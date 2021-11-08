@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "version": "3.0.0",
+  "workspaces": {
+    "packages": [
+      "octopus-xd"
+    ],
+    "nohoist": [
+      "*"
+    ]
+  },
+  "scripts": {},
+  "dependencies": {
+    "dotenv": "8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "typescript": "4.4.4"
+  }
+}
