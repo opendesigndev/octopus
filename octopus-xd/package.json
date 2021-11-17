@@ -1,0 +1,29 @@
+{
+  "name": "@avocode/octopus-xd",
+  "version": "3.0.0-rc.1",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "scripts": {
+    "unpack-xd-file": "npx ts-node ./scripts/convert-every-artboard.ts",
+    "clean-workdir": "npx rimraf ./workdir/*"
+  },
+  "dependencies": {
+    "@sentry/node": "6.14.0",
+    "dotenv": "10.0.0",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "@types/uuid": "^8.3.1",
+    "chalk": "^4.1.2",
+    "fflate": "^0.7.1",
+    "jest": "^27.3.1",
+    "ts-node": "10.4.0"
+  },
+  "description": "Octopus XD converter, converts .xd files to Octopus 3+ format."
+}
