@@ -1,19 +1,19 @@
 import OctopusArtboard from './octopus-artboard'
+import OctopusLayerCommon from './octopus-layer-common'
 import OctopusLayerGroup from './octopus-layer-group'
 import SourceLayerShape from './source-layer-shape'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerGroup | OctopusArtboard,
-  sourceLayerShape: SourceLayerShape
+  sourceLayer: SourceLayerShape
 }
 
-export default class OctopusLayerShape {
+export default class OctopusLayerShape extends OctopusLayerCommon {
   _parent: OctopusLayerGroup | OctopusArtboard
-  _sourceLayerShape: SourceLayerShape
+  _sourceLayer: SourceLayerShape
 
   constructor(options: OctopusLayerShapeOptions) {
-    this._parent = options.parent
-    this._sourceLayerShape = options.sourceLayerShape
+    super(options)
   }
 
   /**
@@ -21,9 +21,7 @@ export default class OctopusLayerShape {
    * Guard with correct return type
    * @returns 
    */
-  convert(): any {
-    return {
-      type: 'shape-octopus'
-    }
+  convertTypeSpecific(): any {
+    return {}
   }
 }

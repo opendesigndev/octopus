@@ -16,14 +16,14 @@ type CreateOctopusLayerOptions = {
 function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   return new OctopusLayerGroup({
     parent,
-    sourceLayerGroup: layer as SourceLayerGroup
+    sourceLayer: layer as SourceLayerGroup
   })
 }
 
 function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   return new OctopusLayerShape({
     parent,
-    sourceLayerShape: layer as SourceLayerShape
+    sourceLayer: layer as SourceLayerShape
   })
 }
 

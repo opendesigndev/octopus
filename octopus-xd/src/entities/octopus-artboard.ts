@@ -29,6 +29,10 @@ export default class OctopusArtboard {
     this._layers = this._initLayers()
   }
 
+  get converter() {
+    return this._octopusXdConverter
+  }
+
   _initLayers() {
     return this._sourceArtboard.children.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
@@ -72,16 +76,21 @@ export default class OctopusArtboard {
    * 5) `exportables`?
    */
   async convert() {
+    const grid = this._getGrid().convert()
+    const guides = this._getGuides()
+
     return {
       type: 'ARTBOARD',
       version: await this._getVersion(),
       id: this._sourceArtboard.refId,
       name: this._sourceArtboard.meta.name,
-      guides: this._getGuides(),
       dimensions: this._getDimensions(),
-      grid: this._getGrid().convert(),
+      ...(grid ? { grid } : null),
+      ...(guides ? { guides } : null),
       layers: this._layers.map(layer => {
         return layer.convert()
+      }).filter(layer => {
+        return layer
       })
     }
   }

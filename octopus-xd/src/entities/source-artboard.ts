@@ -83,6 +83,6 @@ export default class SourceArtboard {
   }
 
   get children() {
-    return this._children
+    return asArray(this._children)
   }
 }

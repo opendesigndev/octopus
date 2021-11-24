@@ -1,4 +1,4 @@
-import { RawColor, RawTransform } from '.'
+import type { RawColor, RawLayerCommon } from '.'
 
 export type RawShapeLayerMeta = {
   ux?: {
@@ -29,12 +29,9 @@ export type RawShape = {
   height?: 488
 }
 
-export type RawShapeLayer = {
+export type RawShapeLayer = RawLayerCommon & {
   type?: 'shape',
-  name?: string,
   meta?: RawShapeLayerMeta,
-  id?: string,
-  transform?: RawTransform,
   style?: RawStyle,
   shape?: RawShape
 }

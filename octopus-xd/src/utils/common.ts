@@ -13,3 +13,7 @@ export function round(n: number, precision = 2) {
   const multiplier = Math.pow(10, precision)
   return Math.round(n * multiplier) / multiplier
 }
+
+export function isObject(any: unknown): boolean {
+  return Boolean(any && (typeof any === 'object' || typeof any === 'function'))
+}

@@ -1,5 +1,6 @@
-import { RawLayer } from './layer'
-import { RawTransform } from './transform'
+import type { RawLayerCommon } from '.'
+import type { RawLayer } from './layer'
+import type { RawTransform } from './transform'
 
 export type RawGroupLayerMeta = {
   ux?: {
@@ -8,12 +9,9 @@ export type RawGroupLayerMeta = {
   }
 }
 
-export type RawGroupLayer = {
+export type RawGroupLayer = RawLayerCommon & {
   type?: 'group',
-  name?: string,
   meta?: RawGroupLayerMeta,
-  id?: string,
-  transform?: RawTransform,
   group?: {
     children?: RawLayer[]
   }
