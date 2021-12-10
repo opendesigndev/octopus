@@ -18,4 +18,4 @@ export default {
   'saturation': 'SATURATION',
   'color': 'COLOR',
   'luminosity': 'LUMINOSITY',
-}
+} as const

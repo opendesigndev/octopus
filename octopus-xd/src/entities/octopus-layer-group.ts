@@ -1,16 +1,15 @@
-import { createOctopusLayer, OctopusLayer } from '../factories/octopus-layer'
-import OctopusArtboard from './octopus-artboard'
-import OctopusLayerCommon from './octopus-layer-common'
+import { createOctopusLayer, OctopusLayer } from '../factories/create-octopus-layer'
+import OctopusLayerCommon, { OctopusLayerParent } from './octopus-layer-common'
 import SourceLayerGroup from './source-layer-group'
 
 
 type OctopusLayerGroupOptions = {
-  parent: OctopusLayerGroup | OctopusArtboard,
+  parent: OctopusLayerParent,
   sourceLayer: SourceLayerGroup
 }
 
 export default class OctopusLayerGroup extends OctopusLayerCommon {
-  _parent: OctopusLayerGroup | OctopusArtboard
+  _parent: OctopusLayerParent
   _sourceLayer: SourceLayerGroup
   _layers: OctopusLayer[]
 

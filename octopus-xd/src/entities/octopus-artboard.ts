@@ -1,5 +1,5 @@
 import OctopusXDConverter from '..'
-import { createOctopusLayer, OctopusLayer } from '../factories/octopus-layer'
+import { createOctopusLayer, OctopusLayer } from '../factories/create-octopus-layer'
 import { asNumber } from '../utils/as'
 import OctopusArtboardGrid from './octopus-artboard-grid'
 import SourceArtboard from './source-artboard'
@@ -74,6 +74,7 @@ export default class OctopusArtboard {
    *    of background layer?
    * 4) `disabledOverrides` - should it be general prop or sketch only?
    * 5) `exportables`?
+   * 6) meta vs specific
    */
   async convert() {
     const grid = this._getGrid().convert()

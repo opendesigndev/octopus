@@ -1,7 +1,7 @@
 import { RawArtboard, RawLayer } from '../typings/source'
 import { asArray } from '../utils/as'
 import SourceDesign from './source-design'
-import { createSourceLayer, SourceLayer } from '../factories/source-layer'
+import { createSourceLayer, SourceLayer } from '../factories/create-source-layer'
 
 
 export type SourceArtboardOptions = {
@@ -83,6 +83,6 @@ export default class SourceArtboard {
   }
 
   get children() {
-    return asArray(this._children)
+    return this._children
   }
 }

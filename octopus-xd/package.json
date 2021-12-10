@@ -10,12 +10,14 @@
   "dependencies": {
     "@sentry/node": "6.14.0",
     "dotenv": "10.0.0",
+    "paper": "0.12.4",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "read-pkg-up": "7.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@avocode/octopus-ts": "^3.0.0-alpha.8",
     "@types/chalk": "^2.2.0",
     "@types/node": "*",
     "@types/pino": "^6.3.3",

@@ -1,11 +1,14 @@
 import { RawLayer } from '../typings/source'
 import SourceArtboard from './source-artboard'
 import SourceLayerGroup from './source-layer-group'
+import SourceLayerShape from './source-layer-shape'
 
+
+export type SourceLayerParent = SourceArtboard | SourceLayerGroup | SourceLayerShape
 
 export default class SourceLayerCommon {
   _rawValue: RawLayer
-  _parent: SourceArtboard | SourceLayerGroup
+  _parent: SourceLayerParent
 
   get transform() {
     return this._rawValue.transform

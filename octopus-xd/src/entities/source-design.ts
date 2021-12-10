@@ -112,9 +112,6 @@ export default class SourceDesign {
   }
 
   getArtboardById(id: string) {
-    const artboard = this._artboards.find(entry => {
-      return entry.meta.id === id
-    })
-    return artboard || null
+    return this._artboards.find(entry => entry.meta.id === id) || null
   }
 }

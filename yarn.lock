@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@avocode/octopus-ts@^3.0.0-alpha.8":
+  version "3.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.8.tgz#5681ad0b6e3a46ce14b5247627dfe3c7cd9a298d"
+  integrity sha512-a4FPb+BnBASRf8rfF2HbulEc9wNLfdbQBii969xv4r3y1PzGZy8bVTQAsPBBW3FDn8vp3RDEHJmWD5fkKl+m7g==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0":
   version "7.16.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.0.tgz#0dfc80309beec8411e65e706461c408b0bb9b431"
@@ -1186,11 +1191,6 @@ dotenv@10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dotenv@8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
-  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
-
 electron-to-chromium@^1.3.886:
   version "1.3.893"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.893.tgz#9d804c68953b05ede35409dba0d73dd54c077b4d"
@@ -2302,6 +2302,11 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
+
+paper@0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/paper/-/paper-0.12.4.tgz#c6b01fea26cb30d15a4f7abeb3465c45ad7b49ae"
+  integrity sha512-KypUqX2uXJZOX2j55RcgnBzK7weau9WKVCB+3e0E1Wa9yxlV7z6BsSrrJxmLNIC0pATbjcy9pJYDutQ7rIhnpQ==
 
 parse-json@^5.0.0:
   version "5.2.0"

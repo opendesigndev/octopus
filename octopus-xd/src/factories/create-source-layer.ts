@@ -1,14 +1,14 @@
 import { RawGroupLayer, RawLayer, RawShapeLayer } from '../typings/source'
-import SourceArtboard from '../entities/source-artboard'
 import SourceLayerGroup from '../entities/source-layer-group'
 import SourceLayerShape from '../entities/source-layer-shape'
+import { SourceLayerParent } from '../entities/source-layer-common'
 
 
 export type SourceLayer = SourceLayerGroup | SourceLayerShape
 
 type CreateLayerOptions = {
   layer: RawLayer,
-  parent: SourceArtboard | SourceLayerGroup
+  parent: SourceLayerParent
 }
 
 function createSourceLayerGroup({ layer, parent }: CreateLayerOptions): SourceLayerGroup {
