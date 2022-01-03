@@ -1,4 +1,4 @@
-export type RawTransform = {
+type Raw2DMatrix = {
   a?: number,
   b?: number,
   c?: number,
@@ -6,3 +6,12 @@ export type RawTransform = {
   tx?: number,
   ty?: number
 }
+
+type Raw3DMatrix = [
+  [number, number, number, number],
+  [number, number, number, number],
+  [number, number, number, number],
+  [number, number, number, number]
+]
+
+export type RawTransform = Raw2DMatrix | Raw3DMatrix

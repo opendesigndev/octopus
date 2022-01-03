@@ -1,11 +1,13 @@
 import SourceArtboard from './source-artboard'
 import SourceInteractions, { SourceInteractionsRaw } from './source-interactions'
 import SourceManifest, { SourceManifestRaw } from './source-manifest'
-import SourceResources, { SourceResourcesRaw } from './source-resources'
+import SourceResources from './source-resources'
 
 import type { ArrayBuffersSourceTree } from '../typings'
 import { JSONFromTypedArray } from '../utils/common'
 import { RawArtboard } from '../typings/source'
+import Expander from '../services/conversion/expander'
+import { RawResources } from '../typings/source/resources'
 
 
 type SourceDesignOptions = {
@@ -15,7 +17,7 @@ type SourceDesignOptions = {
   },
   resources: {
     path: string,
-    rawValue: SourceResourcesRaw
+    rawValue: RawResources
   },
   interactions: {
     path: string,
@@ -53,7 +55,7 @@ export default class SourceDesign {
       },
       resources: {
         path: sourceTree.resources?.path,
-        rawValue: JSONFromTypedArray(sourceTree.resources?.content) as SourceResourcesRaw
+        rawValue: JSONFromTypedArray(sourceTree.resources?.content) as RawResources
       },
       interactions: {
         path: sourceTree.interactions?.path,
@@ -86,10 +88,16 @@ export default class SourceDesign {
       rawValue: options.interactions.rawValue,
       design: this
     })
+
+    const expander = new Expander({
+      resources: this._resources
+    })
+
     this._artboards = options.artboards.map(entry => {
+      expander.expand(entry.rawValue)
       return new SourceArtboard({
         path: entry.path,
-        rawValue: entry.rawValue,
+        rawValue: expander.expand(entry.rawValue),
         design: this
       })
     })

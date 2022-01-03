@@ -1,12 +1,12 @@
 import { promises as fsp } from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
-
-export const WORK_DIR = path.join(__dirname, '..', '..', 'workdir')
+import { getPkgLocation } from './pkg-location'
 
 
 async function getWorkDirTempLocation() {
-  const location = path.join(WORK_DIR, uuidv4())
+  const workdir = path.join(await getPkgLocation(), 'workdir')
+  const location = path.join(workdir, uuidv4())
   await fsp.mkdir(location, { recursive: true })
   return location
 }

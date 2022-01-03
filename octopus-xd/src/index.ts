@@ -18,6 +18,12 @@ type OctopusXDConverterOptions = {
  */
 createEnvironment()
 
+/**
+ * @TODO
+ * Should we publish it as @avocode/octopus-xd?
+ * Should we expand?
+ */
+
 export default class OctopusXDConverter {
   _pkg: Promise<NormalizedReadResult | undefined>
   // Services

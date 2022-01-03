@@ -31,7 +31,7 @@ export function createSegmentI(point: paper.Point, handleIn: paper.Point) {
 export function createSegmentO(point: paper.Point, handleOut: paper.Point) {
   return createSegment(point, undefined, handleOut)
 }
-export function createPath(options: Object | paper.Segment[]): paper.Path {
+export function createPath(options: object | paper.Segment[] | string): paper.Path {
   return new Path(options)
 }
 export function createPathRectangle(point: paper.Point, size: paper.Size): paper.Path.Rectangle {

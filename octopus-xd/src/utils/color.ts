@@ -12,12 +12,13 @@ export function parseXDColor(color: RawColor | null | void) {
     }
   }
 
-  const [ r, g, b, a ] = [
+  const [ r, g, b ] = [
     color?.value?.r,
     color?.value?.g,
     color?.value?.b,
-    color?.alpha
-  ].map(n => asNumber(n))
+  ].map(n => asNumber(n, 0))
+
+  const a = asNumber(color?.alpha, 1)
 
   return {
     r: r / 255,

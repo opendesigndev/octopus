@@ -1,18 +1,15 @@
-import { deepInspect } from "../utils/common"
-import SourceDesign from "./source-design"
+import { RawResources } from '../typings/source/resources'
+import SourceDesign from './source-design'
 
-export type SourceResourcesRaw = {
-
-}
 
 type SourceResourcesOptions = {
-  rawValue: SourceResourcesRaw,
+  rawValue: RawResources,
   path: string,
   design: SourceDesign
 }
 
 export default class SourceResources {
-  _rawValue: SourceResourcesRaw
+  _rawValue: RawResources
   _path: string
   _design: SourceDesign
 
@@ -24,5 +21,13 @@ export default class SourceResources {
 
   get raw() {
     return this._rawValue
+  }
+
+  get clipPaths() {
+    return this.raw?.resources?.clipPaths || null
+  }
+
+  getClipPathById(id: string) {
+    return this.clipPaths?.[id]?.children?.[0] || null
   }
 }

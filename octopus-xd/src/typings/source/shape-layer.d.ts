@@ -1,23 +1,9 @@
-import type { RawColor, RawLayerCommon } from '.'
+import type { RawLayerCommon } from '.'
+import { RawStyle } from './style'
 
 export type RawShapeLayerMeta = {
   ux?: {
     nameL10N?: 'SHAPE_RECTANGLE',
-  }
-}
-
-export type RawFill = {
-  type?: 'solid',
-  color?: RawColor
-}
-
-export type RawStyle = {
-  fill?: RawFill,
-  stroke?: {
-    type?: 'solid',
-    color?: RawColor,
-    width?: 1,
-    align?: 'inside'
   }
 }
 
@@ -89,6 +75,5 @@ export type RawShape =
 export type RawShapeLayer = RawLayerCommon & {
   type?: 'shape',
   meta?: RawShapeLayerMeta,
-  style?: RawStyle,
   shape?: RawShape
 }

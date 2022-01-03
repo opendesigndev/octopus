@@ -12,13 +12,17 @@ import { OctopusLayer } from '../factories/create-octopus-layer'
 import { convertObjectMatrixToArray } from '../utils/matrix'
 import OctopusLayerShape from './octopus-layer-shape'
 
-import type { Octopus } from '@avocode/octopus-ts'
+import { Raw3DMatrix } from '../typings/source'
+import OctopusEffects from './octopus-effects-layer'
+import { NotNull } from '../typings/helpers'
+import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 
 
 export type OctopusLayerParent = 
   | OctopusLayerGroup
   | OctopusArtboard
   | OctopusLayerShape
+  | OctopusLayerMaskGroup
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent,
@@ -53,7 +57,7 @@ export default class OctopusLayerCommon {
     return this._parent
   }
 
-  get parents(): (OctopusArtboard | OctopusLayer)[] {
+  get parents(): (OctopusArtboard | OctopusLayer | OctopusLayerMaskGroup)[] {
     const parent = this._parent
     if (!parent) return []
     return parent instanceof OctopusArtboard
@@ -89,7 +93,7 @@ export default class OctopusLayerCommon {
   }
 
   /**
-   * @TODO how to treat 4D matrices?
+   * @TODO how to treat 3D matrices?
    */
   get transform() {
     if (!this._sourceLayer.transform) {
@@ -103,11 +107,12 @@ export default class OctopusLayerCommon {
     return round(asNumber(this._sourceLayer.opacity, 1))
   }
 
-  get type(): 'SHAPE' | 'GROUP' | null {
+  get type(): 'SHAPE' | 'GROUP' | 'TEXT' | null {
     const types = {
-      shape: 'SHAPE' as 'SHAPE',
-      group: 'GROUP' as 'GROUP'
-    }
+      shape: 'SHAPE',
+      group: 'GROUP',
+      text: 'TEXT'
+    } as const
     const type = String(this._sourceLayer.type).toLowerCase()
     if (!(type in types)) {
       const converter = this.converter
@@ -129,28 +134,31 @@ export default class OctopusLayerCommon {
       : undefined
   }
 
-  /**
-     * Gonna return false if matrix is 3D or missing.
-     */
-  hasValidMatrix() {
-    return typeof this._sourceLayer.transform?.a === 'number'
+  has3dMatrix() {
+    return typeof (this._sourceLayer.transform as Raw3DMatrix)?.[0]?.[0] === 'number'
   }
 
   isConvertable() {
     const hasValidType = this.type !== null
-    const has2dMatrix = this.hasValidMatrix()
-
-    return hasValidType && has2dMatrix
+    const has3dMatrix = this.has3dMatrix()
+    return hasValidType && !has3dMatrix
   }
 
-  convertTypeSpecific() {
-    return {}
+  /**
+   * @TODO Im not sure if it should be defined here or on specific layer types.
+   */
+  effects() {
+    return new OctopusEffects({
+      sourceLayer: this._sourceLayer
+    })
   }
 
-  convert(): Octopus['schemas']['LayerBase'] | null {
+  convertCommon() {
     if (!this.isConvertable()) return null
 
-    const type = this.type as Exclude<typeof this.type, null>
+    const type = this.type as NotNull<typeof this.type>
+    const effectsArray = this.effects().convert()
+    const effects = effectsArray.length ? { effects: effectsArray } : null
 
     return {
       id: this.id,
@@ -162,7 +170,7 @@ export default class OctopusLayerCommon {
       opacity: this.opacity,
       // @ts-ignore
       isFixed: this.isFixed, /** @TODO add types for isFixed */
-      ...this.convertTypeSpecific()
+      ...effects
     }
   }
 }

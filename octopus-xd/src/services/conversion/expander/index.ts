@@ -1,0 +1,97 @@
+import pick from 'lodash/pick'
+import without from 'lodash/without'
+import mergeWith from 'lodash/mergeWith'
+import cloneDeep from 'lodash/cloneDeep'
+
+import SourceResources from '../../../entities/source-resources'
+import { RawArtboard, RawArtboardEntry, RawLayer, RawLayerCommon } from '../../../typings/source'
+import { asArray, asString } from '../../../utils/as'
+import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
+
+
+type ExpanderOptions = {
+  resources: SourceResources
+}
+
+export default class Expander {
+  _resources: SourceResources
+  _symbols: RawLayer[]
+
+  /**
+   * Properties related to symbol internal connections
+   * + properties that shouldn't be copied in general (`type`).
+   */
+  static SKIP_PROPS = [
+    'type',
+    'syncSourceGuid',
+    'guid'
+  ]
+
+  static GROUP_LIKE = [
+    'children',
+    'group',
+    'shape'
+  ]
+
+  constructor(options: ExpanderOptions) {
+    this._resources = options.resources
+    this._symbols = this._initSymbols()
+  }
+
+  _initSymbols() {
+    return asArray(this._resources.raw.resources?.meta?.ux?.symbols).reduce((ids, symbol) => {
+      return [ ...ids, ...flattenLayers(symbol, true, true) ]
+    }, [])
+  }
+
+  _getTargetObjectProps(child: RawLayer) {
+    return pick(child, without(Object.keys(child), ...Expander.SKIP_PROPS))
+  }
+
+  _merge(objValue: unknown, srcValue: unknown, key: string) {
+    if (Expander.GROUP_LIKE.includes(key)) {
+      return undefined
+    }
+    return srcValue === undefined
+      ? objValue
+      : srcValue
+  }
+
+  _replaceValues(replaceWith: RawLayer, restProps: unknown, id: string) {
+    return mergeWith({}, cloneDeep(replaceWith), restProps, { id }, (objValue, srcValue, key) => {
+      return this._merge(objValue, srcValue, key)
+    })
+  }
+
+  _expandChild(child: RawLayer, index: number, children: RawLayer[]) {
+    const ref = child?.syncSourceGuid
+    const id = child?.guid
+    const restProps = this._getTargetObjectProps(child)
+    if (ref) {
+      const replaceWith = this._symbols.find(layer => layer?.id === ref)
+      const clone = replaceWith ? this._replaceValues(replaceWith, restProps, asString(id)) : null
+      children.splice(index, 1, clone as RawLayer)
+      this._expand(clone as RawLayer)
+    } else {
+      this._expand(child as RawLayer)
+    }
+  }
+
+  _expand(artboard: RawArtboardEntry | RawLayer) {
+    childrenOf(artboard, true).forEach((child, index, children) => {
+      this._expandChild(child, index, children)
+    })
+  }
+
+  expand(artboard: RawArtboard) {
+    return {
+      ...artboard,
+      children: artboard.children?.map(artboard => {
+        const clone = cloneDeep(artboard)
+        if (!clone) return clone
+        this._expand(clone as RawArtboardEntry)
+        return clone
+      })
+    }
+  }
+}

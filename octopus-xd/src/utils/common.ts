@@ -14,6 +14,17 @@ export function round(n: number, precision = 2) {
   return Math.round(n * multiplier) / multiplier
 }
 
-export function isObject(any: unknown): boolean {
-  return Boolean(any && (typeof any === 'object' || typeof any === 'function'))
+export function isObject(anyValue: unknown): anyValue is object {
+  return Boolean(anyValue && (typeof anyValue === 'object' || typeof anyValue === 'function'))
+}
+
+export function getMapped<T, U>(value: unknown, map: { [ key: string ]: T }, defaultValue: U): T | U {
+  if (typeof value !== 'string') return defaultValue
+  return value && value in map ? map[ value ] : defaultValue
+}
+
+export function getPresentProps<T, U>(obj: T, skipValues: U[] = []): Partial<T> {
+  return Object.fromEntries(Object.entries(obj).filter(([ , value ]) => {
+    return value !== null && value !== undefined && !skipValues.includes(value)
+  })) as Partial<T>
 }

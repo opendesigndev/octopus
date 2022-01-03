@@ -29,6 +29,14 @@ export default class OctopusArtboard {
     this._layers = this._initLayers()
   }
 
+  get sourceArtboard() {
+    return this._sourceArtboard
+  }
+
+  get sourceDesign() {
+    return this._sourceDesign
+  }
+
   get converter() {
     return this._octopusXdConverter
   }

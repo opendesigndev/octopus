@@ -3,6 +3,7 @@
  */
 export default {
   'pass-through': 'PASS_THROUGH',
+  'normal': 'NORMAL',
   'darken': 'DARKEN',
   'multiply': 'MULTIPLY',
   'color-burn': 'COLOR_BURN',

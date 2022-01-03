@@ -6,7 +6,7 @@
       "src/typings"
     ],
     "declaration": true,
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist/",
     "module": "CommonJS",
     "target": "ES2019",
@@ -18,6 +18,5 @@
     "allowJs": true,
     "lib": ["es2019", "ES2015.Proxy", "dom"]
   },
-
-  "include": ["src/**/*", "test/**/*"]
+  "include": ["src/**/*", "test/**/*", "scripts"]
 }

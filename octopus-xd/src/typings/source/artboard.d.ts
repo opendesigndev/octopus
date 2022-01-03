@@ -21,6 +21,7 @@ export type RawArtboardEntry = {
     ref?: string
   }
 }
+
 export type RawArtboard = {
   children?: RawArtboardEntry[]
 }

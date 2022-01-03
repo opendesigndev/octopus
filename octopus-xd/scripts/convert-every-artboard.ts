@@ -1,12 +1,25 @@
 import chalk from 'chalk'
+import { performance } from 'perf_hooks'
 
 import createSourceTree from './utils/create-source-tree'
 import SourceDesign from '../src/entities/source-design'
 import OctopusXDConverter from '../src'
 import { createTempSaver } from './utils/save-temp'
 import { stringify } from './utils/json-stringify'
+import SourceArtboard from '../src/entities/source-artboard'
 
+/** @TODO move scripts out of src? */
 
+async function convert(converter: OctopusXDConverter, artboard: SourceArtboard, sourceDesign: SourceDesign) {
+  try {
+    return await converter.convertArtboardById({
+      targetArtboardId: artboard.meta.id,
+      sourceDesign
+    })
+  } catch(e) {
+    return null
+  }
+}
 
 ;(async () => {
   const [ filename ] = process.argv.slice(2)
@@ -39,13 +52,12 @@ import { stringify } from './utils/json-stringify'
   `)
 
   sourceDesign.artboards.forEach(async artboard => {
-    const octopus = await converter.convertArtboardById({
-      targetArtboardId: artboard.meta.id,
-      sourceDesign
-    })
+    const timeStart = performance.now()
+    const octopus = await convert(converter, artboard, sourceDesign)
+    const time = performance.now() - timeStart
     const sourceLocation = await saver(`source-${artboard.meta.id}.json`, stringify(artboard.raw))
     const octopusLocation = await saver(`octopus-${artboard.meta.id}.json`, stringify(octopus))
-    console.log(`Artboard: ${ chalk.yellow(artboard.meta.name) } ${ chalk.grey(`(${artboard.meta.id})`) }
+    console.log(`${ octopus ? '✅' : '❌' } ${ chalk.yellow(artboard.meta.name) } (${ Math.round(time) }ms) ${ chalk.grey(`(${artboard.meta.id})`) }
       Source: file://${ sourceLocation }
       Octopus: file://${ octopusLocation }
     `)

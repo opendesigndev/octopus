@@ -41,4 +41,12 @@ export default class SourceLayerCommon {
   get fixed() {
     return this._rawValue.meta?.ux?.fixed
   }
+
+  get style() {
+    return this._rawValue.style
+  }
+
+  get raw() {
+    return this._rawValue
+  }
 }
