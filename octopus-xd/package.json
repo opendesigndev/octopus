@@ -1,5 +1,5 @@
 {
-  "name": "@avocode/octopus-xd",
+  "name": "@octopus/convertor-xd-octopus",
   "version": "3.0.0-rc.1",
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
