@@ -13,7 +13,11 @@
   "scripts": {
     "xd:unpack": "yarn workspace @avocode/octopus-xd unpack-xd-file",
     "xd:clean-workdir": "yarn workspace @avocode/octopus-xd clean-workdir",
-    "xd:watch": "yarn workspace @avocode/octopus-xd watch"
+    "xd:watch": "yarn workspace @avocode/octopus-xd watch",
+    "clean": "yarn workspaces run clean",
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test"
   },
   "dependencies": {},
   "devDependencies": {
