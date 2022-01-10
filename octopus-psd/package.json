@@ -4,7 +4,7 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
-    "convert": "ts-node ./scripts/convert-every-artboard.ts",
+    "convert": "ts-node ./scripts/convert-artboard.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./dist ./workdir",
     "clean-workdir": "rimraf ./workdir/*",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@avocode/octopus-ts": "^3.0.0-alpha.8",
-    "@avocode/psd-parser": "^0.8.5-alpha.1",
+    "@avocode/psd-parser": "0.8.4",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",

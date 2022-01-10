@@ -32,10 +32,10 @@
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.8.tgz#5681ad0b6e3a46ce14b5247627dfe3c7cd9a298d"
   integrity sha512-a4FPb+BnBASRf8rfF2HbulEc9wNLfdbQBii969xv4r3y1PzGZy8bVTQAsPBBW3FDn8vp3RDEHJmWD5fkKl+m7g==
 
-"@avocode/psd-parser@^0.8.5-alpha.1":
-  version "0.8.5-alpha.1"
-  resolved "https://registry.yarnpkg.com/@avocode/psd-parser/-/psd-parser-0.8.5-alpha.1.tgz#9216b588d54c80e78964e35f58b6a3bfb11b3e26"
-  integrity sha512-fxeKnK93B+XIZLnUED9VE63EpF9HfKKQG0Gqy4+CfYdGCgp8+w9YFMhvHgGRdO5+U/Hq17ezHnVYFPdrqh8dKw==
+"@avocode/psd-parser@0.8.4":
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/@avocode/psd-parser/-/psd-parser-0.8.4.tgz#45bfee2cb896d15018beec0f15288aa23804ae3b"
+  integrity sha512-PoVK7QWqMmIg3BOalX6/v3g17NMubPQKrt8eozIhliLXLy7Oa8n0t5kqRt/ekvwNsQOh5tGloc+AomWcDjBo/A==
   dependencies:
     "@avocode/cancel-token" "^1.3.0"
     "@avocode/octopus-photoshop" "2.2.5"
