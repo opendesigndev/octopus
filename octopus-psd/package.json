@@ -1,0 +1,41 @@
+{
+  "name": "@avocode/octopus-psd",
+  "version": "3.0.0-rc.1",
+  "license": "UNLICENSED",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "convert": "ts-node ./scripts/convert-every-artboard.ts",
+    "build": "tsc --build ./tsconfig.json",
+    "clean": "rimraf ./node_modules ./dist ./workdir",
+    "clean-workdir": "rimraf ./workdir/*",
+    "lint": "eslint ./src/*",
+    "prepare": "rimraf ./lib && yarn run build",
+    "watch": "tsc -w",
+    "test": "echo 'Tests are not implemented yet'"
+  },
+  "dependencies": {
+    "dotenv": "10.0.0",
+    "lodash": "^4.17.21",
+    "paper": "0.12.4",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@avocode/octopus-ts": "^3.0.0-alpha.8",
+    "@avocode/psd-parser": "^0.8.5-alpha.1",
+    "@types/chalk": "^2.2.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "@types/uuid": "^8.3.1",
+    "chalk": "^4.1.2",
+    "fflate": "^0.7.1",
+    "jest": "^27.3.1",
+    "ts-node": "10.4.0"
+  },
+  "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
+  "files": [
+    "dist/src"
+  ]
+}

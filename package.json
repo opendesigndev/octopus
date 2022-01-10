@@ -4,13 +4,17 @@
   "license": "UNLICENSED",
   "workspaces": {
     "packages": [
-      "octopus-xd"
+      "octopus-xd",
+      "octopus-psd"
     ],
     "nohoist": [
       "**"
     ]
   },
   "scripts": {
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test",
     "xd:unpack": "yarn workspace @avocode/octopus-xd unpack-xd-file",
     "xd:clean-workdir": "yarn workspace @avocode/octopus-xd clean-workdir",
     "xd:watch": "yarn workspace @avocode/octopus-xd watch"
@@ -18,6 +22,11 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "eslint": "^8.6.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
     "typescript": "4.4.4"
   }
 }
