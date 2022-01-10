@@ -1,1 +1,1 @@
-declare module '@avocode'
+declare module '@avocode' {}

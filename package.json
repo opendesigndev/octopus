@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "yarn workspaces run build",
+    "clean": "rimraf ./node_modules & yarn workspaces run clean",
     "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "xd:unpack": "yarn workspace @avocode/octopus-xd unpack-xd-file",
