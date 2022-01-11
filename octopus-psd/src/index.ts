@@ -1,13 +1,13 @@
 import readPackageUpAsync from 'read-pkg-up'
+import type { NormalizedReadResult } from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
 import { createEnvironment } from './services/general/environment'
 import { createLogger } from './services/general/default-logger'
 import { createSentry } from './services/general/sentry'
+import { ArtboardConverter, ArtboardConversionOptions } from './services/conversion/artboard-converter'
 
-import type { NormalizedReadResult } from 'read-pkg-up'
 import type { Logger } from './typings'
-import ArtboardConverter, { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 
 type OctopusPSDConverterOptions = {
   octopusId: string
@@ -18,12 +18,6 @@ type OctopusPSDConverterOptions = {
  * Loading of .env file.
  */
 createEnvironment()
-
-/**
- * @TODO
- * Should we publish it as @avocode/octopus-xd?
- * Should we expand?
- */
 
 export class OctopusPSDConverter {
   _id: string

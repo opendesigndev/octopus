@@ -1,5 +1,4 @@
 import pino from 'pino'
-// @ts-ignore
 import pinoPretty from 'pino-pretty'
 
 export const createLogger = () => {

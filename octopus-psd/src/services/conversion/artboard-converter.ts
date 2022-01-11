@@ -10,7 +10,7 @@ export type ArtboardConverterOptions = ArtboardConversionOptions & {
   octopusConverter: OctopusPSDConverter
 }
 
-export default class ArtboardConverter {
+export class ArtboardConverter {
   _sourceArtboard: SourceArtboard
   _octopusConverter: OctopusPSDConverter
 
