@@ -3,7 +3,6 @@ import { OctopusPSDConverter } from '..'
 import { asNumber } from '../utils/as'
 // import OctopusArtboardGrid from './octopus-artboard-grid'
 import { SourceArtboard } from './source-artboard'
-import { v4 as uuidv4 } from 'uuid'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard
@@ -50,6 +49,10 @@ export class OctopusArtboard {
     return this._sourceArtboard.guides
   }
 
+  _getId() {
+    return this._octopusConverter._id
+  }
+
   // _getGrid() {
   //   return new OctopusArtboardGrid({ octopusArtboard: this })
   // }
@@ -77,10 +80,9 @@ export class OctopusArtboard {
     const guides = this._getGuides()
 
     return {
+      id: this._getId(),
       type: 'ARTBOARD',
       version: await this._getVersion(),
-      id: uuidv4(),
-      // name: this._sourceArtboard.meta.name, //
       dimensions: this._getDimensions(),
       // ...(grid ? { grid } : null),
       ...(guides ? { guides } : null),

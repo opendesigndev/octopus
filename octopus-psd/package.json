@@ -4,7 +4,7 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
-    "convert": "yarn clean-workdir & ts-node ./scripts/convert-artboard.ts",
+    "convert": "ts-node ./scripts/convert-artboard.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./dist ./workdir",
     "clean-workdir": "rimraf ./workdir/*",

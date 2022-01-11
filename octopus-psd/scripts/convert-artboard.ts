@@ -1,43 +1,41 @@
-// import chalk from 'chalk'
-// import { performance } from 'perf_hooks'
+import chalk from 'chalk'
+import { performance } from 'perf_hooks'
+import { v4 as uuidv4 } from 'uuid'
 
 import { createSourceTree } from './utils/create-source-tree'
 
-// import SourceDesign from '../src/entities/source-design'
 import { OctopusPSDConverter } from '../src'
-// import { createTempSaver } from './utils/save-temp'
-// import { stringify } from './utils/json-stringify'
+import { createTempSaver } from './utils/save-temp'
+import { stringify } from './utils/json-stringify'
 import { SourceArtboard } from '../src/entities/source-artboard'
 
+async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
+  try {
+    return await converter.convertArtboard({ sourceArtboard })
+  } catch (e) {
+    return null
+  }
+}
+
 const convertArtboard = async () => {
+  const octopusId = uuidv4()
   const [filename] = process.argv.slice(2)
-  console.info(`Start converting file: ${filename}`)
+  console.info(`Start converting file: ${chalk.yellow(filename)}`)
   if (filename === undefined) {
     return console.error('Missing argument (path to .psd file)')
   }
-  const sourceArtboard = await createSourceTree(filename)
-  console.info(`Photoshop file converted to source file.`)
+  const sourceArtboard = await createSourceTree(filename, octopusId)
+  console.info(`Photoshop source file converted to directory: ${chalk.yellow(octopusId)}`)
 
-  const converter = new OctopusPSDConverter()
-  const octopus = await converter.convertArtboard({ sourceArtboard })
+  const timeStart = performance.now()
+  const converter = new OctopusPSDConverter({ octopusId })
+  const octopus = await convert(converter, sourceArtboard)
+  const time = Math.round(performance.now() - timeStart)
 
-  console.info(`octopus`, octopus)
-
-  // const saver = await createTempSaver()
-
-  //   sourceDesign.artboards.forEach(async (artboard) => {
-  //     const timeStart = performance.now()
-  //     const octopus = await convert(converter, artboard, sourceDesign)
-  //     const time = performance.now() - timeStart
-  //     const sourceLocation = await saver(`source-${artboard.meta.id}.json`, stringify(artboard.raw))
-  //     const octopusLocation = await saver(`octopus-${artboard.meta.id}.json`, stringify(octopus))
-  //     console.log(`${octopus ? '✅' : '❌'} ${chalk.yellow(artboard.meta.name)} (${Math.round(time)}ms) ${chalk.grey(
-  //       `(${artboard.meta.id})`
-  //     )}
-  //       Source: file://${sourceLocation}
-  //       Octopus: file://${octopusLocation}
-  //     `)
-  //   })
+  const saver = await createTempSaver(octopusId)
+  const octopusLocation = await saver('octopus.json', stringify(octopus))
+  console.info(`${octopus ? '✅' : '❌'} ${chalk.yellow('octopus.json')} (${time}ms) ${chalk.grey(`(${octopus?.id})`)}`)
+  console.info(`  Octopus: file://${octopusLocation}`)
 }
 
 convertArtboard()
