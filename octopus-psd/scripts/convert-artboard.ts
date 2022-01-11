@@ -4,50 +4,26 @@
 import { createSourceTree } from './utils/create-source-tree'
 
 // import SourceDesign from '../src/entities/source-design'
-// import OctopusPSDConverter from '../src'
+import { OctopusPSDConverter } from '../src'
 // import { createTempSaver } from './utils/save-temp'
 // import { stringify } from './utils/json-stringify'
-// import SourceArtboard from '../src/entities/source-artboard'
+import { SourceArtboard } from '../src/entities/source-artboard'
 
-/** @TODO move scripts out of src? */
-
-// async function convert(converter: OctopusPSDConverter, artboard: SourceArtboard, sourceDesign: SourceDesign) {
-//   try {
-//     return await converter.convertArtboardById({
-//       targetArtboardId: artboard.meta.id,
-//       sourceDesign,
-//     })
-//   } catch (e) {
-//     return null
-//   }
-// }
-;(async () => {
-  console.info('XXX start')
-
+const convertArtboard = async () => {
   const [filename] = process.argv.slice(2)
+  console.info(`Start converting file: ${filename}`)
+  if (filename === undefined) {
+    return console.error('Missing argument (path to .psd file)')
+  }
+  const sourceArtboard = await createSourceTree(filename)
+  console.info(`Photoshop file converted to source file.`)
 
-  console.info('XXX filename', filename)
+  const converter = new OctopusPSDConverter()
+  const octopus = await converter.convertArtboard({ sourceArtboard })
 
-  const sourceTree = await createSourceTree(filename)
+  console.info(`octopus`, octopus)
 
-  console.info('XXX sourceTree', sourceTree)
-  //   const sourceDesign = SourceDesign.fromUnzippedBuffers(sourceTree)
-  //   const converter = new OctopusPSDConverter()
-  //   const saver = await createTempSaver()
-
-  //   const manifestLocation = await saver('manifest.json', stringify(sourceDesign.manifest.raw))
-  //   const interactionsLocation = await saver('interactions.json', stringify(sourceDesign.interactions.raw))
-  //   const resourcesLocation = await saver('resources.json', stringify(sourceDesign.resources.raw))
-
-  //   console.log(`${chalk.yellow('Manifest: ')}
-  //     file://${manifestLocation}
-  //   `)
-  //   console.log(`${chalk.yellow('Interactions: ')}
-  //     file://${interactionsLocation}
-  //   `)
-  //   console.log(`${chalk.yellow('Resources: ')}
-  //     file://${resourcesLocation}
-  //   `)
+  // const saver = await createTempSaver()
 
   //   sourceDesign.artboards.forEach(async (artboard) => {
   //     const timeStart = performance.now()
@@ -62,4 +38,6 @@ import { createSourceTree } from './utils/create-source-tree'
   //       Octopus: file://${octopusLocation}
   //     `)
   //   })
-})()
+}
+
+convertArtboard()

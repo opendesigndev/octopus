@@ -1,18 +1,18 @@
-// import type { ArrayBufferEntry } from '../../src/typings'
-import { parsePsd } from './parsePsd'
+import { promises as fsp } from 'fs'
+import { parsePsd } from '@avocode/psd-parser'
+import { SourceArtboard } from '../../src/entities/source-artboard'
 
-export const createSourceTree = async (filename: string) => {
-  console.info('XXX1 filename', filename)
+const defaultOptions = {
+  outDir: './workdir',
+  imagesSubfolder: 'pictures',
+  previewPath: './workdir/preview.png',
+  octopusFileName: 'octopus-v2.json',
+}
 
-  const fileContent = await parsePsd(filename)
-  console.info('XXX2', fileContent)
-
-  // const structure = {
-  //   manifest: fileContent.find((entry) => MANIFEST.test(entry.path)) || null,
-  //   resources: fileContent.find((entry) => RESOURCES.test(entry.path)) || null,
-  //   interactions: fileContent.find((entry) => INTERACTIONS.test(entry.path)) || null,
-  //   artboards: fileContent.filter((entry) => ARTBOARDS.test(entry.path)),
-  // }
-
-  // return structure
+export const createSourceTree = async (filename: string): Promise<SourceArtboard> => {
+  await parsePsd(filename, defaultOptions)
+  const sourceFile = './workdir/source.json'
+  const file = await fsp.readFile(sourceFile, { encoding: 'utf8' })
+  const sourceTree = JSON.parse(file)
+  return sourceTree as SourceArtboard
 }

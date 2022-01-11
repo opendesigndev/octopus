@@ -23,9 +23,6 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "*",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
-    "@typescript-eslint/parser": "^5.9.0",
-    "eslint": "^8.6.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
     "typescript": "4.4.4"

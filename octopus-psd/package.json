@@ -4,21 +4,23 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
-    "convert": "ts-node ./scripts/convert-artboard.ts",
+    "convert": "yarn clean-workdir & ts-node ./scripts/convert-artboard.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./dist ./workdir",
     "clean-workdir": "rimraf ./workdir/*",
-    "lint": "eslint ./src/*",
+    "lint": "eslint ./src/* ./scripts/*",
     "prepare": "rimraf ./lib && yarn run build",
     "watch": "tsc -w",
     "test": "echo 'Tests are not implemented yet'"
   },
   "dependencies": {
+    "@sentry/node": "6.14.0",
     "dotenv": "10.0.0",
     "lodash": "^4.17.21",
     "paper": "0.12.4",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
