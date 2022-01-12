@@ -1,6 +1,6 @@
 import { RawLayerCommon, RawLayer } from './layer'
 
-export type RawSectionLayer = RawLayerCommon & {
+export type RawLayerSection = RawLayerCommon & {
   type?: 'layerSection'
   blendOptions: {
     mode: string

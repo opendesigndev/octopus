@@ -1,16 +1,21 @@
-import { RawArtboard, RawLayer } from '../../typings/source'
-import { asArray } from '../../utils/as'
+import { RawLayer, RawLayerSection } from '../../typings/source'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
+import { asArray } from '../../utils/as'
+import { SourceLayerCommon, SourceLayerParent } from './source-layer-common'
 
-export type SourceArtboardOptions = {
-  rawValue: RawArtboard
+type SourceLayerSectionOptions = {
+  parent: SourceLayerParent
+  rawValue: RawLayerSection
 }
 
-export class SourceArtboard {
-  _rawValue: RawArtboard
+export class SourceLayerSection extends SourceLayerCommon {
+  _rawValue: RawLayerSection
+  _parent: SourceLayerParent
   _layers: SourceLayer[]
 
-  constructor(options: SourceArtboardOptions) {
+  constructor(options: SourceLayerSectionOptions) {
+    super()
+    this._parent = options.parent
     this._rawValue = options.rawValue
     this._layers = this._initLayers()
   }
@@ -28,14 +33,5 @@ export class SourceArtboard {
 
   get layers() {
     return this._layers
-  }
-
-  get bounds() {
-    return {
-      right: this._rawValue.bounds?.right ?? 0,
-      left: this._rawValue.bounds?.left ?? 0,
-      bottom: this._rawValue.bounds?.bottom ?? 0,
-      top: this._rawValue.bounds?.top ?? 0,
-    }
   }
 }

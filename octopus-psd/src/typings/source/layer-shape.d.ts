@@ -1,7 +1,7 @@
 import { RawBounds } from './shared'
 import { RawLayerCommon } from './layer'
 
-export type RawShapeLayer = RawLayerCommon & {
+export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
   fill?: {}

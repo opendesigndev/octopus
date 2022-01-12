@@ -3,7 +3,7 @@ import { RawParagraphStyle } from './style-paragraph'
 import { RawTextBounds } from './shared'
 import { RawTextStyle } from './style-text'
 
-export type RawTextLayer = RawLayerCommon & {
+export type RawLayerText = RawLayerCommon & {
   type?: 'textLayer'
   text?: {
     TextIndex?: number
