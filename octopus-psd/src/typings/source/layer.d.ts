@@ -1,9 +1,10 @@
-import { RawBounds } from './bounds'
+import { RawBounds } from './shared'
 import { RawBackgroundLayer } from './layer-background'
+import { RawSectionLayer } from './layer-section'
 import { RawShapeLayer } from './layer-shape'
+import { RawTextLayer } from './layer-text'
 
 export type RawLayerCommon = {
-  bitmapBounds?: RawBounds
   bounds?: RawBounds
   clipped?: boolean
   id?: number
@@ -13,4 +14,4 @@ export type RawLayerCommon = {
   visible?: boolean
 }
 
-export type RawLayer = RawShapeLayer | RawBackgroundLayer
+export type RawLayer = RawShapeLayer | RawBackgroundLayer | RawSectionLayer | RawTextLayer

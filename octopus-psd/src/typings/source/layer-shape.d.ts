@@ -1,4 +1,4 @@
-import { RawBounds } from './bounds'
+import { RawBounds } from './shared'
 import { RawLayerCommon } from './layer'
 
 export type RawShapeLayer = RawLayerCommon & {
