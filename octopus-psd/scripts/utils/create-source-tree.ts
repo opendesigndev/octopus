@@ -9,7 +9,7 @@ const defaultOptions = (directory: string) => ({
   octopusFileName: 'octopus-v2.json',
 })
 
-export const createSourceTree = async (filename: string, directory: string): Promise<SourceArtboard> => {
+export async function createSourceTree(filename: string, directory: string): Promise<SourceArtboard> {
   await parsePsd(filename, defaultOptions(directory))
   const sourceFile = `./workdir/${directory}/source.json`
   const file = await fsp.readFile(sourceFile, { encoding: 'utf8' })

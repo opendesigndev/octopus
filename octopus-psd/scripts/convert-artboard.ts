@@ -16,7 +16,7 @@ async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArt
   }
 }
 
-const convertArtboard = async () => {
+async function convertArtboard() {
   const octopusId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)

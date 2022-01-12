@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
 import { getPkgLocation } from './pkg-location'
 
-const getWorkDirTempLocation = async (id: string = uuidv4()) => {
+async function getWorkDirTempLocation(id: string = uuidv4()) {
   const workdir = path.join(await getPkgLocation(), 'workdir')
   const location = path.join(workdir, id)
   await fsp.mkdir(location, { recursive: true })
   return location
 }
 
-export const createTempSaver = async (location?: string) => {
+export async function createTempSaver(location?: string) {
   const sessionLocation = await getWorkDirTempLocation(location)
   return async (pathSuffix: string | null, body: string | Buffer) => {
     const suffix = typeof pathSuffix === 'string' ? pathSuffix : uuidv4()

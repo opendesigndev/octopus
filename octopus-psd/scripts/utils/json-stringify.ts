@@ -1,1 +1,3 @@
-export const stringify = (value: any) => JSON.stringify(value, null, '  ')
+export function stringify(value: any) {
+  return JSON.stringify(value, null, '  ')
+}
