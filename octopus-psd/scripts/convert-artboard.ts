@@ -3,10 +3,10 @@ import { performance } from 'perf_hooks'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusPSDConverter } from '../src'
-import { SourceArtboard } from '../src/entities/source-artboard'
 import { createSourceTree } from './utils/create-source-tree'
 import { createTempSaver } from './utils/save-temp'
 import { stringify } from './utils/json-stringify'
+import { SourceArtboard } from '../src/entities/source/source-artboard'
 
 async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
   try {

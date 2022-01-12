@@ -1,8 +1,8 @@
-import { OctopusPSDConverter } from '..'
+import { OctopusPSDConverter } from '../..'
+import { Octopus } from '../../typings/octopus'
 // import { createOctopusLayer, OctopusLayer } from '../factories/create-octopus-layer'
-import { asNumber } from '../utils/as'
-// import OctopusArtboardGrid from './octopus-artboard-grid'
-import { SourceArtboard } from './source-artboard'
+import { asNumber } from '../../utils/as'
+import { SourceArtboard } from '../source/source-artboard'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard
@@ -39,29 +39,20 @@ export class OctopusArtboard {
   // }
 
   _getDimensions() {
+    const { right, left, bottom, top } = this._sourceArtboard.bounds
     return {
-      width: asNumber(this._sourceArtboard.bounds.right - this._sourceArtboard.bounds.left, 0),
-      height: asNumber(this._sourceArtboard.bounds.bottom - this._sourceArtboard.bounds.top, 0),
+      width: asNumber(right - left, 0),
+      height: asNumber(bottom - top, 0),
     }
-  }
-
-  _getGuides() {
-    return this._sourceArtboard.guides
   }
 
   _getId() {
     return this._octopusConverter._id
   }
 
-  // _getGrid() {
-  //   return new OctopusArtboardGrid({ octopusArtboard: this })
-  // }
-
   async _getVersion() {
     const pkg = await this._octopusConverter.pkg
-    return {
-      [pkg.name]: pkg.version,
-    }
+    return pkg.version
   }
 
   /**
@@ -76,16 +67,12 @@ export class OctopusArtboard {
    * 6) meta vs specific
    */
   async convert() {
-    // const grid = this._getGrid().convert()
-    const guides = this._getGuides()
-
     return {
       id: this._getId(),
       type: 'ARTBOARD',
       version: await this._getVersion(),
       dimensions: this._getDimensions(),
-      // ...(grid ? { grid } : null),
-      ...(guides ? { guides } : null),
+      layers: [], // TODO
       // layers: this._layers
       //   .map((layer) => {
       //     return layer.convert()
@@ -93,6 +80,6 @@ export class OctopusArtboard {
       //   .filter((layer) => {
       //     return layer
       //   }),
-    }
+    } as Octopus['OctopusDocument']
   }
 }

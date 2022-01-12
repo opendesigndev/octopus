@@ -1,25 +1,22 @@
 {
-    "compilerOptions": {
-      "esModuleInterop": true,
-      "typeRoots": [
-        "node_modules/@types",
-        "src/typings"
-      ],
-      "declaration": true,
-      "rootDir": "./",
-      "outDir": "./dist/",
-      "module": "CommonJS",
-      "target": "ES2019",
-      "experimentalDecorators": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "allowJs": true,
-      "lib": ["es2019", "ES2015.Proxy", "dom"],
-      "paths": {
-        "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]
-      }
-    },
-    "include": ["src/**/*", "test/**/*", "scripts"]
-  }
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types", "src/typings"],
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "./dist/",
+    "module": "CommonJS",
+    "target": "ES2019",
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "lib": ["es2019", "ES2015.Proxy", "dom"],
+    "paths": {
+      "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]
+    }
+  },
+  "include": ["src/**/*", "test/**/*", "scripts"]
+}

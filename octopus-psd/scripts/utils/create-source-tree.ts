@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs'
 import { parsePsd } from '@avocode/psd-parser'
-import { SourceArtboard } from '../../src/entities/source-artboard'
+import { SourceArtboard } from '../../src/entities/source/source-artboard'
 
 const defaultOptions = (directory: string) => ({
   outDir: `./workdir/${directory}`,
@@ -14,5 +14,5 @@ export async function createSourceTree(filename: string, directory: string): Pro
   const sourceFile = `./workdir/${directory}/source.json`
   const file = await fsp.readFile(sourceFile, { encoding: 'utf8' })
   const sourceTree = JSON.parse(file)
-  return sourceTree as SourceArtboard
+  return new SourceArtboard({ rawValue: sourceTree })
 }
