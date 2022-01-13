@@ -1,5 +1,5 @@
-import { RawBounds } from './shared'
-import { RawLayer } from './layer'
+import type { RawBounds } from './shared'
+import type { RawLayer } from './layer'
 
 export type RawArtboard = {
   bounds?: RawBounds
@@ -10,10 +10,10 @@ export type RawArtboard = {
     angle?: number
   }
   guides?: {
-    x?: [number]
-    y?: [number]
+    x?: number[]
+    y?: number[]
   }
-  layers?: [RawLayer]
+  layers?: RawLayer[]
   mode?: string
   profile?: string | null
   resolution?: number

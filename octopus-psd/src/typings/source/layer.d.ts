@@ -1,8 +1,8 @@
-import { RawBounds } from './shared'
-import { RawLayerBackground } from './layer-background'
-import { RawLayerSection } from './layer-section'
-import { RawLayerShape } from './layer-shape'
-import { RawLayerText } from './layer-text'
+import type { RawLayerBackground } from './layer-background'
+import type { RawLayerSection } from './layer-section'
+import type { RawLayerShape } from './layer-shape'
+import type { RawLayerText } from './layer-text'
+import type { RawBounds } from './shared'
 
 export type RawLayerCommon = {
   bounds?: RawBounds
