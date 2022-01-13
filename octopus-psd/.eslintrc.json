@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 13,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/semi": ["error", "never"],
+        "import/no-default-export": "error",
+        "import/prefer-default-export": "off",
+        "max-len": ["error", { "code": 120 }],
+        "semi": ["error", "never"],
+        "no-underscore-dangle": "off"
+    }
+}

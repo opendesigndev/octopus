@@ -16,6 +16,7 @@ async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArt
   }
 }
 
+// eslint-disable-next-line consistent-return
 async function convertArtboard() {
   const octopusId = uuidv4()
   const [filename] = process.argv.slice(2)
