@@ -8,7 +8,7 @@ type CreateSentryOptions = {
   logger: Logger
 }
 
-export const createSentry = ({ dsn, env, logger }: CreateSentryOptions) => {
+export function createSentry({ dsn, env, logger }: CreateSentryOptions) {
   if (!dsn) {
     logger.warn('No Sentry DSN detected, skipping log tracking')
     return null

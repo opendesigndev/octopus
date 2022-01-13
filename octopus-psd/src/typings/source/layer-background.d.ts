@@ -1,5 +1,5 @@
-import { RawBounds } from './shared'
-import { RawLayerCommon } from './layer'
+import type { RawBounds } from './shared'
+import type { RawLayerCommon } from './layer'
 
 export type RawLayerBackground = RawLayerCommon & {
   type?: 'backgroundLayer'

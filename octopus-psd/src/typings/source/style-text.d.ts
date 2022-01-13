@@ -1,4 +1,4 @@
-import { RawColor } from './shared'
+import type { RawColor } from './shared'
 
 export type RawTextStyle = {
   from?: number
@@ -32,7 +32,7 @@ export type RawTextStyle = {
     strikethrough?: boolean
     strokeColor?: {
       Type?: number
-      Values?: [number]
+      Values?: number[]
     }
     strokeFlag?: boolean
     styleRunAlignment?: number

@@ -1,3 +1,5 @@
 import dotenv from 'dotenv'
 
-export const createEnvironment = () => dotenv.config()
+export function createEnvironment() {
+  return dotenv.config()
+}

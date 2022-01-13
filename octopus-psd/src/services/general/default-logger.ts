@@ -1,7 +1,7 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-export const createLogger = () => {
+export function createLogger() {
   return pino({
     formatters: {
       bindings: ({ pid }) => {
