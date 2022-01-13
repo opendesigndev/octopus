@@ -13,7 +13,7 @@ export class SourceLayerCommon {
   }
 
   get id() {
-    return this._rawValue.id
+    return this._rawValue.id ? this._rawValue.id.toString() : undefined
   }
 
   get name() {

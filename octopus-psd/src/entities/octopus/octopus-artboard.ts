@@ -1,6 +1,6 @@
 import { OctopusPSDConverter } from '../..'
 import { Octopus } from '../../typings/octopus'
-// import { createOctopusLayer, OctopusLayer } from '../factories/create-octopus-layer'
+import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
 import { asNumber } from '../../utils/as'
 import { SourceArtboard } from '../source/source-artboard'
 
@@ -12,12 +12,12 @@ type OctopusArtboardOptions = {
 export class OctopusArtboard {
   _sourceArtboard: SourceArtboard
   _octopusConverter: OctopusPSDConverter
-  // _layers: OctopusLayer[]
+  _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
     this._sourceArtboard = options.sourceArtboard
-    // this._layers = this._initLayers()
+    this._layers = this._initLayers()
   }
 
   get sourceArtboard() {
@@ -28,15 +28,15 @@ export class OctopusArtboard {
     return this._octopusConverter
   }
 
-  // _initLayers() {
-  //   return this._sourceArtboard.children.reduce((layers, sourceLayer) => {
-  //     const octopusLayer = createOctopusLayer({
-  //       parent: this,
-  //       layer: sourceLayer
-  //     })
-  //     return octopusLayer ? [ ...layers, octopusLayer ] : layers
-  //   }, [])
-  // }
+  _initLayers() {
+    return this._sourceArtboard.layers.reduce((layers, sourceLayer) => {
+      const octopusLayer = createOctopusLayer({
+        parent: this,
+        layer: sourceLayer,
+      })
+      return octopusLayer ? [...layers, octopusLayer] : layers
+    }, [])
+  }
 
   _getDimensions() {
     const { right, left, bottom, top } = this._sourceArtboard.bounds
@@ -72,14 +72,7 @@ export class OctopusArtboard {
       type: 'ARTBOARD',
       version: await this._getVersion(),
       dimensions: this._getDimensions(),
-      layers: [], // TODO
-      // layers: this._layers
-      //   .map((layer) => {
-      //     return layer.convert()
-      //   })
-      //   .filter((layer) => {
-      //     return layer
-      //   }),
+      layers: this._layers.map((layer) => layer.convert()).filter((layer) => layer),
     } as Octopus['OctopusDocument']
   }
 }
