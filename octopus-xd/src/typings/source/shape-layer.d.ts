@@ -12,7 +12,8 @@ export type RawShapeRect = {
   x?: 0,
   y?: 0,
   width?: 627,
-  height?: 488
+  height?: 488,
+  r?: number[]
 }
 
 export type RawShapeCompound = {

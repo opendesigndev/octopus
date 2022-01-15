@@ -3,10 +3,11 @@ import readPackageUpAsync from 'read-pkg-up'
 import createEnvironment from './services/general/environment'
 import createLogger from './services/general/default-logger'
 import createSentry from './services/general/sentry'
+import ArtboardConverter from './services/conversion/artboard-converter'
 
 import type { NormalizedReadResult } from 'read-pkg-up'
 import type { Logger } from './typings'
-import ArtboardConverter, { ArtboardConversionOptions } from './services/conversion/artboard-converter'
+import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 
 
 type OctopusXDConverterOptions = {
@@ -18,17 +19,11 @@ type OctopusXDConverterOptions = {
  */
 createEnvironment()
 
-/**
- * @TODO
- * Should we publish it as @avocode/octopus-xd?
- * Should we expand?
- */
-
 export default class OctopusXDConverter {
-  _pkg: Promise<NormalizedReadResult | undefined>
+  private _pkg: Promise<NormalizedReadResult | undefined>
   // Services
-  _logger: Logger
-  _sentry: ReturnType<typeof createSentry>
+  private _logger: Logger
+  private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusXDConverterOptions) {
     this._pkg = readPackageUpAsync({ cwd: __dirname })

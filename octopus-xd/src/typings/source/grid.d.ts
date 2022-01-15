@@ -19,9 +19,5 @@ export type RawGridStyle = {
   marginBottom?: number,
   layoutRowStroke?: RawGridStroke,
   layoutColumnStroke?: RawGridStroke
-  /**
-   * @TODO decide how to infer visibility
-   * `visible` doens't occur in newer xd version, seems like it's somewhat deprecated.
-   */
   visible?: boolean
 }

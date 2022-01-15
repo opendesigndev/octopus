@@ -1,6 +1,8 @@
-import OctopusXDConverter from '../../..'
-import OctopusArtboard from '../../../entities/octopus-artboard'
-import SourceDesign from '../../../entities/source-design'
+import OctopusArtboard from '../../../entities-octopus/octopus-artboard'
+
+import type OctopusXDConverter from '../../..'
+import type SourceDesign from '../../../entities-source/source-design'
+
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string,
@@ -11,11 +13,10 @@ export type ArtboardConverterOptions = ArtboardConversionOptions & {
   octopusXdConverter: OctopusXDConverter
 }
 
-
 export default class ArtboardConverter {
-  _sourceDesign: SourceDesign
-  _targetArtboardId: string
-  _octopusXdConverter: OctopusXDConverter
+  private _sourceDesign: SourceDesign
+  private _targetArtboardId: string
+  private _octopusXdConverter: OctopusXDConverter
 
   constructor(options: ArtboardConverterOptions) {
     this._octopusXdConverter = options.octopusXdConverter
