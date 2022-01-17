@@ -1,3 +1,8 @@
+export type RawSize = {
+  height?: number
+  width?: number
+}
+
 export type RawBounds = {
   bottom?: number
   left?: number
@@ -23,12 +28,22 @@ export type RawColor = {
   red?: number
 }
 
-export type RawAngle = {
-  units?: 'angleUnit' // TODO
+export type RawPercentUnit = {
+  units?: 'percentUnit'
   value?: number
 }
 
-export type RawOpacity = {
-  units?: 'percentUnit' // TODO
+export type RawAngleUnit = {
+  units?: 'angleUnit'
   value?: number
+}
+
+export type RawFraction = {
+  denominator?: number
+  numerator?: number
+}
+
+export type RawBlendOptions = {
+  mode?: string
+  opacity?: RawPercentUnit
 }

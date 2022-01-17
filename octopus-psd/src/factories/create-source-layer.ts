@@ -1,6 +1,14 @@
-import type { RawLayer, RawLayerSection, RawLayerBackground, RawLayerShape, RawLayerText } from '../typings/source'
+import type {
+  RawLayer,
+  RawLayerSection,
+  RawLayerBackground,
+  RawLayerShape,
+  RawLayerText,
+  RawLayerLayer,
+} from '../typings/source'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
+import { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
@@ -40,6 +48,13 @@ function createLayerBackground({ layer, parent }: CreateLayerOptions): SourceLay
   })
 }
 
+function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLayer {
+  return new SourceLayerLayer({
+    parent,
+    rawValue: layer as RawLayerLayer,
+  })
+}
+
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {
   const type = (Object(options.layer) as RawLayer).type
   const builders: { [key: string]: Function } = {
@@ -47,6 +62,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
     shapeLayer: createLayerShape,
     textLayer: createLayerText,
     backgroundLayer: createLayerBackground,
+    layer: createLayerLayer,
   }
   const builder = builders[type as string]
   if (typeof builder !== 'function') {

@@ -1,9 +1,8 @@
+import type { RawBlendOptions } from './shared'
 import type { RawLayerCommon, RawLayer } from './layer'
 
 export type RawLayerSection = RawLayerCommon & {
   type?: 'layerSection'
-  blendOptions: {
-    mode: string
-  }
-  layers: RawLayer[]
+  blendOptions?: RawBlendOptions
+  layers?: RawLayer[]
 }

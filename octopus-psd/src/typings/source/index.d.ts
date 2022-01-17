@@ -1,5 +1,6 @@
 export * from './artboard'
 export * from './layer-background'
+export * from './layer-layer'
 export * from './layer-section'
 export * from './layer-shape'
 export * from './layer-text'

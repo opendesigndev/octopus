@@ -1,3 +1,4 @@
+import type { RawLayerLayer } from './layer-layer'
 import type { RawLayerBackground } from './layer-background'
 import type { RawLayerSection } from './layer-section'
 import type { RawLayerShape } from './layer-shape'
@@ -14,4 +15,4 @@ export type RawLayerCommon = {
   visible?: boolean
 }
 
-export type RawLayer = RawLayerSection | RawLayerShape | RawLayerText | RawLayerBackground
+export type RawLayer = RawLayerSection | RawLayerShape | RawLayerText | RawLayerBackground | RawLayerLayer

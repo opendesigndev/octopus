@@ -1,10 +1,10 @@
-import type { RawAngle, RawBounds, RawColor, RawOpacity } from './shared'
+import type { RawAngleUnit, RawBounds, RawColor, RawPercentUnit } from './shared'
 import type { RawLayerCommon } from './layer'
 
 export type RawShapeTransparency = {
   location?: number
   midpoint?: number
-  opacity?: RawOpacity
+  opacity?: RawPercentUnit
 }
 
 export type RawShapeGradientColors = {
@@ -28,7 +28,7 @@ export type RawShapeFill = {
   dither?: boolean
   gradientsInterpolationMethod?: 'Perc' // TODO
   type?: 'linear' // TODO
-  angle?: RawAngle
+  angle?: RawAngleUnit
   gradient?: RawShapeGradient
 }
 
@@ -47,7 +47,7 @@ export type RawShapePath = {
 export type RawShapeStrokeStyleContent = {
   color?: RawColor
   align?: boolean
-  angle?: RawAngle
+  angle?: RawAngleUnit
   dither?: boolean
   gradient?: RawShapeGradient
 }
