@@ -1,3 +1,4 @@
+import { OctopusPSDConverter } from '../..'
 import { RawLayer } from '../../typings/source'
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerSection } from './source-layer-section'
@@ -5,8 +6,8 @@ import { SourceLayerSection } from './source-layer-section'
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
 export class SourceLayerCommon {
-  _rawValue: RawLayer
-  _parent: SourceLayerParent
+  protected _rawValue: RawLayer
+  protected _parent: SourceLayerParent
 
   get type() {
     return this._rawValue.type
@@ -18,6 +19,18 @@ export class SourceLayerCommon {
 
   get name() {
     return this._rawValue.name
+  }
+
+  get converter(): OctopusPSDConverter | null {
+    const parentArtboard = this.parentArtboard
+    if (!parentArtboard) return null
+    return parentArtboard.converter
+  }
+
+  get parentArtboard(): SourceArtboard | null {
+    if (!this._parent) return null
+    const parent = this._parent as SourceLayerParent
+    return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
   get visible() {

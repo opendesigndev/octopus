@@ -49,5 +49,11 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
     backgroundLayer: createLayerBackground,
   }
   const builder = builders[type as string]
-  return typeof builder === 'function' ? builder(options) : null
+  if (typeof builder !== 'function') {
+    const converter = options.parent.converter
+    converter?.logger?.warn('Unknown source layer type', { extra: { type } })
+    converter?.sentry?.captureMessage('Unknown source layer type', { extra: { type } })
+    return null
+  }
+  return builder(options)
 }

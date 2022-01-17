@@ -9,9 +9,9 @@ type OctopusLayerGroupOptions = {
 }
 
 export class OctopusLayerGroup extends OctopusLayerCommon {
-  _parent: OctopusLayerParent
-  _sourceLayer: SourceLayerSection
-  _layers: OctopusLayer[]
+  protected _parent: OctopusLayerParent
+  protected _sourceLayer: SourceLayerSection
+  private _layers: OctopusLayer[]
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)

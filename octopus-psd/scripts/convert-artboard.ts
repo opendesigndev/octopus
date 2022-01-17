@@ -23,11 +23,11 @@ async function convertArtboard() {
   if (filename === undefined) {
     return console.error('Missing argument (path to .psd file)')
   }
-  const sourceArtboard = await createSourceTree(filename, octopusId)
+  const converter = new OctopusPSDConverter({ octopusId })
+  const sourceArtboard = await createSourceTree(converter, filename, octopusId)
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(octopusId)}`)
 
   const timeStart = performance.now()
-  const converter = new OctopusPSDConverter({ octopusId })
   const octopus = await convert(converter, sourceArtboard)
   const time = Math.round(performance.now() - timeStart)
 

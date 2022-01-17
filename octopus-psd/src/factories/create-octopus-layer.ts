@@ -50,6 +50,5 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
     converter?.sentry?.captureMessage('Unknown layer type', { extra: { type } })
     return null
   }
-
   return builder(options)
 }

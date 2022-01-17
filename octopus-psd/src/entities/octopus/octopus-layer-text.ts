@@ -10,8 +10,8 @@ type OctopusLayerTextOptions = {
 }
 
 export class OctopusLayerText extends OctopusLayerCommon {
-  _parent: OctopusLayerParent
-  _sourceLayer: SourceLayerText
+  protected _parent: OctopusLayerParent
+  protected _sourceLayer: SourceLayerText
 
   constructor(options: OctopusLayerTextOptions) {
     super(options)

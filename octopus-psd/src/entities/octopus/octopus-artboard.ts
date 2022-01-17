@@ -10,9 +10,9 @@ type OctopusArtboardOptions = {
 }
 
 export class OctopusArtboard {
-  _sourceArtboard: SourceArtboard
-  _octopusConverter: OctopusPSDConverter
-  _layers: OctopusLayer[]
+  private _sourceArtboard: SourceArtboard
+  private _octopusConverter: OctopusPSDConverter
+  private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter

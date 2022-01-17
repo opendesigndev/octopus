@@ -15,8 +15,8 @@ type OctopusLayerShapeOptions = {
 }
 
 export class OctopusLayerShape extends OctopusLayerCommon {
-  _parent: OctopusLayerParent
-  _sourceLayer: SourceLayerShape
+  protected _parent: OctopusLayerParent
+  protected _sourceLayer: SourceLayerShape
   //   _children: OctopusLayerShape[]
   //   _shapeData: string
 

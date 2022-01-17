@@ -1,29 +1,37 @@
 import { RawArtboard, RawLayer } from '../../typings/source'
 import { asArray } from '../../utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
+import { OctopusPSDConverter } from '../..'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard
+  octopusConverter: OctopusPSDConverter
 }
 
 export class SourceArtboard {
-  _rawValue: RawArtboard
-  _layers: SourceLayer[]
+  private _rawValue: RawArtboard
+  private _octopusConverter: OctopusPSDConverter
+  private _layers: SourceLayer[]
 
   constructor(options: SourceArtboardOptions) {
     this._rawValue = options.rawValue
+    this._octopusConverter = options.octopusConverter
     this._layers = this._initLayers()
   }
 
+  get converter() {
+    return this._octopusConverter
+  }
+
   _initLayers() {
-    const layers = asArray(this._rawValue?.layers)
-    return layers.reduce((layers: SourceLayer[], layer: RawLayer) => {
+    const layers = asArray(this._rawValue?.layers).reduce((layers: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({
         layer,
         parent: this,
       })
       return sourceLayer ? [...layers, sourceLayer] : layers
     }, [])
+    return layers
   }
 
   get layers() {

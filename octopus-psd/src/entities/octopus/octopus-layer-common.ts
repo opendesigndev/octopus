@@ -24,9 +24,9 @@ type OctopusLayerCommonOptions = {
 }
 
 export class OctopusLayerCommon {
-  _id: string
-  _parent: OctopusLayerParent
-  _sourceLayer: SourceLayer
+  protected _id: string
+  protected _parent: OctopusLayerParent
+  protected _sourceLayer: SourceLayer
 
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent
@@ -43,7 +43,7 @@ export class OctopusLayerCommon {
 
   get parentArtboard(): OctopusArtboard | null {
     if (!this._parent) return null
-    const parent = this._parent as OctopusLayerGroup | OctopusArtboard
+    const parent = this._parent as OctopusLayerParent
     return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
