@@ -13,7 +13,12 @@ import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 
-export type SourceLayer = SourceLayerSection | SourceLayerShape | SourceLayerText | SourceLayerBackground
+export type SourceLayer =
+  | SourceLayerSection
+  | SourceLayerShape
+  | SourceLayerText
+  | SourceLayerBackground
+  | SourceLayerLayer
 
 type CreateLayerOptions = {
   layer: RawLayer

@@ -102,6 +102,7 @@ export class OctopusLayerCommon {
       layerSection: 'GROUP',
       shapeLayer: 'SHAPE',
       textLayer: 'TEXT',
+      layer: 'SHAPE',
       // backgroundLayer: 'TODO',
     } as const
     const type = String(this._sourceLayer.type)

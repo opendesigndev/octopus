@@ -1,5 +1,6 @@
 import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
-import { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
 
 import type { Octopus } from '../../typings/octopus'
 // import { RawShapeCompound, RawShapeRect } from '../typings/source'
@@ -11,12 +12,12 @@ import type { Octopus } from '../../typings/octopus'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerShape
+  sourceLayer: SourceLayerShape | SourceLayerLayer
 }
 
 export class OctopusLayerShape extends OctopusLayerCommon {
   protected _parent: OctopusLayerParent
-  protected _sourceLayer: SourceLayerShape
+  protected _sourceLayer: SourceLayerShape | SourceLayerLayer
   //   _children: OctopusLayerShape[]
   //   _shapeData: string
 
