@@ -136,13 +136,10 @@ export class OctopusLayerShape extends OctopusLayerCommon {
   convertTypeSpecific() {
     const shapes = [] as Octopus['Shape'][] // TODO
     // const shapes = this._getShapes()
-    return {
-      shapes,
-    }
+    return { shapes }
   }
 
   convert(): Octopus['ShapeLayer'] | null {
-    console.info('Convert Layer')
     const common = this.convertCommon()
     if (!common) return null
 

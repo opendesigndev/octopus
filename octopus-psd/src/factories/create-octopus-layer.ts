@@ -1,10 +1,10 @@
 import { OctopusLayerParent } from '../entities/octopus/octopus-layer-common'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
-// import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
+import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
-// import { SourceLayerText } from '../entities/source/source-layer-text'
+import { SourceLayerText } from '../entities/source/source-layer-text'
 import { SourceLayer } from './create-source-layer'
 
 export type OctopusLayer = OctopusLayerGroup // | OctopusLayerShape | OctopusLayerMaskGroup
@@ -28,21 +28,28 @@ function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): 
   })
 }
 
-// function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
-//   return new OctopusLayerText({
-//     parent,
-//     sourceLayer: layer as SourceLayerText,
-//   })
-// }
+function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+  return new OctopusLayerText({
+    parent,
+    sourceLayer: layer as SourceLayerText,
+  })
+}
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
   const type = (Object(options.layer) as SourceLayer).type
   const builders: { [key: string]: Function } = {
     layerSection: createOctopusLayerGroup,
     shapeLayer: createOctopusLayerShape,
-    // textLayer: createOctopusLayerGroup,
+    textLayer: createOctopusLayerText,
     // backgroundLayer: createOctopusLayerGroup, // TODO ignoruj
   }
   const builder = builders[type as string]
-  return typeof builder === 'function' ? builder(options) : null
+  if (typeof builder !== 'function') {
+    const converter = options.parent.converter
+    converter?.logger?.warn('Unknown layer type', { extra: { type } })
+    converter?.sentry?.captureMessage('Unknown layer type', { extra: { type } })
+    return null
+  }
+
+  return builder(options)
 }

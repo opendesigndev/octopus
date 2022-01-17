@@ -34,9 +34,8 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
    * @returns
    */
   convertTypeSpecific() {
-    return {
-      layers: this._layers.map((layer) => layer.convert()).filter(Boolean) as Octopus['Layer'][],
-    }
+    const layers = this._layers.map((layer) => layer.convert()).filter(Boolean) as Octopus['Layer'][]
+    return { layers }
   }
 
   convert(): Octopus['GroupLayer'] | null {

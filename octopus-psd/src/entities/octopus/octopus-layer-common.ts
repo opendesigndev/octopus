@@ -99,12 +99,12 @@ export class OctopusLayerCommon {
 
   get type(): 'SHAPE' | 'GROUP' | 'TEXT' | null {
     const types = {
-      layersection: 'GROUP',
-      shapelayer: 'SHAPE',
-      textlayer: 'TEXT',
+      layerSection: 'GROUP',
+      shapeLayer: 'SHAPE',
+      textLayer: 'TEXT',
       // backgroundLayer: 'TODO',
     } as const
-    const type = String(this._sourceLayer.type).toLowerCase()
+    const type = String(this._sourceLayer.type)
     if (!(type in types)) {
       this.converter?.logger?.error('Unknown layer type', { extra: { type } })
       this.converter?.sentry?.captureMessage('Unknown layer type', { extra: { type } })
@@ -121,9 +121,7 @@ export class OctopusLayerCommon {
   //   }
 
   isConvertible() {
-    const hasValidType = this.type !== null
-    console.info('hasValidType', hasValidType)
-    return hasValidType
+    return this.type !== null
   }
 
   //   /**

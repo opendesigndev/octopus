@@ -55,17 +55,6 @@ export class OctopusArtboard {
     return pkg.version
   }
 
-  /**
-   * @TODOs
-   * 1) Add return type `Artboard` from specs.
-   * 2) Missing `backgroundColor` implementation. Should it be in virtual child layer
-   *    or `mask`-similar prop describing virtual layer?
-   * 3) Discuss `includeBackgroundColorInInstance` - should it be responsibility
-   *    of background layer?
-   * 4) `disabledOverrides` - should it be general prop or sketch only?
-   * 5) `exportables`?
-   * 6) meta vs specific
-   */
   async convert() {
     return {
       id: this._getId(),
