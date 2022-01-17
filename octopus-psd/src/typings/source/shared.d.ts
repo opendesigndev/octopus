@@ -22,3 +22,13 @@ export type RawColor = {
   green?: number
   red?: number
 }
+
+export type RawAngle = {
+  units?: 'angleUnit' // TODO
+  value?: number
+}
+
+export type RawOpacity = {
+  units?: 'percentUnit' // TODO
+  value?: number
+}

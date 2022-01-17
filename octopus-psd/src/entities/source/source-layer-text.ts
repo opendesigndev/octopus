@@ -28,12 +28,12 @@ export class SourceLayerText extends SourceLayerCommon {
   get text() {
     return {
       TextIndex: this._rawValue.text?.TextIndex,
-      boundingBox: this._rawValue.text?.boundingBox,
-      bounds: this._rawValue.text?.bounds,
+      boundingBox: this._rawValue.text?.boundingBox, // TODO
+      bounds: this._rawValue.text?.bounds, // TODO
       orientation: this._rawValue.text?.orientation,
-      paragraphStyleRange: this._rawValue.text?.paragraphStyleRange,
+      paragraphStyleRange: this._rawValue.text?.paragraphStyleRange, // TODO
       textKey: this._rawValue.text?.textKey,
-      textStyleRange: this._rawValue.text?.textStyleRange,
+      textStyleRange: this._rawValue.text?.textStyleRange, // TODO
       transform: {
         tx: this._rawValue.text?.transform?.tx ?? 0,
         ty: this._rawValue.text?.transform?.ty ?? 0,
