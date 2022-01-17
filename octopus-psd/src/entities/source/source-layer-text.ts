@@ -30,7 +30,7 @@ export class SourceLayerText extends SourceLayerCommon {
       TextIndex: this._rawValue.text?.TextIndex,
       boundingBox: this._rawValue.text?.boundingBox, // TODO
       bounds: this._rawValue.text?.bounds, // TODO
-      orientation: this._rawValue.text?.orientation,
+      orientation: this._rawValue.text?.orientation ?? 'horizontal',
       paragraphStyleRange: this._rawValue.text?.paragraphStyleRange, // TODO
       textKey: this._rawValue.text?.textKey,
       textStyleRange: this._rawValue.text?.textStyleRange, // TODO

@@ -1,7 +1,16 @@
 import type { RawLayerCommon } from './layer'
-import type { RawParagraphStyle } from './style-paragraph'
+import type { RawParagraphStyleRange } from './style-paragraph'
 import type { RawBounds, RawTextBounds } from './shared'
-import type { RawTextStyle } from './style-text'
+import type { RawTextStyleRange } from './style-text'
+
+export type RawTextTransform = {
+  tx?: number
+  ty?: number
+  xx?: number
+  xy?: number
+  yx?: number
+  yy?: number
+}
 
 export type RawLayerText = RawLayerCommon & {
   type?: 'textLayer'
@@ -11,16 +20,9 @@ export type RawLayerText = RawLayerCommon & {
     boundingBox?: RawTextBounds
     bounds?: RawTextBounds
     orientation?: 'horizontal' | 'vertical'
-    paragraphStyleRange?: RawParagraphStyle[]
+    paragraphStyleRange?: RawParagraphStyleRange[]
     textKey?: string
-    textStyleRange?: RawTextStyle[]
-    transform?: {
-      tx?: number
-      ty?: number
-      xx?: number
-      xy?: number
-      yx?: number
-      yy?: number
-    }
+    textStyleRange?: RawTextStyleRange[]
+    transform?: RawTextTransform
   }
 }
