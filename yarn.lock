@@ -27,15 +27,10 @@
     lodash "^4.13.1"
     raven "^1.1.4"
 
-"@avocode/octopus-ts@^3.0.0-alpha.14":
-  version "3.0.0-alpha.14"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.14.tgz#a9eb7d609272f1caf6c944d8edfc3c837bcc9496"
-  integrity sha512-8Pi9RGEN95WrvJN9n8OIh6Guk3YLhIeyzEDorp35hxu5357G958UOMiF1hLtVwvdaB5Z15Yxsjd1yreKzoaDxg==
-
-"@avocode/octopus-ts@^3.0.0-alpha.8":
-  version "3.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.8.tgz#5681ad0b6e3a46ce14b5247627dfe3c7cd9a298d"
-  integrity sha512-a4FPb+BnBASRf8rfF2HbulEc9wNLfdbQBii969xv4r3y1PzGZy8bVTQAsPBBW3FDn8vp3RDEHJmWD5fkKl+m7g==
+"@avocode/octopus-ts@3.0.0-alpha.15":
+  version "3.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.15.tgz#1c59161f4baa4e1cdc28479ce565c6b11e66b340"
+  integrity sha512-XSq1PgfCcvLc2MMmKRB7TMewpAjw0U0tGxwRozhC8QncvzbI5neSfSX1/QVCA0eydtKtuA5UiYZriuwa6L05BQ==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

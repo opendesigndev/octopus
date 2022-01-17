@@ -4,7 +4,7 @@
     "typeRoots": ["node_modules/@types", "src/typings"],
     "declaration": true,
     "rootDir": "./",
-    "outDir": "./dist/",
+    "outDir": "./lib/",
     "module": "CommonJS",
     "target": "ES2019",
     "experimentalDecorators": true,

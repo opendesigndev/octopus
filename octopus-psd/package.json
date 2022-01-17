@@ -6,7 +6,7 @@
   "scripts": {
     "convert": "ts-node ./scripts/convert-artboard.ts",
     "build": "tsc --build ./tsconfig.json",
-    "clean": "rimraf ./node_modules ./dist ./workdir",
+    "clean": "rimraf ./node_modules ./lib ./workdir",
     "clean-workdir": "rimraf ./workdir/*",
     "lint": "eslint ./src/* ./scripts/*",
     "prepare": "rimraf ./lib && yarn run build",
@@ -26,7 +26,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@avocode/octopus-ts": "^3.0.0-alpha.14",
+    "@avocode/octopus-ts": "3.0.0-alpha.15",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",

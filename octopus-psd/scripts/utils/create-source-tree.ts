@@ -1,7 +1,7 @@
 import { promises as fsp } from 'fs'
 import { parsePsd } from '@avocode/psd-parser'
 import { SourceArtboard } from '../../src/entities/source/source-artboard'
-import { OctopusPSDConverter } from '../../src'
+import type { OctopusPSDConverter } from '../../src'
 
 const defaultOptions = (directory: string) => ({
   outDir: `./workdir/${directory}`,

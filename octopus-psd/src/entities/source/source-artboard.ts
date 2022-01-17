@@ -1,7 +1,7 @@
-import { RawArtboard, RawLayer } from '../../typings/source'
+import type { RawArtboard, RawLayer } from '../../typings/source'
 import { asArray } from '../../utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
-import { OctopusPSDConverter } from '../..'
+import type { OctopusPSDConverter } from '../..'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

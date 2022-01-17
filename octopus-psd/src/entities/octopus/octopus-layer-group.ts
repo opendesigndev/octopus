@@ -1,6 +1,6 @@
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
-import { SourceLayerSection } from '../source/source-layer-section'
+import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
 
 type OctopusLayerGroupOptions = {
