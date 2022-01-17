@@ -7,7 +7,7 @@
     ],
     "declaration": true,
     "rootDir": "./",
-    "outDir": "./dist/",
+    "outDir": "./lib/",
     "module": "CommonJS",
     "target": "ES2019",
     "experimentalDecorators": true,

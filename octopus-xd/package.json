@@ -4,8 +4,9 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
-    "unpack-xd-file": "npx ts-node ./scripts/convert-every-artboard.ts",
-    "clean": "npx rimraf ./node_modules ./dist ./workdir",
+    "clean": "npx rimraf ./node_modules ./lib ./workdir",
+    "convert:all": "npx ts-node ./scripts/convert-all.ts",
+    "convert:all:render": "npx ts-node ./scripts/convert-all-and-render.ts",
     "clean-workdir": "npx rimraf ./workdir/*",
     "build": "npx tsc --build ./tsconfig.json",
     "lint": "npx eslint ./src/*",
@@ -24,7 +25,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@avocode/octopus-ts": "^3.0.0-alpha.8",
+    "@avocode/octopus-ts": "3.0.0-alpha.15",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",

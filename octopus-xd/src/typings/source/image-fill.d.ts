@@ -5,7 +5,7 @@ export type RawImageFill = {
     height?: number,
     meta?: {
       ux?: {
-        scaleBehavior?: 'fill' | 'cover', /** @TODO double check those values */
+        scaleBehavior?: 'fill' | 'cover',
         uid?: string,
         hrefLastModifiedDate?: number,
       }

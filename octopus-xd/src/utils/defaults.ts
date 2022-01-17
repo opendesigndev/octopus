@@ -1,6 +1,6 @@
 export default {
   LAYER_TRANSFORM: [ 1, 0, 0, 1, 0, 0 ],
-  BLEND_MODE: 'NORMAL' /** @TODO default is normal or pass_through? */,
+  BLEND_MODE: 'NORMAL',
   EFFECTS: {
     SHADOW_CHOKE: 0,
     IMAGE_FILL_TYPE: 'FILL',
@@ -14,5 +14,8 @@ export default {
     STYLE_SMALLCAPS: false,
     STYLE_KERNING: true,
     LAYER_FONT_SIZE: 10
+  },
+  LAYER: {
+    NAME: 'Layer'
   }
 } as const

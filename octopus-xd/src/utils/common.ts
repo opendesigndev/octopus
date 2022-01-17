@@ -28,3 +28,13 @@ export function getPresentProps<T, U>(obj: T, skipValues: U[] = []): Partial<T> 
     return value !== null && value !== undefined && !skipValues.includes(value)
   })) as Partial<T>
 }
+
+export function getConverted<T extends { convert: () => unknown }>(
+  entities: T[]
+): Exclude<ReturnType<T['convert']>, null>[] {
+  return entities.map(entity => {
+    return entity.convert()
+  }).filter(converted => {
+    return converted
+  }) as Exclude<ReturnType<T['convert']>, null>[]
+}

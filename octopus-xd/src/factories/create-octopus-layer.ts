@@ -1,12 +1,13 @@
-import { OctopusLayerParent } from '../entities/octopus-layer-common'
-import OctopusLayerGroup from '../entities/octopus-layer-group'
-import OctopusLayerMaskGroup from '../entities/octopus-layer-maskgroup'
-import OctopusLayerShape from '../entities/octopus-layer-shape'
-import OctopusLayerText from '../entities/octopus-layer-text'
-import SourceLayerGroup from '../entities/source-layer-group'
-import SourceLayerShape from '../entities/source-layer-shape'
-import SourceLayerText from '../entities/source-layer-text'
-import { SourceLayer } from './create-source-layer'
+import OctopusLayerGroup from '../entities-octopus/octopus-layer-group'
+import OctopusLayerMaskGroup from '../entities-octopus/octopus-layer-maskgroup'
+import OctopusLayerShape from '../entities-octopus/octopus-layer-shape'
+import OctopusLayerText from '../entities-octopus/octopus-layer-text'
+
+import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type SourceLayerGroup from '../entities-source/source-layer-group'
+import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type SourceLayerText from '../entities-source/source-layer-text'
+import type { SourceLayer } from './create-source-layer'
 
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerMaskGroup

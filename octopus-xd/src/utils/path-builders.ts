@@ -22,7 +22,7 @@ import type {
 } from '../typings/source'
 
 
-const buildShapePathFromRect = (shape: RawShapeRect): string | null => {
+function buildShapePathFromRect(shape: RawShapeRect): string | null {
   return createPathRectangle(
     createPoint(
       asNumber(shape?.x),
@@ -35,7 +35,7 @@ const buildShapePathFromRect = (shape: RawShapeRect): string | null => {
   ).pathData
 }
 
-const buildShapePathFromEllipse = (shape: RawShapeEllipse): string => {
+function buildShapePathFromEllipse(shape: RawShapeEllipse): string {
   return createPathEllipse(
     createPoint(0, 0),
     createSize(
@@ -45,21 +45,21 @@ const buildShapePathFromEllipse = (shape: RawShapeEllipse): string => {
   ).pathData
 }
 
-const buildShapePathFromPolygon = (shape: RawShapePolygon): string => {
+function buildShapePathFromPolygon(shape: RawShapePolygon): string {
   const polygonPath = `M${
     asArray(shape?.points).map(p => `${asNumber(p?.x)} ${asNumber(p?.y)}`).join('L')
   }Z`
   return createPath(polygonPath).pathData
 }
 
-const buildShapePathFromLine = (shape: RawShapeLine): string => {
+function buildShapePathFromLine(shape: RawShapeLine): string {
   return createPathLine(
     createPoint(asNumber(shape?.x1), asNumber(shape?.y1)),
     createPoint(asNumber(shape?.x2), asNumber(shape?.y2))
   ).pathData
 }
 
-const buildShapePathFromCircle = (shape: RawShapeCircle): string => {
+function buildShapePathFromCircle(shape: RawShapeCircle): string {
   return createPathCircle(
     createPoint(asNumber(shape?.r), asNumber(shape?.r)),
     asNumber(shape?.r)

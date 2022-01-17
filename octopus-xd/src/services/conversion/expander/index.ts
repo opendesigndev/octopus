@@ -3,10 +3,11 @@ import without from 'lodash/without'
 import mergeWith from 'lodash/mergeWith'
 import cloneDeep from 'lodash/cloneDeep'
 
-import SourceResources from '../../../entities/source-resources'
-import { RawArtboard, RawArtboardEntry, RawLayer, RawLayerCommon } from '../../../typings/source'
 import { asArray, asString } from '../../../utils/as'
 import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
+
+import type SourceResources from '../../../entities-source/source-resources'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
 
 
 type ExpanderOptions = {
@@ -14,8 +15,8 @@ type ExpanderOptions = {
 }
 
 export default class Expander {
-  _resources: SourceResources
-  _symbols: RawLayer[]
+  private _resources: SourceResources
+  private _symbols: RawLayer[]
 
   /**
    * Properties related to symbol internal connections
@@ -38,17 +39,17 @@ export default class Expander {
     this._symbols = this._initSymbols()
   }
 
-  _initSymbols() {
+  private _initSymbols() {
     return asArray(this._resources.raw.resources?.meta?.ux?.symbols).reduce((ids, symbol) => {
       return [ ...ids, ...flattenLayers(symbol, true, true) ]
     }, [])
   }
 
-  _getTargetObjectProps(child: RawLayer) {
+  private _getTargetObjectProps(child: RawLayer) {
     return pick(child, without(Object.keys(child), ...Expander.SKIP_PROPS))
   }
 
-  _merge(objValue: unknown, srcValue: unknown, key: string) {
+  private _merge(objValue: unknown, srcValue: unknown, key: string) {
     if (Expander.GROUP_LIKE.includes(key)) {
       return undefined
     }
@@ -57,13 +58,13 @@ export default class Expander {
       : srcValue
   }
 
-  _replaceValues(replaceWith: RawLayer, restProps: unknown, id: string) {
+  private _replaceValues(replaceWith: RawLayer, restProps: unknown, id: string) {
     return mergeWith({}, cloneDeep(replaceWith), restProps, { id }, (objValue, srcValue, key) => {
       return this._merge(objValue, srcValue, key)
     })
   }
 
-  _expandChild(child: RawLayer, index: number, children: RawLayer[]) {
+  private _expandChild(child: RawLayer, index: number, children: RawLayer[]) {
     const ref = child?.syncSourceGuid
     const id = child?.guid
     const restProps = this._getTargetObjectProps(child)
@@ -77,7 +78,7 @@ export default class Expander {
     }
   }
 
-  _expand(artboard: RawArtboardEntry | RawLayer) {
+  private _expand(artboard: RawArtboardEntry | RawLayer) {
     childrenOf(artboard, true).forEach((child, index, children) => {
       this._expandChild(child, index, children)
     })
