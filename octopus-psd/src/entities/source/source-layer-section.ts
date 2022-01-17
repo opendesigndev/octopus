@@ -1,7 +1,8 @@
-import { RawLayer, RawLayerSection } from '../../typings/source'
+import type { RawLayer, RawLayerSection } from '../../typings/source'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import { asArray } from '../../utils/as'
-import { SourceLayerCommon, SourceLayerParent } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerSectionOptions = {
   parent: SourceLayerParent

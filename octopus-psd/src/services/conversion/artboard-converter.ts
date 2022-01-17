@@ -1,6 +1,6 @@
-import { OctopusPSDConverter } from '../..'
+import type { OctopusPSDConverter } from '../..'
 import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
-import { SourceArtboard } from '../../entities/source/source-artboard'
+import type { SourceArtboard } from '../../entities/source/source-artboard'
 
 export type ArtboardConversionOptions = {
   sourceArtboard: SourceArtboard

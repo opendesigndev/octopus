@@ -1,5 +1,6 @@
-import { RawLayerShape, RawShapeFill, RawShapeStrokeStyle } from '../../typings/source'
-import { SourceLayerCommon, SourceLayerParent } from './source-layer-common'
+import type { RawLayerShape, RawShapeFill, RawShapeStrokeStyle } from '../../typings/source'
+import { SourceLayerCommon } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

@@ -1,7 +1,7 @@
-import { OctopusPSDConverter } from '../..'
-import { RawLayer } from '../../typings/source'
+import type { OctopusPSDConverter } from '../..'
+import type { RawLayer } from '../../typings/source'
 import { SourceArtboard } from './source-artboard'
-import { SourceLayerSection } from './source-layer-section'
+import type { SourceLayerSection } from './source-layer-section'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 

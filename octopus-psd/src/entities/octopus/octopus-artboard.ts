@@ -1,8 +1,8 @@
-import { OctopusPSDConverter } from '../..'
-import { Octopus } from '../../typings/octopus'
+import type { OctopusPSDConverter } from '../..'
+import type { Octopus } from '../../typings/octopus'
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
 import { asNumber } from '../../utils/as'
-import { SourceArtboard } from '../source/source-artboard'
+import type { SourceArtboard } from '../source/source-artboard'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard

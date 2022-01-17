@@ -1,5 +1,6 @@
-import { RawLayerBackground } from '../../typings/source'
-import { SourceLayerCommon, SourceLayerParent } from './source-layer-common'
+import type { RawLayerBackground } from '../../typings/source'
+import { SourceLayerCommon } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerBackgroundOptions = {
   parent: SourceLayerParent

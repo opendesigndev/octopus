@@ -1,6 +1,6 @@
 import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { Octopus } from '../../typings/octopus'
-import { SourceLayerText } from '../source/source-layer-text'
+import type { SourceLayerText } from '../source/source-layer-text'
 import { RawLayerText } from '../../typings/source'
 import { runInThisContext } from 'vm'
 

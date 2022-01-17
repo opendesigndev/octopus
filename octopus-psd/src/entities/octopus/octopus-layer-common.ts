@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusPSDConverter } from '../..'
+import type { OctopusPSDConverter } from '../..'
 // import BLEND_MODES from '../../utils/blend-modes'
-import { SourceLayer } from '../../factories/create-source-layer'
-import { asNumber, asString } from '../../utils/as'
+import type { SourceLayer } from '../../factories/create-source-layer'
+import { asString } from '../../utils/as'
 // import { round } from '../../utils/common'
 // import DEFAULTS from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
-import { OctopusLayerGroup } from './octopus-layer-group'
+import type { OctopusLayerGroup } from './octopus-layer-group'
 // import { OctopusLayer } from '../../factories/create-octopus-layer'
 // import { convertObjectMatrixToArray } from '../../utils/matrix'
 

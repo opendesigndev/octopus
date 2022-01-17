@@ -1,9 +1,9 @@
-import { RawLayer, RawLayerSection, RawLayerBackground, RawLayerShape, RawLayerText } from '../typings/source'
+import type { RawLayer, RawLayerSection, RawLayerBackground, RawLayerShape, RawLayerText } from '../typings/source'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
-import { SourceLayerParent } from '../entities/source/source-layer-common'
+import type { SourceLayerParent } from '../entities/source/source-layer-common'
 
 export type SourceLayer = SourceLayerSection | SourceLayerShape | SourceLayerText | SourceLayerBackground
 
