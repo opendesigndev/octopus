@@ -43,7 +43,36 @@ export type RawFraction = {
   numerator?: number
 }
 
+export type RawBlendMode =
+  | 'normal'
+  | 'dissolve'
+  | 'darken'
+  | 'multiply'
+  | 'colorBurn'
+  | 'linearBurn'
+  | 'darkerColor'
+  | 'lighten'
+  | 'screen'
+  | 'colorDodge'
+  | 'linearDodge'
+  | 'lighterColor'
+  | 'overlay'
+  | 'softLight'
+  | 'hardLight'
+  | 'vividLight'
+  | 'linearLight'
+  | 'pinLight'
+  | 'hardMix'
+  | 'difference'
+  | 'exclusion'
+  | 'subtract'
+  | 'divide'
+  | 'hue'
+  | 'saturation'
+  | 'color'
+  | 'luminosity'
+
 export type RawBlendOptions = {
-  mode?: string
+  mode?: RawBlendMode
   opacity?: RawPercentUnit
 }

@@ -1,21 +1,15 @@
 import { v4 as uuidv4 } from 'uuid'
 
 import type { OctopusPSDConverter } from '../..'
-// import BLEND_MODES from '../../utils/blend-modes'
 import type { SourceLayer } from '../../factories/create-source-layer'
-import { asString } from '../../utils/as'
-// import { round } from '../../utils/common'
-// import DEFAULTS from '../../utils/defaults'
+import { asNumber, asString } from '../../utils/as'
 import { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerGroup } from './octopus-layer-group'
-// import { OctopusLayer } from '../../factories/create-octopus-layer'
-// import { convertObjectMatrixToArray } from '../../utils/matrix'
-
-// import { Raw3DMatrix } from '../../typings/source'
-// import OctopusEffects from './octopus-effects-layer'
 import { NotNull } from '../../typings/helpers'
-import { Octopus } from '../../typings/octopus'
-// import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
+import type { Octopus } from '../../typings/octopus'
+import { round } from '../../utils/common'
+import { BLEND_MODES } from '../../utils/blend-modes'
+import { DEFAULTS } from '../../utils/defaults'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -77,12 +71,12 @@ export class OctopusLayerCommon {
     return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
   }
 
-  //   get blendMode(): typeof BLEND_MODES[keyof typeof BLEND_MODES] {
-  //     const sourceBlendMode = this._sourceLayer.blendMode
-  //     return typeof sourceBlendMode === 'string' && sourceBlendMode in BLEND_MODES
-  //       ? BLEND_MODES[sourceBlendMode]
-  //       : DEFAULTS.BLEND_MODE
-  //   }
+  get blendMode(): typeof BLEND_MODES[keyof typeof BLEND_MODES] {
+    const sourceBlendMode = this._sourceLayer.blendMode
+    return typeof sourceBlendMode === 'string' && sourceBlendMode in BLEND_MODES
+      ? BLEND_MODES[sourceBlendMode]
+      : DEFAULTS.BLEND_MODE
+  }
 
   //   /**
   //    * @TODO how to treat 3D matrices?
@@ -95,9 +89,9 @@ export class OctopusLayerCommon {
   //     return matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
   //   }
 
-  // get opacity() {
-  //   return round(asNumber(this._sourceLayer.opacity, 1))
-  // }
+  get opacity() {
+    return round(asNumber(this._sourceLayer.opacity, 100) / 100)
+  }
 
   get type(): 'SHAPE' | 'GROUP' | 'TEXT' | null {
     const types = {
@@ -115,13 +109,6 @@ export class OctopusLayerCommon {
     }
     return types[type as keyof typeof types]
   }
-
-  //   /**
-  //    * @TODO omit `isFixed` or `visible` or similar if missing or has default value?
-  //    */
-  //   get isFixed() {
-  //     return typeof this._sourceLayer.fixed === 'boolean' ? this._sourceLayer.fixed : undefined
-  //   }
 
   get isConvertible() {
     return this.type !== null
@@ -149,9 +136,8 @@ export class OctopusLayerCommon {
       type,
       // transform: this.transform,
       visible: this.visible,
-      // blendMode: this.blendMode,
-      // opacity: this.opacity,
-      // isFixed: this.isFixed
+      blendMode: this.blendMode,
+      opacity: this.opacity,
       // ...effects,
     }
   }

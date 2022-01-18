@@ -3,10 +3,11 @@ import type { RawLayerBackground } from './layer-background'
 import type { RawLayerSection } from './layer-section'
 import type { RawLayerShape } from './layer-shape'
 import type { RawLayerText } from './layer-text'
-import type { RawBounds } from './shared'
+import type { RawBlendOptions, RawBounds } from './shared'
 
 export type RawLayerCommon = {
   bounds?: RawBounds
+  blendOptions?: RawBlendOptions
   clipped?: boolean
   id?: number
   imageEffectsApplied?: boolean

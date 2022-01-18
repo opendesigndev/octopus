@@ -41,6 +41,14 @@ export class SourceLayerCommon {
     return this._rawValue.bounds
   }
 
+  get opacity() {
+    return this._rawValue.blendOptions?.opacity?.value
+  }
+
+  get blendMode() {
+    return this._rawValue.blendOptions?.mode
+  }
+
   get clipped() {
     return this._rawValue.clipped
   }
