@@ -17,15 +17,6 @@ export class SourceLayerLayer extends SourceLayerCommon {
     this._rawValue = options.rawValue
   }
 
-  get bitmapBounds() {
-    return {
-      right: this._rawValue.bitmapBounds?.right ?? 0,
-      left: this._rawValue.bitmapBounds?.left ?? 0,
-      bottom: this._rawValue.bitmapBounds?.bottom ?? 0,
-      top: this._rawValue.bitmapBounds?.top ?? 0,
-    }
-  }
-
   get layerEffects() {
     return {} // TODO
   }

@@ -21,7 +21,7 @@ export class SourceLayerSection extends SourceLayerCommon {
     this._layers = this._initLayers()
   }
 
-  _initLayers() {
+  private _initLayers() {
     const layers = asArray(this._rawValue?.layers)
     return layers.reduce((layers: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({

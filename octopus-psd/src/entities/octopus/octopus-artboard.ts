@@ -3,6 +3,7 @@ import type { Octopus } from '../../typings/octopus'
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
 import { asNumber } from '../../utils/as'
 import type { SourceArtboard } from '../source/source-artboard'
+import { getConverted } from '../../utils/common'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard
@@ -28,7 +29,7 @@ export class OctopusArtboard {
     return this._octopusConverter
   }
 
-  _initLayers() {
+  private _initLayers() {
     return this._sourceArtboard.layers.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
@@ -38,7 +39,7 @@ export class OctopusArtboard {
     }, [])
   }
 
-  _getDimensions() {
+  get dimensions() {
     const { right, left, bottom, top } = this._sourceArtboard.bounds
     return {
       width: asNumber(right - left, 0),
@@ -46,22 +47,25 @@ export class OctopusArtboard {
     }
   }
 
-  _getId() {
-    return this._octopusConverter._id
+  get id() {
+    return this._octopusConverter.id
   }
 
-  async _getVersion() {
-    const pkg = await this._octopusConverter.pkg
-    return pkg.version
+  get version() {
+    return this._octopusConverter.pkg.then((pkg) => pkg.version)
+  }
+
+  get layers() {
+    return getConverted(this._layers)
   }
 
   async convert() {
     return {
-      id: this._getId(),
+      id: this.id,
       type: 'ARTBOARD',
-      version: await this._getVersion(),
-      dimensions: this._getDimensions(),
-      layers: this._layers.map((layer) => layer.convert()).filter((layer) => layer),
+      version: await this.version,
+      dimensions: this.dimensions,
+      layers: this.layers,
     } as Octopus['OctopusDocument']
   }
 }

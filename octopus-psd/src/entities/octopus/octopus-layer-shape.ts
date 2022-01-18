@@ -1,7 +1,6 @@
-import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
-
 import type { Octopus } from '../../typings/octopus'
 // import { RawShapeCompound, RawShapeRect } from '../typings/source'
 // import { asArray, asNumber } from '../utils/as'
@@ -129,15 +128,15 @@ export class OctopusLayerShape extends OctopusLayerCommon {
   //     return [fillShape]
   //   }
 
-  /**
-   * @TODOs
-   * Guard with correct return type
-   * @returns
-   */
-  convertTypeSpecific() {
-    const shapes = [] as Octopus['Shape'][] // TODO
-    // const shapes = this._getShapes()
-    return { shapes }
+  get shapes() {
+    return [] as Octopus['Shape'][] // TODO
+  }
+
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
+    return {
+      type: 'SHAPE',
+      shapes: this.shapes,
+    } as const
   }
 
   convert(): Octopus['ShapeLayer'] | null {
@@ -146,7 +145,7 @@ export class OctopusLayerShape extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...this.convertTypeSpecific(),
+      ...this._convertTypeSpecific(),
     }
   }
 }

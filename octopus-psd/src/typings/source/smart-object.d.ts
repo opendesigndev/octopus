@@ -1,7 +1,7 @@
 import { RawColor, RawPercentUnit } from '.'
 import type { RawBlendOptions, RawBounds, RawFraction, RawSize } from './shared'
 
-type RawTransform = [number, number, number, number, number, number, number, number]
+type RawTransform = [number, number, number, number, number, number, number, number] // TODO recheck if there are always 8 numbers
 
 type RawWarp = {
   bounds?: RawBounds

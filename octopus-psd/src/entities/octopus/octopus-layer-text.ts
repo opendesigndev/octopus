@@ -1,8 +1,6 @@
-import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerText } from '../source/source-layer-text'
-import { RawLayerText } from '../../typings/source'
-import { runInThisContext } from 'vm'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -17,12 +15,12 @@ export class OctopusLayerText extends OctopusLayerCommon {
     super(options)
   }
 
-  _getTextValue() {
+  get textValue() {
     return this._sourceLayer.text.textKey
   }
 
-  _getText(): Octopus['Text'] | null {
-    const value = this._getTextValue()
+  get text(): Octopus['Text'] | null {
+    const value = this.textValue
     if (typeof value !== 'string') return null
     const defaultStyle = {} // this._getDefaultStyle() // TODO
     if (!defaultStyle) return null
@@ -30,8 +28,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     if (!parseTextTransform) return null
     const styles = [] as Octopus['StyleRange'][] // this._getStyles(value) // TODO
     const frame = {} as Octopus['TextFrame'] // this._getFrame() // TODO
-    const horizontalAlign = 'LEFT' // this._getHorizontalAlign()
-    // const horizontalAlign = this._getHorizontalAlign()
+    const horizontalAlign = 'LEFT' // this._getHorizontalAlign() // TODO
 
     return {
       value,
@@ -45,23 +42,21 @@ export class OctopusLayerText extends OctopusLayerCommon {
     }
   }
 
-  /**
-   * @TODOs
-   * Guard with correct return type
-   * @returns
-   */
-  convertTypeSpecific() {
-    const text = this._getText()
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
+    const text = this.text
     if (!text) return null
 
-    return { text }
+    return {
+      type: 'TEXT',
+      text,
+    } as const
   }
 
   convert(): Octopus['TextLayer'] | null {
     const common = this.convertCommon()
     if (!common) return null
 
-    const specific = this.convertTypeSpecific()
+    const specific = this._convertTypeSpecific()
     if (!specific) return null
 
     return {

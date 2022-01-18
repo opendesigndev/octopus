@@ -14,6 +14,7 @@ import type { OctopusLayerGroup } from './octopus-layer-group'
 // import { Raw3DMatrix } from '../../typings/source'
 // import OctopusEffects from './octopus-effects-layer'
 import { NotNull } from '../../typings/helpers'
+import { Octopus } from '../../typings/octopus'
 // import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
@@ -23,6 +24,8 @@ type OctopusLayerCommonOptions = {
   sourceLayer: SourceLayer
 }
 
+export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
+
 export class OctopusLayerCommon {
   protected _id: string
   protected _parent: OctopusLayerParent
@@ -31,7 +34,6 @@ export class OctopusLayerCommon {
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
-
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
@@ -121,7 +123,7 @@ export class OctopusLayerCommon {
   //     return typeof this._sourceLayer.fixed === 'boolean' ? this._sourceLayer.fixed : undefined
   //   }
 
-  isConvertible() {
+  get isConvertible() {
     return this.type !== null
   }
 
@@ -135,7 +137,7 @@ export class OctopusLayerCommon {
   //   }
 
   convertCommon() {
-    if (!this.isConvertible()) return null
+    if (!this.isConvertible) return null
 
     const type = this.type as NotNull<typeof this.type>
     // const effectsArray = this.effects().convert()

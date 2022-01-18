@@ -20,10 +20,10 @@ type OctopusPSDConverterOptions = {
 createEnvironment()
 
 export class OctopusPSDConverter {
-  _id: string
-  _pkg: Promise<NormalizedReadResult | undefined>
-  _logger: Logger
-  _sentry: ReturnType<typeof createSentry>
+  private _id: string
+  private _pkg: Promise<NormalizedReadResult | undefined>
+  private _logger: Logger
+  private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusPSDConverterOptions) {
     this._id = options?.octopusId || uuidv4()
@@ -33,6 +33,10 @@ export class OctopusPSDConverter {
       dsn: process.env.SENTRY_DSN,
       logger: this._logger,
     })
+  }
+
+  get id() {
+    return this._id
   }
 
   get logger() {

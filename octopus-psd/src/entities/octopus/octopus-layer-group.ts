@@ -1,7 +1,8 @@
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
+import { getConverted } from '../../utils/common'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
@@ -18,7 +19,7 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
     this._layers = this._initLayers()
   }
 
-  _initLayers(): OctopusLayer[] {
+  private _initLayers(): OctopusLayer[] {
     return this._sourceLayer.layers.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
@@ -28,14 +29,11 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
     }, [])
   }
 
-  /**
-   * @TODOs
-   * Guard with correct return type
-   * @returns
-   */
-  convertTypeSpecific() {
-    const layers = this._layers.map((layer) => layer.convert()).filter(Boolean) as Octopus['Layer'][]
-    return { layers }
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
+    return {
+      type: 'GROUP',
+      layers: getConverted(this._layers),
+    } as const
   }
 
   convert(): Octopus['GroupLayer'] | null {
@@ -44,7 +42,7 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...this.convertTypeSpecific(),
+      ...this._convertTypeSpecific(),
     }
   }
 }

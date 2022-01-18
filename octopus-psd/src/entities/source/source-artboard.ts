@@ -23,7 +23,7 @@ export class SourceArtboard {
     return this._octopusConverter
   }
 
-  _initLayers() {
+  private _initLayers() {
     const layers = asArray(this._rawValue?.layers).reduce((layers: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({
         layer,
