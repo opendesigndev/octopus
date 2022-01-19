@@ -7,6 +7,13 @@ type RawBoxCorners = {
   rectangleCornerD?: RawPointHV
 }
 
+type RawRadiiCorners = {
+  bottomLeft?: number
+  bottomRight?: number
+  topLeft?: number
+  topRight?: number
+}
+
 type RawOrigin = {
   Trnf?: RawMatrix
   bounds?: RawBounds & { unitValueQuadVersion?: number }
@@ -24,6 +31,7 @@ type RawOrigin = {
   keyOriginPolyPreviousTightBoxCorners?: RawBoxCorners
   keyOriginPolySides?: number
   keyOriginPolyTrueRectCorners?: RawBoxCorners
+  radii?: RawRadiiCorners
   type?: 'rect' | 'roundedRect' | 'line' | 'ellipse' | number
 }
 

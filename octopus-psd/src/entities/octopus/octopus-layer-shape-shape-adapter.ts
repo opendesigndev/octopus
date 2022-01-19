@@ -39,11 +39,17 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   //     }, [])
   //   }
 
+  private get isRectangle(): boolean {
+    // TODO for rotated/transformed rectangles
+    const type = this._sourceLayer.firstPathComponent?.origin?.type
+    return type === 'rect' || type === 'roundedRect'
+  }
+
   get shapeType(): Octopus['PathType'] {
     if (this._sourceLayer.pathComponents.length > 1) {
       return 'COMPOUND'
-    } else if (this._sourceLayer.firstPathComponent?.origin?.type === 'rect') {
-      return 'RECTANGLE' // TODO for rotated/transformed rectangles
+    } else if (this.isRectangle) {
+      return 'RECTANGLE'
     } else {
       return 'PATH'
     }
@@ -68,17 +74,15 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   private _getShapeAsRect(): Octopus['PathRectangle'] {
     const rect = this._sourceLayer.firstPathComponent
     const { bottom, left, right, top } = rect?.origin?.bounds ?? {}
-
-    return {
-      type: 'RECTANGLE',
-      rectangle: {
-        x0: asNumber(left),
-        y0: asNumber(top),
-        x1: asNumber(right),
-        y1: asNumber(bottom),
-      },
-      cornerRadii: [], // rect?.r, // TODO
+    const { bottomLeft, bottomRight, topLeft, topRight } = rect?.origin?.radii ?? {}
+    const rectangle = {
+      x0: asNumber(left),
+      y0: asNumber(top),
+      x1: asNumber(right),
+      y1: asNumber(bottom),
     }
+    const cornerRadii = [asNumber(topLeft, 0), asNumber(topRight, 0), asNumber(bottomRight, 0), asNumber(bottomLeft, 0)]
+    return { type: 'RECTANGLE', rectangle, cornerRadii }
   }
 
   // private _getShapeAsPath(): Octopus['Path'] {

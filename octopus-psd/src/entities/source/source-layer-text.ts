@@ -25,13 +25,8 @@ export class SourceLayerText extends SourceLayerCommon {
   get text() {
     const text = this._rawValue.text
     return {
-      TextIndex: text?.TextIndex,
-      boundingBox: text?.boundingBox, // TODO
-      bounds: text?.bounds, // TODO
+      ...text,
       orientation: text?.orientation ?? 'horizontal',
-      paragraphStyleRange: text?.paragraphStyleRange, // TODO
-      textKey: text?.textKey,
-      textStyleRange: text?.textStyleRange, // TODO
       transform: getMatrixFor(text?.transform),
     }
   }
