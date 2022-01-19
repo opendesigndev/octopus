@@ -1,3 +1,5 @@
+import type { RawAlign } from './shared'
+
 export type RawParagraphStyle = {
   AutoHyphenate?: boolean
   AutoLeading?: number
@@ -19,7 +21,7 @@ export type RawParagraphStyle = {
   StartIndent?: number
   WordSpacing?: number[]
   Zone?: number
-  align?: 'center' | 'right' | 'left'
+  align?: RawAlign
 }
 
 export type RawParagraphStyleRange = {

@@ -1,5 +1,4 @@
-import { RawColor, RawPercentUnit } from '.'
-import type { RawBlendOptions, RawBounds, RawFraction, RawSize } from './shared'
+import type { RawBlendOptions, RawBounds, RawFraction, RawSize, RawColor, RawUnitPercent } from './shared'
 
 type RawTransform = [number, number, number, number, number, number, number, number] // TODO recheck if there are always 8 numbers
 
@@ -9,13 +8,13 @@ type RawWarp = {
   vOrder?: number
   warpPerspective?: number
   warpPerspectiveOther?: number
-  warpRotate?: 'horizontal' // TODO
-  warpStyle?: 'warpNone' // TODO
+  warpRotate?: 'horizontal' | 'vertical'
+  warpStyle?: 'warpNone' | 'warpFlag' | 'warpArc'
   warpValue?: number
 }
 
 type RawFilterFXListFilter = {
-  Amnt?: RawPercentUnit
+  Amnt?: RawUnitPercent
   'Rds '?: number
   Thsh?: number
 }

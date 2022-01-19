@@ -10,16 +10,11 @@ export type RawBounds = {
   top?: number
 }
 
-type RawTextBound = {
-  units?: 'pointsUnit'
-  value?: number
-}
-
 export type RawTextBounds = {
-  bottom?: RawTextBound
-  left?: RawTextBound
-  right?: RawTextBound
-  top?: RawTextBound
+  bottom?: RawUnitPoint
+  left?: RawUnitPoint
+  right?: RawUnitPoint
+  top?: RawUnitPoint
 }
 
 export type RawColor = {
@@ -28,12 +23,17 @@ export type RawColor = {
   red?: number
 }
 
-export type RawPercentUnit = {
+export type RawUnitPoint = {
+  units?: 'pointsUnit'
+  value?: number
+}
+
+export type RawUnitPercent = {
   units?: 'percentUnit'
   value?: number
 }
 
-export type RawAngleUnit = {
+export type RawUnitAngle = {
   units?: 'angleUnit'
   value?: number
 }
@@ -41,6 +41,25 @@ export type RawAngleUnit = {
 export type RawFraction = {
   denominator?: number
   numerator?: number
+}
+
+export type RawPointHV = {
+  horizontal?: number
+  vertical?: number
+}
+
+export type RawPointXY = {
+  x?: number
+  y?: number
+}
+
+export type RawMatrix = {
+  tx?: number
+  ty?: number
+  xx?: number
+  xy?: number
+  yx?: number
+  yy?: number
 }
 
 export type RawBlendMode =
@@ -72,7 +91,11 @@ export type RawBlendMode =
   | 'color'
   | 'luminosity'
 
+export type RawAlign = 'left' | 'right' | 'center' | 'justifyLeft' | 'justifyRight' | 'justifyCenter' | 'justifyAll'
+
+export type RawCombineOperation = 'add' | 'subtract' | 'interfaceIconFrameDimmed' | 'xor'
+
 export type RawBlendOptions = {
   mode?: RawBlendMode
-  opacity?: RawPercentUnit
+  opacity?: RawUnitPercent
 }

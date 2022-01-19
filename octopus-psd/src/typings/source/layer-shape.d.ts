@@ -1,34 +1,35 @@
-import type { RawAngleUnit, RawBounds, RawColor, RawPercentUnit } from './shared'
+import type { RawUnitAngle, RawBounds, RawColor, RawUnitPercent, RawUnitPoint, RawBlendMode } from './shared'
 import type { RawLayerCommon } from './layer'
+import type { RawPathComponent } from './path-component'
 
 export type RawShapeTransparency = {
   location?: number
   midpoint?: number
-  opacity?: RawPercentUnit
+  opacity?: RawUnitPercent
 }
 
 export type RawShapeGradientColors = {
   color?: RawColor
   location?: number
   midpoint?: number
-  type?: 'userStop' // TODO
+  type?: 'userStop'
 }
 
 export type RawShapeGradient = {
   colors?: RawShapeGradientColors[]
-  gradientForm?: 'customStops' // TODO
+  gradientForm?: 'customStops'
   interfaceIconFrameDimmed?: number
   name?: string
   transparency?: RawShapeTransparency[]
 }
 
 export type RawShapeFill = {
-  class?: 'solidColorLayer' | 'gradientLayer' // TODO
+  class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
   color?: RawColor
   dither?: boolean
-  gradientsInterpolationMethod?: 'Perc' // TODO
-  type?: 'linear' // TODO
-  angle?: RawAngleUnit
+  gradientsInterpolationMethod?: 'Perc'
+  type?: 'linear' | 'radial' | 'reflected'
+  angle?: RawUnitAngle
   gradient?: RawShapeGradient
 }
 
@@ -41,13 +42,13 @@ export type RawShapeMask = {
 export type RawShapePath = {
   bounds?: RawBounds
   defaultFill?: boolean
-  pathComponents?: [] // TODO
+  pathComponents?: RawPathComponent[]
 }
 
 export type RawShapeStrokeStyleContent = {
   color?: RawColor
   align?: boolean
-  angle?: RawAngleUnit
+  angle?: RawUnitAngle
   dither?: boolean
   gradient?: RawShapeGradient
 }
@@ -55,21 +56,15 @@ export type RawShapeStrokeStyleContent = {
 export type RawShapeStrokeStyle = {
   fillEnabled?: boolean
   strokeEnabled?: boolean
-  strokeStyleBlendMode?: 'normal' // TODO
+  strokeStyleBlendMode?: RawBlendMode
   strokeStyleContent?: RawShapeStrokeStyleContent
-  strokeStyleLineAlignment?: 'strokeStyleAlignCenter' // TODO
-  strokeStyleLineCapType?: 'strokeStyleButtCap' // TODO
-  strokeStyleLineDashOffset?: {
-    units?: 'pointsUnit' // TODO
-    value?: number
-  }
-  strokeStyleLineJoinType?: 'strokeStyleMiterJoin' // TODO
+  strokeStyleLineAlignment?: 'strokeStyleAlignCenter'
+  strokeStyleLineCapType?: 'strokeStyleButtCap'
+  strokeStyleLineDashOffset?: RawUnitPoint
+  strokeStyleLineJoinType?: 'strokeStyleMiterJoin'
   strokeStyleLineWidth?: number
   strokeStyleMiterLimit?: number
-  strokeStyleOpacity?: {
-    units?: 'percentUnit' // TODO
-    value?: number
-  }
+  strokeStyleOpacity?: RawUnitPercent
   strokeStyleResolution?: number
   strokeStyleScaleLock?: boolean
   strokeStyleStrokeAdjust?: boolean
