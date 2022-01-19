@@ -1,6 +1,7 @@
 import type { RawLayerText } from '../../typings/source'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
+import { getBoundsFor, getMatrixFor } from './utils'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -18,31 +19,20 @@ export class SourceLayerText extends SourceLayerCommon {
   }
 
   get bitmapBounds() {
-    return {
-      right: this._rawValue.bitmapBounds?.right ?? 0,
-      left: this._rawValue.bitmapBounds?.left ?? 0,
-      bottom: this._rawValue.bitmapBounds?.bottom ?? 0,
-      top: this._rawValue.bitmapBounds?.top ?? 0,
-    }
+    return getBoundsFor(this._rawValue.bitmapBounds)
   }
 
   get text() {
+    const text = this._rawValue.text
     return {
-      TextIndex: this._rawValue.text?.TextIndex,
-      boundingBox: this._rawValue.text?.boundingBox, // TODO
-      bounds: this._rawValue.text?.bounds, // TODO
-      orientation: this._rawValue.text?.orientation ?? 'horizontal',
-      paragraphStyleRange: this._rawValue.text?.paragraphStyleRange, // TODO
-      textKey: this._rawValue.text?.textKey,
-      textStyleRange: this._rawValue.text?.textStyleRange, // TODO
-      transform: {
-        tx: this._rawValue.text?.transform?.tx ?? 0,
-        ty: this._rawValue.text?.transform?.ty ?? 0,
-        xx: this._rawValue.text?.transform?.xx ?? 0,
-        xy: this._rawValue.text?.transform?.xy ?? 0,
-        yx: this._rawValue.text?.transform?.yx ?? 0,
-        yy: this._rawValue.text?.transform?.yy ?? 0,
-      },
+      TextIndex: text?.TextIndex,
+      boundingBox: text?.boundingBox, // TODO
+      bounds: text?.bounds, // TODO
+      orientation: text?.orientation ?? 'horizontal',
+      paragraphStyleRange: text?.paragraphStyleRange, // TODO
+      textKey: text?.textKey,
+      textStyleRange: text?.textStyleRange, // TODO
+      transform: getMatrixFor(text?.transform),
     }
   }
 }

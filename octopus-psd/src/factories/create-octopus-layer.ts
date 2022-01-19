@@ -1,6 +1,8 @@
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-common'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
+import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
+import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import type { SourceLayerSection } from '../entities/source/source-layer-section'
@@ -16,33 +18,34 @@ type CreateOctopusLayerOptions = {
 }
 
 function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
-  return new OctopusLayerGroup({
-    parent,
-    sourceLayer: layer as SourceLayerSection,
-  })
+  const sourceLayer = layer as SourceLayerSection
+  return new OctopusLayerGroup({ parent, sourceLayer })
 }
 
-function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
-  return new OctopusLayerShape({
-    parent,
-    sourceLayer: layer as SourceLayerShape | SourceLayerLayer,
-  })
+function createOctopusLayerShapeFromShapeAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+  const sourceLayer = layer as SourceLayerShape
+  const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
+  return new OctopusLayerShape({ parent, sourceLayer, adapter })
+}
+
+function createOctopusLayerShapeFromLayerAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+  const sourceLayer = layer as SourceLayerLayer
+  const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
+  return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
 function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
-  return new OctopusLayerText({
-    parent,
-    sourceLayer: layer as SourceLayerText,
-  })
+  const sourceLayer = layer as SourceLayerText
+  return new OctopusLayerText({ parent, sourceLayer })
 }
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
   const type = (Object(options.layer) as SourceLayer).type
   const builders: { [key: string]: Function } = {
     layerSection: createOctopusLayerGroup,
-    shapeLayer: createOctopusLayerShape,
+    shapeLayer: createOctopusLayerShapeFromShapeAdapter,
     textLayer: createOctopusLayerText,
-    layer: createOctopusLayerShape,
+    layer: createOctopusLayerShapeFromLayerAdapter,
     // backgroundLayer: createOctopusLayerGroup, // TODO ignoruj
   }
   const builder = builders[type as string]

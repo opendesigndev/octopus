@@ -1,6 +1,8 @@
-import type { RawLayerShape, RawShapeFill, RawShapeStrokeStyle } from '../../typings/source'
+import type { RawLayerShape, RawShapeFill, RawShapePath, RawShapeStrokeStyle } from '../../typings/source'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
+import { getBoundsFor, getColorFor, getMatrixFor } from './utils'
+import { RawOrigin, RawPathComponent } from '../../typings/source/path-component'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -25,11 +27,8 @@ export class SourceLayerShape extends SourceLayerCommon {
     const fill = this._rawValue.fill
     return {
       class: fill?.class,
-      color: {
-        blue: fill?.color?.blue ?? 0,
-        green: fill?.color?.green ?? 0,
-        red: fill?.color?.red ?? 0,
-      }, // TODO
+      color: getColorFor(fill?.color),
+      // TODO
     } as RawShapeFill
   }
 
@@ -41,8 +40,39 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this._rawValue.mask // TODO
   }
 
+  get pathBounds() {
+    return getBoundsFor(this._rawValue.path?.bounds)
+  }
+
+  private _mapOrigin(origin: RawOrigin | undefined) {
+    return {
+      Trnf: getMatrixFor(origin?.Trnf),
+      bounds: { ...getBoundsFor(origin?.bounds), unitValueQuadVersion: origin?.bounds?.unitValueQuadVersion },
+      type: origin?.type ? origin.type.toString() : undefined,
+    }
+  }
+
+  get firstPathComponent(): RawPathComponent | undefined {
+    return this.pathComponents[0]
+  }
+
+  get pathComponents() {
+    const pathComponents =
+      this._rawValue.path?.pathComponents?.map((component) => ({
+        origin: this._mapOrigin(component.origin),
+        shapeOperation: component.shapeOperation,
+        subpathListKey: component.subpathListKey,
+      })) ?? []
+    return pathComponents as RawPathComponent[]
+  }
+
   get path() {
-    return this._rawValue.path // TODO
+    const path = this._rawValue.path
+    return {
+      bounds: this.pathBounds,
+      defaultFill: path?.defaultFill,
+      pathComponents: this.pathComponents,
+    } as RawShapePath
   }
 
   get strokeStyle() {

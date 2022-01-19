@@ -2,6 +2,7 @@ import type { OctopusPSDConverter } from '../..'
 import type { RawLayer } from '../../typings/source'
 import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
+import { getBoundsFor } from './utils'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
@@ -38,7 +39,7 @@ export class SourceLayerCommon {
   }
 
   get bounds() {
-    return this._rawValue.bounds
+    return getBoundsFor(this._rawValue.bounds)
   }
 
   get opacity() {

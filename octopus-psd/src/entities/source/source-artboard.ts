@@ -2,6 +2,7 @@ import type { RawArtboard, RawLayer } from '../../typings/source'
 import { asArray } from '../../utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusPSDConverter } from '../..'
+import { getBoundsFor } from './utils'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard
@@ -39,11 +40,6 @@ export class SourceArtboard {
   }
 
   get bounds() {
-    return {
-      right: this._rawValue.bounds?.right ?? 0,
-      left: this._rawValue.bounds?.left ?? 0,
-      bottom: this._rawValue.bounds?.bottom ?? 0,
-      top: this._rawValue.bounds?.top ?? 0,
-    }
+    return getBoundsFor(this._rawValue.bounds)
   }
 }

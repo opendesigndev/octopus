@@ -78,16 +78,14 @@ export class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
-  //   /**
-  //    * @TODO how to treat 3D matrices?
-  //    */
-  //   get transform() {
-  //     if (!this._sourceLayer.transform) {
-  //       return DEFAULTS.LAYER_TRANSFORM.slice()
-  //     }
-  //     const matrixAsArray = convertObjectMatrixToArray(this._sourceLayer.transform)
-  //     return matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
-  //   }
+  get transform() {
+    // if (!this._sourceLayer.transform) {
+    //   return DEFAULTS.LAYER_TRANSFORM.slice()
+    // }
+    // const matrixAsArray = convertObjectMatrixToArray(this._sourceLayer.transform)
+    const matrixAsArray = null // TODO
+    return matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+  }
 
   get opacity() {
     return round(asNumber(this._sourceLayer.opacity, 100) / 100)
@@ -134,7 +132,7 @@ export class OctopusLayerCommon {
       id: this.id,
       name: this.name,
       type,
-      // transform: this.transform,
+      transform: this.transform,
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
