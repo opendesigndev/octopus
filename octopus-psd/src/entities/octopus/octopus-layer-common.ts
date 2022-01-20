@@ -78,13 +78,13 @@ export class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
+  protected get layerTranslate() {
+    return [0, 0]
+  }
+
   get transform() {
-    // if (!this._sourceLayer.transform) {
-    //   return DEFAULTS.LAYER_TRANSFORM.slice()
-    // }
-    // const matrixAsArray = convertObjectMatrixToArray(this._sourceLayer.transform)
-    const matrixAsArray = null // TODO
-    return matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+    const [xx, xy, yx, yy] = [...DEFAULTS.LAYER_TRANSFORM]
+    return [xx, xy, yx, yy, ...this.layerTranslate]
   }
 
   get opacity() {
