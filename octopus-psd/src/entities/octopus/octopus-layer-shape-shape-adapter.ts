@@ -2,15 +2,9 @@ import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopu
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import { asNumber } from '../../utils/as'
-import { DEFAULTS } from '../../utils/defaults'
 import { RawPathComponent } from '../../typings/source/path-component'
 import { RawCombineOperation } from '../../typings/source/shared'
-// import { RawShapeCompound, RawShapeRect } from '../typings/source'
-// import { asArray, asNumber } from '../utils/as'
-// import { convertBooleanOp } from '../utils/boolean-ops'
-// import { createOctopusLayer } from '../factories/create-octopus-layer'
-// import { buildShapePathSafe } from '../utils/path-builders'
-// import { Defined } from '../typings/helpers'
+import { isRectangle } from '../../utils/shape'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
@@ -20,32 +14,21 @@ type OctopusLayerShapeShapeAdapterOptions = {
 export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerShape
-  //   _children: OctopusLayerShape[]
-  //   _shapeData: string
 
   constructor(options: OctopusLayerShapeShapeAdapterOptions) {
     super(options)
-    // this._children = this._initChildren()
   }
 
-  //   _normalizeShapeData() {
-  //     return buildShapePathSafe(this._sourceLayer.shape)
-  //   }
-
-  //   _initChildren() {
-  //     return asArray(this._sourceLayer.children).reduce((layers, shapeLayer) => {
-  //       const octopusLayer = createOctopusLayer({
-  //         parent: this,
-  //         layer: shapeLayer,
-  //       }) as OctopusLayerShape
-  //       return octopusLayer ? [...layers, octopusLayer] : layers
-  //     }, [])
-  //   }
-
   private get isRectangle(): boolean {
-    // TODO for rotated/transformed rectangles
-    const type = this._sourceLayer.firstPathComponent?.origin?.type
-    return type === 'rect' || type === 'roundedRect'
+    const component = this._sourceLayer.firstPathComponent
+    const type = component?.origin?.type
+    if (type !== 'rect' && type !== 'roundedRect') {
+      return false
+    }
+
+    const subpathList = component?.subpathListKey ?? []
+    const points = subpathList[0]?.points ?? []
+    return isRectangle(points?.map((point) => point.anchor))
   }
 
   private _getShapeType(pathComponents: RawPathComponent[]): Octopus['PathType'] {
@@ -53,9 +36,8 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
       return 'COMPOUND'
     } else if (this.isRectangle) {
       return 'RECTANGLE'
-    } else {
-      return 'PATH'
     }
+    return 'PATH'
   }
 
   protected get layerTranslate() {
