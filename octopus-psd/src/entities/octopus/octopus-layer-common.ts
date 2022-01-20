@@ -10,6 +10,7 @@ import type { Octopus } from '../../typings/octopus'
 import { round } from '../../utils/common'
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { DEFAULTS } from '../../utils/defaults'
+import { defaultTranslateMatrix } from '../../utils/path'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -78,13 +79,12 @@ export class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
-  protected get layerTranslate() {
+  get layerTranslate(): [number, number] {
     return [0, 0]
   }
 
   get transform() {
-    const [xx, xy, yx, yy] = [...DEFAULTS.LAYER_TRANSFORM]
-    return [xx, xy, yx, yy, ...this.layerTranslate]
+    return defaultTranslateMatrix(this.layerTranslate)
   }
 
   get opacity() {
