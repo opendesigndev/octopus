@@ -1,7 +1,7 @@
 import type { Octopus } from '../../../typings/octopus'
 import type { RawCombineOperation, RawPathComponent } from '../../../typings/source'
 import { asNumber } from '../../../utils/as'
-import { defaultTranslateMatrix, isRectangle } from '../../../utils/path'
+import { defaultTranslateMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
 
@@ -28,7 +28,8 @@ export default class OctopusPathLike {
 
     const subpathList = component?.subpathListKey ?? []
     const points = subpathList[0]?.points ?? []
-    return isRectangle(points?.map((point) => point.anchor))
+    const pointsMapped = points?.map((point) => point.anchor)
+    return type === 'roundedRect' ? isRoundedRectangle(pointsMapped) : isRectangle(pointsMapped)
   }
 
   private _getShapeType(pathComponents: RawPathComponent[]): Octopus['PathType'] {
