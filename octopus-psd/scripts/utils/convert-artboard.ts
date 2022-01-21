@@ -1,12 +1,17 @@
 import chalk from 'chalk'
 import { performance } from 'perf_hooks'
 import { v4 as uuidv4 } from 'uuid'
+import { execSync } from 'child_process'
+import path from 'path'
+import dotenv from 'dotenv'
 
-import { OctopusPSDConverter } from '../src'
-import { createSourceTree } from './utils/create-source-tree'
-import { createTempSaver } from './utils/save-temp'
-import { stringify } from './utils/json-stringify'
-import { SourceArtboard } from '../src/entities/source/source-artboard'
+import { OctopusPSDConverter } from '../../src'
+import { createSourceTree } from './create-source-tree'
+import { createTempSaver } from './save-temp'
+import { stringify } from './json-stringify'
+import { SourceArtboard } from '../../src/entities/source/source-artboard'
+
+dotenv.config()
 
 async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
   try {
@@ -16,7 +21,18 @@ async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArt
   }
 }
 
-async function convertArtboard() {
+async function renderOctopus(octopusDir: string) {
+  const renderPath = path.join(octopusDir, 'render.png')
+  const command = `${process.env.RENDERING_PATH} ${octopusDir} ${renderPath}`
+  try {
+    execSync(command)
+  } catch (e) {
+    console.info(chalk.red(`Rendering failed while processing command: "${command}"`))
+  }
+  return renderPath
+}
+
+export async function convertArtboard({ render }: { render?: boolean }) {
   const octopusId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
@@ -33,8 +49,11 @@ async function convertArtboard() {
 
   const saver = await createTempSaver(octopusId)
   const octopusLocation = await saver('octopus.json', stringify(octopus))
+  const octopusDir = path.dirname(octopusLocation)
+  const sourceLocation = `${octopusDir}/source.json`
   console.info(`${octopus ? '✅' : '❌'} ${chalk.yellow('octopus.json')} (${time}ms) ${chalk.grey(`(${octopus?.id})`)}`)
+  console.info(`  Source: file://${sourceLocation}`)
   console.info(`  Octopus: file://${octopusLocation}`)
+  const renderLocation = octopus && render ? await renderOctopus(octopusDir) : null
+  render && console.info(`  Render: file://${renderLocation}`)
 }
-
-convertArtboard()
