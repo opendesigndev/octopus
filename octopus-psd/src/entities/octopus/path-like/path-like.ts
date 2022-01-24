@@ -1,6 +1,7 @@
 import type { Octopus } from '../../../typings/octopus'
 import type { RawCombineOperation, RawPathComponent } from '../../../typings/source'
 import { asNumber } from '../../../utils/as'
+import { createShape } from '../../../utils/create-shape'
 import { defaultTranslateMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
@@ -95,7 +96,7 @@ export default class OctopusPathLike {
   private _getPath(pathComponents: RawPathComponent[]): Octopus['Path'] {
     return {
       ...this._getPathBase(pathComponents),
-      geometry: 'TODO', // this._shapeData, // TODO
+      geometry: createShape(pathComponents),
     }
   }
 
