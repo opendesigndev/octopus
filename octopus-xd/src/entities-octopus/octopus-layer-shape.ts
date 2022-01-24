@@ -3,6 +3,7 @@ import { asArray, asNumber } from '../utils/as'
 import { convertBooleanOp } from '../utils/boolean-ops'
 import { createOctopusLayer } from '../factories/create-octopus-layer'
 import { buildShapePathSafe } from '../utils/path-builders'
+import { convertObjectMatrixToArray } from '../utils/matrix'
 import OctopusEffectsShape from './octopus-effects-shape'
 
 import type { LayerSpecifics } from './octopus-layer-common'
@@ -59,17 +60,23 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }, [])
   }
 
+  private _getLayerTransformEntry() {
+    const matrix = convertObjectMatrixToArray(this._sourceLayer.transform)
+    return matrix ? { transform: matrix } : null
+  }
+
   private _getShapeAsCompound(): Octopus['CompoundPath'] {
     const compound = this._sourceLayer.shape as RawShapeCompound
-    const geometry = typeof compound.path === 'string'
-      ? {
-        geometry: compound.path
-      }
-      : null
+    const geometry = typeof compound.path !== 'string' ? null : {
+      geometry: compound.path
+    }
+    const transform = this._getLayerTransformEntry()
+
     return {
       type: 'COMPOUND',
       op: convertBooleanOp(compound),
       paths: this._children.map(shapeLayer => shapeLayer._getShape()),
+      ...transform,
       ...geometry
     }
   }
@@ -77,31 +84,32 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   private _getShapeAsRect(): Octopus['PathRectangle'] {
     const rect = this._sourceLayer.shape as RawShapeRect
     const { x, y, width, height } = rect
+    const transform = this._getLayerTransformEntry()
 
     return {
       type: 'RECTANGLE',
       rectangle: {
         x0: asNumber(x),
-        y0: asNumber(x) + asNumber(width),
-        x1: asNumber(y),
+        x1: asNumber(x) + asNumber(width),
+        y0: asNumber(y),
         y1: asNumber(y) + asNumber(height),
       },
-      cornerRadii: rect?.r
+      cornerRadii: rect?.r,
+      ...transform,
     }
   }
 
   private _getShapeAsPath(): Octopus['Path'] {
+    const transform = this._getLayerTransformEntry()
+
     return {
       type: 'PATH',
-      geometry: this._shapeData
+      geometry: this._shapeData,
+      ...transform,
     }
   }
 
-  private _getShape():
-    Octopus['CompoundPath'] |
-    Octopus['PathRectangle'] |
-    Octopus['PathLike']
-  {
+  private _getShape(): Octopus['PathLike'] {
     switch (this.shapeType) {
       case 'compound': {
         return this._getShapeAsCompound()
@@ -113,13 +121,25 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return this._getShapeAsPath()
   }
 
+  private _getRootShape(): Octopus['Shape']['path'] {
+    const path = this._getShape()
+    /**
+     * Exclude transformation on layer's root shape because this should be placed on layer's level.
+     */
+    return Object.fromEntries(Object.entries(path).filter(([ name ]) => {
+      return name !== 'transform'
+    })) as Octopus['Shape']['path']
+  }
+
   private _getShapes(): Octopus['Shape'][] {
+    const path = this._getRootShape()
+
     const fillShape: Octopus['Shape'] = {
       purpose: 'BODY',
-      fillRule: 'EVEN_ODD' as 'EVEN_ODD',
-      path: this._getShape(),
+      fillRule: 'EVEN_ODD',
+      path,
       ...this.shapeEffects.convert()
-    }
+    } as const
 
     return [ fillShape ]
   }

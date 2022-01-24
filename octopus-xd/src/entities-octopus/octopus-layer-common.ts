@@ -130,7 +130,7 @@ export default class OctopusLayerCommon {
     return typeof (this._sourceLayer.transform as Raw3DMatrix)?.[0]?.[0] === 'number'
   }
 
-  isConvertable() {
+  isConvertible() {
     const hasValidType = this.type !== null
     const has3dMatrix = this.has3dMatrix()
     return hasValidType && !has3dMatrix
@@ -143,7 +143,7 @@ export default class OctopusLayerCommon {
   }
 
   convertCommon() {
-    if (!this.isConvertable()) return null
+    if (!this.isConvertible()) return null
 
     const effectsArray = this.effects().convert()
     const effects = effectsArray.length ? { effects: effectsArray } : null
@@ -155,7 +155,7 @@ export default class OctopusLayerCommon {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
-      ...effects
+      // ...effects
     }
   }
 }

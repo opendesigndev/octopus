@@ -66,10 +66,18 @@ export default class OctopusEffectGradientFill {
       const offset = asNumber(stop?.offset, 0)
       const color = stop?.color
       return {
-        position: Math.round(offset * 100),
+        position: Math.round(offset),
         color: parseXDColor(color)
       }
     })
+  }
+
+  private _calcTransform(): Octopus['Transform'] {
+    return [1, 0, 0, 1, 0, 0]
+    // const points = [
+    //   [x1 * width, y1 * height],
+    //   [x2 * width, y2 * height]
+    // ]
   }
 
   /** @TODO radial gradient? */
@@ -92,9 +100,9 @@ export default class OctopusEffectGradientFill {
         stops
       },
       positioning: {
-        layout: 'FILL', /** @TODO should it be FILL? */
+        layout: 'FILL',
         origin: 'LAYER',
-        transform: [ 1.0, 0.0, 0.0, 1.0, 0.0, 0.0 ] /** @TODO calc later */
+        transform: this._calcTransform()
       }
     }
   }
