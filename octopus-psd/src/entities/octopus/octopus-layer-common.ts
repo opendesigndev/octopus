@@ -10,7 +10,7 @@ import type { Octopus } from '../../typings/octopus'
 import { round } from '../../utils/common'
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { DEFAULTS } from '../../utils/defaults'
-import { defaultTranslateMatrix } from '../../utils/path'
+import { createDefaultTranslationMatrix } from '../../utils/path'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -84,7 +84,7 @@ export class OctopusLayerCommon {
   }
 
   get transform() {
-    return defaultTranslateMatrix(this.layerTranslate)
+    return createDefaultTranslationMatrix(this.layerTranslate)
   }
 
   get opacity() {
@@ -101,8 +101,7 @@ export class OctopusLayerCommon {
     } as const
     const type = String(this._sourceLayer.type)
     if (!(type in types)) {
-      this.converter?.logger?.error('Unknown layer type', { extra: { type } })
-      this.converter?.sentry?.captureMessage('Unknown layer type', { extra: { type } })
+      this.converter?.logWarn('Unknown layer type', { type })
       return null
     }
     return types[type as keyof typeof types]

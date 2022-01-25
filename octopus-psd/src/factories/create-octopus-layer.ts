@@ -50,9 +50,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   }
   const builder = builders[type as string]
   if (typeof builder !== 'function') {
-    const converter = options.parent.converter
-    converter?.logger?.warn('createOctopusLayer: Unknown layer type', { extra: { type } })
-    converter?.sentry?.captureMessage('createOctopusLayer: Unknown layer type', { extra: { type } })
+    options.parent.converter?.logWarn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

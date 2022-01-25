@@ -39,12 +39,9 @@ export class OctopusPSDConverter {
     return this._id
   }
 
-  get logger() {
-    return this._logger
-  }
-
-  get sentry() {
-    return this._sentry
+  logWarn(msg: string, extra: object) {
+    this._logger?.warn(msg, extra)
+    this._sentry?.captureMessage(msg, extra)
   }
 
   get pkg() {

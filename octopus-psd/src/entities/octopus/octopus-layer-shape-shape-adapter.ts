@@ -23,9 +23,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   }
 
   private get _path(): Octopus['PathLike'] {
-    return new OctopusPathLike({ sourceLayer: this._sourceLayer, parent: this }).convert(
-      this._sourceLayer.pathComponents
-    )
+    return new OctopusPathLike({ sourceLayer: this._sourceLayer, parent: this }).convert()
   }
 
   private get _fills(): Octopus['Fill'][] {

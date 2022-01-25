@@ -71,9 +71,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
   }
   const builder = builders[type as string]
   if (typeof builder !== 'function') {
-    const converter = options.parent.converter
-    converter?.logger?.warn('Unknown source layer type', { extra: { type } })
-    converter?.sentry?.captureMessage('Unknown source layer type', { extra: { type } })
+    options.parent.converter?.logWarn('Unknown source layer type', { type })
     return null
   }
   return builder(options)

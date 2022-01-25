@@ -1,8 +1,9 @@
 import type { Octopus } from '../../../typings/octopus'
 import type { RawCombineOperation, RawPathComponent } from '../../../typings/source'
 import { asNumber } from '../../../utils/as'
+import { getMapped } from '../../../utils/common'
 import { createShape } from '../../../utils/create-shape'
-import { defaultTranslateMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
+import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
 
@@ -19,6 +20,13 @@ export default class OctopusPathLike {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
   }
+
+  static COMPOUND_OPERATION_MAP = {
+    add: 'UNION',
+    subtract: 'SUBTRACT',
+    interfaceIconFrameDimmed: 'INTERSECT',
+    xor: 'EXCLUDE',
+  } as const
 
   private get isRectangle(): boolean {
     const component = this._sourceLayer.firstPathComponent
@@ -45,21 +53,14 @@ export default class OctopusPathLike {
   private _getPathBase(pathComponents: RawPathComponent[]): Octopus['PathBase'] {
     return {
       type: this._getShapeType(pathComponents),
-      transform: defaultTranslateMatrix(),
+      transform: createDefaultTranslationMatrix(),
     }
   }
 
   private _getCompoundOperation(operation: RawCombineOperation | undefined): Octopus['BooleanOp'] {
-    const map: { [key: string]: Octopus['BooleanOp'] } = {
-      add: 'UNION',
-      subtract: 'SUBTRACT',
-      interfaceIconFrameDimmed: 'INTERSECT',
-      xor: 'EXCLUDE',
-    }
-    const result = map[operation as string]
+    const result = getMapped(operation, OctopusPathLike.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logger?.warn('Unknown Compound operation', { extra: { operation } })
-      this._parent.converter?.sentry?.captureMessage('Unknown Compound operation', { extra: { operation } })
+      this._parent.converter?.logWarn('Unknown Compound operation', { operation })
       return 'UNION'
     }
     return result
@@ -71,7 +72,7 @@ export default class OctopusPathLike {
     return {
       ...this._getPathBase(pathComponents),
       op: this._getCompoundOperation(last?.shapeOperation),
-      paths: [this.convert(rest), this.convert([last])],
+      paths: [this._convert(rest), this._convert([last])],
     }
   }
 
@@ -81,7 +82,7 @@ export default class OctopusPathLike {
     const [layerTx, layerTy] = this._parent.layerTranslate
     const tx = asNumber(left) - asNumber(layerTx)
     const ty = asNumber(top) - asNumber(layerTy)
-    const transform = defaultTranslateMatrix([tx, ty])
+    const transform = createDefaultTranslationMatrix([tx, ty])
     const rectangle = {
       x0: 0,
       y0: 0,
@@ -100,7 +101,7 @@ export default class OctopusPathLike {
     }
   }
 
-  convert(pathComponents: RawPathComponent[]): Octopus['PathLike'] {
+  private _convert(pathComponents: RawPathComponent[]): Octopus['PathLike'] {
     switch (this._getShapeType(pathComponents)) {
       case 'COMPOUND': {
         return this._getPathCompound(pathComponents)
@@ -110,5 +111,9 @@ export default class OctopusPathLike {
       }
     }
     return this._getPath(pathComponents)
+  }
+
+  convert() {
+    return this._convert(this._sourceLayer.pathComponents)
   }
 }

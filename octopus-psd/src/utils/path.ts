@@ -1,6 +1,9 @@
 import { DEFAULTS } from './defaults'
 
-export function isRectangle(points: Array<{ x?: number; y?: number } | undefined>): boolean {
+type Point = { x?: number; y?: number }
+type Points = (Point | undefined)[]
+
+export function isRectangle(points: Points): boolean {
   const [topLeft, topRight, bottomRight, bottomLeft] = points
   const top = topLeft?.y === topRight?.y
   const bottom = bottomLeft?.y === bottomRight?.y
@@ -9,25 +12,24 @@ export function isRectangle(points: Array<{ x?: number; y?: number } | undefined
   return top && bottom && left && right
 }
 
-export function isRoundedRectangle(points: Array<{ x?: number; y?: number } | undefined>): boolean {
-  const [
-    topLeftTop,
-    topRightTop,
-    topRightRight,
-    bottomRightRight,
-    bottomRightBottom,
-    bottomLeftBottom,
-    bottomLeftLeft,
-    topLeftLeft,
-  ] = points
-  const top = topLeftLeft?.y === topRightRight?.y && topLeftTop?.y === topRightTop?.y
-  const bottom = bottomLeftLeft?.y === bottomRightRight?.y && bottomLeftBottom?.y === bottomRightBottom?.y
-  const left = topLeftLeft?.x === bottomLeftLeft?.x && topLeftTop?.x === bottomLeftBottom?.x
-  const right = topRightTop?.x === bottomRightBottom?.x && topRightRight?.x === bottomRightRight?.x
+/**
+ *     tlt -- trt
+ *   tll        trr
+ *   |            |
+ *   |            |
+ *   bll        brr
+ *     blb -- brb
+ */
+export function isRoundedRectangle(points: Points): boolean {
+  const [tlt, trt, trr, brr, brb, blb, bll, tll] = points
+  const top = tll?.y === trr?.y && tlt?.y === trt?.y
+  const bottom = bll?.y === brr?.y && blb?.y === brb?.y
+  const left = tll?.x === bll?.x && tlt?.x === blb?.x
+  const right = trt?.x === brb?.x && trr?.x === brr?.x
   return top && bottom && left && right
 }
 
-export function defaultTranslateMatrix(translate: [number, number] | undefined = [0, 0]) {
+export function createDefaultTranslationMatrix(translate: [number, number] | undefined = [0, 0]) {
   const [xx, xy, yx, yy] = [...DEFAULTS.LAYER_TRANSFORM]
   return [xx, xy, yx, yy, ...translate]
 }

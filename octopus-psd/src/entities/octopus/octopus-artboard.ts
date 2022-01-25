@@ -59,7 +59,7 @@ export class OctopusArtboard {
     return getConverted(this._layers)
   }
 
-  async convert() {
+  async convert(): Promise<Octopus['OctopusDocument']> {
     return {
       id: this.id,
       type: 'ARTBOARD',

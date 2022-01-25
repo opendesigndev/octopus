@@ -26,8 +26,7 @@ export default class OctopusFill {
     }
     const result = map[type as string]
     if (!result) {
-      this._parent.converter?.logger?.warn('Unknown Fill type', { extra: { type } })
-      this._parent.converter?.sentry?.captureMessage('Unknown Fill type', { extra: { type } })
+      this._parent.converter?.logWarn('Unknown Fill type', { type })
       return 'COLOR'
     }
     return result
