@@ -16,51 +16,6 @@ import {
 import type { RawSubpath, RawCombineOperation, RawPathComponent, RawSubpathPoint, RawPointXY } from '../typings/source'
 import { getMapped } from './common'
 
-function segInOrPoint(seg: paper.Segment) {
-  return seg.handleIn.x || seg.handleIn.y ? seg.point.add(seg.handleIn) : seg.point
-}
-
-function segOutOrPoint(seg: paper.Segment) {
-  return seg.handleOut.x || seg.handleOut.y ? seg.point.add(seg.handleOut) : seg.point
-}
-
-const hasHandles = (seg: paper.Segment): boolean => {
-  return Boolean(seg.handleIn.x || seg.handleIn.y || seg.handleOut.x || seg.handleOut.y)
-}
-
-const applyRadiuses = (path: paper.Path, radiuses: number[]) => {
-  const segments = path.segments.slice(0)
-  path.segments = []
-  const len = segments.length
-  return segments.reduce((path, segment, i) => {
-    if (hasHandles(segment)) {
-      path.add(segment)
-      return path
-    }
-    const curPoint = segment.point
-    const next = segments[i + 1 === len ? 0 : i + 1]
-    const prev = segments[i - 1 < 0 ? len - 1 : i - 1]
-    const nextPoint = segInOrPoint(next)
-    const prevPoint = segOutOrPoint(prev)
-    const radius = Math.min(
-      radiuses[i],
-      Math.floor(Math.min(nextPoint.getDistance(curPoint), prevPoint.getDistance(curPoint)) / 2)
-    )
-    const nextNorm = curPoint.subtract(nextPoint).normalize()
-    const prevNorm = curPoint.subtract(prevPoint).normalize()
-    const angle = Math.acos(nextNorm.dot(prevNorm))
-    const delta = Math.tan(angle / 2) ? radius / Math.tan(angle / 2) : 0
-    const prevDelta = prevNorm.normalize(delta)
-    const nextDelta = nextNorm.normalize(delta)
-    const through = curPoint.subtract(
-      prevNorm.add(nextNorm).normalize(Math.sqrt(delta * delta + radius * radius) - radius)
-    )
-    path.add(curPoint.subtract(prevDelta))
-    path.arcTo(through, curPoint.subtract(nextDelta))
-    return path
-  }, path)
-}
-
 // function shapeTransform(
 //   shape: paper.CompoundPath,
 //   rotation: number,
@@ -109,29 +64,12 @@ const pointToSegment = (point: RawSubpathPoint): paper.Segment | paper.Point => 
   return createPointSegment(point.anchor)
 }
 
-// const extractRadiuses = (points) => {
-//   return points.map((point) => get(point, 'radius'))
-// }
-
 const createSubpath = (subpath: RawSubpath): paper.PathItem => {
   const points = subpath.points ?? []
   const segments = points.map(pointToSegment)
   const shape = createPath(segments)
-
-  console.info('X')
-  console.info('X segments', segments.length)
-  console.info('X shape', shape.pathData)
-  console.info('X')
-
-  return shape // TODO
-
-  // if (shape.segments.length <= 2) return shape
-  // const radiuses = extractRadiuses(subpath.points).map((radius) => {
-  //   return typeof radius !== 'number' ? 0 : radius
-  // })
-  // const roundedShape = applyRadiuses(shape, radiuses)
-  // roundedShape.closed = subpath.closed
-  // return roundedShape
+  shape.closed = subpath.closedSubpath ?? false
+  return shape
 }
 
 const processSubpaths = (subpaths: RawSubpath[]): paper.PathItem | null => {
@@ -139,23 +77,12 @@ const processSubpaths = (subpaths: RawSubpath[]): paper.PathItem | null => {
     .filter((subpath) => (subpath.points?.length ?? 0) > 1)
     .map((subpath: RawSubpath) => createSubpath(subpath))
 
-  console.info('X')
-  console.info('X')
-  console.info('X')
-  console.info('X')
-  console.info('X processSubpaths')
-  console.info('X subpathEntities', subpathEntities.length)
-  console.info('X')
-  console.info('X')
-
-  if (!subpathEntities.length) return null
-
-  return null // TODO
-
-  // return subpathEntities.reduce((prev: paper.Path, current: paper.Path): paper.Path => {
-  //   ;[prev, current].forEach((shape) => (shape.closed = true))
-  //   return prev.exclude(current) as paper.Path
-  // })
+  if (!subpathEntities.length) return null // TODO LOG ERROR
+  return subpathEntities.reduce((prev: paper.PathItem, current: paper.PathItem): paper.PathItem => {
+    prev.closePath()
+    current.closePath()
+    return prev.exclude(current)
+  })
 }
 
 const processPath = (pathComponent: RawPathComponent): paper.PathItem | null => {
@@ -184,11 +111,11 @@ const convertOperation = (operation: RawCombineOperation | undefined): PathOpera
   return result
 }
 
-const serveShapesFromPath = (
-  pathComponent: RawPathComponent
-): { shape: paper.PathItem; operation: PathOperation } | null => {
+type ShapeWithOperation = { shape: paper.PathItem; operation: PathOperation }
+
+const serveShapesFromPath = (pathComponent: RawPathComponent): ShapeWithOperation | null => {
   const shape = processPath(pathComponent)
-  if (shape === null) return null
+  if (shape === null) return null // TODO LOG ERROR
   const operation = convertOperation(pathComponent?.shapeOperation)
   return { shape, operation }
 }
@@ -204,14 +131,14 @@ const serveShapesFromPath = (
 // }
 
 export function createShape(pathComponents: RawPathComponent[]): string {
-  const shapePaths: Array<any> = pathComponents
+  const shapePaths = pathComponents
     // .filter(isValidPath)
     .map(serveShapesFromPath)
-    .filter((shape) => shape)
+    .filter((shape) => shape) as ShapeWithOperation[]
 
-  console.info('X shapePaths', shapePaths)
+  console.info('X shapePaths', shapePaths) // TODO HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE HERE
 
-  if (!shapePaths.length) return ''
+  if (!shapePaths.length) return '' // TODO LOG ERROR
 
   return 'TODO'
 
