@@ -14,6 +14,7 @@ import {
 } from './paper-factories'
 
 import type { RawSubpath, RawCombineOperation, RawPathComponent, RawSubpathPoint, RawPointXY } from '../typings/source'
+import { getMapped } from './common'
 
 function segInOrPoint(seg: paper.Segment) {
   return seg.handleIn.x || seg.handleIn.y ? seg.point.add(seg.handleIn) : seg.point
@@ -104,11 +105,8 @@ const createBezierSegment = (point: RawSubpathPoint): paper.Segment => {
 }
 
 const pointToSegment = (point: RawSubpathPoint): paper.Segment | paper.Point => {
-  if (point.forward || point.backward) {
-    return createBezierSegment(point)
-  } else {
-    return createPointSegment(point.anchor)
-  }
+  if (point.forward || point.backward) return createBezierSegment(point)
+  return createPointSegment(point.anchor)
 }
 
 // const extractRadiuses = (points) => {
@@ -150,9 +148,7 @@ const processSubpaths = (subpaths: RawSubpath[]): paper.PathItem | null => {
   console.info('X')
   console.info('X')
 
-  if (!subpathEntities.length) {
-    return null
-  }
+  if (!subpathEntities.length) return null
 
   return null // TODO
 
@@ -172,26 +168,27 @@ const booleanOperation = (prev: paper.PathItem, current: paper.PathItem, operati
   return prev[operation](current)
 }
 
+const CONVERT_OPERATION_MAP: { [key: string]: PathOperation } = {
+  add: 'unite',
+  subtract: 'subtract',
+  interfaceIconFrameDimmed: 'intersect',
+  xor: 'exclude',
+}
+
 const convertOperation = (operation: RawCombineOperation | undefined): PathOperation => {
-  if (operation === undefined) {
+  const result = getMapped(operation, CONVERT_OPERATION_MAP, undefined)
+  if (!result) {
+    // this._parent.converter?.logWarn('Unknown Compound operation', { operation }) // TODO
     return 'unite'
   }
-  const map: { [key: string]: PathOperation } = {
-    add: 'unite',
-    subtract: 'subtract',
-    interfaceIconFrameDimmed: 'intersect',
-    xor: 'exclude',
-  }
-  return map[operation]
+  return result
 }
 
 const serveShapesFromPath = (
   pathComponent: RawPathComponent
 ): { shape: paper.PathItem; operation: PathOperation } | null => {
   const shape = processPath(pathComponent)
-  if (shape === null) {
-    return null
-  }
+  if (shape === null) return null
   const operation = convertOperation(pathComponent?.shapeOperation)
   return { shape, operation }
 }
@@ -214,9 +211,7 @@ export function createShape(pathComponents: RawPathComponent[]): string {
 
   console.info('X shapePaths', shapePaths)
 
-  if (!shapePaths.length) {
-    return ''
-  }
+  if (!shapePaths.length) return ''
 
   return 'TODO'
 

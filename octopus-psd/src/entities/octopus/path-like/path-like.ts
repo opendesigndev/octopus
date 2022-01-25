@@ -42,11 +42,8 @@ export default class OctopusPathLike {
   }
 
   private _getShapeType(pathComponents: RawPathComponent[]): Octopus['PathType'] {
-    if (pathComponents.length > 1) {
-      return 'COMPOUND'
-    } else if (this.isRectangle) {
-      return 'RECTANGLE'
-    }
+    if (pathComponents.length > 1) return 'COMPOUND'
+    if (this.isRectangle) return 'RECTANGLE'
     return 'PATH'
   }
 
