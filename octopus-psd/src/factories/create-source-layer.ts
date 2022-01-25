@@ -12,6 +12,7 @@ import { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
+import { getMapped } from '../utils/common'
 
 export type SourceLayer =
   | SourceLayerSection
@@ -60,18 +61,19 @@ function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLay
   })
 }
 
+const SOURCE_BUILDER_MAP: { [key: string]: Function } = {
+  layerSection: createLayerSection,
+  shapeLayer: createLayerShape,
+  textLayer: createLayerText,
+  backgroundLayer: createLayerBackground,
+  layer: createLayerLayer,
+} as const
+
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {
   const type = (Object(options.layer) as RawLayer).type
-  const builders: { [key: string]: Function } = {
-    layerSection: createLayerSection,
-    shapeLayer: createLayerShape,
-    textLayer: createLayerText,
-    backgroundLayer: createLayerBackground,
-    layer: createLayerLayer,
-  }
-  const builder = builders[type as string]
+  const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
-    options.parent.converter?.logWarn('Unknown source layer type', { type })
+    options.parent.converter?.logWarn('createSourceLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

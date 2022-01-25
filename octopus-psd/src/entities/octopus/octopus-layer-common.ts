@@ -7,7 +7,7 @@ import { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerGroup } from './octopus-layer-group'
 import { NotNull } from '../../typings/helpers'
 import type { Octopus } from '../../typings/octopus'
-import { round } from '../../utils/common'
+import { getMapped, round } from '../../utils/common'
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { DEFAULTS } from '../../utils/defaults'
 import { createDefaultTranslationMatrix } from '../../utils/path'
@@ -25,6 +25,14 @@ export class OctopusLayerCommon {
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
+
+  static LAYER_TYPE_MAP = {
+    layerSection: 'GROUP',
+    shapeLayer: 'SHAPE',
+    textLayer: 'TEXT',
+    layer: 'SHAPE',
+    // backgroundLayer: 'TODO',
+  } as const
 
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent
@@ -72,7 +80,7 @@ export class OctopusLayerCommon {
     return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
   }
 
-  get blendMode(): typeof BLEND_MODES[keyof typeof BLEND_MODES] {
+  get blendMode(): Octopus['BlendMode'] {
     const sourceBlendMode = this._sourceLayer.blendMode
     return typeof sourceBlendMode === 'string' && sourceBlendMode in BLEND_MODES
       ? BLEND_MODES[sourceBlendMode]
@@ -91,20 +99,14 @@ export class OctopusLayerCommon {
     return round(asNumber(this._sourceLayer.opacity, 100) / 100)
   }
 
-  get type(): 'SHAPE' | 'GROUP' | 'TEXT' | null {
-    const types = {
-      layerSection: 'GROUP',
-      shapeLayer: 'SHAPE',
-      textLayer: 'TEXT',
-      layer: 'SHAPE',
-      // backgroundLayer: 'TODO',
-    } as const
+  get type(): Octopus['LayerBase']['type'] | null {
     const type = String(this._sourceLayer.type)
-    if (!(type in types)) {
-      this.converter?.logWarn('Unknown layer type', { type })
+    const result = getMapped(type, OctopusLayerCommon.LAYER_TYPE_MAP, undefined)
+    if (!result) {
+      this._parent.converter?.logWarn('Unknown Layer type', { type })
       return null
     }
-    return types[type as keyof typeof types]
+    return result
   }
 
   get isConvertible() {

@@ -1,5 +1,6 @@
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
+import { getMapped } from '../../utils/common'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
@@ -12,19 +13,20 @@ export default class OctopusFill {
   protected _parent: OctopusLayerShapeShapeAdapter
   protected _sourceLayer: SourceLayerShape
 
+  static FILL_TYPE_MAP = {
+    solidColorLayer: 'COLOR',
+    gradientLayer: 'GRADIENT',
+    patternLayer: 'IMAGE',
+  } as const
+
   constructor(options: OctopusFillOptions) {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
   }
 
-  get fillType() {
+  get fillType(): Octopus['FillType'] {
     const type = this._sourceLayer.fill.class
-    const map: { [key: string]: Octopus['FillType'] } = {
-      solidColorLayer: 'COLOR',
-      gradientLayer: 'GRADIENT',
-      patternLayer: 'IMAGE',
-    }
-    const result = map[type as string]
+    const result = getMapped(type, OctopusFill.FILL_TYPE_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Fill type', { type })
       return 'COLOR'

@@ -16,17 +16,17 @@ export default class OctopusPathLike {
   protected _parent: OctopusLayerShapeShapeAdapter
   protected _sourceLayer: SourceLayerShape
 
-  constructor(options: OctopusPathLikeOptions) {
-    this._parent = options.parent
-    this._sourceLayer = options.sourceLayer
-  }
-
   static COMPOUND_OPERATION_MAP = {
     add: 'UNION',
     subtract: 'SUBTRACT',
     interfaceIconFrameDimmed: 'INTERSECT',
     xor: 'EXCLUDE',
   } as const
+
+  constructor(options: OctopusPathLikeOptions) {
+    this._parent = options.parent
+    this._sourceLayer = options.sourceLayer
+  }
 
   private get isRectangle(): boolean {
     const component = this._sourceLayer.firstPathComponent
