@@ -17,7 +17,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
     super(options)
   }
 
-  get layerTranslate(): [number, number] {
+  get layerTranslation(): [number, number] {
     const pathBounds = this._sourceLayer.pathBounds
     return [pathBounds.left, pathBounds.top]
   }

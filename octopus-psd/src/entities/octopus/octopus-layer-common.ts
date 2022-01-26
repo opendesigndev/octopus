@@ -87,12 +87,12 @@ export class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
-  get layerTranslate(): [number, number] {
+  get layerTranslation(): [number, number] {
     return [0, 0]
   }
 
   get transform() {
-    return createDefaultTranslationMatrix(this.layerTranslate)
+    return createDefaultTranslationMatrix(this.layerTranslation)
   }
 
   get opacity() {

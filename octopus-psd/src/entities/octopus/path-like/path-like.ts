@@ -76,7 +76,7 @@ export default class OctopusPathLike {
   private _getPathRectangle(pathComponents: RawPathComponent[]): Octopus['PathRectangle'] {
     const rect = pathComponents[0]
     const { bottom, left, right, top } = rect?.origin?.bounds ?? {}
-    const [layerTx, layerTy] = this._parent.layerTranslate
+    const [layerTx, layerTy] = this._parent.layerTranslation
     const tx = asNumber(left) - asNumber(layerTx)
     const ty = asNumber(top) - asNumber(layerTy)
     const transform = createDefaultTranslationMatrix([tx, ty])
@@ -93,7 +93,8 @@ export default class OctopusPathLike {
 
   private _getPath(pathComponents: RawPathComponent[]): Octopus['Path'] {
     const path = pathComponents[0]
-    const geometry = createPathData(path)
+    const layerTranslation = this._parent.layerTranslation
+    const geometry = createPathData(path, layerTranslation)
     if (geometry === '') {
       this._parent.converter?.logWarn('PathData generated empty', { path })
     }

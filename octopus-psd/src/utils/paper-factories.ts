@@ -13,3 +13,7 @@ export function createSegment(point: paper.Point, handleIn?: paper.Point, handle
 export function createPath(options: Object | Array<paper.Segment>): paper.Path {
   return new paper.Path(options)
 }
+
+export function createTranslationMatrix(tx: number, ty: number): paper.Matrix {
+  return new paper.Matrix(1, 0, 0, 1, tx, ty)
+}
