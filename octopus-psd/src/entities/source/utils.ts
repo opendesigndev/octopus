@@ -1,6 +1,8 @@
-import type { RawBounds, RawColor, RawMatrix } from '../../typings/source'
+import type { RawBounds, RawColor, RawMatrix, RawPointXY } from '../../typings/source'
+import type { SourcePointXY } from './shape'
+import type { SourceBounds, SourceColor, SourceMatrix } from './types'
 
-export function getBoundsFor(value: RawBounds | undefined) {
+export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
   return {
     right: value?.right ?? 0,
     left: value?.left ?? 0,
@@ -9,7 +11,7 @@ export function getBoundsFor(value: RawBounds | undefined) {
   }
 }
 
-export function getColorFor(value: RawColor | undefined) {
+export function getColorFor(value: RawColor | undefined): SourceColor {
   return {
     blue: value?.blue ?? 0,
     green: value?.green ?? 0,
@@ -17,7 +19,7 @@ export function getColorFor(value: RawColor | undefined) {
   }
 }
 
-export function getMatrixFor(value: RawMatrix | undefined) {
+export function getMatrixFor(value: RawMatrix | undefined): SourceMatrix {
   return {
     xx: value?.xx ?? 0,
     xy: value?.xy ?? 0,
@@ -26,4 +28,10 @@ export function getMatrixFor(value: RawMatrix | undefined) {
     tx: value?.tx ?? 0,
     ty: value?.ty ?? 0,
   }
+}
+
+export function getPointFor(point: RawPointXY | undefined): SourcePointXY {
+  const x = point?.x ?? 0
+  const y = point?.y ?? 0
+  return { x, y }
 }

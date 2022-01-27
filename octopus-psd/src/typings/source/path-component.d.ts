@@ -14,6 +14,8 @@ type RawRadiiCorners = {
   topRight?: number
 }
 
+type RawOriginType = 'rect' | 'roundedRect' | 'line' | 'ellipse' | number
+
 type RawOrigin = {
   Trnf?: RawMatrix
   bounds?: RawBounds & { unitValueQuadVersion?: number }
@@ -32,7 +34,7 @@ type RawOrigin = {
   keyOriginPolySides?: number
   keyOriginPolyTrueRectCorners?: RawBoxCorners
   radii?: RawRadiiCorners
-  type?: 'rect' | 'roundedRect' | 'line' | 'ellipse' | number
+  type?: RawOriginType
 }
 
 type RawSubpathPoint = {

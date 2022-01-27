@@ -3,13 +3,13 @@ import type {
   RawLayerShape,
   RawShapeFill,
   RawShapeMask,
-  RawShapePath,
   RawShapeStrokeStyle,
 } from '../../typings/source'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
-import { getBoundsFor, getColorFor, getMatrixFor } from './utils'
-import { RawOrigin, RawPathComponent } from '../../typings/source/path-component'
+import { getBoundsFor, getColorFor } from './utils'
+import { mapPath, mapPathComponents } from './shape'
+import type { SourcePathComponent, SourcePath } from './shape'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -53,39 +53,19 @@ export class SourceLayerShape extends SourceLayerCommon {
   }
 
   get pathBounds() {
-    return getBoundsFor(this._rawValue.path?.bounds)
+    return this.path.bounds
   }
 
-  private _mapOrigin(origin: RawOrigin | undefined) {
-    return {
-      ...origin,
-      Trnf: getMatrixFor(origin?.Trnf),
-      bounds: { ...origin?.bounds, ...getBoundsFor(origin?.bounds) },
-      type: origin?.type ? origin.type.toString() : undefined,
-    }
-  }
-
-  get firstPathComponent(): RawPathComponent | undefined {
+  get firstPathComponent(): SourcePathComponent | undefined {
     return this.pathComponents[0]
   }
 
-  get pathComponents() {
-    const pathComponents =
-      this._rawValue.path?.pathComponents?.map((component) => ({
-        ...component,
-        origin: this._mapOrigin(component.origin),
-      })) ?? []
-    return pathComponents as RawPathComponent[]
+  get pathComponents(): SourcePathComponent[] {
+    return this.path.pathComponents
   }
 
-  get path() {
-    const path = this._rawValue.path
-    return {
-      ...path,
-      bounds: this.pathBounds,
-      defaultFill: path?.defaultFill,
-      pathComponents: this.pathComponents,
-    } as RawShapePath
+  get path(): SourcePath {
+    return mapPath(this._rawValue.path)
   }
 
   get strokeStyle() {

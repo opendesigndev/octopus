@@ -39,7 +39,7 @@ export type RawShapeMask = {
   imageName?: string
 }
 
-export type RawShapePath = {
+export type RawPath = {
   bounds?: RawBounds
   defaultFill?: boolean
   pathComponents?: RawPathComponent[]
@@ -77,6 +77,6 @@ export type RawLayerShape = RawLayerCommon & {
   fill?: RawShapeFill
   layerEffects?: {} // TODO
   mask?: RawShapeMask
-  path?: RawShapePath
+  path?: RawPath
   strokeStyle?: RawShapeStrokeStyle
 }

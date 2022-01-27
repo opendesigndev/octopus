@@ -1,11 +1,12 @@
 import type { Octopus } from '../../../typings/octopus'
-import type { RawCombineOperation, RawPathComponent } from '../../../typings/source'
 import { asNumber } from '../../../utils/as'
 import { getMapped } from '../../../utils/common'
 import { createPathData } from '../../../utils/path-data'
 import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
+import type { SourcePathComponent } from '../../source/shape'
+import type { SourceCombineOperation } from '../../source/types'
 
 type OctopusPathLikeOptions = {
   parent: OctopusLayerShapeShapeAdapter
@@ -41,20 +42,20 @@ export default class OctopusPathLike {
     return type === 'roundedRect' ? isRoundedRectangle(pointsMapped) : isRectangle(pointsMapped)
   }
 
-  private _getShapeType(pathComponents: RawPathComponent[]): Octopus['PathType'] {
+  private _getShapeType(pathComponents: SourcePathComponent[]): Octopus['PathType'] {
     if (pathComponents.length > 1) return 'COMPOUND'
     if (this.isRectangle) return 'RECTANGLE'
     return 'PATH'
   }
 
-  private _getPathBase(pathComponents: RawPathComponent[]): Octopus['PathBase'] {
+  private _getPathBase(pathComponents: SourcePathComponent[]): Octopus['PathBase'] {
     return {
       type: this._getShapeType(pathComponents),
       transform: createDefaultTranslationMatrix(),
     }
   }
 
-  private _getCompoundOperation(operation: RawCombineOperation | undefined): Octopus['BooleanOp'] {
+  private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
     const result = getMapped(operation, OctopusPathLike.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Compound operation', { operation })
@@ -63,9 +64,9 @@ export default class OctopusPathLike {
     return result
   }
 
-  private _getPathCompound(pathComponents: RawPathComponent[]): Octopus['CompoundPath'] {
+  private _getPathCompound(pathComponents: SourcePathComponent[]): Octopus['CompoundPath'] {
     const rest = [...pathComponents]
-    const last = rest.pop() as RawPathComponent
+    const last = rest.pop() as SourcePathComponent
     return {
       ...this._getPathBase(pathComponents),
       op: this._getCompoundOperation(last?.shapeOperation),
@@ -73,7 +74,7 @@ export default class OctopusPathLike {
     }
   }
 
-  private _getPathRectangle(pathComponents: RawPathComponent[]): Octopus['PathRectangle'] {
+  private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
     const rect = pathComponents[0]
     const { bottom, left, right, top } = rect?.origin?.bounds ?? {}
     const [layerTx, layerTy] = this._parent.layerTranslation
@@ -91,7 +92,7 @@ export default class OctopusPathLike {
     return { ...this._getPathBase(pathComponents), transform, rectangle, cornerRadii }
   }
 
-  private _getPath(pathComponents: RawPathComponent[]): Octopus['Path'] {
+  private _getPath(pathComponents: SourcePathComponent[]): Octopus['Path'] {
     const path = pathComponents[0]
     const layerTranslation = this._parent.layerTranslation
     const geometry = createPathData(path, layerTranslation)
@@ -104,7 +105,7 @@ export default class OctopusPathLike {
     }
   }
 
-  private _convert(pathComponents: RawPathComponent[]): Octopus['PathLike'] {
+  private _convert(pathComponents: SourcePathComponent[]): Octopus['PathLike'] {
     switch (this._getShapeType(pathComponents)) {
       case 'COMPOUND': {
         return this._getPathCompound(pathComponents)
