@@ -2,6 +2,8 @@ import type { RawCombineOperation } from '../../typings/source'
 
 export type SourceCombineOperation = RawCombineOperation
 
+export type SourcePointXY = { x: number; y: number }
+
 export type SourceBounds = {
   bottom: number
   left: number

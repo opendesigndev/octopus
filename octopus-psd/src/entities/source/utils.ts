@@ -1,6 +1,5 @@
 import type { RawBounds, RawColor, RawMatrix, RawPointXY } from '../../typings/source'
-import type { SourcePointXY } from './shape'
-import type { SourceBounds, SourceColor, SourceMatrix } from './types'
+import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix } from './types'
 
 export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
   return {

@@ -34,24 +34,17 @@ export default class OctopusFill {
     return result
   }
 
-  private get _fillBase(): Octopus['FillBase'] {
-    return { type: this.fillType }
-  }
-
   private get _fillColor(): Octopus['FillColor'] {
     const color = convertColor(this._sourceLayer.fill.color)
-    return {
-      ...this._fillBase,
-      color,
-    } as Octopus['FillColor']
+    return { type: 'COLOR', color }
   }
 
   private get _fillGradient(): Octopus['FillGradient'] {
-    return { ...this._fillBase } as Octopus['FillGradient'] // TODO
+    return { type: 'GRADIENT' } as Octopus['FillGradient'] // TODO
   }
 
   private get _fillImage(): Octopus['FillImage'] {
-    return { ...this._fillBase } as Octopus['FillImage'] // TODO
+    return { type: 'IMAGE' } as Octopus['FillImage'] // TODO
   }
 
   convert(): Octopus['Fill'] {
