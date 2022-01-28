@@ -1,15 +1,12 @@
-import type {
-  RawLayerEffect,
-  RawLayerShape,
-  RawShapeFill,
-  RawShapeMask,
-  RawShapeStrokeStyle,
-} from '../../typings/source'
+import type { RawLayerShape } from '../../typings/source'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
-import { getBoundsFor, getColorFor } from './utils'
-import { mapPath, mapPathComponents } from './shape'
-import type { SourcePathComponent, SourcePath } from './shape'
+import { mapPath } from './shape-path'
+import type { SourcePathComponent, SourcePath } from './shape-path'
+import { mapShapeFill, SourceShapeFill } from './shape-fill'
+import { mapShapeStroke, SourceShapeStrokeStyle } from './shape-stroke'
+import { mapShapeMask, SourceShapeMask } from './shape-mask'
+import { mapLayerEffect, SourceLayerEffect } from './effect'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -26,52 +23,34 @@ export class SourceLayerShape extends SourceLayerCommon {
     this._rawValue = options.rawValue
   }
 
-  get alignEdges() {
-    return this._rawValue.alignEdges
-  }
-
-  get fill() {
-    const fill = this._rawValue.fill
-    return {
-      ...fill,
-      color: getColorFor(fill?.color),
-    } as RawShapeFill
-  }
-
-  get layerEffects() {
-    const layerEffects = this._rawValue.layerEffects
-    return {
-      ...layerEffects,
-    } as RawLayerEffect
-  }
-
-  get mask() {
-    const mask = this._rawValue.mask
-    return {
-      ...mask,
-    } as RawShapeMask
-  }
-
-  get pathBounds() {
-    return this.path.bounds
-  }
-
-  get firstPathComponent(): SourcePathComponent | undefined {
-    return this.pathComponents[0]
+  get path(): SourcePath {
+    return mapPath(this._rawValue.path)
   }
 
   get pathComponents(): SourcePathComponent[] {
     return this.path.pathComponents
   }
 
-  get path(): SourcePath {
-    return mapPath(this._rawValue.path)
+  get firstPathComponent(): SourcePathComponent | undefined {
+    return this.pathComponents[0]
   }
 
-  get strokeStyle() {
-    const strokeStyle = this._rawValue.strokeStyle
-    return {
-      ...strokeStyle,
-    } as RawShapeStrokeStyle
+  get pathBounds() {
+    return this.path.bounds
+  }
+
+  get fill(): SourceShapeFill {
+    return mapShapeFill(this._rawValue.fill)
+  }
+
+  get strokeStyle(): SourceShapeStrokeStyle {
+    return mapShapeStroke(this._rawValue.strokeStyle)
+  }
+
+  get mask(): SourceShapeMask {
+    return mapShapeMask(this._rawValue.mask)
+  }
+  get layerEffects(): SourceLayerEffect {
+    return mapLayerEffect(this._rawValue.layerEffects)
   }
 }

@@ -5,7 +5,7 @@ import { createPathData } from '../../../utils/path-data'
 import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
-import type { SourcePathComponent } from '../../source/shape'
+import type { SourcePathComponent } from '../../source/shape-path'
 import type { SourceCombineOperation } from '../../source/types'
 
 type OctopusPathLikeOptions = {

@@ -2,7 +2,7 @@ import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopu
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import OctopusPathLike from './path-like/path-like'
-import OctopusFill from './fill'
+import OctopusFill from './fill/fill'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
