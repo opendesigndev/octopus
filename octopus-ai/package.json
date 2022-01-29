@@ -4,19 +4,34 @@
   "description": "\"Octopus AI converter, converts .ai files to Octopus 3+ format.\"",
   "main": "dist/src/index.js",
   "scripts": {
-    "create": "./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input && npm run create-private",
+    "create": "rm -rf temp/input && ./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input && npm run create-private",
     "create-private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
+    "convert:all": "npx ts-node ./scripts/convert-all.ts",
     "build": "npx tsc --build ./tsconfig.json",
     "test": "\"echo 'Tests are not implemented yet'\""
   },
   "author": "",
   "license": "UNLICENSED",
+  "dependencies": {
+    "@sentry/node": "6.14.0",
+    "dotenv": "10.0.0",
+    "lodash": "^4.17.21",
+    "paper": "0.12.4",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
+    "uuid": "^8.3.2"
+  },
   "devDependencies": {
     "@avocode/ai-private-data-parser": "^0.1.0-alpha.3",
     "@avocode/octopus-ts": "3.0.0-alpha.15",
+    "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
+    "@types/pino": "^6.3.3",
     "@types/uuid": "^8.3.1",
+    "chalk": "^4.1.2",
+    "fflate": "^0.7.1",
     "jest": "^27.3.1",
     "ts-node": "10.4.0"
   }
