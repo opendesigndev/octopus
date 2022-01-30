@@ -6,6 +6,7 @@ import { buildShapePathSafe } from '../utils/path-builders'
 import { convertObjectMatrixToArray } from '../utils/matrix'
 import OctopusEffectsShape from './octopus-effects-shape'
 
+import type paper from 'paper'
 import type { LayerSpecifics } from './octopus-layer-common'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type SourceLayerShape from '../entities-source/source-layer-shape'
@@ -21,7 +22,7 @@ type OctopusLayerShapeOptions = {
 export default class OctopusLayerShape extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerShape
   private _children: OctopusLayerShape[]
-  private _shapeData: string
+  private _shapeData: paper.Path | paper.CompoundPath
 
   constructor(options: OctopusLayerShapeOptions) {
     super(options)
@@ -42,7 +43,9 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     return new OctopusEffectsShape({
       sourceLayer: this._sourceLayer,
-      resources
+      resources,
+      layerWidth: this._shapeData.bounds.width,
+      layerHeight: this._shapeData.bounds.height
     })
   }
 
@@ -104,7 +107,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     return {
       type: 'PATH',
-      geometry: this._shapeData,
+      geometry: this._shapeData.pathData,
       ...transform,
     }
   }

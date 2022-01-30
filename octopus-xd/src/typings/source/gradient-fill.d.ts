@@ -1,4 +1,4 @@
-import { RawColor } from '.'
+import { RawColor, RawTransform } from '.'
 
 export type RawGradientStop = {
   offset?: number,
@@ -6,23 +6,41 @@ export type RawGradientStop = {
 }
 
 export type RawGradientResources = {
-  type?: 'linear',
+  type?: 'linear' | 'radial',
   stops?: RawGradientStop[]
+}
+
+export type RawGradientLinear = {
+  meta?: {
+    ux?: {
+      gradientResources?: RawGradientResources
+    }
+  },
+  x1?: number,
+  y1?: number,
+  x2?: number,
+  y2?: number,
+  units?: 'objectBoundingBox',
+  ref?: string
+}
+
+export type RawGradientRadial = {
+  meta?: {
+    ux?: {
+      gradientResources?: RawGradientResources
+    }
+  },
+  cx?: number,
+  cy?: number,
+  fx?: number,
+  fy?: number,
+  r?: number,
+  units?: 'objectBoundingBox',
+  ref?: string,
+  transform?: RawTransform
 }
 
 export type RawGradientFill = {
   type?: 'gradient' | 'none',
-  gradient?: {
-    meta?: {
-      ux?: {
-        gradientResources?: RawGradientResources
-      }
-    },
-    x1?: number,
-    y1?: number,
-    x2?: number,
-    y2?: number,
-    units?: 'objectBoundingBox',
-    ref?: string
-  }
+  gradient?: RawGradientLinear | RawGradientRadial
 }

@@ -34,7 +34,6 @@ export default class OctopusEffectsLayer {
     }))
   }
 
-  /** @TODO do we still need EffectBackgroundBlur if we already have `basis`? */
   private _convertBlurs(): Octopus['EffectBlur'][] {
     const filters = this._sourceLayer.style?.filters
     if (!filters) return []

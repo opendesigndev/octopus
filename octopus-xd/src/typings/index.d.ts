@@ -18,5 +18,6 @@ export interface ArrayBuffersSourceTree {
   manifest: ArrayBufferEntry | null,
   resources: ArrayBufferEntry | null,
   interactions: ArrayBufferEntry | null,
-  artboards: ArrayBufferEntry[]
+  artboards: ArrayBufferEntry[],
+  images: ArrayBufferEntry[]
 }

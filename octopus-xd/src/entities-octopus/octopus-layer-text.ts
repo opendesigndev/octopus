@@ -417,7 +417,6 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     return {
       value,
       defaultStyle,
-      /** @TODO clarify what's the desired value for Adobe XD */
       baselinePolicy: 'SET',
       textTransform: parseTextTransform,
       ...(styles.length ? { styles } : null),

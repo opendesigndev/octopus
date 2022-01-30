@@ -25,6 +25,10 @@ type SourceDesignOptions = {
     path: string,
     rawValue: RawSourceInteractions
   },
+  images: {
+    path: string,
+    rawValue: Buffer
+  }[],
   artboards: {
     path: string,
     rawValue: RawArtboard
@@ -36,6 +40,7 @@ export default class SourceDesign {
   private _interactions: SourceInteractions
   private _resources: SourceResources
   private _artboards: SourceArtboard[]
+  private _images: { path: string, rawValue: Buffer }[]
 
   static fromUnzippedBuffers(sourceTree: ArrayBuffersSourceTree) {
     if (!sourceTree.manifest?.content) {
@@ -63,6 +68,12 @@ export default class SourceDesign {
         path: sourceTree.interactions?.path,
         rawValue: JSONFromTypedArray(sourceTree.interactions?.content) as RawSourceInteractions
       },
+      images: sourceTree.images.map(entry => {
+        return {
+          path: entry.path,
+          rawValue: Buffer.from(entry.content)
+        }
+      }),
       artboards: sourceTree.artboards.map(entry => {
         return {
           path: entry.path,
@@ -103,6 +114,12 @@ export default class SourceDesign {
         design: this
       })
     })
+
+    this._images = options.images
+  }
+
+  get images() {
+    return this._images
   }
 
   get manifest() {

@@ -1,3 +1,4 @@
+import path from 'path'
 import chalk from 'chalk'
 
 import createSourceTree from './create-source-tree'
@@ -18,6 +19,9 @@ export async function prepareSourceDesign(options: PrepareSourceDesignOptions) {
   const manifestLocation = await saver('manifest.json', stringify(sourceDesign.manifest.raw))
   const interactionsLocation = await saver('interactions.json', stringify(sourceDesign.interactions.raw))
   const resourcesLocation = await saver('resources.json', stringify(sourceDesign.resources.raw))
+  sourceDesign.images.forEach(async image => {
+    await saver(path.basename(image.path), image.rawValue)
+  })
 
   console.log(`${chalk.yellow('Manifest: ')}
     file://${ manifestLocation }

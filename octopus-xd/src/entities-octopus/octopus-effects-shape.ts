@@ -14,7 +14,9 @@ import type { OctopusFill } from '../typings/octopus-entities'
 type OctopusEffectsShapeOptions = {
   sourceLayer?: SourceLayer,
   resources: SourceResources,
-  fallbackSource?: RawStyle
+  fallbackSource?: RawStyle,
+  layerWidth?: number,
+  layerHeight?: number
 }
 
 type ShapeEffects = {
@@ -29,11 +31,15 @@ export default class OctopusEffectsShape {
   private _sourceLayer: SourceLayer | null
   private _fallbackSource: RawStyle | null
   private _resources: SourceResources
+  private _layerWidth: number | undefined
+  private _layerHeight: number | undefined
 
   constructor(options: OctopusEffectsShapeOptions) {
     this._sourceLayer = options.sourceLayer ?? null
     this._resources = options.resources
     this._fallbackSource = options.fallbackSource ?? null
+    this._layerWidth = options.layerWidth
+    this._layerHeight = options.layerHeight
   }
 
   private get style() {
@@ -47,17 +53,29 @@ export default class OctopusEffectsShape {
 
     // Solid fill
     if ('color' in fill) {
-      return [ OctopusEffectColorFill.fromRaw({ effect: fill }) ]
+      const solidFill = OctopusEffectColorFill.fromRaw({ effect: fill })
+      return [ solidFill ]
     }
 
     // Gradient fill
     if ('gradient' in fill) {
-      return [ OctopusEffectGradientFill.fromRaw({ effect: fill, resources: this._resources }) ]
+      const gradientFill = OctopusEffectGradientFill.fromRaw({
+        effect: fill,
+        resources: this._resources,
+        layerWidth: this._layerWidth,
+        layerHeight: this._layerHeight
+      })
+      return [ gradientFill ]
     }
 
     // Image fill
     if ('pattern' in fill) {
-      return [ OctopusEffectImageFill.fromRaw({ effect: fill }) ]
+      const patternFill = OctopusEffectImageFill.fromRaw({
+        effect: fill,
+        layerWidth: this._layerWidth,
+        layerHeight: this._layerHeight
+      })
+      return [ patternFill ]
     }
     
     return []
@@ -73,7 +91,6 @@ export default class OctopusEffectsShape {
   convert(): ShapeEffects {
     const fills: Octopus['Fill'][] = getConverted(this._parseFills())
     const strokes: Octopus['VectorStroke'][] = getConverted(this._parseStrokes())
-
     return {
       ...(fills.length ? { fills } : null),
       ...(strokes.length ? { strokes } : null),

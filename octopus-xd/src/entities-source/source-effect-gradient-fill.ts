@@ -23,4 +23,8 @@ export default class SourceEffectGradientFill {
   get type() {
     return this._rawEffect?.type
   }
+
+  get gradient() {
+    return this._rawEffect?.gradient
+  }
 }
