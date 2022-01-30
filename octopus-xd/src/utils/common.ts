@@ -1,4 +1,5 @@
 import util from 'util'
+import isObjectLike from 'lodash/isObjectLike'
 
 
 export function JSONFromTypedArray(typedArray: Uint8Array) {
@@ -37,4 +38,15 @@ export function getConverted<T extends { convert: () => unknown }>(
   }).filter(converted => {
     return converted
   }) as Exclude<ReturnType<T['convert']>, null>[]
+}
+
+function _traverseAndFindRecursive<T>(node: unknown, cb: Function): T[] {
+  return [cb(node), ...Object.values(node as object).reduce<T[]>((results, value) => {
+    if (!isObjectLike(value)) return results
+    return [...results, ..._traverseAndFindRecursive<T>(value, cb)]
+  }, [])]
+}
+
+export function traverseAndFind<T>(node: {}, cb: Function): T[] {
+  return _traverseAndFindRecursive<T>(node, cb).filter(result => result !== undefined)
 }

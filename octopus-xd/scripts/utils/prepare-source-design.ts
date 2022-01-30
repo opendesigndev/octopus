@@ -2,7 +2,7 @@ import path from 'path'
 import chalk from 'chalk'
 
 import createSourceTree from './create-source-tree'
-import SourceDesign from '../../src/entities-source/source-design'
+import SourceDesign from '../../src/entities/source/source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
 
@@ -24,14 +24,11 @@ export async function prepareSourceDesign(options: PrepareSourceDesignOptions) {
   })
 
   console.log(`${chalk.yellow('Manifest: ')}
-    file://${ manifestLocation }
-  `)
+    file://${ manifestLocation }`)
   console.log(`${chalk.yellow('Interactions: ')}
-    file://${ interactionsLocation }
-  `)
+    file://${ interactionsLocation }`)
   console.log(`${chalk.yellow('Resources: ')}
-    file://${ resourcesLocation }
-  `)
+    file://${ resourcesLocation }`)
 
   return sourceDesign
 }

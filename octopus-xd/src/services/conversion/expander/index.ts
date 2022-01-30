@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import { asArray, asString } from '../../../utils/as'
 import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 
-import type SourceResources from '../../../entities-source/source-resources'
+import type SourceResources from '../../../entities/source/source-resources'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
 
 
