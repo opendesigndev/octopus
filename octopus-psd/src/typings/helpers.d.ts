@@ -8,3 +8,5 @@ export type RecursivePartial<T> = {
       ? RecursivePartial<T[P]>
       : T[P]
 }
+
+export type ElementOf<T> = T extends Array<infer U> ? U : never

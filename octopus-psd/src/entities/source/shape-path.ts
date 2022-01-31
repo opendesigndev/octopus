@@ -3,7 +3,7 @@ import type { SourceBounds, SourceMatrix } from './types'
 import { getBoundsFor, getMatrixFor, getPointFor } from './utils'
 
 export type SourceSubpathPoint = ReturnType<typeof mapSubpathPoint>
-export function mapSubpathPoint(point: RawSubpathPoint) {
+function mapSubpathPoint(point: RawSubpathPoint) {
   const anchor = getPointFor(point?.anchor)
   const backward = point.backward ? getPointFor(point?.backward) : undefined
   const forward = point.forward ? getPointFor(point?.forward) : undefined
@@ -11,7 +11,7 @@ export function mapSubpathPoint(point: RawSubpathPoint) {
 }
 
 export type SourceOrigin = ReturnType<typeof mapOrigin>
-export function mapOrigin(origin: RawOrigin) {
+function mapOrigin(origin: RawOrigin) {
   const Trnf: SourceMatrix = getMatrixFor(origin.Trnf)
   const bounds: SourceBounds = { ...origin.bounds, ...getBoundsFor(origin.bounds) }
   const type = origin.type ? origin.type.toString() : undefined
@@ -19,20 +19,20 @@ export function mapOrigin(origin: RawOrigin) {
 }
 
 export type SourceSubpath = ReturnType<typeof mapSubpath>
-export function mapSubpath(subpath: RawSubpath) {
+function mapSubpath(subpath: RawSubpath) {
   const points: SourceSubpathPoint[] = (subpath.points ?? []).map(mapSubpathPoint)
   const closedSubpath: boolean = subpath.closedSubpath ?? false
   return { ...subpath, points, closedSubpath }
 }
 
 export type SourcePathComponent = ReturnType<typeof mapPathComponent>
-export function mapPathComponent(component: RawPathComponent) {
+function mapPathComponent(component: RawPathComponent) {
   const subpathListKey: SourceSubpath[] = (component.subpathListKey ?? []).map(mapSubpath)
   const origin: SourceOrigin = mapOrigin(component?.origin ?? {})
   return { ...component, origin, subpathListKey }
 }
 
-export function mapPathComponents(components: RawPathComponent[]): SourcePathComponent[] {
+function mapPathComponents(components: RawPathComponent[]): SourcePathComponent[] {
   return components.map(mapPathComponent)
 }
 

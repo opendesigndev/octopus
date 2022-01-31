@@ -1,7 +1,7 @@
-import type { Octopus } from '../../../typings/octopus'
-import { getMapped } from '../../../utils/common'
-import type { SourceLayerShape } from '../../source/source-layer-shape'
-import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
+import type { Octopus } from '../../../../typings/octopus'
+import { getMapped } from '../../../../utils/common'
+import type { SourceLayerShape } from '../../../source/source-layer-shape'
+import type { OctopusLayerShapeShapeAdapter } from '../layer-shape-shape-adapter'
 import { convertFillColor } from './fill-color'
 import { convertFillGradient } from './fill-gradient'
 import { convertFillImage } from './fill-image'
@@ -38,7 +38,7 @@ export default class OctopusFill {
 
   convert(): Octopus['Fill'] {
     if (this.fillType === 'GRADIENT') return convertFillGradient(this._sourceLayer.fill)
-    if (this.fillType === 'IMAGE') return convertFillImage(this._sourceLayer.fill)
+    if (this.fillType === 'IMAGE') return convertFillImage(this._sourceLayer)
     return convertFillColor(this._sourceLayer.fill)
   }
 }

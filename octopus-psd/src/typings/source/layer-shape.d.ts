@@ -23,12 +23,14 @@ export type RawShapeGradient = {
   transparency?: RawShapeTransparency[]
 }
 
+export type RawFillGradientType = 'linear' | 'radial' | 'reflected' | 'Angl' | 'Dmnd'
+
 export type RawShapeFill = {
   class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
   color?: RawColor
   dither?: boolean
   gradientsInterpolationMethod?: 'Perc'
-  type?: 'linear' | 'radial' | 'reflected'
+  type?: RawFillGradientType
   angle?: RawUnitAngle
   gradient?: RawShapeGradient
 }

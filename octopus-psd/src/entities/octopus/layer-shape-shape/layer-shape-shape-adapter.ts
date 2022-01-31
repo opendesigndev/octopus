@@ -1,7 +1,7 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { Octopus } from '../../typings/octopus'
-import OctopusPathLike from './path-like/path-like'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../octopus-layer-common'
+import type { SourceLayerShape } from '../../source/source-layer-shape'
+import type { Octopus } from '../../../typings/octopus'
+import OctopusPathLike from './path-like'
 import OctopusFill from './fill/fill'
 
 type OctopusLayerShapeShapeAdapterOptions = {
@@ -18,8 +18,8 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   }
 
   get layerTranslation(): [number, number] {
-    const pathBounds = this._sourceLayer.pathBounds
-    return [pathBounds.left, pathBounds.top]
+    const { left, top } = this._sourceLayer.pathBounds
+    return [left, top]
   }
 
   private get _path(): Octopus['PathLike'] {

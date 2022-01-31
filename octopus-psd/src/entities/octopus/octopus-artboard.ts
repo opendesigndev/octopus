@@ -48,7 +48,7 @@ export class OctopusArtboard {
   }
 
   get id() {
-    return this._octopusConverter.id
+    return '1'
   }
 
   get version() {
