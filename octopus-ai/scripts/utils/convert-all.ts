@@ -6,6 +6,6 @@ import { prepareSourceDesign } from './prepare-source-design'
 export async function convertAll (){
     const id = uuidv4()
 
-    prepareSourceDesign()
+    const sourceDesign=await prepareSourceDesign()
 
 }

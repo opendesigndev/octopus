@@ -1,27 +1,30 @@
-export type SourceRoot ={
-    OCProperties?: SourceRootOcProperties| null
+import { RawArtboardEntry } from "./artboard"
+
+export type RawSourceRoot ={
+    OCProperties?: RawSourceRootOcProperties| null
+    Pages?: RawSourceRootPages
 }
 
-export type SourceRootOcProperties ={
-    D: SourceRootOcPropertiesD
+export type RawSourceRootOcProperties ={
+    D: RawSourceRootOcPropertiesD
 }
 
-export type SourceRootOcPropertiesDObject = {
+export type RawSourceRootOcPropertiesDObject = {
     ObjID?: number| null
 }
 
 
-export type SourceRootOcPropertiesD ={
-    OFF?: SourceRootOcPropertiesDObject[]| null
-    ON?: SourceRootOcPropertiesDObject[]| null
+export type RawSourceRootOcPropertiesD ={
+    OFF?: RawSourceRootOcPropertiesDObject[]| null
+    ON?: RawSourceRootOcPropertiesDObject[]| null
 }
 
-export type SourcePages = {
+export type RawSourceRootPages = {
     Count?: number | null
-    Kids?: RawArtBoard[]
+    Kids?: RawArtboardEntry[]
 }
 
-export type Source = {
-    Root?: SourceRoot | null,
-    Pages?: 
+export type RawSource = {
+    Root?: RawSourceRoot | null,
+    Pages?: RawSourceRootPages
 }

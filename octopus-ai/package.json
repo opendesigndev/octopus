@@ -13,6 +13,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "@avocode/octopus-common": "^2.2.10",
     "@sentry/node": "6.14.0",
     "dotenv": "10.0.0",
     "lodash": "^4.17.21",
