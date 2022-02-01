@@ -1,17 +1,11 @@
-import { SourceLayer } from "../../factories/create-source-layer"
+import { RawLayer } from "./source-layer-common"
 
 
-
-export type RawArtboardEntryContentsMarkedContext = {
-    Type?: "MarkedContext" | null,
-    Kids: SourceLayer []
-
-}
 export type RawArtboardEntryContents = {
     Filter?:string|null,
     Length?: number|null,
     Kind?: number|null,
-    Data?: [RawArtboardEntryContentsMarkedContext]
+    Data?: RawLayer[]
 }
 
 

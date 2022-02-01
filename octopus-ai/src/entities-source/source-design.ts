@@ -28,4 +28,8 @@ export default class SourceDesign {
     get artboards (){
         return this._artboards
     }
+
+    getArtboardById(id: string) {
+        return this._artboards.find(entry => entry.id === id) || null
+      }
 }

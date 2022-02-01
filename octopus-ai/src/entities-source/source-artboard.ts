@@ -4,7 +4,7 @@ import { RawArtboardEntry } from "../typings/source/artboard";
 import SourceBounds from './source-bounds';
 import { asArray } from '../utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
-import { RawLayer } from '../typings/source/layer';
+import { RawLayer } from '../typings/source/source-layer-common';
 
 export default class SourceArtboard {
     private _rawArtboard:RawArtboardEntry
@@ -17,24 +17,25 @@ export default class SourceArtboard {
     }
 
     constructor(rawArtboard: RawArtboardEntry){
-        this._rawArtboard=rawArtboard
-        this._bounds=SourceArtboard.getBounds(rawArtboard)
+        this._rawArtboard = rawArtboard
+        this._bounds = SourceArtboard.getBounds(rawArtboard)
         this._children = this._initChildren()
     }
 
     private _initChildren() {
-        const children = asArray(this.firstChild?.Kids)
-        return children.reduce((children: SourceLayer[], layer: RawLayer) => {
+        const children = asArray(this._rawArtboard?.Contents?.Data)
+        return children.reduce((children: SourceLayer[], layer: RawLayer, i:number) => {
           const sourceLayer = createSourceLayer({
             layer,
-            parent: this
+            parent: this,
+            path: [i]
           })
           return sourceLayer ? [ ...children, sourceLayer ] : children
         }, [])
       }
 
     public get layers () {
-        return []
+        return this._children
     }
 
     public get id (){
@@ -48,11 +49,6 @@ export default class SourceArtboard {
     public get bounds (){
         return this._bounds
     }
-
-    get firstChild() {
-        const artboards = this._rawArtboard?.Contents?.Data
-        return artboards?.[0]|| null
-      }
 
     get children () {
         return this._children
