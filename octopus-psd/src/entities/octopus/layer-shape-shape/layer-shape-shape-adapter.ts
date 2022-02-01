@@ -1,4 +1,4 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../octopus-layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../layer-common'
 import type { SourceLayerShape } from '../../source/source-layer-shape'
 import type { Octopus } from '../../../typings/octopus'
 import OctopusPathLike from './path-like'

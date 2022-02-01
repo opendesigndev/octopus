@@ -1,4 +1,4 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../octopus-layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../layer-common'
 import type { SourceLayerLayer } from '../../source/source-layer-layer'
 import type { Octopus } from '../../../typings/octopus'
 import { mapFillImage } from './fill'

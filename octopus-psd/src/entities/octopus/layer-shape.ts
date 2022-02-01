@@ -1,4 +1,4 @@
-import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { OctopusLayerCommon, OctopusLayerParent } from './layer-common'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerShapeShapeAdapter } from './layer-shape-shape/layer-shape-shape-adapter'
 import type { OctopusLayerShapeLayerAdapter } from './layer-shape-layer/layer-shape-layer-adapter'
