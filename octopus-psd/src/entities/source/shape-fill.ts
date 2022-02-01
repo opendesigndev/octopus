@@ -18,5 +18,6 @@ export type SourceShapeFill = ReturnType<typeof mapShapeFill>
 export function mapShapeFill(fill: RawShapeFill | undefined) {
   const color = getColorFor(fill?.color)
   const gradient = mapShapeGradient(fill?.gradient)
-  return { ...fill, color, gradient }
+  const reverse = fill?.reverse ?? false
+  return { ...fill, color, gradient, reverse }
 }

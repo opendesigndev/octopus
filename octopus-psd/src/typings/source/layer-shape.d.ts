@@ -33,6 +33,7 @@ export type RawShapeFill = {
   type?: RawFillGradientType
   angle?: RawUnitAngle
   gradient?: RawShapeGradient
+  reverse?: boolean
 }
 
 export type RawShapeMask = {

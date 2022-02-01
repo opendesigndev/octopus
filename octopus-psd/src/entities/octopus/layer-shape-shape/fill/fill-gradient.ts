@@ -5,6 +5,7 @@ import { getMapped } from '../../../../utils/common'
 import type { SourceShapeFill, SourceShapeGradientColor } from '../../../source/shape-fill'
 import type { SourceLayerShape } from '../../../source/source-layer-shape'
 import type { SourceFillGradientType } from '../../../source/types'
+import { reverse } from 'lodash'
 
 const FILL_GRADIENT_TYPE_MAP = {
   linear: 'LINEAR',
@@ -22,21 +23,32 @@ function mapGradientType(type: SourceFillGradientType | undefined): Octopus['Fil
   return result
 }
 
-type FillGradientStops = ElementOf<Octopus['FillGradient']['gradient']['stops']>
+type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
-function mapGradientStop(stop: SourceShapeGradientColor): FillGradientStops {
+function mapGradientStop(stop: SourceShapeGradientColor): FillGradientStop {
   const color = convertColor(stop?.color)
   const position = stop.location / 4096
   return { color, position }
 }
 
-function mapGradientStops(colors: SourceShapeGradientColor[] = []): Octopus['FillGradient']['gradient']['stops'] {
-  return colors.map(mapGradientStop)
+function mapReversed(stop: FillGradientStop): FillGradientStop {
+  return { ...stop, position: 1 - stop.position }
+}
+
+function mapGradientStops(
+  colors: SourceShapeGradientColor[] = [],
+  inverse: boolean
+): Octopus['FillGradient']['gradient']['stops'] {
+  const stops = colors.map(mapGradientStop)
+  if (inverse) {
+    return reverse(stops).map(mapReversed)
+  }
+  return stops
 }
 
 function mapGradient(fill: SourceShapeFill): Octopus['FillGradient']['gradient'] {
   const type = mapGradientType(fill?.type)
-  const stops = mapGradientStops(fill?.gradient.colors)
+  const stops = mapGradientStops(fill?.gradient.colors, fill.reverse)
   return { type, stops }
 }
 
