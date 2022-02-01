@@ -37,7 +37,7 @@ export default class OctopusFill {
   }
 
   convert(): Octopus['Fill'] {
-    if (this.fillType === 'GRADIENT') return convertFillGradient(this._sourceLayer.fill)
+    if (this.fillType === 'GRADIENT') return convertFillGradient(this._sourceLayer)
     if (this.fillType === 'IMAGE') return convertFillImage(this._sourceLayer)
     return convertFillColor(this._sourceLayer.fill)
   }
