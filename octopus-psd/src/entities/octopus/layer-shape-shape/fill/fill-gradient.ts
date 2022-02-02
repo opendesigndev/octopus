@@ -5,7 +5,7 @@ import { getMapped } from '../../../../utils/common'
 import type { SourceShapeFill, SourceShapeGradientColor } from '../../../source/shape-fill'
 import type { SourceLayerShape } from '../../../source/source-layer-shape'
 import type { SourceFillGradientType } from '../../../source/types'
-import { reverse } from 'lodash'
+import { getLinearGradientPoints, Matrix, scaleMatrix } from '../../../../utils/gradient'
 
 const FILL_GRADIENT_TYPE_MAP = {
   linear: 'LINEAR',
@@ -31,38 +31,45 @@ function mapGradientStop(stop: SourceShapeGradientColor): FillGradientStop {
   return { color, position }
 }
 
-function mapReversed(stop: FillGradientStop): FillGradientStop {
-  return { ...stop, position: 1 - stop.position }
-}
-
-function mapGradientStops(
-  colors: SourceShapeGradientColor[] = [],
-  inverse: boolean
-): Octopus['FillGradient']['gradient']['stops'] {
-  const stops = colors.map(mapGradientStop)
-  if (inverse) {
-    return reverse(stops).map(mapReversed)
-  }
-  return stops
+function mapGradientStops(colors: SourceShapeGradientColor[] = []): Octopus['FillGradient']['gradient']['stops'] {
+  return colors.map(mapGradientStop)
 }
 
 function mapGradient(fill: SourceShapeFill): Octopus['FillGradient']['gradient'] {
   const type = mapGradientType(fill?.type)
-  const stops = mapGradientStops(fill?.gradient.colors, fill.reverse)
+  const stops = mapGradientStops(fill?.gradient.colors)
   return { type, stops }
+}
+
+type TransformLinearParams = { angle: number; scale: number; inverse: boolean; width: number; height: number }
+function getTransformLinear({ angle, scale, inverse, width, height }: TransformLinearParams): Octopus['Transform'] {
+  const [P1, P2] = getLinearGradientPoints({ angle, inverse })
+
+  const p1 = { x: width * P1.x, y: height * P1.y }
+  const p2 = { x: width * P2.x, y: height * P2.y }
+
+  const scaleX = p2.x - p1.x
+  const skewY = p2.y - p1.y
+  const skewX = p1.y - p2.y
+  const scaleY = p2.x - p1.x
+  const tx = p1.x
+  const ty = p1.y
+
+  const matrix: Matrix = [scaleX, skewY, skewX, scaleY, tx, ty]
+  const center = { x: width / 2, y: height / 2 }
+  return scaleMatrix(matrix, scale, center)
 }
 
 function mapPositioning(layer: SourceLayerShape): Octopus['FillPositioning'] {
   const { width, height } = layer
+  const { angle, scale, reverse } = layer.fill
 
-  // TODO
-  // TODO
-  // TODO
+  const transform = getTransformLinear({ width, height, scale, angle, inverse: reverse }) // TODO other gradient types
 
   return {
     layout: 'FILL',
     origin: 'LAYER',
-    transform: [width, 0, 0, height, 0, 0],
+    transform,
   }
 }
 

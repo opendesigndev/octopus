@@ -17,3 +17,7 @@ export function createPath(options: Object | Array<paper.Segment>): paper.Path {
 export function createTranslationMatrix(tx: number, ty: number): paper.Matrix {
   return new paper.Matrix(1, 0, 0, 1, tx, ty)
 }
+
+export function createMatrix(a: number, b: number, c: number, d: number, tx: number, ty: number): paper.Matrix {
+  return new paper.Matrix(a, b, c, d, tx, ty)
+}

@@ -12,7 +12,7 @@
     "lint": "eslint ./src/* ./scripts/*",
     "prepare": "rimraf ./lib && yarn run build",
     "watch": "tsc -w",
-    "test": "echo 'Tests are not implemented yet'"
+    "test": "yarn jest"
   },
   "dependencies": {
     "@avocode/psd-parser": "0.8.4",
@@ -29,12 +29,14 @@
   "devDependencies": {
     "@avocode/octopus-ts": "3.0.0-alpha.15",
     "@types/chalk": "^2.2.0",
+    "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
     "@types/pino": "^6.3.3",
     "@types/uuid": "^8.3.1",
     "jest": "^27.3.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
     "ts-node": "10.4.0",
     "typescript": "4.4.4"
   },

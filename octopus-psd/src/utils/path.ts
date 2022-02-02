@@ -1,9 +1,10 @@
 import { DEFAULTS } from './defaults'
 
 type Point = { x?: number; y?: number }
-type Points = (Point | undefined)[]
+export type Points = (Point | undefined)[]
 
 export function isRectangle(points: Points): boolean {
+  if (points.length !== 4) return false
   const [topLeft, topRight, bottomRight, bottomLeft] = points
   const top = topLeft?.y === topRight?.y
   const bottom = bottomLeft?.y === bottomRight?.y
@@ -21,6 +22,7 @@ export function isRectangle(points: Points): boolean {
  *     blb -- brb
  */
 export function isRoundedRectangle(points: Points): boolean {
+  if (points.length !== 8) return false
   const [tlt, trt, trr, brr, brb, blb, bll, tll] = points
   const top = tll?.y === trr?.y && tlt?.y === trt?.y
   const bottom = bll?.y === brr?.y && blb?.y === brb?.y

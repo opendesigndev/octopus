@@ -5,13 +5,13 @@ import type { SourceLayerShape } from '../../../source/source-layer-shape'
 function mapImage(layer: SourceLayerShape): Octopus['Image'] {
   const ref: Octopus['ImageRef'] = {
     type: 'RESOURCE',
-    value: convertImagePath(layer?.imageName ?? ''),
+    value: convertImagePath(layer?.imageName ?? ''), // TODO this is not correct
   }
   return { ref }
 }
 
 function mapPositioning(layer: SourceLayerShape): Octopus['FillPositioning'] {
-  const transform: Octopus['Transform'] = [layer?.width, 0, 0, layer?.height, 0, 0]
+  const transform: Octopus['Transform'] = [layer?.width, 0, 0, layer?.height, 0, 0] // TODO
   return { layout: 'FILL', origin: 'LAYER', transform }
 }
 
