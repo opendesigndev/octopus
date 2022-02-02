@@ -3,6 +3,7 @@ import {RawGroupLayer, RawLayer} from '../typings/source'
 import {SourceLayerParent} from './source-layer-common'
 import { asArray } from '../utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
+import SourceArtboard from './source-artboard';
 
 type SourceLayerGroupOptions = {
     parent: SourceLayerParent,
@@ -11,11 +12,10 @@ type SourceLayerGroupOptions = {
   }
 
 export default class SourceLayerGroup extends SourceLayerCommon {
-    private _rawValue: RawGroupLayer
+    protected _rawValue: RawGroupLayer
     private _children: SourceLayer []
-
     constructor(options: SourceLayerGroupOptions){
-        super(options.path)
+        super(options)
         this._rawValue = options.rawValue
         this._children = this._initChildren()
     }
@@ -36,7 +36,14 @@ export default class SourceLayerGroup extends SourceLayerCommon {
          return this._children
      }
 
-     get raw () {
-         return this._rawValue
+     get name () {
+      const DEFAULT_NAME = '<Group>'
+      const propertiesId = this._rawValue.Properties
+
+      if(!(this._parent instanceof SourceArtboard)|| !propertiesId){
+        return DEFAULT_NAME
+      }
+
+      return this._parent.resources?.Properties?.[propertiesId] || DEFAULT_NAME
      }
 }

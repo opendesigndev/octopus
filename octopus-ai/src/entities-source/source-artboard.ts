@@ -2,9 +2,9 @@ import _ from 'lodash'
 
 import { RawArtboardEntry } from "../typings/source/artboard";
 import SourceBounds from './source-bounds';
-import { asArray } from '../utils/as';
+import { asArray, asNumber } from '../utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
-import { RawLayer } from '../typings/source/source-layer-common';
+import { RawLayer } from '../typings/source/layer';
 
 export default class SourceArtboard {
     private _rawArtboard:RawArtboardEntry
@@ -39,11 +39,11 @@ export default class SourceArtboard {
     }
 
     public get id (){
-        return _.get(this._rawArtboard,'Id')
+        return this._rawArtboard.Id
     }
 
     public get name (){
-        return _.get(this._rawArtboard,'Name')
+        return this._rawArtboard.Name
     }
 
     public get bounds (){
@@ -52,5 +52,22 @@ export default class SourceArtboard {
 
     get children () {
         return this._children
+    }
+
+    get dimensions(){
+        const [,,width,height] = asArray(this._rawArtboard.MediaBox)
+
+        return {
+            width: asNumber(width,0),
+            height: asNumber(height,0)
+        }
+    }
+
+    get resources() {
+        return this._rawArtboard.Resources
+    }
+
+    get hiddenContentObjectIds(){
+        return this._rawArtboard['OCProperties.D.OFF']
     }
 }

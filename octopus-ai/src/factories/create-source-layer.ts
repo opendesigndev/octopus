@@ -5,7 +5,7 @@ import SourceLayerGroup from '../entities-source/source-layer-group'
 
 import SourceArtboard from "../entities-source/source-artboard"
 import { RawArtboardEntry } from "../typings/source/artboard"
-import { RawLayer } from "../typings/source/source-layer-common"
+import { RawLayer } from "../typings/source/layer"
 import type { SourceLayerParent } from '../entities-source/source-layer-common'
 import { RawGroupLayer, RawTextLayer } from '../typings/source'
 import SourceLayerText from '../entities-source/source-layer-text'
