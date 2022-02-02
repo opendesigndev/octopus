@@ -4,34 +4,31 @@ import { isObject } from '../../utils/common'
 import { asArray, asNumber } from '../../utils/as'
 import SourceEffectGradientFill from '../source/source-effect-gradient-fill'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
-import { createMatrix, createPathCircle, createPathEllipse, createPathRectangle, createPoint, createSize } from '../../utils/paper'
+import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper'
 
 import type SourceResources from '../source/source-resources'
 import type { Octopus } from '../../typings/octopus'
 import type { RawGradientFill, RawGradientLinear, RawGradientRadial, RawGradientResources } from '../../typings/source'
 import type { Defined } from '../../typings/helpers'
-import { Path } from 'paper/dist/paper-core'
+import OctopusBounds from './octopus-bounds'
 
 
 type OctopusEffectGradientFillOptions = {
   source: SourceEffectGradientFill,
   resources: SourceResources,
-  layerWidth?: number,
-  layerHeight?: number
+  effectBounds: OctopusBounds
 }
 
 type OctopusEffectGradientFillFromRawOptions = {
   effect: RawGradientFill,
   resources: SourceResources,
-  layerWidth?: number,
-  layerHeight?: number
+  effectBounds: OctopusBounds
 }
 
 export default class OctopusEffectGradientFill {
   private _source: SourceEffectGradientFill
   private _resources: SourceResources
-  private _layerWidth: number | undefined
-  private _layerHeight: number | undefined
+  private _effectBounds: OctopusBounds
 
   static VALID_GRADIENT_TYPES = [
     'linear',
@@ -49,16 +46,14 @@ export default class OctopusEffectGradientFill {
         effect: options.effect
       }),
       resources: options.resources,
-      layerWidth: options.layerWidth,
-      layerHeight: options.layerHeight
+      effectBounds: options.effectBounds
     })
   }
 
   constructor(options: OctopusEffectGradientFillOptions) {
     this._source = options.source
     this._resources = options.resources
-    this._layerWidth = options.layerWidth
-    this._layerHeight = options.layerHeight
+    this._effectBounds = options.effectBounds
   }
 
   private _isValidGradientType(gradientType: unknown): gradientType is 'linear' {
@@ -90,8 +85,8 @@ export default class OctopusEffectGradientFill {
   private _getTransformLinear(): Octopus['Transform'] {
     const gradient = this._source.gradient as RawGradientLinear
 
-    const w = asNumber(this._layerWidth, 0)
-    const h = asNumber(this._layerHeight, 0)
+    const w = asNumber(this._effectBounds.w, 0)
+    const h = asNumber(this._effectBounds.h, 0)
 
     const x1 = asNumber(gradient?.x1, 0)
     const y1 = asNumber(gradient?.y1, 0)
@@ -104,8 +99,8 @@ export default class OctopusEffectGradientFill {
     return [
       p2.x - p1.x,
       p2.y - p1.y,
-      1,
-      1,
+      -(p2.y - p1.y), /** @TODO should be changed to 1 after rendering fix */
+      p2.x - p1.x, /** @TODO should be changed to 1 after rendering fix */
       p1.x,
       p1.y
     ]
@@ -117,8 +112,8 @@ export default class OctopusEffectGradientFill {
     const cx = asNumber(gradient.cx, 0)
     const cy = asNumber(gradient.cy, 0)
     const r = asNumber(gradient.r, 0)
-    const w = asNumber(this._layerWidth, 0)
-    const h = asNumber(this._layerHeight, 0)
+    const w = asNumber(this._effectBounds.w, 0)
+    const h = asNumber(this._effectBounds.h, 0)
     const transform = convertObjectMatrixToArray(gradient?.transform)
     const [ a, b, c, d, tx, ty ] =  transform || [ 1, 0, 0, 1, 0, 0 ]
 

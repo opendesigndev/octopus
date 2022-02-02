@@ -8,6 +8,7 @@ import OctopusXDConverter from '../../src'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
 import { prepareSourceDesign } from './prepare-source-design'
+import { getPkgLocation } from './pkg-location'
 
 
 type ConvertAllOptions = {
@@ -20,8 +21,13 @@ async function renderOctopus(
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `render-${id}.png`)
   await fsp.rename(octopusPath, path.join(octopusDir, 'octopus.json'))
+  const fontsDir = path.join(await getPkgLocation(), 'fonts')
+  const fontsOption = fontsDir ? `--fonts ${ fontsDir }` : ''
   try {
-    execSync(`${ process.env.RENDERING_PATH } ${ octopusDir } ${ renderPath }`, { stdio: 'ignore' })
+    execSync(
+      `${ process.env.RENDERING_PATH } ${ fontsOption } ${ octopusDir } ${ renderPath }`,
+      { stdio: 'ignore' }
+    )
     await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
     return {
       value: renderPath,

@@ -1,10 +1,10 @@
 import type { RawImageFill } from '../../typings/source'
+import OctopusBounds from '../octopus/octopus-bounds'
 
 
 export type SourceEffectImageFillOptions = {
   effect: RawImageFill,
-  layerWidth?: number,
-  layerHeight?: number
+  effectBounds: OctopusBounds
 }
 
 export default class SourceEffectImageFill {

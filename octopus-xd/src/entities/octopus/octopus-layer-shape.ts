@@ -30,6 +30,10 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     this._children = this._initChildren()
   }
 
+  get shapeData() {
+    return this._shapeData
+  }
+
   get shapeType() {
     return this._sourceLayer.shapeType
   }
@@ -42,10 +46,8 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
 
     return new OctopusEffectsShape({
-      sourceLayer: this._sourceLayer,
-      resources,
-      layerWidth: this._shapeData.bounds.width,
-      layerHeight: this._shapeData.bounds.height
+      octopusLayer: this,
+      resources
     })
   }
 

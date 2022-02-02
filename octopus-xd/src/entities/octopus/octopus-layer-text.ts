@@ -3,9 +3,9 @@ import OctopusLayerCommon, { LayerSpecifics } from './octopus-layer-common'
 import { asArray, asNumber, asString } from '../../utils/as'
 import { getPresentProps } from '../../utils/common'
 import defaults from '../../utils/defaults'
-import OctopusEffectsShape from './octopus-effects-shape'
 import { createMatrix } from '../../utils/paper'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
+import OctopusEffectsText from './octopus-effects-text'
 
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Octopus } from '../../typings/octopus'
@@ -202,9 +202,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const resources = this.parentArtboard?.sourceDesign.resources
     if (!resources) return null
 
-    const { fills, strokes } = new OctopusEffectsShape({
-      sourceLayer: this._sourceLayer,
-      resources
+    const { fills, strokes } = OctopusEffectsText.fromTextLayer({
+      octopusLayer: this
     }).convert()
 
     const optionalDefaultStyleProps = getPresentProps({
@@ -315,9 +314,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const resources = this.parentArtboard?.sourceDesign.resources
     if (!resources) return null
 
-    const { fills, strokes } = new OctopusEffectsShape({
-      fallbackSource: paragraph.style,
-      resources
+    const { fills, strokes } = new OctopusEffectsText({
+      effectSource: paragraph.style
     }).convert()
 
     const optionalDefaultStyleProps = getPresentProps({

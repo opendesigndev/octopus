@@ -8,6 +8,7 @@ import OctopusArtboard from './octopus-artboard'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import OctopusEffectsLayer from './octopus-effects-layer'
 import defaults from '../../utils/defaults'
+import { createMatrix } from '../../utils/paper'
 
 import type OctopusXDConverter from '../..'
 import type OctopusLayerGroup from './octopus-layer-group'
@@ -42,6 +43,10 @@ export default class OctopusLayerCommon {
     this._sourceLayer = options.sourceLayer
 
     this._id = asString(this._sourceLayer.id, uuidv4())
+  }
+
+  get sourceLayer() {
+    return this._sourceLayer
   }
 
   get converter(): OctopusXDConverter | null {
@@ -95,12 +100,19 @@ export default class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
-  get transform() {
-    if (!this._sourceLayer.transform) {
-      return DEFAULTS.LAYER_TRANSFORM.slice()
+  get transform(): Octopus['Transform'] {
+    const matrixAsArray = this._sourceLayer.transform
+      ? convertObjectMatrixToArray(this._sourceLayer.transform)
+      : DEFAULTS.LAYER_TRANSFORM.slice()
+
+    const [ a, b, c, d, tx, ty ] = matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+    const matrix = createMatrix(a, b, c, d, tx, ty)
+    if (this.parent === this.parentArtboard) {
+      const { x, y } = this.parentArtboard?.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
+      matrix.prepend(createMatrix(1, 0, 0, 1, -x, -y))
     }
-    const matrixAsArray = convertObjectMatrixToArray(this._sourceLayer.transform)
-    return matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+    
+    return [ matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty ]
   }
 
   get opacity() {

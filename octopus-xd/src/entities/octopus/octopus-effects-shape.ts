@@ -3,20 +3,17 @@ import OctopusEffectGradientFill from './octopus-effect-gradient-fill'
 import OctopusEffectImageFill from './octopus-effect-image-fill'
 import OctopusEffectStroke from './octopus-effect-stroke'
 import { getConverted } from '../../utils/common'
+import OctopusBounds from './octopus-bounds'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { RawStyle } from '../../typings/source'
 import type SourceResources from '../source/source-resources'
 import type { OctopusFill } from '../../typings/octopus-entities'
+import type OctopusLayerShape from './octopus-layer-shape'
 
 
 type OctopusEffectsShapeOptions = {
-  sourceLayer?: SourceLayer,
-  resources: SourceResources,
-  fallbackSource?: RawStyle,
-  layerWidth?: number,
-  layerHeight?: number
+  octopusLayer?: OctopusLayerShape,
+  resources: SourceResources
 }
 
 type ShapeEffects = {
@@ -28,22 +25,16 @@ type ShapeEffects = {
  * Vector effects.
  */
 export default class OctopusEffectsShape {
-  private _sourceLayer: SourceLayer | null
-  private _fallbackSource: RawStyle | null
+  private _octopusLayer: OctopusLayerShape | null
   private _resources: SourceResources
-  private _layerWidth: number | undefined
-  private _layerHeight: number | undefined
 
   constructor(options: OctopusEffectsShapeOptions) {
-    this._sourceLayer = options.sourceLayer ?? null
+    this._octopusLayer = options.octopusLayer ?? null
     this._resources = options.resources
-    this._fallbackSource = options.fallbackSource ?? null
-    this._layerWidth = options.layerWidth
-    this._layerHeight = options.layerHeight
   }
 
   private get style() {
-    return this._sourceLayer?.style || this._fallbackSource
+    return this._octopusLayer?.sourceLayer.style
   }
 
   private _parseFills(): OctopusFill[] {
@@ -59,22 +50,28 @@ export default class OctopusEffectsShape {
 
     // Gradient fill
     if ('gradient' in fill) {
+      const bounds = this._octopusLayer?.shapeData.bounds
+      if (!bounds) return []
+
       const gradientFill = OctopusEffectGradientFill.fromRaw({
         effect: fill,
         resources: this._resources,
-        layerWidth: this._layerWidth,
-        layerHeight: this._layerHeight
+        effectBounds: OctopusBounds.fromPaperBounds(bounds)
       })
+
       return [ gradientFill ]
     }
 
     // Image fill
     if ('pattern' in fill) {
+      const bounds = this._octopusLayer?.shapeData.bounds
+      if (!bounds) return []
+      
       const patternFill = OctopusEffectImageFill.fromRaw({
         effect: fill,
-        layerWidth: this._layerWidth,
-        layerHeight: this._layerHeight
+        effectBounds: OctopusBounds.fromPaperBounds(bounds)
       })
+
       return [ patternFill ]
     }
     
