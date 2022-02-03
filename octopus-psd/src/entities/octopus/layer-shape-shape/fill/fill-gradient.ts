@@ -5,7 +5,7 @@ import { getMapped } from '../../../../utils/common'
 import type { SourceShapeFill, SourceShapeGradientColor } from '../../../source/shape-fill'
 import type { SourceLayerShape } from '../../../source/source-layer-shape'
 import type { SourceFillGradientType } from '../../../source/types'
-import { getLinearGradientPoints, Matrix, scaleMatrix } from '../../../../utils/gradient'
+import { getLinearGradientPoints, scaleLineSegment } from '../../../../utils/gradient'
 
 const FILL_GRADIENT_TYPE_MAP = {
   linear: 'LINEAR',
@@ -45,8 +45,10 @@ type TransformLinearParams = { angle: number; scale: number; inverse: boolean; w
 function getTransformLinear({ angle, scale, inverse, width, height }: TransformLinearParams): Octopus['Transform'] {
   const [P1, P2] = getLinearGradientPoints({ angle, inverse })
 
-  const p1 = { x: width * P1.x, y: height * P1.y }
-  const p2 = { x: width * P2.x, y: height * P2.y }
+  const [SP1, SP2] = scaleLineSegment(P1, P2, scale, { x: 0.5, y: 0.5 })
+
+  const p1 = { x: width * SP1.x, y: height * SP1.y }
+  const p2 = { x: width * SP2.x, y: height * SP2.y }
 
   const scaleX = p2.x - p1.x
   const skewY = p2.y - p1.y
@@ -55,9 +57,7 @@ function getTransformLinear({ angle, scale, inverse, width, height }: TransformL
   const tx = p1.x
   const ty = p1.y
 
-  const matrix: Matrix = [scaleX, skewY, skewX, scaleY, tx, ty]
-  const center = { x: width / 2, y: height / 2 }
-  return scaleMatrix(matrix, scale, center)
+  return [scaleX, skewY, skewX, scaleY, tx, ty]
 }
 
 function mapPositioning(layer: SourceLayerShape): Octopus['FillPositioning'] {
