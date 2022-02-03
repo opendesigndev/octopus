@@ -45,7 +45,9 @@ type TransformLinearParams = { angle: number; scale: number; inverse: boolean; w
 function getTransformLinear({ angle, scale, inverse, width, height }: TransformLinearParams): Octopus['Transform'] {
   const [P1, P2] = getLinearGradientPoints({ angle, inverse })
 
-  const [SP1, SP2] = scaleLineSegment(P1, P2, scale, { x: 0.5, y: 0.5 })
+  const horizontal = scale
+  const vertical = (width / height) * scale
+  const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, horizontal, vertical, center: { x: 0.5, y: 0.5 } })
 
   const p1 = { x: width * SP1.x, y: height * SP1.y }
   const p2 = { x: width * SP2.x, y: height * SP2.y }

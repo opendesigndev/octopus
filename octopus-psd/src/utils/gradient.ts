@@ -29,9 +29,16 @@ export function getLinearGradientPoints(params: LinearGradientPointsParams): [Po
   return variantA({ angle, inverse })
 }
 
-export function scaleLineSegment(p1: Point, p2: Point, scale: number, center: Point): [Point, Point] {
+type ScaleLineSegmentParams = {
+  p1: Point
+  p2: Point
+  horizontal: number
+  vertical: number
+  center: Point
+}
+export function scaleLineSegment({ p1, p2, horizontal, vertical, center }: ScaleLineSegmentParams): [Point, Point] {
   const path = createPath([createPoint(p1.x, p1.y), createPoint(p2.x, p2.y)])
-  path.scale(scale, createPoint(center.x, center.y))
+  path.scale(horizontal, vertical, createPoint(center.x, center.y))
   const P1 = path.firstSegment.point
   const P2 = path.lastSegment.point
   return [
