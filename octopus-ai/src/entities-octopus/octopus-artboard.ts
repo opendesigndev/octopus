@@ -1,8 +1,11 @@
+import { createOctopusLayer } from '../factories/create-octopus-layer'
 import OctopusAIConverter from '..'
 import SourceDesign from '../entities-source/source-design'
 import SourceArtboard from '../entities-source/source-artboard'
 import { OctopusLayer} from '../factories/create-octopus-layer'
 import {asArray} from '../utils/as'
+import type { Octopus } from '../typings/octopus'
+import { getConverted } from '../utils/common'
 
 type OctopusArtboardOptions = {
     sourceDesign: SourceDesign,
@@ -28,13 +31,13 @@ export default class OctopusArtboard {
       }
 
       private _initLayers() {
-        // return this._sourceArtboard.children.reduce((layers, sourceLayer) => {
-        //   const octopusLayer = createOctopusLayer({
-        //     parent: this,
-        //     layer: sourceLayer
-        //   })
-        //   return octopusLayer ? [ ...layers, octopusLayer ] : layers
-        // }, []) 
+        return this._sourceArtboard.children.reduce((layers, sourceLayer) => {
+          const octopusLayer = createOctopusLayer({
+            parent: this,
+            layer: sourceLayer
+          })
+          return octopusLayer ? [ ...layers, octopusLayer ] : layers
+        }, []) 
 
         return []
       }
@@ -51,5 +54,30 @@ export default class OctopusArtboard {
 
       get resources () {
         return this._sourceArtboard.resources
+      }
+
+      get id () {
+        return this._sourceArtboard.id
+      }
+
+      private async _getVersion() {
+        const pkg = await this._octopusAIConverter.pkg
+        return pkg.version
+      }
+
+      
+      async convert(): Promise<Octopus['OctopusDocument']> {
+        if (typeof this._sourceArtboard.id !== 'string') {
+          throw new Error('Artboard \'id\' property is missing.')
+        }
+    
+       // const dimensions = this._getDimensions().convert()
+    
+        return {
+          type: 'ARTBOARD',
+          version: await this._getVersion(),
+          id: this.id,
+          layers: getConverted(this._layers)
+        }
       }
 }

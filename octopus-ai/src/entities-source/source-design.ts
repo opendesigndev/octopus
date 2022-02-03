@@ -22,7 +22,7 @@ export default class SourceDesign {
     }
 
     constructor (options:SourceDesignOptions){
-        this._artboards = options.artboards.map((rawArtboard)=>new SourceArtboard(rawArtboard))
+        this._artboards = options.artboards.map((rawArtboard, index)=>new SourceArtboard(rawArtboard, index+1))
     }
 
     get artboards (){
@@ -30,6 +30,6 @@ export default class SourceDesign {
     }
 
     getArtboardById(id: string) {
-        return this._artboards.find(entry => entry.id === id) || null
+        return this.artboards.find(entry => entry.id === id) || null
       }
 }

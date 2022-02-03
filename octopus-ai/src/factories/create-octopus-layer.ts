@@ -1,11 +1,11 @@
 import OctopusLayerGroup from '../entities-octopus/octopus-layer-group'
 // import OctopusLayerMaskGroup from '../entities-octopus/octopus-layer-maskgroup'
-// import OctopusLayerShape from '../entities-octopus/octopus-layer-shape'
-// import OctopusLayerText from '../entities-octopus/octopus-layer-text'
+import OctopusLayerShape from '../entities-octopus/octopus-layer-shape'
+import OctopusLayerText from '../entities-octopus/octopus-layer-text'
 
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type SourceLayerGroup from '../entities-source/source-layer-group'
-// import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type SourceLayerShape from '../entities-source/source-layer-shape'
 import type SourceLayerText from '../entities-source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
 
@@ -37,26 +37,27 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
 //     : createOctopusLayerGroup(options)
 // }
 
-// function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
-//   return new OctopusLayerShape({
-//     parent,
-//     sourceLayer: layer as SourceLayerShape
-//   })
-// }
+function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+  return new OctopusLayerShape({
+    parent,
+    sourceLayer: layer as SourceLayerShape
+  })
+}
 
-// function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
-//   return new OctopusLayerText({
-//     parent,
-//     sourceLayer: layer as SourceLayerText
-//   })
-// }
+function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+  return new OctopusLayerText({
+    parent,
+    sourceLayer: layer as SourceLayerText
+  })
+}
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
   const type = (Object(options.layer) as SourceLayer).type
+
   const builders: { [key: string]: Function } = {
     MarkedContext: createOctopusLayerGroup,
-    shape: createOctopusLayerShape,
-    text: createOctopusLayerText
+    Path: createOctopusLayerShape,
+    TextGroup: createOctopusLayerText
   }
   const builder = builders[type as string]
   return typeof builder === 'function' ? builder(options) : null

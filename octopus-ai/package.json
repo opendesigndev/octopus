@@ -7,6 +7,7 @@
     "create": "rm -rf temp/input && ./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input && npm run create-private",
     "create-private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
     "convert:all": "npx ts-node ./scripts/convert-all.ts",
+    "convert:dev": "rm -rf workdir && npm run convert:all",
     "build": "npx tsc --build ./tsconfig.json",
     "test": "\"echo 'Tests are not implemented yet'\""
   },

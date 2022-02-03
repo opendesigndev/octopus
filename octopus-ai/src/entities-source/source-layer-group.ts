@@ -44,6 +44,8 @@ export default class SourceLayerGroup extends SourceLayerCommon {
         return DEFAULT_NAME
       }
 
-      return this._parent.resources?.Properties?.[propertiesId] || DEFAULT_NAME
+      const name = this._parent.resources?.Properties?.[propertiesId]?.Name
+      
+      return name || DEFAULT_NAME
      }
 }

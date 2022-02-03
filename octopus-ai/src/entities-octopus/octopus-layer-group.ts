@@ -33,7 +33,7 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
     private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
         return {
           type: 'GROUP',
-          layers: getConverted(this._layers)
+          layers: getConverted(this._layers),
         } as const
       }
     

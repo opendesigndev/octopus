@@ -30,23 +30,8 @@ export type RawArtboardEntryResourcesProperties = {
 
 export type RawArtboardMediaBox = [number,number,number,number]
 type RawArtBoardEntryResourcesColorSpace = {
-    CS0?: (number|object)[]
+    [key:string]: (number|object)[]
 }
-
-type RawArtBoardEntryResourcesExtGStateGS0 = {
-    AIS: boolean,
-    BM: string,
-    CA?: number,
-    OPM?: number,
-    SA?: boolean,
-    SMask?: null,
-    OP?: boolean,
-    Type?: string,
-    ca?: number,
-    op?: false,
-    ObjID?: 38
-}
-
 
 type RawArtboardEntryResourcesFontTextFontFontDescriptorFontFile3={
     Filter?: string,
@@ -111,7 +96,19 @@ export type RawArtboardEntryResourcesFont = {
 }
 
 type RawArtBoardEntryResourcesExtGState={
-    GS0?: RawArtBoardEntryResourcesExtGStateGS0
+    [key:string]:{
+    AIS: boolean,
+    BM: string,
+    CA?: number,
+    OPM?: number,
+    SA?: boolean,
+    SMask?: null,
+    OP?: boolean,
+    Type?: string,
+    ca?: number,
+    op?: false,
+    ObjID?: 38
+    }
 }
 
 export type RawArtBoardEntryResources = {

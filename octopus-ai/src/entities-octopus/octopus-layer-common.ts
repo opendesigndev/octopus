@@ -50,7 +50,8 @@ export default class OctopusLayerCommon {
       
     convertCommon() {
       return {
-        id: this.id
+        id: this.id,
+        name: this._sourceLayer.name
       }
     }
 }

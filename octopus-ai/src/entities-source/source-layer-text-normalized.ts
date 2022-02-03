@@ -1,28 +1,28 @@
 import { RawTextLayerText } from "../typings/source";
 import {SourceLayerParent} from './source-layer-common'
 
-type SourceLayerNormalizedTextOptions = {
+type SourceLayerTextNormalizedOptions = {
     parent: SourceLayerParent,
     rawValue: RawTextLayerText,
   }
 
-export default class SourceLayerNormalizedText {
+export default class SourceLayerTextNormalized {
     private _rawValue: RawTextLayerText
     private _parent: SourceLayerParent
 
-    constructor(options:SourceLayerNormalizedTextOptions){
+    constructor(options:SourceLayerTextNormalizedOptions){
         this._rawValue = options.rawValue
         this._parent = options.parent
     }
 
-      get graphicState(){  
+      get graphicsState(){  
         return this._rawValue.GraphicsState
 
     }
 
     //post script name or fontDict
     get font(){
-        const textFont = this.graphicState?.TextFont || ''
+        const textFont = this.graphicsState?.TextFont || ''
         const resources = this._parent.resources
 
         return resources?.Font?.[textFont]
@@ -30,5 +30,13 @@ export default class SourceLayerNormalizedText {
 
     get fontDescriptor () {
         return this.font?.FontDescriptor
+    }
+
+    get parsedTextValue(){
+        const stringOrArrayText= this._rawValue.Text
+
+        return Array.isArray(stringOrArrayText)
+        ? stringOrArrayText.filter(stringOrNum=>typeof stringOrNum === 'string').join('')
+        : stringOrArrayText
     }
 }

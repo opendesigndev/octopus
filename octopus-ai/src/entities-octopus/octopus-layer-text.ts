@@ -3,7 +3,8 @@ import type SourceLayerText from '../entities-source/source-layer-text'
 import {OctopusLayerParent} from '../typings/octopus-entities'
 import type { Octopus } from '../typings/octopus'
 import { RawTextLayerText } from "../typings/source";
-import type SourceLayerNormalizedText from '../entities-source/source-layer-normalized-text'
+import type SourceLayerNormalizedText from '../entities-source/source-layer-text-normalized'
+import { text } from "node:stream/consumers";
 
 type OctopusLayerTextOptions = {
     parent: OctopusLayerParent,
@@ -34,33 +35,33 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     }
 
-      private _getText(){
-          return {}
-      }
 
       private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
-        const text = this._getText()
+        const textValue = this._sourceLayer.textValue
+        const name = this._sourceLayer.name
+
         if (!text) return null
-        // @ts-ignore
         return {
           type: 'TEXT',
+          // @ts-ignore
+          text:{
+            value:textValue
+          },
+          name
         }
       }
       
       //@ts-ignore
       convert(): Octopus['TextLayer'] | null {
-        // const common = this.convertCommon()
-        // if (!common) return null
+        const common = this.convertCommon()
+        if (!common) return null
     
-        // const specific = this._convertTypeSpecific()
-        // if (!specific) return null
+        const specific = this._convertTypeSpecific()
+        if (!specific) return null
     
-        // return {
-        //   ...common,
-        //   ...specific
-        // }
-        
-        //@ts-ignore
-        return this._sourceLayer
+        return {
+          ...common,
+          ...specific,
+        }
       }
 }
