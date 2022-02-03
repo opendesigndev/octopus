@@ -34,6 +34,7 @@ export type RawShapeFill = {
   angle?: RawUnitAngle
   gradient?: RawShapeGradient
   reverse?: boolean
+  align?: boolean
   scale?: RawUnitPercent
 }
 

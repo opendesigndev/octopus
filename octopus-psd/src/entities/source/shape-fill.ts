@@ -19,7 +19,8 @@ export function mapShapeFill(fill: RawShapeFill | undefined) {
   const color = getColorFor(fill?.color)
   const gradient = mapShapeGradient(fill?.gradient)
   const reverse = fill?.reverse ?? false
+  const align = fill?.align ?? true
   const scale = (fill?.scale?.value ?? 100) / 100
   const angle = fill?.angle?.value ?? 0
-  return { ...fill, color, gradient, reverse, scale, angle }
+  return { ...fill, color, gradient, reverse, scale, angle, align }
 }
