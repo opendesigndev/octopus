@@ -1,5 +1,5 @@
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './layer-common'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
 import { getConverted } from '../../utils/common'

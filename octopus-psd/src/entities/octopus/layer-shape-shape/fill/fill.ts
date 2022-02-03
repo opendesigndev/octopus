@@ -1,7 +1,7 @@
 import type { Octopus } from '../../../../typings/octopus'
 import { getMapped } from '../../../../utils/common'
 import type { SourceLayerShape } from '../../../source/source-layer-shape'
-import type { OctopusLayerShapeShapeAdapter } from '../layer-shape-shape-adapter'
+import type { OctopusLayerShapeShapeAdapter } from '../../octopus-layer-shape-shape-adapter'
 import { convertFillColor } from './fill-color'
 import { convertFillGradient } from './fill-gradient'
 import { convertFillImage } from './fill-image'

@@ -1,8 +1,8 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from '../layer-common'
-import type { SourceLayerLayer } from '../../source/source-layer-layer'
-import type { Octopus } from '../../../typings/octopus'
-import { mapFillImage } from './fill'
-import { mapPathRectangle } from './path-rectangle'
+import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
+import type { Octopus } from '../../typings/octopus'
+import { mapFillImage } from './layer-shape-layer/fill'
+import { mapPathRectangle } from './layer-shape-layer/path-rectangle'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
