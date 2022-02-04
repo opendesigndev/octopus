@@ -1,21 +1,23 @@
-import type { Octopus } from '../../../typings/octopus'
-import { asNumber } from '../../../utils/as'
-import { getMapped } from '../../../utils/common'
-import { createPathData } from '../../../utils/path-data'
-import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../../utils/path'
-import type { SourceLayerShape } from '../../source/source-layer-shape'
-import type { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
-import type { SourcePathComponent } from '../../source/shape-path'
-import type { SourceCombineOperation } from '../../source/types'
+import type { Octopus } from '../../typings/octopus'
+import { asNumber } from '../../utils/as'
+import { getMapped } from '../../utils/common'
+import { createPathData } from '../../utils/path-data'
+import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
+import type { SourcePathComponent } from '../source/shape-path'
+import type { SourceCombineOperation } from '../source/types'
 
 type OctopusPathLikeOptions = {
-  parent: OctopusLayerShapeShapeAdapter
-  sourceLayer: SourceLayerShape
+  parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
+  sourceLayer: SourceLayerShape | SourceLayerLayer
 }
 
-export default class OctopusPathLike {
-  protected _parent: OctopusLayerShapeShapeAdapter
-  protected _sourceLayer: SourceLayerShape
+export class OctopusPathLike {
+  protected _parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
+  protected _sourceLayer: SourceLayerShape | SourceLayerLayer
 
   static COMPOUND_OPERATION_MAP = {
     add: 'UNION',
@@ -30,7 +32,10 @@ export default class OctopusPathLike {
   }
 
   private get isRectangle(): boolean {
-    const component = this._sourceLayer.firstPathComponent
+    if (this._sourceLayer.type === 'layer') return true
+    const sourceLayer = this._sourceLayer as SourceLayerShape
+
+    const component = sourceLayer.firstPathComponent
     const type = component?.origin?.type
     if (type !== 'rect' && type !== 'roundedRect') {
       return false
@@ -117,7 +122,15 @@ export default class OctopusPathLike {
     return this._getPath(pathComponents)
   }
 
-  convert() {
-    return this._convert(this._sourceLayer.pathComponents)
+  convert(): Octopus['PathLike'] {
+    if (this._sourceLayer.type === 'shapeLayer') {
+      const sourceLayer = this._sourceLayer as SourceLayerShape
+      return this._convert(sourceLayer.pathComponents)
+    } else {
+      const { width, height } = this._sourceLayer as SourceLayerLayer
+      const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
+      const transform = createDefaultTranslationMatrix()
+      return { type: 'RECTANGLE', rectangle, transform }
+    }
   }
 }

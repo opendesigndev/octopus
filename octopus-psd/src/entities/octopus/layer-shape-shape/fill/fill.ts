@@ -11,7 +11,7 @@ type OctopusFillOptions = {
   sourceLayer: SourceLayerShape
 }
 
-export default class OctopusFill {
+export class OctopusFill {
   protected _parent: OctopusLayerShapeShapeAdapter
   protected _sourceLayer: SourceLayerShape
 

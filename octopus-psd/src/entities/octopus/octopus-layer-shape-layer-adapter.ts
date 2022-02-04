@@ -2,7 +2,7 @@ import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopu
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
 import { mapFillImage } from './layer-shape-layer/fill'
-import { mapPathRectangle } from './layer-shape-layer/path-rectangle'
+import { OctopusPathLike } from './octopus-path-like'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -23,7 +23,7 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
   }
 
   private get _path(): Octopus['PathLike'] {
-    return mapPathRectangle(this._sourceLayer)
+    return new OctopusPathLike({ sourceLayer: this._sourceLayer, parent: this }).convert()
   }
 
   private get _fills(): Octopus['Fill'][] {
