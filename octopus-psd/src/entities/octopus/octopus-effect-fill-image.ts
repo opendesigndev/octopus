@@ -20,7 +20,7 @@ export class OctopusEffectFillImage {
     return this._parent.sourceLayer
   }
 
-  mapImage(layer: SourceLayerShape | SourceLayerLayer): Octopus['Image'] {
+  private _mapImage(layer: SourceLayerShape | SourceLayerLayer): Octopus['Image'] {
     const ref: Octopus['ImageRef'] = {
       type: 'RESOURCE',
       value: convertImagePath(layer?.imageName ?? ''), // TODO this is not correct for SourceLayerShape
@@ -28,14 +28,14 @@ export class OctopusEffectFillImage {
     return { ref }
   }
 
-  mapPositioning(layer: SourceLayerShape | SourceLayerLayer): Octopus['FillPositioning'] {
+  private _mapPositioning(layer: SourceLayerShape | SourceLayerLayer): Octopus['FillPositioning'] {
     const transform: Octopus['Transform'] = [layer?.width, 0, 0, layer?.height, 0, 0] // TODO
     return { layout: 'FILL', origin: 'LAYER', transform }
   }
 
   convert(): Octopus['FillImage'] {
-    const image = this.mapImage(this.sourceLayer)
-    const positioning = this.mapPositioning(this.sourceLayer)
+    const image = this._mapImage(this.sourceLayer)
+    const positioning = this._mapPositioning(this.sourceLayer)
     return { type: 'IMAGE', image, positioning }
   }
 }
