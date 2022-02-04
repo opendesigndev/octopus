@@ -1,11 +1,12 @@
-import type { ElementOf } from '../../../../typings/helpers'
-import type { Octopus } from '../../../../typings/octopus'
-import { convertColor } from '../../../../utils/color'
-import { getMapped } from '../../../../utils/common'
-import type { SourceShapeFill, SourceShapeGradientColor } from '../../../source/shape-fill'
-import type { SourceLayerShape } from '../../../source/source-layer-shape'
-import type { SourceFillGradientType } from '../../../source/types'
-import { getLinearGradientPoints, scaleLineSegment } from '../../../../utils/gradient'
+import type { ElementOf } from '../../typings/helpers'
+import type { Octopus } from '../../typings/octopus'
+import { convertColor } from '../../utils/color'
+import { getMapped } from '../../utils/common'
+import type { SourceShapeFill, SourceShapeGradientColor } from '../source/shape-fill'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceFillGradientType } from '../source/types'
+import { getLinearGradientPoints, scaleLineSegment } from '../../utils/gradient'
+import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 const FILL_GRADIENT_TYPE_MAP = {
   linear: 'LINEAR',
@@ -75,8 +76,24 @@ function mapPositioning(layer: SourceLayerShape): Octopus['FillPositioning'] {
   }
 }
 
-export function convertFillGradient(layer: SourceLayerShape): Octopus['FillGradient'] {
-  const gradient = mapGradient(layer.fill)
-  const positioning = mapPositioning(layer)
-  return { type: 'GRADIENT', gradient, positioning }
+type OctopusFillGradientOptions = {
+  parent: OctopusLayerShapeShapeAdapter
+}
+
+export class OctopusEffectFillGradient {
+  protected _parent: OctopusLayerShapeShapeAdapter
+
+  constructor(options: OctopusFillGradientOptions) {
+    this._parent = options.parent
+  }
+
+  get sourceLayer(): SourceLayerShape {
+    return this._parent.sourceLayer
+  }
+
+  convert(): Octopus['FillGradient'] {
+    const gradient = mapGradient(this.sourceLayer.fill)
+    const positioning = mapPositioning(this.sourceLayer)
+    return { type: 'GRADIENT', gradient, positioning }
+  }
 }

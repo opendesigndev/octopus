@@ -12,12 +12,10 @@ import type { SourceCombineOperation } from '../source/types'
 
 type OctopusPathLikeOptions = {
   parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
-  sourceLayer: SourceLayerShape | SourceLayerLayer
 }
 
 export class OctopusPathLike {
   protected _parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
-  protected _sourceLayer: SourceLayerShape | SourceLayerLayer
 
   static COMPOUND_OPERATION_MAP = {
     add: 'UNION',
@@ -28,12 +26,15 @@ export class OctopusPathLike {
 
   constructor(options: OctopusPathLikeOptions) {
     this._parent = options.parent
-    this._sourceLayer = options.sourceLayer
+  }
+
+  get sourceLayer(): SourceLayerShape | SourceLayerLayer {
+    return this._parent.sourceLayer
   }
 
   private get isRectangle(): boolean {
-    if (this._sourceLayer.type === 'layer') return true
-    const sourceLayer = this._sourceLayer as SourceLayerShape
+    if (this.sourceLayer.type === 'layer') return true
+    const sourceLayer = this.sourceLayer as SourceLayerShape
 
     const component = sourceLayer.firstPathComponent
     const type = component?.origin?.type
@@ -123,11 +124,11 @@ export class OctopusPathLike {
   }
 
   convert(): Octopus['PathLike'] {
-    if (this._sourceLayer.type === 'shapeLayer') {
-      const sourceLayer = this._sourceLayer as SourceLayerShape
+    if (this.sourceLayer.type === 'shapeLayer') {
+      const sourceLayer = this.sourceLayer as SourceLayerShape
       return this._convert(sourceLayer.pathComponents)
     } else {
-      const { width, height } = this._sourceLayer as SourceLayerLayer
+      const { width, height } = this.sourceLayer as SourceLayerLayer
       const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
       const transform = createDefaultTranslationMatrix()
       return { type: 'RECTANGLE', rectangle, transform }

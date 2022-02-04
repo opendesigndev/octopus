@@ -1,8 +1,8 @@
 import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
-import { mapFillImage } from './layer-shape-layer/fill'
 import { OctopusPathLike } from './octopus-path-like'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -17,17 +17,21 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
     super(options)
   }
 
+  get sourceLayer(): SourceLayerLayer {
+    return this._sourceLayer
+  }
+
   get layerTranslation(): [number, number] {
     const { left, top } = this._sourceLayer.bounds
     return [left, top]
   }
 
   private get _path(): Octopus['PathLike'] {
-    return new OctopusPathLike({ sourceLayer: this._sourceLayer, parent: this }).convert()
+    return new OctopusPathLike({ parent: this }).convert()
   }
 
   private get _fills(): Octopus['Fill'][] {
-    const fill = mapFillImage(this._sourceLayer)
+    const fill = new OctopusEffectFillImage({ parent: this }).convert()
     return [fill]
   }
 
