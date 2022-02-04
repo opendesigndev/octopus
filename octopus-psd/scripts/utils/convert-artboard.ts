@@ -12,6 +12,7 @@ import { stringify } from './json-stringify'
 import { SourceArtboard } from '../../src/entities/source/source-artboard'
 
 dotenv.config()
+const shouldRender = process.env.CONVERT_RENDER === 'true'
 
 async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
   try {
@@ -32,7 +33,7 @@ async function renderOctopus(octopusDir: string) {
   return renderPath
 }
 
-export async function convertArtboard({ render }: { render?: boolean }) {
+export async function convertArtboard() {
   const octopusId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
@@ -54,6 +55,6 @@ export async function convertArtboard({ render }: { render?: boolean }) {
   console.info(`${octopus ? '✅' : '❌'} ${chalk.yellow('octopus.json')} (${time}ms) ${chalk.grey(`(${octopus?.id})`)}`)
   console.info(`  Source: file://${sourceLocation}`)
   console.info(`  Octopus: file://${octopusLocation}`)
-  const renderLocation = octopus && render ? await renderOctopus(octopusDir) : null
-  render && console.info(`  Render: file://${renderLocation}`)
+  const renderLocation = octopus && shouldRender ? await renderOctopus(octopusDir) : null
+  shouldRender && console.info(`  Render: file://${renderLocation}`)
 }

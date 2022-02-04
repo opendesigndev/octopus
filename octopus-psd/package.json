@@ -5,7 +5,6 @@
   "main": "dist/src/index.js",
   "scripts": {
     "convert": "ts-node ./scripts/convert.ts",
-    "convert:render": "ts-node ./scripts/convert-and-render.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "clean-workdir": "rimraf ./workdir/*",
