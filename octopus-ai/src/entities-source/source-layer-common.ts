@@ -1,8 +1,10 @@
 import SourceArtboard from "./source-artboard"
 import SourceLayerGroup from "./source-layer-group"
 import type { RawArtBoardEntryResources, RawLayer } from '../typings/source'
+import SourceLayerXObject from './source-layer-x-object'
+import SourceResources from "./source-resources"
 
-export type SourceLayerParent = SourceLayerGroup | SourceArtboard
+export type SourceLayerParent = SourceLayerGroup | SourceArtboard |SourceLayerXObject
 
 type SourceLayerCommonOptions = {
     parent: SourceLayerParent,
@@ -38,7 +40,7 @@ export default class SourceLayerCommon {
         return this._rawValue
     }
 
-    get resources (): RawArtBoardEntryResources | undefined {
+    get resources (): SourceResources | undefined {
         return this._parent.resources
     }
 }

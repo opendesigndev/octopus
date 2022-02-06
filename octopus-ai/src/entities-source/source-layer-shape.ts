@@ -23,6 +23,7 @@ type SourceLayerShapeOptions = {
         this._subpaths=  this._initSubpaths()
     }
 
+
     private _initSubpaths() {
         const path = this.path
         return this._rawValue.Subpaths?.map(subPath=>new SourceLayerShapeSubPath({path,rawValue:subPath,parent:this}))||[]
@@ -41,8 +42,38 @@ type SourceLayerShapeOptions = {
         return this._subpaths
     }
 
+    get graphicsState () {
+        return this._rawValue.GraphicsState
+    }
+
     get getExtGState () {
-       const specifiedParameters = this._rawValue.GraphicsState?.SpecifiedParameters || ''
+       const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
        return this._parent.resources?.ExtGState?.[specifiedParameters]
     }
+
+    get fillRule() {
+        return this._rawValue.FillRule
+    }
+
+    get isStroke() {
+        return Boolean(this._rawValue.Stroke)
+    }
+
+    get lineJoin(){
+     return this.graphicsState?.LineJoin || 0
+    }
+  
+    get lineCap() {
+      return this.graphicsState?.LineCap || 0
+    }
+
+    get colorSpaceNonStroking (){
+        return this.graphicsState?.ColorSpaceNonStroking
+    }
+
+    get colorSpaceStroking (){
+        return this.graphicsState?.ColorSpaceStroking
+    }
+   
+   
 }

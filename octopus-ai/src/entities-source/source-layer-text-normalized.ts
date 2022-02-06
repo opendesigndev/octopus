@@ -22,10 +22,10 @@ export default class SourceLayerTextNormalized {
 
     //post script name or fontDict
     get font(){
-        const textFont = this.graphicsState?.TextFont || ''
+        const fontId = this.graphicsState?.TextFont || ''
         const resources = this._parent.resources
 
-        return resources?.Font?.[textFont]
+        return resources?.getFontById(fontId)
     }
 
     get fontDescriptor () {

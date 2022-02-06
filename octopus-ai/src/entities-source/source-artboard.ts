@@ -5,23 +5,20 @@ import SourceBounds from './source-bounds';
 import { asArray, asNumber } from '../utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
 import { RawLayer } from '../typings/source/layer';
-import { v4 as uuidv4 } from 'uuid';
+import SourceResources from './source-resources';
 
 export default class SourceArtboard {
     private _rawArtboard:RawArtboardEntry
     private _bounds: SourceBounds
     private _children: SourceLayer[]
     private _id: string
-    static getBounds(sourceArtboard: RawArtboardEntry){
-        const [top, left, width, height] = _.get(sourceArtboard, 'MediaBox', [0, 0, 0, 0])
-        return SourceBounds.from(top,left,width,height)
-    }
-
+    private _resources: SourceResources
+     
     constructor(rawArtboard: RawArtboardEntry, id:number){
         this._id = String(id)
         this._rawArtboard = rawArtboard
-        this._bounds = SourceArtboard.getBounds(rawArtboard)
         this._children = this._initChildren()
+        this._resources = new SourceResources({rawValue: this._rawArtboard.Resources})
     }
 
     private _initChildren() {
@@ -66,7 +63,7 @@ export default class SourceArtboard {
     }
 
     get resources() {
-        return this._rawArtboard.Resources
+        return this._resources
     }
 
     get hiddenContentObjectIds(){

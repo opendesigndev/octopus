@@ -12,6 +12,11 @@ type OctopusLayerShapeOptions = {
 
 
 export default class OctopusLayerShape extends OctopusLayerCommon {
+    static  FILL_RULE  ={
+      'non-zero-winding-number': 'NON_ZERO',
+      'even-odd': 'EVEN_ODD'
+    }
+
     protected _sourceLayer: SourceLayerShape
 
     constructor(options: OctopusLayerShapeOptions){
@@ -22,9 +27,24 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     get shapes(){
        return this._sourceLayer.subPaths
     }
+
+    get fillRule () {
+      const sourceFillRule =  this._sourceLayer.fillRule
+      
+      return sourceFillRule 
+      ? OctopusLayerShape.FILL_RULE[sourceFillRule] 
+      : OctopusLayerShape.FILL_RULE["even-odd"]
+    }
+
+    get purpose () {
+      return this._sourceLayer.isStroke ? 'STROKE' : 'BODY'
+    }
+
     private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
         return {
+          purpose: this.purpose,
           type: 'SHAPE',
+          fillRule: this.fillRule,
           //@ts-ignore
           shapes: this.shapes 
         }

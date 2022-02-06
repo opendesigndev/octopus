@@ -17,7 +17,7 @@ export type RawShapeLayer = {
     Type?: "Path"
     GraphicsState?: RawGraphicsState<RawShapeLayer>
     Subpaths?: RawShapeLayerSubPath[]
-    FillRule?: string,
+    FillRule?: 'non-zero-winding-number' | 'even-odd',
     Fill?: boolean,
     Stroke?: boolean
 }
