@@ -81,8 +81,8 @@ export type RawResourcesFont = {
     [TextFont:string]:RawResourcesFontTextFont
 }
 
-type RawResourcesColorSpace = {
-    [key:string]: (number|object)[]
+export type RawResourcesColorSpace = {
+    [key:string]: object
 }
 
 type RawResourcesExtGState={

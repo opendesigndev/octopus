@@ -19,7 +19,7 @@ export type RawGraphicsState<T=undefined> = {
     LineCap?: number,
     LineJoin?: number,
     MiterLimit?: number,
-    DashPattern?: (number|number[])[],
+    DashPattern?: [number[],number],
     RenderingIntent?: string,
     Flatness?: number,
     StrokeAdjustment?: false,

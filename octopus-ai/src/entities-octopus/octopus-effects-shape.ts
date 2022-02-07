@@ -1,11 +1,55 @@
-import type { SourceLayer } from '../factories/create-source-layer'
-import type SourceResources from '../entities-source/source-resources'
+import OctopusEffectStroke from './octopus-effect-stroke'
+import {OctopusLayerParent} from '../typings/octopus-entities'
+import SourceLayerShape from '../entities-source/source-layer-shape'
+import OctopusEffectFill from './octopus-effect-color-fill'
+import type { Octopus } from '../typings/octopus'
+import {getConverted} from '../utils/common'
 
 type OctopusEffectsShapeOptions = {
-    sourceLayer?: SourceLayer,
-    resources: SourceResources,
+    sourceLayer: SourceLayerShape,
+    parent: OctopusLayerParent,
   }
 
-export default class OctopusEffectsShape {
+type ShapeEffects = {
+  fills?: Octopus['Fill'][],
+  strokes?: Octopus['VectorStroke'][]
+}
 
+export default class OctopusEffectsShape {
+  private _sourceLayer: SourceLayerShape
+  private _parent: OctopusLayerParent
+
+  constructor(options: OctopusEffectsShapeOptions) {
+    this._sourceLayer = options.sourceLayer
+    this._parent =  options.parent
+  }
+
+  private _parseStrokes(): OctopusEffectStroke[] {
+    return this._parent.resources && this._sourceLayer
+      ? [new OctopusEffectStroke({ 
+        resources: this._parent.resources,
+        sourceLayer: this._sourceLayer
+       }) ]
+      : []
+  }
+
+  private _parseFills(): OctopusEffectFill[] {
+    return this._parent.resources && this._sourceLayer
+      ? [new OctopusEffectFill({ 
+        resources: this._parent.resources,
+        sourceLayer: this._sourceLayer,
+        colorSpaceType: 'ColorSpaceNonStroking'
+       }) ]
+      : []
+  }
+
+  convert(): ShapeEffects {
+    const fills: Octopus['Fill'][] = getConverted(this._parseFills())
+    const strokes: Octopus['VectorStroke'][] = getConverted(this._parseStrokes())
+
+    return {
+      ...(fills.length ? { fills } : null),
+      ...(strokes.length ? { strokes } : null),
+    }
+  }
 }

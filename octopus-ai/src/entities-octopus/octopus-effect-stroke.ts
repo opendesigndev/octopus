@@ -1,6 +1,8 @@
 import SourceLayerShape from "../entities-source/source-layer-shape"
 import SourceResources from "../entities-source/source-resources"
-import { SourceLayer } from "../factories/create-source-layer"
+import type { Octopus } from '../typings/octopus'
+import { asNumber } from '../utils/as'
+import OctopusEffectColorFill from "./octopus-effect-color-fill"
 
 type OctopusEffectStrokeOptions = {
     resources: SourceResources
@@ -9,7 +11,7 @@ type OctopusEffectStrokeOptions = {
 
 type LineJoin = 'MITER' | 'ROUND' | 'BEVEL'
 
-type ColorSpaceTypeOptions = 'ColorSpaceNonStroking'|'ColorSpaceStroking' 
+
 export default class OctopusEffectStroke {
     private _resources: SourceResources
     private _sourceLayer: SourceLayerShape 
@@ -22,22 +24,48 @@ export default class OctopusEffectStroke {
         this._sourceLayer =  options.sourceLayer
     }
 
-    private _getColorSpaceStroking(){
-        const colorSpaceStroking = this._sourceLayer.colorSpaceStroking
-        return this._resources.getColorSpaceValue(colorSpaceStroking)
+    // private _getColorSpaceNonStroking(){
+    //     const colorSpaceNonStroking = this._sourceLayer.colorSpaceNonStroking
+    //     return this._resources.getColorSpaceValue(colorSpaceNonStroking)
+    //  }
+
+    private _parseDashing() {
+        const dashing =  this._sourceLayer.dashPattern?.[0] || []
+        const dashOffset =  this._sourceLayer.dashPattern?.[1] || 0
+
+        if (dashing.length === 0) {
+            return {}
+          }
+
+          return { dashing, dashOffset}
     }
 
-    private _getColorSpaceNonStroking(){
-        const colorSpaceNonStroking = this._sourceLayer.colorSpaceNonStroking
-        return this._resources.getColorSpaceValue(colorSpaceNonStroking)
-     }
-
-
-   get lineJoin():LineJoin{
+  private get lineJoin():LineJoin{
         return OctopusEffectStroke.LINE_JOIN_MAP[this._sourceLayer.lineJoin]
     }
 
-    get lineCap() {
+    private get lineCap() {
         return OctopusEffectStroke.LINE_CAP_MAP[this._sourceLayer.lineJoin]
+    }
+
+    convert(): Octopus['VectorStroke'] | null {
+        const dashing = this._parseDashing()
+        const style =  dashing ? 'DASHED' : 'SOLID'
+        const fill = (new OctopusEffectColorFill({
+            resources:this._resources,
+            sourceLayer:this._sourceLayer,
+            colorSpaceType: 'ColorSpaceStroking'
+        })).convert()
+
+        return {
+            thickness: asNumber(this._sourceLayer.lineWidth),
+            fill,
+            position: 'CENTER',
+            visible: true,
+            style,
+            lineJoin: this.lineJoin,
+            lineCap: this.lineCap,
+            ...dashing,
+        }   
     }
 }  

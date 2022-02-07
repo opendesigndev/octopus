@@ -46,6 +46,10 @@ type SourceLayerShapeOptions = {
         return this._rawValue.GraphicsState
     }
 
+    get dashPattern () {
+        return this.graphicsState?.DashPattern
+    }
+
     get getExtGState () {
        const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
        return this._parent.resources?.ExtGState?.[specifiedParameters]
@@ -67,12 +71,20 @@ type SourceLayerShapeOptions = {
       return this.graphicsState?.LineCap || 0
     }
 
+    get colorStroking() {
+        return this.graphicsState?.ColorStroking
+    }
+
     get colorSpaceNonStroking (){
         return this.graphicsState?.ColorSpaceNonStroking
     }
 
     get colorSpaceStroking (){
         return this.graphicsState?.ColorSpaceStroking
+    }
+
+    get lineWidth() {
+        return this.graphicsState?.LineWidth
     }
    
    

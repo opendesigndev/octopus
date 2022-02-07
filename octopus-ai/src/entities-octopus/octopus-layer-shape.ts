@@ -46,14 +46,16 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
           type: 'SHAPE',
           fillRule: this.fillRule,
           //@ts-ignore
-          shapes: this.shapes 
+          shapes: this.shapes
         }
       }
 
-      convert(): Octopus['GroupLayer'] | null {
+      convert(): Octopus['ShapeLayer'] | null {
         const common = this.convertCommon()
+
+        
         if (!common) return null
-        //@ts-ignore
+
         return {
           ...common,
           ...this._convertTypeSpecific()

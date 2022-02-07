@@ -1,5 +1,5 @@
 import { RawLayer } from "./layer"
-
+import { RawResources } from "./resources"
 
 export type RawArtboardEntryContents = {
     Filter?:string,
@@ -29,95 +29,6 @@ export type RawArtboardEntryResourcesProperties = {
 }
 
 export type RawArtboardMediaBox = [number,number,number,number]
-type RawArtBoardEntryResourcesColorSpace = {
-    [key:string]: (number|object)[]
-}
-
-type RawArtboardEntryResourcesFontTextFontFontDescriptorFontFile3={
-    Filter?: string,
-    Length?: number,
-    Subtype?: string,
-    Kind?: number,
-}&ObjectId
-
-type RawArtboardEntryResourcesFontTextFontFontDescriptor={
-    Ascent?: number,
-    CapHeight?: number,
-    CharSet?: string,
-    Descent?: number,
-    Flags?: number,
-    FontBBox?: number[],
-    FontFamily?: string,
-    FontFile3?:RawArtboardEntryResourcesFontTextFontFontDescriptorFontFile3
-    FontName?: string,
-    FontStretch?: string,
-    FontWeight?: number,
-    ItalicAngle?: number,
-    StemV?: number,
-    Type?: string,
-    XHeight?: number,
-}&ObjectId
-
-export type RawArtboardEntryResourcesFontTextFont={
-    BaseFont?: string
-    Encoding?: string
-    FirstChar?: number
-    FontDescriptor?:RawArtboardEntryResourcesFontTextFontFontDescriptor
-    LastChar?: number,
-    Subtype?: string,
-    Type?: string,
-    Widths?: number[]
-}&ObjectId
-
-type RawArtboardEntryResourcesFontPropertiesMC0UsageCreatorInfo={
-    Creator?: string
-    Subtype?: string
-}
-
-type RawArtboardEntryResourcesFontPropertiesMC0Usage={
-    CreatorInfo?:RawArtboardEntryResourcesFontPropertiesMC0UsageCreatorInfo
-} & ObjectId
-
-type RawArtboardEntryResourcesFontPropertiesMC0={
-    Intent?: string[]
-    Name?: string[]
-    Type?: string
-    Usage?:RawArtboardEntryResourcesFontPropertiesMC0Usage
-} & ObjectId
-
-type RawArtboardEntryResourcesFontProperties={
-    MC0?:RawArtboardEntryResourcesFontPropertiesMC0
-}
-
-export type RawArtboardEntryResourcesFont = {
-    Properties?:RawArtboardEntryResourcesFontProperties
-}&{
-    [TextFont:string]:RawArtboardEntryResourcesFontTextFont
-}
-
-type RawArtBoardEntryResourcesExtGState={
-    [key:string]:{
-    AIS: boolean,
-    BM: string,
-    CA?: number,
-    OPM?: number,
-    SA?: boolean,
-    SMask?: null,
-    OP?: boolean,
-    Type?: string,
-    ca?: number,
-    op?: false,
-    ObjID?: 38
-    }
-}
-
-export type RawArtBoardEntryResources = {
-    ColorSpace?:RawArtBoardEntryResourcesColorSpace
-    ExtGState?:RawArtBoardEntryResourcesExtGState
-    Font?: RawArtboardEntryResourcesFont
-    ProcSet?:string[]
-    Properties?: RawArtboardEntryResourcesProperties
-}
 
 export type RawArtboardEntry = {
     Contents?:RawArtboardEntryContents,
@@ -125,5 +36,5 @@ export type RawArtboardEntry = {
     Name?:string
     MediaBox?:RawArtboardMediaBox
     "OCProperties.D.OFF"?:ObjectId[]
-    Resources?:RawArtBoardEntryResources
+    Resources?:RawResources
 }
