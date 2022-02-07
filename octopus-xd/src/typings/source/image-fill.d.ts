@@ -1,4 +1,4 @@
-export type RawImageFill = {
+export type RawFillImage = {
   type?: 'pattern' | 'none',
   pattern?: {
     width?: number,

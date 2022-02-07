@@ -1,14 +1,14 @@
 import type { RawSolidFill } from '../../typings/source'
 
 
-export type SourceEffectColorFillOptions = {
+export type SourceEffectFillColorOptions = {
   effect: RawSolidFill
 }
 
-export default class SourceEffectColorFill {
+export default class SourceEffectFillColor {
   private _rawEffect: RawSolidFill
 
-  constructor(options: SourceEffectColorFillOptions) {
+  constructor(options: SourceEffectFillColorOptions) {
     this._rawEffect = options.effect
   }
 

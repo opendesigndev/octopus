@@ -69,14 +69,14 @@ export default class OctopusLayerCommon {
     const parent = this._parent
     if (!parent) return []
     return parent instanceof OctopusArtboard
-      ? [ parent ]
-      : [ ...parent.parents, parent ]
+      ? [parent]
+      : [...parent.parents, parent]
   }
 
   get parentLayers(): OctopusLayer[] {
     const parent = this._parent
     if (!parent || parent instanceof OctopusArtboard) return []
-    return [ ...parent.parentLayers, parent ]
+    return [...parent.parentLayers, parent]
   }
 
   get id() {
@@ -105,14 +105,14 @@ export default class OctopusLayerCommon {
       ? convertObjectMatrixToArray(this._sourceLayer.transform)
       : DEFAULTS.LAYER_TRANSFORM.slice()
 
-    const [ a, b, c, d, tx, ty ] = matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+    const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
     const matrix = createMatrix(a, b, c, d, tx, ty)
     if (this.parent === this.parentArtboard) {
       const { x, y } = this.parentArtboard?.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
       matrix.prepend(createMatrix(1, 0, 0, 1, -x, -y))
     }
-    
-    return [ matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty ]
+
+    return [matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty]
   }
 
   get opacity() {
@@ -167,7 +167,7 @@ export default class OctopusLayerCommon {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
-      // ...effects
+      ...effects
     }
   }
 }

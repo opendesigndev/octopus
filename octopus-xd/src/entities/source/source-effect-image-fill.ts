@@ -1,16 +1,16 @@
-import type { RawImageFill } from '../../typings/source'
+import type { RawFillImage } from '../../typings/source'
 import OctopusBounds from '../octopus/octopus-bounds'
 
 
-export type SourceEffectImageFillOptions = {
-  effect: RawImageFill,
+export type SourceEffectFillImageOptions = {
+  effect: RawFillImage,
   effectBounds: OctopusBounds
 }
 
-export default class SourceEffectImageFill {
-  private _rawEffect: RawImageFill
+export default class SourceEffectFillImage {
+  private _rawEffect: RawFillImage
 
-  constructor(options: SourceEffectImageFillOptions) {
+  constructor(options: SourceEffectFillImageOptions) {
     this._rawEffect = options.effect
   }
 

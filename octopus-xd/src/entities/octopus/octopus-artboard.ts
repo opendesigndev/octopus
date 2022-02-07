@@ -50,8 +50,8 @@ export default class OctopusArtboard {
         parent: this,
         layer: sourceLayer
       })
-      return octopusLayer ? [ ...layers, octopusLayer ] : layers
-    }, []) 
+      return octopusLayer ? [...layers, octopusLayer] : layers
+    }, [])
   }
 
   private _getDimensions() {
@@ -74,6 +74,7 @@ export default class OctopusArtboard {
     const dimensions = this._getDimensions().convert()
 
     return {
+      // @ts-ignore
       type: 'ARTBOARD',
       version: await this._getVersion(),
       id: this._sourceArtboard.refId,

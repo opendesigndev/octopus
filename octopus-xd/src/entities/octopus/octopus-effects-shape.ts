@@ -1,6 +1,6 @@
-import OctopusEffectColorFill from './octopus-effect-color-fill'
-import OctopusEffectGradientFill from './octopus-effect-gradient-fill'
-import OctopusEffectImageFill from './octopus-effect-image-fill'
+import OctopusEffectFillColor from './octopus-effect-fill-color'
+import OctopusEffectFillGradient from './octopus-effect-fill-gradient'
+import OctopusEffectFillImage from './octopus-effect-fill-image'
 import OctopusEffectStroke from './octopus-effect-stroke'
 import { getConverted } from '../../utils/common'
 import OctopusBounds from './octopus-bounds'
@@ -44,7 +44,7 @@ export default class OctopusEffectsShape {
 
     // Solid fill
     if ('color' in fill) {
-      const solidFill = OctopusEffectColorFill.fromRaw({ effect: fill })
+      const solidFill = OctopusEffectFillColor.fromRaw({ effect: fill })
       return [solidFill]
     }
 
@@ -53,7 +53,7 @@ export default class OctopusEffectsShape {
       const bounds = this._octopusLayer?.shapeData.bounds
       if (!bounds) return []
 
-      const gradientFill = OctopusEffectGradientFill.fromRaw({
+      const gradientFill = OctopusEffectFillGradient.fromRaw({
         effect: fill,
         resources: this._resources,
         effectBounds: OctopusBounds.fromPaperBounds(bounds)
@@ -67,7 +67,7 @@ export default class OctopusEffectsShape {
       const bounds = this._octopusLayer?.shapeData.bounds
       if (!bounds) return []
 
-      const patternFill = OctopusEffectImageFill.fromRaw({
+      const patternFill = OctopusEffectFillImage.fromRaw({
         effect: fill,
         effectBounds: OctopusBounds.fromPaperBounds(bounds)
       })

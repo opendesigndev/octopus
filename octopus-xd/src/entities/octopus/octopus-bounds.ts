@@ -1,3 +1,5 @@
+import { asNumber } from "../../utils/as"
+
 type OctopusBoundsOptions = {
   x: number,
   y: number,
@@ -12,7 +14,7 @@ export default class OctopusBounds {
   private _h: number
 
   static from(x: number, y: number, w: number, h: number): OctopusBounds {
-    return new this({ x, y, w , h })
+    return new this({ x, y, w, h })
   }
 
   static fromPaperBounds(bounds: paper.Rectangle) {
@@ -32,19 +34,19 @@ export default class OctopusBounds {
   }
 
   get x() {
-    return this._x
+    return asNumber(this._x, 0)
   }
 
   get y() {
-    return this._y
+    return asNumber(this._y, 0)
   }
 
   get w() {
-    return this._w
+    return asNumber(this._w, 0)
   }
 
   get h() {
-    return this._h
+    return asNumber(this._h, 0)
   }
 
   convert() {

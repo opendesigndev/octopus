@@ -1,7 +1,7 @@
 import defaults from '../../utils/defaults'
 import { getMapped } from '../../utils/common'
 import { asNumber } from '../../utils/as'
-import OctopusEffectColorFill from './octopus-effect-color-fill'
+import OctopusEffectFillColor from './octopus-effect-fill-color'
 import SourceEffectStroke from '../source/source-effect-stroke'
 
 import type { RawStroke } from '../../typings/source'
@@ -67,7 +67,7 @@ export default class OctopusEffectStroke {
     const lineCap = getMapped(this._source.cap, LINE_CAP_MAP, STROKE_CAP)
     const position = getMapped(this._source.align, POSITION_MAP, STROKE_POSITION)
 
-    const fill = OctopusEffectColorFill.fromRaw({
+    const fill = OctopusEffectFillColor.fromRaw({
       effect: {
         type: this._source.type === 'none' ? 'none' : 'solid', /** @TODO confirm */
         color: this._source.color

@@ -40,7 +40,7 @@ export type RawGradientRadial = {
   transform?: RawTransform
 }
 
-export type RawGradientFill = {
+export type RawFillGradient = {
   type?: 'gradient' | 'none',
   gradient?: RawGradientLinear | RawGradientRadial
 }

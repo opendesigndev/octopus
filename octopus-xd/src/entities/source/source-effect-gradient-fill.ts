@@ -1,14 +1,14 @@
-import type { RawGradientFill } from '../../typings/source'
+import type { RawFillGradient } from '../../typings/source'
 
 
-export type SourceEffectGradientFillOptions = {
-  effect: RawGradientFill
+export type SourceEffectFillGradientOptions = {
+  effect: RawFillGradient
 }
 
-export default class SourceEffectGradientFill {
-  private _rawEffect: RawGradientFill
+export default class SourceEffectFillGradient {
+  private _rawEffect: RawFillGradient
 
-  constructor(options: SourceEffectGradientFillOptions) {
+  constructor(options: SourceEffectFillGradientOptions) {
     this._rawEffect = options.effect
   }
 

@@ -1,4 +1,4 @@
-import OctopusEffectColorFill from './octopus-effect-color-fill'
+import OctopusEffectFillColor from './octopus-effect-fill-color'
 import OctopusEffectStroke from './octopus-effect-stroke'
 import { getConverted } from '../../utils/common'
 
@@ -48,7 +48,7 @@ export default class OctopusEffectsText {
 
     // Solid fill
     if ('color' in fill) {
-      const solidFill = OctopusEffectColorFill.fromRaw({ effect: fill })
+      const solidFill = OctopusEffectFillColor.fromRaw({ effect: fill })
       return [solidFill]
     }
 

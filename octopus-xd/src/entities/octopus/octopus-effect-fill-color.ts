@@ -2,26 +2,26 @@ import defaults from '../../utils/defaults'
 
 import { parseXDColor } from '../../utils/color'
 import { isObject } from '../../utils/common'
-import SourceEffectColorFill from '../source/source-effect-color-fill'
+import SourceEffectFillColor from '../source/source-effect-color-fill'
 
-import type { SourceEffectColorFillOptions } from '../source/source-effect-color-fill'
+import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'
 import type { Octopus } from '../../typings/octopus'
 
 
-type OctopusEffectColorFillOptions = {
-  source: SourceEffectColorFill
+type OctopusEffectFillColorOptions = {
+  source: SourceEffectFillColor
 }
 
-export default class OctopusEffectColorFill {
-  private _source: SourceEffectColorFill
+export default class OctopusEffectFillColor {
+  private _source: SourceEffectFillColor
 
-  static fromRaw(options: SourceEffectColorFillOptions) {
+  static fromRaw(options: SourceEffectFillColorOptions) {
     return new this({
-      source: new SourceEffectColorFill(options)
+      source: new SourceEffectFillColor(options)
     })
   }
 
-  constructor(options: OctopusEffectColorFillOptions) {
+  constructor(options: OctopusEffectFillColorOptions) {
     this._source = options.source
   }
 

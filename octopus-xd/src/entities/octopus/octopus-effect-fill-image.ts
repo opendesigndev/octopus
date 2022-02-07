@@ -1,20 +1,20 @@
 import defaults from '../../utils/defaults'
 import { asBoolean, asNumber, asString } from '../../utils/as'
-import SourceEffectImageFill from '../source/source-effect-image-fill'
+import SourceEffectFillImage from '../source/source-effect-image-fill'
 import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
 import OctopusBounds from './octopus-bounds'
 
 import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectImageFillOptions } from '../source/source-effect-image-fill'
+import type { SourceEffectFillImageOptions } from '../source/source-effect-image-fill'
 
 
-type OctopusEffectImageFillOptions = {
-  source: SourceEffectImageFill,
+type OctopusEffectFillImageOptions = {
+  source: SourceEffectFillImage,
   effectBounds: OctopusBounds
 }
 
-export default class OctopusEffectImageFill {
-  private _source: SourceEffectImageFill
+export default class OctopusEffectFillImage {
+  private _source: SourceEffectFillImage
   private _effectBounds: OctopusBounds
 
   static TYPES = {
@@ -22,14 +22,14 @@ export default class OctopusEffectImageFill {
     fill: 'STRETCH'
   } as const
 
-  static fromRaw(options: SourceEffectImageFillOptions) {
+  static fromRaw(options: SourceEffectFillImageOptions) {
     return new this({
-      source: new SourceEffectImageFill(options),
+      source: new SourceEffectFillImage(options),
       effectBounds: options.effectBounds
     })
   }
 
-  constructor(options: OctopusEffectImageFillOptions) {
+  constructor(options: OctopusEffectFillImageOptions) {
     this._source = options.source
     this._effectBounds = options.effectBounds
   }
@@ -47,8 +47,8 @@ export default class OctopusEffectImageFill {
   }
 
   private _getTransformFill(): Octopus['Transform'] {
-    const w = asNumber(this._effectBounds.w, 0)
-    const h = asNumber(this._effectBounds.h, 0)
+    const w = this._effectBounds.w
+    const h = this._effectBounds.h
     const iw = asNumber(this._source.imageWidth, 0)
     const ih = asNumber(this._source.imageHeight, 0)
     const offsetX = asNumber(this._source.offsetX, 0)
@@ -89,7 +89,7 @@ export default class OctopusEffectImageFill {
       )
     )
 
-    const [ p1, p2, p3 ] = [
+    const [p1, p2, p3] = [
       pointsMap.TOP_LEFT,
       pointsMap.TOP_RIGHT,
       pointsMap.BOTTOM_LEFT
@@ -100,14 +100,14 @@ export default class OctopusEffectImageFill {
       p2.y - p1.y,
       p3.x - p1.x,
       p3.y - p1.y,
-      p1.x, 
+      p1.x,
       p1.y
     ]
   }
 
   private _getTransformStretch(): Octopus['Transform'] {
-    const w = asNumber(this._effectBounds.w, 0)
-    const h = asNumber(this._effectBounds.h, 0)
+    const w = this._effectBounds.w
+    const h = this._effectBounds.h
     const offsetX = asNumber(this._source.offsetX, 0)
     const offsetY = asNumber(this._source.offsetY, 0)
     const scaleX = this._getScaleX()
@@ -131,12 +131,12 @@ export default class OctopusEffectImageFill {
     )
     image.translate(
       createPoint(
-      w * offsetX,
-      h * offsetY
+        w * offsetX,
+        h * offsetY
       )
     )
 
-    const [ p1, p2, p3 ] = [
+    const [p1, p2, p3] = [
       pointsMap.TOP_LEFT,
       pointsMap.TOP_RIGHT,
       pointsMap.BOTTOM_LEFT
@@ -147,7 +147,7 @@ export default class OctopusEffectImageFill {
       p2.y - p1.y,
       p3.x - p1.x,
       p3.y - p1.y,
-      p1.x, 
+      p1.x,
       p1.y
     ]
   }
@@ -163,7 +163,7 @@ export default class OctopusEffectImageFill {
     const scaleBehavior = this._source.scaleBehavior
 
     const fillType = scaleBehavior
-      ? OctopusEffectImageFill.TYPES[scaleBehavior]
+      ? OctopusEffectFillImage.TYPES[scaleBehavior]
       : defaults.EFFECTS.IMAGE_FILL_TYPE
 
     const transform = fillType === 'FILL'
