@@ -23,13 +23,13 @@ export default class OctopusArtboardGrid {
   private _convertColumnGrid() {
     const style = this._getGridStyle()
     if (!style) return null
-    
+
     const { width, height } = {
       width: asNumber(this._octopusArtboard.sourceArtboard.meta['uxdesign#bounds']?.width),
       height: asNumber(this._octopusArtboard.sourceArtboard.meta['uxdesign#bounds']?.height)
     }
 
-    const [ top, left, right, bottom, count, gutter ] = [
+    const [top, left, right, bottom, count, gutter] = [
       style?.marginTop,
       style?.marginLeft,
       style?.marginRight,
@@ -44,7 +44,7 @@ export default class OctopusArtboardGrid {
       width - right - left,
       height - bottom - top
     ).convert()
-  
+
     const size = round((width - (left + right) - (count - 1) * gutter) / count)
     const visible = asBoolean(style.visible, false)
     const color = parseXDColor(style?.layoutColumnStroke?.color)
@@ -64,13 +64,13 @@ export default class OctopusArtboardGrid {
     const style = this._getGridStyle()
     if (!style) return null
 
-    const [ rowSpacing, columnSpacing ] = [
+    const [rowSpacing, columnSpacing] = [
       style?.rowSpacing,
       style?.columnSpacing
     ].map(n => asNumber(n, 0))
-    
+
     if (rowSpacing !== columnSpacing) return null
-  
+
     const visible = asBoolean(style.visible, false)
     const color = parseXDColor(style?.rowStroke?.color)
 
@@ -86,6 +86,6 @@ export default class OctopusArtboardGrid {
   convert() {
     const column = this._convertColumnGrid()
     const grid = this._convertGrid()
-    return [ column, grid ].filter(grid => grid)
+    return [column, grid].filter(grid => grid)
   }
 }

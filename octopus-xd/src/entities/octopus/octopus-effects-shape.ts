@@ -39,13 +39,13 @@ export default class OctopusEffectsShape {
 
   private _parseFills(): OctopusFill[] {
     const fill = this.style?.fill
-    
+
     if (!fill) return []
 
     // Solid fill
     if ('color' in fill) {
       const solidFill = OctopusEffectColorFill.fromRaw({ effect: fill })
-      return [ solidFill ]
+      return [solidFill]
     }
 
     // Gradient fill
@@ -59,29 +59,29 @@ export default class OctopusEffectsShape {
         effectBounds: OctopusBounds.fromPaperBounds(bounds)
       })
 
-      return [ gradientFill ]
+      return [gradientFill]
     }
 
     // Image fill
     if ('pattern' in fill) {
       const bounds = this._octopusLayer?.shapeData.bounds
       if (!bounds) return []
-      
+
       const patternFill = OctopusEffectImageFill.fromRaw({
         effect: fill,
         effectBounds: OctopusBounds.fromPaperBounds(bounds)
       })
 
-      return [ patternFill ]
+      return [patternFill]
     }
-    
+
     return []
   }
 
   private _parseStrokes(): OctopusEffectStroke[] {
     const stroke = this.style?.stroke
     return stroke
-      ? [ OctopusEffectStroke.fromRaw({ effect: stroke }) ]
+      ? [OctopusEffectStroke.fromRaw({ effect: stroke })]
       : []
   }
 

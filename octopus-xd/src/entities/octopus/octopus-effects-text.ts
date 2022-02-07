@@ -4,7 +4,6 @@ import { getConverted } from '../../utils/common'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStyle } from '../../typings/source'
-import type SourceResources from '../source/source-resources'
 import type { OctopusFill } from '../../typings/octopus-entities'
 import OctopusLayerText from './octopus-layer-text'
 
@@ -44,22 +43,22 @@ export default class OctopusEffectsText {
 
   private _parseFills(): OctopusFill[] {
     const fill = this.style?.fill
-    
+
     if (!fill) return []
 
     // Solid fill
     if ('color' in fill) {
       const solidFill = OctopusEffectColorFill.fromRaw({ effect: fill })
-      return [ solidFill ]
+      return [solidFill]
     }
-    
+
     return []
   }
 
   private _parseStrokes(): OctopusEffectStroke[] {
     const stroke = this.style?.stroke
     return stroke
-      ? [ OctopusEffectStroke.fromRaw({ effect: stroke }) ]
+      ? [OctopusEffectStroke.fromRaw({ effect: stroke })]
       : []
   }
 
