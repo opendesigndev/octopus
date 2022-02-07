@@ -4,6 +4,7 @@ import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 import type OctopusXDConverter from '../..'
 import { asArray, asString } from '../../utils/as'
 import { traverseAndFind } from '../../utils/common'
+import firstCallMemo from '../../utils/first-call-memo'
 
 
 type OctopusManifestOptions = {
@@ -69,30 +70,34 @@ export default class OctopusManifest {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.style?.fill?.pattern?.meta?.ux?.uid
     })
-    return [ ...new Set(entries) ]
+    return [...new Set(entries)]
   }
 
   private _getArtboardAssetsFonts(raw: object) {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.postscriptName
     })
-    return [ ...new Set(entries) ]
+    return [...new Set(entries)]
   }
 
   private _getArtboardAssets(artboardId: string) {
     const targetArtboard = this._sourceDesign.getArtboardById(artboardId)
     const raw = targetArtboard?.raw
     if (!raw) return null
-    
+
     const images = this._getArtboardAssetsImages(raw).map(image => {
       return {
-        location: '', /** @TODO should be optional? */
+        location: {
+          type: 'TRANSIENT'
+        },
         refId: image
       }
     })
     const fonts = this._getArtboardAssetsFonts(raw).map(font => {
       return {
-        location: '', /** @TODO should be optional? */
+        location: {
+          type: 'TRANSIENT'
+        },
         name: font
       }
     })
@@ -103,6 +108,7 @@ export default class OctopusManifest {
     }
   }
 
+  @firstCallMemo()
   get artboards() {
     return this.manifestArtboardEntries.map(artboard => {
       const id = this._getArtboardIdByPath(artboard.path)
@@ -113,29 +119,11 @@ export default class OctopusManifest {
         bounds: this._convertManifestBounds(artboard['uxdesign#bounds']),
         dependencies: [],
         location: {
-          type: 'LOCAL_RESOURCE',
-          path: '' /** @TODO should we make location optional? because generation can be done in-memory */
+          type: 'TRANSIENT'
         },
         assets: this._getArtboardAssets(id)
       }
     }).filter(artboardEntry => artboardEntry) as Artboard[]
-  }
-
-  /** @TODO should we output pages or just artboards are enough? */
-  get pages() {
-    const artboardIds = this.artboards.map(artboard => {
-      return {
-        id: artboard.id,
-        type: 'ARTBOARD'
-      } as const
-    })
-
-    const artificialPage = {
-      id: OctopusManifest.DEFAULT_PAGE_ID,
-      name: OctopusManifest.DEFAULT_PAGE_NAME,
-      children: artboardIds,
-    }
-    return [ artificialPage ]
   }
 
   /** @TODO guard with official types */
@@ -147,7 +135,7 @@ export default class OctopusManifest {
         version: this.xdVersion
       },
       name: this.name,
-      pages: this.pages,
+      pages: [],
       artboards: this.artboards,
       components: [],
       chunks: [],
