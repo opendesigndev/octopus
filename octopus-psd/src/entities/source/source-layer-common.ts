@@ -22,15 +22,13 @@ export class SourceLayerCommon {
     return this._rawValue.name
   }
 
-  get converter(): OctopusPSDConverter | null {
+  get converter(): OctopusPSDConverter {
     const parentArtboard = this.parentArtboard
-    if (!parentArtboard) return null
     return parentArtboard.converter
   }
 
-  get parentArtboard(): SourceArtboard | null {
-    if (!this._parent) return null
-    const parent = this._parent as SourceLayerParent
+  get parentArtboard(): SourceArtboard {
+    const parent = this._parent
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
@@ -42,12 +40,11 @@ export class SourceLayerCommon {
     return getBoundsFor(this._rawValue.bounds)
   }
 
-  get width() {
-    return this.bounds.right - this.bounds.left
-  }
-
-  get height() {
-    return this.bounds.bottom - this.bounds.top
+  get dimensions() {
+    const { left, right, top, bottom } = this.bounds
+    const width = right - left
+    const height = bottom - top
+    return { width, height }
   }
 
   get opacity() {

@@ -35,14 +35,11 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.pathComponents[0]
   }
 
-  get width() {
-    const { left, right } = this.pathBounds
-    return right - left
-  }
-
-  get height() {
-    const { top, bottom } = this.pathBounds
-    return bottom - top
+  get dimensions() {
+    const { left, right, top, bottom } = this.pathBounds
+    const width = right - left
+    const height = bottom - top
+    return { width, height }
   }
 
   get pathBounds() {

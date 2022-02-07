@@ -29,7 +29,8 @@ export class OctopusEffectFillImage {
   }
 
   private _mapPositioning(layer: SourceLayerShape | SourceLayerLayer): Octopus['FillPositioning'] {
-    const transform: Octopus['Transform'] = [layer?.width, 0, 0, layer?.height, 0, 0] // TODO
+    const { width, height } = layer.dimensions
+    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0] // TODO
     return { layout: 'FILL', origin: 'LAYER', transform }
   }
 

@@ -128,7 +128,8 @@ export class OctopusPathLike {
       const sourceLayer = this.sourceLayer as SourceLayerShape
       return this._convert(sourceLayer.pathComponents)
     } else {
-      const { width, height } = this.sourceLayer as SourceLayerLayer
+      const sourceLayer = this.sourceLayer as SourceLayerLayer
+      const { width, height } = sourceLayer.dimensions
       const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
       const transform = createDefaultTranslationMatrix()
       return { type: 'RECTANGLE', rectangle, transform }

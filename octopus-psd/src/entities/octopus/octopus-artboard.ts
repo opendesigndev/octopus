@@ -40,11 +40,7 @@ export class OctopusArtboard {
   }
 
   get dimensions() {
-    const { right, left, bottom, top } = this._sourceArtboard.bounds
-    return {
-      width: asNumber(right - left, 0),
-      height: asNumber(bottom - top, 0),
-    }
+    return this._sourceArtboard.dimensions
   }
 
   get id() {

@@ -40,33 +40,15 @@ export class OctopusLayerCommon {
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
-  get converter(): OctopusPSDConverter | null {
+  get converter(): OctopusPSDConverter {
     const parentArtboard = this.parentArtboard
-    if (!parentArtboard) return null
     return parentArtboard.converter
   }
 
-  get parentArtboard(): OctopusArtboard | null {
-    if (!this._parent) return null
+  get parentArtboard(): OctopusArtboard {
     const parent = this._parent as OctopusLayerParent
     return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
-
-  //   get parent() {
-  //     return this._parent
-  //   }
-
-  //   get parents(): (OctopusArtboard | OctopusLayer | OctopusLayerMaskGroup)[] {
-  //     const parent = this._parent
-  //     if (!parent) return []
-  //     return parent instanceof OctopusArtboard ? [parent] : [...parent.parents, parent]
-  //   }
-
-  //   get parentLayers(): OctopusLayer[] {
-  //     const parent = this._parent
-  //     if (!parent || parent instanceof OctopusArtboard) return []
-  //     return [...parent.parentLayers, parent]
-  //   }
 
   get id() {
     return this._id
