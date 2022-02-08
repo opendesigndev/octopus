@@ -2,7 +2,7 @@ import SourceInteractions from './source-interactions'
 import SourceManifest from './source-manifest'
 import SourceResources from './source-resources'
 import SourceArtboard from './source-artboard'
-import { JSONFromTypedArray } from '../../utils/common'
+import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
 import Expander from '../../services/conversion/expander'
 
 import type { RawSourceInteractions } from './source-interactions'

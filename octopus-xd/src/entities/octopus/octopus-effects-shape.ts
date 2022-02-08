@@ -2,7 +2,7 @@ import OctopusEffectFillColor from './octopus-effect-fill-color'
 import OctopusEffectFillGradient from './octopus-effect-fill-gradient'
 import OctopusEffectFillImage from './octopus-effect-fill-image'
 import OctopusEffectStroke from './octopus-effect-stroke'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import OctopusBounds from './octopus-bounds'
 
 import type { Octopus } from '../../typings/octopus'

@@ -1,7 +1,7 @@
 import defaults from '../../utils/defaults'
 
 import { parseXDColor } from '../../utils/color'
-import { isObject } from '../../utils/common'
+import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import SourceEffectFillColor from '../source/source-effect-color-fill'
 
 import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'

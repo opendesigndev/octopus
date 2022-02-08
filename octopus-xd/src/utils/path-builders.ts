@@ -11,7 +11,7 @@ import {
   createPath
 } from './paper'
 
-import { asArray, asNumber } from './as'
+import { asNumber, asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import type {
   RawShape,
@@ -49,9 +49,8 @@ function buildShapeFromEllipse(shape: RawShapeEllipse): paper.Path {
 }
 
 function buildShapeFromPolygon(shape: RawShapePolygon): paper.Path {
-  const polygonPath = `M${
-    asArray(shape?.points).map(p => `${asNumber(p?.x)} ${asNumber(p?.y)}`).join('L')
-  }Z`
+  const polygonPath = `M${asArray(shape?.points).map(p => `${asNumber(p?.x)} ${asNumber(p?.y)}`).join('L')
+    }Z`
   return createPath(polygonPath)
 }
 
@@ -79,7 +78,7 @@ export function buildShapeFromPath(shape: RawShapePath): paper.Path | null {
 
 export function buildShape(shape: RawShape): paper.Path | paper.CompoundPath | null {
   const type = shape?.type
-  
+
   switch (type) {
     case 'compound': {
       return buildShapeFromCompound(shape)

@@ -3,7 +3,7 @@ import without from 'lodash/without'
 import mergeWith from 'lodash/mergeWith'
 import cloneDeep from 'lodash/cloneDeep'
 
-import { asArray, asString } from '../../../utils/as'
+import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 
 import type SourceResources from '../../../entities/source/source-resources'
@@ -41,7 +41,7 @@ export default class Expander {
 
   private _initSymbols() {
     return asArray(this._resources.raw.resources?.meta?.ux?.symbols).reduce((ids, symbol) => {
-      return [ ...ids, ...flattenLayers(symbol, true, true) ]
+      return [...ids, ...flattenLayers(symbol, true, true)]
     }, [])
   }
 

@@ -1,11 +1,11 @@
-import { asArray } from '../../utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import OctopusEffectBlur from './octopus-effect-blur'
 import OctopusEffectDropShadow from './octopus-effect-drop-shadow'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { RawBlur, RawEffectDropShadow } from '../../typings/source'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 
 type OctopusEffectsLayerOptions = {

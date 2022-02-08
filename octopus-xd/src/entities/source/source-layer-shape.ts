@@ -1,5 +1,5 @@
 import { createSourceLayer } from '../../factories/create-source-layer'
-import { asArray } from '../../utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import SourceLayerCommon from './source-layer-common'
 
 import type { SourceLayerParent } from './source-layer-common'
@@ -32,7 +32,7 @@ export default class SourceLayerShape extends SourceLayerCommon {
         parent: this,
         layer: shapeLayer
       })
-      return layer ? [ ...children, layer as SourceLayerShape ] : children
+      return layer ? [...children, layer as SourceLayerShape] : children
     }, [])
   }
 

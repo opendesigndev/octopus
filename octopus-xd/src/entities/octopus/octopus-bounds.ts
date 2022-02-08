@@ -1,4 +1,4 @@
-import { asNumber } from "../../utils/as"
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 type OctopusBoundsOptions = {
   x: number,

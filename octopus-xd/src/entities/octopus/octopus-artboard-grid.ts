@@ -1,6 +1,6 @@
-import { asBoolean, asNumber } from '../../utils/as'
+import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { parseXDColor } from '../../utils/color'
-import { round } from '../../utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/common'
 import OctopusBounds from './octopus-bounds'
 
 import type OctopusArtboard from './octopus-artboard'

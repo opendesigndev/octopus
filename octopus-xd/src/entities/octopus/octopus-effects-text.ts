@@ -1,6 +1,6 @@
 import OctopusEffectFillColor from './octopus-effect-fill-color'
 import OctopusEffectStroke from './octopus-effect-stroke'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStyle } from '../../typings/source'

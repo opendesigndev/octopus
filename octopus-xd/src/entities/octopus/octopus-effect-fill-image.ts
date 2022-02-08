@@ -1,5 +1,5 @@
 import defaults from '../../utils/defaults'
-import { asBoolean, asNumber, asString } from '../../utils/as'
+import { asBoolean, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import SourceEffectFillImage from '../source/source-effect-image-fill'
 import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
 import OctopusBounds from './octopus-bounds'

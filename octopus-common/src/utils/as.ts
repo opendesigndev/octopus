@@ -39,3 +39,17 @@ export function asNumber(value: unknown, defaultValue?: number): number {
   }
   return Number(value)
 }
+
+export function asFiniteNumber(value: unknown, defaultValue?: number): number {
+  if (typeof value === 'number') {
+    return value
+  }
+  if (typeof defaultValue === 'number') {
+    return defaultValue
+  }
+  const conversionAttempt = Number(value)
+  if (!Number.isInteger(conversionAttempt)) {
+    throw new Error(`Failed when converting "${value}" to finite number`)
+  }
+  return conversionAttempt
+}

@@ -1,5 +1,5 @@
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceArtboard from '../source/source-artboard'

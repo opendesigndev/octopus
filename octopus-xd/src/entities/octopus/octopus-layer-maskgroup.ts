@@ -3,7 +3,7 @@ import OctopusLayerCommon from './octopus-layer-common'
 import { OctopusLayerParent } from '../../typings/octopus-entities'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { SourceLayer } from '../../factories/create-source-layer'
-import { asNumber, asString } from '../../utils/as'
+import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 
 import type { LayerSpecifics } from './octopus-layer-common'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -29,15 +29,15 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     const hasClipPath = Boolean(raw?.meta?.ux?.clipPathResources)
     return isShapeMaskGroup || hasClipPath
   }
-  
+
   static isRepeatGrid(layer: SourceLayer) {
     return Boolean((layer.raw as RawGroupLayer)?.meta?.ux?.repeatGrid)
   }
-  
+
   static isScrollableGroup(layer: SourceLayer) {
     return Boolean((layer.raw as RawGroupLayer)?.meta?.ux?.scrollingType)
   }
-  
+
   static isMaskGroupLike(layer: SourceLayer) {
     return this.isShapeMaskGroup(layer)
       || this.isRepeatGrid(layer)
@@ -141,8 +141,8 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
         parent: this,
         layer: sourceLayer
       })
-      return octopusLayer ? [ ...layers, octopusLayer ] : layers
-    }, []) 
+      return octopusLayer ? [...layers, octopusLayer] : layers
+    }, [])
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['MaskGroupLayer']> | null {

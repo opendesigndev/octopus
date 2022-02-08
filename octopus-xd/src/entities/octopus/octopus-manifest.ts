@@ -2,9 +2,9 @@ import SourceDesign from '../source/source-design'
 
 import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 import type OctopusXDConverter from '../..'
-import { asArray, asString } from '../../utils/as'
-import { traverseAndFind } from '../../utils/common'
-import firstCallMemo from '../../utils/first-call-memo'
+import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
+import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 
 type OctopusManifestOptions = {

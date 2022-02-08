@@ -1,4 +1,4 @@
-import { asBoolean, asNumber } from '../../utils/as'
+import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import SourceEffectBlur from '../source/source-effect-blur'
 
 import type { Octopus } from '../../typings/octopus'
@@ -37,7 +37,7 @@ export default class OctopusEffectBlur {
       opacity: asNumber(this._source.opacity, 1)
     } as const
 
-    return [ brightnessFilter, opacityFilter ]
+    return [brightnessFilter, opacityFilter]
   }
 
   convert(): Octopus['EffectBlur'] {
@@ -52,6 +52,6 @@ export default class OctopusEffectBlur {
       blur,
       basis,
       filters
-    }  
+    }
   }
 }

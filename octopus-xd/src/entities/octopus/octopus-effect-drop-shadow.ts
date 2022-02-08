@@ -1,5 +1,5 @@
-import { asBoolean, asNumber } from '../../utils/as'
-import { isObject } from '../../utils/common'
+import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
+import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import defaults from '../../utils/defaults'
 import { parseXDColor } from '../../utils/color'
 import SourceEffectDropShadow from '../source/source-effect-drop-shadow'
@@ -31,7 +31,7 @@ export default class OctopusEffectDropShadow {
     const params = this._source.dropShadowParams
     if (!isObject(params)) return null
 
-    const {dx, dy, r, color} = params as Defined<typeof params>
+    const { dx, dy, r, color } = params as Defined<typeof params>
 
     /**
      * Shadow normalizations from Octopus 2 have been removed

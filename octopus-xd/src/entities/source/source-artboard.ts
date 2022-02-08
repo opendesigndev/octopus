@@ -1,4 +1,4 @@
-import { asArray } from '../../utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer } from '../../factories/create-source-layer'
 
 import type SourceDesign from './source-design'
@@ -32,7 +32,7 @@ export default class SourceArtboard {
         layer,
         parent: this
       })
-      return sourceLayer ? [ ...children, sourceLayer ] : children
+      return sourceLayer ? [...children, sourceLayer] : children
     }, [])
   }
 
@@ -75,11 +75,11 @@ export default class SourceArtboard {
     return {
       x: asArray(guides.horizontalGuides?.guides).reduce((guidesX, guide) => {
         if (typeof guide?.position !== 'number') return guidesX
-        return [ ...guidesX, guide.position ]
+        return [...guidesX, guide.position]
       }, []),
       y: asArray(guides.verticalGuides?.guides).reduce((guidesY, guide) => {
         if (typeof guide?.position !== 'number') return guidesY
-        return [ ...guidesY, guide.position ]
+        return [...guidesY, guide.position]
       }, [])
     }
   }
