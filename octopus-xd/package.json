@@ -5,7 +5,6 @@
   "main": "dist/src/index.js",
   "scripts": {
     "convert:all": "npx ts-node ./scripts/convert-all.ts",
-    "convert:all:render": "npx ts-node ./scripts/convert-all.ts",
     "clean-workdir": "npx rimraf ./workdir/*",
     "build": "npx tsc --build ./tsconfig.json",
     "prepare": "npx rimraf ./lib && yarn run build",

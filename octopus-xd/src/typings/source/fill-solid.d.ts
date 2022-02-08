@@ -1,6 +1,6 @@
 import { RawColor } from '.'
 
-export type RawSolidFill = {
+export type RawFillColor = {
   type?: 'solid' | 'none',
   color?: RawColor
 }

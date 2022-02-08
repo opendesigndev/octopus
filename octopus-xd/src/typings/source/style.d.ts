@@ -1,9 +1,9 @@
-import { RawFillGradient } from './gradient-fill'
+import { RawFillGradient } from './fill-gradient'
 import { RawBlendMode } from './blend-mode'
 import { RawEffectDropShadow } from './drop-shadow'
-import { RawSolidFill } from './solid-fill'
+import { RawFillColor } from './fill-solid'
 import { RawStroke } from './stroke'
-import { RawFillImage } from './image-fill'
+import { RawFillImage } from './fill-image'
 import { RawBlur } from './blur'
 
 
@@ -12,7 +12,7 @@ export type RawTextDecoration = 'underline' | 'line-through'
 export type RawStyle = {
   blendMode?: RawBlendMode,
   opacity?: number,
-  fill?: RawSolidFill | RawFillGradient | RawFillImage,
+  fill?: RawFillColor | RawFillGradient | RawFillImage,
   stroke?: RawStroke,
   filters?: (RawEffectDropShadow | RawBlur)[],
   clipPath?: {
