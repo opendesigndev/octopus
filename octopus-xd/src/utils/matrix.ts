@@ -1,5 +1,5 @@
-import { Raw2DMatrix, RawTransform } from '../typings/source'
-import { asNumber } from './as'
+import { Raw2DMatrix } from '../typings/source'
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 export function convertObjectMatrixToArray(matrix: unknown) {
   if (typeof (matrix as Raw2DMatrix)?.a === 'number') {
