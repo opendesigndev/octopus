@@ -1,4 +1,4 @@
-import { asArray } from './as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import type { RawLayer } from '../typings/source'
 
@@ -39,8 +39,8 @@ export function flattenLayers(
   const hasDescendants = hasLayers || hasSubshapes
 
   const itselves = includeStates
-    ? [ layer, ...asArray(layer?.meta?.ux?.states) ]
-    : [ layer ]
+    ? [layer, ...asArray(layer?.meta?.ux?.states)]
+    : [layer]
 
   if (!hasDescendants) return itselves
 

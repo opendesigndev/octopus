@@ -1,0 +1,29 @@
+{
+  "name": "@avocode/octopus-common",
+  "version": "3.0.0-rc.6",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc --build ./tsconfig.json",
+    "prepare": "npx rimraf ./lib && yarn run build",
+    "watch": "npx tsc -w",
+    "test": "echo 'Tests are not implemented yet'"
+  },
+  "dependencies": {
+    "@sentry/node": "6.14.0",
+    "lodash": "^4.17.21",
+    "read-pkg-up": "7.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/uuid": "^8.3.1",
+    "jest": "^27.3.1",
+    "ts-node": "10.4.0"
+  },
+  "description": "General utility functions for Octopus 3 common cases.",
+  "files": [
+    "dist"
+  ]
+}

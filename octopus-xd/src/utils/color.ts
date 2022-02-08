@@ -1,5 +1,5 @@
 import { RawColor } from '../typings/source'
-import { asNumber } from './as'
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 
 export function parseXDColor(color: RawColor | null | void) {
@@ -12,7 +12,7 @@ export function parseXDColor(color: RawColor | null | void) {
     }
   }
 
-  const [ r, g, b ] = [
+  const [r, g, b] = [
     color?.value?.r,
     color?.value?.g,
     color?.value?.b,

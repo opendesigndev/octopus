@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@avocode/octopus-ts@^3.0.0-alpha.8":
-  version "3.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.8.tgz#5681ad0b6e3a46ce14b5247627dfe3c7cd9a298d"
-  integrity sha512-a4FPb+BnBASRf8rfF2HbulEc9wNLfdbQBii969xv4r3y1PzGZy8bVTQAsPBBW3FDn8vp3RDEHJmWD5fkKl+m7g==
+"@avocode/octopus-ts@3.0.0-alpha.17":
+  version "3.0.0-alpha.17"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.17.tgz#31b4d7de248d5f7a2dd642ee87585db233a1a987"
+  integrity sha512-jmwbbwJX39llf/5mpJeQGSh1qriDK07kKGSCX3L8YyC07dPNnsswauADy+9wPuzs+v7luak8ZxPwY/spkS+Qag==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0":
   version "7.16.0"
