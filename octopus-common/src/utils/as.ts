@@ -41,7 +41,7 @@ export function asNumber(value: unknown, defaultValue?: number): number {
 }
 
 export function asFiniteNumber(value: unknown, defaultValue?: number): number {
-  if (typeof value === 'number') {
+  if (typeof value === 'number' && Number.isFinite(value)) {
     return value
   }
   if (typeof defaultValue === 'number') {
