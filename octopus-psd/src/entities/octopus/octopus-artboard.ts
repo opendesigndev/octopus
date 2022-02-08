@@ -1,9 +1,9 @@
 import type { OctopusPSDConverter } from '../..'
 import type { Octopus } from '../../typings/octopus'
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { asNumber } from '../../utils/as'
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import type { SourceArtboard } from '../source/source-artboard'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard

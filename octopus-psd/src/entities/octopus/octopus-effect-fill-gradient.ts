@@ -1,7 +1,7 @@
 import type { ElementOf } from '../../typings/helpers'
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
-import { getMapped } from '../../utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceShapeFill, SourceShapeGradientColor } from '../source/shape-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceFillGradientType } from '../source/types'

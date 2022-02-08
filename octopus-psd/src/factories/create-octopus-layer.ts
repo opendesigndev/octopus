@@ -8,7 +8,7 @@ import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import type { SourceLayerSection } from '../entities/source/source-layer-section'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
-import { getMapped } from '../utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceLayer } from './create-source-layer'
 
 export type OctopusLayer = OctopusLayerGroup // | OctopusLayerShape | OctopusLayerMaskGroup

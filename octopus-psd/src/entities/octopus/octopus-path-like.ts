@@ -1,6 +1,6 @@
 import type { Octopus } from '../../typings/octopus'
-import { asNumber } from '../../utils/as'
-import { getMapped } from '../../utils/common'
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { createPathData } from '../../utils/path-data'
 import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
 import type { SourceLayerShape } from '../source/source-layer-shape'

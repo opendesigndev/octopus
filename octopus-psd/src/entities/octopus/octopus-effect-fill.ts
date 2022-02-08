@@ -1,5 +1,5 @@
 import type { Octopus } from '../../typings/octopus'
-import { getMapped } from '../../utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'

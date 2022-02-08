@@ -1,5 +1,5 @@
 import type { RawArtboard, RawLayer } from '../../typings/source'
-import { asArray } from '../../utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusPSDConverter } from '../..'
 import { getBoundsFor } from './utils'

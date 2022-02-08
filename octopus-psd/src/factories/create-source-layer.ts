@@ -12,7 +12,7 @@ import { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import { getMapped } from '../utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 export type SourceLayer =
   | SourceLayerSection

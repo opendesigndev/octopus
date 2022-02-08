@@ -2,7 +2,7 @@ import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus
 import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
-import { getConverted } from '../../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
