@@ -143,8 +143,7 @@ export class OctopusEffectFillGradient {
 
   private _getPositioning(): Octopus['FillPositioning'] {
     const type = this.type
-    const transform = type === 'RADIAL' || type === 'ANGULAR' ? this._transformRadial : this._transformLinear
-
+    const transform = type === 'LINEAR' ? this._transformLinear : this._transformRadial
     return {
       layout: 'FILL',
       origin: 'LAYER',
