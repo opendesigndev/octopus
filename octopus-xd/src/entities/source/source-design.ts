@@ -8,8 +8,9 @@ import Expander from '../../services/conversion/expander'
 import type { RawSourceInteractions } from './source-interactions'
 import type { RawSourceManifest } from './source-manifest'
 import type { ArrayBuffersSourceTree } from '../../typings'
-import type { RawArtboard } from '../../typings/source'
+import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
+import PasteboardNormalizer from '../../services/conversion/pasteboard-normalizer'
 
 
 type SourceDesignOptions = {
@@ -31,7 +32,7 @@ type SourceDesignOptions = {
   }[],
   artboards: {
     path: string,
-    rawValue: RawArtboard
+    rawValue: RawArtboardLike
   }[]
 }
 
@@ -77,7 +78,7 @@ export default class SourceDesign {
       artboards: sourceTree.artboards.map(entry => {
         return {
           path: entry.path,
-          rawValue: JSONFromTypedArray(entry.content) as RawArtboard
+          rawValue: JSONFromTypedArray(entry.content) as RawArtboardLike
         }
       })
     }
@@ -102,15 +103,20 @@ export default class SourceDesign {
       design: this
     })
 
-    const expander = new Expander({
-      resources: this._resources
-    })
+    const expander = new Expander({ resources: this._resources })
 
     this._artboards = options.artboards.map(entry => {
-      expander.expand(entry.rawValue)
+      const rawValue = /pasteboard/.test(entry.path)
+        ? new PasteboardNormalizer({
+          manifest: this._manifest,
+          pasteboard: entry.rawValue as RawPasteboard
+        }).normalize()
+        : entry.rawValue as RawArtboard
+
+      expander.expand(rawValue)
       return new SourceArtboard({
         path: entry.path,
-        rawValue: expander.expand(entry.rawValue),
+        rawValue: expander.expand(rawValue),
         design: this
       })
     })

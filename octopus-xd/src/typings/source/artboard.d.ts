@@ -33,7 +33,7 @@ export type RawArtboardEntry = {
   }
 }
 
-export type RawArtboardEntries = {
+export type RawArtboard = {
   version?: string,
   children?: RawArtboardEntry[],
   resources?: {
@@ -44,4 +44,4 @@ export type RawArtboardEntries = {
   }
 }
 
-export type RawArtboard = RawPasteboard | RawArtboardEntries
+export type RawArtboardLike = RawPasteboard | RawArtboard

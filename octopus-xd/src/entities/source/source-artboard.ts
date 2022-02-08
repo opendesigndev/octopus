@@ -2,7 +2,7 @@ import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer } from '../../factories/create-source-layer'
 
 import type SourceDesign from './source-design'
-import type { RawArtboard, RawArtboardEntries, RawArtboardEntry, RawLayer, RawPasteboard } from '../../typings/source'
+import type { RawArtboard, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
 
 
@@ -13,7 +13,7 @@ export type SourceArtboardOptions = {
 }
 
 export default class SourceArtboard {
-  private _rawValue: RawArtboardEntries
+  private _rawValue: RawArtboard
   private _path: string
   private _design: SourceDesign
   private _children: SourceLayer[]
@@ -21,7 +21,7 @@ export default class SourceArtboard {
   constructor(options: SourceArtboardOptions) {
     this._design = options.design
     this._path = options.path
-    this._rawValue = this._normalizePasteboard(options.rawValue)
+    this._rawValue = options.rawValue as RawArtboard
     this._children = this._initChildren()
   }
 
@@ -31,25 +31,6 @@ export default class SourceArtboard {
       throw new Error(`Can't resolve manifest entry for artboard at ${this._path}`)
     }
     return manifestEntry
-  }
-
-  private _normalizePasteboard(artboard: RawArtboard) {
-    const manifestEntry = this._getManifestEntryByPath()
-    if (manifestEntry.path !== 'pasteboard') return artboard as RawArtboardEntries
-
-    const pasteboard = artboard as RawPasteboard
-    return {
-      version: asString(pasteboard.version),
-      children: [{
-        type: 'artboard',
-        id: manifestEntry.id,
-        artboard: {
-          children: pasteboard.children,
-        }
-      }],
-      resources: pasteboard.resources,
-      artboards: pasteboard.artboards
-    } as RawArtboardEntries
   }
 
   private _initChildren() {

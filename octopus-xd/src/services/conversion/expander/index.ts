@@ -84,7 +84,7 @@ export default class Expander {
     })
   }
 
-  expand(artboard: RawArtboard) {
+  expand(artboard: RawArtboard): RawArtboard {
     return {
       ...artboard,
       children: artboard.children?.map(artboard => {
