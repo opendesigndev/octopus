@@ -8,6 +8,7 @@ import type { SourceFillGradientType } from '../source/types'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
+import { reverse } from 'lodash'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -43,23 +44,34 @@ export class OctopusEffectFillGradient {
     return result
   }
 
-  private _getGradientStop(stop: SourceShapeGradientColor): FillGradientStop {
+  get isInverse() {
+    return this.sourceLayer.fill.reverse
+  }
+
+  private _mapGradientStop = (stop: SourceShapeGradientColor): FillGradientStop => {
+    const STOP_MAX_LOCATION = 4096
     const color = convertColor(stop?.color)
-    const position = stop.location / 4096
+    const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
+    const position = location / STOP_MAX_LOCATION
     return { color, position }
   }
 
-  private _getGradientStops(colors: SourceShapeGradientColor[] = []): Octopus['FillGradient']['gradient']['stops'] {
+  private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
+    const colors: SourceShapeGradientColor[] = this.sourceLayer.fill.gradient.colors ?? []
+
     // TODO: Add midpoints
     // TODO: Fix for multiple stops at the same location (filter for start/end)
 
-    return colors.map(this._getGradientStop)
+    if (this.isInverse) {
+      return reverse(colors).map(this._mapGradientStop)
+    }
+    return colors.map(this._mapGradientStop)
   }
 
   private _getGradient(): Octopus['FillGradient']['gradient'] {
     const fill: SourceShapeFill = this.sourceLayer.fill
     const type = this.type
-    const stops = this._getGradientStops(fill?.gradient.colors)
+    const stops = this._gradientStops
     return { type, stops }
   }
 
@@ -114,7 +126,7 @@ export class OctopusEffectFillGradient {
     const line = createLine(createPoint(SP1.x, SP1.y), createPoint(SP2.x, SP2.y))
     const size = line.length
 
-    const centerPoint = createPoint(width / 2 + boundTx, height / 2 + boundTy)
+    const centerPoint = createPoint(width / 2, height / 2)
     const oval = createPathEllipse(createPoint(0, 0), createSize(size))
     oval.position = centerPoint
     const [, , s2, s3] = oval.segments.map((seg) => seg.point)
