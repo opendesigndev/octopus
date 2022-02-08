@@ -48,7 +48,7 @@ export function asFiniteNumber(value: unknown, defaultValue?: number): number {
     return defaultValue
   }
   const conversionAttempt = Number(value)
-  if (!Number.isInteger(conversionAttempt)) {
+  if (!Number.isFinite(conversionAttempt)) {
     throw new Error(`Failed when converting "${value}" to finite number`)
   }
   return conversionAttempt
