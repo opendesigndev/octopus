@@ -44,7 +44,7 @@ export function asFiniteNumber(value: unknown, defaultValue?: number): number {
   if (typeof value === 'number' && Number.isFinite(value)) {
     return value
   }
-  if (typeof defaultValue === 'number') {
+  if (typeof defaultValue === 'number' && Number.isFinite(defaultValue)) {
     return defaultValue
   }
   const conversionAttempt = Number(value)
