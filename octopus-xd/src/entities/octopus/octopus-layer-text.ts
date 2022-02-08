@@ -233,12 +233,13 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _getArtboardOffset() {
+    const defaultOffset = { x: 0, y: 0 }
     const resources = this.parentArtboard?.sourceDesign.resources
-    if (!resources) return null
+    if (!resources) return defaultOffset
     const ref = this.parentArtboard?.sourceArtboard.raw.children?.[0].artboard?.ref
-    if (!ref) return null
+    if (!ref) return defaultOffset
     const artboardMeta = resources.raw.artboards?.[ref]
-    if (!artboardMeta) return null
+    if (!artboardMeta) return defaultOffset
     const x = asNumber(artboardMeta.x, 0)
     const y = asNumber(artboardMeta.y, 0)
     return { x, y }
@@ -400,8 +401,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     if (typeof value !== 'string') return null
     const defaultStyle = this._getDefaultStyle()
     if (!defaultStyle) return null
-    const parseTextTransform = this._getTextTransform()
-    if (!parseTextTransform) return null
+    const textTransform = this._getTextTransform()
+    if (!textTransform) return null
     const styles = this._getStyles(value)
     const frame = this._getFrame()
     const horizontalAlign = this._getHorizontalAlign()
@@ -412,7 +413,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
-      textTransform: parseTextTransform,
+      textTransform,
       ...(styles.length ? { styles } : null),
       frame,
       horizontalAlign
