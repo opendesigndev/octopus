@@ -72,7 +72,7 @@ export default class OctopusXDConverter {
         ...options,
         octopusXdConverter: this
       }).convert()
-      
+
       return {
         value,
         error: null

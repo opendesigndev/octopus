@@ -67,7 +67,7 @@ export default class OctopusArtboard {
 
   /** @TODOs Add background layer */
   async convert(): Promise<Octopus['OctopusDocument']> {
-    if (typeof this._sourceArtboard.refId !== 'string') {
+    if (typeof this._sourceArtboard.meta.id !== 'string') {
       throw new Error('Artboard \'id\' property is missing.')
     }
 
@@ -77,7 +77,7 @@ export default class OctopusArtboard {
       // @ts-ignore
       type: 'ARTBOARD',
       version: await this._getVersion(),
-      id: this._sourceArtboard.refId,
+      id: this._sourceArtboard.meta.id,
       dimensions,
       layers: getConverted(this._layers)
     }

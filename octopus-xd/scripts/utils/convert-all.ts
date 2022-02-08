@@ -22,10 +22,10 @@ async function renderOctopus(
   const renderPath = path.join(octopusDir, `render-${id}.png`)
   await fsp.rename(octopusPath, path.join(octopusDir, 'octopus.json'))
   const fontsDir = path.join(await getPkgLocation(), 'fonts')
-  const fontsOption = fontsDir ? `--fonts ${ fontsDir }` : ''
+  const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
     execSync(
-      `${ process.env.RENDERING_PATH } ${ fontsOption } ${ octopusDir } ${ renderPath }`,
+      `${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`,
       { stdio: 'ignore' }
     )
     await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
@@ -56,10 +56,10 @@ export async function convertAll(options: ConvertAllOptions) {
   )
 
   console.log(`${chalk.yellow('Octopus-manifest: ')}
-    file://${ convertedManifest }`)
+    file://${convertedManifest}`)
 
   console.log(`${chalk.yellow('Artboards: ')}`)
-  
+
   return convertedDesign.artboards.reduce(async (queue, conversion) => {
     const locations = await queue
     const artboard = sourceDesign.getArtboardById(conversion.targetArtboardId)
@@ -81,12 +81,12 @@ export async function convertAll(options: ConvertAllOptions) {
       ? await renderOctopus(conversion.targetArtboardId, octopusLocation)
       : null
 
-    console.log(`    ${ status } ${ name } (${ time }ms) ${ id }
-    ${ chalk.cyan(`Source:`) } file://${ sourceLocation }
-    ${ chalk.cyan(`Octopus:`) } file://${ octopusLocation }
-    ${ chalk.cyan(`Render:`) } ${ render === null ? '<none>' : (render.error ? chalk.red(render.error.message) : `file://${ render.value }`) }
+    console.log(`    ${status} ${name} (${time}ms) ${id}
+    ${chalk.cyan(`Source:`)} file://${sourceLocation}
+    ${chalk.cyan(`Octopus:`)} file://${octopusLocation}
+    ${chalk.cyan(`Render:`)} ${render === null ? '<none>' : (render.error ? chalk.red(render.error.message) : `file://${render.value}`)}
     `)
 
-    return [ ...locations, octopusLocation ]
+    return [...locations, octopusLocation]
   }, Promise.resolve([]))
 }
