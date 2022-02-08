@@ -5,8 +5,9 @@ import { getMapped } from '../../utils/common'
 import type { SourceShapeFill, SourceShapeGradientColor } from '../source/shape-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceFillGradientType } from '../source/types'
-import { getLinearGradientPoints, scaleLineSegment } from '../../utils/gradient'
+import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -49,6 +50,9 @@ export class OctopusEffectFillGradient {
   }
 
   private _getGradientStops(colors: SourceShapeGradientColor[] = []): Octopus['FillGradient']['gradient']['stops'] {
+    // TODO: Add midpoints
+    // TODO: Fix for multiple stops at the same location (filter for start/end)
+
     return colors.map(this._getGradientStop)
   }
 
@@ -73,14 +77,17 @@ export class OctopusEffectFillGradient {
 
   private get _transformLinear(): Octopus['Transform'] {
     const layer: SourceLayerShape = this.sourceLayer
-    const { angle, scale, reverse } = layer.fill
+    const { angle, scale } = layer.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
 
-    const [P1, P2] = getLinearGradientPoints({ angle, inverse: reverse })
-
-    const horizontal = scale
-    const vertical = (width / height) * scale
-    const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, horizontal, vertical, center: { x: 0.5, y: 0.5 } })
+    const [P1, P2] = angleToPoints({ angle, width, height })
+    const [SP1, SP2] = scaleLineSegment({
+      p1: P1,
+      p2: P2,
+      horizontal: scale,
+      vertical: scale,
+      center: { x: 0.5, y: 0.5 },
+    })
 
     const p1 = { x: width * SP1.x, y: height * SP1.y }
     const p2 = { x: width * SP2.x, y: height * SP2.y }
@@ -91,15 +98,35 @@ export class OctopusEffectFillGradient {
     const scaleY = p2.x - p1.x
     const tx = p1.x - boundTx
     const ty = p1.y - boundTy
-
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
   private get _transformRadial(): Octopus['Transform'] {
-    // TODO
-    // TODO
-    // TODO
-    return [1, 0, 0, 1, 0, 0]
+    const layer: SourceLayerShape = this.sourceLayer
+    const { angle, scale } = layer.fill
+    const { width, height, boundTx, boundTy } = this._transformAlignParams
+
+    const [P1, P2] = angleToPoints({ angle, width, height })
+    const horizontal = width * scale
+    const vertical = height * scale
+    const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, horizontal, vertical, center: { x: 0.5, y: 0.5 } })
+
+    const line = createLine(createPoint(SP1.x, SP1.y), createPoint(SP2.x, SP2.y))
+    const size = line.length
+
+    const centerPoint = createPoint(width / 2 + boundTx, height / 2 + boundTy)
+    const oval = createPathEllipse(createPoint(0, 0), createSize(size))
+    oval.position = centerPoint
+    const [, , s2, s3] = oval.segments.map((seg) => seg.point)
+    const [p1, p2, p3] = [centerPoint, s2, s3]
+
+    const scaleX = p2.x - p1.x
+    const skewY = p2.y - p1.y
+    const skewX = p3.x - p1.x
+    const scaleY = p3.y - p1.y
+    const tx = p1.x - boundTx
+    const ty = p1.y - boundTy
+    return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
   private _getPositioning(): Octopus['FillPositioning'] {

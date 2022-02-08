@@ -3,30 +3,37 @@ import { createPath, createPoint } from './paper-factories'
 
 type Point = { x: number; y: number }
 
-function variantA({ angle, inverse }: LinearGradientPointsParams): [Point, Point] {
-  const p1 = { x: 0, y: 0.5 + tan(angle) / 2 }
-  const p2 = { x: 1, y: 0.5 - tan(angle) / 2 }
-  return inverse ? [p2, p1] : [p1, p2]
-}
-
-function variantB({ angle, inverse }: LinearGradientPointsParams): [Point, Point] {
-  const p1 = { x: 0.5 - tan(90 - angle) / 2, y: 1 }
-  const p2 = { x: 0.5 + tan(90 - angle) / 2, y: 0 }
-  return inverse ? [p2, p1] : [p1, p2]
-}
-
-export type LinearGradientPointsParams = { angle: number; inverse: boolean }
-export function getLinearGradientPoints(params: LinearGradientPointsParams): [Point, Point] {
-  let angle = params.angle
-  let inverse = params.inverse
-
-  angle = mod(angle, 360)
-  if (angle >= 180) inverse = !inverse
-  angle = mod(angle, 180)
-
-  if (angle >= 135) return variantA({ angle, inverse: !inverse })
-  if (angle >= 45) return variantB({ angle, inverse })
-  return variantA({ angle, inverse })
+export type AngleToPointsParams = { angle: number; width: number; height: number }
+export function angleToPoints(params: AngleToPointsParams): [Point, Point] {
+  const { width, height } = params
+  const angle = mod(params.angle, 360)
+  const over180 = angle >= 180
+  const side = (angle: number, isReverted: boolean) => {
+    const relation = angle % 180 > 90 ? width / height : height / width
+    const value = relation > tan(angle % 90)
+    return isReverted ? !value : value
+  }
+  const halfW = width / 2
+  const halfH = height / 2
+  const angleNormalized = angle % 90
+  const isReverted = (angle >= 90 && angle < 180) || (angle >= 270 && angle < 360)
+  const tg1 = tan(isReverted ? angle : angleNormalized)
+  const tg2 = tan(isReverted ? 90 - angle : 90 - angleNormalized)
+  const onY = side(angle, isReverted)
+  const x2 = Math.round(onY ? width : halfW + halfH * tg2)
+  const y2 = Math.round(onY ? halfH - halfW * tg1 : 0)
+  const x1 = onY ? 0 : width - x2
+  const y1 = onY ? height - y2 : height
+  const invertException = isReverted && tan(angleNormalized) > width / height
+  return (invertException ? !over180 : over180)
+    ? [
+        { x: x2 / width, y: y2 / height },
+        { x: x1 / width, y: y1 / height },
+      ]
+    : [
+        { x: x1 / width, y: y1 / height },
+        { x: x2 / width, y: y2 / height },
+      ]
 }
 
 type ScaleLineSegmentParams = {
