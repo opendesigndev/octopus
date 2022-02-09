@@ -1,7 +1,8 @@
+import path from 'path'
 import chalk from 'chalk'
 
 import createSourceTree from './create-source-tree'
-import SourceDesign from '../../src/entities-source/source-design'
+import SourceDesign from '../../src/entities/source/source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
 
@@ -18,16 +19,16 @@ export async function prepareSourceDesign(options: PrepareSourceDesignOptions) {
   const manifestLocation = await saver('manifest.json', stringify(sourceDesign.manifest.raw))
   const interactionsLocation = await saver('interactions.json', stringify(sourceDesign.interactions.raw))
   const resourcesLocation = await saver('resources.json', stringify(sourceDesign.resources.raw))
+  sourceDesign.images.forEach(async image => {
+    await saver(path.basename(image.path), image.rawValue)
+  })
 
   console.log(`${chalk.yellow('Manifest: ')}
-    file://${ manifestLocation }
-  `)
+    file://${ manifestLocation }`)
   console.log(`${chalk.yellow('Interactions: ')}
-    file://${ interactionsLocation }
-  `)
+    file://${ interactionsLocation }`)
   console.log(`${chalk.yellow('Resources: ')}
-    file://${ resourcesLocation }
-  `)
+    file://${ resourcesLocation }`)
 
   return sourceDesign
 }

@@ -5,7 +5,8 @@
   "workspaces": {
     "packages": [
       "octopus-xd",
-      "octopus-ai"
+      "octopus-ai",
+      "octopus-common"
     ],
     "nohoist": [
       "**"

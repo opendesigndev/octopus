@@ -1,5 +1,5 @@
 export default {
-  LAYER_TRANSFORM: [ 1, 0, 0, 1, 0, 0 ],
+  LAYER_TRANSFORM: [1, 0, 0, 1, 0, 0],
   BLEND_MODE: 'NORMAL',
   EFFECTS: {
     SHADOW_CHOKE: 0,
@@ -17,5 +17,8 @@ export default {
   },
   LAYER: {
     NAME: 'Layer'
+  },
+  SHAPE: {
+    BOOLEAN_OP: 'UNION'
   }
 } as const

@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 import readPackageUpAsync from 'read-pkg-up'
 
 import createEnvironment from './services/general/environment'
@@ -8,10 +9,24 @@ import ArtboardConverter from './services/conversion/artboard-converter'
 import type { NormalizedReadResult } from 'read-pkg-up'
 import type { Logger } from './typings'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
+import type SourceDesign from './entities/source/source-design'
+import type { Octopus } from './typings/octopus'
+import OctopusManifest from './entities/octopus/octopus-manifest'
 
 
 type OctopusXDConverterOptions = {
   logger?: Logger
+}
+
+type ConvertDesignOptions = {
+  sourceDesign: SourceDesign
+}
+
+type ConversionResult = {
+  targetArtboardId: string,
+  value: Octopus['OctopusDocument'] | undefined,
+  error: Error | null,
+  time: number
 }
 
 /**
@@ -51,10 +66,54 @@ export default class OctopusXDConverter {
     })
   }
 
-  convertArtboardById(options: ArtboardConversionOptions) {
-    return new ArtboardConverter({
-      ...options,
+  private async _convertArtboardByIdSafe(options: ArtboardConversionOptions) {
+    try {
+      const value = await new ArtboardConverter({
+        ...options,
+        octopusXdConverter: this
+      }).convert()
+      
+      return {
+        value,
+        error: null
+      }
+    } catch (err) {
+      return {
+        value: undefined,
+        error: err
+      }
+    }
+  }
+
+  async convertDesign(options: ConvertDesignOptions) {
+    const artboards = await Promise.all(options.sourceDesign.artboards.map(artboard => {
+      return this.convertArtboardById({
+        targetArtboardId: artboard.meta.id,
+        sourceDesign: options.sourceDesign
+      })
+    }))
+
+    const manifest = await new OctopusManifest({
+      sourceDesign: options.sourceDesign,
       octopusXdConverter: this
     }).convert()
+
+    return {
+      manifest,
+      artboards
+    }
+  }
+
+  async convertArtboardById(options: ArtboardConversionOptions): Promise<ConversionResult> {
+    const timeStart = performance.now()
+    const { value, error } = await this._convertArtboardByIdSafe(options)
+    const time = performance.now() - timeStart
+
+    return {
+      targetArtboardId: options.targetArtboardId,
+      value,
+      error,
+      time
+    }
   }
 }
