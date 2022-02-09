@@ -1,7 +1,8 @@
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import SourceLayerShape from "../entities-source/source-layer-shape"
 import SourceResources from "../entities-source/source-resources"
 import type { Octopus } from '../typings/octopus'
-import { asNumber } from '../utils/as'
 import OctopusEffectColorFill from "./octopus-effect-color-fill"
 
 type OctopusEffectStrokeOptions = {

@@ -1,7 +1,8 @@
 
+import SourceResources from '../entities-source/source-resources'
 import {SourceLayer} from '../factories/create-source-layer'
 import type { Octopus } from '../typings/octopus'
-import { RawArtBoardEntryResources } from '../typings/source'
+import { RawResources } from '../typings/source'
 import OctopusArtboard from './octopus-artboard'
 import OctopusLayerGroup from './octopus-layer-group'
 
@@ -44,7 +45,7 @@ export default class OctopusLayerCommon {
         return hiddenContentIds
       }
 
-      get resources ():RawArtBoardEntryResources|undefined {
+      get resources (): SourceResources|undefined {
         return this._parent.resources
       }
       

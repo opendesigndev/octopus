@@ -55,7 +55,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
         
         if (!common) return null
-
+        //@ts-ignore
         return {
           ...common,
           ...this._convertTypeSpecific()

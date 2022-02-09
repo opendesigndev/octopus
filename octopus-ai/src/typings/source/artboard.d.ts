@@ -1,5 +1,5 @@
 import { RawLayer } from "./layer"
-import { RawResources } from "./resources"
+import { RawResources, ObjectId } from "./resources"
 
 export type RawArtboardEntryContents = {
     Filter?:string,
@@ -16,8 +16,6 @@ export type RawArtboardEntryResourcesPropertiesUsageCreatorInfo = {
 export type RawArtboardEntryResourcesPropertiesUsage={
     CreatorInfo:RawArtboardEntryResourcesPropertiesUsageCreatorInfo
 }&ObjectId
-
-export type ObjectId= {ObjID?:number}
 
 export type RawArtboardEntryResourcesProperties = {
     [id:string]:{

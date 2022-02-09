@@ -3,9 +3,9 @@ import OctopusAIConverter from '..'
 import SourceDesign from '../entities-source/source-design'
 import SourceArtboard from '../entities-source/source-artboard'
 import { OctopusLayer} from '../factories/create-octopus-layer'
-import {asArray} from '../utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import type { Octopus } from '../typings/octopus'
-import { getConverted } from '../utils/common'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusArtboardOptions = {
     sourceDesign: SourceDesign,
@@ -38,8 +38,6 @@ export default class OctopusArtboard {
           })
           return octopusLayer ? [ ...layers, octopusLayer ] : layers
         }, []) 
-
-        return []
       }
 
       get dimensions () {
