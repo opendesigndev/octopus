@@ -1,9 +1,5 @@
 import SourceLayerCommon from './source-layer-common'
-import {RawGroupLayer, RawLayer} from '../typings/source'
 import {SourceLayerParent} from './source-layer-common'
-import { asArray } from '../utils/as';
-import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
-import SourceArtboard from './source-artboard';
 import { RawShapeLayer } from '../typings/source/shape-layer';
 import SourceLayerShapeSubPath from './source-layer-shape-subpath'
 
@@ -82,10 +78,24 @@ type SourceLayerShapeOptions = {
     get colorSpaceStroking (){
         return this.graphicsState?.ColorSpaceStroking
     }
-
+    
+    get colorNonStroking () {
+        return this.graphicsState?.ColorNonStroking
+    }
+    
     get lineWidth() {
         return this.graphicsState?.LineWidth
     }
    
-   
+    get transformMatrix () {
+        return this._rawValue?.GraphicsState?.CTM || [1, 0, 0, 1, 0, 0]
+    }
+
+    get fill () {
+        return this._rawValue.Fill
+    }
+
+    get stroke () {
+        return this._rawValue.Stroke
+    }
 }

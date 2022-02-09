@@ -3,7 +3,7 @@ import SourceLayerGroup from '../entities-source/source-layer-group'
 import {OctopusLayerParent} from '../typings/octopus-entities'
 import type { Octopus } from '../typings/octopus'
 import {OctopusLayer} from '../factories/create-octopus-layer'
-import {getConverted} from '../utils/convert'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import {createOctopusLayer} from '../factories/create-octopus-layer'
 
 type OctopusLayerGroupOptions = {

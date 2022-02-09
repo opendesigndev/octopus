@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 import { RawArtboardEntry } from "../typings/source/artboard";
 import SourceBounds from './source-bounds';
-import { asArray, asNumber } from '../utils/as';
+import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
 import { RawLayer } from '../typings/source/layer';
 import SourceResources from './source-resources';

@@ -69,13 +69,14 @@ export default class OctopusArtboard {
           throw new Error('Artboard \'id\' property is missing.')
         }
     
-       // const dimensions = this._getDimensions().convert()
+       const dimensions = this._sourceArtboard.dimensions
     
         return {
           type: 'ARTBOARD',
           version: await this._getVersion(),
           id: this.id,
-          layers: getConverted(this._layers)
+          dimensions,
+          layers: getConverted(this._layers),
         }
       }
 }

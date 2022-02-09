@@ -18,4 +18,8 @@ export default class SourceLayerShapeSubPath {
     get type () {
         return this._rawValue.Type
     }
+
+    get coords (){
+        return this._rawValue.Coords
+    }
 }

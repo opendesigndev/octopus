@@ -1,6 +1,6 @@
 import SourceLayerShape from "../entities-source/source-layer-shape"
 import SourceResources from "../entities-source/source-resources"
-import {convertDeviceRGB, getColorSpaceName, convertDeviceCMYK, convertDeviceGray, convertICCBased, guessColorSpaceByComponents, parseColor} from '../utils/colors'
+import {convertDeviceRGB, getColorSpaceName, convertDeviceCMYK, convertDeviceGray, convertICCBased, guessColorSpaceByComponents, parseColor, convertRGBToRGBA} from '../utils/colors'
 import type { Octopus } from '../typings/octopus'
 
 type ColorSpaceType = 'ColorSpaceStroking' | 'ColorSpaceNonStroking'
@@ -32,25 +32,32 @@ export default class OctopusEffectColorFill {
         return this._resources.getColorSpaceValue(colorSpaceName)
     }
 
+    private get color () {
+     return  (this._colorSpaceType === 'ColorSpaceNonStroking'
+     ? this._sourceLayer.colorNonStroking
+     : this._sourceLayer.colorStroking ) 
+     || []
+    }
+
 
     private _parseColor () {
-        const color = this._sourceLayer.colorStroking || []
-                // check this mess of types
+        const color = this.color
         const colorSpace = this.colorSpace
         const colorSpaceName = getColorSpaceName(colorSpace)
 
         switch(colorSpace){
             case 'DeviceRGB':
-                return convertDeviceRGB(color)
+                return convertRGBToRGBA(convertDeviceRGB(color))
               case 'DeviceCMYK':
-                return convertDeviceCMYK(color)
+                return convertRGBToRGBA(convertDeviceCMYK(color))
               case 'DeviceGray':
-                return convertDeviceGray(color)
+                return convertRGBToRGBA(convertDeviceGray(color))
               case 'ICCBased':
-                return convertICCBased(color)
+                return convertRGBToRGBA(convertICCBased(color))
               default:
+                //@todo: remove console use logger
                 console.warn('convertColor', 'Unknown ColorSpace', {colorSpaceName})
-                return guessColorSpaceByComponents(color)
+                return convertRGBToRGBA(guessColorSpaceByComponents(color))
         }
     }
 

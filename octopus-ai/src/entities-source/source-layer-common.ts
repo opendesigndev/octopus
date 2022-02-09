@@ -1,6 +1,6 @@
 import SourceArtboard from "./source-artboard"
 import SourceLayerGroup from "./source-layer-group"
-import type { RawArtBoardEntryResources, RawLayer } from '../typings/source'
+import type { RawLayer } from '../typings/source'
 import SourceLayerXObject from './source-layer-x-object'
 import SourceResources from "./source-resources"
 

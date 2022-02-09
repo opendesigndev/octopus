@@ -1,7 +1,7 @@
 import SourceLayerCommon from './source-layer-common'
 import {RawGroupLayer, RawLayer} from '../typings/source'
 import {SourceLayerParent} from './source-layer-common'
-import { asArray } from '../utils/as';
+import { asArray } from '@avocode/octopus-common/dist/utils/as';
 import { createSourceLayer, SourceLayer } from '../factories/create-source-layer';
 import SourceArtboard from './source-artboard';
 

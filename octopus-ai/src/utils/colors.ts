@@ -96,7 +96,10 @@ export function roundComponents(components: RgbColorComponents): RgbColorCompone
 export function parseColor(colorCompontents:number[]):number[]{
     return colorCompontents
     .map((channel)=>Number.isFinite(channel)?channel:0)
-    .map((channel)=>Math.round(channel))
     .map((channel)=>Math.max(channel,0))
-    .map((channel)=>Math.min(channel,255))
+    .map((channel)=>Math.min(channel,1))
+}
+
+export function convertRGBToRGBA(color:number[]):number[] {
+  return color.map((c)=>c/255)
 }

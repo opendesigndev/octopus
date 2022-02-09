@@ -50,8 +50,8 @@ export default class OctopusEffectStroke {
     }
 
     convert(): Octopus['VectorStroke'] | null {
-        const dashing = this._parseDashing()
-        const style =  dashing ? 'DASHED' : 'SOLID'
+        const dashProperties = this._parseDashing()
+        const style = dashProperties.dashing ? 'DASHED' : 'SOLID'
         const fill = (new OctopusEffectColorFill({
             resources:this._resources,
             sourceLayer:this._sourceLayer,
@@ -66,7 +66,7 @@ export default class OctopusEffectStroke {
             style,
             lineJoin: this.lineJoin,
             lineCap: this.lineCap,
-            ...dashing,
+            ...dashProperties,
         }   
     }
 }  

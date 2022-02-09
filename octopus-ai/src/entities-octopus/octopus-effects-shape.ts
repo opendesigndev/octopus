@@ -4,10 +4,11 @@ import SourceLayerShape from '../entities-source/source-layer-shape'
 import OctopusEffectFill from './octopus-effect-color-fill'
 import type { Octopus } from '../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import SourceResources from '../entities-source/source-resources'
 
 type OctopusEffectsShapeOptions = {
     sourceLayer: SourceLayerShape,
-    parent: OctopusLayerParent,
+    resources: SourceResources,
   }
 
 type ShapeEffects = {
@@ -17,26 +18,26 @@ type ShapeEffects = {
 
 export default class OctopusEffectsShape {
   private _sourceLayer: SourceLayerShape
-  private _parent: OctopusLayerParent
+  private _resources: SourceResources
 
   constructor(options: OctopusEffectsShapeOptions) {
     this._sourceLayer = options.sourceLayer
-    this._parent =  options.parent
+    this._resources =  options.resources
   }
 
   private _parseStrokes(): OctopusEffectStroke[] {
-    return this._parent.resources && this._sourceLayer
+    return this._sourceLayer.stroke
       ? [new OctopusEffectStroke({ 
-        resources: this._parent.resources,
+        resources: this._resources,
         sourceLayer: this._sourceLayer
        }) ]
       : []
   }
 
   private _parseFills(): OctopusEffectFill[] {
-    return this._parent.resources && this._sourceLayer
+    return this._sourceLayer.fill
       ? [new OctopusEffectFill({ 
-        resources: this._parent.resources,
+        resources: this._resources,
         sourceLayer: this._sourceLayer,
         colorSpaceType: 'ColorSpaceNonStroking'
        }) ]
