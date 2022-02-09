@@ -38,7 +38,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
       ...(styles.length ? { styles } : null),
       frame,
       horizontalAlign,
-      // verticalAlign?: 'TOP' | 'CENTER' | 'BOTTOM'
+      // verticalAlign?: 'TOP' | 'CENTER' | 'BOTTOM' // TODO
     }
   }
 

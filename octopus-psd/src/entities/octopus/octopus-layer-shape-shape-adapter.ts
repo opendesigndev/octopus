@@ -41,7 +41,6 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
-      // ...this.shapeEffects.convert() // TODO
     }
     return [fillShape]
   }

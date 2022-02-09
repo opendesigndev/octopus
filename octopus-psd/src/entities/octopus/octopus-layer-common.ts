@@ -31,7 +31,7 @@ export class OctopusLayerCommon {
     shapeLayer: 'SHAPE',
     textLayer: 'TEXT',
     layer: 'SHAPE',
-    // backgroundLayer: 'TODO',
+    // TODO: backgroundLayer: 'TODO',
   } as const
 
   constructor(options: OctopusLayerCommonOptions) {
@@ -95,21 +95,10 @@ export class OctopusLayerCommon {
     return this.type !== null
   }
 
-  //   /**
-  //    * @TODO Im not sure if it should be defined here or on specific layer types.
-  //    */
-  //   effects() {
-  //     return new OctopusEffects({
-  //       sourceLayer: this._sourceLayer,
-  //     })
-  //   }
-
   convertCommon() {
     if (!this.isConvertible) return null
 
     const type = this.type as NotNull<typeof this.type>
-    // const effectsArray = this.effects().convert()
-    // const effects = effectsArray.length ? { effects: effectsArray } : null
 
     return {
       id: this.id,
@@ -119,7 +108,6 @@ export class OctopusLayerCommon {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
-      // ...effects,
     }
   }
 }

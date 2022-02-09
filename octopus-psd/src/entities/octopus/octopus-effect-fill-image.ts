@@ -30,7 +30,7 @@ export class OctopusEffectFillImage {
 
   private _mapPositioning(layer: SourceLayerShape | SourceLayerLayer): Octopus['FillPositioning'] {
     const { width, height } = layer.dimensions
-    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0] // TODO
+    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0] // TODO patterns will need fix
     return { layout: 'FILL', origin: 'LAYER', transform }
   }
 
