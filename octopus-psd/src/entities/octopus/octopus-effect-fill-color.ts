@@ -1,20 +1,20 @@
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
-import type { SourceLayerShape } from '../source/source-layer-shape'
+import { SourceShapeFill } from '../source/source-effect-fill'
 
 type OctopusFillOptions = {
-  sourceLayer: SourceLayerShape
+  fill: SourceShapeFill
 }
 
 export class OctopusEffectFillColor {
-  protected _sourceLayer: SourceLayerShape
+  protected _fill: SourceShapeFill
 
   constructor(options: OctopusFillOptions) {
-    this._sourceLayer = options.sourceLayer
+    this._fill = options.fill
   }
 
   convert(): Octopus['FillColor'] {
-    const color = convertColor(this._sourceLayer.fill?.color)
+    const color = convertColor(this._fill.color)
     return { type: 'COLOR', color }
   }
 }

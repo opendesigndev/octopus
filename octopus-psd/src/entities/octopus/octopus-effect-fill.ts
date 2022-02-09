@@ -5,43 +5,37 @@ import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
+import type { SourceShapeFill } from '../source/source-effect-fill'
 
 type OctopusFillOptions = {
   parent: OctopusLayerShapeShapeAdapter
+  fill: SourceShapeFill
 }
 
 export class OctopusEffectFill {
   protected _parent: OctopusLayerShapeShapeAdapter
-
-  static FILL_TYPE_MAP = {
-    solidColorLayer: 'COLOR',
-    gradientLayer: 'GRADIENT',
-    patternLayer: 'IMAGE',
-  } as const
+  protected _fill: SourceShapeFill
 
   constructor(options: OctopusFillOptions) {
     this._parent = options.parent
+    this._fill = options.fill
   }
 
-  get sourceLayer(): SourceLayerShape {
-    return this._parent.sourceLayer
+  get fill(): SourceShapeFill {
+    return this._fill
   }
 
   get fillType(): Octopus['FillType'] {
-    const type = this.sourceLayer.fill.class
-    const result = getMapped(type, OctopusEffectFill.FILL_TYPE_MAP, undefined)
-    if (!result) {
-      this._parent.converter?.logWarn('Unknown Fill type', { type })
-      return 'COLOR'
-    }
-    return result
+    if (this.fill.pattern) return 'IMAGE'
+    if (this.fill.gradient) return 'GRADIENT'
+    return 'COLOR'
   }
 
   convert(): Octopus['Fill'] {
-    const sourceLayer = this.sourceLayer
+    const fill = this.fill
     const parent = this._parent
-    if (this.fillType === 'GRADIENT') return new OctopusEffectFillGradient({ parent }).convert()
+    if (this.fillType === 'GRADIENT') return new OctopusEffectFillGradient({ parent, fill }).convert()
     if (this.fillType === 'IMAGE') return new OctopusEffectFillImage({ parent }).convert()
-    return new OctopusEffectFillColor({ sourceLayer }).convert()
+    return new OctopusEffectFillColor({ fill }).convert()
   }
 }

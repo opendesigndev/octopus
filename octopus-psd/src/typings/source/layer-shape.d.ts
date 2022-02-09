@@ -15,7 +15,7 @@ export type RawShapeGradientColors = {
   type?: 'userStop'
 }
 
-export type RawShapeGradient = {
+export type RawFillGradient = {
   colors?: RawShapeGradientColors[]
   gradientForm?: 'customStops'
   interfaceIconFrameDimmed?: number
@@ -23,21 +23,29 @@ export type RawShapeGradient = {
   transparency?: RawShapeTransparency[]
 }
 
+export type RawFillPattern = {
+  ID?: string
+  name?: string
+}
+
 export type RawGradientType = 'linear' | 'radial' | 'reflected' | 'Angl' | 'Dmnd'
 
 export type RawGradientsInterpolationMethod = 'Perc' | 'Lnr ' | 'Gcls'
 
-export type RawShapeFill = {
+export type RawFill = {
+  align?: boolean
+  angle?: RawUnitAngle
+  Angl?: RawUnitAngle
   class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
   color?: RawColor
   dither?: boolean
+  gradient?: RawFillGradient
   gradientsInterpolationMethod?: RawGradientsInterpolationMethod
-  type?: RawGradientType
-  angle?: RawUnitAngle
-  gradient?: RawShapeGradient
+  offset?: RawShapeStrokeOffset
+  pattern?: RawFillPattern
   reverse?: boolean
-  align?: boolean
   scale?: RawUnitPercent
+  type?: RawGradientType
 }
 
 export type RawShapeMask = {
@@ -57,19 +65,6 @@ export type RawShapeStrokeOffset = {
   vertical?: RawUnitPercent
 }
 
-export type RawShapeStrokeStyleContent = {
-  color?: RawColor
-  align?: boolean
-  angle?: RawUnitAngle
-  dither?: boolean
-  gradient?: RawShapeGradient
-  gradientsInterpolationMethod?: RawGradientsInterpolationMethod
-  offset?: RawShapeStrokeOffset
-  reverse?: boolean
-  scale?: RawUnitPercent
-  type?: RawGradientType
-}
-
 export type RawStrokeStyleLineAlignment =
   | 'strokeStyleAlignInside'
   | 'strokeStyleAlignCenter'
@@ -83,7 +78,7 @@ export type RawShapeStrokeStyle = {
   fillEnabled?: boolean
   strokeEnabled?: boolean
   strokeStyleBlendMode?: RawBlendMode
-  strokeStyleContent?: RawShapeStrokeStyleContent
+  strokeStyleContent?: RawFill
   strokeStyleLineAlignment?: RawStrokeStyleLineAlignment
   strokeStyleLineCapType?: RawStrokeStyleLineCapType
   strokeStyleLineDashOffset?: RawUnitPoint
@@ -101,7 +96,7 @@ export type RawShapeStrokeStyle = {
 export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
-  fill?: RawShapeFill
+  fill?: RawFill
   layerEffects?: {} // TODO
   mask?: RawShapeMask
   path?: RawPath
