@@ -4,7 +4,7 @@
  */
 
 import { createPath, createPoint, createSegment, createTranslationMatrix } from './paper-factories'
-import type { SourcePathComponent, SourceSubpath, SourceSubpathPoint } from '../entities/source/shape-path'
+import type { SourcePathComponent, SourceSubpath, SourceSubpathPoint } from '../entities/source/source-path'
 import type { SourcePointXY } from '../entities/source/types'
 
 const createPointSegment = ({ x, y }: SourcePointXY): paper.Segment => {

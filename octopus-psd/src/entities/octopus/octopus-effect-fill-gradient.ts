@@ -2,7 +2,7 @@ import type { ElementOf } from '../../typings/helpers'
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import type { SourceShapeFill, SourceShapeGradientColor } from '../source/shape-fill'
+import type { SourceShapeGradientColor } from '../source/source-effect-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceFillGradientType } from '../source/types'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
@@ -69,7 +69,6 @@ export class OctopusEffectFillGradient {
   }
 
   private _getGradient(): Octopus['FillGradient']['gradient'] {
-    const fill: SourceShapeFill = this.sourceLayer.fill
     const type = this.type
     const stops = this._gradientStops
     return { type, stops }

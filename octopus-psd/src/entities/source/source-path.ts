@@ -2,16 +2,16 @@ import type { RawPath, RawOrigin, RawPathComponent, RawSubpath, RawSubpathPoint 
 import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from './types'
 import { getBoundsFor, getMatrixFor, getPointFor, getRadiiCornersFor } from './utils'
 
-export type SourceSubpathPoint = ReturnType<typeof mapSubpathPoint>
-function mapSubpathPoint(point: RawSubpathPoint) {
+export type SourceSubpathPoint = ReturnType<typeof convertRawSubpathPoint>
+function convertRawSubpathPoint(point: RawSubpathPoint) {
   const anchor = getPointFor(point?.anchor)
   const backward = point.backward ? getPointFor(point?.backward) : undefined
   const forward = point.forward ? getPointFor(point?.forward) : undefined
   return { ...point, anchor, backward, forward }
 }
 
-export type SourceOrigin = ReturnType<typeof mapOrigin>
-function mapOrigin(origin: RawOrigin) {
+export type SourceOrigin = ReturnType<typeof convertRawOrigin>
+function convertRawOrigin(origin: RawOrigin) {
   const type = origin.type ? origin.type.toString() : undefined
   const bounds: SourceBounds = { ...origin.bounds, ...getBoundsFor(origin.bounds) }
   const radii: SourceRadiiCorners = { ...origin.radii, ...getRadiiCornersFor(origin.radii) }
@@ -19,27 +19,27 @@ function mapOrigin(origin: RawOrigin) {
   return { ...origin, type, bounds, radii, Trnf }
 }
 
-export type SourceSubpath = ReturnType<typeof mapSubpath>
-function mapSubpath(subpath: RawSubpath) {
-  const points: SourceSubpathPoint[] = (subpath.points ?? []).map(mapSubpathPoint)
+export type SourceSubpath = ReturnType<typeof convertRawSubpath>
+function convertRawSubpath(subpath: RawSubpath) {
+  const points: SourceSubpathPoint[] = (subpath.points ?? []).map(convertRawSubpathPoint)
   const closedSubpath: boolean = subpath.closedSubpath ?? false
   return { ...subpath, points, closedSubpath }
 }
 
-export type SourcePathComponent = ReturnType<typeof mapPathComponent>
-function mapPathComponent(component: RawPathComponent) {
-  const subpathListKey: SourceSubpath[] = (component.subpathListKey ?? []).map(mapSubpath)
-  const origin: SourceOrigin = mapOrigin(component?.origin ?? {})
+export type SourcePathComponent = ReturnType<typeof convertRawPathComponent>
+function convertRawPathComponent(component: RawPathComponent) {
+  const subpathListKey: SourceSubpath[] = (component.subpathListKey ?? []).map(convertRawSubpath)
+  const origin: SourceOrigin = convertRawOrigin(component?.origin ?? {})
   return { ...component, origin, subpathListKey }
 }
 
-function mapPathComponents(components: RawPathComponent[]): SourcePathComponent[] {
-  return components.map(mapPathComponent)
+function convertRawPathComponents(components: RawPathComponent[]): SourcePathComponent[] {
+  return components.map(convertRawPathComponent)
 }
 
-export type SourcePath = ReturnType<typeof mapPath>
-export function mapPath(path: RawPath | undefined) {
-  const pathComponents = mapPathComponents(path?.pathComponents ?? [])
+export type SourcePath = ReturnType<typeof convertRawPath>
+export function convertRawPath(path: RawPath | undefined) {
+  const pathComponents = convertRawPathComponents(path?.pathComponents ?? [])
   const bounds = getBoundsFor(path?.bounds)
   return { ...path, bounds, pathComponents }
 }
