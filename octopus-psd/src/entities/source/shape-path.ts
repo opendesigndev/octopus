@@ -1,6 +1,6 @@
 import type { RawPath, RawOrigin, RawPathComponent, RawSubpath, RawSubpathPoint } from '../../typings/source'
-import type { SourceBounds, SourceMatrix } from './types'
-import { getBoundsFor, getMatrixFor, getPointFor } from './utils'
+import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from './types'
+import { getBoundsFor, getMatrixFor, getPointFor, getRadiiCornersFor } from './utils'
 
 export type SourceSubpathPoint = ReturnType<typeof mapSubpathPoint>
 function mapSubpathPoint(point: RawSubpathPoint) {
@@ -12,10 +12,11 @@ function mapSubpathPoint(point: RawSubpathPoint) {
 
 export type SourceOrigin = ReturnType<typeof mapOrigin>
 function mapOrigin(origin: RawOrigin) {
-  const Trnf: SourceMatrix = getMatrixFor(origin.Trnf)
-  const bounds: SourceBounds = { ...origin.bounds, ...getBoundsFor(origin.bounds) }
   const type = origin.type ? origin.type.toString() : undefined
-  return { ...origin, Trnf, bounds, type }
+  const bounds: SourceBounds = { ...origin.bounds, ...getBoundsFor(origin.bounds) }
+  const radii: SourceRadiiCorners = { ...origin.radii, ...getRadiiCornersFor(origin.radii) }
+  const Trnf: SourceMatrix = getMatrixFor(origin.Trnf)
+  return { ...origin, type, bounds, radii, Trnf }
 }
 
 export type SourceSubpath = ReturnType<typeof mapSubpath>

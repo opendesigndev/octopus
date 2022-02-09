@@ -1,7 +1,5 @@
 import type { RawBlendOptions, RawBounds, RawFraction, RawSize, RawColor, RawUnitPercent } from './shared'
 
-type RawTransform = [number, number, number, number, number, number, number, number] // TODO recheck if there are always 8 numbers
-
 type RawWarp = {
   bounds?: RawBounds
   uOrder?: number
@@ -48,12 +46,12 @@ export type RawSmartObject = {
   filterFX?: RawFilterFX
   frameCount?: number
   frameStep?: RawFraction
-  nonAffineTransform?: RawTransform
+  nonAffineTransform?: number[]
   placed?: string
   resolution?: number
   size?: RawSize
   totalPages?: number
-  transform?: RawTransform
+  transform?: number[]
   type?: number
   warp?: RawWarp
 }

@@ -13,6 +13,13 @@ export type SourceBounds = {
   top: number
 }
 
+export type SourceRadiiCorners = {
+  bottomLeft: number
+  bottomRight: number
+  topLeft: number
+  topRight: number
+}
+
 export type SourceColor = {
   blue: number
   green: number

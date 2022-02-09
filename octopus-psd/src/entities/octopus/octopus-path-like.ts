@@ -76,25 +76,20 @@ export class OctopusPathLike {
     return {
       ...this._getPathBase(pathComponents),
       op: this._getCompoundOperation(last?.shapeOperation),
-      paths: [this._convert(rest), this._convert([last])],
+      paths: [this._convert(rest), this._convert([last])], // TODO: Add optimization to make the compound tree more flat
     }
   }
 
   private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
     const rect = pathComponents[0]
-    const { bottom, left, right, top } = rect?.origin?.bounds ?? {}
+    const { bottom, left, right, top } = rect.origin.bounds
     const [layerTx, layerTy] = this._parent.layerTranslation
-    const tx = asNumber(left) - asNumber(layerTx)
-    const ty = asNumber(top) - asNumber(layerTy)
+    const tx = left - layerTx
+    const ty = top - layerTy
     const transform = createDefaultTranslationMatrix([tx, ty])
-    const rectangle = {
-      x0: 0,
-      y0: 0,
-      x1: asNumber(right) - asNumber(layerTx) - asNumber(tx),
-      y1: asNumber(bottom) - asNumber(layerTy) - asNumber(ty),
-    }
-    const { bottomLeft, bottomRight, topLeft, topRight } = rect?.origin?.radii ?? {}
-    const cornerRadii = [asNumber(topLeft, 0), asNumber(topRight, 0), asNumber(bottomRight, 0), asNumber(bottomLeft, 0)]
+    const rectangle = { x0: 0, y0: 0, x1: right - left, y1: bottom - top }
+    const { bottomLeft, bottomRight, topLeft, topRight } = rect.origin.radii
+    const cornerRadii = [topLeft, topRight, bottomRight, bottomLeft]
     return { ...this._getPathBase(pathComponents), transform, rectangle, cornerRadii }
   }
 
