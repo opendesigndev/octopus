@@ -23,14 +23,16 @@ export type RawShapeGradient = {
   transparency?: RawShapeTransparency[]
 }
 
-export type RawFillGradientType = 'linear' | 'radial' | 'reflected' | 'Angl' | 'Dmnd'
+export type RawGradientType = 'linear' | 'radial' | 'reflected' | 'Angl' | 'Dmnd'
+
+export type RawGradientsInterpolationMethod = 'Perc' | 'Lnr ' | 'Gcls'
 
 export type RawShapeFill = {
   class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
   color?: RawColor
   dither?: boolean
-  gradientsInterpolationMethod?: 'Perc'
-  type?: RawFillGradientType
+  gradientsInterpolationMethod?: RawGradientsInterpolationMethod
+  type?: RawGradientType
   angle?: RawUnitAngle
   gradient?: RawShapeGradient
   reverse?: boolean
@@ -50,23 +52,43 @@ export type RawPath = {
   pathComponents?: RawPathComponent[]
 }
 
+export type RawShapeStrokeOffset = {
+  horizontal?: RawUnitPercent
+  vertical?: RawUnitPercent
+}
+
 export type RawShapeStrokeStyleContent = {
   color?: RawColor
   align?: boolean
   angle?: RawUnitAngle
   dither?: boolean
   gradient?: RawShapeGradient
+  gradientsInterpolationMethod?: RawGradientsInterpolationMethod
+  offset?: RawShapeStrokeOffset
+  reverse?: boolean
+  scale?: RawUnitPercent
+  type?: RawGradientType
 }
+
+export type RawStrokeStyleLineAlignment =
+  | 'strokeStyleAlignInside'
+  | 'strokeStyleAlignCenter'
+  | 'strokeStyleAlignOutside'
+
+export type RawStrokeStyleLineCapType = 'strokeStyleButtCap' | 'strokeStyleRoundCap' | 'strokeStyleSquareCap'
+
+export type RawStrokeStyleLineJoinType = 'strokeStyleMiterJoin' | 'strokeStyleRoundJoin' | 'strokeStyleBevelJoin'
 
 export type RawShapeStrokeStyle = {
   fillEnabled?: boolean
   strokeEnabled?: boolean
   strokeStyleBlendMode?: RawBlendMode
   strokeStyleContent?: RawShapeStrokeStyleContent
-  strokeStyleLineAlignment?: 'strokeStyleAlignCenter'
-  strokeStyleLineCapType?: 'strokeStyleButtCap'
+  strokeStyleLineAlignment?: RawStrokeStyleLineAlignment
+  strokeStyleLineCapType?: RawStrokeStyleLineCapType
   strokeStyleLineDashOffset?: RawUnitPoint
-  strokeStyleLineJoinType?: 'strokeStyleMiterJoin'
+  strokeStyleLineDashSet?: number[]
+  strokeStyleLineJoinType?: RawStrokeStyleLineJoinType
   strokeStyleLineWidth?: number
   strokeStyleMiterLimit?: number
   strokeStyleOpacity?: RawUnitPercent
