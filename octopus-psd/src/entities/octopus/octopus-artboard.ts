@@ -35,7 +35,7 @@ export class OctopusArtboard {
         parent: this,
         layer: sourceLayer,
       })
-      return octopusLayer ? [...layers, octopusLayer] : layers
+      return octopusLayer ? [octopusLayer, ...layers] : layers
     }, [])
   }
 

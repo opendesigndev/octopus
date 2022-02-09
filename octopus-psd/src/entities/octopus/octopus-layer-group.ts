@@ -25,7 +25,7 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
         parent: this,
         layer: sourceLayer,
       })
-      return octopusLayer ? [...layers, octopusLayer] : layers
+      return octopusLayer ? [octopusLayer, ...layers] : layers
     }, [])
   }
 
