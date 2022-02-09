@@ -4,7 +4,7 @@ import { convertColor } from '../../utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceShapeGradientColor } from '../source/source-effect-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceFillGradientType } from '../source/types'
+import type { SourceGradientType } from '../source/types'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
@@ -35,7 +35,7 @@ export class OctopusEffectFillGradient {
   }
 
   get type(): Octopus['FillGradient']['gradient']['type'] {
-    const type: SourceFillGradientType | undefined = this.sourceLayer.fill.type
+    const type: SourceGradientType | undefined = this.sourceLayer.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.FILL_GRADIENT_TYPE_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Fill Gradient type', { type })

@@ -1,8 +1,8 @@
-import type { RawCombineOperation, RawFillGradientType } from '../../typings/source'
+import type { RawCombineOperation, RawGradientType } from '../../typings/source'
 
 export type SourceCombineOperation = RawCombineOperation
 
-export type SourceFillGradientType = RawFillGradientType
+export type SourceGradientType = RawGradientType
 
 export type SourcePointXY = { x: number; y: number }
 
