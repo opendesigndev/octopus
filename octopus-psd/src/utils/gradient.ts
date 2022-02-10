@@ -36,16 +36,10 @@ export function angleToPoints(params: AngleToPointsParams): [Point, Point] {
       ]
 }
 
-type ScaleLineSegmentParams = {
-  p1: Point
-  p2: Point
-  horizontal: number
-  vertical: number
-  center: Point
-}
-export function scaleLineSegment({ p1, p2, horizontal, vertical, center }: ScaleLineSegmentParams): [Point, Point] {
+type ScaleLineSegmentParams = { p1: Point; p2: Point; scaleX: number; scaleY: number; center: Point }
+export function scaleLineSegment({ p1, p2, scaleX, scaleY, center }: ScaleLineSegmentParams): [Point, Point] {
   const path = createPath([createPoint(p1.x, p1.y), createPoint(p2.x, p2.y)])
-  path.scale(horizontal, vertical, createPoint(center.x, center.y))
+  path.scale(scaleX, scaleY, createPoint(center.x, center.y))
   const P1 = path.firstSegment.point
   const P2 = path.lastSegment.point
   return [

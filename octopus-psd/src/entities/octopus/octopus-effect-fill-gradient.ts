@@ -1,4 +1,4 @@
-import type { ElementOf } from '../../typings/helpers'
+import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
@@ -8,7 +8,6 @@ import type { SourceGradientType } from '../source/types'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
-import { reverse } from 'lodash'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -21,7 +20,7 @@ export class OctopusEffectFillGradient {
   protected _parent: OctopusLayerShapeShapeAdapter
   protected _fill: SourceShapeFill
 
-  static FILL_GRADIENT_TYPE_MAP = {
+  static GRADIENT_TYPE_MAP = {
     linear: 'LINEAR',
     radial: 'RADIAL',
     Angl: 'ANGULAR',
@@ -41,12 +40,16 @@ export class OctopusEffectFillGradient {
     return this._fill
   }
 
+  private _isValidGradientType(): boolean {
+    return this.type !== undefined
+  }
+
   get type(): Octopus['FillGradient']['gradient']['type'] {
     const type: SourceGradientType | undefined = this.fill.type
-    const result = getMapped(type, OctopusEffectFillGradient.FILL_GRADIENT_TYPE_MAP, undefined)
+    const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Fill Gradient type', { type })
-      return 'LINEAR'
+      return undefined
     }
     return result
   }
@@ -55,7 +58,7 @@ export class OctopusEffectFillGradient {
     return this.fill.reverse
   }
 
-  private _mapGradientStop = (stop: SourceShapeGradientColor): FillGradientStop => {
+  private _getGradientStop(stop: SourceShapeGradientColor): FillGradientStop {
     const STOP_MAX_LOCATION = 4096
     const color = convertColor(stop?.color)
     const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
@@ -69,10 +72,8 @@ export class OctopusEffectFillGradient {
     // TODO: Add midpoints
     // TODO: Fix for multiple stops at the same location (filter for start/end)
 
-    if (this.isInverse) {
-      return reverse(colors).map(this._mapGradientStop)
-    }
-    return colors.map(this._mapGradientStop)
+    const stops = this.isInverse ? [...colors].reverse() : colors
+    return stops.map((stop) => this._getGradientStop(stop))
   }
 
   private _getGradient(): Octopus['FillGradient']['gradient'] {
@@ -82,15 +83,12 @@ export class OctopusEffectFillGradient {
   }
 
   private get _transformAlignParams() {
-    const fill = this.fill
-    const layer = this.sourceLayer
-    const align = fill.align
-    if (align) {
-      const { width, height } = layer.dimensions
+    if (this.fill.align) {
+      const { width, height } = this.sourceLayer.dimensions
       return { width, height, boundTx: 0, boundTy: 0 }
     }
     const { width, height } = this._parent.parentArtboard.dimensions
-    const { left, top } = layer.bounds
+    const { left, top } = this.sourceLayer.bounds
     return { width, height, boundTx: left, boundTy: top }
   }
 
@@ -99,13 +97,7 @@ export class OctopusEffectFillGradient {
     const { width, height, boundTx, boundTy } = this._transformAlignParams
 
     const [P1, P2] = angleToPoints({ angle, width, height })
-    const [SP1, SP2] = scaleLineSegment({
-      p1: P1,
-      p2: P2,
-      horizontal: scale,
-      vertical: scale,
-      center: { x: 0.5, y: 0.5 },
-    })
+    const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, scaleX: scale, scaleY: scale, center: { x: 0.5, y: 0.5 } })
 
     const p1 = { x: width * SP1.x, y: height * SP1.y }
     const p2 = { x: width * SP2.x, y: height * SP2.y }
@@ -124,9 +116,13 @@ export class OctopusEffectFillGradient {
     const { width, height, boundTx, boundTy } = this._transformAlignParams
 
     const [P1, P2] = angleToPoints({ angle, width, height })
-    const horizontal = width * scale
-    const vertical = height * scale
-    const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, horizontal, vertical, center: { x: 0.5, y: 0.5 } })
+    const [SP1, SP2] = scaleLineSegment({
+      p1: P1,
+      p2: P2,
+      scaleX: scale * width,
+      scaleY: scale * height,
+      center: { x: 0.5, y: 0.5 },
+    })
 
     const line = createLine(createPoint(SP1.x, SP1.y), createPoint(SP2.x, SP2.y))
     const size = line.length
@@ -156,9 +152,11 @@ export class OctopusEffectFillGradient {
     }
   }
 
-  convert(): Octopus['FillGradient'] {
+  convert(): Octopus['FillGradient'] | null {
+    if (!this._isValidGradientType()) return null
     const gradient = this._getGradient()
     const positioning = this._getPositioning()
+
     return { type: 'GRADIENT', gradient, positioning }
   }
 }

@@ -31,7 +31,7 @@ export class OctopusEffectFill {
     return 'COLOR'
   }
 
-  convert(): Octopus['Fill'] {
+  convert(): Octopus['Fill'] | null {
     const fill = this.fill
     const parent = this._parent
     if (this.fillType === 'GRADIENT') return new OctopusEffectFillGradient({ parent, fill }).convert()

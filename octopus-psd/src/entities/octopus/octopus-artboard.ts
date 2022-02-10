@@ -1,7 +1,6 @@
 import type { OctopusPSDConverter } from '../..'
 import type { Octopus } from '../../typings/octopus'
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import type { SourceArtboard } from '../source/source-artboard'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
@@ -14,6 +13,8 @@ export class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusConverter: OctopusPSDConverter
   private _layers: OctopusLayer[]
+
+  static DEFAULT_ID = '1'
 
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
@@ -44,7 +45,7 @@ export class OctopusArtboard {
   }
 
   get id() {
-    return '1'
+    return OctopusArtboard.DEFAULT_ID
   }
 
   get version() {

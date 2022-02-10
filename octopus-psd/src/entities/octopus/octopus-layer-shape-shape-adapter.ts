@@ -33,7 +33,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
 
   private get _fills(): Octopus['Fill'][] {
     const fill = new OctopusEffectFill({ parent: this, fill: this.sourceLayer.fill }).convert()
-    return [fill]
+    return fill ? [fill] : []
   }
 
   private get _strokes(): Octopus['VectorStroke'][] {
@@ -47,7 +47,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
-      strokes: this._strokes,
+      // strokes: this._strokes, // TODO
     }
     return [fillShape]
   }
