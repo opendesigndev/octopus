@@ -1,5 +1,4 @@
 import OctopusEffectStroke from './octopus-effect-stroke'
-import {OctopusLayerParent} from '../typings/octopus-entities'
 import SourceLayerShape from '../entities-source/source-layer-shape'
 import OctopusEffectFill from './octopus-effect-color-fill'
 import type { Octopus } from '../typings/octopus'

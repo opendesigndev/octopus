@@ -15,7 +15,7 @@
       "strictNullChecks": true,
       "moduleResolution": "node",
       "resolveJsonModule": true,
-      "allowJs": true,
+      "allowJs": false,
       "lib": ["es2019", "ES2015.Proxy", "dom"]
     },
     "include": ["src/**/*", "test/**/*", "scripts"]

@@ -1,3 +1,5 @@
+import { RawShapeLayerSubPathPoint } from "../typings/source"
+
 type TransformOptions = {
     parentHeight: number,
     matrix: [number,number,number,number,number,number]
@@ -11,13 +13,13 @@ export function transformCoords(
     const result = []
 
     for (let i = 0; i < coords.length; i += 2) {
-      result.push(...transformPoint(transformOptions, [coords[i], coords[i + 1]]))
+      result.push(...transformCoord(transformOptions, [coords[i], coords[i + 1]]))
     }
   
     return result
   }
   
- export  function transformPoint(
+ export  function transformCoord(
     transformOptions: TransformOptions,
     point: Coord
   ): number[] {
@@ -64,5 +66,23 @@ export function transformCoords(
          return resultCoord
      })
    }
+
+   export function isValid(point:RawShapeLayerSubPathPoint) {
+    if (!hasExpectedType(point)) {
+      return false
+    }
+  
+    if (!point.Coords) {
+      return false
+    }
+  
+    return true
+  }
+  
+  export function hasExpectedType(point:RawShapeLayerSubPathPoint) {
+    const type =point.Type
+    return ['Curve', 'Line', 'Move'].some((t) => t === type)
+  }
+  
 
   

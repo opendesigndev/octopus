@@ -1,4 +1,4 @@
-import { RawShapeLayerSubPath } from '../typings/source/shape-layer';
+import { RawShapeLayerSubPath } from '../typings/source';
 import SourceLayerShape from './source-layer-shape';
 
 
@@ -22,4 +22,8 @@ export default class SourceLayerShapeSubPath {
     get coords (){
         return this._rawValue.Coords
     }
+
+    get points (){
+       return this._rawValue.Points
+    }    
 }
