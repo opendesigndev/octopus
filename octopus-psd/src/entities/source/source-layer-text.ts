@@ -1,7 +1,7 @@
-import type { RawLayerText } from '../../typings/source'
+import type { RawLayerText } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
-import { getBoundsFor, getMatrixFor } from './utils'
+import { getBoundsFor, getMatrixFor } from '../../utils/source'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent

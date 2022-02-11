@@ -5,7 +5,7 @@ import type {
   RawLayerShape,
   RawLayerText,
   RawLayerLayer,
-} from '../typings/source'
+} from '../typings/raw'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
 import { SourceLayerLayer } from '../entities/source/source-layer-layer'

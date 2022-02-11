@@ -1,4 +1,4 @@
-import type { RawLayerBackground } from '../../typings/source'
+import type { RawLayerBackground } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 

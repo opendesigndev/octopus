@@ -1,4 +1,4 @@
-import type { RawShapeStrokeStyle } from '../../typings/source'
+import type { RawShapeStrokeStyle } from '../../typings/raw'
 import { convertRawShapeFill } from './source-effect-fill'
 
 export type SourceShapeStrokeStyle = ReturnType<typeof convertRawShapeStroke>

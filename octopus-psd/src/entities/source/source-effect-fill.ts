@@ -1,5 +1,5 @@
-import type { RawFill, RawFillGradient, RawShapeGradientColors } from '../../typings/source'
-import { getColorFor } from './utils'
+import type { RawFill, RawFillGradient, RawShapeGradientColors } from '../../typings/raw'
+import { getColorFor } from '../../utils/source'
 
 export type SourceShapeGradientColor = ReturnType<typeof convertRawShapeGradientColor>
 function convertRawShapeGradientColor(gradient: RawShapeGradientColors | undefined) {

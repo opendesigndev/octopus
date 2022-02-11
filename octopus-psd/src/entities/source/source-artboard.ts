@@ -1,8 +1,8 @@
-import type { RawArtboard, RawLayer } from '../../typings/source'
+import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusPSDConverter } from '../..'
-import { getBoundsFor } from './utils'
+import { getBoundsFor } from '../../utils/source'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

@@ -1,6 +1,6 @@
-import type { RawPath, RawOrigin, RawPathComponent, RawSubpath, RawSubpathPoint } from '../../typings/source'
-import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from './types'
-import { getBoundsFor, getMatrixFor, getPointFor, getRadiiCornersFor } from './utils'
+import type { RawPath, RawOrigin, RawPathComponent, RawSubpath, RawSubpathPoint } from '../../typings/raw'
+import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source'
+import { getBoundsFor, getMatrixFor, getPointFor, getRadiiCornersFor } from '../../utils/source'
 
 export type SourceSubpathPoint = ReturnType<typeof convertRawSubpathPoint>
 function convertRawSubpathPoint(point: RawSubpathPoint) {

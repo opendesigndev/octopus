@@ -1,5 +1,5 @@
 import type { Octopus } from '../typings/octopus'
-import type { RawColor } from '../typings/source'
+import type { RawColor } from '../typings/raw'
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 export function convertColor(color: RawColor | null | undefined): Octopus['Color'] {

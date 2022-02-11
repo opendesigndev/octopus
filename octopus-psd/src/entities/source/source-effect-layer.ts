@@ -1,4 +1,4 @@
-import type { RawLayerEffect } from '../../typings/source'
+import type { RawLayerEffect } from '../../typings/raw'
 
 export type SourceLayerEffect = ReturnType<typeof convertRawLayerEffect>
 export function convertRawLayerEffect(effect: RawLayerEffect | undefined) {

@@ -1,6 +1,6 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners } from '../../typings/source'
-import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix, SourceRadiiCorners } from './types'
+import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners } from '../typings/raw'
+import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix, SourceRadiiCorners } from '../typings/source'
 
 export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
   const right = asFiniteNumber(value?.right, 0)

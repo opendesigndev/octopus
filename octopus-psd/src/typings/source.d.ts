@@ -1,4 +1,4 @@
-import type { RawCombineOperation, RawGradientType } from '../../typings/source'
+import type { RawCombineOperation, RawGradientType } from './raw'
 
 export type SourceCombineOperation = RawCombineOperation
 

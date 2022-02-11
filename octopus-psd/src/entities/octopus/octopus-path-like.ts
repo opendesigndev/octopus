@@ -7,7 +7,7 @@ import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
 import type { SourcePathComponent } from '../source/source-path'
-import type { SourceCombineOperation } from '../source/types'
+import type { SourceCombineOperation } from '../../typings/source'
 
 type OctopusPathLikeOptions = {
   parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter

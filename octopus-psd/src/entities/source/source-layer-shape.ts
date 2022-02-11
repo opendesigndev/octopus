@@ -1,4 +1,4 @@
-import type { RawLayerShape } from '../../typings/source'
+import type { RawLayerShape } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 import { convertRawPath } from './source-path'
