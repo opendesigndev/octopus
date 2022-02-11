@@ -40,13 +40,6 @@ export class SourceLayerCommon {
     return getBoundsFor(this._rawValue.bounds)
   }
 
-  get dimensions() {
-    const { left, right, top, bottom } = this.bounds
-    const width = right - left
-    const height = bottom - top
-    return { width, height }
-  }
-
   get opacity() {
     return this._rawValue.blendOptions?.opacity?.value
   }

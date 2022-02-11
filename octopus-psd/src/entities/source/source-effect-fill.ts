@@ -24,3 +24,5 @@ export function convertRawShapeFill(fill: RawFill | undefined) {
   const angle = fill?.Angl?.value ?? fill?.angle?.value ?? 0
   return { ...fill, color, gradient, reverse, scale, angle, align }
 }
+
+export class SourceEffectFill {}

@@ -11,6 +11,8 @@ export type SourceBounds = {
   left: number
   right: number
   top: number
+  width: number
+  height: number
 }
 
 export type SourceRadiiCorners = {

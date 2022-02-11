@@ -1,5 +1,4 @@
 import type { Octopus } from '../../typings/octopus'
-import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { createPathData } from '../../utils/path-data'
 import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
@@ -75,6 +74,7 @@ export class OctopusPathLike {
     const last = rest.pop() as SourcePathComponent
     return {
       ...this._getPathBase(pathComponents),
+      type: 'COMPOUND',
       op: this._getCompoundOperation(last?.shapeOperation),
       paths: [this._convert(rest), this._convert([last])], // TODO: Add optimization to make the compound tree more flat
     }
@@ -90,7 +90,8 @@ export class OctopusPathLike {
     const rectangle = { x0: 0, y0: 0, x1: right - left, y1: bottom - top }
     const { bottomLeft, bottomRight, topLeft, topRight } = rect.origin.radii
     const cornerRadii = [topLeft, topRight, bottomRight, bottomLeft]
-    return { ...this._getPathBase(pathComponents), transform, rectangle, cornerRadii }
+    const cornerRadius = cornerRadii[0] // TODO
+    return { ...this._getPathBase(pathComponents), type: 'RECTANGLE', transform, rectangle, cornerRadius }
   }
 
   private _getPath(pathComponents: SourcePathComponent[]): Octopus['Path'] {
@@ -102,6 +103,7 @@ export class OctopusPathLike {
     }
     return {
       ...this._getPathBase(pathComponents),
+      type: 'PATH',
       geometry,
     }
   }
@@ -124,7 +126,7 @@ export class OctopusPathLike {
       return this._convert(sourceLayer.pathComponents)
     } else {
       const sourceLayer = this.sourceLayer as SourceLayerLayer
-      const { width, height } = sourceLayer.dimensions
+      const { width, height } = sourceLayer.bounds
       const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
       const transform = createDefaultTranslationMatrix()
       return { type: 'RECTANGLE', rectangle, transform }

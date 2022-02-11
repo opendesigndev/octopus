@@ -44,12 +44,12 @@ export class OctopusEffectFillGradient {
     return this.type !== undefined
   }
 
-  get type(): Octopus['FillGradient']['gradient']['type'] {
+  get type(): Octopus['FillGradient']['gradient']['type'] | null {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Fill Gradient type', { type })
-      return undefined
+      return null
     }
     return result
   }
@@ -76,15 +76,16 @@ export class OctopusEffectFillGradient {
     return stops.map((stop) => this._getGradientStop(stop))
   }
 
-  private _getGradient(): Octopus['FillGradient']['gradient'] {
+  private _getGradient(): Octopus['FillGradient']['gradient'] | null {
     const type = this.type
+    if (type === null) return null
     const stops = this._gradientStops
     return { type, stops }
   }
 
   private get _transformAlignParams() {
     if (this.fill.align) {
-      const { width, height } = this.sourceLayer.dimensions
+      const { width, height } = this.sourceLayer.bounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
     const { width, height } = this._parent.parentArtboard.dimensions
@@ -155,6 +156,7 @@ export class OctopusEffectFillGradient {
   convert(): Octopus['FillGradient'] | null {
     if (!this._isValidGradientType()) return null
     const gradient = this._getGradient()
+    if (gradient === null) return null
     const positioning = this._getPositioning()
 
     return { type: 'GRADIENT', gradient, positioning }

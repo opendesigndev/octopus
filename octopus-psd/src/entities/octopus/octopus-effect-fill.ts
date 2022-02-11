@@ -1,6 +1,4 @@
 import type { Octopus } from '../../typings/octopus'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
@@ -25,17 +23,25 @@ export class OctopusEffectFill {
     return this._fill
   }
 
-  get fillType(): Octopus['FillType'] {
+  get fillType(): Octopus['FillType'] | null {
     if (this.fill.pattern) return 'IMAGE'
     if (this.fill.gradient) return 'GRADIENT'
-    return 'COLOR'
+    if (this.fill.color) return 'COLOR'
+    return null
   }
 
   convert(): Octopus['Fill'] | null {
     const fill = this.fill
     const parent = this._parent
-    if (this.fillType === 'GRADIENT') return new OctopusEffectFillGradient({ parent, fill }).convert()
-    if (this.fillType === 'IMAGE') return new OctopusEffectFillImage({ parent }).convert()
-    return new OctopusEffectFillColor({ fill }).convert()
+    switch (this.fillType) {
+      case 'GRADIENT':
+        return new OctopusEffectFillGradient({ parent, fill }).convert()
+      case 'IMAGE':
+        return new OctopusEffectFillImage({ parent }).convert()
+      case 'COLOR':
+        return new OctopusEffectFillColor({ fill }).convert()
+      default:
+        return null
+    }
   }
 }

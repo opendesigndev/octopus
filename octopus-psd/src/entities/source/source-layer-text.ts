@@ -12,6 +12,8 @@ export class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawLayerText
   protected _parent: SourceLayerParent
 
+  static DEFAULT_ORIENTATION = 'horizontal'
+
   constructor(options: SourceLayerTextOptions) {
     super()
     this._parent = options.parent
@@ -26,7 +28,7 @@ export class SourceLayerText extends SourceLayerCommon {
     const text = this._rawValue.text
     return {
       ...text,
-      orientation: text?.orientation ?? 'horizontal',
+      orientation: text?.orientation ?? SourceLayerText.DEFAULT_ORIENTATION,
       transform: getMatrixFor(text?.transform),
     }
   }

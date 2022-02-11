@@ -41,7 +41,8 @@ export class OctopusArtboard {
   }
 
   get dimensions() {
-    return this._sourceArtboard.dimensions
+    const { width, height } = this._sourceArtboard.bounds
+    return { width, height }
   }
 
   get id() {

@@ -42,11 +42,4 @@ export class SourceArtboard {
   get bounds() {
     return getBoundsFor(this._rawValue.bounds)
   }
-
-  get dimensions() {
-    const { left, right, top, bottom } = this.bounds
-    const width = right - left
-    const height = bottom - top
-    return { width, height }
-  }
 }

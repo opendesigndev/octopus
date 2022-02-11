@@ -3,12 +3,13 @@ import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners } from
 import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix, SourceRadiiCorners } from './types'
 
 export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
-  return {
-    right: asFiniteNumber(value?.right, 0),
-    left: asFiniteNumber(value?.left, 0),
-    bottom: asFiniteNumber(value?.bottom, 0),
-    top: asFiniteNumber(value?.top, 0),
-  }
+  const right = asFiniteNumber(value?.right, 0)
+  const left = asFiniteNumber(value?.left, 0)
+  const bottom = asFiniteNumber(value?.bottom, 0)
+  const top = asFiniteNumber(value?.top, 0)
+  const width = right - left
+  const height = bottom - top
+  return { right, left, bottom, top, width, height }
 }
 
 export function getRadiiCornersFor(value: RawRadiiCorners | undefined): SourceRadiiCorners {
@@ -20,11 +21,13 @@ export function getRadiiCornersFor(value: RawRadiiCorners | undefined): SourceRa
   }
 }
 
-export function getColorFor(value: RawColor | undefined): SourceColor {
+export function getColorFor(value: RawColor | undefined): SourceColor | null {
+  const { blue, green, red } = value ?? {}
+  if (blue === undefined && green === undefined && red === undefined) return null
   return {
-    blue: asFiniteNumber(value?.blue, 0),
-    green: asFiniteNumber(value?.green, 0),
-    red: asFiniteNumber(value?.red, 0),
+    blue: asFiniteNumber(blue, 0),
+    green: asFiniteNumber(green, 0),
+    red: asFiniteNumber(red, 0),
   }
 }
 

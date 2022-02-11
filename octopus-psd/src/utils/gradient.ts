@@ -25,15 +25,9 @@ export function angleToPoints(params: AngleToPointsParams): [Point, Point] {
   const x1 = onY ? 0 : width - x2
   const y1 = onY ? height - y2 : height
   const invertException = isReverted && tan(angleNormalized) > width / height
-  return (invertException ? !over180 : over180)
-    ? [
-        { x: x2 / width, y: y2 / height },
-        { x: x1 / width, y: y1 / height },
-      ]
-    : [
-        { x: x1 / width, y: y1 / height },
-        { x: x2 / width, y: y2 / height },
-      ]
+  const P1 = { x: x2 / width, y: y2 / height }
+  const P2 = { x: x1 / width, y: y1 / height }
+  return (invertException ? !over180 : over180) ? [P1, P2] : [P2, P1]
 }
 
 type ScaleLineSegmentParams = { p1: Point; p2: Point; scaleX: number; scaleY: number; center: Point }

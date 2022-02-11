@@ -37,7 +37,6 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
 
   private get _shapes(): Octopus['Shape'][] {
     const fillShape: Octopus['Shape'] = {
-      purpose: 'BODY',
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,

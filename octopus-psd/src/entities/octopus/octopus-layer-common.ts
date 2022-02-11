@@ -26,6 +26,8 @@ export class OctopusLayerCommon {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
 
+  static DEFAULT_TRANSLATION = [0, 0] as const
+
   static LAYER_TYPE_MAP = {
     layerSection: 'GROUP',
     shapeLayer: 'SHAPE',
@@ -41,8 +43,7 @@ export class OctopusLayerCommon {
   }
 
   get converter(): OctopusPSDConverter {
-    const parentArtboard = this.parentArtboard
-    return parentArtboard.converter
+    return this.parentArtboard.converter
   }
 
   get parentArtboard(): OctopusArtboard {
@@ -69,8 +70,8 @@ export class OctopusLayerCommon {
       : DEFAULTS.BLEND_MODE
   }
 
-  get layerTranslation(): [number, number] {
-    return [0, 0]
+  get layerTranslation(): readonly [number, number] {
+    return OctopusLayerCommon.DEFAULT_TRANSLATION
   }
 
   get transform() {

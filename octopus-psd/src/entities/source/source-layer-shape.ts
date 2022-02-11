@@ -3,7 +3,7 @@ import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 import { convertRawPath } from './source-path'
 import type { SourcePathComponent, SourcePath } from './source-path'
-import { convertRawShapeFill, SourceShapeFill } from './source-effect-fill'
+import { convertRawShapeFill, SourceEffectFill, SourceShapeFill } from './source-effect-fill'
 import { convertRawShapeStroke, SourceShapeStrokeStyle } from './source-shape-stroke'
 import { convertRawShapeMask, SourceShapeMask } from './source-shape-mask'
 import { convertRawLayerEffect, SourceLayerEffect } from './source-effect-layer'
@@ -33,13 +33,6 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get firstPathComponent(): SourcePathComponent | undefined {
     return this.pathComponents[0]
-  }
-
-  get dimensions() {
-    const { left, right, top, bottom } = this.pathBounds
-    const width = right - left
-    const height = bottom - top
-    return { width, height }
   }
 
   get pathBounds() {

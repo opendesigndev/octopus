@@ -24,8 +24,6 @@ export class OctopusLayerText extends OctopusLayerCommon {
     if (typeof value !== 'string') return null
     const defaultStyle = {} // this._getDefaultStyle() // TODO
     if (!defaultStyle) return null
-    const parseTextTransform = {} as Octopus['TextTransform'] // this._getTextTransform() // TODO
-    if (!parseTextTransform) return null
     const styles = [] as Octopus['StyleRange'][] // this._getStyles(value) // TODO
     const frame = {} as Octopus['TextFrame'] // this._getFrame() // TODO
     const horizontalAlign = 'LEFT' // this._getHorizontalAlign() // TODO
@@ -34,7 +32,6 @@ export class OctopusLayerText extends OctopusLayerCommon {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
-      textTransform: parseTextTransform,
       ...(styles.length ? { styles } : null),
       frame,
       horizontalAlign,
