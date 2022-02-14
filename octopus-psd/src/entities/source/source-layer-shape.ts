@@ -4,9 +4,9 @@ import type { SourceLayerParent } from './source-layer-common'
 import { SourcePath } from './source-path'
 import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
-import { convertRawShapeStroke, SourceShapeStrokeStyle } from './source-shape-stroke'
-import { convertRawShapeMask, SourceShapeMask } from './source-shape-mask'
-import { convertRawLayerEffect, SourceLayerEffect } from './source-effect-layer'
+import { SourceEffectStroke } from './source-effect-stroke'
+import { SourceShapeMask } from './source-shape-mask'
+import { SourceLayerEffect } from './source-effect-layer'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -43,14 +43,15 @@ export class SourceLayerShape extends SourceLayerCommon {
     return new SourceEffectFill(this._rawValue.fill)
   }
 
-  get strokeStyle(): SourceShapeStrokeStyle {
-    return convertRawShapeStroke(this._rawValue.strokeStyle)
+  get stroke() {
+    return new SourceEffectStroke(this._rawValue.strokeStyle)
   }
 
-  get mask(): SourceShapeMask {
-    return convertRawShapeMask(this._rawValue.mask)
+  get mask() {
+    return new SourceShapeMask(this._rawValue.mask)
   }
-  get layerEffects(): SourceLayerEffect {
-    return convertRawLayerEffect(this._rawValue.layerEffects)
+
+  get layerEffects() {
+    return new SourceLayerEffect(this._rawValue.layerEffects)
   }
 }

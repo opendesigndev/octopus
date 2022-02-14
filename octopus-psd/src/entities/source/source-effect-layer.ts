@@ -1,6 +1,14 @@
 import type { RawLayerEffect } from '../../typings/raw'
 
-export type SourceLayerEffect = ReturnType<typeof convertRawLayerEffect>
-export function convertRawLayerEffect(effect: RawLayerEffect | undefined) {
-  return { ...effect } // TODO
+export class SourceLayerEffect {
+  protected _rawValue: RawLayerEffect | undefined
+
+  constructor(effect: RawLayerEffect | undefined) {
+    this._rawValue = effect
+  }
+
+  // TODO remove in the end
+  get RAW() {
+    return this._rawValue
+  }
 }

@@ -2,19 +2,19 @@ import type { RawSubpathPoint } from '../../typings/raw'
 import { getPointFor } from '../../utils/source'
 
 export class SourceSubpathPoint {
-  protected _point: RawSubpathPoint
+  protected _rawValue: RawSubpathPoint
 
   constructor(point: RawSubpathPoint) {
-    this._point = point
+    this._rawValue = point
   }
 
   get anchor() {
-    return getPointFor(this._point?.anchor)
+    return getPointFor(this._rawValue?.anchor)
   }
   get backward() {
-    return this._point.backward ? getPointFor(this._point?.backward) : undefined
+    return this._rawValue.backward ? getPointFor(this._rawValue?.backward) : undefined
   }
   get forward() {
-    return this._point.forward ? getPointFor(this._point?.forward) : undefined
+    return this._rawValue.forward ? getPointFor(this._rawValue?.forward) : undefined
   }
 }

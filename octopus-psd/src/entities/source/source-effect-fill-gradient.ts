@@ -2,13 +2,13 @@ import type { RawFillGradient } from '../../typings/raw'
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color'
 
 export class SourceEffectFillGradient {
-  protected _gradient: RawFillGradient | undefined
+  protected _rawValue: RawFillGradient | undefined
 
   constructor(gradient: RawFillGradient | undefined) {
-    this._gradient = gradient
+    this._rawValue = gradient
   }
 
   get colors() {
-    return this._gradient?.colors?.map((color) => new SourceEffectFillGradientColor(color))
+    return this._rawValue?.colors?.map((color) => new SourceEffectFillGradientColor(color))
   }
 }

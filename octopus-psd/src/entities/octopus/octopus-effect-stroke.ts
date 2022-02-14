@@ -21,7 +21,7 @@ export class OctopusEffectStroke {
   convert(): Octopus['VectorStroke'] {
     const thickness = 10 // TODO
     const position = 'CENTER' // TODO
-    const fill = new OctopusEffectFillColor({ fill: this.sourceLayer.strokeStyle.fill }).convert() // TODO
+    const fill = new OctopusEffectFillColor({ fill: this.sourceLayer.stroke.fill }).convert() // TODO
     const style = 'SOLID' // TODO
     const lineJoin = 'BEVEL' // TODO BEVEL ROUND MITER
     const lineCap = 'ROUND' // TODO ROUND BUTT SQUARE

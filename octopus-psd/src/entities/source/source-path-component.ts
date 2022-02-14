@@ -4,14 +4,14 @@ import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/sour
 import { SourceSubpath } from './source-subpath'
 
 export class SourcePathComponent {
-  protected _component: RawPathComponent
+  protected _rawValue: RawPathComponent
 
   constructor(component: RawPathComponent) {
-    this._component = component
+    this._rawValue = component
   }
 
   get origin() {
-    const origin = this._component?.origin ?? {}
+    const origin = this._rawValue?.origin ?? {}
     const type = origin.type ? origin.type.toString() : undefined
     const bounds: SourceBounds = { ...origin.bounds, ...getBoundsFor(origin.bounds) }
     const radii: SourceRadiiCorners = { ...origin.radii, ...getRadiiCornersFor(origin.radii) }
@@ -20,10 +20,10 @@ export class SourcePathComponent {
   }
 
   get subpathListKey() {
-    return (this._component.subpathListKey ?? []).map((subpath) => new SourceSubpath(subpath))
+    return (this._rawValue.subpathListKey ?? []).map((subpath) => new SourceSubpath(subpath))
   }
 
   get shapeOperation() {
-    return this._component.shapeOperation
+    return this._rawValue.shapeOperation
   }
 }

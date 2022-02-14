@@ -3,41 +3,41 @@ import { getColorFor } from '../../utils/source'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
 export class SourceEffectFill {
-  protected _fill: RawFill | undefined
+  protected _rawValue: RawFill | undefined
 
   constructor(fill: RawFill | undefined) {
-    this._fill = fill
+    this._rawValue = fill
   }
 
   get color() {
-    return getColorFor(this._fill?.color)
+    return getColorFor(this._rawValue?.color)
   }
 
   get gradient() {
-    return this._fill?.gradient ? new SourceEffectFillGradient(this._fill?.gradient) : undefined
+    return this._rawValue?.gradient ? new SourceEffectFillGradient(this._rawValue?.gradient) : undefined
   }
 
   get reverse() {
-    return this._fill?.reverse ?? false
+    return this._rawValue?.reverse ?? false
   }
 
   get align() {
-    return this._fill?.align ?? true
+    return this._rawValue?.align ?? true
   }
 
   get scale() {
-    return (this._fill?.scale?.value ?? 100) / 100
+    return (this._rawValue?.scale?.value ?? 100) / 100
   }
 
   get angle() {
-    return this._fill?.Angl?.value ?? this._fill?.angle?.value ?? 0
+    return this._rawValue?.Angl?.value ?? this._rawValue?.angle?.value ?? 0
   }
 
   get type() {
-    return this._fill?.type
+    return this._rawValue?.type
   }
 
   get pattern() {
-    return this._fill?.pattern
+    return this._rawValue?.pattern
   }
 }
