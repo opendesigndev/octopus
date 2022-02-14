@@ -14,6 +14,7 @@ import { SourceArtboard } from '../../src/entities/source/source-artboard'
 dotenv.config()
 
 async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
+  // TODO https://gitlab.avcd.cz/opendesign/octopus-converters/-/merge_requests/3#note_276626
   try {
     return await converter.convertArtboard({ sourceArtboard })
   } catch (e) {

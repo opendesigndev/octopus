@@ -19,5 +19,5 @@ export async function createSourceTree(
   const sourceFile = `./workdir/${directory}/source.json`
   const file = await fsp.readFile(sourceFile, { encoding: 'utf8' })
   const sourceTree = JSON.parse(file)
-  return new SourceArtboard({ octopusConverter, rawValue: sourceTree })
+  return new SourceArtboard({ octopusConverter, rawValue: sourceTree }) // TODO https://gitlab.avcd.cz/opendesign/octopus-converters/-/merge_requests/3#note_276627
 }
