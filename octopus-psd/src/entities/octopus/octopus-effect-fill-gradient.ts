@@ -40,10 +40,6 @@ export class OctopusEffectFillGradient {
     return this._fill
   }
 
-  private _isValidGradientType(): boolean {
-    return this.type !== undefined
-  }
-
   get type(): Octopus['FillGradient']['gradient']['type'] | null {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
@@ -76,9 +72,7 @@ export class OctopusEffectFillGradient {
     return stops.map((stop) => this._getGradientStop(stop))
   }
 
-  private _getGradient(): Octopus['FillGradient']['gradient'] | null {
-    const type = this.type
-    if (type === null) return null
+  private _getGradient(type: Octopus['FillGradient']['gradient']['type']): Octopus['FillGradient']['gradient'] {
     const stops = this._gradientStops
     return { type, stops }
   }
@@ -154,9 +148,10 @@ export class OctopusEffectFillGradient {
   }
 
   convert(): Octopus['FillGradient'] | null {
-    if (!this._isValidGradientType()) return null
-    const gradient = this._getGradient()
-    if (gradient === null) return null
+    const type = this.type
+    if (type === null) return null
+
+    const gradient = this._getGradient(type)
     const positioning = this._getPositioning()
 
     return { type: 'GRADIENT', gradient, positioning }

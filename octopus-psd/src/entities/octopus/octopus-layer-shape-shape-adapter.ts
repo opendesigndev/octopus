@@ -1,7 +1,7 @@
 import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
-import { OctopusPathLike } from './octopus-path-like'
+import { OctopusPathLike } from './octopus-layer-shape-shape-path-like'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
 
