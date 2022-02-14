@@ -3,23 +3,23 @@ import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import type { SourceShapeFill } from '../source/source-effect-fill'
+import type { SourceEffectFill } from '../source/source-effect-fill'
 
 type OctopusFillOptions = {
   parent: OctopusLayerShapeShapeAdapter
-  fill: SourceShapeFill
+  fill: SourceEffectFill
 }
 
 export class OctopusEffectFill {
   protected _parent: OctopusLayerShapeShapeAdapter
-  protected _fill: SourceShapeFill
+  protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
     this._parent = options.parent
     this._fill = options.fill
   }
 
-  get fill(): SourceShapeFill {
+  get fill(): SourceEffectFill {
     return this._fill
   }
 

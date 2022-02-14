@@ -2,23 +2,24 @@ import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import type { SourceShapeFill, SourceShapeGradientColor } from '../source/source-effect-fill'
+import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceGradientType } from '../../typings/source'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
+import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
 type OctopusFillGradientOptions = {
   parent: OctopusLayerShapeShapeAdapter
-  fill: SourceShapeFill
+  fill: SourceEffectFill
 }
 
 export class OctopusEffectFillGradient {
   protected _parent: OctopusLayerShapeShapeAdapter
-  protected _fill: SourceShapeFill
+  protected _fill: SourceEffectFill
 
   static GRADIENT_TYPE_MAP = {
     linear: 'LINEAR',
@@ -36,7 +37,7 @@ export class OctopusEffectFillGradient {
     return this._parent.sourceLayer
   }
 
-  get fill(): SourceShapeFill {
+  get fill(): SourceEffectFill {
     return this._fill
   }
 
@@ -54,7 +55,7 @@ export class OctopusEffectFillGradient {
     return this.fill.reverse
   }
 
-  private _getGradientStop(stop: SourceShapeGradientColor): FillGradientStop {
+  private _getGradientStop(stop: SourceEffectFillGradientColor): FillGradientStop {
     const STOP_MAX_LOCATION = 4096
     const color = convertColor(stop?.color)
     const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
@@ -63,7 +64,7 @@ export class OctopusEffectFillGradient {
   }
 
   private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
-    const colors: SourceShapeGradientColor[] = this.fill.gradient?.colors ?? []
+    const colors: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
 
     // TODO: Add midpoints
     // TODO: Fix for multiple stops at the same location (filter for start/end)

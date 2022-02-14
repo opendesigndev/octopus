@@ -3,7 +3,7 @@ import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 import { convertRawPath } from './source-path'
 import type { SourcePathComponent, SourcePath } from './source-path'
-import { convertRawShapeFill, SourceEffectFill, SourceShapeFill } from './source-effect-fill'
+import { SourceEffectFill } from './source-effect-fill'
 import { convertRawShapeStroke, SourceShapeStrokeStyle } from './source-shape-stroke'
 import { convertRawShapeMask, SourceShapeMask } from './source-shape-mask'
 import { convertRawLayerEffect, SourceLayerEffect } from './source-effect-layer'
@@ -39,8 +39,8 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.path.bounds
   }
 
-  get fill(): SourceShapeFill {
-    return convertRawShapeFill(this._rawValue.fill)
+  get fill() {
+    return new SourceEffectFill(this._rawValue.fill)
   }
 
   get strokeStyle(): SourceShapeStrokeStyle {

@@ -1,28 +1,43 @@
-import type { RawFill, RawFillGradient, RawShapeGradientColors } from '../../typings/raw'
+import type { RawFill } from '../../typings/raw'
 import { getColorFor } from '../../utils/source'
+import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
-export type SourceShapeGradientColor = ReturnType<typeof convertRawShapeGradientColor>
-function convertRawShapeGradientColor(gradient: RawShapeGradientColors | undefined) {
-  const colors = getColorFor(gradient?.color)
-  const location = gradient?.location || 0
-  return { ...gradient, colors, location }
+export class SourceEffectFill {
+  protected _fill: RawFill | undefined
+
+  constructor(fill: RawFill | undefined) {
+    this._fill = fill
+  }
+
+  get color() {
+    return getColorFor(this._fill?.color)
+  }
+
+  get gradient() {
+    return this._fill?.gradient ? new SourceEffectFillGradient(this._fill?.gradient) : undefined
+  }
+
+  get reverse() {
+    return this._fill?.reverse ?? false
+  }
+
+  get align() {
+    return this._fill?.align ?? true
+  }
+
+  get scale() {
+    return (this._fill?.scale?.value ?? 100) / 100
+  }
+
+  get angle() {
+    return this._fill?.Angl?.value ?? this._fill?.angle?.value ?? 0
+  }
+
+  get type() {
+    return this._fill?.type
+  }
+
+  get pattern() {
+    return this._fill?.pattern
+  }
 }
-
-export type SourceShapeGradient = ReturnType<typeof convertRawShapeGradient>
-function convertRawShapeGradient(gradient: RawFillGradient | undefined) {
-  const colors = gradient?.colors?.map(convertRawShapeGradientColor)
-  return { ...gradient, colors }
-}
-
-export type SourceShapeFill = ReturnType<typeof convertRawShapeFill>
-export function convertRawShapeFill(fill: RawFill | undefined) {
-  const color = getColorFor(fill?.color)
-  const gradient = fill?.gradient ? convertRawShapeGradient(fill?.gradient) : undefined
-  const reverse = fill?.reverse ?? false
-  const align = fill?.align ?? true
-  const scale = (fill?.scale?.value ?? 100) / 100
-  const angle = fill?.Angl?.value ?? fill?.angle?.value ?? 0
-  return { ...fill, color, gradient, reverse, scale, angle, align }
-}
-
-export class SourceEffectFill {}

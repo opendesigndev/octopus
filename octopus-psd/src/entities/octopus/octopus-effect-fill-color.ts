@@ -1,13 +1,13 @@
 import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/color'
-import { SourceShapeFill } from '../source/source-effect-fill'
+import { SourceEffectFill } from '../source/source-effect-fill'
 
 type OctopusFillOptions = {
-  fill: SourceShapeFill
+  fill: SourceEffectFill
 }
 
 export class OctopusEffectFillColor {
-  protected _fill: SourceShapeFill
+  protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
     this._fill = options.fill
