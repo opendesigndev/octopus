@@ -1,8 +1,8 @@
 import type { RawLayerShape } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
-import { convertRawPath } from './source-path'
-import type { SourcePathComponent, SourcePath } from './source-path'
+import { SourcePath } from './source-path'
+import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
 import { convertRawShapeStroke, SourceShapeStrokeStyle } from './source-shape-stroke'
 import { convertRawShapeMask, SourceShapeMask } from './source-shape-mask'
@@ -24,7 +24,7 @@ export class SourceLayerShape extends SourceLayerCommon {
   }
 
   get path(): SourcePath {
-    return convertRawPath(this._rawValue.path)
+    return new SourcePath(this._rawValue.path)
   }
 
   get pathComponents(): SourcePathComponent[] {
