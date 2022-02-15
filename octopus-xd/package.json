@@ -4,6 +4,7 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
+    "clean": "npx rimraf ./node_modules ./lib ./workdir",
     "convert:all": "npx ts-node ./scripts/convert-all.ts",
     "clean-workdir": "npx rimraf ./workdir/*",
     "build": "npx tsc --build ./tsconfig.json",
@@ -32,7 +33,8 @@
     "chalk": "^4.1.2",
     "fflate": "^0.7.1",
     "jest": "^27.3.1",
-    "ts-node": "10.4.0"
+    "ts-node": "10.5.0",
+    "typescript": "4.4.4"
   },
   "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "files": [
