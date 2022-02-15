@@ -53,8 +53,16 @@ export class OctopusArtboard {
     return this._octopusConverter.pkg.then((pkg) => pkg.version)
   }
 
-  get layers() {
+  get layers(): Octopus['Layer'][] {
     return getConverted(this._layers)
+  }
+
+  get content(): Octopus['Layer'] {
+    return {
+      id: '1:background',
+      type: 'GROUP',
+      layers: this.layers,
+    }
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
@@ -63,7 +71,7 @@ export class OctopusArtboard {
       type: 'ARTBOARD',
       version: await this.version,
       dimensions: this.dimensions,
-      layers: this.layers,
+      content: this.content,
     } as Octopus['OctopusDocument']
   }
 }
