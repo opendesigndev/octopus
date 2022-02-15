@@ -1,3 +1,12 @@
+.nyc_output/
+coverage/
+dist/
+dist-browser/
+docs/
+node_modules/
+yarn-error.log
+.env
+
 fonts
 workdir
 manager.jwt

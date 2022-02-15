@@ -8,7 +8,7 @@ import {
   createPathLine,
   createPoint,
   createSize,
-  createPath
+  createPath,
 } from './paper'
 
 import { asNumber, asArray } from '@avocode/octopus-common/dist/utils/as'
@@ -21,36 +21,27 @@ import type {
   RawShapeLine,
   RawShapePath,
   RawShapePolygon,
-  RawShapeRect
+  RawShapeRect,
 } from '../typings/source'
-
 
 function buildShapeFromRect(shape: RawShapeRect): paper.Path {
   return createPathRectangle(
-    createPoint(
-      asNumber(shape?.x),
-      asNumber(shape?.y)
-    ),
-    createSize(
-      asNumber(shape?.width),
-      asNumber(shape?.height)
-    )
+    createPoint(asNumber(shape?.x), asNumber(shape?.y)),
+    createSize(asNumber(shape?.width), asNumber(shape?.height))
   )
 }
 
 function buildShapeFromEllipse(shape: RawShapeEllipse): paper.Path {
   return createPathEllipse(
     createPoint(0, 0),
-    createSize(
-      asNumber(shape?.rx) * 2,
-      asNumber(shape?.ry) * 2
-    )
+    createSize(asNumber(shape?.rx) * 2, asNumber(shape?.ry) * 2)
   )
 }
 
 function buildShapeFromPolygon(shape: RawShapePolygon): paper.Path {
-  const polygonPath = `M${asArray(shape?.points).map(p => `${asNumber(p?.x)} ${asNumber(p?.y)}`).join('L')
-    }Z`
+  const polygonPath = `M${asArray(shape?.points)
+    .map((p) => `${asNumber(p?.x)} ${asNumber(p?.y)}`)
+    .join('L')}Z`
   return createPath(polygonPath)
 }
 
@@ -68,15 +59,21 @@ function buildShapeFromCircle(shape: RawShapeCircle): paper.Path {
   )
 }
 
-export function buildShapeFromCompound(shape: RawShapeCompound): paper.CompoundPath | null {
-  return typeof shape?.path === 'string' ? createCompoundPath(shape?.path) : null
+export function buildShapeFromCompound(
+  shape: RawShapeCompound
+): paper.CompoundPath | null {
+  return typeof shape?.path === 'string'
+    ? createCompoundPath(shape?.path)
+    : null
 }
 
 export function buildShapeFromPath(shape: RawShapePath): paper.Path | null {
   return typeof shape?.path === 'string' ? createPath(shape?.path) : null
 }
 
-export function buildShape(shape: RawShape): paper.Path | paper.CompoundPath | null {
+export function buildShape(
+  shape: RawShape
+): paper.Path | paper.CompoundPath | null {
   const type = shape?.type
 
   switch (type) {
@@ -106,7 +103,9 @@ export function buildShape(shape: RawShape): paper.Path | paper.CompoundPath | n
   return null
 }
 
-export function buildShapePathSafe(shape: RawShape | undefined): paper.Path | paper.CompoundPath {
+export function buildShapePathSafe(
+  shape: RawShape | undefined
+): paper.Path | paper.CompoundPath {
   const defaultShape = createPath('M0 0Z')
 
   if (!shape) return defaultShape

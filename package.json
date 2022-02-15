@@ -16,14 +16,25 @@
     "build": "yarn workspaces run build",
     "clean": "rimraf ./node_modules && yarn workspaces run clean",
     "clean-init": "yarn clean && yarn && yarn build",
-    "lint": "yarn workspaces run lint",
     "test": "yarn workspaces run test",
     "xd:unpack": "yarn workspace @avocode/octopus-xd unpack-xd-file",
     "xd:clean-workdir": "yarn workspace @avocode/octopus-xd clean-workdir",
-    "xd:watch": "yarn workspace @avocode/octopus-xd watch"
+    "xd:watch": "yarn workspace @avocode/octopus-xd watch",
+    "lint": "yarn run lint:prettier && yarn run lint:eslint",
+    "lint:eslint": "eslint . --ext .ts",
+    "lint:prettier": "prettier -c ."
   },
   "dependencies": {},
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "@types/node": "*",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "24.3.6",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.2.1",
+    "typescript": "4.4.4"
   }
 }
