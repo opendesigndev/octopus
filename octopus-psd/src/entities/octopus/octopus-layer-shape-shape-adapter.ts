@@ -1,7 +1,7 @@
 import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
-import { OctopusLayerShapePath } from './octopus-layer-shape-path'
+import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
 
@@ -28,7 +28,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   }
 
   private get _path(): Octopus['PathLike'] {
-    return new OctopusLayerShapePath({ parent: this }).convert()
+    return new OctopusLayerShapeShapePath({ parent: this }).convert()
   }
 
   private get _fills(): Octopus['Fill'][] {
@@ -38,23 +38,23 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
 
   private get _strokes(): Octopus['VectorStroke'][] {
     const stroke = new OctopusEffectStroke({ parent: this }).convert()
-    return [stroke]
+    return stroke ? [stroke] : []
   }
 
-  private get _shapes(): Octopus['Shape'][] {
-    const fillShape: Octopus['Shape'] = {
+  private get _shape(): Octopus['Shape'] {
+    return {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
-      // strokes: this._strokes, // TODO
+      strokes: this._strokes,
     }
-    return [fillShape]
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
     return {
       type: 'SHAPE',
-      shapes: this._shapes,
+      shape: this._shape,
+      shapes: [this._shape], // TODO remove when fixed in Octopus specification
     } as const
   }
 

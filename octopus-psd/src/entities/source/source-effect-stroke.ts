@@ -13,4 +13,20 @@ export class SourceEffectStroke extends SourceEntity {
   get fill() {
     return new SourceEffectFill(this._rawValue?.strokeStyleContent)
   }
+
+  get lineWidth() {
+    return this._rawValue?.strokeStyleLineWidth ?? 0
+  }
+
+  get lineAlignment() {
+    return this._rawValue?.strokeStyleLineAlignment ?? 'strokeStyleAlignCenter'
+  }
+
+  get lineCap() {
+    return this._rawValue?.strokeStyleLineCapType ?? 'strokeStyleButtCap'
+  }
+
+  get lineJoin() {
+    return this._rawValue?.strokeStyleLineJoinType ?? 'strokeStyleMiterJoin'
+  }
 }

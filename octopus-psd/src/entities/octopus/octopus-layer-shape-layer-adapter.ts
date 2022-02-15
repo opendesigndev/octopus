@@ -27,8 +27,7 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
   }
 
   private get _path(): Octopus['PathLike'] {
-    const sourceLayer = this.sourceLayer as SourceLayerLayer
-    const { width, height } = sourceLayer.bounds
+    const { width, height } = this.sourceLayer.bounds
     const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
     const transform = createDefaultTranslationMatrix()
     return { type: 'RECTANGLE', rectangle, transform }
