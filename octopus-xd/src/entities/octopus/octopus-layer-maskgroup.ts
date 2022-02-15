@@ -83,7 +83,8 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       type: 'shape',
       transform: { a: 1, b: 0, c: 0, d: 1, tx, ty },
       meta: { ux: { hasCustomName: true } },
-      shape: { type: 'rect', x: 0, y: 0, width, height }
+      shape: { type: 'rect', x: 0, y: 0, width, height },
+      visible: false /** @TODO confirm */
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -104,7 +105,8 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       type: 'shape',
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
       meta: { ux: { hasCustomName: true } },
-      shape: { type: 'rect', x: 0, y: 0, width, height }
+      shape: { type: 'rect', x: 0, y: 0, width, height },
+      visible: false /** @TODO confirm */
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -117,7 +119,19 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     const mask = this._getMaskResource()
 
     if (!mask) return null
-    const sourceLayer = createSourceLayer({ layer: mask, parent: this._sourceLayer })
+
+    /**
+     * The only exception when mask layer should stay visible is when it's artboard's background.
+     */
+    const layer = mask === this.parentArtboard?.backgroundMaskLayerRaw ? mask : {
+      ...mask,
+      visible: false /** @TODO confirm */
+    }
+
+    const sourceLayer = createSourceLayer({
+      layer,
+      parent: this._sourceLayer
+    })
 
     if (!sourceLayer) return null
     return createOctopusLayer({ layer: sourceLayer, parent: this }) as (OctopusLayerShape | null)

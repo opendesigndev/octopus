@@ -14,10 +14,23 @@ export default class OctopusArtboardDimensions {
     this._sourceArtboard = options.sourceArtboard
   }
 
+  get areValid() {
+    return typeof this._sourceArtboard.meta['uxdesign#bounds']?.width === 'number'
+      && typeof this._sourceArtboard.meta['uxdesign#bounds']?.height === 'number'
+  }
+
+  get w() {
+    return asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.width, 0)
+  }
+
+  get h() {
+    return asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.height, 0)
+  }
+
   convert() {
     return {
-      width: asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.width, 0),
-      height: asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.height, 0)
+      width: this.w,
+      height: this.h
     }
   }
 }

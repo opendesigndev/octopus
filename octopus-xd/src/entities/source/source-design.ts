@@ -105,7 +105,7 @@ export default class SourceDesign {
 
     const expander = new Expander({ resources: this._resources })
 
-    this._artboards = options.artboards.map(entry => {
+    this._artboards = options.artboards.reduce((artboards, entry) => {
       const rawValue = /pasteboard/.test(entry.path)
         ? new PasteboardNormalizer({
           manifest: this._manifest,
@@ -113,13 +113,17 @@ export default class SourceDesign {
         }).normalize()
         : entry.rawValue as RawArtboard
 
-      expander.expand(rawValue)
-      return new SourceArtboard({
+      // expander.expand(rawValue)
+      if (!rawValue) return artboards
+
+      const artboard = new SourceArtboard({
         path: entry.path,
         rawValue: expander.expand(rawValue),
         design: this
       })
-    })
+
+      return [...artboards, artboard]
+    }, [])
 
     this._images = options.images
   }

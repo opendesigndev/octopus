@@ -48,6 +48,10 @@ export default class SourceArtboard {
     return this._rawValue
   }
 
+  get path() {
+    return this._path
+  }
+
   get meta() {
     const manifestEntry = this._getManifestEntryByPath()
     const internalId = this._rawValue.children?.[0]?.artboard?.ref || null

@@ -25,7 +25,6 @@ type OctopusLayerCommonOptions = {
   sourceLayer: SourceLayer
 }
 
-/** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 export default class OctopusLayerCommon {
   protected _id: string

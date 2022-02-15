@@ -98,10 +98,12 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
-  private _getShapeAsRect(): Octopus['PathRectangle'] {
+  private _getShapeAsRectWithSimpleRadius(): Octopus['PathRectangle'] {
     const rect = this._sourceLayer.shape as RawShapeRect
-    const { x, y, width, height } = rect
+    const { x, y, width, height, r } = rect
     const transform = this._getLayerTransformEntry()
+
+    const simpleRadius = typeof r?.[0] === 'number' ? { cornerRadius: r?.[0] } : null
 
     return {
       type: 'RECTANGLE',
@@ -111,8 +113,24 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
         y0: asNumber(y),
         y1: asNumber(y) + asNumber(height),
       },
-      cornerRadii: rect?.r,
+      ...simpleRadius,
       ...transform,
+    }
+  }
+
+  private _getShapeAsRectWithMultipleRadii(): Octopus['Path'] {
+    const rect = this._sourceLayer.shape as RawShapeRect
+    const { r } = rect
+    const transform = this._getLayerTransformEntry()
+
+    return {
+      type: 'PATH',
+      geometry: this._shapeData.pathData,
+      ...transform,
+      cornerRadii: r /** @TODO define correct order */,
+      meta: {
+        sourceShape: 'RECTANGLE'
+      }
     }
   }
 
@@ -126,13 +144,21 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
+  private _rectangleHasMultipleRadii() {
+    const radii = (this._sourceLayer.shape as RawShapeRect).r
+    if (!Array.isArray(radii) || !radii.length) return false
+    return radii.some(radius => radius !== radii[0])
+  }
+
   private _getShape(): Octopus['PathLike'] {
     switch (this.shapeType) {
       case 'compound': {
         return this._getShapeAsCompound()
       }
       case 'rect': {
-        return this._getShapeAsRect()
+        return this._rectangleHasMultipleRadii()
+          ? this._getShapeAsRectWithMultipleRadii()
+          : this._getShapeAsRectWithSimpleRadius()
       }
     }
     return this._getShapeAsPath()
@@ -148,24 +174,25 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     })) as Octopus['Shape']['path']
   }
 
-  private _getShapes(): Octopus['Shape'][] {
+  private _getShapes(): Octopus['Shape'] {
     const path = this._getRootShape()
 
     const fillShape: Octopus['Shape'] = {
-      purpose: 'BODY',
+      // purpose: 'BODY',
       fillRule: 'EVEN_ODD',
       path,
       ...this.shapeEffects.convert()
     } as const
 
-    return [fillShape]
+    return fillShape
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
-    const shapes = this._getShapes()
+    const shape = this._getShapes()
     return {
       type: 'SHAPE',
-      shapes
+      shape,
+      shapes: undefined
     }
   }
 

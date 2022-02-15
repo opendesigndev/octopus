@@ -1,3 +1,4 @@
+import { RawStyle } from '.'
 import { RawGridStyle } from './grid'
 import { RawGuidesModel } from './guides'
 import { RawLayer } from './layer'
@@ -22,6 +23,7 @@ export type RawArtboardEntry = {
       gridStyle?: RawGridStyle
     }
   },
+  style?: RawStyle,
   artboard?: {
     meta?: {
       ux?: {

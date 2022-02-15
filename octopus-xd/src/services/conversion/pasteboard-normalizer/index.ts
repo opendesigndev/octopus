@@ -21,6 +21,9 @@ export default class PasteboardNormalizer {
     if (!manifestEntry) {
       throw new Error('Missing manifest entry for pasteboard')
     }
+
+    if (!this._pasteboard.children?.length) return null
+
     return {
       version: asString(this._pasteboard.version),
       children: [{
