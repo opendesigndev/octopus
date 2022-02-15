@@ -7,11 +7,11 @@ import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-
 import type { SourcePathComponent } from '../source/source-path-component'
 import type { SourceCombineOperation } from '../../typings/source'
 
-type OctopusPathLikeOptions = {
+type OctopusLayerShapePathOptions = {
   parent: OctopusLayerShapeShapeAdapter
 }
 
-export class OctopusPathLike {
+export class OctopusLayerShapePath {
   protected _parent: OctopusLayerShapeShapeAdapter
 
   static COMPOUND_OPERATION_MAP = {
@@ -21,7 +21,7 @@ export class OctopusPathLike {
     xor: 'EXCLUDE',
   } as const
 
-  constructor(options: OctopusPathLikeOptions) {
+  constructor(options: OctopusLayerShapePathOptions) {
     this._parent = options.parent
   }
 
@@ -59,7 +59,7 @@ export class OctopusPathLike {
   }
 
   private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
-    const result = getMapped(operation, OctopusPathLike.COMPOUND_OPERATION_MAP, undefined)
+    const result = getMapped(operation, OctopusLayerShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
       this._parent.converter?.logWarn('Unknown Compound operation', { operation })
       return 'UNION'

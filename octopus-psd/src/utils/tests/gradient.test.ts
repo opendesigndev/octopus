@@ -1,4 +1,4 @@
-import { angleToPoints } from './gradient'
+import { angleToPoints } from '../gradient'
 
 describe('angleToPoints', () => {
   describe('canvas 1000x1000', () => {

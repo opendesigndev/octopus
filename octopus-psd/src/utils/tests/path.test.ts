@@ -1,4 +1,4 @@
-import { isRectangle, Points } from './path'
+import { isRectangle, Points } from '../path'
 
 describe('isRectangle', () => {
   function testIsRectangle(points: Points, result: boolean): void {

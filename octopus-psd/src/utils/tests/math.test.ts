@@ -1,4 +1,4 @@
-import { mod, tan } from './math'
+import { mod, tan } from '../math'
 
 describe('mod', () => {
   function testModulo(N: number, modulo: number, result: number): void {
