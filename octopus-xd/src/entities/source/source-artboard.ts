@@ -1,14 +1,14 @@
-import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer } from '../../factories/create-source-layer'
 
 import type SourceDesign from './source-design'
-import type { RawArtboard, RawLayer } from '../../typings/source'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
-
+import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest'
 
 export type SourceArtboardOptions = {
-  rawValue: RawArtboard,
-  path: string,
+  rawValue: RawArtboard
+  path: string
   design: SourceDesign
 }
 
@@ -38,43 +38,43 @@ export default class SourceArtboard {
     return children.reduce((children: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({
         layer,
-        parent: this
+        parent: this,
       })
       return sourceLayer ? [...children, sourceLayer] : children
     }, [])
   }
 
-  get raw() {
+  get raw(): RawArtboard {
     return this._rawValue
   }
 
-  get path() {
+  get path(): string {
     return this._path
   }
 
-  get meta() {
+  get meta(): RawGeneralEntry & RawArtboardSpecific & { id: string; internalId: string | null } {
     const manifestEntry = this._getManifestEntryByPath()
     const internalId = this._rawValue.children?.[0]?.artboard?.ref || null
     const manifestId = manifestEntry.id
     return {
       ...manifestEntry,
       id: manifestId,
-      internalId
+      internalId,
     }
   }
 
   /**
    * Helper to access first "real" artboard object.
    */
-  get firstChild() {
+  get firstChild(): RawArtboardEntry | null {
     return this._rawValue.children?.[0] || null
   }
 
-  get refId() {
+  get refId(): string | null {
     return this.firstChild?.artboard?.ref || null
   }
 
-  get guides() {
+  get guides(): { x: number[]; y: number[] } | null {
     const guides = this.firstChild?.meta?.ux?.guidesModel
     if (!guides) return null
 
@@ -86,11 +86,11 @@ export default class SourceArtboard {
       y: asArray(guides.verticalGuides?.guides).reduce((guidesY, guide) => {
         if (typeof guide?.position !== 'number') return guidesY
         return [...guidesY, guide.position]
-      }, [])
+      }, []),
     }
   }
 
-  get children() {
+  get children(): SourceLayer[] {
     return this._children
   }
 }

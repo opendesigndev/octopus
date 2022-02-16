@@ -1,9 +1,10 @@
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import SourceManifest from '../../../entities/source/source-manifest'
-import { RawArtboard, RawPasteboard } from '../../../typings/source'
+
+import type { RawArtboard, RawPasteboard } from '../../../typings/source'
 
 type PasteboardNormalizerOptions = {
-  manifest: SourceManifest,
+  manifest: SourceManifest
   pasteboard: RawPasteboard
 }
 
@@ -16,7 +17,7 @@ export default class PasteboardNormalizer {
     this._manifest = options.manifest
   }
 
-  normalize() {
+  normalize(): RawArtboard | null {
     const manifestEntry = this._manifest.getArtboardEntryByPartialPath('pasteboard')
     if (!manifestEntry) {
       throw new Error('Missing manifest entry for pasteboard')
@@ -26,15 +27,17 @@ export default class PasteboardNormalizer {
 
     return {
       version: asString(this._pasteboard.version),
-      children: [{
-        type: 'artboard',
-        id: manifestEntry.id,
-        artboard: {
-          children: this._pasteboard.children,
-        }
-      }],
+      children: [
+        {
+          type: 'artboard',
+          id: manifestEntry.id,
+          artboard: {
+            children: this._pasteboard.children,
+          },
+        },
+      ],
       resources: this._pasteboard.resources,
-      artboards: this._pasteboard.artboards
+      artboards: this._pasteboard.artboards,
     } as RawArtboard
   }
 }

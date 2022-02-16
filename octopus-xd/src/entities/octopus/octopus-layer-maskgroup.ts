@@ -12,9 +12,8 @@ import type { Octopus } from '../../typings/octopus'
 import type OctopusLayerShape from './octopus-layer-shape'
 import type { RawGroupLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
 
-
 type OctopusLayerMaskGroupOptions = {
-  parent: OctopusLayerParent,
+  parent: OctopusLayerParent
   sourceLayer: SourceLayerGroup
 }
 
@@ -23,25 +22,23 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[]
   private _mask: OctopusLayerShape | null
 
-  static isShapeMaskGroup(layer: SourceLayer) {
+  static isShapeMaskGroup(layer: SourceLayer): boolean {
     const raw = layer.raw as RawShapeMaskGroupLayer
     const isShapeMaskGroup = raw?.meta?.ux?.nameL10N === 'SHAPE_MASK'
     const hasClipPath = Boolean(raw?.meta?.ux?.clipPathResources)
     return isShapeMaskGroup || hasClipPath
   }
 
-  static isRepeatGrid(layer: SourceLayer) {
+  static isRepeatGrid(layer: SourceLayer): boolean {
     return Boolean((layer.raw as RawGroupLayer)?.meta?.ux?.repeatGrid)
   }
 
-  static isScrollableGroup(layer: SourceLayer) {
+  static isScrollableGroup(layer: SourceLayer): boolean {
     return Boolean((layer.raw as RawGroupLayer)?.meta?.ux?.scrollingType)
   }
 
-  static isMaskGroupLike(layer: SourceLayer) {
-    return this.isShapeMaskGroup(layer)
-      || this.isRepeatGrid(layer)
-      || this.isScrollableGroup(layer)
+  static isMaskGroupLike(layer: SourceLayer): boolean {
+    return this.isShapeMaskGroup(layer) || this.isRepeatGrid(layer) || this.isScrollableGroup(layer)
   }
 
   constructor(options: OctopusLayerMaskGroupOptions) {
@@ -84,7 +81,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       transform: { a: 1, b: 0, c: 0, d: 1, tx, ty },
       meta: { ux: { hasCustomName: true } },
       shape: { type: 'rect', x: 0, y: 0, width, height },
-      visible: false /** @TODO confirm */
+      visible: false /** @TODO confirm */,
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -106,7 +103,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
       meta: { ux: { hasCustomName: true } },
       shape: { type: 'rect', x: 0, y: 0, width, height },
-      visible: false /** @TODO confirm */
+      visible: false /** @TODO confirm */,
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -123,18 +120,21 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     /**
      * The only exception when mask layer should stay visible is when it's artboard's background.
      */
-    const layer = mask === this.parentArtboard?.backgroundMaskLayerRaw ? mask : {
-      ...mask,
-      visible: false /** @TODO confirm */
-    }
+    const layer =
+      mask === this.parentArtboard?.backgroundMaskLayerRaw
+        ? mask
+        : {
+            ...mask,
+            visible: false /** @TODO confirm */,
+          }
 
     const sourceLayer = createSourceLayer({
       layer,
-      parent: this._sourceLayer
+      parent: this._sourceLayer,
     })
 
     if (!sourceLayer) return null
-    return createOctopusLayer({ layer: sourceLayer, parent: this }) as (OctopusLayerShape | null)
+    return createOctopusLayer({ layer: sourceLayer, parent: this }) as OctopusLayerShape | null
   }
 
   private _initMaskLayer(): OctopusLayerShape | null {
@@ -153,7 +153,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     return this._sourceLayer.children.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layer: sourceLayer
+        layer: sourceLayer,
       })
       return octopusLayer ? [...layers, octopusLayer] : layers
     }, [])
@@ -168,8 +168,8 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     return {
       type: 'MASK_GROUP',
       mask: octopusMask,
-      maskBasis: 'BODY', /** @TODO infer later */
-      layers: this._layers.map(layer => layer.convert()).filter(Boolean) as Octopus['Layer'][]
+      maskBasis: 'BODY' /** @TODO infer later */,
+      layers: this._layers.map((layer) => layer.convert()).filter(Boolean) as Octopus['Layer'][],
     } as const
   }
 
@@ -182,7 +182,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...specific
+      ...specific,
     }
   }
 }

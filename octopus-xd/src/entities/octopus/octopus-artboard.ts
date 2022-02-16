@@ -1,5 +1,3 @@
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
-
 import OctopusArtboardDimensions from './octopus-artboard-dimensions'
 import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 import SourceLayerGroup from '../source/source-layer-group'
@@ -12,10 +10,9 @@ import type OctopusXDConverter from '../..'
 import type { RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
 import OctopusLayerGroup from './octopus-layer-group'
 
-
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign,
-  targetArtboardId: string,
+  sourceDesign: SourceDesign
+  targetArtboardId: string
   octopusXdConverter: OctopusXDConverter
 }
 
@@ -36,25 +33,25 @@ export default class OctopusArtboard {
     this._backgroundRaw = this._getArtificialMaskGroupMaskLayer()
   }
 
-  get backgroundMaskLayerRaw() {
+  get backgroundMaskLayerRaw(): RawShapeLayer {
     return this._backgroundRaw
   }
 
-  get sourceArtboard() {
+  get sourceArtboard(): SourceArtboard {
     return this._sourceArtboard
   }
 
-  get sourceDesign() {
+  get sourceDesign(): SourceDesign {
     return this._sourceDesign
   }
 
-  get converter() {
+  get converter(): OctopusXDConverter {
     return this._octopusXdConverter
   }
 
   private _getDimensions() {
     return new OctopusArtboardDimensions({
-      sourceArtboard: this._sourceArtboard
+      sourceArtboard: this._sourceArtboard,
     })
   }
 
@@ -74,7 +71,7 @@ export default class OctopusArtboard {
       id: uuidv4FromSeed(`${artboardId}:backgroundMask`),
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
       style: this._sourceArtboard.raw.children?.[0].style,
-      shape: { type: 'rect', x: 0, y: 0, width, height }
+      shape: { type: 'rect', x: 0, y: 0, width, height },
     } as RawShapeLayer
   }
 
@@ -89,40 +86,40 @@ export default class OctopusArtboard {
           nameL10N: 'SHAPE_MASK',
           clipPathResources: {
             children: [this._backgroundRaw],
-            type: 'clipPath'
-          }
-        }
+            type: 'clipPath',
+          },
+        },
       },
       id: uuidv4FromSeed(`${artboardId}:background`),
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
       group: {
-        children: this._sourceArtboard.firstChild?.artboard?.children
-      }
+        children: this._sourceArtboard.firstChild?.artboard?.children,
+      },
     } as RawShapeMaskGroupLayer
   }
 
   private _getArtificialMaskGroupSource() {
     return new SourceLayerGroup({
       parent: this._sourceArtboard,
-      rawValue: this._getArtificialMaskGroupRaw()
+      rawValue: this._getArtificialMaskGroupRaw(),
     })
   }
 
   private _getContent() {
     return /pasteboard/.test(this._sourceArtboard.path)
       ? new OctopusLayerGroup({
-        parent: this,
-        sourceLayer: this._getArtificialMaskGroupSource()
-      })
+          parent: this,
+          sourceLayer: this._getArtificialMaskGroupSource(),
+        })
       : new OctopusLayerMaskGroup({
-        parent: this,
-        sourceLayer: this._getArtificialMaskGroupSource()
-      })
+          parent: this,
+          sourceLayer: this._getArtificialMaskGroupSource(),
+        })
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
     if (typeof this._sourceArtboard.meta.id !== 'string') {
-      throw new Error('Artboard \'id\' property is missing.')
+      throw new Error("Artboard 'id' property is missing.")
     }
 
     const dimensions = this._getDimensions()
@@ -130,7 +127,7 @@ export default class OctopusArtboard {
     const content = this._getContent().convert()
 
     if (!content) {
-      throw new Error('Can\'t compile artificial background layer')
+      throw new Error("Can't compile artificial background layer")
     }
 
     return {
@@ -138,7 +135,7 @@ export default class OctopusArtboard {
       version: await this._getVersion(),
       id: this._sourceArtboard.meta.id,
       ...dimensionsEntry,
-      content
+      content,
     }
   }
 }

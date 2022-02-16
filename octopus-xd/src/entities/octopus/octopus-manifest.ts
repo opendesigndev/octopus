@@ -6,16 +6,15 @@ import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-
 type OctopusManifestOptions = {
-  sourceDesign: SourceDesign,
+  sourceDesign: SourceDesign
   octopusXdConverter: OctopusXDConverter
 }
 
 type RawManifestBounds = {
-  x: number,
-  y: number,
-  width: number,
+  x: number
+  y: number
+  width: number
   height: number
 }
 
@@ -31,15 +30,15 @@ export default class OctopusManifest {
     this._octopusXdConverter = options.octopusXdConverter
   }
 
-  get manifestVersion() {
-    return this._octopusXdConverter.pkg.then(pkg => pkg.version)
+  get manifestVersion(): Promise<string> {
+    return this._octopusXdConverter.pkg.then((pkg) => pkg.version)
   }
 
-  get xdVersion() {
+  get xdVersion(): string {
     return asString(this._sourceDesign.manifest.xdVersion, '0')
   }
 
-  get name() {
+  get name(): string {
     return asString(this._sourceDesign.manifest.name, 'Untitled')
   }
 
@@ -48,28 +47,31 @@ export default class OctopusManifest {
       x: bounds.x,
       y: bounds.y,
       w: bounds.width,
-      h: bounds.height
+      h: bounds.height,
     }
   }
 
   private get manifestArtboardEntries() {
-    const artwork = asArray(this._sourceDesign.manifest.raw?.children).find(child => {
+    const artwork = asArray(this._sourceDesign.manifest.raw?.children).find((child) => {
       return child.path === 'artwork'
     })
     if (!artwork) return []
-    return asArray(artwork.children?.filter(child => {
-      return /^artboard-/.test(child.path) || /pasteboard/.test(child.path)
-    }), [])
+    return asArray(
+      artwork.children?.filter((child) => {
+        return /^artboard-/.test(child.path) || /pasteboard/.test(child.path)
+      }),
+      []
+    )
   }
 
-  private _getArtboardAssetsImages(raw: object) {
+  private _getArtboardAssetsImages(raw: Record<string, unknown>) {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.style?.fill?.pattern?.meta?.ux?.uid
     })
     return [...new Set(entries)]
   }
 
-  private _getArtboardAssetsFonts(raw: object) {
+  private _getArtboardAssetsFonts(raw: Record<string, unknown>) {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.postscriptName
     })
@@ -81,54 +83,53 @@ export default class OctopusManifest {
     const raw = targetArtboard?.raw
     if (!raw) return null
 
-    const images = this._getArtboardAssetsImages(raw).map(image => {
+    const images = this._getArtboardAssetsImages(raw).map((image) => {
       return {
         location: {
-          type: 'TRANSIENT'
+          type: 'TRANSIENT',
         },
-        refId: image
+        refId: image,
       }
     })
-    const fonts = this._getArtboardAssetsFonts(raw).map(font => {
+    const fonts = this._getArtboardAssetsFonts(raw).map((font) => {
       return {
         location: {
-          type: 'TRANSIENT'
+          type: 'TRANSIENT',
         },
-        name: font
+        name: font,
       }
     })
 
     return {
       ...(images.length ? { images } : null),
-      ...(fonts.length ? { fonts } : null)
+      ...(fonts.length ? { fonts } : null),
     }
   }
 
   @firstCallMemo()
-  get artboards() {
-    return this.manifestArtboardEntries.map(artboard => {
-      const id = artboard.id
-      if (!id) return null
+  get artboards(): Artboard[] {
+    return this.manifestArtboardEntries
+      .map((artboard) => {
+        const id = artboard.id
+        if (!id) return null
 
-      const pasteboard = artboard.path === 'pasteboard'
-        ? { isPasteboard: true }
-        : null
-      const bounds = artboard.path === 'pasteboard'
-        ? null
-        : { bounds: this._convertManifestBounds(artboard['uxdesign#bounds']) }
+        const pasteboard = artboard.path === 'pasteboard' ? { isPasteboard: true } : null
+        const bounds =
+          artboard.path === 'pasteboard' ? null : { bounds: this._convertManifestBounds(artboard['uxdesign#bounds']) }
 
-      return {
-        id,
-        name: artboard.name,
-        ...bounds,
-        dependencies: [],
-        location: {
-          type: 'TRANSIENT'
-        },
-        assets: this._getArtboardAssets(id),
-        ...pasteboard
-      }
-    }).filter(artboardEntry => artboardEntry) as Artboard[]
+        return {
+          id,
+          name: artboard.name,
+          ...bounds,
+          dependencies: [],
+          location: {
+            type: 'TRANSIENT',
+          },
+          assets: this._getArtboardAssets(id),
+          ...pasteboard,
+        }
+      })
+      .filter((artboardEntry) => artboardEntry) as Artboard[]
   }
 
   /** @TODO guard with official types */
@@ -137,14 +138,14 @@ export default class OctopusManifest {
       version: await this.manifestVersion,
       origin: {
         name: 'xd',
-        version: this.xdVersion
+        version: this.xdVersion,
       },
       name: this.name,
       pages: [],
       artboards: this.artboards,
       components: [],
       chunks: [],
-      libraries: []
+      libraries: [],
     }
   }
 }

@@ -6,14 +6,6 @@ import OctopusLayerGroup from '../entities/octopus/octopus-layer-group'
 import OctopusLayerMaskGroup from '../entities/octopus/octopus-layer-maskgroup'
 import OctopusLayerShape from '../entities/octopus/octopus-layer-shape'
 
+export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard | OctopusLayerShape | OctopusLayerMaskGroup
 
-export type OctopusLayerParent =
-  | OctopusLayerGroup
-  | OctopusArtboard
-  | OctopusLayerShape
-  | OctopusLayerMaskGroup
-
-export type OctopusFill =
-  | OctopusEffectFillColor
-  | OctopusEffectFillGradient
-  | OctopusEffectFillImage
+export type OctopusFill = OctopusEffectFillColor | OctopusEffectFillGradient | OctopusEffectFillImage

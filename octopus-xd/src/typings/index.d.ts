@@ -1,23 +1,24 @@
-// Services 
+/* eslint-disable @typescript-eslint/ban-types */
+// Services
 export interface Logger {
-  fatal: Function,
-  error: Function,
-  warn: Function,
-  info: Function,
-  debug: Function,
-  trace: Function,
+  fatal: Function
+  error: Function
+  warn: Function
+  info: Function
+  debug: Function
+  trace: Function
   silent: Function
 }
 
 export interface ArrayBufferEntry {
-  path: string,
+  path: string
   content: Uint8Array
 }
 
 export interface ArrayBuffersSourceTree {
-  manifest: ArrayBufferEntry | null,
-  resources: ArrayBufferEntry | null,
-  interactions: ArrayBufferEntry | null,
-  artboards: ArrayBufferEntry[],
+  manifest: ArrayBufferEntry | null
+  resources: ArrayBufferEntry | null
+  interactions: ArrayBufferEntry | null
+  artboards: ArrayBufferEntry[]
   images: ArrayBufferEntry[]
 }

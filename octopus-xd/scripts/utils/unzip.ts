@@ -3,9 +3,8 @@ import fflate from 'fflate'
 
 import type { UnzipFileFilter, Unzipped } from 'fflate'
 
-
 type UnzipOptions = {
-  filename: string,
+  filename: string
   filter?: UnzipFileFilter
 }
 
@@ -19,12 +18,12 @@ export async function unzip(options: UnzipOptions): Promise<Unzipped> {
   })
 }
 
-export async function unzipArray(options: UnzipOptions) {
+export async function unzipArray(options: UnzipOptions): Promise<{ path: string; content: Uint8Array }[]> {
   const results = await unzip(options)
-  return Object.keys(results).map(key => {
+  return Object.keys(results).map((key) => {
     return {
       path: key,
-      content: results[key]
+      content: results[key],
     }
   })
 }

@@ -8,7 +8,6 @@ import type { RawStroke } from '../../typings/source'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectStrokeOptions } from '../source/source-effect-stroke'
 
-
 type OctopusEffectStrokeOptions = {
   source: SourceEffectStroke
 }
@@ -17,26 +16,26 @@ export default class OctopusEffectStroke {
   private _source: SourceEffectStroke
 
   static LINE_JOIN_MAP = {
-    'bevel': 'BEVEL',
-    'round': 'ROUND',
-    'miter': 'MITER'
+    bevel: 'BEVEL',
+    round: 'ROUND',
+    miter: 'MITER',
   } as const
 
   static LINE_CAP_MAP = {
-    'round': 'ROUND',
-    'butt': 'BUTT',
-    'square': 'SQUARE'
+    round: 'ROUND',
+    butt: 'BUTT',
+    square: 'SQUARE',
   } as const
 
   static POSITION_MAP = {
-    'center': 'CENTER',
-    'inside': 'INSIDE',
-    'outside': 'OUTSIDE'
+    center: 'CENTER',
+    inside: 'INSIDE',
+    outside: 'OUTSIDE',
   } as const
 
-  static fromRaw(options: SourceEffectStrokeOptions) {
+  static fromRaw(options: SourceEffectStrokeOptions): OctopusEffectStroke {
     return new this({
-      source: new SourceEffectStroke(options)
+      source: new SourceEffectStroke(options),
     })
   }
 
@@ -47,12 +46,7 @@ export default class OctopusEffectStroke {
   private _parseDashing(rawDash: RawStroke['dash']): number[] | null {
     const dashSetExists = Array.isArray(rawDash) && rawDash.length
     if (!dashSetExists) return null
-    return rawDash.length % 2 === 1
-      ? [
-        ...rawDash,
-        ...rawDash.slice(-1)
-      ]
-      : rawDash.slice()
+    return rawDash.length % 2 === 1 ? [...rawDash, ...rawDash.slice(-1)] : rawDash.slice()
   }
 
   convert(): Octopus['VectorStroke'] | null {
@@ -69,9 +63,9 @@ export default class OctopusEffectStroke {
 
     const fill = OctopusEffectFillColor.fromRaw({
       effect: {
-        type: this._source.type === 'none' ? 'none' : 'solid', /** @TODO confirm */
-        color: this._source.color
-      }
+        type: this._source.type === 'none' ? 'none' : 'solid' /** @TODO confirm */,
+        color: this._source.color,
+      },
     }).convert()
 
     if (!fill) return null
@@ -84,7 +78,7 @@ export default class OctopusEffectStroke {
       style,
       lineJoin,
       lineCap,
-      ...(dashing ? { dashing } : null)
+      ...(dashing ? { dashing } : null),
     }
   }
 }

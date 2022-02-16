@@ -1,9 +1,9 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 type OctopusBoundsOptions = {
-  x: number,
-  y: number,
-  w: number,
+  x: number
+  y: number
+  w: number
   h: number
 }
 
@@ -17,12 +17,12 @@ export default class OctopusBounds {
     return new this({ x, y, w, h })
   }
 
-  static fromPaperBounds(bounds: paper.Rectangle) {
+  static fromPaperBounds(bounds: paper.Rectangle): OctopusBounds {
     return new this({
       x: bounds.left,
       y: bounds.top,
       w: bounds.width,
-      h: bounds.height
+      h: bounds.height,
     })
   }
 
@@ -33,28 +33,28 @@ export default class OctopusBounds {
     this._h = options.h
   }
 
-  get x() {
+  get x(): number {
     return asNumber(this._x, 0)
   }
 
-  get y() {
+  get y(): number {
     return asNumber(this._y, 0)
   }
 
-  get w() {
+  get w(): number {
     return asNumber(this._w, 0)
   }
 
-  get h() {
+  get h(): number {
     return asNumber(this._h, 0)
   }
 
-  convert() {
+  convert(): { x: number; y: number; w: number; h: number } {
     return {
       x: this._x,
       y: this._y,
       w: this._w,
-      h: this._h
+      h: this._h,
     }
   }
 }

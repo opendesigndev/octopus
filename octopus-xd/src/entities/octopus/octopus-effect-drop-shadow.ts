@@ -8,7 +8,6 @@ import type { Octopus } from '../../typings/octopus'
 import type { Defined } from '../../typings/helpers'
 import type { SourceEffectDropShadowOptions } from '../source/source-effect-drop-shadow'
 
-
 type OctopusEffectDropShadowOptions = {
   source: SourceEffectDropShadow
 }
@@ -16,9 +15,9 @@ type OctopusEffectDropShadowOptions = {
 export default class OctopusEffectDropShadow {
   private _source: SourceEffectDropShadow
 
-  static fromRaw(options: SourceEffectDropShadowOptions) {
+  static fromRaw(options: SourceEffectDropShadowOptions): OctopusEffectDropShadow {
     return new this({
-      source: new SourceEffectDropShadow(options)
+      source: new SourceEffectDropShadow(options),
     })
   }
 
@@ -45,13 +44,13 @@ export default class OctopusEffectDropShadow {
       shadow: {
         offset: {
           x: asNumber(dx),
-          y: asNumber(dy)
+          y: asNumber(dy),
         },
         blur: asNumber(r) * 2,
         choke: defaults.EFFECTS.SHADOW_CHOKE,
-        color: parseXDColor(color)
+        color: parseXDColor(color),
       },
-      basis: 'BODY' /** @TODO deduct later */
+      basis: 'BODY' /** @TODO deduct later */,
     }
   }
 }

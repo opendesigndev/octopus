@@ -4,10 +4,10 @@ import SourceLayerCommon from './source-layer-common'
 
 import type { SourceLayerParent } from './source-layer-common'
 import type { RawShapeCompound, RawShapeLayer } from '../../typings/source'
-
+import type { Defined } from '../../typings/helpers'
 
 type SourceLayerShapeOptions = {
-  parent: SourceLayerParent,
+  parent: SourceLayerParent
   rawValue: RawShapeLayer
 }
 
@@ -30,21 +30,21 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return asArray((this._rawValue.shape as RawShapeCompound).children).reduce((children, shapeLayer) => {
       const layer = createSourceLayer({
         parent: this,
-        layer: shapeLayer
+        layer: shapeLayer,
       })
       return layer ? [...children, layer as SourceLayerShape] : children
     }, [])
   }
 
-  get shape() {
+  get shape(): RawShapeLayer['shape'] {
     return this._rawValue?.shape
   }
 
-  get shapeType() {
+  get shapeType(): Defined<RawShapeLayer['shape']>['type'] {
     return this._rawValue.shape?.type
   }
 
-  get children() {
+  get children(): SourceLayerShape[] | null {
     return this._children
   }
 }

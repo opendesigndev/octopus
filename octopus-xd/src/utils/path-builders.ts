@@ -32,10 +32,7 @@ function buildShapeFromRect(shape: RawShapeRect): paper.Path {
 }
 
 function buildShapeFromEllipse(shape: RawShapeEllipse): paper.Path {
-  return createPathEllipse(
-    createPoint(0, 0),
-    createSize(asNumber(shape?.rx) * 2, asNumber(shape?.ry) * 2)
-  )
+  return createPathEllipse(createPoint(0, 0), createSize(asNumber(shape?.rx) * 2, asNumber(shape?.ry) * 2))
 }
 
 function buildShapeFromPolygon(shape: RawShapePolygon): paper.Path {
@@ -53,27 +50,18 @@ function buildShapeFromLine(shape: RawShapeLine): paper.Path {
 }
 
 function buildShapeFromCircle(shape: RawShapeCircle): paper.Path {
-  return createPathCircle(
-    createPoint(asNumber(shape?.r), asNumber(shape?.r)),
-    asNumber(shape?.r)
-  )
+  return createPathCircle(createPoint(asNumber(shape?.r), asNumber(shape?.r)), asNumber(shape?.r))
 }
 
-export function buildShapeFromCompound(
-  shape: RawShapeCompound
-): paper.CompoundPath | null {
-  return typeof shape?.path === 'string'
-    ? createCompoundPath(shape?.path)
-    : null
+export function buildShapeFromCompound(shape: RawShapeCompound): paper.CompoundPath | null {
+  return typeof shape?.path === 'string' ? createCompoundPath(shape?.path) : null
 }
 
 export function buildShapeFromPath(shape: RawShapePath): paper.Path | null {
   return typeof shape?.path === 'string' ? createPath(shape?.path) : null
 }
 
-export function buildShape(
-  shape: RawShape
-): paper.Path | paper.CompoundPath | null {
+export function buildShape(shape: RawShape): paper.Path | paper.CompoundPath | null {
   const type = shape?.type
 
   switch (type) {
@@ -103,9 +91,7 @@ export function buildShape(
   return null
 }
 
-export function buildShapePathSafe(
-  shape: RawShape | undefined
-): paper.Path | paper.CompoundPath {
+export function buildShapePathSafe(shape: RawShape | undefined): paper.Path | paper.CompoundPath {
   const defaultShape = createPath('M0 0Z')
 
   if (!shape) return defaultShape

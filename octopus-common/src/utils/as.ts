@@ -1,4 +1,4 @@
-type AsArray<T> = T extends any[] ? T : never
+type AsArray<T> = T extends unknown[] ? T : never
 
 export function asArray<T, U>(value: T, defaultValue?: U): AsArray<T> | AsArray<U> {
   if (Array.isArray(value)) {

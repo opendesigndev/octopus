@@ -1,7 +1,7 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
+import type { Octopus } from '../../typings/octopus'
 import type SourceArtboard from '../source/source-artboard'
-
 
 type OctopusDimensionsOptions = {
   sourceArtboard: SourceArtboard
@@ -14,23 +14,25 @@ export default class OctopusArtboardDimensions {
     this._sourceArtboard = options.sourceArtboard
   }
 
-  get areValid() {
-    return typeof this._sourceArtboard.meta['uxdesign#bounds']?.width === 'number'
-      && typeof this._sourceArtboard.meta['uxdesign#bounds']?.height === 'number'
+  get areValid(): boolean {
+    return (
+      typeof this._sourceArtboard.meta['uxdesign#bounds']?.width === 'number' &&
+      typeof this._sourceArtboard.meta['uxdesign#bounds']?.height === 'number'
+    )
   }
 
-  get w() {
+  get w(): number {
     return asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.width, 0)
   }
 
-  get h() {
+  get h(): number {
     return asNumber(this._sourceArtboard.meta['uxdesign#bounds']?.height, 0)
   }
 
-  convert() {
+  convert(): Octopus['Dimensions'] {
     return {
       width: this.w,
-      height: this.h
+      height: this.h,
     }
   }
 }

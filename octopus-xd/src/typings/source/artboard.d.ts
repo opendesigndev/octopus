@@ -4,43 +4,43 @@ import { RawGuidesModel } from './guides'
 import { RawLayer } from './layer'
 
 export type RawPasteboard = {
-  version?: string,
-  children?: RawLayer[],
+  version?: string
+  children?: RawLayer[]
   resources?: {
     href?: string
-  },
+  }
   artboards?: {
     href?: string
   }
 }
 
 export type RawArtboardEntry = {
-  type?: 'artboard',
-  id?: string,
+  type?: 'artboard'
+  id?: string
   meta?: {
     ux?: {
-      guidesModel?: RawGuidesModel,
+      guidesModel?: RawGuidesModel
       gridStyle?: RawGridStyle
     }
-  },
-  style?: RawStyle,
+  }
+  style?: RawStyle
   artboard?: {
     meta?: {
       ux?: {
         path?: string
       }
-    },
-    children?: RawLayer[],
+    }
+    children?: RawLayer[]
     ref?: string
   }
 }
 
 export type RawArtboard = {
-  version?: string,
-  children?: RawArtboardEntry[],
+  version?: string
+  children?: RawArtboardEntry[]
   resources?: {
     href?: string
-  },
+  }
   artboards?: {
     href?: string
   }

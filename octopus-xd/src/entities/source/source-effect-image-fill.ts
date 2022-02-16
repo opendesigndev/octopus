@@ -1,9 +1,14 @@
-import type { RawFillImage } from '../../typings/source'
 import OctopusBounds from '../octopus/octopus-bounds'
 
+import type { Defined } from '../../typings/helpers'
+import type { RawFillImage } from '../../typings/source'
+
+/** Just a helper type to shorten long types on methods */
+type DefinedPattern = Defined<RawFillImage['pattern']>
+type DefinedUx = Defined<Defined<DefinedPattern['meta']>['ux']>
 
 export type SourceEffectFillImageOptions = {
-  effect: RawFillImage,
+  effect: RawFillImage
   effectBounds: OctopusBounds
 }
 
@@ -14,51 +19,51 @@ export default class SourceEffectFillImage {
     this._rawEffect = options.effect
   }
 
-  get type() {
+  get type(): RawFillImage['type'] {
     return this._rawEffect?.type
   }
 
-  get uid() {
+  get uid(): DefinedUx['uid'] {
     return this._rawEffect?.pattern?.meta?.ux?.uid
   }
 
-  get scaleBehavior() {
+  get scaleBehavior(): DefinedUx['scaleBehavior'] {
     return this._rawEffect?.pattern?.meta?.ux?.scaleBehavior
   }
 
-  get scale() {
+  get scale(): DefinedUx['scale'] {
     return this._rawEffect?.pattern?.meta?.ux?.scale
   }
 
-  get scaleX() {
+  get scaleX(): DefinedUx['scaleX'] {
     return this._rawEffect?.pattern?.meta?.ux?.scaleX
   }
 
-  get scaleY() {
+  get scaleY(): DefinedUx['scaleY'] {
     return this._rawEffect?.pattern?.meta?.ux?.scaleY
   }
 
-  get offsetX() {
+  get offsetX(): DefinedUx['offsetX'] {
     return this._rawEffect?.pattern?.meta?.ux?.offsetX
   }
 
-  get offsetY() {
+  get offsetY(): DefinedUx['offsetY'] {
     return this._rawEffect?.pattern?.meta?.ux?.offsetY
   }
 
-  get flipX() {
+  get flipX(): DefinedUx['flipX'] {
     return this._rawEffect?.pattern?.meta?.ux?.flipX
   }
 
-  get flipY() {
+  get flipY(): DefinedUx['flipY'] {
     return this._rawEffect?.pattern?.meta?.ux?.flipY
   }
 
-  get imageWidth() {
+  get imageWidth(): DefinedPattern['width'] {
     return this._rawEffect?.pattern?.width
   }
 
-  get imageHeight() {
+  get imageHeight(): DefinedPattern['height'] {
     return this._rawEffect?.pattern?.height
   }
 }

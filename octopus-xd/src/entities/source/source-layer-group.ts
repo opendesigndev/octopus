@@ -6,9 +6,8 @@ import type { RawGroupLayer, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { SourceLayerParent } from './source-layer-common'
 
-
 type SourceLayerGroupOptions = {
-  parent: SourceLayerParent,
+  parent: SourceLayerParent
   rawValue: RawGroupLayer
 }
 
@@ -28,13 +27,13 @@ export default class SourceLayerGroup extends SourceLayerCommon {
     return children.reduce((children: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({
         layer,
-        parent: this
+        parent: this,
       })
       return sourceLayer ? [...children, sourceLayer] : children
     }, [])
   }
 
-  get children() {
+  get children(): SourceLayer[] {
     return this._children
   }
 }
