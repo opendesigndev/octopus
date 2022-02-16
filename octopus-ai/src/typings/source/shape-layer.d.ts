@@ -6,11 +6,16 @@ export type RawShapeLayerSubPathPoint = {
 
 }
 
+type X = number
+type Y = number
+type Width = number
+type Height =number
+
 export type RawShapeLayerSubPath = {
     Type?: string
     Points?: RawShapeLayerSubPathPoint[]
     Closed?: boolean
-    Coords?: number[]
+    Coords?: [X,Y,Width,Height]
 
 }
 

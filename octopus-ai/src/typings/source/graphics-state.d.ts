@@ -1,7 +1,8 @@
 import { RawLayer } from "."
 
+export type RawGraphicsStateMatrix = [number,number,number,number,number,number]
 export type RawGraphicsState<T=undefined> = {
-    CTM?: [number,number,number,number,number,number],
+    CTM?: RawGraphicsStateMatrix,
     ClippingPath?: T extends RawLayer ? T[] : null,
     ColorSpaceStroking?: string,
     ColorSpaceNonStroking?: string,

@@ -2,6 +2,7 @@ import SourceLayerCommon from './source-layer-common'
 import {SourceLayerParent} from './source-layer-common'
 import { RawShapeLayer } from '../typings/source/shape-layer';
 import SourceLayerShapeSubPath from './source-layer-shape-subpath'
+import { RawGraphicsStateMatrix } from '../typings/source/graphics-state';
 
 type SourceLayerShapeOptions = {
     parent: SourceLayerParent,
@@ -11,7 +12,7 @@ type SourceLayerShapeOptions = {
 
   export default class SourceLayerShape extends SourceLayerCommon {
     protected _rawValue: RawShapeLayer
-    private _subpaths: SourceLayerShapeSubPath []
+    private _subpaths: SourceLayerShapeSubPath[]
 
     constructor(options: SourceLayerShapeOptions){
         super(options)
@@ -34,7 +35,7 @@ type SourceLayerShapeOptions = {
         return this._isRect() ? '<Rectangle>' : '<Path>'
       }
 
-    get subPaths(){
+    get subpaths(): SourceLayerShapeSubPath[]{
         return this._subpaths
     }
 
@@ -86,9 +87,18 @@ type SourceLayerShapeOptions = {
     get lineWidth() {
         return this.graphicsState?.LineWidth
     }
+
+    get parentArtboardHeight(){
+        return this.parentArtboard?.dimensions?.height || 0
+    }
    
-    get transformMatrix () {
-        return this._rawValue?.GraphicsState?.CTM || [1, 0, 0, 1, 0, 0]
+    get transformMatrix (): RawGraphicsStateMatrix {
+        const rawCtm: RawGraphicsStateMatrix = this._rawValue?.GraphicsState?.CTM
+        ? [...this._rawValue?.GraphicsState?.CTM]
+        : [1, 0, 0, 1, 0, 0]
+
+        rawCtm[5]= -rawCtm[5]
+        return rawCtm
     }
 
     get fill () {

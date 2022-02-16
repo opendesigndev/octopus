@@ -34,18 +34,17 @@ export default class OctopusLayerText extends OctopusLayerCommon {
        const texts= this._sourceLayer.texts.map(text=>this._parseText(text))
 
     }
-
-
-      private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
-        const textValue = this._sourceLayer.textValue
-        const name = this._sourceLayer.name
+  
+    private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
+       const textValue = this._sourceLayer.textValue
+       const name = this._sourceLayer.name
 
         if (!text) return null
         return {
           type: 'TEXT',
           // @ts-ignore
           text:{
-            value:textValue
+            value: textValue
           },
           name
         }

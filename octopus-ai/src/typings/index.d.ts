@@ -6,5 +6,4 @@ export interface Logger {
     debug: Function,
     trace: Function,
     silent: Function
-  }
-  
+  }  

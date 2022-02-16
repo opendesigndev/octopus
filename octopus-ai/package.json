@@ -8,6 +8,7 @@
     "create-private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
     "convert:all": "npx ts-node ./scripts/convert-all.ts",
     "convert:dev": "rm -rf workdir && npm run convert:all",
+    "create:convert": "yarn run create && yarn run convert:dev && orchestrator4.run workdir/test/octopus-1.json",
     "build": "npx tsc --build ./tsconfig.json",
     "test": "\"echo 'Tests are not implemented yet'\""
   },

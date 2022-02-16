@@ -1,51 +1,49 @@
 import { RawShapeLayerSubPathPoint } from "../typings/source"
+import { RawGraphicsStateMatrix } from "../typings/source/graphics-state"
 
-type TransformOptions = {
-    parentHeight: number,
+export type TransformOptions = {
     matrix: [number,number,number,number,number,number]
 }
-type Coord=[number,number]
+
+export type Coord=[number,number]
 
 export function transformCoords(
-    transformOptions: TransformOptions,
+    matrix: RawGraphicsStateMatrix,
     coords:number[]
   ): number[] {
     const result = []
-
     for (let i = 0; i < coords.length; i += 2) {
-      result.push(...transformCoord(transformOptions, [coords[i], coords[i + 1]]))
+      result.push(...transformCoord(matrix, [coords[i], coords[i + 1]]))
     }
-  
+
     return result
   }
   
  export  function transformCoord(
-    transformOptions: TransformOptions,
+    matrix: RawGraphicsStateMatrix,
     point: Coord
   ): number[] {
-    const {matrix, parentHeight} = transformOptions
     const [x, y] = point
-    const [a, b, c, d, tx, ty] = matrix
+    const [a, b, c, d] = matrix
   
     return [
-      Math.round((a * x + b * y + tx)*10000)/10000,
-      Math.round((parentHeight - (c * x + d * y + ty))*10000)/10000,
+      Math.round((a * x + b * y )*10000)/10000,
+      Math.round((c * x + d * y)*10000)/10000,
     ]
   }
   
   export function createRectPoints(
-    transformOptions: TransformOptions,
     coords: number[]
   ): Coord[] {
     const [x, y, width, height] = coords
-  
-    const points:[number,number][] = [
+
+    const points:Coord[] = [
       [x, y],
       [x + width, y],
-      [x + width, y + height],
-      [x, y + height],
+      [x + width, y - height],
+      [x, y - height],
     ]
-    return points.map((coordinates) => transformCoords(transformOptions, coordinates)) as Coord[]
+    return points
   }
 
 
@@ -84,5 +82,14 @@ export function transformCoords(
     return ['Curve', 'Line', 'Move'].some((t) => t === type)
   }
   
+export function inverseYCoords(coords: number[], artboardHeight: number): number[]{
+  const inversedCoords = coords.map((coord,index)=>{
+    if(index%2 === 0){
+      return coord
+    }
+    return artboardHeight - coord
+  })
 
+  return inversedCoords
+}
   

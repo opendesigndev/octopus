@@ -12,6 +12,7 @@ type SourceLayerCommonOptions = {
     path: number[]
   }
 
+
 export default class SourceLayerCommon {
     protected _parent: SourceLayerParent
     protected _rawValue: RawLayer
@@ -20,7 +21,7 @@ export default class SourceLayerCommon {
     constructor(options:SourceLayerCommonOptions){
         this._path=options.path
         this._rawValue=options.rawValue
-        this._path=options.path
+        this._parent=options.parent
     }
 
     get path () {
@@ -43,4 +44,17 @@ export default class SourceLayerCommon {
     get resources (): SourceResources | undefined {
         return this._parent.resources
     }
+
+    get parentArtboard(): SourceArtboard | null {
+        if (!this._parent) return null
+
+        const parent = this._parent as SourceLayerGroup | SourceArtboard
+        return parent instanceof SourceArtboard ? parent : parent.parentArtboard
+      }
+    
+    get parentArtboardDimensions () {
+        return this.parentArtboard?.dimensions || {width:0, height:0}
+    }
+
+
 }
