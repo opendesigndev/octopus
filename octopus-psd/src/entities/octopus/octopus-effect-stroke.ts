@@ -1,9 +1,9 @@
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { SourceEffectStroke } from '../source/source-effect-stroke'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { OctopusEffectFill } from './octopus-effect-fill'
 
 type OctopusStrokeOptions = {
   parent: OctopusLayerShapeShapeAdapter
@@ -72,18 +72,33 @@ export class OctopusEffectStroke {
     return result
   }
 
-  convert(): Octopus['VectorStroke'] | null {
+  get fill(): Octopus['Fill'] | null {
+    const fill = this.sourceLayer.stroke.fill
+    return new OctopusEffectFill({ parent: this._parent, fill }).convert()
+  }
+
+  get style() {
     const thickness = this.stroke.lineWidth
+    const dashing = this.stroke.lineDashSet
+    if (dashing === undefined) return { style: 'SOLID' as const, thickness }
+    return {
+      style: 'DASHED' as const,
+      thickness,
+      dashing: dashing.map((dash) => dash * thickness),
+    }
+  }
+
+  convert(): Octopus['VectorStroke'] | null {
+    const fill = this.fill
     const position = this.position
-    const fill = new OctopusEffectFillColor({ fill: this.sourceLayer.stroke.fill }).convert() // TODO
-    const style = 'SOLID' // TODO
     const lineJoin = this.lineJoin
     const lineCap = this.lineCap
 
+    if (fill === null) return null
     if (position === null) return null
     if (lineCap === null) return null
     if (lineJoin === null) return null
 
-    return { thickness, position, fill, style, lineJoin, lineCap }
+    return { fill, position, lineJoin, lineCap, ...this.style }
   }
 }

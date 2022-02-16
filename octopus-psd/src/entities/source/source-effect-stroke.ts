@@ -29,4 +29,8 @@ export class SourceEffectStroke extends SourceEntity {
   get lineJoin() {
     return this._rawValue?.strokeStyleLineJoinType ?? 'strokeStyleMiterJoin'
   }
+
+  get lineDashSet() {
+    return this._rawValue?.strokeStyleLineDashSet
+  }
 }
