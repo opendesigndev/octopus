@@ -22,9 +22,8 @@ async function convert(converter: OctopusAIConverter, artboard: SourceArtboard, 
 export async function convertAll (){
     const id = uuidv4()
     const converter = new OctopusAIConverter()
-    const sourceDesign=await prepareSourceDesign()
-    //@todo here goes id from uuid but for easier command line rendering I put 'test'
-    const saver = await createTempSaver({ id:'test' })
+    const sourceDesign = await prepareSourceDesign()
+    const saver = await createTempSaver({ id })
 
     
   return Promise.all(sourceDesign.artboards.map(async artboard => {
