@@ -6,15 +6,25 @@ import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 type OctopusFillImageOptions = {
+  imagePath: string
+  layout: Octopus['FillPositioning']['layout']
+  transform: Octopus['Transform']
+  origin: Octopus['FillPositioning']['origin']
   parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
 }
 
 export class OctopusEffectFillImage {
-  protected _parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
-
-  static IMAGE_PREFIX = 'pictures'
+  private _imagePath: string
+  private _layout: Octopus['FillPositioning']['layout']
+  private _transform: Octopus['Transform']
+  private _origin: Octopus['FillPositioning']['origin']
+  private _parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
 
   constructor(options: OctopusFillImageOptions) {
+    this._imagePath = options.imagePath
+    this._layout = options.layout
+    this._transform = options.transform
+    this._origin = options.origin
     this._parent = options.parent
   }
 
@@ -22,22 +32,16 @@ export class OctopusEffectFillImage {
     return this._parent.sourceLayer
   }
 
-  private _convertImagePath(name: string) {
-    return path.join(OctopusEffectFillImage.IMAGE_PREFIX, name)
-  }
-
   private _getImage(): Octopus['Image'] {
     const ref: Octopus['ImageRef'] = {
       type: 'RESOURCE',
-      value: this._convertImagePath(this.sourceLayer?.imageName ?? ''), // TODO this is not correct for SourceLayerShape
+      value: this._imagePath,
     }
     return { ref }
   }
 
   private _getPositioning(): Octopus['FillPositioning'] {
-    const { width, height } = this.sourceLayer.bounds
-    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0] // TODO patterns will need fix
-    return { layout: 'FILL', origin: 'LAYER', transform }
+    return { layout: this._layout, origin: this._origin, transform: this._transform }
   }
 
   convert(): Octopus['FillImage'] {

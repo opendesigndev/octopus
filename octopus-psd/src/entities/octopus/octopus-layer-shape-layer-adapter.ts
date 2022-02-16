@@ -3,6 +3,8 @@ import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { createDefaultTranslationMatrix } from '../../utils/path'
+import path from 'path'
+import { FOLDER_IMAGES } from '../../utils/const'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -34,23 +36,33 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
   }
 
   private get _fills(): Octopus['Fill'][] {
-    const fill = new OctopusEffectFillImage({ parent: this }).convert()
+    const imagePath = path.join(FOLDER_IMAGES, this.sourceLayer.imageName ?? '')
+    const { width, height } = this.sourceLayer.bounds
+    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0]
+    const fill = new OctopusEffectFillImage({
+      parent: this,
+      imagePath,
+      transform,
+      layout: 'STRETCH',
+      origin: 'LAYER',
+    }).convert()
     return [fill]
   }
 
-  private get _shapes(): Octopus['Shape'][] {
+  private get _shape(): Octopus['Shape'] {
     const fillShape: Octopus['Shape'] = {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
     }
-    return [fillShape]
+    return fillShape
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
     return {
       type: 'SHAPE',
-      shapes: this._shapes,
+      shape: this._shape,
+      shapes: [this._shape], // TODO remove when fixed in Octopus specification
     } as const
   }
 

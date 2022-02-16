@@ -1,6 +1,6 @@
 import paper from 'paper'
 
-const { Path, Point, Segment, Size, Rectangle, Matrix } = paper
+const { Path, Point, Segment, Size, Rectangle, Raster, Matrix } = paper
 
 paper.setup(new Size(0, 0))
 
@@ -34,4 +34,8 @@ export function createTranslationMatrix(tx: number, ty: number): paper.Matrix {
 
 export function createMatrix(a: number, b: number, c: number, d: number, tx: number, ty: number): paper.Matrix {
   return new Matrix(a, b, c, d, tx, ty)
+}
+
+export function createRaster(path: string): paper.Raster {
+  return new Raster(path)
 }

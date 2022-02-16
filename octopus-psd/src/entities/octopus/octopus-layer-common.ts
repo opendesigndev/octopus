@@ -42,6 +42,10 @@ export class OctopusLayerCommon {
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
+  get sourceLayer(): SourceLayer {
+    return this._sourceLayer
+  }
+
   get converter(): OctopusPSDConverter {
     return this.parentArtboard.converter
   }

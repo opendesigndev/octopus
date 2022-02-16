@@ -31,7 +31,7 @@ export class OctopusArtboard {
   }
 
   private _initLayers() {
-    return this._sourceArtboard.layers.reduce((layers, sourceLayer) => {
+    return this.sourceArtboard.layers.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
         layer: sourceLayer,
@@ -41,7 +41,7 @@ export class OctopusArtboard {
   }
 
   get dimensions() {
-    const { width, height } = this._sourceArtboard.bounds
+    const { width, height } = this.sourceArtboard.bounds
     return { width, height }
   }
 
