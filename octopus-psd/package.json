@@ -1,0 +1,47 @@
+{
+  "name": "@avocode/octopus-psd",
+  "version": "3.0.0-rc.1",
+  "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
+  "license": "UNLICENSED",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "convert": "ts-node ./scripts/convert.ts",
+    "build": "tsc --build ./tsconfig.json",
+    "clean": "rimraf ./node_modules ./lib ./workdir",
+    "clean-workdir": "rimraf ./workdir/*",
+    "lint": "eslint ./src/* ./scripts/*",
+    "prepare": "rimraf ./lib && yarn run build",
+    "watch": "tsc -w",
+    "test": "yarn jest"
+  },
+  "dependencies": {
+    "@avocode/octopus-common": "3.0.0-rc.6",
+    "@avocode/psd-parser": "0.8.4",
+    "@sentry/node": "6.14.0",
+    "chalk": "^4.1.2",
+    "dotenv": "10.0.0",
+    "lodash": "^4.17.21",
+    "paper": "0.12.15",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@avocode/octopus-ts": "3.0.0-alpha.19",
+    "@types/chalk": "^2.2.0",
+    "@types/jest": "^27.4.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "@types/uuid": "^8.3.1",
+    "jest": "^27.3.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "10.5.0",
+    "typescript": "4.4.4"
+  },
+  "files": [
+    "dist/src"
+  ]
+}

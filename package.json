@@ -6,20 +6,25 @@
     "packages": [
       "octopus-xd",
       "octopus-ai",
-      "octopus-common"
+      "octopus-common",
+      "octopus-psd"
     ],
     "nohoist": [
       "**"
     ]
   },
   "scripts": {
+    "build": "yarn workspaces run build",
+    "clean": "rimraf ./node_modules && yarn workspaces run clean",
+    "clean-init": "yarn clean && yarn && yarn build",
+    "lint": "yarn workspaces run lint",
+    "test": "yarn workspaces run test",
     "xd:unpack": "yarn workspace @avocode/octopus-xd unpack-xd-file",
     "xd:clean-workdir": "yarn workspace @avocode/octopus-xd clean-workdir",
     "xd:watch": "yarn workspace @avocode/octopus-xd watch"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "*",
-    "typescript": "4.4.4"
+    "rimraf": "^3.0.2"
   }
 }
