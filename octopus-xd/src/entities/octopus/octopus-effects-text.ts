@@ -7,7 +7,6 @@ import type { RawStyle } from '../../typings/source'
 import type { OctopusFill } from '../../typings/octopus-entities'
 import OctopusLayerText from './octopus-layer-text'
 
-
 type OctopusEffectsTextOptions = {
   effectSource?: RawStyle
 }
@@ -17,7 +16,7 @@ type FromTextLayerOptions = {
 }
 
 type TextEffects = {
-  fills?: Octopus['Fill'][],
+  fills?: Octopus['Fill'][]
   strokes?: Octopus['VectorStroke'][]
 }
 
@@ -27,9 +26,9 @@ type TextEffects = {
 export default class OctopusEffectsText {
   private _effectSource: RawStyle | null
 
-  static fromTextLayer(options: FromTextLayerOptions) {
+  static fromTextLayer(options: FromTextLayerOptions): OctopusEffectsText {
     return new this({
-      effectSource: options.octopusLayer.sourceLayer.style as RawStyle
+      effectSource: options.octopusLayer.sourceLayer.style as RawStyle,
     })
   }
 
@@ -57,9 +56,7 @@ export default class OctopusEffectsText {
 
   private _parseStrokes(): OctopusEffectStroke[] {
     const stroke = this.style?.stroke
-    return stroke
-      ? [OctopusEffectStroke.fromRaw({ effect: stroke })]
-      : []
+    return stroke ? [OctopusEffectStroke.fromRaw({ effect: stroke })] : []
   }
 
   convert(): TextEffects {

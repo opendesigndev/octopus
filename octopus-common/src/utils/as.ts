@@ -1,4 +1,4 @@
-type AsArray<T> = T extends any[] ? T : never
+type AsArray<T> = T extends unknown[] ? T : never
 
 export function asArray<T, U>(value: T, defaultValue?: U): AsArray<T> | AsArray<U> {
   if (Array.isArray(value)) {
@@ -41,14 +41,14 @@ export function asNumber(value: unknown, defaultValue?: number): number {
 }
 
 export function asFiniteNumber(value: unknown, defaultValue?: number): number {
-  if (typeof value === 'number') {
+  if (typeof value === 'number' && Number.isFinite(value)) {
     return value
   }
-  if (typeof defaultValue === 'number') {
+  if (typeof defaultValue === 'number' && Number.isFinite(defaultValue)) {
     return defaultValue
   }
   const conversionAttempt = Number(value)
-  if (!Number.isInteger(conversionAttempt)) {
+  if (!Number.isFinite(conversionAttempt)) {
     throw new Error(`Failed when converting "${value}" to finite number`)
   }
   return conversionAttempt

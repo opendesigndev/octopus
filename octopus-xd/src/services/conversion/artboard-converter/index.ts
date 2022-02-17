@@ -2,10 +2,10 @@ import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
 
 import type OctopusXDConverter from '../../..'
 import type SourceDesign from '../../../entities/source/source-design'
-
+import type { Octopus } from '../../../typings/octopus'
 
 export type ArtboardConversionOptions = {
-  targetArtboardId: string,
+  targetArtboardId: string
   sourceDesign: SourceDesign
 }
 
@@ -24,11 +24,11 @@ export default class ArtboardConverter {
     this._targetArtboardId = options.targetArtboardId
   }
 
-  convert() {
+  convert(): Promise<Octopus['OctopusDocument']> {
     return new OctopusArtboard({
       sourceDesign: this._sourceDesign,
       octopusXdConverter: this._octopusXdConverter,
-      targetArtboardId: this._targetArtboardId
+      targetArtboardId: this._targetArtboardId,
     }).convert()
   }
 }

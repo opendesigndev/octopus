@@ -8,9 +8,8 @@ import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { LayerSpecifics } from './octopus-layer-common'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-
 type OctopusLayerGroupOptions = {
-  parent: OctopusLayerParent,
+  parent: OctopusLayerParent
   sourceLayer: SourceLayerGroup
 }
 
@@ -27,7 +26,7 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
     return this._sourceLayer.children.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layer: sourceLayer
+        layer: sourceLayer,
       })
       return octopusLayer ? [...layers, octopusLayer] : layers
     }, [])
@@ -36,7 +35,7 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
     return {
       type: 'GROUP',
-      layers: getConverted(this._layers)
+      layers: getConverted(this._layers),
     } as const
   }
 
@@ -46,7 +45,7 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...this._convertTypeSpecific()
+      ...this._convertTypeSpecific(),
     }
   }
 }

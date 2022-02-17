@@ -1,7 +1,6 @@
 import { convertAll } from './utils/convert-all'
-
-(async () => {
+;(async () => {
   await convertAll({
-    render: Boolean(Number(process.env.CONVERT_RENDER))
+    render: Boolean(Number(process.env.CONVERT_RENDER)),
   })
 })()

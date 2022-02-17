@@ -4,7 +4,6 @@ import SourceEffectBlur from '../source/source-effect-blur'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectBlurOptions } from '../source/source-effect-blur'
 
-
 type OctopusEffectBlurOptions = {
   source: SourceEffectBlur
 }
@@ -12,9 +11,9 @@ type OctopusEffectBlurOptions = {
 export default class OctopusEffectBlur {
   private _source: SourceEffectBlur
 
-  static fromRaw(options: SourceEffectBlurOptions) {
+  static fromRaw(options: SourceEffectBlurOptions): OctopusEffectBlur {
     return new this({
-      source: new SourceEffectBlur(options)
+      source: new SourceEffectBlur(options),
     })
   }
 
@@ -28,13 +27,13 @@ export default class OctopusEffectBlur {
     const brightnessFilter = {
       type: 'XD_BRIGHTNESS_ADJUSTMENT',
       visible: true,
-      brightness: asNumber(this._source.brightness, 0)
+      brightness: asNumber(this._source.brightness, 0),
     } as const
 
     const opacityFilter = {
       type: 'OPACITY_MULTIPLIER',
       visible: true,
-      opacity: asNumber(this._source.opacity, 1)
+      opacity: asNumber(this._source.opacity, 1),
     } as const
 
     return [brightnessFilter, opacityFilter]
@@ -51,7 +50,7 @@ export default class OctopusEffectBlur {
       visible,
       blur,
       basis,
-      filters
+      filters,
     }
   }
 }

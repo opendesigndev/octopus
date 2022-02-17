@@ -9,7 +9,6 @@ import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 import type SourceResources from '../../../entities/source/source-resources'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
 
-
 type ExpanderOptions = {
   resources: SourceResources
 }
@@ -22,17 +21,9 @@ export default class Expander {
    * Properties related to symbol internal connections
    * + properties that shouldn't be copied in general (`type`).
    */
-  static SKIP_PROPS = [
-    'type',
-    'syncSourceGuid',
-    'guid'
-  ]
+  static SKIP_PROPS = ['type', 'syncSourceGuid', 'guid']
 
-  static GROUP_LIKE = [
-    'children',
-    'group',
-    'shape'
-  ]
+  static GROUP_LIKE = ['children', 'group', 'shape']
 
   constructor(options: ExpanderOptions) {
     this._resources = options.resources
@@ -53,9 +44,7 @@ export default class Expander {
     if (Expander.GROUP_LIKE.includes(key)) {
       return undefined
     }
-    return srcValue === undefined
-      ? objValue
-      : srcValue
+    return srcValue === undefined ? objValue : srcValue
   }
 
   private _replaceValues(replaceWith: RawLayer, restProps: unknown, id: string) {
@@ -69,7 +58,7 @@ export default class Expander {
     const id = child?.guid
     const restProps = this._getTargetObjectProps(child)
     if (ref) {
-      const replaceWith = this._symbols.find(layer => layer?.id === ref)
+      const replaceWith = this._symbols.find((layer) => layer?.id === ref)
       const clone = replaceWith ? this._replaceValues(replaceWith, restProps, asString(id)) : null
       children.splice(index, 1, clone as RawLayer)
       this._expand(clone as RawLayer)
@@ -84,15 +73,15 @@ export default class Expander {
     })
   }
 
-  expand(artboard: RawArtboard) {
+  expand(artboard: RawArtboard): RawArtboard {
     return {
       ...artboard,
-      children: artboard.children?.map(artboard => {
+      children: artboard.children?.map((artboard) => {
         const clone = cloneDeep(artboard)
         if (!clone) return clone
         this._expand(clone as RawArtboardEntry)
         return clone
-      })
+      }),
     }
   }
 }
