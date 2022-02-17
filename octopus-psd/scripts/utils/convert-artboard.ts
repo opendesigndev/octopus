@@ -33,7 +33,7 @@ async function renderOctopus(octopusDir: string) {
   return renderPath
 }
 
-export async function convertArtboard() {
+export async function convertArtboard(): Promise<void> {
   const designId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)

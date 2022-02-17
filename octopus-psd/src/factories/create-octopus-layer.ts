@@ -11,7 +11,13 @@ import type { SourceLayerText } from '../entities/source/source-layer-text'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceLayer } from './create-source-layer'
 
-export type OctopusLayer = OctopusLayerGroup // | OctopusLayerShape | OctopusLayerMaskGroup
+export type OctopusLayer = OctopusLayerGroup | OctopusLayerText | OctopusLayerShape
+
+type OctopusLayerBuilders =
+  | typeof createOctopusLayerGroup
+  | typeof createOctopusLayerShapeFromShapeAdapter
+  | typeof createOctopusLayerText
+  | typeof createOctopusLayerShapeFromLayerAdapter
 
 type CreateOctopusLayerOptions = {
   layer: SourceLayer
@@ -40,7 +46,7 @@ function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): O
   return new OctopusLayerText({ parent, sourceLayer })
 }
 
-const OCTOPUS_BUILDER_MAP: { [key: string]: Function } = {
+const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   layerSection: createOctopusLayerGroup,
   shapeLayer: createOctopusLayerShapeFromShapeAdapter,
   textLayer: createOctopusLayerText,

@@ -8,11 +8,11 @@ export class SourceSubpath {
     this._rawValue = subpath
   }
 
-  get points() {
+  get points(): SourceSubpathPoint[] {
     return (this._rawValue.points ?? []).map((point) => new SourceSubpathPoint(point))
   }
 
-  get closedSubpath() {
+  get closedSubpath(): boolean {
     return this._rawValue.closedSubpath ?? false
   }
 }

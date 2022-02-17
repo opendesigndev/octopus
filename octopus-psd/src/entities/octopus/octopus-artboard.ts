@@ -22,11 +22,11 @@ export class OctopusArtboard {
     this._layers = this._initLayers()
   }
 
-  get sourceArtboard() {
+  get sourceArtboard(): SourceArtboard {
     return this._sourceArtboard
   }
 
-  get converter() {
+  get converter(): OctopusPSDConverter {
     return this._octopusConverter
   }
 
@@ -40,17 +40,17 @@ export class OctopusArtboard {
     }, [])
   }
 
-  get dimensions() {
+  get dimensions(): { width: number; height: number } {
     const { width, height } = this.sourceArtboard.bounds
     return { width, height }
   }
 
-  get id() {
+  get id(): string {
     return OctopusArtboard.DEFAULT_ID
   }
 
-  get version() {
-    return this._octopusConverter.pkg.then((pkg) => pkg.version)
+  get version(): Promise<string> {
+    return this._octopusConverter.pkgVersion
   }
 
   get layers(): Octopus['Layer'][] {

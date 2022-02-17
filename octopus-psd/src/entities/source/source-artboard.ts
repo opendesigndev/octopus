@@ -3,6 +3,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusPSDConverter } from '../..'
 import { getBoundsFor } from '../../utils/source'
+import { SourceBounds } from '../../typings/source'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard
@@ -20,7 +21,7 @@ export class SourceArtboard {
     this._layers = this._initLayers()
   }
 
-  get converter() {
+  get converter(): OctopusPSDConverter {
     return this._octopusConverter
   }
 
@@ -35,11 +36,11 @@ export class SourceArtboard {
     return layers
   }
 
-  get layers() {
+  get layers(): SourceLayer[] {
     return this._layers
   }
 
-  get bounds() {
+  get bounds(): SourceBounds {
     return getBoundsFor(this._rawValue.bounds)
   }
 }

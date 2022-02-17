@@ -15,7 +15,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     super(options)
   }
 
-  get textValue() {
+  get textValue(): string | undefined {
     return this._sourceLayer.text.textKey
   }
 

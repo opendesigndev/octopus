@@ -10,7 +10,9 @@ async function getWorkDirTempLocation(id: string = uuidv4()) {
   return location
 }
 
-export async function createTempSaver(location?: string) {
+export async function createTempSaver(
+  location?: string
+): Promise<(pathSuffix: string | null, body: string | Buffer) => Promise<string>> {
   const sessionLocation = await getWorkDirTempLocation(location)
   return async (pathSuffix: string | null, body: string | Buffer) => {
     const suffix = typeof pathSuffix === 'string' ? pathSuffix : uuidv4()

@@ -51,7 +51,7 @@ export class OctopusEffectFillGradient {
     return result
   }
 
-  get isInverse() {
+  get isInverse(): boolean {
     return this.fill.reverse
   }
 

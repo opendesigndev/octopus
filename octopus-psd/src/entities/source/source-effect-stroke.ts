@@ -1,4 +1,9 @@
-import type { RawShapeStrokeStyle } from '../../typings/raw'
+import type {
+  RawShapeStrokeStyle,
+  RawStrokeStyleLineAlignment,
+  RawStrokeStyleLineCapType,
+  RawStrokeStyleLineJoinType,
+} from '../../typings/raw'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 
@@ -10,27 +15,27 @@ export class SourceEffectStroke extends SourceEntity {
     this._rawValue = stroke
   }
 
-  get fill() {
+  get fill(): SourceEffectFill {
     return new SourceEffectFill(this._rawValue?.strokeStyleContent)
   }
 
-  get lineWidth() {
+  get lineWidth(): number {
     return this._rawValue?.strokeStyleLineWidth ?? 0
   }
 
-  get lineAlignment() {
+  get lineAlignment(): RawStrokeStyleLineAlignment {
     return this._rawValue?.strokeStyleLineAlignment ?? 'strokeStyleAlignCenter'
   }
 
-  get lineCap() {
+  get lineCap(): RawStrokeStyleLineCapType {
     return this._rawValue?.strokeStyleLineCapType ?? 'strokeStyleButtCap'
   }
 
-  get lineJoin() {
+  get lineJoin(): RawStrokeStyleLineJoinType {
     return this._rawValue?.strokeStyleLineJoinType ?? 'strokeStyleMiterJoin'
   }
 
-  get lineDashSet() {
+  get lineDashSet(): number[] | undefined {
     return this._rawValue?.strokeStyleLineDashSet
   }
 }

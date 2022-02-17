@@ -8,7 +8,7 @@ export class SourceEffectFillGradient {
     this._rawValue = gradient
   }
 
-  get colors() {
+  get colors(): SourceEffectFillGradientColor[] | undefined {
     return this._rawValue?.colors?.map((color) => new SourceEffectFillGradientColor(color))
   }
 }

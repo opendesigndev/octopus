@@ -1,5 +1,4 @@
 import type { Octopus } from '../../typings/octopus'
-import path from 'path'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'

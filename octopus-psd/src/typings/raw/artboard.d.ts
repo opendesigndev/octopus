@@ -22,7 +22,7 @@ export type RawArtboard = {
   profile?: string | null
   resolution?: number
   selection?: []
-  subdocuments?: {}
+  subdocuments?: Record<string, unknown>
   timeStamp?: number
   version?: string
 }

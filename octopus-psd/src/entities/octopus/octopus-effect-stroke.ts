@@ -9,6 +9,12 @@ type OctopusStrokeOptions = {
   parent: OctopusLayerShapeShapeAdapter
 }
 
+type Style = {
+  style: Octopus['VectorStroke']['style']
+  thickness: Octopus['VectorStroke']['thickness']
+  dashing?: Octopus['VectorStroke']['dashing']
+}
+
 export class OctopusEffectStroke {
   protected _parent: OctopusLayerShapeShapeAdapter
 
@@ -42,7 +48,7 @@ export class OctopusEffectStroke {
     return this.sourceLayer.stroke
   }
 
-  get position() {
+  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
     const lineAlignment = this.stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusEffectStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
@@ -52,7 +58,7 @@ export class OctopusEffectStroke {
     return result
   }
 
-  get lineCap() {
+  get lineCap(): 'BUTT' | 'ROUND' | 'SQUARE' | null {
     const lineCap = this.stroke.lineCap
     const result = getMapped(lineCap, OctopusEffectStroke.STROKE_LINE_CAP_MAP, undefined)
     if (!result) {
@@ -62,7 +68,7 @@ export class OctopusEffectStroke {
     return result
   }
 
-  get lineJoin() {
+  get lineJoin(): 'ROUND' | 'MITER' | 'BEVEL' | null {
     const lineJoin = this.stroke.lineJoin
     const result = getMapped(lineJoin, OctopusEffectStroke.STROKE_LINE_JOIN_MAP, undefined)
     if (!result) {
@@ -77,7 +83,7 @@ export class OctopusEffectStroke {
     return new OctopusEffectFill({ parent: this._parent, fill }).convert()
   }
 
-  get style() {
+  get style(): Style {
     const thickness = this.stroke.lineWidth
     const dashing = this.stroke.lineDashSet
     if (dashing === undefined) return { style: 'SOLID' as const, thickness }

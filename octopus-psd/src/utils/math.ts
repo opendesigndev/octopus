@@ -3,6 +3,6 @@ export function mod(n: number, mod: number): number {
   return remainder >= 0 ? remainder : remainder + mod
 }
 
-export function tan(degrees: number) {
+export function tan(degrees: number): number {
   return Math.tan((degrees * Math.PI) / 180)
 }

@@ -7,6 +7,7 @@ import { SourceEffectFill } from './source-effect-fill'
 import { SourceEffectStroke } from './source-effect-stroke'
 import { SourceShapeMask } from './source-shape-mask'
 import { SourceLayerEffect } from './source-effect-layer'
+import { SourceBounds } from '../../typings/source'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -35,23 +36,23 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.pathComponents[0]
   }
 
-  get pathBounds() {
+  get pathBounds(): SourceBounds {
     return this.path.bounds
   }
 
-  get fill() {
+  get fill(): SourceEffectFill {
     return new SourceEffectFill(this._rawValue.fill)
   }
 
-  get stroke() {
+  get stroke(): SourceEffectStroke {
     return new SourceEffectStroke(this._rawValue.strokeStyle)
   }
 
-  get mask() {
+  get mask(): SourceShapeMask {
     return new SourceShapeMask(this._rawValue.mask)
   }
 
-  get layerEffects() {
+  get layerEffects(): SourceLayerEffect {
     return new SourceLayerEffect(this._rawValue.layerEffects)
   }
 }

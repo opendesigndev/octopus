@@ -21,6 +21,13 @@ export type SourceLayer =
   | SourceLayerBackground
   | SourceLayerLayer
 
+type SourceLayerBuilders =
+  | typeof createLayerSection
+  | typeof createLayerShape
+  | typeof createLayerText
+  | typeof createLayerBackground
+  | typeof createLayerLayer
+
 type CreateLayerOptions = {
   layer: RawLayer
   parent: SourceLayerParent
@@ -61,7 +68,7 @@ function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLay
   })
 }
 
-const SOURCE_BUILDER_MAP: { [key: string]: Function } = {
+const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
   layerSection: createLayerSection,
   shapeLayer: createLayerShape,
   textLayer: createLayerText,

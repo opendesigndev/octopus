@@ -97,7 +97,7 @@ export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
   fill?: RawFill
-  layerEffects?: {} // TODO
+  layerEffects?: Record<string, unknown> // TODO
   mask?: RawShapeMask
   path?: RawPath
   strokeStyle?: RawShapeStrokeStyle

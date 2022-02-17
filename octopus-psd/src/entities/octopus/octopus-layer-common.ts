@@ -55,15 +55,15 @@ export class OctopusLayerCommon {
     return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
-  get id() {
+  get id(): string {
     return this._id
   }
 
-  get name() {
+  get name(): string {
     return asString(this._sourceLayer.name, 'Layer')
   }
 
-  get visible() {
+  get visible(): boolean | undefined {
     return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
   }
 
@@ -78,11 +78,11 @@ export class OctopusLayerCommon {
     return OctopusLayerCommon.DEFAULT_TRANSLATION
   }
 
-  get transform() {
+  get transform(): number[] {
     return createDefaultTranslationMatrix(this.layerTranslation)
   }
 
-  get opacity() {
+  get opacity(): number {
     return round(asNumber(this._sourceLayer.opacity, 100) / 100)
   }
 
@@ -96,11 +96,11 @@ export class OctopusLayerCommon {
     return result
   }
 
-  get isConvertible() {
+  get isConvertible(): boolean {
     return this.type !== null
   }
 
-  convertCommon() {
+  convertCommon(): Octopus['LayerBase'] | null {
     if (!this.isConvertible) return null
 
     const type = this.type as NotNull<typeof this.type>

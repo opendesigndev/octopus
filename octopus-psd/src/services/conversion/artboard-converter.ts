@@ -1,6 +1,7 @@
 import type { OctopusPSDConverter } from '../..'
 import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
 import type { SourceArtboard } from '../../entities/source/source-artboard'
+import type { Octopus } from '../../typings/octopus'
 
 export type ArtboardConversionOptions = {
   sourceArtboard: SourceArtboard
@@ -19,7 +20,7 @@ export class ArtboardConverter {
     this._sourceArtboard = options.sourceArtboard
   }
 
-  convert() {
+  convert(): Promise<Octopus['OctopusDocument']> {
     return new OctopusArtboard({
       sourceArtboard: this._sourceArtboard,
       octopusConverter: this._octopusConverter,
