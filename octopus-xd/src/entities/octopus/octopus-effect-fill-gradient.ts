@@ -5,23 +5,22 @@ import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import SourceEffectFillGradient from '../source/source-effect-gradient-fill'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper'
+import OctopusBounds from './octopus-bounds'
 
 import type SourceResources from '../source/source-resources'
 import type { Octopus } from '../../typings/octopus'
 import type { RawFillGradient, RawGradientLinear, RawGradientRadial, RawGradientResources } from '../../typings/source'
 import type { Defined } from '../../typings/helpers'
-import OctopusBounds from './octopus-bounds'
-
 
 type OctopusEffectFillGradientOptions = {
-  source: SourceEffectFillGradient,
-  resources: SourceResources,
+  source: SourceEffectFillGradient
+  resources: SourceResources
   effectBounds: OctopusBounds
 }
 
 type OctopusEffectFillGradientFromRawOptions = {
-  effect: RawFillGradient,
-  resources: SourceResources,
+  effect: RawFillGradient
+  resources: SourceResources
   effectBounds: OctopusBounds
 }
 
@@ -30,23 +29,20 @@ export default class OctopusEffectFillGradient {
   private _resources: SourceResources
   private _effectBounds: OctopusBounds
 
-  static VALID_GRADIENT_TYPES = [
-    'linear',
-    'radial'
-  ]
+  static VALID_GRADIENT_TYPES = ['linear', 'radial']
 
   static GRADIENT_MAP = {
-    'linear': 'LINEAR',
-    'radial': 'RADIAL'
+    linear: 'LINEAR',
+    radial: 'RADIAL',
   } as const
 
-  static fromRaw(options: OctopusEffectFillGradientFromRawOptions) {
+  static fromRaw(options: OctopusEffectFillGradientFromRawOptions): OctopusEffectFillGradient {
     return new this({
       source: new SourceEffectFillGradient({
-        effect: options.effect
+        effect: options.effect,
       }),
       resources: options.resources,
-      effectBounds: options.effectBounds
+      effectBounds: options.effectBounds,
     })
   }
 
@@ -63,9 +59,8 @@ export default class OctopusEffectFillGradient {
   private _getGradientResources() {
     const gradientId = this._source.ref
 
-    const resourcesGradient = typeof gradientId === 'undefined'
-      ? null
-      : this._resources.raw?.resources?.gradients?.[gradientId]
+    const resourcesGradient =
+      typeof gradientId === 'undefined' ? null : this._resources.raw?.resources?.gradients?.[gradientId]
 
     const localGradient = this._source.gradientResources
     return resourcesGradient || localGradient
@@ -77,7 +72,7 @@ export default class OctopusEffectFillGradient {
       const color = stop?.color
       return {
         position: offset,
-        color: parseXDColor(color)
+        color: parseXDColor(color),
       }
     })
   }
@@ -99,10 +94,10 @@ export default class OctopusEffectFillGradient {
     return [
       p2.x - p1.x,
       p2.y - p1.y,
-      -(p2.y - p1.y), /** @TODO should be changed to 1 after rendering fix */
-      p2.x - p1.x, /** @TODO should be changed to 1 after rendering fix */
+      -(p2.y - p1.y) /** @TODO should be changed to 1 after rendering fix */,
+      p2.x - p1.x /** @TODO should be changed to 1 after rendering fix */,
       p1.x,
-      p1.y
+      p1.y,
     ]
   }
 
@@ -122,17 +117,10 @@ export default class OctopusEffectFillGradient {
     oval.transform(createMatrix(a, b, c, d, tx, ty))
     oval.scale(w * 2, h * 2)
     oval.position = centerPoint
-    const [, , s2, s3] = oval.segments.map(seg => seg.point)
+    const [, , s2, s3] = oval.segments.map((seg) => seg.point)
     const [p1, p2, p3] = [centerPoint, s2, s3]
 
-    return [
-      p2.x - p1.x,
-      p2.y - p1.y,
-      p3.x - p1.x,
-      p3.y - p1.y,
-      p1.x,
-      p1.y
-    ]
+    return [p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, p1.x, p1.y]
   }
 
   convert(): Octopus['FillGradient'] | null {
@@ -145,9 +133,7 @@ export default class OctopusEffectFillGradient {
     const type = OctopusEffectFillGradient.GRADIENT_MAP[gradient.type]
     const stops = this._getColors(gradient)
 
-    const transform = type === 'LINEAR'
-      ? this._getTransformLinear()
-      : this._getTransformRadial()
+    const transform = type === 'LINEAR' ? this._getTransformLinear() : this._getTransformRadial()
 
     return {
       type: 'GRADIENT',
@@ -155,13 +141,13 @@ export default class OctopusEffectFillGradient {
       blendMode: defaults.BLEND_MODE,
       gradient: {
         type,
-        stops
+        stops,
       },
       positioning: {
         layout: 'FILL',
         origin: 'LAYER',
-        transform
-      }
+        transform,
+      },
     }
   }
 }

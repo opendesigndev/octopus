@@ -1,10 +1,11 @@
+import type { Defined } from '../../typings/helpers'
+import type { RawShapeLayer } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
 import type SourceDesign from './source-design'
 
-
 type SourceResourcesOptions = {
-  rawValue: RawResources,
-  path: string,
+  rawValue: RawResources
+  path: string
   design: SourceDesign
 }
 
@@ -19,15 +20,15 @@ export default class SourceResources {
     this._path = options.path
   }
 
-  get raw() {
+  get raw(): RawResources {
     return this._rawValue
   }
 
-  get clipPaths() {
+  get clipPaths(): Defined<Defined<RawResources>['resources']>['clipPaths'] | null {
     return this.raw?.resources?.clipPaths || null
   }
 
-  getClipPathById(id: string) {
+  getClipPathById(id: string): RawShapeLayer | null {
     return this.clipPaths?.[id]?.children?.[0] || null
   }
 }

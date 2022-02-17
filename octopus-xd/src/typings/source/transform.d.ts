@@ -1,9 +1,9 @@
 type Raw2DMatrix = {
-  a?: number,
-  b?: number,
-  c?: number,
-  d?: number,
-  tx?: number,
+  a?: number
+  b?: number
+  c?: number
+  d?: number
+  tx?: number
   ty?: number
 }
 

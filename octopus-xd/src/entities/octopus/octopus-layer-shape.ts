@@ -13,9 +13,8 @@ import type { Octopus } from '../../typings/octopus'
 import type { RawShapeCompound, RawShapeRect } from '../../typings/source'
 import defaults from '../../utils/defaults'
 
-
 type OctopusLayerShapeOptions = {
-  parent: OctopusLayerParent,
+  parent: OctopusLayerParent
   sourceLayer: SourceLayerShape
 }
 
@@ -28,7 +27,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     add: 'UNION',
     subtract: 'SUBTRACT',
     intersect: 'INTERSECT',
-    exclude: 'EXCLUDE'
+    exclude: 'EXCLUDE',
   } as const
 
   constructor(options: OctopusLayerShapeOptions) {
@@ -37,24 +36,20 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     this._children = this._initChildren()
   }
 
-  get shapeData() {
+  get shapeData(): paper.Path | paper.CompoundPath {
     return this._shapeData
   }
 
-  get shapeType() {
-    return this._sourceLayer.shapeType
-  }
-
-  get shapeEffects() {
+  get shapeEffects(): OctopusEffectsShape {
     const resources = this.parentArtboard?.sourceDesign.resources
 
     if (!resources) {
-      throw new Error('Design resources are missing, can\'t resolve effects.')
+      throw new Error("Design resources are missing, can't resolve effects.")
     }
 
     return new OctopusEffectsShape({
       octopusLayer: this,
-      resources
+      resources,
     })
   }
 
@@ -66,7 +61,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return asArray(this._sourceLayer.children).reduce((layers, shapeLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layer: shapeLayer
+        layer: shapeLayer,
       }) as OctopusLayerShape
       return octopusLayer ? [...layers, octopusLayer] : layers
     }, [])
@@ -79,29 +74,34 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _convertBooleanOp(shape: RawShapeCompound) {
     const rawOp = shape.operation as keyof typeof OctopusLayerShape.BOOLEAN_OPS
-    return (OctopusLayerShape.BOOLEAN_OPS[rawOp]) ?? defaults.SHAPE.BOOLEAN_OP
+    return OctopusLayerShape.BOOLEAN_OPS[rawOp] ?? defaults.SHAPE.BOOLEAN_OP
   }
 
   private _getShapeAsCompound(): Octopus['CompoundPath'] {
     const compound = this._sourceLayer.shape as RawShapeCompound
-    const geometry = typeof compound.path !== 'string' ? null : {
-      geometry: compound.path
-    }
+    const geometry =
+      typeof compound.path !== 'string'
+        ? null
+        : {
+            geometry: compound.path,
+          }
     const transform = this._getLayerTransformEntry()
 
     return {
       type: 'COMPOUND',
       op: this._convertBooleanOp(compound),
-      paths: this._children.map(shapeLayer => shapeLayer._getShape()),
+      paths: this._children.map((shapeLayer) => shapeLayer._getShape()),
       ...transform,
-      ...geometry
+      ...geometry,
     }
   }
 
-  private _getShapeAsRect(): Octopus['PathRectangle'] {
+  private _getShapeAsRectWithSimpleRadius(): Octopus['PathRectangle'] {
     const rect = this._sourceLayer.shape as RawShapeRect
-    const { x, y, width, height } = rect
+    const { x, y, width, height, r } = rect
     const transform = this._getLayerTransformEntry()
+
+    const simpleRadius = typeof r?.[0] === 'number' ? { cornerRadius: r?.[0] } : null
 
     return {
       type: 'RECTANGLE',
@@ -111,8 +111,24 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
         y0: asNumber(y),
         y1: asNumber(y) + asNumber(height),
       },
-      cornerRadii: rect?.r,
+      ...simpleRadius,
       ...transform,
+    }
+  }
+
+  private _getShapeAsRectWithMultipleRadii(): Octopus['Path'] {
+    const rect = this._sourceLayer.shape as RawShapeRect
+    const { r } = rect
+    const transform = this._getLayerTransformEntry()
+
+    return {
+      type: 'PATH',
+      geometry: this._shapeData.pathData,
+      ...transform,
+      cornerRadii: r /** @TODO define correct order */,
+      meta: {
+        sourceShape: 'RECTANGLE',
+      },
     }
   }
 
@@ -126,13 +142,21 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
+  private _rectangleHasMultipleRadii() {
+    const radii = (this._sourceLayer.shape as RawShapeRect).r
+    if (!Array.isArray(radii) || !radii.length) return false
+    return radii.some((radius) => radius !== radii[0])
+  }
+
   private _getShape(): Octopus['PathLike'] {
-    switch (this.shapeType) {
+    switch (this._sourceLayer.shapeType) {
       case 'compound': {
         return this._getShapeAsCompound()
       }
       case 'rect': {
-        return this._getShapeAsRect()
+        return this._rectangleHasMultipleRadii()
+          ? this._getShapeAsRectWithMultipleRadii()
+          : this._getShapeAsRectWithSimpleRadius()
       }
     }
     return this._getShapeAsPath()
@@ -143,29 +167,32 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     /**
      * Exclude transformation on layer's root shape because this should be placed on layer's level.
      */
-    return Object.fromEntries(Object.entries(path).filter(([name]) => {
-      return name !== 'transform'
-    })) as Octopus['Shape']['path']
+    return Object.fromEntries(
+      Object.entries(path).filter(([name]) => {
+        return name !== 'transform'
+      })
+    ) as Octopus['Shape']['path']
   }
 
-  private _getShapes(): Octopus['Shape'][] {
+  private _getShapes(): Octopus['Shape'] {
     const path = this._getRootShape()
 
     const fillShape: Octopus['Shape'] = {
-      purpose: 'BODY',
+      // purpose: 'BODY',
       fillRule: 'EVEN_ODD',
       path,
-      ...this.shapeEffects.convert()
+      ...this.shapeEffects.convert(),
     } as const
 
-    return [fillShape]
+    return fillShape
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
-    const shapes = this._getShapes()
+    const shape = this._getShapes()
     return {
       type: 'SHAPE',
-      shapes
+      shape,
+      shapes: undefined /** @TODO remove after schema fix */,
     }
   }
 
@@ -175,7 +202,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...this._convertTypeSpecific()
+      ...this._convertTypeSpecific(),
     }
   }
 }

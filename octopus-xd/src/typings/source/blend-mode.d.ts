@@ -1,4 +1,4 @@
-export type RawBlendMode = 
+export type RawBlendMode =
   | 'pass-through'
   | 'darken'
   | 'multiply'

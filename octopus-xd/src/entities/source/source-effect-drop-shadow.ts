@@ -1,5 +1,5 @@
+import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawEffectDropShadow } from '../../typings/source'
-
 
 export type SourceEffectDropShadowOptions = {
   effect: RawEffectDropShadow
@@ -12,11 +12,11 @@ export default class SourceEffectDropShadow {
     this._rawEffect = options.effect
   }
 
-  get visible() {
+  get visible(): RawEffectDropShadow['visible'] {
     return this._rawEffect?.visible
   }
 
-  get dropShadowParams() {
+  get dropShadowParams(): ElementOf<Exclude<RawEffectDropShadow['params'], undefined>['dropShadows']> | undefined {
     return this._rawEffect?.params?.dropShadows?.[0]
   }
 }

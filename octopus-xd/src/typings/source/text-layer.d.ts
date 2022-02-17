@@ -2,36 +2,36 @@ import { RawStyle, RawTransform } from '.'
 import { RawLayerCommon } from './layer'
 
 export type RawRangedStyle = {
-  length?: number,
-  linkId?: string,
-  fontFamily?: string,
-  fontStyle?: string,
-  postscriptName?: string,
-  fontSize?: number,
-  charSpacing?: number,
-  underline?: boolean,
-  textTransform?: 'none' | 'lowercase' | 'uppercase' | 'titlecase',
-  textScript?: 'none',
+  length?: number
+  linkId?: string
+  fontFamily?: string
+  fontStyle?: string
+  postscriptName?: string
+  fontSize?: number
+  charSpacing?: number
+  underline?: boolean
+  textTransform?: 'none' | 'lowercase' | 'uppercase' | 'titlecase'
+  textScript?: 'none'
   fill?: {
     value?: number
-  },
+  }
   strikethrough?: boolean
 }
 
 export type RawTextMeta = {
   ux?: {
-    hasCustomName?: true,
-    singleTextObject?: true,
-    rangedStyles?: RawRangedStyle[],
+    hasCustomName?: true
+    singleTextObject?: true
+    rangedStyles?: RawRangedStyle[]
     localTransform?: RawTransform
   }
 }
 
 export type RawTextParagraphRange = {
-  x?: number,
-  y?: number,
-  from?: number,
-  to?: number,
+  x?: number
+  y?: number
+  from?: number
+  to?: number
   style?: RawStyle
 }
 
@@ -40,15 +40,15 @@ export type RawTextParagraph = {
 }
 
 export type RawTextLayer = RawLayerCommon & {
-  type?: 'text',
-  meta?: RawTextMeta,
+  type?: 'text'
+  meta?: RawTextMeta
   text?: {
     frame?: {
-      type?: 'positioned' | 'autoHeight' | 'area',
-      width?: number,
+      type?: 'positioned' | 'autoHeight' | 'area'
+      width?: number
       height?: number
-    },
-    paragraphs?: RawTextParagraph[],
+    }
+    paragraphs?: RawTextParagraph[]
     rawText?: string
   }
 }

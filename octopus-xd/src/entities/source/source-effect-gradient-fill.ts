@@ -1,5 +1,5 @@
+import type { Defined } from '../../typings/helpers'
 import type { RawFillGradient } from '../../typings/source'
-
 
 export type SourceEffectFillGradientOptions = {
   effect: RawFillGradient
@@ -12,19 +12,19 @@ export default class SourceEffectFillGradient {
     this._rawEffect = options.effect
   }
 
-  get ref() {
+  get ref(): Defined<RawFillGradient['gradient']>['ref'] {
     return this._rawEffect?.gradient?.ref
   }
 
-  get gradientResources() {
+  get gradientResources(): Defined<Defined<Defined<RawFillGradient['gradient']>['meta']>['ux']>['gradientResources'] {
     return this._rawEffect?.gradient?.meta?.ux?.gradientResources
   }
 
-  get type() {
+  get type(): RawFillGradient['type'] {
     return this._rawEffect?.type
   }
 
-  get gradient() {
+  get gradient(): RawFillGradient['gradient'] {
     return this._rawEffect?.gradient
   }
 }

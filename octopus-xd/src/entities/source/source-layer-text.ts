@@ -2,10 +2,10 @@ import SourceLayerCommon from './source-layer-common'
 
 import type { RawTextLayer } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
-
+import { Defined } from '../../typings/helpers'
 
 type SourceLayerTextOptions = {
-  parent: SourceLayerParent,
+  parent: SourceLayerParent
   rawValue: RawTextLayer
 }
 
@@ -19,15 +19,15 @@ export default class SourceLayerText extends SourceLayerCommon {
     this._rawValue = options.rawValue
   }
 
-  get textValue() {
+  get textValue(): Defined<RawTextLayer['text']>['rawText'] {
     return this._rawValue?.text?.rawText
   }
 
-  get attributes() {
+  get attributes(): Defined<RawTextLayer['style']>['textAttributes'] {
     return this._rawValue?.style?.textAttributes
   }
 
-  get raw() {
+  get raw(): RawTextLayer {
     return this._rawValue
   }
 }

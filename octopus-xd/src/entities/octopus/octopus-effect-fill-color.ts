@@ -7,7 +7,6 @@ import SourceEffectFillColor from '../source/source-effect-color-fill'
 import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'
 import type { Octopus } from '../../typings/octopus'
 
-
 type OctopusEffectFillColorOptions = {
   source: SourceEffectFillColor
 }
@@ -15,9 +14,9 @@ type OctopusEffectFillColorOptions = {
 export default class OctopusEffectFillColor {
   private _source: SourceEffectFillColor
 
-  static fromRaw(options: SourceEffectFillColorOptions) {
+  static fromRaw(options: SourceEffectFillColorOptions): OctopusEffectFillColor {
     return new this({
-      source: new SourceEffectFillColor(options)
+      source: new SourceEffectFillColor(options),
     })
   }
 
@@ -37,7 +36,7 @@ export default class OctopusEffectFillColor {
       type: 'COLOR' as const,
       visible,
       blendMode: defaults.BLEND_MODE,
-      color: parseXDColor(color)
+      color: parseXDColor(color),
     }
   }
 }

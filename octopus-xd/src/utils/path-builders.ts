@@ -8,7 +8,7 @@ import {
   createPathLine,
   createPoint,
   createSize,
-  createPath
+  createPath,
 } from './paper'
 
 import { asNumber, asArray } from '@avocode/octopus-common/dist/utils/as'
@@ -21,36 +21,24 @@ import type {
   RawShapeLine,
   RawShapePath,
   RawShapePolygon,
-  RawShapeRect
+  RawShapeRect,
 } from '../typings/source'
-
 
 function buildShapeFromRect(shape: RawShapeRect): paper.Path {
   return createPathRectangle(
-    createPoint(
-      asNumber(shape?.x),
-      asNumber(shape?.y)
-    ),
-    createSize(
-      asNumber(shape?.width),
-      asNumber(shape?.height)
-    )
+    createPoint(asNumber(shape?.x), asNumber(shape?.y)),
+    createSize(asNumber(shape?.width), asNumber(shape?.height))
   )
 }
 
 function buildShapeFromEllipse(shape: RawShapeEllipse): paper.Path {
-  return createPathEllipse(
-    createPoint(0, 0),
-    createSize(
-      asNumber(shape?.rx) * 2,
-      asNumber(shape?.ry) * 2
-    )
-  )
+  return createPathEllipse(createPoint(0, 0), createSize(asNumber(shape?.rx) * 2, asNumber(shape?.ry) * 2))
 }
 
 function buildShapeFromPolygon(shape: RawShapePolygon): paper.Path {
-  const polygonPath = `M${asArray(shape?.points).map(p => `${asNumber(p?.x)} ${asNumber(p?.y)}`).join('L')
-    }Z`
+  const polygonPath = `M${asArray(shape?.points)
+    .map((p) => `${asNumber(p?.x)} ${asNumber(p?.y)}`)
+    .join('L')}Z`
   return createPath(polygonPath)
 }
 
@@ -62,10 +50,7 @@ function buildShapeFromLine(shape: RawShapeLine): paper.Path {
 }
 
 function buildShapeFromCircle(shape: RawShapeCircle): paper.Path {
-  return createPathCircle(
-    createPoint(asNumber(shape?.r), asNumber(shape?.r)),
-    asNumber(shape?.r)
-  )
+  return createPathCircle(createPoint(asNumber(shape?.r), asNumber(shape?.r)), asNumber(shape?.r))
 }
 
 export function buildShapeFromCompound(shape: RawShapeCompound): paper.CompoundPath | null {

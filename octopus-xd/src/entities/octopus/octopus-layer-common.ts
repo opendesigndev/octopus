@@ -19,13 +19,11 @@ import type { Raw3DMatrix } from '../../typings/source'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 
-
 type OctopusLayerCommonOptions = {
-  parent: OctopusLayerParent,
+  parent: OctopusLayerParent
   sourceLayer: SourceLayer
 }
 
-/** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 export default class OctopusLayerCommon {
   protected _id: string
@@ -35,7 +33,7 @@ export default class OctopusLayerCommon {
   static LAYER_TYPES = {
     shape: 'SHAPE',
     group: 'GROUP',
-    text: 'TEXT'
+    text: 'TEXT',
   } as const
 
   constructor(options: OctopusLayerCommonOptions) {
@@ -45,7 +43,7 @@ export default class OctopusLayerCommon {
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
-  get sourceLayer() {
+  get sourceLayer(): SourceLayer {
     return this._sourceLayer
   }
 
@@ -61,16 +59,14 @@ export default class OctopusLayerCommon {
     return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
-  get parent() {
+  get parent(): OctopusLayerParent {
     return this._parent
   }
 
   get parents(): (OctopusArtboard | OctopusLayer | OctopusLayerMaskGroup)[] {
     const parent = this._parent
     if (!parent) return []
-    return parent instanceof OctopusArtboard
-      ? [parent]
-      : [...parent.parents, parent]
+    return parent instanceof OctopusArtboard ? [parent] : [...parent.parents, parent]
   }
 
   get parentLayers(): OctopusLayer[] {
@@ -79,23 +75,21 @@ export default class OctopusLayerCommon {
     return [...parent.parentLayers, parent]
   }
 
-  get id() {
+  get id(): string {
     return this._id
   }
 
-  get name() {
+  get name(): string {
     return asString(this._sourceLayer.name, defaults.LAYER.NAME)
   }
 
-  get visible() {
-    return typeof this._sourceLayer.visible === 'boolean'
-      ? this._sourceLayer.visible
-      : undefined
+  get visible(): boolean | undefined {
+    return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
   }
 
   get blendMode(): typeof BLEND_MODES[keyof typeof BLEND_MODES] {
     const sourceBlendMode = this._sourceLayer.blendMode
-    return typeof sourceBlendMode === 'string' && (sourceBlendMode in BLEND_MODES)
+    return typeof sourceBlendMode === 'string' && sourceBlendMode in BLEND_MODES
       ? BLEND_MODES[sourceBlendMode]
       : DEFAULTS.BLEND_MODE
   }
@@ -115,7 +109,7 @@ export default class OctopusLayerCommon {
     return [matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty]
   }
 
-  get opacity() {
+  get opacity(): number {
     return round(asNumber(this._sourceLayer.opacity, 1))
   }
 
@@ -132,29 +126,27 @@ export default class OctopusLayerCommon {
     return OctopusLayerCommon.LAYER_TYPES[type as keyof typeof OctopusLayerCommon.LAYER_TYPES]
   }
 
-  get isFixed() {
-    return typeof this._sourceLayer.fixed === 'boolean'
-      ? this._sourceLayer.fixed
-      : undefined
+  get isFixed(): boolean | undefined {
+    return typeof this._sourceLayer.fixed === 'boolean' ? this._sourceLayer.fixed : undefined
   }
 
-  has3dMatrix() {
+  has3dMatrix(): boolean {
     return typeof (this._sourceLayer.transform as Raw3DMatrix)?.[0]?.[0] === 'number'
   }
 
-  isConvertible() {
+  isConvertible(): boolean {
     const hasValidType = this.type !== null
     const has3dMatrix = this.has3dMatrix()
     return hasValidType && !has3dMatrix
   }
 
-  effects() {
+  effects(): OctopusEffectsLayer {
     return new OctopusEffectsLayer({
-      sourceLayer: this._sourceLayer
+      sourceLayer: this._sourceLayer,
     })
   }
 
-  convertCommon() {
+  convertCommon(): Omit<Octopus['LayerBase'], 'type'> | null {
     if (!this.isConvertible()) return null
 
     const effectsArray = this.effects().convert()
@@ -167,7 +159,7 @@ export default class OctopusLayerCommon {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
-      ...effects
+      ...effects,
     }
   }
 }

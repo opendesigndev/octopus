@@ -7,9 +7,8 @@ import OctopusBounds from './octopus-bounds'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFillImageOptions } from '../source/source-effect-image-fill'
 
-
 type OctopusEffectFillImageOptions = {
-  source: SourceEffectFillImage,
+  source: SourceEffectFillImage
   effectBounds: OctopusBounds
 }
 
@@ -19,13 +18,13 @@ export default class OctopusEffectFillImage {
 
   static TYPES = {
     cover: 'FILL',
-    fill: 'STRETCH'
+    fill: 'STRETCH',
   } as const
 
-  static fromRaw(options: SourceEffectFillImageOptions) {
+  static fromRaw(options: SourceEffectFillImageOptions): OctopusEffectFillImage {
     return new this({
       source: new SourceEffectFillImage(options),
-      effectBounds: options.effectBounds
+      effectBounds: options.effectBounds,
     })
   }
 
@@ -57,14 +56,8 @@ export default class OctopusEffectFillImage {
     const scaleY = this._getScaleY()
     const flipX = asBoolean(this._source.flipX, false)
     const flipY = asBoolean(this._source.flipY, false)
-    const layerBox = createPathRectangle(
-      createPoint(0, 0),
-      createSize(w, h)
-    )
-    const image = createPathRectangle(
-      createPoint(0, 0),
-      createSize(iw, ih)
-    )
+    const layerBox = createPathRectangle(createPoint(0, 0), createSize(w, h))
+    const image = createPathRectangle(createPoint(0, 0), createSize(iw, ih))
 
     const pointsMap = {
       TOP_LEFT: image.segments[1].point,
@@ -72,37 +65,23 @@ export default class OctopusEffectFillImage {
       TOP_RIGHT: image.segments[2].point,
     }
 
-    const ratio = (w / h) > (iw / ih) ? w / iw : h / ih
+    const ratio = w / h > iw / ih ? w / iw : h / ih
     image.bounds.center = layerBox.bounds.center
     image.scale(ratio)
-    image.scale(
-      (flipX ? -1 : 1) * scaleX,
-      (flipY ? -1 : 1) * scaleY
-    )
+    image.scale((flipX ? -1 : 1) * scaleX, (flipY ? -1 : 1) * scaleY)
     const aspectRatio = (iw * h) / (ih * w)
     const aspectScaleX = Math.min(1 / aspectRatio, 1)
     const aspectScaleY = Math.min(aspectRatio, 1)
     image.translate(
       createPoint(
-        w / aspectScaleX * offsetX + this._effectBounds.x,
-        h / aspectScaleY * offsetY + this._effectBounds.y
+        (w / aspectScaleX) * offsetX + this._effectBounds.x,
+        (h / aspectScaleY) * offsetY + this._effectBounds.y
       )
     )
 
-    const [p1, p2, p3] = [
-      pointsMap.TOP_LEFT,
-      pointsMap.TOP_RIGHT,
-      pointsMap.BOTTOM_LEFT
-    ]
+    const [p1, p2, p3] = [pointsMap.TOP_LEFT, pointsMap.TOP_RIGHT, pointsMap.BOTTOM_LEFT]
 
-    return [
-      p2.x - p1.x,
-      p2.y - p1.y,
-      p3.x - p1.x,
-      p3.y - p1.y,
-      p1.x,
-      p1.y
-    ]
+    return [p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, p1.x, p1.y]
   }
 
   private _getTransformStretch(): Octopus['Transform'] {
@@ -114,10 +93,7 @@ export default class OctopusEffectFillImage {
     const scaleY = this._getScaleY()
     const flipX = asBoolean(this._source.flipX, false)
     const flipY = asBoolean(this._source.flipY, false)
-    const image = createPathRectangle(
-      createPoint(0, 0),
-      createSize(w, h)
-    )
+    const image = createPathRectangle(createPoint(0, 0), createSize(w, h))
 
     const pointsMap = {
       TOP_LEFT: image.segments[1].point,
@@ -125,31 +101,12 @@ export default class OctopusEffectFillImage {
       TOP_RIGHT: image.segments[2].point,
     }
 
-    image.scale(
-      (flipX ? -1 : 1) * scaleX,
-      (flipY ? -1 : 1) * scaleY
-    )
-    image.translate(
-      createPoint(
-        w * offsetX,
-        h * offsetY
-      )
-    )
+    image.scale((flipX ? -1 : 1) * scaleX, (flipY ? -1 : 1) * scaleY)
+    image.translate(createPoint(w * offsetX, h * offsetY))
 
-    const [p1, p2, p3] = [
-      pointsMap.TOP_LEFT,
-      pointsMap.TOP_RIGHT,
-      pointsMap.BOTTOM_LEFT
-    ]
+    const [p1, p2, p3] = [pointsMap.TOP_LEFT, pointsMap.TOP_RIGHT, pointsMap.BOTTOM_LEFT]
 
-    return [
-      p2.x - p1.x,
-      p2.y - p1.y,
-      p3.x - p1.x,
-      p3.y - p1.y,
-      p1.x,
-      p1.y
-    ]
+    return [p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, p1.x, p1.y]
   }
 
   convert(): Octopus['Fill'] | null {
@@ -157,31 +114,27 @@ export default class OctopusEffectFillImage {
 
     const ref = {
       type: 'RESOURCE',
-      value: asString(this._source.uid)
+      value: asString(this._source.uid),
     } as const
 
     const scaleBehavior = this._source.scaleBehavior
 
-    const fillType = scaleBehavior
-      ? OctopusEffectFillImage.TYPES[scaleBehavior]
-      : defaults.EFFECTS.IMAGE_FILL_TYPE
+    const fillType = scaleBehavior ? OctopusEffectFillImage.TYPES[scaleBehavior] : defaults.EFFECTS.IMAGE_FILL_TYPE
 
-    const transform = fillType === 'FILL'
-      ? this._getTransformFill()
-      : this._getTransformStretch()
+    const transform = fillType === 'FILL' ? this._getTransformFill() : this._getTransformStretch()
 
     return {
       type: 'IMAGE' as const,
       visible,
       blendMode: defaults.BLEND_MODE,
       image: {
-        ref
+        ref,
       },
       positioning: {
         layout: fillType,
         origin: 'LAYER',
-        transform
-      }
+        transform,
+      },
     }
   }
 }

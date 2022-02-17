@@ -3,12 +3,13 @@ import * as sentry from '@sentry/node'
 import type { Logger } from '../../../typings'
 
 type CreateSentryOptions = {
-  dsn?: string,
-  env?: string,
+  dsn?: string
+  env?: string
   logger: Logger
 }
 
-export default function createSentry({ dsn, env, logger }: CreateSentryOptions) {
+export default function createSentry(options: CreateSentryOptions): typeof sentry | null {
+  const { dsn, env, logger } = options
   if (!dsn) {
     logger.warn('No Sentry DSN detected, skipping log tracking')
     return null
