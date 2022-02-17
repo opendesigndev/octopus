@@ -9,6 +9,13 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
+"@avocode/ai-private-data-parser@^0.1.0-alpha.3":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@avocode/ai-private-data-parser/-/ai-private-data-parser-0.1.1.tgz#1f8d28a7e83d74fc6e4b0be1e80db6f515797861"
+  integrity sha512-J2yoz5Zk2Dqz+PQLOj2f/RfK+7DsxF28KeqtAeKs92vyC3hRmg2Qu/g5U69KWErtG17OK3xizuORRvgH8QKm6w==
+  dependencies:
+    "@bokuweb/zstd-wasm" "0.0.14"
+
 "@avocode/cancel-token@^1.3.0":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@avocode/cancel-token/-/cancel-token-1.4.2.tgz#d50daf61ba8fd5d8eec9a922e8cfac81e5bf1e03"
@@ -33,6 +40,11 @@
     "@avocode/octopus-common" "2.1.11"
     lodash "^4.13.1"
     raven "^1.1.4"
+
+"@avocode/octopus-ts@3.0.0-alpha.15":
+  version "3.0.0-alpha.15"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.15.tgz#1c59161f4baa4e1cdc28479ce565c6b11e66b340"
+  integrity sha512-XSq1PgfCcvLc2MMmKRB7TMewpAjw0U0tGxwRozhC8QncvzbI5neSfSX1/QVCA0eydtKtuA5UiYZriuwa6L05BQ==
 
 "@avocode/octopus-ts@3.0.0-alpha.19":
   version "3.0.0-alpha.19"
@@ -338,6 +350,11 @@
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
+
+"@bokuweb/zstd-wasm@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@bokuweb/zstd-wasm/-/zstd-wasm-0.0.14.tgz#7a966aeab675ba42cbcf6cba84c70a3aece1cca9"
+  integrity sha512-5pkce57OteVrDbtkEi2lWF8viH4MtMLry6BikYV1xtkVxTXQuOu6cLBv08yGWrEfw/oRp6TAkpTAndOVx9OpKA==
 
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
@@ -2859,7 +2876,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-paper@0.12.15:
+paper@0.12.15, paper@^0.12.15:
   version "0.12.15"
   resolved "https://registry.yarnpkg.com/paper/-/paper-0.12.15.tgz#28b5e5ce0f7a99a851e980f6715f376881dfbc84"
   integrity sha512-9qqtcY+V0Sd2RTLZKh7rTfWDbhfitOrtq3kzgOufhGpuYpCUXM+3UIK61au14tI0F9NA4xSttDYfk376O50aPA==

@@ -8,19 +8,19 @@ import type SourceLayerGroup from '../entities-source/source-layer-group'
 import type SourceLayerShape from '../entities-source/source-layer-shape'
 import type SourceLayerText from '../entities-source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
+import { Nullable } from '../typings/helpers'
 
-
-export type OctopusLayer = OctopusLayerGroup
+export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText
 
 type CreateOctopusLayerOptions = {
-  layer: SourceLayer,
+  layer: SourceLayer
   parent: OctopusLayerParent
 }
 
 function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   return new OctopusLayerGroup({
     parent,
-    sourceLayer: layer as SourceLayerGroup
+    sourceLayer: layer as SourceLayerGroup,
   })
 }
 
@@ -40,25 +40,29 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
 function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   return new OctopusLayerShape({
     parent,
-    sourceLayer: layer as SourceLayerShape
+    sourceLayer: layer as SourceLayerShape,
   })
 }
 
 function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
   return new OctopusLayerText({
     parent,
-    sourceLayer: layer as SourceLayerText
+    sourceLayer: layer as SourceLayerText,
   })
 }
 
-export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
-  const type = (Object(options.layer) as SourceLayer).type
+type Builder = (options: CreateOctopusLayerOptions) => OctopusLayerText | OctopusLayerShape | OctopusLayerGroup
 
-  const builders: { [key: string]: Function } = {
+export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
+  const type = (Object(options.layer) as SourceLayer).type || ''
+
+  const builders: {
+    [key: string]: Builder
+  } = {
     MarkedContext: createOctopusLayerGroup,
     Path: createOctopusLayerShape,
-    TextGroup: createOctopusLayerText
+    TextGroup: createOctopusLayerText,
   }
-  const builder = builders[type as string]
+  const builder = builders[type]
   return typeof builder === 'function' ? builder(options) : null
 }

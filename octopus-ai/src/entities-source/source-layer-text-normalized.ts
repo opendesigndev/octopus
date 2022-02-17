@@ -1,42 +1,47 @@
-import { RawTextLayerText } from "../typings/source";
-import {SourceLayerParent} from './source-layer-common'
+import {
+  RawResourcesFontTextFont,
+  RawResourcesFontTextFontFontDescriptorFontFile3,
+  RawTextLayerText,
+} from '../typings/source'
+import { RawGraphicsState } from '../typings/source/graphics-state'
+import { SourceLayerParent } from './source-layer-common'
+import { Nullable } from '../typings/helpers'
 
 type SourceLayerTextNormalizedOptions = {
-    parent: SourceLayerParent,
-    rawValue: RawTextLayerText,
-  }
+  parent: SourceLayerParent
+  rawValue: RawTextLayerText
+}
 
 export default class SourceLayerTextNormalized {
-    private _rawValue: RawTextLayerText
-    private _parent: SourceLayerParent
+  private _rawValue: RawTextLayerText
+  private _parent: SourceLayerParent
 
-    constructor(options:SourceLayerTextNormalizedOptions){
-        this._rawValue = options.rawValue
-        this._parent = options.parent
-    }
+  constructor(options: SourceLayerTextNormalizedOptions) {
+    this._rawValue = options.rawValue
+    this._parent = options.parent
+  }
 
-      get graphicsState(){  
-        return this._rawValue.GraphicsState
+  get graphicsState(): Nullable<RawGraphicsState> {
+    return this._rawValue.GraphicsState
+  }
 
-    }
+  //post script name or fontDict
+  get font(): Nullable<RawResourcesFontTextFont> {
+    const fontId = this.graphicsState?.TextFont || ''
+    const resources = this._parent.resources
 
-    //post script name or fontDict
-    get font(){
-        const fontId = this.graphicsState?.TextFont || ''
-        const resources = this._parent.resources
+    return resources?.getFontById(fontId)
+  }
 
-        return resources?.getFontById(fontId)
-    }
+  get fontDescriptor(): Nullable<RawResourcesFontTextFontFontDescriptorFontFile3> {
+    return this.font?.FontDescriptor
+  }
 
-    get fontDescriptor () {
-        return this.font?.FontDescriptor
-    }
+  get parsedTextValue(): Nullable<string> {
+    const stringOrArrayText = this._rawValue.Text
 
-    get parsedTextValue(){
-        const stringOrArrayText= this._rawValue.Text
-
-        return Array.isArray(stringOrArrayText)
-        ? stringOrArrayText.filter(stringOrNum=>typeof stringOrNum === 'string').join('')
-        : stringOrArrayText
-    }
+    return Array.isArray(stringOrArrayText)
+      ? stringOrArrayText.filter((stringOrNum) => typeof stringOrNum === 'string').join('')
+      : stringOrArrayText
+  }
 }

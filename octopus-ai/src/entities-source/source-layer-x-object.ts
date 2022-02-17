@@ -1,40 +1,42 @@
 import { RawXObjectLayer } from '../typings/source/x-object'
-import SourceLayerCommon, {SourceLayerParent} from '../entities-source/source-layer-common'
+import SourceLayerCommon, { SourceLayerParent } from '../entities-source/source-layer-common'
+import { RawGraphicsState } from '../typings/source/graphics-state'
+import { Nullable } from '../typings/helpers'
 
 type SourceLayerXObjectOptions = {
-    parent: SourceLayerParent,
-    rawValue: RawXObjectLayer,
-    path: number[]
+  parent: SourceLayerParent
+  rawValue: RawXObjectLayer
+  path: number[]
+}
+
+export default class SourceLayerShape extends SourceLayerCommon {
+  protected _rawValue: RawXObjectLayer
+
+  constructor(options: SourceLayerXObjectOptions) {
+    super(options)
+    this._rawValue = options.rawValue
   }
 
-  export default class SourceLayerShape extends SourceLayerCommon {
-    protected _rawValue: RawXObjectLayer
+  get name(): Nullable<string> {
+    return this._rawValue.Name
+  }
 
-    constructor(options: SourceLayerXObjectOptions){
-        super(options)
-        this._rawValue = options.rawValue
-    }  
+  get graphicsState(): Nullable<RawGraphicsState> {
+    return this._rawValue.GraphicsState
+  }
 
-    get name () {
-        return this._rawValue.Name
-    }
+  get lineJoin(): number {
+    return this.graphicsState?.LineJoin || 0
+  }
 
-    get graphicsState () {
-      return this._rawValue.GraphicsState
-    }
+  get lineCap(): number {
+    return this.graphicsState?.LineCap || 0
+  }
 
-    get lineJoin(){
-      return this.graphicsState.LineJoin || 0
-    }
+  // get XObject () {
+  //     this._parent.resources.
+  // }
 
-    get lineCap() {
-      return this.graphicsState.LineCap || 0
-    }
-
-    // get XObject () {
-    //     this._parent.resources.
-    // }
-
-    //  const xobject = _.get(artboardData.resources, `XObject.${name}`)
+  //  const xobject = _.get(artboardData.resources, `XObject.${name}`)
   //     const subtype = _.get(xobject, 'Subtype')
 }

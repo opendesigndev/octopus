@@ -1,10 +1,9 @@
-//file copy from octopus-xd
+//@todo file copy from octopus-xd
 
 import { promises as fsp } from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
-import {getPkgLocation} from './pkg-location'
-
+import { getPkgLocation } from './pkg-location'
 
 type CreateTempSaverOptions = {
   id?: string
@@ -17,9 +16,12 @@ async function getWorkDirTempLocation(id: string | void) {
   return location
 }
 
-export async function createTempSaver(options: CreateTempSaverOptions) {
+export async function createTempSaver(
+  options: CreateTempSaverOptions
+): Promise<(pathSuffix: string | null, body: string | Buffer) => Promise<string>> {
   const sessionLocation = await getWorkDirTempLocation(options.id)
-  return async (pathSuffix: string | null, body: string | Buffer) => {
+
+  return async (pathSuffix: string | null, body: string | Buffer): Promise<string> => {
     const suffix = typeof pathSuffix === 'string' ? pathSuffix : uuidv4()
     const fullPath = path.join(sessionLocation, suffix)
     await fsp.writeFile(fullPath, body)

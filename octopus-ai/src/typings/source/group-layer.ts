@@ -1,8 +1,8 @@
-import { RawTextLayer } from "."
+import { RawTextLayer } from '.'
 
 export type RawGroupLayer = {
-    Type?: "MarkedContext",
-    Tag?: string,
-    Properties? : string,
-    Kids?: RawTextLayer[],
+  Type?: 'MarkedContext'
+  Tag?: string
+  Properties?: string
+  Kids?: RawTextLayer[]
 }
