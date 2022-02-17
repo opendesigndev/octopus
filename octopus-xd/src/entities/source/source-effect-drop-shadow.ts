@@ -1,7 +1,5 @@
+import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawEffectDropShadow } from '../../typings/source'
-
-/** @TODO remove after merge with newest octopus-common */
-export type ElementOf<T> = T extends Array<infer U> ? U : never
 
 export type SourceEffectDropShadowOptions = {
   effect: RawEffectDropShadow
