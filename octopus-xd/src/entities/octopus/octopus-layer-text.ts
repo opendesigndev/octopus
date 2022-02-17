@@ -12,20 +12,19 @@ import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
 import type { RawRangedStyle, RawTextLayer, RawTextParagraphRange } from '../../typings/source'
 
-
 type OctopusLayerTextOptions = {
-  parent: OctopusLayerParent,
+  parent: OctopusLayerParent
   sourceLayer: SourceLayerText
 }
 
 type NormalizedRawRangedStyle = RawRangedStyle & {
-  lengthFrom: number,
+  lengthFrom: number
   lengthTo: number
 }
 
 type MergedTextStyle = RawTextParagraphRange & {
-  from: number,
-  to: number,
+  from: number
+  to: number
   metaUxStyle: NormalizedRawRangedStyle | null
 }
 
@@ -40,9 +39,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     return str.replace(/\s+/g, '')
   }
 
-  private _getLetterCase(
-    rawLetterCase: NormalizedRawRangedStyle['textTransform']
-  ): Octopus['TextStyle']['letterCase'] {
+  private _getLetterCase(rawLetterCase: NormalizedRawRangedStyle['textTransform']): Octopus['TextStyle']['letterCase'] {
     switch (rawLetterCase) {
       case 'lowercase': {
         return 'LOWERCASE'
@@ -66,19 +63,11 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
   private _getUniqueSortedStops(paragraphs: RawTextParagraphRange[], meta: NormalizedRawRangedStyle[]) {
     const paragraphsStops = paragraphs.reduce((stops, paragraph) => {
-      return [
-        ...stops,
-        asNumber(paragraph?.from, 0),
-        asNumber(paragraph?.to, 0)
-      ]
+      return [...stops, asNumber(paragraph?.from, 0), asNumber(paragraph?.to, 0)]
     }, [])
 
     const metaStops = meta.reduce((stops, meta) => {
-      return [
-        ...stops,
-        asNumber(meta?.lengthFrom, 0),
-        asNumber(meta?.lengthTo, 0)
-      ]
+      return [...stops, asNumber(meta?.lengthFrom, 0), asNumber(meta?.lengthTo, 0)]
     }, [])
 
     return [...new Set([...paragraphsStops, ...metaStops])].sort((a, b) => a - b)
@@ -116,7 +105,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         ...matchingParagraph,
         from,
         to,
-        metaUxStyle: matchingMeta || null
+        metaUxStyle: matchingMeta || null,
       }
       return [...ranges, merged]
     }, [])
@@ -126,7 +115,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const decorations = asArray(layer?.style?.textAttributes?.decoration)
     const fontLetterSpacing = asNumber(layer?.style?.textAttributes?.letterSpacing, 0)
     const fontSize = asNumber(layer?.style?.font?.size, defaults.TEXT.LAYER_FONT_SIZE)
-    const letterSpacing = fontLetterSpacing * fontSize / 1000
+    const letterSpacing = (fontLetterSpacing * fontSize) / 1000
     const psNameRaw = asString(layer?.style?.font?.postscriptName, '')
     const family = asString(layer?.style?.font?.family, '')
     const style = asString(layer?.style?.font?.style, '')
@@ -149,20 +138,17 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       lineHeight: layer?.style?.textAttributes?.lineHeight,
       syntheticPostScriptName: syntheticPSN,
       underline,
-      linethrough: decorations.includes('line-through')
+      linethrough: decorations.includes('line-through'),
     } as const
   }
 
   private _parseParagraphWideRange(range: MergedTextStyle) {
-    const layerFontSize = asNumber(
-      this._sourceLayer.raw?.style?.font?.size,
-      defaults.TEXT.LAYER_FONT_SIZE
-    )
+    const layerFontSize = asNumber(this._sourceLayer.raw?.style?.font?.size, defaults.TEXT.LAYER_FONT_SIZE)
 
     const decorations = asArray(range?.style?.textAttributes?.decoration)
     const fontLetterSpacing = asNumber(range?.style?.textAttributes?.letterSpacing, 0)
     const fontSize = asNumber(range?.style?.font?.size, layerFontSize)
-    const letterSpacing = fontLetterSpacing * fontSize / 1000
+    const letterSpacing = (fontLetterSpacing * fontSize) / 1000
     const textTransform = range?.metaUxStyle?.textTransform
     const psNameRaw = asString(range?.style?.font?.postscriptName, '')
     const family = asString(range?.style?.font?.family, '')
@@ -182,7 +168,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       letterSpacing: Number.isNaN(letterSpacing) ? undefined : letterSpacing,
       underline,
       linethrough: decorations.includes('line-through'),
-      letterCase
+      letterCase,
     } as const
   }
 
@@ -193,17 +179,20 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _getDefaultStyle(): Octopus['TextStyle'] | null {
     const layerWideProps = this._parseLayerWideRange(this._sourceLayer.raw)
 
-    const optionalFontProps = getPresentProps({
-      family: layerWideProps.name,
-      style: layerWideProps.type,
-      syntheticPostScriptName: layerWideProps.syntheticPostScriptName
-    }, [''])
+    const optionalFontProps = getPresentProps(
+      {
+        family: layerWideProps.name,
+        style: layerWideProps.type,
+        syntheticPostScriptName: layerWideProps.syntheticPostScriptName,
+      },
+      ['']
+    )
 
     const resources = this.parentArtboard?.sourceDesign.resources
     if (!resources) return null
 
     const { fills, strokes } = OctopusEffectsText.fromTextLayer({
-      octopusLayer: this
+      octopusLayer: this,
     }).convert()
 
     const optionalDefaultStyleProps = getPresentProps({
@@ -214,31 +203,32 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       underline: layerWideProps.underline,
       linethrough: layerWideProps.linethrough,
       ...(fills ? { fills } : null),
-      ...(strokes ? { strokes } : null)
+      ...(strokes ? { strokes } : null),
     })
 
     return {
       font: {
         postScriptName: layerWideProps.postScriptName,
-        ...optionalFontProps
+        ...optionalFontProps,
       },
-      ...optionalDefaultStyleProps
+      ...optionalDefaultStyleProps,
     }
   }
 
   private _getTranslationMatrix(tx: number, ty: number) {
     const hasTranslation = typeof tx === 'number' && typeof ty === 'number'
     const zeroTranslation = tx === ty && tx === 0
-    return (!zeroTranslation && hasTranslation) ? { a: 1, b: 0, c: 0, d: 1, tx, ty } : null
+    return !zeroTranslation && hasTranslation ? { a: 1, b: 0, c: 0, d: 1, tx, ty } : null
   }
 
   private _getArtboardOffset() {
+    const defaultOffset = { x: 0, y: 0 }
     const resources = this.parentArtboard?.sourceDesign.resources
-    if (!resources) return null
+    if (!resources) return defaultOffset
     const ref = this.parentArtboard?.sourceArtboard.raw.children?.[0].artboard?.ref
-    if (!ref) return null
+    if (!ref) return defaultOffset
     const artboardMeta = resources.raw.artboards?.[ref]
-    if (!artboardMeta) return null
+    if (!artboardMeta) return defaultOffset
     const x = asNumber(artboardMeta.x, 0)
     const y = asNumber(artboardMeta.y, 0)
     return { x, y }
@@ -256,14 +246,13 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const paragraphAlign = this._sourceLayer.raw?.style?.textAttributes?.paragraphAlign || 'left'
     const paraAlignMod = { left: 0, center: 0.5, right: 1 }[paragraphAlign] ?? 0
     const frameWidth = asNumber(this._sourceLayer.raw?.text?.frame?.width, 0)
-    const paraOffsetXTweaked = this._sourceLayer.raw?.text?.frame?.type === 'autoHeight'
-      ? frameWidth * paraAlignMod + paraOffsetX
-      : paraOffsetX
+    const paraOffsetXTweaked =
+      this._sourceLayer.raw?.text?.frame?.type === 'autoHeight' ? frameWidth * paraAlignMod + paraOffsetX : paraOffsetX
     return this._getTranslationMatrix(paraOffsetXTweaked, paraOffsetY)
   }
 
   private _getTextTransform(): Octopus['Transform'] | null {
-    const parentMatrices = this.parentLayers.map(parent => parent.transform)
+    const parentMatrices = this.parentLayers.map((parent) => parent.transform)
     const offsetMatrixParagraph = this._getOffsetMatrixParagraph()
 
     const offset = this._getArtboardOffset()
@@ -276,13 +265,15 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       convertObjectMatrixToArray(offsetMatrixArtboard),
       ...parentMatrices,
       convertObjectMatrixToArray(offsetMatrixLayer),
-      convertObjectMatrixToArray(offsetMatrixParagraph)
-    ].filter((matrix) => {
-      return Array.isArray(matrix)
-    }).map((matrix) => {
-      const [a, b, c, d, tx, ty] = matrix as number[]
-      return createMatrix(a, b, c, d, tx, ty)
-    })
+      convertObjectMatrixToArray(offsetMatrixParagraph),
+    ]
+      .filter((matrix) => {
+        return Array.isArray(matrix)
+      })
+      .map((matrix) => {
+        const [a, b, c, d, tx, ty] = matrix as number[]
+        return createMatrix(a, b, c, d, tx, ty)
+      })
     const { a, b, c, d, tx, ty } = matrices.reduce((matrix, current) => matrix.append(current))
 
     return [a, b, c, d, tx, ty]
@@ -301,17 +292,20 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _getParagraphStyle(paragraph: MergedTextStyle): Octopus['TextStyle'] | null {
     const paragraphWideProps = this._parseParagraphWideRange(paragraph)
 
-    const optionalFontProps = getPresentProps({
-      family: paragraphWideProps.name,
-      style: paragraphWideProps.type,
-      syntheticPostScriptName: paragraphWideProps.syntheticPostScriptName
-    }, [''])
+    const optionalFontProps = getPresentProps(
+      {
+        family: paragraphWideProps.name,
+        style: paragraphWideProps.type,
+        syntheticPostScriptName: paragraphWideProps.syntheticPostScriptName,
+      },
+      ['']
+    )
 
     const resources = this.parentArtboard?.sourceDesign.resources
     if (!resources) return null
 
     const { fills, strokes } = new OctopusEffectsText({
-      effectSource: paragraph.style
+      effectSource: paragraph.style,
     }).convert()
 
     const optionalDefaultStyleProps = getPresentProps({
@@ -323,15 +317,15 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       linethrough: paragraphWideProps.linethrough,
       letterCase: paragraphWideProps.letterCase,
       ...(fills ? { fills } : null),
-      ...(strokes ? { strokes } : null)
+      ...(strokes ? { strokes } : null),
     })
 
     return {
       font: {
         postScriptName: paragraphWideProps.postScriptName,
-        ...optionalFontProps
+        ...optionalFontProps,
       },
-      ...optionalDefaultStyleProps
+      ...optionalDefaultStyleProps,
     }
   }
 
@@ -344,9 +338,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
   private _mergeRanges(ranges: Octopus['StyleRange'][]): Octopus['StyleRange'][] {
     const unique = ranges.reduce((unique: Octopus['StyleRange'][], range) => {
-      return unique.every((uniqueRange) => isEqual(uniqueRange.style, range.style))
-        ? [...unique, range]
-        : unique
+      return unique.every((uniqueRange) => isEqual(uniqueRange.style, range.style)) ? [...unique, range] : unique
     }, [])
     return unique.map((uniqueRange) => {
       return {
@@ -355,7 +347,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
           .filter((range) => isEqual(uniqueRange.style, range.style))
           .reduce((ranges, range) => {
             return [...ranges, ...asArray(range.ranges)]
-          }, [])
+          }, []),
       }
     })
   }
@@ -364,11 +356,13 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const paragraphs = this._getFlatParagraphs()
     const rangedStyles = this._getNormalizedRangedStyles(textValue.length)
     const textStyles = this._mergeMetaToParagraphs(paragraphs, rangedStyles)
-    const parsedRanges = textStyles.map((paragraph) => {
-      return this._parseRange(paragraph)
-    }).filter((parsedRange) => {
-      return parsedRange
-    }) as Octopus['StyleRange'][]
+    const parsedRanges = textStyles
+      .map((paragraph) => {
+        return this._parseRange(paragraph)
+      })
+      .filter((parsedRange) => {
+        return parsedRange
+      }) as Octopus['StyleRange'][]
     return this._mergeRanges(parsedRanges)
   }
 
@@ -381,12 +375,12 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         mode: ({ area: 'FIXED', autoHeight: 'AUTO_HEIGHT' } as const)[frameType],
         size: {
           width: asNumber(raw?.text?.frame?.width, 1),
-          height: asNumber(raw?.text?.frame?.height, 1)
-        }
+          height: asNumber(raw?.text?.frame?.height, 1),
+        },
       }
     }
     return {
-      mode: 'AUTO_WIDTH'
+      mode: 'AUTO_WIDTH',
     }
   }
 
@@ -400,8 +394,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     if (typeof value !== 'string') return null
     const defaultStyle = this._getDefaultStyle()
     if (!defaultStyle) return null
-    const parseTextTransform = this._getTextTransform()
-    if (!parseTextTransform) return null
+    const textTransform = this._getTextTransform()
+    if (!textTransform) return null
     const styles = this._getStyles(value)
     const frame = this._getFrame()
     const horizontalAlign = this._getHorizontalAlign()
@@ -412,10 +406,10 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
-      textTransform: parseTextTransform,
+      textTransform,
       ...(styles.length ? { styles } : null),
       frame,
-      horizontalAlign
+      horizontalAlign,
     }
   }
 
@@ -425,7 +419,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     return {
       type: 'TEXT',
-      text
+      text,
     }
   }
 
@@ -438,7 +432,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     return {
       ...common,
-      ...specific
+      ...specific,
     }
   }
 }

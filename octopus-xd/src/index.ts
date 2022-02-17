@@ -2,17 +2,17 @@ import { performance } from 'perf_hooks'
 import readPackageUpAsync from 'read-pkg-up'
 
 import createEnvironment from './services/general/environment'
-import createLogger from './services/general/default-logger'
 import createSentry from './services/general/sentry'
 import ArtboardConverter from './services/conversion/artboard-converter'
+import OctopusManifest from './entities/octopus/octopus-manifest'
+import { OctopusManifestReport } from './typings/manifest'
+import { logger, set as setLogger } from './services/instances/logger'
 
-import type { NormalizedReadResult } from 'read-pkg-up'
+import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { Logger } from './typings'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 import type SourceDesign from './entities/source/source-design'
 import type { Octopus } from './typings/octopus'
-import OctopusManifest from './entities/octopus/octopus-manifest'
-
 
 type OctopusXDConverterOptions = {
   logger?: Logger
@@ -23,9 +23,9 @@ type ConvertDesignOptions = {
 }
 
 type ConversionResult = {
-  targetArtboardId: string,
-  value: Octopus['OctopusDocument'] | undefined,
-  error: Error | null,
+  targetArtboardId: string
+  value: Octopus['OctopusDocument'] | undefined
+  error: Error | null
   time: number
 }
 
@@ -37,28 +37,27 @@ createEnvironment()
 export default class OctopusXDConverter {
   private _pkg: Promise<NormalizedReadResult | undefined>
   // Services
-  private _logger: Logger
   private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusXDConverterOptions) {
+    this._setupLogger(options?.logger)
     this._pkg = readPackageUpAsync({ cwd: __dirname })
-    this._logger = options?.logger || createLogger()
     this._sentry = createSentry({
       dsn: process.env.SENTRY_DSN,
-      logger: this._logger
+      logger,
     })
   }
 
-  get logger() {
-    return this._logger
+  private _setupLogger(logger?: Logger) {
+    if (logger) setLogger(logger)
   }
 
-  get sentry() {
+  get sentry(): ReturnType<typeof createSentry> {
     return this._sentry
   }
 
-  get pkg() {
-    return this._pkg.then(normalized => {
+  get pkg(): Promise<NormalizedPackageJson> {
+    return this._pkg.then((normalized) => {
       if (!normalized) {
         throw new Error(`File "package.json" not found, can't infer "version" property of Octopus`)
       }
@@ -70,37 +69,41 @@ export default class OctopusXDConverter {
     try {
       const value = await new ArtboardConverter({
         ...options,
-        octopusXdConverter: this
+        octopusXdConverter: this,
       }).convert()
-      
+
       return {
         value,
-        error: null
+        error: null,
       }
     } catch (err) {
       return {
         value: undefined,
-        error: err
+        error: err,
       }
     }
   }
 
-  async convertDesign(options: ConvertDesignOptions) {
-    const artboards = await Promise.all(options.sourceDesign.artboards.map(artboard => {
-      return this.convertArtboardById({
-        targetArtboardId: artboard.meta.id,
-        sourceDesign: options.sourceDesign
+  async convertDesign(
+    options: ConvertDesignOptions
+  ): Promise<{ manifest: OctopusManifestReport; artboards: ConversionResult[] }> {
+    const artboards = await Promise.all(
+      options.sourceDesign.artboards.map((artboard) => {
+        return this.convertArtboardById({
+          targetArtboardId: artboard.meta.id,
+          sourceDesign: options.sourceDesign,
+        })
       })
-    }))
+    )
 
     const manifest = await new OctopusManifest({
       sourceDesign: options.sourceDesign,
-      octopusXdConverter: this
+      octopusXdConverter: this,
     }).convert()
 
     return {
       manifest,
-      artboards
+      artboards,
     }
   }
 
@@ -113,7 +116,7 @@ export default class OctopusXDConverter {
       targetArtboardId: options.targetArtboardId,
       value,
       error,
-      time
+      time,
     }
   }
 }

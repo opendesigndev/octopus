@@ -1,12 +1,10 @@
 import type SourceDesign from './source-design'
 
-export type RawSourceInteractions = {
-
-}
+export type RawSourceInteractions = Record<string, unknown>
 
 type SourceInteractionsOptions = {
-  rawValue: RawSourceInteractions,
-  path: string,
+  rawValue: RawSourceInteractions
+  path: string
   design: SourceDesign
 }
 
@@ -21,7 +19,7 @@ export default class SourceInteractions {
     this._path = options.path
   }
 
-  get raw() {
+  get raw(): RawSourceInteractions {
     return this._rawValue
   }
 }

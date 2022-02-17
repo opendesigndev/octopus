@@ -1,6 +1,5 @@
 import type { RawStroke } from '../../typings/source'
 
-
 export type SourceEffectStrokeOptions = {
   effect: RawStroke
 }
@@ -12,31 +11,31 @@ export default class SourceEffectStroke {
     this._rawEffect = options.effect
   }
 
-  get type() {
+  get type(): RawStroke['type'] {
     return this._rawEffect?.type
   }
 
-  get dash() {
+  get dash(): RawStroke['dash'] {
     return this._rawEffect?.dash
   }
 
-  get join() {
+  get join(): RawStroke['join'] {
     return this._rawEffect?.join
   }
 
-  get cap() {
+  get cap(): RawStroke['cap'] {
     return this._rawEffect?.cap
   }
 
-  get align() {
+  get align(): RawStroke['align'] {
     return this._rawEffect?.align
   }
 
-  get width() {
+  get width(): RawStroke['width'] {
     return this._rawEffect?.width
   }
 
-  get color() {
+  get color(): RawStroke['color'] {
     return this._rawEffect?.color
   }
 }

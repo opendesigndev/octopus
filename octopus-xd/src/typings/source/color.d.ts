@@ -1,9 +1,9 @@
 export type RawColor = {
-  mode?: string,
+  mode?: string
   value?: {
-    r?: number,
-    g?: number,
+    r?: number
+    g?: number
     b?: number
-  },
+  }
   alpha?: number
 }
