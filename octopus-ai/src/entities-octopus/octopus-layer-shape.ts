@@ -101,15 +101,9 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
       )
       .map((point) => point.toOctopus())
     const closed = !this._sourceLayer.stroke
+    const paperShape = createShape({ closed, points })
 
-    // todo: no sign of radius in octopus2 illustrator, should be removed from type?
-    return createShape([
-      {
-        closed,
-        points,
-      },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ] as any).pathData
+    return paperShape?.pathData
   }
 
   private _parsePath(shape: SourceLayerShapeSubPath) {

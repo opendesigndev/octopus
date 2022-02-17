@@ -59,7 +59,7 @@ export function createSegmentI(point: paper.Point, handleIn: paper.Point): paper
 export function createSegmentO(point: paper.Point, handleOut: paper.Point): paper.Segment {
   return createSegment(point, null, handleOut)
 }
-export function createPath(options: Record<string, unknown> | Array<paper.Segment>): paper.Path {
+export function createPath(options: Record<string, unknown> | Array<paper.Segment | paper.Point>): paper.Path {
   return new paper.Path(options)
 }
 export function createPathRectangle(...rect: Array<paper.Point | OctopusBounds | paper.Size>): paper.Path {
