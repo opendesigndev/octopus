@@ -10,7 +10,7 @@ import { ArtboardConverter, ArtboardConversionOptions } from './services/convers
 import type { Logger } from './typings'
 
 type OctopusPSDConverterOptions = {
-  octopusId: string
+  designId: string
   logger?: Logger
 }
 
@@ -26,7 +26,7 @@ export class OctopusPSDConverter {
   private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusPSDConverterOptions) {
-    this._id = options?.octopusId || uuidv4()
+    this._id = options?.designId || uuidv4()
     this._pkg = readPackageUpAsync({ cwd: __dirname })
     this._logger = options?.logger || createLogger()
     this._sentry = createSentry({

@@ -34,21 +34,19 @@ async function renderOctopus(octopusDir: string) {
 }
 
 export async function convertArtboard() {
-  const octopusId = uuidv4()
+  const designId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
-  if (filename === undefined) {
-    return console.error('Missing argument (path to .psd file)')
-  }
-  const converter = new OctopusPSDConverter({ octopusId })
-  const sourceArtboard = await createSourceTree(converter, filename, octopusId)
-  console.info(`Photoshop source file converted to directory: ${chalk.yellow(octopusId)}`)
+  if (filename === undefined) return console.error('Missing argument (path to .psd file)')
+  const converter = new OctopusPSDConverter({ designId })
+  const sourceArtboard = await createSourceTree(converter, filename, designId)
+  console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)}`)
 
   const timeStart = performance.now()
   const octopus = await convert(converter, sourceArtboard)
   const time = Math.round(performance.now() - timeStart)
 
-  const saver = await createTempSaver(octopusId)
+  const saver = await createTempSaver(designId)
   const octopusLocation = await saver('octopus.json', stringify(octopus))
   const octopusDir = path.dirname(octopusLocation)
   const sourceLocation = `${octopusDir}/source.json`
