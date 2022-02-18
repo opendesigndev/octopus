@@ -6,17 +6,17 @@ import path from 'path'
 import dotenv from 'dotenv'
 
 import { OctopusPSDConverter } from '../../src'
-import { createSourceTree } from './create-source-tree'
+import { prepareSourceDesign } from './prepare-source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
-import { SourceArtboard } from '../../src/entities/source/source-artboard'
+import { SourceDesign } from '../../src/entities/source/source-design'
 
 dotenv.config()
 
-async function convert(converter: OctopusPSDConverter, sourceArtboard: SourceArtboard) {
+async function convert(converter: OctopusPSDConverter, sourceDesign: SourceDesign) {
   // TODO https://gitlab.avcd.cz/opendesign/octopus-converters/-/merge_requests/3#note_276626
   try {
-    return await converter.convertArtboard({ sourceArtboard })
+    return await converter.convertDesign({ sourceDesign })
   } catch (e) {
     return null
   }
@@ -33,17 +33,18 @@ async function renderOctopus(octopusDir: string) {
   return renderPath
 }
 
-export async function convertArtboard(): Promise<void> {
+export async function convertDesign(): Promise<void> {
   const designId = uuidv4()
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
   if (filename === undefined) return console.error('Missing argument (path to .psd file)')
   const converter = new OctopusPSDConverter({ designId })
-  const sourceArtboard = await createSourceTree(converter, filename, designId)
+  const sourceDesign = await prepareSourceDesign(converter, filename, designId)
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)}`)
 
   const timeStart = performance.now()
-  const octopus = await convert(converter, sourceArtboard)
+  const convertResult = await convert(converter, sourceDesign)
+  const octopus = convertResult?.artboards[0]?.value
   const time = Math.round(performance.now() - timeStart)
 
   const saver = await createTempSaver(designId)

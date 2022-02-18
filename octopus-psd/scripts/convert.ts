@@ -1,3 +1,3 @@
-import { convertArtboard } from './utils/convert-artboard'
+import { convertDesign } from './utils/convert-design'
 
-convertArtboard()
+convertDesign()

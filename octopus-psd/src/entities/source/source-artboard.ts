@@ -15,6 +15,8 @@ export class SourceArtboard {
   private _octopusConverter: OctopusPSDConverter
   private _layers: SourceLayer[]
 
+  static DEFAULT_ID = '1'
+
   constructor(options: SourceArtboardOptions) {
     this._rawValue = options.rawValue
     this._octopusConverter = options.octopusConverter
@@ -42,5 +44,9 @@ export class SourceArtboard {
 
   get bounds(): SourceBounds {
     return getBoundsFor(this._rawValue.bounds)
+  }
+
+  get id(): string {
+    return SourceArtboard.DEFAULT_ID
   }
 }

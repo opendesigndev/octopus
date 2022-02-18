@@ -9,10 +9,25 @@ import { ArtboardConverter, ArtboardConversionOptions } from './services/convers
 
 import type { Logger } from './typings'
 import type { Octopus } from './typings/octopus'
+import type { SourceDesign } from './entities/source/source-design'
+import { OctopusManifestReport } from './typings/manifest'
+import { OctopusManifest } from './entities/octopus/octopus-manifest'
+import { SourceArtboard } from './entities/source/source-artboard'
 
 type OctopusPSDConverterOptions = {
   designId: string
   logger?: Logger
+}
+
+type ConvertDesignOptions = {
+  sourceDesign: SourceDesign
+}
+
+type ConversionResult = {
+  targetArtboardId: string
+  value: Octopus['OctopusDocument'] | undefined
+  error: Error | null
+  time: number
 }
 
 /**
@@ -58,10 +73,37 @@ export class OctopusPSDConverter {
     })
   }
 
-  convertArtboard(options: ArtboardConversionOptions): Promise<Octopus['OctopusDocument']> {
-    return new ArtboardConverter({
-      ...options,
+  private async _convertArtboardSafe(options: ArtboardConversionOptions) {
+    try {
+      const value = await new ArtboardConverter({ ...options, octopusConverter: this }).convert()
+      return { value, error: null }
+    } catch (error) {
+      return { error }
+    }
+  }
+
+  private async _convertArtboard(options: ArtboardConversionOptions): Promise<ConversionResult> {
+    const timeStart = performance.now()
+    const { value, error } = await this._convertArtboardSafe(options)
+    const time = performance.now() - timeStart
+
+    const targetArtboardId = value?.id ?? SourceArtboard.DEFAULT_ID
+    return { targetArtboardId, value, error, time }
+  }
+
+  async convertDesign(
+    options: ConvertDesignOptions
+  ): Promise<{ manifest: OctopusManifestReport; artboards: ConversionResult[] }> {
+    const artboard = await this._convertArtboard({ sourceDesign: options.sourceDesign })
+
+    const manifest = await new OctopusManifest({
+      sourceDesign: options.sourceDesign,
       octopusConverter: this,
     }).convert()
+
+    return {
+      manifest,
+      artboards: [artboard],
+    }
   }
 }

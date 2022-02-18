@@ -14,8 +14,6 @@ export class OctopusArtboard {
   private _octopusConverter: OctopusPSDConverter
   private _layers: OctopusLayer[]
 
-  static DEFAULT_ID = '1'
-
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
     this._sourceArtboard = options.sourceArtboard
@@ -46,7 +44,7 @@ export class OctopusArtboard {
   }
 
   get id(): string {
-    return OctopusArtboard.DEFAULT_ID
+    return this.sourceArtboard.id
   }
 
   get version(): Promise<string> {
