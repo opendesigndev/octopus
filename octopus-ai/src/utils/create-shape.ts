@@ -53,6 +53,7 @@ export default function createShape(subpath: OctopusSubpath): Nullable<paper.Pat
   if (!isSubpathValid(subpath)) {
     return null
   }
+
   const shape = createSubpath(subpath)
 
   if (!shape) {

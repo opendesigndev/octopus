@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import OctopusLayerCommon, { LayerSpecifics } from './octopus-layer-common'
 import { OctopusLayerParent } from '../typings/octopus-entities'
 import type { Octopus } from '../typings/octopus'
@@ -16,8 +15,8 @@ type OctopusLayerShapeOptions = {
 
 export default class OctopusLayerShape extends OctopusLayerCommon {
   static FILL_RULE = {
-    'non-zero-winding-number': 'NON_ZERO',
-    'even-odd': 'EVEN_ODD',
+    'non-zero-winding-number': 'NON_ZERO' as const,
+    'even-odd': 'EVEN_ODD' as const,
   }
 
   protected _sourceLayer: SourceLayerShape
@@ -50,8 +49,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
         rectangle,
         type: 'RECTANGLE',
         transform: this._sourceLayer.transformMatrix,
-        //@todo check what is this, no idea from illustrator2
-        cornerRadii: [0, 0, 0, 0],
       },
       ...this.shapeEffects,
     }
@@ -124,29 +121,36 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
-  private _parseShapes() {
-    return this._sourceLayer.subpaths.map((shape) => {
+  private _getShapes(): Octopus['Shape'] {
+    const path = this._sourceLayer.subpaths.map((shape) => {
       if (this._isRect(shape)) {
         return this._parseRect(shape)
       }
 
       return this._parsePath(shape)
     })
+
+    const fillShape: Octopus['Shape'] = {
+      purpose: 'BODY',
+      fillRule: this.fillRule,
+      path,
+      ...this.shapeEffects,
+    } as const
+
+    return fillShape
   }
 
-  get fillRule(): string {
+  get fillRule(): 'NON_ZERO' | 'EVEN_ODD' {
     const sourceFillRule = this._sourceLayer.fillRule
 
     return sourceFillRule ? OctopusLayerShape.FILL_RULE[sourceFillRule] : OctopusLayerShape.FILL_RULE['even-odd']
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
+    const shapes = this._getShapes()
     return {
-      purpose: 'BODY',
       type: 'SHAPE',
-      fillRule: this.fillRule,
-      //@ts-ignore
-      shapes: this._parseShapes(),
+      shapes,
     }
   }
 
@@ -154,7 +158,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     const common = this.convertCommon()
 
     if (!common) return null
-    //@ts-ignore
     return {
       ...common,
       ...this._convertTypeSpecific(),
