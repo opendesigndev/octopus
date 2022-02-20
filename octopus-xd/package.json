@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-xd",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.2",
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
