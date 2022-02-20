@@ -23,7 +23,7 @@ function createSourceLayerGroup({ layer, parent, path }: CreateLayerOptions): So
   })
 }
 
-function createSourceLayerShape({ layer, parent, path }: CreateLayerOptions): SourceLayerShape {
+export function createSourceLayerShape({ layer, parent, path }: CreateLayerOptions): SourceLayerShape {
   return new SourceLayerShape({
     parent,
     path,
@@ -31,7 +31,7 @@ function createSourceLayerShape({ layer, parent, path }: CreateLayerOptions): So
   })
 }
 
-function createSourceLayerText({ layer, parent, path }: CreateLayerOptions): SourceLayerText {
+export function createSourceLayerText({ layer, parent, path }: CreateLayerOptions): SourceLayerText {
   return new SourceLayerText({
     parent,
     rawValue: layer as RawTextLayer,

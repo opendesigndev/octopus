@@ -38,18 +38,14 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return { x0, y0, x1, y1 }
   }
 
-  private _parseRect(shape: SourceLayerShapeSubPath) {
+  private _parseRect(shape: SourceLayerShapeSubPath): Octopus['PathRectangle'] {
     const coords = shape.coords || [0, 0, 0, 0]
     const rectangle = this._parseRectangleCoords(coords)
 
     return {
-      purpose: 'BODY',
-      fillRule: this.fillRule,
-      path: {
-        rectangle,
-        type: 'RECTANGLE',
-        transform: this._sourceLayer.transformMatrix,
-      },
+      rectangle,
+      type: 'RECTANGLE',
+      transform: this._sourceLayer.transformMatrix,
       ...this.shapeEffects,
     }
   }
@@ -68,10 +64,10 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }).convert()
   }
 
-  private _createGeometry(shape: SourceLayerShapeSubPath) {
+  private _createGeometry(shape: SourceLayerShapeSubPath): string {
     const validRawPoints = shape.points?.filter(isValid) || []
     if (validRawPoints.length === 0) {
-      return []
+      return ''
     }
 
     const points = validRawPoints
@@ -100,38 +96,40 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     const closed = !this._sourceLayer.stroke
     const paperShape = createShape({ closed, points })
 
-    return paperShape?.pathData
+    return paperShape?.pathData || ''
   }
 
-  private _parsePath(shape: SourceLayerShapeSubPath) {
+  private _parsePath(shape: SourceLayerShapeSubPath): Octopus['Path'] {
     const geometry = this._createGeometry(shape)
     const transform = this._sourceLayer.transformMatrix
 
     return {
-      purpose: 'BODY',
-      path: {
-        geometry,
-        type: 'PATH',
-        transform,
-      },
-      fillRule: this.fillRule,
-      ...this.shapeEffects,
-      //@todo check what is this, no idea from illustrator2
-      cornerRadii: [0, 0, 0, 0],
+      type: 'PATH',
+      geometry,
+      transform,
     }
   }
 
-  private _getShapes(): Octopus['Shape'] {
-    const path = this._sourceLayer.subpaths.map((shape) => {
-      if (this._isRect(shape)) {
-        return this._parseRect(shape)
-      }
+  private _getPath(): Octopus['Shape']['path'] | null {
+    const sourceSubpath = this._sourceLayer.subpaths[0]
+    if (!sourceSubpath) {
+      return null
+    }
 
-      return this._parsePath(shape)
-    })
+    if (this._isRect(sourceSubpath)) {
+      return this._parseRect(sourceSubpath)
+    }
+
+    return this._parsePath(sourceSubpath)
+  }
+
+  private _getShapes(): Octopus['Shape'] | null {
+    const path = this._getPath()
+    if (!path) {
+      return null
+    }
 
     const fillShape: Octopus['Shape'] = {
-      purpose: 'BODY',
       fillRule: this.fillRule,
       path,
       ...this.shapeEffects,
@@ -142,25 +140,32 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   get fillRule(): 'NON_ZERO' | 'EVEN_ODD' {
     const sourceFillRule = this._sourceLayer.fillRule
-
     return sourceFillRule ? OctopusLayerShape.FILL_RULE[sourceFillRule] : OctopusLayerShape.FILL_RULE['even-odd']
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
-    const shapes = this._getShapes()
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
+    const shape = this._getShapes()
+
+    if (!shape) {
+      return null
+    }
+
     return {
       type: 'SHAPE',
-      shapes,
-    }
+      shape,
+      shapes: undefined /** @TODO remove after schema fix */,
+    } as const
   }
 
   convert(): Octopus['ShapeLayer'] | null {
     const common = this.convertCommon()
+    const specific = this._convertTypeSpecific()
 
-    if (!common) return null
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     return {
       ...common,
-      ...this._convertTypeSpecific(),
+      ...specific,
     }
   }
 }

@@ -5,15 +5,15 @@ import SourceLayerXObject from './source-layer-x-object'
 import { Nullable } from '../typings/helpers'
 import { Octopus } from '../typings/octopus'
 import SourceResources from './source-resources'
+import SourceLayerShape from './source-layer-x-object'
 
-export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject
+export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
 
 type SourceLayerCommonOptions = {
   parent: SourceLayerParent
   rawValue: RawLayer
   path: number[]
 }
-
 type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject'
 
 export default class SourceLayerCommon {

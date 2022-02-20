@@ -4,7 +4,9 @@ import { RawShapeLayer, RawShapeLayerFillRule } from '../typings/source/shape-la
 import SourceLayerShapeSubPath from './source-layer-shape-subpath'
 import { DashPattern, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source/graphics-state'
 import { Nullable } from '../typings/helpers'
-import { RawResourcesExtGState } from '../typings/source'
+import { RawLayer, RawResourcesExtGState } from '../typings/source'
+import { createSourceLayerShape, SourceLayer } from '../factories/create-source-layer'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -13,13 +15,15 @@ type SourceLayerShapeOptions = {
 }
 
 export default class SourceLayerShape extends SourceLayerCommon {
-  protected _rawValue: RawShapeLayer
+  public _rawValue: RawShapeLayer
   private _subpaths: SourceLayerShapeSubPath[]
+  private _sourceMask: SourceLayerShape[] | null
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
     this._rawValue = options.rawValue
     this._subpaths = this._initSubpaths()
+    this._sourceMask = this._initSourceMask()
   }
 
   private _initSubpaths() {
@@ -29,6 +33,23 @@ export default class SourceLayerShape extends SourceLayerCommon {
         (subPath) => new SourceLayerShapeSubPath({ path, rawValue: subPath, parent: this })
       ) || []
     )
+  }
+
+  private _initSourceMask() {
+    if (!this.clippingPath || !this.clippingPath.length) {
+      return null
+    }
+
+    const children = asArray(this.clippingPath)
+    return children.reduce((children: SourceLayerShape[], layer: RawLayer, i: number) => {
+      const sourceLayer = createSourceLayerShape({
+        layer,
+        parent: this as SourceLayerParent,
+        path: this.path.concat(i),
+      })
+
+      return sourceLayer ? [...children, sourceLayer] : children
+    }, [])
   }
 
   private _isRect() {
@@ -43,7 +64,7 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this._subpaths
   }
 
-  get graphicsState(): Nullable<RawGraphicsState<RawShapeLayer>> {
+  get graphicsState(): Nullable<RawGraphicsState> {
     return this._rawValue.GraphicsState
   }
 
@@ -111,5 +132,13 @@ export default class SourceLayerShape extends SourceLayerCommon {
 
   get stroke(): boolean {
     return Boolean(this._rawValue.Stroke)
+  }
+
+  get clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+    return this.graphicsState?.ClippingPath
+  }
+
+  get sourceMask() {
+    return this._sourceMask
   }
 }

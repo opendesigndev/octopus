@@ -12,7 +12,7 @@ type SourceLayerGroupOptions = {
 }
 
 export default class SourceLayerGroup extends SourceLayerCommon {
-  protected _rawValue: RawGroupLayer
+  public _rawValue: RawGroupLayer
   private _children: SourceLayer[]
 
   constructor(options: SourceLayerGroupOptions) {

@@ -78,7 +78,10 @@ export default class OctopusArtboard {
       version: await this._getVersion(),
       id: this.id,
       dimensions,
-      layers: getConverted(this._layers),
+      content: {
+        type: 'GROUP',
+        layers: getConverted(this._layers),
+      },
     }
   }
 }

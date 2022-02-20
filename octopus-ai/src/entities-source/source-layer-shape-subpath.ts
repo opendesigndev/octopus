@@ -10,7 +10,7 @@ type SourceLayerShapeOptions = {
 }
 
 export default class SourceLayerShapeSubPath {
-  private _rawValue: RawShapeLayerSubPath
+  public _rawValue: RawShapeLayerSubPath
   private _points: RawShapeLayerSubPathPoint[]
   private _parent: SourceLayerShape
   private _coords: number[]

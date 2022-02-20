@@ -10,7 +10,7 @@ type SourceLayerXObjectOptions = {
 }
 
 export default class SourceLayerShape extends SourceLayerCommon {
-  protected _rawValue: RawXObjectLayer
+  public _rawValue: RawXObjectLayer
 
   constructor(options: SourceLayerXObjectOptions) {
     super(options)
@@ -29,9 +29,9 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.LineJoin || 0
   }
 
-  get lineCap(): number {
-    return this.graphicsState?.LineCap || 0
-  }
+  // get lineCap(): number {
+  //   return this.graphicsState?.LineCap || 0
+  // }
 
   // get XObject () {
   //     this._parent.resources.

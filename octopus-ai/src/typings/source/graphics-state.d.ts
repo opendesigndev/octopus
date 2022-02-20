@@ -1,10 +1,11 @@
-import { RawLayer } from '.'
+import { RawShapeLayer } from '.'
 
 export type RawGraphicsStateMatrix = [number, number, number, number, number, number]
 export type DashPattern = [number[], number]
-export type RawGraphicsState<T = undefined> = {
+
+export type RawGraphicsState = {
   CTM?: RawGraphicsStateMatrix
-  ClippingPath?: T extends RawLayer ? T[] : null
+  ClippingPath?: RawShapeLayer[] | null
   ColorSpaceStroking?: string
   ColorSpaceNonStroking?: string
   ColorStroking?: number[]

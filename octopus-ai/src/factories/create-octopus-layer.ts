@@ -9,8 +9,9 @@ import type SourceLayerShape from '../entities-source/source-layer-shape'
 import type SourceLayerText from '../entities-source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
 import { Nullable } from '../typings/helpers'
+import OctopusLayerMaskGroup from '../entities-octopus/octopus-layer-maskgroup'
 
-export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText
+export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText | OctopusLayerMaskGroup
 
 type CreateOctopusLayerOptions = {
   layer: SourceLayer
@@ -24,18 +25,20 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
   })
 }
 
-// function createOctopusLayerMaskGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
-//   return new OctopusLayerMaskGroup({
-//     parent,
-//     sourceLayer: layer as SourceLayerGroup
-//   })
-// }
+function createOctopusLayerGroupLike(options: CreateOctopusLayerOptions) {
+  const layer = options.layer as SourceLayerShape
 
-// function createOctopusLayerGroupLike(options: CreateOctopusLayerOptions) {
-//   return OctopusLayerMaskGroup.isMaskGroupLike(options.layer)
-//     ? createOctopusLayerMaskGroup(options)
-//     : createOctopusLayerGroup(options)
-// }
+  return OctopusLayerMaskGroup.isShapeMaskGroup(layer)
+    ? createOctopusLayerMaskGroup(options)
+    : createOctopusLayerShape(options)
+}
+
+function createOctopusLayerMaskGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
+  return new OctopusLayerMaskGroup({
+    parent,
+    sourceLayer: layer as SourceLayerShape,
+  })
+}
 
 function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   return new OctopusLayerShape({
@@ -51,7 +54,7 @@ function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): O
   })
 }
 
-type Builder = (options: CreateOctopusLayerOptions) => OctopusLayerText | OctopusLayerShape | OctopusLayerGroup
+type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
   const type = (Object(options.layer) as SourceLayer).type || ''
@@ -60,7 +63,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable
     [key: string]: Builder
   } = {
     MarkedContext: createOctopusLayerGroup,
-    Path: createOctopusLayerShape,
+    Path: createOctopusLayerGroupLike,
     TextGroup: createOctopusLayerText,
   }
   const builder = builders[type]

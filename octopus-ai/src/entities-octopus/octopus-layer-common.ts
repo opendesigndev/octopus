@@ -2,10 +2,7 @@
 import SourceResources from '../entities-source/source-resources'
 import { SourceLayer } from '../factories/create-source-layer'
 import type { Octopus } from '../typings/octopus'
-import OctopusArtboard from './octopus-artboard'
-import OctopusLayerGroup from './octopus-layer-group'
-
-export type OctopusLayerParent = OctopusArtboard | OctopusLayerGroup
+import { OctopusLayerParent } from '../typings/octopus-entities'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
