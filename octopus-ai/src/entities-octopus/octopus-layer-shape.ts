@@ -161,11 +161,13 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
+    if (!specific) {
+      return null
+    }
+
     return {
       ...common,
       ...specific,
-    }
+    } as const
   }
 }

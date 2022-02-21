@@ -45,8 +45,7 @@ export default class OctopusLayerCommon {
     return this._parent.resources
   }
 
-  convertCommon(): Octopus['LayerBase'] {
-    //@ts-ignore
+  convertCommon(): Omit<Octopus['LayerBase'], 'type'> {
     return {
       id: this.id,
       name: this._sourceLayer.name,

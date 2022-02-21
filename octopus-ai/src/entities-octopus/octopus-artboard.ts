@@ -79,6 +79,7 @@ export default class OctopusArtboard {
       id: this.id,
       dimensions,
       content: {
+        id: 'artificialGroup',
         type: 'GROUP',
         layers: getConverted(this._layers),
       },
