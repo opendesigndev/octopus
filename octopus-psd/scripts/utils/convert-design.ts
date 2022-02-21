@@ -1,5 +1,4 @@
 import chalk from 'chalk'
-import { performance } from 'perf_hooks'
 import { v4 as uuidv4 } from 'uuid'
 import { execSync } from 'child_process'
 import path from 'path'
@@ -32,18 +31,22 @@ export async function convertDesign(): Promise<void> {
   const sourceDesign = await prepareSourceDesign(converter, filename, designId)
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)}`)
 
-  const timeStart = performance.now()
   const convertResult = await converter.convertDesign({ sourceDesign })
-  const octopus = convertResult?.artboards[0]?.value
-  const time = Math.round(performance.now() - timeStart)
-
   const saver = await createTempSaver(designId)
+
+  const octopus = convertResult?.artboards[0]
   const octopusLocation = await saver('octopus.json', stringify(octopus))
   const octopusDir = path.dirname(octopusLocation)
+
+  const manifest = convertResult?.manifest
+  const manifestLocation = await saver('manifest.json', stringify(manifest))
+
   const sourceLocation = `${octopusDir}/source.json`
-  console.info(`${octopus ? '✅' : '❌'} ${chalk.yellow('octopus.json')} (${time}ms) ${chalk.grey(`(${octopus?.id})`)}`)
+  console.info(`${octopus?.value ? '✅' : '❌'} ${chalk.yellow('octopus.json')} (${octopus?.time}ms)`)
   console.info(`  Source: file://${sourceLocation}`)
+  console.info(`  Manifest: file://${manifestLocation}`)
   console.info(`  Octopus: file://${octopusLocation}`)
+
   const shouldRender = process.env.CONVERT_RENDER === 'true'
   const renderLocation = octopus && shouldRender ? await renderOctopus(octopusDir) : null
   shouldRender && console.info(`  Render: file://${renderLocation}`)

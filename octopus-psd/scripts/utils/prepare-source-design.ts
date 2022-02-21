@@ -1,4 +1,4 @@
-import { readFile, readdir } from 'fs/promises'
+import { readFile, readdir, stat, access } from 'fs/promises'
 import { parsePsd } from '@avocode/psd-parser'
 import { SourceDesign, SourceImage } from '../../src/entities/source/source-design'
 import type { OctopusPSDConverter } from '../../src'
@@ -23,22 +23,32 @@ function getParsePsdOptions(designId: string) {
 async function getImages(designId: string): Promise<SourceImage[]> {
   const images = [] as SourceImage[]
   const imagesPath = path.join(OUTPUT_DIR, designId, IMAGES_DIR)
-  const imagesResults = await readdir(imagesPath, { withFileTypes: true })
-  for (const image of imagesResults) {
-    if (image.isDirectory()) continue
-    const name = image.name
-    images.push({ name, path: path.join(IMAGES_DIR, name) })
+  try {
+    const imagesResults = await readdir(imagesPath, { withFileTypes: true })
+    for (const image of imagesResults) {
+      if (image.isDirectory()) continue
+      const name = image.name
+      images.push({ name, path: path.join(IMAGES_DIR, name) })
+    }
+  } catch {
+    console.info(`Reading image directory '${imagesPath}' was not successful`)
   }
+
   const patternsPath = path.join(OUTPUT_DIR, designId, IMAGES_DIR, PATTERNS_DIR)
-  const patternsResults = await readdir(patternsPath, { withFileTypes: true })
-  for (const image of patternsResults) {
-    if (image.isDirectory()) continue
-    const name = image.name
-    const relativePath = path.join(IMAGES_DIR, PATTERNS_DIR, name)
-    const imgPath = path.join(OUTPUT_DIR, designId, relativePath)
-    const { width, height } = await sizeOf(imgPath)
-    images.push({ name, path: relativePath, width, height })
+  try {
+    const patternsResults = await readdir(patternsPath, { withFileTypes: true })
+    for (const image of patternsResults) {
+      if (image.isDirectory()) continue
+      const name = image.name
+      const relativePath = path.join(IMAGES_DIR, PATTERNS_DIR, name)
+      const imgPath = path.join(OUTPUT_DIR, designId, relativePath)
+      const { width, height } = await sizeOf(imgPath)
+      images.push({ name, path: relativePath, width, height })
+    }
+  } catch {
+    console.info(`Reading image pattern directory '${patternsPath}' was not successful`)
   }
+
   return images
 }
 
