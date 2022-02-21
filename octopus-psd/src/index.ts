@@ -3,7 +3,7 @@ import type { NormalizedReadResult } from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
 import { createEnvironment } from './services/general/environment'
-import { set as setLogger } from './services/instances/logger'
+import { logger, set as setLogger } from './services/instances/logger'
 import { createSentry } from './services/general/sentry'
 import { ArtboardConverter, ArtboardConversionOptions } from './services/conversion/artboard-converter'
 
@@ -13,7 +13,6 @@ import type { SourceDesign } from './entities/source/source-design'
 import { OctopusManifestReport } from './typings/manifest'
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { SourceArtboard } from './entities/source/source-artboard'
-import { createDefaultLogger } from './services/general/default-logger'
 
 type OctopusPSDConverterOptions = {
   designId: string
@@ -39,15 +38,13 @@ createEnvironment()
 export class OctopusPSDConverter {
   private _id: string
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _logger: Logger
   private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusPSDConverterOptions) {
     this._id = options?.designId || uuidv4()
     this._pkg = readPackageUpAsync({ cwd: __dirname })
 
-    const logger = options?.logger ?? createDefaultLogger()
-    this._setupLogger(logger)
+    this._setupLogger(options?.logger)
     this._sentry = createSentry({
       dsn: process.env.SENTRY_DSN,
       logger,
@@ -59,14 +56,11 @@ export class OctopusPSDConverter {
   }
 
   private _setupLogger(logger?: Logger) {
-    if (logger) {
-      setLogger(logger)
-      this._logger = logger
-    }
+    if (logger) setLogger(logger)
   }
 
   logWarn(msg: string, extra: unknown): void {
-    this._logger?.warn(msg, extra)
+    logger?.warn(msg, extra)
     this._sentry?.captureMessage(msg)
   }
 
