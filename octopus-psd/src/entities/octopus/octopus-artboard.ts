@@ -3,25 +3,30 @@ import type { Octopus } from '../../typings/octopus'
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceArtboard } from '../source/source-artboard'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
-  sourceArtboard: SourceArtboard
+  sourceDesign: SourceDesign
   octopusConverter: OctopusPSDConverter
 }
 
 export class OctopusArtboard {
-  private _sourceArtboard: SourceArtboard
+  private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusPSDConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
-    this._sourceArtboard = options.sourceArtboard
+    this._sourceDesign = options.sourceDesign
     this._layers = this._initLayers()
   }
 
   get sourceArtboard(): SourceArtboard {
-    return this._sourceArtboard
+    return this._sourceDesign.artboard
+  }
+
+  get sourceDesign(): SourceDesign {
+    return this._sourceDesign
   }
 
   get converter(): OctopusPSDConverter {

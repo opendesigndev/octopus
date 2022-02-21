@@ -22,7 +22,7 @@ export class ArtboardConverter {
 
   convert(): Promise<Octopus['OctopusDocument']> {
     return new OctopusArtboard({
-      sourceArtboard: this._sourceDesign.artboard,
+      sourceDesign: this._sourceDesign,
       octopusConverter: this._octopusConverter,
     }).convert()
   }

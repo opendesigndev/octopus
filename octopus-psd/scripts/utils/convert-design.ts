@@ -9,18 +9,8 @@ import { OctopusPSDConverter } from '../../src'
 import { prepareSourceDesign } from './prepare-source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
-import { SourceDesign } from '../../src/entities/source/source-design'
 
 dotenv.config()
-
-async function convert(converter: OctopusPSDConverter, sourceDesign: SourceDesign) {
-  // TODO https://gitlab.avcd.cz/opendesign/octopus-converters/-/merge_requests/3#note_276626
-  try {
-    return await converter.convertDesign({ sourceDesign })
-  } catch (e) {
-    return null
-  }
-}
 
 async function renderOctopus(octopusDir: string) {
   const renderPath = path.join(octopusDir, 'render.png')
@@ -43,7 +33,7 @@ export async function convertDesign(): Promise<void> {
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)}`)
 
   const timeStart = performance.now()
-  const convertResult = await convert(converter, sourceDesign)
+  const convertResult = await converter.convertDesign({ sourceDesign })
   const octopus = convertResult?.artboards[0]?.value
   const time = Math.round(performance.now() - timeStart)
 

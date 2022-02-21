@@ -38,10 +38,13 @@ export class OctopusEffectFill {
     return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
   }
 
-  get imageTransform(): Octopus['Transform'] {
-    const width = 300 // TODO
-    const height = 300 // TODO
-
+  get imageTransform(): Octopus['Transform'] | null {
+    const images = this._parent.parentArtboard.sourceDesign.images
+    const { width, height } = images.find((img) => img.path === this.imagePath) ?? {}
+    if (width === undefined || height === undefined) {
+      this._parent.converter?.logWarn('Unknown image', { imagePath: this.imagePath })
+      return null
+    }
     const matrix = createMatrix(width, 0, 0, height, 0, 0)
     matrix.scale(this.fill.scale)
     matrix.rotate(-this.fill.angle, 0, 0)
@@ -54,14 +57,17 @@ export class OctopusEffectFill {
     switch (this.fillType) {
       case 'GRADIENT':
         return new OctopusEffectFillGradient({ parent, fill }).convert()
-      case 'IMAGE':
+      case 'IMAGE': {
+        const transform = this.imageTransform
+        if (transform === null) return null
         return new OctopusEffectFillImage({
           parent,
           imagePath: this.imagePath,
-          transform: this.imageTransform,
+          transform,
           layout: 'TILE',
           origin: 'ARTBOARD',
         }).convert()
+      }
       case 'COLOR':
         return new OctopusEffectFillColor({ fill }).convert()
       default:
