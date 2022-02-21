@@ -1,9 +1,10 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import SourceLayerShape from '../entities-source/source-layer-shape'
-import SourceResources from '../entities-source/source-resources'
+import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
+
+import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type SourceResources from '../entities-source/source-resources'
 import type { Octopus } from '../typings/octopus'
-import OctopusEffectColorFill from './octopus-effect-color-fill'
 
 type OctopusEffectStrokeOptions = {
   resources: SourceResources
@@ -30,21 +31,17 @@ export default class OctopusEffectStroke {
   //  }
 
   private _parseDashing() {
-    const dashing = this._sourceLayer.dashPattern?.[0] || []
-    const dashOffset = this._sourceLayer.dashPattern?.[1] || 0
-
-    if (dashing.length === 0) {
-      return {}
-    }
+    const dashing = this._sourceLayer.dashing
+    const dashOffset = this._sourceLayer.dashOffset
 
     return { dashing, dashOffset }
   }
 
-  private get lineJoin(): LineJoin {
+  private get _lineJoin(): LineJoin {
     return OctopusEffectStroke.LINE_JOIN_MAP[this._sourceLayer.lineJoin]
   }
 
-  private get lineCap() {
+  private get _lineCap() {
     return OctopusEffectStroke.LINE_CAP_MAP[this._sourceLayer.lineJoin]
   }
 
@@ -54,7 +51,7 @@ export default class OctopusEffectStroke {
     const fill = new OctopusEffectColorFill({
       resources: this._resources,
       sourceLayer: this._sourceLayer,
-      colorSpaceType: 'ColorSpaceStroking',
+      colorSpaceType: ColorSpace.COLOR_SPACE_STROKING,
     }).convert()
 
     return {
@@ -63,8 +60,8 @@ export default class OctopusEffectStroke {
       position: 'CENTER',
       visible: true,
       style,
-      lineJoin: this.lineJoin,
-      lineCap: this.lineCap,
+      lineJoin: this._lineJoin,
+      lineCap: this._lineCap,
       ...dashProperties,
     }
   }

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 //@todo copy from xd
 import pino from 'pino'
-// @ts-ignore
 import pinoPretty from 'pino-pretty'
 
 export default function createDefaultLogger(): ReturnType<typeof pino> {

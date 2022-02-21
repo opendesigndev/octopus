@@ -1,5 +1,3 @@
-import SourceLayerShape from '../entities-source/source-layer-shape'
-import SourceResources from '../entities-source/source-resources'
 import {
   convertDeviceRGB,
   getColorSpaceName,
@@ -10,21 +8,28 @@ import {
   parseColor,
   convertRGBToRGBA,
 } from '../utils/colors'
+
+import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type SourceResources from '../entities-source/source-resources'
 import type { Octopus } from '../typings/octopus'
-import { Nullable } from '../typings/helpers'
+import type { Nullable } from '../typings/helpers'
 import type { RawResourcesColorSpace } from '../typings/source/resources'
-type ColorSpaceType = 'ColorSpaceStroking' | 'ColorSpaceNonStroking'
+
+export enum ColorSpace {
+  COLOR_SPACE_STROKING = 'ColorSpaceStroking',
+  COLOR_SPACE_NON_STROKING = 'ColorSpaceNonStroking',
+}
 
 type OctopusEffectColorFillOptions = {
   resources: SourceResources
   sourceLayer: SourceLayerShape
-  colorSpaceType: ColorSpaceType
+  colorSpaceType: ColorSpace
 }
 
 export default class OctopusEffectColorFill {
   private _resources: SourceResources
   private _sourceLayer: SourceLayerShape
-  private _colorSpaceType: ColorSpaceType
+  private _colorSpaceType: ColorSpace
 
   constructor(options: OctopusEffectColorFillOptions) {
     this._resources = options.resources
@@ -33,26 +38,26 @@ export default class OctopusEffectColorFill {
   }
 
   //colorSpace
-  private get colorSpace(): Nullable<string | RawResourcesColorSpace[string]> {
+  private get _colorSpace(): Nullable<string | RawResourcesColorSpace[string]> {
     const colorSpaceName =
-      this._colorSpaceType === 'ColorSpaceStroking'
+      this._colorSpaceType === ColorSpace.COLOR_SPACE_STROKING
         ? this._sourceLayer.colorSpaceStroking
         : this._sourceLayer.colorSpaceNonStroking
 
     return this._resources.getColorSpaceValue(colorSpaceName || undefined)
   }
 
-  private get color() {
+  private get _color() {
     return (
-      (this._colorSpaceType === 'ColorSpaceNonStroking'
+      (this._colorSpaceType === ColorSpace.COLOR_SPACE_NON_STROKING
         ? this._sourceLayer.colorNonStroking
         : this._sourceLayer.colorStroking) || []
     )
   }
 
   private _parseColor() {
-    const color = this.color
-    const colorSpace = this.colorSpace
+    const color = this._color
+    const colorSpace = this._colorSpace
     const colorSpaceName = getColorSpaceName(colorSpace || null)
 
     switch (colorSpace) {

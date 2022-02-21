@@ -41,11 +41,6 @@
     lodash "^4.13.1"
     raven "^1.1.4"
 
-"@avocode/octopus-ts@3.0.0-alpha.15":
-  version "3.0.0-alpha.15"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.15.tgz#1c59161f4baa4e1cdc28479ce565c6b11e66b340"
-  integrity sha512-XSq1PgfCcvLc2MMmKRB7TMewpAjw0U0tGxwRozhC8QncvzbI5neSfSX1/QVCA0eydtKtuA5UiYZriuwa6L05BQ==
-
 "@avocode/octopus-ts@3.0.0-alpha.19":
   version "3.0.0-alpha.19"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.19.tgz#05b89dbd356ed5ce63bb93a13d36640ee36a4a63"

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import OctopusLayerCommon, { LayerSpecifics } from './octopus-layer-common'
-import type SourceLayerText from '../entities-source/source-layer-text'
-import { OctopusLayerParent } from '../typings/octopus-entities'
-import type { Octopus } from '../typings/octopus'
+import OctopusLayerCommon from './octopus-layer-common'
 // import { RawTextLayerText } from '../typings/source'
 // import type SourceLayerNormalizedText from '../entities-source/source-layer-text-normalized'
-import { text } from 'node:stream/consumers'
+
+import type { Octopus } from '../typings/octopus'
+import type SourceLayerText from '../entities-source/source-layer-text'
+import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -37,7 +38,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const textValue = this._sourceLayer.textValue
     const name = this._sourceLayer.name
 
-    if (!text) return null
+    if (!textValue) return null
     return {
       type: 'TEXT',
       // @ts-ignore

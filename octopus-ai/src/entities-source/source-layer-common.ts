@@ -1,11 +1,11 @@
 import SourceArtboard from './source-artboard'
-import SourceLayerGroup from './source-layer-group'
-import type { RawLayer } from '../typings/source'
-import SourceLayerXObject from './source-layer-x-object'
-import { Nullable } from '../typings/helpers'
-import { Octopus } from '../typings/octopus'
-import SourceResources from './source-resources'
-import SourceLayerShape from './source-layer-x-object'
+
+import type SourceLayerGroup from './source-layer-group'
+import type { RawLayer, RawResourcesExtGState, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source'
+import type SourceLayerXObject from './source-layer-x-object'
+import type { Nullable } from '../typings/helpers'
+import type SourceResources from './source-resources'
+import type SourceLayerShape from './source-layer-x-object'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
 
@@ -50,7 +50,35 @@ export default class SourceLayerCommon {
     return this.parentArtboard?.resources
   }
 
-  get parentArtboardDimensions(): Octopus['Dimensions'] {
+  get parentArtboardDimensions(): { width: number; height: number } {
     return this.parentArtboard?.dimensions || { width: 0, height: 0 }
+  }
+
+  get graphicsState(): Nullable<RawGraphicsState> {
+    //as graphicsState is obtained differently in source-layer-text, we overload this method there
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const rawValue: any = this._rawValue
+    return rawValue.GraphicsState
+  }
+
+  get extGState(): Nullable<RawResourcesExtGState[string]> {
+    const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
+    return this._parent.resources?.ExtGState?.[specifiedParameters]
+  }
+
+  get blendMode(): Nullable<string> {
+    return this.extGState?.BM
+  }
+
+  get opacity(): Nullable<number> {
+    return this.extGState?.CA
+  }
+
+  get transformMatrix(): RawGraphicsStateMatrix {
+    const rawCtm: RawGraphicsStateMatrix = this.graphicsState?.CTM ?? [1, 0, 0, 1, 0, 0]
+    const inversedCtm = [...rawCtm]
+    inversedCtm[5] = -rawCtm[5]
+
+    return inversedCtm as RawGraphicsStateMatrix
   }
 }

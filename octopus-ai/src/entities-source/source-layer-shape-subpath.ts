@@ -1,7 +1,8 @@
-import { Nullable } from '../typings/helpers'
-import { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../typings/source'
 import { inverseYCoords } from '../utils/coords'
-import SourceLayerShape from './source-layer-shape'
+
+import type { Nullable } from '../typings/helpers'
+import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../typings/source'
+import type SourceLayerShape from './source-layer-shape'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerShape

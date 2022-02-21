@@ -1,7 +1,8 @@
-import { RawSource } from '../typings/source'
-import { RawArtboardEntry } from '../typings/source/artboard'
 import SourceArtboard from './source-artboard'
-import { Nullable } from '../typings/helpers'
+
+import type { Nullable } from '../typings/helpers'
+import type { RawArtboardEntry } from '../typings/source/artboard'
+import type { RawSource } from '../typings/source'
 
 type SourceDesignOptions = {
   artboards: RawArtboardEntry[]

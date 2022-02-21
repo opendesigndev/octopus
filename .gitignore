@@ -12,7 +12,7 @@ workdir
 manager.jwt
 manager-staging.jwt
 manager-prod.jwt
-
+.DS_Store
 build/*
 
 dist

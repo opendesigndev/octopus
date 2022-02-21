@@ -4,12 +4,14 @@
   "description": "\"Octopus AI converter, converts .ai files to Octopus 3+ format.\"",
   "main": "dist/src/index.js",
   "scripts": {
-    "create": "rm -rf temp/input && ./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input && npm run create:private",
+    "create:cleanup": "rimraf temp/input",
+    "create:create": "./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input && npm run create:private",
+    "create": "yarn create:cleanup && yarn create:create && yarn create:private",
     "create:private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
     "convert:all": "npx ts-node ./scripts/convert-render.ts",
     "build": "npx tsc --build ./tsconfig.json",
     "test": "\"echo 'Tests are not implemented yet'\"",
-    "render:test": "orchestrator4.run ./temp/octopustest/test.json"
+    "render:test": "npx ts-node ./scripts/render-test.ts"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -33,7 +35,6 @@
     "@types/pino": "^6.3.3",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
-    "fflate": "^0.7.1",
     "jest": "^27.3.1",
     "ts-node": "10.4.0"
   }

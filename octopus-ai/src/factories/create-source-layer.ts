@@ -1,11 +1,12 @@
 import SourceLayerGroup from '../entities-source/source-layer-group'
 import SourceLayerShape from '../entities-source/source-layer-shape'
-import { RawLayer } from '../typings/source/layer'
-import { RawShapeLayer } from '../typings/source/shape-layer'
-import type { SourceLayerParent } from '../entities-source/source-layer-common'
-import { RawGroupLayer, RawTextLayer } from '../typings/source'
 import SourceLayerText from '../entities-source/source-layer-text'
-import { Nullable } from '../typings/helpers'
+
+import type { Nullable } from '../typings/helpers'
+import type { SourceLayerParent } from '../entities-source/source-layer-common'
+import type { RawGroupLayer, RawTextLayer } from '../typings/source'
+import type { RawLayer } from '../typings/source/layer'
+import type { RawShapeLayer } from '../typings/source/shape-layer'
 
 export type SourceLayer = SourceLayerGroup | SourceLayerText | SourceLayerShape
 

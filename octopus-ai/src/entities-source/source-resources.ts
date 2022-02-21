@@ -1,4 +1,4 @@
-import { Nullable } from '../typings/helpers'
+import type { Nullable } from '../typings/helpers'
 import type {
   RawResources,
   RawResourcesProperties,

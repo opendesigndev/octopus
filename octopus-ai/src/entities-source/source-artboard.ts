@@ -1,11 +1,14 @@
 import _ from 'lodash'
-import { RawArtboardEntry } from '../typings/source/artboard'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { createSourceLayer, SourceLayer } from '../factories/create-source-layer'
-import { RawLayer } from '../typings/source/layer'
+
+import { createSourceLayer } from '../factories/create-source-layer'
 import SourceResources from './source-resources'
-import { Nullable } from '../typings/helpers'
-import { Octopus } from '../typings/octopus'
+
+import type { Nullable } from '../typings/helpers'
+import type { Octopus } from '../typings/octopus'
+import type { RawArtboardEntry } from '../typings/source/artboard'
+import type { SourceLayer } from '../factories/create-source-layer'
+import type { RawLayer } from '../typings/source/layer'
 
 export default class SourceArtboard {
   private _rawArtboard: RawArtboardEntry
@@ -48,7 +51,7 @@ export default class SourceArtboard {
     return this._children
   }
 
-  get dimensions(): Octopus['Dimensions'] {
+  get dimensions(): { width: number; height: number } {
     const [, , width, height] = asArray(this._rawArtboard.MediaBox)
 
     return {

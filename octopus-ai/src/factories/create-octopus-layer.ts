@@ -8,7 +8,7 @@ import type SourceLayerGroup from '../entities-source/source-layer-group'
 import type SourceLayerShape from '../entities-source/source-layer-shape'
 import type SourceLayerText from '../entities-source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
-import { Nullable } from '../typings/helpers'
+import type { Nullable } from '../typings/helpers'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText
 //export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText | OctopusLayerMaskGroup

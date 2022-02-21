@@ -1,11 +1,11 @@
 import readPackageUpAsync, { NormalizedPackageJson } from 'read-pkg-up'
 
-import { Logger } from './typings'
 import createLogger from './services/general/default-logger'
 import ArtboardConverter from './services/conversion/artboard-converter'
+
+import type { Logger } from './typings'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 import type { Octopus } from './typings/octopus'
-
 import type { NormalizedReadResult } from 'read-pkg-up'
 
 type OctopusAIConverterOptions = {
@@ -18,7 +18,7 @@ export default class OctopusAIConverter {
 
   constructor(options?: OctopusAIConverterOptions) {
     this._pkg = readPackageUpAsync({ cwd: __dirname })
-    this._logger = options?.logger || createLogger()
+    this._logger = options?.logger ?? createLogger()
   }
 
   // get logger() {

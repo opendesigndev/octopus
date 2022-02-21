@@ -1,5 +1,5 @@
-import { RawShapeLayerSubPathPoint } from '../typings/source'
-import { RawGraphicsStateMatrix } from '../typings/source/graphics-state'
+import type { RawShapeLayerSubPathPoint } from '../typings/source'
+import type { RawGraphicsStateMatrix } from '../typings/source/graphics-state'
 
 export type TransformOptions = {
   matrix: [number, number, number, number, number, number]

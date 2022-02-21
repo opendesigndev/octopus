@@ -1,10 +1,13 @@
+import dotenv from 'dotenv'
+
 import { convertAll } from './utils/convert-all'
 import { renderOctopus } from './utils/render-to-octopus'
-import dotenv from 'dotenv'
 
 dotenv.config()
 ;(async () => {
   const [octopusLocation] = await convertAll()
+
+  console.info(`Octopus: file://${octopusLocation}`)
 
   if (!octopusLocation) {
     return
@@ -18,6 +21,5 @@ dotenv.config()
 
   const renderPath = await renderOctopus(octopusLocation)
 
-  console.info(`Octopus: file://${octopusLocation}`)
   console.info(`Image: file://${renderPath}`)
 })()

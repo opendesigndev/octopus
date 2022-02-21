@@ -1,7 +1,9 @@
-import { RawXObjectLayer } from '../typings/source/x-object'
-import SourceLayerCommon, { SourceLayerParent } from '../entities-source/source-layer-common'
-import { RawGraphicsState } from '../typings/source/graphics-state'
-import { Nullable } from '../typings/helpers'
+import SourceLayerCommon from '../entities-source/source-layer-common'
+
+import type { SourceLayerParent } from '../entities-source/source-layer-common'
+import type { RawGraphicsState } from '../typings/source/graphics-state'
+import type { Nullable } from '../typings/helpers'
+import type { RawXObjectLayer } from '../typings/source/x-object'
 
 type SourceLayerXObjectOptions = {
   parent: SourceLayerParent

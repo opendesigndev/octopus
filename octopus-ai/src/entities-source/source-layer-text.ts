@@ -1,8 +1,10 @@
-import SourceLayerCommon from './source-layer-common'
-import { RawTextLayer } from '../typings/source'
-import { SourceLayerParent } from './source-layer-common'
 import SourceLayerNormalizedText from './source-layer-text-normalized'
-import { Nullable } from '../typings/helpers'
+import SourceLayerCommon from './source-layer-common'
+
+import type { Nullable } from '../typings/helpers'
+import type { RawTextLayer, RawResourcesExtGState } from '../typings/source'
+import type { SourceLayerParent } from './source-layer-common'
+import type { RawGraphicsState } from '../typings/source/graphics-state'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -25,6 +27,19 @@ export default class SourceLayerText extends SourceLayerCommon {
 
   get texts(): Nullable<SourceLayerNormalizedText[]> {
     return this._normalizedTexts
+  }
+
+  get graphicsState(): Nullable<RawGraphicsState> {
+    return this._normalizedTexts[0].graphicsState
+  }
+
+  get extGState(): Nullable<RawResourcesExtGState[string]> {
+    const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
+    return this._parent.resources?.ExtGState?.[specifiedParameters]
+  }
+
+  get blendMode(): Nullable<string> {
+    return this.extGState?.BM
   }
 
   get textValue(): string {

@@ -1,12 +1,13 @@
-import SourceLayerCommon from './source-layer-common'
-import { SourceLayerParent } from './source-layer-common'
-import { RawShapeLayer, RawShapeLayerFillRule } from '../typings/source/shape-layer'
-import SourceLayerShapeSubPath from './source-layer-shape-subpath'
-import { DashPattern, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source/graphics-state'
-import { Nullable } from '../typings/helpers'
-import { RawLayer, RawResourcesExtGState } from '../typings/source'
-import { createSourceLayerShape, SourceLayer } from '../factories/create-source-layer'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
+import SourceLayerCommon from './source-layer-common'
+import SourceLayerShapeSubPath from './source-layer-shape-subpath'
+import { createSourceLayerShape } from '../factories/create-source-layer'
+
+import type { Nullable } from '../typings/helpers'
+import type { RawLayer, DashPattern, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source'
+import type { SourceLayerParent } from './source-layer-common'
+import type { RawShapeLayer, RawShapeLayerFillRule } from '../typings/source/shape-layer'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -45,7 +46,7 @@ export default class SourceLayerShape extends SourceLayerCommon {
       const sourceLayer = createSourceLayerShape({
         layer,
         parent: this as SourceLayerParent,
-        path: this.path.concat(i),
+        path: [...this.path, i],
       })
 
       return sourceLayer ? [...children, sourceLayer] : children
@@ -72,9 +73,12 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.DashPattern
   }
 
-  get getExtGState(): Nullable<RawResourcesExtGState[string]> {
-    const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
+  get dashing(): number[] {
+    return this.dashPattern?.[0] ?? []
+  }
+
+  get dashOffset(): number {
+    return this.dashPattern?.[1] ?? 0
   }
 
   get fillRule(): Nullable<RawShapeLayerFillRule> {
@@ -117,15 +121,6 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.parentArtboard?.dimensions?.height || 0
   }
 
-  get transformMatrix(): RawGraphicsStateMatrix {
-    const rawCtm: RawGraphicsStateMatrix = this._rawValue?.GraphicsState?.CTM
-      ? [...this._rawValue?.GraphicsState?.CTM]
-      : [1, 0, 0, 1, 0, 0]
-
-    rawCtm[5] = -rawCtm[5]
-    return rawCtm
-  }
-
   get fill(): boolean {
     return Boolean(this._rawValue.Fill)
   }
@@ -138,7 +133,7 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.ClippingPath
   }
 
-  get sourceMask() {
+  get sourceMask(): SourceLayerShape[] | null {
     return this._sourceMask
   }
 }

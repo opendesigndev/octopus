@@ -1,11 +1,11 @@
-import {
+import type { RawGraphicsState } from '../typings/source/graphics-state'
+import type { SourceLayerParent } from './source-layer-common'
+import type { Nullable } from '../typings/helpers'
+import type {
   RawResourcesFontTextFont,
   RawResourcesFontTextFontFontDescriptorFontFile3,
   RawTextLayerText,
 } from '../typings/source'
-import { RawGraphicsState } from '../typings/source/graphics-state'
-import { SourceLayerParent } from './source-layer-common'
-import { Nullable } from '../typings/helpers'
 
 type SourceLayerTextNormalizedOptions = {
   parent: SourceLayerParent

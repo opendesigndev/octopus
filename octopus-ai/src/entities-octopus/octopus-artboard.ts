@@ -1,12 +1,13 @@
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import { createOctopusLayer } from '../factories/create-octopus-layer'
 import OctopusAIConverter from '..'
-import SourceDesign from '../entities-source/source-design'
-import SourceArtboard from '../entities-source/source-artboard'
-import { OctopusLayer } from '../factories/create-octopus-layer'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
 import type { Octopus } from '../typings/octopus'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import SourceResources from '../entities-source/source-resources'
+import type SourceResources from '../entities-source/source-resources'
+import type { OctopusLayer } from '../factories/create-octopus-layer'
+import type SourceDesign from '../entities-source/source-design'
+import type SourceArtboard from '../entities-source/source-artboard'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign
@@ -15,7 +16,6 @@ type OctopusArtboardOptions = {
 }
 
 export default class OctopusArtboard {
-  private _sourceDesign: SourceDesign
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
@@ -26,32 +26,29 @@ export default class OctopusArtboard {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
     this._octopusAIConverter = options.octopusAIConverter
-    this._sourceDesign = options.sourceDesign
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
   }
 
   private _initLayers() {
-    return (
-      this._sourceArtboard?.children?.reduce((layers, sourceLayer) => {
-        const octopusLayer = createOctopusLayer({
-          parent: this,
-          layer: sourceLayer,
-        })
-        return octopusLayer ? [...layers, octopusLayer] : layers
-      }, []) || []
-    )
+    return asArray(this._sourceArtboard?.children).reduce((layers, sourceLayer) => {
+      const octopusLayer = createOctopusLayer({
+        parent: this,
+        layer: sourceLayer,
+      })
+      return octopusLayer ? [...layers, octopusLayer] : layers
+    }, [])
   }
 
   get dimensions(): Octopus['Dimensions'] {
     return this._sourceArtboard.dimensions
   }
 
-  get hiddenContentIds(): number[] {
-    return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
-      .map((c) => c.ObjID)
-      .filter((id) => id) as number[]
-  }
+  // get hiddenContentIds(): number[] {
+  //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
+  //     .map((c) => c.ObjID)
+  //     .filter((id) => asFiniteNumber(id)) as number[]
+  // }
 
   get resources(): SourceResources {
     return this._sourceArtboard.resources
@@ -67,6 +64,12 @@ export default class OctopusArtboard {
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
+    const parentGroupLayer = this._layers[0].convert()
+
+    if (!parentGroupLayer) {
+      throw new Error('Artboard is missing content')
+    }
+
     if (typeof this._sourceArtboard.id !== 'string') {
       throw new Error("Artboard 'id' property is missing.")
     }
@@ -78,11 +81,8 @@ export default class OctopusArtboard {
       version: await this._getVersion(),
       id: this.id,
       dimensions,
-      content: {
-        id: 'artificialGroup',
-        type: 'GROUP',
-        layers: getConverted(this._layers),
-      },
+      //@todo look at notes (this will change in future to handle backgrounds)
+      content: parentGroupLayer,
     }
   }
 }

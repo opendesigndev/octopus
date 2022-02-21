@@ -1,12 +1,15 @@
-import OctopusLayerCommon, { LayerSpecifics } from './octopus-layer-common'
-import { OctopusLayerParent } from '../typings/octopus-entities'
-import type { Octopus } from '../typings/octopus'
-import SourceLayerShape from '../entities-source/source-layer-shape'
-import SourceLayerShapeSubPath from '../entities-source/source-layer-shape-subpath'
-import { calculateBottomRightCorner, calculateTopLeftCorner, createRectPoints, isValid } from '../utils/coords'
-import OctopusEffectsShape, { ShapeEffects } from './octopus-effects-shape'
-import createShape from '../utils/create-shape'
+import OctopusLayerCommon from './octopus-layer-common'
 import Point from './octopus-point'
+import OctopusEffectsShape from './octopus-effects-shape'
+import createShape from '../utils/create-shape'
+import { calculateBottomRightCorner, calculateTopLeftCorner, createRectPoints, isValid } from '../utils/coords'
+
+import type { LayerSpecifics } from './octopus-layer-common'
+import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type { Octopus } from '../typings/octopus'
+import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type SourceLayerShapeSubPath from '../entities-source/source-layer-shape-subpath'
+import type { ShapeEffects } from './octopus-effects-shape'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

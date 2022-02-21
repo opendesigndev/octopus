@@ -1,4 +1,4 @@
-import { OctopusPoint } from '../utils/create-shape'
+import type { OctopusPoint } from '../utils/create-shape'
 
 function createSimplePoint(coordinates: number[]) {
   return createPoint('point', coordinates)

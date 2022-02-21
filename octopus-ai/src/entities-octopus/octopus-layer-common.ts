@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import SourceResources from '../entities-source/source-resources'
-import { SourceLayer } from '../factories/create-source-layer'
+import type SourceResources from '../entities-source/source-resources'
+import type { SourceLayer } from '../factories/create-source-layer'
 import type { Octopus } from '../typings/octopus'
-import { OctopusLayerParent } from '../typings/octopus-entities'
+import type { OctopusLayerParent } from '../typings/octopus-entities'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
@@ -32,21 +32,35 @@ export default class OctopusLayerCommon {
     return this._id
   }
 
-  get dimensions(): Octopus['Dimensions'] {
-    return this._parent.dimensions
-  }
-
-  get hiddenContentIds(): number[] {
-    const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
-    return hiddenContentIds
-  }
+  // get hiddenContentIds(): number[] {
+  //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
+  //   return hiddenContentIds
+  // }
 
   get resources(): SourceResources | undefined {
     return this._parent.resources
   }
 
+  get blendMode(): Octopus['LayerBase']['blendMode'] {
+    const blendMode = this._sourceLayer.blendMode
+
+    if (!blendMode) {
+      return 'NORMAL'
+    }
+
+    return blendMode
+      .replace(/\.?([A-Z][a-z]+)/g, (x, y) => `_${y.toUpperCase()}`)
+      .replace(/^_/, '') as Octopus['LayerBase']['blendMode']
+  }
+
+  get opacity(): number {
+    return this._sourceLayer.opacity ?? 1
+  }
+
   convertCommon(): Omit<Octopus['LayerBase'], 'type'> {
     return {
+      blendMode: this.blendMode,
+      opacity: this.opacity,
       id: this.id,
       name: this._sourceLayer.name,
     }

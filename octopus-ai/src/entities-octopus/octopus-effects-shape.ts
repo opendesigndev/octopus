@@ -1,9 +1,11 @@
-import OctopusEffectStroke from './octopus-effect-stroke'
-import SourceLayerShape from '../entities-source/source-layer-shape'
-import OctopusEffectFill from './octopus-effect-color-fill'
-import type { Octopus } from '../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import SourceResources from '../entities-source/source-resources'
+
+import OctopusEffectStroke from './octopus-effect-stroke'
+import OctopusEffectFill, { ColorSpace } from './octopus-effect-color-fill'
+
+import type SourceLayerShape from '../entities-source/source-layer-shape'
+import type { Octopus } from '../typings/octopus'
+import type SourceResources from '../entities-source/source-resources'
 
 type OctopusEffectsShapeOptions = {
   sourceLayer: SourceLayerShape
@@ -41,7 +43,7 @@ export default class OctopusEffectsShape {
           new OctopusEffectFill({
             resources: this._resources,
             sourceLayer: this._sourceLayer,
-            colorSpaceType: 'ColorSpaceNonStroking',
+            colorSpaceType: ColorSpace.COLOR_SPACE_NON_STROKING,
           }),
         ]
       : []
