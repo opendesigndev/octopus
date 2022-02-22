@@ -13,6 +13,7 @@ import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { logWarn } from '../services/instances/misc'
 
 export type SourceLayer =
   | SourceLayerSection
@@ -80,7 +81,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
   const type = (Object(options.layer) as RawLayer).type
   const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
-    options.parent.converter?.logWarn('createSourceLayer: Unknown layer type', { type })
+    logWarn('createSourceLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

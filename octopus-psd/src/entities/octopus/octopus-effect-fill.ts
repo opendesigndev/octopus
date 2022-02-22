@@ -7,6 +7,7 @@ import type { SourceEffectFill } from '../source/source-effect-fill'
 import path from 'path'
 import { FOLDER_IMAGES, FOLDER_PATTERNS } from '../../utils/const'
 import { createMatrix } from '../../utils/paper-factories'
+import { logWarn } from '../../services/instances/misc'
 
 type OctopusFillOptions = {
   parent: OctopusLayerShapeShapeAdapter
@@ -42,7 +43,7 @@ export class OctopusEffectFill {
     const images = this._parent.parentArtboard.sourceDesign.images
     const { width, height } = images.find((img) => img.path === this.imagePath) ?? {}
     if (width === undefined || height === undefined) {
-      this._parent.converter?.logWarn('Unknown image', { imagePath: this.imagePath })
+      logWarn('Unknown image', { imagePath: this.imagePath })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, 0, 0)

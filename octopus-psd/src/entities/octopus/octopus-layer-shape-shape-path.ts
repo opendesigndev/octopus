@@ -6,6 +6,7 @@ import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import type { SourcePathComponent } from '../source/source-path-component'
 import type { SourceCombineOperation } from '../../typings/source'
+import { logWarn } from '../../services/instances/misc'
 
 type OctopusLayerShapeShapePathOptions = {
   parent: OctopusLayerShapeShapeAdapter
@@ -61,7 +62,7 @@ export class OctopusLayerShapeShapePath {
   private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
     const result = getMapped(operation, OctopusLayerShapeShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Compound operation', { operation })
+      logWarn('Unknown Compound operation', { operation })
       return 'UNION'
     }
     return result
@@ -96,9 +97,7 @@ export class OctopusLayerShapeShapePath {
     const path = pathComponents[0]
     const layerTranslation = this._parent.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === '') {
-      this._parent.converter?.logWarn('PathData generated empty', { path })
-    }
+    if (geometry === '') logWarn('PathData generated empty', { path })
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',

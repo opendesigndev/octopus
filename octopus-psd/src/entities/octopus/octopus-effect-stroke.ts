@@ -4,6 +4,7 @@ import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-
 import { SourceEffectStroke } from '../source/source-effect-stroke'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusEffectFill } from './octopus-effect-fill'
+import { logWarn } from '../../services/instances/misc'
 
 type OctopusStrokeOptions = {
   parent: OctopusLayerShapeShapeAdapter
@@ -52,7 +53,7 @@ export class OctopusEffectStroke {
     const lineAlignment = this.stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusEffectStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Stroke position', { lineAlignment, stroke: this.stroke })
+      logWarn('Unknown Stroke position', { lineAlignment, stroke: this.stroke })
       return null
     }
     return result
@@ -62,7 +63,7 @@ export class OctopusEffectStroke {
     const lineCap = this.stroke.lineCap
     const result = getMapped(lineCap, OctopusEffectStroke.STROKE_LINE_CAP_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Stroke line cap', { lineCap, stroke: this.stroke })
+      logWarn('Unknown Stroke line cap', { lineCap, stroke: this.stroke })
       return null
     }
     return result
@@ -72,7 +73,7 @@ export class OctopusEffectStroke {
     const lineJoin = this.stroke.lineJoin
     const result = getMapped(lineJoin, OctopusEffectStroke.STROKE_LINE_JOIN_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Stroke line join', { lineJoin, stroke: this.stroke })
+      logWarn('Unknown Stroke line join', { lineJoin, stroke: this.stroke })
       return null
     }
     return result

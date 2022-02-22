@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createEnvironment } from './services/general/environment'
 import { logger, set as setLogger } from './services/instances/logger'
+import { set as setSentry } from './services/instances/sentry'
 import { createSentry } from './services/general/sentry'
 import { ArtboardConverter, ArtboardConversionOptions } from './services/conversion/artboard-converter'
 
@@ -38,17 +39,18 @@ createEnvironment()
 export class OctopusPSDConverter {
   private _id: string
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _sentry: ReturnType<typeof createSentry>
 
   constructor(options?: OctopusPSDConverterOptions) {
     this._id = options?.designId || uuidv4()
     this._pkg = readPackageUpAsync({ cwd: __dirname })
 
     this._setupLogger(options?.logger)
-    this._sentry = createSentry({
-      dsn: process.env.SENTRY_DSN,
-      logger,
-    })
+    setSentry(
+      createSentry({
+        dsn: process.env.SENTRY_DSN,
+        logger,
+      })
+    )
   }
 
   get id(): string {
@@ -57,11 +59,6 @@ export class OctopusPSDConverter {
 
   private _setupLogger(logger?: Logger) {
     if (logger) setLogger(logger)
-  }
-
-  logWarn(msg: string, extra: unknown): void {
-    logger?.warn(msg, extra)
-    this._sentry?.captureMessage(msg)
   }
 
   get pkgVersion(): Promise<string> {

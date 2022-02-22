@@ -11,6 +11,7 @@ import { getMapped, round } from '@avocode/octopus-common/dist/utils/common'
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { DEFAULTS } from '../../utils/defaults'
 import { createDefaultTranslationMatrix } from '../../utils/path'
+import { logWarn } from '../../services/instances/misc'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -90,7 +91,7 @@ export class OctopusLayerCommon {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerCommon.LAYER_TYPE_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Layer type', { type })
+      logWarn('Unknown Layer type', { type })
       return null
     }
     return result

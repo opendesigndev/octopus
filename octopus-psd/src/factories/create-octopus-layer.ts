@@ -10,6 +10,7 @@ import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceLayer } from './create-source-layer'
+import { logWarn } from '../services/instances/misc'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerText | OctopusLayerShape
 
@@ -58,7 +59,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   const type = (Object(options.layer) as SourceLayer).type
   const builder = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
-    options.parent.converter?.logWarn('createOctopusLayer: Unknown layer type', { type })
+    logWarn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

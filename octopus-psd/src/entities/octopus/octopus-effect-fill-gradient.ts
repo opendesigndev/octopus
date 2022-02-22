@@ -9,6 +9,7 @@ import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
+import { logWarn } from '../../services/instances/misc'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -45,7 +46,7 @@ export class OctopusEffectFillGradient {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Fill Gradient type', { type })
+      logWarn('Unknown Fill Gradient type', { type })
       return null
     }
     return result
