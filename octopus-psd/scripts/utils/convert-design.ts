@@ -35,7 +35,7 @@ export async function convertDesign(): Promise<void> {
   const saver = await createTempSaver(designId)
 
   const octopus = convertResult?.artboards[0]
-  const octopusLocation = await saver('octopus.json', stringify(octopus))
+  const octopusLocation = await saver('octopus.json', stringify(octopus?.value))
   const octopusDir = path.dirname(octopusLocation)
 
   const manifest = convertResult?.manifest
