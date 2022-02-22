@@ -1,4 +1,4 @@
-import { readFile, readdir, stat, access } from 'fs/promises'
+import { readFile, readdir } from 'fs/promises'
 import { parsePsd } from '@avocode/psd-parser'
 import { SourceDesign, SourceImage } from '../../src/entities/source/source-design'
 import type { OctopusPSDConverter } from '../../src'
