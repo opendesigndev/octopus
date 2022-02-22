@@ -10,7 +10,8 @@
     "clean": "rimraf ./node_modules ./dist",
     "watch": "tsc -w",
     "lint": "echo 'Linter is not implemented yet'",
-    "test": "echo 'Tests are not implemented yet'"
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/node": "6.14.0",

@@ -22,7 +22,8 @@
     "xd:watch": "yarn workspace @avocode/octopus-xd watch",
     "lint": "yarn run lint:prettier && yarn run lint:eslint",
     "lint:eslint": "eslint . --ext .ts",
-    "lint:prettier": "prettier -c ."
+    "lint:prettier": "prettier -c .",
+    "types:check": "yarn workspaces run types:check"
   },
   "dependencies": {},
   "devDependencies": {

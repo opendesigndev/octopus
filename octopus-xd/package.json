@@ -10,7 +10,8 @@
     "build": "npx tsc --build ./tsconfig.json",
     "prepare": "npx rimraf ./lib && yarn run build",
     "watch": "npx tsc -w",
-    "test": "echo 'Tests are not implemented yet'"
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "@avocode/octopus-common": "3.0.0-rc.6",
