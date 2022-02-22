@@ -15,16 +15,13 @@ export function getColorSpaceName(colorSpace: Record<string, unknown> | string |
 
 export function guessColorSpaceByComponents(color: number[]): RgbColorComponents {
   if (Array.isArray(color)) {
-    if (color.length === 1) {
-      return grayToRgb(color)
-    }
-
-    if (color.length === 3) {
-      return normalizeRgb(color)
-    }
-
-    if (color.length === 4) {
-      return cmykToRgb(color)
+    switch (color.length) {
+      case 1:
+        return grayToRgb(color)
+      case 3:
+        return normalizeRgb(color)
+      case 4:
+        return cmykToRgb(color)
     }
   }
   //@todo solve warnings. console should not be present

@@ -9,5 +9,5 @@ export type RawTextLayerText = {
 
 export type RawTextLayer = {
   Type?: 'TextGroup'
-  Texts: RawTextLayerText[]
+  Texts?: RawTextLayerText[]
 }

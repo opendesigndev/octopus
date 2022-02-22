@@ -1,5 +1,5 @@
 import { RawLayer } from './layer'
-import { RawResources, ObjectId } from './resources'
+import { RawResources, RawObjectId } from './resources'
 
 export type RawArtboardEntryContents = {
   Filter?: string
@@ -14,8 +14,8 @@ export type RawArtboardEntryResourcesPropertiesUsageCreatorInfo = {
 }
 
 export type RawArtboardEntryResourcesPropertiesUsage = {
-  CreatorInfo: RawArtboardEntryResourcesPropertiesUsageCreatorInfo
-} & ObjectId
+  CreatorInfo?: RawArtboardEntryResourcesPropertiesUsageCreatorInfo
+} & RawObjectId
 
 export type RawArtboardEntryResourcesProperties = {
   [id: string]: {
@@ -23,7 +23,7 @@ export type RawArtboardEntryResourcesProperties = {
     Name?: string
     Type?: string
     Usage?: RawArtboardEntryResourcesPropertiesUsage
-  } & ObjectId
+  } & RawObjectId
 }
 
 export type RawArtboardMediaBox = [number, number, number, number]
@@ -33,6 +33,6 @@ export type RawArtboardEntry = {
   Id?: number
   Name?: string
   MediaBox?: RawArtboardMediaBox
-  'OCProperties.D.OFF'?: ObjectId[]
+  'OCProperties.D.OFF'?: RawObjectId[]
   Resources?: RawResources
 }

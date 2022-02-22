@@ -5,7 +5,7 @@
  */
 import { createPath, createPoint, createSegment } from './paper-factories'
 
-import type { Nullable } from '../typings/helpers'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type PointType = 'point' | 'bezier'
 export type OctopusPoint = {

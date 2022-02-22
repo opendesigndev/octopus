@@ -2,12 +2,12 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import SourceLayerCommon from './source-layer-common'
 import SourceLayerShapeSubPath from './source-layer-shape-subpath'
-import { createSourceLayerShape } from '../factories/create-source-layer'
+import { createSourceLayerShape } from '../../factories/create-source-layer'
 
-import type { Nullable } from '../typings/helpers'
-import type { RawLayer, DashPattern, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawLayer, DashPattern, RawGraphicsState } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
-import type { RawShapeLayer, RawShapeLayerFillRule } from '../typings/source/shape-layer'
+import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -16,7 +16,7 @@ type SourceLayerShapeOptions = {
 }
 
 export default class SourceLayerShape extends SourceLayerCommon {
-  public _rawValue: RawShapeLayer
+  protected _rawValue: RawShapeLayer
   private _subpaths: SourceLayerShapeSubPath[]
   private _sourceMask: SourceLayerShape[] | null
 
@@ -29,10 +29,8 @@ export default class SourceLayerShape extends SourceLayerCommon {
 
   private _initSubpaths() {
     const path = this.path
-    return (
-      this._rawValue.Subpaths?.map(
-        (subPath) => new SourceLayerShapeSubPath({ path, rawValue: subPath, parent: this })
-      ) || []
+    return asArray(
+      this._rawValue.Subpaths?.map((subPath) => new SourceLayerShapeSubPath({ path, rawValue: subPath, parent: this }))
     )
   }
 

@@ -6,7 +6,7 @@ export type RawSourceRoot = {
 }
 
 export type RawSourceRootOcProperties = {
-  D: RawSourceRootOcPropertiesD
+  D?: RawSourceRootOcPropertiesD
 }
 
 export type RawSourceRootOcPropertiesDObject = {

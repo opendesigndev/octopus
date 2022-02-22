@@ -1,6 +1,6 @@
 // import OctopusLayerCommon from './octopus-layer-common'
-// import { OctopusLayerParent } from '../typings/octopus-entities'
-// import SourceLayerShape from '../entities-source/source-layer-shape'
+// import { OctopusLayerParent } from '../../typings/octopus-entities'
+// import SourceLayerShape from '../source/source-layer-shape'
 
 // import OctopusLayerShape from './octopus-layer-shape'
 

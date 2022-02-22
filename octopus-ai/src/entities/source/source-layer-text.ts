@@ -1,20 +1,23 @@
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
 import SourceLayerNormalizedText from './source-layer-text-normalized'
 import SourceLayerCommon from './source-layer-common'
 
-import type { Nullable } from '../typings/helpers'
-import type { RawTextLayer, RawResourcesExtGState } from '../typings/source'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawTextLayer, RawResourcesExtGState } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
-import type { RawGraphicsState } from '../typings/source/graphics-state'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
   rawValue: RawTextLayer
   path: number[]
 }
-
+//@todo: possible option to create texts from children...
 export default class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerNormalizedText[]
+  static DEFAULT_NAME = '<TextLayer>'
 
   constructor(options: SourceLayerTextOptions) {
     super(options)
@@ -22,7 +25,15 @@ export default class SourceLayerText extends SourceLayerCommon {
   }
 
   private _initTexts() {
-    return this._rawValue?.Texts.map((text) => new SourceLayerNormalizedText({ rawValue: text, parent: this._parent }))
+    return asArray(
+      this._rawValue?.Texts?.map(
+        (text) =>
+          new SourceLayerNormalizedText({
+            rawValue: text,
+            parent: this._parent,
+          })
+      )
+    )
   }
 
   get texts(): Nullable<SourceLayerNormalizedText[]> {
@@ -48,7 +59,7 @@ export default class SourceLayerText extends SourceLayerCommon {
 
   get name(): string {
     if (!this.textValue) {
-      return '<TextLayer>'
+      return SourceLayerText.DEFAULT_NAME
     }
 
     if (this.textValue.length < 100) {

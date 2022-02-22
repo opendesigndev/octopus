@@ -1,18 +1,40 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type SourceResources from '../entities-source/source-resources'
-import type { SourceLayer } from '../factories/create-source-layer'
-import type { Octopus } from '../typings/octopus'
-import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type SourceResources from '../source/source-resources'
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
+
+// export default {
+//   'pass-through': 'PASS_THROUGH',
+//   normal: 'NORMAL',
+//   darken: 'DARKEN',
+//   multiply: 'MULTIPLY',
+//   'color-burn': 'COLOR_BURN',
+//   lighten: 'LIGHTEN',
+//   screen: 'SCREEN',
+//   'color-dodge': 'COLOR_DODGE',
+//   overlay: 'OVERLAY',
+//   'soft-light': 'SOFT_LIGHT',
+//   'hard-light': 'HARD_LIGHT',
+//   difference: 'DIFFERENCE',
+//   exclusion: 'EXCLUSION',
+//   hue: 'HUE',
+//   saturation: 'SATURATION',
+//   color: 'COLOR',
+//   luminosity: 'LUMINOSITY',
+// } as const
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayer
 }
 
-export default class OctopusLayerCommon {
+export default abstract class OctopusLayerCommon {
+  static DEFAULT_OPACITY = 1
+
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
@@ -54,7 +76,7 @@ export default class OctopusLayerCommon {
   }
 
   get opacity(): number {
-    return this._sourceLayer.opacity ?? 1
+    return this._sourceLayer.opacity ?? OctopusLayerCommon.DEFAULT_OPACITY
   }
 
   convertCommon(): Omit<Octopus['LayerBase'], 'type'> {

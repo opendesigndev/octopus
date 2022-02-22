@@ -1,11 +1,10 @@
-import type { RawShapeLayerSubPathPoint } from '../typings/source'
-import type { RawGraphicsStateMatrix } from '../typings/source/graphics-state'
+import type { RawShapeLayerSubPathPoint } from '../typings/raw'
+import type { RawGraphicsStateMatrix } from '../typings/raw/graphics-state'
+import type { Coord } from '../typings/index'
 
 export type TransformOptions = {
   matrix: [number, number, number, number, number, number]
 }
-
-export type Coord = [number, number]
 
 export function transformCoords(matrix: RawGraphicsStateMatrix, coords: number[]): number[] {
   const result = []
@@ -20,7 +19,7 @@ export function transformCoord(matrix: RawGraphicsStateMatrix, point: Coord): nu
   const [x, y] = point
   const [a, b, c, d] = matrix
 
-  return [Math.round((a * x + b * y) * 10000) / 10000, Math.round((c * x + d * y) * 10000) / 10000]
+  return [a * x + b * y, c * x + d * y]
 }
 
 export function createRectPoints(coords: number[]): Coord[] {
@@ -70,7 +69,7 @@ export function hasExpectedType(point: RawShapeLayerSubPathPoint): boolean {
   return ['Curve', 'Line', 'Move'].some((t) => t === type)
 }
 
-export function inverseYCoords(coords: number[], artboardHeight: number): number[] {
+export function invertYCooords(coords: number[], artboardHeight: number): number[] {
   const inversedCoords = coords.map((coord, index) => {
     if (index % 2 === 0) {
       return coord

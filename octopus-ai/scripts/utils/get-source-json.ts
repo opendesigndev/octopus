@@ -1,5 +1,5 @@
 import { promises as fsp } from 'fs'
-import { RawSource } from '../../src/typings/source'
+import { RawSource } from '../../src/typings/raw'
 
 const SOURCE_ADDRESS = './temp/input/source.json'
 

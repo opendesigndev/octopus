@@ -1,14 +1,13 @@
 import _ from 'lodash'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import { createSourceLayer } from '../factories/create-source-layer'
+import { createSourceLayer } from '../../factories/create-source-layer'
 import SourceResources from './source-resources'
 
-import type { Nullable } from '../typings/helpers'
-import type { Octopus } from '../typings/octopus'
-import type { RawArtboardEntry } from '../typings/source/artboard'
-import type { SourceLayer } from '../factories/create-source-layer'
-import type { RawLayer } from '../typings/source/layer'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawArtboardEntry } from '../../typings/raw/artboard'
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawLayer } from '../../typings/raw/layer'
 
 export default class SourceArtboard {
   private _rawArtboard: RawArtboardEntry

@@ -7,11 +7,11 @@ dotenv.config()
 ;(async () => {
   const [octopusLocation] = await convertAll()
 
-  console.info(`Octopus: file://${octopusLocation}`)
-
   if (!octopusLocation) {
     return
   }
+
+  console.info(`Octopus: file://${octopusLocation}`)
 
   const shouldRender = process.env.CONVERT_RENDER === 'true'
 

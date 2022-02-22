@@ -1,15 +1,19 @@
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
 import OctopusLayerCommon from './octopus-layer-common'
 import Point from './octopus-point'
 import OctopusEffectsShape from './octopus-effects-shape'
-import createShape from '../utils/create-shape'
-import { calculateBottomRightCorner, calculateTopLeftCorner, createRectPoints, isValid } from '../utils/coords'
+import createShape from '../../utils/create-shape'
+import { calculateBottomRightCorner, calculateTopLeftCorner, createRectPoints, isValid } from '../../utils/coords'
 
 import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerParent } from '../typings/octopus-entities'
-import type { Octopus } from '../typings/octopus'
-import type SourceLayerShape from '../entities-source/source-layer-shape'
-import type SourceLayerShapeSubPath from '../entities-source/source-layer-shape-subpath'
-import type { ShapeEffects } from './octopus-effects-shape'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { Octopus } from '../../typings/octopus'
+import type SourceLayerShape from '../source/source-layer-shape'
+import type SourceLayerShapeSubPath from '../source/source-layer-shape-subpath'
+import { RawShapeLayerSubPathPoint } from '../../typings/raw'
+import type { NormalizedPoint } from './octopus-point'
+import type { Coord } from '../../typings'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
@@ -17,10 +21,13 @@ type OctopusLayerShapeOptions = {
 }
 
 export default class OctopusLayerShape extends OctopusLayerCommon {
+  static DEFAULT_POINT_COORDS = [0, 0, 0, 0, 0, 0, 0]
+  static DEFAULT_GEOMETRY = 'MZ'
   static FILL_RULE = {
-    'non-zero-winding-number': 'NON_ZERO' as const,
-    'even-odd': 'EVEN_ODD' as const,
-  }
+    'non-zero-winding-number': 'NON_ZERO',
+    'even-odd': 'EVEN_ODD',
+  } as const
+  static DEFAULT_FILL_RULE = 'EVEN_ODD' as const
 
   protected _sourceLayer: SourceLayerShape
 
@@ -44,16 +51,17 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   private _parseRect(shape: SourceLayerShapeSubPath): Octopus['PathRectangle'] {
     const coords = shape.coords || [0, 0, 0, 0]
     const rectangle = this._parseRectangleCoords(coords)
+    const convertedShapeEffects = this._createShapeEffects()
 
     return {
       rectangle,
       type: 'RECTANGLE',
       transform: this._sourceLayer.transformMatrix,
-      ...this.shapeEffects,
+      ...convertedShapeEffects,
     }
   }
 
-  get shapeEffects(): ShapeEffects {
+  private _createShapeEffects(): OctopusEffectsShape {
     const sourceLayer = this._sourceLayer
     const resources = this._parent.resources
 
@@ -64,42 +72,43 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return new OctopusEffectsShape({
       sourceLayer,
       resources,
-    }).convert()
+    })
+  }
+
+  private _normalizePoints(points: RawShapeLayerSubPathPoint[]): NormalizedPoint[] {
+    return points.reduce((coordArray: NormalizedPoint[], point, index) => {
+      const coords = point.Coords
+      if (!coords) {
+        return coordArray
+      }
+
+      if (point.Type === 'Line' || point.Type === 'Move') {
+        coordArray.push({ anchor: [...(coords.slice(0, 2) as Coord)] })
+        return coordArray
+      }
+
+      const previousOutBezier = coords.slice(0, 2) as Coord
+      coordArray[index - 1] = { ...coordArray[index - 1], outBezier: previousOutBezier }
+
+      const inBezier = coords.slice(2, 4) as Coord
+      const anchor = coords.slice(4, 6) as Coord
+      coordArray.push({ inBezier, anchor })
+      return coordArray
+    }, [])
   }
 
   private _createGeometry(shape: SourceLayerShapeSubPath): string {
-    const validRawPoints = shape.points?.filter(isValid) || []
+    const validRawPoints = asArray(shape.points?.filter(isValid))
     if (validRawPoints.length === 0) {
-      return ''
+      return OctopusLayerShape.DEFAULT_GEOMETRY
     }
 
-    const points = validRawPoints
-      .slice(1)
-      .reduce(
-        (points, pointData) => {
-          switch (pointData.Type) {
-            case 'Curve': {
-              const [x1, y1, x2, y2, x3, y3] = pointData.Coords
-              const point = new Point([x3, y3])
-              points[points.length - 1].outBezier = [x1, y1]
-              point.inBezier = [x2, y2]
-              points.push(point)
-              break
-            }
-            case 'Line': {
-              points.push(new Point(pointData.Coords))
-              break
-            }
-          }
-          return points
-        },
-        [new Point(validRawPoints[0].Coords)]
-      )
-      .map((point) => point.toOctopus())
+    const normalizedPoints = this._normalizePoints(validRawPoints)
+    const points = normalizedPoints.map((point) => new Point(point).convert())
     const closed = !this._sourceLayer.stroke
     const paperShape = createShape({ closed, points })
 
-    return paperShape?.pathData || ''
+    return paperShape?.pathData ?? OctopusLayerShape.DEFAULT_GEOMETRY
   }
 
   private _parsePath(shape: SourceLayerShapeSubPath): Octopus['Path'] {
@@ -128,6 +137,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _getShapes(): Octopus['Shape'] | null {
     const path = this._getPath()
+    const shapeEffects = this._createShapeEffects().convert()
     if (!path) {
       return null
     }
@@ -135,7 +145,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     const fillShape: Octopus['Shape'] = {
       fillRule: this.fillRule,
       path,
-      ...this.shapeEffects,
+      ...shapeEffects,
     } as const
 
     return fillShape
@@ -143,7 +153,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   get fillRule(): 'NON_ZERO' | 'EVEN_ODD' {
     const sourceFillRule = this._sourceLayer.fillRule
-    return sourceFillRule ? OctopusLayerShape.FILL_RULE[sourceFillRule] : OctopusLayerShape.FILL_RULE['even-odd']
+    return sourceFillRule ? OctopusLayerShape.FILL_RULE[sourceFillRule] : OctopusLayerShape.DEFAULT_FILL_RULE
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {

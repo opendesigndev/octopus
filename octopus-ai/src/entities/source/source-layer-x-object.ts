@@ -1,9 +1,9 @@
-import SourceLayerCommon from '../entities-source/source-layer-common'
+import SourceLayerCommon from '../source/source-layer-common'
 
-import type { SourceLayerParent } from '../entities-source/source-layer-common'
-import type { RawGraphicsState } from '../typings/source/graphics-state'
-import type { Nullable } from '../typings/helpers'
-import type { RawXObjectLayer } from '../typings/source/x-object'
+import type { SourceLayerParent } from '../source/source-layer-common'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawXObjectLayer } from '../../typings/raw/x-object'
 
 type SourceLayerXObjectOptions = {
   parent: SourceLayerParent
@@ -11,8 +11,8 @@ type SourceLayerXObjectOptions = {
   path: number[]
 }
 
-export default class SourceLayerShape extends SourceLayerCommon {
-  public _rawValue: RawXObjectLayer
+export default class SourceLayerXObject extends SourceLayerCommon {
+  protected _rawValue: RawXObjectLayer
 
   constructor(options: SourceLayerXObjectOptions) {
     super(options)
@@ -21,10 +21,6 @@ export default class SourceLayerShape extends SourceLayerCommon {
 
   get name(): Nullable<string> {
     return this._rawValue.Name
-  }
-
-  get graphicsState(): Nullable<RawGraphicsState> {
-    return this._rawValue.GraphicsState
   }
 
   get lineJoin(): number {

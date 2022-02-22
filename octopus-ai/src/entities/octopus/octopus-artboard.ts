@@ -1,13 +1,13 @@
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { createOctopusLayer } from '../factories/create-octopus-layer'
-import OctopusAIConverter from '..'
+import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import OctopusAIConverter from '../..'
 
-import type { Octopus } from '../typings/octopus'
-import type SourceResources from '../entities-source/source-resources'
-import type { OctopusLayer } from '../factories/create-octopus-layer'
-import type SourceDesign from '../entities-source/source-design'
-import type SourceArtboard from '../entities-source/source-artboard'
+import type { Octopus } from '../../typings/octopus'
+import type SourceResources from '../source/source-resources'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type SourceDesign from '../source/source-design'
+import type SourceArtboard from '../source/source-artboard'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign
@@ -64,10 +64,16 @@ export default class OctopusArtboard {
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
-    const parentGroupLayer = this._layers[0].convert()
+    const parentGroupLayer = this._layers[0]
 
     if (!parentGroupLayer) {
       throw new Error('Artboard is missing content')
+    }
+
+    const content = parentGroupLayer.convert()
+
+    if (!content) {
+      throw new Error('Error converting parent group layer')
     }
 
     if (typeof this._sourceArtboard.id !== 'string') {
@@ -82,7 +88,7 @@ export default class OctopusArtboard {
       id: this.id,
       dimensions,
       //@todo look at notes (this will change in future to handle backgrounds)
-      content: parentGroupLayer,
+      content,
     }
   }
 }

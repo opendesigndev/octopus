@@ -2,7 +2,7 @@ import { RawGraphicsState } from './graphics-state'
 
 export type RawShapeLayerSubPathPoint = {
   Type?: string
-  Coords: number[]
+  Coords?: number[]
 }
 
 type X = number

@@ -3,11 +3,11 @@ import { performance } from 'perf_hooks'
 import { v4 as uuidv4 } from 'uuid'
 
 import OctopusAIConverter from '../../src'
-import SourceArtboard from '../../src/entities-source/source-artboard'
+import SourceArtboard from '../../src/entities/source/source-artboard'
 import { prepareSourceDesign } from './prepare-source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
-import SourceDesign from '../../src/entities-source/source-design'
+import SourceDesign from '../../src/entities/source/source-design'
 
 async function convert(converter: OctopusAIConverter, artboard: SourceArtboard, sourceDesign: SourceDesign) {
   try {

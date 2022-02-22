@@ -9,3 +9,5 @@ export interface Logger {
   trace: Function
   silent: Function
 }
+
+export type Coord = [number, number]

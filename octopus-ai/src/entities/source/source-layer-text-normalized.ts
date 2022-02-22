@@ -1,11 +1,11 @@
-import type { RawGraphicsState } from '../typings/source/graphics-state'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerParent } from './source-layer-common'
-import type { Nullable } from '../typings/helpers'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type {
   RawResourcesFontTextFont,
   RawResourcesFontTextFontFontDescriptorFontFile3,
   RawTextLayerText,
-} from '../typings/source'
+} from '../../typings/raw'
 
 type SourceLayerTextNormalizedOptions = {
   parent: SourceLayerParent

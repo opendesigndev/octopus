@@ -1,13 +1,13 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import OctopusLayerCommon from './octopus-layer-common'
-import { createOctopusLayer } from '../factories/create-octopus-layer'
+import { createOctopusLayer } from '../../factories/create-octopus-layer'
 
 import type { LayerSpecifics } from './octopus-layer-common'
-import type { Octopus } from '../typings/octopus'
-import type { OctopusLayer } from '../factories/create-octopus-layer'
-import type SourceLayerGroup from '../entities-source/source-layer-group'
-import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type SourceLayerGroup from '../source/source-layer-group'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent

@@ -1,11 +1,11 @@
 import SourceArtboard from './source-artboard'
 
 import type SourceLayerGroup from './source-layer-group'
-import type { RawLayer, RawResourcesExtGState, RawGraphicsState, RawGraphicsStateMatrix } from '../typings/source'
+import type { RawLayer, RawResourcesExtGState, RawGraphicsState, RawGraphicsStateMatrix } from '../../typings/raw'
 import type SourceLayerXObject from './source-layer-x-object'
-import type { Nullable } from '../typings/helpers'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type SourceResources from './source-resources'
-import type SourceLayerShape from './source-layer-x-object'
+import type SourceLayerShape from './source-layer-shape'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
 
@@ -76,9 +76,9 @@ export default class SourceLayerCommon {
 
   get transformMatrix(): RawGraphicsStateMatrix {
     const rawCtm: RawGraphicsStateMatrix = this.graphicsState?.CTM ?? [1, 0, 0, 1, 0, 0]
-    const inversedCtm = [...rawCtm]
-    inversedCtm[5] = -rawCtm[5]
+    const clonedCtm = [...rawCtm]
+    clonedCtm[5] = -rawCtm[5]
 
-    return inversedCtm as RawGraphicsStateMatrix
+    return clonedCtm as RawGraphicsStateMatrix
   }
 }

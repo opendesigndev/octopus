@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import OctopusLayerCommon from './octopus-layer-common'
-// import { RawTextLayerText } from '../typings/source'
-// import type SourceLayerNormalizedText from '../entities-source/source-layer-text-normalized'
+// import { RawTextLayerText } from '../../typings/source'
+// import type SourceLayerNormalizedText from '../source/source-layer-text-normalized'
 
-import type { Octopus } from '../typings/octopus'
-import type SourceLayerText from '../entities-source/source-layer-text'
-import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type { Octopus } from '../../typings/octopus'
+import type SourceLayerText from '../source/source-layer-text'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerTextOptions = {

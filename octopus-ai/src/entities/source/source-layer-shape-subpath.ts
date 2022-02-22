@@ -1,7 +1,9 @@
-import { inverseYCoords } from '../utils/coords'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import type { Nullable } from '../typings/helpers'
-import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../typings/source'
+import { invertYCooords } from '../../utils/coords'
+
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw'
 import type SourceLayerShape from './source-layer-shape'
 
 type SourceLayerShapeOptions = {
@@ -11,7 +13,7 @@ type SourceLayerShapeOptions = {
 }
 
 export default class SourceLayerShapeSubPath {
-  public _rawValue: RawShapeLayerSubPath
+  protected _rawValue: RawShapeLayerSubPath
   private _points: RawShapeLayerSubPathPoint[]
   private _parent: SourceLayerShape
   private _coords: number[]
@@ -22,11 +24,12 @@ export default class SourceLayerShapeSubPath {
 
     const artboardHeight = this._parent.parentArtboardHeight
 
-    this._points =
+    this._points = asArray(
       options.rawValue?.Points?.map((point) => ({
         ...point,
-        Coords: inverseYCoords(point.Coords, artboardHeight),
-      })) || []
+        Coords: invertYCooords(point.Coords ?? [], artboardHeight),
+      }))
+    )
 
     const rectangleCoords = options.rawValue?.Coords
 

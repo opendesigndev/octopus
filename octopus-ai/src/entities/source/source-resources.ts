@@ -1,4 +1,4 @@
-import type { Nullable } from '../typings/helpers'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type {
   RawResources,
   RawResourcesProperties,
@@ -6,7 +6,7 @@ import type {
   RawResourcesFont,
   RawResourcesFontTextFont,
   RawResourcesColorSpace,
-} from '../typings/source/resources'
+} from '../../typings/raw/resources'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources

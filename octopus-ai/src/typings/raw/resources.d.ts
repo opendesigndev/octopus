@@ -1,11 +1,11 @@
-export type ObjectId = { ObjID?: number }
+export type RawObjectId = { ObjID?: number }
 
 type RawResourcesFontTextFontFontDescriptorFontFile3 = {
   Filter?: string
   Length?: number
   Subtype?: string
   Kind?: number
-} & ObjectId
+} & RawObjectId
 
 export type RawResourcesPropertiesUsageCreatorInfo = {
   Creator?: string
@@ -13,16 +13,17 @@ export type RawResourcesPropertiesUsageCreatorInfo = {
 }
 
 export type RawResourcesPropertiesUsage = {
-  CreatorInfo: RawResourcesPropertiesUsageCreatorInfo
-} & ObjectId
+  CreatorInfo?: RawResourcesPropertiesUsageCreatorInfo
+} & RawObjectId
 
 export type RawResourcesProperties = {
-  [id: string]: {
-    Intent?: string[]
-    Name?: string
-    Type?: string
-    Usage?: RawResourcesPropertiesUsage
-  } & ObjectId
+  [id: string]: Partial<{
+    Intent: string[]
+    Name: string
+    Type: string
+    Usage: RawResourcesPropertiesUsage
+  }> &
+    RawObjectId
 }
 
 export type RawResourcesFontTextFontFontDescriptor = {
@@ -41,7 +42,7 @@ export type RawResourcesFontTextFontFontDescriptor = {
   StemV?: number
   Type?: string
   XHeight?: number
-} & ObjectId
+} & RawObjectId
 
 export type RawResourcesFontTextFont = {
   BaseFont?: string
@@ -52,7 +53,7 @@ export type RawResourcesFontTextFont = {
   Subtype?: string
   Type?: string
   Widths?: number[]
-} & ObjectId
+} & RawObjectId
 
 type RawResourcesFontPropertiesMC0UsageCreatorInfo = {
   Creator?: string
@@ -61,14 +62,14 @@ type RawResourcesFontPropertiesMC0UsageCreatorInfo = {
 
 type RawResourcesFontPropertiesMC0Usage = {
   CreatorInfo?: RawResourcesFontPropertiesMC0UsageCreatorInfo
-} & ObjectId
+} & RawObjectId
 
 type RawResourcesFontPropertiesMC0 = {
   Intent?: string[]
   Name?: string[]
   Type?: string
   Usage?: RawResourcesFontPropertiesMC0Usage
-} & ObjectId
+} & RawObjectId
 
 type RawResourcesFontProperties = {
   MC0?: RawResourcesFontPropertiesMC0
@@ -85,19 +86,20 @@ export type RawResourcesColorSpace = {
 }
 
 export type RawResourcesExtGState = {
-  [key: string]: {
+  [key: string]: Partial<{
     AIS: boolean
     BM: string
-    CA?: number
-    OPM?: number
-    SA?: boolean
-    SMask?: null
-    OP?: boolean
-    Type?: string
-    ca?: number
-    op?: false
-    ObjID?: 38
-  }
+    CA: number
+    OPM: number
+    SA: boolean
+    //@todo will change this type when layer is created with non null value
+    SMask: null
+    OP: boolean
+    Type: string
+    ca: number
+    op: boolean
+    ObjID: 38
+  }>
 }
 
 export type RawResources = {

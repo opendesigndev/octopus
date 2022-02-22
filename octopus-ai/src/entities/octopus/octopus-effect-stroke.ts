@@ -2,9 +2,9 @@ import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
 
-import type SourceLayerShape from '../entities-source/source-layer-shape'
-import type SourceResources from '../entities-source/source-resources'
-import type { Octopus } from '../typings/octopus'
+import type SourceLayerShape from '../source/source-layer-shape'
+import type SourceResources from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus'
 
 type OctopusEffectStrokeOptions = {
   resources: SourceResources
@@ -51,7 +51,7 @@ export default class OctopusEffectStroke {
     const fill = new OctopusEffectColorFill({
       resources: this._resources,
       sourceLayer: this._sourceLayer,
-      colorSpaceType: ColorSpace.COLOR_SPACE_STROKING,
+      colorSpaceType: ColorSpace.STROKING,
     }).convert()
 
     return {

@@ -1,3 +1,5 @@
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
 import {
   convertDeviceRGB,
   getColorSpaceName,
@@ -7,17 +9,17 @@ import {
   guessColorSpaceByComponents,
   parseColor,
   convertRGBToRGBA,
-} from '../utils/colors'
+} from '../../utils/colors'
 
-import type SourceLayerShape from '../entities-source/source-layer-shape'
-import type SourceResources from '../entities-source/source-resources'
-import type { Octopus } from '../typings/octopus'
-import type { Nullable } from '../typings/helpers'
-import type { RawResourcesColorSpace } from '../typings/source/resources'
+import type SourceLayerShape from '../source/source-layer-shape'
+import type SourceResources from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { RawResourcesColorSpace } from '../../typings/raw/resources'
 
 export enum ColorSpace {
-  COLOR_SPACE_STROKING = 'ColorSpaceStroking',
-  COLOR_SPACE_NON_STROKING = 'ColorSpaceNonStroking',
+  STROKING = 'ColorSpaceStroking',
+  NON_STROKING = 'ColorSpaceNonStroking',
 }
 
 type OctopusEffectColorFillOptions = {
@@ -40,7 +42,7 @@ export default class OctopusEffectColorFill {
   //colorSpace
   private get _colorSpace(): Nullable<string | RawResourcesColorSpace[string]> {
     const colorSpaceName =
-      this._colorSpaceType === ColorSpace.COLOR_SPACE_STROKING
+      this._colorSpaceType === ColorSpace.STROKING
         ? this._sourceLayer.colorSpaceStroking
         : this._sourceLayer.colorSpaceNonStroking
 
@@ -48,10 +50,10 @@ export default class OctopusEffectColorFill {
   }
 
   private get _color() {
-    return (
-      (this._colorSpaceType === ColorSpace.COLOR_SPACE_NON_STROKING
+    return asArray(
+      this._colorSpaceType === ColorSpace.NON_STROKING
         ? this._sourceLayer.colorNonStroking
-        : this._sourceLayer.colorStroking) || []
+        : this._sourceLayer.colorStroking
     )
   }
 
