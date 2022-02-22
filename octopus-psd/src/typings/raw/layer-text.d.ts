@@ -12,17 +12,19 @@ export type RawTextTransform = {
   yy?: number
 }
 
+export type RawText = {
+  TextIndex?: number
+  boundingBox?: RawTextBounds
+  bounds?: RawTextBounds
+  orientation?: 'horizontal' | 'vertical'
+  paragraphStyleRange?: RawParagraphStyleRange[]
+  textKey?: string
+  textStyleRange?: RawTextStyleRange[]
+  transform?: RawTextTransform
+}
+
 export type RawLayerText = RawLayerCommon & {
   type?: 'textLayer'
   bitmapBounds?: RawBounds
-  text?: {
-    TextIndex?: number
-    boundingBox?: RawTextBounds
-    bounds?: RawTextBounds
-    orientation?: 'horizontal' | 'vertical'
-    paragraphStyleRange?: RawParagraphStyleRange[]
-    textKey?: string
-    textStyleRange?: RawTextStyleRange[]
-    transform?: RawTextTransform
-  }
+  text?: RawText
 }

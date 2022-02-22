@@ -1,21 +1,18 @@
 import type { RawLayerText } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
-import { getBoundsFor, getMatrixFor } from '../../utils/source'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
+import { getBoundsFor } from '../../utils/source'
+import type { SourceBounds } from '../../typings/source'
+import { SourceText } from './source-text'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
   rawValue: RawLayerText
 }
 
-type SourceLayerTextType = RawLayerText['text'] & { orientation: 'horizontal' | 'vertical'; transform: SourceMatrix }
-
 export class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawLayerText
   protected _parent: SourceLayerParent
-
-  static DEFAULT_ORIENTATION = 'horizontal' as const
 
   constructor(options: SourceLayerTextOptions) {
     super()
@@ -27,12 +24,7 @@ export class SourceLayerText extends SourceLayerCommon {
     return getBoundsFor(this._rawValue.bitmapBounds)
   }
 
-  get text(): SourceLayerTextType {
-    const text = this._rawValue.text
-    return {
-      ...text,
-      orientation: text?.orientation ?? SourceLayerText.DEFAULT_ORIENTATION,
-      transform: getMatrixFor(text?.transform),
-    }
+  get text(): SourceText {
+    return new SourceText(this._rawValue.text)
   }
 }
