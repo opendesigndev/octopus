@@ -20,4 +20,45 @@ export class SourceTextStyle extends SourceEntity {
   get fontStyleName(): string | undefined {
     return this._rawValue?.fontStyleName
   }
+
+  get size(): number {
+    return this._rawValue?.size ?? 0
+  }
+
+  get lineHeight(): number {
+    return this._rawValue?.leading ?? 0
+  }
+
+  get letterSpacing(): number {
+    const tracking = this._rawValue?.tracking ?? 0
+    return (tracking * this.size) / 1000
+  }
+
+  get kerning(): boolean {
+    return true
+  }
+
+  get features(): [] {
+    return []
+  }
+
+  get ligatures(): boolean {
+    return this._rawValue?.ligatures ?? true
+  }
+
+  get altLigature(): boolean {
+    return this._rawValue?.altligature ?? false
+  }
+
+  get underline(): boolean {
+    return this._rawValue?.underline ?? false
+  }
+
+  get linethrough(): boolean {
+    return this._rawValue?.strikethrough ?? false
+  }
+
+  get letterCase(): 'allCaps' | 'smallCaps' | undefined {
+    return this._rawValue?.fontCaps
+  }
 }

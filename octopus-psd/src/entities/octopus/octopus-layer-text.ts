@@ -6,7 +6,6 @@ import type { SourceTextStyleRange } from '../source/source-text-style-range'
 import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
-import { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -61,7 +60,6 @@ export class OctopusLayerText extends OctopusLayerCommon {
       defaultStyle[key as keyof typeof occurrences] = occurrence[0].value
       return defaultStyle
     }, {} as { [key in keyof Octopus['TextStyle']]: unknown })
-
     return defaultStyle as Octopus['TextStyle']
   }
 
@@ -73,9 +71,37 @@ export class OctopusLayerText extends OctopusLayerCommon {
     }
   }
 
+  private _getLigatures(textStyle: SourceTextStyle): Octopus['TextStyle']['ligatures'] {
+    if (!textStyle.ligatures) return 'NONE'
+    if (textStyle.altLigature) return 'ALL'
+    return 'STANDARD'
+  }
+
+  private _getLetterCase(textStyle: SourceTextStyle): Octopus['TextStyle']['letterCase'] {
+    switch (textStyle.letterCase) {
+      case 'allCaps':
+        return 'UPPERCASE'
+      case 'smallCaps':
+        return 'SMALL_CAPS'
+      default:
+        return 'NONE'
+    }
+  }
+
   private _parseStyle(textStyle: SourceTextStyle): Octopus['TextStyle'] {
     return {
       font: this._getFont(textStyle),
+      fontSize: textStyle.size,
+      lineHeight: textStyle.lineHeight,
+      letterSpacing: textStyle.letterSpacing,
+      kerning: textStyle.kerning,
+      features: textStyle.features,
+      ligatures: this._getLigatures(textStyle),
+      underline: textStyle.underline ? 'SINGLE' : 'NONE',
+      linethrough: textStyle.linethrough,
+      letterCase: this._getLetterCase(textStyle),
+      // fills?: components['schemas']['Fill'][]
+      // strokes?: components['schemas']['VectorStroke'][]
     }
   }
 

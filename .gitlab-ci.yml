@@ -14,7 +14,7 @@ cache:
 lint:
   stage: test
   script:
-    - yarn lint:all
+    - yarn lint
 
 typecheck:
   stage: test
@@ -24,4 +24,4 @@ typecheck:
 test:
   stage: test
   script:
-    - yarn test:all
+    - yarn test
