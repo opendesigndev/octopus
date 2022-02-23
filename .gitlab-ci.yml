@@ -25,3 +25,10 @@ test:
   stage: test
   script:
     - yarn test
+
+together:
+  stage: test
+  script:
+    - yarn lint
+    - yarn build
+    - yarn test
