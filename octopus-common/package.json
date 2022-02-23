@@ -6,8 +6,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
-    "prepare": "rimraf ./dist && yarn run build",
+    "prepare": "yarn clean-build",
+    "postinstall": "yarn clean-build",
     "clean": "rimraf ./node_modules ./dist",
+    "clean-build": "rimraf ./dist && yarn run build",
     "watch": "tsc -w",
     "lint": "echo 'Linter is not implemented yet'",
     "test": "echo 'Tests are not implemented yet'",

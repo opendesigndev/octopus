@@ -21,22 +21,22 @@ export class OctopusLayerText extends OctopusLayerCommon {
     super(options)
   }
 
-  get textValue(): string {
+  private get _textValue(): string {
     return this._sourceLayer.text.textKey
   }
 
-  get sourceText(): SourceText {
+  private get _sourceText(): SourceText {
     return this._sourceLayer.text
   }
 
-  get sourceTextStyleRanges(): SourceTextStyleRange[] {
-    return this.sourceText.textStyles
+  private get _sourceTextStyleRanges(): SourceTextStyleRange[] {
+    return this._sourceText.textStyles
   }
 
   private get _defaultStyle(): Octopus['TextStyle'] {
     const occurrences: { [key in keyof Octopus['TextStyle']]: { value: unknown; range: number }[] } = {}
 
-    this.sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
+    this._sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
       const range = asFiniteNumber(to - from, 0)
       if (range === 0) return
@@ -130,7 +130,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
       style: Octopus['TextStyle']
       ranges: Array<{ from: number; to: number }>
     }>
-    this.sourceTextStyleRanges.forEach((styleRange: SourceTextStyleRange) => {
+    this._sourceTextStyleRanges.forEach((styleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = styleRange
       const range = asFiniteNumber(to - from, 0)
       if (range === 0) return
@@ -150,7 +150,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
   }
 
   get text(): Octopus['Text'] | null {
-    const value = this.textValue
+    const value = this._textValue
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)

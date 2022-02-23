@@ -6,6 +6,7 @@ stages:
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
   - yarn
+  - yarn build
 
 cache:
   paths:
@@ -15,11 +16,6 @@ lint:
   stage: test
   script:
     - yarn lint
-
-build:
-  stage: test
-  script:
-    - yarn build
 
 test:
   stage: test
