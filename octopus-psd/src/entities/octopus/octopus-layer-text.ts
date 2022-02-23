@@ -4,25 +4,13 @@ import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
 import type { SourceTextStyleRange } from '../source/source-text-style-range'
 import { SourceTextStyle } from '../source/source-text-style'
-import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual } from 'lodash'
-import { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerText
 }
-
-type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never
-
-// const keys = Object.keys(occs) as (keyof typeof occs)[]
-// keys.forEach(key => {
-//   const distributedValues = occs[key]
-//   const values = occs[key] as ToArrayNonDist<ElementOf<typeof distributedValues>>
-//   values.find((value) => {
-//     value.a
-//   })
-// })
 
 export class OctopusLayerText extends OctopusLayerCommon {
   protected _parent: OctopusLayerParent
@@ -45,76 +33,38 @@ export class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _getDefaultStyle(): Octopus['TextStyle'] {
-    // type Occurrences = Record<string, {value: textFont[occurrenceKey], occurrence: number}[]>
-    type Occurrence = { value: unknown; range: number }
-    type Occurrences = typeof occurrences
-    type OccurrenceKeys = keyof Occurrences
-    const occurrences = {
-      font: [] as Occurrence[],
-      fontSize: [] as Occurrence[],
-      lineHeight: [] as Occurrence[],
-      letterSpacing: [] as Occurrence[],
-      kerning: [] as Occurrence[],
-      features: [] as Occurrence[],
-      ligatures: [] as Occurrence[],
-      underline: [] as Occurrence[],
-      linethrough: [] as Occurrence[],
-      letterCase: [] as Occurrence[],
-      fills: [] as Occurrence[],
-      strokes: [] as Occurrence[],
-      // font: [] as { value: Octopus['TextStyle']['font']; range: number }[],
-      // fontSize: [] as { value: Octopus['TextStyle']['fontSize']; range: number }[],
-      // lineHeight: [] as { value: Octopus['TextStyle']['lineHeight']; range: number }[],
-      // letterSpacing: [] as { value: Octopus['TextStyle']['letterSpacing']; range: number }[],
-      // kerning: [] as { value: Octopus['TextStyle']['kerning']; range: number }[],
-      // features: [] as { value: Octopus['TextStyle']['features']; range: number }[],
-      // ligatures: [] as { value: Octopus['TextStyle']['ligatures']; range: number }[],
-      // underline: [] as { value: Octopus['TextStyle']['underline']; range: number }[],
-      // linethrough: [] as { value: Octopus['TextStyle']['linethrough']; range: number }[],
-      // letterCase: [] as { value: Octopus['TextStyle']['letterCase']; range: number }[],
-      // fills: [] as { value: Octopus['TextStyle']['fills']; range: number }[],
-      // strokes: [] as { value: Octopus['TextStyle']['strokes']; range: number }[],
-    }
+    /**
+     * Ono to chtelo trochu se zamyslet, ale nakonec neni imo ani potreba mit ten occurences s
+     * preddefinovanymi klicma + ted' uz tu neni zadny `any`.
+     * Radsi si to ale vyzkousej na vic examplech jestli ti to funguje jak ma.
+     */
+    const occurrences: { [key in keyof Octopus['TextStyle']]: { value: unknown; range: number }[] } = {}
 
     this.sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
       const range = asFiniteNumber(to - from, 0)
       if (range === 0) return
       const style = this._parseStyle(textStyle)
-
-      const styleKeys = Object.keys(style) as OccurrenceKeys[]
+      const styleKeys = Object.keys(style) as (keyof typeof style)[]
       styleKeys.forEach((occurrenceKey) => {
-        const occurrenceValues = occurrences[occurrenceKey]
+        const occurrenceValues = asArray(occurrences[occurrenceKey])
         const styleValue = style[occurrenceKey]
-
-        // TODO NIKI
-
-        // const distributedOccurrenceValues = occurrences[occurrenceKey]
-        // const occurrenceValues = occurrences[occurrenceKey] as ToArrayNonDist<
-        //   ElementOf<typeof distributedOccurrenceValues>
-        // >
-
-        // Check if there already exists a textStyle property with such a value.
-        const foundOccurrence = occurrenceValues.find((occurrenceObject) => isEqual(occurrenceObject.value, styleValue))
+        const foundOccurrence = occurrenceValues.find(({ value }) => isEqual(value, styleValue))
         if (foundOccurrence === undefined) {
-          // If not, add new textStyle property value with occurrence range.
-          occurrences[occurrenceKey].push({ value: styleValue, range })
+          occurrenceValues.push({ value: styleValue, range })
         } else {
-          // If there already exists such value of that prop, just increase occurrence.
           foundOccurrence.range += range
         }
+        occurrences[occurrenceKey] = occurrenceValues
       })
     })
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const defaultStyle = {} as any // Find properties' values with highest occurrence.
-    const occurrencesKeys = Object.keys(occurrences) as OccurrenceKeys[]
-    occurrencesKeys.forEach((key) => {
-      if (occurrences[key].length === 0) return
-      occurrences[key].sort((value1, value2) => value2.range - value1.range)
-      // First value is the value with highest occurrence.
-      defaultStyle[key] = occurrences[key][0].value
-    })
+    const defaultStyle = Object.entries(occurrences).reduce((defaultStyle, [key, occurance]) => {
+      if (occurance.length === 0) return
+      occurance.sort((value1, value2) => value2.range - value1.range)
+      defaultStyle[key as keyof typeof occurrences] = occurance[0].value
+      return defaultStyle
+    }, {} as { [key in keyof Octopus['TextStyle']]: unknown })
 
     console.info('defaultStyle', defaultStyle)
 
