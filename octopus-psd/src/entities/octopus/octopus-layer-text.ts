@@ -5,7 +5,8 @@ import type { SourceText } from '../source/source-text'
 import type { SourceTextStyleRange } from '../source/source-text-style-range'
 import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { isEqual } from 'lodash'
+import { isEqual, isEmpty } from 'lodash'
+import { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -32,12 +33,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     return this.sourceText.textStyles
   }
 
-  private _getDefaultStyle(): Octopus['TextStyle'] {
-    /**
-     * Ono to chtelo trochu se zamyslet, ale nakonec neni imo ani potreba mit ten occurences s
-     * preddefinovanymi klicma + ted' uz tu neni zadny `any`.
-     * Radsi si to ale vyzkousej na vic examplech jestli ti to funguje jak ma.
-     */
+  private get _defaultStyle(): Octopus['TextStyle'] {
     const occurrences: { [key in keyof Octopus['TextStyle']]: { value: unknown; range: number }[] } = {}
 
     this.sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
@@ -59,14 +55,12 @@ export class OctopusLayerText extends OctopusLayerCommon {
       })
     })
 
-    const defaultStyle = Object.entries(occurrences).reduce((defaultStyle, [key, occurance]) => {
-      if (occurance.length === 0) return
-      occurance.sort((value1, value2) => value2.range - value1.range)
-      defaultStyle[key as keyof typeof occurrences] = occurance[0].value
+    const defaultStyle = Object.entries(occurrences).reduce((defaultStyle, [key, occurrence]) => {
+      if (occurrence.length === 0) return
+      occurrence.sort((value1, value2) => value2.range - value1.range)
+      defaultStyle[key as keyof typeof occurrences] = occurrence[0].value
       return defaultStyle
     }, {} as { [key in keyof Octopus['TextStyle']]: unknown })
-
-    console.info('defaultStyle', defaultStyle)
 
     return defaultStyle as Octopus['TextStyle']
   }
@@ -85,22 +79,49 @@ export class OctopusLayerText extends OctopusLayerCommon {
     }
   }
 
-  private _getStyle(styleRange: SourceTextStyleRange): Octopus['StyleRange'] {
-    const { from, to, textStyle } = styleRange
-    const ranges = [{ from, to }] // TODO add optimization to merge same styles
-    const style = this._parseStyle(textStyle)
-    return { ranges, style }
+  private _subtractDefaultStyle = (
+    style: Octopus['TextStyle'],
+    defaultStyle: Octopus['TextStyle']
+  ): Octopus['TextStyle'] => {
+    const ownFont = {} as Record<keyof Octopus['TextStyle'], unknown>
+    const styleProps = Object.keys(style) as (keyof Octopus['TextStyle'])[]
+    styleProps.forEach((styleProp) => {
+      if (!isEqual(style[styleProp], defaultStyle[styleProp])) {
+        ownFont[styleProp] = style[styleProp]
+      }
+    })
+    return ownFont as Octopus['TextStyle']
   }
 
-  private _getStyles(): Octopus['StyleRange'][] {
-    return this.sourceTextStyleRanges.map((style) => this._getStyle(style))
+  private _getStyles(defaultStyle: Octopus['TextStyle']): Octopus['StyleRange'][] {
+    const styleRanges = [] as Array<{
+      style: Octopus['TextStyle']
+      ranges: Array<{ from: number; to: number }>
+    }>
+    this.sourceTextStyleRanges.forEach((styleRange: SourceTextStyleRange) => {
+      const { from, to, textStyle } = styleRange
+      const range = asFiniteNumber(to - from, 0)
+      if (range === 0) return
+
+      const parsedStyle = this._parseStyle(textStyle)
+      const style = this._subtractDefaultStyle(parsedStyle, defaultStyle)
+      if (isEmpty(style)) return
+
+      const foundOccurrence = styleRanges.find((styleRange) => isEqual(styleRange.style, style))
+      if (foundOccurrence === undefined) {
+        styleRanges.push({ style, ranges: [{ from, to }] })
+      } else {
+        foundOccurrence.ranges.push({ from, to })
+      }
+    })
+    return styleRanges as Octopus['StyleRange'][]
   }
 
   get text(): Octopus['Text'] | null {
     const value = this.textValue
-    const defaultStyle = this._getDefaultStyle()
+    const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
-    const styles = this._getStyles()
+    const styles = this._getStyles(defaultStyle)
     // const frame = {} as Octopus['TextFrame'] // this._getFrame() // TODO
 
     return {
