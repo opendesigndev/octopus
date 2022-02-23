@@ -1,0 +1,27 @@
+image: node:latest
+
+stages:
+  - test
+
+before_script:
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+  - yarn
+
+cache:
+  paths:
+    - node_modules/
+
+lint:
+  stage: test
+  script:
+    - yarn lint:all
+
+typecheck:
+  stage: test
+  script:
+    - yarn types:check
+
+test:
+  stage: test
+  script:
+    - yarn test:all
