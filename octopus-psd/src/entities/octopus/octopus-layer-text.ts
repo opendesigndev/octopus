@@ -156,6 +156,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     const styles = this._getStyles(defaultStyle)
 
     // TODO add text picture when octopus3 schema is prepared
+    // TODO add transform
 
     return {
       value,

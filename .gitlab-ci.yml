@@ -16,10 +16,10 @@ lint:
   script:
     - yarn lint
 
-typecheck:
+build:
   stage: test
   script:
-    - yarn types:check
+    - yarn build
 
 test:
   stage: test

@@ -24,7 +24,7 @@
     "lint:eslint": "eslint . --ext .ts --max-warnings=0",
     "lint:prettier": "prettier -c .",
     "types:check": "yarn workspaces run types:check",
-    "verify": "yarn lint && yarn test && yarn types:check"
+    "verify": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {},
   "devDependencies": {
