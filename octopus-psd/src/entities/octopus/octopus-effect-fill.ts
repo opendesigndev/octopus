@@ -69,8 +69,11 @@ export class OctopusEffectFill {
           origin: 'ARTBOARD',
         }).convert()
       }
-      case 'COLOR':
-        return new OctopusEffectFillColor({ fill }).convert()
+      case 'COLOR': {
+        const color = fill.color
+        if (color === null) return null
+        return new OctopusEffectFillColor({ color }).convert()
+      }
       default:
         return null
     }

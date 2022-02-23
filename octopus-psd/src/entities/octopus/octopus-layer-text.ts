@@ -6,6 +6,7 @@ import type { SourceTextStyleRange } from '../source/source-text-style-range'
 import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -88,6 +89,12 @@ export class OctopusLayerText extends OctopusLayerCommon {
     }
   }
 
+  private _getFills(textStyle: SourceTextStyle): Octopus['TextStyle']['fills'] {
+    const color = textStyle.color
+    const fill = new OctopusEffectFillColor({ color }).convert()
+    return [fill]
+  }
+
   private _parseStyle(textStyle: SourceTextStyle): Octopus['TextStyle'] {
     return {
       font: this._getFont(textStyle),
@@ -100,8 +107,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
       underline: textStyle.underline ? 'SINGLE' : 'NONE',
       linethrough: textStyle.linethrough,
       letterCase: this._getLetterCase(textStyle),
-      // fills?: components['schemas']['Fill'][]
-      // strokes?: components['schemas']['VectorStroke'][]
+      fills: this._getFills(textStyle),
     }
   }
 
@@ -148,14 +154,14 @@ export class OctopusLayerText extends OctopusLayerCommon {
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
-    // const frame = {} as Octopus['TextFrame'] // this._getFrame() // TODO
+
+    // TODO add text picture when octopus3 schema is prepared
 
     return {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
       styles,
-      // frame,
     }
   }
 

@@ -1,4 +1,6 @@
 import type { RawTextStyle } from '../../typings/raw'
+import type { SourceColor } from '../../typings/source'
+import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 export class SourceTextStyle extends SourceEntity {
@@ -60,5 +62,9 @@ export class SourceTextStyle extends SourceEntity {
 
   get letterCase(): 'allCaps' | 'smallCaps' | undefined {
     return this._rawValue?.fontCaps
+  }
+
+  get color(): SourceColor | null {
+    return getColorFor(this._rawValue?.color)
   }
 }
