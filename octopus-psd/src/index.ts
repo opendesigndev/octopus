@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 import readPackageUpAsync from 'read-pkg-up'
 import type { NormalizedReadResult } from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
