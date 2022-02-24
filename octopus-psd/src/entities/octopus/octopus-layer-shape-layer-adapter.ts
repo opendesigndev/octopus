@@ -1,4 +1,4 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
@@ -11,7 +11,7 @@ type OctopusLayerShapeLayerAdapterOptions = {
   sourceLayer: SourceLayerLayer
 }
 
-export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
+export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerLayer
 
@@ -40,7 +40,6 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
     const { width, height } = this.sourceLayer.bounds
     const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0]
     const fill = new OctopusEffectFillImage({
-      parent: this,
       imagePath,
       transform,
       layout: 'STRETCH',
@@ -67,7 +66,7 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
   }
 
   convert(): Octopus['ShapeLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
     return {

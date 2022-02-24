@@ -1,5 +1,5 @@
-import type { RawFill, RawFillPattern } from '../../typings/raw'
-import type { SourceColor, SourceGradientType } from '../../typings/source'
+import type { RawBlendMode, RawFill, RawFillPattern } from '../../typings/raw'
+import type { SourceColor, SourceGradientType, SourcePointXY } from '../../typings/source'
 import { getColorFor } from '../../utils/source'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
@@ -40,5 +40,22 @@ export class SourceEffectFill {
 
   get pattern(): RawFillPattern | undefined {
     return this._rawValue?.pattern
+  }
+
+  get enabled(): boolean {
+    return this._rawValue?.enabled ?? true
+  }
+
+  get blendMode(): RawBlendMode | undefined {
+    return this._rawValue?.mode
+  }
+
+  get opacity(): number | undefined {
+    return this._rawValue?.opacity?.value
+  }
+
+  get offset(): SourcePointXY | undefined {
+    const { horizontal, vertical } = this._rawValue?.phase ?? {}
+    return horizontal !== undefined && vertical !== undefined ? { x: horizontal, y: vertical } : undefined
   }
 }

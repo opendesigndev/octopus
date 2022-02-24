@@ -38,4 +38,8 @@ export class SourceEffectStroke extends SourceEntity {
   get lineDashSet(): number[] | undefined {
     return this._rawValue?.strokeStyleLineDashSet
   }
+
+  get enabled(): boolean {
+    return this._rawValue?.strokeEnabled ?? true
+  }
 }

@@ -15,14 +15,14 @@ import { logWarn } from '../../services/instances/misc'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
-type OctopusLayerCommonOptions = {
+type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayer
 }
 
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 
-export class OctopusLayerCommon {
+export class OctopusLayerBase {
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
@@ -37,7 +37,7 @@ export class OctopusLayerCommon {
     // TODO: backgroundLayer: 'TODO',
   } as const
 
-  constructor(options: OctopusLayerCommonOptions) {
+  constructor(options: OctopusLayerBaseOptions) {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
     this._id = asString(this._sourceLayer.id, uuidv4())
@@ -76,7 +76,7 @@ export class OctopusLayerCommon {
   }
 
   get layerTranslation(): readonly [number, number] {
-    return OctopusLayerCommon.DEFAULT_TRANSLATION
+    return OctopusLayerBase.DEFAULT_TRANSLATION
   }
 
   get transform(): number[] {
@@ -89,7 +89,7 @@ export class OctopusLayerCommon {
 
   get type(): Octopus['LayerBase']['type'] | null {
     const type = String(this._sourceLayer.type)
-    const result = getMapped(type, OctopusLayerCommon.LAYER_TYPE_MAP, undefined)
+    const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
     if (!result) {
       logWarn('Unknown Layer type', { type })
       return null
@@ -101,7 +101,7 @@ export class OctopusLayerCommon {
     return this.type !== null
   }
 
-  convertCommon(): Octopus['LayerBase'] | null {
+  convertBase(): Octopus['LayerBase'] | null {
     if (!this.isConvertible) return null
 
     const type = this.type as NotNull<typeof this.type>

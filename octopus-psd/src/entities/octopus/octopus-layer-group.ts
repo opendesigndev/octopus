@@ -1,5 +1,5 @@
 import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
@@ -9,7 +9,7 @@ type OctopusLayerGroupOptions = {
   sourceLayer: SourceLayerSection
 }
 
-export class OctopusLayerGroup extends OctopusLayerCommon {
+export class OctopusLayerGroup extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerSection
   private _layers: OctopusLayer[]
@@ -37,12 +37,9 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
   }
 
   convert(): Octopus['GroupLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
-    return {
-      ...common,
-      ...this._convertTypeSpecific(),
-    }
+    return { ...common, ...this._convertTypeSpecific() }
   }
 }

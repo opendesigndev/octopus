@@ -1,4 +1,4 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
@@ -13,7 +13,7 @@ type OctopusLayerTextOptions = {
   sourceLayer: SourceLayerText
 }
 
-export class OctopusLayerText extends OctopusLayerCommon {
+export class OctopusLayerText extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerText
 
@@ -173,7 +173,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
   }
 
   convert(): Octopus['TextLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
     const specific = this._convertTypeSpecific()

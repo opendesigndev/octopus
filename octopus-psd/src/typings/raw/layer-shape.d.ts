@@ -1,4 +1,12 @@
-import type { RawUnitAngle, RawBounds, RawColor, RawUnitPercent, RawUnitPoint, RawBlendMode } from './shared'
+import type {
+  RawUnitAngle,
+  RawBounds,
+  RawColor,
+  RawUnitPercent,
+  RawUnitPoint,
+  RawBlendMode,
+  RawPointHV,
+} from './shared'
 import type { RawLayerCommon } from './layer'
 import type { RawPathComponent } from './path-component'
 
@@ -46,6 +54,12 @@ export type RawFill = {
   reverse?: boolean
   scale?: RawUnitPercent
   type?: RawGradientType
+  enabled?: boolean
+  mode?: RawBlendMode
+  opacity?: RawUnitPercent
+  phase?: RawPointHV
+  present?: boolean
+  showInDialog?: boolean
 }
 
 export type RawShapeMask = {
@@ -97,7 +111,6 @@ export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
   fill?: RawFill
-  layerEffects?: Record<string, unknown> // TODO
   mask?: RawShapeMask
   path?: RawPath
   strokeStyle?: RawShapeStrokeStyle

@@ -1,4 +1,4 @@
-import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-common'
+import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'

@@ -1,4 +1,4 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
@@ -10,7 +10,7 @@ type OctopusLayerShapeShapeAdapterOptions = {
   sourceLayer: SourceLayerShape
 }
 
-export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
+export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerShape
 
@@ -59,7 +59,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
   }
 
   convert(): Octopus['ShapeLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
     return {

@@ -23,19 +23,15 @@ export class OctopusEffectFill {
     this._fill = options.fill
   }
 
-  get fill(): SourceEffectFill {
-    return this._fill
-  }
-
   get fillType(): Octopus['FillType'] | null {
-    if (this.fill.pattern) return 'IMAGE'
-    if (this.fill.gradient) return 'GRADIENT'
-    if (this.fill.color) return 'COLOR'
+    if (this._fill.pattern) return 'IMAGE'
+    if (this._fill.gradient) return 'GRADIENT'
+    if (this._fill.color) return 'COLOR'
     return null
   }
 
   get imagePath(): string {
-    const imageName = `${this.fill.pattern?.ID}.png`
+    const imageName = `${this._fill.pattern?.ID}.png`
     return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
   }
 
@@ -47,13 +43,13 @@ export class OctopusEffectFill {
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, 0, 0)
-    matrix.scale(this.fill.scale)
-    matrix.rotate(-this.fill.angle, 0, 0)
+    matrix.scale(this._fill.scale)
+    matrix.rotate(-this._fill.angle, 0, 0)
     return matrix.values
   }
 
   convert(): Octopus['Fill'] | null {
-    const fill = this.fill
+    const fill = this._fill
     const parent = this._parent
     switch (this.fillType) {
       case 'GRADIENT':
@@ -62,7 +58,6 @@ export class OctopusEffectFill {
         const transform = this.imageTransform
         if (transform === null) return null
         return new OctopusEffectFillImage({
-          parent,
           imagePath: this.imagePath,
           transform,
           layout: 'TILE',

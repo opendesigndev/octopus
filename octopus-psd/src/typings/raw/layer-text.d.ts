@@ -1,16 +1,7 @@
 import type { RawLayerCommon } from './layer'
 import type { RawParagraphStyleRange } from './style-paragraph'
-import type { RawBounds, RawTextBounds } from './shared'
+import type { RawBounds, RawMatrix, RawTextBounds } from './shared'
 import type { RawTextStyleRange } from './style-text'
-
-export type RawTextTransform = {
-  tx?: number
-  ty?: number
-  xx?: number
-  xy?: number
-  yx?: number
-  yy?: number
-}
 
 export type RawText = {
   TextIndex?: number
@@ -20,7 +11,7 @@ export type RawText = {
   paragraphStyleRange?: RawParagraphStyleRange[]
   textKey?: string
   textStyleRange?: RawTextStyleRange[]
-  transform?: RawTextTransform
+  transform?: RawMatrix
 }
 
 export type RawLayerText = RawLayerCommon & {

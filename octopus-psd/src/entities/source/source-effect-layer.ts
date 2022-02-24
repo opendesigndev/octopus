@@ -1,4 +1,5 @@
 import type { RawLayerEffect } from '../../typings/raw'
+import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 
 export class SourceLayerEffect extends SourceEntity {
@@ -9,5 +10,11 @@ export class SourceLayerEffect extends SourceEntity {
     this._rawValue = effect
   }
 
-  // TODO Remove if not needed in the end
+  get scale(): number {
+    return (this._rawValue?.scale?.value ?? 100) / 100
+  }
+
+  get patternFill(): SourceEffectFill | undefined {
+    return new SourceEffectFill(this._rawValue?.patternFill)
+  }
 }
