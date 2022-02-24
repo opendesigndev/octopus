@@ -7,6 +7,7 @@ import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+import { convertMatrix } from '../../utils/convert'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -149,20 +150,25 @@ export class OctopusLayerText extends OctopusLayerBase {
     return styleRanges as Octopus['StyleRange'][]
   }
 
+  private get _textTransform(): Octopus['Transform'] {
+    return convertMatrix(this._sourceText.transform)
+  }
+
   get text(): Octopus['Text'] | null {
     const value = this._textValue
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
+    const textTransform = this._textTransform
 
     // TODO add text picture when octopus3 schema is prepared
-    // TODO add transform
 
     return {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
       styles,
+      textTransform,
     }
   }
 

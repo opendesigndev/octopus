@@ -1,6 +1,6 @@
 import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
-import { convertColor } from '../../utils/color'
+import { convertColor } from '../../utils/convert'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceLayerShape } from '../source/source-layer-shape'
