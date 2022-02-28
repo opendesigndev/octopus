@@ -7,7 +7,7 @@ import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { convertMatrix } from '../../utils/convert'
+import { convertMatrix, pointsToPixels } from '../../utils/convert'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -155,9 +155,11 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private get _frame(): Octopus['TextFrame'] {
-    const mode = 'FIXED'
-    const size = { width: 0, height: 0 } // TODO
-    return { mode, size }
+    const boundingBox = this._sourceText.boundingBox
+    const resolution = this.parentArtboard.sourceArtboard.resolution
+    const width = pointsToPixels(boundingBox.width, resolution)
+    const height = pointsToPixels(boundingBox.height, resolution)
+    return { mode: 'FIXED', size: { width, height } }
   }
 
   get text(): Octopus['Text'] | null {

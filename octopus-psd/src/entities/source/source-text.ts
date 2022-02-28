@@ -1,6 +1,6 @@
 import type { RawText } from '../../typings/raw'
-import { getMatrixFor } from '../../utils/source'
-import type { SourceMatrix } from '../../typings/source'
+import { getMatrixFor, getTextBoundsFor } from '../../utils/source'
+import type { SourceBounds, SourceMatrix } from '../../typings/source'
 import { SourceEntity } from './source-entity'
 import { SourceTextStyleRange } from './source-text-style-range'
 
@@ -28,5 +28,9 @@ export class SourceText extends SourceEntity {
   get textStyles(): SourceTextStyleRange[] {
     const textStyles = this._rawValue?.textStyleRange ?? []
     return textStyles.map((style) => new SourceTextStyleRange(style))
+  }
+
+  get boundingBox(): SourceBounds {
+    return getTextBoundsFor(this._rawValue?.boundingBox)
   }
 }

@@ -49,4 +49,8 @@ export class SourceArtboard {
   get id(): string {
     return SourceArtboard.DEFAULT_ID
   }
+
+  get resolution(): number | undefined {
+    return this._rawValue.resolution
+  }
 }
