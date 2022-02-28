@@ -2,7 +2,7 @@ import type { RawLayerEffect } from '../../typings/raw'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 
-export class SourceLayerEffect extends SourceEntity {
+export class SourceLayerEffects extends SourceEntity {
   protected _rawValue: RawLayerEffect | undefined
 
   constructor(effect: RawLayerEffect | undefined) {
@@ -12,6 +12,10 @@ export class SourceLayerEffect extends SourceEntity {
 
   get scale(): number {
     return (this._rawValue?.scale?.value ?? 100) / 100
+  }
+
+  get enabledAll(): boolean {
+    return this._rawValue?.masterFXSwitch ?? false
   }
 
   get patternFill(): SourceEffectFill | undefined {

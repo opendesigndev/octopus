@@ -6,7 +6,6 @@ import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEffectStroke } from './source-effect-stroke'
 import { SourceShapeMask } from './source-shape-mask'
-import { SourceLayerEffect } from './source-effect-layer'
 import { SourceBounds } from '../../typings/source'
 
 type SourceLayerShapeOptions = {
@@ -50,9 +49,5 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get mask(): SourceShapeMask {
     return new SourceShapeMask(this._rawValue.mask)
-  }
-
-  get layerEffects(): SourceLayerEffect {
-    return new SourceLayerEffect(this._rawValue.layerEffects)
   }
 }

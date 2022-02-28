@@ -1,7 +1,43 @@
 import type { Octopus } from '../typings/octopus'
-import type { RawColor } from '../typings/raw'
+import type { RawBlendMode, RawColor } from '../typings/raw'
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import type { SourceMatrix } from '../typings/source'
+import { DEFAULTS } from './defaults'
+
+const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
+  blendDivide: 'DIVIDE',
+  blendSubtraction: 'SUBTRACT',
+  color: 'COLOR',
+  colorBurn: 'COLOR_BURN',
+  colorDodge: 'COLOR_DODGE',
+  darken: 'DARKEN',
+  darkerColor: 'DARKER_COLOR',
+  difference: 'DIFFERENCE',
+  dissolve: 'DISSOLVE',
+  exclusion: 'EXCLUSION',
+  hardLight: 'HARD_LIGHT',
+  hardMix: 'HARD_MIX',
+  hue: 'HUE',
+  lighten: 'LIGHTEN',
+  lighterColor: 'LIGHTER_COLOR',
+  linearBurn: 'LINEAR_BURN',
+  linearDodge: 'LINEAR_DODGE',
+  linearLight: 'LINEAR_LIGHT',
+  luminosity: 'LUMINOSITY',
+  multiply: 'MULTIPLY',
+  normal: 'NORMAL',
+  overlay: 'OVERLAY',
+  passThrough: 'PASS_THROUGH',
+  pinLight: 'PIN_LIGHT',
+  saturation: 'SATURATION',
+  screen: 'SCREEN',
+  softLight: 'SOFT_LIGHT',
+  vividLight: 'VIVID_LIGHT',
+}
+
+export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode'] {
+  return typeof blendMode === 'string' && blendMode in BLEND_MODES ? BLEND_MODES[blendMode] : DEFAULTS.BLEND_MODE
+}
 
 export function convertColor(color: RawColor | null | undefined): Octopus['Color'] {
   return {

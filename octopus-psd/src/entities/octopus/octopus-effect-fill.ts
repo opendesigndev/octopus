@@ -36,10 +36,11 @@ export class OctopusEffectFill {
   }
 
   get imageTransform(): Octopus['Transform'] | null {
+    const imagePath = this.imagePath
     const images = this._parent.parentArtboard.sourceDesign.images
-    const { width, height } = images.find((img) => img.path === this.imagePath) ?? {}
+    const { width, height } = images.find((img) => img.path === imagePath) ?? {}
     if (width === undefined || height === undefined) {
-      logWarn('Unknown image', { imagePath: this.imagePath })
+      logWarn('Unknown image', { imagePath })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, 0, 0)

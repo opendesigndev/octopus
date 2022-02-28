@@ -8,10 +8,10 @@ import type { OctopusLayerGroup } from './octopus-layer-group'
 import { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
 import { getMapped, round } from '@avocode/octopus-common/dist/utils/common'
-import { BLEND_MODES } from '../../utils/blend-modes'
-import { DEFAULTS } from '../../utils/defaults'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { logWarn } from '../../services/instances/misc'
+import { OctopusEffectsLayer } from './octopus-effects-layer'
+import { convertBlendMode } from '../../utils/convert'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -69,10 +69,7 @@ export class OctopusLayerBase {
   }
 
   get blendMode(): Octopus['BlendMode'] {
-    const sourceBlendMode = this._sourceLayer.blendMode
-    return typeof sourceBlendMode === 'string' && sourceBlendMode in BLEND_MODES
-      ? BLEND_MODES[sourceBlendMode]
-      : DEFAULTS.BLEND_MODE
+    return convertBlendMode(this._sourceLayer.blendMode)
   }
 
   get layerTranslation(): readonly [number, number] {
@@ -101,6 +98,12 @@ export class OctopusLayerBase {
     return this.type !== null
   }
 
+  get effects(): Octopus['Effect'][] {
+    const parentArtboard = this.parentArtboard
+    const effects = this._sourceLayer.layerEffects
+    return new OctopusEffectsLayer({ parentArtboard, effects }).convert()
+  }
+
   convertBase(): Octopus['LayerBase'] | null {
     if (!this.isConvertible) return null
 
@@ -114,6 +117,7 @@ export class OctopusLayerBase {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
+      effects: this.effects,
     }
   }
 }

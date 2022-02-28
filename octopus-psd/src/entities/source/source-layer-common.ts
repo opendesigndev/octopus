@@ -4,6 +4,7 @@ import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
 import { getBoundsFor } from '../../utils/source'
 import { SourceBounds } from '../../typings/source'
+import { SourceLayerEffects } from './source-effects-layer'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
@@ -60,5 +61,9 @@ export class SourceLayerCommon {
 
   get imageName(): string | undefined {
     return this._rawValue.imageName
+  }
+
+  get layerEffects(): SourceLayerEffects {
+    return new SourceLayerEffects(this._rawValue.layerEffects)
   }
 }
