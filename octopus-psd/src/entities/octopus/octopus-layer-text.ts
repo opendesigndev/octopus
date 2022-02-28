@@ -154,21 +154,29 @@ export class OctopusLayerText extends OctopusLayerBase {
     return convertMatrix(this._sourceText.transform)
   }
 
+  private get _frame(): Octopus['TextFrame'] {
+    const mode = 'FIXED'
+    const size = { width: 0, height: 0 } // TODO
+    return { mode, size }
+  }
+
   get text(): Octopus['Text'] | null {
     const value = this._textValue
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
     const textTransform = this._textTransform
+    const frame = this._frame
 
     // TODO add text picture when octopus3 schema is prepared
 
     return {
       value,
       defaultStyle,
-      baselinePolicy: 'SET',
+      baselinePolicy: 'FIXED_OFFSET',
       styles,
       textTransform,
+      frame,
     }
   }
 
