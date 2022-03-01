@@ -8,6 +8,8 @@ import type { RawBlendOptions, RawBounds, RawUnitPercent } from './shared'
 export type RawLayerEffect = {
   masterFXSwitch?: boolean
   numModifyingFX?: number
+  solidFill?: RawFill
+  gradientFill?: RawFill
   patternFill?: RawFill
   scale?: RawUnitPercent
 }

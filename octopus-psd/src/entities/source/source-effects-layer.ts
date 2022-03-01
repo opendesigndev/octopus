@@ -19,6 +19,14 @@ export class SourceLayerEffects extends SourceEntity {
     return this._rawValue?.masterFXSwitch ?? false
   }
 
+  get solidFill(): SourceEffectFill | undefined {
+    return new SourceEffectFill(this._rawValue?.solidFill)
+  }
+
+  get gradientFill(): SourceEffectFill | undefined {
+    return new SourceEffectFill(this._rawValue?.gradientFill)
+  }
+
   get patternFill(): SourceEffectFill | undefined {
     return new SourceEffectFill(this._rawValue?.patternFill)
   }

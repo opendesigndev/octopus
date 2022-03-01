@@ -12,19 +12,18 @@ import { convertBlendMode } from '../../utils/convert'
 type OctopusFillOptions = {
   parentArtboard: OctopusArtboard
   effects: SourceLayerEffects
+  fill: SourceEffectFill
 }
 
 export class OctopusEffectOverlay {
   protected _parentArtboard: OctopusArtboard
   protected _effects: SourceLayerEffects
+  protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
     this._parentArtboard = options.parentArtboard
     this._effects = options.effects
-  }
-
-  private get _fill(): SourceEffectFill | undefined {
-    return this._effects.patternFill
+    this._fill = options.fill
   }
 
   get imagePath(): string {
@@ -55,11 +54,11 @@ export class OctopusEffectOverlay {
   }
 
   get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._effects.patternFill?.blendMode)
+    return convertBlendMode(this._fill?.blendMode)
   }
 
   get visible(): boolean {
-    const enabled = this._effects.patternFill?.enabled ?? false
+    const enabled = this._fill?.enabled ?? false
     const enabledAll = this._effects.enabledAll ?? false
     return enabledAll && enabled
   }

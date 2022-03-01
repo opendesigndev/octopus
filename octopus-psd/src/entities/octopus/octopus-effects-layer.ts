@@ -29,6 +29,25 @@ export class OctopusEffectsLayer {
       const effectOverlay = new OctopusEffectOverlay({
         effects: this._effects,
         parentArtboard: this._parentArtboard,
+        fill: this._effects.patternFill,
+      }).convert()
+      if (effectOverlay != null) effects.push(effectOverlay)
+    }
+
+    if (this._effects.solidFill) {
+      const effectOverlay = new OctopusEffectOverlay({
+        effects: this._effects,
+        parentArtboard: this._parentArtboard,
+        fill: this._effects.solidFill,
+      }).convert()
+      if (effectOverlay != null) effects.push(effectOverlay)
+    }
+
+    if (this._effects.gradientFill) {
+      const effectOverlay = new OctopusEffectOverlay({
+        effects: this._effects,
+        parentArtboard: this._parentArtboard,
+        fill: this._effects.gradientFill,
       }).convert()
       if (effectOverlay != null) effects.push(effectOverlay)
     }
