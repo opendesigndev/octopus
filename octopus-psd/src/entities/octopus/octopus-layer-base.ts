@@ -2,16 +2,16 @@ import { v4 as uuidv4 } from 'uuid'
 
 import type { OctopusPSDConverter } from '../..'
 import type { SourceLayer } from '../../factories/create-source-layer'
-import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
+import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerGroup } from './octopus-layer-group'
 import { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
-import { getMapped, round } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { logWarn } from '../../services/instances/misc'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
-import { convertBlendMode } from '../../utils/convert'
+import { convertBlendMode, convertOpacity } from '../../utils/convert'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -81,7 +81,7 @@ export class OctopusLayerBase {
   }
 
   get opacity(): number {
-    return round(asNumber(this._sourceLayer.opacity, 100) / 100)
+    return convertOpacity(this._sourceLayer.opacity)
   }
 
   get type(): Octopus['LayerBase']['type'] | null {

@@ -70,6 +70,7 @@ export class OctopusEffectOverlay {
     const overlay = new OctopusEffectFillImage({
       imagePath: this.imagePath,
       transform,
+      opacity: this._fill?.opacity,
       layout: 'TILE',
       origin: 'ARTBOARD',
     }).convert()

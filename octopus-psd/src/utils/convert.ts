@@ -39,6 +39,14 @@ export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode']
   return typeof blendMode === 'string' && blendMode in BLEND_MODES ? BLEND_MODES[blendMode] : DEFAULTS.BLEND_MODE
 }
 
+export function convertOpacity(opacity: number | undefined): number {
+  return asFiniteNumber(opacity, 100) / 100
+}
+
+export function convertScale(scale: number | undefined): number {
+  return asFiniteNumber(scale, 100) / 100
+}
+
 export function convertColor(color: RawColor | null | undefined): Octopus['Color'] {
   return {
     r: asFiniteNumber(color?.red, 0) / 255,

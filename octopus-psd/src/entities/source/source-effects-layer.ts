@@ -1,4 +1,5 @@
 import type { RawLayerEffect } from '../../typings/raw'
+import { convertScale } from '../../utils/convert'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 
@@ -11,7 +12,7 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   get scale(): number {
-    return (this._rawValue?.scale?.value ?? 100) / 100
+    return convertScale(this._rawValue?.scale?.value)
   }
 
   get enabledAll(): boolean {
