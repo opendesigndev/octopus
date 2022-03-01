@@ -53,8 +53,11 @@ export class OctopusEffectFill {
     const fill = this._fill
     const parent = this._parent
     switch (this.fillType) {
-      case 'GRADIENT':
-        return new OctopusEffectFillGradient({ parent, fill }).convert()
+      case 'GRADIENT': {
+        const parentArtboard = parent.parentArtboard
+        const sourceLayerBounds = parent.sourceLayer.bounds
+        return new OctopusEffectFillGradient({ parentArtboard, fill, sourceLayerBounds }).convert()
+      }
       case 'IMAGE': {
         const transform = this.imageTransform
         if (transform === null) return null

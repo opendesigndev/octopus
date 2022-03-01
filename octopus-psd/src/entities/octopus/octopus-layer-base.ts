@@ -100,8 +100,9 @@ export class OctopusLayerBase {
 
   get effects(): Octopus['Effect'][] {
     const parentArtboard = this.parentArtboard
-    const effects = this._sourceLayer.layerEffects
-    return new OctopusEffectsLayer({ parentArtboard, effects }).convert()
+    const effects = this.sourceLayer.layerEffects
+    const sourceLayerBounds = this.sourceLayer.bounds
+    return new OctopusEffectsLayer({ parentArtboard, effects, sourceLayerBounds }).convert()
   }
 
   convertBase(): Octopus['LayerBase'] | null {

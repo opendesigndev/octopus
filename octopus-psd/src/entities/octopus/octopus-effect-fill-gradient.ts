@@ -3,23 +3,24 @@ import type { Octopus } from '../../typings/octopus'
 import { convertColor } from '../../utils/convert'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceGradientType } from '../../typings/source'
+import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
-import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import { logWarn } from '../../services/instances/misc'
+import { OctopusArtboard } from './octopus-artboard'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
 type OctopusFillGradientOptions = {
-  parent: OctopusLayerShapeShapeAdapter
+  parentArtboard: OctopusArtboard
+  sourceLayerBounds: SourceBounds
   fill: SourceEffectFill
 }
 
 export class OctopusEffectFillGradient {
-  protected _parent: OctopusLayerShapeShapeAdapter
+  protected _parentArtboard: OctopusArtboard
+  protected _sourceLayerBounds: SourceBounds
   protected _fill: SourceEffectFill
 
   static GRADIENT_TYPE_MAP = {
@@ -30,12 +31,17 @@ export class OctopusEffectFillGradient {
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
-    this._parent = options.parent
+    this._parentArtboard = options.parentArtboard
+    this._sourceLayerBounds = options.sourceLayerBounds
     this._fill = options.fill
   }
 
-  get sourceLayer(): SourceLayerShape {
-    return this._parent.sourceLayer
+  get parentArtboard(): OctopusArtboard {
+    return this._parentArtboard
+  }
+
+  get sourceLayerBounds(): SourceBounds {
+    return this._sourceLayerBounds
   }
 
   get fill(): SourceEffectFill {
@@ -81,11 +87,11 @@ export class OctopusEffectFillGradient {
 
   private get _transformAlignParams() {
     if (this.fill.align) {
-      const { width, height } = this.sourceLayer.bounds
+      const { width, height } = this.sourceLayerBounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
-    const { width, height } = this._parent.parentArtboard.dimensions
-    const { left, top } = this.sourceLayer.bounds
+    const { width, height } = this.parentArtboard.dimensions
+    const { left, top } = this.sourceLayerBounds
     return { width, height, boundTx: left, boundTy: top }
   }
 

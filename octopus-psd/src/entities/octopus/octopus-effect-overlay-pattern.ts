@@ -15,7 +15,7 @@ type OctopusFillOptions = {
   fill: SourceEffectFill
 }
 
-export class OctopusEffectOverlay {
+export class OctopusEffectOverlayPattern {
   protected _parentArtboard: OctopusArtboard
   protected _effects: SourceLayerEffects
   protected _fill: SourceEffectFill
@@ -73,8 +73,6 @@ export class OctopusEffectOverlay {
       layout: 'TILE',
       origin: 'ARTBOARD',
     }).convert()
-
-    // TODO Add effect opacity
 
     const visible = this.visible
     const blendMode = this.blendMode
