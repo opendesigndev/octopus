@@ -54,7 +54,6 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
     return {
       type: 'SHAPE',
       shape: this._shape,
-      shapes: [this._shape], // TODO remove when fixed in Octopus specification
     } as const
   }
 
