@@ -30,7 +30,7 @@ export class SourceText extends SourceEntity {
     return textStyles.map((style) => new SourceTextStyleRange(style))
   }
 
-  get boundingBox(): SourceBounds {
-    return getTextBoundsFor(this._rawValue?.boundingBox)
+  get bounds(): SourceBounds {
+    return getTextBoundsFor(this._rawValue?.bounds)
   }
 }

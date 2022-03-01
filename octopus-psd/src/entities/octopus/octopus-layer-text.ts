@@ -7,7 +7,7 @@ import { SourceTextStyle } from '../source/source-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { convertMatrix, pointsToPixels } from '../../utils/convert'
+import { createMatrix } from '../../utils/paper-factories'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -151,14 +151,20 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private get _textTransform(): Octopus['Transform'] {
-    return convertMatrix(this._sourceText.transform)
+    const { top, left } = this._sourceText.bounds
+
+    const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
+    const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
+    matrix.invert()
+    matrix.tx -= left
+    matrix.ty -= top
+    matrix.invert()
+
+    return matrix.values
   }
 
   private get _frame(): Octopus['TextFrame'] {
-    const boundingBox = this._sourceText.boundingBox
-    const resolution = this.parentArtboard.sourceArtboard.resolution
-    const width = pointsToPixels(boundingBox.width, resolution)
-    const height = pointsToPixels(boundingBox.height, resolution)
+    const { width, height } = this._sourceText.bounds
     return { mode: 'FIXED', size: { width, height } }
   }
 
@@ -175,7 +181,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return {
       value,
       defaultStyle,
-      baselinePolicy: 'FIXED_OFFSET',
+      baselinePolicy: 'FIXED_OFFSET', // TODO Fix when octopus3 schema is updated
       styles,
       textTransform,
       frame,
