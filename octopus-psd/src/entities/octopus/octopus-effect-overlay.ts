@@ -32,6 +32,13 @@ export class OctopusEffectOverlay {
     return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
   }
 
+  private get _offset(): [x: number, y: number] {
+    const offset = this._fill?.offset
+    if (offset === undefined) logWarn('Unknown fill offset', { fill: this._fill })
+    const { x, y } = offset ?? { x: 0, y: 0 }
+    return [x, y]
+  }
+
   get imageTransform(): Octopus['Transform'] | null {
     if (this._fill === undefined) return null
     const imagePath = this.imagePath
@@ -41,9 +48,9 @@ export class OctopusEffectOverlay {
       logWarn('Unknown image', { imagePath })
       return null
     }
-    const matrix = createMatrix(width, 0, 0, height, 0, 0)
+    const matrix = createMatrix(width, 0, 0, height, ...this._offset)
     matrix.scale(this._fill.scale)
-    matrix.rotate(-this._fill.angle, 0, 0) // TODO fix transform
+    matrix.rotate(-this._fill.angle, 0, 0)
     return matrix.values
   }
 
