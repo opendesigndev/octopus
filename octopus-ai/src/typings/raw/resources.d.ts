@@ -85,6 +85,10 @@ export type RawResourcesColorSpace = {
   [key: string]: Record<string, unknown>
 }
 
+export type RawResourcesExtGStateSmask = {
+  G?: RawResources
+}
+
 export type RawResourcesExtGState = {
   [key: string]: Partial<{
     AIS: boolean
@@ -92,8 +96,7 @@ export type RawResourcesExtGState = {
     CA: number
     OPM: number
     SA: boolean
-    //@todo will change this type when layer is created with non null value
-    SMask: null
+    SMask: RawResourcesExtGStateSmask
     OP: boolean
     Type: string
     ca: number
@@ -102,10 +105,43 @@ export type RawResourcesExtGState = {
   }>
 }
 
+export type RawResourcesShadingKeyFunctionFunction = Partial<{
+  C0: number[]
+  C1: number[]
+  Domain: number[]
+  FunctionType: number
+  N: number
+  ObjID: number
+}>
+
+export type RawResourcesShadingKeyFunction = Partial<{
+  Bounds: number[]
+  Domain: number[]
+  Encode: number[]
+  FunctionType: number
+  Functions: RawResourcesShadingKeyFunctionFunction[]
+}>
+
+export type RawResourcesShadingKey = Partial<{
+  AntiAlias: false
+  ColorSpace: [string] | string
+  Coords: number[]
+  Domain: number[]
+  Extend: boolean[]
+  Function: RawResourcesShadingKeyFunction
+  ShadingType: number
+  ObjID: number
+}>
+
+export type RawResourcesShading = {
+  [shadingName: string]: RawResourcesShadingKey
+}
+
 export type RawResources = {
   ColorSpace?: RawResourcesColorSpace
   ExtGState?: RawResourcesExtGState
   Font?: RawResourcesFont
   ProcSet?: string[]
   Properties?: RawResourcesProperties
+  Shading?: RawResourcesShading
 }

@@ -47,6 +47,7 @@ export function createSourceLayer(options: CreateLayerOptions): Nullable<SourceL
     Path: createSourceLayerShape,
     TextGroup: createSourceLayerText,
     MarkedContext: createSourceLayerGroup,
+    Shading: createSourceLayerShape,
   }
   const builder = builders[type as string]
   return typeof builder === 'function' ? builder(options) : null

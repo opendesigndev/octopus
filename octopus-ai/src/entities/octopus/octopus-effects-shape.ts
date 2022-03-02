@@ -2,6 +2,7 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import OctopusEffectStroke from './octopus-effect-stroke'
 import OctopusEffectFill, { ColorSpace } from './octopus-effect-color-fill'
+import OctopusEffectGradientFill from './octopus-effect-fill-gradient'
 
 import type SourceLayerShape from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
@@ -37,16 +38,28 @@ export default class OctopusEffectsShape {
       : []
   }
 
-  private _parseFills(): OctopusEffectFill[] {
-    return this._sourceLayer.fill
-      ? [
-          new OctopusEffectFill({
-            resources: this._resources,
-            sourceLayer: this._sourceLayer,
-            colorSpaceType: ColorSpace.NON_STROKING,
-          }),
-        ]
-      : []
+  private _parseFills(): (OctopusEffectFill | OctopusEffectGradientFill)[] {
+    const fills = []
+
+    if (this._sourceLayer.fill) {
+      fills.push(
+        new OctopusEffectFill({
+          resources: this._resources,
+          sourceLayer: this._sourceLayer,
+          colorSpaceType: ColorSpace.NON_STROKING,
+        })
+      )
+    }
+
+    if (this._sourceLayer.type === 'Shading') {
+      fills.push(
+        new OctopusEffectGradientFill({
+          resources: this._resources,
+          sourceLayer: this._sourceLayer,
+        })
+      )
+    }
+    return fills
   }
 
   convert(): ShapeEffects {

@@ -28,8 +28,8 @@ export function createRectPoints(coords: number[]): Coord[] {
   const points: Coord[] = [
     [x, y],
     [x + width, y],
-    [x + width, y - height],
-    [x, y - height],
+    [x + width, y + height],
+    [x, y + height],
   ]
   return points
 }

@@ -1,7 +1,5 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { invertYCooords } from '../../utils/coords'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw'
 import type SourceLayerShape from './source-layer-shape'
@@ -22,21 +20,16 @@ export default class SourceLayerShapeSubPath {
     this._rawValue = options.rawValue
     this._parent = options.parent
 
-    const artboardHeight = this._parent.parentArtboardHeight
-
     this._points = asArray(
       options.rawValue?.Points?.map((point) => ({
         ...point,
-        Coords: invertYCooords(point.Coords ?? [], artboardHeight),
+        Coords: asArray(point.Coords),
       }))
     )
 
     const rectangleCoords = options.rawValue?.Coords
 
-    // we are transforming y only. Coords have structure [x,y, width, height]
-    this._coords = rectangleCoords
-      ? [...rectangleCoords.slice(0, 1), artboardHeight - rectangleCoords[1], ...rectangleCoords.slice(2)]
-      : []
+    this._coords = asArray(rectangleCoords)
   }
 
   get type(): Nullable<string> {

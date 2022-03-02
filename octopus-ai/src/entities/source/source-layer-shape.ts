@@ -5,7 +5,7 @@ import SourceLayerShapeSubPath from './source-layer-shape-subpath'
 import { createSourceLayerShape } from '../../factories/create-source-layer'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawLayer, DashPattern, RawGraphicsState } from '../../typings/raw'
+import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
 
@@ -18,37 +18,34 @@ type SourceLayerShapeOptions = {
 export default class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawShapeLayer
   private _subpaths: SourceLayerShapeSubPath[]
-  private _sourceMask: SourceLayerShape[] | null
+  private _clippingPaths: SourceLayerShape[] | null
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
     this._rawValue = options.rawValue
     this._subpaths = this._initSubpaths()
-    this._sourceMask = this._initSourceMask()
+    this._clippingPaths = this._initClippingPaths()
   }
 
   private _initSubpaths() {
     const path = this.path
+
     return asArray(
       this._rawValue.Subpaths?.map((subPath) => new SourceLayerShapeSubPath({ path, rawValue: subPath, parent: this }))
     )
   }
 
-  private _initSourceMask() {
-    if (!this.clippingPath || !this.clippingPath.length) {
-      return null
-    }
-
-    const children = asArray(this.clippingPath)
-    return children.reduce((children: SourceLayerShape[], layer: RawLayer, i: number) => {
-      const sourceLayer = createSourceLayerShape({
-        layer,
-        parent: this as SourceLayerParent,
-        path: [...this.path, i],
-      })
-
-      return sourceLayer ? [...children, sourceLayer] : children
-    }, [])
+  private _initClippingPaths(): SourceLayerShape[] {
+    const children = asArray(this._clippingPath)
+    return children
+      .map((layer: RawShapeLayer, i: number) =>
+        createSourceLayerShape({
+          layer,
+          parent: this,
+          path: [...this.path, i],
+        })
+      )
+      .filter((sourceLayer) => !!sourceLayer) as SourceLayerShape[]
   }
 
   private _isRect() {
@@ -56,6 +53,10 @@ export default class SourceLayerShape extends SourceLayerCommon {
   }
 
   get name(): string {
+    if (this._rawValue.Name) {
+      return this._rawValue.Name
+    }
+
     return this._isRect() ? '<Rectangle>' : '<Path>'
   }
 
@@ -127,11 +128,15 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return Boolean(this._rawValue.Stroke)
   }
 
-  get clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+  private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
     return this.graphicsState?.ClippingPath
   }
 
-  get sourceMask(): SourceLayerShape[] | null {
-    return this._sourceMask
+  get clippingPaths(): SourceLayerShape[] | null {
+    return this._clippingPaths
+  }
+
+  get parentArtboardMediaBox(): RawArtboardMediaBox {
+    return this.parentArtboard?.mediaBox || [0, 0, 0, 0]
   }
 }

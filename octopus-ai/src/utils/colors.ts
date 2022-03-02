@@ -1,3 +1,5 @@
+import type { RawResourcesColorSpace } from '../typings/raw'
+
 export type RgbColorComponents = [number, number, number]
 
 export function getColorSpaceName(colorSpace: Record<string, unknown> | string | null): string | null {
@@ -91,6 +93,28 @@ export function parseColor(colorCompontents: number[]): number[] {
     .map((channel) => Math.min(channel, 1))
 }
 
-export function convertRGBToRGBA(color: number[]): number[] {
-  return color.map((c) => c / 255)
+export function convertRGBToRGBA(color: RgbColorComponents): RgbColorComponents {
+  return color.map((c) => c / 255) as RgbColorComponents
+}
+
+export default function convertColor(
+  color: number[],
+  colorSpace: RawResourcesColorSpace['key'] | string
+): RgbColorComponents {
+  const colorSpaceName = getColorSpaceName(colorSpace || null)
+
+  switch (colorSpace) {
+    case 'DeviceRGB':
+      return convertRGBToRGBA(convertDeviceRGB(color))
+    case 'DeviceCMYK':
+      return convertRGBToRGBA(convertDeviceCMYK(color))
+    case 'DeviceGray':
+      return convertRGBToRGBA(convertDeviceGray(color))
+    case 'ICCBased':
+      return convertRGBToRGBA(convertICCBased(color))
+    default:
+      //@todo: remove console logger
+      console.warn('convertColor', 'Unknown ColorSpace', { colorSpaceName })
+      return convertRGBToRGBA(guessColorSpaceByComponents(color))
+  }
 }

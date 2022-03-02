@@ -9,7 +9,7 @@ export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'typ
 
 // export default {
 //   'pass-through': 'PASS_THROUGH',
-//   normal: 'NORMAL',
+//   Normal: 'NORMAL', // updated
 //   darken: 'DARKEN',
 //   multiply: 'MULTIPLY',
 //   'color-burn': 'COLOR_BURN',
@@ -65,7 +65,6 @@ export default abstract class OctopusLayerCommon {
 
   get blendMode(): Octopus['LayerBase']['blendMode'] {
     const blendMode = this._sourceLayer.blendMode
-
     if (!blendMode) {
       return 'NORMAL'
     }

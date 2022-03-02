@@ -36,11 +36,11 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     this._sourceLayer = options.sourceLayer
   }
 
-  private _isRect(subPath: SourceLayerShapeSubPath) {
+  private _isRect(subPath: SourceLayerShapeSubPath): boolean {
     return subPath.type == 'Rect'
   }
 
-  private _parseRectangleCoords(coords: number[]) {
+  private _parseRectangleCoords(coords: number[]): { x0: number; y0: number; x1: number; y1: number } {
     const rectPoints = createRectPoints(coords)
     const [x0, y0] = calculateTopLeftCorner(rectPoints)
     const [x1, y1] = calculateBottomRightCorner(rectPoints)
@@ -48,16 +48,31 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return { x0, y0, x1, y1 }
   }
 
-  private _parseRect(shape: SourceLayerShapeSubPath): Octopus['PathRectangle'] {
-    const coords = shape.coords || [0, 0, 0, 0]
+  private _parseRect(coords: SourceLayerShapeSubPath['_coords']): Octopus['PathRectangle'] {
     const rectangle = this._parseRectangleCoords(coords)
-    const convertedShapeEffects = this._createShapeEffects()
 
     return {
       rectangle,
       type: 'RECTANGLE',
       transform: this._sourceLayer.transformMatrix,
-      ...convertedShapeEffects,
+    }
+  }
+
+  private _createClippingPaths(): Octopus['PathLike'][] {
+    return asArray(
+      this._sourceLayer.clippingPaths
+        ?.map((sourceLayer) => {
+          return { ...new OctopusLayerShape({ parent: this, sourceLayer })._getPath() }
+        })
+        .filter((path) => !!path) as Octopus['PathLike'][]
+    )
+  }
+
+  private _parseCompound(op: Octopus['CompoundPath']['op'], paths: Octopus['PathLike'][]): Octopus['CompoundPath'] {
+    return {
+      type: 'COMPOUND',
+      op,
+      paths,
     }
   }
 
@@ -122,14 +137,30 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
-  private _getPath(): Octopus['Shape']['path'] | null {
-    const sourceSubpath = this._sourceLayer.subpaths[0]
+  private _parseSourceShading(): Octopus['PathLike'] | null {
+    const paths = this._createClippingPaths().filter((path) => path)
+
+    if (paths.length) {
+      return this._parseCompound('INTERSECT', paths)
+    }
+
+    const coords = this._sourceLayer.parentArtboardMediaBox
+
+    return this._parseRect(coords)
+  }
+
+  private _getPath(sourceSubpath?: SourceLayerShapeSubPath): Octopus['PathLike'] | null {
+    if (this._sourceLayer.type === 'Shading') {
+      return this._parseSourceShading()
+    }
+
+    sourceSubpath = sourceSubpath ?? this._sourceLayer.subpaths[0]
     if (!sourceSubpath) {
       return null
     }
 
     if (this._isRect(sourceSubpath)) {
-      return this._parseRect(sourceSubpath)
+      return this._parseRect(sourceSubpath.coords ?? [0, 0, 0, 0])
     }
 
     return this._parsePath(sourceSubpath)
@@ -138,6 +169,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   private _getShapes(): Octopus['Shape'] | null {
     const path = this._getPath()
     const shapeEffects = this._createShapeEffects().convert()
+
     if (!path) {
       return null
     }
@@ -158,7 +190,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
     const shape = this._getShapes()
-
     if (!shape) {
       return null
     }
@@ -173,7 +204,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   convert(): Octopus['ShapeLayer'] | null {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
-
     if (!specific) {
       return null
     }

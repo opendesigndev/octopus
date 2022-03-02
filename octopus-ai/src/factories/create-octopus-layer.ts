@@ -65,6 +65,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable
     MarkedContext: createOctopusLayerGroup,
     Path: createOctopusLayerShape,
     TextGroup: createOctopusLayerText,
+    Shading: createOctopusLayerShape,
   }
   const builder = builders[type]
   return typeof builder === 'function' ? builder(options) : null

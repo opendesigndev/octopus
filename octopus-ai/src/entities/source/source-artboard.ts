@@ -5,7 +5,7 @@ import { createSourceLayer } from '../../factories/create-source-layer'
 import SourceResources from './source-resources'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawArtboardEntry } from '../../typings/raw/artboard'
+import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer } from '../../typings/raw/layer'
 
@@ -50,8 +50,12 @@ export default class SourceArtboard {
     return this._children
   }
 
+  get mediaBox(): RawArtboardMediaBox {
+    return this._rawArtboard.MediaBox ?? [0, 0, 0, 0]
+  }
+
   get dimensions(): { width: number; height: number } {
-    const [, , width, height] = asArray(this._rawArtboard.MediaBox)
+    const [, , width, height] = asArray(this.mediaBox)
 
     return {
       width: asNumber(width, 0),
