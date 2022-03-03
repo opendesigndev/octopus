@@ -1,14 +1,14 @@
-import type { RawLayerEffect } from '../../typings/raw'
+import type { RawLayerEffects } from '../../typings/raw'
 import { convertScale } from '../../utils/convert'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 
 export class SourceLayerEffects extends SourceEntity {
-  protected _rawValue: RawLayerEffect | undefined
+  protected _rawValue: RawLayerEffects | undefined
 
-  constructor(effect: RawLayerEffect | undefined) {
-    super(effect)
-    this._rawValue = effect
+  constructor(effects: RawLayerEffects | undefined) {
+    super(effects)
+    this._rawValue = effects
   }
 
   get scale(): number {
@@ -20,14 +20,17 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   get solidFill(): SourceEffectFill | undefined {
-    return new SourceEffectFill(this._rawValue?.solidFill)
+    const fill = this._rawValue?.solidFill
+    return fill !== undefined ? new SourceEffectFill(fill) : undefined
   }
 
   get gradientFill(): SourceEffectFill | undefined {
-    return new SourceEffectFill(this._rawValue?.gradientFill)
+    const fill = this._rawValue?.gradientFill
+    return fill !== undefined ? new SourceEffectFill(fill) : undefined
   }
 
   get patternFill(): SourceEffectFill | undefined {
-    return new SourceEffectFill(this._rawValue?.patternFill)
+    const fill = this._rawValue?.patternFill
+    return fill !== undefined ? new SourceEffectFill(fill) : undefined
   }
 }

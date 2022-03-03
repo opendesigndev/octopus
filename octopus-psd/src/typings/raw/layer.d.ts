@@ -1,18 +1,10 @@
 import type { RawLayerLayer } from './layer-layer'
 import type { RawLayerBackground } from './layer-background'
 import type { RawLayerSection } from './layer-section'
-import type { RawFill, RawLayerShape } from './layer-shape'
+import type { RawLayerShape } from './layer-shape'
 import type { RawLayerText } from './layer-text'
-import type { RawBlendOptions, RawBounds, RawUnitPercent } from './shared'
-
-export type RawLayerEffect = {
-  masterFXSwitch?: boolean
-  numModifyingFX?: number
-  solidFill?: RawFill
-  gradientFill?: RawFill
-  patternFill?: RawFill
-  scale?: RawUnitPercent
-}
+import type { RawBlendOptions, RawBounds } from './shared'
+import type { RawLayerEffects } from './effects'
 
 export type RawLayerCommon = {
   bounds?: RawBounds
@@ -23,7 +15,7 @@ export type RawLayerCommon = {
   imageName?: string
   name?: string
   visible?: boolean
-  layerEffects?: RawLayerEffect
+  layerEffects?: RawLayerEffects
 }
 
 export type RawLayer = RawLayerSection | RawLayerShape | RawLayerText | RawLayerBackground | RawLayerLayer
