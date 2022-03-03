@@ -76,12 +76,12 @@ export default class SourceLayerCommon {
     return this._parent.resources?.ExtGState?.[specifiedParameters]
   }
 
-  get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
-    return this.extGState?.SMask?.G?.Shading?.Sh0?.Function
+  get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {
+    return this.extGState?.BM
   }
 
-  get blendMode(): Nullable<string> {
-    return this.extGState?.BM
+  get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
+    return this.extGState?.SMask?.G?.Shading?.Sh0?.Function
   }
 
   get opacity(): Nullable<number> {

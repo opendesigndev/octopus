@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { BLEND_MODES } from '../../utils/blend-modes'
+
 import type SourceResources from '../source/source-resources'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -6,26 +7,6 @@ import type { OctopusLayerParent } from '../../typings/octopus-entities'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
-
-// export default {
-//   'pass-through': 'PASS_THROUGH',
-//   Normal: 'NORMAL', // updated
-//   darken: 'DARKEN',
-//   multiply: 'MULTIPLY',
-//   'color-burn': 'COLOR_BURN',
-//   lighten: 'LIGHTEN',
-//   screen: 'SCREEN',
-//   'color-dodge': 'COLOR_DODGE',
-//   overlay: 'OVERLAY',
-//   'soft-light': 'SOFT_LIGHT',
-//   'hard-light': 'HARD_LIGHT',
-//   difference: 'DIFFERENCE',
-//   exclusion: 'EXCLUSION',
-//   hue: 'HUE',
-//   saturation: 'SATURATION',
-//   color: 'COLOR',
-//   luminosity: 'LUMINOSITY',
-// } as const
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
@@ -64,12 +45,19 @@ export default abstract class OctopusLayerCommon {
   }
 
   get blendMode(): Octopus['LayerBase']['blendMode'] {
-    const blendMode = this._sourceLayer.blendMode
-    if (!blendMode) {
-      return 'NORMAL'
+    const blendModeKey = this._sourceLayer.blendMode
+
+    if (!blendModeKey) {
+      return BLEND_MODES.Normal
     }
 
-    return blendMode
+    const blendMode = BLEND_MODES[blendModeKey]
+
+    if (blendMode) {
+      return blendMode
+    }
+
+    return blendModeKey
       .replace(/\.?([A-Z][a-z]+)/g, (x, y) => `_${y.toUpperCase()}`)
       .replace(/^_/, '') as Octopus['LayerBase']['blendMode']
   }
