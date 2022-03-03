@@ -51,7 +51,7 @@ export class SourceEffectFill {
     return this._rawValue?.mode
   }
 
-  get opacity(): number | undefined {
+  get opacity(): number {
     return convertOpacity(this._rawValue?.opacity?.value)
   }
 

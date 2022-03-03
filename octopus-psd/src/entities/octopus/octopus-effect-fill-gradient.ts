@@ -64,7 +64,7 @@ export class OctopusEffectFillGradient {
 
   private _getGradientStop(stop: SourceEffectFillGradientColor): FillGradientStop {
     const STOP_MAX_LOCATION = 4096
-    const color = convertColor(stop?.color)
+    const color = convertColor(stop?.color, this._fill.opacity)
     const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
     const position = location / STOP_MAX_LOCATION
     return { color, position }

@@ -44,7 +44,8 @@ export class OctopusEffectOverlayColor {
       logWarn('Unknown effect overlay color', { fill: this._fill })
       return null
     }
-    const overlay = new OctopusEffectFillColor({ color: this.color }).convert()
+    const opacity = this._fill.opacity
+    const overlay = new OctopusEffectFillColor({ color, opacity }).convert()
 
     // TODO Add effect opacity
 

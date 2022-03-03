@@ -46,11 +46,11 @@ export function convertScale(scale: number | undefined): number {
   return asFiniteNumber(scale, 100) / 100
 }
 
-export function convertColor(color: RawColor | null | undefined): Octopus['Color'] {
+export function convertColor(color: RawColor | null | undefined, opacity?: number): Octopus['Color'] {
   return {
     r: asFiniteNumber(color?.red, 0) / 255,
     g: asFiniteNumber(color?.green, 0) / 255,
     b: asFiniteNumber(color?.blue, 0) / 255,
-    a: 1,
+    a: opacity ?? 1,
   }
 }
