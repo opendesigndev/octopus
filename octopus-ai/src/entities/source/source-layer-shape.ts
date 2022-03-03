@@ -92,9 +92,9 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.LineJoin || 0
   }
 
-  //   get lineCap(): number {
-  //     return this.graphicsState?.LineCap || 0
-  //   }
+  get lineCap(): number {
+    return this.graphicsState?.LineCap || 0
+  }
 
   get colorStroking(): Nullable<number[]> {
     return this.graphicsState?.ColorStroking
@@ -124,8 +124,8 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return Boolean(this._rawValue.Fill)
   }
 
-  get stroke(): boolean {
-    return Boolean(this._rawValue.Stroke)
+  get stroke(): Nullable<boolean> {
+    return this._rawValue.Stroke
   }
 
   private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {

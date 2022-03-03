@@ -120,7 +120,8 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     const normalizedPoints = this._normalizePoints(validRawPoints)
     const points = normalizedPoints.map((point) => new Point(point).convert())
-    const closed = !this._sourceLayer.stroke
+    const forceClosed = !(this._sourceLayer.stroke ?? true)
+    const closed = this._sourceLayer.subpaths[0].closed ?? forceClosed
     const paperShape = createShape({ closed, points })
 
     return paperShape?.pathData ?? OctopusLayerShape.DEFAULT_GEOMETRY

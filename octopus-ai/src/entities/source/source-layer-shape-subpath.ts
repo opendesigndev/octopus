@@ -36,6 +36,10 @@ export default class SourceLayerShapeSubPath {
     return this._rawValue.Type
   }
 
+  get closed(): Nullable<boolean> {
+    return this._rawValue.Closed
+  }
+
   get coords(): Nullable<number[]> {
     return this._coords
   }

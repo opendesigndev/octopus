@@ -25,11 +25,6 @@ export default class OctopusEffectStroke {
     this._sourceLayer = options.sourceLayer
   }
 
-  // private _getColorSpaceNonStroking(){
-  //     const colorSpaceNonStroking = this._sourceLayer.colorSpaceNonStroking
-  //     return this._resources.getColorSpaceValue(colorSpaceNonStroking)
-  //  }
-
   private _parseDashing() {
     const dashing = this._sourceLayer.dashing
     const dashOffset = this._sourceLayer.dashOffset
@@ -42,7 +37,7 @@ export default class OctopusEffectStroke {
   }
 
   private get _lineCap() {
-    return OctopusEffectStroke.LINE_CAP_MAP[this._sourceLayer.lineJoin]
+    return OctopusEffectStroke.LINE_CAP_MAP[this._sourceLayer.lineCap]
   }
 
   convert(): Octopus['VectorStroke'] | null {

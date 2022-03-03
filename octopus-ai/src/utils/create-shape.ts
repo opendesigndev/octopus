@@ -59,5 +59,10 @@ export default function createShape(subpath: OctopusSubpath): Nullable<paper.Pat
   if (!shape) {
     return null
   }
+
+  if (subpath.closed) {
+    shape.closePath()
+  }
+
   return shape
 }
