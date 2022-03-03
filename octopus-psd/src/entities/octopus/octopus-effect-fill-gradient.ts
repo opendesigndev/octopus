@@ -98,6 +98,7 @@ export class OctopusEffectFillGradient {
   private get _transformLinear(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
+    const offset = this.fill.offset(width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, scaleX: scale, scaleY: scale, center: { x: 0.5, y: 0.5 } })
@@ -109,14 +110,15 @@ export class OctopusEffectFillGradient {
     const skewY = p2.y - p1.y
     const skewX = p1.y - p2.y
     const scaleY = p2.x - p1.x
-    const tx = p1.x - boundTx
-    const ty = p1.y - boundTy
+    const tx = p1.x - boundTx + offset.x
+    const ty = p1.y - boundTy + offset.y
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
   private get _transformRadial(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
+    const offset = this.fill.offset(width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({
@@ -140,8 +142,8 @@ export class OctopusEffectFillGradient {
     const skewY = p2.y - p1.y
     const skewX = p3.x - p1.x
     const scaleY = p3.y - p1.y
-    const tx = p1.x - boundTx
-    const ty = p1.y - boundTy
+    const tx = p1.x - boundTx + offset.x
+    const ty = p1.y - boundTy + offset.y
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 

@@ -50,7 +50,7 @@ export class OctopusEffectOverlayColor {
 
     const visible = this.visible
     const blendMode = this.blendMode
-    const basis = 'BODY_PLUS_STROKES'
+    const basis = 'FILL'
     return { type: 'OVERLAY', visible, blendMode, basis, overlay }
   }
 }

@@ -1,5 +1,5 @@
 import type { RawBlendMode, RawFill, RawFillPattern } from '../../typings/raw'
-import type { SourceColor, SourceGradientType, SourcePointXY } from '../../typings/source'
+import type { SourceColor, SourceGradientType, SourceVectorXY } from '../../typings/source'
 import { convertOpacity, convertScale } from '../../utils/convert'
 import { getColorFor } from '../../utils/source'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
@@ -55,8 +55,19 @@ export class SourceEffectFill {
     return convertOpacity(this._rawValue?.opacity?.value)
   }
 
-  get offset(): SourcePointXY | undefined {
-    const { horizontal, vertical } = this._rawValue?.phase ?? {}
-    return horizontal !== undefined && vertical !== undefined ? { x: horizontal, y: vertical } : undefined
+  get phase(): SourceVectorXY {
+    const { horizontal: x, vertical: y } = this._rawValue?.phase ?? {}
+    if (x !== undefined && y !== undefined) return { x, y }
+    return { x: 0, y: 0 }
+  }
+
+  offset(width: number, height: number): SourceVectorXY {
+    const { horizontal: h, vertical: v } = this._rawValue?.offset ?? {}
+    if (h?.value !== undefined && v?.value !== undefined) {
+      const x = (h.value * width) / 100
+      const y = (v.value * height) / 100
+      return { x, y }
+    }
+    return { x: 0, y: 0 }
   }
 }

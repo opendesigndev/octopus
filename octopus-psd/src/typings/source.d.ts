@@ -5,6 +5,7 @@ export type SourceCombineOperation = RawCombineOperation
 export type SourceGradientType = RawGradientType
 
 export type SourcePointXY = { x: number; y: number }
+export type SourceVectorXY = { x: number; y: number }
 
 export type SourceBounds = {
   bottom: number

@@ -32,9 +32,7 @@ export class OctopusEffectOverlayPattern {
   }
 
   private get _offset(): [x: number, y: number] {
-    const offset = this._fill?.offset
-    if (offset === undefined) logWarn('Unknown fill offset', { fill: this._fill })
-    const { x, y } = offset ?? { x: 0, y: 0 }
+    const { x, y } = this._fill?.phase
     return [x, y]
   }
 
@@ -76,7 +74,7 @@ export class OctopusEffectOverlayPattern {
 
     const visible = this.visible
     const blendMode = this.blendMode
-    const basis = 'BODY_PLUS_STROKES'
+    const basis = 'FILL'
     return { type: 'OVERLAY', visible, blendMode, basis, overlay }
   }
 }
