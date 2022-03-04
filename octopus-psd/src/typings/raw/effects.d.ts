@@ -40,7 +40,6 @@ export type RawFill = {
   angle?: RawUnitAngle
   Angl?: RawUnitAngle
   class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
-  paintType?: 'solidColor' | 'gradientFill' | 'pattern'
   color?: RawColor
   dither?: boolean
   gradient?: RawFillGradient
@@ -53,25 +52,20 @@ export type RawFill = {
   enabled?: boolean
   mode?: RawBlendMode
   opacity?: RawUnitPercent
-  phase?: RawPointHV
+  phase?: RawPointHV | RawShapeStrokeOffset
   present?: boolean
   showInDialog?: boolean
   overprint?: boolean
   size?: number
-  style?: 'outsetFrame' | 'insetFrame' | 'centeredFrame'
 }
 
-export type RawEffectStroke = {
-  color?: RawColor
-  enabled?: boolean
-  mode?: 'normal'
-  opacity?: RawUnitPercent
+export type RawEffectStrokeLineAlignment = 'outsetFrame' | 'insetFrame' | 'centeredFrame'
+
+export type RawEffectStroke = RawFill & {
+  paintType?: 'solidColor' | 'gradientFill' | 'pattern'
   overprint?: boolean
-  paintType?: 'solidColor' | 'gradientFill'
-  present?: boolean
-  showInDialog?: boolean
   size?: number
-  style?: 'outsetFrame'
+  style?: RawEffectStrokeLineAlignment
 }
 
 export type RawLayerEffects = {
@@ -80,6 +74,6 @@ export type RawLayerEffects = {
   solidFill?: RawFill
   gradientFill?: RawFill
   patternFill?: RawFill
-  frameFX?: RawFill
+  frameFX?: RawEffectStroke
   scale?: RawUnitPercent
 }

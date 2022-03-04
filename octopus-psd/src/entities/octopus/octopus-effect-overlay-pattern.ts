@@ -8,20 +8,24 @@ import { logWarn } from '../../services/instances/misc'
 import { createMatrix } from '../../utils/paper-factories'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { convertBlendMode } from '../../utils/convert'
+import type { SourceBounds } from '../../typings/source'
 
 type OctopusFillOptions = {
   parentArtboard: OctopusArtboard
+  sourceLayerBounds: SourceBounds
   effects: SourceLayerEffects
   fill: SourceEffectFill
 }
 
 export class OctopusEffectOverlayPattern {
   protected _parentArtboard: OctopusArtboard
+  protected _sourceLayerBounds: SourceBounds
   protected _effects: SourceLayerEffects
   protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
     this._parentArtboard = options.parentArtboard
+    this._sourceLayerBounds = options.sourceLayerBounds
     this._effects = options.effects
     this._fill = options.fill
   }
@@ -32,7 +36,8 @@ export class OctopusEffectOverlayPattern {
   }
 
   private get _offset(): [x: number, y: number] {
-    const { x, y } = this._fill?.phase
+    const { width, height } = this._sourceLayerBounds
+    const { x, y } = this._fill?.offset(width, height)
     return [x, y]
   }
 

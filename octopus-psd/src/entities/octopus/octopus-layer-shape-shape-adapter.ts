@@ -3,7 +3,7 @@ import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
 import { OctopusEffectFill } from './octopus-effect-fill'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusStroke } from './octopus-stroke'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
@@ -32,12 +32,18 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
   }
 
   private get _fills(): Octopus['Fill'][] {
-    const fill = new OctopusEffectFill({ parent: this, fill: this.sourceLayer.fill }).convert()
+    const parentArtboard = this.parentArtboard
+    const sourceLayerBounds = this.sourceLayer.bounds
+    const fill = new OctopusEffectFill({ parentArtboard, sourceLayerBounds, fill: this.sourceLayer.fill }).convert()
     return fill ? [fill] : []
   }
 
   private get _strokes(): Octopus['VectorStroke'][] {
-    const stroke = new OctopusEffectStroke({ parent: this }).convert()
+    const stroke = new OctopusStroke({
+      parentArtboard: this.parentArtboard,
+      sourceLayerBounds: this.sourceLayer.bounds,
+      stroke: this.sourceLayer.stroke,
+    }).convert()
     return stroke ? [stroke] : []
   }
 

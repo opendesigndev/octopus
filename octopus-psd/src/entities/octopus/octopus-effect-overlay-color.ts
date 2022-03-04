@@ -47,8 +47,6 @@ export class OctopusEffectOverlayColor {
     const opacity = this._fill.opacity
     const overlay = new OctopusEffectFillColor({ color, opacity }).convert()
 
-    // TODO Add effect opacity
-
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'

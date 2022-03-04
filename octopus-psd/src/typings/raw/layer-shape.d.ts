@@ -15,11 +15,6 @@ export type RawPath = {
   pathComponents?: RawPathComponent[]
 }
 
-export type RawShapeStrokeOffset = {
-  horizontal?: RawUnitPercent
-  vertical?: RawUnitPercent
-}
-
 export type RawStrokeStyleLineAlignment =
   | 'strokeStyleAlignInside'
   | 'strokeStyleAlignCenter'

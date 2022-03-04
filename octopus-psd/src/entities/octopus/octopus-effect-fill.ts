@@ -1,5 +1,4 @@
 import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
@@ -8,18 +7,23 @@ import path from 'path'
 import { FOLDER_IMAGES, FOLDER_PATTERNS } from '../../utils/const'
 import { createMatrix } from '../../utils/paper-factories'
 import { logWarn } from '../../services/instances/misc'
+import type { SourceBounds } from '../../typings/source'
+import type { OctopusArtboard } from './octopus-artboard'
 
 type OctopusFillOptions = {
-  parent: OctopusLayerShapeShapeAdapter
+  parentArtboard: OctopusArtboard
+  sourceLayerBounds: SourceBounds
   fill: SourceEffectFill
 }
 
 export class OctopusEffectFill {
-  protected _parent: OctopusLayerShapeShapeAdapter
+  protected _parentArtboard: OctopusArtboard
+  protected _sourceLayerBounds: SourceBounds
   protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
-    this._parent = options.parent
+    this._parentArtboard = options.parentArtboard
+    this._sourceLayerBounds = options.sourceLayerBounds
     this._fill = options.fill
   }
 
@@ -35,15 +39,21 @@ export class OctopusEffectFill {
     return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
   }
 
+  private get _offset(): [x: number, y: number] {
+    const { width, height } = this._sourceLayerBounds
+    const { x, y } = this._fill?.offset(width, height)
+    return [x, y]
+  }
+
   get imageTransform(): Octopus['Transform'] | null {
     const imagePath = this.imagePath
-    const images = this._parent.parentArtboard.sourceDesign.images
+    const images = this._parentArtboard.sourceDesign.images
     const { width, height } = images.find((img) => img.path === imagePath) ?? {}
     if (width === undefined || height === undefined) {
       logWarn('Unknown image', { imagePath })
       return null
     }
-    const matrix = createMatrix(width, 0, 0, height, 0, 0)
+    const matrix = createMatrix(width, 0, 0, height, ...this._offset)
     matrix.scale(this._fill.scale)
     matrix.rotate(-this._fill.angle, 0, 0)
     return matrix.values
@@ -51,11 +61,10 @@ export class OctopusEffectFill {
 
   convert(): Octopus['Fill'] | null {
     const fill = this._fill
-    const parent = this._parent
     switch (this.fillType) {
       case 'GRADIENT': {
-        const parentArtboard = parent.parentArtboard
-        const sourceLayerBounds = parent.sourceLayer.bounds
+        const parentArtboard = this._parentArtboard
+        const sourceLayerBounds = this._sourceLayerBounds
         return new OctopusEffectFillGradient({ parentArtboard, fill, sourceLayerBounds }).convert()
       }
       case 'IMAGE': {
@@ -71,7 +80,8 @@ export class OctopusEffectFill {
       case 'COLOR': {
         const color = fill.color
         if (color === null) return null
-        return new OctopusEffectFillColor({ color }).convert()
+        const opacity = fill.opacity
+        return new OctopusEffectFillColor({ color, opacity }).convert()
       }
       default:
         return null

@@ -43,8 +43,6 @@ export class OctopusEffectOverlayGradient {
     const overlay = new OctopusEffectFillGradient({ parentArtboard, sourceLayerBounds, fill }).convert()
     if (overlay === null) return null
 
-    // TODO Add effect opacity
-
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'

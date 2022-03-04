@@ -1,6 +1,7 @@
 import type { RawLayerEffects } from '../../typings/raw'
 import { convertScale } from '../../utils/convert'
 import { SourceEffectFill } from './source-effect-fill'
+import { SourceEffectStroke } from './source-effect-stroke'
 import { SourceEntity } from './source-entity'
 
 export class SourceLayerEffects extends SourceEntity {
@@ -32,5 +33,10 @@ export class SourceLayerEffects extends SourceEntity {
   get patternFill(): SourceEffectFill | undefined {
     const fill = this._rawValue?.patternFill
     return fill !== undefined ? new SourceEffectFill(fill) : undefined
+  }
+
+  get stroke(): SourceEffectStroke | undefined {
+    const fill = this._rawValue?.frameFX
+    return fill !== undefined ? new SourceEffectStroke(fill) : undefined
   }
 }

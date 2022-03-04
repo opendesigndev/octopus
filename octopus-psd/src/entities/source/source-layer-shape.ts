@@ -4,7 +4,7 @@ import type { SourceLayerParent } from './source-layer-common'
 import { SourcePath } from './source-path'
 import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
-import { SourceEffectStroke } from './source-effect-stroke'
+import { SourceStroke } from './source-stroke'
 import { SourceShapeMask } from './source-shape-mask'
 import { SourceBounds } from '../../typings/source'
 
@@ -43,8 +43,8 @@ export class SourceLayerShape extends SourceLayerCommon {
     return new SourceEffectFill(this._rawValue.fill)
   }
 
-  get stroke(): SourceEffectStroke {
-    return new SourceEffectStroke(this._rawValue.strokeStyle)
+  get stroke(): SourceStroke {
+    return new SourceStroke(this._rawValue.strokeStyle)
   }
 
   get mask(): SourceShapeMask {

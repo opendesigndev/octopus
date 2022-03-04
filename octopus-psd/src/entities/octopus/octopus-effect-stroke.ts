@@ -1,50 +1,40 @@
 import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
-import { SourceEffectStroke } from '../source/source-effect-stroke'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { logWarn } from '../../services/instances/misc'
+import type { OctopusArtboard } from './octopus-artboard'
+import type { SourceBounds } from '../../typings/source'
+import type { SourceEffectStroke } from '../source/source-effect-stroke'
+import type { SourceLayerEffects } from '../source/source-effects-layer'
+import { convertBlendMode } from '../../utils/convert'
 
-type OctopusStrokeOptions = {
-  parent: OctopusLayerShapeShapeAdapter
-}
-
-type Style = {
-  style: Octopus['VectorStroke']['style']
-  thickness: Octopus['VectorStroke']['thickness']
-  dashing?: Octopus['VectorStroke']['dashing']
+type OctopusEffectStrokeOptions = {
+  parentArtboard: OctopusArtboard
+  effects: SourceLayerEffects
+  stroke: SourceEffectStroke
+  sourceLayerBounds: SourceBounds
 }
 
 export class OctopusEffectStroke {
-  protected _parent: OctopusLayerShapeShapeAdapter
+  protected _parentArtboard: OctopusArtboard
+  protected _effects: SourceLayerEffects
+  protected _stroke: SourceEffectStroke
+  protected _sourceLayerBounds: SourceBounds
 
   static STROKE_POSITION_MAP = {
-    strokeStyleAlignCenter: 'CENTER',
-    strokeStyleAlignInside: 'INSIDE',
-    strokeStyleAlignOutside: 'OUTSIDE',
+    centeredFrame: 'CENTER',
+    insetFrame: 'INSIDE',
+    outsetFrame: 'OUTSIDE',
   } as const
 
-  static STROKE_LINE_CAP_MAP = {
-    strokeStyleButtCap: 'BUTT',
-    strokeStyleRoundCap: 'ROUND',
-    strokeStyleSquareCap: 'SQUARE',
-  } as const
-
-  static STROKE_LINE_JOIN_MAP = {
-    strokeStyleMiterJoin: 'MITER',
-    strokeStyleRoundJoin: 'ROUND',
-    strokeStyleBevelJoin: 'BEVEL',
-  } as const
-
-  constructor(options: OctopusStrokeOptions) {
-    this._parent = options.parent
+  constructor(options: OctopusEffectStrokeOptions) {
+    this._parentArtboard = options.parentArtboard
+    this._effects = options.effects
+    this._stroke = options.stroke
+    this._sourceLayerBounds = options.sourceLayerBounds
   }
 
-  private get _stroke(): SourceEffectStroke {
-    return this._parent.sourceLayer.stroke
-  }
-
-  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+  private get _position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
     const lineAlignment = this._stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusEffectStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
@@ -54,54 +44,39 @@ export class OctopusEffectStroke {
     return result
   }
 
-  get lineCap(): 'BUTT' | 'ROUND' | 'SQUARE' | null {
-    const lineCap = this._stroke.lineCap
-    const result = getMapped(lineCap, OctopusEffectStroke.STROKE_LINE_CAP_MAP, undefined)
-    if (!result) {
-      logWarn('Unknown Stroke line cap', { lineCap, stroke: this._stroke })
-      return null
-    }
-    return result
-  }
-
-  get lineJoin(): 'ROUND' | 'MITER' | 'BEVEL' | null {
-    const lineJoin = this._stroke.lineJoin
-    const result = getMapped(lineJoin, OctopusEffectStroke.STROKE_LINE_JOIN_MAP, undefined)
-    if (!result) {
-      logWarn('Unknown Stroke line join', { lineJoin, stroke: this._stroke })
-      return null
-    }
-    return result
-  }
-
-  get fill(): Octopus['Fill'] | null {
+  private get _fill(): Octopus['Fill'] | null {
+    const parentArtboard = this._parentArtboard
+    const sourceLayerBounds = this._sourceLayerBounds
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parent: this._parent, fill }).convert()
+    return new OctopusEffectFill({ parentArtboard, sourceLayerBounds, fill }).convert()
   }
 
-  get style(): Style {
+  get stroke(): Octopus['Stroke'] | null {
     const thickness = this._stroke.lineWidth
-    const dashing = this._stroke.lineDashSet
-    if (dashing === undefined) return { style: 'SOLID' as const, thickness }
-    return {
-      style: 'DASHED' as const,
-      thickness,
-      dashing: dashing.map((dash) => dash * thickness),
-    }
+    const position = this._position
+    const fill = this._fill
+    if (thickness === null) return null
+    if (position === null) return null
+    if (fill === null) return null
+    return { thickness, position, fill }
   }
 
-  convert(): Octopus['VectorStroke'] | null {
+  get visible(): boolean {
+    const enabled = this._stroke?.enabled ?? false
+    const enabledAll = this._effects.enabledAll ?? false
+    return enabledAll && enabled
+  }
+
+  get blendMode(): Octopus['BlendMode'] {
+    return convertBlendMode(this._stroke?.blendMode)
+  }
+
+  convert(): Octopus['EffectStroke'] | null {
     if (!this._stroke.enabled) return null
-    const fill = this.fill
-    const position = this.position
-    const lineJoin = this.lineJoin
-    const lineCap = this.lineCap
-
-    if (fill === null) return null
-    if (position === null) return null
-    if (lineCap === null) return null
-    if (lineJoin === null) return null
-
-    return { fill, position, lineJoin, lineCap, ...this.style }
+    const stroke = this.stroke
+    if (stroke === null) return null
+    const visible = this.visible
+    const blendMode = this.blendMode
+    return { type: 'STROKE', stroke, visible, blendMode, basis: 'BODY_PLUS_STROKES' }
   }
 }

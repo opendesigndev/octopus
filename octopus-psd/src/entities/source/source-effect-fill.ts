@@ -55,14 +55,10 @@ export class SourceEffectFill {
     return convertOpacity(this._rawValue?.opacity?.value)
   }
 
-  get phase(): SourceVectorXY {
-    const { horizontal: x, vertical: y } = this._rawValue?.phase ?? {}
-    if (x !== undefined && y !== undefined) return { x, y }
-    return { x: 0, y: 0 }
-  }
-
   offset(width: number, height: number): SourceVectorXY {
-    const { horizontal: h, vertical: v } = this._rawValue?.offset ?? {}
+    const { horizontal: h, vertical: v } = this._rawValue?.offset ?? this._rawValue?.phase ?? {}
+    if (typeof h === 'number' && typeof v === 'number') return { x: h, y: v }
+    if (typeof h === 'number' || typeof v === 'number') return { x: 0, y: 0 }
     if (h?.value !== undefined && v?.value !== undefined) {
       const x = (h.value * width) / 100
       const y = (v.value * height) / 100
