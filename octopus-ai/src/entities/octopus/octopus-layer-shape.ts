@@ -36,8 +36,12 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     this._sourceLayer = options.sourceLayer
   }
 
-  private _isRect(subPath: SourceLayerShapeSubPath): boolean {
-    return subPath.type == 'Rect'
+  private _isRect(subPaths: SourceLayerShapeSubPath[]): boolean {
+    if (subPaths.length > 1) {
+      return false
+    }
+
+    return subPaths[0].type === 'Rect'
   }
 
   private _parseRectangleCoords(coords: number[]): { x0: number; y0: number; x1: number; y1: number } {
@@ -112,23 +116,28 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }, [])
   }
 
-  private _createGeometry(shape: SourceLayerShapeSubPath): string {
-    const validRawPoints = asArray(shape.points?.filter(isValid))
-    if (validRawPoints.length === 0) {
+  private _createGeometry(subPaths: SourceLayerShapeSubPath[]): string {
+    const mergedPoints = subPaths.reverse().reduce((points: RawShapeLayerSubPathPoint[], shape) => {
+      const validRawPoints = asArray(shape.points?.filter(isValid))
+      return [...points, ...validRawPoints]
+    }, [])
+
+    if (mergedPoints.length === 0) {
       return OctopusLayerShape.DEFAULT_GEOMETRY
     }
 
-    const normalizedPoints = this._normalizePoints(validRawPoints)
+    const normalizedPoints = this._normalizePoints(mergedPoints)
     const points = normalizedPoints.map((point) => new Point(point).convert())
+
     const forceClosed = !(this._sourceLayer.stroke ?? true)
-    const closed = this._sourceLayer.subpaths[0].closed ?? forceClosed
+    const closed = subPaths[0].closed ?? forceClosed
     const paperShape = createShape({ closed, points })
 
     return paperShape?.pathData ?? OctopusLayerShape.DEFAULT_GEOMETRY
   }
 
-  private _parsePath(shape: SourceLayerShapeSubPath): Octopus['Path'] {
-    const geometry = this._createGeometry(shape)
+  private _parsePath(paths: SourceLayerShapeSubPath[]): Octopus['Path'] {
+    const geometry = this._createGeometry(paths)
     const transform = this._sourceLayer.transformMatrix
 
     return {
@@ -150,21 +159,21 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return this._parseRect(coords)
   }
 
-  private _getPath(sourceSubpath?: SourceLayerShapeSubPath): Octopus['PathLike'] | null {
+  private _getPath(): Octopus['PathLike'] | null {
     if (this._sourceLayer.type === 'Shading') {
       return this._parseSourceShading()
     }
 
-    sourceSubpath = sourceSubpath ?? this._sourceLayer.subpaths[0]
-    if (!sourceSubpath) {
+    const sourceSubpaths = this._sourceLayer.subpaths
+    if (!sourceSubpaths || !sourceSubpaths.length) {
       return null
     }
 
-    if (this._isRect(sourceSubpath)) {
-      return this._parseRect(sourceSubpath.coords ?? [0, 0, 0, 0])
+    if (this._isRect(sourceSubpaths)) {
+      return this._parseRect(sourceSubpaths[0].coords ?? [0, 0, 0, 0])
     }
 
-    return this._parsePath(sourceSubpath)
+    return this._parsePath(sourceSubpaths)
   }
 
   private _getShapes(): Octopus['Shape'] | null {
