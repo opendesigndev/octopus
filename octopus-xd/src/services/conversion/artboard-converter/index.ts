@@ -21,8 +21,6 @@ export default class ArtboardConverter {
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    throw 1 /** @TODO handle by converted artboards */
-    /** @TODO investigate why images are transient on failed artboards */
     return new OctopusArtboard({
       octopusXdConverter: this._octopusXdConverter,
       targetArtboardId: this._targetArtboardId,

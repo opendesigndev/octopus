@@ -2,11 +2,12 @@
   "name": "@avocode/octopus-xd",
   "version": "3.0.0-rc.1",
   "license": "UNLICENSED",
-  "main": "dist/src/index.js",
+  "main": "lib/src/index.js",
   "scripts": {
     "clean": "npx rimraf ./node_modules ./lib ./workdir",
-    "convert:all": "npx ts-node ./scripts/convert-all.ts",
-    "clean-workdir": "npx rimraf ./workdir/*",
+    "convert:all": "npx ts-node ./scripts/convert-design.ts",
+    "convert:all:debug": "npx ts-node ./scripts/convert-design-debug.ts",
+    "clean:workdir": "npx rimraf ./workdir/*",
     "build": "npx tsc --build ./tsconfig.json",
     "prepare": "npx rimraf ./lib && yarn run build",
     "watch": "npx tsc -w",
@@ -39,6 +40,6 @@
   },
   "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "files": [
-    "dist/src"
+    "lib/src"
   ]
 }
