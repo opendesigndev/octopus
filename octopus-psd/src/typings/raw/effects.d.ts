@@ -35,7 +35,13 @@ export type RawShapeStrokeOffset = {
   vertical?: RawUnitPercent
 }
 
-export type RawFill = {
+export type RawEffectCommon = {
+  enabled?: boolean
+  present?: boolean
+  showInDialog?: boolean
+}
+
+export type RawFill = RawEffectCommon & {
   align?: boolean
   angle?: RawUnitAngle
   Angl?: RawUnitAngle
@@ -49,14 +55,33 @@ export type RawFill = {
   reverse?: boolean
   scale?: RawUnitPercent
   type?: RawGradientType
-  enabled?: boolean
   mode?: RawBlendMode
   opacity?: RawUnitPercent
   phase?: RawPointHV | RawShapeStrokeOffset
-  present?: boolean
-  showInDialog?: boolean
-  overprint?: boolean
-  size?: number
+}
+
+export type RawTransferSpec = {
+  curve?: RawPointHV[]
+  name?: 'Linear'
+}
+
+export type RawEffectShadow = RawEffectCommon & {
+  antiAlias?: boolean
+  blur?: number
+  chokeMatte?: number
+  color?: RawColor
+  distance?: number
+  localLightingAngle?: RawUnitAngle
+  mode?: RawBlendMode
+  noise?: RawUnitPercent
+  opacity?: RawUnitPercent
+  transferSpec?: RawTransferSpec
+  useGlobalAngle?: boolean
+}
+
+export type RawEffectGlow = RawEffectShadow & {
+  glowTechnique?: 'softMatte'
+  innerGlowSource?: 'edgeGlow'
 }
 
 export type RawEffectStrokeLineAlignment = 'outsetFrame' | 'insetFrame' | 'centeredFrame'
@@ -68,6 +93,40 @@ export type RawEffectStroke = RawFill & {
   style?: RawEffectStrokeLineAlignment
 }
 
+export type RawEffectBevelEmboss = RawEffectCommon & {
+  antialiasGloss?: boolean
+  bevelDirection?: 'stampIn'
+  bevelStyle?: 'innerBevel'
+  bevelTechnique?: 'softMatte'
+  blur?: number
+  highlightColor?: RawColor
+  highlightMode?: RawBlendMode
+  highlightOpacity?: RawUnitPercent
+  localLightingAltitude?: RawUnitAngle
+  localLightingAngle?: RawUnitAngle
+  shadowColor?: RawColor
+  shadowMode?: RawBlendMode
+  shadowOpacity?: RawUnitPercent
+  softness?: number
+  strengthRatio?: RawUnitPercent
+  transferSpec?: RawTransferSpec
+  useGlobalAngle?: boolean
+  useShape?: boolean
+  useTexture?: boolean
+}
+
+export type RawEffectSatin = RawEffectCommon & {
+  antiAlias?: boolean
+  blur?: number
+  color?: RawColor
+  distance?: number
+  invert?: boolean
+  localLightingAngle?: RawUnitAngle
+  mappingShape?: RawTransferSpec
+  mode?: RawBlendMode
+  opacity?: RawUnitPercent
+}
+
 export type RawLayerEffects = {
   masterFXSwitch?: boolean
   numModifyingFX?: number
@@ -75,5 +134,11 @@ export type RawLayerEffects = {
   gradientFill?: RawFill
   patternFill?: RawFill
   frameFX?: RawEffectStroke
+  innerShadow?: RawEffectShadow
+  dropShadow?: RawEffectShadow
+  innerGlow?: RawEffectGlow
+  outerGlow?: RawEffectGlow
+  bevelEmboss?: RawEffectBevelEmboss
+  chromeFX?: RawEffectSatin
   scale?: RawUnitPercent
 }

@@ -53,4 +53,8 @@ export class SourceArtboard {
   get resolution(): number | undefined {
     return this._rawValue.resolution
   }
+
+  get globalLightAngle(): number | undefined {
+    return this._rawValue.globalLight?.angle
+  }
 }
