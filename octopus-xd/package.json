@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-xd",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.4",
   "license": "UNLICENSED",
   "main": "lib/src/index.js",
   "scripts": {
@@ -23,7 +23,8 @@
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "read-pkg-up": "7.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "fflate": "^0.7.1"
   },
   "devDependencies": {
     "@avocode/octopus-ts": "3.0.0-alpha.19",
@@ -33,7 +34,6 @@
     "@types/pino": "^6.3.3",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
-    "fflate": "^0.7.1",
     "jest": "^27.3.1",
     "ts-node": "10.5.0",
     "typescript": "4.4.4"
