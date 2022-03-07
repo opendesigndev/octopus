@@ -1,5 +1,3 @@
-import OctopusBounds from '../octopus/octopus-bounds'
-
 import type { Defined } from '../../typings/helpers'
 import type { RawFillImage } from '../../typings/source'
 
@@ -9,7 +7,6 @@ type DefinedUx = Defined<Defined<DefinedPattern['meta']>['ux']>
 
 export type SourceEffectFillImageOptions = {
   effect: RawFillImage
-  effectBounds: OctopusBounds
 }
 
 export default class SourceEffectFillImage {

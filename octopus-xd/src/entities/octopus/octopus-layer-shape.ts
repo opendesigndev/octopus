@@ -179,7 +179,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     const fillShape: Octopus['Shape'] = {
       // purpose: 'BODY',
-      fillRule: 'EVEN_ODD',
+      fillRule: 'EVEN_ODD' /** @TODO doublecheck new rendering */,
       path,
       ...this.shapeEffects.convert(),
     } as const

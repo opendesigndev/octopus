@@ -1,12 +1,10 @@
 import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
 
-import type OctopusXDConverter from '../../..'
-import type SourceDesign from '../../../entities/source/source-design'
+import type { OctopusXDConverter } from '../../..'
 import type { Octopus } from '../../../typings/octopus'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string
-  sourceDesign: SourceDesign
 }
 
 export type ArtboardConverterOptions = ArtboardConversionOptions & {
@@ -14,19 +12,18 @@ export type ArtboardConverterOptions = ArtboardConversionOptions & {
 }
 
 export default class ArtboardConverter {
-  private _sourceDesign: SourceDesign
   private _targetArtboardId: string
   private _octopusXdConverter: OctopusXDConverter
 
   constructor(options: ArtboardConverterOptions) {
     this._octopusXdConverter = options.octopusXdConverter
-    this._sourceDesign = options.sourceDesign
     this._targetArtboardId = options.targetArtboardId
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
+    throw 1 /** @TODO handle by converted artboards */
+    /** @TODO investigate why images are transient on failed artboards */
     return new OctopusArtboard({
-      sourceDesign: this._sourceDesign,
       octopusXdConverter: this._octopusXdConverter,
       targetArtboardId: this._targetArtboardId,
     }).convert()
