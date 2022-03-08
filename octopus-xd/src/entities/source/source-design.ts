@@ -2,13 +2,11 @@ import SourceInteractions from './source-interactions'
 import SourceManifest from './source-manifest'
 import SourceResources from './source-resources'
 import SourceArtboard from './source-artboard'
-import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
 import Expander from '../../services/conversion/expander'
 import PasteboardNormalizer from '../../services/conversion/pasteboard-normalizer'
 
 import type { RawSourceInteractions } from './source-interactions'
 import type { RawSourceManifest } from './source-manifest'
-import type { ArrayBuffersSourceTree } from '../../typings'
 import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
 
@@ -41,49 +39,6 @@ export default class SourceDesign {
   private _resources: SourceResources
   private _artboards: SourceArtboard[]
   private _images: { path: string; rawValue: Buffer }[]
-
-  static fromUnzippedBuffers(sourceTree: ArrayBuffersSourceTree): SourceDesign {
-    if (!sourceTree.manifest?.content) {
-      throw new Error('Missing "manifest" ArrayBuffer entry from the source design.')
-    }
-
-    if (!sourceTree.interactions?.content) {
-      throw new Error('Missing "interactions" ArrayBuffer entry from the source design.')
-    }
-
-    if (!sourceTree.resources?.content) {
-      throw new Error('Missing "resources" ArrayBuffer entry from the source design.')
-    }
-
-    const options = {
-      manifest: {
-        path: sourceTree.manifest?.path,
-        rawValue: JSONFromTypedArray(sourceTree.manifest?.content) as RawSourceManifest,
-      },
-      resources: {
-        path: sourceTree.resources?.path,
-        rawValue: JSONFromTypedArray(sourceTree.resources?.content) as RawResources,
-      },
-      interactions: {
-        path: sourceTree.interactions?.path,
-        rawValue: JSONFromTypedArray(sourceTree.interactions?.content) as RawSourceInteractions,
-      },
-      images: sourceTree.images.map((entry) => {
-        return {
-          path: entry.path,
-          rawValue: Buffer.from(entry.content),
-        }
-      }),
-      artboards: sourceTree.artboards.map((entry) => {
-        return {
-          path: entry.path,
-          rawValue: JSONFromTypedArray(entry.content) as RawArtboardLike,
-        }
-      }),
-    }
-
-    return new this(options)
-  }
 
   constructor(options: SourceDesignOptions) {
     this._manifest = new SourceManifest({

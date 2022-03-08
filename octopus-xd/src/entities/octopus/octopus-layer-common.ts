@@ -10,7 +10,7 @@ import OctopusEffectsLayer from './octopus-effects-layer'
 import defaults from '../../utils/defaults'
 import { createMatrix } from '../../utils/paper'
 
-import type OctopusXDConverter from '../..'
+import type { OctopusXDConverter } from '../..'
 import type OctopusLayerGroup from './octopus-layer-group'
 import type OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 import type { SourceLayer } from '../../factories/create-source-layer'

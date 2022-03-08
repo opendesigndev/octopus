@@ -5,32 +5,43 @@ import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
 import OctopusBounds from './octopus-bounds'
 
 import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectFillImageOptions } from '../source/source-effect-image-fill'
+import type { RawFillImage } from '../../typings/source'
+import type OctopusLayerShape from './octopus-layer-shape'
 
 type OctopusEffectFillImageOptions = {
   source: SourceEffectFillImage
   effectBounds: OctopusBounds
+  octopusLayer: OctopusLayerShape
+}
+
+type OctopusEffectFillImageFromRawOptions = {
+  effect: RawFillImage
+  effectBounds: OctopusBounds
+  octopusLayer: OctopusLayerShape
 }
 
 export default class OctopusEffectFillImage {
   private _source: SourceEffectFillImage
   private _effectBounds: OctopusBounds
+  private _octopusLayer: OctopusLayerShape
 
   static TYPES = {
     cover: 'FILL',
     fill: 'STRETCH',
   } as const
 
-  static fromRaw(options: SourceEffectFillImageOptions): OctopusEffectFillImage {
+  static fromRaw(options: OctopusEffectFillImageFromRawOptions): OctopusEffectFillImage {
     return new this({
       source: new SourceEffectFillImage(options),
       effectBounds: options.effectBounds,
+      octopusLayer: options.octopusLayer,
     })
   }
 
   constructor(options: OctopusEffectFillImageOptions) {
     this._source = options.source
     this._effectBounds = options.effectBounds
+    this._octopusLayer = options.octopusLayer
   }
 
   private _getScaleX(): number {
@@ -112,9 +123,14 @@ export default class OctopusEffectFillImage {
   convert(): Octopus['Fill'] | null {
     const visible = this._source.type !== 'none'
 
+    const octopusManifest = this._octopusLayer.parentArtboard?.converter.octopusManifest
+
+    const uid = asString(this._source.uid)
+    const imagePath = octopusManifest?.getExportedRelativeImageById(uid)
+
     const ref = {
       type: 'RESOURCE',
-      value: asString(this._source.uid),
+      value: imagePath ?? uid /** @TODO seems like absolute paths don't work */,
     } as const
 
     const scaleBehavior = this._source.scaleBehavior
