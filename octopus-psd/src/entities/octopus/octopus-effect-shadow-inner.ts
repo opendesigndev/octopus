@@ -1,9 +1,8 @@
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusArtboard } from './octopus-artboard'
-import { convertBlendMode, convertColor } from '../../utils/convert'
-import type { SourceColor } from '../../typings/source'
 import { SourceEffectShadow } from '../source/source-effect-shadow'
+import { OctopusEffectShadowCommon } from './octopus-effect-shadow-common'
 
 type OctopusShadowOptions = {
   parentArtboard: OctopusArtboard
@@ -11,38 +10,20 @@ type OctopusShadowOptions = {
   shadow: SourceEffectShadow
 }
 
-export class OctopusEffectShadowInner {
+export class OctopusEffectShadowInner extends OctopusEffectShadowCommon {
   protected _parentArtboard: OctopusArtboard
   protected _effects: SourceLayerEffects
   protected _shadow: SourceEffectShadow
 
   constructor(options: OctopusShadowOptions) {
+    super(options)
     this._parentArtboard = options.parentArtboard
     this._effects = options.effects
     this._shadow = options.shadow
   }
 
-  get color(): SourceColor | null {
-    return this._shadow.color
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._shadow?.blendMode)
-  }
-
-  get visible(): boolean {
-    const enabled = this._shadow?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
-  }
-
   convert(): Octopus['EffectInnerShadow'] | null {
-    const color = convertColor(this._shadow.color, this._shadow.opacity)
-    const blur = this._shadow.blur
-    const choke = this._shadow.choke
-    const offset = { x: 10, y: 10 } // TODO
-    const shadow = { color, blur, choke, offset }
-
+    const shadow = this.shadowConfig
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'

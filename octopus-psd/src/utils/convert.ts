@@ -46,14 +46,6 @@ export function convertScale(scale: number | undefined): number {
   return asFiniteNumber(scale, 100) / 100
 }
 
-export function convertBlur(blur: number | undefined): number {
-  return asFiniteNumber(blur, 0) / 100
-}
-
-export function convertChoke(choke: number | undefined): number {
-  return asFiniteNumber(choke, 0) / 100
-}
-
 export function convertColor(color: RawColor | null | undefined, opacity?: number): Octopus['Color'] {
   return {
     r: asFiniteNumber(color?.red, 0) / 255,

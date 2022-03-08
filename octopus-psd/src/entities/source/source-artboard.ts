@@ -1,5 +1,5 @@
 import type { RawArtboard, RawLayer } from '../../typings/raw'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusPSDConverter } from '../..'
 import { getBoundsFor } from '../../utils/source'
@@ -54,7 +54,7 @@ export class SourceArtboard {
     return this._rawValue.resolution
   }
 
-  get globalLightAngle(): number | undefined {
-    return this._rawValue.globalLight?.angle
+  get globalLightAngle(): number {
+    return asFiniteNumber(this._rawValue.globalLight?.angle, 0)
   }
 }
