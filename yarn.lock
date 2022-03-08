@@ -46,6 +46,11 @@
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.19.tgz#05b89dbd356ed5ce63bb93a13d36640ee36a4a63"
   integrity sha512-G++OHOBZU7poZcPlrvGXmi4mG7XsZ9OsORWXbAth2Fr/vIWXQ+SA+yRwPvBRpktLCRplr+Tqvy7AwcaELzcO8g==
 
+"@avocode/octopus-ts@3.0.0-alpha.21":
+  version "3.0.0-alpha.21"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.21.tgz#6eba145e1f01d91a1720ccf1257ecdea1a5ea787"
+  integrity sha512-BmoxWfv2BQdt+DSaXw1YSZW/jb+IxXQNa/WQv6Y/ZKx9Y4HW4Kg2A/hk6YKBw3Oz/bRuYcyhDFbpxx0ArwDYWg==
+
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/@avocode/psd-parser/-/psd-parser-0.8.4.tgz#45bfee2cb896d15018beec0f15288aa23804ae3b"

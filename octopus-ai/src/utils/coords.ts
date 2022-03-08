@@ -6,6 +6,8 @@ export type TransformOptions = {
   matrix: [number, number, number, number, number, number]
 }
 
+export type RectCoords = { x0: number; y0: number; x1: number; y1: number }
+
 export function transformCoords(matrix: RawGraphicsStateMatrix, coords: number[]): number[] {
   const result = []
   for (let i = 0; i < coords.length; i += 2) {
@@ -22,9 +24,27 @@ export function transformCoord(matrix: RawGraphicsStateMatrix, point: Coord): nu
   return [a * x + b * y, c * x + d * y]
 }
 
+//note: y axis is inverted
+export function getIssPositiveOrientation(width: number, height: number): boolean {
+  return width * height < 0
+}
+
+export function getNorthEastSouthWestCoords(rectPoints: Coord[]): RectCoords {
+  const [x0, y0] = calculateTopLeftCorner(rectPoints)
+  const [x1, y1] = calculateBottomRightCorner(rectPoints)
+
+  return { x0, y0, x1, y1 }
+}
+
+export function getNorthWestSouthEasttCoords(rectPoints: Coord[]): RectCoords {
+  const [x0, y0] = calculateTopRightCorner(rectPoints)
+  const [x1, y1] = calculateBottomLeftCorner(rectPoints)
+
+  return { x0, y0, x1, y1 }
+}
+
 export function createRectPoints(coords: number[]): Coord[] {
   const [x, y, width, height] = coords
-
   const points: Coord[] = [
     [x, y],
     [x + width, y],
@@ -46,6 +66,24 @@ export function calculateBottomRightCorner(coords: Coord[]): Coord {
 export function calculateTopLeftCorner(coords: Coord[]): Coord {
   return coords.reduce((coord, resultCoord) => {
     if (!resultCoord || coord[0] < resultCoord[0] || coord[1] < resultCoord[1]) {
+      return [...coord]
+    }
+    return resultCoord
+  })
+}
+
+export function calculateTopRightCorner(coords: Coord[]): Coord {
+  return coords.reduce((coord, resultCoord) => {
+    if (!resultCoord || coord[0] > resultCoord[0] || coord[1] < resultCoord[1]) {
+      return [...coord]
+    }
+    return resultCoord
+  })
+}
+
+export function calculateBottomLeftCorner(coords: Coord[]): Coord {
+  return coords.reduce((coord, resultCoord) => {
+    if (!resultCoord || coord[0] < resultCoord[0] || coord[1] > resultCoord[1]) {
       return [...coord]
     }
     return resultCoord

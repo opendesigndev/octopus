@@ -17,7 +17,7 @@ export type RawShapeLayerSubPath = {
   Coords?: [X, Y, Width, Height]
 }
 
-export type RawShapeLayerFillRule = 'non-zero-winding-number' | 'even-odd'
+export type RawShapeLayerFillRule = 'nonzero-winding-number' | 'even-odd'
 export type RawShapeLayer = {
   Name?: string
   Type?: 'Path'
