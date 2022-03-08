@@ -9,22 +9,28 @@ import { createMatrix } from '../../utils/paper-factories'
 import { logWarn } from '../../services/instances/misc'
 import type { SourceBounds } from '../../typings/source'
 import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectFill {
-  protected _parentArtboard: OctopusArtboard
-  protected _sourceLayerBounds: SourceBounds
+  protected _parentLayer: OctopusLayerBase
   protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._sourceLayerBounds = options.sourceLayerBounds
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
   }
 
   get fillType(): Octopus['FillType'] | null {
@@ -63,9 +69,8 @@ export class OctopusEffectFill {
     const fill = this._fill
     switch (this.fillType) {
       case 'GRADIENT': {
-        const parentArtboard = this._parentArtboard
-        const sourceLayerBounds = this._sourceLayerBounds
-        return new OctopusEffectFillGradient({ parentArtboard, fill, sourceLayerBounds }).convert()
+        const parentLayer = this._parentLayer
+        return new OctopusEffectFillGradient({ parentLayer, fill }).convert()
       }
       case 'IMAGE': {
         const transform = this.imageTransform

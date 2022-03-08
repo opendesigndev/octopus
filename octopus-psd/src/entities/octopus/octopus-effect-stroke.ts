@@ -2,8 +2,6 @@ import type { Octopus } from '../../typings/octopus'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { logWarn } from '../../services/instances/misc'
-import type { OctopusArtboard } from './octopus-artboard'
-import type { SourceBounds } from '../../typings/source'
 import type { SourceEffectStroke } from '../source/source-effect-stroke'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
@@ -30,14 +28,6 @@ export class OctopusEffectStroke {
     this._stroke = options.stroke
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
-  }
-
-  private get _sourceLayerBounds(): SourceBounds {
-    return this._parentLayer.sourceLayer.bounds
-  }
-
   private get _effects(): SourceLayerEffects {
     return this._parentLayer.sourceLayer.layerEffects
   }
@@ -54,10 +44,9 @@ export class OctopusEffectStroke {
 
   @firstCallMemo()
   private get _fill(): Octopus['Fill'] | null {
-    const parentArtboard = this._parentArtboard
-    const sourceLayerBounds = this._sourceLayerBounds
+    const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentArtboard, sourceLayerBounds, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill }).convert()
   }
 
   get stroke(): Octopus['Stroke'] | null {

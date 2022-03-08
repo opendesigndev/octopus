@@ -3,13 +3,11 @@ import type { SourceStroke } from '../source/source-stroke'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { logWarn } from '../../services/instances/misc'
-import type { OctopusArtboard } from './octopus-artboard'
-import type { SourceBounds } from '../../typings/source'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusStrokeOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
+  parentLayer: OctopusLayerBase
   stroke: SourceStroke
 }
 
@@ -20,8 +18,7 @@ type Style = {
 }
 
 export class OctopusStroke {
-  protected _parentArtboard: OctopusArtboard
-  protected _sourceLayerBounds: SourceBounds
+  protected _parentLayer: OctopusLayerBase
   protected _stroke: SourceStroke
 
   static STROKE_POSITION_MAP = {
@@ -43,8 +40,7 @@ export class OctopusStroke {
   } as const
 
   constructor(options: OctopusStrokeOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._sourceLayerBounds = options.sourceLayerBounds
+    this._parentLayer = options.parentLayer
     this._stroke = options.stroke
   }
 
@@ -80,10 +76,9 @@ export class OctopusStroke {
 
   @firstCallMemo()
   get fill(): Octopus['Fill'] | null {
-    const parentArtboard = this._parentArtboard
-    const sourceLayerBounds = this._sourceLayerBounds
+    const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentArtboard, sourceLayerBounds, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill }).convert()
   }
 
   get style(): Style {

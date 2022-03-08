@@ -8,19 +8,18 @@ import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import { logWarn } from '../../services/instances/misc'
-import { OctopusArtboard } from './octopus-artboard'
+import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
 type OctopusFillGradientOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectFillGradient {
-  protected _parentArtboard: OctopusArtboard
-  protected _sourceLayerBounds: SourceBounds
+  protected _parentLayer: OctopusLayerBase
   protected _fill: SourceEffectFill
 
   static GRADIENT_TYPE_MAP = {
@@ -31,17 +30,16 @@ export class OctopusEffectFillGradient {
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._sourceLayerBounds = options.sourceLayerBounds
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
   }
 
-  get parentArtboard(): OctopusArtboard {
-    return this._parentArtboard
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
   }
 
-  get sourceLayerBounds(): SourceBounds {
-    return this._sourceLayerBounds
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
   }
 
   get fill(): SourceEffectFill {
@@ -87,11 +85,11 @@ export class OctopusEffectFillGradient {
 
   private get _transformAlignParams() {
     if (this.fill.align) {
-      const { width, height } = this.sourceLayerBounds
+      const { width, height } = this._sourceLayerBounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
-    const { width, height } = this.parentArtboard.dimensions
-    const { left, top } = this.sourceLayerBounds
+    const { width, height } = this._parentArtboard.dimensions
+    const { left, top } = this._sourceLayerBounds
     return { width, height, boundTx: left, boundTy: top }
   }
 

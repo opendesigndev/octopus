@@ -30,24 +30,18 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
 
   @firstCallMemo()
   private get _path(): Octopus['PathLike'] {
-    return new OctopusLayerShapeShapePath({ parent: this }).convert()
+    return new OctopusLayerShapeShapePath({ parentLayer: this }).convert()
   }
 
   @firstCallMemo()
   private get _fills(): Octopus['Fill'][] {
-    const parentArtboard = this.parentArtboard
-    const sourceLayerBounds = this.sourceLayer.bounds
-    const fill = new OctopusEffectFill({ parentArtboard, sourceLayerBounds, fill: this.sourceLayer.fill }).convert()
+    const fill = new OctopusEffectFill({ parentLayer: this, fill: this.sourceLayer.fill }).convert()
     return fill ? [fill] : []
   }
 
   @firstCallMemo()
   private get _strokes(): Octopus['VectorStroke'][] {
-    const stroke = new OctopusStroke({
-      parentArtboard: this.parentArtboard,
-      sourceLayerBounds: this.sourceLayer.bounds,
-      stroke: this.sourceLayer.stroke,
-    }).convert()
+    const stroke = new OctopusStroke({ parentLayer: this, stroke: this.sourceLayer.stroke }).convert()
     return stroke ? [stroke] : []
   }
 
