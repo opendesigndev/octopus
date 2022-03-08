@@ -1,3 +1,4 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from '../source/source-effects-layer'
@@ -28,6 +29,7 @@ export class OctopusEffectsLayer {
     this._effects = options.effects
   }
 
+  @firstCallMemo()
   private get _effectDropShadow(): Octopus['EffectDropShadow'] | null {
     if (this._effects.dropShadow === undefined) return null
     return new OctopusEffectShadowDrop({
@@ -37,6 +39,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectOuterGlow(): Octopus['EffectOuterGlow'] | null {
     if (this._effects.outerGlow === undefined) return null
     return new OctopusEffectGlowOuter({
@@ -46,6 +49,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectOverlayPattern(): Octopus['EffectOverlay'] | null {
     if (this._effects.patternFill === undefined) return null
     return new OctopusEffectOverlayPattern({
@@ -56,6 +60,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectOverlayGradient(): Octopus['EffectOverlay'] | null {
     if (this._effects.gradientFill === undefined) return null
     return new OctopusEffectOverlayGradient({
@@ -66,6 +71,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectOverlayColor(): Octopus['EffectOverlay'] | null {
     if (this._effects.solidFill === undefined) return null
     return new OctopusEffectOverlayColor({
@@ -75,11 +81,13 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectSatin(): Octopus['EffectOther'] | null {
     if (this._effects.satin === undefined) return null
     return null // TODO
   }
 
+  @firstCallMemo()
   private get _effectInnerGlow(): Octopus['EffectInnerGlow'] | null {
     if (this._effects.innerGlow === undefined) return null
     return new OctopusEffectGlowInner({
@@ -89,6 +97,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectInnerShadow(): Octopus['EffectInnerShadow'] | null {
     if (this._effects.innerShadow === undefined) return null
     return new OctopusEffectShadowInner({
@@ -98,6 +107,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectStroke(): Octopus['EffectStroke'] | null {
     if (this._effects.stroke === undefined) return null
     return new OctopusEffectStroke({
@@ -108,6 +118,7 @@ export class OctopusEffectsLayer {
     }).convert()
   }
 
+  @firstCallMemo()
   private get _effectBevelEmboss(): Octopus['EffectOther'] | null {
     if (this._effects.bevelEmboss === undefined) return null
     return null // TODO

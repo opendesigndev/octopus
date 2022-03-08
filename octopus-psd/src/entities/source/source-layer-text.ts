@@ -4,6 +4,7 @@ import type { SourceLayerParent } from './source-layer-common'
 import { getBoundsFor } from '../../utils/source'
 import type { SourceBounds } from '../../typings/source'
 import { SourceText } from './source-text'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -20,10 +21,12 @@ export class SourceLayerText extends SourceLayerCommon {
     this._rawValue = options.rawValue
   }
 
+  @firstCallMemo()
   get bitmapBounds(): SourceBounds {
     return getBoundsFor(this._rawValue.bitmapBounds)
   }
 
+  @firstCallMemo()
   get text(): SourceText {
     return new SourceText(this._rawValue.text)
   }

@@ -3,6 +3,7 @@ import { getMatrixFor, getTextBoundsFor } from '../../utils/source'
 import type { SourceBounds, SourceMatrix } from '../../typings/source'
 import { SourceEntity } from './source-entity'
 import { SourceTextStyleRange } from './source-text-style-range'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export class SourceText extends SourceEntity {
   protected _rawValue: RawText | undefined
@@ -25,6 +26,7 @@ export class SourceText extends SourceEntity {
     return getMatrixFor(this._rawValue?.transform)
   }
 
+  @firstCallMemo()
   get textStyles(): SourceTextStyleRange[] {
     const textStyles = this._rawValue?.textStyleRange ?? []
     return textStyles.map((style) => new SourceTextStyleRange(style))

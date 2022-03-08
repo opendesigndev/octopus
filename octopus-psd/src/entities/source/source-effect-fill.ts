@@ -1,3 +1,4 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawBlendMode, RawFill, RawFillPattern } from '../../typings/raw'
 import type { SourceColor, SourceGradientType, SourceVectorXY } from '../../typings/source'
 import { convertOpacity, convertScale } from '../../utils/convert'
@@ -15,6 +16,7 @@ export class SourceEffectFill {
     return getColorFor(this._rawValue?.color)
   }
 
+  @firstCallMemo()
   get gradient(): SourceEffectFillGradient | undefined {
     return this._rawValue?.gradient ? new SourceEffectFillGradient(this._rawValue?.gradient) : undefined
   }

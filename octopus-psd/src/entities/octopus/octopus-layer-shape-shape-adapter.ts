@@ -4,6 +4,7 @@ import type { Octopus } from '../../typings/octopus'
 import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusStroke } from './octopus-stroke'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
@@ -27,10 +28,12 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
     return [left, top]
   }
 
+  @firstCallMemo()
   private get _path(): Octopus['PathLike'] {
     return new OctopusLayerShapeShapePath({ parent: this }).convert()
   }
 
+  @firstCallMemo()
   private get _fills(): Octopus['Fill'][] {
     const parentArtboard = this.parentArtboard
     const sourceLayerBounds = this.sourceLayer.bounds
@@ -38,6 +41,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
     return fill ? [fill] : []
   }
 
+  @firstCallMemo()
   private get _strokes(): Octopus['VectorStroke'][] {
     const stroke = new OctopusStroke({
       parentArtboard: this.parentArtboard,

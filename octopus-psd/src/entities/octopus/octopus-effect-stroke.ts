@@ -7,6 +7,7 @@ import type { SourceBounds } from '../../typings/source'
 import type { SourceEffectStroke } from '../source/source-effect-stroke'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusEffectStrokeOptions = {
   parentArtboard: OctopusArtboard
@@ -44,6 +45,7 @@ export class OctopusEffectStroke {
     return result
   }
 
+  @firstCallMemo()
   private get _fill(): Octopus['Fill'] | null {
     const parentArtboard = this._parentArtboard
     const sourceLayerBounds = this._sourceLayerBounds

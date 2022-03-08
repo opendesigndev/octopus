@@ -1,3 +1,4 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawPathComponent } from '../../typings/raw'
 import type { SourceCombineOperation } from '../../typings/source'
 import { SourcePathOrigin } from './source-path-origin'
@@ -10,10 +11,12 @@ export class SourcePathComponent {
     this._rawValue = component
   }
 
+  @firstCallMemo()
   get origin(): SourcePathOrigin {
     return new SourcePathOrigin(this._rawValue.origin)
   }
 
+  @firstCallMemo()
   get subpathListKey(): SourceSubpath[] {
     return (this._rawValue.subpathListKey ?? []).map((subpath) => new SourceSubpath(subpath))
   }

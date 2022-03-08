@@ -11,6 +11,7 @@ import { createDefaultTranslationMatrix } from '../../utils/path'
 import { logWarn } from '../../services/instances/misc'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
 import { convertBlendMode, convertOpacity } from '../../utils/convert'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
 
@@ -93,6 +94,7 @@ export class OctopusLayerBase {
     return this.type !== null
   }
 
+  @firstCallMemo()
   get effects(): Octopus['Effect'][] {
     const parentArtboard = this.parentArtboard
     const effects = this.sourceLayer.layerEffects

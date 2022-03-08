@@ -1,3 +1,4 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type {
   RawShapeStrokeStyle,
   RawStrokeStyleLineAlignment,
@@ -19,6 +20,7 @@ export class SourceStroke extends SourceEntity {
     this._rawValue = stroke
   }
 
+  @firstCallMemo()
   get fill(): SourceEffectFill {
     return new SourceEffectFill(this._rawValue?.strokeStyleContent)
   }

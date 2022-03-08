@@ -4,6 +4,7 @@ import type { SourceLayerSection } from './source-layer-section'
 import { getBoundsFor } from '../../utils/source'
 import { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from './source-effects-layer'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
@@ -57,6 +58,7 @@ export class SourceLayerCommon {
     return this._rawValue.imageName
   }
 
+  @firstCallMemo()
   get layerEffects(): SourceLayerEffects {
     return new SourceLayerEffects(this._rawValue.layerEffects)
   }

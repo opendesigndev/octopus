@@ -5,6 +5,7 @@ import { OctopusEffectFill } from './octopus-effect-fill'
 import { logWarn } from '../../services/instances/misc'
 import type { OctopusArtboard } from './octopus-artboard'
 import type { SourceBounds } from '../../typings/source'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusStrokeOptions = {
   parentArtboard: OctopusArtboard
@@ -77,6 +78,7 @@ export class OctopusStroke {
     return result
   }
 
+  @firstCallMemo()
   get fill(): Octopus['Fill'] | null {
     const parentArtboard = this._parentArtboard
     const sourceLayerBounds = this._sourceLayerBounds

@@ -1,3 +1,4 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawBlendMode, RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
@@ -12,6 +13,7 @@ export class SourceEffectStroke extends SourceEntity {
     this._rawValue = stroke
   }
 
+  @firstCallMemo()
   get fill(): SourceEffectFill {
     return new SourceEffectFill(this._rawValue)
   }

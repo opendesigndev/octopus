@@ -5,6 +5,7 @@ import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import path from 'path'
 import { FOLDER_IMAGES } from '../../utils/const'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -35,6 +36,7 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     return { type: 'RECTANGLE', rectangle, transform }
   }
 
+  @firstCallMemo()
   private get _fills(): Octopus['Fill'][] {
     const imagePath = path.join(FOLDER_IMAGES, this.sourceLayer.imageName ?? '')
     const { width, height } = this.sourceLayer.bounds

@@ -8,6 +8,7 @@ import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { createMatrix } from '../../utils/paper-factories'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -36,6 +37,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return this._sourceText.textStyles
   }
 
+  @firstCallMemo()
   private get _defaultStyleOccurrences(): Occurrences {
     return this._sourceTextStyleRanges.reduce((occurrences: Occurrences, textStyleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
@@ -58,10 +60,11 @@ export class OctopusLayerText extends OctopusLayerBase {
     }, {})
   }
 
+  @firstCallMemo()
   private get _defaultStyle(): Octopus['TextStyle'] {
     const occurrences = this._defaultStyleOccurrences
     const defaultStyle = Object.entries(occurrences).reduce((defaultStyle, [key, occurrence]) => {
-      if (occurrence.length === 0) return
+      if (occurrence.length === 0) return defaultStyle
       occurrence.sort((value1, value2) => value2.range - value1.range)
       defaultStyle[key as keyof typeof occurrences] = occurrence[0].value
       return defaultStyle
@@ -153,6 +156,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     ) as Octopus['StyleRange'][]
   }
 
+  @firstCallMemo()
   private get _textTransform(): Octopus['Transform'] {
     const { top, left } = this._sourceText.bounds
 
@@ -171,6 +175,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return { mode: 'FIXED', size: { width, height } }
   }
 
+  @firstCallMemo()
   get text(): Octopus['Text'] | null {
     const value = this._textValue
     const defaultStyle = this._defaultStyle
