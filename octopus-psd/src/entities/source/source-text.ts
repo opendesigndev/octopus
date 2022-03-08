@@ -33,4 +33,8 @@ export class SourceText extends SourceEntity {
   get bounds(): SourceBounds {
     return getTextBoundsFor(this._rawValue?.bounds)
   }
+
+  get boundingBox(): SourceBounds {
+    return getTextBoundsFor(this._rawValue?.boundingBox)
+  }
 }
