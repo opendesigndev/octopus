@@ -28,11 +28,6 @@ export class OctopusEffectsLayer {
     this._effects = options.effects
   }
 
-  get effectType(): Octopus['EffectType'] | null {
-    if (this._effects.patternFill) return 'OVERLAY'
-    return null
-  }
-
   private get _effectDropShadow(): Octopus['EffectDropShadow'] | null {
     if (this._effects.dropShadow === undefined) return null
     return new OctopusEffectShadowDrop({

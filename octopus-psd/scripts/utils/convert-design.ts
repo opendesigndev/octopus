@@ -42,8 +42,8 @@ export async function convertDesign(): Promise<void> {
   const parseTime = performance.now() - parseTimeStart
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)} ${displayPerf(parseTime)}`)
 
-  const converter = new OctopusPSDConverter({ designId })
-  const convertResult = await converter.convertDesign({ sourceDesign })
+  const converter = new OctopusPSDConverter({ designId, sourceDesign })
+  const convertResult = await converter.convertDesign()
   const saver = await createTempSaver(designId)
 
   const octopus = convertResult?.artboards[0]

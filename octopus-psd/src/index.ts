@@ -14,19 +14,14 @@ import type { Octopus } from './typings/octopus'
 import type { SourceDesign } from './entities/source/source-design'
 import { OctopusManifestReport } from './typings/manifest'
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
-import { SourceArtboard } from './entities/source/source-artboard'
 
 type OctopusPSDConverterOptions = {
-  designId: string
+  sourceDesign: SourceDesign
+  designId?: string
   logger?: Logger
 }
 
-type ConvertDesignOptions = {
-  sourceDesign: SourceDesign
-}
-
 type ConversionResult = {
-  targetArtboardId: string
   value: Octopus['OctopusDocument'] | undefined
   error: Error | null
   time: number
@@ -39,10 +34,12 @@ createEnvironment()
 
 export class OctopusPSDConverter {
   private _id: string
+  private _sourceDesign: SourceDesign
   private _pkg: Promise<NormalizedReadResult | undefined>
 
-  constructor(options?: OctopusPSDConverterOptions) {
-    this._id = options?.designId || uuidv4()
+  constructor(options: OctopusPSDConverterOptions) {
+    this._id = options.designId || uuidv4()
+    this._sourceDesign = options.sourceDesign
     this._pkg = readPackageUpAsync({ cwd: __dirname })
 
     this._setupLogger(options?.logger)
@@ -76,7 +73,7 @@ export class OctopusPSDConverter {
       const value = await new ArtboardConverter({ ...options, octopusConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
-      return { error }
+      return { value: undefined, error }
     }
   }
 
@@ -84,18 +81,14 @@ export class OctopusPSDConverter {
     const timeStart = performance.now()
     const { value, error } = await this._convertArtboardSafe(options)
     const time = performance.now() - timeStart
-
-    const targetArtboardId = value?.id ?? SourceArtboard.DEFAULT_ID
-    return { targetArtboardId, value, error, time }
+    return { value, error, time }
   }
 
-  async convertDesign(
-    options: ConvertDesignOptions
-  ): Promise<{ manifest: OctopusManifestReport; artboards: ConversionResult[] }> {
-    const artboard = await this._convertArtboard({ sourceDesign: options.sourceDesign })
+  async convertDesign(): Promise<{ manifest: OctopusManifestReport; artboards: ConversionResult[] }> {
+    const artboard = await this._convertArtboard({ sourceDesign: this._sourceDesign })
 
     const manifest = await new OctopusManifest({
-      sourceDesign: options.sourceDesign,
+      sourceDesign: this._sourceDesign,
       octopusConverter: this,
     }).convert()
 

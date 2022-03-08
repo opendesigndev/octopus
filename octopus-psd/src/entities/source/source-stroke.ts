@@ -10,6 +10,10 @@ import { SourceEntity } from './source-entity'
 export class SourceStroke extends SourceEntity {
   protected _rawValue: RawShapeStrokeStyle | undefined
 
+  static DEFAULT_LINE_ALIGNMENT = 'strokeStyleAlignCenter' as const
+  static DEFAULT_LINE_CAP = 'strokeStyleButtCap' as const
+  static DEFAULT_LINE_JOIN = 'strokeStyleMiterJoin' as const
+
   constructor(stroke: RawShapeStrokeStyle | undefined) {
     super(stroke)
     this._rawValue = stroke
@@ -24,15 +28,15 @@ export class SourceStroke extends SourceEntity {
   }
 
   get lineAlignment(): RawStrokeStyleLineAlignment {
-    return this._rawValue?.strokeStyleLineAlignment ?? 'strokeStyleAlignCenter'
+    return this._rawValue?.strokeStyleLineAlignment ?? SourceStroke.DEFAULT_LINE_ALIGNMENT
   }
 
   get lineCap(): RawStrokeStyleLineCapType {
-    return this._rawValue?.strokeStyleLineCapType ?? 'strokeStyleButtCap'
+    return this._rawValue?.strokeStyleLineCapType ?? SourceStroke.DEFAULT_LINE_CAP
   }
 
   get lineJoin(): RawStrokeStyleLineJoinType {
-    return this._rawValue?.strokeStyleLineJoinType ?? 'strokeStyleMiterJoin'
+    return this._rawValue?.strokeStyleLineJoinType ?? SourceStroke.DEFAULT_LINE_JOIN
   }
 
   get lineDashSet(): number[] | undefined {

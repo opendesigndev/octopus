@@ -12,7 +12,7 @@ export class SourcePathOrigin extends SourceEntity {
   }
 
   get type(): string | undefined {
-    return this._rawValue?.type ? this._rawValue.type.toString() : undefined
+    return this._rawValue?.type ? String(this._rawValue.type) : undefined
   }
 
   get bounds(): SourceBounds {

@@ -5,6 +5,8 @@ import { SourceEntity } from './source-entity'
 export class SourceEffectStroke extends SourceEntity {
   protected _rawValue: RawEffectStroke | undefined
 
+  static DEFAULT_LINE_ALIGNMENT = 'centeredFrame' as const
+
   constructor(stroke: RawEffectStroke | undefined) {
     super(stroke)
     this._rawValue = stroke
@@ -19,7 +21,7 @@ export class SourceEffectStroke extends SourceEntity {
   }
 
   get lineAlignment(): RawEffectStrokeLineAlignment {
-    return this._rawValue?.style ?? 'centeredFrame'
+    return this._rawValue?.style ?? SourceEffectStroke.DEFAULT_LINE_ALIGNMENT
   }
 
   get blendMode(): RawBlendMode | undefined {

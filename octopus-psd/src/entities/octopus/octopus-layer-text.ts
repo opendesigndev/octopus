@@ -14,6 +14,8 @@ type OctopusLayerTextOptions = {
   sourceLayer: SourceLayerText
 }
 
+type Occurrences = { [key in keyof Octopus['TextStyle']]: { value: unknown; range: number }[] }
+
 export class OctopusLayerText extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerText
@@ -35,7 +37,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private get _defaultStyle(): Octopus['TextStyle'] {
-    const occurrences: { [key in keyof Octopus['TextStyle']]: { value: unknown; range: number }[] } = {}
+    const occurrences: Occurrences = {}
 
     this._sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
