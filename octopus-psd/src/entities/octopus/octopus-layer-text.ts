@@ -9,6 +9,7 @@ import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { createMatrix } from '../../utils/paper-factories'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { keys } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -44,8 +45,7 @@ export class OctopusLayerText extends OctopusLayerBase {
       const range = asFiniteNumber(to - from, 0)
       if (range === 0) return occurrences
       const style = this._parseStyle(textStyle)
-      const styleKeys = Object.keys(style) as (keyof typeof style)[]
-      styleKeys.forEach((occurrenceKey) => {
+      keys(style).forEach((occurrenceKey) => {
         const occurrenceValues = asArray(occurrences[occurrenceKey])
         const styleValue = style[occurrenceKey]
         const foundOccurrence = occurrenceValues.find(({ value }) => isEqual(value, styleValue))
@@ -124,7 +124,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     defaultStyle: Octopus['TextStyle']
   ): Octopus['TextStyle'] => {
     const ownFont = {} as Record<keyof Octopus['TextStyle'], unknown>
-    const styleProps = Object.keys(style) as (keyof Octopus['TextStyle'])[]
+    const styleProps = keys(style) as (keyof Octopus['TextStyle'])[]
     styleProps.forEach((styleProp) => {
       if (!isEqual(style[styleProp], defaultStyle[styleProp])) {
         ownFont[styleProp] = style[styleProp]
