@@ -5,25 +5,32 @@ import { OctopusArtboard } from './octopus-artboard'
 import { convertBlendMode } from '../../utils/convert'
 import type { SourceBounds } from '../../typings/source'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectOverlayGradient {
-  protected _parentArtboard: OctopusArtboard
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
   protected _fill: SourceEffectFill
-  protected _sourceLayerBounds: SourceBounds
 
   constructor(options: OctopusFillOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
-    this._sourceLayerBounds = options.sourceLayerBounds
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   get blendMode(): Octopus['BlendMode'] {

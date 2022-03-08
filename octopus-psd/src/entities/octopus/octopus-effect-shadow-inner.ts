@@ -1,25 +1,16 @@
 import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
-import { OctopusArtboard } from './octopus-artboard'
-import { SourceEffectShadow } from '../source/source-effect-shadow'
+import type { SourceEffectShadow } from '../source/source-effect-shadow'
 import { OctopusEffectShadowCommon } from './octopus-effect-shadow-common'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowOptions = {
-  parentArtboard: OctopusArtboard
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   shadow: SourceEffectShadow
 }
 
 export class OctopusEffectShadowInner extends OctopusEffectShadowCommon {
-  protected _parentArtboard: OctopusArtboard
-  protected _effects: SourceLayerEffects
-  protected _shadow: SourceEffectShadow
-
   constructor(options: OctopusShadowOptions) {
     super(options)
-    this._parentArtboard = options.parentArtboard
-    this._effects = options.effects
-    this._shadow = options.shadow
   }
 
   convert(): Octopus['EffectInnerShadow'] | null {

@@ -9,25 +9,32 @@ import { createMatrix } from '../../utils/paper-factories'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { convertBlendMode } from '../../utils/convert'
 import type { SourceBounds } from '../../typings/source'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectOverlayPattern {
-  protected _parentArtboard: OctopusArtboard
-  protected _sourceLayerBounds: SourceBounds
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
   protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._sourceLayerBounds = options.sourceLayerBounds
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   get imagePath(): string {

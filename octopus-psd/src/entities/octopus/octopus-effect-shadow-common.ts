@@ -4,22 +4,28 @@ import { OctopusArtboard } from './octopus-artboard'
 import { convertBlendMode, convertColor } from '../../utils/convert'
 import { SourceEffectShadow } from '../source/source-effect-shadow'
 import { cos, sin, round, clamp } from '../../utils/math'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowCommonOptions = {
-  parentArtboard: OctopusArtboard
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   shadow: SourceEffectShadow
 }
 
 export class OctopusEffectShadowCommon {
-  protected _parentArtboard: OctopusArtboard
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
   protected _shadow: SourceEffectShadow
 
   constructor(options: OctopusShadowCommonOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
     this._shadow = options.shadow
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   /**

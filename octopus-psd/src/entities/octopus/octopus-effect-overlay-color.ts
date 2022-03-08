@@ -1,27 +1,28 @@
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
-import { OctopusArtboard } from './octopus-artboard'
 import { logWarn } from '../../services/instances/misc'
 import { convertBlendMode } from '../../utils/convert'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import type { SourceColor } from '../../typings/source'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
-  parentArtboard: OctopusArtboard
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectOverlayColor {
-  protected _parentArtboard: OctopusArtboard
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
   protected _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   get color(): SourceColor | null {

@@ -8,19 +8,16 @@ import type { SourceEffectStroke } from '../source/source-effect-stroke'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectStrokeOptions = {
-  parentArtboard: OctopusArtboard
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
   stroke: SourceEffectStroke
-  sourceLayerBounds: SourceBounds
 }
 
 export class OctopusEffectStroke {
-  protected _parentArtboard: OctopusArtboard
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
   protected _stroke: SourceEffectStroke
-  protected _sourceLayerBounds: SourceBounds
 
   static STROKE_POSITION_MAP = {
     centeredFrame: 'CENTER',
@@ -29,10 +26,20 @@ export class OctopusEffectStroke {
   } as const
 
   constructor(options: OctopusEffectStrokeOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
     this._stroke = options.stroke
-    this._sourceLayerBounds = options.sourceLayerBounds
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   private get _position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {

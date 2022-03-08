@@ -11,30 +11,36 @@ import { OctopusEffectOverlayPattern } from './octopus-effect-overlay-pattern'
 import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop'
 import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectLayerOptions = {
-  parentArtboard: OctopusArtboard
-  sourceLayerBounds: SourceBounds
-  effects: SourceLayerEffects
+  parentLayer: OctopusLayerBase
 }
 
 export class OctopusEffectsLayer {
-  protected _parentArtboard: OctopusArtboard
-  protected _sourceLayerBounds: SourceBounds
-  protected _effects: SourceLayerEffects
+  protected _parentLayer: OctopusLayerBase
 
   constructor(options: OctopusEffectLayerOptions) {
-    this._parentArtboard = options.parentArtboard
-    this._sourceLayerBounds = options.sourceLayerBounds
-    this._effects = options.effects
+    this._parentLayer = options.parentLayer
+  }
+
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
+  }
+
+  private get _effects(): SourceLayerEffects {
+    return this._parentLayer.sourceLayer.layerEffects
   }
 
   @firstCallMemo()
   private get _effectDropShadow(): Octopus['EffectDropShadow'] | null {
     if (this._effects.dropShadow === undefined) return null
     return new OctopusEffectShadowDrop({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       shadow: this._effects.dropShadow,
     }).convert()
   }
@@ -43,8 +49,7 @@ export class OctopusEffectsLayer {
   private get _effectOuterGlow(): Octopus['EffectOuterGlow'] | null {
     if (this._effects.outerGlow === undefined) return null
     return new OctopusEffectGlowOuter({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       shadow: this._effects.outerGlow,
     }).convert()
   }
@@ -53,10 +58,8 @@ export class OctopusEffectsLayer {
   private get _effectOverlayPattern(): Octopus['EffectOverlay'] | null {
     if (this._effects.patternFill === undefined) return null
     return new OctopusEffectOverlayPattern({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       fill: this._effects.patternFill,
-      sourceLayerBounds: this._sourceLayerBounds,
     }).convert()
   }
 
@@ -64,10 +67,8 @@ export class OctopusEffectsLayer {
   private get _effectOverlayGradient(): Octopus['EffectOverlay'] | null {
     if (this._effects.gradientFill === undefined) return null
     return new OctopusEffectOverlayGradient({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       fill: this._effects.gradientFill,
-      sourceLayerBounds: this._sourceLayerBounds,
     }).convert()
   }
 
@@ -75,8 +76,7 @@ export class OctopusEffectsLayer {
   private get _effectOverlayColor(): Octopus['EffectOverlay'] | null {
     if (this._effects.solidFill === undefined) return null
     return new OctopusEffectOverlayColor({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       fill: this._effects.solidFill,
     }).convert()
   }
@@ -91,8 +91,7 @@ export class OctopusEffectsLayer {
   private get _effectInnerGlow(): Octopus['EffectInnerGlow'] | null {
     if (this._effects.innerGlow === undefined) return null
     return new OctopusEffectGlowInner({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       shadow: this._effects.innerGlow,
     }).convert()
   }
@@ -101,8 +100,7 @@ export class OctopusEffectsLayer {
   private get _effectInnerShadow(): Octopus['EffectInnerShadow'] | null {
     if (this._effects.innerShadow === undefined) return null
     return new OctopusEffectShadowInner({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       shadow: this._effects.innerShadow,
     }).convert()
   }
@@ -111,10 +109,8 @@ export class OctopusEffectsLayer {
   private get _effectStroke(): Octopus['EffectStroke'] | null {
     if (this._effects.stroke === undefined) return null
     return new OctopusEffectStroke({
-      parentArtboard: this._parentArtboard,
-      effects: this._effects,
+      parentLayer: this._parentLayer,
       stroke: this._effects.stroke,
-      sourceLayerBounds: this._sourceLayerBounds,
     }).convert()
   }
 
