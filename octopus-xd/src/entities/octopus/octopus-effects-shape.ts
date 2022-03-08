@@ -11,7 +11,7 @@ import type { OctopusFill } from '../../typings/octopus-entities'
 import type OctopusLayerShape from './octopus-layer-shape'
 
 type OctopusEffectsShapeOptions = {
-  octopusLayer?: OctopusLayerShape
+  octopusLayer: OctopusLayerShape
   resources: SourceResources
 }
 
@@ -24,11 +24,11 @@ type ShapeEffects = {
  * Vector effects.
  */
 export default class OctopusEffectsShape {
-  private _octopusLayer: OctopusLayerShape | null
+  private _octopusLayer: OctopusLayerShape
   private _resources: SourceResources
 
   constructor(options: OctopusEffectsShapeOptions) {
-    this._octopusLayer = options.octopusLayer ?? null
+    this._octopusLayer = options.octopusLayer
     this._resources = options.resources
   }
 
@@ -68,6 +68,7 @@ export default class OctopusEffectsShape {
 
       const patternFill = OctopusEffectFillImage.fromRaw({
         effect: fill,
+        octopusLayer: this._octopusLayer,
         effectBounds: OctopusBounds.fromPaperBounds(bounds),
       })
 

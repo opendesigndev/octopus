@@ -2,33 +2,30 @@ import OctopusArtboardDimensions from './octopus-artboard-dimensions'
 import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 import SourceLayerGroup from '../source/source-layer-group'
 import { uuidv4FromSeed } from '../../utils/id'
+import OctopusLayerGroup from './octopus-layer-group'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceArtboard from '../source/source-artboard'
 import type SourceDesign from '../source/source-design'
-import type OctopusXDConverter from '../..'
+import type { OctopusXDConverter } from '../..'
 import type { RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
-import OctopusLayerGroup from './octopus-layer-group'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
   targetArtboardId: string
   octopusXdConverter: OctopusXDConverter
 }
 
 export default class OctopusArtboard {
-  private _sourceDesign: SourceDesign
   private _sourceArtboard: SourceArtboard
   private _octopusXdConverter: OctopusXDConverter
   private _backgroundRaw: RawShapeLayer
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.sourceDesign.getArtboardById(options.targetArtboardId)
+    const artboard = options.octopusXdConverter.sourceDesign.getArtboardById(options.targetArtboardId)
     if (!artboard) {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
     this._octopusXdConverter = options.octopusXdConverter
-    this._sourceDesign = options.sourceDesign
     this._sourceArtboard = artboard
     this._backgroundRaw = this._getArtificialMaskGroupMaskLayer()
   }
@@ -42,7 +39,7 @@ export default class OctopusArtboard {
   }
 
   get sourceDesign(): SourceDesign {
-    return this._sourceDesign
+    return this._octopusXdConverter.sourceDesign
   }
 
   get converter(): OctopusXDConverter {
@@ -64,12 +61,14 @@ export default class OctopusArtboard {
     const artboardId = this._sourceArtboard.meta.id
     const { w: width, h: height } = this._getDimensions()
 
+    const { x, y } = this.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
+
     return {
       type: 'shape',
       name: 'Background',
       meta: { ux: { nameL10N: 'SHAPE_RECTANGLE' } },
       id: uuidv4FromSeed(`${artboardId}:backgroundMask`),
-      transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
+      transform: { a: 1, b: 0, c: 0, d: 1, tx: x, ty: y },
       style: this._sourceArtboard.raw.children?.[0].style,
       shape: { type: 'rect', x: 0, y: 0, width, height },
     } as RawShapeLayer
