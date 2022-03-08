@@ -36,13 +36,11 @@ export class OctopusLayerText extends OctopusLayerBase {
     return this._sourceText.textStyles
   }
 
-  private get _defaultStyle(): Octopus['TextStyle'] {
-    const occurrences: Occurrences = {}
-
-    this._sourceTextStyleRanges.forEach((textStyleRange: SourceTextStyleRange) => {
+  private get _defaultStyleOccurrences(): Occurrences {
+    return this._sourceTextStyleRanges.reduce((occurrences: Occurrences, textStyleRange: SourceTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
       const range = asFiniteNumber(to - from, 0)
-      if (range === 0) return
+      if (range === 0) return occurrences
       const style = this._parseStyle(textStyle)
       const styleKeys = Object.keys(style) as (keyof typeof style)[]
       styleKeys.forEach((occurrenceKey) => {
@@ -56,8 +54,12 @@ export class OctopusLayerText extends OctopusLayerBase {
         }
         occurrences[occurrenceKey] = occurrenceValues
       })
-    })
+      return occurrences
+    }, {})
+  }
 
+  private get _defaultStyle(): Octopus['TextStyle'] {
+    const occurrences = this._defaultStyleOccurrences
     const defaultStyle = Object.entries(occurrences).reduce((defaultStyle, [key, occurrence]) => {
       if (occurrence.length === 0) return
       occurrence.sort((value1, value2) => value2.range - value1.range)
@@ -129,27 +131,26 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private _getStyles(defaultStyle: Octopus['TextStyle']): Octopus['StyleRange'][] {
-    const styleRanges = [] as Array<{
-      style: Octopus['TextStyle']
-      ranges: Array<{ from: number; to: number }>
-    }>
-    this._sourceTextStyleRanges.forEach((styleRange: SourceTextStyleRange) => {
-      const { from, to, textStyle } = styleRange
-      const range = asFiniteNumber(to - from, 0)
-      if (range === 0) return
+    return this._sourceTextStyleRanges.reduce(
+      (styleRanges: Octopus['StyleRange'][], styleRange: SourceTextStyleRange) => {
+        const { from, to, textStyle } = styleRange
+        const range = asFiniteNumber(to - from, 0)
+        if (range === 0) return styleRanges
 
-      const parsedStyle = this._parseStyle(textStyle)
-      const style = this._subtractDefaultStyle(parsedStyle, defaultStyle)
-      if (isEmpty(style)) return
+        const parsedStyle = this._parseStyle(textStyle)
+        const style = this._subtractDefaultStyle(parsedStyle, defaultStyle)
+        if (isEmpty(style)) return styleRanges
 
-      const foundOccurrence = styleRanges.find((styleRange) => isEqual(styleRange.style, style))
-      if (foundOccurrence === undefined) {
-        styleRanges.push({ style, ranges: [{ from, to }] })
-      } else {
-        foundOccurrence.ranges.push({ from, to })
-      }
-    })
-    return styleRanges as Octopus['StyleRange'][]
+        const foundOccurrence = styleRanges.find((styleRange) => isEqual(styleRange.style, style))
+        if (foundOccurrence === undefined) {
+          styleRanges.push({ style, ranges: [{ from, to }] })
+        } else {
+          foundOccurrence.ranges.push({ from, to })
+        }
+        return styleRanges
+      },
+      []
+    ) as Octopus['StyleRange'][]
   }
 
   private get _textTransform(): Octopus['Transform'] {
