@@ -30,10 +30,9 @@ async function renderOctopus(octopusDir: string) {
   return { renderLocation, renderTime }
 }
 
-export async function convertDesign(): Promise<void> {
+export async function convertDesign(filename: string): Promise<void> {
   const timeStart = performance.now()
   const designId = uuidv4()
-  const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
   if (filename === undefined) return console.error('Missing argument (path to .psd file)')
 

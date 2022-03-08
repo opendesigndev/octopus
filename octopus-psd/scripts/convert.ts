@@ -1,3 +1,5 @@
 import { convertDesign } from './utils/convert-design'
 
-convertDesign()
+const [filename] = process.argv.slice(2)
+
+convertDesign(filename)
