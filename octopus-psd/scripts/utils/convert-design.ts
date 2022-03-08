@@ -36,13 +36,13 @@ export async function convertDesign(): Promise<void> {
   const [filename] = process.argv.slice(2)
   console.info(`Start converting file: ${chalk.yellow(filename)}`)
   if (filename === undefined) return console.error('Missing argument (path to .psd file)')
-  const converter = new OctopusPSDConverter({ designId })
 
   const parseTimeStart = performance.now()
-  const sourceDesign = await prepareSourceDesign(converter, filename, designId)
+  const sourceDesign = await prepareSourceDesign(filename, designId)
   const parseTime = performance.now() - parseTimeStart
   console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)} ${displayPerf(parseTime)}`)
 
+  const converter = new OctopusPSDConverter({ designId })
   const convertResult = await converter.convertDesign({ sourceDesign })
   const saver = await createTempSaver(designId)
 

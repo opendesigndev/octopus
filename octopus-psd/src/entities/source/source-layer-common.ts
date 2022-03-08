@@ -1,4 +1,3 @@
-import type { OctopusPSDConverter } from '../..'
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
@@ -23,11 +22,6 @@ export class SourceLayerCommon {
 
   get name(): string | undefined {
     return this._rawValue.name
-  }
-
-  get converter(): OctopusPSDConverter {
-    const parentArtboard = this.parentArtboard
-    return parentArtboard.converter
   }
 
   get parentArtboard(): SourceArtboard {

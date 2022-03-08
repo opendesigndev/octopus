@@ -1,7 +1,6 @@
 import { readFile, readdir } from 'fs/promises'
 import { parsePsd } from '@avocode/psd-parser'
 import { SourceDesign, SourceImage } from '../../src/entities/source/source-design'
-import type { OctopusPSDConverter } from '../../src'
 import path from 'path'
 import sizeOf from 'image-size'
 
@@ -52,15 +51,11 @@ async function getImages(designId: string): Promise<SourceImage[]> {
   return images
 }
 
-export async function prepareSourceDesign(
-  octopusConverter: OctopusPSDConverter,
-  filename: string,
-  designId: string
-): Promise<SourceDesign> {
+export async function prepareSourceDesign(filename: string, designId: string): Promise<SourceDesign> {
   await parsePsd(filename, getParsePsdOptions(designId))
   const sourcePath = path.join(OUTPUT_DIR, designId, SOURCE_FILE)
   const file = await readFile(sourcePath, { encoding: 'utf8' })
   const artboard = JSON.parse(file)
   const images = await getImages(designId)
-  return new SourceDesign({ designId, octopusConverter, artboard, images })
+  return new SourceDesign({ designId, artboard, images })
 }

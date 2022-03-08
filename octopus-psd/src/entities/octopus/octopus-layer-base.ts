@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import type { OctopusPSDConverter } from '../..'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { OctopusArtboard } from './octopus-artboard'
@@ -45,10 +44,6 @@ export class OctopusLayerBase {
 
   get sourceLayer(): SourceLayer {
     return this._sourceLayer
-  }
-
-  get converter(): OctopusPSDConverter {
-    return this.parentArtboard.converter
   }
 
   get parentArtboard(): OctopusArtboard {
