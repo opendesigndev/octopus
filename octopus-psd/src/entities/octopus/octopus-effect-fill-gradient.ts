@@ -145,7 +145,7 @@ export class OctopusEffectFillGradient {
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
-  private _getPositioning(): Octopus['FillPositioning'] {
+  private get _positioning(): Octopus['FillPositioning'] {
     const type = this.type
     const transform = type === 'LINEAR' ? this._transformLinear : this._transformRadial
     return {
@@ -160,7 +160,7 @@ export class OctopusEffectFillGradient {
     if (type === null) return null
 
     const gradient = this._getGradient(type)
-    const positioning = this._getPositioning()
+    const positioning = this._positioning
 
     return { type: 'GRADIENT', gradient, positioning }
   }

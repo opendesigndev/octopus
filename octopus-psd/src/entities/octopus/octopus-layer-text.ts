@@ -158,7 +158,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   @firstCallMemo()
   private get _textTransform(): Octopus['Transform'] {
-    const { top, left } = this._sourceText.bounds
+    const { top, left } = this._sourceText.boundingBox
 
     const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
     const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
@@ -189,7 +189,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return {
       value,
       defaultStyle,
-      baselinePolicy: 'FIXED_OFFSET', // TODO Fix when octopus3 schema is updated
+      baselinePolicy: 'OFFSET_BEARING',
       styles,
       textTransform,
       frame,

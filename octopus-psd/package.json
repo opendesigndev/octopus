@@ -31,7 +31,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@avocode/octopus-ts": "3.0.0-alpha.20",
+    "@avocode/octopus-ts": "3.0.0-alpha.22",
     "@types/chalk": "^2.2.0",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
