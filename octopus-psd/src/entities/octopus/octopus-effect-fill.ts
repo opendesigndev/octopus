@@ -85,7 +85,7 @@ export class OctopusEffectFill {
       case 'COLOR': {
         const color = fill.color
         if (color === null) return null
-        const opacity = fill.opacity
+        const opacity = fill.opacity * this._parentLayer.fillOpacity
         return new OctopusEffectFillColor({ color, opacity }).convert()
       }
       default:

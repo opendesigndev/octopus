@@ -42,6 +42,10 @@ export class SourceLayerCommon {
     return this._rawValue.blendOptions?.opacity?.value
   }
 
+  get fillOpacity(): number | undefined {
+    return this._rawValue.blendOptions?.fillOpacity?.value
+  }
+
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendOptions?.mode
   }

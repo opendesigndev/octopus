@@ -1,5 +1,6 @@
 import type { RawTextStyle } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
+import { round } from '../../utils/math'
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
@@ -28,7 +29,7 @@ export class SourceTextStyle extends SourceEntity {
   }
 
   get lineHeight(): number {
-    return this._rawValue?.leading ?? 0
+    return round(this._rawValue?.leading ?? 0, 1)
   }
 
   get letterSpacing(): number {

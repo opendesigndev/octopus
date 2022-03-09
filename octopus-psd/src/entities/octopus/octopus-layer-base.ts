@@ -80,6 +80,10 @@ export class OctopusLayerBase {
     return convertOpacity(this._sourceLayer.opacity)
   }
 
+  get fillOpacity(): number {
+    return convertOpacity(this._sourceLayer.fillOpacity)
+  }
+
   get type(): Octopus['LayerBase']['type'] | null {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
