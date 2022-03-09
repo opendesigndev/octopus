@@ -4,7 +4,7 @@ import { round } from '../../utils/math'
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
-export class SourceTextStyle extends SourceEntity {
+export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
 
   constructor(text: RawTextStyle | undefined) {

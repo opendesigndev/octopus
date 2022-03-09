@@ -37,3 +37,5 @@ export type SourceMatrix = {
   yx: number
   yy: number
 }
+
+export type SourceAlign = 'left' | 'right' | 'center' | 'justifyLeft' | 'justifyRight' | 'justifyCenter' | 'justifyAll'

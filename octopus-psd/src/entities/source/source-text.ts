@@ -2,8 +2,9 @@ import type { RawText } from '../../typings/raw'
 import { getMatrixFor, getTextBoundsFor } from '../../utils/source'
 import type { SourceBounds, SourceMatrix } from '../../typings/source'
 import { SourceEntity } from './source-entity'
-import { SourceTextStyleRange } from './source-text-style-range'
+import { SourceTextTextStyleRange } from './source-text-text-style-range'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
 
 export class SourceText extends SourceEntity {
   protected _rawValue: RawText | undefined
@@ -27,9 +28,15 @@ export class SourceText extends SourceEntity {
   }
 
   @firstCallMemo()
-  get textStyles(): SourceTextStyleRange[] {
-    const textStyles = this._rawValue?.textStyleRange ?? []
-    return textStyles.map((style) => new SourceTextStyleRange(style))
+  get textStyles(): SourceTextTextStyleRange[] {
+    const ranges = this._rawValue?.textStyleRange ?? []
+    return ranges.map((range) => new SourceTextTextStyleRange(range))
+  }
+
+  @firstCallMemo()
+  get paragraphStyles(): SourceTextParagraphStyleRange[] {
+    const ranges = this._rawValue?.paragraphStyleRange ?? []
+    return ranges.map((range) => new SourceTextParagraphStyleRange(range))
   }
 
   get bounds(): SourceBounds {

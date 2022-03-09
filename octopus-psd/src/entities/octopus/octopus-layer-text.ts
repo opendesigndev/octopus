@@ -2,14 +2,14 @@ import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
-import type { SourceTextStyleRange } from '../source/source-text-style-range'
-import { SourceTextStyle } from '../source/source-text-style'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
+import type { SourceTextTextStyle } from '../source/source-text-text-style'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isEqual, isEmpty } from 'lodash'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { createMatrix } from '../../utils/paper-factories'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { keys } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
 import { normalizeTextValue } from '@avocode/octopus-common/dist/utils/text'
 
 type OctopusLayerTextOptions = {
@@ -23,6 +23,16 @@ export class OctopusLayerText extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerText
 
+  static TEXT_ALIGN_MAP = {
+    left: 'LEFT',
+    center: 'CENTER',
+    right: 'RIGHT',
+    justifyLeft: 'JUSTIFY',
+    justifyRight: 'JUSTIFY',
+    justifyCenter: 'JUSTIFY',
+    justifyAll: 'JUSTIFY',
+  } as const
+
   constructor(options: OctopusLayerTextOptions) {
     super(options)
   }
@@ -35,13 +45,13 @@ export class OctopusLayerText extends OctopusLayerBase {
     return this._sourceLayer.text
   }
 
-  private get _sourceTextStyleRanges(): SourceTextStyleRange[] {
+  private get _sourceTextStyleRanges(): SourceTextTextStyleRange[] {
     return this._sourceText.textStyles
   }
 
   @firstCallMemo()
   private get _defaultStyleOccurrences(): Occurrences {
-    return this._sourceTextStyleRanges.reduce((occurrences: Occurrences, textStyleRange: SourceTextStyleRange) => {
+    return this._sourceTextStyleRanges.reduce((occurrences: Occurrences, textStyleRange: SourceTextTextStyleRange) => {
       const { from, to, textStyle } = textStyleRange
       const range = asFiniteNumber(to - from, 0)
       if (range === 0) return occurrences
@@ -73,7 +83,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return defaultStyle as Octopus['TextStyle']
   }
 
-  private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] {
+  private _getFont(textStyle: SourceTextTextStyle): Octopus['TextStyle']['font'] {
     return {
       postScriptName: textStyle.fontPostScriptName,
       family: textStyle.fontName,
@@ -81,13 +91,13 @@ export class OctopusLayerText extends OctopusLayerBase {
     }
   }
 
-  private _getLigatures(textStyle: SourceTextStyle): Octopus['TextStyle']['ligatures'] {
+  private _getLigatures(textStyle: SourceTextTextStyle): Octopus['TextStyle']['ligatures'] {
     if (!textStyle.ligatures) return 'NONE'
     if (textStyle.altLigature) return 'ALL'
     return 'STANDARD'
   }
 
-  private _getLetterCase(textStyle: SourceTextStyle): Octopus['TextStyle']['letterCase'] {
+  private _getLetterCase(textStyle: SourceTextTextStyle): Octopus['TextStyle']['letterCase'] {
     switch (textStyle.letterCase) {
       case 'allCaps':
         return 'UPPERCASE'
@@ -98,14 +108,14 @@ export class OctopusLayerText extends OctopusLayerBase {
     }
   }
 
-  private _getFills(textStyle: SourceTextStyle): Octopus['TextStyle']['fills'] {
+  private _getFills(textStyle: SourceTextTextStyle): Octopus['TextStyle']['fills'] {
     const color = textStyle.color
     const opacity = this.fillOpacity
     const fill = new OctopusEffectFillColor({ color, opacity }).convert()
     return [fill]
   }
 
-  private _parseStyle(textStyle: SourceTextStyle): Octopus['TextStyle'] {
+  private _parseStyle(textStyle: SourceTextTextStyle): Octopus['TextStyle'] {
     return {
       font: this._getFont(textStyle),
       fontSize: textStyle.size,
@@ -137,7 +147,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getStyles(defaultStyle: Octopus['TextStyle']): Octopus['StyleRange'][] {
     return this._sourceTextStyleRanges.reduce(
-      (styleRanges: Octopus['StyleRange'][], styleRange: SourceTextStyleRange) => {
+      (styleRanges: Octopus['StyleRange'][], styleRange: SourceTextTextStyleRange) => {
         const { from, to, textStyle } = styleRange
         const range = asFiniteNumber(to - from, 0)
         if (range === 0) return styleRanges
@@ -172,6 +182,14 @@ export class OctopusLayerText extends OctopusLayerBase {
     return matrix.values
   }
 
+  private get _horizontalAlign(): Octopus['Text']['horizontalAlign'] {
+    return getMapped(
+      this._sourceText.paragraphStyles[0]?.paragraphStyle?.align,
+      OctopusLayerText.TEXT_ALIGN_MAP,
+      'LEFT'
+    )
+  }
+
   private get _frame(): Octopus['TextFrame'] {
     const { width, height } = this._sourceText.bounds
     return { mode: 'FIXED', size: { width, height } }
@@ -185,12 +203,14 @@ export class OctopusLayerText extends OctopusLayerBase {
     const styles = this._getStyles(defaultStyle)
     const textTransform = this._textTransform
     const frame = this._frame
+    const horizontalAlign = this._horizontalAlign
 
     // TODO add text picture when octopus3 schema is prepared
 
     return {
       value,
       defaultStyle,
+      horizontalAlign,
       baselinePolicy: 'OFFSET_BEARING',
       styles,
       textTransform,
