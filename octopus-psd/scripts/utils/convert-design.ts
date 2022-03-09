@@ -9,6 +9,7 @@ import { OctopusPSDConverter } from '../../src'
 import { prepareSourceDesign } from './prepare-source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
+import { symlink } from 'fs/promises'
 
 dotenv.config()
 
@@ -18,6 +19,11 @@ function displayPerf(time: number): string {
 }
 
 async function renderOctopus(octopusDir: string) {
+  // symlink fonts
+  const symlinkPath = path.join(octopusDir, 'fonts')
+  const fontsPath = path.join(octopusDir, '..', '..', 'fonts')
+  await symlink(fontsPath, symlinkPath)
+
   const renderLocation = path.join(octopusDir, 'render.png')
   const command = `${process.env.RENDERING_PATH} ${octopusDir} ${renderLocation}`
   const timeStart = performance.now()
