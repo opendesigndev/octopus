@@ -1,7 +1,7 @@
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
-import { getBoundsFor, getOpacityFor } from '../../utils/source'
+import { getBoundsFor, getUnitRatioFor } from '../../utils/source'
 import { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from './source-effects-layer'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
@@ -39,11 +39,11 @@ export class SourceLayerCommon {
   }
 
   get opacity(): number {
-    return getOpacityFor(this._rawValue.blendOptions?.opacity?.value)
+    return getUnitRatioFor(this._rawValue.blendOptions?.opacity?.value)
   }
 
   get fillOpacity(): number {
-    return getOpacityFor(this._rawValue.blendOptions?.fillOpacity?.value)
+    return getUnitRatioFor(this._rawValue.blendOptions?.fillOpacity?.value)
   }
 
   get blendMode(): RawBlendMode | undefined {

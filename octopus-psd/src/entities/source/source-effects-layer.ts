@@ -1,6 +1,6 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawLayerEffects } from '../../typings/raw'
-import { getScaleFor } from '../../utils/source'
+import { getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceEffectSatin } from './source-effect-satin'
@@ -17,7 +17,7 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   get scale(): number {
-    return getScaleFor(this._rawValue?.scale?.value)
+    return getUnitRatioFor(this._rawValue?.scale?.value)
   }
 
   get enabledAll(): boolean {

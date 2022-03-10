@@ -1,7 +1,7 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import type { RawBlendMode, RawEffectSatin } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
-import { getColorFor, getOpacityFor } from '../../utils/source'
+import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 export class SourceEffectSatin extends SourceEntity {
@@ -29,7 +29,7 @@ export class SourceEffectSatin extends SourceEntity {
   }
 
   get opacity(): number {
-    return getOpacityFor(this._rawValue?.opacity?.value)
+    return getUnitRatioFor(this._rawValue?.opacity?.value)
   }
 
   get invert(): boolean {

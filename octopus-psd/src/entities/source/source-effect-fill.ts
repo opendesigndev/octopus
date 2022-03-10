@@ -1,7 +1,7 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawBlendMode, RawFill, RawFillPattern } from '../../typings/raw'
 import type { SourceColor, SourceGradientType, SourceVectorXY } from '../../typings/source'
-import { getColorFor, getOpacityFor, getScaleFor } from '../../utils/source'
+import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
 export class SourceEffectFill {
@@ -29,7 +29,7 @@ export class SourceEffectFill {
   }
 
   get scale(): number {
-    return getScaleFor(this._rawValue?.scale?.value)
+    return getUnitRatioFor(this._rawValue?.scale?.value)
   }
 
   get angle(): number {
@@ -53,7 +53,7 @@ export class SourceEffectFill {
   }
 
   get opacity(): number {
-    return getOpacityFor(this._rawValue?.opacity?.value)
+    return getUnitRatioFor(this._rawValue?.opacity?.value)
   }
 
   offset(width: number, height: number): SourceVectorXY {

@@ -58,10 +58,6 @@ export function getPointFor(point: RawPointXY | undefined): SourcePointXY {
   return { x, y }
 }
 
-export function getOpacityFor(opacity: number | undefined): number {
-  return asFiniteNumber(opacity, 100) / 100
-}
-
-export function getScaleFor(scale: number | undefined): number {
-  return asFiniteNumber(scale, 100) / 100
+export function getUnitRatioFor(percentage: number | undefined, defaultValue = 100): number {
+  return asFiniteNumber(percentage, defaultValue) / 100
 }

@@ -23,11 +23,21 @@ export class OctopusEffectBevelEmboss {
   }
 
   private get otherEffectProperties() {
-    return { otherEffectType: 'BEVEL_AND_EMBOSS' }
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._bevelEmboss?.highlightMode)
+    return {
+      otherEffectType: 'BEVEL_AND_EMBOSS',
+      style: this._bevelEmboss.style,
+      depth: this._bevelEmboss.depth,
+      blur: this._bevelEmboss.blur,
+      softness: this._bevelEmboss.softness,
+      angle: this._bevelEmboss.localLightingAngle,
+      altitude: this._bevelEmboss.localLightingAltitude,
+      highlightMode: convertBlendMode(this._bevelEmboss.highlightMode),
+      highlightColor: this._bevelEmboss.highlightColor,
+      highlightOpacity: this._bevelEmboss.highlightOpacity,
+      shadowMode: convertBlendMode(this._bevelEmboss.shadowMode),
+      shadowColor: this._bevelEmboss.shadowColor,
+      shadowOpacity: this._bevelEmboss.shadowOpacity,
+    }
   }
 
   get visible(): boolean {
@@ -39,8 +49,7 @@ export class OctopusEffectBevelEmboss {
   convert(): Octopus['EffectOther'] | null {
     const otherEffectProperties = this.otherEffectProperties
     const visible = this.visible
-    const blendMode = this.blendMode
     const basis = 'FILL'
-    return { type: 'OTHER', visible, blendMode, basis, otherEffectProperties }
+    return { type: 'OTHER', visible, basis, otherEffectProperties }
   }
 }
