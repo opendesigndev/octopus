@@ -101,10 +101,6 @@ export default class OctopusLayerCommon {
 
     const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.TRANSFORM.slice()
     const matrix = createMatrix(a, b, c, d, tx, ty)
-    if (this.parent === this.parentArtboard) {
-      const { x, y } = this.parentArtboard?.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
-      matrix.prepend(createMatrix(1, 0, 0, 1, -x, -y))
-    }
 
     return [matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty]
   }

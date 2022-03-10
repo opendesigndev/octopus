@@ -77,6 +77,8 @@ export default class OctopusArtboard {
   private _getArtificialMaskGroupRaw() {
     const artboardId = this._sourceArtboard.meta.id
 
+    const { x, y } = this.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
+
     return {
       type: 'group',
       name: this._sourceArtboard.meta.name,
@@ -90,7 +92,7 @@ export default class OctopusArtboard {
         },
       },
       id: uuidv4FromSeed(`${artboardId}:background`),
-      transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
+      transform: { a: 1, b: 0, c: 0, d: 1, tx: -x, ty: -y },
       group: {
         children: this._sourceArtboard.firstChild?.artboard?.children,
       },
