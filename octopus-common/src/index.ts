@@ -1,6 +1,7 @@
 // Utils
 import * as As from './utils/as'
 import * as Common from './utils/common'
+import * as Math from './utils/math'
 import * as Pkg from './utils/pkg'
 import * as UtilityTypes from './utils/utility-types'
 import * as Async from './utils/async'
@@ -18,4 +19,5 @@ export const utils = {
   pkg: Pkg,
   utilityTypes: UtilityTypes,
   async: Async,
+  math: Math,
 }

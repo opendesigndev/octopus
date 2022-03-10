@@ -2,6 +2,7 @@ import type { Octopus } from '../typings/octopus'
 import type { RawBlendMode, RawColor } from '../typings/raw'
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { DEFAULTS } from './defaults'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 
 const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   blendDivide: 'DIVIDE',
@@ -38,19 +39,11 @@ export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode']
   return typeof blendMode === 'string' && blendMode in BLEND_MODES ? BLEND_MODES[blendMode] : DEFAULTS.BLEND_MODE
 }
 
-export function convertOpacity(opacity: number | undefined): number {
-  return asFiniteNumber(opacity, 100) / 100
-}
-
-export function convertScale(scale: number | undefined): number {
-  return asFiniteNumber(scale, 100) / 100
-}
-
 export function convertColor(color: RawColor | null | undefined, opacity?: number): Octopus['Color'] {
   return {
-    r: asFiniteNumber(color?.red, 0) / 255,
-    g: asFiniteNumber(color?.green, 0) / 255,
-    b: asFiniteNumber(color?.blue, 0) / 255,
-    a: opacity ?? 1,
+    r: round(asFiniteNumber(color?.red, 0) / 255, 4),
+    g: round(asFiniteNumber(color?.green, 0) / 255, 4),
+    b: round(asFiniteNumber(color?.blue, 0) / 255, 4),
+    a: round(opacity ?? 1, 4),
   }
 }

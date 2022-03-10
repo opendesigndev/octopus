@@ -3,11 +3,13 @@ import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusArtboard } from './octopus-artboard'
+import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'
 import { OctopusEffectGlowInner } from './octopus-effect-glow-inner'
 import { OctopusEffectGlowOuter } from './octopus-effect-glow-outer'
 import { OctopusEffectOverlayColor } from './octopus-effect-overlay-color'
 import { OctopusEffectOverlayGradient } from './octopus-effect-overlay-gradient'
 import { OctopusEffectOverlayPattern } from './octopus-effect-overlay-pattern'
+import { OctopusEffectSatin } from './octopus-effect-satin'
 import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop'
 import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
@@ -84,7 +86,10 @@ export class OctopusEffectsLayer {
   @firstCallMemo()
   private get _effectSatin(): Octopus['EffectOther'] | null {
     if (this._effects.satin === undefined) return null
-    return null // TODO
+    return new OctopusEffectSatin({
+      parentLayer: this._parentLayer,
+      satin: this._effects.satin,
+    }).convert()
   }
 
   @firstCallMemo()
@@ -117,7 +122,10 @@ export class OctopusEffectsLayer {
   @firstCallMemo()
   private get _effectBevelEmboss(): Octopus['EffectOther'] | null {
     if (this._effects.bevelEmboss === undefined) return null
-    return null // TODO
+    return new OctopusEffectBevelEmboss({
+      parentLayer: this._parentLayer,
+      bevelEmboss: this._effects.bevelEmboss,
+    }).convert()
   }
 
   convert(): Octopus['Effect'][] {

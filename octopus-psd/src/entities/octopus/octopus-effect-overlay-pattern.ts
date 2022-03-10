@@ -48,6 +48,10 @@ export class OctopusEffectOverlayPattern {
     return [x, y]
   }
 
+  private get _opacity(): number {
+    return this._fill?.opacity
+  }
+
   get imageTransform(): Octopus['Transform'] | null {
     if (this._fill === undefined) return null
     const imagePath = this.imagePath
@@ -79,7 +83,7 @@ export class OctopusEffectOverlayPattern {
     const overlay = new OctopusEffectFillImage({
       imagePath: this.imagePath,
       transform,
-      opacity: this._fill?.opacity,
+      opacity: this._opacity,
       layout: 'TILE',
       origin: 'ARTBOARD',
     }).convert()

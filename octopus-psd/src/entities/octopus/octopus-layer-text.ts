@@ -11,6 +11,7 @@ import { createMatrix } from '../../utils/paper-factories'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
 import { normalizeTextValue } from '@avocode/octopus-common/dist/utils/text'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -192,7 +193,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private get _frame(): Octopus['TextFrame'] {
     const { width, height } = this._sourceText.bounds
-    return { mode: 'FIXED', size: { width, height } }
+    return { mode: 'FIXED', size: { width: round(width), height: round(height) } }
   }
 
   @firstCallMemo()

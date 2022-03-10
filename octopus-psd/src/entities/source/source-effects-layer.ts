@@ -1,7 +1,9 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { RawLayerEffects } from '../../typings/raw'
-import { convertScale } from '../../utils/convert'
+import { getScaleFor } from '../../utils/source'
+import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss'
 import { SourceEffectFill } from './source-effect-fill'
+import { SourceEffectSatin } from './source-effect-satin'
 import { SourceEffectShadow } from './source-effect-shadow'
 import { SourceEffectStroke } from './source-effect-stroke'
 import { SourceEntity } from './source-entity'
@@ -15,7 +17,7 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   get scale(): number {
-    return convertScale(this._rawValue?.scale?.value)
+    return getScaleFor(this._rawValue?.scale?.value)
   }
 
   get enabledAll(): boolean {
@@ -71,14 +73,14 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   @firstCallMemo()
-  get satin(): SourceEffectStroke | undefined {
-    const fill = this._rawValue?.chromeFX
-    return fill !== undefined ? new SourceEffectStroke(fill) : undefined // TODO
+  get satin(): SourceEffectSatin | undefined {
+    const satin = this._rawValue?.chromeFX
+    return satin !== undefined ? new SourceEffectSatin(satin) : undefined
   }
 
   @firstCallMemo()
-  get bevelEmboss(): SourceEffectStroke | undefined {
-    const fill = this._rawValue?.bevelEmboss
-    return fill !== undefined ? new SourceEffectStroke(fill) : undefined // TODO
+  get bevelEmboss(): SourceEffectBevelEmboss | undefined {
+    const bevelEmboss = this._rawValue?.bevelEmboss
+    return bevelEmboss !== undefined ? new SourceEffectBevelEmboss(bevelEmboss) : undefined
   }
 }

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import BLEND_MODES from '../../utils/blend-modes'
 import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import { round } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 import DEFAULTS from '../../utils/defaults'
 import OctopusArtboard from './octopus-artboard'
 import { convertObjectMatrixToArray } from '../../utils/matrix'

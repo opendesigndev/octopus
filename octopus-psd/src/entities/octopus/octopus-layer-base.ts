@@ -10,7 +10,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { logWarn } from '../../services/instances/misc'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
-import { convertBlendMode, convertOpacity } from '../../utils/convert'
+import { convertBlendMode } from '../../utils/convert'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
@@ -77,11 +77,11 @@ export class OctopusLayerBase {
   }
 
   get opacity(): number {
-    return convertOpacity(this._sourceLayer.opacity)
+    return this._sourceLayer.opacity
   }
 
   get fillOpacity(): number {
-    return convertOpacity(this._sourceLayer.fillOpacity)
+    return this._sourceLayer.fillOpacity
   }
 
   get type(): Octopus['LayerBase']['type'] | null {

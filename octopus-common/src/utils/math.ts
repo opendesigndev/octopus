@@ -3,7 +3,7 @@ export function mod(n: number, mod: number): number {
   return remainder >= 0 ? remainder : remainder + mod
 }
 
-export function round(n: number, precision = 0): number {
+export function round(n: number, precision = 2): number {
   const multiplier = Math.pow(10, precision)
   return Math.round(n * multiplier) / multiplier
 }

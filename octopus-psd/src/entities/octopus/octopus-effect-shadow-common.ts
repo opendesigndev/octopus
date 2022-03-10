@@ -3,7 +3,7 @@ import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusArtboard } from './octopus-artboard'
 import { convertBlendMode, convertColor } from '../../utils/convert'
 import { SourceEffectShadow } from '../source/source-effect-shadow'
-import { cos, sin, round, clamp } from '../../utils/math'
+import { cos, sin, round, clamp } from '@avocode/octopus-common/dist/utils/math'
 import { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowCommonOptions = {
