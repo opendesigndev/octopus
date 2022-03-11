@@ -62,7 +62,7 @@ export class OctopusArtboard {
 
   get content(): Octopus['Layer'] {
     return {
-      id: '1:background',
+      id: `${this.id}:background`,
       type: 'GROUP',
       layers: this.layers,
     }
