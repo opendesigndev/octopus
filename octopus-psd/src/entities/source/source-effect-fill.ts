@@ -5,7 +5,7 @@ import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
 export class SourceEffectFill {
-  protected _rawValue: RawFill | undefined
+  private _rawValue: RawFill | undefined
 
   constructor(fill: RawFill | undefined) {
     this._rawValue = fill

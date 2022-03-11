@@ -14,8 +14,8 @@ type OctopusEffectStrokeOptions = {
 }
 
 export class OctopusEffectStroke {
-  protected _parentLayer: OctopusLayerBase
-  protected _stroke: SourceEffectStroke
+  private _parentLayer: OctopusLayerBase
+  private _stroke: SourceEffectStroke
 
   static STROKE_POSITION_MAP = {
     centeredFrame: 'CENTER',

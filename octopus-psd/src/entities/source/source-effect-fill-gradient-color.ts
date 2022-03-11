@@ -3,7 +3,7 @@ import type { SourceColor } from '../../typings/source'
 import { getColorFor } from '../../utils/source'
 
 export class SourceEffectFillGradientColor {
-  protected _rawValue: RawShapeGradientColors | undefined
+  private _rawValue: RawShapeGradientColors | undefined
 
   constructor(colors: RawShapeGradientColors | undefined) {
     this._rawValue = colors

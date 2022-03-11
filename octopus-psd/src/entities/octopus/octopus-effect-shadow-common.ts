@@ -12,8 +12,8 @@ type OctopusShadowCommonOptions = {
 }
 
 export class OctopusEffectShadowCommon {
-  protected _parentLayer: OctopusLayerBase
-  protected _shadow: SourceEffectShadow
+  private _parentLayer: OctopusLayerBase
+  private _shadow: SourceEffectShadow
 
   constructor(options: OctopusShadowCommonOptions) {
     this._parentLayer = options.parentLayer

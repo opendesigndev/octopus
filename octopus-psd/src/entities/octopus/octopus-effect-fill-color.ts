@@ -8,8 +8,8 @@ type OctopusFillOptions = {
 }
 
 export class OctopusEffectFillColor {
-  protected _color: SourceColor | null
-  protected _opacity: number | undefined
+  private _color: SourceColor | null
+  private _opacity: number | undefined
 
   constructor(options: OctopusFillOptions) {
     this._color = options.color

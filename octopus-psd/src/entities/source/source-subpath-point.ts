@@ -3,7 +3,7 @@ import type { SourcePointXY } from '../../typings/source'
 import { getPointFor } from '../../utils/source'
 
 export class SourceSubpathPoint {
-  protected _rawValue: RawSubpathPoint
+  private _rawValue: RawSubpathPoint
 
   constructor(point: RawSubpathPoint) {
     this._rawValue = point

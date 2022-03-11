@@ -5,7 +5,7 @@ import { SourcePathOrigin } from './source-path-origin'
 import { SourceSubpath } from './source-subpath'
 
 export class SourcePathComponent {
-  protected _rawValue: RawPathComponent
+  private _rawValue: RawPathComponent
 
   constructor(component: RawPathComponent) {
     this._rawValue = component

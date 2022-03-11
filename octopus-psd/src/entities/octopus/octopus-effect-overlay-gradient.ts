@@ -11,8 +11,8 @@ type OctopusFillOptions = {
 }
 
 export class OctopusEffectOverlayGradient {
-  protected _parentLayer: OctopusLayerBase
-  protected _fill: SourceEffectFill
+  private _parentLayer: OctopusLayerBase
+  private _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
     this._parentLayer = options.parentLayer

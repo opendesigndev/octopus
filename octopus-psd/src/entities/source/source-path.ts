@@ -5,7 +5,7 @@ import { getBoundsFor } from '../../utils/source'
 import { SourcePathComponent } from './source-path-component'
 
 export class SourcePath {
-  protected _rawValue: RawPath | undefined
+  private _rawValue: RawPath | undefined
 
   constructor(path: RawPath | undefined) {
     this._rawValue = path

@@ -13,7 +13,7 @@ type OctopusLayerShapeShapePathOptions = {
 }
 
 export class OctopusLayerShapeShapePath {
-  protected _parentLayer: OctopusLayerShapeShapeAdapter
+  private _parentLayer: OctopusLayerShapeShapeAdapter
 
   static COMPOUND_OPERATION_MAP = {
     add: 'UNION',

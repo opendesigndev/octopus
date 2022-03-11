@@ -20,7 +20,7 @@ type OctopusEffectLayerOptions = {
 }
 
 export class OctopusEffectsLayer {
-  protected _parentLayer: OctopusLayerBase
+  private _parentLayer: OctopusLayerBase
 
   constructor(options: OctopusEffectLayerOptions) {
     this._parentLayer = options.parentLayer

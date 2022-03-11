@@ -18,8 +18,8 @@ type Style = {
 }
 
 export class OctopusStroke {
-  protected _parentLayer: OctopusLayerBase
-  protected _stroke: SourceStroke
+  private _parentLayer: OctopusLayerBase
+  private _stroke: SourceStroke
 
   static STROKE_POSITION_MAP = {
     strokeStyleAlignCenter: 'CENTER',

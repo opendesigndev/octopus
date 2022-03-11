@@ -19,8 +19,8 @@ type OctopusFillGradientOptions = {
 }
 
 export class OctopusEffectFillGradient {
-  protected _parentLayer: OctopusLayerBase
-  protected _fill: SourceEffectFill
+  private _parentLayer: OctopusLayerBase
+  private _fill: SourceEffectFill
 
   static GRADIENT_TYPE_MAP = {
     linear: 'LINEAR',
