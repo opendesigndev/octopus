@@ -1,25 +1,26 @@
 import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
-import { convertColor } from '../../utils/color'
+import { convertColor, convertOffset } from '../../utils/convert'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceGradientType } from '../../typings/source'
+import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
-import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
+import { logWarn } from '../../services/instances/misc'
+import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
 type OctopusFillGradientOptions = {
-  parent: OctopusLayerShapeShapeAdapter
+  parentLayer: OctopusLayerBase
   fill: SourceEffectFill
 }
 
 export class OctopusEffectFillGradient {
-  protected _parent: OctopusLayerShapeShapeAdapter
-  protected _fill: SourceEffectFill
+  private _parentLayer: OctopusLayerBase
+  private _fill: SourceEffectFill
 
   static GRADIENT_TYPE_MAP = {
     linear: 'LINEAR',
@@ -29,12 +30,16 @@ export class OctopusEffectFillGradient {
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
-    this._parent = options.parent
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
   }
 
-  get sourceLayer(): SourceLayerShape {
-    return this._parent.sourceLayer
+  private get _parentArtboard(): OctopusArtboard {
+    return this._parentLayer.parentArtboard
+  }
+
+  private get _sourceLayerBounds(): SourceBounds {
+    return this._parentLayer.sourceLayer.bounds
   }
 
   get fill(): SourceEffectFill {
@@ -45,19 +50,19 @@ export class OctopusEffectFillGradient {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Fill Gradient type', { type })
+      logWarn('Unknown Fill Gradient type', { type })
       return null
     }
     return result
   }
 
-  get isInverse() {
+  get isInverse(): boolean {
     return this.fill.reverse
   }
 
   private _getGradientStop(stop: SourceEffectFillGradientColor): FillGradientStop {
     const STOP_MAX_LOCATION = 4096
-    const color = convertColor(stop?.color)
+    const color = convertColor(stop?.color, this._fill.opacity)
     const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
     const position = location / STOP_MAX_LOCATION
     return { color, position }
@@ -80,17 +85,18 @@ export class OctopusEffectFillGradient {
 
   private get _transformAlignParams() {
     if (this.fill.align) {
-      const { width, height } = this.sourceLayer.bounds
+      const { width, height } = this._sourceLayerBounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
-    const { width, height } = this._parent.parentArtboard.dimensions
-    const { left, top } = this.sourceLayer.bounds
+    const { width, height } = this._parentArtboard.dimensions
+    const { left, top } = this._sourceLayerBounds
     return { width, height, boundTx: left, boundTy: top }
   }
 
   private get _transformLinear(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
+    const offset = convertOffset(this.fill.offset, width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, scaleX: scale, scaleY: scale, center: { x: 0.5, y: 0.5 } })
@@ -102,14 +108,15 @@ export class OctopusEffectFillGradient {
     const skewY = p2.y - p1.y
     const skewX = p1.y - p2.y
     const scaleY = p2.x - p1.x
-    const tx = p1.x - boundTx
-    const ty = p1.y - boundTy
+    const tx = p1.x - boundTx + offset.x
+    const ty = p1.y - boundTy + offset.y
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
   private get _transformRadial(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
+    const offset = convertOffset(this.fill.offset, width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({
@@ -133,12 +140,12 @@ export class OctopusEffectFillGradient {
     const skewY = p2.y - p1.y
     const skewX = p3.x - p1.x
     const scaleY = p3.y - p1.y
-    const tx = p1.x - boundTx
-    const ty = p1.y - boundTy
+    const tx = p1.x - boundTx + offset.x
+    const ty = p1.y - boundTy + offset.y
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
-  private _getPositioning(): Octopus['FillPositioning'] {
+  private get _positioning(): Octopus['FillPositioning'] {
     const type = this.type
     const transform = type === 'LINEAR' ? this._transformLinear : this._transformRadial
     return {
@@ -153,7 +160,7 @@ export class OctopusEffectFillGradient {
     if (type === null) return null
 
     const gradient = this._getGradient(type)
-    const positioning = this._getPositioning()
+    const positioning = this._positioning
 
     return { type: 'GRADIENT', gradient, positioning }
   }

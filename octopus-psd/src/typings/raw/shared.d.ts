@@ -98,4 +98,5 @@ export type RawCombineOperation = 'add' | 'subtract' | 'interfaceIconFrameDimmed
 export type RawBlendOptions = {
   mode?: RawBlendMode
   opacity?: RawUnitPercent
+  fillOpacity?: RawUnitPercent
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 export interface Logger {
   fatal: Function
   error: Function

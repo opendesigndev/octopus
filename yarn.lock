@@ -32,16 +32,6 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
-"@avocode/octopus-common@3.0.0-rc.6":
-  version "3.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.6.tgz#4e9c75659750aebf25b1a9a8cb3606517dda4600"
-  integrity sha512-cbgj+X2ElNuUjQDciYdcgVC66CZp4uR41ore6VhmJNR3IyCK7s5xo7oxF4tnUrwZp0326KI91DrtxeiDyAGv8A==
-  dependencies:
-    "@sentry/node" "6.14.0"
-    lodash "^4.17.21"
-    read-pkg-up "7.0.1"
-    uuid "^8.3.2"
-
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"
@@ -56,10 +46,10 @@
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.19.tgz#05b89dbd356ed5ce63bb93a13d36640ee36a4a63"
   integrity sha512-G++OHOBZU7poZcPlrvGXmi4mG7XsZ9OsORWXbAth2Fr/vIWXQ+SA+yRwPvBRpktLCRplr+Tqvy7AwcaELzcO8g==
 
-"@avocode/octopus-ts@3.0.0-alpha.21":
-  version "3.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.21.tgz#6eba145e1f01d91a1720ccf1257ecdea1a5ea787"
-  integrity sha512-BmoxWfv2BQdt+DSaXw1YSZW/jb+IxXQNa/WQv6Y/ZKx9Y4HW4Kg2A/hk6YKBw3Oz/bRuYcyhDFbpxx0ArwDYWg==
+"@avocode/octopus-ts@3.0.0-alpha.22":
+  version "3.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.22.tgz#378fba8e168e8ed8d3e099dbeac85f270d54654a"
+  integrity sha512-NUb8c1jWvviNMwYyWMkgir9SHmHFp5Fg+ltrVp/XqFP2aoubaTdIVsKEhUuA+ZYohSZy+/hGNQhwvpyQzWCZGg==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"
@@ -1998,6 +1988,13 @@ ignore@^5.1.8, ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
 
+image-size@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/image-size/-/image-size-1.0.1.tgz#86d6cfc2b1d19eab5d2b368d4b9194d9e48541c5"
+  integrity sha512-VAwkvNSNGClRw9mDHhc5Efax8PLlsOGcUTh0T/LIriC8vPA3U5PdqXWqkz406MoYHMKW8Uf9gWr05T/rYB44kQ==
+  dependencies:
+    queue "6.0.2"
+
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
@@ -2027,7 +2024,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@^2.0.3:
+inherits@2, inherits@^2.0.3, inherits@~2.0.3:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
@@ -3072,6 +3069,13 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+
+queue@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/queue/-/queue-6.0.2.tgz#b91525283e2315c7553d2efa18d83e76432fed65"
+  integrity sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==
+  dependencies:
+    inherits "~2.0.3"
 
 quick-format-unescaped@^4.0.3:
   version "4.0.4"

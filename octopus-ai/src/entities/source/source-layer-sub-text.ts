@@ -1,4 +1,4 @@
-import { round } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'

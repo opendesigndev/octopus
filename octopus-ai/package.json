@@ -9,14 +9,17 @@
     "create": "yarn create:cleanup && yarn create:create && yarn create:private",
     "create:private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
     "convert:all": "npx ts-node ./scripts/convert-render.ts",
-    "build": "npx tsc --build ./tsconfig.json",
-    "test": "\"echo 'Tests are not implemented yet'\"",
-    "render:test": "npx ts-node ./scripts/render-test.ts"
+    "render:test": "npx ts-node ./scripts/render-test.ts",
+    "test": "echo 'Tests are not implemented yet'",
+    "build": "tsc --build ./tsconfig.json",
+    "clean": "rimraf ./node_modules ./lib ./workdir",
+    "types:check": "tsc --noEmit"
+
   },
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "@avocode/octopus-common": "3.0.0-rc.6",
+    "@avocode/octopus-common": "3.0.0-rc.7",
     "@sentry/node": "6.14.0",
     "dotenv": "10.0.0",
     "lodash": "^4.17.21",

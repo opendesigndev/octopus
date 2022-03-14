@@ -1,16 +1,17 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
-import { OctopusLayerShapePath } from './octopus-layer-shape-path'
+import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
 import { OctopusEffectFill } from './octopus-effect-fill'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusStroke } from './octopus-stroke'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerShape
 }
 
-export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
+export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerShape
 
@@ -27,39 +28,41 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon {
     return [left, top]
   }
 
+  @firstCallMemo()
   private get _path(): Octopus['PathLike'] {
-    return new OctopusLayerShapePath({ parent: this }).convert()
+    return new OctopusLayerShapeShapePath({ parentLayer: this }).convert()
   }
 
+  @firstCallMemo()
   private get _fills(): Octopus['Fill'][] {
-    const fill = new OctopusEffectFill({ parent: this, fill: this.sourceLayer.fill }).convert()
+    const fill = new OctopusEffectFill({ parentLayer: this, fill: this.sourceLayer.fill }).convert()
     return fill ? [fill] : []
   }
 
+  @firstCallMemo()
   private get _strokes(): Octopus['VectorStroke'][] {
-    const stroke = new OctopusEffectStroke({ parent: this }).convert()
-    return [stroke]
+    const stroke = new OctopusStroke({ parentLayer: this, stroke: this.sourceLayer.stroke }).convert()
+    return stroke ? [stroke] : []
   }
 
-  private get _shapes(): Octopus['Shape'][] {
-    const fillShape: Octopus['Shape'] = {
+  private get _shape(): Octopus['Shape'] {
+    return {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
-      // strokes: this._strokes, // TODO
+      strokes: this._strokes,
     }
-    return [fillShape]
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
     return {
       type: 'SHAPE',
-      shapes: this._shapes,
+      shape: this._shape,
     } as const
   }
 
   convert(): Octopus['ShapeLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
     return {

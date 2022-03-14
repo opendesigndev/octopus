@@ -6,13 +6,14 @@ import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import type { SourcePathComponent } from '../source/source-path-component'
 import type { SourceCombineOperation } from '../../typings/source'
+import { logWarn } from '../../services/instances/misc'
 
-type OctopusLayerShapePathOptions = {
-  parent: OctopusLayerShapeShapeAdapter
+type OctopusLayerShapeShapePathOptions = {
+  parentLayer: OctopusLayerShapeShapeAdapter
 }
 
-export class OctopusLayerShapePath {
-  protected _parent: OctopusLayerShapeShapeAdapter
+export class OctopusLayerShapeShapePath {
+  private _parentLayer: OctopusLayerShapeShapeAdapter
 
   static COMPOUND_OPERATION_MAP = {
     add: 'UNION',
@@ -21,12 +22,12 @@ export class OctopusLayerShapePath {
     xor: 'EXCLUDE',
   } as const
 
-  constructor(options: OctopusLayerShapePathOptions) {
-    this._parent = options.parent
+  constructor(options: OctopusLayerShapeShapePathOptions) {
+    this._parentLayer = options.parentLayer
   }
 
   get sourceLayer(): SourceLayerShape {
-    return this._parent.sourceLayer
+    return this._parentLayer.sourceLayer
   }
 
   private get isRectangle(): boolean {
@@ -59,9 +60,9 @@ export class OctopusLayerShapePath {
   }
 
   private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
-    const result = getMapped(operation, OctopusLayerShapePath.COMPOUND_OPERATION_MAP, undefined)
+    const result = getMapped(operation, OctopusLayerShapeShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
-      this._parent.converter?.logWarn('Unknown Compound operation', { operation })
+      logWarn('Unknown Compound operation', { operation })
       return 'UNION'
     }
     return result
@@ -81,7 +82,7 @@ export class OctopusLayerShapePath {
   private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
     const rect = pathComponents[0]
     const { bottom, left, right, top } = rect.origin.bounds
-    const [layerTx, layerTy] = this._parent.layerTranslation
+    const [layerTx, layerTy] = this._parentLayer.layerTranslation
     const tx = left - layerTx
     const ty = top - layerTy
     const transform = createDefaultTranslationMatrix([tx, ty])
@@ -94,11 +95,9 @@ export class OctopusLayerShapePath {
 
   private _getPath(pathComponents: SourcePathComponent[]): Octopus['Path'] {
     const path = pathComponents[0]
-    const layerTranslation = this._parent.layerTranslation
+    const layerTranslation = this._parentLayer.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === '') {
-      this._parent.converter?.logWarn('PathData generated empty', { path })
-    }
+    if (geometry === 'MZ') logWarn('PathData generated empty', { path })
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',

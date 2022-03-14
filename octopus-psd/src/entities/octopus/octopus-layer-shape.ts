@@ -1,4 +1,4 @@
-import { OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
@@ -10,7 +10,7 @@ type OctopusLayerShapeOptions = {
   adapter: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
 }
 
-export class OctopusLayerShape extends OctopusLayerCommon {
+export class OctopusLayerShape extends OctopusLayerBase {
   private _adapter: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
 
   constructor(options: OctopusLayerShapeOptions) {

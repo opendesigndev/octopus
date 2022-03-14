@@ -31,7 +31,7 @@ export function isRoundedRectangle(points: Points): boolean {
   return top && bottom && left && right
 }
 
-export function createDefaultTranslationMatrix(translate: readonly [number, number] | undefined = [0, 0]) {
+export function createDefaultTranslationMatrix(translate: readonly [number, number] | undefined = [0, 0]): number[] {
   const [xx, xy, yx, yy] = [...DEFAULTS.LAYER_TRANSFORM]
   return [xx, xy, yx, yy, ...translate]
 }

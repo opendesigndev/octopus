@@ -264,14 +264,9 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     const offset = this._getArtboardOffset()
     if (!offset) return null
-    const offsetMatrixArtboard = this._getTranslationMatrix(-offset.x, -offset.y)
 
     // Current layer matrix.
-    const matrices = [
-      defaults.TRANSFORM.slice(),
-      convertObjectMatrixToArray(offsetMatrixArtboard),
-      convertObjectMatrixToArray(offsetMatrixParagraph),
-    ]
+    const matrices = [defaults.TRANSFORM.slice(), convertObjectMatrixToArray(offsetMatrixParagraph)]
       .filter((matrix) => {
         return Array.isArray(matrix)
       })

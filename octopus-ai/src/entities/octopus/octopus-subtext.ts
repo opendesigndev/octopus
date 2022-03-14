@@ -1,4 +1,4 @@
-import { round } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import convertColor from '../../utils/colors'
 import SourceLayerSubText from '../source/source-layer-sub-text'

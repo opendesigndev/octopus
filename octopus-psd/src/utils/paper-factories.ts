@@ -20,8 +20,8 @@ export function createLine(from: paper.Point, to: paper.Point): paper.Path {
   return new Path.Line(from, to)
 }
 
-export function createPath(options: Object | Array<paper.Segment>): paper.Path {
-  return new Path(options)
+export function createPath(segments: Array<paper.Segment | paper.Point>): paper.Path {
+  return new Path(segments)
 }
 
 export function createPathEllipse(point: paper.Point, size: paper.Size): paper.Path.Ellipse {

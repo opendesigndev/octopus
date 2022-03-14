@@ -1,48 +1,54 @@
 import type { Octopus } from '../../typings/octopus'
-import path from 'path'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 type OctopusFillImageOptions = {
-  parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
+  imagePath: string
+  layout: Octopus['FillPositioning']['layout']
+  transform: Octopus['Transform']
+  origin: Octopus['FillPositioning']['origin']
+  opacity?: number
 }
 
-export class OctopusEffectFillImage {
-  protected _parent: OctopusLayerShapeShapeAdapter | OctopusLayerShapeLayerAdapter
+type ImageFilterOpacityMultiplier = { type: 'OPACITY_MULTIPLIER'; opacity: number }
 
-  static IMAGE_PREFIX = 'pictures'
+export class OctopusEffectFillImage {
+  private _imagePath: string
+  private _layout: Octopus['FillPositioning']['layout']
+  private _transform: Octopus['Transform']
+  private _origin: Octopus['FillPositioning']['origin']
+  private _opacity: number | undefined
 
   constructor(options: OctopusFillImageOptions) {
-    this._parent = options.parent
+    this._imagePath = options.imagePath
+    this._layout = options.layout
+    this._transform = options.transform
+    this._origin = options.origin
+    this._opacity = options.opacity
   }
 
-  get sourceLayer(): SourceLayerShape | SourceLayerLayer {
-    return this._parent.sourceLayer
-  }
-
-  private _convertImagePath(name: string) {
-    return path.join(OctopusEffectFillImage.IMAGE_PREFIX, name)
-  }
-
-  private _getImage(): Octopus['Image'] {
+  private get _image(): Octopus['Image'] {
     const ref: Octopus['ImageRef'] = {
       type: 'RESOURCE',
-      value: this._convertImagePath(this.sourceLayer?.imageName ?? ''), // TODO this is not correct for SourceLayerShape
+      value: this._imagePath,
     }
     return { ref }
   }
 
-  private _getPositioning(): Octopus['FillPositioning'] {
-    const { width, height } = this.sourceLayer.bounds
-    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0] // TODO patterns will need fix
-    return { layout: 'FILL', origin: 'LAYER', transform }
+  private get _positioning(): Octopus['FillPositioning'] {
+    return { layout: this._layout, origin: this._origin, transform: this._transform }
+  }
+
+  private get _filters(): ImageFilterOpacityMultiplier[] {
+    const filters = [] as ImageFilterOpacityMultiplier[]
+    if (this._opacity !== undefined) {
+      filters.push({ type: 'OPACITY_MULTIPLIER', opacity: this._opacity })
+    }
+    return filters
   }
 
   convert(): Octopus['FillImage'] {
-    const image = this._getImage()
-    const positioning = this._getPositioning()
-    return { type: 'IMAGE', image, positioning }
+    const image = this._image
+    const positioning = this._positioning
+    const filters = this._filters
+    return { type: 'IMAGE', image, positioning, filters }
   }
 }
