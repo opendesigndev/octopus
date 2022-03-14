@@ -1,8 +1,6 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from '../source/source-effects-layer'
-import { OctopusArtboard } from './octopus-artboard'
 import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'
 import { OctopusEffectGlowInner } from './octopus-effect-glow-inner'
 import { OctopusEffectGlowOuter } from './octopus-effect-glow-outer'
@@ -26,14 +24,6 @@ export class OctopusEffectsLayer {
     this._parentLayer = options.parentLayer
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
-  }
-
-  private get _sourceLayerBounds(): SourceBounds {
-    return this._parentLayer.sourceLayer.bounds
-  }
-
   private get _effects(): SourceLayerEffects {
     return this._parentLayer.sourceLayer.layerEffects
   }
@@ -43,7 +33,7 @@ export class OctopusEffectsLayer {
     if (this._effects.dropShadow === undefined) return null
     return new OctopusEffectShadowDrop({
       parentLayer: this._parentLayer,
-      shadow: this._effects.dropShadow,
+      effect: this._effects.dropShadow,
     }).convert()
   }
 
@@ -52,7 +42,7 @@ export class OctopusEffectsLayer {
     if (this._effects.outerGlow === undefined) return null
     return new OctopusEffectGlowOuter({
       parentLayer: this._parentLayer,
-      shadow: this._effects.outerGlow,
+      effect: this._effects.outerGlow,
     }).convert()
   }
 
@@ -61,7 +51,7 @@ export class OctopusEffectsLayer {
     if (this._effects.patternFill === undefined) return null
     return new OctopusEffectOverlayPattern({
       parentLayer: this._parentLayer,
-      fill: this._effects.patternFill,
+      effect: this._effects.patternFill,
     }).convert()
   }
 
@@ -70,7 +60,7 @@ export class OctopusEffectsLayer {
     if (this._effects.gradientFill === undefined) return null
     return new OctopusEffectOverlayGradient({
       parentLayer: this._parentLayer,
-      fill: this._effects.gradientFill,
+      effect: this._effects.gradientFill,
     }).convert()
   }
 
@@ -79,7 +69,7 @@ export class OctopusEffectsLayer {
     if (this._effects.solidFill === undefined) return null
     return new OctopusEffectOverlayColor({
       parentLayer: this._parentLayer,
-      fill: this._effects.solidFill,
+      effect: this._effects.solidFill,
     }).convert()
   }
 
@@ -88,7 +78,7 @@ export class OctopusEffectsLayer {
     if (this._effects.satin === undefined) return null
     return new OctopusEffectSatin({
       parentLayer: this._parentLayer,
-      satin: this._effects.satin,
+      effect: this._effects.satin,
     }).convert()
   }
 
@@ -97,7 +87,7 @@ export class OctopusEffectsLayer {
     if (this._effects.innerGlow === undefined) return null
     return new OctopusEffectGlowInner({
       parentLayer: this._parentLayer,
-      shadow: this._effects.innerGlow,
+      effect: this._effects.innerGlow,
     }).convert()
   }
 
@@ -106,7 +96,7 @@ export class OctopusEffectsLayer {
     if (this._effects.innerShadow === undefined) return null
     return new OctopusEffectShadowInner({
       parentLayer: this._parentLayer,
-      shadow: this._effects.innerShadow,
+      effect: this._effects.innerShadow,
     }).convert()
   }
 
@@ -115,7 +105,7 @@ export class OctopusEffectsLayer {
     if (this._effects.stroke === undefined) return null
     return new OctopusEffectStroke({
       parentLayer: this._parentLayer,
-      stroke: this._effects.stroke,
+      effect: this._effects.stroke,
     }).convert()
   }
 
@@ -124,7 +114,7 @@ export class OctopusEffectsLayer {
     if (this._effects.bevelEmboss === undefined) return null
     return new OctopusEffectBevelEmboss({
       parentLayer: this._parentLayer,
-      bevelEmboss: this._effects.bevelEmboss,
+      effect: this._effects.bevelEmboss,
     }).convert()
   }
 

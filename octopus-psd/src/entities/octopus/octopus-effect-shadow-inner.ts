@@ -5,7 +5,7 @@ import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowOptions = {
   parentLayer: OctopusLayerBase
-  shadow: SourceEffectShadow
+  effect: SourceEffectShadow
 }
 
 export class OctopusEffectShadowInner extends OctopusEffectShadowCommon {

@@ -1,9 +1,9 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import type { RawBlendMode, RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
+import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
+import { SourceEffectBase } from './source-effect-base'
 import { SourceEffectFill } from './source-effect-fill'
-import { SourceEntity } from './source-entity'
 
-export class SourceEffectStroke extends SourceEntity {
+export class SourceEffectStroke extends SourceEffectBase {
   protected _rawValue: RawEffectStroke | undefined
 
   static DEFAULT_LINE_ALIGNMENT = 'centeredFrame' as const
@@ -24,13 +24,5 @@ export class SourceEffectStroke extends SourceEntity {
 
   get lineAlignment(): RawEffectStrokeLineAlignment {
     return this._rawValue?.style ?? SourceEffectStroke.DEFAULT_LINE_ALIGNMENT
-  }
-
-  get blendMode(): RawBlendMode | undefined {
-    return this._rawValue?.mode
-  }
-
-  get enabled(): boolean {
-    return this._rawValue?.enabled ?? true
   }
 }

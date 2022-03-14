@@ -1,25 +1,22 @@
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectBevelEmboss } from '../source/source-effect-bevel-emboss'
-import { SourceLayerEffects } from '../source/source-effects-layer'
 import type { OctopusLayerBase } from './octopus-layer-base'
 import { convertBlendMode } from '../../utils/convert'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 type OctopusEffectBevelEmbossOptions = {
   parentLayer: OctopusLayerBase
-  bevelEmboss: SourceEffectBevelEmboss
+  effect: SourceEffectBevelEmboss
 }
 
-export class OctopusEffectBevelEmboss {
-  private _parentLayer: OctopusLayerBase
+export class OctopusEffectBevelEmboss extends OctopusEffectBase {
+  protected _parentLayer: OctopusLayerBase
   private _bevelEmboss: SourceEffectBevelEmboss
 
   constructor(options: OctopusEffectBevelEmbossOptions) {
+    super(options)
     this._parentLayer = options.parentLayer
-    this._bevelEmboss = options.bevelEmboss
-  }
-
-  private get _effects(): SourceLayerEffects {
-    return this._parentLayer.sourceLayer.layerEffects
+    this._bevelEmboss = options.effect
   }
 
   private get _otherEffectProperties() {
@@ -38,12 +35,6 @@ export class OctopusEffectBevelEmboss {
       shadowColor: this._bevelEmboss.shadowColor,
       shadowOpacity: this._bevelEmboss.shadowOpacity,
     }
-  }
-
-  get visible(): boolean {
-    const enabled = this._bevelEmboss?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
   }
 
   convert(): Octopus['EffectOther'] | null {

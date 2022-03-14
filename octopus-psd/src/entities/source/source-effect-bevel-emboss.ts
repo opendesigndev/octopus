@@ -2,9 +2,9 @@ import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import type { RawBlendMode, RawEffectBevelEmboss } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { SourceEffectBase } from './source-effect-base'
 
-export class SourceEffectBevelEmboss extends SourceEntity {
+export class SourceEffectBevelEmboss extends SourceEffectBase {
   protected _rawValue: RawEffectBevelEmboss | undefined
 
   constructor(raw: RawEffectBevelEmboss | undefined) {
@@ -58,9 +58,5 @@ export class SourceEffectBevelEmboss extends SourceEntity {
 
   get shadowOpacity(): number {
     return getUnitRatioFor(this._rawValue?.shadowOpacity?.value)
-  }
-
-  get enabled(): boolean {
-    return this._rawValue?.enabled ?? true
   }
 }

@@ -1,13 +1,15 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import type { RawBlendMode, RawFill, RawFillPattern } from '../../typings/raw'
+import type { RawFill, RawFillPattern } from '../../typings/raw'
 import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
+import { SourceEffectBase } from './source-effect-base'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 
-export class SourceEffectFill {
-  private _rawValue: RawFill | undefined
+export class SourceEffectFill extends SourceEffectBase {
+  protected _rawValue: RawFill | undefined
 
   constructor(fill: RawFill | undefined) {
+    super(fill)
     this._rawValue = fill
   }
 
@@ -42,14 +44,6 @@ export class SourceEffectFill {
 
   get pattern(): RawFillPattern | undefined {
     return this._rawValue?.pattern
-  }
-
-  get enabled(): boolean {
-    return this._rawValue?.enabled ?? true
-  }
-
-  get blendMode(): RawBlendMode | undefined {
-    return this._rawValue?.mode
   }
 
   get opacity(): number {

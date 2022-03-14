@@ -3,18 +3,17 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { logWarn } from '../../services/instances/misc'
 import type { SourceEffectStroke } from '../source/source-effect-stroke'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
-import { convertBlendMode } from '../../utils/convert'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 type OctopusEffectStrokeOptions = {
   parentLayer: OctopusLayerBase
-  stroke: SourceEffectStroke
+  effect: SourceEffectStroke
 }
 
-export class OctopusEffectStroke {
-  private _parentLayer: OctopusLayerBase
+export class OctopusEffectStroke extends OctopusEffectBase {
+  protected _parentLayer: OctopusLayerBase
   private _stroke: SourceEffectStroke
 
   static STROKE_POSITION_MAP = {
@@ -24,12 +23,9 @@ export class OctopusEffectStroke {
   } as const
 
   constructor(options: OctopusEffectStrokeOptions) {
+    super(options)
     this._parentLayer = options.parentLayer
-    this._stroke = options.stroke
-  }
-
-  private get _effects(): SourceLayerEffects {
-    return this._parentLayer.sourceLayer.layerEffects
+    this._stroke = options.effect
   }
 
   private get _position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
@@ -57,16 +53,6 @@ export class OctopusEffectStroke {
     if (position === null) return null
     if (fill === null) return null
     return { thickness, position, fill }
-  }
-
-  get visible(): boolean {
-    const enabled = this._stroke?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._stroke?.blendMode)
   }
 
   convert(): Octopus['EffectStroke'] | null {

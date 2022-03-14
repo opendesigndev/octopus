@@ -1,10 +1,10 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import type { RawBlendMode, RawEffectShadow } from '../../typings/raw'
+import type { RawEffectShadow } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { SourceEffectBase } from './source-effect-base'
 
-export class SourceEffectShadow extends SourceEntity {
+export class SourceEffectShadow extends SourceEffectBase {
   protected _rawValue: RawEffectShadow | undefined
 
   constructor(raw: RawEffectShadow | undefined) {
@@ -36,15 +36,7 @@ export class SourceEffectShadow extends SourceEntity {
     return getColorFor(this._rawValue?.color)
   }
 
-  get blendMode(): RawBlendMode | undefined {
-    return this._rawValue?.mode
-  }
-
   get opacity(): number | undefined {
     return getUnitRatioFor(this._rawValue?.opacity?.value)
-  }
-
-  get enabled(): boolean {
-    return this._rawValue?.enabled ?? true
   }
 }

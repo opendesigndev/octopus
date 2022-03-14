@@ -1,31 +1,28 @@
 import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusArtboard } from './octopus-artboard'
-import { convertBlendMode, convertColor } from '../../utils/convert'
+import { convertColor } from '../../utils/convert'
 import { SourceEffectShadow } from '../source/source-effect-shadow'
 import { cos, sin, round, clamp } from '@avocode/octopus-common/dist/utils/math'
 import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 type OctopusShadowCommonOptions = {
   parentLayer: OctopusLayerBase
-  shadow: SourceEffectShadow
+  effect: SourceEffectShadow
 }
 
-export class OctopusEffectShadowCommon {
-  private _parentLayer: OctopusLayerBase
+export class OctopusEffectShadowCommon extends OctopusEffectBase {
+  protected _parentLayer: OctopusLayerBase
   private _shadow: SourceEffectShadow
 
   constructor(options: OctopusShadowCommonOptions) {
+    super(options)
     this._parentLayer = options.parentLayer
-    this._shadow = options.shadow
+    this._shadow = options.effect
   }
 
   private get _parentArtboard(): OctopusArtboard {
     return this._parentLayer.parentArtboard
-  }
-
-  private get _effects(): SourceLayerEffects {
-    return this._parentLayer.sourceLayer.layerEffects
   }
 
   /**
@@ -73,15 +70,5 @@ export class OctopusEffectShadowCommon {
     const offset = this._offset
 
     return { color, blur, choke, offset }
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._shadow?.blendMode)
-  }
-
-  get visible(): boolean {
-    const enabled = this._shadow?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
   }
 }

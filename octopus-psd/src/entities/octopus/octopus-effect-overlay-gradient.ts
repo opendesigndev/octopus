@@ -1,36 +1,22 @@
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
-import { convertBlendMode } from '../../utils/convert'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
 import type { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
-  fill: SourceEffectFill
+  effect: SourceEffectFill
 }
 
-export class OctopusEffectOverlayGradient {
-  private _parentLayer: OctopusLayerBase
+export class OctopusEffectOverlayGradient extends OctopusEffectBase {
+  protected _parentLayer: OctopusLayerBase
   private _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
+    super(options)
     this._parentLayer = options.parentLayer
-    this._fill = options.fill
-  }
-
-  private get _effects(): SourceLayerEffects {
-    return this._parentLayer.sourceLayer.layerEffects
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._fill?.blendMode)
-  }
-
-  get visible(): boolean {
-    const enabled = this._fill?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
+    this._fill = options.effect
   }
 
   get overlay(): OctopusEffectFillGradient {

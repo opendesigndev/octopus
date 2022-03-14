@@ -1,29 +1,30 @@
 import path from 'path'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { FOLDER_IMAGES, FOLDER_PATTERNS } from '../../utils/const'
 import { OctopusArtboard } from './octopus-artboard'
 import { logWarn } from '../../services/instances/misc'
 import { createMatrix } from '../../utils/paper-factories'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { convertBlendMode, convertOffset } from '../../utils/convert'
+import { convertOffset } from '../../utils/convert'
 import type { SourceBounds } from '../../typings/source'
 import { OctopusLayerBase } from './octopus-layer-base'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
-  fill: SourceEffectFill
+  effect: SourceEffectFill
 }
 
-export class OctopusEffectOverlayPattern {
-  private _parentLayer: OctopusLayerBase
+export class OctopusEffectOverlayPattern extends OctopusEffectBase {
+  protected _parentLayer: OctopusLayerBase
   private _fill: SourceEffectFill
 
   constructor(options: OctopusFillOptions) {
+    super(options)
     this._parentLayer = options.parentLayer
-    this._fill = options.fill
+    this._fill = options.effect
   }
 
   private get _parentArtboard(): OctopusArtboard {
@@ -32,10 +33,6 @@ export class OctopusEffectOverlayPattern {
 
   private get _sourceLayerBounds(): SourceBounds {
     return this._parentLayer.sourceLayer.bounds
-  }
-
-  private get _effects(): SourceLayerEffects {
-    return this._parentLayer.sourceLayer.layerEffects
   }
 
   private get _imagePath(): string {
@@ -66,16 +63,6 @@ export class OctopusEffectOverlayPattern {
     matrix.scale(this._fill.scale)
     matrix.rotate(-this._fill.angle, 0, 0)
     return matrix.values
-  }
-
-  get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._fill?.blendMode)
-  }
-
-  get visible(): boolean {
-    const enabled = this._fill?.enabled ?? false
-    const enabledAll = this._effects.enabledAll ?? false
-    return enabledAll && enabled
   }
 
   @firstCallMemo()
