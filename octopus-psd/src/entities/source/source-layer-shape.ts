@@ -4,9 +4,10 @@ import type { SourceLayerParent } from './source-layer-common'
 import { SourcePath } from './source-path'
 import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
-import { SourceEffectStroke } from './source-effect-stroke'
+import { SourceStroke } from './source-stroke'
 import { SourceShapeMask } from './source-shape-mask'
-import { SourceLayerEffect } from './source-effect-layer'
+import { SourceBounds } from '../../typings/source'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -23,6 +24,7 @@ export class SourceLayerShape extends SourceLayerCommon {
     this._rawValue = options.rawValue
   }
 
+  @firstCallMemo()
   get path(): SourcePath {
     return new SourcePath(this._rawValue.path)
   }
@@ -35,23 +37,22 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.pathComponents[0]
   }
 
-  get pathBounds() {
+  get pathBounds(): SourceBounds {
     return this.path.bounds
   }
 
-  get fill() {
+  @firstCallMemo()
+  get fill(): SourceEffectFill {
     return new SourceEffectFill(this._rawValue.fill)
   }
 
-  get stroke() {
-    return new SourceEffectStroke(this._rawValue.strokeStyle)
+  @firstCallMemo()
+  get stroke(): SourceStroke {
+    return new SourceStroke(this._rawValue.strokeStyle)
   }
 
-  get mask() {
+  @firstCallMemo()
+  get mask(): SourceShapeMask {
     return new SourceShapeMask(this._rawValue.mask)
-  }
-
-  get layerEffects() {
-    return new SourceLayerEffect(this._rawValue.layerEffects)
   }
 }

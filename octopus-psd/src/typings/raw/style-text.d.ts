@@ -24,6 +24,7 @@ export type RawTextStyle = {
   language?: number
   leading?: number
   ligatures?: boolean
+  altligature?: boolean
   noBreak?: boolean
   outlineWidth?: number
   size?: number
@@ -39,6 +40,7 @@ export type RawTextStyle = {
   underline?: boolean
   verticalScale?: number
   yUnderline?: number
+  fontCaps?: 'allCaps' | 'smallCaps'
 }
 
 export type RawTextStyleRange = {

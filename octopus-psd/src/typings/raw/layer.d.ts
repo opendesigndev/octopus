@@ -4,6 +4,7 @@ import type { RawLayerSection } from './layer-section'
 import type { RawLayerShape } from './layer-shape'
 import type { RawLayerText } from './layer-text'
 import type { RawBlendOptions, RawBounds } from './shared'
+import type { RawLayerEffects } from './effects'
 
 export type RawLayerCommon = {
   bounds?: RawBounds
@@ -14,6 +15,7 @@ export type RawLayerCommon = {
   imageName?: string
   name?: string
   visible?: boolean
+  layerEffects?: RawLayerEffects
 }
 
 export type RawLayer = RawLayerSection | RawLayerShape | RawLayerText | RawLayerBackground | RawLayerLayer

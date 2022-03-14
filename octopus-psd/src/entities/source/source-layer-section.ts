@@ -32,7 +32,7 @@ export class SourceLayerSection extends SourceLayerCommon {
     }, [])
   }
 
-  get layers() {
+  get layers(): SourceLayer[] {
     return this._layers
   }
 }

@@ -5,7 +5,7 @@ export class SourceEntity {
     this._rawValue = raw
   }
 
-  get raw() {
+  get raw(): unknown {
     return this._rawValue
   }
 }

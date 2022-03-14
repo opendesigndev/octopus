@@ -1,3 +1,5 @@
-import { convertArtboard } from './utils/convert-artboard'
+import { convertDesign } from './utils/convert-design'
 
-convertArtboard()
+const [filename] = process.argv.slice(2)
+
+convertDesign(filename)

@@ -9,11 +9,6 @@ export function deepInspect(value: unknown): string {
   return util.inspect(value, { depth: null })
 }
 
-export function round(n: number, precision = 2): number {
-  const multiplier = Math.pow(10, precision)
-  return Math.round(n * multiplier) / multiplier
-}
-
 export function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
   return Boolean(anyValue && (typeof anyValue === 'object' || typeof anyValue === 'function'))
 }

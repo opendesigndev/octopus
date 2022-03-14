@@ -21,9 +21,10 @@
     "xd:clean-workdir": "yarn workspace @avocode/octopus-xd clean-workdir",
     "xd:watch": "yarn workspace @avocode/octopus-xd watch",
     "lint": "yarn run lint:prettier && yarn run lint:eslint",
-    "lint:eslint": "eslint . --ext .ts",
+    "lint:eslint": "eslint . --ext .ts --max-warnings=0",
     "lint:prettier": "prettier -c .",
-    "types:check": "yarn workspaces run types:check"
+    "types:check": "yarn workspaces run types:check",
+    "verify": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {},
   "devDependencies": {

@@ -1,15 +1,18 @@
-import { LayerSpecifics, OctopusLayerCommon, OctopusLayerParent } from './octopus-layer-common'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { createDefaultTranslationMatrix } from '../../utils/path'
+import path from 'path'
+import { FOLDER_IMAGES } from '../../utils/const'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerLayer
 }
 
-export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
+export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerLayer
 
@@ -27,36 +30,44 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerCommon {
   }
 
   private get _path(): Octopus['PathLike'] {
-    const sourceLayer = this.sourceLayer as SourceLayerLayer
-    const { width, height } = sourceLayer.bounds
+    const { width, height } = this.sourceLayer.bounds
     const rectangle = { x0: 0, y0: 0, x1: width, y1: height }
     const transform = createDefaultTranslationMatrix()
     return { type: 'RECTANGLE', rectangle, transform }
   }
 
+  @firstCallMemo()
   private get _fills(): Octopus['Fill'][] {
-    const fill = new OctopusEffectFillImage({ parent: this }).convert()
+    const imagePath = path.join(FOLDER_IMAGES, this.sourceLayer.imageName ?? '')
+    const { width, height } = this.sourceLayer.bounds
+    const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0]
+    const fill = new OctopusEffectFillImage({
+      imagePath,
+      transform,
+      layout: 'STRETCH',
+      origin: 'LAYER',
+    }).convert()
     return [fill]
   }
 
-  private get _shapes(): Octopus['Shape'][] {
+  private get _shape(): Octopus['Shape'] {
     const fillShape: Octopus['Shape'] = {
       fillRule: 'EVEN_ODD',
       path: this._path,
       fills: this._fills,
     }
-    return [fillShape]
+    return fillShape
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
     return {
       type: 'SHAPE',
-      shapes: this._shapes,
+      shape: this._shape,
     } as const
   }
 
   convert(): Octopus['ShapeLayer'] | null {
-    const common = this.convertCommon()
+    const common = this.convertBase()
     if (!common) return null
 
     return {

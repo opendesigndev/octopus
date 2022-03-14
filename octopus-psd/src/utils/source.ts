@@ -1,5 +1,5 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners } from '../typings/raw'
+import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners, RawTextBounds } from '../typings/raw'
 import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix, SourceRadiiCorners } from '../typings/source'
 
 export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
@@ -7,6 +7,16 @@ export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
   const left = asFiniteNumber(value?.left, 0)
   const bottom = asFiniteNumber(value?.bottom, 0)
   const top = asFiniteNumber(value?.top, 0)
+  const width = right - left
+  const height = bottom - top
+  return { right, left, bottom, top, width, height }
+}
+
+export function getTextBoundsFor(value: RawTextBounds | undefined): SourceBounds {
+  const right = asFiniteNumber(value?.right?.value, 0)
+  const left = asFiniteNumber(value?.left?.value, 0)
+  const bottom = asFiniteNumber(value?.bottom?.value, 0)
+  const top = asFiniteNumber(value?.top?.value, 0)
   const width = right - left
   const height = bottom - top
   return { right, left, bottom, top, width, height }
@@ -46,4 +56,8 @@ export function getPointFor(point: RawPointXY | undefined): SourcePointXY {
   const x = asFiniteNumber(point?.x, 0)
   const y = asFiniteNumber(point?.y, 0)
   return { x, y }
+}
+
+export function getUnitRatioFor(percentage: number | undefined, defaultValue = 100): number {
+  return asFiniteNumber(percentage, defaultValue) / 100
 }

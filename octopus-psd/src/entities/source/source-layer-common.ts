@@ -1,30 +1,28 @@
-import type { OctopusPSDConverter } from '../..'
-import type { RawLayer } from '../../typings/raw'
+import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
-import { getBoundsFor } from '../../utils/source'
+import { getBoundsFor, getUnitRatioFor } from '../../utils/source'
+import { SourceBounds } from '../../typings/source'
+import { SourceLayerEffects } from './source-effects-layer'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
+type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer'
 export class SourceLayerCommon {
   protected _rawValue: RawLayer
   protected _parent: SourceLayerParent
 
-  get type() {
+  get type(): SourceLayerType | undefined {
     return this._rawValue.type
   }
 
-  get id() {
+  get id(): string | undefined {
     return this._rawValue.id ? this._rawValue.id.toString() : undefined
   }
 
-  get name() {
+  get name(): string | undefined {
     return this._rawValue.name
-  }
-
-  get converter(): OctopusPSDConverter {
-    const parentArtboard = this.parentArtboard
-    return parentArtboard.converter
   }
 
   get parentArtboard(): SourceArtboard {
@@ -32,31 +30,40 @@ export class SourceLayerCommon {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  get visible() {
+  get visible(): boolean | undefined {
     return this._rawValue.visible
   }
 
-  get bounds() {
+  get bounds(): SourceBounds {
     return getBoundsFor(this._rawValue.bounds)
   }
 
-  get opacity() {
-    return this._rawValue.blendOptions?.opacity?.value
+  get opacity(): number {
+    return getUnitRatioFor(this._rawValue.blendOptions?.opacity?.value)
   }
 
-  get blendMode() {
+  get fillOpacity(): number {
+    return getUnitRatioFor(this._rawValue.blendOptions?.fillOpacity?.value)
+  }
+
+  get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendOptions?.mode
   }
 
-  get clipped() {
+  get clipped(): boolean | undefined {
     return this._rawValue.clipped
   }
 
-  get imageEffectsApplied() {
+  get imageEffectsApplied(): boolean | undefined {
     return this._rawValue.imageEffectsApplied
   }
 
-  get imageName() {
+  get imageName(): string | undefined {
     return this._rawValue.imageName
+  }
+
+  @firstCallMemo()
+  get layerEffects(): SourceLayerEffects {
+    return new SourceLayerEffects(this._rawValue.layerEffects)
   }
 }

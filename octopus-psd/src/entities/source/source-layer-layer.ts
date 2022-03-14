@@ -16,12 +16,4 @@ export class SourceLayerLayer extends SourceLayerCommon {
     this._parent = options.parent
     this._rawValue = options.rawValue
   }
-
-  get layerEffects() {
-    return {} // TODO
-  }
-
-  get smartObject() {
-    return {} // TODO
-  }
 }
