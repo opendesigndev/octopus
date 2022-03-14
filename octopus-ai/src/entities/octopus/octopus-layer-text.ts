@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+import _ from 'lodash'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+
 import OctopusLayerCommon from './octopus-layer-common'
-// import { RawTextLayerText } from '../../typings/source'
-// import type SourceLayerNormalizedText from '../source/source-layer-text-normalized'
+import OctopusSubText from './octopus-subtext'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
@@ -13,49 +14,143 @@ type OctopusLayerTextOptions = {
   sourceLayer: SourceLayerText
 }
 
+type Range = {
+  from: number
+  to: number
+}
+
 export default class OctopusLayerText extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerText
+  private _octopusSubTexts: OctopusSubText[]
 
   constructor(options: OctopusLayerTextOptions) {
     super(options)
+
+    this._octopusSubTexts = asArray(
+      options.sourceLayer.texts?.map((sourceLayer) => new OctopusSubText({ sourceLayer }))
+    )
   }
 
-  // private _parseFontSize(text: RawTextLayerText) {
-  //   return text
-  // }
-  // private _parseFont(text: SourceLayerNormalizedText) {}
+  private _createNewStyle(from: number, subtext: Octopus['Text']): Octopus['StyleRange'] {
+    return {
+      style: { ...subtext.defaultStyle },
+      ranges: [{ from, to: from + subtext.value.length }],
+    }
+  }
 
-  // private _parseText(text: SourceLayerNormalizedText) {
-  //   const artboardResources = this.parent.resources
-  //   const font = this._parseFont(text)
-  // }
+  private _areStylesEqual(rootStyle: Octopus['StyleRange'], nextLayerStyle: Octopus['StyleRange']) {
+    return _.isEqual(
+      {
+        ...rootStyle,
+        ranges: [],
+      },
+      { ...nextLayerStyle, ranges: [] }
+    )
+  }
 
-  // private _getTexts() {
-  //   const texts = this._sourceLayer.texts.map((text) => this._parseText(text))
-  // }
+  private _getDuplicatesMap(styles: Octopus['StyleRange'][]) {
+    return styles.reduce((dups, style) => {
+      const uniqueStyles = [...dups.keys()]
+      const uniqueEntry = uniqueStyles.find((unique) => this._areStylesEqual(unique, style))
+      if (uniqueEntry) {
+        dups.get(uniqueEntry).push(style)
+      } else {
+        dups.set(style, [style])
+      }
+      return dups
+    }, new Map())
+  }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
-    const textValue = this._sourceLayer.textValue
-    const name = this._sourceLayer.name
+  private _getUnifiedRanges(ranges: Range[]) {
+    const fromArray = ranges.map(({ from }) => from).sort((a, b) => a - b)
+    const toArray = ranges.map(({ to }) => to).sort((a, b) => a - b)
+    const rangesArray = []
 
-    if (!textValue) return null
+    let range = { from: fromArray[0], to: toArray[0] }
+
+    for (let toIndex = 0; toIndex < ranges.length; toIndex += 1) {
+      const from = fromArray[toIndex]
+      const to = toArray[toIndex]
+
+      if (from <= range.to) {
+        range.to = to
+      } else {
+        rangesArray.push(range)
+        range = { from, to }
+      }
+
+      if (toIndex === toArray.length - 1) {
+        rangesArray.push(range)
+      }
+    }
+    return rangesArray
+  }
+
+  private _getUnifiedStyles(styles: Octopus['StyleRange'][]) {
+    const duplicates = this._getDuplicatesMap(styles)
+    return [...duplicates.keys()].map((style) => ({
+      ...style,
+      ranges: this._getUnifiedRanges(
+        duplicates
+          .get(style)
+          .reduce((ranges: Range[], style: Octopus['StyleRange']) => [...ranges, ...style.ranges], [])
+      ),
+    }))
+  }
+
+  private _parseText(): Octopus['Text'] {
+    const mergedText = this._octopusSubTexts.reduce((merged: Octopus['Text'], subtext: OctopusSubText) => {
+      const converted = subtext.convert()
+      if (merged.value === undefined || merged.value === null) {
+        return {
+          ...converted,
+          styles: [this._createNewStyle(0, converted)],
+        }
+      }
+
+      merged.styles?.push(this._createNewStyle(merged.value.length, converted))
+      return { ...merged, value: merged.value + converted.value }
+    }, {} as Octopus['Text'])
+
+    return { ...mergedText, styles: this._getUnifiedStyles(asArray(mergedText.styles)) }
+  }
+
+  private _parseName(text: Octopus['Text']): string {
+    const textValue = text.value
+    if (!textValue) {
+      return this._sourceLayer.name
+    }
+
+    if (textValue.length < 100) {
+      return textValue
+    }
+
+    return textValue.substring(0, 99)
+  }
+
+  private _convertTypeSpecific(): (LayerSpecifics<Octopus['TextLayer']> & { name: string }) | null {
+    const text = this._parseText()
+    const name = this._parseName(text)
+
     return {
       type: 'TEXT',
-      // @ts-ignore
-      text: {
-        value: textValue,
-      },
+      text,
       name,
     }
   }
 
-  //@ts-ignore
   convert(): Octopus['TextLayer'] | null {
     const common = this.convertCommon()
-    if (!common) return null
+
+    if (!common) {
+      return null
+    }
 
     const specific = this._convertTypeSpecific()
-    if (!specific) return null
+
+    if (!specific) {
+      return null
+    }
 
     return {
       ...common,

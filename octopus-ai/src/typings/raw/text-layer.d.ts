@@ -1,8 +1,8 @@
-import { RawGraphicsState } from './graphics-state'
+import type { RawGraphicsState, RawGraphicsStateMatrix } from './graphics-state'
 
 export type RawTextLayerText = {
   GraphicsState?: RawGraphicsState
-  TextMatrix?: number[]
+  TextMatrix?: RawGraphicsStateMatrix
   TextLineMatrix?: number[]
   Text?: (string | number)[] | string
 }

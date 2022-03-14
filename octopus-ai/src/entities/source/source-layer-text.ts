@@ -1,10 +1,11 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import _ from 'lodash'
 
-import SourceLayerNormalizedText from './source-layer-text-normalized'
+import SourceLayerSubText from './source-layer-sub-text'
 import SourceLayerCommon from './source-layer-common'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawTextLayer, RawResourcesExtGState } from '../../typings/raw'
+import type { RawTextLayer } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 
@@ -13,10 +14,10 @@ type SourceLayerTextOptions = {
   rawValue: RawTextLayer
   path: number[]
 }
-//@todo: possible option to create texts from children...
+
 export default class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawTextLayer
-  private _normalizedTexts: SourceLayerNormalizedText[]
+  private _normalizedTexts: SourceLayerSubText[]
   static DEFAULT_NAME = '<TextLayer>'
 
   constructor(options: SourceLayerTextOptions) {
@@ -25,18 +26,31 @@ export default class SourceLayerText extends SourceLayerCommon {
   }
 
   private _initTexts() {
-    return asArray(
+    const textSubLayers = asArray(
       this._rawValue?.Texts?.map(
         (text) =>
-          new SourceLayerNormalizedText({
+          new SourceLayerSubText({
             rawValue: text,
-            parent: this._parent,
+            parent: this,
           })
       )
     )
+
+    textSubLayers.forEach((textSubLayer, index) => {
+      if (index === 0) {
+        return
+      }
+
+      if (!_.isEqual(textSubLayer.textTransformMatrix, textSubLayers[index - 1].textTransformMatrix)) {
+        //@todo: use logger
+        console.error('initTexts', 'Different transform matrix in the same text group')
+      }
+    })
+
+    return textSubLayers
   }
 
-  get texts(): Nullable<SourceLayerNormalizedText[]> {
+  get texts(): Nullable<SourceLayerSubText[]> {
     return this._normalizedTexts
   }
 
@@ -44,28 +58,7 @@ export default class SourceLayerText extends SourceLayerCommon {
     return this._normalizedTexts[0].graphicsState
   }
 
-  get extGState(): Nullable<RawResourcesExtGState[string]> {
-    const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
-  }
-
-  get blendMode(): Nullable<string> {
-    return this.extGState?.BM
-  }
-
-  get textValue(): string {
-    return this._normalizedTexts.reduce((text, textObj) => text + textObj.parsedTextValue, '')
-  }
-
   get name(): string {
-    if (!this.textValue) {
-      return SourceLayerText.DEFAULT_NAME
-    }
-
-    if (this.textValue.length < 100) {
-      return this.textValue
-    }
-
-    return this.textValue.slice(0, 99)
+    return SourceLayerText.DEFAULT_NAME
   }
 }
