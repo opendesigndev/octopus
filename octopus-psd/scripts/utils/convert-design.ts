@@ -1,22 +1,17 @@
 import chalk from 'chalk'
-import { v4 as uuidv4 } from 'uuid'
 import { execSync } from 'child_process'
 import path from 'path'
 import dotenv from 'dotenv'
 import { performance } from 'perf_hooks'
 
 import { OctopusPSDConverter } from '../../src'
-import { prepareSourceDesign } from './prepare-source-design'
 import { createTempSaver } from './save-temp'
 import { stringify } from './json-stringify'
 import { symlink } from 'fs/promises'
+import { displayPerf } from '../../src/utils/console'
+import { timestamp } from './timestamp'
 
 dotenv.config()
-
-function displayPerf(time: number): string {
-  const color = time > 50 ? chalk.red : chalk.yellow
-  return '(' + color(`${time.toFixed(2)}ms`) + ')'
-}
 
 async function renderOctopus(octopusDir: string) {
   // symlink fonts
@@ -36,18 +31,13 @@ async function renderOctopus(octopusDir: string) {
   return { renderLocation, renderTime }
 }
 
-export async function convertDesign(filename: string): Promise<void> {
+export async function convertDesign(filePath: string): Promise<void> {
   const timeStart = performance.now()
-  const designId = uuidv4()
-  console.info(`Start converting file: ${chalk.yellow(filename)}`)
-  if (filename === undefined) return console.error('Missing argument (path to .psd file)')
+  const designId = `${timestamp()}-${path.basename(filePath, '.psd')}`
+  console.info(`Start converting file: ${chalk.yellow(filePath)}`)
+  if (filePath === undefined) return console.error('Missing argument (path to .psd file)')
 
-  const parseTimeStart = performance.now()
-  const sourceDesign = await prepareSourceDesign(filename, designId)
-  const parseTime = performance.now() - parseTimeStart
-  console.info(`Photoshop source file converted to directory: ${chalk.yellow(designId)} ${displayPerf(parseTime)}`)
-
-  const converter = new OctopusPSDConverter({ designId, sourceDesign })
+  const converter = await OctopusPSDConverter.fromFile({ filePath, designId })
   const convertResult = await converter.convertDesign()
   const saver = await createTempSaver(designId)
 

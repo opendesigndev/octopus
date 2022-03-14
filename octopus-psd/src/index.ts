@@ -14,12 +14,30 @@ import type { Octopus } from './typings/octopus'
 import type { SourceDesign } from './entities/source/source-design'
 import { OctopusManifestReport } from './typings/manifest'
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
+import { PSDFileReader } from './services/readers/psd-file-reader'
 
-type OctopusPSDConverterOptions = {
-  sourceDesign: SourceDesign
+// type ConvertDesignOptions = {
+//   exporter?: Exporter // TODO
+// }
+
+type OctopusPSDConverterGeneralOptions = {
   designId?: string
   logger?: Logger
 }
+
+type OctopusPSDConverterFromFileOptions = OctopusPSDConverterGeneralOptions & {
+  filePath: string
+}
+
+type OctopusPSDConverterOptions = OctopusPSDConverterGeneralOptions & {
+  sourceDesign: SourceDesign
+}
+
+// type OctopusPSDConverterOptions = {
+//   sourceDesign: SourceDesign
+//   designId?: string
+//   logger?: Logger
+// }
 
 type ConversionResult = {
   value: Octopus['OctopusDocument'] | undefined
@@ -36,6 +54,19 @@ export class OctopusPSDConverter {
   private _id: string
   private _sourceDesign: SourceDesign
   private _pkg: Promise<NormalizedReadResult | undefined>
+
+  static EXPORTERS = {
+    // LOCAL: LocalExporter, // TODO
+    // TEMP: TempExporter, // TODO
+  }
+
+  static async fromFile(options: OctopusPSDConverterFromFileOptions): Promise<OctopusPSDConverter> {
+    const designId = options.designId || uuidv4()
+    return new this({
+      logger: options.logger,
+      sourceDesign: await new PSDFileReader({ path: options.filePath, designId }).sourceDesign,
+    })
+  }
 
   constructor(options: OctopusPSDConverterOptions) {
     this._id = options.designId || uuidv4()

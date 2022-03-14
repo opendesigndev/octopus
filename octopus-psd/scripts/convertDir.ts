@@ -8,7 +8,7 @@ async function convertDir(dirPath: string) {
     for (const file of files) {
       if (file.isDirectory()) continue
       if (!/\.psd$/i.test(file.name)) continue
-      convertDesign(path.join(dirPath, file.name))
+      await convertDesign(path.join(dirPath, file.name))
     }
   } catch {
     console.info(`Reading directory '${dirPath}' was not successful`)

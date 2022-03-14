@@ -1,5 +1,7 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
+import isEmpty from 'lodash/isEmpty'
+import compact from 'lodash/compact'
 
 export function createDefaultLogger(): ReturnType<typeof pino> {
   return pino({
@@ -27,9 +29,9 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
     timestamp: pino.stdTimeFunctions.isoTime,
     hooks: {
       logMethod: function (args, method) {
-        const [message] = args
-        const extra = args.length > 1 ? { extra: args.slice(1) } : null
-        method.apply(this, [extra, message])
+        const [message, ...extra] = args
+        const _extra = !isEmpty(compact(extra)) ? { extra } : null
+        method.apply(this, [_extra, message])
       },
     },
   })
