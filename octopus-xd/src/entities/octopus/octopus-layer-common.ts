@@ -97,9 +97,9 @@ export default class OctopusLayerCommon {
   get transform(): Octopus['Transform'] {
     const matrixAsArray = this._sourceLayer.transform
       ? convertObjectMatrixToArray(this._sourceLayer.transform)
-      : DEFAULTS.LAYER_TRANSFORM.slice()
+      : DEFAULTS.TRANSFORM.slice()
 
-    const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.LAYER_TRANSFORM.slice()
+    const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.TRANSFORM.slice()
     const matrix = createMatrix(a, b, c, d, tx, ty)
     if (this.parent === this.parentArtboard) {
       const { x, y } = this.parentArtboard?.sourceArtboard.meta['uxdesign#bounds'] ?? { x: 0, y: 0 }
