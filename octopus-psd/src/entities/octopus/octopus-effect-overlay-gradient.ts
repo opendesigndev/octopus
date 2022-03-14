@@ -33,10 +33,14 @@ export class OctopusEffectOverlayGradient {
     return enabledAll && enabled
   }
 
-  convert(): Octopus['EffectOverlay'] | null {
+  get overlay(): OctopusEffectFillGradient {
     const parentLayer = this._parentLayer
     const fill = this._fill
-    const overlay = new OctopusEffectFillGradient({ parentLayer, fill }).convert()
+    return new OctopusEffectFillGradient({ parentLayer, fill })
+  }
+
+  convert(): Octopus['EffectOverlay'] | null {
+    const overlay = this.overlay.convert()
     if (overlay === null) return null
 
     const visible = this.visible

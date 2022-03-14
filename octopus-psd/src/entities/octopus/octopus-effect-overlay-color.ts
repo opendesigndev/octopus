@@ -25,7 +25,7 @@ export class OctopusEffectOverlayColor {
     return this._parentLayer.sourceLayer.layerEffects
   }
 
-  get color(): SourceColor | null {
+  private get _color(): SourceColor | null {
     return this._fill.color
   }
 
@@ -39,18 +39,23 @@ export class OctopusEffectOverlayColor {
     return enabledAll && enabled
   }
 
-  convert(): Octopus['EffectOverlay'] | null {
-    const color = this.color
+  get overlay(): OctopusEffectFillColor | null {
+    const color = this._color
     if (color === null) {
       logWarn('Unknown effect overlay color', { fill: this._fill })
       return null
     }
     const opacity = this._fill.opacity
-    const overlay = new OctopusEffectFillColor({ color, opacity }).convert()
+    return new OctopusEffectFillColor({ color, opacity })
+  }
+
+  convert(): Octopus['EffectOverlay'] | null {
+    const overlay = this.overlay
+    if (overlay === null) return null
 
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'
-    return { type: 'OVERLAY', visible, blendMode, basis, overlay }
+    return { type: 'OVERLAY', visible, blendMode, basis, overlay: overlay.convert() }
   }
 }

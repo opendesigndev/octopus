@@ -13,7 +13,7 @@ export class OctopusEffectShadowDrop extends OctopusEffectShadowCommon {
     super(options)
   }
 
-  convert(): Octopus['EffectDropShadow'] | null {
+  convert(): Octopus['EffectDropShadow'] {
     const shadow = this.shadowConfig
     const visible = this.visible
     const blendMode = this.blendMode

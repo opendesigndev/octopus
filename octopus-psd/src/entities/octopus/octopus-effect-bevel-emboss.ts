@@ -22,7 +22,7 @@ export class OctopusEffectBevelEmboss {
     return this._parentLayer.sourceLayer.layerEffects
   }
 
-  private get otherEffectProperties() {
+  private get _otherEffectProperties() {
     return {
       otherEffectType: 'BEVEL_AND_EMBOSS',
       style: this._bevelEmboss.style,
@@ -47,7 +47,7 @@ export class OctopusEffectBevelEmboss {
   }
 
   convert(): Octopus['EffectOther'] | null {
-    const otherEffectProperties = this.otherEffectProperties
+    const otherEffectProperties = this._otherEffectProperties
     const visible = this.visible
     const basis = 'FILL'
     return { type: 'OTHER', visible, basis, otherEffectProperties }

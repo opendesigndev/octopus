@@ -22,13 +22,13 @@ export class OctopusEffectSatin {
     return this._parentLayer.sourceLayer.layerEffects
   }
 
-  get _color(): Octopus['Color'] | null {
+  private get _color(): Octopus['Color'] | null {
     const color = this._satin.color
     const opacity = this._satin.opacity
     return convertColor(color, opacity)
   }
 
-  private get otherEffectProperties() {
+  private get _otherEffectProperties() {
     const color = this._color
     const blur = this._satin.blur
     const distance = this._satin.distance
@@ -48,7 +48,7 @@ export class OctopusEffectSatin {
   }
 
   convert(): Octopus['EffectOther'] | null {
-    const otherEffectProperties = this.otherEffectProperties
+    const otherEffectProperties = this._otherEffectProperties
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'

@@ -137,8 +137,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     defaultStyle: Octopus['TextStyle']
   ): Octopus['TextStyle'] => {
     const ownFont = {} as Record<keyof Octopus['TextStyle'], unknown>
-    const styleProps = keys(style) as (keyof Octopus['TextStyle'])[]
-    styleProps.forEach((styleProp) => {
+    keys(style).forEach((styleProp) => {
       if (!isEqual(style[styleProp], defaultStyle[styleProp])) {
         ownFont[styleProp] = style[styleProp]
       }

@@ -10,6 +10,7 @@ import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { convertBlendMode } from '../../utils/convert'
 import type { SourceBounds } from '../../typings/source'
 import { OctopusLayerBase } from './octopus-layer-base'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -37,7 +38,7 @@ export class OctopusEffectOverlayPattern {
     return this._parentLayer.sourceLayer.layerEffects
   }
 
-  get imagePath(): string {
+  private get _imagePath(): string {
     const imageName = `${this._fill?.pattern?.ID}.png`
     return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
   }
@@ -52,9 +53,9 @@ export class OctopusEffectOverlayPattern {
     return this._fill?.opacity
   }
 
-  get imageTransform(): Octopus['Transform'] | null {
+  private get _imageTransform(): Octopus['Transform'] | null {
     if (this._fill === undefined) return null
-    const imagePath = this.imagePath
+    const imagePath = this._imagePath
     const images = this._parentArtboard.sourceDesign.images
     const { width, height } = images.find((img) => img.path === imagePath) ?? {}
     if (width === undefined || height === undefined) {
@@ -77,20 +78,25 @@ export class OctopusEffectOverlayPattern {
     return enabledAll && enabled
   }
 
-  convert(): Octopus['EffectOverlay'] | null {
-    const transform = this.imageTransform
+  @firstCallMemo()
+  get overlay(): OctopusEffectFillImage | null {
+    const transform = this._imageTransform
     if (transform === null) return null
-    const overlay = new OctopusEffectFillImage({
-      imagePath: this.imagePath,
+    return new OctopusEffectFillImage({
+      imagePath: this._imagePath,
       transform,
       opacity: this._opacity,
       layout: 'TILE',
       origin: 'ARTBOARD',
-    }).convert()
+    })
+  }
 
+  convert(): Octopus['EffectOverlay'] | null {
+    const overlay = this.overlay
+    if (overlay === null) return null
     const visible = this.visible
     const blendMode = this.blendMode
     const basis = 'FILL'
-    return { type: 'OVERLAY', visible, blendMode, basis, overlay }
+    return { type: 'OVERLAY', visible, blendMode, basis, overlay: overlay.convert() }
   }
 }
