@@ -32,6 +32,16 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
+"@avocode/octopus-common@3.0.0-rc.6":
+  version "3.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.6.tgz#4e9c75659750aebf25b1a9a8cb3606517dda4600"
+  integrity sha512-cbgj+X2ElNuUjQDciYdcgVC66CZp4uR41ore6VhmJNR3IyCK7s5xo7oxF4tnUrwZp0326KI91DrtxeiDyAGv8A==
+  dependencies:
+    "@sentry/node" "6.14.0"
+    lodash "^4.17.21"
+    read-pkg-up "7.0.1"
+    uuid "^8.3.2"
+
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"

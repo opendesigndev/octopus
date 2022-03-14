@@ -1,5 +1,5 @@
 import isEqual from 'lodash/isEqual'
-import OctopusLayerCommon, { LayerSpecifics } from './octopus-layer-common'
+import OctopusLayerCommon from './octopus-layer-common'
 import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { getPresentProps } from '@avocode/octopus-common/dist/utils/common'
 import defaults from '../../utils/defaults'
@@ -7,6 +7,7 @@ import { createMatrix } from '../../utils/paper'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import OctopusEffectsText from './octopus-effects-text'
 
+import type { LayerSpecifics } from './octopus-layer-common'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
@@ -143,16 +144,23 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _parseParagraphWideRange(range: MergedTextStyle) {
-    const layerFontSize = asNumber(this._sourceLayer.raw?.style?.font?.size, defaults.TEXT.LAYER_FONT_SIZE)
+    const layerFontSize = asNumber(
+      this._sourceLayer.raw?.style?.font?.size,
+      asNumber(range?.metaUxStyle?.fontSize, defaults.TEXT.LAYER_FONT_SIZE)
+    )
 
     const decorations = asArray(range?.style?.textAttributes?.decoration)
     const fontLetterSpacing = asNumber(range?.style?.textAttributes?.letterSpacing, 0)
     const fontSize = asNumber(range?.style?.font?.size, layerFontSize)
     const letterSpacing = (fontLetterSpacing * fontSize) / 1000
     const textTransform = range?.metaUxStyle?.textTransform
-    const psNameRaw = asString(range?.style?.font?.postscriptName, '')
-    const family = asString(range?.style?.font?.family, '')
-    const style = asString(range?.style?.font?.style, '')
+    /**
+     * Some props occurs twice - in paragraph styles and in ranged styles.
+     * Trying to fallback on the one another in case of missing props.
+     */
+    const psNameRaw = asString(range?.style?.font?.postscriptName, asString(range?.metaUxStyle?.postscriptName, ''))
+    const family = asString(range?.style?.font?.family, asString(range?.metaUxStyle?.fontFamily, ''))
+    const style = asString(range?.style?.font?.style, asString(range?.metaUxStyle?.fontStyle, ''))
     const syntheticPSN = Boolean(!psNameRaw && family && family.length > 0 && style)
     const postScriptName = syntheticPSN ? this._constructSyntheticPSN(family, style) : psNameRaw
     const underline = decorations.includes('underline') ? 'SINGLE' : 'NONE'
@@ -252,7 +260,6 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _getTextTransform(): Octopus['Transform'] | null {
-    const parentMatrices = this.parentLayers.map((parent) => parent.transform)
     const offsetMatrixParagraph = this._getOffsetMatrixParagraph()
 
     const offset = this._getArtboardOffset()
@@ -260,11 +267,9 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const offsetMatrixArtboard = this._getTranslationMatrix(-offset.x, -offset.y)
 
     // Current layer matrix.
-    const offsetMatrixLayer = this._sourceLayer.raw?.transform
     const matrices = [
+      defaults.TRANSFORM.slice(),
       convertObjectMatrixToArray(offsetMatrixArtboard),
-      ...parentMatrices,
-      convertObjectMatrixToArray(offsetMatrixLayer),
       convertObjectMatrixToArray(offsetMatrixParagraph),
     ]
       .filter((matrix) => {
@@ -274,8 +279,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         const [a, b, c, d, tx, ty] = matrix as number[]
         return createMatrix(a, b, c, d, tx, ty)
       })
-    const { a, b, c, d, tx, ty } = matrices.reduce((matrix, current) => matrix.append(current))
 
+    const { a, b, c, d, tx, ty } = matrices.reduce((matrix, current) => matrix.append(current))
     return [a, b, c, d, tx, ty]
   }
 

@@ -58,3 +58,7 @@ function _traverseAndFindRecursive<T>(node: unknown, cb: Function): T[] {
 export function traverseAndFind<T>(node: Record<string, unknown>, cb: Function): T[] {
   return _traverseAndFindRecursive<T>(node, cb).filter((result) => result !== undefined)
 }
+
+export function keys<T extends Record<string | number | symbol, unknown>>(obj: T): (keyof T)[] {
+  return Object.keys(obj)
+}

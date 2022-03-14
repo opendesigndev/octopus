@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-common",
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.7",
   "license": "UNLICENSED",
   "description": "General utility functions for Octopus 3 common cases.",
   "main": "dist/index.js",
@@ -10,7 +10,8 @@
     "clean": "rimraf ./node_modules ./dist",
     "watch": "tsc -w",
     "lint": "echo 'Linter is not implemented yet'",
-    "test": "echo 'Tests are not implemented yet'"
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "@sentry/node": "6.14.0",

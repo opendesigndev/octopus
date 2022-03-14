@@ -1,5 +1,5 @@
 export default {
-  LAYER_TRANSFORM: [1, 0, 0, 1, 0, 0],
+  TRANSFORM: [1, 0, 0, 1, 0, 0],
   BLEND_MODE: 'NORMAL',
   EFFECTS: {
     SHADOW_CHOKE: 0,

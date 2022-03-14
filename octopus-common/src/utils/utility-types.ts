@@ -11,3 +11,4 @@ export type RecursivePartial<T> = {
 
 export type ElementOf<T> = T extends Array<infer U> ? U : never
 export type Nullable<T> = T | null | undefined
+export type GetPromiseValue<T> = T extends Promise<infer U> ? U : never
