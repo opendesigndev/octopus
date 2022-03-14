@@ -26,7 +26,9 @@ export class SourceStroke extends SourceEntity {
   }
 
   get lineWidth(): number {
-    return this._rawValue?.strokeStyleLineWidth ?? 0
+    const lineWidth = this._rawValue?.strokeStyleLineWidth
+    if (typeof lineWidth === 'number') return lineWidth
+    return lineWidth?.value ?? 0
   }
 
   get lineAlignment(): RawStrokeStyleLineAlignment {

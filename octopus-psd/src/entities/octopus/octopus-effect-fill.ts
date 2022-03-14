@@ -10,6 +10,7 @@ import { logWarn } from '../../services/instances/misc'
 import type { SourceBounds } from '../../typings/source'
 import type { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerBase } from './octopus-layer-base'
+import { convertOffset } from '../../utils/convert'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -47,7 +48,7 @@ export class OctopusEffectFill {
 
   private get _offset(): [x: number, y: number] {
     const { width, height } = this._sourceLayerBounds
-    const { x, y } = this._fill?.offset(width, height)
+    const { x, y } = convertOffset(this._fill?.offset, width, height)
     return [x, y]
   }
 

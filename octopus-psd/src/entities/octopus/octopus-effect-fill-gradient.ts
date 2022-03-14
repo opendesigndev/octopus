@@ -1,6 +1,6 @@
 import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { Octopus } from '../../typings/octopus'
-import { convertColor } from '../../utils/convert'
+import { convertColor, convertOffset } from '../../utils/convert'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceBounds, SourceGradientType } from '../../typings/source'
@@ -96,7 +96,7 @@ export class OctopusEffectFillGradient {
   private get _transformLinear(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
-    const offset = this.fill.offset(width, height)
+    const offset = convertOffset(this.fill.offset, width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({ p1: P1, p2: P2, scaleX: scale, scaleY: scale, center: { x: 0.5, y: 0.5 } })
@@ -116,7 +116,7 @@ export class OctopusEffectFillGradient {
   private get _transformRadial(): Octopus['Transform'] {
     const { angle, scale } = this.fill
     const { width, height, boundTx, boundTy } = this._transformAlignParams
-    const offset = this.fill.offset(width, height)
+    const offset = convertOffset(this.fill.offset, width, height)
 
     const [P1, P2] = angleToPoints({ angle, width, height })
     const [SP1, SP2] = scaleLineSegment({

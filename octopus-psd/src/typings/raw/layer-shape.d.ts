@@ -34,7 +34,7 @@ export type RawShapeStrokeStyle = {
   strokeStyleLineDashOffset?: RawUnitPoint
   strokeStyleLineDashSet?: number[]
   strokeStyleLineJoinType?: RawStrokeStyleLineJoinType
-  strokeStyleLineWidth?: number
+  strokeStyleLineWidth?: number | RawUnitPoint
   strokeStyleMiterLimit?: number
   strokeStyleOpacity?: RawUnitPercent
   strokeStyleResolution?: number

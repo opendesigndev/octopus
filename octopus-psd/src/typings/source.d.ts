@@ -1,4 +1,4 @@
-import type { RawCombineOperation, RawGradientType } from './raw'
+import type { RawCombineOperation, RawGradientType, RawPointHV, RawShapeStrokeOffset } from './raw'
 
 export type SourceCombineOperation = RawCombineOperation
 
@@ -39,3 +39,5 @@ export type SourceMatrix = {
 }
 
 export type SourceAlign = 'left' | 'right' | 'center' | 'justifyLeft' | 'justifyRight' | 'justifyCenter' | 'justifyAll'
+
+export type SourceOffset = RawPointHV | RawShapeStrokeOffset

@@ -3,6 +3,7 @@ import type { RawBlendMode, RawColor } from '../typings/raw'
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { DEFAULTS } from './defaults'
 import { round } from '@avocode/octopus-common/dist/utils/math'
+import type { SourceOffset, SourceVectorXY } from '../typings/source'
 
 const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   blendDivide: 'DIVIDE',
@@ -46,4 +47,16 @@ export function convertColor(color: RawColor | null | undefined, opacity?: numbe
     b: round(asFiniteNumber(color?.blue, 0) / 255, 4),
     a: round(opacity ?? 1, 4),
   }
+}
+
+export function convertOffset(offset: SourceOffset, width: number, height: number): SourceVectorXY {
+  const { horizontal: h, vertical: v } = offset
+  if (typeof h === 'number' && typeof v === 'number') return { x: h, y: v }
+  if (typeof h === 'number' || typeof v === 'number') return { x: 0, y: 0 }
+  if (h?.value !== undefined && v?.value !== undefined) {
+    const x = (h.value * width) / 100
+    const y = (v.value * height) / 100
+    return { x, y }
+  }
+  return { x: 0, y: 0 }
 }

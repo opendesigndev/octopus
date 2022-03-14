@@ -7,7 +7,7 @@ import { OctopusArtboard } from './octopus-artboard'
 import { logWarn } from '../../services/instances/misc'
 import { createMatrix } from '../../utils/paper-factories'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { convertBlendMode } from '../../utils/convert'
+import { convertBlendMode, convertOffset } from '../../utils/convert'
 import type { SourceBounds } from '../../typings/source'
 import { OctopusLayerBase } from './octopus-layer-base'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
@@ -45,7 +45,7 @@ export class OctopusEffectOverlayPattern {
 
   private get _offset(): [x: number, y: number] {
     const { width, height } = this._sourceLayerBounds
-    const { x, y } = this._fill?.offset(width, height)
+    const { x, y } = convertOffset(this._fill?.offset, width, height)
     return [x, y]
   }
 
