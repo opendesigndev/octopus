@@ -60,5 +60,5 @@ export async function convertDesign(filePath: string): Promise<void> {
     console.info(`  Render: file://${renderLocation} ${displayPerf(renderTime)}`)
   }
   const time = performance.now() - timeStart
-  console.info('Processing time:', displayPerf(time))
+  console.info(`Processing time: ${displayPerf(time)} \n\n`)
 }

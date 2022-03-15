@@ -1,5 +1,5 @@
 import type { Dirent } from 'fs'
-import { readdir } from 'fs/promises'
+import { readdir, stat } from 'fs/promises'
 import { logWarn } from '../services/instances/misc'
 
 export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null> {
@@ -10,4 +10,9 @@ export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null>
     logWarn(`Reading directory '${dirPath}' was not successful`)
     return null
   }
+}
+
+export async function isDirectory(path: string): Promise<boolean> {
+  const stats = await stat(path)
+  return stats.isDirectory()
 }

@@ -96,7 +96,6 @@ export class PSDFileReader {
     const designId = this.designId
     const artboard = await this._getSourceArtboard()
     const images = await this._getImages()
-    console.info('images', images)
     const sourceDesign = new SourceDesign({ designId, artboard, images })
     return sourceDesign
   }
