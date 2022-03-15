@@ -1,4 +1,3 @@
-//https://gitlab.avcd.cz/avocode/node-sketch-writer/-/blob/master/src/utils/create-shape.ts
 /**
  * This file is taken from svg-exporter and slightly modified, the purpose of createShape() is
  * to generate  paper.Path based on Octopus shape.

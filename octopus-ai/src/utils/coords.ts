@@ -1,3 +1,5 @@
+import chunk from 'lodash/chunk'
+
 import type { RawShapeLayerSubPathPoint } from '../typings/raw'
 import type { RawGraphicsStateMatrix } from '../typings/raw/graphics-state'
 import type { Coord } from '../typings/index'
@@ -9,12 +11,7 @@ export type TransformOptions = {
 export type RectCoords = { x0: number; y0: number; x1: number; y1: number }
 
 export function transformCoords(matrix: RawGraphicsStateMatrix, coords: number[]): number[] {
-  const result = []
-  for (let i = 0; i < coords.length; i += 2) {
-    result.push(...transformCoord(matrix, [coords[i], coords[i + 1]]))
-  }
-
-  return result
+  return chunk(coords, 2).flatMap((coord: Coord) => transformCoord(matrix, coord))
 }
 
 export function transformCoord(matrix: RawGraphicsStateMatrix, point: Coord): number[] {
@@ -36,7 +33,7 @@ export function getNorthEastSouthWestCoords(rectPoints: Coord[]): RectCoords {
   return { x0, y0, x1, y1 }
 }
 
-export function getNorthWestSouthEasttCoords(rectPoints: Coord[]): RectCoords {
+export function getNorthWestSouthEastCoords(rectPoints: Coord[]): RectCoords {
   const [x0, y0] = calculateTopRightCorner(rectPoints)
   const [x1, y1] = calculateBottomLeftCorner(rectPoints)
 
@@ -108,12 +105,5 @@ export function hasExpectedType(point: RawShapeLayerSubPathPoint): boolean {
 }
 
 export function invertYCooords(coords: number[], artboardHeight: number): number[] {
-  const inversedCoords = coords.map((coord, index) => {
-    if (index % 2 === 0) {
-      return coord
-    }
-    return artboardHeight - coord
-  })
-
-  return inversedCoords
+  return coords.map((coord, index) => (index % 2 ? artboardHeight - coord : coord))
 }
