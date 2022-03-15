@@ -1,11 +1,10 @@
 import { SourceDesign, SourceImage } from '../../entities/source/source-design'
-import { readFile } from 'fs/promises'
 import { parsePsd } from '@avocode/psd-parser'
 import path from 'path'
 import sizeOf from 'image-size'
 import chalk from 'chalk'
 import { displayPerf } from '../../utils/console'
-import { getFilesFromDir } from '../../utils/files'
+import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
 import type { RawArtboard } from '../../typings/raw'
 import { logInfo } from '../instances/misc'
 
@@ -57,17 +56,16 @@ export class PSDFileReader {
   }
 
   private async _getSourceArtboard(): Promise<RawArtboard> {
-    const designId = this.designId
     const timeParseStart = performance.now()
     await parsePsd(this.path, this._parsePsdOptions)
     const timeParse = performance.now() - timeParseStart
-    logInfo(`Source file created in directory: ${chalk.yellow(designId)} ${displayPerf(timeParse)}`)
+    logInfo(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
+
     const timeReadStart = performance.now()
-    const sourcePath = path.join(this._outDir, PSDFileReader.SOURCE_FILE)
-    const sourceFile = await readFile(sourcePath, { encoding: 'utf8' })
-    const artboard: RawArtboard = JSON.parse(sourceFile)
+    const artboard = await parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
     const timeRead = performance.now() - timeReadStart
     logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
+
     return artboard
   }
 
