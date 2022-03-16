@@ -25,15 +25,27 @@ export class SourceDesign {
     this._designId = options.designId
   }
 
-  get images(): SourceImage[] {
-    return this._images
-  }
-
   get designId(): string {
     return this._designId
   }
 
   get artboard(): SourceArtboard {
     return this._artboard
+  }
+
+  get images(): SourceImage[] {
+    return this._images
+  }
+
+  get values(): {
+    designId: string
+    artboard: RawArtboard
+    images: SourceImage[]
+  } {
+    return {
+      designId: this.designId,
+      artboard: this.artboard.raw,
+      images: this.images,
+    }
   }
 }

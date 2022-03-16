@@ -1,3 +1,4 @@
+import path from 'path'
 import { performance } from 'perf_hooks'
 import readPackageUpAsync from 'read-pkg-up'
 import type { NormalizedReadResult } from 'read-pkg-up'
@@ -8,17 +9,24 @@ import { logger, set as setLogger } from './services/instances/logger'
 import { set as setSentry } from './services/instances/sentry'
 import { createSentry } from './services/general/sentry'
 import { ArtboardConverter, ArtboardConversionOptions } from './services/conversion/artboard-converter'
+import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import type { Logger } from './typings'
 import type { Octopus } from './typings/octopus'
-import type { SourceDesign } from './entities/source/source-design'
+import type { SourceDesign, SourceImage } from './entities/source/source-design'
 import { OctopusManifestReport } from './typings/manifest'
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { PSDFileReader } from './services/readers/psd-file-reader'
+import { LocalExporter } from './services/exporters/local-exporter'
+import { TempExporter } from './services/exporters/temp-exporter'
+import { AbstractExporter } from './services/exporters/abstract-exporter'
 
-// type ConvertDesignOptions = {
-//   exporter?: Exporter // TODO
-// }
+export { LocalExporter }
+export { TempExporter }
+
+type ConvertDesignOptions = {
+  exporter?: AbstractExporter
+}
 
 type OctopusPSDConverterGeneralOptions = {
   designId?: string
@@ -39,9 +47,15 @@ type OctopusPSDConverterOptions = OctopusPSDConverterGeneralOptions & {
 //   logger?: Logger
 // }
 
-type ConversionResult = {
+export type ArtboardConversionResult = {
+  id: string
   value: Octopus['OctopusDocument'] | undefined
   error: Error | null
+  time: number
+}
+
+export type DesignConversionResult = {
+  manifest: OctopusManifestReport
   time: number
 }
 
@@ -52,25 +66,29 @@ createEnvironment()
 
 export class OctopusPSDConverter {
   private _id: string
-  private _sourceDesign: SourceDesign
   private _pkg: Promise<NormalizedReadResult | undefined>
+  private _sourceDesign: SourceDesign
+  private _octopusManifest: OctopusManifest
 
   static EXPORTERS = {
-    // LOCAL: LocalExporter, // TODO
-    // TEMP: TempExporter, // TODO
+    LOCAL: LocalExporter,
+    TEMP: TempExporter,
   }
 
-  static async fromFile(options: OctopusPSDConverterFromFileOptions): Promise<OctopusPSDConverter> {
+  static async fromFile(options: OctopusPSDConverterFromFileOptions): Promise<OctopusPSDConverter | null> {
     const designId = options.designId || uuidv4()
+    const sourceDesign = await new PSDFileReader({ path: options.filePath, designId }).sourceDesign
+    if (sourceDesign === null) return null
     return new this({
       logger: options.logger,
-      sourceDesign: await new PSDFileReader({ path: options.filePath, designId }).sourceDesign,
+      sourceDesign,
     })
   }
 
   constructor(options: OctopusPSDConverterOptions) {
     this._id = options.designId || uuidv4()
     this._sourceDesign = options.sourceDesign
+    this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter: this })
     this._pkg = readPackageUpAsync({ cwd: __dirname })
 
     this._setupLogger(options?.logger)
@@ -80,6 +98,14 @@ export class OctopusPSDConverter {
         logger,
       })
     )
+  }
+
+  get sourceDesign(): SourceDesign {
+    return this._sourceDesign
+  }
+
+  get octopusManifest(): OctopusManifest {
+    return this._octopusManifest
   }
 
   get id(): string {
@@ -108,24 +134,51 @@ export class OctopusPSDConverter {
     }
   }
 
-  private async _convertArtboard(options: ArtboardConversionOptions): Promise<ConversionResult> {
+  private async _convertArtboard(options: ArtboardConversionOptions): Promise<ArtboardConversionResult> {
+    const id = options.sourceDesign.designId
     const timeStart = performance.now()
     const { value, error } = await this._convertArtboardSafe(options)
     const time = performance.now() - timeStart
-    return { value, error, time }
+    return { id, value, error, time }
   }
 
-  async convertDesign(): Promise<{ manifest: OctopusManifestReport; artboards: ConversionResult[] }> {
-    const artboard = await this._convertArtboard({ sourceDesign: this._sourceDesign })
+  async convertDesign(
+    options?: ConvertDesignOptions
+  ): Promise<{ manifest: OctopusManifestReport; artboards: ArtboardConversionResult[]; images: SourceImage[] }> {
+    const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
 
-    const manifest = await new OctopusManifest({
-      sourceDesign: this._sourceDesign,
-      octopusConverter: this,
-    }).convert()
+    this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
+
+    /** Images */
+    const images = await Promise.all(
+      this._sourceDesign.images.map(async (image) => {
+        const imageId = path.basename(image.path)
+        const imagePath = await exporter?.exportImage?.(image.name, image.path) // TODO HERE
+        if (typeof imagePath === 'string') {
+          this.octopusManifest.setExportedImage(imageId, imagePath)
+        }
+        return image
+      })
+    )
+
+    /** Artboard */
+    const artboard = await this._convertArtboard({ sourceDesign: this._sourceDesign })
+    const artboardPath = await exporter?.exportArtboard?.(artboard)
+    if (typeof artboardPath === 'string') {
+      this.octopusManifest.setExportedArtboard(artboard.id, artboardPath)
+    }
+
+    /** Manifest */
+    const timeStart = performance.now()
+    const manifest = await this.octopusManifest.convert()
+    const time = performance.now() - timeStart
+
+    await exporter?.exportManifest?.({ manifest, time })
 
     return {
       manifest,
       artboards: [artboard],
+      images,
     }
   }
 }

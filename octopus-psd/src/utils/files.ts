@@ -1,5 +1,5 @@
 import type { Dirent } from 'fs'
-import { readdir, stat, readFile } from 'fs/promises'
+import { readdir, stat, readFile, writeFile, mkdir, copyFile as cp } from 'fs/promises'
 import { logWarn } from '../services/instances/misc'
 
 export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null> {
@@ -12,12 +12,47 @@ export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null>
   }
 }
 
-export async function parseJsonFromFile<T>(path: string): Promise<T> {
-  const file = await readFile(path, { encoding: 'utf8' })
-  return JSON.parse(file)
+export async function parseJsonFromFile<T>(path: string): Promise<T | null> {
+  try {
+    const file = await readFile(path, { encoding: 'utf8' })
+    return JSON.parse(file)
+  } catch (e) {
+    logWarn(`Parsing json from file '${path}' failed`)
+    return null
+  }
 }
 
 export async function isDirectory(path: string): Promise<boolean> {
   const stats = await stat(path)
   return stats.isDirectory()
+}
+
+export async function saveFile(path: string, body: string | Buffer): Promise<string> {
+  try {
+    await writeFile(path, body)
+  } catch (e) {
+    logWarn(`Saving file '${path}' failed`)
+  }
+  return path
+}
+
+export async function makeDir(path: string): Promise<string> {
+  try {
+    await mkdir(path, { recursive: true })
+  } catch (e) {
+    logWarn(`Making directory '${path}' was not successful`)
+  }
+  return path
+}
+
+export async function copyFile(src: string, dest: string): Promise<string> {
+  console.info()
+  console.info('COPY FILE')
+  console.info()
+  try {
+    await cp(src, dest)
+  } catch (e) {
+    logWarn(`Copying file from '${src}' to '${dest}' failed`)
+  }
+  return dest
 }

@@ -37,9 +37,19 @@ export async function convertDesign(filePath: string): Promise<void> {
   console.info(`Start converting file: ${chalk.yellow(filePath)}`)
   if (filePath === undefined) return console.error('Missing argument (path to .psd file)')
 
-  const converter = await OctopusPSDConverter.fromFile({ filePath, designId })
-  const convertResult = await converter.convertDesign()
   const saver = await createTempSaver(designId)
+
+  const converter = await OctopusPSDConverter.fromFile({ filePath, designId })
+  if (converter === null) {
+    console.error('OctopusPSDConverter Failed')
+    return
+  }
+  const sourceDesign = converter.sourceDesign.values
+  console.info('sourceDesign', sourceDesign)
+
+  await saver('sourceDesign.json', stringify(sourceDesign))
+
+  const convertResult = await converter.convertDesign()
 
   const octopus = convertResult?.artboards[0]
   const octopusLocation = await saver('octopus.json', stringify(octopus?.value))
@@ -49,8 +59,10 @@ export async function convertDesign(filePath: string): Promise<void> {
   const manifestLocation = await saver('manifest.json', stringify(manifest))
 
   const sourceLocation = `${octopusDir}/source.json`
+  const sourceDesignLocation = `${octopusDir}/sourceDesign.json`
   console.info(`${octopus?.value ? '✅' : '❌'} ${chalk.yellow('octopus.json')} ${displayPerf(octopus?.time)}`)
   console.info(`  Source: file://${sourceLocation}`)
+  console.info(`  SourceDesign: file://${sourceDesignLocation}`)
   console.info(`  Manifest: file://${manifestLocation}`)
   console.info(`  Octopus: file://${octopusLocation}`)
 

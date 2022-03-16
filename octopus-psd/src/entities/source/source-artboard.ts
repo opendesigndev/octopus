@@ -30,6 +30,10 @@ export class SourceArtboard {
     return layers
   }
 
+  get raw(): RawArtboard {
+    return this._rawValue
+  }
+
   get layers(): SourceLayer[] {
     return this._layers
   }

@@ -6,9 +6,10 @@
   "main": "dist/src/index.js",
   "scripts": {
     "convert": "ts-node ./scripts/convert.ts",
+    "convert:local": "ts-node ./scripts/convert-local.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
-    "clean-workdir": "rimraf ./workdir/*",
+    "clean:workdir": "rimraf ./workdir/*",
     "lint": "eslint ./src/* ./scripts/*",
     "prepare": "rimraf ./lib && yarn run build",
     "watch": "tsc -w",

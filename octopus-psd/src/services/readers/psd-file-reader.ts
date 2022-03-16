@@ -16,7 +16,7 @@ type PSDFileReaderOptions = {
 export class PSDFileReader {
   private _path: string
   private _designId: string
-  private _sourceDesign: Promise<SourceDesign>
+  private _sourceDesign: Promise<SourceDesign | null>
 
   static OUTPUT_DIR = 'workdir'
   static IMAGES_DIR = 'pictures'
@@ -38,7 +38,7 @@ export class PSDFileReader {
     return this._designId
   }
 
-  get sourceDesign(): Promise<SourceDesign> {
+  get sourceDesign(): Promise<SourceDesign | null> {
     return this._sourceDesign
   }
 
@@ -55,7 +55,7 @@ export class PSDFileReader {
     }
   }
 
-  private async _getSourceArtboard(): Promise<RawArtboard> {
+  private async _getSourceArtboard(): Promise<RawArtboard | null> {
     const timeParseStart = performance.now()
     await parsePsd(this.path, this._parsePsdOptions)
     const timeParse = performance.now() - timeParseStart
@@ -90,9 +90,10 @@ export class PSDFileReader {
     return [...images, ...patterns]
   }
 
-  private async _initSourceDesign(): Promise<SourceDesign> {
+  private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
     const artboard = await this._getSourceArtboard()
+    if (artboard == null) return null
     const images = await this._getImages()
     const sourceDesign = new SourceDesign({ designId, artboard, images })
     return sourceDesign
