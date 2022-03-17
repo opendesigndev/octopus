@@ -28,11 +28,17 @@ export type RawArtboardEntryResourcesProperties = {
 
 export type RawArtboardMediaBox = [number, number, number, number]
 
+export type OCPropertiesD = {
+  OFF?: RawObjectId[]
+}
+export type OCProperties = {
+  D?: OCPropertiesD
+}
 export type RawArtboardEntry = {
   Contents?: RawArtboardEntryContents
   Id?: number
   Name?: string
   MediaBox?: RawArtboardMediaBox
-  'OCProperties.D.OFF'?: RawObjectId[]
+  OCProperties?: OCProperties
   Resources?: RawResources
 }

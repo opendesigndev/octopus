@@ -9,7 +9,7 @@ import {
   isValid,
   getIssPositiveOrientation,
   getNorthEastSouthWestCoords,
-  getNorthWestSouthEasttCoords,
+  getNorthWestSouthEastCoords,
 } from '../../utils/coords'
 
 import type { LayerSpecifics } from './octopus-layer-common'
@@ -53,7 +53,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     const isPositiveOrientation = getIssPositiveOrientation(width, height)
 
     if (isPositiveOrientation) {
-      return getNorthWestSouthEasttCoords(rectPoints)
+      return getNorthWestSouthEastCoords(rectPoints)
     }
 
     return getNorthEastSouthWestCoords(rectPoints)
