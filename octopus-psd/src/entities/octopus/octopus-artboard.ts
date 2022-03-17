@@ -21,6 +21,10 @@ export class OctopusArtboard {
     this._layers = this._initLayers()
   }
 
+  get parentArtboard(): OctopusArtboard {
+    return this
+  }
+
   get sourceArtboard(): SourceArtboard {
     return this._sourceDesign.artboard
   }

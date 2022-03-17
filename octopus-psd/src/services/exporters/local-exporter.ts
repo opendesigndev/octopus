@@ -5,7 +5,6 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
-import type { SourceArtboard } from '../../../src/entities/source/source-artboard'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
@@ -62,7 +61,6 @@ export class LocalExporter implements AbstractExporter {
   }
 
   async exportImage(name: string, location: string): Promise<string> {
-    // const save = this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
     const dir = await this._outputDir
     const fullPath = path.join(dir, LocalExporter.IMAGES_DIR_NAME, name)
     const save = copyFile(location, fullPath)

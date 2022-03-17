@@ -71,10 +71,12 @@ export class PSDFileReader {
 
   private async _getImages(): Promise<SourceImage[]> {
     const imagesPath = path.join(this._outDir, PSDFileReader.IMAGES_DIR)
-    const images: SourceImage[] = ((await getFilesFromDir(imagesPath)) ?? []).map((image) => ({
-      name: image.name,
-      path: path.join(PSDFileReader.IMAGES_DIR, image.name),
-    }))
+    const images: SourceImage[] = ((await getFilesFromDir(imagesPath)) ?? []).map((image) => {
+      const name = image.name
+      const relativePath = path.join(PSDFileReader.IMAGES_DIR, name)
+      const imgPath = path.join(this._outDir, relativePath)
+      return { name, path: imgPath, relativePath }
+    })
 
     const patterns: SourceImage[] = []
     const patternsPath = path.join(this._outDir, PSDFileReader.PATTERNS_DIR)
@@ -84,7 +86,7 @@ export class PSDFileReader {
       const relativePath = path.join(PSDFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this._outDir, relativePath)
       const { width, height } = await sizeOf(imgPath)
-      patterns.push({ name, path: relativePath, width, height })
+      patterns.push({ name, path: imgPath, relativePath, width, height })
     }
 
     return [...images, ...patterns]

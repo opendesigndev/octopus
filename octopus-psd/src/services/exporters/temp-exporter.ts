@@ -1,11 +1,10 @@
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import { mkdir, writeFile } from 'fs/promises'
+import { copyFile, mkdir, writeFile } from 'fs/promises'
 import EventEmitter from 'events'
 
 import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
-import type { SourceArtboard } from '../../entities/source/source-artboard'
 import type { SourceDesign } from '../../entities/source/source-design'
 
 type TempExporterOptions = {
@@ -69,9 +68,12 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return octopusPath
   }
 
-  // async exportImage(name: string, path: string): Promise<string> {
-  //   return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(name)), data)
-  // }
+  async exportImage(name: string, location: string): Promise<string> {
+    const dir = await this._outputDir
+    const fullPath = path.join(dir, TempExporter.IMAGES_DIR_NAME, name)
+    await copyFile(location, fullPath)
+    return fullPath
+  }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
     const manifestPath = await this._save(TempExporter.MANIFEST_NAME, this._stringify(manifest.manifest))

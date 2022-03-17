@@ -7,6 +7,7 @@
   "scripts": {
     "convert": "ts-node ./scripts/convert.ts",
     "convert:local": "ts-node ./scripts/convert-local.ts",
+    "convert:debug": "ts-node ./scripts/convert-debug.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "clean:workdir": "rimraf ./workdir/*",

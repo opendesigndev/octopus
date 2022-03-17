@@ -153,7 +153,7 @@ export class OctopusPSDConverter {
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
         const imageId = path.basename(image.path)
-        const imagePath = await exporter?.exportImage?.(image.name, image.path) // TODO HERE
+        const imagePath = await exporter?.exportImage?.(image.name, image.path)
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }

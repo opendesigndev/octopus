@@ -3,9 +3,8 @@ import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { createDefaultTranslationMatrix } from '../../utils/path'
-import path from 'path'
-import { FOLDER_IMAGES } from '../../utils/const'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { logWarn } from '../../services/instances/misc'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -37,8 +36,13 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   }
 
   @firstCallMemo()
-  private get _fills(): Octopus['Fill'][] {
-    const imagePath = path.join(FOLDER_IMAGES, this.sourceLayer.imageName ?? '')
+  private get _fills(): Octopus['Fill'][] | null {
+    const imageName = this.sourceLayer.imageName ?? ''
+    const imagePath = this._parent.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(imageName)
+    if (imagePath === undefined) {
+      logWarn('Unknown image', { imagePath, imageName })
+      return null
+    }
     const { width, height } = this.sourceLayer.bounds
     const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0]
     const fill = new OctopusEffectFillImage({
@@ -50,19 +54,23 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     return [fill]
   }
 
-  private get _shape(): Octopus['Shape'] {
+  private get _shape(): Octopus['Shape'] | null {
+    const fills = this._fills
+    if (fills === null) return null
     const fillShape: Octopus['Shape'] = {
       fillRule: 'EVEN_ODD',
       path: this._path,
-      fills: this._fills,
+      fills,
     }
     return fillShape
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
+    const shape = this._shape
+    if (shape === null) return null
     return {
       type: 'SHAPE',
-      shape: this._shape,
+      shape,
     } as const
   }
 
@@ -70,9 +78,12 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     const common = this.convertBase()
     if (!common) return null
 
+    const specific = this._convertTypeSpecific()
+    if (!specific) return null
+
     return {
       ...common,
-      ...this._convertTypeSpecific(),
+      ...specific,
     }
   }
 }

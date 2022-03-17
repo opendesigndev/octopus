@@ -1,7 +1,5 @@
-import path from 'path'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import { FOLDER_IMAGES, FOLDER_PATTERNS } from '../../utils/const'
 import { OctopusArtboard } from './octopus-artboard'
 import { logWarn } from '../../services/instances/misc'
 import { createMatrix } from '../../utils/paper-factories'
@@ -11,6 +9,7 @@ import type { SourceBounds } from '../../typings/source'
 import { OctopusLayerBase } from './octopus-layer-base'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { OctopusEffectBase } from './octopus-effect-base'
+import type { SourceImage } from '../source/source-design'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -35,9 +34,16 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
     return this._parentLayer.sourceLayer.bounds
   }
 
-  private get _imagePath(): string {
-    const imageName = `${this._fill?.pattern?.ID}.png`
-    return path.join(FOLDER_IMAGES, FOLDER_PATTERNS, imageName)
+  private get _imageName(): string {
+    return `${this._fill?.pattern?.ID}.png`
+  }
+
+  private get _imagePath(): string | undefined {
+    return this._parentLayer.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
+  }
+
+  private get _image(): SourceImage | undefined {
+    return this._parentArtboard.sourceDesign.getImageByName(this._imageName)
   }
 
   private get _offset(): [x: number, y: number] {
@@ -52,11 +58,10 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
 
   private get _imageTransform(): Octopus['Transform'] | null {
     if (this._fill === undefined) return null
-    const imagePath = this._imagePath
-    const images = this._parentArtboard.sourceDesign.images
-    const { width, height } = images.find((img) => img.path === imagePath) ?? {}
+    const image = this._image
+    const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logWarn('Unknown image', { imagePath })
+      logWarn('Unknown image', { image, id: this._fill?.pattern?.ID })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)
@@ -69,8 +74,10 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
   get overlay(): OctopusEffectFillImage | null {
     const transform = this._imageTransform
     if (transform === null) return null
+    const imagePath = this._imagePath
+    if (imagePath === undefined) return null
     return new OctopusEffectFillImage({
-      imagePath: this._imagePath,
+      imagePath,
       transform,
       opacity: this._opacity,
       layout: 'TILE',

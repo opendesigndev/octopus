@@ -4,6 +4,7 @@ import type { RawArtboard } from '../../typings/raw'
 export type SourceImage = {
   name: string
   path: string
+  relativePath: string
   width?: number
   height?: number
 }
@@ -35,6 +36,10 @@ export class SourceDesign {
 
   get images(): SourceImage[] {
     return this._images
+  }
+
+  getImageByName(name: string): SourceImage | undefined {
+    return this.images.find((image) => image.name === name)
   }
 
   get values(): {

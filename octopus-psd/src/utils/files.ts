@@ -46,9 +46,6 @@ export async function makeDir(path: string): Promise<string> {
 }
 
 export async function copyFile(src: string, dest: string): Promise<string> {
-  console.info()
-  console.info('COPY FILE')
-  console.info()
   try {
     await cp(src, dest)
   } catch (e) {
