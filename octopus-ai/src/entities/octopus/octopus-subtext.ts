@@ -1,7 +1,7 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import convertColor from '../../utils/colors'
 import SourceLayerSubText from '../source/source-layer-sub-text'
+import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
 
 import type { Octopus } from '../../typings/octopus'
 
@@ -33,43 +33,27 @@ export default class OctopusSubText {
     return { postScriptName }
   }
 
-  private _parseFill(): Octopus['FillColor'] {
-    const [r, g, b] = convertColor(
-      this._sourceLayer.colorNonStroking ?? [0, 0, 0],
-      this._sourceLayer.colorSpaceNonStroking ?? ''
-    )
-
-    return {
-      type: 'COLOR' as const,
-      color: { r, g, b, a: 1 },
-    }
-  }
-
-  private _parseTextValue(): string {
-    const stringOrArr = this._sourceLayer.value
-
-    if (typeof stringOrArr === 'string') {
-      return stringOrArr
-    }
-
-    return stringOrArr.filter((stringOrNum) => typeof stringOrNum === 'string').join('')
-  }
-
   private _parseStyle(): Octopus['TextStyle'] {
     const font = this._parseFont()
     const fontSize = this._sourceLayer.fontSize
     const letterSpacing = this._parseLetterSpacing()
 
+    const fill = new OctopusEffectColorFill({
+      sourceLayer: this._sourceLayer,
+      colorSpaceType: ColorSpace.NON_STROKING,
+      colorSpaceValue: this._sourceLayer.colorSpaceNonStroking ?? '',
+    }).convert()
+
     return {
       font,
       fontSize,
       letterSpacing,
-      fills: [this._parseFill()],
+      fills: [fill],
     }
   }
 
   convert(): Octopus['Text'] {
-    const value = this._parseTextValue()
+    const value = this._sourceLayer.value
     const style = this._parseStyle()
 
     return {

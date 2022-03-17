@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@todo copy from xd
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 

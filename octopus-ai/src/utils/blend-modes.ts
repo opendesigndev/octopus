@@ -17,6 +17,6 @@ export const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   Exclusion: 'EXCLUSION',
   Hue: 'HUE',
   Saturation: 'SATURATION',
-  color: 'COLOR',
+  Color: 'COLOR',
   Luminosity: 'LUMINOSITY',
 } as const

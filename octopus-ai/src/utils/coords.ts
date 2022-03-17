@@ -22,7 +22,7 @@ export function transformCoord(matrix: RawGraphicsStateMatrix, point: Coord): nu
 }
 
 //note: y axis is inverted
-export function getIssPositiveOrientation(width: number, height: number): boolean {
+export function getIsPositiveOrientation(width: number, height: number): boolean {
   return width * height < 0
 }
 
@@ -51,40 +51,28 @@ export function createRectPoints(coords: number[]): Coord[] {
   return points
 }
 
+export function getX(coords: Coord[]): number[] {
+  return coords.map(([x]) => x)
+}
+
+export function getY(coords: Coord[]): number[] {
+  return coords.map(([, y]) => y)
+}
+
 export function calculateBottomRightCorner(coords: Coord[]): Coord {
-  return coords.reduce((coord, resultCoord) => {
-    if (!resultCoord || coord[0] > resultCoord[0] || coord[1] > resultCoord[1]) {
-      return [...coord]
-    }
-    return resultCoord
-  })
+  return [Math.max(...getX(coords)), Math.max(...getY(coords))]
 }
 
 export function calculateTopLeftCorner(coords: Coord[]): Coord {
-  return coords.reduce((coord, resultCoord) => {
-    if (!resultCoord || coord[0] < resultCoord[0] || coord[1] < resultCoord[1]) {
-      return [...coord]
-    }
-    return resultCoord
-  })
+  return [Math.min(...getX(coords)), Math.min(...getY(coords))]
 }
 
 export function calculateTopRightCorner(coords: Coord[]): Coord {
-  return coords.reduce((coord, resultCoord) => {
-    if (!resultCoord || coord[0] > resultCoord[0] || coord[1] < resultCoord[1]) {
-      return [...coord]
-    }
-    return resultCoord
-  })
+  return [Math.max(...getX(coords)), Math.min(...getY(coords))]
 }
 
 export function calculateBottomLeftCorner(coords: Coord[]): Coord {
-  return coords.reduce((coord, resultCoord) => {
-    if (!resultCoord || coord[0] < resultCoord[0] || coord[1] > resultCoord[1]) {
-      return [...coord]
-    }
-    return resultCoord
-  })
+  return [Math.min(...getX(coords)), Math.max(...getY(coords))]
 }
 
 export function isValid(point: RawShapeLayerSubPathPoint): boolean {
@@ -100,8 +88,7 @@ export function isValid(point: RawShapeLayerSubPathPoint): boolean {
 }
 
 export function hasExpectedType(point: RawShapeLayerSubPathPoint): boolean {
-  const type = point.Type
-  return ['Curve', 'Line', 'Move'].some((t) => t === type)
+  return ['Curve', 'Line', 'Move'].includes(point.Type ?? '')
 }
 
 export function invertYCooords(coords: number[], artboardHeight: number): number[] {

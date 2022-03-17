@@ -65,10 +65,7 @@ export default class SourceLayerCommon {
   }
 
   get graphicsState(): Nullable<RawGraphicsState> {
-    //as graphicsState is obtained differently in source-layer-text, we overload this method there
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const rawValue: any = this._rawValue
-    return rawValue.GraphicsState
+    return 'GraphicsState' in this._rawValue ? this._rawValue.GraphicsState : null
   }
 
   get extGState(): Nullable<RawResourcesExtGState[string]> {

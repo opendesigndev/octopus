@@ -41,10 +41,12 @@ export default class OctopusEffectsShape {
   private _parseFills(): (OctopusEffectFill | OctopusEffectGradientFill)[] {
     const fills = []
 
-    if (this._sourceLayer.fill) {
+    if (this._sourceLayer.isFill) {
+      const colorSpaceValue = this._resources.getColorSpaceValue(this._sourceLayer.colorSpaceNonStroking ?? '') ?? ''
+
       fills.push(
         new OctopusEffectFill({
-          resources: this._resources,
+          colorSpaceValue,
           sourceLayer: this._sourceLayer,
           colorSpaceType: ColorSpace.NON_STROKING,
         })

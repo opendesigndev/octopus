@@ -1,5 +1,3 @@
-import { isArray } from 'lodash'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type {
   RawResources,
@@ -52,38 +50,36 @@ export default class SourceResources {
     return this._rawValue?.ColorSpace
   }
 
-  public getShading(shadingName: string): Nullable<RawResourcesShadingKey> {
+  getShading(shadingName: string): Nullable<RawResourcesShadingKey> {
     return this._rawValue?.Shading?.[shadingName]
   }
 
-  public getShadingCoords(
-    shadingName: string /*, artboardHeight: number*/
-  ): Nullable<RawResourcesShadingKey['Coords']> {
+  getShadingCoords(shadingName: string /*, artboardHeight: number*/): Nullable<RawResourcesShadingKey['Coords']> {
     return this.getShading(shadingName)?.Coords ?? [0, 0, 0, 0]
   }
 
-  public getShadingType(shadingName: string): Nullable<RawResourcesShadingKey['ShadingType']> {
+  getShadingType(shadingName: string): Nullable<RawResourcesShadingKey['ShadingType']> {
     return this._rawValue?.Shading?.[shadingName]['ShadingType']
   }
 
-  public getShadingColorSpace(shadingName: string): string {
+  getShadingColorSpace(shadingName: string): string {
     const colorSpace = this.getShading(shadingName)?.ColorSpace
-    return (isArray(colorSpace) ? colorSpace[0] : colorSpace) ?? ''
+    return (Array.isArray(colorSpace) ? colorSpace[0] : colorSpace) ?? ''
   }
 
-  public getShadingFunction(shadingName: string): Nullable<RawResourcesShadingKeyFunction> {
+  getShadingFunction(shadingName: string): Nullable<RawResourcesShadingKeyFunction> {
     return this.getShading(shadingName)?.Function
   }
 
-  public getShadingFunctionBounds(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Bounds']> {
+  getShadingFunctionBounds(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Bounds']> {
     return this.getShadingFunction(shadingName)?.Bounds
   }
 
-  public getShadingFunctionFunctions(shadingName: string): Nullable<RawResourcesShadingKeyFunctionFunction[]> {
+  getShadingFunctionFunctions(shadingName: string): Nullable<RawResourcesShadingKeyFunctionFunction[]> {
     return this.getShadingFunction(shadingName)?.Functions
   }
 
-  public getShadingFunctionEncode(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Encode']> {
+  getShadingFunctionEncode(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Encode']> {
     return this.getShadingFunction(shadingName)?.Encode
   }
 

@@ -1,5 +1,6 @@
-import _ from 'lodash'
+import zipWith from 'lodash/zipWith'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import chunk from 'lodash/chunk'
 
 import convertColor from '../../utils/colors'
 
@@ -16,6 +17,7 @@ type OctopusEffectGradientFillOptions = {
 
 export default class OctopusEffectGradientFill {
   static DEFAULT_RGB_COLOR = [0, 0, 0]
+
   private _resources: SourceResources
   private _sourceLayer: SourceLayerShape
 
@@ -63,10 +65,7 @@ export default class OctopusEffectGradientFill {
       return Array(count).fill([0, 1])
     }
 
-    const encodePairs = []
-    for (let i = 0; i < encode.length; i += 2) {
-      encodePairs.push([encode[i], encode[i + 1]])
-    }
+    const encodePairs = chunk(encode, 2)
 
     return encodePairs as Coord[]
   }
@@ -77,7 +76,7 @@ export default class OctopusEffectGradientFill {
     const functions = asArray(this._resources.getShadingFunctionFunctions(shadingName))
     const encode = this._readEncode(functions.length)
 
-    return _.zipWith(functions, encode, (f, e) => this._parseType2Function(f, e, colorSpace)).reduce(
+    return zipWith(functions, encode, (f, e) => this._parseType2Function(f, e, colorSpace)).reduce(
       (acc: GradientStop[], stops, i) => {
         acc.push({ ...stops[0], position: i === 0 ? 0 : bounds[i - 1] })
 
@@ -96,7 +95,7 @@ export default class OctopusEffectGradientFill {
     const colorStops = this._parseType3Function(colorSpace)
     const alphaStops = this._parseAlphaStops(colorStops.length)
 
-    return _.zipWith(colorStops, alphaStops, this._mergeColorWithAlpha)
+    return zipWith(colorStops, alphaStops, this._mergeColorWithAlpha)
   }
 
   private _mergeColorWithAlpha(colorStop: GradientStop, a: number): GradientColorStop {
@@ -159,7 +158,7 @@ export default class OctopusEffectGradientFill {
     }
   }
 
-  public convert(): Octopus['FillGradient'] {
+  convert(): Octopus['FillGradient'] {
     const gradient = this._parseGradient()
     const positioning = this._parsePositioning()
 

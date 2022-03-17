@@ -1,3 +1,6 @@
+import { clamp } from '@avocode/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import type { RawResourcesColorSpace } from '../typings/raw'
 
 export type RgbColorComponents = [number, number, number]
@@ -82,15 +85,11 @@ export function cmykToRgb(color: number[]): RgbColorComponents {
 }
 
 export function roundComponents(components: RgbColorComponents): RgbColorComponents {
-  const [r, g, b] = components.map(Math.round)
-  return [r, g, b]
+  return components.map((component) => Math.round(component)) as RgbColorComponents
 }
 
 export function parseColor(colorCompontents: number[]): number[] {
-  return colorCompontents
-    .map((channel) => (Number.isFinite(channel) ? channel : 0))
-    .map((channel) => Math.max(channel, 0))
-    .map((channel) => Math.min(channel, 1))
+  return colorCompontents.map((channel) => clamp(asFiniteNumber(channel, 0), 0, 1))
 }
 
 export function convertRGBToRGBA(color: RgbColorComponents): RgbColorComponents {

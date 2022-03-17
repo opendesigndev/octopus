@@ -21,10 +21,6 @@ export default class OctopusAIConverter {
     this._logger = options?.logger ?? createLogger()
   }
 
-  // get logger() {
-  //   return this._logger
-  // }
-
   get pkg(): Promise<NormalizedPackageJson> {
     return this._pkg.then((normalized) => {
       if (!normalized) {

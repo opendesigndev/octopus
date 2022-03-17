@@ -3,9 +3,9 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import convertColor, { parseColor } from '../../utils/colors'
 
 import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceResources from '../source/source-resources'
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace } from '../../typings/raw/resources'
+import type SourceLayerSubText from '../source/source-layer-sub-text'
 
 export enum ColorSpace {
   STROKING = 'ColorSpaceStroking',
@@ -13,29 +13,20 @@ export enum ColorSpace {
 }
 
 type OctopusEffectColorFillOptions = {
-  resources: SourceResources
-  sourceLayer: SourceLayerShape
+  sourceLayer: SourceLayerShape | SourceLayerSubText
   colorSpaceType: ColorSpace
+  colorSpaceValue: string | RawResourcesColorSpace[string]
 }
 
 export default class OctopusEffectColorFill {
-  private _resources: SourceResources
-  private _sourceLayer: SourceLayerShape
+  private _sourceLayer: SourceLayerShape | SourceLayerSubText
   private _colorSpaceType: ColorSpace
+  private _colorSpaceValue: string | RawResourcesColorSpace[string]
 
   constructor(options: OctopusEffectColorFillOptions) {
-    this._resources = options.resources
     this._sourceLayer = options.sourceLayer
     this._colorSpaceType = options.colorSpaceType
-  }
-
-  private get _colorSpace(): string | RawResourcesColorSpace[string] {
-    const colorSpaceName =
-      this._colorSpaceType === ColorSpace.STROKING
-        ? this._sourceLayer.colorSpaceStroking
-        : this._sourceLayer.colorSpaceNonStroking
-
-    return this._resources.getColorSpaceValue(colorSpaceName || undefined) ?? ''
+    this._colorSpaceValue = options.colorSpaceValue
   }
 
   private get _color() {
@@ -48,9 +39,8 @@ export default class OctopusEffectColorFill {
 
   private _parseColor() {
     const color = this._color
-    const colorSpace = this._colorSpace ?? ''
 
-    return convertColor(color, colorSpace)
+    return convertColor(color, this._colorSpaceValue)
   }
 
   convert(): Octopus['FillColor'] {

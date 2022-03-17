@@ -18,7 +18,7 @@ type SourceLayerTextNormalizedOptions = {
 export default class SourceLayerSubText {
   private _rawValue: RawTextLayerText
   private _parent: SourceLayerText
-  static DEFAULT_TEXT_MATRIX = [0, 0, 0, 0, 0, 0, 0]
+  static DEFAULT_TEXT_MATRIX = [1, 0, 0, 1, 0, 0] as RawGraphicsStateMatrix
 
   constructor(options: SourceLayerTextNormalizedOptions) {
     this._rawValue = options.rawValue
@@ -30,13 +30,13 @@ export default class SourceLayerSubText {
   }
 
   get textTransformMatrix(): RawGraphicsStateMatrix {
-    const rawCtm: RawGraphicsStateMatrix = this.textMatrix ?? [1, 0, 0, 1, 0, 0]
+    const rawCtm: RawGraphicsStateMatrix = this.textMatrix ?? SourceLayerSubText.DEFAULT_TEXT_MATRIX
     const fontSize = this.fontSize
     const clonedCtm = [...rawCtm]
-    clonedCtm[0] = round(rawCtm[0] / fontSize, 4)
-    clonedCtm[1] = round(-rawCtm[1] / fontSize, 4)
-    clonedCtm[2] = round(-rawCtm[2] / fontSize, 4)
-    clonedCtm[3] = round(rawCtm[3] / fontSize, 4)
+    clonedCtm[0] = rawCtm[0] / fontSize
+    clonedCtm[1] = -rawCtm[1] / fontSize
+    clonedCtm[2] = -rawCtm[2] / fontSize
+    clonedCtm[3] = rawCtm[3] / fontSize
     clonedCtm[5] = this._parent.parentArtboardHeight - rawCtm[5]
 
     return clonedCtm as RawGraphicsStateMatrix
@@ -99,7 +99,21 @@ export default class SourceLayerSubText {
     return this.graphicsState?.ColorNonStroking
   }
 
-  get value(): string | (string | number)[] {
-    return this._rawValue.Text ?? ''
+  get colorSpaceStroking(): Nullable<string> {
+    return this.graphicsState?.ColorSpaceStroking
+  }
+
+  get colorStroking(): Nullable<number[]> {
+    return this.graphicsState?.ColorStroking
+  }
+
+  get value(): string {
+    const stringOrArr = this._rawValue.Text ?? ''
+
+    if (typeof stringOrArr === 'string') {
+      return stringOrArr
+    }
+
+    return stringOrArr.filter((stringOrNum) => typeof stringOrNum === 'string').join('')
   }
 }

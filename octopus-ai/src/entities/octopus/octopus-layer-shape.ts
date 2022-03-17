@@ -7,7 +7,7 @@ import createShape from '../../utils/create-shape'
 import {
   createRectPoints,
   isValid,
-  getIssPositiveOrientation,
+  getIsPositiveOrientation,
   getNorthEastSouthWestCoords,
   getNorthWestSouthEastCoords,
 } from '../../utils/coords'
@@ -50,7 +50,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   private _parseRectangleCoords(coords: number[]): RectCoords {
     const [, , width, height] = coords
     const rectPoints = createRectPoints(coords)
-    const isPositiveOrientation = getIssPositiveOrientation(width, height)
+    const isPositiveOrientation = getIsPositiveOrientation(width, height)
 
     if (isPositiveOrientation) {
       return getNorthWestSouthEastCoords(rectPoints)
@@ -170,12 +170,12 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return this._parseRect(coords)
   }
 
-  private _getPath(sourceSubpaths?: SourceLayerShapeSubPath[]): Octopus['PathLike'] | null {
+  private _getPath(): Octopus['PathLike'] | null {
     if (this._sourceLayer.type === 'Shading') {
       return this._parseSourceShading()
     }
 
-    sourceSubpaths = sourceSubpaths ?? this._sourceLayer.subpaths
+    const sourceSubpaths = this._sourceLayer.subpaths
 
     if (sourceSubpaths.length > 1) {
       return this._parseCompound(sourceSubpaths)

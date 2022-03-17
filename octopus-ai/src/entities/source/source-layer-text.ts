@@ -1,5 +1,5 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
 
 import SourceLayerSubText from './source-layer-sub-text'
 import SourceLayerCommon from './source-layer-common'
@@ -16,10 +16,10 @@ type SourceLayerTextOptions = {
 }
 
 export default class SourceLayerText extends SourceLayerCommon {
-  protected _rawValue: RawTextLayer
-  private _normalizedTexts: SourceLayerSubText[]
   static DEFAULT_NAME = '<TextLayer>'
 
+  protected _rawValue: RawTextLayer
+  private _normalizedTexts: SourceLayerSubText[]
   constructor(options: SourceLayerTextOptions) {
     super(options)
     this._normalizedTexts = this._initTexts()
@@ -36,16 +36,14 @@ export default class SourceLayerText extends SourceLayerCommon {
       )
     )
 
-    textSubLayers.forEach((textSubLayer, index) => {
-      if (index === 0) {
-        return
-      }
-
-      if (!_.isEqual(textSubLayer.textTransformMatrix, textSubLayers[index - 1].textTransformMatrix)) {
-        //@todo: use logger
-        console.error('initTexts', 'Different transform matrix in the same text group')
-      }
+    const equalDescendantMatrices = textSubLayers.every((textSubLayer) => {
+      return isEqual(textSubLayer.textTransformMatrix, textSubLayers[0].textTransformMatrix)
     })
+
+    if (!equalDescendantMatrices) {
+      //@todo: use logger
+      console.error('initTexts', 'Different transform matrix in the same text group')
+    }
 
     return textSubLayers
   }

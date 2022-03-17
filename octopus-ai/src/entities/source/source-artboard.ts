@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
@@ -35,15 +34,15 @@ export default class SourceArtboard {
     }, [])
   }
 
-  public get layers(): SourceLayer[] {
+  get layers(): SourceLayer[] {
     return this._children
   }
 
-  public get id(): string {
+  get id(): string {
     return this._id
   }
 
-  public get name(): Nullable<string> {
+  get name(): Nullable<string> {
     return this._rawArtboard.Name
   }
 

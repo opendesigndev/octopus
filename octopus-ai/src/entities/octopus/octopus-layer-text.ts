@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
+import pick from 'lodash/pick'
+import without from 'lodash/without'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import OctopusLayerCommon from './octopus-layer-common'
@@ -38,30 +40,28 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     }
   }
 
-  private _areStylesEqual(rootStyle: Octopus['StyleRange'], nextLayerStyle: Octopus['StyleRange']) {
-    return _.isEqual(
-      {
-        ...rootStyle,
-        ranges: [],
-      },
-      { ...nextLayerStyle, ranges: [] }
+  private _areStylesEqual(style1: Octopus['StyleRange'], style2: Octopus['StyleRange']): boolean {
+    return isEqual(
+      pick(style1, without(Object.keys(style1), 'ranges')),
+      pick(style2, without(Object.keys(style2), 'ranges'))
     )
   }
 
-  private _getDuplicatesMap(styles: Octopus['StyleRange'][]) {
+  private _getDuplicatesMap(styles: Octopus['StyleRange'][]): Map<Octopus['StyleRange'], Octopus['StyleRange'][]> {
     return styles.reduce((dups, style) => {
       const uniqueStyles = [...dups.keys()]
       const uniqueEntry = uniqueStyles.find((unique) => this._areStylesEqual(unique, style))
       if (uniqueEntry) {
-        dups.get(uniqueEntry).push(style)
+        const uniqueEntryArray = dups.get(uniqueEntry) as Octopus['StyleRange'][]
+        uniqueEntryArray.push(style)
       } else {
         dups.set(style, [style])
       }
       return dups
-    }, new Map())
+    }, new Map<Octopus['StyleRange'], Octopus['StyleRange'][]>())
   }
 
-  private _getUnifiedRanges(ranges: Range[]) {
+  private _getUnifiedRanges(ranges: Range[]): Range[] {
     const fromArray = ranges.map(({ from }) => from).sort((a, b) => a - b)
     const toArray = ranges.map(({ to }) => to).sort((a, b) => a - b)
     const rangesArray = []
@@ -86,16 +86,18 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     return rangesArray
   }
 
-  private _getUnifiedStyles(styles: Octopus['StyleRange'][]) {
+  private _getUnifiedStyles(styles: Octopus['StyleRange'][]): Octopus['StyleRange'][] {
     const duplicates = this._getDuplicatesMap(styles)
-    return [...duplicates.keys()].map((style) => ({
-      ...style,
-      ranges: this._getUnifiedRanges(
-        duplicates
-          .get(style)
-          .reduce((ranges: Range[], style: Octopus['StyleRange']) => [...ranges, ...style.ranges], [])
-      ),
-    }))
+    return [...duplicates.keys()].map((style) => {
+      const equalStyles = duplicates.get(style) as Octopus['StyleRange'][]
+
+      return {
+        ...style,
+        ranges: this._getUnifiedRanges(
+          equalStyles.reduce((ranges: Range[], style: Octopus['StyleRange']) => [...ranges, ...style.ranges], [])
+        ),
+      }
+    })
   }
 
   private _parseText(): Octopus['Text'] {

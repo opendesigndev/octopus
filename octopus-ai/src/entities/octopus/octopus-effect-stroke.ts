@@ -43,8 +43,10 @@ export default class OctopusEffectStroke {
   convert(): Octopus['VectorStroke'] | null {
     const dashProperties = this._parseDashing()
     const style = dashProperties.dashing ? 'DASHED' : 'SOLID'
+    const colorSpaceValue = this._resources.getColorSpaceValue(this._sourceLayer.colorSpaceStroking ?? '') ?? ''
+
     const fill = new OctopusEffectColorFill({
-      resources: this._resources,
+      colorSpaceValue,
       sourceLayer: this._sourceLayer,
       colorSpaceType: ColorSpace.STROKING,
     }).convert()

@@ -13,7 +13,8 @@
     "test": "echo 'Tests are not implemented yet'",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
-    "types:check": "tsc --noEmit"
+    "types:check": "tsc --noEmit",
+    "watch": "tsc -w"
 
   },
   "author": "",
