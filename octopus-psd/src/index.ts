@@ -135,7 +135,7 @@ export class OctopusPSDConverter {
   }
 
   private async _convertArtboard(options: ArtboardConversionOptions): Promise<ArtboardConversionResult> {
-    const id = options.sourceDesign.designId
+    const id = options.sourceDesign.artboard.id
     const timeStart = performance.now()
     const { value, error } = await this._convertArtboardSafe(options)
     const time = performance.now() - timeStart

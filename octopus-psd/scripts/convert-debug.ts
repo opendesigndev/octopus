@@ -5,9 +5,10 @@ import { getPkgLocation } from './utils/pkg-location'
 import { OctopusPSDConverter, TempExporter } from '../src'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
+import { getFilesFromDir, isDirectory } from '../src/utils/files'
 
 type ConvertAllOptions = {
-  render?: boolean
+  shouldRender?: boolean
   filePath: string
   outputDir: string
 }
@@ -28,9 +29,13 @@ type ConvertedResources = {
   images: string[]
 }
 
-export async function convertDesign(options: ConvertAllOptions): Promise<void> {
-  const designId = `${timestamp()}-${path.basename(options.filePath, '.psd')}`
-  const exporter = new TempExporter({ tempDir: options.outputDir, id: designId })
+export async function convertDesign({
+  outputDir,
+  filePath,
+  shouldRender = process.env.CONVERT_RENDER === 'true',
+}: ConvertAllOptions): Promise<void> {
+  const designId = `${timestamp()}-${path.basename(filePath, '.psd')}`
+  const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('source:resources', (exportedResources: ConvertedResources) => {
     const { manifest, interactions, resources, images } = exportedResources
@@ -49,7 +54,7 @@ export async function convertDesign(options: ConvertAllOptions): Promise<void> {
     const time = Math.round(artboard.time)
     const id = chalk.grey(`(${artboard.id})`)
 
-    const render = options.render && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
+    const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
 
     console.log(`${chalk.yellow('Artboard: ')}
     ${status} ${name} (${time}ms) ${id}
@@ -65,7 +70,7 @@ export async function convertDesign(options: ConvertAllOptions): Promise<void> {
     file://${manifest}`)
   })
 
-  const converter = await OctopusPSDConverter.fromFile({ filePath: options.filePath, designId })
+  const converter = await OctopusPSDConverter.fromFile({ filePath, designId })
   if (converter === null) {
     console.error('Missing converter')
     return
@@ -74,14 +79,31 @@ export async function convertDesign(options: ConvertAllOptions): Promise<void> {
   await converter.convertDesign({ exporter })
 }
 
-async function convert() {
-  const [filePath] = process.argv.slice(2)
-
-  await convertDesign({
-    filePath,
-    render: Boolean(Number(process.env.CONVERT_RENDER)),
-    outputDir: path.join(await getPkgLocation(), 'workdir'),
-  })
+async function convertDir(dirPath: string) {
+  try {
+    const files = (await getFilesFromDir(dirPath)) ?? []
+    for (const file of files) {
+      if (!/\.psd$/i.test(file.name)) continue
+      await convertDesign({
+        filePath: path.join(dirPath, file.name),
+        outputDir: path.join(await getPkgLocation(), 'workdir'),
+      })
+    }
+  } catch {
+    console.info(`Reading directory '${dirPath}' was not successful`)
+  }
 }
 
-convert()
+async function convert(location: string) {
+  if (await isDirectory(location)) {
+    convertDir(location)
+  } else {
+    convertDesign({
+      filePath: location,
+      outputDir: path.join(await getPkgLocation(), 'workdir'),
+    })
+  }
+}
+
+const [location] = process.argv.slice(2)
+convert(location)

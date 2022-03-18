@@ -146,12 +146,7 @@ export default class OctopusManifest {
       }
     })
     const fonts = this._getArtboardAssetsFonts(raw).map((font) => {
-      return {
-        location: {
-          type: 'TRANSIENT',
-        },
-        name: font,
-      }
+      return { location: { type: 'TRANSIENT' }, name: font }
     })
 
     return {

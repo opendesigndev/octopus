@@ -1,6 +1,13 @@
 import path from 'path'
 import { SourceDesign } from '../source/source-design'
-import type { Artboard, AssetFont, AssetImage, Assets, OctopusManifestReport } from '../../typings/manifest'
+import type {
+  Artboard,
+  AssetFont,
+  AssetImage,
+  Assets,
+  OctopusManifestReport,
+  ResourceLocation,
+} from '../../typings/manifest'
 import type { OctopusPSDConverter } from '../..'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { SourceBounds } from '../../typings/source'
@@ -94,7 +101,7 @@ export class OctopusManifest {
 
   private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
     const entries = traverseAndFind(raw, (obj: unknown) => {
-      return Object(obj)?.postScriptName
+      return Object(obj)?.fontPostScriptName
     })
     return [...new Set(entries)] as string[]
   }
@@ -107,25 +114,13 @@ export class OctopusManifest {
     const images: AssetImage[] = this._octopusConverter.sourceDesign.images.map((image) => {
       const location = this.getExportedRelativeImageByName(image.name)
       return {
-        location:
-          typeof location === 'string'
-            ? {
-                type: 'LOCAL_RESOURCE',
-                path: location,
-              }
-            : {
-                type: 'TRANSIENT',
-              },
+        location: typeof location === 'string' ? { type: 'LOCAL_RESOURCE', path: location } : { type: 'TRANSIENT' },
         refId: image.name,
       }
     })
+
     const fonts: AssetFont[] = this._getArtboardAssetsFonts(raw).map((font) => {
-      return {
-        location: {
-          type: 'TRANSIENT',
-        },
-        name: font,
-      }
+      return { location: { type: 'TRANSIENT' }, name: font }
     })
 
     return {
@@ -141,13 +136,18 @@ export class OctopusManifest {
     const bounds = this._convertManifestBounds(sourceArtboard.bounds)
     const assets = this._getArtboardAssets() ?? undefined
 
+    // TODO: how to handle failed artboards?
+    const exportLocation = this.getExportedRelativeArtboardById(id)
+    const location: ResourceLocation =
+      typeof exportLocation === 'string' ? { type: 'LOCAL_RESOURCE', path: exportLocation } : { type: 'TRANSIENT' }
+
     const artboard: Artboard = {
       id,
       name: id,
       bounds,
       dependencies: [],
       assets,
-      location: { type: 'TRANSIENT' },
+      location,
     }
     return [artboard]
   }
