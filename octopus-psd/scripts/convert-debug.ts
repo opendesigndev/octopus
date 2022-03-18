@@ -3,12 +3,11 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { getPkgLocation } from './utils/pkg-location'
-import { OctopusPSDConverter, TempExporter } from '../src'
+import { OctopusPSDConverter, TempExporter, PSDFileReader } from '../src'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
 import { getFilesFromDir, isDirectory } from '../src/utils/files'
 import { displayPerf } from '../src/utils/console'
-import { PSDFileReader } from '../src/services/readers/psd-file-reader'
 
 type ConvertAllOptions = {
   shouldRender?: boolean

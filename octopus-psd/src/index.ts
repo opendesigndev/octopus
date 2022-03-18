@@ -19,9 +19,12 @@ import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { TempExporter } from './services/exporters/temp-exporter'
 import { AbstractExporter } from './services/exporters/abstract-exporter'
+import { PSDFileReader } from './services/readers/psd-file-reader'
 
 export { LocalExporter }
 export { TempExporter }
+
+export { PSDFileReader }
 
 type ConvertDesignOptions = {
   exporter?: AbstractExporter

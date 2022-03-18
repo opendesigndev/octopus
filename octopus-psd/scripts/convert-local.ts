@@ -2,8 +2,7 @@ import os from 'os'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusPSDConverter, LocalExporter } from '../src'
-import { PSDFileReader } from '../src/services/readers/psd-file-reader'
+import { OctopusPSDConverter, LocalExporter, PSDFileReader } from '../src'
 
 async function convert() {
   const [filePath] = process.argv.slice(2)
