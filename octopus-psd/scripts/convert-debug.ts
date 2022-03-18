@@ -8,6 +8,7 @@ import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
 import { getFilesFromDir, isDirectory } from '../src/utils/files'
 import { displayPerf } from '../src/utils/console'
+import { PSDFileReader } from '../src/services/readers/psd-file-reader'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
@@ -44,7 +45,7 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.log(`\n${chalk.yellow('Artboard:')} ${status}`)
+    console.log(`\n${chalk.yellow('Artboard')} ${filePath} ${status}`)
     console.log(`  ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}`)
     console.log(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
     console.log(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
@@ -54,7 +55,13 @@ export async function convertDesign({
     console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n`)
   })
 
-  const converter = await OctopusPSDConverter.fromFile({ filePath, designId })
+  const reader = new PSDFileReader({ path: filePath, designId })
+  const sourceDesign = await reader.sourceDesign
+  if (sourceDesign === null) {
+    console.error('Creating SourceDesign Failed')
+    return
+  }
+  const converter = new OctopusPSDConverter({ sourceDesign })
   if (converter === null) {
     console.error('Missing converter')
     return

@@ -7,6 +7,7 @@ import { displayPerf } from '../../utils/console'
 import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
 import type { RawArtboard } from '../../typings/raw'
 import { logInfo } from '../instances/misc'
+import rimraf from 'rimraf'
 
 type PSDFileReaderOptions = {
   path: string
@@ -40,6 +41,12 @@ export class PSDFileReader {
 
   get sourceDesign(): Promise<SourceDesign | null> {
     return this._sourceDesign
+  }
+
+  async cleanup(): Promise<void> {
+    rimraf(this._outDir, (error: Error | null | undefined) => {
+      if (error) console.error('PSDFileReader cleanup failed: ', error)
+    })
   }
 
   private get _outDir() {

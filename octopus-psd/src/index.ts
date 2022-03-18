@@ -16,7 +16,6 @@ import type { Octopus } from './typings/octopus'
 import type { SourceDesign, SourceImage } from './entities/source/source-design'
 import { OctopusManifestReport } from './typings/manifest'
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
-import { PSDFileReader } from './services/readers/psd-file-reader'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { TempExporter } from './services/exporters/temp-exporter'
 import { AbstractExporter } from './services/exporters/abstract-exporter'
@@ -33,19 +32,9 @@ type OctopusPSDConverterGeneralOptions = {
   logger?: Logger
 }
 
-type OctopusPSDConverterFromFileOptions = OctopusPSDConverterGeneralOptions & {
-  filePath: string
-}
-
 type OctopusPSDConverterOptions = OctopusPSDConverterGeneralOptions & {
   sourceDesign: SourceDesign
 }
-
-// type OctopusPSDConverterOptions = {
-//   sourceDesign: SourceDesign
-//   designId?: string
-//   logger?: Logger
-// }
 
 export type ArtboardConversionResult = {
   id: string
@@ -73,16 +62,6 @@ export class OctopusPSDConverter {
   static EXPORTERS = {
     LOCAL: LocalExporter,
     TEMP: TempExporter,
-  }
-
-  static async fromFile(options: OctopusPSDConverterFromFileOptions): Promise<OctopusPSDConverter | null> {
-    const designId = options.designId || uuidv4()
-    const sourceDesign = await new PSDFileReader({ path: options.filePath, designId }).sourceDesign
-    if (sourceDesign === null) return null
-    return new this({
-      logger: options.logger,
-      sourceDesign,
-    })
   }
 
   constructor(options: OctopusPSDConverterOptions) {
