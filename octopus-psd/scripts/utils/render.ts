@@ -1,31 +1,30 @@
 import path from 'path'
-import { promises as fsp } from 'fs'
 import { getPkgLocation } from './pkg-location'
 import { execSync } from 'child_process'
+import chalk from 'chalk'
 
-export async function renderOctopus(
-  id: string,
-  octopusPath: string
-): Promise<{ value: string | undefined; error: null | Error }> {
+export type RenderResult = {
+  value: string | undefined
+  error: Error | null
+  time: number
+}
+
+export async function renderOctopus(id: string, octopusPath: string): Promise<RenderResult> {
+  const timeStart = performance.now()
+
   const octopusDir = path.dirname(octopusPath)
-  const renderPath = path.join(octopusDir, `render-${id}.png`)
-  await fsp.rename(octopusPath, path.join(octopusDir, 'octopus.json'))
-  const fontsDir = path.join(await getPkgLocation(), 'fonts')
+  const renderPath = path.join(octopusDir, 'render.png')
+  const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
+
+  const result: RenderResult = { value: undefined, error: null, time: 0 }
   try {
     execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
-    /** @TODO rendering doesnt crash at all now? */
-    await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
-    return {
-      value: renderPath,
-      error: null,
-    }
-  } catch (e) {
-    // console.log(chalk.red(`Rendering failed while processing ${octopusPath}`))
-    await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
-    return {
-      value: undefined,
-      error: e,
-    }
+    result['value'] = renderPath
+  } catch (err) {
+    console.log(chalk.red(`Rendering failed while processing ${octopusPath}`))
+    result['error'] = err
   }
+  result['time'] = performance.now() - timeStart
+  return result
 }

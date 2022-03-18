@@ -1,11 +1,13 @@
 import path from 'path'
 import chalk from 'chalk'
+import dotenv from 'dotenv'
 
 import { getPkgLocation } from './utils/pkg-location'
 import { OctopusPSDConverter, TempExporter } from '../src'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
 import { getFilesFromDir, isDirectory } from '../src/utils/files'
+import { displayPerf } from '../src/utils/console'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
@@ -22,12 +24,7 @@ type ConvertedArtboard = {
   sourcePath: string
 }
 
-type ConvertedResources = {
-  manifest: string
-  interactions: string
-  resources: string
-  images: string[]
-}
+dotenv.config()
 
 export async function convertDesign({
   outputDir,
@@ -37,37 +34,24 @@ export async function convertDesign({
   const designId = `${timestamp()}-${path.basename(filePath, '.psd')}`
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
-  exporter.on('source:resources', (exportedResources: ConvertedResources) => {
-    const { manifest, interactions, resources, images } = exportedResources
-    console.log(`${chalk.yellow('Manifest: ')}
-    file://${manifest}`)
-    console.log(`${chalk.yellow('Interactions: ')}
-    file://${interactions}`)
-    console.log(`${chalk.yellow('Resources: ')}
-    file://${resources}`)
-    console.log(`${chalk.yellow('Images: ')}
-    ${images.map((image) => `    file://${image}`).join('\n')}`)
-  })
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? '❌' : '✅'
-    const name = chalk.yellow(artboard.name)
-    const time = Math.round(artboard.time)
-    const id = chalk.grey(`(${artboard.id})`)
-
     const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
+    const renderPath =
+      render === null
+        ? '<none>'
+        : render.error
+        ? chalk.red(render.error.message)
+        : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.log(`${chalk.yellow('Artboard: ')}
-    ${status} ${name} (${time}ms) ${id}
-    ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}
-    ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath}
-    ${chalk.cyan(`Render:`)} ${
-      render === null ? '<none>' : render.error ? chalk.red(render.error.message) : `file://${render.value}`
-    }
-    `)
+    console.log(`\n${chalk.yellow('Artboard:')} ${status}`)
+    console.log(`  ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}`)
+    console.log(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
+    console.log(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })
+
   exporter.on('octopus:manifest', (manifest: string) => {
-    console.log(`${chalk.yellow('Octopus-manifest: ')}
-    file://${manifest}`)
+    console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n`)
   })
 
   const converter = await OctopusPSDConverter.fromFile({ filePath, designId })

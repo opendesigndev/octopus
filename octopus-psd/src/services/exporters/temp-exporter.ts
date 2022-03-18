@@ -5,14 +5,12 @@ import EventEmitter from 'events'
 
 import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
-import type { SourceDesign } from '../../entities/source/source-design'
 
 type TempExporterOptions = {
   id?: string
   tempDir: string
 }
 
-type SourceResources = { source: string }
 export class TempExporter extends EventEmitter implements AbstractExporter {
   _outputDir: Promise<string>
   _tempDir: string
@@ -49,20 +47,15 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return this._outputDir
   }
 
-  async exportSourceDesign(design: SourceDesign): Promise<SourceResources> {
-    const source = await this._save(TempExporter.SOURCE_NAME, this._stringify(design.artboard.raw))
-    const result = { source }
-    this.emit('source:resources', result)
-    return result
-  }
-
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string> {
     const octopusPath = await this._save(TempExporter.OCTOPUS_NAME, this._stringify(artboard.value))
+    const sourcePath = path.join(await this._outputDir, TempExporter.SOURCE_NAME)
     const result = {
       id: artboard.id,
       time: artboard.time,
       error: artboard.error,
       octopusPath,
+      sourcePath,
     }
     this.emit('octopus:artboard', result)
     return octopusPath
