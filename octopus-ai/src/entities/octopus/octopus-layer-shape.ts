@@ -1,7 +1,7 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import OctopusLayerCommon from './octopus-layer-common'
-import Point from './octopus-point'
+import OctopusPoint from './octopus-point'
 import OctopusEffectsShape from './octopus-effects-shape'
 import createShape from '../../utils/create-shape'
 import {
@@ -139,7 +139,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   private _createSubpathGeometry(subpath: SourceLayerShapeSubPath): string {
     const validRawPoints = asArray(subpath.points?.filter(isValid))
     const normalizedPoints = this._normalizePoints(validRawPoints)
-    const points = normalizedPoints.map((point) => new Point(point).convert())
+    const points = normalizedPoints.map((point) => new OctopusPoint(point).convert())
     const forceClosed = !(this._sourceLayer.stroke ?? true)
     const closed = subpath.closed ?? forceClosed
     const paperShape = createShape({ closed, points })
