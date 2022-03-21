@@ -1,7 +1,7 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import OctopusAIConverter from '../..'
+import { OctopusAIConverter } from '../..'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceResources from '../source/source-resources'
@@ -10,7 +10,6 @@ import type SourceDesign from '../source/source-design'
 import type SourceArtboard from '../source/source-artboard'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
 }
@@ -21,10 +20,12 @@ export default class OctopusArtboard {
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.sourceDesign.getArtboardById(options.targetArtboardId)
+    const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
+
     if (!artboard) {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
+
     this._octopusAIConverter = options.octopusAIConverter
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
@@ -40,10 +41,6 @@ export default class OctopusArtboard {
     }, [])
   }
 
-  get dimensions(): Octopus['Dimensions'] {
-    return this._sourceArtboard.dimensions
-  }
-
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)
@@ -52,6 +49,10 @@ export default class OctopusArtboard {
 
   get resources(): SourceResources {
     return this._sourceArtboard.resources
+  }
+
+  get sourceDesign(): SourceDesign {
+    return this._octopusAIConverter.sourceDesign
   }
 
   get id(): string {

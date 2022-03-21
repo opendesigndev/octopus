@@ -1,29 +1,33 @@
 import SourceArtboard from './source-artboard'
+import SourceMetadata from './source-metadata'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawArtboardEntry } from '../../typings/raw/artboard'
-import type { RawSource } from '../../typings/raw'
-
-type SourceDesignOptions = {
-  artboards: RawArtboardEntry[]
-}
+import type { RawSourceRootOcProperties } from '../../typings/raw'
+import type { SourceImage, SourceTree } from '../../typings'
 
 export default class SourceDesign {
   private _artboards: SourceArtboard[]
+  private _images: SourceImage[]
+  private _ocProperties: RawSourceRootOcProperties
+  private _metaData: SourceMetadata
 
-  static fromRawSource(source: RawSource): SourceDesign {
-    if (!source?.Root?.Pages?.Kids) {
-      throw new Error('Missing "Kids" array entry from the source design.')
-    }
-    const options = {
-      artboards: source.Root.Pages.Kids,
-    }
-
-    return new this(options)
+  constructor(sourceTree: SourceTree) {
+    this._artboards = sourceTree.artboards.map((rawArtboard, index) => new SourceArtboard(rawArtboard, index + 1))
+    this._metaData = new SourceMetadata(sourceTree.metadata)
+    this._images = sourceTree.images
+    this._ocProperties = sourceTree.ocProperties
   }
 
-  constructor(options: SourceDesignOptions) {
-    this._artboards = options.artboards.map((rawArtboard, index) => new SourceArtboard(rawArtboard, index + 1))
+  get metadaData(): SourceMetadata {
+    return this._metaData
+  }
+
+  get images(): SourceImage[] {
+    return this._images
+  }
+
+  get ocProperties(): RawSourceRootOcProperties {
+    return this._ocProperties
   }
 
   get artboards(): SourceArtboard[] {

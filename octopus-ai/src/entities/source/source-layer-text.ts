@@ -41,7 +41,6 @@ export default class SourceLayerText extends SourceLayerCommon {
     })
 
     if (!equalDescendantMatrices) {
-      //@todo: use logger
       console.error('initTexts', 'Different transform matrix in the same text group')
     }
 

@@ -1,3 +1,5 @@
+import SourceResourcesXObject from './source-resources-x-object'
+
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type {
   RawResources,
@@ -15,11 +17,40 @@ type SourceResourcesOptions = {
   rawValue?: RawResources
 }
 
+type XObjectContainer = { [key: string]: SourceResourcesXObject }
+
 export default class SourceResources {
+  static X_OBJECT_IMG_SUBTYPE = 'Image'
+
   protected _rawValue?: RawResources
+  private _xObjectContainer: XObjectContainer
 
   constructor(options: SourceResourcesOptions) {
     this._rawValue = options.rawValue
+    this._xObjectContainer = this._initXObjectContainer()
+  }
+
+  private _initXObjectContainer(): XObjectContainer {
+    return Object.keys(this._rawValue?.XObject ?? {}).reduce<XObjectContainer>((xObjectContainer, key) => {
+      const rawXObject = this._rawValue?.XObject?.[key]
+      if (!rawXObject) {
+        return xObjectContainer
+      }
+
+      return { ...xObjectContainer, [key]: new SourceResourcesXObject(rawXObject) }
+    }, {})
+  }
+
+  getXObject(key: string): Nullable<SourceResourcesXObject> {
+    return this._xObjectContainer[key]
+  }
+
+  get images(): SourceResourcesXObject[] {
+    return this.xObjects.filter((xObject) => xObject.subType === SourceResources.X_OBJECT_IMG_SUBTYPE)
+  }
+
+  get xObjects(): SourceResourcesXObject[] {
+    return Object.values(this._xObjectContainer)
   }
 
   get raw(): Nullable<RawResources> {

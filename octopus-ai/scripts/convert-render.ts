@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
 
-import { convertAll } from './utils/convert-all'
+import { convertDebug } from './utils/convert-debug'
 import { renderOctopus } from './utils/render-to-octopus'
 
 dotenv.config()
 ;(async () => {
-  const [octopusLocation] = await convertAll()
+  const octopusLocation = await convertDebug()
 
   if (!octopusLocation) {
     return

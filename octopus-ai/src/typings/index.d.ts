@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
+
+import type { RawArtboardEntry, RawMetadata, RawSource, RawSourceRootOcProperties } from './raw'
+
 // Services
 export interface Logger {
   fatal: Function
@@ -25,4 +28,13 @@ export type GradientColorStop = {
   interpolation?: 'LINEAR' | 'POWER' | 'REVERSE_POWER'
   interpolationParameternumber?: number
   color: Color
+}
+
+export type SourceImage = { id: string; rawValue: Buffer; path: string }
+export type SourceTree = {
+  source: RawSource
+  metadata: RawMetadata
+  images: SourceImage[]
+  artboards: RawArtboardEntry[]
+  ocProperties: RawSourceRootOcProperties
 }

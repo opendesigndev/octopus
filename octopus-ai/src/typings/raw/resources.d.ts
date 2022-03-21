@@ -1,3 +1,5 @@
+import type { RawResourcesXObject } from './resources-x-object'
+
 export type RawObjectId = { ObjID?: number }
 
 type RawResourcesFontTextFontFontDescriptorFontFile3 = {
@@ -144,4 +146,5 @@ export type RawResources = {
   ProcSet?: string[]
   Properties?: RawResourcesProperties
   Shading?: RawResourcesShading
+  XObject?: { [key: string]: RawResourcesXObject }
 }
