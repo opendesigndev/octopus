@@ -2,7 +2,7 @@ import paper from 'paper'
 
 const { Path, Point, Segment, Size, Rectangle, Matrix } = paper
 
-paper.setup(new Size(0, 0))
+paper.setup(new Size(100, 100))
 
 export function createPoint(x: number, y: number): paper.Point {
   return new Point(x, y)
