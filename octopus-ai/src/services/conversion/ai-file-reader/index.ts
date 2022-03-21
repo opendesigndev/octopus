@@ -1,6 +1,7 @@
 import { readFile, readdir } from 'fs/promises'
 
 import SourceDesign from '../../../entities/source/source-design'
+import { logger } from '../../../services/instances/logger'
 
 import type { SourceTree, SourceImage } from '../../../typings'
 import type { RawSource, RawMetadata } from '../../../typings/raw'
@@ -31,8 +32,7 @@ export class AIFileReader {
       const fileContent = await readFile(path, 'utf-8')
       return JSON.parse(fileContent) as T
     } catch (_) {
-      //@todo use logger
-      console.error('Failed to read:', path)
+      logger.error('Failed to read:', path)
       return null
     }
   }
@@ -42,8 +42,7 @@ export class AIFileReader {
     try {
       imagePaths = await readdir(dirPath + '/bitmaps')
     } catch (_) {
-      //@todo use logger
-      console.error('Failed to read image dir:', dirPath)
+      logger.error('Failed to read image dir:', dirPath)
       return []
     }
 
@@ -56,8 +55,7 @@ export class AIFileReader {
             rawValue: Buffer.from(await readFile(path)),
           }
         } catch (_) {
-          //@todo use logger
-          console.error('Failed to read image:', path)
+          logger.error('Failed to read image:', path)
           return null
         }
       })

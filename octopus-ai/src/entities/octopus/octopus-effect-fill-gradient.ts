@@ -3,6 +3,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import chunk from 'lodash/chunk'
 
 import convertColor from '../../utils/colors'
+import { logger } from '../../services/instances/logger'
 
 import type SourceLayerShape from '../source/source-layer-shape'
 import type SourceResources from '../source/source-resources'
@@ -142,8 +143,7 @@ export default class OctopusEffectGradientFill {
       case 3:
         return this._parseRadialGradient()
       default:
-        //@todo use logger
-        console.warn('parseShading', 'Unsupported shading type', { shadingType })
+        logger.warn('parseShading', 'Unsupported shading type', { shadingType })
         return this._parseLinearGradient()
     }
   }

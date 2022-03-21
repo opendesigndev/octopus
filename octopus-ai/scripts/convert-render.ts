@@ -11,8 +11,6 @@ dotenv.config()
     return
   }
 
-  console.info(`Octopus: file://${octopusLocation}`)
-
   const shouldRender = process.env.CONVERT_RENDER === 'true'
 
   if (!shouldRender) {
