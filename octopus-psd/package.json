@@ -5,6 +5,7 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
+    "convert": "ts-node ./scripts/ag-psd.ts",
     "convert:local": "ts-node ./scripts/convert-local.ts",
     "convert:debug": "ts-node ./scripts/convert-debug.ts",
     "build": "tsc --build ./tsconfig.json",
@@ -20,6 +21,8 @@
     "@avocode/octopus-common": "3.0.0-rc.7",
     "@avocode/psd-parser": "0.8.4",
     "@sentry/node": "6.14.0",
+    "ag-psd": "^14.3.6",
+    "canvas": "^2.9.1",
     "chalk": "^4.1.2",
     "dotenv": "10.0.0",
     "image-size": "^1.0.1",
