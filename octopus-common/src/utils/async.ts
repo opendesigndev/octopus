@@ -18,6 +18,12 @@ export function detachPromiseControls<T>(): DetachedPromiseControls<T> {
   }
 }
 
+export async function benchmark<T>(cb: () => Promise<T>): Promise<{ time: number; result: T }> {
+  const timeStart = performance.now()
+  const result = await cb()
+  return { result, time: performance.now() - timeStart }
+}
+
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(() => {
