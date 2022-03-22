@@ -4,8 +4,6 @@ import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus
 import type { SourceArtboard } from '../source/source-artboard'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceDesign } from '../source/source-design'
-import last from 'lodash/last'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign
@@ -40,18 +38,6 @@ export class OctopusArtboard {
   }
 
   private _initLayers() {
-    const lastLayer = last(this.sourceArtboard.layers)
-    if (lastLayer?.type === 'backgroundLayer') {
-      const rest = this.sourceArtboard.layers.slice(0, -1)
-      return [
-        new OctopusLayerMaskGroup({
-          parent: this,
-          sourceLayer: lastLayer,
-          sourceLayers: rest,
-        }),
-      ]
-    }
-
     return this.sourceArtboard.layers.reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
@@ -79,9 +65,20 @@ export class OctopusArtboard {
   }
 
   get content(): Octopus['Layer'] {
+    const { width, height } = this.dimensions
     return {
       id: `${this.id}:background`,
-      type: 'GROUP',
+      type: 'MASK_GROUP',
+      maskBasis: 'BODY',
+      mask: {
+        id: `${this.id}:backgroundMask`,
+        type: 'SHAPE',
+        visible: false,
+        shape: {
+          path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } },
+          fills: [{ type: 'COLOR', color: { r: 0, g: 0, b: 0, a: 0 } }],
+        },
+      },
       layers: this.layers,
     }
   }
