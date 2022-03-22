@@ -12,8 +12,9 @@ import { logWarn } from '../../services/instances/misc'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
-export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
+export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard
 
 type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
@@ -30,11 +31,11 @@ export class OctopusLayerBase {
   static DEFAULT_TRANSLATION = [0, 0] as const
 
   static LAYER_TYPE_MAP = {
+    backgroundLayer: 'MASK_GROUP',
     layerSection: 'GROUP',
     shapeLayer: 'SHAPE',
     textLayer: 'TEXT',
     layer: 'SHAPE',
-    // TODO: backgroundLayer: 'TODO',
   } as const
 
   constructor(options: OctopusLayerBaseOptions) {
