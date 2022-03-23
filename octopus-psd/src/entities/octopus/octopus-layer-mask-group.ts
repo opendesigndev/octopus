@@ -51,7 +51,6 @@ export class OctopusLayerMaskGroup extends OctopusLayerBase {
     } as const
   }
 
-
   convert(): Octopus['MaskGroupLayer'] | null {
     const common = this.convertBase()
     if (!common) return null

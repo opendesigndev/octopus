@@ -54,6 +54,7 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   textLayer: createOctopusLayerText,
   layer: createOctopusLayerShapeFromLayerAdapter,
   backgroundLayer: createOctopusLayerShapeFromLayerAdapter,
+  //adjustmentLayer: TODO, // TODO
 } as const
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {

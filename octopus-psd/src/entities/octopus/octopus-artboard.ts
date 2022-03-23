@@ -74,10 +74,7 @@ export class OctopusArtboard {
         id: `${this.id}:backgroundMask`,
         type: 'SHAPE',
         visible: false,
-        shape: {
-          path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } },
-          fills: [{ type: 'COLOR', color: { r: 0, g: 0, b: 0, a: 0 } }],
-        },
+        shape: { path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } } },
       },
       layers: this.layers,
     }

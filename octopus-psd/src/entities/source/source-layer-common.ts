@@ -5,11 +5,12 @@ import { getBoundsFor, getUnitRatioFor } from '../../utils/source'
 import { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from './source-effects-layer'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { SourceEntity } from './source-entity'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
 type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer'
-export class SourceLayerCommon {
+export class SourceLayerCommon extends SourceEntity {
   protected _rawValue: RawLayer
   protected _parent: SourceLayerParent
 

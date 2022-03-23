@@ -20,6 +20,7 @@ import { LocalExporter } from './services/exporters/local-exporter'
 import { TempExporter } from './services/exporters/temp-exporter'
 import { AbstractExporter } from './services/exporters/abstract-exporter'
 import { PSDFileReader } from './services/readers/psd-file-reader'
+import { logError } from './services/instances/misc'
 
 export { LocalExporter }
 export { TempExporter }
@@ -112,6 +113,7 @@ export class OctopusPSDConverter {
       const value = await new ArtboardConverter({ ...options, octopusConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
+      logError('Converting Artboard failed', { error })
       return { value: undefined, error }
     }
   }
@@ -145,9 +147,11 @@ export class OctopusPSDConverter {
 
     /** Artboard */
     const artboard = await this._convertArtboard({ sourceDesign: this._sourceDesign })
-    const artboardPath = await exporter?.exportArtboard?.(artboard)
-    if (typeof artboardPath === 'string') {
-      this.octopusManifest.setExportedArtboard(artboard.id, artboardPath)
+    if (!artboard.error) {
+      const artboardPath = await exporter?.exportArtboard?.(artboard)
+      if (typeof artboardPath === 'string') {
+        this.octopusManifest.setExportedArtboard(artboard.id, artboardPath)
+      }
     }
 
     /** Manifest */

@@ -8,6 +8,7 @@ import type { SourcePathComponent } from '../entities/source/source-path-compone
 import type { SourcePointXY } from '../typings/source'
 import type { SourceSubpath } from '../entities/source/source-subpath'
 import type { SourceSubpathPoint } from '../entities/source/source-subpath-point'
+import { logError } from '../services/instances/misc'
 
 const createPointSegment = ({ x, y }: SourcePointXY): paper.Segment => {
   return createSegment(createPoint(x, y))
@@ -41,12 +42,21 @@ const createSubpath = (subpath: SourceSubpath, layerTranslation: [number, number
   return shape
 }
 
-const processSubpaths = (subpaths: SourceSubpath[], layerTranslation: [number, number]): paper.PathItem => {
-  const pathItem = subpaths
-    .filter((subpath) => subpath.points.length > 1)
-    .map((subpath: SourceSubpath) => createSubpath(subpath, layerTranslation))
-    .reduce((prev: paper.PathItem, current: paper.PathItem): paper.PathItem => prev.exclude(current))
-  return pathItem
+const processSubpaths = (subpaths: SourceSubpath[], layerTranslation: [number, number]): paper.PathItem | null => {
+  try {
+    const subpathEntities = subpaths
+      .filter((subpath) => subpath?.points?.length > 1)
+      .map((subpath: SourceSubpath) => createSubpath(subpath, layerTranslation))
+    if (!subpathEntities.length) return null
+    return subpathEntities.reduce((prev, current): paper.PathItem => {
+      prev.closePath()
+      current.closePath()
+      return prev?.exclude(current)
+    })
+  } catch (error) {
+    logError('PathData: processSubpaths failed', error)
+    return null
+  }
 }
 
 export function createPathData(pathComponent: SourcePathComponent, layerTranslation: [number, number]): string {

@@ -37,7 +37,8 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
 
   @firstCallMemo()
   private get _fills(): Octopus['Fill'][] | null {
-    const imageName = this.sourceLayer.imageName ?? ''
+    const imageName = this.sourceLayer.imageName
+    if (imageName === undefined) return null
     const imagePath = this._parent.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(imageName)
     if (imagePath === undefined) {
       logWarn('Unknown image', { imagePath, imageName })

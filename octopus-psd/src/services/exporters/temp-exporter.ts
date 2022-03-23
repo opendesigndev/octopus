@@ -1,10 +1,10 @@
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import { copyFile, mkdir, writeFile } from 'fs/promises'
 import EventEmitter from 'events'
 
 import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import { copyFile, makeDir, saveFile } from '../../utils/files'
 
 type TempExporterOptions = {
   id?: string
@@ -32,14 +32,14 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   private async _initOutputDir(options: TempExporterOptions) {
     const tempDir = path.join(this._tempDir, typeof options.id === 'string' ? options.id : uuidv4())
-    await mkdir(path.join(tempDir, TempExporter.IMAGES_DIR_NAME), { recursive: true })
+    await makeDir(path.join(tempDir, TempExporter.IMAGES_DIR_NAME))
     return tempDir
   }
 
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    await writeFile(fullPath, body)
+    await saveFile(fullPath, body)
     return fullPath
   }
 

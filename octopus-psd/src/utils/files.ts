@@ -30,8 +30,8 @@ export async function isDirectory(path: string): Promise<boolean> {
 export async function saveFile(path: string, body: string | Buffer): Promise<string> {
   try {
     await writeFile(path, body)
-  } catch (e) {
-    logWarn(`Saving file '${path}' failed`)
+  } catch (error) {
+    logWarn(`Saving file '${path}' failed`, { error })
   }
   return path
 }

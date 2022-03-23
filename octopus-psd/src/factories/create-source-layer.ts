@@ -75,6 +75,7 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
   textLayer: createLayerText,
   backgroundLayer: createLayerBackground,
   layer: createLayerLayer,
+  // adjustmentLayer : TODO // TODO
 } as const
 
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {

@@ -1,6 +1,7 @@
 import path from 'path'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
+import kebabCase from 'lodash/kebabCase'
 
 import { getPkgLocation } from './utils/pkg-location'
 import { OctopusPSDConverter, TempExporter, PSDFileReader } from '../src'
@@ -31,7 +32,7 @@ export async function convertDesign({
   filePath,
   shouldRender = process.env.CONVERT_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
-  const designId = `${timestamp()}-${path.basename(filePath, '.psd')}`
+  const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
@@ -79,8 +80,8 @@ async function convertDir(dirPath: string) {
         outputDir: path.join(await getPkgLocation(), 'workdir'),
       })
     }
-  } catch {
-    console.info(`Reading directory '${dirPath}' was not successful`)
+  } catch (err) {
+    console.info(`Reading directory '${dirPath}' was not successful`, err)
   }
 }
 

@@ -12,7 +12,7 @@ export class SourceLayerBackground extends SourceLayerCommon {
   protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerBackgroundOptions) {
-    super()
+    super(options)
     this._parent = options.parent
     this._rawValue = options.rawValue
   }

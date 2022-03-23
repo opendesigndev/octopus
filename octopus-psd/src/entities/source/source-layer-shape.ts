@@ -19,7 +19,7 @@ export class SourceLayerShape extends SourceLayerCommon {
   protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerShapeOptions) {
-    super()
+    super(options)
     this._parent = options.parent
     this._rawValue = options.rawValue
   }
