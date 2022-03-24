@@ -12,7 +12,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { SourceLayer } from './create-source-layer'
 import { logWarn } from '../services/instances/misc'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { wrapWithBitmapMaskLayerIfNeeded } from './mask-group-layer'
+import { wrapWithBitmapMaskLayerIfNeeded } from './bitmap-mask-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 

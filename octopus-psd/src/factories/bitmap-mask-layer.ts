@@ -15,13 +15,17 @@ type CreateOctopusLayerOptions<T> = {
   parent: OctopusLayerParent
 }
 
-type RawOptions = {
+type RawBitmapMaskLayerOptions = {
   width: number
   height: number
   imageName: string
 }
 
-function createRawLayerLayer({ width: right, height: bottom, imageName }: RawOptions): RawLayerLayer {
+function createRawBitmapMaskLayer({
+  width: right,
+  height: bottom,
+  imageName,
+}: RawBitmapMaskLayerOptions): RawLayerLayer {
   return {
     bitmapBounds: { bottom, left: 0, right, top: 0 },
     bounds: { bottom, left: 0, right, top: 0 },
@@ -38,7 +42,7 @@ function wrapWithBitmapMaskLayer<T extends OctopusLayer>({
   parent,
 }: CreateOctopusLayerOptions<T>): T | OctopusLayerMaskGroup {
   const { width, height } = octopusLayer.parentArtboard.dimensions
-  const raw = createRawLayerLayer({ width, height, imageName: bitmapMask })
+  const raw = createRawBitmapMaskLayer({ width, height, imageName: bitmapMask })
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
 
   const maskAdapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer: maskSourceLayer })
