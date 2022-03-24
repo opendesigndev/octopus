@@ -12,7 +12,8 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { SourceLayer } from './create-source-layer'
 import { logWarn } from '../services/instances/misc'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { wrapWithBitmapMaskLayerIfNeeded } from './bitmap-mask-layer'
+import { wrapWithBitmapMaskLayerIfNeeded } from './mask-bitmap-layer'
+import { wrapWithShapeMaskLayerIfNeeded } from './mask-shape-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 
@@ -33,7 +34,9 @@ function createOctopusLayerGroup({
 }: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerSection
   const octopusLayer = new OctopusLayerGroup({ parent, sourceLayer })
-  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+
+  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 function createOctopusLayerShapeFromShapeAdapter({
@@ -43,6 +46,7 @@ function createOctopusLayerShapeFromShapeAdapter({
   const sourceLayer = layer as SourceLayerShape
   const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
   const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
+
   return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
@@ -53,7 +57,9 @@ function createOctopusLayerShapeFromLayerAdapter({
   const sourceLayer = layer as SourceLayerLayer
   const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
   const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
-  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+
+  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 function createOctopusLayerText({
@@ -62,7 +68,9 @@ function createOctopusLayerText({
 }: CreateOctopusLayerOptions): OctopusLayerText | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerText
   const octopusLayer = new OctopusLayerText({ parent, sourceLayer })
-  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+
+  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {

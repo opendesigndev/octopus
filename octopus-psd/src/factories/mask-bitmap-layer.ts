@@ -1,18 +1,17 @@
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
-import { SourceLayerLayer } from '../entities/source/source-layer-layer'
+import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { createSourceLayer, SourceLayer } from './create-source-layer'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { RawLayerLayer } from '../typings/raw'
+import type { RawLayerLayer } from '../typings/raw'
 import type { OctopusLayer } from './create-octopus-layer'
 
 type CreateOctopusLayerOptions<T> = {
-  bitmapMask: string
-
   sourceLayer: SourceLayer
   octopusLayer: T
   parent: OctopusLayerParent
+  bitmapMask: string
 }
 
 type RawBitmapMaskLayerOptions = {
@@ -44,15 +43,15 @@ function wrapWithBitmapMaskLayer<T extends OctopusLayer>({
   const { width, height } = octopusLayer.parentArtboard.dimensions
   const raw = createRawBitmapMaskLayer({ width, height, imageName: bitmapMask })
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
-
   const maskAdapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer: maskSourceLayer })
+  // maskAdapter.setFillBlendMode('BRIGHTNESS_TO_ALPHA') // TODO add when https://gitlab.avcd.cz/backend/rendering/-/issues/506 is implemented
   const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
   return new OctopusLayerMaskGroup({
     parent,
-    id: `${octopusLayer.id}:MaskGroup`,
+    id: `${octopusLayer.id}:BitmapMask`,
     mask,
     layers: [octopusLayer],
-    maskBasis: 'FILL',
+    maskBasis: 'LAYER',
   })
 }
 

@@ -6,6 +6,7 @@ type OctopusFillImageOptions = {
   transform: Octopus['Transform']
   origin: Octopus['FillPositioning']['origin']
   opacity?: number
+  blendMode?: Octopus['BlendMode']
 }
 
 type ImageFilterOpacityMultiplier = { type: 'OPACITY_MULTIPLIER'; opacity: number }
@@ -16,6 +17,7 @@ export class OctopusEffectFillImage {
   private _transform: Octopus['Transform']
   private _origin: Octopus['FillPositioning']['origin']
   private _opacity: number | undefined
+  private _blendMode: Octopus['BlendMode'] | undefined
 
   constructor(options: OctopusFillImageOptions) {
     this._imagePath = options.imagePath
@@ -23,6 +25,7 @@ export class OctopusEffectFillImage {
     this._transform = options.transform
     this._origin = options.origin
     this._opacity = options.opacity
+    this._blendMode = options.blendMode
   }
 
   private get _image(): Octopus['Image'] {
@@ -49,6 +52,7 @@ export class OctopusEffectFillImage {
     const image = this._image
     const positioning = this._positioning
     const filters = this._filters
-    return { type: 'IMAGE', image, positioning, filters }
+    const blendMode = this._blendMode
+    return { type: 'IMAGE', image, positioning, filters, blendMode }
   }
 }

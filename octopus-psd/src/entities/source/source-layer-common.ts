@@ -6,6 +6,8 @@ import { SourceBounds } from '../../typings/source'
 import { SourceLayerEffects } from './source-effects-layer'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { SourceEntity } from './source-entity'
+import { SourcePath } from './source-path'
+// import type { SourcePathComponent } from './source-path-component'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
@@ -87,4 +89,21 @@ export class SourceLayerCommon extends SourceEntity {
   get bitmapMask(): string | undefined {
     return this._rawValue.mask?.imageName
   }
+
+  @firstCallMemo()
+  get path(): SourcePath | undefined {
+    if (this._rawValue.path) return new SourcePath(this._rawValue.path)
+  }
+
+  // get pathComponents(): SourcePathComponent[] {
+  //   return this.path.pathComponents
+  // }
+
+  // get firstPathComponent(): SourcePathComponent | undefined {
+  //   return this.pathComponents[0]
+  // }
+
+  // get pathBounds(): SourceBounds {
+  //   return this.path.bounds
+  // }
 }

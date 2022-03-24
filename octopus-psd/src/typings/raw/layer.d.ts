@@ -5,11 +5,18 @@ import type { RawLayerShape } from './layer-shape'
 import type { RawLayerText } from './layer-text'
 import type { RawBlendOptions, RawBounds } from './shared'
 import type { RawLayerEffects } from './effects'
+import type { RawPathComponent } from './path-component'
 
 export type RawShapeMask = {
   bounds?: RawBounds
   extendWithWhite?: boolean
   imageName?: string
+}
+
+export type RawPath = {
+  bounds?: RawBounds
+  defaultFill?: boolean
+  pathComponents?: RawPathComponent[]
 }
 
 export type RawLayerCommon = {
@@ -20,6 +27,7 @@ export type RawLayerCommon = {
   imageEffectsApplied?: boolean
   imageName?: string
   mask?: RawShapeMask
+  path?: RawPath
   name?: string
   visible?: boolean
   layerEffects?: RawLayerEffects

@@ -1,13 +1,6 @@
-import type { RawBounds, RawUnitPercent, RawUnitPoint, RawBlendMode } from './shared'
+import type { RawUnitPercent, RawUnitPoint, RawBlendMode } from './shared'
 import type { RawLayerCommon } from './layer'
-import type { RawPathComponent } from './path-component'
 import type { RawFill } from './effects'
-
-export type RawPath = {
-  bounds?: RawBounds
-  defaultFill?: boolean
-  pathComponents?: RawPathComponent[]
-}
 
 export type RawStrokeStyleLineAlignment =
   | 'strokeStyleAlignInside'
@@ -41,6 +34,5 @@ export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
   fill?: RawFill
-  path?: RawPath
   strokeStyle?: RawShapeStrokeStyle
 }
