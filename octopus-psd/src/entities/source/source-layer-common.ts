@@ -10,9 +10,21 @@ import { SourceEntity } from './source-entity'
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
 type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer'
+
+type SourceLayerOptions = {
+  parent: SourceLayerParent
+  rawValue: RawLayer
+}
+
 export class SourceLayerCommon extends SourceEntity {
   protected _rawValue: RawLayer
   protected _parent: SourceLayerParent
+
+  constructor(options: SourceLayerOptions) {
+    super(options.rawValue)
+    this._parent = options.parent
+    this._rawValue = options.rawValue
+  }
 
   get type(): SourceLayerType | undefined {
     return this._rawValue.type
@@ -26,13 +38,17 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.name
   }
 
+  get parent(): SourceLayerParent {
+    return this._parent
+  }
+
   get parentArtboard(): SourceArtboard {
     const parent = this._parent
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  get visible(): boolean | undefined {
-    return this._rawValue.visible
+  get visible(): boolean {
+    return this._rawValue.visible ?? true
   }
 
   get bounds(): SourceBounds {
@@ -51,8 +67,8 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.blendOptions?.mode
   }
 
-  get clipped(): boolean | undefined {
-    return this._rawValue.clipped
+  get clipped(): boolean {
+    return this._rawValue.clipped ?? false
   }
 
   get imageEffectsApplied(): boolean | undefined {
@@ -66,5 +82,9 @@ export class SourceLayerCommon extends SourceEntity {
   @firstCallMemo()
   get layerEffects(): SourceLayerEffects {
     return new SourceLayerEffects(this._rawValue.layerEffects)
+  }
+
+  get bitmapMask(): string | undefined {
+    return this._rawValue.mask?.imageName
   }
 }

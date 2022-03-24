@@ -5,7 +5,6 @@ import { SourcePath } from './source-path'
 import type { SourcePathComponent } from './source-path-component'
 import { SourceEffectFill } from './source-effect-fill'
 import { SourceStroke } from './source-stroke'
-import { SourceShapeMask } from './source-shape-mask'
 import { SourceBounds } from '../../typings/source'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
@@ -49,10 +48,5 @@ export class SourceLayerShape extends SourceLayerCommon {
   @firstCallMemo()
   get stroke(): SourceStroke {
     return new SourceStroke(this._rawValue.strokeStyle)
-  }
-
-  @firstCallMemo()
-  get mask(): SourceShapeMask {
-    return new SourceShapeMask(this._rawValue.mask)
   }
 }

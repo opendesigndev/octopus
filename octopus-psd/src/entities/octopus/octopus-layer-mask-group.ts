@@ -1,63 +1,73 @@
-import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import { OctopusLayer } from '../../factories/create-octopus-layer'
+import { OctopusLayerParent } from './octopus-layer-base'
 import type { Octopus } from '../../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import { SourceLayer } from '../../factories/create-source-layer'
+import { OctopusArtboard } from './octopus-artboard'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayer // mask
-  sourceLayers: SourceLayer[] // layers
+  id: string
+  mask: OctopusLayer
+  layers: OctopusLayer[]
+  maskBasis?: Octopus['MaskBasis']
 }
 
-export class OctopusLayerMaskGroup extends OctopusLayerBase {
-  protected _parent: OctopusLayerParent
-  protected _sourceLayer: SourceLayer
-  private _sourceLayers: SourceLayer[]
+type createBackgroundOptions = {
+  id: string
+  width: number
+  height: number
+  layers: Octopus['Layer'][]
+}
+
+export class OctopusLayerMaskGroup {
+  private _parent: OctopusLayerParent
+  private _id: string
+  private _mask: OctopusLayer
   private _layers: OctopusLayer[]
+  private _maskBasis: Octopus['MaskBasis']
 
-  constructor(options: OctopusLayerMaskGroupOptions) {
-    super(options)
-    this._sourceLayers = options.sourceLayers
-    this._layers = this._initLayers()
-  }
-
-  get sourceMask(): SourceLayer {
-    return this._sourceLayer
-  }
-
-  get sourceLayers(): SourceLayer[] {
-    return this._sourceLayers
-  }
-
-  private _initLayers(): OctopusLayer[] {
-    return this.sourceLayers.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [octopusLayer, ...layers] : layers
-    }, [])
-  }
-
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['MaskGroupLayer']> | null {
-    const mask = createOctopusLayer({ parent: this, layer: this.sourceMask })?.convert()
-    if (!mask) return null
+  static virtualBackground({ id, width, height, layers }: createBackgroundOptions): Octopus['MaskGroupLayer'] {
     return {
+      id: `${id}:background`,
       type: 'MASK_GROUP',
       maskBasis: 'BODY',
-      mask,
-      layers: getConverted(this._layers),
-    } as const
+      mask: {
+        id: `${id}:backgroundMask`,
+        type: 'SHAPE',
+        visible: false,
+        shape: { path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } } },
+      },
+      layers,
+    }
+  }
+
+  constructor(options: OctopusLayerMaskGroupOptions) {
+    this._parent = options.parent
+    this._id = options.id
+    this._mask = options.mask
+    this._layers = options.layers
+    this._maskBasis = options.maskBasis ?? 'BODY'
+  }
+
+  get id(): string {
+    return this._id
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    const parent = this._parent as OctopusLayerParent
+    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {
-    const common = this.convertBase()
-    if (!common) return null
+    const mask = this._mask.convert()
+    if (!mask) return null
 
-    const specific = this._convertTypeSpecific()
-    if (!specific) return null
-
-    return { ...common, ...specific }
+    return {
+      id: this._id,
+      type: 'MASK_GROUP',
+      maskBasis: this._maskBasis,
+      mask,
+      layers: getConverted(this._layers),
+    } as const
   }
 }

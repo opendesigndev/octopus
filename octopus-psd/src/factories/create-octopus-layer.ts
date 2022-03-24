@@ -9,9 +9,10 @@ import type { SourceLayerSection } from '../entities/source/source-layer-section
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import type { SourceLayer } from './create-source-layer'
+import { SourceLayer } from './create-source-layer'
 import { logWarn } from '../services/instances/misc'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import { wrapWithBitmapMaskLayerIfNeeded } from './mask-group-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 
@@ -26,26 +27,42 @@ type CreateOctopusLayerOptions = {
   parent: OctopusLayerParent
 }
 
-function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
+function createOctopusLayerGroup({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerSection
-  return new OctopusLayerGroup({ parent, sourceLayer })
+  const octopusLayer = new OctopusLayerGroup({ parent, sourceLayer })
+  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
-function createOctopusLayerShapeFromShapeAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+function createOctopusLayerShapeFromShapeAdapter({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerShape
   const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
-  return new OctopusLayerShape({ parent, sourceLayer, adapter })
+  const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
+  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
-function createOctopusLayerShapeFromLayerAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+function createOctopusLayerShapeFromLayerAdapter({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerLayer
   const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
-  return new OctopusLayerShape({ parent, sourceLayer, adapter })
+  const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
+  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
-function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+function createOctopusLayerText({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerText | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerText
-  return new OctopusLayerText({ parent, sourceLayer })
+  const octopusLayer = new OctopusLayerText({ parent, sourceLayer })
+  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {

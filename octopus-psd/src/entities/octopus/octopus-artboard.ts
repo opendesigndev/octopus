@@ -4,6 +4,7 @@ import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus
 import type { SourceArtboard } from '../source/source-artboard'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceDesign } from '../source/source-design'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign
@@ -65,19 +66,10 @@ export class OctopusArtboard {
   }
 
   get content(): Octopus['Layer'] {
+    const id = this.id
     const { width, height } = this.dimensions
-    return {
-      id: `${this.id}:background`,
-      type: 'MASK_GROUP',
-      maskBasis: 'BODY',
-      mask: {
-        id: `${this.id}:backgroundMask`,
-        type: 'SHAPE',
-        visible: false,
-        shape: { path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } } },
-      },
-      layers: this.layers,
-    }
+    const layers = this.layers
+    return OctopusLayerMaskGroup.virtualBackground({ id, width, height, layers })
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

@@ -3,12 +3,6 @@ import type { RawLayerCommon } from './layer'
 import type { RawPathComponent } from './path-component'
 import type { RawFill } from './effects'
 
-export type RawShapeMask = {
-  bounds?: RawBounds
-  extendWithWhite?: boolean
-  imageName?: string
-}
-
 export type RawPath = {
   bounds?: RawBounds
   defaultFill?: boolean
@@ -47,7 +41,6 @@ export type RawLayerShape = RawLayerCommon & {
   type?: 'shapeLayer'
   alignEdges?: boolean
   fill?: RawFill
-  mask?: RawShapeMask
   path?: RawPath
   strokeStyle?: RawShapeStrokeStyle
 }

@@ -6,6 +6,12 @@ import type { RawLayerText } from './layer-text'
 import type { RawBlendOptions, RawBounds } from './shared'
 import type { RawLayerEffects } from './effects'
 
+export type RawShapeMask = {
+  bounds?: RawBounds
+  extendWithWhite?: boolean
+  imageName?: string
+}
+
 export type RawLayerCommon = {
   bounds?: RawBounds
   blendOptions?: RawBlendOptions
@@ -13,6 +19,7 @@ export type RawLayerCommon = {
   id?: number
   imageEffectsApplied?: boolean
   imageName?: string
+  mask?: RawShapeMask
   name?: string
   visible?: boolean
   layerEffects?: RawLayerEffects
