@@ -3,7 +3,6 @@ import chalk from 'chalk'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusAIConverter, TempExporter } from '../../src'
-import { readAdditionalTextData } from './read-additional-text-data'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
@@ -17,8 +16,7 @@ export async function convertDebug(): Promise<Nullable<string>> {
     return
   }
 
-  const additionalTextData = readAdditionalTextData()
-  const converter = await OctopusAIConverter.fromDir({ dirPath: sourceDir, additionalTextData })
+  const converter = await OctopusAIConverter.fromDir({ dirPath: sourceDir })
   const tempDir = process.env.OUTPUT_DIR
 
   if (!tempDir) {
@@ -32,7 +30,7 @@ export async function convertDebug(): Promise<Nullable<string>> {
     file://${manifest}`)
   })
 
-  exporter.on('source:resources', ({ metadata, images, ocProperties }) => {
+  exporter.on('source:resources', ({ metadata, images, ocProperties, additionalTextData }) => {
     console.log(`${chalk.yellow('metadata: ')}
     file://${metadata}`)
 
@@ -41,6 +39,11 @@ export async function convertDebug(): Promise<Nullable<string>> {
 
     console.log(`${chalk.yellow('ocProperties: ')}
     file://${ocProperties}`)
+
+    if (additionalTextData) {
+      console.log(`${chalk.yellow('additionalTextData: ')}
+      file://${additionalTextData}`)
+    }
   })
 
   let octopusPathResult

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
+import { AdditionalTextData } from './additional-text-data'
 import type { RawArtboardEntry, RawMetadata, RawSource, RawSourceRootOcProperties } from './raw'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 // Services
 export interface Logger {
@@ -31,10 +33,12 @@ export type GradientColorStop = {
 }
 
 export type SourceImage = { id: string; rawValue: Buffer; path: string }
+
 export type SourceTree = {
   source: RawSource
   metadata: RawMetadata
   images: SourceImage[]
   artboards: RawArtboardEntry[]
   ocProperties: RawSourceRootOcProperties
+  additionalTextData: Nullable<AdditionalTextData>
 }

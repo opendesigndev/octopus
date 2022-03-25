@@ -109,7 +109,6 @@ export default class AdditionalTextDataParser {
 
     this._currentTextGroups = []
     this._currentMatches = []
-
     return sourceTexts
   }
 
@@ -132,6 +131,7 @@ export default class AdditionalTextDataParser {
     this._setTextGroup(sourceLayerText)
 
     if (!this._isLastLayer(nextSourceLayer)) {
+      console.error('___not last')
       return false
     }
 

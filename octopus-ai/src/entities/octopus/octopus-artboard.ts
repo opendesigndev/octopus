@@ -8,20 +8,20 @@ import type SourceResources from '../source/source-resources'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type SourceDesign from '../source/source-design'
 import type SourceArtboard from '../source/source-artboard'
-import type AdditionalTextDataParser from '../../services/conversion/private-data-parser'
+import type AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
-  additionalTextDataParser?: AdditionalTextDataParser
+  additionalTextDataParser: Nullable<AdditionalTextDataParser>
 }
 
 export default class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
-  private _additionalTextDataParser?: AdditionalTextDataParser
+  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
 
   constructor(options: OctopusArtboardOptions) {
     const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)

@@ -8,7 +8,7 @@ import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
 import { AIFileReader } from './services/conversion/ai-file-reader'
 import OctopusManifest from './entities/octopus/octopus-manifest'
-import AdditionalTextDataParser from './services/conversion/private-data-parser'
+import AdditionalTextDataParser from './services/conversion/additional-text-data-parser'
 
 import type { Logger, SourceImage } from './typings'
 import type { Octopus } from './typings/octopus'
@@ -16,7 +16,6 @@ import type SourceDesign from './entities/source/source-design'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { OctopusManifestReport } from './typings/manifest'
 import type { Exporter } from './services/conversion/exporter'
-import type { AdditionalTextData } from './typings/additional-text-data'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type ConvertDesignOptions = {
@@ -29,12 +28,10 @@ type OctopusAIConverterGeneralOptions = {
 
 type OctopusAIConverterFromFileOptions = OctopusAIConverterGeneralOptions & {
   dirPath: string
-  additionalTextData: Nullable<AdditionalTextData>
 }
 
 type OctopusAIConverterOptions = OctopusAIConverterGeneralOptions & {
   sourceDesign: SourceDesign
-  additionalTextDataParser?: AdditionalTextDataParser
 }
 
 export type ArtboardConversionResult = {
@@ -54,7 +51,7 @@ export class OctopusAIConverter {
   private _sentry: ReturnType<typeof createSentry>
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
-  private _additionalTextDataParser?: AdditionalTextDataParser
+  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
@@ -62,12 +59,12 @@ export class OctopusAIConverter {
   }
 
   static async fromDir(options: OctopusAIConverterFromFileOptions): Promise<OctopusAIConverter> {
-    const { logger, additionalTextData } = options
+    const { logger } = options
+    const sourceDesign = await new AIFileReader({ path: options.dirPath }).sourceDesign
 
     return new this({
       logger,
-      sourceDesign: await new AIFileReader({ path: options.dirPath }).sourceDesign,
-      additionalTextDataParser: additionalTextData ? new AdditionalTextDataParser(additionalTextData) : undefined,
+      sourceDesign,
     })
   }
 
@@ -77,7 +74,9 @@ export class OctopusAIConverter {
     this._sentry = createSentry({ dsn: process.env.SENTRY_DSN, logger })
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ octopusAIConverter: this })
-    this._additionalTextDataParser = options.additionalTextDataParser
+
+    const additionalTextData = options.sourceDesign.additionalTextData
+    this._additionalTextDataParser = additionalTextData ? new AdditionalTextDataParser(additionalTextData) : null
   }
 
   get sourceDesign(): SourceDesign {

@@ -23,6 +23,7 @@ export class TempExporter extends EventEmitter implements Exporter {
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
   static METADATA_NAME = 'resources.json'
   static OC_PROPERTIES_NAME = 'ocProperties.json'
+  static ADDITIONAL_TEXT_DATA = 'additionalTextData.json'
 
   constructor(options: TempExporterOptions) {
     super()
@@ -54,6 +55,9 @@ export class TempExporter extends EventEmitter implements Exporter {
   async exportSourceDesign(design: SourceDesign): Promise<SourceResources> {
     const saveMetadata = this._save(TempExporter.METADATA_NAME, this._stringify(design.metadaData.raw))
     const saveOcProperties = this._save(TempExporter.OC_PROPERTIES_NAME, this._stringify(design.ocProperties))
+    const saveAdditionalTextData = design.additionalTextData
+      ? this._save(TempExporter.ADDITIONAL_TEXT_DATA, this._stringify(design.additionalTextData))
+      : null
 
     /**
      * It's possible (and more idiomatic) to save images via `exportImage()`, but for debugging purposes we
@@ -64,8 +68,13 @@ export class TempExporter extends EventEmitter implements Exporter {
         return this._save(path.join(TempExporter.IMAGES_DIR_NAME, image.id), image.rawValue)
       })
     )
-    const [metadata, images, ocProperties] = await Promise.all([saveMetadata, saveImages, saveOcProperties])
-    const result = { metadata, images, ocProperties }
+    const [metadata, images, ocProperties, additionalTextData] = await Promise.all([
+      saveMetadata,
+      saveImages,
+      saveOcProperties,
+      saveAdditionalTextData,
+    ])
+    const result = { metadata, images, ocProperties, additionalTextData }
     this.emit('source:resources', result)
 
     return result

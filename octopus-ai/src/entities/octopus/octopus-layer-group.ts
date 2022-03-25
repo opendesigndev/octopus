@@ -11,7 +11,7 @@ import type SourceLayerGroup from '../source/source-layer-group'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type SourceLayerText from '../source/source-layer-text'
 import type { SourceLayer } from '../../factories/create-source-layer'
-import AdditionalTextDataParser from '../../services/conversion/private-data-parser'
+import AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent

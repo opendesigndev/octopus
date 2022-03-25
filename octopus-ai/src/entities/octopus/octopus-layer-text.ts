@@ -7,7 +7,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
 import { removeTrailingHyphen } from '../../utils/text'
-import AdditionalTextDataParser from '../../services/conversion/private-data-parser'
+import AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
@@ -46,7 +46,10 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         })
       )
     ).filter((octopusSubText) => !!octopusSubText) as Octopus['Text'][]
-
+    // console.error(
+    //   '___octopusSubtexts',
+    //   octopusSubTexts.map((subtext) => subtext.value)
+    // )
     this._octopusSubTexts = this._getSubtextsWithLineHeights([...octopusSubTexts])
     const additionalTextDataText = this.parentArtboard.additionalTextDataParser?.getOctopusText(this._sourceLayers)
     this._additionalTextDataText = additionalTextDataText
@@ -210,7 +213,6 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       (merged: Octopus['Text'], subtext: Octopus['Text'], index: number) => {
         const isLast = this._octopusSubTexts.length - 1 === index
         const octopusTextSlice = this._getOctopusTextSlice(subtext.value, isLast)
-        console.error('___octopusTextSlice', octopusTextSlice)
         if (typeof octopusTextSlice === 'string') {
           subtext = { ...subtext, value: octopusTextSlice }
         }

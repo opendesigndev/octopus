@@ -2,7 +2,8 @@ import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
 
 import type { Octopus } from '../../../typings/octopus'
 import type { OctopusAIConverter } from '../../..'
-import AdditionalTextDataParser from '../private-data-parser'
+import type AdditionalTextDataParser from '../additional-text-data-parser'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string
@@ -10,13 +11,13 @@ export type ArtboardConversionOptions = {
 
 export type ArtboardConverterOptions = ArtboardConversionOptions & {
   octopusAIConverter: OctopusAIConverter
-  additionalTextDataParser?: AdditionalTextDataParser
+  additionalTextDataParser: Nullable<AdditionalTextDataParser>
 }
 
 export default class ArtboardConverter {
   private _targetArtboardId: string
   private _octopusAIConverter: OctopusAIConverter
-  private _additionalTextDataParser?: AdditionalTextDataParser
+  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
 
   constructor(options: ArtboardConverterOptions) {
     this._octopusAIConverter = options.octopusAIConverter

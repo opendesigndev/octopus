@@ -7,7 +7,7 @@
     "create:cleanup": "rimraf temp/input",
     "create:create": "./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input",
     "create": "yarn create:cleanup && yarn create:create && yarn create:additionalTextData",
-    "create:additionalTextData": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/additionalTextData/additionalTextData.json",
+    "create:additionalTextData": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/input/additionalTextData.json",
     "convert:all": "npx ts-node ./scripts/convert-render.ts",
     "render:test": "npx ts-node ./scripts/render-test.ts",
     "test": "echo 'Tests are not implemented yet'",

@@ -4,6 +4,7 @@ import SourceDesign from '../../../entities/source/source-design'
 import { logger } from '../../../services/instances/logger'
 
 import type { SourceTree, SourceImage } from '../../../typings'
+import type { AdditionalTextData } from '../../../typings/additional-text-data'
 import type { RawSource, RawMetadata } from '../../../typings/raw'
 
 type AIFileReaderOptions = {
@@ -14,12 +15,11 @@ export class AIFileReader {
   static SOURCE_FILE = 'source.json'
   static METADATA_FILE = 'metadata.json'
   static IMAGE_DIR = 'bitmaps'
+  static ADDITIONAL_TEXT_DATA = 'additionalTextData.json'
 
-  private _path: string
   private _sourceDesign: Promise<SourceDesign>
 
   constructor(options: AIFileReaderOptions) {
-    this._path = options.path
     this._sourceDesign = this._initSourceDesign(options.path)
   }
 
@@ -65,6 +65,9 @@ export class AIFileReader {
   private async _createSourceTree(dirPath: string): Promise<SourceTree> {
     const source = await this._getRawJSON<RawSource>(`${dirPath}/${AIFileReader.SOURCE_FILE}`)
     const metadata = await this._getRawJSON<RawMetadata>(`${dirPath}/${AIFileReader.METADATA_FILE}`)
+    const additionalTextData = await this._getRawJSON<AdditionalTextData>(
+      `${dirPath}/${AIFileReader.ADDITIONAL_TEXT_DATA}`
+    )
 
     const images = await Promise.all(await this._loadImages(dirPath))
     const artboards = source?.Root?.Pages?.Kids ?? []
@@ -86,12 +89,17 @@ export class AIFileReader {
       throw new Error('Missing artboards from source design')
     }
 
+    if (!additionalTextData) {
+      logger.warn('SourceDesign created without additionalTextData')
+    }
+
     return {
       source,
       metadata,
       images,
       artboards,
       ocProperties,
+      additionalTextData,
     }
   }
 
