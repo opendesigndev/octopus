@@ -4,13 +4,14 @@ import type SourceResources from '../source/source-resources'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import OctopusArtboard from './octopus-artboard'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayer
+  sourceLayers: SourceLayer[]
 }
 
 export default abstract class OctopusLayerCommon {
@@ -22,9 +23,9 @@ export default abstract class OctopusLayerCommon {
 
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent
-    this._sourceLayer = options.sourceLayer
+    this._sourceLayer = options.sourceLayers[0]
 
-    this._id = options.sourceLayer.path.join(':')
+    this._id = options.sourceLayers[0].path.join(':')
   }
 
   get parent(): OctopusLayerParent {
@@ -35,6 +36,7 @@ export default abstract class OctopusLayerCommon {
     return this._id
   }
 
+  //@todo remove if not neccessary
   // get hiddenContentIds(): number[] {
   //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
   //   return hiddenContentIds
@@ -64,6 +66,10 @@ export default abstract class OctopusLayerCommon {
 
   get opacity(): number {
     return this._sourceLayer.opacity ?? OctopusLayerCommon.DEFAULT_OPACITY
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    return this._parent instanceof OctopusArtboard ? this._parent : this._parent.parentArtboard
   }
 
   convertCommon(): Omit<Octopus['LayerBase'], 'type'> {

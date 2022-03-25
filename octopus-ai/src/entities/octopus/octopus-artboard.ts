@@ -8,16 +8,20 @@ import type SourceResources from '../source/source-resources'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type SourceDesign from '../source/source-design'
 import type SourceArtboard from '../source/source-artboard'
+import type AdditionalTextDataParser from '../../services/conversion/private-data-parser'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
+  additionalTextDataParser?: AdditionalTextDataParser
 }
 
 export default class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
+  private _additionalTextDataParser?: AdditionalTextDataParser
 
   constructor(options: OctopusArtboardOptions) {
     const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
@@ -28,6 +32,7 @@ export default class OctopusArtboard {
 
     this._octopusAIConverter = options.octopusAIConverter
     this._sourceArtboard = artboard
+    this._additionalTextDataParser = options.additionalTextDataParser
     this._layers = this._initLayers()
   }
 
@@ -35,12 +40,13 @@ export default class OctopusArtboard {
     return asArray(this._sourceArtboard?.children).reduce((layers, sourceLayer) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layer: sourceLayer,
+        layers: [sourceLayer],
       })
       return octopusLayer ? [...layers, octopusLayer] : layers
     }, [])
   }
 
+  //@todo remove if not necessary later
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)
@@ -49,6 +55,10 @@ export default class OctopusArtboard {
 
   get resources(): SourceResources {
     return this._sourceArtboard.resources
+  }
+
+  get additionalTextDataParser(): Nullable<AdditionalTextDataParser> {
+    return this._additionalTextDataParser
   }
 
   get sourceDesign(): SourceDesign {

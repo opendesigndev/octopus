@@ -3,17 +3,28 @@ import chalk from 'chalk'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusAIConverter, TempExporter } from '../../src'
-import { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import { readAdditionalTextData } from './read-additional-text-data'
+
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 dotenv.config()
 export async function convertDebug(): Promise<Nullable<string>> {
   const id = uuidv4()
-  const converter = await OctopusAIConverter.fromDir({ dirPath: './temp/input' })
+  const sourceDir = process.env.SOURCE_DIR
+
+  if (!sourceDir) {
+    console.log(`${chalk.red('could not find source dir')}`)
+    return
+  }
+
+  const additionalTextData = readAdditionalTextData()
+  const converter = await OctopusAIConverter.fromDir({ dirPath: sourceDir, additionalTextData })
   const tempDir = process.env.OUTPUT_DIR
 
   if (!tempDir) {
     return null
   }
+
   const exporter = new TempExporter({ tempDir, id })
 
   exporter.on('octopus:manifest', (manifest) => {
@@ -53,6 +64,5 @@ export async function convertDebug(): Promise<Nullable<string>> {
   })
 
   await converter.convertDesign({ exporter })
-
   return octopusPathResult
 }

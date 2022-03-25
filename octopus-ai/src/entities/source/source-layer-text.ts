@@ -20,6 +20,7 @@ export default class SourceLayerText extends SourceLayerCommon {
 
   protected _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerSubText[]
+
   constructor(options: SourceLayerTextOptions) {
     super(options)
     this._normalizedTexts = this._initTexts()
@@ -49,6 +50,10 @@ export default class SourceLayerText extends SourceLayerCommon {
 
   get texts(): Nullable<SourceLayerSubText[]> {
     return this._normalizedTexts
+  }
+
+  get textValue(): string {
+    return this.texts?.map((text) => text.value).join('') ?? ''
   }
 
   get graphicsState(): Nullable<RawGraphicsState> {

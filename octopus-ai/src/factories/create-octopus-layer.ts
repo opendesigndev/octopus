@@ -14,14 +14,14 @@ export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerT
 //export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText | OctopusLayerMaskGroup
 
 type CreateOctopusLayerOptions = {
-  layer: SourceLayer
+  layers: SourceLayer[]
   parent: OctopusLayerParent
 }
 
-function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
+function createOctopusLayerGroup({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   return new OctopusLayerGroup({
     parent,
-    sourceLayer: layer as SourceLayerGroup,
+    sourceLayers: layers as SourceLayerGroup[],
   })
 }
 
@@ -40,24 +40,30 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
 //   })
 // }
 
-function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+function createOctopusLayerShape({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   return new OctopusLayerShape({
     parent,
-    sourceLayer: layer as SourceLayerShape,
+    sourceLayers: layers as SourceLayerShape[],
   })
 }
 
-function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+function createOctopusLayerText({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerText {
   return new OctopusLayerText({
     parent,
-    sourceLayer: layer as SourceLayerText,
+    sourceLayers: layers as SourceLayerText[],
   })
 }
 
 type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
-  const type = (Object(options.layer) as SourceLayer).type || ''
+  const [layer] = options.layers
+
+  if (!layer) {
+    return null
+  }
+
+  const type = (Object(layer) as SourceLayer).type || ''
 
   const builders: {
     [key: string]: Builder

@@ -24,7 +24,7 @@ import type { RectCoords } from '../../utils/coords'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerShape
+  sourceLayers: SourceLayerShape[]
 }
 
 export default class OctopusLayerShape extends OctopusLayerCommon {
@@ -40,7 +40,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   constructor(options: OctopusLayerShapeOptions) {
     super(options)
-    this._sourceLayer = options.sourceLayer
   }
 
   private _isRect(subPath: SourceLayerShapeSubPath): boolean {
@@ -73,7 +72,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return asArray(
       this._sourceLayer.clippingPaths
         ?.map((sourceLayer) => {
-          return { ...new OctopusLayerShape({ parent: this, sourceLayer })._getPath() }
+          return { ...new OctopusLayerShape({ parent: this, sourceLayers: [sourceLayer] })._getPath() }
         })
         .filter((path) => !!path) as Octopus['PathLike'][]
     )

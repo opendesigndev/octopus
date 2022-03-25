@@ -1,19 +1,24 @@
 import isEqual from 'lodash/isEqual'
+import flatten from 'lodash/flatten'
 import pick from 'lodash/pick'
 import without from 'lodash/without'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
+import { removeTrailingHyphen } from '../../utils/text'
+import AdditionalTextDataParser from '../../services/conversion/private-data-parser'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { LayerSpecifics } from './octopus-layer-common'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { AdditionalTextDataText } from '../../typings/additional-text-data'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerText
+  sourceLayers: SourceLayerText[]
 }
 
 type Range = {
@@ -22,15 +27,30 @@ type Range = {
 }
 
 export default class OctopusLayerText extends OctopusLayerCommon {
-  protected _sourceLayer: SourceLayerText
-  private _octopusSubTexts: OctopusSubText[]
+  static HYPHEN = '-'
+  static MIN_LINE_HEIGHT = 1
+
+  protected _sourceLayers: SourceLayerText[]
+  private _octopusSubTexts: Octopus['Text'][]
+  private _octopusTextValue: Nullable<string>
+  private _additionalTextDataText: Nullable<AdditionalTextDataText>
 
   constructor(options: OctopusLayerTextOptions) {
     super(options)
+    this._sourceLayers = options.sourceLayers
 
-    this._octopusSubTexts = asArray(
-      options.sourceLayer.texts?.map((sourceLayer) => new OctopusSubText({ sourceLayer }))
-    )
+    const octopusSubTexts = flatten(
+      asArray(
+        options.sourceLayers.map((sourceLayer) => {
+          return sourceLayer.texts?.map((sourceLayer) => new OctopusSubText({ sourceLayer }).convert())
+        })
+      )
+    ).filter((octopusSubText) => !!octopusSubText) as Octopus['Text'][]
+
+    this._octopusSubTexts = this._getSubtextsWithLineHeights([...octopusSubTexts])
+    const additionalTextDataText = this.parentArtboard.additionalTextDataParser?.getOctopusText(this._sourceLayers)
+    this._additionalTextDataText = additionalTextDataText
+    this._octopusTextValue = additionalTextDataText?.content
   }
 
   private _createNewStyle(from: number, subtext: Octopus['Text']): Octopus['StyleRange'] {
@@ -38,6 +58,42 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       style: { ...subtext.defaultStyle },
       ranges: [{ from, to: from + subtext.value.length }],
     }
+  }
+
+  private _getLineHeight(
+    prevLineHeight: Nullable<number>,
+    currentTy: Nullable<number>,
+    prevTy: Nullable<number>
+  ): Nullable<number> {
+    if (!currentTy || !prevTy) {
+      return prevLineHeight
+    }
+
+    const newLineHeight = currentTy - prevTy
+    if (newLineHeight < OctopusLayerText.MIN_LINE_HEIGHT) {
+      return prevLineHeight
+    }
+
+    return newLineHeight
+  }
+
+  private _getSubtextsWithLineHeights(octopusSubTexts: Octopus['Text'][]): Octopus['Text'][] {
+    let prevLineHeight: Nullable<number>
+
+    return octopusSubTexts.map((octopusSubText, index) => {
+      const prevIndex = index - 1
+
+      const prevTy = octopusSubTexts[prevIndex]?.textTransform?.[5]
+      const currentTy = octopusSubText.textTransform?.[5]
+      const lineHeight = this._getLineHeight(prevLineHeight, currentTy, prevTy)
+      prevLineHeight = lineHeight
+
+      if (!lineHeight) {
+        return { ...octopusSubText }
+      }
+
+      return { ...octopusSubText, defaultStyle: { ...octopusSubText.defaultStyle, lineHeight } }
+    })
   }
 
   private _areStylesEqual(style1: Octopus['StyleRange'], style2: Octopus['StyleRange']): boolean {
@@ -83,6 +139,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         rangesArray.push(range)
       }
     }
+
     return rangesArray
   }
 
@@ -100,21 +157,84 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     })
   }
 
+  private _getOctopusTextSliceLength(subtext: string): Nullable<number> {
+    if (!this._octopusTextValue) {
+      return null
+    }
+
+    let octopusStringLength = 0
+
+    if (this._octopusTextValue?.indexOf(subtext) === 0) {
+      octopusStringLength = subtext.length
+    } else if (this._octopusTextValue?.indexOf(removeTrailingHyphen(subtext)) === 0) {
+      octopusStringLength = removeTrailingHyphen(subtext).length
+    } else if (subtext !== OctopusLayerText.HYPHEN) {
+      return
+    }
+
+    if (AdditionalTextDataParser.OCTOPUS_EXTRA_CHARACTERS.includes(this._octopusTextValue[octopusStringLength])) {
+      octopusStringLength = octopusStringLength + 1
+    }
+    return octopusStringLength
+  }
+
+  private _getOctopusTextSlice(subtext: string, isLast: boolean): Nullable<string> {
+    if (isLast || !this._octopusTextValue) {
+      return this._octopusTextValue
+    }
+
+    const octopusStringLength = this._getOctopusTextSliceLength(subtext)
+
+    if (typeof octopusStringLength !== 'number') {
+      return
+    }
+
+    const octopusTextSlice = this._octopusTextValue.slice(0, octopusStringLength)
+    this._octopusTextValue = this._octopusTextValue.slice(octopusStringLength)
+
+    return octopusTextSlice
+  }
+
+  private _getFrame(): Nullable<Octopus['TextFrame']> {
+    const width = this._additionalTextDataText?.frame?.width
+    const height = this._additionalTextDataText?.frame?.height
+    if (!width || !height) {
+      return
+    }
+
+    return { mode: 'FIXED', size: { width, height } }
+  }
+
   private _parseText(): Octopus['Text'] {
-    const mergedText = this._octopusSubTexts.reduce((merged: Octopus['Text'], subtext: OctopusSubText) => {
-      const converted = subtext.convert()
-      if (merged.value === undefined || merged.value === null) {
-        return {
-          ...converted,
-          styles: [this._createNewStyle(0, converted)],
+    const mergedText = this._octopusSubTexts.reduce(
+      (merged: Octopus['Text'], subtext: Octopus['Text'], index: number) => {
+        const isLast = this._octopusSubTexts.length - 1 === index
+        const octopusTextSlice = this._getOctopusTextSlice(subtext.value, isLast)
+        console.error('___octopusTextSlice', octopusTextSlice)
+        if (typeof octopusTextSlice === 'string') {
+          subtext = { ...subtext, value: octopusTextSlice }
         }
-      }
 
-      merged.styles?.push(this._createNewStyle(merged.value.length, converted))
-      return { ...merged, value: merged.value + converted.value }
-    }, {} as Octopus['Text'])
+        if (typeof merged.value !== 'string') {
+          return {
+            ...subtext,
+            styles: [this._createNewStyle(0, subtext)],
+          }
+        }
 
-    return { ...mergedText, styles: this._getUnifiedStyles(asArray(mergedText.styles)) }
+        return {
+          ...merged,
+          value: merged.value + subtext.value,
+          styles: [...(merged.styles ?? []), this._createNewStyle(merged.value.length, subtext)],
+        }
+      },
+      {} as Octopus['Text']
+    )
+
+    const octopusTextWithStyles = { ...mergedText, styles: this._getUnifiedStyles(asArray(mergedText.styles)) }
+    const frame = this._getFrame()
+
+    return frame ? { ...octopusTextWithStyles, frame } : octopusTextWithStyles
   }
 
   private _parseName(text: Octopus['Text']): string {

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 
 import { convertDebug } from './utils/convert-debug'
-import { renderOctopus } from './utils/render-to-octopus'
+import { renderOctopus } from './utils/render-octopus'
 
 dotenv.config()
 ;(async () => {
