@@ -41,7 +41,9 @@ export class LocalExporter implements Exporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    await fsp.writeFile(fullPath, body)
+    const write = fsp.writeFile(fullPath, body)
+    this._assetsSaves.push(write)
+    await write
     return fullPath
   }
 
@@ -56,15 +58,11 @@ export class LocalExporter implements Exporter {
 
   exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    const save = this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
-    this._assetsSaves.push(save)
-    return save
+    return this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
   }
 
   exportImage(name: string, data: Buffer): Promise<string> {
-    const save = this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
-    this._assetsSaves.push(save)
-    return save
+    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {

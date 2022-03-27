@@ -10,6 +10,13 @@ import * as UtilityTypes from './utils/utility-types'
 // Decorators
 import * as FirstCallMemo from './decorators/first-call-memo'
 
+// Postprocessors
+import * as TextPostprocessor from './postprocessors/text'
+
+export const postprocessors = {
+  text: TextPostprocessor,
+}
+
 export const decorators = {
   firstCallMemo: FirstCallMemo,
 }

@@ -27,10 +27,6 @@ type OctopusXDConverterGeneralOptions = {
   logger?: Logger
 }
 
-type OctopusXDConverterFromFileOptions = OctopusXDConverterGeneralOptions & {
-  filename: string
-}
-
 type OctopusXDConverterOptions = OctopusXDConverterGeneralOptions & {
   sourceDesign: SourceDesign
 }
@@ -63,11 +59,8 @@ export class OctopusXDConverter {
     TEMP: TempExporter,
   }
 
-  static async fromFile(options: OctopusXDConverterFromFileOptions): Promise<OctopusXDConverter> {
-    return new this({
-      logger: options.logger,
-      sourceDesign: await new XDFileReader({ path: options.filename }).sourceDesign,
-    })
+  static READERS = {
+    FILE: XDFileReader,
   }
 
   constructor(options: OctopusXDConverterOptions) {
@@ -132,7 +125,7 @@ export class OctopusXDConverter {
   async convertDesign(options?: ConvertDesignOptions): Promise<{
     manifest: OctopusManifestReport
     artboards: ArtboardConversionResult[]
-    images: { path: string; rawValue: Buffer }[]
+    images: { path: string; getImageData: () => Promise<Buffer> }[]
   }> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as Exporter) : null
 
@@ -145,7 +138,8 @@ export class OctopusXDConverter {
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
         const imageId = path.basename(image.path)
-        const imagePath = await exporter?.exportImage?.(image.path, image.rawValue)
+        const rawData = await image.getImageData()
+        const imagePath = await exporter?.exportImage?.(image.path, rawData)
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }
@@ -161,7 +155,7 @@ export class OctopusXDConverter {
       if (typeof artboardPath === 'string') {
         this.octopusManifest.setExportedArtboard(artboard.meta.id, artboardPath)
       }
-      return [...artboards, converted]
+      return [...artboards, converted] /** @TODO fix O(n^2) ... everywhere :D */
     }, Promise.resolve([]))
 
     /** Manifest */
@@ -181,3 +175,4 @@ export class OctopusXDConverter {
 
 export { LocalExporter }
 export { TempExporter }
+export { XDFileReader }
