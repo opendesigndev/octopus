@@ -19,7 +19,7 @@ async function render(id: string, octopusPath: string) {
     execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
     return { value: renderPath, error: null }
   } catch (error) {
-    console.log(chalk.red(`Rendering failed while processing ${octopusPath}`))
+    console.error(chalk.red(`Rendering failed while processing ${octopusPath}`))
     return { value: undefined, error }
   }
 }

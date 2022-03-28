@@ -28,6 +28,7 @@ type SourceLayerBuilders =
   | typeof createLayerText
   | typeof createLayerBackground
   | typeof createLayerLayer
+  | typeof skipLayer
 
 type CreateLayerOptions = {
   layer: RawLayer
@@ -69,13 +70,17 @@ function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLay
   })
 }
 
+function skipLayer(): null {
+  return null
+}
+
 const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
   layerSection: createLayerSection,
   shapeLayer: createLayerShape,
   textLayer: createLayerText,
   backgroundLayer: createLayerBackground,
   layer: createLayerLayer,
-  // adjustmentLayer : TODO // TODO
+  adjustmentLayer: skipLayer,
 } as const
 
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {

@@ -52,7 +52,7 @@ export async function convertDesign({
   })
 
   exporter.on('octopus:manifest', (manifest: string) => {
-    console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n`)
+    console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n\n`)
   })
 
   const reader = new PSDFileReader({ path: filePath, designId })

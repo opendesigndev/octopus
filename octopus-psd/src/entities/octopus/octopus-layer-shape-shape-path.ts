@@ -97,7 +97,7 @@ export class OctopusLayerShapeShapePath {
     const path = pathComponents[0]
     const layerTranslation = this._parentLayer.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === 'MZ') logWarn('PathData generated empty', { path })
+    if (geometry === 'MZ') logWarn('PathData generated empty')
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',
