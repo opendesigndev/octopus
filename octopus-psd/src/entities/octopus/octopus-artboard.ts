@@ -1,6 +1,6 @@
 import type { OctopusPSDConverter } from '../..'
 import type { Octopus } from '../../typings/octopus'
-import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
+import { OctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import type { SourceArtboard } from '../source/source-artboard'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceDesign } from '../source/source-design'
@@ -19,7 +19,7 @@ export class OctopusArtboard {
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
     this._sourceDesign = options.sourceDesign
-    this._layers = this._initLayers()
+    this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
   }
 
   get parentArtboard(): OctopusArtboard {
@@ -36,16 +36,6 @@ export class OctopusArtboard {
 
   get converter(): OctopusPSDConverter {
     return this._octopusConverter
-  }
-
-  private _initLayers() {
-    return this.sourceArtboard.layers.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [octopusLayer, ...layers] : layers
-    }, [])
   }
 
   get dimensions(): { width: number; height: number } {

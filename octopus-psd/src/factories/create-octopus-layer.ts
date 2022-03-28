@@ -82,7 +82,7 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   //adjustmentLayer: TODO, // TODO
 } as const
 
-export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
+function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
   const type = (Object(options.layer) as SourceLayer).type
   const builder = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
@@ -90,4 +90,14 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
     return null
   }
   return builder(options)
+}
+
+export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
+  return layers.reduce((layers, sourceLayer) => {
+    const octopusLayer = createOctopusLayer({
+      parent,
+      layer: sourceLayer,
+    })
+    return octopusLayer ? [octopusLayer, ...layers] : layers
+  }, [])
 }

@@ -1,4 +1,4 @@
-import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
+import { OctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 import type { SourceLayerSection } from '../source/source-layer-section'
 import type { Octopus } from '../../typings/octopus'
@@ -16,17 +16,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)
-    this._layers = this._initLayers()
-  }
-
-  private _initLayers(): OctopusLayer[] {
-    return this._sourceLayer.layers.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [octopusLayer, ...layers] : layers
-    }, [])
+    this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
