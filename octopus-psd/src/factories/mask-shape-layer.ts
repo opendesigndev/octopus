@@ -32,7 +32,7 @@ function wrapWithShapeMaskLayer<T extends OctopusLayer>({
   sourceLayer,
   octopusLayer,
   parent,
-}: CreateOctopusLayerOptions<T>): T | OctopusLayerMaskGroup {
+}: CreateOctopusLayerOptions<T>): OctopusLayerMaskGroup {
   const raw = createRawShapeMaskLayer({ path })
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
   const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })

@@ -14,6 +14,7 @@ import { logWarn } from '../services/instances/misc'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { wrapWithBitmapMaskLayerIfNeeded } from './mask-bitmap-layer'
 import { wrapWithShapeMaskLayerIfNeeded } from './mask-shape-layer'
+import { createClippingMask } from './mask-clipping-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 
@@ -79,7 +80,6 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   textLayer: createOctopusLayerText,
   layer: createOctopusLayerShapeFromLayerAdapter,
   backgroundLayer: createOctopusLayerShapeFromLayerAdapter,
-  //adjustmentLayer: TODO, // TODO
 } as const
 
 function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
@@ -93,11 +93,26 @@ function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | 
 }
 
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
+  let clippedLayers: OctopusLayer[] = []
   return layers.reduce((layers, sourceLayer) => {
     const octopusLayer = createOctopusLayer({
       parent,
       layer: sourceLayer,
     })
-    return octopusLayer ? [octopusLayer, ...layers] : layers
+
+    if (!octopusLayer) return layers
+
+    if (sourceLayer.clipped) {
+      clippedLayers.push(octopusLayer)
+      return layers
+    }
+
+    if (clippedLayers.length > 0) {
+      const clippingMask = createClippingMask({ parent, mask: octopusLayer, layers: [...clippedLayers].reverse() })
+      clippedLayers = []
+      return [clippingMask, ...layers]
+    }
+
+    return [octopusLayer, ...layers]
   }, [])
 }

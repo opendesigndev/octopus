@@ -94,16 +94,4 @@ export class SourceLayerCommon extends SourceEntity {
   get path(): SourcePath | undefined {
     if (this._rawValue.path) return new SourcePath(this._rawValue.path)
   }
-
-  // get pathComponents(): SourcePathComponent[] {
-  //   return this.path.pathComponents
-  // }
-
-  // get firstPathComponent(): SourcePathComponent | undefined {
-  //   return this.pathComponents[0]
-  // }
-
-  // get pathBounds(): SourceBounds {
-  //   return this.path.bounds
-  // }
 }

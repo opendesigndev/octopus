@@ -39,7 +39,7 @@ function wrapWithBitmapMaskLayer<T extends OctopusLayer>({
   sourceLayer,
   octopusLayer,
   parent,
-}: CreateOctopusLayerOptions<T>): T | OctopusLayerMaskGroup {
+}: CreateOctopusLayerOptions<T>): OctopusLayerMaskGroup {
   const { width, height } = octopusLayer.parentArtboard.dimensions
   const raw = createRawBitmapMaskLayer({ width, height, imageName: bitmapMask })
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
