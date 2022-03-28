@@ -10,7 +10,7 @@ import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { createMatrix } from '../../utils/paper-factories'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
-import { normalizeTextValue } from '@avocode/octopus-common/dist/utils/text'
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
 type OctopusLayerTextOptions = {
@@ -197,7 +197,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   @firstCallMemo()
   get text(): Octopus['Text'] | null {
-    const value = normalizeTextValue(this._textValue)
+    const value = this._textValue
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
@@ -221,7 +221,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
     const text = this.text
     if (!text) return null
-    return { type: 'TEXT', text } as const
+    return { type: 'TEXT', text: normalizeText(text) } as const
   }
 
   convert(): Octopus['TextLayer'] | null {
