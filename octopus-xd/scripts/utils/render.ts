@@ -14,14 +14,12 @@ export async function renderOctopus(
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
     execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
-    /** @TODO rendering doesnt crash at all now? */
     await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
     return {
       value: renderPath,
       error: null,
     }
   } catch (e) {
-    // console.log(chalk.red(`Rendering failed while processing ${octopusPath}`))
     await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
     return {
       value: undefined,

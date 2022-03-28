@@ -1,6 +1,3 @@
-/**
- * @TODO normalize
- */
 export default {
   'pass-through': 'PASS_THROUGH',
   normal: 'NORMAL',

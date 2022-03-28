@@ -1,8 +1,9 @@
-import isEqual from 'lodash/isEqual'
-import OctopusLayerCommon from './octopus-layer-common'
 import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { getPresentProps } from '@avocode/octopus-common/dist/utils/common'
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
+
 import defaults from '../../utils/defaults'
+import OctopusLayerCommon from './octopus-layer-common'
 import { createMatrix } from '../../utils/paper'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import OctopusEffectsText from './octopus-effects-text'
@@ -264,14 +265,9 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     const offset = this._getArtboardOffset()
     if (!offset) return null
-    const offsetMatrixArtboard = this._getTranslationMatrix(-offset.x, -offset.y)
 
     // Current layer matrix.
-    const matrices = [
-      defaults.TRANSFORM.slice(),
-      convertObjectMatrixToArray(offsetMatrixArtboard),
-      convertObjectMatrixToArray(offsetMatrixParagraph),
-    ]
+    const matrices = [defaults.TRANSFORM.slice(), convertObjectMatrixToArray(offsetMatrixParagraph)]
       .filter((matrix) => {
         return Array.isArray(matrix)
       })
@@ -341,34 +337,17 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     return { style: paragraphStyle, ranges: [range] }
   }
 
-  private _mergeRanges(ranges: Octopus['StyleRange'][]): Octopus['StyleRange'][] {
-    const unique = ranges.reduce((unique: Octopus['StyleRange'][], range) => {
-      return unique.every((uniqueRange) => isEqual(uniqueRange.style, range.style)) ? [...unique, range] : unique
-    }, [])
-    return unique.map((uniqueRange) => {
-      return {
-        ...uniqueRange,
-        ranges: ranges
-          .filter((range) => isEqual(uniqueRange.style, range.style))
-          .reduce((ranges, range) => {
-            return [...ranges, ...asArray(range.ranges)]
-          }, []),
-      }
-    })
-  }
-
-  private _getStyles(textValue: string) {
+  private _getStyles(textValue: string): Octopus['StyleRange'][] {
     const paragraphs = this._getFlatParagraphs()
     const rangedStyles = this._getNormalizedRangedStyles(textValue.length)
     const textStyles = this._mergeMetaToParagraphs(paragraphs, rangedStyles)
-    const parsedRanges = textStyles
+    return textStyles
       .map((paragraph) => {
         return this._parseRange(paragraph)
       })
       .filter((parsedRange) => {
         return parsedRange
       }) as Octopus['StyleRange'][]
-    return this._mergeRanges(parsedRanges)
   }
 
   private _getFrame(): Octopus['TextFrame'] {
@@ -424,7 +403,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     return {
       type: 'TEXT',
-      text,
+      text: normalizeText(text),
     }
   }
 

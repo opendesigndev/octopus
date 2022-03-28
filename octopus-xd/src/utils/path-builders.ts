@@ -57,8 +57,8 @@ export function buildShapeFromCompound(shape: RawShapeCompound): paper.CompoundP
   return typeof shape?.path === 'string' ? createCompoundPath(shape?.path) : null
 }
 
-export function buildShapeFromPath(shape: RawShapePath): paper.Path | null {
-  return typeof shape?.path === 'string' ? createPath(shape?.path) : null
+export function buildShapeFromPath(shape: RawShapePath): paper.CompoundPath | null {
+  return typeof shape?.path === 'string' ? createCompoundPath(shape?.path) : null
 }
 
 export function buildShape(shape: RawShape): paper.Path | paper.CompoundPath | null {

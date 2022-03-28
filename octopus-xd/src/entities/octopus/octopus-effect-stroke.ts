@@ -63,7 +63,7 @@ export default class OctopusEffectStroke {
 
     const fill = OctopusEffectFillColor.fromRaw({
       effect: {
-        type: this._source.type === 'none' ? 'none' : 'solid' /** @TODO confirm */,
+        type: this._source.type === 'none' ? 'none' : 'solid',
         color: this._source.color,
       },
     }).convert()
