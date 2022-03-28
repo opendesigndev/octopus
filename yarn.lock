@@ -32,6 +32,16 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
+"@avocode/octopus-common@3.0.0-rc.7":
+  version "3.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.7.tgz#6c03959d08443abd75445e8118cd900312fa3102"
+  integrity sha512-H1QcjQCsgxORqYkqzA65ZRup9fkvlsr9lqPzyno2Ctv+reEoWD75Fjnk87xtrQ/Jmtzy7WhFzojT03Z32Isn7Q==
+  dependencies:
+    "@sentry/node" "6.14.0"
+    lodash "^4.17.21"
+    read-pkg-up "7.0.1"
+    uuid "^8.3.2"
+
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"
@@ -41,15 +51,20 @@
     lodash "^4.13.1"
     raven "^1.1.4"
 
-"@avocode/octopus-ts@3.0.0-alpha.19":
-  version "3.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.19.tgz#05b89dbd356ed5ce63bb93a13d36640ee36a4a63"
-  integrity sha512-G++OHOBZU7poZcPlrvGXmi4mG7XsZ9OsORWXbAth2Fr/vIWXQ+SA+yRwPvBRpktLCRplr+Tqvy7AwcaELzcO8g==
+"@avocode/octopus-ts@3.0.0-alpha.21":
+  version "3.0.0-alpha.21"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.21.tgz#6eba145e1f01d91a1720ccf1257ecdea1a5ea787"
+  integrity sha512-BmoxWfv2BQdt+DSaXw1YSZW/jb+IxXQNa/WQv6Y/ZKx9Y4HW4Kg2A/hk6YKBw3Oz/bRuYcyhDFbpxx0ArwDYWg==
 
 "@avocode/octopus-ts@3.0.0-alpha.22":
   version "3.0.0-alpha.22"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.22.tgz#378fba8e168e8ed8d3e099dbeac85f270d54654a"
   integrity sha512-NUb8c1jWvviNMwYyWMkgir9SHmHFp5Fg+ltrVp/XqFP2aoubaTdIVsKEhUuA+ZYohSZy+/hGNQhwvpyQzWCZGg==
+
+"@avocode/octopus-ts@3.0.0-alpha.23":
+  version "3.0.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.23.tgz#9ffdb29c20577c302dcf48a8e3696bc379bdd43a"
+  integrity sha512-v3HMlSxGsFIkugAXEO0/BGzdArwFykv5j18UZS4P/ZYe4xnxgja8nS9wfgvfon0UDynZXXCrw5TJMkGZ9MW7NA==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

@@ -12,6 +12,7 @@ import type SourceLayerShape from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import type { RawShapeCompound, RawShapeRect } from '../../typings/source'
 import defaults from '../../utils/defaults'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
@@ -28,6 +29,11 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     subtract: 'SUBTRACT',
     intersect: 'INTERSECT',
     exclude: 'EXCLUDE',
+  } as const
+
+  static FILL_RULES = {
+    nonzero: 'NON_ZERO',
+    evenodd: 'EVEN_ODD',
   } as const
 
   constructor(options: OctopusLayerShapeOptions) {
@@ -132,14 +138,38 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     }
   }
 
-  private _getShapeAsPath(): Octopus['Path'] {
+  private _getSimplePath(): Octopus['Path'] {
     const transform = this._getLayerTransformEntry()
+    const geometry = this._shapeData.pathData
 
     return {
       type: 'PATH',
-      geometry: this._shapeData.pathData,
+      geometry,
       ...transform,
     }
+  }
+
+  private _getCompoundSimplePath(path: paper.Path): Octopus['Path'] {
+    return {
+      type: 'PATH',
+      geometry: path.pathData,
+    }
+  }
+
+  private _getShapeAsCompoundPathNoop(): Octopus['CompoundPath'] {
+    const transform = this._getLayerTransformEntry()
+    const geometry = this._shapeData.pathData
+
+    return {
+      type: 'COMPOUND',
+      geometry,
+      ...transform,
+      paths: this._shapeData.children.map((path: paper.Path) => this._getCompoundSimplePath(path)),
+    }
+  }
+
+  private _getShapeAsPath(): Octopus['Path'] | Octopus['CompoundPath'] {
+    return asArray(this._shapeData.children).length > 1 ? this._getShapeAsCompoundPathNoop() : this._getSimplePath()
   }
 
   private _rectangleHasMultipleRadii() {
@@ -174,11 +204,16 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     ) as Octopus['Shape']['path']
   }
 
+  private _getFillRule(): Octopus['FillRule'] {
+    return getMapped(this._sourceLayer.shape?.winding, OctopusLayerShape.FILL_RULES, 'NON_ZERO')
+  }
+
   private _getShapes(): Octopus['Shape'] {
     const path = this._getRootShape()
+    const fillRule = this._getFillRule()
 
     const fillShape: Octopus['Shape'] = {
-      fillRule: 'NON_ZERO',
+      fillRule,
       path,
       ...this.shapeEffects.convert(),
     } as const
@@ -191,7 +226,6 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     return {
       type: 'SHAPE',
       shape,
-      shapes: undefined /** @TODO remove after schema fix */,
     }
   }
 

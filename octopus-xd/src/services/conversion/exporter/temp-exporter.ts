@@ -3,10 +3,13 @@ import { v4 as uuidv4 } from 'uuid'
 import { promises as fsp } from 'fs'
 import EventEmitter from 'events'
 
+import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+
 import type { Exporter } from '.'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
 import type sourceDesign from '../../../entities/source/source-design'
 import type SourceArtboard from '../../../entities/source/source-artboard'
+import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
   id?: string
@@ -18,6 +21,8 @@ type SourceResources = { manifest: string; interactions: string; resources: stri
 export class TempExporter extends EventEmitter implements Exporter {
   _outputDir: Promise<string>
   _tempDir: string
+  _assetsSaves: Promise<unknown>[]
+  _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
@@ -29,6 +34,8 @@ export class TempExporter extends EventEmitter implements Exporter {
     super()
     this._tempDir = options.tempDir
     this._outputDir = this._initOutputDir(options)
+    this._assetsSaves = []
+    this._completed = detachPromiseControls<void>()
   }
 
   private _stringify(value: unknown) {
@@ -44,8 +51,15 @@ export class TempExporter extends EventEmitter implements Exporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    await fsp.writeFile(fullPath, body)
+    const write = fsp.writeFile(fullPath, body)
+    this._assetsSaves.push(write)
+    await write
     return fullPath
+  }
+
+  async completed(): Promise<void> {
+    await this._completed.promise
+    await Promise.all(this._assetsSaves)
   }
 
   getBasePath(): Promise<string> {
@@ -61,8 +75,9 @@ export class TempExporter extends EventEmitter implements Exporter {
      * do it all in once via SourceDesign entity.
      */
     const saveImages = Promise.all(
-      design.images.map((image) => {
-        return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(image.path)), image.rawValue)
+      design.images.map(async (image) => {
+        const rawData = await image.getImageData()
+        return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(image.path)), rawData)
       })
     )
     const [manifest, interactions, resources, images] = await Promise.all([
@@ -97,6 +112,7 @@ export class TempExporter extends EventEmitter implements Exporter {
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
     const manifestPath = await this._save(TempExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest.manifest))
+    this._completed.resolve()
     this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }

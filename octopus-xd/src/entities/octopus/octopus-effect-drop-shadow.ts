@@ -38,7 +38,7 @@ export default class OctopusEffectDropShadow {
      */
 
     return {
-      type: 'DROP_SHADOW' as const,
+      type: 'DROP_SHADOW',
       visible,
       blendMode: defaults.BLEND_MODE,
       shadow: {
@@ -50,7 +50,7 @@ export default class OctopusEffectDropShadow {
         choke: defaults.EFFECTS.SHADOW_CHOKE,
         color: parseXDColor(color),
       },
-      basis: 'BODY' /** @TODO deduct later */,
-    }
+      basis: 'BODY',
+    } as const
   }
 }

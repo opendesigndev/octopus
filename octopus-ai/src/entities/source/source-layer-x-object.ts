@@ -1,7 +1,6 @@
 import SourceLayerCommon from '../source/source-layer-common'
 
 import type { SourceLayerParent } from '../source/source-layer-common'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
 
