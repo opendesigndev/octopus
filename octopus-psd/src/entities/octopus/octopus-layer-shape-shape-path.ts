@@ -73,15 +73,26 @@ export class OctopusLayerShapeShapePath {
     return result
   }
 
-  private _getPathCompound(pathComponents: SourcePathComponent[]): Octopus['CompoundPath'] {
-    const rest = [...pathComponents]
-    const last = rest.pop() as SourcePathComponent
-    return {
-      ...this._getPathBase(pathComponents),
-      type: 'COMPOUND',
-      op: this._getCompoundOperation(last?.shapeOperation),
-      paths: [this._convert(rest), this._convert([last])], // TODO: Add optimization to make the compound tree more flat
+  private _splitByOperation(pathComponents: SourcePathComponent[]) {
+    let index = pathComponents.length - 1
+    const operation = this._getCompoundOperation(pathComponents[index]?.shapeOperation)
+    const same: SourcePathComponent[] = []
+    for (; index >= 0; index--) {
+      const last = pathComponents[index]
+      const lastOp = this._getCompoundOperation(last?.shapeOperation)
+      if (lastOp !== operation) break
+      same.push(last)
     }
+    const rest = index > 0 ? pathComponents.slice(0, index + 1) : []
+    return [same, rest]
+  }
+
+  private _getPathCompound(pathComponents: SourcePathComponent[]): Octopus['CompoundPath'] {
+    const [same, rest] = this._splitByOperation(pathComponents)
+    const op = this._getCompoundOperation(same[0]?.shapeOperation)
+    const sameConverted = same.map((path) => this._convert([path]))
+    const paths = rest.length ? [this._convert(rest), ...sameConverted] : sameConverted
+    return { ...this._getPathBase(pathComponents), type: 'COMPOUND', op, paths }
   }
 
   private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
