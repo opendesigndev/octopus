@@ -81,7 +81,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       transform: { a: 1, b: 0, c: 0, d: 1, tx, ty },
       meta: { ux: { hasCustomName: true } },
       shape: { type: 'rect', x: 0, y: 0, width, height },
-      visible: false /** @TODO confirm */,
+      visible: false,
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -103,7 +103,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
       meta: { ux: { hasCustomName: true } },
       shape: { type: 'rect', x: 0, y: 0, width, height },
-      visible: false /** @TODO confirm */,
+      visible: false,
     } as RawShapeLayer
 
     const artificialSourceLayer = createSourceLayer({ layer: rect, parent: this._sourceLayer })
@@ -125,7 +125,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
         ? mask
         : {
             ...mask,
-            visible: false /** @TODO confirm */,
+            visible: false,
           }
 
     const sourceLayer = createSourceLayer({
@@ -168,7 +168,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     return {
       type: 'MASK_GROUP',
       mask: octopusMask,
-      maskBasis: 'BODY' /** @TODO infer later */,
+      maskBasis: 'BODY',
       layers: this._layers.map((layer) => layer.convert()).filter(Boolean) as Octopus['Layer'][],
     } as const
   }

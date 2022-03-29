@@ -2,7 +2,7 @@ import path from 'path'
 import chalk from 'chalk'
 
 import { getPkgLocation } from './utils/pkg-location'
-import { OctopusXDConverter, TempExporter } from '../src'
+import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
@@ -62,8 +62,12 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
     file://${manifest}`)
   })
 
-  const converter = await OctopusXDConverter.fromFile({ filename: options.filename })
+  const reader = new XDFileReader({ path: options.filename, storeAssetsOnFs: true })
+  const sourceDesign = await reader.sourceDesign
+  const converter = new OctopusXDConverter({ sourceDesign })
   converter.convertDesign({ exporter })
+  await exporter.completed()
+  await reader.cleanup()
 }
 
 async function convert() {

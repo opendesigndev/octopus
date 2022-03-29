@@ -18,8 +18,8 @@ export type RawShapeRect = {
 export type RawShapeCompound = {
   type?: 'compound'
   path?: string
-  operation?: 'add' /** @TODO extend enum */
-  children?: RawShapeLayer[] /** @TODO maybe not only shape layers */
+  operation?: 'add' | 'subtract' | 'intersect' | 'exclude'
+  children?: RawShapeLayer[]
 }
 
 export type RawShapeEllipse = {
@@ -63,14 +63,12 @@ export type RawShapePolygon = {
   'uxdesign#height'?: number
 }
 
-export type RawShape =
-  | RawShapeRect
-  | RawShapeCompound
-  | RawShapeEllipse
-  | RawShapeCircle
-  | RawShapeLine
-  | RawShapePath
-  | RawShapePolygon
+export type RawShapeGeneral = {
+  winding?: 'evenodd' | 'nonzero'
+}
+
+export type RawShape = RawShapeGeneral &
+  (RawShapeRect | RawShapeCompound | RawShapeEllipse | RawShapeCircle | RawShapeLine | RawShapePath | RawShapePolygon)
 
 export type RawShapeLayer = RawLayerCommon & {
   type?: 'shape'

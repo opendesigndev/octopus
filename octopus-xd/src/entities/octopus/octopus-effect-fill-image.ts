@@ -130,7 +130,7 @@ export default class OctopusEffectFillImage {
 
     const ref = {
       type: 'RESOURCE',
-      value: imagePath ?? uid /** @TODO seems like absolute paths don't work */,
+      value: imagePath ?? uid,
     } as const
 
     const scaleBehavior = this._source.scaleBehavior

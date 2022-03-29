@@ -1,3 +1,7 @@
+import fsp from 'fs/promises'
+import os from 'os'
+import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
 import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
 
 import { unzipArray } from './unzip'
@@ -11,10 +15,13 @@ import type { RawSourceInteractions } from '../../../entities/source/source-inte
 
 type XDFileReaderOptions = {
   path: string
+  storeAssetsOnFs?: boolean
 }
 
 export class XDFileReader {
   private _path: string
+  private _storeAssetsOnFs: boolean
+  private _tempAssetsLocation: Promise<string | null>
   private _sourceDesign: Promise<SourceDesign>
 
   static ARTBOARDS = /artwork\/artboard-/
@@ -26,6 +33,8 @@ export class XDFileReader {
 
   constructor(options: XDFileReaderOptions) {
     this._path = options.path
+    this._storeAssetsOnFs = options.storeAssetsOnFs ?? false
+    this._tempAssetsLocation = this._initTempAssetsLocation()
     this._sourceDesign = this._initSourceDesign(options.path)
   }
 
@@ -35,6 +44,13 @@ export class XDFileReader {
 
   get sourceDesign(): Promise<SourceDesign> {
     return this._sourceDesign
+  }
+
+  private async _initTempAssetsLocation() {
+    if (!this._storeAssetsOnFs) return Promise.resolve(null)
+    const tmpPath = path.join(os.tmpdir(), uuidv4())
+    await fsp.mkdir(tmpPath, { recursive: true })
+    return tmpPath
   }
 
   private async _initSourceDesign(path: string) {
@@ -69,7 +85,7 @@ export class XDFileReader {
     return structure
   }
 
-  private _fromSourceTree(sourceTree: ArrayBuffersSourceTree): SourceDesign {
+  private async _fromSourceTree(sourceTree: ArrayBuffersSourceTree): Promise<SourceDesign> {
     if (!sourceTree.manifest?.content) {
       throw new Error('Missing "manifest" ArrayBuffer entry from the source design.')
     }
@@ -81,6 +97,25 @@ export class XDFileReader {
     if (!sourceTree.resources?.content) {
       throw new Error('Missing "resources" ArrayBuffer entry from the source design.')
     }
+
+    const images = Promise.all(
+      sourceTree.images.map(async (entry) => {
+        const tmpPath = await this._tempAssetsLocation
+        if (this._storeAssetsOnFs && typeof tmpPath === 'string') {
+          const tmpFile = path.join(tmpPath, uuidv4())
+          await fsp.writeFile(tmpFile, Buffer.from(entry.content))
+          return {
+            path: entry.path,
+            getImageData: () => fsp.readFile(tmpFile),
+          }
+        }
+
+        return {
+          path: entry.path,
+          getImageData: () => Promise.resolve(Buffer.from(entry.content)),
+        }
+      })
+    )
 
     const options = {
       manifest: {
@@ -95,12 +130,7 @@ export class XDFileReader {
         path: sourceTree.interactions?.path,
         rawValue: JSONFromTypedArray(sourceTree.interactions?.content) as RawSourceInteractions,
       },
-      images: sourceTree.images.map((entry) => {
-        return {
-          path: entry.path,
-          rawValue: Buffer.from(entry.content),
-        }
-      }),
+      images: await images,
       artboards: sourceTree.artboards.map((entry) => {
         return {
           path: entry.path,
@@ -110,5 +140,13 @@ export class XDFileReader {
     }
 
     return new SourceDesign(options)
+  }
+
+  async cleanup(): Promise<void> {
+    const tempDir = await this._tempAssetsLocation
+    if (typeof tempDir === 'string') {
+      await fsp.rm(tempDir, { recursive: true, force: true })
+    }
+    return
   }
 }

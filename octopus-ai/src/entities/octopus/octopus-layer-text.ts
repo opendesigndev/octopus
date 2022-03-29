@@ -1,8 +1,6 @@
-import isEqual from 'lodash/isEqual'
 import flatten from 'lodash/flatten'
-import pick from 'lodash/pick'
-import without from 'lodash/without'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
@@ -19,11 +17,6 @@ import type { AdditionalTextDataText } from '../../typings/additional-text-data'
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
   layerSequence: LayerSequence
-}
-
-type Range = {
-  from: number
-  to: number
 }
 
 export default class OctopusLayerText extends OctopusLayerCommon {
@@ -93,67 +86,6 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       }
 
       return { ...octopusSubText, defaultStyle: { ...octopusSubText.defaultStyle, lineHeight } }
-    })
-  }
-
-  private _areStylesEqual(style1: Octopus['StyleRange'], style2: Octopus['StyleRange']): boolean {
-    return isEqual(
-      pick(style1, without(Object.keys(style1), 'ranges')),
-      pick(style2, without(Object.keys(style2), 'ranges'))
-    )
-  }
-
-  private _getDuplicatesMap(styles: Octopus['StyleRange'][]): Map<Octopus['StyleRange'], Octopus['StyleRange'][]> {
-    return styles.reduce((dups, style) => {
-      const uniqueStyles = [...dups.keys()]
-      const uniqueEntry = uniqueStyles.find((unique) => this._areStylesEqual(unique, style))
-      if (uniqueEntry) {
-        const uniqueEntryArray = dups.get(uniqueEntry) as Octopus['StyleRange'][]
-        uniqueEntryArray.push(style)
-      } else {
-        dups.set(style, [style])
-      }
-      return dups
-    }, new Map<Octopus['StyleRange'], Octopus['StyleRange'][]>())
-  }
-
-  private _getUnifiedRanges(ranges: Range[]): Range[] {
-    const fromArray = ranges.map(({ from }) => from).sort((a, b) => a - b)
-    const toArray = ranges.map(({ to }) => to).sort((a, b) => a - b)
-    const rangesArray = []
-
-    let range = { from: fromArray[0], to: toArray[0] }
-
-    for (let toIndex = 0; toIndex < ranges.length; toIndex += 1) {
-      const from = fromArray[toIndex]
-      const to = toArray[toIndex]
-
-      if (from <= range.to) {
-        range.to = to
-      } else {
-        rangesArray.push(range)
-        range = { from, to }
-      }
-
-      if (toIndex === toArray.length - 1) {
-        rangesArray.push(range)
-      }
-    }
-
-    return rangesArray
-  }
-
-  private _getUnifiedStyles(styles: Octopus['StyleRange'][]): Octopus['StyleRange'][] {
-    const duplicates = this._getDuplicatesMap(styles)
-    return [...duplicates.keys()].map((style) => {
-      const equalStyles = duplicates.get(style) as Octopus['StyleRange'][]
-
-      return {
-        ...style,
-        ranges: this._getUnifiedRanges(
-          equalStyles.reduce((ranges: Range[], style: Octopus['StyleRange']) => [...ranges, ...style.ranges], [])
-        ),
-      }
     })
   }
 
@@ -231,7 +163,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       {} as Octopus['Text']
     )
 
-    const octopusTextWithStyles = { ...mergedText, styles: this._getUnifiedStyles(asArray(mergedText.styles)) }
+    const octopusTextWithStyles = { ...mergedText, styles: asArray(mergedText.styles) }
     const frame = this._getFrame()
 
     return frame ? { ...octopusTextWithStyles, frame } : octopusTextWithStyles
@@ -256,7 +188,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
     return {
       type: 'TEXT',
-      text,
+      text: normalizeText(text),
       name,
     }
   }
