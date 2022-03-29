@@ -1,5 +1,4 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 import OctopusLayerCommon from './octopus-layer-common'
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
@@ -9,20 +8,10 @@ import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type SourceLayerGroup from '../source/source-layer-group'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type SourceLayerText from '../source/source-layer-text'
-import type { SourceLayer } from '../../factories/create-source-layer'
-import AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
   sourceLayers: SourceLayerGroup[]
-}
-
-type GetSourceLayerGroupingOptions = {
-  sourceLayer: SourceLayer
-  index: number
-  sourceLayers: SourceLayer[]
-  additionalTextDataParser: Nullable<AdditionalTextDataParser>
 }
 
 export default class OctopusLayerGroup extends OctopusLayerCommon {
@@ -34,44 +23,15 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
     this._layers = this._initLayers()
   }
 
-  private _getSourceLayerGrouping({
-    sourceLayer,
-    index,
-    sourceLayers,
-    additionalTextDataParser,
-  }: GetSourceLayerGroupingOptions): Nullable<SourceLayer[]> {
-    if (sourceLayer.type !== 'TextGroup' || !additionalTextDataParser) {
-      return [sourceLayer]
-    }
-
-    const sourceLayerTextGroup = additionalTextDataParser.getTextGrouping(
-      sourceLayer as SourceLayerText,
-      sourceLayers[index + 1]
-    )
-    if (!sourceLayerTextGroup) {
-      return
-    }
-
-    return sourceLayerTextGroup
-  }
-
   private _initLayers(): OctopusLayer[] {
-    const additionalTextDataParser = this.parentArtboard.additionalTextDataParser
-    return this._sourceLayer.children.reduce<OctopusLayer[]>((layers, sourceLayer, index, array) => {
-      const groupedLayers = this._getSourceLayerGrouping({
-        additionalTextDataParser,
-        sourceLayer,
-        sourceLayers: array,
-        index,
-      })
+    const sourceLayerGroupingService = this.parentArtboard.sourceLayerGroupingService
 
-      if (!groupedLayers) {
-        return layers
-      }
+    const groupedLayers = sourceLayerGroupingService?.getLayerSequences(this._sourceLayer.children)
 
+    return groupedLayers.reduce<OctopusLayer[]>((layers, layerSequence) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layers: groupedLayers,
+        layerSequence,
       })
 
       return octopusLayer ? [...layers, octopusLayer] : layers

@@ -2,8 +2,7 @@ import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
 
 import type { Octopus } from '../../../typings/octopus'
 import type { OctopusAIConverter } from '../../..'
-import type AdditionalTextDataParser from '../additional-text-data-parser'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type SourceLayerGroupingService from '../source-layer-grouping-service'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string
@@ -11,25 +10,25 @@ export type ArtboardConversionOptions = {
 
 export type ArtboardConverterOptions = ArtboardConversionOptions & {
   octopusAIConverter: OctopusAIConverter
-  additionalTextDataParser: Nullable<AdditionalTextDataParser>
+  sourceLayerGroupingService: SourceLayerGroupingService
 }
 
 export default class ArtboardConverter {
   private _targetArtboardId: string
   private _octopusAIConverter: OctopusAIConverter
-  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
+  private _sourceLayerGroupingService: SourceLayerGroupingService
 
   constructor(options: ArtboardConverterOptions) {
     this._octopusAIConverter = options.octopusAIConverter
     this._targetArtboardId = options.targetArtboardId
-    this._additionalTextDataParser = options.additionalTextDataParser
+    this._sourceLayerGroupingService = options.sourceLayerGroupingService
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
     return new OctopusArtboard({
       octopusAIConverter: this._octopusAIConverter,
       targetArtboardId: this._targetArtboardId,
-      additionalTextDataParser: this._additionalTextDataParser,
+      sourceLayerGroupingService: this._sourceLayerGroupingService,
     }).convert()
   }
 }

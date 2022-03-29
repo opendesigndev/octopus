@@ -10,5 +10,5 @@ export type AdditionalTextDataText = Partial<{
 }>
 
 export type AdditionalTextData = {
-  texts: AdditionalTextDataText[]
+  texts?: AdditionalTextDataText[]
 }

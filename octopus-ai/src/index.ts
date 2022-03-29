@@ -8,7 +8,7 @@ import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
 import { AIFileReader } from './services/conversion/ai-file-reader'
 import OctopusManifest from './entities/octopus/octopus-manifest'
-import AdditionalTextDataParser from './services/conversion/additional-text-data-parser'
+import SourceLayerGroupingService from './services/conversion/source-layer-grouping-service'
 
 import type { Logger, SourceImage } from './typings'
 import type { Octopus } from './typings/octopus'
@@ -16,7 +16,6 @@ import type SourceDesign from './entities/source/source-design'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { OctopusManifestReport } from './typings/manifest'
 import type { Exporter } from './services/conversion/exporter'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type ConvertDesignOptions = {
   exporter?: Exporter
@@ -51,7 +50,7 @@ export class OctopusAIConverter {
   private _sentry: ReturnType<typeof createSentry>
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
-  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
+  private _sourceLayerGroupingService: SourceLayerGroupingService
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
@@ -76,7 +75,7 @@ export class OctopusAIConverter {
     this._octopusManifest = new OctopusManifest({ octopusAIConverter: this })
 
     const additionalTextData = options.sourceDesign.additionalTextData
-    this._additionalTextDataParser = additionalTextData ? new AdditionalTextDataParser(additionalTextData) : null
+    this._sourceLayerGroupingService = new SourceLayerGroupingService(additionalTextData)
   }
 
   get sourceDesign(): SourceDesign {
@@ -105,7 +104,7 @@ export class OctopusAIConverter {
       const value = await new ArtboardConverter({
         targetArtboardId,
         octopusAIConverter: this,
-        additionalTextDataParser: this._additionalTextDataParser,
+        sourceLayerGroupingService: this._sourceLayerGroupingService,
       }).convert()
 
       return {

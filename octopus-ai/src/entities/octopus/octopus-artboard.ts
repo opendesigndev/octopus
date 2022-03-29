@@ -8,20 +8,19 @@ import type SourceResources from '../source/source-resources'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type SourceDesign from '../source/source-design'
 import type SourceArtboard from '../source/source-artboard'
-import type AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type SourceLayerGroupingService from '../../services/conversion/source-layer-grouping-service'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
-  additionalTextDataParser: Nullable<AdditionalTextDataParser>
+  sourceLayerGroupingService: SourceLayerGroupingService
 }
 
 export default class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
-  private _additionalTextDataParser: Nullable<AdditionalTextDataParser>
+  private _sourceLayerGroupingService: SourceLayerGroupingService
 
   constructor(options: OctopusArtboardOptions) {
     const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
@@ -32,16 +31,19 @@ export default class OctopusArtboard {
 
     this._octopusAIConverter = options.octopusAIConverter
     this._sourceArtboard = artboard
-    this._additionalTextDataParser = options.additionalTextDataParser
+    this._sourceLayerGroupingService = options.sourceLayerGroupingService
     this._layers = this._initLayers()
   }
 
   private _initLayers() {
-    return asArray(this._sourceArtboard?.children).reduce((layers, sourceLayer) => {
+    const groupedLayers = this._sourceLayerGroupingService.getLayerSequences(asArray(this._sourceArtboard.children))
+
+    return groupedLayers.reduce((layers, layerSequence) => {
       const octopusLayer = createOctopusLayer({
         parent: this,
-        layers: [sourceLayer],
+        layerSequence,
       })
+
       return octopusLayer ? [...layers, octopusLayer] : layers
     }, [])
   }
@@ -57,8 +59,8 @@ export default class OctopusArtboard {
     return this._sourceArtboard.resources
   }
 
-  get additionalTextDataParser(): Nullable<AdditionalTextDataParser> {
-    return this._additionalTextDataParser
+  get sourceLayerGroupingService(): SourceLayerGroupingService {
+    return this._sourceLayerGroupingService
   }
 
   get sourceDesign(): SourceDesign {

@@ -1,27 +1,26 @@
 import OctopusLayerGroup from '../entities/octopus/octopus-layer-group'
-// import OctopusLayerMaskGroup from '../entities-octopus/octopus-layer-maskgroup'
 import OctopusLayerShape from '../entities/octopus/octopus-layer-shape'
 import OctopusLayerText from '../entities/octopus/octopus-layer-text'
 
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type SourceLayerGroup from '../entities/source/source-layer-group'
 import type SourceLayerShape from '../entities/source/source-layer-shape'
-import type SourceLayerText from '../entities/source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { LayerSequence } from '../services/conversion/source-layer-grouping-service'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText
 //export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText | OctopusLayerMaskGroup
 
 type CreateOctopusLayerOptions = {
-  layers: SourceLayer[]
+  layerSequence: LayerSequence
   parent: OctopusLayerParent
 }
 
-function createOctopusLayerGroup({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
+function createOctopusLayerGroup({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   return new OctopusLayerGroup({
     parent,
-    sourceLayers: layers as SourceLayerGroup[],
+    sourceLayers: layerSequence.sourceLayers as SourceLayerGroup[],
   })
 }
 
@@ -40,24 +39,24 @@ function createOctopusLayerGroup({ layers, parent }: CreateOctopusLayerOptions):
 //   })
 // }
 
-function createOctopusLayerShape({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+function createOctopusLayerShape({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   return new OctopusLayerShape({
     parent,
-    sourceLayers: layers as SourceLayerShape[],
+    sourceLayers: layerSequence.sourceLayers as SourceLayerShape[],
   })
 }
 
-function createOctopusLayerText({ layers, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+function createOctopusLayerText({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerText {
   return new OctopusLayerText({
     parent,
-    sourceLayers: layers as SourceLayerText[],
+    layerSequence,
   })
 }
 
 type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
-  const [layer] = options.layers
+  const [layer] = options.layerSequence.sourceLayers
 
   if (!layer) {
     return null

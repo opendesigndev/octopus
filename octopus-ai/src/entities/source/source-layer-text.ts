@@ -3,6 +3,7 @@ import isEqual from 'lodash/isEqual'
 
 import SourceLayerSubText from './source-layer-sub-text'
 import SourceLayerCommon from './source-layer-common'
+import { logger } from '../../services/instances/logger'
 
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawTextLayer } from '../../typings/raw'
@@ -42,7 +43,7 @@ export default class SourceLayerText extends SourceLayerCommon {
     })
 
     if (!equalDescendantMatrices) {
-      console.error('initTexts', 'Different transform matrix in the same text group')
+      logger.warn('initTexts', 'Different transform matrix in the same text group')
     }
 
     return textSubLayers

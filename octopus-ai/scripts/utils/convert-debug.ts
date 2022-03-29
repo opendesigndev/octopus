@@ -52,6 +52,7 @@ export async function convertDebug(): Promise<Nullable<string>> {
     if (error) {
       console.log(`${chalk.red('Error converting artboard')}`)
       console.table({ id, name, time })
+      console.error(error)
       return
     }
 

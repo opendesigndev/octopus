@@ -7,7 +7,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
 import { removeTrailingHyphen } from '../../utils/text'
-import AdditionalTextDataParser from '../../services/conversion/additional-text-data-parser'
+import SourceLayerGroupingService, { LayerSequence } from '../../services/conversion/source-layer-grouping-service'
 
 import type { Octopus } from '../../typings/octopus'
 import type SourceLayerText from '../source/source-layer-text'
@@ -18,7 +18,7 @@ import type { AdditionalTextDataText } from '../../typings/additional-text-data'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
-  sourceLayers: SourceLayerText[]
+  layerSequence: LayerSequence
 }
 
 type Range = {
@@ -35,23 +35,20 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _octopusTextValue: Nullable<string>
   private _additionalTextDataText: Nullable<AdditionalTextDataText>
 
-  constructor(options: OctopusLayerTextOptions) {
-    super(options)
-    this._sourceLayers = options.sourceLayers
+  constructor({ layerSequence, parent }: OctopusLayerTextOptions) {
+    const { additionalTextDataText, sourceLayers } = layerSequence
+    super({ sourceLayers: sourceLayers, parent })
+    this._sourceLayers = sourceLayers as SourceLayerText[]
 
     const octopusSubTexts = flatten(
       asArray(
-        options.sourceLayers.map((sourceLayer) => {
+        this._sourceLayers.map((sourceLayer) => {
           return sourceLayer.texts?.map((sourceLayer) => new OctopusSubText({ sourceLayer }).convert())
         })
       )
     ).filter((octopusSubText) => !!octopusSubText) as Octopus['Text'][]
-    // console.error(
-    //   '___octopusSubtexts',
-    //   octopusSubTexts.map((subtext) => subtext.value)
-    // )
     this._octopusSubTexts = this._getSubtextsWithLineHeights([...octopusSubTexts])
-    const additionalTextDataText = this.parentArtboard.additionalTextDataParser?.getOctopusText(this._sourceLayers)
+
     this._additionalTextDataText = additionalTextDataText
     this._octopusTextValue = additionalTextDataText?.content
   }
@@ -175,7 +172,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       return
     }
 
-    if (AdditionalTextDataParser.OCTOPUS_EXTRA_CHARACTERS.includes(this._octopusTextValue[octopusStringLength])) {
+    if (SourceLayerGroupingService.OCTOPUS_EXTRA_CHARACTERS.includes(this._octopusTextValue[octopusStringLength])) {
       octopusStringLength = octopusStringLength + 1
     }
     return octopusStringLength
@@ -201,6 +198,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _getFrame(): Nullable<Octopus['TextFrame']> {
     const width = this._additionalTextDataText?.frame?.width
     const height = this._additionalTextDataText?.frame?.height
+
     if (!width || !height) {
       return
     }
