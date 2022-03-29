@@ -18,6 +18,8 @@ type OctopusFillGradientOptions = {
   fill: SourceEffectFill
 }
 
+type GradientType = Octopus['FillGradient']['gradient']['type'] | 'REFLECTED'
+
 export class OctopusEffectFillGradient {
   private _parentLayer: OctopusLayerBase
   private _fill: SourceEffectFill
@@ -27,6 +29,7 @@ export class OctopusEffectFillGradient {
     radial: 'RADIAL',
     Angl: 'ANGULAR',
     Dmnd: 'DIAMOND',
+    reflected: 'REFLECTED',
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
@@ -46,7 +49,7 @@ export class OctopusEffectFillGradient {
     return this._fill
   }
 
-  get type(): Octopus['FillGradient']['gradient']['type'] | null {
+  get type(): GradientType | null {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
@@ -65,7 +68,9 @@ export class OctopusEffectFillGradient {
     const color = convertColor(stop?.color, this._fill.opacity)
     const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
     const position = location / STOP_MAX_LOCATION
-    return { color, position }
+    const interpolation = 'LINEAR'
+    const interpolationParameter = 1
+    return { color, interpolation, interpolationParameter, position }
   }
 
   private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
@@ -78,8 +83,13 @@ export class OctopusEffectFillGradient {
     return stops.map((stop) => this._getGradientStop(stop))
   }
 
-  private _getGradient(type: Octopus['FillGradient']['gradient']['type']): Octopus['FillGradient']['gradient'] {
-    const stops = this._gradientStops
+  private _getGradient(type: GradientType): Octopus['FillGradient']['gradient'] {
+    const stops = this._gradientStops ?? []
+    if (type === 'REFLECTED') {
+      const stops_left = [...stops].reverse().map((stop) => ({ ...stop, position: (1 - stop.position) / 2 }))
+      const stops_right = [...stops].map((stop) => ({ ...stop, position: (1 + stop.position) / 2 }))
+      return { type: 'LINEAR', stops: [...stops_left, ...stops_right] }
+    }
     return { type, stops }
   }
 
@@ -147,7 +157,8 @@ export class OctopusEffectFillGradient {
 
   private get _positioning(): Octopus['FillPositioning'] {
     const type = this.type
-    const transform = type === 'LINEAR' ? this._transformLinear : this._transformRadial
+    const isLinear = type === 'LINEAR' || type === 'REFLECTED'
+    const transform = isLinear ? this._transformLinear : this._transformRadial
     return {
       layout: 'FILL',
       origin: 'LAYER',
