@@ -44,7 +44,7 @@ function wrapWithBitmapMaskLayer<T extends OctopusLayer>({
   const raw = createRawBitmapMaskLayer({ width, height, imageName: bitmapMask })
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
   const maskAdapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer: maskSourceLayer })
-  // maskAdapter.setFillBlendMode('BRIGHTNESS_TO_ALPHA') // TODO add when https://gitlab.avcd.cz/backend/rendering/-/issues/506 is implemented
+  maskAdapter.setFillBlendMode('BRIGHTNESS_TO_ALPHA')
   const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
   return new OctopusLayerMaskGroup({
     parent,
