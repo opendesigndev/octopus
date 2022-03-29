@@ -3,7 +3,7 @@ import type { RawLayerBackground } from './layer-background'
 import type { RawLayerSection } from './layer-section'
 import type { RawLayerShape } from './layer-shape'
 import type { RawLayerText } from './layer-text'
-import type { RawBlendOptions, RawBounds } from './shared'
+import type { RawBlendOptions, RawBounds, RawColor } from './shared'
 import type { RawLayerEffects } from './effects'
 import type { RawPathComponent } from './path-component'
 
@@ -19,7 +19,15 @@ export type RawPath = {
   pathComponents?: RawPathComponent[]
 }
 
+export type RawLayerArtboard = {
+  artboardBackgroundType?: number
+  artboardPresetName?: string
+  artboardRect?: RawBounds
+  color?: RawColor
+}
+
 export type RawLayerCommon = {
+  artboard?: RawLayerArtboard
   bounds?: RawBounds
   blendOptions?: RawBlendOptions
   clipped?: boolean

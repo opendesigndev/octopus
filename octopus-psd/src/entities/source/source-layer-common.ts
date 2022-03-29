@@ -1,8 +1,8 @@
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import { SourceArtboard } from './source-artboard'
 import type { SourceLayerSection } from './source-layer-section'
-import { getBoundsFor, getUnitRatioFor } from '../../utils/source'
-import { SourceBounds } from '../../typings/source'
+import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
+import type { SourceBounds, SourceColor } from '../../typings/source'
 import { SourceLayerEffects } from './source-effects-layer'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { SourceEntity } from './source-entity'
@@ -49,12 +49,30 @@ export class SourceLayerCommon extends SourceEntity {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
+  get artboardColor(): SourceColor | null {
+    switch (this._rawValue.artboard?.artboardBackgroundType) {
+      case 1: // white
+        return getColorFor({ blue: 255, green: 255, red: 255 })
+      case 2: // black
+        return getColorFor({ blue: 0, green: 0, red: 0 })
+      case 3: // transparent
+        return null
+      case 4: // other
+        return getColorFor(this._rawValue.artboard?.color)
+    }
+    return null
+  }
+
+  get isArtboard(): boolean {
+    return this._rawValue.artboard !== undefined
+  }
+
   get visible(): boolean {
     return this._rawValue.visible ?? true
   }
 
   get bounds(): SourceBounds {
-    return getBoundsFor(this._rawValue.bounds)
+    return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : getBoundsFor(this._rawValue.bounds)
   }
 
   get opacity(): number {
