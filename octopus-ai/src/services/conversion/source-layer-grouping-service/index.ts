@@ -174,8 +174,8 @@ export default class SourceLayerGroupingService {
 
   private _addBestMatchToLastTextLayerSequence(): void {
     const bestMatch = this._getBestMatch()
-
     const lastTextLayerSequence = this._lastTextLayerSequence
+
     if (bestMatch && typeof bestMatch.index === 'number' && lastTextLayerSequence) {
       this._eliminateMatchFromAdditionalTextData(bestMatch)
       lastTextLayerSequence.additionalTextDataText = {

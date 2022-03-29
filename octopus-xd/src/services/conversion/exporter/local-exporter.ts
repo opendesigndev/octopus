@@ -44,6 +44,7 @@ export class LocalExporter implements Exporter {
     const write = fsp.writeFile(fullPath, body)
     this._assetsSaves.push(write)
     await write
+
     return fullPath
   }
 

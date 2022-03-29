@@ -2,11 +2,13 @@ import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 import { promises as fsp } from 'fs'
 import EventEmitter from 'events'
+import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 import type { Exporter } from '.'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
 import type SourceDesign from '../../../entities/source/source-design'
 import type SourceArtboard from '../../../entities/source/source-artboard'
+import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
   id?: string
@@ -16,8 +18,10 @@ type TempExporterOptions = {
 type SourceResources = { metadata: string; images: string[]; ocProperties: string }
 
 export class TempExporter extends EventEmitter implements Exporter {
-  _outputDir: Promise<string>
-  _tempDir: string
+  private _outputDir: Promise<string>
+  private _tempDir: string
+  private _completed: DetachedPromiseControls<void>
+  private _assetsSaves: Promise<unknown>[]
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
@@ -29,6 +33,8 @@ export class TempExporter extends EventEmitter implements Exporter {
     super()
     this._tempDir = options.tempDir
     this._outputDir = this._initOutputDir(options)
+    this._assetsSaves = []
+    this._completed = detachPromiseControls<void>()
   }
 
   private _stringify(value: unknown) {
@@ -44,7 +50,11 @@ export class TempExporter extends EventEmitter implements Exporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    await fsp.writeFile(fullPath, body)
+    const write = fsp.writeFile(fullPath, body)
+    this._assetsSaves.push(write)
+
+    await write
+
     return path.resolve('./' + fullPath)
   }
 
@@ -104,6 +114,8 @@ export class TempExporter extends EventEmitter implements Exporter {
       TempExporter.OCTOPUS_MANIFEST_NAME,
       this._stringify(designConversionResult.manifest)
     )
+
+    this._completed.resolve()
     this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }

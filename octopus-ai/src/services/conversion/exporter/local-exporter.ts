@@ -42,9 +42,9 @@ export class LocalExporter implements Exporter {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
     const save = fsp.writeFile(fullPath, body)
-
     this._assetsSaves.push(save)
     await save
+
     return fullPath
   }
 
