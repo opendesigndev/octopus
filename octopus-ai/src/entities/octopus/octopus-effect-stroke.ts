@@ -25,11 +25,14 @@ export default class OctopusEffectStroke {
     this._sourceLayer = options.sourceLayer
   }
 
-  private _parseDashing() {
-    const dashing = this._sourceLayer.dashing
-    const dashOffset = this._sourceLayer.dashOffset
+  private _parseDashing(): number[] {
+    const dashing = [...this._sourceLayer.dashing]
 
-    return { dashing, dashOffset }
+    if (dashing.length === 1) {
+      dashing.push(dashing[0])
+    }
+
+    return dashing
   }
 
   private get _lineJoin(): LineJoin {
@@ -41,8 +44,8 @@ export default class OctopusEffectStroke {
   }
 
   convert(): Octopus['VectorStroke'] | null {
-    const dashProperties = this._parseDashing()
-    const style = dashProperties.dashing ? 'DASHED' : 'SOLID'
+    const dashing = this._parseDashing()
+    const style = dashing.length ? 'DASHED' : 'SOLID'
     const colorSpaceValue = this._resources.getColorSpaceValue(this._sourceLayer.colorSpaceStroking ?? '') ?? ''
 
     const fill = new OctopusEffectColorFill({
@@ -59,7 +62,7 @@ export default class OctopusEffectStroke {
       style,
       lineJoin: this._lineJoin,
       lineCap: this._lineCap,
-      ...dashProperties,
+      dashing,
     }
   }
 }

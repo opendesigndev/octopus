@@ -76,10 +76,6 @@ export default class SourceLayerShape extends SourceLayerCommon {
     return this.dashPattern?.[0] ?? []
   }
 
-  get dashOffset(): number {
-    return this.dashPattern?.[1] ?? 0
-  }
-
   get fillRule(): Nullable<RawShapeLayerFillRule> {
     return this._rawValue.FillRule
   }
