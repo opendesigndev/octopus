@@ -30,7 +30,7 @@ export class OctopusLayerShapeShapePath {
     return this._parentLayer.sourceLayer
   }
 
-  private get isRectangle(): boolean {
+  private isRectangle(pathComponents: SourcePathComponent[]): boolean {
     if (this.sourceLayer.type === 'layer') return true
     const sourceLayer = this.sourceLayer as SourceLayerShape
 
@@ -43,12 +43,17 @@ export class OctopusLayerShapeShapePath {
     const subpathList = component?.subpathListKey ?? []
     const points = subpathList[0]?.points ?? []
     const pointsMapped = points?.map((point) => point.anchor)
-    return type === 'roundedRect' ? isRoundedRectangle(pointsMapped) : isRectangle(pointsMapped)
+
+    if (type !== 'roundedRect') return isRectangle(pointsMapped)
+
+    const { bottomLeft, bottomRight, topLeft, topRight } = pathComponents[0].origin.radii
+    const hasSameCornerRadii = [bottomLeft, bottomRight, topLeft, topRight].every((val, _i, arr) => val === arr[0])
+    return isRoundedRectangle(pointsMapped) && hasSameCornerRadii
   }
 
   private _getShapeType(pathComponents: SourcePathComponent[]): Octopus['PathType'] {
     if (pathComponents.length > 1) return 'COMPOUND'
-    if (this.isRectangle) return 'RECTANGLE'
+    if (this.isRectangle(pathComponents)) return 'RECTANGLE'
     return 'PATH'
   }
 
@@ -87,9 +92,7 @@ export class OctopusLayerShapeShapePath {
     const ty = top - layerTy
     const transform = createDefaultTranslationMatrix([tx, ty])
     const rectangle = { x0: 0, y0: 0, x1: right - left, y1: bottom - top }
-    const { bottomLeft, bottomRight, topLeft, topRight } = rect.origin.radii
-    const cornerRadii = [topLeft, topRight, bottomRight, bottomLeft]
-    const cornerRadius = cornerRadii[0] // TODO
+    const cornerRadius = rect.origin.radii.topLeft
     return { ...this._getPathBase(pathComponents), type: 'RECTANGLE', transform, rectangle, cornerRadius }
   }
 
