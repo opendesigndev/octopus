@@ -16,6 +16,7 @@ export type RawLayerCommon = {
   meta?: {
     ux?: {
       fixed?: boolean
+      states?: RawLayer[]
     }
   }
   style?: RawStyle

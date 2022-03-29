@@ -4,6 +4,7 @@ import { OctopusLayerParent } from '../../typings/octopus-entities'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { SourceLayer } from '../../factories/create-source-layer'
 import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import type { LayerSpecifics } from './octopus-layer-common'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -155,7 +156,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
         parent: this,
         layer: sourceLayer,
       })
-      return octopusLayer ? [...layers, octopusLayer] : layers
+      return octopusLayer ? push(layers, octopusLayer) : layers
     }, [])
   }
 
