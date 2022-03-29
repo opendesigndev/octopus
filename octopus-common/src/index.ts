@@ -4,7 +4,6 @@ import * as Async from './utils/async'
 import * as Common from './utils/common'
 import * as MathUtils from './utils/math'
 import * as Pkg from './utils/pkg'
-import * as Text from './utils/text'
 import * as UtilityTypes from './utils/utility-types'
 
 // Decorators
