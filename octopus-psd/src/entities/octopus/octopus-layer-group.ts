@@ -9,10 +9,19 @@ type OctopusLayerGroupOptions = {
   sourceLayer: SourceLayerSection
 }
 
+type CreateBackgroundOptions = {
+  id: string
+  layers: Octopus['Layer'][]
+}
+
 export class OctopusLayerGroup extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerSection
   private _layers: OctopusLayer[]
+
+  static createBackground({ id, layers }: CreateBackgroundOptions): Octopus['GroupLayer'] {
+    return { id: `${id}:background`, type: 'GROUP', layers }
+  }
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)

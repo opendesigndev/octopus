@@ -7,7 +7,6 @@ import { SourceLayerEffects } from './source-effects-layer'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { SourceEntity } from './source-entity'
 import { SourcePath } from './source-path'
-// import type { SourcePathComponent } from './source-path-component'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 

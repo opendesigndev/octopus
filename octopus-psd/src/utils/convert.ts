@@ -3,7 +3,7 @@ import type { RawBlendMode, RawColor } from '../typings/raw'
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { DEFAULTS } from './defaults'
 import { round } from '@avocode/octopus-common/dist/utils/math'
-import type { SourceOffset, SourceVectorXY } from '../typings/source'
+import type { SourceBounds, SourceOffset, SourceVectorXY } from '../typings/source'
 
 const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   blendDivide: 'DIVIDE',
@@ -59,4 +59,12 @@ export function convertOffset(offset: SourceOffset, width: number, height: numbe
     return { x, y }
   }
   return { x: 0, y: 0 }
+}
+
+export function convertRectangle(bounds: SourceBounds | undefined): Octopus['Rectangle'] {
+  const x0 = bounds?.left ?? 0
+  const x1 = bounds?.right ?? 0
+  const y0 = bounds?.top ?? 0
+  const y1 = bounds?.bottom ?? 0
+  return { x0, x1, y0, y1 }
 }

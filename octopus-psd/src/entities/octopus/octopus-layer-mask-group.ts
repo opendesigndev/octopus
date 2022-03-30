@@ -3,6 +3,8 @@ import { OctopusLayerParent } from './octopus-layer-base'
 import type { Octopus } from '../../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusArtboard } from './octopus-artboard'
+import type { SourceBounds, SourceColor } from '../../typings/source'
+import { convertColor, convertRectangle } from '../../utils/convert'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
@@ -12,11 +14,12 @@ type OctopusLayerMaskGroupOptions = {
   maskBasis?: Octopus['MaskBasis']
 }
 
-type createBackgroundOptions = {
+type CreateBackgroundOptions = {
   id: string
-  width: number
-  height: number
+  bounds: SourceBounds | undefined
+  color?: SourceColor | null
   layers: Octopus['Layer'][]
+  isArtboard?: boolean
 }
 
 export class OctopusLayerMaskGroup {
@@ -26,19 +29,22 @@ export class OctopusLayerMaskGroup {
   private _layers: OctopusLayer[]
   private _maskBasis: Octopus['MaskBasis']
 
-  static virtualBackground({ id, width, height, layers }: createBackgroundOptions): Octopus['MaskGroupLayer'] {
-    return {
-      id: `${id}:background`,
-      type: 'MASK_GROUP',
-      maskBasis: 'BODY',
-      mask: {
-        id: `${id}:backgroundMask`,
-        type: 'SHAPE',
-        visible: false,
-        shape: { path: { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: width, y1: height } } },
-      },
-      layers,
+  static createBackground({
+    id,
+    bounds,
+    color,
+    layers,
+    isArtboard,
+  }: CreateBackgroundOptions): Octopus['MaskGroupLayer'] {
+    const rectangle = convertRectangle(bounds)
+    const fills: Octopus['Fill'][] = color ? [{ type: 'COLOR', color: convertColor(color) }] : []
+    const mask: Octopus['ShapeLayer'] = {
+      id: `${id}:backgroundMask`,
+      type: 'SHAPE',
+      visible: fills.length > 0,
+      shape: { path: { type: 'RECTANGLE', rectangle }, fills },
     }
+    return { id: `${id}:background`, type: 'MASK_GROUP', maskBasis: 'BODY', mask, layers, meta: { isArtboard } }
   }
 
   constructor(options: OctopusLayerMaskGroupOptions) {
@@ -47,6 +53,10 @@ export class OctopusLayerMaskGroup {
     this._mask = options.mask
     this._layers = options.layers
     this._maskBasis = options.maskBasis ?? 'BODY'
+  }
+
+  get sourceLayer(): null {
+    return null
   }
 
   get id(): string {
