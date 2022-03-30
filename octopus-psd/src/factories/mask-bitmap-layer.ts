@@ -20,18 +20,9 @@ type RawBitmapMaskLayerOptions = {
   imageName: string
 }
 
-function createRawBitmapMaskLayer({
-  width: right,
-  height: bottom,
-  imageName,
-}: RawBitmapMaskLayerOptions): RawLayerLayer {
-  return {
-    bitmapBounds: { bottom, left: 0, right, top: 0 },
-    bounds: { bottom, left: 0, right, top: 0 },
-    visible: false,
-    imageName,
-    type: 'layer',
-  }
+function createRawBitmapMaskLayer({ width, height, imageName }: RawBitmapMaskLayerOptions): RawLayerLayer {
+  const bounds = { left: 0, right: width, top: 0, bottom: height }
+  return { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName }
 }
 
 function wrapWithBitmapMaskLayer<T extends OctopusLayer>({

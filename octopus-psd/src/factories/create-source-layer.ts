@@ -36,38 +36,23 @@ type CreateLayerOptions = {
 }
 
 function createLayerSection({ layer, parent }: CreateLayerOptions): SourceLayerSection {
-  return new SourceLayerSection({
-    parent,
-    rawValue: layer as RawLayerSection,
-  })
+  return new SourceLayerSection({ parent, rawValue: layer as RawLayerSection })
 }
 
 function createLayerShape({ layer, parent }: CreateLayerOptions): SourceLayerShape {
-  return new SourceLayerShape({
-    parent,
-    rawValue: layer as RawLayerShape,
-  })
+  return new SourceLayerShape({ parent, rawValue: layer as RawLayerShape })
 }
 
 function createLayerText({ layer, parent }: CreateLayerOptions): SourceLayerText {
-  return new SourceLayerText({
-    parent,
-    rawValue: layer as RawLayerText,
-  })
+  return new SourceLayerText({ parent, rawValue: layer as RawLayerText })
 }
 
 function createLayerBackground({ layer, parent }: CreateLayerOptions): SourceLayerBackground {
-  return new SourceLayerBackground({
-    parent,
-    rawValue: layer as RawLayerBackground,
-  })
+  return new SourceLayerBackground({ parent, rawValue: layer as RawLayerBackground })
 }
 
 function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLayer {
-  return new SourceLayerLayer({
-    parent,
-    rawValue: layer as RawLayerLayer,
-  })
+  return new SourceLayerLayer({ parent, rawValue: layer as RawLayerLayer })
 }
 
 function skipLayer(): null {

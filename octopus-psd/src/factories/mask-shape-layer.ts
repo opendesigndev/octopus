@@ -20,11 +20,7 @@ type RawShapeMaskLayerOptions = {
 }
 
 function createRawShapeMaskLayer({ path }: RawShapeMaskLayerOptions): RawLayerShape {
-  return {
-    visible: false,
-    path: path.raw as RawPath,
-    type: 'shapeLayer',
-  }
+  return { type: 'shapeLayer', visible: false, path: path.raw as RawPath }
 }
 
 function wrapWithShapeMaskLayer<T extends OctopusLayer>({
@@ -37,13 +33,8 @@ function wrapWithShapeMaskLayer<T extends OctopusLayer>({
   const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
   const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })
   const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
-  return new OctopusLayerMaskGroup({
-    parent,
-    id: `${octopusLayer.id}:ShapeMask`,
-    mask,
-    layers: [octopusLayer],
-    maskBasis: 'BODY',
-  })
+  const id = `${octopusLayer.id}:ShapeMask`
+  return new OctopusLayerMaskGroup({ id, parent, mask, maskBasis: 'BODY', layers: [octopusLayer] })
 }
 
 type Options<T> = {
