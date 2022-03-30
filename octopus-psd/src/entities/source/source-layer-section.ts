@@ -1,6 +1,7 @@
 import type { RawLayer, RawLayerSection } from '../../typings/raw'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 
@@ -28,7 +29,7 @@ export class SourceLayerSection extends SourceLayerCommon {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...layers, sourceLayer] : layers
+      return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
   }
 

@@ -1,5 +1,6 @@
 import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
 import { SourceBounds } from '../../typings/source'
@@ -25,7 +26,7 @@ export class SourceArtboard {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...layers, sourceLayer] : layers
+      return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
     return layers
   }
