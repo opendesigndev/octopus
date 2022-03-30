@@ -83,7 +83,7 @@ export class OctopusLayerShapeShapePath {
       if (lastOp !== operation) break
       same.push(last)
     }
-    const rest = index > 0 ? pathComponents.slice(0, index + 1) : []
+    const rest = index >= 0 ? pathComponents.slice(0, index + 1) : []
     return [same, rest]
   }
 
