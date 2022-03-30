@@ -1,3 +1,4 @@
+import { push } from '@avocode/octopus-common/dist/utils/common'
 import type paper from 'paper'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -56,7 +57,7 @@ export function flattenGroup(group: paper.Group | paper.Item): paper.Item[] {
     ? [
         group,
         ...group.children.reduce((acc: paper.Item[], child: paper.Item) => {
-          return [...acc, ...flattenGroup(child)]
+          return push(acc, ...flattenGroup(child))
         }, []),
       ]
     : [group as paper.Item]

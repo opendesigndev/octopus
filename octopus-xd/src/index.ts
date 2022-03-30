@@ -1,7 +1,7 @@
 import path from 'path'
 import { performance } from 'perf_hooks'
 import readPackageUpAsync from 'read-pkg-up'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
 
 import createEnvironment from './services/general/environment'
 import createSentry from './services/general/sentry'
@@ -155,7 +155,7 @@ export class OctopusXDConverter {
       if (typeof artboardPath === 'string') {
         this.octopusManifest.setExportedArtboard(artboard.meta.id, artboardPath)
       }
-      return [...artboards, converted] /** @TODO fix O(n^2) ... everywhere :D */
+      return push(artboards, converted)
     }, Promise.resolve([]))
 
     /** Manifest */

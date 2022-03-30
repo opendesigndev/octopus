@@ -9,6 +9,7 @@ import type { RawSourceInteractions } from './source-interactions'
 import type { RawSourceManifest } from './source-manifest'
 import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type SourceDesignOptions = {
   manifest: {
@@ -76,7 +77,7 @@ export default class SourceDesign {
         design: this,
       })
 
-      return [...artboards, artboard]
+      return push(artboards, artboard)
     }, [])
 
     this._images = options.images

@@ -57,3 +57,8 @@ export function traverseAndFind<T>(node: Record<string, unknown>, cb: Function):
 export function keys<T extends Record<string | number | symbol, unknown>>(obj: T): (keyof T)[] {
   return Object.keys(obj)
 }
+
+export function push<T, U>(arr: (T | U)[], ...values: U[]): (T | U)[] {
+  arr.push(...values)
+  return arr
+}

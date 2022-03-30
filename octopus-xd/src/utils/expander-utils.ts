@@ -1,6 +1,8 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+import get from 'lodash/get'
 
-import type { RawLayer } from '../typings/source'
+import type { RawArtboardEntry, RawLayer } from '../typings/source'
 
 const GROUP_LIKE_TYPES = ['artboard', 'group']
 
@@ -8,50 +10,30 @@ function isGroup(layer: unknown): boolean {
   return GROUP_LIKE_TYPES.includes((layer as Record<string, 'type'>)?.type)
 }
 
-export function childrenOf(layer: unknown, includeShapes = false): RawLayer[] {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const children = layer?.[layer?.type]?.children
+export function childrenOf(layer: RawLayer | RawArtboardEntry): RawLayer[] {
+  const children = get(layer, `${layer.type}.children`) as RawLayer[] | undefined
   if (Array.isArray(children)) {
     return children
   }
-
-  if (includeShapes) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const shapeChildren = layer?.shape?.children
-    if (Array.isArray(shapeChildren)) {
-      return shapeChildren
-    }
-  }
-
   return []
 }
 
-export function flattenLayers(layer: unknown, includeShapes = false, includeStates = false): RawLayer[] {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const hasSubshapes = includeShapes ? Boolean(layer?.shape?.children?.length) : false
-
+export function flattenLayers(layer: RawLayer, includeShapes = false, includeStates = false): RawLayer[] {
+  const hasSubshapes = includeShapes ? Boolean(get(layer, 'shape.children.length')) : false
   const hasLayers = Boolean(isGroup(layer) && childrenOf(layer).length)
-
   const hasDescendants = hasLayers || hasSubshapes
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const itselves = includeStates ? [layer, ...asArray(layer?.meta?.ux?.states)] : [layer]
-
   if (!hasDescendants) return itselves
 
   return [
     ...itselves,
     ...itselves.reduce((children, layer) => {
-      return [
-        ...children,
-        ...childrenOf(layer, includeShapes).reduce((children, child) => {
-          return [...children, ...flattenLayers(child, includeShapes, includeStates)]
-        }, []),
-      ]
+      return push(
+        children,
+        ...childrenOf(layer).reduce((children, child) => {
+          return push(children, ...flattenLayers(child, includeShapes, includeStates))
+        }, [])
+      )
     }, []),
   ]
 }

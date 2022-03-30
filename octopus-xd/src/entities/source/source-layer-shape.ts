@@ -5,6 +5,7 @@ import SourceLayerCommon from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
 import type { RawShapeCompound, RawShapeLayer } from '../../typings/source'
 import type { Defined } from '../../typings/helpers'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -32,7 +33,7 @@ export default class SourceLayerShape extends SourceLayerCommon {
         parent: this,
         layer: shapeLayer,
       })
-      return layer ? [...children, layer as SourceLayerShape] : children
+      return layer ? push(children, layer as SourceLayerShape) : children
     }, [])
   }
 

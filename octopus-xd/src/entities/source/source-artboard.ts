@@ -5,6 +5,7 @@ import type SourceDesign from './source-design'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard
@@ -40,7 +41,7 @@ export default class SourceArtboard {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...children, sourceLayer] : children
+      return sourceLayer ? push(children, sourceLayer) : children
     }, [])
   }
 
@@ -81,11 +82,11 @@ export default class SourceArtboard {
     return {
       x: asArray(guides.horizontalGuides?.guides).reduce((guidesX, guide) => {
         if (typeof guide?.position !== 'number') return guidesX
-        return [...guidesX, guide.position]
+        return push(guidesX, guide.position)
       }, []),
       y: asArray(guides.verticalGuides?.guides).reduce((guidesY, guide) => {
         if (typeof guide?.position !== 'number') return guidesY
-        return [...guidesY, guide.position]
+        return push(guidesY, guide.position)
       }, []),
     }
   }

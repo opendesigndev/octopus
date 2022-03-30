@@ -12,7 +12,7 @@ import type SourceLayerShape from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import type { RawShapeCompound, RawShapeRect } from '../../typings/source'
 import defaults from '../../utils/defaults'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
@@ -69,7 +69,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
         parent: this,
         layer: shapeLayer,
       }) as OctopusLayerShape
-      return octopusLayer ? [...layers, octopusLayer] : layers
+      return octopusLayer ? push(layers, octopusLayer) : layers
     }, [])
   }
 
