@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types", "typings"],
+    "typeRoots": ["node_modules/@types"],
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./dist",

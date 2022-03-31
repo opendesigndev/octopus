@@ -15,5 +15,8 @@ export abstract class Exporter {
   exportManifest?(_manifest: DesignConversionResult): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
   }
+  finalizeExport?(): void {
+    throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
+  }
   abstract getBasePath(): Promise<string>
 }

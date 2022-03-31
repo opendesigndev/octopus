@@ -5,7 +5,8 @@ import type SourceDesign from './source-design'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest'
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { push, traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard
@@ -32,6 +33,28 @@ export default class SourceArtboard {
       throw new Error(`Can't resolve manifest entry for artboard at ${this._path}`)
     }
     return manifestEntry
+  }
+
+  private _getArtboardAssetsImages(): string[] {
+    const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
+      return Object(obj)?.style?.fill?.pattern?.meta?.ux?.uid
+    })
+    return [...new Set(entries)] as string[]
+  }
+
+  private _getArtboardAssetsFonts(): string[] {
+    const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
+      return Object(obj)?.postscriptName
+    })
+    return [...new Set(entries)] as string[]
+  }
+
+  @firstCallMemo()
+  get dependencies(): { images: string[]; fonts: string[] } {
+    return {
+      images: this._getArtboardAssetsImages(),
+      fonts: this._getArtboardAssetsFonts(),
+    }
   }
 
   private _initChildren() {
