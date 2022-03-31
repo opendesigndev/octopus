@@ -7,7 +7,7 @@ type RawBoxCorners = {
   rectangleCornerD?: RawPointHV
 }
 
-type RawRadiiCorners = {
+export type RawRadiiCorners = {
   bottomLeft?: number
   bottomRight?: number
   topLeft?: number
@@ -16,7 +16,7 @@ type RawRadiiCorners = {
 
 type RawOriginType = 'rect' | 'roundedRect' | 'line' | 'ellipse' | number
 
-type RawOrigin = {
+export type RawOrigin = {
   Trnf?: RawMatrix
   bounds?: RawBounds & { unitValueQuadVersion?: number }
   keyOriginBoxCorners?: RawBoxCorners
@@ -37,13 +37,13 @@ type RawOrigin = {
   type?: RawOriginType
 }
 
-type RawSubpathPoint = {
+export type RawSubpathPoint = {
   anchor?: RawPointXY
   backward?: RawPointXY
   forward?: RawPointXY
 }
 
-type RawSubpath = {
+export type RawSubpath = {
   closedSubpath?: boolean
   points?: RawSubpathPoint[]
   subpathType?: 'NORMAL' | 'POLYGON_TOOL' | 'ZERO'
