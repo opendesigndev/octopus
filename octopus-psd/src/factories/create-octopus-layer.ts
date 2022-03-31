@@ -12,9 +12,6 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { SourceLayer } from './create-source-layer'
 import { logWarn } from '../services/instances/misc'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { wrapWithBitmapMaskLayerIfNeeded } from './mask-bitmap-layer'
-import { wrapWithShapeMaskLayerIfNeeded } from './mask-shape-layer'
-import { createClippingMask } from './mask-clipping-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 
@@ -92,6 +89,36 @@ function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | 
   return builder(options)
 }
 
+type WrapWithBitmapMaskOptions<T> = {
+  sourceLayer: SourceLayer
+  octopusLayer: T
+  parent: OctopusLayerParent
+}
+export function wrapWithBitmapMaskLayerIfNeeded<T extends OctopusLayer>({
+  sourceLayer,
+  octopusLayer,
+  parent,
+}: WrapWithBitmapMaskOptions<T>): T | OctopusLayerMaskGroup {
+  const bitmapMask = sourceLayer.bitmapMask
+  if (!bitmapMask) return octopusLayer
+  return OctopusLayerMaskGroup.createBitmapMask({ bitmapMask, sourceLayer, octopusLayer, parent })
+}
+
+type WrapWithShapeMaskOptions<T> = {
+  sourceLayer: SourceLayer
+  octopusLayer: T
+  parent: OctopusLayerParent
+}
+export function wrapWithShapeMaskLayerIfNeeded<T extends OctopusLayer>({
+  sourceLayer,
+  octopusLayer,
+  parent,
+}: WrapWithShapeMaskOptions<T>): T | OctopusLayerMaskGroup {
+  const path = sourceLayer.path
+  if (!path) return octopusLayer
+  return OctopusLayerMaskGroup.createShapeMask({ path, sourceLayer, octopusLayer, parent })
+}
+
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
   let clippedLayers: OctopusLayer[] = []
   return layers.reduce((layers, sourceLayer) => {
@@ -108,7 +135,11 @@ export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerP
     }
 
     if (clippedLayers.length > 0) {
-      const clippingMask = createClippingMask({ parent, mask: octopusLayer, layers: [...clippedLayers].reverse() })
+      const clippingMask = OctopusLayerMaskGroup.createClippingMask({
+        parent,
+        mask: octopusLayer,
+        layers: [...clippedLayers].reverse(),
+      })
       clippedLayers = []
       return [clippingMask, ...layers]
     }

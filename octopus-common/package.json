@@ -6,7 +6,6 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
-    "prepare": "yarn clean-build",
     "postinstall": "yarn clean-build",
     "clean": "rimraf ./node_modules ./dist",
     "clean-build": "rimraf ./dist && yarn run build",

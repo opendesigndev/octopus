@@ -2,10 +2,8 @@ import type { OctopusPSDConverter } from '../..'
 import type { Octopus } from '../../typings/octopus'
 import { OctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import type { SourceArtboard } from '../source/source-artboard'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceDesign } from '../source/source-design'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { OctopusLayerGroup } from './octopus-layer-group'
 
 type OctopusArtboardOptions = {
@@ -53,25 +51,19 @@ export class OctopusArtboard {
     return this._octopusConverter.pkgVersion
   }
 
-  @firstCallMemo()
-  get layers(): Octopus['Layer'][] {
-    return getConverted(this._layers)
-  }
-
   get content(): Octopus['Layer'] {
     const id = this.id
     const bounds = this.sourceArtboard.bounds
 
     const hasArtboards = !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
-    if (!hasArtboards) return OctopusLayerMaskGroup.createBackground({ id, bounds, layers: this.layers })
+    if (!hasArtboards) return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
 
     const layers = this._layers.map((layer) => {
       const id = layer.id
       const bounds = layer.sourceLayer?.bounds
-      const converted = getConverted([layer])
       const color = layer.sourceLayer?.artboardColor ?? null
       const isArtboard = layer.sourceLayer?.isArtboard
-      return OctopusLayerMaskGroup.createBackground({ id, bounds, color, isArtboard, layers: converted })
+      return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, layers: [layer] })
     })
     return OctopusLayerGroup.createBackground({ id, layers })
   }
