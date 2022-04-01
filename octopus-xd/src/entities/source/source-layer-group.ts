@@ -5,6 +5,7 @@ import SourceLayerCommon from './source-layer-common'
 import type { RawGroupLayer, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { SourceLayerParent } from './source-layer-common'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent
@@ -29,7 +30,7 @@ export default class SourceLayerGroup extends SourceLayerCommon {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...children, sourceLayer] : children
+      return sourceLayer ? push(children, sourceLayer) : children
     }, [])
   }
 

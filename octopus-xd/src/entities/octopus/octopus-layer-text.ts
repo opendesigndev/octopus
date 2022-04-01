@@ -1,5 +1,5 @@
 import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import { getPresentProps } from '@avocode/octopus-common/dist/utils/common'
+import { getPresentProps, push } from '@avocode/octopus-common/dist/utils/common'
 import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 
 import defaults from '../../utils/defaults'
@@ -65,11 +65,11 @@ export default class OctopusLayerText extends OctopusLayerCommon {
 
   private _getUniqueSortedStops(paragraphs: RawTextParagraphRange[], meta: NormalizedRawRangedStyle[]) {
     const paragraphsStops = paragraphs.reduce((stops, paragraph) => {
-      return [...stops, asNumber(paragraph?.from, 0), asNumber(paragraph?.to, 0)]
+      return push(stops, asNumber(paragraph?.from, 0), asNumber(paragraph?.to, 0))
     }, [])
 
     const metaStops = meta.reduce((stops, meta) => {
-      return [...stops, asNumber(meta?.lengthFrom, 0), asNumber(meta?.lengthTo, 0)]
+      return push(stops, asNumber(meta?.lengthFrom, 0), asNumber(meta?.lengthTo, 0))
     }, [])
 
     return [...new Set([...paragraphsStops, ...metaStops])].sort((a, b) => a - b)
@@ -109,7 +109,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
         to,
         metaUxStyle: matchingMeta || null,
       }
-      return [...ranges, merged]
+      return push(ranges, merged)
     }, [])
   }
 
@@ -284,9 +284,9 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const paragraphs = asArray(this._sourceLayer.raw?.text?.paragraphs)
     return paragraphs.reduce((result, line) => {
       const current = asArray(line?.lines).reduce((current, line) => {
-        return Array.isArray(line) ? [...current, ...line] : current
+        return Array.isArray(line) ? push(current, ...line) : current
       })
-      return [...result, ...current]
+      return push(result, ...current)
     }, [])
   }
 

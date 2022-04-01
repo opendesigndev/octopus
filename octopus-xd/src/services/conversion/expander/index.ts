@@ -8,6 +8,7 @@ import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 
 import type SourceResources from '../../../entities/source/source-resources'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type ExpanderOptions = {
   resources: SourceResources
@@ -32,7 +33,7 @@ export default class Expander {
 
   private _initSymbols() {
     return asArray(this._resources.raw.resources?.meta?.ux?.symbols).reduce((ids, symbol) => {
-      return [...ids, ...flattenLayers(symbol, true, true)]
+      return push(ids, ...flattenLayers(symbol, true, true))
     }, [])
   }
 
@@ -68,7 +69,7 @@ export default class Expander {
   }
 
   private _expand(artboard: RawArtboardEntry | RawLayer) {
-    childrenOf(artboard, true).forEach((child, index, children) => {
+    childrenOf(artboard).forEach((child, index, children) => {
       this._expandChild(child, index, children)
     })
   }

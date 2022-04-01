@@ -2,9 +2,11 @@ import * as FirstCallMemo from './decorators/first-call-memo'
 import * as TextPostprocessor from './postprocessors/text'
 import * as As from './utils/as'
 import * as Async from './utils/async'
+import * as Benchmark from './utils/benchmark'
 import * as Common from './utils/common'
 import * as MathUtils from './utils/math'
 import * as Pkg from './utils/pkg'
+import * as Queue from './utils/queue'
 import * as UtilityTypes from './utils/utility-types'
 
 export const postprocessors = {
@@ -18,9 +20,11 @@ export const decorators = {
 export const utils = {
   as: As,
   async: Async,
+  benchmark: Benchmark,
   common: Common,
   math: MathUtils,
   pkg: Pkg,
   text: Text,
   utilityTypes: UtilityTypes,
+  queue: Queue,
 }

@@ -1,12 +1,12 @@
 {
   "name": "@avocode/octopus-common",
-  "version": "3.0.0-rc.11",
+  "version": "3.0.0-rc.15",
   "license": "UNLICENSED",
   "description": "General utility functions for Octopus 3 common cases.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
-    "postinstall": "yarn clean-build",
+    "prepack": "yarn clean-build",
     "clean": "rimraf ./node_modules ./dist",
     "clean-build": "rimraf ./dist && yarn run build",
     "watch": "tsc -w",
