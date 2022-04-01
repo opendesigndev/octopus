@@ -1,12 +1,12 @@
+import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import os from 'os'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
-import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+import type { AbstractExporter } from './abstract-exporter'
 
 type LocalExporterOptions = {
   path: string

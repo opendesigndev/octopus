@@ -1,5 +1,9 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { asString } from '@avocode/octopus-common/dist/utils/as'
+import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import path from 'path'
-import { SourceDesign } from '../source/source-design'
+
+import type { OctopusPSDConverter } from '../..'
 import type {
   Artboard,
   AssetFont,
@@ -8,11 +12,8 @@ import type {
   OctopusManifestReport,
   ResourceLocation,
 } from '../../typings/manifest'
-import type { OctopusPSDConverter } from '../..'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { SourceBounds } from '../../typings/source'
-import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import { SourceDesign } from '../source/source-design'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

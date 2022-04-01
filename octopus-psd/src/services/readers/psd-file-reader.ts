@@ -1,13 +1,14 @@
-import { SourceDesign, SourceImage } from '../../entities/source/source-design'
 import { parsePsd } from '@avocode/psd-parser'
-import path from 'path'
-import sizeOf from 'image-size'
 import chalk from 'chalk'
+import sizeOf from 'image-size'
+import path from 'path'
+import rimraf from 'rimraf'
+
+import { SourceDesign, SourceImage } from '../../entities/source/source-design'
+import type { RawArtboard } from '../../typings/raw'
 import { displayPerf } from '../../utils/console'
 import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
-import type { RawArtboard } from '../../typings/raw'
 import { logInfo } from '../instances/misc'
-import rimraf from 'rimraf'
 
 type PSDFileReaderOptions = {
   path: string

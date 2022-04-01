@@ -1,6 +1,6 @@
 import type { RawLayerCommon } from './layer'
-import type { RawParagraphStyleRange } from './style-paragraph'
 import type { RawBounds, RawMatrix, RawTextBounds } from './shared'
+import type { RawParagraphStyleRange } from './style-paragraph'
 import type { RawTextStyleRange } from './style-text'
 
 export type RawText = {

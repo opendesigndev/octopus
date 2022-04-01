@@ -1,15 +1,16 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import { logWarn } from '../../services/instances/misc'
 import type { Octopus } from '../../typings/octopus'
+import type { SourceBounds } from '../../typings/source'
+import { convertOffset } from '../../utils/convert'
+import { createMatrix } from '../../utils/paper-factories'
+import type { SourceImage } from '../source/source-design'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import { OctopusArtboard } from './octopus-artboard'
-import { logWarn } from '../../services/instances/misc'
-import { createMatrix } from '../../utils/paper-factories'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { convertOffset } from '../../utils/convert'
-import type { SourceBounds } from '../../typings/source'
-import { OctopusLayerBase } from './octopus-layer-base'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { OctopusEffectBase } from './octopus-effect-base'
-import type { SourceImage } from '../source/source-design'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase

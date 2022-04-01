@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawFill, RawFillPattern } from '../../typings/raw'
 import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'

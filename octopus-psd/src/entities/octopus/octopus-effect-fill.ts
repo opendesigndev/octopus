@@ -1,15 +1,15 @@
+import { logWarn } from '../../services/instances/misc'
 import type { Octopus } from '../../typings/octopus'
+import type { SourceBounds } from '../../typings/source'
+import { convertOffset } from '../../utils/convert'
+import { createMatrix } from '../../utils/paper-factories'
+import type { SourceImage } from '../source/source-design'
+import type { SourceEffectFill } from '../source/source-effect-fill'
+import type { OctopusArtboard } from './octopus-artboard'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import { createMatrix } from '../../utils/paper-factories'
-import { logWarn } from '../../services/instances/misc'
-import type { SourceBounds } from '../../typings/source'
-import type { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerBase } from './octopus-layer-base'
-import { convertOffset } from '../../utils/convert'
-import type { SourceImage } from '../source/source-design'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase

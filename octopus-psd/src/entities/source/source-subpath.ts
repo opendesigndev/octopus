@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawSubpath } from '../../typings/raw'
 import { SourceSubpathPoint } from './source-subpath-point'
 

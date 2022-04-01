@@ -1,6 +1,7 @@
+import { round } from '@avocode/octopus-common/dist/utils/math'
+
 import type { RawTextStyle } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
-import { round } from '@avocode/octopus-common/dist/utils/math'
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 

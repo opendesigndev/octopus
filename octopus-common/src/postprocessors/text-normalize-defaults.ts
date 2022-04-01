@@ -2,10 +2,9 @@ import has from 'lodash/has'
 import pick from 'lodash/pick'
 import without from 'lodash/without'
 
-import { isObject, keys } from '../utils/common'
-
 import type { Octopus } from '../typings/octopus-common'
 import { asArray } from '../utils/as'
+import { isObject, keys } from '../utils/common'
 
 function normalizeDefaultStyle(
   defaultStyle: Octopus['TextStyle'],

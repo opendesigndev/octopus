@@ -1,8 +1,8 @@
 import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectBevelEmboss } from '../source/source-effect-bevel-emboss'
-import type { OctopusLayerBase } from './octopus-layer-base'
 import { convertBlendMode } from '../../utils/convert'
+import type { SourceEffectBevelEmboss } from '../source/source-effect-bevel-emboss'
 import { OctopusEffectBase } from './octopus-effect-base'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectBevelEmbossOptions = {
   parentLayer: OctopusLayerBase

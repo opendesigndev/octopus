@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawLayerEffects } from '../../typings/raw'
 import { getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss'

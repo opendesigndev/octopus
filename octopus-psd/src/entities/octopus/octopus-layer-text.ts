@@ -1,17 +1,18 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
+import { isEmpty, isEqual } from 'lodash'
+
 import type { Octopus } from '../../typings/octopus'
+import { createMatrix } from '../../utils/paper-factories'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
-import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
 import type { SourceTextTextStyle } from '../source/source-text-text-style'
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { isEqual, isEmpty } from 'lodash'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { createMatrix } from '../../utils/paper-factories'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
-import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

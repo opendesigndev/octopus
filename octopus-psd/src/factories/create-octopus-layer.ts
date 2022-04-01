@@ -1,5 +1,8 @@
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
+import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
@@ -8,10 +11,8 @@ import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import type { SourceLayerSection } from '../entities/source/source-layer-section'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { SourceLayer } from './create-source-layer'
 import { logWarn } from '../services/instances/misc'
-import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import { SourceLayer } from './create-source-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 

@@ -1,10 +1,11 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { Octopus } from '../../typings/octopus'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { createDefaultTranslationMatrix } from '../../utils/path'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import { logWarn } from '../../services/instances/misc'
+import type { Octopus } from '../../typings/octopus'
+import { createDefaultTranslationMatrix } from '../../utils/path'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent

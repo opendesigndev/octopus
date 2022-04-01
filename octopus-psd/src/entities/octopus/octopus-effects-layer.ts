@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { Octopus } from '../../typings/octopus'
 import { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'

@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawPathComponent } from '../../typings/raw'
 import type { SourceCombineOperation } from '../../typings/source'
 import { SourcePathOrigin } from './source-path-origin'

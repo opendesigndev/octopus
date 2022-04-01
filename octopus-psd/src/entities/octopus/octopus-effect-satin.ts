@@ -1,8 +1,8 @@
 import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectSatin } from '../source/source-effect-satin'
-import type { OctopusLayerBase } from './octopus-layer-base'
 import { convertColor } from '../../utils/convert'
+import type { SourceEffectSatin } from '../source/source-effect-satin'
 import { OctopusEffectBase } from './octopus-effect-base'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectSatinOptions = {
   parentLayer: OctopusLayerBase

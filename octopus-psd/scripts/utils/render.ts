@@ -1,8 +1,9 @@
-import path from 'path'
-import { getPkgLocation } from './pkg-location'
-import { execSync } from 'child_process'
-import chalk from 'chalk'
 import { benchmark } from '@avocode/octopus-common/dist/utils/async'
+import chalk from 'chalk'
+import { execSync } from 'child_process'
+import path from 'path'
+
+import { getPkgLocation } from './pkg-location'
 
 export type RenderResult = {
   value: string | undefined

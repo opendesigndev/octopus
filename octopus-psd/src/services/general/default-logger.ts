@@ -1,7 +1,7 @@
+import compact from 'lodash/compact'
+import isEmpty from 'lodash/isEmpty'
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
-import isEmpty from 'lodash/isEmpty'
-import compact from 'lodash/compact'
 
 export function createDefaultLogger(): ReturnType<typeof pino> {
   return pino({

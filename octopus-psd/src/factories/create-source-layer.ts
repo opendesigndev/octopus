@@ -1,19 +1,20 @@
-import type {
-  RawLayer,
-  RawLayerSection,
-  RawLayerBackground,
-  RawLayerShape,
-  RawLayerText,
-  RawLayerLayer,
-} from '../typings/raw'
-import { SourceLayerSection } from '../entities/source/source-layer-section'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
+import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import { SourceLayerLayer } from '../entities/source/source-layer-layer'
+import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { logWarn } from '../services/instances/misc'
+import type {
+  RawLayer,
+  RawLayerBackground,
+  RawLayerLayer,
+  RawLayerSection,
+  RawLayerShape,
+  RawLayerText,
+} from '../typings/raw'
 
 export type SourceLayer =
   | SourceLayerSection

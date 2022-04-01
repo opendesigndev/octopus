@@ -1,4 +1,4 @@
-import type { RawBlendOptions, RawBounds, RawFraction, RawSize, RawColor, RawUnitPercent } from './shared'
+import type { RawBlendOptions, RawBounds, RawColor, RawFraction, RawSize, RawUnitPercent } from './shared'
 
 type RawWarp = {
   bounds?: RawBounds

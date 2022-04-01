@@ -1,10 +1,11 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { Octopus } from '../../typings/octopus'
-import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
-import { OctopusEffectFill } from './octopus-effect-fill'
-import { OctopusStroke } from './octopus-stroke'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import { OctopusEffectFill } from './octopus-effect-fill'
+import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
+import { OctopusStroke } from './octopus-stroke'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent

@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawFillGradient } from '../../typings/raw'
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color'
 

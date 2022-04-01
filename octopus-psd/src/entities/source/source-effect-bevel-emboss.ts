@@ -1,4 +1,5 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import type { RawBlendMode, RawEffectBevelEmboss } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'

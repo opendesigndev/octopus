@@ -1,9 +1,10 @@
-import type { RawLayer, RawLayerSection } from '../../typings/raw'
-import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
-import { SourceLayerCommon } from './source-layer-common'
+
+import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
+import type { RawLayer, RawLayerSection } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common'
 
 type SourceLayerSectionOptions = {
   parent: SourceLayerParent

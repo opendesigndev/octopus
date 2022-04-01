@@ -1,9 +1,10 @@
-import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
+
 import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
-import { getBoundsFor } from '../../utils/source'
+import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { SourceBounds } from '../../typings/source'
+import { getBoundsFor } from '../../utils/source'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

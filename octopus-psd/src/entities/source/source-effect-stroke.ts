@@ -1,4 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
 import { SourceEffectBase } from './source-effect-base'
 import { SourceEffectFill } from './source-effect-fill'

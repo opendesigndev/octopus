@@ -1,10 +1,10 @@
+import EventEmitter from 'events'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
-import EventEmitter from 'events'
 
-import type { AbstractExporter } from './abstract-exporter'
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+import type { AbstractExporter } from './abstract-exporter'
 
 type TempExporterOptions = {
   id?: string

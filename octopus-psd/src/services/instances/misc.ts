@@ -1,6 +1,7 @@
+import type { Extras } from '@sentry/types'
+
 import { logger } from './logger'
 import { sentry } from './sentry'
-import type { Extras } from '@sentry/types'
 
 export function logInfo(msg: string, extra?: unknown): void {
   logger?.info(msg, extra)

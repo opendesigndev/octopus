@@ -1,6 +1,6 @@
-import type { RawUnitPercent, RawUnitPoint, RawBlendMode } from './shared'
-import type { RawLayerCommon } from './layer'
 import type { RawFill } from './effects'
+import type { RawLayerCommon } from './layer'
+import type { RawBlendMode, RawUnitPercent, RawUnitPoint } from './shared'
 
 export type RawStrokeStyleLineAlignment =
   | 'strokeStyleAlignInside'

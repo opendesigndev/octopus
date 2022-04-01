@@ -1,6 +1,6 @@
 import type { RawLayerLayer } from '../../typings/raw'
-import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayerParent } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common'
 
 type SourceLayerLayerOptions = {
   parent: SourceLayerParent

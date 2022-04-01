@@ -1,14 +1,14 @@
-import path from 'path'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
+import path from 'path'
 
+import { OctopusPSDConverter, PSDFileReader, TempExporter } from '../src'
+import { displayPerf } from '../src/utils/console'
+import { getFilesFromDir, isDirectory } from '../src/utils/files'
 import { getPkgLocation } from './utils/pkg-location'
-import { OctopusPSDConverter, TempExporter, PSDFileReader } from '../src'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
-import { getFilesFromDir, isDirectory } from '../src/utils/files'
-import { displayPerf } from '../src/utils/console'
 
 type ConvertAllOptions = {
   shouldRender?: boolean

@@ -1,12 +1,13 @@
-import type { Octopus } from '../../typings/octopus'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { createPathData } from '../../utils/path-data'
-import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
-import type { SourcePathComponent } from '../source/source-path-component'
-import type { SourceCombineOperation } from '../../typings/source'
+
 import { logWarn } from '../../services/instances/misc'
+import type { Octopus } from '../../typings/octopus'
+import type { SourceCombineOperation } from '../../typings/source'
+import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
+import { createPathData } from '../../utils/path-data'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourcePathComponent } from '../source/source-path-component'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter

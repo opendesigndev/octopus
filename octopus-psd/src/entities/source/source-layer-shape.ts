@@ -1,12 +1,13 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import type { RawLayerShape } from '../../typings/raw'
-import { SourceLayerCommon } from './source-layer-common'
+import { SourceBounds } from '../../typings/source'
+import { SourceEffectFill } from './source-effect-fill'
 import type { SourceLayerParent } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common'
 import { SourcePath } from './source-path'
 import type { SourcePathComponent } from './source-path-component'
-import { SourceEffectFill } from './source-effect-fill'
 import { SourceStroke } from './source-stroke'
-import { SourceBounds } from '../../typings/source'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
