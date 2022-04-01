@@ -16,7 +16,6 @@ import type SourceDesign from './entities/source/source-design'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { OctopusManifestReport } from './typings/manifest'
 import type { Exporter } from './services/conversion/exporter'
-import { basename } from 'path'
 
 type ConvertDesignOptions = {
   exporter?: Exporter
