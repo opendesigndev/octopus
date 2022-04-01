@@ -1,11 +1,17 @@
 import path from 'path'
 
 import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 import type { OctopusXDConverter } from '../..'
+
+type ImageDescriptor = { path: unknown }
+
+type ArtboardDescriptor = {
+  path: unknown
+  error: Error | null
+  time: number | null
+}
 
 type OctopusManifestOptions = {
   octopusXdConverter: OctopusXDConverter
@@ -21,8 +27,8 @@ type RawManifestBounds = {
 export default class OctopusManifest {
   private _octopusXdConverter: OctopusXDConverter
   private _exports: {
-    images: Map<string, string>
-    artboards: Map<string, string>
+    images: Map<string, ImageDescriptor>
+    artboards: Map<string, ArtboardDescriptor>
   }
   private _basePath: string | null
 
@@ -44,34 +50,34 @@ export default class OctopusManifest {
     }
   }
 
-  getExportedImageById(id: string): string | undefined {
+  getExportedImageById(id: string): ImageDescriptor | undefined {
     return this._exports.images.get(id)
   }
 
-  getExportedRelativeImageById(id: string): string | undefined {
-    const imagePath = this._exports.images.get(id)
-    if (imagePath === undefined) return undefined
-    if (this._basePath === null) return imagePath
-    return path.relative(this._basePath, imagePath)
+  getExportedRelativeImagePathById(id: string): string | undefined {
+    const image = this._exports.images.get(id)
+    if (typeof image?.path !== 'string') return undefined
+    if (this._basePath === null) return image.path
+    return path.relative(this._basePath, image.path)
   }
 
-  setExportedImage(id: string, path: string): void {
-    this._exports.images.set(id, path)
+  setExportedImage(id: string, imageDescriptor: ImageDescriptor): void {
+    this._exports.images.set(id, imageDescriptor)
   }
 
-  getExportedArtboardById(id: string): string | undefined {
+  getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
     return this._exports.artboards.get(id)
   }
 
-  getExportedRelativeArtboardById(id: string): string | undefined {
-    const artboardPath = this._exports.artboards.get(id)
-    if (artboardPath === undefined) return undefined
-    if (this._basePath === null) return artboardPath
-    return path.relative(this._basePath, artboardPath)
+  getExportedRelativeArtboardPathById(id: string): string | undefined {
+    const artboard = this._exports.artboards.get(id)
+    if (typeof artboard?.path !== 'string') return undefined
+    if (this._basePath === null) return artboard.path
+    return path.relative(this._basePath, artboard.path)
   }
 
-  setExportedArtboard(id: string, path: string): void {
-    this._exports.artboards.set(id, path)
+  setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
+    this._exports.artboards.set(id, artboard)
   }
 
   get manifestVersion(): Promise<string> {
@@ -111,27 +117,14 @@ export default class OctopusManifest {
     )
   }
 
-  private _getArtboardAssetsImages(raw: Record<string, unknown>): string[] {
-    const entries = traverseAndFind(raw, (obj: unknown) => {
-      return Object(obj)?.style?.fill?.pattern?.meta?.ux?.uid
-    })
-    return [...new Set(entries)] as string[]
-  }
-
-  private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
-    const entries = traverseAndFind(raw, (obj: unknown) => {
-      return Object(obj)?.postscriptName
-    })
-    return [...new Set(entries)] as string[]
-  }
-
   private _getArtboardAssets(artboardId: string) {
     const targetArtboard = this._octopusXdConverter.sourceDesign.getArtboardById(artboardId)
-    const raw = targetArtboard?.raw
-    if (!raw) return null
+    if (!targetArtboard) return null
 
-    const images = this._getArtboardAssetsImages(raw).map((image) => {
-      const location = this.getExportedRelativeImageById(image)
+    const { images: imageDeps, fonts: fontDeps } = targetArtboard.dependencies
+
+    const images = imageDeps.map((image) => {
+      const location = this.getExportedRelativeImagePathById(image)
       return {
         location:
           typeof location === 'string'
@@ -145,7 +138,7 @@ export default class OctopusManifest {
         refId: image,
       }
     })
-    const fonts = this._getArtboardAssetsFonts(raw).map((font) => {
+    const fonts = fontDeps.map((font) => {
       return {
         location: {
           type: 'TRANSIENT',
@@ -160,7 +153,6 @@ export default class OctopusManifest {
     }
   }
 
-  @firstCallMemo()
   get artboards(): Artboard[] {
     return this.manifestArtboardEntries
       .map((artboard) => {
@@ -171,7 +163,7 @@ export default class OctopusManifest {
         const bounds =
           artboard.path === 'pasteboard' ? null : { bounds: this._convertManifestBounds(artboard['uxdesign#bounds']) }
 
-        const exportLocation = this.getExportedRelativeArtboardById(id)
+        const exportLocation = this.getExportedRelativeArtboardPathById(id)
         /** @TODO how to handle failed artboards? */
         const location =
           typeof exportLocation === 'string'
@@ -182,10 +174,16 @@ export default class OctopusManifest {
             : {
                 type: 'TRANSIENT',
               }
-
+        const status = this.getExportedArtboardById(id)
+        const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PENDING'
         return {
           id,
           name: artboard.name,
+          status: {
+            value: statusValue,
+            error: status?.error ?? null,
+            time: status?.time ?? null,
+          },
           ...bounds,
           dependencies: [],
           location,

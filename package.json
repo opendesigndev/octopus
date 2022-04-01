@@ -4,9 +4,9 @@
   "license": "UNLICENSED",
   "workspaces": {
     "packages": [
+      "octopus-common",
       "octopus-xd",
       "octopus-ai",
-      "octopus-common",
       "octopus-psd"
     ],
     "nohoist": [
