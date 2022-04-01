@@ -1,3 +1,6 @@
+import { RawLayer } from './layer'
+import { RawResources } from './resources'
+
 export type RawSourceXObjectColorSpaceObject = Partial<{
   Filter: string
   Length: number
@@ -16,6 +19,8 @@ export type RawSourceXObjectData = {
   [key: string]: string
 }
 
+export type XObjectSubtype = 'Form' | 'Image'
+
 export type RawResourcesXObject = Partial<{
   BitsPerComponent: number
   ColorSpace: [string, RawSourceXObjectColorSpaceObject]
@@ -26,10 +31,13 @@ export type RawResourcesXObject = Partial<{
   Length: number
   Name: string
   SMask: RawResourcesXObject
-  Subtype: string
+  Subtype: XObjectSubtype
   Type: 'XObject'
   Width: number
   Kind: number
-  Data: RawSourceXObjectData
+  Data: RawSourceXObjectData | RawLayer[]
   ObjID: number
+  Resources: RawResources
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  BBox: any //todo: check what this is when creating xobjectForm
 }>

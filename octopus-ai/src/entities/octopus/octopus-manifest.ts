@@ -110,6 +110,7 @@ export default class OctopusManifest {
 
     const images = this._getArtboardAssetsImages(artboardResources).map((image) => {
       const location = this.getExportedRelativeImageById(image)
+
       return {
         location:
           typeof location === 'string'

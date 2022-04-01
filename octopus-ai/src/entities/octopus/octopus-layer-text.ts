@@ -22,6 +22,7 @@ type OctopusLayerTextOptions = {
 export default class OctopusLayerText extends OctopusLayerCommon {
   static HYPHEN = '-'
   static MIN_LINE_HEIGHT = 1
+  static DEFAULT_TEXT_LAYER_NAME = '<TextLayer>'
 
   protected _sourceLayers: SourceLayerText[]
   private _octopusSubTexts: Octopus['Text'][]
@@ -172,7 +173,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _parseName(text: Octopus['Text']): string {
     const textValue = text.value
     if (!textValue) {
-      return this._sourceLayer.name
+      return this._sourceLayer?.name ?? OctopusLayerText.DEFAULT_TEXT_LAYER_NAME
     }
 
     if (textValue.length < 100) {

@@ -9,6 +9,7 @@ import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type SourceDesign from '../source/source-design'
 import type SourceArtboard from '../source/source-artboard'
 import type SourceLayerGroupingService from '../../services/conversion/source-layer-grouping-service'
+import type OctopusManifest from './octopus-manifest'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
@@ -74,6 +75,14 @@ export default class OctopusArtboard {
   private async _getVersion(): Promise<string> {
     const pkg = await this._octopusAIConverter.pkg
     return pkg.version
+  }
+
+  get manifest(): OctopusManifest {
+    return this._octopusAIConverter.manifest
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    return this
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

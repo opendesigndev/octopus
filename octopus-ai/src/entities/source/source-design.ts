@@ -14,7 +14,9 @@ export default class SourceDesign {
   private _additionalTexData: Nullable<AdditionalTextData>
 
   constructor(sourceTree: SourceTree) {
-    this._artboards = sourceTree.artboards.map((rawArtboard, index) => new SourceArtboard(rawArtboard, index + 1))
+    this._artboards = sourceTree.artboards.map(
+      (rawArtboard, index) => new SourceArtboard(rawArtboard, String(index + 1))
+    )
     this._metaData = new SourceMetadata(sourceTree.metadata)
     this._images = sourceTree.images
     this._ocProperties = sourceTree.ocProperties

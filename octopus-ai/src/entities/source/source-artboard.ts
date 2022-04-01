@@ -7,7 +7,8 @@ import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer } from '../../typings/raw/layer'
-import type { RawObjectId } from '../../typings/raw'
+import type { RawObjectId, XObjectSubtype } from '../../typings/raw'
+import type SourceResourcesXObject from './source-resources-x-object'
 
 export default class SourceArtboard {
   private _rawArtboard: RawArtboardEntry
@@ -15,11 +16,11 @@ export default class SourceArtboard {
   private _id: string
   private _resources: SourceResources
 
-  constructor(rawArtboard: RawArtboardEntry, id: number) {
-    this._id = String(id)
+  constructor(rawArtboard: RawArtboardEntry, id: string) {
+    this._id = id
     this._rawArtboard = rawArtboard
-    this._children = this._initChildren()
     this._resources = new SourceResources({ rawValue: this._rawArtboard.Resources })
+    this._children = this._initChildren()
   }
 
   private _initChildren() {
@@ -73,5 +74,13 @@ export default class SourceArtboard {
 
   get hiddenContentObjectIds(): RawObjectId[] {
     return this._rawArtboard.OCProperties?.D?.OFF ?? []
+  }
+
+  getResourcesXObject(xObjectName: string): Nullable<SourceResourcesXObject> {
+    return this._resources?.getXObject(xObjectName)
+  }
+
+  getResourcesXObjectSubtype(xObjectName: string): Nullable<XObjectSubtype> {
+    return this._resources?.getXObject(xObjectName)?.subType
   }
 }

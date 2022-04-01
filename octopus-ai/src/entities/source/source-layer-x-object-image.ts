@@ -1,6 +1,6 @@
-import SourceLayerCommon from '../source/source-layer-common'
+import SourceLayerCommon from './source-layer-common'
 
-import type { SourceLayerParent } from '../source/source-layer-common'
+import type { SourceLayerParent } from './source-layer-common'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
 
@@ -10,7 +10,7 @@ type SourceLayerXObjectOptions = {
   path: number[]
 }
 
-export default class SourceLayerXObject extends SourceLayerCommon {
+export default class SourceLayerXObjectImage extends SourceLayerCommon {
   protected _rawValue: RawXObjectLayer
 
   constructor(options: SourceLayerXObjectOptions) {

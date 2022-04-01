@@ -8,12 +8,11 @@ import type {
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
 } from '../../typings/raw'
-import type SourceLayerXObject from './source-layer-x-object'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type SourceResources from './source-resources'
 import type SourceLayerShape from './source-layer-shape'
 
-export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
+export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerShape
 
 type SourceLayerCommonOptions = {
   parent: SourceLayerParent

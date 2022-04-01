@@ -146,5 +146,7 @@ export type RawResources = {
   ProcSet?: string[]
   Properties?: RawResourcesProperties
   Shading?: RawResourcesShading
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  BBox?: any // todo check what this is when creating xObjectForm
   XObject?: { [key: string]: RawResourcesXObject }
 }

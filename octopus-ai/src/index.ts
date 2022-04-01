@@ -16,6 +16,7 @@ import type SourceDesign from './entities/source/source-design'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { OctopusManifestReport } from './typings/manifest'
 import type { Exporter } from './services/conversion/exporter'
+import { basename } from 'path'
 
 type ConvertDesignOptions = {
   exporter?: Exporter
@@ -99,6 +100,10 @@ export class OctopusAIConverter {
     return this._sentry
   }
 
+  get manifest(): OctopusManifest {
+    return this._octopusManifest
+  }
+
   private async _convertArtboardByIdSafe(targetArtboardId: string) {
     try {
       const value = await new ArtboardConverter({
@@ -142,7 +147,7 @@ export class OctopusAIConverter {
       this._sourceDesign.images.map(async (image) => {
         const imagePath = await exporter?.exportImage?.(image.id, image.rawValue)
         if (typeof imagePath === 'string') {
-          this._octopusManifest.setExportedImage(image.id, imagePath)
+          this._octopusManifest.setExportedImage(image.id, `${imagePath}`)
         }
         return image
       })

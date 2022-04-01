@@ -77,7 +77,7 @@ export default abstract class OctopusLayerCommon {
       blendMode: this.blendMode,
       opacity: this.opacity,
       id: this.id,
-      name: this._sourceLayer.name,
+      name: this._sourceLayer.name ?? '',
     }
   }
 }
