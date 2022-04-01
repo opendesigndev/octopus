@@ -6,7 +6,7 @@ import type SourceLayerGroup from '../source/source-layer-group'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { LayerSpecifics } from './octopus-layer-common'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted, push } from '@avocode/octopus-common/dist/utils/common'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
@@ -28,7 +28,7 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
         parent: this,
         layer: sourceLayer,
       })
-      return octopusLayer ? [...layers, octopusLayer] : layers
+      return octopusLayer ? push(layers, octopusLayer) : layers
     }, [])
   }
 
