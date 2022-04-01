@@ -32,16 +32,6 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
-"@avocode/octopus-common@3.0.0-rc.7":
-  version "3.0.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.7.tgz#6c03959d08443abd75445e8118cd900312fa3102"
-  integrity sha512-H1QcjQCsgxORqYkqzA65ZRup9fkvlsr9lqPzyno2Ctv+reEoWD75Fjnk87xtrQ/Jmtzy7WhFzojT03Z32Isn7Q==
-  dependencies:
-    "@sentry/node" "6.14.0"
-    lodash "^4.17.21"
-    read-pkg-up "7.0.1"
-    uuid "^8.3.2"
-
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"
@@ -1767,6 +1757,11 @@ eslint-plugin-prettier@^4.0.0:
   integrity sha512-98MqmCJ7vJodoQK359bqQWaxOE0CS8paAz/GgjaZLyex4TTk3g9HugoO89EqWCrFiOqn9EVvcoo7gZzONCWVwQ==
   dependencies:
     prettier-linter-helpers "^1.0.0"
+
+eslint-plugin-simple-import-sort@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-7.0.0.tgz#a1dad262f46d2184a90095a60c66fef74727f0f8"
+  integrity sha512-U3vEDB5zhYPNfxT5TYR7u01dboFZp+HNpnGhkDB2g/2E4wZ/g1Q9Ton8UwCLfRV9yAKyYqDh62oHOamvkFxsvw==
 
 eslint-scope@^5.1.1:
   version "5.1.1"

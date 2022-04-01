@@ -9,12 +9,12 @@ export async function renderOctopus(
 ): Promise<{ value: string | undefined; error: null | Error }> {
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `render-${id}.png`)
-  await fsp.rename(octopusPath, path.join(octopusDir, 'octopus.json'))
   const fontsDir = path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
-    execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
-    await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
+    execSync(`${process.env.RENDERING_PATH} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`, {
+      stdio: 'ignore',
+    })
     return {
       value: renderPath,
       error: null,

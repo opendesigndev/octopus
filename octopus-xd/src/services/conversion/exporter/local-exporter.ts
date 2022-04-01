@@ -57,6 +57,10 @@ export class LocalExporter implements Exporter {
     await Promise.all(this._assetsSaves)
   }
 
+  finalizeExport(): void {
+    this._completed.resolve()
+  }
+
   exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
     return this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
@@ -67,8 +71,6 @@ export class LocalExporter implements Exporter {
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    const save = await this._save(LocalExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest.manifest))
-    this._completed.resolve()
-    return save
+    return this._save(LocalExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest.manifest))
   }
 }

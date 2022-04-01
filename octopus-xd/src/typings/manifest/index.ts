@@ -14,6 +14,25 @@ export type TypedId<T> = {
   type: T
 }
 
+export enum StatusValue {
+  PENDING = 'PENDING', // we know such artboard exists, but we don't know about its exact status
+  PROCESSING = 'PROCESSING', // we are in processing of given artboard
+  READY = 'READY', // everything is completed and fine
+  FAILED = 'FAILED', // conversion crashed or similar
+}
+
+type Error = {
+  code?: number
+  message?: string
+  stacktrace?: string[]
+}
+
+type Status = {
+  value: StatusValue | null
+  error: Error | null
+  time: number | null // how many time it took to process
+}
+
 /**
  * Types describing local or remote resource location.
  */
@@ -118,6 +137,7 @@ export type Component = {
   bounds: Bounds
   dependencies: TypedId<'COMPONENT' | 'CHUNK'>[]
   location: ResourceLocation
+  status: Status
   /* isLibraryComponent: true ??? */
   preview?: ResourceLocation
   assets?: Assets
@@ -134,6 +154,7 @@ export type Artboard = {
   name: string
   bounds: Bounds
   dependencies: TypedId<'COMPONENT' | 'CHUNK'>[]
+  status: Status
   location: ResourceLocation
   preview?: ResourceLocation
   assets?: Assets
@@ -168,6 +189,7 @@ export type Chunk = {
   name: string
   type: 'OVERRIDE' | 'LAYER_STYLE' | 'TOKEN' | 'WHATEVER'
   location: ResourceLocation
+  status: Status
   preview?: ResourceLocation
   assets?: Assets
   description?: string

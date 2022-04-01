@@ -126,7 +126,7 @@ export default class OctopusEffectFillImage {
     const octopusManifest = this._octopusLayer.parentArtboard?.converter.octopusManifest
 
     const uid = asString(this._source.uid)
-    const imagePath = octopusManifest?.getExportedRelativeImageById(uid)
+    const imagePath = octopusManifest?.getExportedRelativeImagePathById(uid)
 
     const ref = {
       type: 'RESOURCE',

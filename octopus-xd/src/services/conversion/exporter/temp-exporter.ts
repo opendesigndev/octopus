@@ -62,6 +62,10 @@ export class TempExporter extends EventEmitter implements Exporter {
     await Promise.all(this._assetsSaves)
   }
 
+  finalizeExport(): void {
+    this._completed.resolve()
+  }
+
   getBasePath(): Promise<string> {
     return this._outputDir
   }
@@ -112,7 +116,6 @@ export class TempExporter extends EventEmitter implements Exporter {
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
     const manifestPath = await this._save(TempExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest.manifest))
-    this._completed.resolve()
     this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }
