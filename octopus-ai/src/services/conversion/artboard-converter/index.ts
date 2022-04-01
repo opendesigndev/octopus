@@ -1,7 +1,6 @@
-import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
-
-import type { Octopus } from '../../../typings/octopus'
 import type { OctopusAIConverter } from '../../..'
+import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
+import type { Octopus } from '../../../typings/octopus'
 import type SourceLayerGroupingService from '../source-layer-grouping-service'
 
 export type ArtboardConversionOptions = {

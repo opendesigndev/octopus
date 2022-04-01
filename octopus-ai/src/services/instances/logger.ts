@@ -1,6 +1,5 @@
-import createDefaultLogger from '../general/default-logger'
-
 import type { Logger } from '../../typings'
+import createDefaultLogger from '../general/default-logger'
 
 /**
  * Module-based singleton

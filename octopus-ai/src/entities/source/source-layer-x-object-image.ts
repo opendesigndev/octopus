@@ -1,8 +1,8 @@
-import SourceLayerCommon from './source-layer-common'
-
-import type { SourceLayerParent } from './source-layer-common'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
+import type { SourceLayerParent } from './source-layer-common'
+import SourceLayerCommon from './source-layer-common'
 
 type SourceLayerXObjectOptions = {
   parent: SourceLayerParent

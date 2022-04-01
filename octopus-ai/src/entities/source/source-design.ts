@@ -1,10 +1,10 @@
-import SourceArtboard from './source-artboard'
-import SourceMetadata from './source-metadata'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawSourceRootOcProperties } from '../../typings/raw'
+
 import type { SourceImage, SourceTree } from '../../typings'
 import type { AdditionalTextData } from '../../typings/additional-text-data'
+import type { RawSourceRootOcProperties } from '../../typings/raw'
+import SourceArtboard from './source-artboard'
+import SourceMetadata from './source-metadata'
 
 export default class SourceDesign {
   private _artboards: SourceArtboard[]

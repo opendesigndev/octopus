@@ -1,13 +1,13 @@
-import path from 'path'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import path from 'path'
 
+import type { OctopusAIConverter } from '../..'
+import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw'
 import type SourceResources from '../source/source-resources'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
-import type { OctopusAIConverter } from '../..'
 
 type OctopusManifestOptions = {
   octopusAIConverter: OctopusAIConverter

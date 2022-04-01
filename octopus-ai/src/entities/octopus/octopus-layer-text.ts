@@ -1,18 +1,17 @@
-import flatten from 'lodash/flatten'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import flatten from 'lodash/flatten'
 
+import SourceLayerGroupingService, { LayerSequence } from '../../services/conversion/source-layer-grouping-service'
+import type { AdditionalTextDataText } from '../../typings/additional-text-data'
+import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import { removeTrailingHyphen } from '../../utils/text'
+import type SourceLayerText from '../source/source-layer-text'
+import type { LayerSpecifics } from './octopus-layer-common'
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
-import { removeTrailingHyphen } from '../../utils/text'
-import SourceLayerGroupingService, { LayerSequence } from '../../services/conversion/source-layer-grouping-service'
-
-import type { Octopus } from '../../typings/octopus'
-import type SourceLayerText from '../source/source-layer-text'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { AdditionalTextDataText } from '../../typings/additional-text-data'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

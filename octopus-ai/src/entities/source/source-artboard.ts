@@ -1,13 +1,12 @@
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
-
-import { createSourceLayer } from '../../factories/create-source-layer'
-import SourceResources from './source-resources'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
+
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawLayer } from '../../typings/raw/layer'
+import { createSourceLayer } from '../../factories/create-source-layer'
 import type { RawObjectId, XObjectSubtype } from '../../typings/raw'
+import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
+import type { RawLayer } from '../../typings/raw/layer'
+import SourceResources from './source-resources'
 import type SourceResourcesXObject from './source-resources-x-object'
 
 export default class SourceArtboard {

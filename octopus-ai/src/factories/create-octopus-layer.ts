@@ -1,16 +1,16 @@
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
 import OctopusLayerGroup from '../entities/octopus/octopus-layer-group'
 import OctopusLayerShape from '../entities/octopus/octopus-layer-shape'
-import OctopusLayerText from '../entities/octopus/octopus-layer-text'
 import OctopusLayerShapeShapeAdapter from '../entities/octopus/octopus-layer-shape-shape-adapter'
 import OctopusLayerShapeXObjectImageAdapter from '../entities/octopus/octopus-layer-shape-xObject-adapter'
-
-import type { OctopusLayerParent } from '../typings/octopus-entities'
+import OctopusLayerText from '../entities/octopus/octopus-layer-text'
 import type SourceLayerGroup from '../entities/source/source-layer-group'
 import type SourceLayerShape from '../entities/source/source-layer-shape'
-import type { SourceLayer } from './create-source-layer'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { LayerSequence } from '../services/conversion/source-layer-grouping-service'
 import type SourceLayerXObjectImage from '../entities/source/source-layer-x-object-image'
+import type { LayerSequence } from '../services/conversion/source-layer-grouping-service'
+import type { OctopusLayerParent } from '../typings/octopus-entities'
+import type { SourceLayer } from './create-source-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText
 //export type OctopusLayer = OctopusLayerGroup | OctopusLayerShape | OctopusLayerText | OctopusLayerMaskGroup

@@ -1,10 +1,9 @@
-import OctopusLayerCommon from './octopus-layer-common'
-import OctopusEffectsShape from './octopus-effects-shape'
-
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type SourceLayerXObjectImage from '../source/source-layer-x-object-image'
+import OctopusEffectsShape from './octopus-effects-shape'
+import type { LayerSpecifics } from './octopus-layer-common'
+import OctopusLayerCommon from './octopus-layer-common'
 
 type OctopusLayerShapeXObjectImageAdapterOptions = {
   parent: OctopusLayerParent

@@ -1,7 +1,8 @@
-import type { Octopus } from '../../typings/octopus'
-import type SourceLayerXObjectImage from '../source/source-layer-x-object-image'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
+import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type SourceLayerXObjectImage from '../source/source-layer-x-object-image'
 
 type OctopusEffectImageFillOptions = {
   sourceLayer: SourceLayerXObjectImage

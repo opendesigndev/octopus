@@ -1,6 +1,6 @@
+import chalk from 'chalk'
 import { execSync } from 'child_process'
 import path from 'path'
-import chalk from 'chalk'
 
 import { getPkgLocation } from './pkg-location'
 

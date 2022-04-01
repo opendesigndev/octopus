@@ -1,10 +1,9 @@
-import dotenv from 'dotenv'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import chalk from 'chalk'
+import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusAIConverter, TempExporter } from '../../src'
-
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 dotenv.config()
 export async function convertDebug(): Promise<Nullable<string>> {

@@ -1,5 +1,6 @@
-import type { RawResources, RawResourcesXObject, XObjectSubtype } from '../../typings/raw'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
+import type { RawResources, RawResourcesXObject, XObjectSubtype } from '../../typings/raw'
 
 export default class SourceResourcesXObject {
   private _rawValue: RawResourcesXObject

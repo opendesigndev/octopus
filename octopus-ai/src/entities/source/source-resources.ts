@@ -1,17 +1,17 @@
-import SourceResourcesXObject from './source-resources-x-object'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
 import type {
   RawResources,
-  RawResourcesProperties,
+  RawResourcesColorSpace,
   RawResourcesExtGState,
   RawResourcesFont,
   RawResourcesFontTextFont,
-  RawResourcesColorSpace,
+  RawResourcesProperties,
   RawResourcesShadingKey,
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
 } from '../../typings/raw/resources'
+import SourceResourcesXObject from './source-resources-x-object'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources

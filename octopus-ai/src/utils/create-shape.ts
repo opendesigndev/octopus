@@ -2,9 +2,9 @@
  * This file is taken from svg-exporter and slightly modified, the purpose of createShape() is
  * to generate  paper.Path based on Octopus shape.
  */
-import { createPath, createPoint, createSegment } from './paper-factories'
-
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
+import { createPath, createPoint, createSegment } from './paper-factories'
 
 type PointType = 'point' | 'bezier'
 export type OctopusPoint = {

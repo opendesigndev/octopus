@@ -1,4 +1,5 @@
 import { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
 import { RawMetadata } from '../../typings/raw'
 
 export default class SourceMetadata {

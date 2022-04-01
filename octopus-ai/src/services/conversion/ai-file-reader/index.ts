@@ -1,11 +1,10 @@
-import { readFile, readdir } from 'fs/promises'
+import { readdir, readFile } from 'fs/promises'
 
 import SourceDesign from '../../../entities/source/source-design'
 import { logger } from '../../../services/instances/logger'
-
-import type { SourceTree, SourceImage } from '../../../typings'
+import type { SourceImage, SourceTree } from '../../../typings'
 import type { AdditionalTextData } from '../../../typings/additional-text-data'
-import type { RawSource, RawMetadata } from '../../../typings/raw'
+import type { RawMetadata, RawSource } from '../../../typings/raw'
 
 type AIFileReaderOptions = {
   path: string

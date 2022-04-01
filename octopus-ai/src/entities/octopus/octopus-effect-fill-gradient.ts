@@ -1,15 +1,14 @@
-import zipWith from 'lodash/zipWith'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import chunk from 'lodash/chunk'
+import zipWith from 'lodash/zipWith'
 
-import convertColor from '../../utils/colors'
 import { logger } from '../../services/instances/logger'
-
+import type { Coord, GradientColorStop, GradientStop, RgbColorComponents } from '../../typings'
+import type { Octopus } from '../../typings/octopus'
+import type { RawResourcesColorSpace, RawResourcesShadingKeyFunctionFunction } from '../../typings/raw/resources'
+import convertColor from '../../utils/colors'
 import type SourceLayerShape from '../source/source-layer-shape'
 import type SourceResources from '../source/source-resources'
-import type { Octopus } from '../../typings/octopus'
-import type { Coord, GradientColorStop, GradientStop, RgbColorComponents } from '../../typings'
-import type { RawResourcesColorSpace, RawResourcesShadingKeyFunctionFunction } from '../../typings/raw/resources'
 
 type OctopusEffectGradientFillOptions = {
   sourceLayer: SourceLayerShape

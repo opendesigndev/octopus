@@ -1,21 +1,20 @@
-import readPackageUpAsync from 'read-pkg-up'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import type { NormalizedPackageJson, NormalizedReadResult } from 'read-pkg-up'
+import readPackageUpAsync from 'read-pkg-up'
 
+import OctopusManifest from './entities/octopus/octopus-manifest'
+import type SourceDesign from './entities/source/source-design'
+import { AIFileReader } from './services/conversion/ai-file-reader'
 import ArtboardConverter from './services/conversion/artboard-converter'
-import createSentry from './services/general/sentry'
-import { logger, set as setLogger } from './services/instances/logger'
+import type { Exporter } from './services/conversion/exporter'
 import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
-import { AIFileReader } from './services/conversion/ai-file-reader'
-import OctopusManifest from './entities/octopus/octopus-manifest'
 import SourceLayerGroupingService from './services/conversion/source-layer-grouping-service'
-
+import createSentry from './services/general/sentry'
+import { logger, set as setLogger } from './services/instances/logger'
 import type { Logger, SourceImage } from './typings'
-import type { Octopus } from './typings/octopus'
-import type SourceDesign from './entities/source/source-design'
-import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 import type { OctopusManifestReport } from './typings/manifest'
-import type { Exporter } from './services/conversion/exporter'
+import type { Octopus } from './typings/octopus'
 
 type ConvertDesignOptions = {
   exporter?: Exporter

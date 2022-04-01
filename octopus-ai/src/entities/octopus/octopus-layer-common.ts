@@ -1,9 +1,8 @@
-import { BLEND_MODES } from '../../utils/blend-modes'
-
-import type SourceResources from '../source/source-resources'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import { BLEND_MODES } from '../../utils/blend-modes'
+import type SourceResources from '../source/source-resources'
 import OctopusArtboard from './octopus-artboard'
 
 /** @TODO fix exclusion of `type` from return type after schema update */

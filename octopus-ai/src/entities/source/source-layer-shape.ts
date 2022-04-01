@@ -1,13 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
+import { createSourceLayerShape } from '../../factories/create-source-layer'
+import type { DashPattern, RawArtboardMediaBox, RawGraphicsState } from '../../typings/raw'
+import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
+import type { SourceLayerParent } from './source-layer-common'
 import SourceLayerCommon from './source-layer-common'
 import SourceLayerShapeSubPath from './source-layer-shape-subpath'
-import { createSourceLayerShape } from '../../factories/create-source-layer'
-
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
-import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

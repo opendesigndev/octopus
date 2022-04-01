@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
 import { AdditionalTextData } from './additional-text-data'
 import type { RawArtboardEntry, RawMetadata, RawSource, RawSourceRootOcProperties } from './raw'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 // Services
 export interface Logger {

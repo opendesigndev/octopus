@@ -1,9 +1,9 @@
-import { removeTrailingHyphen } from '../../../utils/text'
-
-import type { AdditionalTextData, AdditionalTextDataText } from '../../../typings/additional-text-data'
-import type { SourceLayer } from '../../../factories/create-source-layer'
-import type SourceLayerText from '../../../entities/source/source-layer-text'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
+import type SourceLayerText from '../../../entities/source/source-layer-text'
+import type { SourceLayer } from '../../../factories/create-source-layer'
+import type { AdditionalTextData, AdditionalTextDataText } from '../../../typings/additional-text-data'
+import { removeTrailingHyphen } from '../../../utils/text'
 
 type CurrentMatch = AdditionalTextDataText & {
   remainder: string

@@ -1,11 +1,11 @@
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+
+import SourceArtboard from '../entities/source/source-artboard'
+import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import SourceLayerGroup from '../entities/source/source-layer-group'
 import SourceLayerShape from '../entities/source/source-layer-shape'
 import SourceLayerText from '../entities/source/source-layer-text'
 import SourceLayerXObjectImage from '../entities/source/source-layer-x-object-image'
-import SourceArtboard from '../entities/source/source-artboard'
-
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { RawGroupLayer, RawTextLayer } from '../typings/raw'
 import type { RawLayer } from '../typings/raw/layer'
 import type { RawShapeLayer } from '../typings/raw/shape-layer'

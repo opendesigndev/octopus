@@ -1,5 +1,5 @@
 import { RawLayer } from './layer'
-import { RawResources, RawObjectId } from './resources'
+import { RawObjectId, RawResources } from './resources'
 
 export type RawArtboardEntryContents = {
   Filter?: string
