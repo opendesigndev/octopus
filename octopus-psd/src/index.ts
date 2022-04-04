@@ -18,7 +18,7 @@ import { logError } from './services/instances/misc'
 import { set as setSentry } from './services/instances/sentry'
 import { PSDFileReader } from './services/readers/psd-file-reader'
 import type { Logger } from './typings'
-import { OctopusManifestReport } from './typings/manifest'
+import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 
 export { LocalExporter }
@@ -47,7 +47,7 @@ export type ArtboardConversionResult = {
 }
 
 export type DesignConversionResult = {
-  manifest: OctopusManifestReport
+  manifest: Manifest['OctopusManifest']
   time: number
 }
 
@@ -127,7 +127,7 @@ export class OctopusPSDConverter {
 
   async convertDesign(
     options?: ConvertDesignOptions
-  ): Promise<{ manifest: OctopusManifestReport; artboards: ArtboardConversionResult[]; images: SourceImage[] }> {
+  ): Promise<{ manifest: Manifest['OctopusManifest']; artboards: ArtboardConversionResult[]; images: SourceImage[] }> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
 
     this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())

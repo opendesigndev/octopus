@@ -23,6 +23,11 @@
   dependencies:
     abort-controller "3.0.0"
 
+"@avocode/manifest-ts@3.0.0-alpha.25":
+  version "3.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.25.tgz#6499946414fb1b2824d6475227f547066df49eaf"
+  integrity sha512-1RTQ5paMsUa6ms4Ip+MjtMPgQkIQjbfJbCyVJy64XBuqVQKtxDBiZX5gZg8yZ7WAIpmh6GRKqDK3O3QEs6PdRg==
+
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-2.1.11.tgz#905886eeed52ba942a1e973a82ced59a65fe0ff9"
@@ -50,6 +55,11 @@
   version "3.0.0-alpha.23"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.23.tgz#9ffdb29c20577c302dcf48a8e3696bc379bdd43a"
   integrity sha512-v3HMlSxGsFIkugAXEO0/BGzdArwFykv5j18UZS4P/ZYe4xnxgja8nS9wfgvfon0UDynZXXCrw5TJMkGZ9MW7NA==
+
+"@avocode/octopus-ts@3.0.0-alpha.25":
+  version "3.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.25.tgz#356ef0ebccc6992174718298804695111cab3351"
+  integrity sha512-zdgDpu+CnkwYcKLHXM9OfqAb1OEF5pjhJUZ4/0WErdaZntHAvvjvcfeJxjWx1q5N3cOo9gNFzZo24ElJwiI+Tg==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

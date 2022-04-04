@@ -17,8 +17,9 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
+    "@avocode/manifest-ts": "3.0.0-alpha.25",
     "@avocode/octopus-common": "3.0.0-rc.15",
-    "@avocode/octopus-ts": "3.0.0-alpha.23",
+    "@avocode/octopus-ts": "3.0.0-alpha.25",
     "@avocode/psd-parser": "0.8.4",
     "@sentry/node": "6.14.0",
     "chalk": "^4.1.2",

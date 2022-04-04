@@ -4,16 +4,9 @@ import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import path from 'path'
 
 import type { OctopusPSDConverter } from '../..'
-import type {
-  Artboard,
-  AssetFont,
-  AssetImage,
-  Assets,
-  OctopusManifestReport,
-  ResourceLocation,
-} from '../../typings/manifest'
-import { SourceBounds } from '../../typings/source'
-import { SourceDesign } from '../source/source-design'
+import type { Manifest } from '../../typings/manifest'
+import type { SourceBounds } from '../../typings/source'
+import type { SourceDesign } from '../source/source-design'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
@@ -107,20 +100,19 @@ export class OctopusManifest {
     return [...new Set(entries)] as string[]
   }
 
-  private _getArtboardAssets(): Assets | null {
+  private _getArtboardAssets(): Manifest['Assets'] | null {
     const targetArtboard = this._octopusConverter.sourceDesign.artboard
     const raw = targetArtboard?.raw
     if (!raw) return null
 
-    const images: AssetImage[] = this._octopusConverter.sourceDesign.images.map((image) => {
-      const location = this.getExportedRelativeImageByName(image.name)
-      return {
-        location: typeof location === 'string' ? { type: 'LOCAL_RESOURCE', path: location } : { type: 'TRANSIENT' },
-        refId: image.name,
-      }
+    const images: Manifest['AssetImage'][] = this._octopusConverter.sourceDesign.images.map((image) => {
+      const path = this.getExportedRelativeImageByName(image.name)
+      const location: Manifest['ResourceLocation'] =
+        typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
+      return { location, refId: image.name }
     })
 
-    const fonts: AssetFont[] = this._getArtboardAssetsFonts(raw).map((font) => {
+    const fonts: Manifest['AssetFont'][] = this._getArtboardAssetsFonts(raw).map((font) => {
       return { location: { type: 'TRANSIENT' }, name: font }
     })
 
@@ -131,18 +123,18 @@ export class OctopusManifest {
   }
 
   @firstCallMemo()
-  get artboards(): Artboard[] {
+  get artboards(): Manifest['Artboard'][] {
     const sourceArtboard = this._sourceDesign.artboard
     const id = sourceArtboard.id
     const bounds = this._convertManifestBounds(sourceArtboard.bounds)
     const assets = this._getArtboardAssets() ?? undefined
 
     // TODO: how to handle failed artboards?
-    const exportLocation = this.getExportedRelativeArtboardById(id)
-    const location: ResourceLocation =
-      typeof exportLocation === 'string' ? { type: 'LOCAL_RESOURCE', path: exportLocation } : { type: 'TRANSIENT' }
+    const path = this.getExportedRelativeArtboardById(id)
+    const location: Manifest['ResourceLocation'] =
+      typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
 
-    const artboard: Artboard = {
+    const artboard: Manifest['Artboard'] = {
       id,
       name: id,
       bounds,
@@ -153,12 +145,11 @@ export class OctopusManifest {
     return [artboard]
   }
 
-  /** @TODO guard with official types */
-  async convert(): Promise<OctopusManifestReport> {
+  async convert(): Promise<Manifest['OctopusManifest']> {
     return {
       version: await this.manifestVersion,
       origin: {
-        name: 'photoshop',
+        name: 'PHOTOSHOP',
         version: this.psdVersion,
       },
       name: this.name,
