@@ -85,16 +85,18 @@ async function convertDir(dirPath: string) {
   }
 }
 
-async function convert(location: string) {
-  if (await isDirectory(location)) {
-    convertDir(location)
-  } else {
-    convertDesign({
-      filePath: location,
-      outputDir: path.join(await getPkgLocation(), 'workdir'),
-    })
+async function convert(locations: string[]) {
+  for (const location of locations) {
+    if (await isDirectory(location)) {
+      await convertDir(location)
+    } else {
+      await convertDesign({
+        filePath: location,
+        outputDir: path.join(await getPkgLocation(), 'workdir'),
+      })
+    }
   }
 }
 
-const [location] = process.argv.slice(2)
-convert(location)
+const locations = process.argv.slice(2)
+convert(locations)
