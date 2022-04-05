@@ -36,6 +36,7 @@ export class OctopusLayerBase {
     shapeLayer: 'SHAPE',
     textLayer: 'TEXT',
     layer: 'SHAPE',
+    adjustmentLayer: 'SHAPE',
   } as const
 
   constructor(options: OctopusLayerBaseOptions) {

@@ -1,4 +1,5 @@
 import type { RawLayerEffects } from './effects'
+import type { RawLayerAdjustment } from './layer-adjustment'
 import type { RawLayerBackground } from './layer-background'
 import type { RawLayerLayer } from './layer-layer'
 import type { RawLayerSection } from './layer-section'
@@ -41,4 +42,10 @@ export type RawLayerCommon = {
   layerEffects?: RawLayerEffects
 }
 
-export type RawLayer = RawLayerSection | RawLayerShape | RawLayerText | RawLayerBackground | RawLayerLayer
+export type RawLayer =
+  | RawLayerAdjustment
+  | RawLayerBackground
+  | RawLayerLayer
+  | RawLayerSection
+  | RawLayerShape
+  | RawLayerText

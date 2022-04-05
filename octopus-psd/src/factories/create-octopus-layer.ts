@@ -4,9 +4,11 @@ import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
+import { OctopusLayerShapeAdjustmentAdapter } from '../entities/octopus/octopus-layer-shape-adjustment-adapter'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
+import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import type { SourceLayerSection } from '../entities/source/source-layer-section'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
@@ -61,6 +63,17 @@ function createOctopusLayerShapeFromLayerAdapter({
   return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
+function createOctopusLayerShapeFromAdjustmentAdapter({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
+  const sourceLayer = layer as SourceLayerAdjustment
+  const adapter = new OctopusLayerShapeAdjustmentAdapter({ parent, sourceLayer })
+  const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
+
+  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+}
+
 function createOctopusLayerText({
   layer,
   parent,
@@ -78,6 +91,7 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   textLayer: createOctopusLayerText,
   layer: createOctopusLayerShapeFromLayerAdapter,
   backgroundLayer: createOctopusLayerShapeFromLayerAdapter,
+  adjustmentLayer: createOctopusLayerShapeFromAdjustmentAdapter,
 } as const
 
 function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {

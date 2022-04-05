@@ -11,7 +11,7 @@ import { SourcePath } from './source-path'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 
-type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer'
+type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer' | 'adjustmentLayer'
 
 type SourceLayerOptions = {
   parent: SourceLayerParent

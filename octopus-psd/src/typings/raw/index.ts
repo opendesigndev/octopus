@@ -1,6 +1,7 @@
 export * from './artboard'
 export * from './effects'
 export * from './layer'
+export * from './layer-adjustment'
 export * from './layer-background'
 export * from './layer-layer'
 export * from './layer-section'

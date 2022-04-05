@@ -1,4 +1,5 @@
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
@@ -9,6 +10,7 @@ import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logWarn } from '../services/instances/misc'
 import type {
   RawLayer,
+  RawLayerAdjustment,
   RawLayerBackground,
   RawLayerLayer,
   RawLayerSection,
@@ -22,6 +24,7 @@ export type SourceLayer =
   | SourceLayerText
   | SourceLayerBackground
   | SourceLayerLayer
+  | SourceLayerAdjustment
 
 type SourceLayerBuilders =
   | typeof createLayerSection
@@ -29,7 +32,7 @@ type SourceLayerBuilders =
   | typeof createLayerText
   | typeof createLayerBackground
   | typeof createLayerLayer
-  | typeof skipLayer
+  | typeof createLayerAdjustment
 
 type CreateLayerOptions = {
   layer: RawLayer
@@ -56,8 +59,8 @@ function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLay
   return new SourceLayerLayer({ parent, rawValue: layer as RawLayerLayer })
 }
 
-function skipLayer(): null {
-  return null
+function createLayerAdjustment({ layer, parent }: CreateLayerOptions): SourceLayerAdjustment {
+  return new SourceLayerAdjustment({ parent, rawValue: layer as RawLayerAdjustment })
 }
 
 const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
@@ -66,7 +69,7 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
   textLayer: createLayerText,
   backgroundLayer: createLayerBackground,
   layer: createLayerLayer,
-  adjustmentLayer: skipLayer,
+  adjustmentLayer: createLayerAdjustment,
 } as const
 
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {

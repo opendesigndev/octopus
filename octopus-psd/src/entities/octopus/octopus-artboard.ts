@@ -51,20 +51,25 @@ export class OctopusArtboard {
     return this._octopusConverter.pkgVersion
   }
 
+  private _getArtboardFromLayer(layer: OctopusLayer): Octopus['MaskGroupLayer'] {
+    const id = layer.id
+    const bounds = layer.sourceLayer?.bounds
+    const color = layer.sourceLayer?.artboardColor ?? null
+    const isArtboard = layer.sourceLayer?.isArtboard
+    return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, layers: [layer] })
+  }
+
   get content(): Octopus['Layer'] {
     const id = this.id
     const bounds = this.sourceArtboard.bounds
 
-    const hasArtboards = !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
-    if (!hasArtboards) return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
+    const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
+    if (!hasArtboards)
+      return this._layers.length > 1
+        ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
+        : this._getArtboardFromLayer(this._layers[0])
 
-    const layers = this._layers.map((layer) => {
-      const id = layer.id
-      const bounds = layer.sourceLayer?.bounds
-      const color = layer.sourceLayer?.artboardColor ?? null
-      const isArtboard = layer.sourceLayer?.isArtboard
-      return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, layers: [layer] })
-    })
+    const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))
     return OctopusLayerGroup.createBackground({ id, layers })
   }
 
