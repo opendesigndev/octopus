@@ -86,6 +86,10 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     } as const
   }
 
+  private get _meta(): Octopus['LayerMeta'] | undefined {
+    return this.sourceLayer.smartObject ? { origin: { type: 'PHOTOSHOP_SMART_OBJECT' } } : undefined
+  }
+
   convert(): Octopus['ShapeLayer'] | null {
     const common = this.convertBase()
     if (!common) return null
@@ -93,9 +97,12 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     const specific = this._convertTypeSpecific()
     if (!specific) return null
 
+    const meta = this._meta
+
     return {
       ...common,
       ...specific,
+      meta,
     }
   }
 }
