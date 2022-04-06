@@ -134,8 +134,8 @@ export class OctopusLayerMaskGroup {
     this._maskBasis = options.maskBasis ?? 'BODY'
   }
 
-  get sourceLayer(): null {
-    return null
+  get sourceLayer(): SourceLayer {
+    return this._mask.sourceLayer
   }
 
   get id(): string {

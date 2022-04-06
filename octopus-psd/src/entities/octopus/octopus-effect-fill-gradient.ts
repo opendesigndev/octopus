@@ -97,7 +97,6 @@ export class OctopusEffectFillGradient {
   }
 
   private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
-    const gradientOpacity = this._parentLayer.fillOpacity
     const colorStops: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
     const opacityStops: SourceEffectFillGradientOpacity[] = this.fill.gradient?.opacities ?? []
 
@@ -117,7 +116,7 @@ export class OctopusEffectFillGradient {
         lOpacity.location !== rOpacity.location ? invLerp(lOpacity.location, rOpacity.location, location) : 1
       const opacity = lerp(lOpacity.opacity, rOpacity.opacity, opacityRatio)
 
-      const combinedColor = multiplyAlpha(color, opacity * gradientOpacity)
+      const combinedColor = multiplyAlpha(color, opacity * this._parentLayer.fillOpacity * this._fill.opacity)
       return this._getGradientStop(combinedColor, location)
     })
 
