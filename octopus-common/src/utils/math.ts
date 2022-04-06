@@ -23,3 +23,13 @@ export function cos(degrees: number): number {
 export function tan(degrees: number): number {
   return Math.tan((degrees * Math.PI) / 180)
 }
+
+export function lerp(x: number, y: number, ratio: number): number {
+  return x * (1 - ratio) + y * ratio
+}
+
+export function invLerp(x: number, y: number, position: number): number {
+  if (x === position) return 0
+  if (y === position) return 1
+  return (position - x) / (y - x)
+}

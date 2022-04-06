@@ -6,7 +6,7 @@ export type RawShapeTransparency = {
   opacity?: RawUnitPercent
 }
 
-export type RawShapeGradientColors = {
+export type RawShapeGradientColor = {
   color?: RawColor
   location?: number
   midpoint?: number
@@ -14,7 +14,7 @@ export type RawShapeGradientColors = {
 }
 
 export type RawFillGradient = {
-  colors?: RawShapeGradientColors[]
+  colors?: RawShapeGradientColor[]
   gradientForm?: 'customStops'
   interfaceIconFrameDimmed?: number
   name?: string

@@ -10,7 +10,7 @@
     "clean": "rimraf ./node_modules ./dist",
     "clean-build": "rimraf ./dist && yarn run build",
     "watch": "tsc -w",
-    "lint": "echo 'Linter is not implemented yet'",
+    "lint": "eslint ./src/*",
     "test": "yarn jest",
     "types:check": "tsc --noEmit"
   },

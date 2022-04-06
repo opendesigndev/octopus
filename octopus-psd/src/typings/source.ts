@@ -24,9 +24,9 @@ export type SourceRadiiCorners = {
 }
 
 export type SourceColor = {
-  blue: number
-  green: number
-  red: number
+  b: number
+  g: number
+  r: number
 }
 
 export type SourceMatrix = {

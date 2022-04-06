@@ -3,6 +3,7 @@ import * as TextPostprocessor from './postprocessors/text'
 import * as As from './utils/as'
 import * as Async from './utils/async'
 import * as Benchmark from './utils/benchmark'
+import * as Color from './utils/color'
 import * as Common from './utils/common'
 import * as MathUtils from './utils/math'
 import * as Pkg from './utils/pkg'
@@ -21,6 +22,7 @@ export const utils = {
   as: As,
   async: Async,
   benchmark: Benchmark,
+  color: Color,
   common: Common,
   math: MathUtils,
   pkg: Pkg,

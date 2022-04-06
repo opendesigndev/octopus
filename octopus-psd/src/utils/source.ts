@@ -36,9 +36,9 @@ export function getColorFor(value: RawColor | undefined): SourceColor | null {
   const { blue, green, red } = value ?? {}
   if (blue === undefined && green === undefined && red === undefined) return null
   return {
-    blue: asFiniteNumber(blue, 0),
-    green: asFiniteNumber(green, 0),
-    red: asFiniteNumber(red, 0),
+    b: asFiniteNumber(blue, 0),
+    g: asFiniteNumber(green, 0),
+    r: asFiniteNumber(red, 0),
   }
 }
 
