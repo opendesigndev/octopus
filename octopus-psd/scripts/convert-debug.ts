@@ -62,11 +62,6 @@ export async function convertDesign({
     return
   }
   const converter = new OctopusPSDConverter({ sourceDesign })
-  if (converter === null) {
-    console.error('Missing converter')
-    return
-  }
-
   await converter.convertDesign({ exporter })
 }
 

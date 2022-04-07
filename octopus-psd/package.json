@@ -10,7 +10,7 @@
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "clean:workdir": "rimraf ./workdir/*",
-    "lint": "eslint ./src/* ./scripts/*",
+    "lint": "eslint . --ext .ts --ignore-pattern 'lib/'  --max-warnings=0",
     "prepack": "rimraf ./lib && yarn run build",
     "watch": "tsc -w",
     "test": "yarn jest",

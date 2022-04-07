@@ -1,4 +1,4 @@
-import { benchmark } from '@avocode/octopus-common/dist/utils/async'
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import chalk from 'chalk'
 import { execSync } from 'child_process'
 import path from 'path'
@@ -26,6 +26,6 @@ async function render(id: string, octopusPath: string) {
 }
 
 export async function renderOctopus(id: string, octopusPath: string): Promise<RenderResult> {
-  const { time, result } = await benchmark(() => render(id, octopusPath))
+  const { time, result } = await benchmarkAsync(() => render(id, octopusPath))
   return { ...result, time }
 }
