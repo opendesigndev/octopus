@@ -21,7 +21,7 @@ export class SourceDesign {
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._artboard = new SourceArtboard({ rawValue: options.artboard })
+    this._artboard = new SourceArtboard(options.artboard)
     this._images = options.images
     this._designId = options.designId
   }

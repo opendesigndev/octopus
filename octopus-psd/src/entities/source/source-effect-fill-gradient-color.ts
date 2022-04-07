@@ -1,14 +1,15 @@
 import type { RawShapeGradientColor } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 import { getColorFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-export class SourceEffectFillGradientColor {
-  private _rawValue: RawShapeGradientColor | undefined
+export class SourceEffectFillGradientColor extends SourceEntity {
+  protected _rawValue: RawShapeGradientColor | undefined
 
   static DEFAULT_COLOR: SourceColor = { r: 0, g: 0, b: 0 }
 
   constructor(raw: RawShapeGradientColor | undefined) {
-    this._rawValue = raw
+    super(raw)
   }
 
   get color(): SourceColor {

@@ -10,7 +10,6 @@ export class SourceEffectSatin extends SourceEffectBase {
 
   constructor(raw: RawEffectSatin | undefined) {
     super(raw)
-    this._rawValue = raw
   }
 
   get color(): SourceColor | null {

@@ -12,9 +12,8 @@ export class SourceText extends SourceEntity {
 
   static DEFAULT_ORIENTATION = 'horizontal' as const
 
-  constructor(text: RawText | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawText | undefined) {
+    super(raw)
   }
 
   get textKey(): string {

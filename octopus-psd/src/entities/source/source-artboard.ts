@@ -5,19 +5,16 @@ import { createSourceLayer, SourceLayer } from '../../factories/create-source-la
 import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { SourceBounds } from '../../typings/source'
 import { getBoundsFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-export type SourceArtboardOptions = {
-  rawValue: RawArtboard
-}
-
-export class SourceArtboard {
-  private _rawValue: RawArtboard
+export class SourceArtboard extends SourceEntity {
+  protected _rawValue: RawArtboard
   private _layers: SourceLayer[]
 
   static DEFAULT_ID = '1'
 
-  constructor(options: SourceArtboardOptions) {
-    this._rawValue = options.rawValue
+  constructor(raw: RawArtboard) {
+    super(raw)
     this._layers = this._initLayers()
   }
 

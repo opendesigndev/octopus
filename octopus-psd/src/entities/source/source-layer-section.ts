@@ -20,8 +20,6 @@ export class SourceLayerSection extends SourceLayerCommon {
 
   constructor(options: SourceLayerSectionOptions) {
     super(options)
-    this._parent = options.parent
-    this._rawValue = options.rawValue
     this._layers = this._initLayers()
   }
 

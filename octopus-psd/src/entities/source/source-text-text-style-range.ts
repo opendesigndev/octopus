@@ -7,9 +7,8 @@ import { SourceTextTextStyle } from './source-text-text-style'
 export class SourceTextTextStyleRange extends SourceEntity {
   protected _rawValue: RawTextStyleRange | undefined
 
-  constructor(text: RawTextStyleRange | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawTextStyleRange | undefined) {
+    super(raw)
   }
 
   get from(): number {

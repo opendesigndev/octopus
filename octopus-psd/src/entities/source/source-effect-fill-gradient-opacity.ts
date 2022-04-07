@@ -1,11 +1,12 @@
 import type { RawShapeTransparency } from '../../typings/raw'
 import { getUnitRatioFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-export class SourceEffectFillGradientOpacity {
-  private _rawValue: RawShapeTransparency | undefined
+export class SourceEffectFillGradientOpacity extends SourceEntity {
+  protected _rawValue: RawShapeTransparency | undefined
 
-  constructor(opacity: RawShapeTransparency | undefined) {
-    this._rawValue = opacity
+  constructor(raw: RawShapeTransparency | undefined) {
+    super(raw)
   }
 
   get opacity(): number {

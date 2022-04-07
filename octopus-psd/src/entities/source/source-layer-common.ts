@@ -25,7 +25,6 @@ export class SourceLayerCommon extends SourceEntity {
   constructor(options: SourceLayerOptions) {
     super(options.rawValue)
     this._parent = options.parent
-    this._rawValue = options.rawValue
   }
 
   get type(): SourceLayerType | undefined {

@@ -9,9 +9,8 @@ import { SourcePathComponent } from './source-path-component'
 export class SourcePath extends SourceEntity {
   protected _rawValue: RawPath | undefined
 
-  constructor(path: RawPath | undefined) {
-    super(path)
-    this._rawValue = path
+  constructor(raw: RawPath | undefined) {
+    super(raw)
   }
 
   get bounds(): SourceBounds {

@@ -10,7 +10,6 @@ export class SourceEffectShadow extends SourceEffectBase {
 
   constructor(raw: RawEffectShadow | undefined) {
     super(raw)
-    this._rawValue = raw
   }
 
   get distance(): number {

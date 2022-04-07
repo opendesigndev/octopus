@@ -20,8 +20,6 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
-    this._parent = options.parent
-    this._rawValue = options.rawValue
   }
 
   @firstCallMemo()

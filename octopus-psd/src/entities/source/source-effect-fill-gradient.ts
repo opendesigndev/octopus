@@ -3,12 +3,13 @@ import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-me
 import type { RawFillGradient } from '../../typings/raw'
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color'
 import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity'
+import { SourceEntity } from './source-entity'
 
-export class SourceEffectFillGradient {
-  private _rawValue: RawFillGradient | undefined
+export class SourceEffectFillGradient extends SourceEntity {
+  protected _rawValue: RawFillGradient | undefined
 
-  constructor(gradient: RawFillGradient | undefined) {
-    this._rawValue = gradient
+  constructor(raw: RawFillGradient | undefined) {
+    super(raw)
   }
 
   @firstCallMemo()

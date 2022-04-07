@@ -12,9 +12,8 @@ import { SourceEntity } from './source-entity'
 export class SourceLayerEffects extends SourceEntity {
   protected _rawValue: RawLayerEffects | undefined
 
-  constructor(effects: RawLayerEffects | undefined) {
-    super(effects)
-    this._rawValue = effects
+  constructor(raw: RawLayerEffects | undefined) {
+    super(raw)
   }
 
   get scale(): number {

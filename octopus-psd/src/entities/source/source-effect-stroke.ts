@@ -9,9 +9,8 @@ export class SourceEffectStroke extends SourceEffectBase {
 
   static DEFAULT_LINE_ALIGNMENT = 'centeredFrame' as const
 
-  constructor(stroke: RawEffectStroke | undefined) {
-    super(stroke)
-    this._rawValue = stroke
+  constructor(raw: RawEffectStroke | undefined) {
+    super(raw)
   }
 
   @firstCallMemo()

@@ -7,9 +7,8 @@ import { SourceTextParagraphStyle } from './source-text-paragraph-style'
 export class SourceTextParagraphStyleRange extends SourceEntity {
   protected _rawValue: RawParagraphStyleRange | undefined
 
-  constructor(text: RawParagraphStyleRange | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawParagraphStyleRange | undefined) {
+    super(raw)
   }
 
   get from(): number {

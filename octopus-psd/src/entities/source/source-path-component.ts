@@ -2,14 +2,15 @@ import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-me
 
 import type { RawPathComponent } from '../../typings/raw'
 import type { SourceCombineOperation } from '../../typings/source'
+import { SourceEntity } from './source-entity'
 import { SourcePathOrigin } from './source-path-origin'
 import { SourceSubpath } from './source-subpath'
 
-export class SourcePathComponent {
-  private _rawValue: RawPathComponent
+export class SourcePathComponent extends SourceEntity {
+  protected _rawValue: RawPathComponent
 
-  constructor(component: RawPathComponent) {
-    this._rawValue = component
+  constructor(raw: RawPathComponent) {
+    super(raw)
   }
 
   @firstCallMemo()

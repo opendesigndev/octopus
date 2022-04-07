@@ -12,13 +12,11 @@ export class SourceLayerLayer extends SourceLayerCommon {
   protected _rawValue: RawLayerLayer
   protected _parent: SourceLayerParent
 
-  get smartObject(): RawSmartObject | undefined {
-    return this._rawValue.smartObject
-  }
-
   constructor(options: SourceLayerLayerOptions) {
     super(options)
-    this._parent = options.parent
-    this._rawValue = options.rawValue
+  }
+
+  get smartObject(): RawSmartObject | undefined {
+    return this._rawValue.smartObject
   }
 }

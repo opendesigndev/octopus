@@ -5,9 +5,8 @@ import { SourceEntity } from './source-entity'
 export class SourceTextParagraphStyle extends SourceEntity {
   protected _rawValue: RawParagraphStyle | undefined
 
-  constructor(text: RawParagraphStyle | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawParagraphStyle | undefined) {
+    super(raw)
   }
 
   get align(): SourceAlign {

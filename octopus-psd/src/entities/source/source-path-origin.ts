@@ -8,9 +8,8 @@ import { SourceEntity } from './source-entity'
 export class SourcePathOrigin extends SourceEntity {
   protected _rawValue: RawOrigin | undefined
 
-  constructor(origin: RawOrigin | undefined) {
-    super(origin)
-    this._rawValue = origin
+  constructor(raw: RawOrigin | undefined) {
+    super(raw)
   }
 
   get type(): string | undefined {

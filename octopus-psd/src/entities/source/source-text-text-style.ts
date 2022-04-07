@@ -8,9 +8,8 @@ import { SourceEntity } from './source-entity'
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
 
-  constructor(text: RawTextStyle | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawTextStyle | undefined) {
+    super(raw)
   }
 
   get fontPostScriptName(): string {

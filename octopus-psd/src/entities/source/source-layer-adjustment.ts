@@ -15,8 +15,6 @@ export class SourceLayerAdjustment extends SourceLayerCommon {
 
   constructor(options: SourceLayerLayerOptions) {
     super(options)
-    this._parent = options.parent
-    this._rawValue = options.rawValue
   }
 
   @firstCallMemo()

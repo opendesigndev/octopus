@@ -18,8 +18,6 @@ export class SourceLayerText extends SourceLayerCommon {
 
   constructor(options: SourceLayerTextOptions) {
     super(options)
-    this._parent = options.parent
-    this._rawValue = options.rawValue
   }
 
   @firstCallMemo()

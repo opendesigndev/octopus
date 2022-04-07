@@ -1,3 +1,4 @@
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { parsePsd } from '@avocode/psd-parser'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
@@ -45,8 +46,10 @@ export class PSDFileReader {
   }
 
   async cleanup(): Promise<void> {
-    rimraf(this._outDir, (error: Error | null | undefined) => {
-      if (error) console.error('PSDFileReader cleanup failed: ', error)
+    return new Promise((resolve, reject) => {
+      rimraf(this._outDir, (error: Error | null | undefined) => {
+        error ? reject(error) : resolve()
+      })
     })
   }
 
@@ -64,17 +67,15 @@ export class PSDFileReader {
   }
 
   private async _getSourceArtboard(): Promise<RawArtboard | null> {
-    const timeParseStart = performance.now()
-    await parsePsd(this.path, this._parsePsdOptions)
-    const timeParse = performance.now() - timeParseStart
+    const { time: timeParse } = await benchmarkAsync(async () => await parsePsd(this.path, this._parsePsdOptions))
     logInfo(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
 
-    const timeReadStart = performance.now()
-    const artboard = await parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
-    const timeRead = performance.now() - timeReadStart
+    const { time: timeRead, result } = await benchmarkAsync(
+      async () => await parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
+    )
     logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
 
-    return artboard
+    return result
   }
 
   private async _getImages(): Promise<SourceImage[]> {

@@ -6,7 +6,6 @@ export class SourceEffectBase extends SourceEntity {
 
   constructor(raw: RawEffectShadow | undefined) {
     super(raw)
-    this._rawValue = raw
   }
 
   get blendMode(): RawBlendMode | undefined {

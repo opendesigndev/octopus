@@ -10,7 +10,6 @@ export class SourceEffectBevelEmboss extends SourceEffectBase {
 
   constructor(raw: RawEffectBevelEmboss | undefined) {
     super(raw)
-    this._rawValue = raw
   }
 
   get style(): string | undefined {

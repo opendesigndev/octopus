@@ -16,9 +16,8 @@ export class SourceStroke extends SourceEntity {
   static DEFAULT_LINE_CAP = 'strokeStyleButtCap' as const
   static DEFAULT_LINE_JOIN = 'strokeStyleMiterJoin' as const
 
-  constructor(stroke: RawShapeStrokeStyle | undefined) {
-    super(stroke)
-    this._rawValue = stroke
+  constructor(raw: RawShapeStrokeStyle | undefined) {
+    super(raw)
   }
 
   @firstCallMemo()

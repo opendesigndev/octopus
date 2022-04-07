@@ -1,12 +1,13 @@
 import type { RawSubpathPoint } from '../../typings/raw'
 import type { SourcePointXY } from '../../typings/source'
 import { getPointFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-export class SourceSubpathPoint {
-  private _rawValue: RawSubpathPoint
+export class SourceSubpathPoint extends SourceEntity {
+  protected _rawValue: RawSubpathPoint
 
-  constructor(point: RawSubpathPoint) {
-    this._rawValue = point
+  constructor(raw: RawSubpathPoint) {
+    super(raw)
   }
 
   get anchor(): SourcePointXY {

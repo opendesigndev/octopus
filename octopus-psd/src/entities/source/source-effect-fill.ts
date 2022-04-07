@@ -9,9 +9,8 @@ import { SourceEffectFillGradient } from './source-effect-fill-gradient'
 export class SourceEffectFill extends SourceEffectBase {
   protected _rawValue: RawFill | undefined
 
-  constructor(fill: RawFill | undefined) {
-    super(fill)
-    this._rawValue = fill
+  constructor(raw: RawFill | undefined) {
+    super(raw)
   }
 
   get color(): SourceColor | null {
