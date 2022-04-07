@@ -1,4 +1,4 @@
-import { cos, mod, sin, tan, lerp, invLerp } from '../math'
+import { cos, invLerp, lerp, mod, sin, tan } from '../math'
 
 describe('mod', () => {
   function testModulo(N: number, modulo: number, result: number): void {

@@ -1,7 +1,7 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { logWarn } from '../../services/instances/misc'
 
+import { logWarn } from '../../services/instances/misc'
 import type { Octopus } from '../../typings/octopus'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import type { SourceLayerAdjustment } from '../source/source-layer-adjustment'

@@ -1,6 +1,6 @@
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 
+import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import { SourceLayerLayer } from '../entities/source/source-layer-layer'
