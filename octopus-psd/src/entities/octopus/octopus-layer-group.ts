@@ -29,6 +29,10 @@ export class OctopusLayerGroup extends OctopusLayerBase {
     this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
+  get layers(): OctopusLayer[] {
+    return this._layers
+  }
+
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
     return {
       type: 'GROUP',

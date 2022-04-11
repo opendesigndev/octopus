@@ -142,13 +142,17 @@ export class OctopusLayerMaskGroup {
     return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
+  get type(): 'MASK_GROUP' {
+    return 'MASK_GROUP'
+  }
+
   convert(): Octopus['MaskGroupLayer'] | null {
     const mask = this._mask.convert()
     if (!mask) return null
 
     return {
       id: this._id,
-      type: 'MASK_GROUP',
+      type: this.type,
       maskBasis: this._maskBasis,
       mask,
       layers: getConverted(this._layers),

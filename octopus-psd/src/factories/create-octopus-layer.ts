@@ -29,6 +29,15 @@ type CreateOctopusLayerOptions = {
   parent: OctopusLayerParent
 }
 
+const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
+  layerSection: createOctopusLayerGroup,
+  shapeLayer: createOctopusLayerShapeFromShapeAdapter,
+  textLayer: createOctopusLayerText,
+  layer: createOctopusLayerShapeFromLayerAdapter,
+  backgroundLayer: createOctopusLayerShapeFromLayerAdapter,
+  adjustmentLayer: createOctopusLayerShapeFromAdjustmentAdapter,
+} as const
+
 function createOctopusLayerGroup({
   layer,
   parent,
@@ -85,16 +94,7 @@ function createOctopusLayerText({
   return OctopusLayerMaskGroup.wrapWithShapeMaskIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
-const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
-  layerSection: createOctopusLayerGroup,
-  shapeLayer: createOctopusLayerShapeFromShapeAdapter,
-  textLayer: createOctopusLayerText,
-  layer: createOctopusLayerShapeFromLayerAdapter,
-  backgroundLayer: createOctopusLayerShapeFromLayerAdapter,
-  adjustmentLayer: createOctopusLayerShapeFromAdjustmentAdapter,
-} as const
-
-function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
+export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
   const type = options.layer.type
   const builder = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {

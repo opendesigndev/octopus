@@ -39,6 +39,15 @@ type CreateLayerOptions = {
   parent: SourceLayerParent
 }
 
+const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
+  layerSection: createLayerSection,
+  shapeLayer: createLayerShape,
+  textLayer: createLayerText,
+  backgroundLayer: createLayerBackground,
+  layer: createLayerLayer,
+  adjustmentLayer: createLayerAdjustment,
+} as const
+
 function createLayerSection({ layer, parent }: CreateLayerOptions): SourceLayerSection {
   return new SourceLayerSection({ parent, rawValue: layer as RawLayerSection })
 }
@@ -62,15 +71,6 @@ function createLayerLayer({ layer, parent }: CreateLayerOptions): SourceLayerLay
 function createLayerAdjustment({ layer, parent }: CreateLayerOptions): SourceLayerAdjustment {
   return new SourceLayerAdjustment({ parent, rawValue: layer as RawLayerAdjustment })
 }
-
-const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
-  layerSection: createLayerSection,
-  shapeLayer: createLayerShape,
-  textLayer: createLayerText,
-  backgroundLayer: createLayerBackground,
-  layer: createLayerLayer,
-  adjustmentLayer: createLayerAdjustment,
-} as const
 
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {
   const type = (Object(options.layer) as RawLayer).type
