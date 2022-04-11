@@ -30,6 +30,12 @@ type ConvertDesignOptions = {
   exporter?: AbstractExporter
 }
 
+export type ConvertDesignResult = {
+  manifest: Manifest['OctopusManifest']
+  artboards: ArtboardConversionResult[]
+  images: SourceImage[]
+}
+
 type OctopusPSDConverterGeneralOptions = {
   designId?: string
   logger?: Logger
@@ -125,9 +131,7 @@ export class OctopusPSDConverter {
     return { id, value, error, time }
   }
 
-  async convertDesign(
-    options?: ConvertDesignOptions
-  ): Promise<{ manifest: Manifest['OctopusManifest']; artboards: ArtboardConversionResult[]; images: SourceImage[] }> {
+  async convertDesign(options?: ConvertDesignOptions): Promise<ConvertDesignResult> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
 
     this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
@@ -159,6 +163,8 @@ export class OctopusPSDConverter {
     const time = performance.now() - timeStart
 
     await exporter?.exportManifest?.({ manifest, time })
+
+    exporter?.finalizeExport?.()
 
     return {
       manifest,

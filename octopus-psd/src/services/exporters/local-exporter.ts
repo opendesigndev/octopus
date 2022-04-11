@@ -53,6 +53,10 @@ export class LocalExporter implements AbstractExporter {
     await Promise.all(this._assetsSaves)
   }
 
+  finalizeExport(): void {
+    this._completed.resolve()
+  }
+
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
     const save = this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))

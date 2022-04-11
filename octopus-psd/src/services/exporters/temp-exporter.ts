@@ -1,3 +1,4 @@
+import { DetachedPromiseControls, detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import EventEmitter from 'events'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
@@ -14,6 +15,8 @@ type TempExporterOptions = {
 export class TempExporter extends EventEmitter implements AbstractExporter {
   _outputDir: Promise<string>
   _tempDir: string
+  _assetsSaves: Promise<unknown>[]
+  _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static SOURCE_NAME = 'source.json'
@@ -24,6 +27,8 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     super()
     this._tempDir = options.tempDir
     this._outputDir = this._initOutputDir(options)
+    this._assetsSaves = []
+    this._completed = detachPromiseControls<void>()
   }
 
   private _stringify(value: unknown) {
@@ -39,8 +44,19 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    await saveFile(fullPath, body)
+    const write = saveFile(fullPath, body)
+    this._assetsSaves.push(write)
+    await write
     return fullPath
+  }
+
+  async completed(): Promise<void> {
+    await this._completed.promise
+    await Promise.all(this._assetsSaves)
+  }
+
+  finalizeExport(): void {
+    this._completed.resolve()
   }
 
   getBasePath(): Promise<string> {

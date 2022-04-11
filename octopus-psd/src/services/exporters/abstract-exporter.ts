@@ -13,5 +13,9 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
   }
 
+  finalizeExport?(): void {
+    throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
+  }
+
   abstract getBasePath(): Promise<string>
 }
