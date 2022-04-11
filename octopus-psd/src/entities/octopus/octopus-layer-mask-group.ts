@@ -8,7 +8,6 @@ import type { SourceBounds, SourceColor } from '../../typings/source'
 import { convertColor, convertRectangle } from '../../utils/convert'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourcePath } from '../source/source-path'
 import { OctopusArtboard } from './octopus-artboard'
 import { OctopusLayerParent } from './octopus-layer-base'
 import { OctopusLayerShape } from './octopus-layer-shape'
@@ -32,18 +31,10 @@ type CreateBackgroundOptions = {
   isArtboard?: boolean
 }
 
-type CreateBitmapMaskOptions<T> = {
+type CreateWrapMaskOptions<T> = {
   sourceLayer: SourceLayer
   octopusLayer: T
   parent: OctopusLayerParent
-  bitmapMask: string
-}
-
-type CreateShapeMaskOptions<T> = {
-  sourceLayer: SourceLayer
-  octopusLayer: T
-  parent: OctopusLayerParent
-  path: SourcePath
 }
 
 type CreateClippingMaskOptions = {
@@ -84,12 +75,14 @@ export class OctopusLayerMaskGroup {
     }
   }
 
-  static createBitmapMask<T extends OctopusLayer>({
-    bitmapMask,
+  static wrapWithBitmapMaskIfNeeded<T extends OctopusLayer>({
     sourceLayer,
     octopusLayer,
     parent,
-  }: CreateBitmapMaskOptions<T>): OctopusLayerMaskGroup {
+  }: CreateWrapMaskOptions<T>): OctopusLayerMaskGroup | T {
+    const bitmapMask = sourceLayer.bitmapMask
+    if (!bitmapMask) return octopusLayer
+
     const { width, height } = octopusLayer.parentArtboard.dimensions
     const bounds = { left: 0, right: width, top: 0, bottom: height }
     const raw: RawLayerLayer = { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName: bitmapMask }
@@ -106,12 +99,14 @@ export class OctopusLayerMaskGroup {
     })
   }
 
-  static createShapeMask<T extends OctopusLayer>({
-    path,
+  static wrapWithShapeMaskIfNeeded<T extends OctopusLayer>({
     sourceLayer,
     octopusLayer,
     parent,
-  }: CreateShapeMaskOptions<T>): OctopusLayerMaskGroup {
+  }: CreateWrapMaskOptions<T>): OctopusLayerMaskGroup | T {
+    const path = sourceLayer.path
+    if (!path) return octopusLayer
+
     const raw: RawLayerShape = { type: 'shapeLayer', visible: false, path: path.raw as RawPath }
     const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
     const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })

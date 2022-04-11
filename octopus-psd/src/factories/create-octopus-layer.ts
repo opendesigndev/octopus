@@ -36,8 +36,8 @@ function createOctopusLayerGroup({
   const sourceLayer = layer as SourceLayerSection
   const octopusLayer = new OctopusLayerGroup({ parent, sourceLayer })
 
-  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
-  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
+  const wrapped = OctopusLayerMaskGroup.wrapWithBitmapMaskIfNeeded({ sourceLayer, octopusLayer, parent })
+  return OctopusLayerMaskGroup.wrapWithShapeMaskIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 function createOctopusLayerShapeFromShapeAdapter({
@@ -48,7 +48,7 @@ function createOctopusLayerShapeFromShapeAdapter({
   const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
   const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
 
-  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+  return OctopusLayerMaskGroup.wrapWithBitmapMaskIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
 function createOctopusLayerShapeFromLayerAdapter({
@@ -59,8 +59,8 @@ function createOctopusLayerShapeFromLayerAdapter({
   const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
   const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
 
-  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
-  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
+  const wrapped = OctopusLayerMaskGroup.wrapWithBitmapMaskIfNeeded({ sourceLayer, octopusLayer, parent })
+  return OctopusLayerMaskGroup.wrapWithShapeMaskIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 function createOctopusLayerShapeFromAdjustmentAdapter({
@@ -71,7 +71,7 @@ function createOctopusLayerShapeFromAdjustmentAdapter({
   const adapter = new OctopusLayerShapeAdjustmentAdapter({ parent, sourceLayer })
   const octopusLayer = new OctopusLayerShape({ parent, sourceLayer, adapter })
 
-  return wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
+  return OctopusLayerMaskGroup.wrapWithBitmapMaskIfNeeded({ sourceLayer, octopusLayer, parent })
 }
 
 function createOctopusLayerText({
@@ -81,8 +81,8 @@ function createOctopusLayerText({
   const sourceLayer = layer as SourceLayerText
   const octopusLayer = new OctopusLayerText({ parent, sourceLayer })
 
-  const wrapped = wrapWithBitmapMaskLayerIfNeeded({ sourceLayer, octopusLayer, parent })
-  return wrapWithShapeMaskLayerIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
+  const wrapped = OctopusLayerMaskGroup.wrapWithBitmapMaskIfNeeded({ sourceLayer, octopusLayer, parent })
+  return OctopusLayerMaskGroup.wrapWithShapeMaskIfNeeded({ sourceLayer, octopusLayer: wrapped, parent })
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
@@ -95,43 +95,13 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
 } as const
 
 function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
-  const type = (Object(options.layer) as SourceLayer).type
+  const type = options.layer.type
   const builder = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
     logWarn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)
-}
-
-type WrapWithBitmapMaskOptions<T> = {
-  sourceLayer: SourceLayer
-  octopusLayer: T
-  parent: OctopusLayerParent
-}
-export function wrapWithBitmapMaskLayerIfNeeded<T extends OctopusLayer>({
-  sourceLayer,
-  octopusLayer,
-  parent,
-}: WrapWithBitmapMaskOptions<T>): T | OctopusLayerMaskGroup {
-  const bitmapMask = sourceLayer.bitmapMask
-  if (!bitmapMask) return octopusLayer
-  return OctopusLayerMaskGroup.createBitmapMask({ bitmapMask, sourceLayer, octopusLayer, parent })
-}
-
-type WrapWithShapeMaskOptions<T> = {
-  sourceLayer: SourceLayer
-  octopusLayer: T
-  parent: OctopusLayerParent
-}
-export function wrapWithShapeMaskLayerIfNeeded<T extends OctopusLayer>({
-  sourceLayer,
-  octopusLayer,
-  parent,
-}: WrapWithShapeMaskOptions<T>): T | OctopusLayerMaskGroup {
-  const path = sourceLayer.path
-  if (!path) return octopusLayer
-  return OctopusLayerMaskGroup.createShapeMask({ path, sourceLayer, octopusLayer, parent })
 }
 
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {

@@ -1,7 +1,6 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
 import type { Octopus } from '../../typings/octopus'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import type { SourceLayerAdjustment } from '../source/source-layer-adjustment'
@@ -71,12 +70,10 @@ export class OctopusLayerShapeAdjustmentAdapter extends OctopusLayerBase {
     } as const
   }
 
-  private get _meta(): Octopus['LayerMeta'] {
+  private get _meta(): Octopus['LayerMeta'] | null {
     const fillType = this._fill?.type
     const adjustmentType = getMapped(fillType, OctopusLayerShapeAdjustmentAdapter.ADJUSTMENT_TYPE_MAP, undefined)
-    if (!adjustmentType) {
-      logWarn('Unknown Adjustment type', { fillType })
-    }
+    if (!adjustmentType) return null
     return { origin: { type: 'PHOTOSHOP_ADJUSTMENT_LAYER', adjustmentType } }
   }
 
@@ -88,6 +85,7 @@ export class OctopusLayerShapeAdjustmentAdapter extends OctopusLayerBase {
     if (!specific) return null
 
     const meta = this._meta
+    if (!meta) return null
 
     return {
       ...common,
