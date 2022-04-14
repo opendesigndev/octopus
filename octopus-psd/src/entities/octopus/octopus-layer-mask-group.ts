@@ -65,13 +65,14 @@ export class OctopusLayerMaskGroup {
       visible: fills.length > 0,
       shape: { path: { type: 'RECTANGLE', rectangle }, fills },
     }
+    const meta = isArtboard ? { isArtboard } : undefined
     return {
       id: `${id}:background`,
       type: 'MASK_GROUP',
       maskBasis: 'BODY',
       mask,
       layers: getConverted(layers),
-      meta: { isArtboard },
+      meta,
     }
   }
 
