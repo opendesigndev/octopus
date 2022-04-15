@@ -1,5 +1,4 @@
 import path from 'path'
-import { promises as fsp } from 'fs'
 import { getPkgLocation } from './pkg-location'
 import { execSync } from 'child_process'
 
@@ -20,7 +19,6 @@ export async function renderOctopus(
       error: null,
     }
   } catch (e) {
-    await fsp.rename(path.join(octopusDir, 'octopus.json'), octopusPath)
     return {
       value: undefined,
       error: e,

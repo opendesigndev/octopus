@@ -21,6 +21,10 @@ export default class OctopusEffectsLayer {
     this._sourceLayer = options.sourceLayer
   }
 
+  private _hasVectorEffects(): boolean {
+    return this._sourceLayer.style?.fill?.type !== 'none' || this._sourceLayer.style?.stroke?.type !== 'none'
+  }
+
   private _convertShadows(): Octopus['EffectDropShadow'][] {
     const filters = this._sourceLayer.style?.filters
     if (!filters) return []
@@ -30,8 +34,10 @@ export default class OctopusEffectsLayer {
           return filter?.type === 'dropShadow'
         })
         .map((dropShadow) => {
+          const effectsBasisMissing = !this._hasVectorEffects()
           return OctopusEffectDropShadow.fromRaw({
             effect: dropShadow as RawEffectDropShadow,
+            effectsBasisMissing,
           })
         })
     )

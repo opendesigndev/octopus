@@ -16,18 +16,21 @@ type OctopusEffectFillGradientOptions = {
   source: SourceEffectFillGradient
   resources: SourceResources
   effectBounds: OctopusBounds
+  compoundOffset: { x: number; y: number }
 }
 
 type OctopusEffectFillGradientFromRawOptions = {
   effect: RawFillGradient
   resources: SourceResources
   effectBounds: OctopusBounds
+  compoundOffset: { x: number; y: number }
 }
 
 export default class OctopusEffectFillGradient {
   private _source: SourceEffectFillGradient
   private _resources: SourceResources
   private _effectBounds: OctopusBounds
+  private _compoundOffset: { x: number; y: number }
 
   static VALID_GRADIENT_TYPES = ['linear', 'radial']
 
@@ -43,6 +46,7 @@ export default class OctopusEffectFillGradient {
       }),
       resources: options.resources,
       effectBounds: options.effectBounds,
+      compoundOffset: options.compoundOffset,
     })
   }
 
@@ -50,6 +54,7 @@ export default class OctopusEffectFillGradient {
     this._source = options.source
     this._resources = options.resources
     this._effectBounds = options.effectBounds
+    this._compoundOffset = options.compoundOffset
   }
 
   private _isValidGradientType(gradientType: unknown): gradientType is 'linear' {
@@ -96,8 +101,8 @@ export default class OctopusEffectFillGradient {
       p2.y - p1.y,
       -(p2.y - p1.y) /** @TODO should be changed to 1 after rendering fix */,
       p2.x - p1.x /** @TODO should be changed to 1 after rendering fix */,
-      p1.x,
-      p1.y,
+      p1.x - this._compoundOffset.x,
+      p1.y - this._compoundOffset.y,
     ]
   }
 
@@ -120,7 +125,14 @@ export default class OctopusEffectFillGradient {
     const [, , s2, s3] = oval.segments.map((seg) => seg.point)
     const [p1, p2, p3] = [centerPoint, s2, s3]
 
-    return [p2.x - p1.x, p2.y - p1.y, p3.x - p1.x, p3.y - p1.y, p1.x, p1.y]
+    return [
+      p2.x - p1.x,
+      p2.y - p1.y,
+      p3.x - p1.x,
+      p3.y - p1.y,
+      p1.x - this._compoundOffset.x,
+      p1.y - this._compoundOffset.y,
+    ]
   }
 
   convert(): Octopus['FillGradient'] | null {

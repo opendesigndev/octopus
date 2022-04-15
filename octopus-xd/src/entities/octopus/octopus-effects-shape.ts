@@ -26,10 +26,14 @@ type ShapeEffects = {
 export default class OctopusEffectsShape {
   private _octopusLayer: OctopusLayerShape
   private _resources: SourceResources
+  private _fills: OctopusFill[]
+  private _strokes: OctopusEffectStroke[]
 
   constructor(options: OctopusEffectsShapeOptions) {
     this._octopusLayer = options.octopusLayer
     this._resources = options.resources
+    this._fills = this._parseFills()
+    this._strokes = this._parseStrokes()
   }
 
   private get style() {
@@ -49,13 +53,14 @@ export default class OctopusEffectsShape {
 
     // Gradient fill
     if ('gradient' in fill) {
-      const bounds = this._octopusLayer?.shapeData.bounds
+      const bounds = this._octopusLayer?.shapeData.shape.bounds
       if (!bounds) return []
 
       const gradientFill = OctopusEffectFillGradient.fromRaw({
         effect: fill,
         resources: this._resources,
         effectBounds: OctopusBounds.fromPaperBounds(bounds),
+        compoundOffset: this._octopusLayer?.shapeData.compilationOffset,
       })
 
       return [gradientFill]
@@ -63,7 +68,7 @@ export default class OctopusEffectsShape {
 
     // Image fill
     if ('pattern' in fill) {
-      const bounds = this._octopusLayer?.shapeData.bounds
+      const bounds = this._octopusLayer?.shapeData.shape.bounds
       if (!bounds) return []
 
       const patternFill = OctopusEffectFillImage.fromRaw({
@@ -84,8 +89,8 @@ export default class OctopusEffectsShape {
   }
 
   convert(): ShapeEffects {
-    const fills: Octopus['Fill'][] = getConverted(this._parseFills())
-    const strokes: Octopus['VectorStroke'][] = getConverted(this._parseStrokes())
+    const fills: Octopus['Fill'][] = getConverted(this._fills)
+    const strokes: Octopus['VectorStroke'][] = getConverted(this._strokes)
     return {
       ...(fills.length ? { fills } : null),
       ...(strokes.length ? { strokes } : null),

@@ -50,6 +50,7 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
 
     console.log(`${chalk.yellow('Artboard: ')}
     ${status} ${name} (${time}ms) ${id}
+    ${chalk.cyan('Error:')} ${artboard.error ? chalk.red(artboard.error) : '<none>'}
     ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}
     ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath}
     ${chalk.cyan(`Render:`)} ${

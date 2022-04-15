@@ -100,9 +100,8 @@ export default class OctopusLayerCommon {
       : DEFAULTS.TRANSFORM.slice()
 
     const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.TRANSFORM.slice()
-    const matrix = createMatrix(a, b, c, d, tx, ty)
 
-    return [matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty]
+    return createMatrix(a, b, c, d, tx, ty).values
   }
 
   get opacity(): number {

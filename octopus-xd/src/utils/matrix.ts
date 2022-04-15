@@ -1,6 +1,7 @@
 import { Raw2DMatrix } from '../typings/source'
 import { asFiniteNumber, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { createMatrix } from './paper'
+import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import type { Octopus } from '../typings/octopus'
 
@@ -12,12 +13,13 @@ export function convertObjectMatrixToArray(matrix: unknown): Octopus['Transform'
   return null
 }
 
-export function convertArrayToPaperMatrix(matrix: [number, number, number, number, number, number]): paper.Matrix {
+export function convertArrayToPaperMatrix(matrix: number[]): paper.Matrix {
   const [a, b, c, d, tx, ty] = matrix
   return createMatrix(a, b, c, d, tx, ty)
 }
 
 export function convertObjectToPaperMatrix(matrix: Raw2DMatrix): paper.Matrix {
+  if (!isObject(matrix)) return createMatrix(1, 0, 0, 1, 0, 0)
   const { a, b, c, d, tx, ty } = Object.fromEntries(
     Object.entries(matrix).map(([key, value]) => [key, asFiniteNumber(value, 0)])
   )

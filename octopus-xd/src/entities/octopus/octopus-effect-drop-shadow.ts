@@ -10,19 +10,23 @@ import type { SourceEffectDropShadowOptions } from '../source/source-effect-drop
 
 type OctopusEffectDropShadowOptions = {
   source: SourceEffectDropShadow
+  effectsBasisMissing: boolean
 }
 
 export default class OctopusEffectDropShadow {
   private _source: SourceEffectDropShadow
+  private _effectsBasisMissing: boolean
 
-  static fromRaw(options: SourceEffectDropShadowOptions): OctopusEffectDropShadow {
+  static fromRaw(options: SourceEffectDropShadowOptions & { effectsBasisMissing: boolean }): OctopusEffectDropShadow {
     return new this({
       source: new SourceEffectDropShadow(options),
+      effectsBasisMissing: options.effectsBasisMissing,
     })
   }
 
   constructor(options: OctopusEffectDropShadowOptions) {
     this._source = options.source
+    this._effectsBasisMissing = options.effectsBasisMissing
   }
 
   convert(): Octopus['EffectDropShadow'] | null {
@@ -50,7 +54,7 @@ export default class OctopusEffectDropShadow {
         choke: defaults.EFFECTS.SHADOW_CHOKE,
         color: parseXDColor(color),
       },
-      basis: 'BODY',
+      basis: this._effectsBasisMissing ? 'BODY' : 'LAYER_AND_EFFECTS',
     } as const
   }
 }

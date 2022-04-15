@@ -2,7 +2,7 @@ import OctopusLayerCommon from './octopus-layer-common'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { buildShapePathSafe } from '../../utils/path-builders'
-import { convertObjectMatrixToArray } from '../../utils/matrix'
+import { convertArrayToPaperMatrix, convertObjectToPaperMatrix } from '../../utils/matrix'
 import OctopusEffectsShape from './octopus-effects-shape'
 
 import type paper from 'paper'
@@ -10,19 +10,25 @@ import type { LayerSpecifics } from './octopus-layer-common'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type SourceLayerShape from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
-import type { RawShapeCompound, RawShapeRect } from '../../typings/source'
+import type { Raw2DMatrix, RawShapeCompound, RawShapeRect } from '../../typings/source'
 import defaults from '../../utils/defaults'
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+import { createMatrix } from '../../utils/paper'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerShape
 }
 
+type ShapeData = {
+  shape: paper.Path | paper.CompoundPath
+  normalizationOffset: { x: number; y: number }
+  compilationOffset: { x: number; y: number }
+}
 export default class OctopusLayerShape extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerShape
   private _children: OctopusLayerShape[]
-  private _shapeData: paper.Path | paper.CompoundPath
+  private _shapeData: ShapeData
 
   static BOOLEAN_OPS = {
     add: 'UNION',
@@ -42,8 +48,20 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
     this._children = this._initChildren()
   }
 
-  get shapeData(): paper.Path | paper.CompoundPath {
+  get shapeData(): ShapeData {
     return this._shapeData
+  }
+
+  get transform(): Octopus['Transform'] {
+    /**
+     * Following normalization is due to XD's weird way of saving shapes + its matrix sometimes.
+     * Sometimes geometry is unnecessarily moved and compensated by matrix tx/ty.
+     * We move geometry back to x: 0, y: 0 and normalize matrix.
+     * */
+    const { x, y } = this._shapeData.normalizationOffset
+    const transform = convertArrayToPaperMatrix(super.transform)
+    const shapeOffsetMatrix = createMatrix(1, 0, 0, 1, x, y)
+    return transform.append(shapeOffsetMatrix).values
   }
 
   get shapeEffects(): OctopusEffectsShape {
@@ -74,8 +92,11 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
   }
 
   private _getLayerTransformEntry() {
-    const matrix = convertObjectMatrixToArray(this._sourceLayer.transform)
-    return matrix ? { transform: matrix } : null
+    const { x, y } = this._shapeData.normalizationOffset
+    const matrix = convertObjectToPaperMatrix(this._sourceLayer.transform as Raw2DMatrix)
+    const shapeOffsetMatrix = createMatrix(1, 0, 0, 1, x, y)
+    const transform = matrix.append(shapeOffsetMatrix).values
+    return transform ? { transform } : null
   }
 
   private _convertBooleanOp(shape: RawShapeCompound) {
@@ -129,7 +150,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
     return {
       type: 'PATH',
-      geometry: this._shapeData.pathData,
+      geometry: this._shapeData.shape.pathData,
       ...transform,
       cornerRadii: r /** @TODO define correct order */,
       meta: {
@@ -140,7 +161,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _getSimplePath(): Octopus['Path'] {
     const transform = this._getLayerTransformEntry()
-    const geometry = this._shapeData.pathData
+    const geometry = this._shapeData.shape.pathData
 
     return {
       type: 'PATH',
@@ -158,18 +179,20 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _getShapeAsCompoundPathNoop(): Octopus['CompoundPath'] {
     const transform = this._getLayerTransformEntry()
-    const geometry = this._shapeData.pathData
+    const geometry = this._shapeData.shape.pathData
 
     return {
       type: 'COMPOUND',
       geometry,
       ...transform,
-      paths: this._shapeData.children.map((path: paper.Path) => this._getCompoundSimplePath(path)),
+      paths: this._shapeData.shape.children.map((path: paper.Path) => this._getCompoundSimplePath(path)),
     }
   }
 
   private _getShapeAsPath(): Octopus['Path'] | Octopus['CompoundPath'] {
-    return asArray(this._shapeData.children).length > 1 ? this._getShapeAsCompoundPathNoop() : this._getSimplePath()
+    return asArray(this._shapeData.shape.children).length > 1
+      ? this._getShapeAsCompoundPathNoop()
+      : this._getSimplePath()
   }
 
   private _rectangleHasMultipleRadii() {
