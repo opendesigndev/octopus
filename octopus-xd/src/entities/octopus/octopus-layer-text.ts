@@ -3,9 +3,9 @@ import { getPresentProps, push } from '@avocode/octopus-common/dist/utils/common
 import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 
 import defaults from '../../utils/defaults'
-import OctopusLayerCommon from './octopus-layer-common'
 import { createMatrix } from '../../utils/paper'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
+import OctopusLayerCommon from './octopus-layer-common'
 import OctopusEffectsText from './octopus-effects-text'
 
 import type { LayerSpecifics } from './octopus-layer-common'

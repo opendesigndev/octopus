@@ -1,8 +1,9 @@
-import defaults from '../../utils/defaults'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
-import OctopusEffectFillColor from './octopus-effect-fill-color'
+
+import defaults from '../../utils/defaults'
 import SourceEffectStroke from '../source/source-effect-stroke'
+import OctopusEffectFillColor from './octopus-effect-fill-color'
 
 import type { RawStroke } from '../../typings/source'
 import type { Octopus } from '../../typings/octopus'

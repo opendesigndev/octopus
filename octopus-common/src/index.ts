@@ -8,10 +8,8 @@ import * as Pkg from './utils/pkg'
 import * as Text from './utils/text'
 import * as Queue from './utils/queue'
 import * as UtilityTypes from './utils/utility-types'
-
 // Decorators
 import * as FirstCallMemo from './decorators/first-call-memo'
-
 // Postprocessors
 import * as TextPostprocessor from './postprocessors/text'
 

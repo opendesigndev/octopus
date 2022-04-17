@@ -1,14 +1,15 @@
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+
 import OctopusEffectFillColor from './octopus-effect-fill-color'
 import OctopusEffectFillGradient from './octopus-effect-fill-gradient'
 import OctopusEffectFillImage from './octopus-effect-fill-image'
 import OctopusEffectStroke from './octopus-effect-stroke'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import OctopusBounds from './octopus-bounds'
 
-import type { Octopus } from '../../typings/octopus'
-import type SourceResources from '../source/source-resources'
-import type { OctopusFill } from '../../typings/octopus-entities'
 import type OctopusLayerShape from './octopus-layer-shape'
+import type { OctopusFill } from '../../typings/octopus-entities'
+import type SourceResources from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus'
 
 type OctopusEffectsShapeOptions = {
   octopusLayer: OctopusLayerShape

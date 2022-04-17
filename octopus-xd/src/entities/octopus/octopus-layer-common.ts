@@ -1,14 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'
-
-import BLEND_MODES from '../../utils/blend-modes'
 import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
-import DEFAULTS from '../../utils/defaults'
-import OctopusArtboard from './octopus-artboard'
-import { convertObjectMatrixToArray } from '../../utils/matrix'
-import OctopusEffectsLayer from './octopus-effects-layer'
-import defaults from '../../utils/defaults'
+
 import { createMatrix } from '../../utils/paper'
+import { convertObjectMatrixToArray } from '../../utils/matrix'
+import DEFAULTS from '../../utils/defaults'
+import BLEND_MODES from '../../utils/blend-modes'
+import OctopusEffectsLayer from './octopus-effects-layer'
+import OctopusArtboard from './octopus-artboard'
 
 import type { OctopusXDConverter } from '../..'
 import type OctopusLayerGroup from './octopus-layer-group'
@@ -80,7 +79,7 @@ export default class OctopusLayerCommon {
   }
 
   get name(): string {
-    return asString(this._sourceLayer.name, defaults.LAYER.NAME)
+    return asString(this._sourceLayer.name, DEFAULTS.LAYER.NAME)
   }
 
   get visible(): boolean | undefined {

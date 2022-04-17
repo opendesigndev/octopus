@@ -1,8 +1,9 @@
 import path from 'path'
+
 import chalk from 'chalk'
 
-import { getPkgLocation } from './utils/pkg-location'
 import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
+import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {

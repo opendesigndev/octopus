@@ -1,18 +1,19 @@
-import OctopusArtboardDimensions from './octopus-artboard-dimensions'
-import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import SourceLayerGroup from '../source/source-layer-group'
 import { uuidv4FromSeed } from '../../utils/id'
-import OctopusLayerGroup from './octopus-layer-group'
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import defaults from '../../utils/defaults'
-
-import type { Octopus } from '../../typings/octopus'
-import type SourceArtboard from '../source/source-artboard'
-import type SourceDesign from '../source/source-design'
-import type { OctopusXDConverter } from '../..'
-import type { RawLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
 import { createMatrix } from '../../utils/paper'
 import { convertArrayToPaperMatrix, convertObjectMatrixToArray, convertPaperMatrixToObject } from '../../utils/matrix'
+import OctopusArtboardDimensions from './octopus-artboard-dimensions'
+import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
+import OctopusLayerGroup from './octopus-layer-group'
+
+import type { RawLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
+import type { OctopusXDConverter } from '../..'
+import type SourceDesign from '../source/source-design'
+import type SourceArtboard from '../source/source-artboard'
+import type { Octopus } from '../../typings/octopus'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string

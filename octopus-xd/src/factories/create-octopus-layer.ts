@@ -1,7 +1,7 @@
-import OctopusLayerGroup from '../entities/octopus/octopus-layer-group'
-import OctopusLayerMaskGroup from '../entities/octopus/octopus-layer-maskgroup'
-import OctopusLayerShape from '../entities/octopus/octopus-layer-shape'
 import OctopusLayerText from '../entities/octopus/octopus-layer-text'
+import OctopusLayerShape from '../entities/octopus/octopus-layer-shape'
+import OctopusLayerMaskGroup from '../entities/octopus/octopus-layer-maskgroup'
+import OctopusLayerGroup from '../entities/octopus/octopus-layer-group'
 
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type SourceLayerGroup from '../entities/source/source-layer-group'

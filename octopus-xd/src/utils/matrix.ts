@@ -1,8 +1,9 @@
-import { Raw2DMatrix } from '../typings/source'
 import { asFiniteNumber, asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { createMatrix } from './paper'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
+import { createMatrix } from './paper'
+
+import type { Raw2DMatrix } from '../typings/source'
 import type { Octopus } from '../typings/octopus'
 
 export function convertObjectMatrixToArray(matrix: unknown): Octopus['Transform'] | null {

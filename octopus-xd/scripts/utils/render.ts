@@ -1,6 +1,7 @@
 import path from 'path'
-import { getPkgLocation } from './pkg-location'
 import { execSync } from 'child_process'
+
+import { getPkgLocation } from './pkg-location'
 
 export async function renderOctopus(
   id: string,

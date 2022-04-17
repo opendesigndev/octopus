@@ -1,4 +1,4 @@
-import type paper from 'paper'
+import { asNumber, asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import {
   createPathCircle,
@@ -10,9 +10,9 @@ import {
   createSize,
   createPath,
 } from './paper'
+import { convertObjectToPaperMatrix } from './matrix'
 
-import { asNumber, asArray } from '@avocode/octopus-common/dist/utils/as'
-
+import type paper from 'paper'
 import type {
   Raw2DMatrix,
   RawShape,
@@ -25,7 +25,6 @@ import type {
   RawShapePolygon,
   RawShapeRect,
 } from '../typings/source'
-import { convertObjectToPaperMatrix } from './matrix'
 
 function buildShapeFromRect(shape: RawShapeRect): paper.Path {
   return createPathRectangle(

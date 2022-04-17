@@ -1,11 +1,11 @@
-import defaults from '../../utils/defaults'
-
-import { parseXDColor } from '../../utils/color'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
+
+import defaults from '../../utils/defaults'
+import { parseXDColor } from '../../utils/color'
 import SourceEffectFillColor from '../source/source-effect-color-fill'
 
-import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'
 import type { Octopus } from '../../typings/octopus'
+import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'
 
 type OctopusEffectFillColorOptions = {
   source: SourceEffectFillColor

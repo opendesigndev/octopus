@@ -1,4 +1,4 @@
-import { RawColor } from '.'
+import type { RawColor } from '.'
 
 export type RawStroke = {
   type?: 'solid' | 'none'

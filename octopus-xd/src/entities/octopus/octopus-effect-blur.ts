@@ -1,4 +1,5 @@
 import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
+
 import SourceEffectBlur from '../source/source-effect-blur'
 
 import type { Octopus } from '../../typings/octopus'

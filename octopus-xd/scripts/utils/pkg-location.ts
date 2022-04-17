@@ -1,5 +1,6 @@
-import readPackageUpAsync from 'read-pkg-up'
 import path from 'path'
+
+import readPackageUpAsync from 'read-pkg-up'
 
 const pkg = readPackageUpAsync({ cwd: __dirname })
 

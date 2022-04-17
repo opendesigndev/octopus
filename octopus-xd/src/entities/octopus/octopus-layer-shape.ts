@@ -1,19 +1,20 @@
-import OctopusLayerCommon from './octopus-layer-common'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { buildShapePathSafe } from '../../utils/path-builders'
 import { convertArrayToPaperMatrix, convertObjectToPaperMatrix } from '../../utils/matrix'
+import defaults from '../../utils/defaults'
+import { createMatrix } from '../../utils/paper'
+import OctopusLayerCommon from './octopus-layer-common'
 import OctopusEffectsShape from './octopus-effects-shape'
 
-import type paper from 'paper'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type { Octopus } from '../../typings/octopus'
 import type { Raw2DMatrix, RawShapeCompound, RawShapeRect } from '../../typings/source'
-import defaults from '../../utils/defaults'
-import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
-import { createMatrix } from '../../utils/paper'
+import type { Octopus } from '../../typings/octopus'
+import type SourceLayerShape from '../source/source-layer-shape'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { LayerSpecifics } from './octopus-layer-common'
+import type paper from 'paper'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

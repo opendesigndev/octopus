@@ -1,9 +1,10 @@
-import defaults from '../../utils/defaults'
 import { asBoolean, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import SourceEffectFillImage from '../source/source-effect-image-fill'
-import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
-import OctopusBounds from './octopus-bounds'
 
+import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
+import SourceEffectFillImage from '../source/source-effect-image-fill'
+import defaults from '../../utils/defaults'
+
+import type OctopusBounds from './octopus-bounds'
 import type { Octopus } from '../../typings/octopus'
 import type { RawFillImage } from '../../typings/source'
 import type OctopusLayerShape from './octopus-layer-shape'

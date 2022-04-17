@@ -1,12 +1,13 @@
-import defaults from '../../utils/defaults'
-import { parseXDColor } from '../../utils/color'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
+
+import defaults from '../../utils/defaults'
+import { parseXDColor } from '../../utils/color'
 import SourceEffectFillGradient from '../source/source-effect-gradient-fill'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper'
-import OctopusBounds from './octopus-bounds'
 
+import type OctopusBounds from './octopus-bounds'
 import type SourceResources from '../source/source-resources'
 import type { Octopus } from '../../typings/octopus'
 import type { RawFillGradient, RawGradientLinear, RawGradientRadial, RawGradientResources } from '../../typings/source'

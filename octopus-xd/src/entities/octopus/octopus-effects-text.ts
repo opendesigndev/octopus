@@ -1,11 +1,12 @@
-import OctopusEffectFillColor from './octopus-effect-fill-color'
-import OctopusEffectStroke from './octopus-effect-stroke'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
+import OctopusEffectStroke from './octopus-effect-stroke'
+import OctopusEffectFillColor from './octopus-effect-fill-color'
+
+import type OctopusLayerText from './octopus-layer-text'
 import type { Octopus } from '../../typings/octopus'
 import type { RawStyle } from '../../typings/source'
 import type { OctopusFill } from '../../typings/octopus-entities'
-import OctopusLayerText from './octopus-layer-text'
 
 type OctopusEffectsTextOptions = {
   effectSource?: RawStyle
