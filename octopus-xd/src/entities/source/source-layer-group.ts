@@ -1,11 +1,12 @@
-import { createSourceLayer } from '../../factories/create-source-layer'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
+import { createSourceLayer } from '../../factories/create-source-layer'
 import SourceLayerCommon from './source-layer-common'
 
-import type { RawGroupLayer, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawGroupLayer, RawLayer } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
-import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent

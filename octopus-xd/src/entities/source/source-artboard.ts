@@ -1,12 +1,13 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push, traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+
 import { createSourceLayer } from '../../factories/create-source-layer'
 
-import type SourceDesign from './source-design'
-import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
+import type SourceDesign from './source-design'
 import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest'
-import { push, traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

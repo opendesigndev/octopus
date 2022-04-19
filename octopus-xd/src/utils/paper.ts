@@ -1,4 +1,5 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
+
 import type paper from 'paper'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

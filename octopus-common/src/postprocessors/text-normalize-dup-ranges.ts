@@ -1,4 +1,5 @@
 import isEqual from 'lodash/isEqual'
+
 import { asArray } from '../utils/as'
 
 import type { Octopus } from '../typings/octopus-common'

@@ -1,17 +1,18 @@
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import OctopusLayerCommon from './octopus-layer-common'
-import { OctopusLayerParent } from '../../typings/octopus-entities'
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { SourceLayer } from '../../factories/create-source-layer'
 import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import type { LayerSpecifics } from './octopus-layer-common'
+import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { createSourceLayer } from '../../factories/create-source-layer'
+import OctopusLayerCommon from './octopus-layer-common'
+
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type SourceLayerGroup from '../source/source-layer-group'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
-import type OctopusLayerShape from './octopus-layer-shape'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { RawGroupLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
+import type SourceLayerGroup from '../source/source-layer-group'
+import type { LayerSpecifics } from './octopus-layer-common'
+import type OctopusLayerShape from './octopus-layer-shape'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent

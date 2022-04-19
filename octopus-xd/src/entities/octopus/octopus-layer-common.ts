@@ -1,23 +1,22 @@
+import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 import { v4 as uuidv4 } from 'uuid'
 
 import BLEND_MODES from '../../utils/blend-modes'
-import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import { round } from '@avocode/octopus-common/dist/utils/math'
 import DEFAULTS from '../../utils/defaults'
-import OctopusArtboard from './octopus-artboard'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
-import OctopusEffectsLayer from './octopus-effects-layer'
-import defaults from '../../utils/defaults'
 import { createMatrix } from '../../utils/paper'
+import OctopusArtboard from './octopus-artboard'
+import OctopusEffectsLayer from './octopus-effects-layer'
 
 import type { OctopusXDConverter } from '../..'
-import type OctopusLayerGroup from './octopus-layer-group'
-import type OctopusLayerMaskGroup from './octopus-layer-maskgroup'
-import type { SourceLayer } from '../../factories/create-source-layer'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Raw3DMatrix } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { Raw3DMatrix } from '../../typings/source'
+import type OctopusLayerGroup from './octopus-layer-group'
+import type OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
@@ -80,7 +79,7 @@ export default class OctopusLayerCommon {
   }
 
   get name(): string {
-    return asString(this._sourceLayer.name, defaults.LAYER.NAME)
+    return asString(this._sourceLayer.name, DEFAULTS.LAYER.NAME)
   }
 
   get visible(): boolean | undefined {
@@ -100,9 +99,8 @@ export default class OctopusLayerCommon {
       : DEFAULTS.TRANSFORM.slice()
 
     const [a, b, c, d, tx, ty] = matrixAsArray || DEFAULTS.TRANSFORM.slice()
-    const matrix = createMatrix(a, b, c, d, tx, ty)
 
-    return [matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty]
+    return createMatrix(a, b, c, d, tx, ty).values
   }
 
   get opacity(): number {

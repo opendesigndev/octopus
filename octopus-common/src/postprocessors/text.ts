@@ -1,6 +1,6 @@
 import { normalizeDefaults } from './text-normalize-defaults'
-import { normalizeLinebreak } from './text-normalize-linebreak'
 import { normalizeDupRanges } from './text-normalize-dup-ranges'
+import { normalizeLinebreak } from './text-normalize-linebreak'
 
 import type { Octopus } from '../typings/octopus-common'
 
