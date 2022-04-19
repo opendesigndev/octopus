@@ -3,7 +3,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { logWarn } from '../../services/instances/misc'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceCombineOperation } from '../../typings/source'
-import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
+import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
 import { createPathData } from '../../utils/path-data'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourcePathComponent } from '../source/source-path-component'
@@ -31,13 +31,13 @@ export class OctopusLayerShapeShapePath {
     return this._parentLayer.sourceLayer
   }
 
-  private isRectangle(pathComponents: SourcePathComponent[]): boolean {
+  private isRectangle(): boolean {
     if (this.sourceLayer.type === 'layer') return true
     const sourceLayer = this.sourceLayer as SourceLayerShape
 
     const component = sourceLayer.firstPathComponent
     const type = component?.origin?.type
-    if (type !== 'rect' && type !== 'roundedRect') {
+    if (type !== 'rect') {
       return false
     }
 
@@ -45,16 +45,12 @@ export class OctopusLayerShapeShapePath {
     const points = subpathList[0]?.points ?? []
     const pointsMapped = points?.map((point) => point.anchor)
 
-    if (type !== 'roundedRect') return isRectangle(pointsMapped)
-
-    const { bottomLeft, bottomRight, topLeft, topRight } = pathComponents[0].origin.radii
-    const hasSameCornerRadii = [bottomLeft, bottomRight, topLeft, topRight].every((val, _i, arr) => val === arr[0])
-    return isRoundedRectangle(pointsMapped) && hasSameCornerRadii
+    return isRectangle(pointsMapped)
   }
 
   private _getShapeType(pathComponents: SourcePathComponent[]): Octopus['PathType'] {
     if (pathComponents.length > 1) return 'COMPOUND'
-    if (this.isRectangle(pathComponents)) return 'RECTANGLE'
+    if (this.isRectangle()) return 'RECTANGLE'
     return 'PATH'
   }
 

@@ -27,13 +27,13 @@ const pointToSegment = (point: SourceSubpathPoint): paper.Segment => {
   return createPointSegment(point.anchor)
 }
 
-const subtractLayerTranslation = (segment: paper.Segment, [tx, ty]: [number, number]) => {
+const subtractLayerTranslation = (segment: paper.Segment, [tx, ty]: readonly [number, number]) => {
   const translationMatrix = createTranslationMatrix(-tx, -ty)
   segment.transform(translationMatrix)
   return segment
 }
 
-const createSubpath = (subpath: SourceSubpath, layerTranslation: [number, number]): paper.PathItem => {
+const createSubpath = (subpath: SourceSubpath, layerTranslation: readonly [number, number]): paper.PathItem => {
   const segments = subpath.points
     .map(pointToSegment)
     .map((segment) => subtractLayerTranslation(segment, layerTranslation))
@@ -42,7 +42,10 @@ const createSubpath = (subpath: SourceSubpath, layerTranslation: [number, number
   return shape
 }
 
-const processSubpaths = (subpaths: SourceSubpath[], layerTranslation: [number, number]): paper.PathItem | null => {
+const processSubpaths = (
+  subpaths: SourceSubpath[],
+  layerTranslation: readonly [number, number]
+): paper.PathItem | null => {
   try {
     const subpathEntities = subpaths
       .filter((subpath) => subpath?.points?.length > 1)
@@ -59,7 +62,10 @@ const processSubpaths = (subpaths: SourceSubpath[], layerTranslation: [number, n
   }
 }
 
-export function createPathData(pathComponent: SourcePathComponent, layerTranslation: [number, number]): string {
+export function createPathData(
+  pathComponent: SourcePathComponent,
+  layerTranslation: readonly [number, number]
+): string {
   const subpaths = pathComponent?.subpathListKey ?? []
   const pathItem = processSubpaths(subpaths, layerTranslation)
   return pathItem?.pathData || 'MZ'
