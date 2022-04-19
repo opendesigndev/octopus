@@ -1,11 +1,13 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import type { Octopus } from '../../typings/octopus'
 import { createDefaultTranslationMatrix } from '../../utils/path'
-import type { SourceLayerAdjustment } from '../source/source-layer-adjustment'
 import { OctopusEffectFill } from './octopus-effect-fill'
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import { OctopusLayerBase } from './octopus-layer-base'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerAdjustment } from '../source/source-layer-adjustment'
+import type { OctopusLayerParent, LayerSpecifics } from './octopus-layer-base'
 
 type OctopusLayerShapeAdjustmentAdapterOptions = {
   parent: OctopusLayerParent

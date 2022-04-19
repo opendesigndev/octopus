@@ -1,15 +1,18 @@
+import path from 'path'
+
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { parsePsd } from '@avocode/psd-parser'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
-import path from 'path'
 import rimraf from 'rimraf'
 
-import { SourceDesign, SourceImage } from '../../entities/source/source-design'
-import type { RawArtboard } from '../../typings/raw'
+import { SourceDesign } from '../../entities/source/source-design'
 import { displayPerf } from '../../utils/console'
 import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
 import { logInfo } from '../instances/misc'
+
+import type { SourceImage } from '../../entities/source/source-design'
+import type { RawArtboard } from '../../typings/raw'
 
 type PSDFileReaderOptions = {
   path: string

@@ -1,6 +1,7 @@
-import type { RawParagraphStyle } from '../../typings/raw'
-import { SourceAlign } from '../../typings/source'
 import { SourceEntity } from './source-entity'
+
+import type { RawParagraphStyle } from '../../typings/raw'
+import type { SourceAlign } from '../../typings/source'
 
 export class SourceTextParagraphStyle extends SourceEntity {
   protected _rawValue: RawParagraphStyle | undefined

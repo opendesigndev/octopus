@@ -1,12 +1,14 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
+import { createSourceLayer } from '../../factories/create-source-layer'
+import { getBoundsFor } from '../../utils/source'
+import { SourceLayerCommon } from './source-layer-common'
+
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer, RawLayerSection } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
-import { getBoundsFor } from '../../utils/source'
 import type { SourceLayerParent } from './source-layer-common'
-import { SourceLayerCommon } from './source-layer-common'
 
 type SourceLayerSectionOptions = {
   parent: SourceLayerParent

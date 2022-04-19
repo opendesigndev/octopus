@@ -2,9 +2,10 @@ import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-me
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 import { logWarn } from '../../services/instances/misc'
+import { OctopusEffectFill } from './octopus-effect-fill'
+
 import type { Octopus } from '../../typings/octopus'
 import type { SourceStroke } from '../source/source-stroke'
-import { OctopusEffectFill } from './octopus-effect-fill'
 import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusStrokeOptions = {

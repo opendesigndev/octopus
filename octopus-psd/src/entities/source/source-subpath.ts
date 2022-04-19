@@ -1,8 +1,9 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawSubpath } from '../../typings/raw'
 import { SourceEntity } from './source-entity'
 import { SourceSubpathPoint } from './source-subpath-point'
+
+import type { RawSubpath } from '../../typings/raw'
 
 export class SourceSubpath extends SourceEntity {
   protected _rawValue: RawSubpath

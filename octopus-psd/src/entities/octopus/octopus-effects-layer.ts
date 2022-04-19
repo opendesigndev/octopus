@@ -1,7 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { Octopus } from '../../typings/octopus'
-import { SourceLayerEffects } from '../source/source-effects-layer'
 import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'
 import { OctopusEffectGlowInner } from './octopus-effect-glow-inner'
 import { OctopusEffectGlowOuter } from './octopus-effect-glow-outer'
@@ -12,7 +10,10 @@ import { OctopusEffectSatin } from './octopus-effect-satin'
 import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop'
 import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
-import { OctopusLayerBase } from './octopus-layer-base'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerEffects } from '../source/source-effects-layer'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectLayerOptions = {
   parentLayer: OctopusLayerBase

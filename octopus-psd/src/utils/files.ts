@@ -1,7 +1,8 @@
-import type { Dirent } from 'fs'
 import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises'
 
 import { logWarn } from '../services/instances/misc'
+
+import type { Dirent } from 'fs'
 
 export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null> {
   try {

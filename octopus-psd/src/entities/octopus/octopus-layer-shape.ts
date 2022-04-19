@@ -1,6 +1,8 @@
+import { OctopusLayerBase } from './octopus-layer-base'
+
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
-import { OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import type { OctopusLayerParent } from './octopus-layer-base'
 import type { OctopusLayerShapeAdjustmentAdapter } from './octopus-layer-shape-adjustment-adapter'
 import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'

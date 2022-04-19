@@ -1,11 +1,14 @@
-import { DetachedPromiseControls, detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import EventEmitter from 'events'
 import path from 'path'
+
+import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+
+import type { ArtboardConversionResult, DesignConversionResult } from '../..'
 import type { AbstractExporter } from './abstract-exporter'
+import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
   id?: string

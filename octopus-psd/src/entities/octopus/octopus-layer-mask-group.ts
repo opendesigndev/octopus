@@ -1,18 +1,20 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { OctopusLayer } from '../../factories/create-octopus-layer'
-import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { RawLayerLayer, RawLayerShape, RawPath } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
+import { createSourceLayer } from '../../factories/create-source-layer'
 import { convertColor, convertRectangle } from '../../utils/convert'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { SourceLayerShape } from '../source/source-layer-shape'
 import { OctopusArtboard } from './octopus-artboard'
-import { OctopusLayerParent } from './octopus-layer-base'
 import { OctopusLayerShape } from './octopus-layer-shape'
 import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { Octopus } from '../../typings/octopus'
+import type { RawLayerLayer, RawLayerShape, RawPath } from '../../typings/raw'
+import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent

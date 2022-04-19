@@ -1,10 +1,11 @@
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 import { logWarn } from '../../services/instances/misc'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceCombineOperation } from '../../typings/source'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
 import { createPathData } from '../../utils/path-data'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceCombineOperation } from '../../typings/source'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourcePathComponent } from '../source/source-path-component'
 import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'

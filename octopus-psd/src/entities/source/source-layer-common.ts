@@ -1,13 +1,14 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
 import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerEffects } from './source-effects-layer'
 import { SourceEntity } from './source-entity'
-import type { SourceLayerSection } from './source-layer-section'
 import { SourcePath } from './source-path'
+
+import type { RawBlendMode, RawLayer } from '../../typings/raw'
+import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceLayerSection } from './source-layer-section'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 

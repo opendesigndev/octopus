@@ -1,6 +1,5 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawLayerEffects } from '../../typings/raw'
 import { getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss'
 import { SourceEffectFill } from './source-effect-fill'
@@ -8,6 +7,8 @@ import { SourceEffectSatin } from './source-effect-satin'
 import { SourceEffectShadow } from './source-effect-shadow'
 import { SourceEffectStroke } from './source-effect-stroke'
 import { SourceEntity } from './source-entity'
+
+import type { RawLayerEffects } from '../../typings/raw'
 
 export class SourceLayerEffects extends SourceEntity {
   protected _rawValue: RawLayerEffects | undefined

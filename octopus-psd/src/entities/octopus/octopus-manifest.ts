@@ -1,7 +1,8 @@
+import path from 'path'
+
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-import path from 'path'
 
 import type { OctopusPSDConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'

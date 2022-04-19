@@ -1,10 +1,11 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawPath } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 import { SourcePathComponent } from './source-path-component'
+
+import type { RawPath } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
 
 export class SourcePath extends SourceEntity {
   protected _rawValue: RawPath | undefined

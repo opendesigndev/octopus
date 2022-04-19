@@ -2,12 +2,13 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logWarn } from '../services/instances/misc'
+
+import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type {
   RawLayer,
   RawLayerAdjustment,

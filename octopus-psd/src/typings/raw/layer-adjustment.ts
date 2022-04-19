@@ -1,4 +1,4 @@
-import { RawFill } from './effects'
+import type { RawFill } from './effects'
 import type { RawLayerCommon } from './layer'
 
 export type RawLayerAdjustment = RawLayerCommon & {

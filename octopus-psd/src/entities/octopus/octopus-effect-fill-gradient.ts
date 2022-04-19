@@ -1,20 +1,21 @@
 import { lerpColor, multiplyAlpha } from '@avocode/octopus-common/dist/utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { invLerp, lerp } from '@avocode/octopus-common/dist/utils/math'
-import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 import uniq from 'lodash/uniq'
 
 import { logWarn } from '../../services/instances/misc'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import { convertColor, convertOffset } from '../../utils/convert'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
 import type { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerBase } from './octopus-layer-base'
+import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 

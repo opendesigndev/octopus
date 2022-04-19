@@ -1,10 +1,11 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawPathComponent } from '../../typings/raw'
-import type { SourceCombineOperation } from '../../typings/source'
 import { SourceEntity } from './source-entity'
 import { SourcePathOrigin } from './source-path-origin'
 import { SourceSubpath } from './source-subpath'
+
+import type { RawPathComponent } from '../../typings/raw'
+import type { SourceCombineOperation } from '../../typings/source'
 
 export class SourcePathComponent extends SourceEntity {
   protected _rawValue: RawPathComponent

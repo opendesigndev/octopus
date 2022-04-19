@@ -1,7 +1,8 @@
+import path from 'path'
+
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
-import path from 'path'
 
 import { OctopusPSDConverter, PSDFileReader, TempExporter } from '../src'
 import { displayPerf } from '../src/utils/console'

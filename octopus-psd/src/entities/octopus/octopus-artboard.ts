@@ -1,10 +1,12 @@
+import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { OctopusLayerGroup } from './octopus-layer-group'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+
 import type { OctopusPSDConverter } from '../..'
-import { createOctopusLayers, OctopusLayer } from '../../factories/create-octopus-layer'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
-import { OctopusLayerGroup } from './octopus-layer-group'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign

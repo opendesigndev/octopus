@@ -3,16 +3,19 @@ import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
-import { isEmpty, isEqual } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
+import isEqual from 'lodash/isEqual'
+
+import { createMatrix } from '../../utils/paper-factories'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
-import { createMatrix } from '../../utils/paper-factories'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
 import type { SourceTextTextStyle } from '../source/source-text-text-style'
 import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -87,7 +90,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getFont(textStyle: SourceTextTextStyle): Octopus['TextStyle']['font'] {
     return {
-      postScriptName: textStyle.fontPostScriptName,
+      postScriptName: 'Arial', // textStyle.fontPostScriptName,
       family: textStyle.fontName,
       style: textStyle.fontStyleName,
     }

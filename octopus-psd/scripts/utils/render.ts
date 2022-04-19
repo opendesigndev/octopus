@@ -1,7 +1,8 @@
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
-import chalk from 'chalk'
 import { execSync } from 'child_process'
 import path from 'path'
+
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import chalk from 'chalk'
 
 import { getPkgLocation } from './pkg-location'
 

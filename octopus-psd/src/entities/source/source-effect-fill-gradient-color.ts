@@ -1,7 +1,8 @@
-import type { RawShapeGradientColor } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
+
+import type { RawShapeGradientColor } from '../../typings/raw'
+import type { SourceColor } from '../../typings/source'
 
 export class SourceEffectFillGradientColor extends SourceEntity {
   protected _rawValue: RawShapeGradientColor | undefined

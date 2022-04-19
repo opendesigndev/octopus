@@ -1,7 +1,8 @@
-import type { RawSubpathPoint } from '../../typings/raw'
-import type { SourcePointXY } from '../../typings/source'
 import { getPointFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
+
+import type { RawSubpathPoint } from '../../typings/raw'
+import type { SourcePointXY } from '../../typings/source'
 
 export class SourceSubpathPoint extends SourceEntity {
   protected _rawValue: RawSubpathPoint

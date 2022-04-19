@@ -1,9 +1,10 @@
 import { logWarn } from '../../services/instances/misc'
+import { OctopusEffectBase } from './octopus-effect-base'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+
 import type { Octopus } from '../../typings/octopus'
 import type { SourceColor } from '../../typings/source'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import { OctopusEffectBase } from './octopus-effect-base'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {

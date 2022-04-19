@@ -1,6 +1,7 @@
-import type { RawShapeTransparency } from '../../typings/raw'
 import { getUnitRatioFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
+
+import type { RawShapeTransparency } from '../../typings/raw'
 
 export class SourceEffectFillGradientOpacity extends SourceEntity {
   protected _rawValue: RawShapeTransparency | undefined

@@ -1,10 +1,11 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawFill, RawFillPattern } from '../../typings/raw'
-import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBase } from './source-effect-base'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient'
+
+import type { RawFill, RawFillPattern } from '../../typings/raw'
+import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
 
 export class SourceEffectFill extends SourceEffectBase {
   protected _rawValue: RawFill | undefined

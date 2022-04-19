@@ -1,4 +1,5 @@
 import path from 'path'
+
 import readPackageUpAsync from 'read-pkg-up'
 
 const packageJson = readPackageUpAsync({ cwd: __dirname })

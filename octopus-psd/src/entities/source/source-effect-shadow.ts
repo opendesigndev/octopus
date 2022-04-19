@@ -1,9 +1,10 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import type { RawEffectShadow } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBase } from './source-effect-base'
+
+import type { RawEffectShadow } from '../../typings/raw'
+import type { SourceColor } from '../../typings/source'
 
 export class SourceEffectShadow extends SourceEffectBase {
   protected _rawValue: RawEffectShadow | undefined

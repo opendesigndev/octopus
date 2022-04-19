@@ -1,8 +1,9 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import type { RawParagraphStyleRange } from '../../typings/raw'
 import { SourceEntity } from './source-entity'
 import { SourceTextParagraphStyle } from './source-text-paragraph-style'
+
+import type { RawParagraphStyleRange } from '../../typings/raw'
 
 export class SourceTextParagraphStyleRange extends SourceEntity {
   protected _rawValue: RawParagraphStyleRange | undefined
