@@ -66,7 +66,8 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return this._outputDir
   }
 
-  async exportArtboard(artboard: ArtboardConversionResult): Promise<string> {
+  async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
+    if (!artboard.value) return Promise.resolve(null)
     const octopusPath = await this._save(TempExporter.OCTOPUS_NAME, this._stringify(artboard.value))
     const sourcePath = path.join(await this._outputDir, TempExporter.SOURCE_NAME)
     const result = {
@@ -87,9 +88,12 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return fullPath
   }
 
-  async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    const manifestPath = await this._save(TempExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
-    this.emit('octopus:manifest', manifestPath)
+  async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
+    const manifestPath = await this._save(TempExporter.MANIFEST_NAME, this._stringify(manifest))
+    const manifestStatus = manifest.artboards[0]?.status?.value
+    if (manifestStatus === 'READY' || manifestStatus === 'FAILED') {
+      this.emit('octopus:manifest', manifestPath)
+    }
     return manifestPath
   }
 }

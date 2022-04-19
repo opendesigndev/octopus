@@ -1,7 +1,7 @@
 import path from 'path'
-import { performance } from 'perf_hooks'
 
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -128,16 +128,24 @@ export class OctopusPSDConverter {
 
   private async _convertArtboard(options: ArtboardConversionOptions): Promise<ArtboardConversionResult> {
     const id = options.sourceDesign.artboard.id
-    const timeStart = performance.now()
-    const { value, error } = await this._convertArtboardSafe(options)
-    const time = performance.now() - timeStart
+    const { time, result } = await benchmarkAsync(() => this._convertArtboardSafe(options))
+    const { value, error } = result
     return { id, value, error, time }
+  }
+
+  private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest']> {
+    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+    await exporter?.exportManifest?.({ manifest, time })
+    return manifest
   }
 
   async convertDesign(options?: ConvertDesignOptions): Promise<ConvertDesignResult> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
 
     this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
+
+    /** First Manifest save  */
+    this._exportManifest(exporter)
 
     /** Images */
     const images = await Promise.all(
@@ -152,26 +160,20 @@ export class OctopusPSDConverter {
     )
 
     /** Artboard */
-    const artboard = await this._convertArtboard({ sourceDesign: this._sourceDesign })
-    if (!artboard.error) {
-      const artboardPath = await exporter?.exportArtboard?.(artboard)
-      if (typeof artboardPath === 'string') {
-        this.octopusManifest.setExportedArtboard(artboard.id, artboardPath)
-      }
-    }
+    const artboardResult = await this._convertArtboard({ sourceDesign: this._sourceDesign })
+    const artboardPath = await exporter?.exportArtboard?.(artboardResult)
+    const { time, error } = artboardResult
+    this.octopusManifest.setExportedArtboard(artboardResult.id, { path: artboardPath, time, error })
 
-    /** Manifest */
-    const timeStart = performance.now()
-    const manifest = await this.octopusManifest.convert()
-    const time = performance.now() - timeStart
+    /** Final trigger of Manifest save */
+    const manifest = await this._exportManifest(exporter)
 
-    await exporter?.exportManifest?.({ manifest, time })
-
+    /** Trigger finalizer */
     exporter?.finalizeExport?.()
 
     return {
       manifest,
-      artboards: [artboard],
+      artboards: [artboardResult],
       images,
     }
   }

@@ -1,6 +1,5 @@
 import path from 'path'
 
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 
@@ -14,12 +13,18 @@ type OctopusManifestOptions = {
   octopusConverter: OctopusPSDConverter
 }
 
+type ArtboardDescriptor = {
+  path: unknown
+  error: Error | null
+  time: number | null
+}
+
 export class OctopusManifest {
   private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusPSDConverter
   private _exports: {
     images: Map<string, string>
-    artboards: Map<string, string>
+    artboards: Map<string, ArtboardDescriptor>
   }
 
   private _basePath: string | null
@@ -58,19 +63,19 @@ export class OctopusManifest {
     this._exports.images.set(name, path)
   }
 
-  getExportedArtboardById(id: string): string | undefined {
+  getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
     return this._exports.artboards.get(id)
   }
 
-  getExportedRelativeArtboardById(id: string): string | undefined {
-    const artboardPath = this._exports.artboards.get(id)
-    if (artboardPath === undefined) return undefined
-    if (this._basePath === null) return artboardPath
-    return path.relative(this._basePath, artboardPath)
+  getExportedArtboardRelativePathById(id: string): string | undefined {
+    const artboardResult = this._exports.artboards.get(id)
+    if (typeof artboardResult?.path !== 'string') return undefined
+    if (this._basePath === null) return artboardResult.path
+    return path.relative(this._basePath, artboardResult.path)
   }
 
-  setExportedArtboard(id: string, path: string): void {
-    this._exports.artboards.set(id, path)
+  setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
+    this._exports.artboards.set(id, artboard)
   }
 
   get manifestVersion(): Promise<string> {
@@ -94,6 +99,16 @@ export class OctopusManifest {
     }
   }
 
+  private _convertError(error: Error | null | undefined): Manifest['Error'] | undefined {
+    if (!error) return undefined
+    const UNKNOWN_CODE = -1
+    return {
+      code: UNKNOWN_CODE,
+      message: error.message,
+      stacktrace: error.stack ? [error.stack] : undefined,
+    }
+  }
+
   private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.fontPostScriptName
@@ -101,7 +116,7 @@ export class OctopusManifest {
     return [...new Set(entries)] as string[]
   }
 
-  private _getArtboardAssets(): Manifest['Assets'] | null {
+  private get _artboardAssets(): Manifest['Assets'] | null {
     const targetArtboard = this._octopusConverter.sourceDesign.artboard
     const raw = targetArtboard?.raw
     if (!raw) return null
@@ -123,21 +138,27 @@ export class OctopusManifest {
     }
   }
 
-  @firstCallMemo()
   get artboards(): Manifest['Artboard'][] {
     const sourceArtboard = this._sourceDesign.artboard
     const id = sourceArtboard.id
     const bounds = this._convertManifestBounds(sourceArtboard.bounds)
-    const assets = this._getArtboardAssets() ?? undefined
+    const assets = this._artboardAssets ?? undefined
 
-    // TODO: how to handle failed artboards?
-    const path = this.getExportedRelativeArtboardById(id)
+    const status = this.getExportedArtboardById(id)
+    const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
+
+    const path = this.getExportedArtboardRelativePathById(id)
     const location: Manifest['ResourceLocation'] =
       typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
 
     const artboard: Manifest['Artboard'] = {
       id,
       name: id,
+      status: {
+        value: statusValue,
+        error: this._convertError(status?.error),
+        time: status?.time ?? undefined,
+      },
       bounds,
       dependencies: [],
       assets,

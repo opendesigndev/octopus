@@ -75,8 +75,6 @@ export class LocalExporter implements AbstractExporter {
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    const save = await this._save(LocalExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
-    this._completed.resolve()
-    return save
+    return this._save(LocalExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
   }
 }
