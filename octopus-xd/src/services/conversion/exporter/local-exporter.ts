@@ -1,9 +1,9 @@
+import { promises as fsp } from 'fs'
 import os from 'os'
 import path from 'path'
-import { promises as fsp } from 'fs'
 
-import { v4 as uuidv4 } from 'uuid'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { v4 as uuidv4 } from 'uuid'
 
 import type { Exporter } from '.'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../../src'

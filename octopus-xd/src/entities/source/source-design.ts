@@ -2,15 +2,15 @@ import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import Expander from '../../services/conversion/expander'
 import PasteboardNormalizer from '../../services/conversion/pasteboard-normalizer'
+import SourceArtboard from './source-artboard'
 import SourceInteractions from './source-interactions'
 import SourceManifest from './source-manifest'
 import SourceResources from './source-resources'
-import SourceArtboard from './source-artboard'
 
-import type { RawResources } from '../../typings/source/resources'
 import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
-import type { RawSourceManifest } from './source-manifest'
+import type { RawResources } from '../../typings/source/resources'
 import type { RawSourceInteractions } from './source-interactions'
+import type { RawSourceManifest } from './source-manifest'
 
 type SourceDesignOptions = {
   manifest: {

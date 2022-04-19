@@ -4,9 +4,9 @@ import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import OctopusLayerCommon from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type SourceLayerGroup from '../source/source-layer-group'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type SourceLayerGroup from '../source/source-layer-group'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerGroupOptions = {

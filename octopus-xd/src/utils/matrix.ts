@@ -3,8 +3,8 @@ import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import { createMatrix } from './paper'
 
-import type { Raw2DMatrix } from '../typings/source'
 import type { Octopus } from '../typings/octopus'
+import type { Raw2DMatrix } from '../typings/source'
 
 export function convertObjectMatrixToArray(matrix: unknown): Octopus['Transform'] | null {
   if (typeof (matrix as Raw2DMatrix)?.a === 'number') {

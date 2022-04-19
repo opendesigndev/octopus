@@ -1,14 +1,14 @@
-import path from 'path'
-import { promises as fsp } from 'fs'
 import EventEmitter from 'events'
+import { promises as fsp } from 'fs'
+import path from 'path'
 
-import { v4 as uuidv4 } from 'uuid'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { v4 as uuidv4 } from 'uuid'
 
 import type { Exporter } from '.'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
-import type sourceDesign from '../../../entities/source/source-design'
 import type SourceArtboard from '../../../entities/source/source-artboard'
+import type sourceDesign from '../../../entities/source/source-design'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {

@@ -2,17 +2,17 @@ import fsp from 'fs/promises'
 import os from 'os'
 import path from 'path'
 
-import { v4 as uuidv4 } from 'uuid'
 import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
+import { v4 as uuidv4 } from 'uuid'
 
 import SourceDesign from '../../../entities/source/source-design'
 import { unzipArray } from './unzip'
 
-import type { UnzipFileInfo } from 'fflate'
 import type { ArrayBuffersSourceTree } from '../../../../src/typings'
+import type { RawSourceInteractions } from '../../../entities/source/source-interactions'
 import type { RawSourceManifest } from '../../../entities/source/source-manifest'
 import type { RawArtboardLike, RawResources } from '../../../typings/source'
-import type { RawSourceInteractions } from '../../../entities/source/source-interactions'
+import type { UnzipFileInfo } from 'fflate'
 
 type XDFileReaderOptions = {
   path: string

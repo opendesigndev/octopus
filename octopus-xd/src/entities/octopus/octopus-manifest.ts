@@ -2,8 +2,8 @@ import path from 'path'
 
 import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 
-import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 import type { OctopusXDConverter } from '../..'
+import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
 
 type ImageDescriptor = { path: unknown }
 
