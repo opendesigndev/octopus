@@ -26,6 +26,11 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
     return this._sourceLayer
   }
 
+  get layerTranslation(): [number, number] {
+    const { left, top } = this._sourceLayer.pathBounds
+    return [left, top]
+  }
+
   @firstCallMemo()
   private get _path(): Octopus['PathLike'] {
     return new OctopusLayerShapeShapePath({ parentLayer: this }).convert()

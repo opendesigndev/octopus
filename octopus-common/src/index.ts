@@ -10,12 +10,12 @@ import * as Pkg from './utils/pkg'
 import * as Queue from './utils/queue'
 import * as UtilityTypes from './utils/utility-types'
 
-export const postprocessors = {
-  text: TextPostprocessor,
-}
-
 export const decorators = {
   firstCallMemo: FirstCallMemo,
+}
+
+export const postprocessors = {
+  text: TextPostprocessor,
 }
 
 export const utils = {
@@ -26,7 +26,6 @@ export const utils = {
   common: Common,
   math: MathUtils,
   pkg: Pkg,
-  text: Text,
-  utilityTypes: UtilityTypes,
   queue: Queue,
+  utilityTypes: UtilityTypes,
 }
