@@ -2,11 +2,11 @@ import SourceLayerGroup from '../entities/source/source-layer-group'
 import SourceLayerShape from '../entities/source/source-layer-shape'
 import SourceLayerText from '../entities/source/source-layer-text'
 
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { RawGroupLayer, RawTextLayer } from '../typings/raw'
 import type { RawLayer } from '../typings/raw/layer'
 import type { RawShapeLayer } from '../typings/raw/shape-layer'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayer = SourceLayerGroup | SourceLayerText | SourceLayerShape
 type Builder = (options: CreateLayerOptions) => SourceLayer

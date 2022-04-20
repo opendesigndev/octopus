@@ -1,4 +1,4 @@
-import { RawColor, RawTransform } from '.'
+import type { RawColor, RawTransform } from '.'
 
 export type RawGradientStop = {
   offset?: number

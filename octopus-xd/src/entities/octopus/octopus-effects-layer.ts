@@ -1,7 +1,8 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+
 import OctopusEffectBlur from './octopus-effect-blur'
 import OctopusEffectDropShadow from './octopus-effect-drop-shadow'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -21,6 +22,10 @@ export default class OctopusEffectsLayer {
     this._sourceLayer = options.sourceLayer
   }
 
+  private _hasVectorEffects(): boolean {
+    return this._sourceLayer.style?.fill?.type !== 'none' || this._sourceLayer.style?.stroke?.type !== 'none'
+  }
+
   private _convertShadows(): Octopus['EffectDropShadow'][] {
     const filters = this._sourceLayer.style?.filters
     if (!filters) return []
@@ -30,8 +35,10 @@ export default class OctopusEffectsLayer {
           return filter?.type === 'dropShadow'
         })
         .map((dropShadow) => {
+          const effectsBasisMissing = !this._hasVectorEffects()
           return OctopusEffectDropShadow.fromRaw({
             effect: dropShadow as RawEffectDropShadow,
+            effectsBasisMissing,
           })
         })
     )

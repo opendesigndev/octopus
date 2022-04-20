@@ -1,5 +1,6 @@
-import { Octopus } from '../typings/octopus-common'
 import { clamp, lerp, round } from './math'
+
+import type { Octopus } from '../typings/octopus-common'
 
 type Color = { r?: number; g?: number; b?: number; a?: number }
 

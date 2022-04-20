@@ -33,7 +33,7 @@
     "import/default": "off",
     "import/no-named-as-default-member": "off",
     "import/order": [
-      "off",
+      "warn",
       {
         "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object", "type"],
         "newlines-between": "always",
@@ -44,7 +44,7 @@
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
-      "off",
+      "warn",
       {
         "prefer": "type-imports"
       }

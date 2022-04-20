@@ -1,18 +1,18 @@
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { getPresentProps, push } from '@avocode/octopus-common/dist/utils/common'
-import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 
 import defaults from '../../utils/defaults'
-import OctopusLayerCommon from './octopus-layer-common'
-import { createMatrix } from '../../utils/paper'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
+import { createMatrix } from '../../utils/paper'
 import OctopusEffectsText from './octopus-effects-text'
+import OctopusLayerCommon from './octopus-layer-common'
 
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Octopus } from '../../typings/octopus'
-import type SourceLayerText from '../source/source-layer-text'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { RawRangedStyle, RawTextLayer, RawTextParagraphRange } from '../../typings/source'
+import type SourceLayerText from '../source/source-layer-text'
+import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

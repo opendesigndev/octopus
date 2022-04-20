@@ -1,10 +1,10 @@
-import { RawFillGradient } from './fill-gradient'
-import { RawBlendMode } from './blend-mode'
-import { RawEffectDropShadow } from './drop-shadow'
-import { RawFillColor } from './fill-solid'
-import { RawStroke } from './stroke'
-import { RawFillImage } from './fill-image'
-import { RawBlur } from './blur'
+import type { RawBlendMode } from './blend-mode'
+import type { RawBlur } from './blur'
+import type { RawEffectDropShadow } from './drop-shadow'
+import type { RawFillGradient } from './fill-gradient'
+import type { RawFillImage } from './fill-image'
+import type { RawFillColor } from './fill-solid'
+import type { RawStroke } from './stroke'
 
 export type RawTextDecoration = 'underline' | 'line-through'
 

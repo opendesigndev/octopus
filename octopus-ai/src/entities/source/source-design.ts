@@ -1,8 +1,8 @@
 import SourceArtboard from './source-artboard'
 
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { RawArtboardEntry } from '../../typings/raw/artboard'
 import type { RawSource } from '../../typings/raw'
+import type { RawArtboardEntry } from '../../typings/raw/artboard'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceDesignOptions = {
   artboards: RawArtboardEntry[]

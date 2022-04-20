@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
+import { config } from 'dotenv'
 
-export default function createEnvironment(): ReturnType<typeof dotenv.config> {
-  return dotenv.config()
+export default function createEnvironment(): ReturnType<typeof config> {
+  return config()
 }

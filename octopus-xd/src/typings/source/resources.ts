@@ -1,4 +1,4 @@
-import { RawClipPathResources, RawGradientResources, RawLayer } from '.'
+import type { RawClipPathResources, RawGradientResources, RawLayer } from '.'
 
 export type RawResources = {
   version?: string

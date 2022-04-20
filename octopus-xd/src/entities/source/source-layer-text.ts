@@ -1,8 +1,8 @@
 import SourceLayerCommon from './source-layer-common'
 
+import type { Defined } from '../../typings/helpers'
 import type { RawTextLayer } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
-import { Defined } from '../../typings/helpers'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent

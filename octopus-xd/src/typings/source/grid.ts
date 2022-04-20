@@ -1,4 +1,4 @@
-import { RawColor } from './color'
+import type { RawColor } from './color'
 
 export type RawGridStroke = {
   type?: string

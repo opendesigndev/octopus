@@ -1,14 +1,14 @@
+import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+import cloneDeep from 'lodash/cloneDeep'
+import mergeWith from 'lodash/mergeWith'
 import pick from 'lodash/pick'
 import without from 'lodash/without'
-import mergeWith from 'lodash/mergeWith'
-import cloneDeep from 'lodash/cloneDeep'
 
-import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 
 import type SourceResources from '../../../entities/source/source-resources'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
-import { push } from '@avocode/octopus-common/dist/utils/common'
 
 type ExpanderOptions = {
   resources: SourceResources
