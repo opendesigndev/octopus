@@ -15,6 +15,7 @@ import { logger, set as setLogger } from './services/instances/logger'
 import { logError } from './services/instances/misc'
 import { set as setSentry } from './services/instances/sentry'
 import { PSDFileReader } from './services/readers/psd-file-reader'
+import { SourceFileReader } from './services/readers/source-file-reader'
 
 import type { SourceDesign, SourceImage } from './entities/source/source-design'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
@@ -24,10 +25,8 @@ import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
-export { LocalExporter }
-export { TempExporter }
-
-export { PSDFileReader }
+export { LocalExporter, TempExporter }
+export { PSDFileReader, SourceFileReader }
 
 type ConvertDesignOptions = {
   exporter?: AbstractExporter

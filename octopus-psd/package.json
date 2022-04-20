@@ -5,15 +5,17 @@
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
-    "convert:local": "ts-node ./scripts/convert-local.ts",
-    "convert:debug": "ts-node ./scripts/convert-debug.ts",
     "build": "tsc --build ./tsconfig.json",
-    "clean": "rimraf ./node_modules ./lib ./workdir",
     "clean:workdir": "rimraf ./workdir/*",
+    "clean": "rimraf ./node_modules ./lib ./workdir",
+    "convert:psd:debug": "ts-node ./scripts/convert-psd-debug.ts",
+    "convert:psd:local": "ts-node ./scripts/convert-psd-local.ts",
+    "convert:source:debug": "ts-node ./scripts/convert-source-debug.ts",
+    "convert:source:local": "ts-node ./scripts/convert-source-local.ts",
     "prepack": "rimraf ./lib && yarn run build",
-    "watch": "tsc -w",
     "test": "yarn jest",
-    "types:check": "tsc --noEmit"
+    "types:check": "tsc --noEmit",
+    "watch": "tsc -w"
   },
   "dependencies": {
     "@avocode/manifest-ts": "3.0.0-alpha.26",
