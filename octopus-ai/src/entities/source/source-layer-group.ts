@@ -1,8 +1,8 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import SourceLayerCommon from './source-layer-common'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import SourceArtboard from './source-artboard'
+import SourceLayerCommon from './source-layer-common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawGroupLayer, RawLayer } from '../../typings/raw'

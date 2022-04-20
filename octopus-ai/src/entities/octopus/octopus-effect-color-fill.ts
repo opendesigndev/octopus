@@ -2,9 +2,9 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import convertColor, { parseColor } from '../../utils/colors'
 
-import type SourceLayerShape from '../source/source-layer-shape'
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace } from '../../typings/raw/resources'
+import type SourceLayerShape from '../source/source-layer-shape'
 import type SourceLayerSubText from '../source/source-layer-sub-text'
 
 export enum ColorSpace {

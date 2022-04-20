@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 import path from 'path'
+
 import chalk from 'chalk'
 
 export function renderOctopus(octopusLocation: string): string {

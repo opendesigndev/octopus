@@ -1,9 +1,5 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import OctopusLayerCommon from './octopus-layer-common'
-import OctopusPoint from './octopus-point'
-import OctopusEffectsShape from './octopus-effects-shape'
-import createShape from '../../utils/create-shape'
 import {
   createRectPoints,
   isValid,
@@ -11,16 +7,20 @@ import {
   getNorthEastSouthWestCoords,
   getNorthWestSouthEastCoords,
 } from '../../utils/coords'
+import createShape from '../../utils/create-shape'
+import OctopusEffectsShape from './octopus-effects-shape'
+import OctopusLayerCommon from './octopus-layer-common'
+import OctopusPoint from './octopus-point'
 
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { Coord } from '../../typings'
 import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { RawShapeLayerSubPathPoint } from '../../typings/raw'
+import type { RectCoords } from '../../utils/coords'
 import type SourceLayerShape from '../source/source-layer-shape'
 import type SourceLayerShapeSubPath from '../source/source-layer-shape-subpath'
-import type { RawShapeLayerSubPathPoint } from '../../typings/raw'
+import type { LayerSpecifics } from './octopus-layer-common'
 import type { NormalizedPoint } from './octopus-point'
-import type { Coord } from '../../typings'
-import type { RectCoords } from '../../utils/coords'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

@@ -1,6 +1,5 @@
 import SourceArtboard from './source-artboard'
 
-import type SourceLayerGroup from './source-layer-group'
 import type {
   RawLayer,
   RawResourcesExtGState,
@@ -8,10 +7,11 @@ import type {
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
 } from '../../typings/raw'
-import type SourceLayerXObject from './source-layer-x-object'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
-import type SourceResources from './source-resources'
+import type SourceLayerGroup from './source-layer-group'
 import type SourceLayerShape from './source-layer-shape'
+import type SourceLayerXObject from './source-layer-x-object'
+import type SourceResources from './source-resources'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
 
