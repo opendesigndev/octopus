@@ -1,4 +1,4 @@
-import { RawGraphicsState } from './graphics-state'
+import type { RawGraphicsState } from './graphics-state'
 
 export type RawXObjectLayer = {
   Type?: 'XObject'

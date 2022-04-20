@@ -1,10 +1,10 @@
 import readPackageUpAsync from 'read-pkg-up'
 
-import createLogger from './services/general/default-logger'
 import ArtboardConverter from './services/conversion/artboard-converter'
+import createLogger from './services/general/default-logger'
 
-import type { Logger } from './typings'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
+import type { Logger } from './typings'
 import type { Octopus } from './typings/octopus'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 

@@ -1,14 +1,14 @@
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import isEqual from 'lodash/isEqual'
 import pick from 'lodash/pick'
 import without from 'lodash/without'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import OctopusLayerCommon from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
 
 import type { Octopus } from '../../typings/octopus'
-import type SourceLayerText from '../source/source-layer-text'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type SourceLayerText from '../source/source-layer-text'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerTextOptions = {

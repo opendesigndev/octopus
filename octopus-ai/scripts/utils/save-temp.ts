@@ -1,7 +1,8 @@
 //@todo file copy from octopus-xd
 import { promises as fsp } from 'fs'
-import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
+
+import { v4 as uuidv4 } from 'uuid'
 
 import { getPkgLocation } from './pkg-location'
 

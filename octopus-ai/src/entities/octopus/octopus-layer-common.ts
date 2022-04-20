@@ -1,9 +1,9 @@
 import { BLEND_MODES } from '../../utils/blend-modes'
 
-import type SourceResources from '../source/source-resources'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type SourceResources from '../source/source-resources'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>

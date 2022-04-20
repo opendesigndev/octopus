@@ -1,8 +1,8 @@
 import chunk from 'lodash/chunk'
 
+import type { Coord } from '../typings/index'
 import type { RawShapeLayerSubPathPoint } from '../typings/raw'
 import type { RawGraphicsStateMatrix } from '../typings/raw/graphics-state'
-import type { Coord } from '../typings/index'
 
 export type TransformOptions = {
   matrix: [number, number, number, number, number, number]

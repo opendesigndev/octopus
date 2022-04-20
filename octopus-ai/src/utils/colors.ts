@@ -1,5 +1,5 @@
-import { clamp } from '@avocode/octopus-common/dist/utils/math'
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { clamp } from '@avocode/octopus-common/dist/utils/math'
 
 import type { RawResourcesColorSpace } from '../typings/raw'
 

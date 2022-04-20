@@ -1,4 +1,4 @@
-import { RawTextLayer } from '.'
+import type { RawTextLayer } from '.'
 
 export type RawGroupLayer = {
   Type?: 'MarkedContext'

@@ -1,4 +1,3 @@
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 import type {
   RawResources,
   RawResourcesProperties,
@@ -10,6 +9,7 @@ import type {
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
 } from '../../typings/raw/resources'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources
