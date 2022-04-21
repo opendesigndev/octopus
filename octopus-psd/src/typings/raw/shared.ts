@@ -11,10 +11,10 @@ export type RawBounds = {
 }
 
 export type RawTextBounds = {
-  bottom?: RawUnitPoint
-  left?: RawUnitPoint
-  right?: RawUnitPoint
-  top?: RawUnitPoint
+  bottom?: number | RawUnitPoint
+  left?: number | RawUnitPoint
+  right?: number | RawUnitPoint
+  top?: number | RawUnitPoint
 }
 
 export type RawColor = {

@@ -1,6 +1,6 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getMatrixFor, getTextBoundsFor } from '../../utils/source'
+import { getMatrixFor, getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
 import { SourceTextTextStyleRange } from './source-text-text-style-range'
@@ -41,10 +41,10 @@ export class SourceText extends SourceEntity {
   }
 
   get bounds(): SourceBounds {
-    return getTextBoundsFor(this._rawValue?.bounds)
+    return getBoundsFor(this._rawValue?.bounds)
   }
 
   get boundingBox(): SourceBounds {
-    return getTextBoundsFor(this._rawValue?.boundingBox)
+    return getBoundsFor(this._rawValue?.boundingBox)
   }
 }
