@@ -90,7 +90,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getFont(textStyle: SourceTextTextStyle): Octopus['TextStyle']['font'] {
     return {
-      postScriptName: 'Arial', // textStyle.fontPostScriptName,
+      postScriptName: textStyle.fontPostScriptName,
       family: textStyle.fontName,
       style: textStyle.fontStyleName,
     }
@@ -208,8 +208,6 @@ export class OctopusLayerText extends OctopusLayerBase {
     const textTransform = this._textTransform
     const frame = this._frame
     const horizontalAlign = this._horizontalAlign
-
-    // TODO add text picture when octopus3 schema is prepared
 
     return {
       value,
