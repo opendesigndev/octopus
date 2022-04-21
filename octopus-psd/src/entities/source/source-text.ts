@@ -40,8 +40,8 @@ export class SourceText extends SourceEntity {
     return ranges.map((range) => new SourceTextParagraphStyleRange(range))
   }
 
-  get bounds(): SourceBounds {
-    return getBoundsFor(this._rawValue?.bounds)
+  get bounds(): SourceBounds | undefined {
+    return this._rawValue?.bounds ? getBoundsFor(this._rawValue?.bounds) : undefined
   }
 
   get boundingBox(): SourceBounds {

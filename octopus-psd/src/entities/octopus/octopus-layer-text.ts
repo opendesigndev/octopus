@@ -195,7 +195,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private get _frame(): Octopus['TextFrame'] {
-    const { width, height } = this._sourceText.bounds
+    const { width, height } = this._sourceText.bounds || this._sourceLayer.bounds
     return { mode: 'FIXED', size: { width: round(width), height: round(height) } }
   }
 
