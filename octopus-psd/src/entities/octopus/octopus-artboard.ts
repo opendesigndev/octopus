@@ -58,8 +58,9 @@ export class OctopusArtboard {
     const bounds = layer.sourceLayer?.bounds
     const color = layer.sourceLayer?.artboardColor ?? null
     const isArtboard = layer.sourceLayer?.isArtboard
+    const visible = layer.sourceLayer.visible
     const layers = layer.type === 'GROUP' ? (layer as OctopusLayerGroup).layers : [layer]
-    return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, layers })
+    return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, visible, layers })
   }
 
   get content(): Octopus['Layer'] {
