@@ -44,8 +44,8 @@ export class SourceFileReader {
   }
 
   private async _getSourceArtboard(): Promise<RawArtboard | null> {
-    const { time: timeRead, result } = await benchmarkAsync(
-      async () => await parseJsonFromFile<RawArtboard>(path.join(this.path, SourceFileReader.SOURCE_FILE))
+    const { time: timeRead, result } = await benchmarkAsync(() =>
+      parseJsonFromFile<RawArtboard>(path.join(this.path, SourceFileReader.SOURCE_FILE))
     )
     logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
 

@@ -70,11 +70,11 @@ export class PSDFileReader {
   }
 
   private async _getSourceArtboard(): Promise<RawArtboard | null> {
-    const { time: timeParse } = await benchmarkAsync(async () => await parsePsd(this.path, this._parsePsdOptions))
+    const { time: timeParse } = await benchmarkAsync(() => parsePsd(this.path, this._parsePsdOptions))
     logInfo(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
 
-    const { time: timeRead, result } = await benchmarkAsync(
-      async () => await parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
+    const { time: timeRead, result } = await benchmarkAsync(() =>
+      parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
     )
     logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
 

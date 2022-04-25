@@ -76,11 +76,6 @@ export class OctopusPSDConverter {
   }
 
   constructor(options: OctopusPSDConverterOptions) {
-    this._id = options.designId || uuidv4()
-    this._sourceDesign = options.sourceDesign
-    this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter: this })
-    this._pkg = readPackageUpAsync({ cwd: __dirname })
-
     this._setupLogger(options?.logger)
     setSentry(
       createSentry({
@@ -88,6 +83,11 @@ export class OctopusPSDConverter {
         logger,
       })
     )
+
+    this._id = options.designId || uuidv4()
+    this._sourceDesign = options.sourceDesign
+    this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter: this })
+    this._pkg = readPackageUpAsync({ cwd: __dirname })
   }
 
   get sourceDesign(): SourceDesign {

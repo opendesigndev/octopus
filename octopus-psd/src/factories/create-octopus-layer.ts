@@ -40,45 +40,30 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: { builder: OctopusLayerBuilders; sho
   adjustmentLayer: { builder: createOctopusLayerShapeFromAdjustmentAdapter, shouldCheckShapeMask: false },
 } as const
 
-function createOctopusLayerGroup({
-  layer,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup {
+function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   const sourceLayer = layer as SourceLayerSection
   return new OctopusLayerGroup({ parent, sourceLayer })
 }
 
-function createOctopusLayerShapeFromShapeAdapter({
-  layer,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
+function createOctopusLayerShapeFromShapeAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerShape
   const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
-function createOctopusLayerShapeFromLayerAdapter({
-  layer,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
+function createOctopusLayerShapeFromLayerAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerLayer
   const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
-function createOctopusLayerShapeFromAdjustmentAdapter({
-  layer,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerShape | OctopusLayerMaskGroup {
+function createOctopusLayerShapeFromAdjustmentAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerAdjustment
   const adapter = new OctopusLayerShapeAdjustmentAdapter({ parent, sourceLayer })
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
-function createOctopusLayerText({
-  layer,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerText | OctopusLayerMaskGroup {
+function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
   const sourceLayer = layer as SourceLayerText
   return new OctopusLayerText({ parent, sourceLayer })
 }
