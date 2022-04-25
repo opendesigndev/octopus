@@ -1,6 +1,7 @@
 import path from 'path'
 
 import chalk from 'chalk'
+import dotenv from 'dotenv'
 
 import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
 import { getPkgLocation } from './utils/pkg-location'
@@ -27,6 +28,8 @@ type ConvertedResources = {
   resources: string
   images: string[]
 }
+
+dotenv.config()
 
 export async function convertAll(options: ConvertAllOptions): Promise<void> {
   const exporter = new TempExporter({ tempDir: options.outputDir })
@@ -73,13 +76,15 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
 }
 
 async function convert() {
-  const [filename] = process.argv.slice(2)
+  const filenames = process.argv.slice(2)
 
-  await convertAll({
-    filename,
-    render: Boolean(Number(process.env.CONVERT_RENDER)),
-    outputDir: path.join(await getPkgLocation(), 'workdir'),
-  })
+  for (const filename of filenames) {
+    await convertAll({
+      filename,
+      render: process.env.CONVERT_RENDER === 'true',
+      outputDir: path.join(await getPkgLocation(), 'workdir'),
+    })
+  }
 }
 
 convert()
