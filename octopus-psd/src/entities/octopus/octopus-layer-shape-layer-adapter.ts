@@ -47,6 +47,10 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     this._fillBlendMode = blendMode
   }
 
+  get opacity(): number {
+    return this._sourceLayer.opacity * this._sourceLayer.fillOpacity
+  }
+
   @firstCallMemo()
   private get _fills(): Octopus['Fill'][] | null {
     const imageName = this.sourceLayer.imageName
