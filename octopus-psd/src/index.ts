@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import readPackageUpAsync from 'read-pkg-up'
@@ -138,8 +139,9 @@ export class OctopusPSDConverter {
     return manifest
   }
 
-  async convertDesign(options?: ConvertDesignOptions): Promise<ConvertDesignResult> {
+  async convertDesign(options?: ConvertDesignOptions): Promise<ConvertDesignResult | null> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
+    if (exporter == null) return null
 
     this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
 
@@ -150,7 +152,7 @@ export class OctopusPSDConverter {
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
         const imageId = path.basename(image.path)
-        const imagePath = await exporter?.exportImage?.(image.name, image.path)
+        const imagePath = await rejectTo(exporter?.exportImage?.(image.name, image.path))
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }
