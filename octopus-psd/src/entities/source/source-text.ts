@@ -44,7 +44,7 @@ export class SourceText extends SourceEntity {
     return this._rawValue?.bounds ? getBoundsFor(this._rawValue?.bounds) : undefined
   }
 
-  get boundingBox(): SourceBounds {
-    return getBoundsFor(this._rawValue?.boundingBox)
+  get boundingBox(): SourceBounds | undefined {
+    return this._rawValue?.boundingBox ? getBoundsFor(this._rawValue?.boundingBox) : undefined
   }
 }

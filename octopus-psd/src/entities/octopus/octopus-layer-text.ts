@@ -174,18 +174,30 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   @firstCallMemo()
   private get _textTransform(): Octopus['Transform'] {
-    const { top, left } = this._sourceText.boundingBox
-
     const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
     const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
-    matrix.invert()
-    matrix.tx -= left
-    matrix.ty -= top
-    matrix.invert()
-
+    if (this._sourceText.boundingBox !== undefined) {
+      const { top, left } = this._sourceText.boundingBox
+      matrix.invert()
+      matrix.tx -= left
+      matrix.ty -= top
+      matrix.invert()
+    } else {
+      const align = this._horizontalAlign
+      const { width, height } = this._sourceLayer.bounds
+      if (align === 'RIGHT') {
+        matrix.tx -= width
+        matrix.ty -= height
+      }
+      if (align === 'CENTER') {
+        matrix.tx -= width / 2
+        matrix.ty -= height / 2
+      }
+    }
     return matrix.values
   }
 
+  @firstCallMemo()
   private get _horizontalAlign(): Octopus['Text']['horizontalAlign'] {
     return getMapped(
       this._sourceText.paragraphStyles[0]?.paragraphStyle?.align,
