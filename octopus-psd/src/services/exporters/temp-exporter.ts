@@ -84,7 +84,9 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   async exportImage(name: string, location: string): Promise<string> {
     const dir = await this._outputDir
     const fullPath = path.join(dir, TempExporter.IMAGES_DIR_NAME, name)
-    await copyFile(location, fullPath)
+    const write = copyFile(location, fullPath)
+    this._assetsSaves.push(write)
+    await write
     return fullPath
   }
 

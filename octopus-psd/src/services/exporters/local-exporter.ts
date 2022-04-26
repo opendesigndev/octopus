@@ -43,7 +43,10 @@ export class LocalExporter implements AbstractExporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
-    return saveFile(fullPath, body)
+    const write = saveFile(fullPath, body)
+    this._assetsSaves.push(write)
+    await write
+    return fullPath
   }
 
   getBasePath(): Promise<string> {
@@ -61,9 +64,7 @@ export class LocalExporter implements AbstractExporter {
 
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    const save = this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))
-    this._assetsSaves.push(save)
-    return save
+    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))
   }
 
   async exportImage(name: string, location: string): Promise<string> {
