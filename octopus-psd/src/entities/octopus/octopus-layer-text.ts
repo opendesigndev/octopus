@@ -176,8 +176,9 @@ export class OctopusLayerText extends OctopusLayerBase {
   private get _textTransform(): Octopus['Transform'] {
     const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
     const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
-    if (this._sourceText.boundingBox !== undefined) {
-      const { top, left } = this._sourceText.boundingBox
+    if (this._sourceText.bounds !== undefined) {
+      const { left } = this._sourceText.bounds
+      const { top } = this._sourceText.boundingBox ?? this._sourceText.bounds
       matrix.invert()
       matrix.tx -= left
       matrix.ty -= top
