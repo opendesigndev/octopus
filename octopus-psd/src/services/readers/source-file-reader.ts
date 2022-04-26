@@ -58,7 +58,7 @@ export class SourceFileReader {
       const name = image.name
       const relativePath = path.join(SourceFileReader.IMAGES_DIR, name)
       const imgPath = path.join(this.path, relativePath)
-      return { name, path: imgPath, relativePath }
+      return { name, path: imgPath }
     })
 
     const patterns: SourceImage[] = []
@@ -69,7 +69,7 @@ export class SourceFileReader {
       const relativePath = path.join(SourceFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this.path, relativePath)
       const { width, height } = await sizeOf(imgPath)
-      patterns.push({ name, path: imgPath, relativePath, width, height })
+      patterns.push({ name, path: imgPath, width, height })
     }
 
     return [...images, ...patterns]

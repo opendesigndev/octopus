@@ -87,7 +87,7 @@ export class PSDFileReader {
       const name = image.name
       const relativePath = path.join(PSDFileReader.IMAGES_DIR, name)
       const imgPath = path.join(this._outDir, relativePath)
-      return { name, path: imgPath, relativePath }
+      return { name, path: imgPath }
     })
 
     const patterns: SourceImage[] = []
@@ -98,7 +98,7 @@ export class PSDFileReader {
       const relativePath = path.join(PSDFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this._outDir, relativePath)
       const { width, height } = await sizeOf(imgPath)
-      patterns.push({ name, path: imgPath, relativePath, width, height })
+      patterns.push({ name, path: imgPath, width, height })
     }
 
     return [...images, ...patterns]

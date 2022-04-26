@@ -46,7 +46,7 @@ export class OctopusEffectFill {
   }
 
   private get _imagePath(): string | undefined {
-    return this._parentLayer.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
+    return this._parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
   }
 
   private get _image(): SourceImage | undefined {

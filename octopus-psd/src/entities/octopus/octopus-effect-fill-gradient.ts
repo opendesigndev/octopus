@@ -127,9 +127,9 @@ export class OctopusEffectFillGradient {
   private _getGradient(type: GradientType): Octopus['FillGradient']['gradient'] {
     const stops = this._gradientStops ?? []
     if (type === 'REFLECTED') {
-      const stops_left = [...stops].reverse().map((stop) => ({ ...stop, position: (1 - stop.position) / 2 }))
-      const stops_right = [...stops].map((stop) => ({ ...stop, position: (1 + stop.position) / 2 }))
-      return { type: 'LINEAR', stops: [...stops_left, ...stops_right] }
+      const stopsLeft = [...stops].reverse().map((stop) => ({ ...stop, position: (1 - stop.position) / 2 }))
+      const stopsRight = [...stops].map((stop) => ({ ...stop, position: (1 + stop.position) / 2 }))
+      return { type: 'LINEAR', stops: [...stopsLeft, ...stopsRight] }
     }
     return { type, stops }
   }

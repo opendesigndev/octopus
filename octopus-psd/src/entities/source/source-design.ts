@@ -5,7 +5,6 @@ import type { RawArtboard } from '../../typings/raw'
 export type SourceImage = {
   name: string
   path: string
-  relativePath: string
   width?: number
   height?: number
 }
