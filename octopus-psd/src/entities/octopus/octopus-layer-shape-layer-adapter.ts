@@ -86,10 +86,8 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
     const shape = this._shape
     if (shape === null) return null
-    return {
-      type: 'SHAPE',
-      shape,
-    } as const
+    const meta = this._meta
+    return { type: 'SHAPE', shape, meta } as const
   }
 
   private get _meta(): Octopus['LayerMeta'] | undefined {
@@ -103,12 +101,6 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     const specific = this._convertTypeSpecific()
     if (!specific) return null
 
-    const meta = this._meta
-
-    return {
-      ...common,
-      ...specific,
-      meta,
-    }
+    return { ...common, ...specific }
   }
 }

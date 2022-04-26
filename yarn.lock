@@ -37,6 +37,16 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
+"@avocode/octopus-common@3.0.0-rc.15":
+  version "3.0.0-rc.15"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.15.tgz#36250e39bc0c3f3c3d325a1f3df053cf36bc8e84"
+  integrity sha512-amjw4kTijj7FTe/JtS8iWKsuTQqPPSX9TcVsh4hZx52GY4g+vVGUELEuw/3GbRoRdOa6h9Gn9V0gMbwHnGNogQ==
+  dependencies:
+    "@sentry/node" "6.14.0"
+    lodash "^4.17.21"
+    read-pkg-up "7.0.1"
+    uuid "^8.3.2"
+
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"
@@ -1575,6 +1585,11 @@ dotenv@10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
+
+dotenv@16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.0.tgz#c619001253be89ebb638d027b609c75c26e47411"
+  integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
 
 electron-to-chromium@^1.4.17:
   version "1.4.71"

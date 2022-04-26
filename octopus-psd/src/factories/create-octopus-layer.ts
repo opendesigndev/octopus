@@ -32,12 +32,30 @@ type CreateOctopusLayerOptions = {
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: { builder: OctopusLayerBuilders; shouldCheckShapeMask: boolean } } = {
-  layerSection: { builder: createOctopusLayerGroup, shouldCheckShapeMask: true },
-  shapeLayer: { builder: createOctopusLayerShapeFromShapeAdapter, shouldCheckShapeMask: false },
-  textLayer: { builder: createOctopusLayerText, shouldCheckShapeMask: true },
-  layer: { builder: createOctopusLayerShapeFromLayerAdapter, shouldCheckShapeMask: true },
-  backgroundLayer: { builder: createOctopusLayerShapeFromLayerAdapter, shouldCheckShapeMask: true },
-  adjustmentLayer: { builder: createOctopusLayerShapeFromAdjustmentAdapter, shouldCheckShapeMask: false },
+  layerSection: {
+    builder: createOctopusLayerGroup,
+    shouldCheckShapeMask: true,
+  },
+  shapeLayer: {
+    builder: createOctopusLayerShapeFromShapeAdapter,
+    shouldCheckShapeMask: false,
+  },
+  textLayer: {
+    builder: createOctopusLayerText,
+    shouldCheckShapeMask: true,
+  },
+  layer: {
+    builder: createOctopusLayerShapeFromLayerAdapter,
+    shouldCheckShapeMask: true,
+  },
+  backgroundLayer: {
+    builder: createOctopusLayerShapeFromLayerAdapter,
+    shouldCheckShapeMask: true,
+  },
+  adjustmentLayer: {
+    builder: createOctopusLayerShapeFromAdjustmentAdapter,
+    shouldCheckShapeMask: false,
+  },
 } as const
 
 function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {

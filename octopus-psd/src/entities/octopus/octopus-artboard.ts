@@ -5,6 +5,7 @@ import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 import type { OctopusPSDConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
+import type { SourceBounds } from '../../typings/source'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
 
@@ -53,9 +54,9 @@ export class OctopusArtboard {
     return this._octopusConverter.pkgVersion
   }
 
-  private _getArtboardFromLayer(layer: OctopusLayer): Octopus['MaskGroupLayer'] {
+  private _getArtboardFromLayer(layer: OctopusLayer, parentBounds?: SourceBounds): Octopus['MaskGroupLayer'] {
     const id = layer.id
-    const bounds = layer.sourceLayer?.bounds
+    const bounds = parentBounds ?? layer.sourceLayer?.bounds
     const color = layer.sourceLayer?.artboardColor ?? null
     const isArtboard = layer.sourceLayer?.isArtboard
     const visible = layer.sourceLayer.visible
@@ -71,7 +72,7 @@ export class OctopusArtboard {
     if (!hasArtboards)
       return this._layers.length > 1
         ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
-        : this._getArtboardFromLayer(this._layers[0])
+        : this._getArtboardFromLayer(this._layers[0], bounds)
 
     const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))
     return OctopusLayerGroup.createBackground({ id, layers })

@@ -22,7 +22,7 @@ type OctopusLayerBaseOptions = {
   sourceLayer: SourceLayer
 }
 
-export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
+export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type' | 'meta'>>
 
 export class OctopusLayerBase {
   protected _id: string
