@@ -74,6 +74,7 @@ export class OctopusEffectFill {
 
   convert(): Octopus['Fill'] | null {
     const fill = this._fill
+    if (!fill.enabled) return null
     switch (this.fillType) {
       case 'GRADIENT': {
         const parentLayer = this._parentLayer

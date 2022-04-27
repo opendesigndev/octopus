@@ -9,9 +9,11 @@ import type { SourceColor, SourceGradientType, SourceOffset } from '../../typing
 
 export class SourceEffectFill extends SourceEffectBase {
   protected _rawValue: RawFill | undefined
+  protected _enabled: boolean | undefined
 
-  constructor(raw: RawFill | undefined) {
+  constructor(raw: RawFill | undefined, enabled?: boolean) {
     super(raw)
+    this._enabled = enabled
   }
 
   get color(): SourceColor | null {
@@ -53,5 +55,9 @@ export class SourceEffectFill extends SourceEffectBase {
 
   get offset(): SourceOffset {
     return this._rawValue?.offset ?? this._rawValue?.phase ?? { horizontal: 0, vertical: 0 }
+  }
+
+  get enabled(): boolean {
+    return this._enabled ?? true
   }
 }

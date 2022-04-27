@@ -42,7 +42,7 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   @firstCallMemo()
   get fill(): SourceEffectFill {
-    return new SourceEffectFill(this._rawValue.fill)
+    return new SourceEffectFill(this._rawValue.fill, this._rawValue.strokeStyle?.fillEnabled)
   }
 
   @firstCallMemo()
