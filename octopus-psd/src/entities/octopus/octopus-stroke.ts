@@ -80,7 +80,7 @@ export class OctopusStroke {
   get fill(): Octopus['Fill'] | null {
     const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentLayer, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill, isStroke: true }).convert()
   }
 
   get style(): Style {

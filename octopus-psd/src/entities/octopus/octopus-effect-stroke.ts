@@ -44,7 +44,7 @@ export class OctopusEffectStroke extends OctopusEffectBase {
   private get _fill(): Octopus['Fill'] | null {
     const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentLayer, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill, isStroke: true }).convert()
   }
 
   get stroke(): Octopus['Stroke'] | null {

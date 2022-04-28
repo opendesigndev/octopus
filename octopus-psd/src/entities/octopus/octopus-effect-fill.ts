@@ -15,15 +15,18 @@ import type { OctopusLayerBase } from './octopus-layer-base'
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
   fill: SourceEffectFill
+  isStroke?: boolean
 }
 
 export class OctopusEffectFill {
   private _parentLayer: OctopusLayerBase
   private _fill: SourceEffectFill
+  private _isStroke: boolean
 
   constructor(options: OctopusFillOptions) {
     this._parentLayer = options.parentLayer
     this._fill = options.fill
+    this._isStroke = options.isStroke ?? false
   }
 
   private get _parentArtboard(): OctopusArtboard {
@@ -78,7 +81,8 @@ export class OctopusEffectFill {
     switch (this.fillType) {
       case 'GRADIENT': {
         const parentLayer = this._parentLayer
-        return new OctopusEffectFillGradient({ parentLayer, fill }).convert()
+        const isStroke = this._isStroke
+        return new OctopusEffectFillGradient({ parentLayer, fill, isStroke }).convert()
       }
       case 'IMAGE': {
         const transform = this.imageTransform
@@ -95,7 +99,7 @@ export class OctopusEffectFill {
       case 'COLOR': {
         const color = fill.color
         if (color === null) return null
-        const opacity = fill.opacity * this._parentLayer.fillOpacity
+        const opacity = this._isStroke ? fill.opacity : fill.opacity * this._parentLayer.fillOpacity
         return new OctopusEffectFillColor({ color, opacity }).convert()
       }
       default:
