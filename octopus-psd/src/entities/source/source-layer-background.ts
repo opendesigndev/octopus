@@ -1,5 +1,6 @@
-import type { RawLayerBackground } from '../../typings/raw'
 import { SourceLayerCommon } from './source-layer-common'
+
+import type { RawLayerBackground } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerBackgroundOptions = {
@@ -12,8 +13,6 @@ export class SourceLayerBackground extends SourceLayerCommon {
   protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerBackgroundOptions) {
-    super()
-    this._parent = options.parent
-    this._rawValue = options.rawValue
+    super(options)
   }
 }

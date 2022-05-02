@@ -1,8 +1,9 @@
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
-import { OctopusLayerBase } from './octopus-layer-base'
-import { SourceEffectBase } from '../source/source-effect-base'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceEffectBase } from '../source/source-effect-base'
+import type { SourceLayerEffects } from '../source/source-effects-layer'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectBaseOptions = {
   parentLayer: OctopusLayerBase

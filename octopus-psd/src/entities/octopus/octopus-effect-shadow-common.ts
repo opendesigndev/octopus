@@ -1,10 +1,12 @@
-import type { Octopus } from '../../typings/octopus'
-import { OctopusArtboard } from './octopus-artboard'
+import { clamp, cos, round, sin } from '@avocode/octopus-common/dist/utils/math'
+
 import { convertColor } from '../../utils/convert'
-import { SourceEffectShadow } from '../source/source-effect-shadow'
-import { cos, sin, round, clamp } from '@avocode/octopus-common/dist/utils/math'
-import { OctopusLayerBase } from './octopus-layer-base'
 import { OctopusEffectBase } from './octopus-effect-base'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceEffectShadow } from '../source/source-effect-shadow'
+import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowCommonOptions = {
   parentLayer: OctopusLayerBase

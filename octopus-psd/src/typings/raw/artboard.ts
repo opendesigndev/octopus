@@ -1,5 +1,5 @@
-import type { RawBounds } from './shared'
 import type { RawLayer } from './layer'
+import type { RawBounds } from './shared'
 
 type RawGuides = {
   x?: number[]

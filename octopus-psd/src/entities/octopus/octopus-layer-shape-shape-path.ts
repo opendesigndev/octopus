@@ -1,12 +1,14 @@
-import type { Octopus } from '../../typings/octopus'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { createPathData } from '../../utils/path-data'
-import { createDefaultTranslationMatrix, isRectangle, isRoundedRectangle } from '../../utils/path'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
-import type { SourcePathComponent } from '../source/source-path-component'
-import type { SourceCombineOperation } from '../../typings/source'
+
 import { logWarn } from '../../services/instances/misc'
+import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
+import { createPathData } from '../../utils/path-data'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceCombineOperation } from '../../typings/source'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourcePathComponent } from '../source/source-path-component'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter
@@ -30,25 +32,26 @@ export class OctopusLayerShapeShapePath {
     return this._parentLayer.sourceLayer
   }
 
-  private get isRectangle(): boolean {
+  private isRectangle(): boolean {
     if (this.sourceLayer.type === 'layer') return true
     const sourceLayer = this.sourceLayer as SourceLayerShape
 
     const component = sourceLayer.firstPathComponent
     const type = component?.origin?.type
-    if (type !== 'rect' && type !== 'roundedRect') {
+    if (type !== 'rect') {
       return false
     }
 
     const subpathList = component?.subpathListKey ?? []
     const points = subpathList[0]?.points ?? []
     const pointsMapped = points?.map((point) => point.anchor)
-    return type === 'roundedRect' ? isRoundedRectangle(pointsMapped) : isRectangle(pointsMapped)
+
+    return isRectangle(pointsMapped)
   }
 
   private _getShapeType(pathComponents: SourcePathComponent[]): Octopus['PathType'] {
     if (pathComponents.length > 1) return 'COMPOUND'
-    if (this.isRectangle) return 'RECTANGLE'
+    if (this.isRectangle()) return 'RECTANGLE'
     return 'PATH'
   }
 
@@ -68,15 +71,26 @@ export class OctopusLayerShapeShapePath {
     return result
   }
 
-  private _getPathCompound(pathComponents: SourcePathComponent[]): Octopus['CompoundPath'] {
-    const rest = [...pathComponents]
-    const last = rest.pop() as SourcePathComponent
-    return {
-      ...this._getPathBase(pathComponents),
-      type: 'COMPOUND',
-      op: this._getCompoundOperation(last?.shapeOperation),
-      paths: [this._convert(rest), this._convert([last])], // TODO: Add optimization to make the compound tree more flat
+  private _splitByOperation(pathComponents: SourcePathComponent[]) {
+    let index = pathComponents.length - 1
+    const operation = this._getCompoundOperation(pathComponents[index]?.shapeOperation)
+    const same: SourcePathComponent[] = []
+    for (; index >= 0; index--) {
+      const last = pathComponents[index]
+      const lastOp = this._getCompoundOperation(last?.shapeOperation)
+      if (lastOp !== operation) break
+      same.push(last)
     }
+    const rest = index >= 0 ? pathComponents.slice(0, index + 1) : []
+    return [same, rest]
+  }
+
+  private _getPathCompound(pathComponents: SourcePathComponent[]): Octopus['CompoundPath'] {
+    const [same, rest] = this._splitByOperation(pathComponents)
+    const op = this._getCompoundOperation(same[0]?.shapeOperation)
+    const sameConverted = same.map((path) => this._convert([path]))
+    const paths = rest.length ? [this._convert(rest), ...sameConverted] : sameConverted
+    return { ...this._getPathBase(pathComponents), type: 'COMPOUND', op, paths }
   }
 
   private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
@@ -87,9 +101,7 @@ export class OctopusLayerShapeShapePath {
     const ty = top - layerTy
     const transform = createDefaultTranslationMatrix([tx, ty])
     const rectangle = { x0: 0, y0: 0, x1: right - left, y1: bottom - top }
-    const { bottomLeft, bottomRight, topLeft, topRight } = rect.origin.radii
-    const cornerRadii = [topLeft, topRight, bottomRight, bottomLeft]
-    const cornerRadius = cornerRadii[0] // TODO
+    const cornerRadius = rect.origin.radii.topLeft
     return { ...this._getPathBase(pathComponents), type: 'RECTANGLE', transform, rectangle, cornerRadius }
   }
 
@@ -97,7 +109,7 @@ export class OctopusLayerShapeShapePath {
     const path = pathComponents[0]
     const layerTranslation = this._parentLayer.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === 'MZ') logWarn('PathData generated empty', { path })
+    if (geometry === 'MZ') logWarn('PathData generated empty')
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',

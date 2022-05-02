@@ -1,37 +1,53 @@
-import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { Octopus } from '../../typings/octopus'
-import { convertColor, convertOffset } from '../../utils/convert'
+import { lerpColor, multiplyAlpha } from '@avocode/octopus-common/dist/utils/color'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceBounds, SourceGradientType } from '../../typings/source'
-import { scaleLineSegment, angleToPoints } from '../../utils/gradient'
-import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
-import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
+import { invLerp, lerp } from '@avocode/octopus-common/dist/utils/math'
+import uniq from 'lodash/uniq'
+
 import { logWarn } from '../../services/instances/misc'
+import { convertColor, convertOffset } from '../../utils/convert'
+import { angleToPoints, scaleLineSegment } from '../../utils/gradient'
+import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceBounds, SourceGradientType } from '../../typings/source'
+import type { SourceEffectFill } from '../source/source-effect-fill'
+import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
+import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
 import type { OctopusArtboard } from './octopus-artboard'
 import type { OctopusLayerBase } from './octopus-layer-base'
+import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
 type OctopusFillGradientOptions = {
   parentLayer: OctopusLayerBase
   fill: SourceEffectFill
+  isStroke?: boolean
 }
+
+type GradientType = Octopus['FillGradient']['gradient']['type'] | 'REFLECTED'
+
+type GradientSourceStop = SourceEffectFillGradientColor | SourceEffectFillGradientOpacity
+
+type GradientClosestStops<T> = { left: T; right: T }
 
 export class OctopusEffectFillGradient {
   private _parentLayer: OctopusLayerBase
   private _fill: SourceEffectFill
+  private _isStroke: boolean
 
   static GRADIENT_TYPE_MAP = {
     linear: 'LINEAR',
     radial: 'RADIAL',
     Angl: 'ANGULAR',
     Dmnd: 'DIAMOND',
+    reflected: 'REFLECTED',
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
     this._parentLayer = options.parentLayer
     this._fill = options.fill
+    this._isStroke = options.isStroke ?? false
   }
 
   private get _parentArtboard(): OctopusArtboard {
@@ -46,7 +62,7 @@ export class OctopusEffectFillGradient {
     return this._fill
   }
 
-  get type(): Octopus['FillGradient']['gradient']['type'] | null {
+  get type(): GradientType | null {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
@@ -60,26 +76,65 @@ export class OctopusEffectFillGradient {
     return this.fill.reverse
   }
 
-  private _getGradientStop(stop: SourceEffectFillGradientColor): FillGradientStop {
+  private _getGradientStop(color: Octopus['Color'], location: number): FillGradientStop {
     const STOP_MAX_LOCATION = 4096
-    const color = convertColor(stop?.color, this._fill.opacity)
-    const location = this.isInverse ? STOP_MAX_LOCATION - stop.location : stop.location
-    const position = location / STOP_MAX_LOCATION
-    return { color, position }
+    const _location = this.isInverse ? STOP_MAX_LOCATION - location : location
+    const position = _location / STOP_MAX_LOCATION
+    const interpolation = 'LINEAR'
+    const interpolationParameter = 1
+    return { color, interpolation, interpolationParameter, position }
+  }
+
+  private _getClosestStops<T extends GradientSourceStop>(location: number, stops: T[]): GradientClosestStops<T> {
+    const closest = { left: stops[0], right: stops[stops.length - 1] }
+    const equal = stops.filter((stop) => stop.location === location)
+    if (equal.length) {
+      closest.left = equal[0]
+      closest.right = equal[equal.length - 1]
+    } else {
+      const left = stops.filter((stop) => stop.location < location)
+      const right = stops.filter((stop) => stop.location > location)
+      if (left.length) closest.left = left[left.length - 1]
+      if (right.length) closest.right = right[0]
+    }
+    return closest
   }
 
   private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
-    const colors: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
+    const colorStops: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
+    const opacityStops: SourceEffectFillGradientOpacity[] = this.fill.gradient?.opacities ?? []
 
-    // TODO: Add midpoints
-    // TODO: Fix for multiple stops at the same location (filter for start/end)
+    const locations = uniq([
+      ...colorStops.map((stop) => stop.location),
+      ...opacityStops.map((stop) => stop.location),
+    ]).sort((loc1, loc2) => loc1 - loc2)
 
-    const stops = this.isInverse ? [...colors].reverse() : colors
-    return stops.map((stop) => this._getGradientStop(stop))
+    const stops = locations.map((location) => {
+      const { left: lColor, right: rColor } = this._getClosestStops(location, colorStops)
+      const { left: lOpacity, right: rOpacity } = this._getClosestStops(location, opacityStops)
+
+      const colorRatio = lColor.location !== rColor.location ? invLerp(lColor.location, rColor.location, location) : 1
+      const color = convertColor(lerpColor(lColor.color, rColor.color, colorRatio))
+
+      const opacityRatio =
+        lOpacity.location !== rOpacity.location ? invLerp(lOpacity.location, rOpacity.location, location) : 1
+      const opacity = lerp(lOpacity.opacity, rOpacity.opacity, opacityRatio)
+      const combinedOpacity = this._isStroke ? opacity : opacity * this._parentLayer.fillOpacity * this._fill.opacity
+
+      const combinedColor = multiplyAlpha(color, combinedOpacity)
+      return this._getGradientStop(combinedColor, location)
+    })
+
+    return this.isInverse ? stops.reverse() : stops
   }
 
-  private _getGradient(type: Octopus['FillGradient']['gradient']['type']): Octopus['FillGradient']['gradient'] {
-    const stops = this._gradientStops
+  private _getGradient(type: GradientType): Octopus['FillGradient']['gradient'] {
+    const stops = this._gradientStops ?? []
+    if (type === 'REFLECTED') {
+      const stopsLeft = [...stops].reverse().map((stop) => ({ ...stop, position: (1 - stop.position) / 2 }))
+      const stopsRight = [...stops].map((stop) => ({ ...stop, position: (1 + stop.position) / 2 }))
+      return { type: 'LINEAR', stops: [...stopsLeft, ...stopsRight] }
+    }
     return { type, stops }
   }
 
@@ -147,7 +202,8 @@ export class OctopusEffectFillGradient {
 
   private get _positioning(): Octopus['FillPositioning'] {
     const type = this.type
-    const transform = type === 'LINEAR' ? this._transformLinear : this._transformRadial
+    const isLinear = type === 'LINEAR' || type === 'REFLECTED'
+    const transform = isLinear ? this._transformLinear : this._transformRadial
     return {
       layout: 'FILL',
       origin: 'LAYER',

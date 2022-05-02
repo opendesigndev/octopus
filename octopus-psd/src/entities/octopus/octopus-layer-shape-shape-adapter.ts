@@ -1,10 +1,13 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { Octopus } from '../../typings/octopus'
-import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
-import { OctopusEffectFill } from './octopus-effect-fill'
-import { OctopusStroke } from './octopus-stroke'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import { OctopusEffectFill } from './octopus-effect-fill'
+import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
+import { OctopusStroke } from './octopus-stroke'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerShapeShapeAdapterOptions = {
   parent: OctopusLayerParent
@@ -65,9 +68,9 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerBase {
     const common = this.convertBase()
     if (!common) return null
 
-    return {
-      ...common,
-      ...this._convertTypeSpecific(),
-    }
+    const specific = this._convertTypeSpecific()
+    if (!specific) return null
+
+    return { ...common, ...specific }
   }
 }

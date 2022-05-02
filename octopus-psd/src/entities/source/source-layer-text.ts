@@ -1,10 +1,12 @@
-import type { RawLayerText } from '../../typings/raw'
-import { SourceLayerCommon } from './source-layer-common'
-import type { SourceLayerParent } from './source-layer-common'
-import { getBoundsFor } from '../../utils/source'
-import type { SourceBounds } from '../../typings/source'
-import { SourceText } from './source-text'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import { getBoundsFor } from '../../utils/source'
+import { SourceLayerCommon } from './source-layer-common'
+import { SourceText } from './source-text'
+
+import type { RawLayerText } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
+import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -16,9 +18,7 @@ export class SourceLayerText extends SourceLayerCommon {
   protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerTextOptions) {
-    super()
-    this._parent = options.parent
-    this._rawValue = options.rawValue
+    super(options)
   }
 
   @firstCallMemo()

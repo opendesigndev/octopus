@@ -1,11 +1,13 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { Octopus } from '../../typings/octopus'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { createDefaultTranslationMatrix } from '../../utils/path'
-import path from 'path'
-import { FOLDER_IMAGES } from '../../utils/const'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import { logWarn } from '../../services/instances/misc'
+import { createDefaultTranslationMatrix } from '../../utils/path'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image'
+import { OctopusLayerBase } from './octopus-layer-base'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerLayer } from '../source/source-layer-layer'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent
@@ -15,6 +17,7 @@ type OctopusLayerShapeLayerAdapterOptions = {
 export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerLayer
+  private _fillBlendMode: Octopus['BlendMode'] | undefined
 
   constructor(options: OctopusLayerShapeLayerAdapterOptions) {
     super(options)
@@ -36,43 +39,68 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     return { type: 'RECTANGLE', rectangle, transform }
   }
 
+  get fillBlendMode(): Octopus['BlendMode'] | undefined {
+    return this._fillBlendMode
+  }
+
+  setFillBlendMode(blendMode: Octopus['BlendMode'] | undefined): void {
+    this._fillBlendMode = blendMode
+  }
+
+  get opacity(): number {
+    return this._sourceLayer.opacity * this._sourceLayer.fillOpacity
+  }
+
   @firstCallMemo()
-  private get _fills(): Octopus['Fill'][] {
-    const imagePath = path.join(FOLDER_IMAGES, this.sourceLayer.imageName ?? '')
+  private get _fills(): Octopus['Fill'][] | null {
+    const imageName = this.sourceLayer.imageName
+    if (imageName === undefined) return null
+    const imagePath = this._parent.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(imageName)
+    if (imagePath === undefined) {
+      logWarn('Unknown image', { imagePath, imageName })
+      return null
+    }
     const { width, height } = this.sourceLayer.bounds
     const transform: Octopus['Transform'] = [width, 0, 0, height, 0, 0]
     const fill = new OctopusEffectFillImage({
       imagePath,
       transform,
+      blendMode: this.fillBlendMode,
       layout: 'STRETCH',
       origin: 'LAYER',
     }).convert()
     return [fill]
   }
 
-  private get _shape(): Octopus['Shape'] {
+  private get _shape(): Octopus['Shape'] | null {
+    const fills = this._fills
+    if (fills === null) return null
     const fillShape: Octopus['Shape'] = {
       fillRule: 'EVEN_ODD',
       path: this._path,
-      fills: this._fills,
+      fills,
     }
     return fillShape
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
-    return {
-      type: 'SHAPE',
-      shape: this._shape,
-    } as const
+  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> | null {
+    const shape = this._shape
+    if (shape === null) return null
+    const meta = this._meta
+    return { type: 'SHAPE', shape, meta } as const
+  }
+
+  private get _meta(): Octopus['LayerMeta'] | undefined {
+    return this.sourceLayer.smartObject ? { origin: { type: 'PHOTOSHOP_SMART_OBJECT' } } : undefined
   }
 
   convert(): Octopus['ShapeLayer'] | null {
     const common = this.convertBase()
     if (!common) return null
 
-    return {
-      ...common,
-      ...this._convertTypeSpecific(),
-    }
+    const specific = this._convertTypeSpecific()
+    if (!specific) return null
+
+    return { ...common, ...specific }
   }
 }

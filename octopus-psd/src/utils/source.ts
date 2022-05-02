@@ -1,22 +1,25 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import type { RawBounds, RawColor, RawMatrix, RawPointXY, RawRadiiCorners, RawTextBounds } from '../typings/raw'
-import type { SourceBounds, SourcePointXY, SourceColor, SourceMatrix, SourceRadiiCorners } from '../typings/source'
 
-export function getBoundsFor(value: RawBounds | undefined): SourceBounds {
-  const right = asFiniteNumber(value?.right, 0)
-  const left = asFiniteNumber(value?.left, 0)
-  const bottom = asFiniteNumber(value?.bottom, 0)
-  const top = asFiniteNumber(value?.top, 0)
-  const width = right - left
-  const height = bottom - top
-  return { right, left, bottom, top, width, height }
+import type {
+  RawBounds,
+  RawColor,
+  RawMatrix,
+  RawPointXY,
+  RawRadiiCorners,
+  RawTextBounds,
+  RawUnitPoint,
+} from '../typings/raw'
+import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source'
+
+function getValue(value: number | RawUnitPoint | undefined): number | undefined {
+  return typeof value === 'object' ? value.value : value
 }
 
-export function getTextBoundsFor(value: RawTextBounds | undefined): SourceBounds {
-  const right = asFiniteNumber(value?.right?.value, 0)
-  const left = asFiniteNumber(value?.left?.value, 0)
-  const bottom = asFiniteNumber(value?.bottom?.value, 0)
-  const top = asFiniteNumber(value?.top?.value, 0)
+export function getBoundsFor(value: RawBounds | RawTextBounds | undefined): SourceBounds {
+  const right = asFiniteNumber(getValue(value?.right), 0)
+  const left = asFiniteNumber(getValue(value?.left), 0)
+  const bottom = asFiniteNumber(getValue(value?.bottom), 0)
+  const top = asFiniteNumber(getValue(value?.top), 0)
   const width = right - left
   const height = bottom - top
   return { right, left, bottom, top, width, height }
@@ -35,9 +38,9 @@ export function getColorFor(value: RawColor | undefined): SourceColor | null {
   const { blue, green, red } = value ?? {}
   if (blue === undefined && green === undefined && red === undefined) return null
   return {
-    blue: asFiniteNumber(blue, 0),
-    green: asFiniteNumber(green, 0),
-    red: asFiniteNumber(red, 0),
+    b: asFiniteNumber(blue, 0),
+    g: asFiniteNumber(green, 0),
+    r: asFiniteNumber(red, 0),
   }
 }
 

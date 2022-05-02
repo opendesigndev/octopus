@@ -1,7 +1,13 @@
-import type { RawLayer, RawLayerSection } from '../../typings/raw'
-import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
+import { createSourceLayer } from '../../factories/create-source-layer'
+import { getBoundsFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
+
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawLayer, RawLayerSection } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerSectionOptions = {
@@ -15,9 +21,7 @@ export class SourceLayerSection extends SourceLayerCommon {
   private _layers: SourceLayer[]
 
   constructor(options: SourceLayerSectionOptions) {
-    super()
-    this._parent = options.parent
-    this._rawValue = options.rawValue
+    super(options)
     this._layers = this._initLayers()
   }
 
@@ -28,8 +32,12 @@ export class SourceLayerSection extends SourceLayerCommon {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...layers, sourceLayer] : layers
+      return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
+  }
+
+  get bounds(): SourceBounds {
+    return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : this._parent.bounds
   }
 
   get layers(): SourceLayer[] {

@@ -1,15 +1,16 @@
-import type { RawTextStyle } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
 import { round } from '@avocode/octopus-common/dist/utils/math'
+
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
+
+import type { RawTextStyle } from '../../typings/raw'
+import type { SourceColor } from '../../typings/source'
 
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
 
-  constructor(text: RawTextStyle | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawTextStyle | undefined) {
+    super(raw)
   }
 
   get fontPostScriptName(): string {

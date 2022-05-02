@@ -1,10 +1,11 @@
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectFill } from '../source/source-effect-fill'
 import { logWarn } from '../../services/instances/misc'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import type { SourceColor } from '../../typings/source'
-import type { OctopusLayerBase } from './octopus-layer-base'
 import { OctopusEffectBase } from './octopus-effect-base'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceColor } from '../../typings/source'
+import type { SourceEffectFill } from '../source/source-effect-fill'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase

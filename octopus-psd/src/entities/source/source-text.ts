@@ -1,19 +1,20 @@
-import type { RawText } from '../../typings/raw'
-import { getMatrixFor, getTextBoundsFor } from '../../utils/source'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
-import { SourceEntity } from './source-entity'
-import { SourceTextTextStyleRange } from './source-text-text-style-range'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
+import { getMatrixFor, getBoundsFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
+import { SourceTextTextStyleRange } from './source-text-text-style-range'
+
+import type { RawText } from '../../typings/raw'
+import type { SourceBounds, SourceMatrix } from '../../typings/source'
 
 export class SourceText extends SourceEntity {
   protected _rawValue: RawText | undefined
 
   static DEFAULT_ORIENTATION = 'horizontal' as const
 
-  constructor(text: RawText | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawText | undefined) {
+    super(raw)
   }
 
   get textKey(): string {
@@ -39,11 +40,11 @@ export class SourceText extends SourceEntity {
     return ranges.map((range) => new SourceTextParagraphStyleRange(range))
   }
 
-  get bounds(): SourceBounds {
-    return getTextBoundsFor(this._rawValue?.bounds)
+  get bounds(): SourceBounds | undefined {
+    return this._rawValue?.bounds ? getBoundsFor(this._rawValue?.bounds) : undefined
   }
 
-  get boundingBox(): SourceBounds {
-    return getTextBoundsFor(this._rawValue?.boundingBox)
+  get boundingBox(): SourceBounds | undefined {
+    return this._rawValue?.boundingBox ? getBoundsFor(this._rawValue?.boundingBox) : undefined
   }
 }

@@ -1,4 +1,4 @@
-import { mod, tan, sin, cos } from '../math'
+import { cos, invLerp, lerp, mod, sin, tan } from '../math'
 
 describe('mod', () => {
   function testModulo(N: number, modulo: number, result: number): void {
@@ -85,6 +85,46 @@ describe('tan', () => {
     [360, -2.4492935982947064e-16],
     [-15, -0.2679491924311227],
     [-360, 2.4492935982947064e-16],
+  ]
+
+  examples.forEach((example) => testTan(...example))
+})
+
+describe('lerp', () => {
+  function testTan(x: number, y: number, ratio: number, result: number): void {
+    test(`lerp(${x}, ${y}, ${ratio}) to be ${result}`, () => {
+      expect(lerp(x, y, ratio)).toBe(result)
+    })
+  }
+
+  type Example = [number, number, number, number]
+  const examples: Example[] = [
+    [0, 1, 0.5, 0.5],
+    [10, 20, 0.5, 15],
+    [2, 12, 0.2, 4],
+    [-10, 10, 0.5, 0],
+    [0, 1, 2, 2],
+    [1, 0, 2, -1],
+  ]
+
+  examples.forEach((example) => testTan(...example))
+})
+
+describe('invLerp', () => {
+  function testTan(x: number, y: number, ratio: number, result: number): void {
+    test(`invLerp(${x}, ${y}, ${ratio}) to be ${result}`, () => {
+      expect(invLerp(x, y, ratio)).toBe(result)
+    })
+  }
+
+  type Example = [number, number, number, number]
+  const examples: Example[] = [
+    [0, 1, 0.5, 0.5],
+    [10, 20, 15, 0.5],
+    [2, 12, 4, 0.2],
+    [-10, 10, 0, 0.5],
+    [0, 1, 2, 2],
+    [1, 0, -1, 2],
   ]
 
   examples.forEach((example) => testTan(...example))

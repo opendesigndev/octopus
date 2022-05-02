@@ -1,4 +1,5 @@
 import { SourceArtboard } from './source-artboard'
+
 import type { RawArtboard } from '../../typings/raw'
 
 export type SourceImage = {
@@ -20,13 +21,9 @@ export class SourceDesign {
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._artboard = new SourceArtboard({ rawValue: options.artboard })
+    this._artboard = new SourceArtboard(options.artboard)
     this._images = options.images
     this._designId = options.designId
-  }
-
-  get images(): SourceImage[] {
-    return this._images
   }
 
   get designId(): string {
@@ -35,5 +32,25 @@ export class SourceDesign {
 
   get artboard(): SourceArtboard {
     return this._artboard
+  }
+
+  get images(): SourceImage[] {
+    return this._images
+  }
+
+  getImageByName(name: string): SourceImage | undefined {
+    return this.images.find((image) => image.name === name)
+  }
+
+  get values(): {
+    designId: string
+    artboard: RawArtboard
+    images: SourceImage[]
+  } {
+    return {
+      designId: this.designId,
+      artboard: this.artboard.raw,
+      images: this.images,
+    }
   }
 }

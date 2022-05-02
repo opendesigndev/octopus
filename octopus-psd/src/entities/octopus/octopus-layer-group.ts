@@ -1,12 +1,21 @@
-import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
-import type { SourceLayerSection } from '../source/source-layer-section'
-import type { Octopus } from '../../typings/octopus'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+
+import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { OctopusLayerBase } from './octopus-layer-base'
+
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerSection } from '../source/source-layer-section'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerSection
+}
+
+type CreateBackgroundOptions = {
+  id: string
+  layers: Octopus['Layer'][]
 }
 
 export class OctopusLayerGroup extends OctopusLayerBase {
@@ -14,19 +23,17 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   protected _sourceLayer: SourceLayerSection
   private _layers: OctopusLayer[]
 
-  constructor(options: OctopusLayerGroupOptions) {
-    super(options)
-    this._layers = this._initLayers()
+  static createBackground({ id, layers }: CreateBackgroundOptions): Octopus['GroupLayer'] {
+    return { id: `${id}:background`, type: 'GROUP', layers }
   }
 
-  private _initLayers(): OctopusLayer[] {
-    return this._sourceLayer.layers.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [octopusLayer, ...layers] : layers
-    }, [])
+  constructor(options: OctopusLayerGroupOptions) {
+    super(options)
+    this._layers = createOctopusLayers(this._sourceLayer.layers, this)
+  }
+
+  get layers(): OctopusLayer[] {
+    return this._layers
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> {
@@ -40,6 +47,9 @@ export class OctopusLayerGroup extends OctopusLayerBase {
     const common = this.convertBase()
     if (!common) return null
 
-    return { ...common, ...this._convertTypeSpecific() }
+    const specific = this._convertTypeSpecific()
+    if (!specific) return null
+
+    return { ...common, ...specific }
   }
 }

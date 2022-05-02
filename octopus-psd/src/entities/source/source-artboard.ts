@@ -1,21 +1,22 @@
-import type { RawArtboard, RawLayer } from '../../typings/raw'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { createSourceLayer, SourceLayer } from '../../factories/create-source-layer'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
+import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
-import { SourceBounds } from '../../typings/source'
+import { SourceEntity } from './source-entity'
 
-export type SourceArtboardOptions = {
-  rawValue: RawArtboard
-}
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawArtboard, RawLayer } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
 
-export class SourceArtboard {
-  private _rawValue: RawArtboard
+export class SourceArtboard extends SourceEntity {
+  protected _rawValue: RawArtboard
   private _layers: SourceLayer[]
 
-  static DEFAULT_ID = '1'
+  static DEFAULT_ID = 'artboard:1'
 
-  constructor(options: SourceArtboardOptions) {
-    this._rawValue = options.rawValue
+  constructor(raw: RawArtboard) {
+    super(raw)
     this._layers = this._initLayers()
   }
 
@@ -25,9 +26,13 @@ export class SourceArtboard {
         layer,
         parent: this,
       })
-      return sourceLayer ? [...layers, sourceLayer] : layers
+      return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
     return layers
+  }
+
+  get raw(): RawArtboard {
+    return this._rawValue
   }
 
   get layers(): SourceLayer[] {

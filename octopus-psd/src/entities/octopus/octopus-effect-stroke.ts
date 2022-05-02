@@ -1,11 +1,13 @@
-import type { Octopus } from '../../typings/octopus'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { OctopusEffectFill } from './octopus-effect-fill'
-import { logWarn } from '../../services/instances/misc'
-import type { SourceEffectStroke } from '../source/source-effect-stroke'
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+
+import { logWarn } from '../../services/instances/misc'
 import { OctopusEffectBase } from './octopus-effect-base'
+import { OctopusEffectFill } from './octopus-effect-fill'
+
+import type { Octopus } from '../../typings/octopus'
+import type { SourceEffectStroke } from '../source/source-effect-stroke'
+import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusEffectStrokeOptions = {
   parentLayer: OctopusLayerBase
@@ -42,7 +44,7 @@ export class OctopusEffectStroke extends OctopusEffectBase {
   private get _fill(): Octopus['Fill'] | null {
     const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentLayer, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill, isStroke: true }).convert()
   }
 
   get stroke(): Octopus['Stroke'] | null {

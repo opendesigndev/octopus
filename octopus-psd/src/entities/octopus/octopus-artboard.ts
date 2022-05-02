@@ -1,8 +1,12 @@
+import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { OctopusLayerGroup } from './octopus-layer-group'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+
 import type { OctopusPSDConverter } from '../..'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import { createOctopusLayer, OctopusLayer } from '../../factories/create-octopus-layer'
+import type { SourceBounds } from '../../typings/source'
 import type { SourceArtboard } from '../source/source-artboard'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
@@ -18,7 +22,11 @@ export class OctopusArtboard {
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
     this._sourceDesign = options.sourceDesign
-    this._layers = this._initLayers()
+    this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    return this
   }
 
   get sourceArtboard(): SourceArtboard {
@@ -31,16 +39,6 @@ export class OctopusArtboard {
 
   get converter(): OctopusPSDConverter {
     return this._octopusConverter
-  }
-
-  private _initLayers() {
-    return this.sourceArtboard.layers.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [octopusLayer, ...layers] : layers
-    }, [])
   }
 
   get dimensions(): { width: number; height: number } {
@@ -56,16 +54,28 @@ export class OctopusArtboard {
     return this._octopusConverter.pkgVersion
   }
 
-  get layers(): Octopus['Layer'][] {
-    return getConverted(this._layers)
+  private _getArtboardFromLayer(layer: OctopusLayer, parentBounds?: SourceBounds): Octopus['MaskGroupLayer'] {
+    const id = layer.id
+    const bounds = parentBounds ?? layer.sourceLayer?.bounds
+    const color = layer.sourceLayer?.artboardColor ?? null
+    const isArtboard = layer.sourceLayer?.isArtboard
+    const visible = layer.sourceLayer.visible
+    const layers = layer.type === 'GROUP' ? (layer as OctopusLayerGroup).layers : [layer]
+    return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, visible, layers })
   }
 
   get content(): Octopus['Layer'] {
-    return {
-      id: `${this.id}:background`,
-      type: 'GROUP',
-      layers: this.layers,
-    }
+    const id = this.id
+    const bounds = this.sourceArtboard.bounds
+
+    const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
+    if (!hasArtboards)
+      return this._layers.length > 1
+        ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
+        : this._getArtboardFromLayer(this._layers[0], bounds)
+
+    const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))
+    return OctopusLayerGroup.createBackground({ id, layers })
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

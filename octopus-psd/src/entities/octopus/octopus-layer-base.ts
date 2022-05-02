@@ -1,26 +1,28 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { asString } from '@avocode/octopus-common/dist/utils/as'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { OctopusArtboard } from './octopus-artboard'
-import type { OctopusLayerGroup } from './octopus-layer-group'
-import { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
-import type { Octopus } from '../../typings/octopus'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { createDefaultTranslationMatrix } from '../../utils/path'
 import { logWarn } from '../../services/instances/misc'
-import { OctopusEffectsLayer } from './octopus-effects-layer'
 import { convertBlendMode } from '../../utils/convert'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { createDefaultTranslationMatrix } from '../../utils/path'
+import { OctopusArtboard } from './octopus-artboard'
+import { OctopusEffectsLayer } from './octopus-effects-layer'
 
-export type OctopusLayerParent = OctopusLayerGroup | OctopusArtboard
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { Octopus } from '../../typings/octopus'
+import type { OctopusLayerGroup } from './octopus-layer-group'
+import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
+
+export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard
 
 type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayer
 }
 
-export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
+export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type' | 'meta'>>
 
 export class OctopusLayerBase {
   protected _id: string
@@ -30,11 +32,12 @@ export class OctopusLayerBase {
   static DEFAULT_TRANSLATION = [0, 0] as const
 
   static LAYER_TYPE_MAP = {
+    backgroundLayer: 'MASK_GROUP',
     layerSection: 'GROUP',
     shapeLayer: 'SHAPE',
     textLayer: 'TEXT',
     layer: 'SHAPE',
-    // TODO: backgroundLayer: 'TODO',
+    adjustmentLayer: 'SHAPE',
   } as const
 
   constructor(options: OctopusLayerBaseOptions) {

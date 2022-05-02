@@ -1,14 +1,15 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import type { RawTextStyleRange } from '../../typings/raw'
+
 import { SourceEntity } from './source-entity'
 import { SourceTextTextStyle } from './source-text-text-style'
+
+import type { RawTextStyleRange } from '../../typings/raw'
 
 export class SourceTextTextStyleRange extends SourceEntity {
   protected _rawValue: RawTextStyleRange | undefined
 
-  constructor(text: RawTextStyleRange | undefined) {
-    super(text)
-    this._rawValue = text
+  constructor(raw: RawTextStyleRange | undefined) {
+    super(raw)
   }
 
   get from(): number {

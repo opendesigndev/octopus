@@ -1,9 +1,11 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+
+import { logWarn } from '../../services/instances/misc'
+import { OctopusEffectFill } from './octopus-effect-fill'
+
 import type { Octopus } from '../../typings/octopus'
 import type { SourceStroke } from '../source/source-stroke'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { OctopusEffectFill } from './octopus-effect-fill'
-import { logWarn } from '../../services/instances/misc'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusStrokeOptions = {
@@ -78,7 +80,7 @@ export class OctopusStroke {
   get fill(): Octopus['Fill'] | null {
     const parentLayer = this._parentLayer
     const fill = this._stroke.fill
-    return new OctopusEffectFill({ parentLayer, fill }).convert()
+    return new OctopusEffectFill({ parentLayer, fill, isStroke: true }).convert()
   }
 
   get style(): Style {

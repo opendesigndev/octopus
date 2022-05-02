@@ -1,17 +1,21 @@
-import { LayerSpecifics, OctopusLayerBase, OctopusLayerParent } from './octopus-layer-base'
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
+import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
+import isEmpty from 'lodash/isEmpty'
+import isEqual from 'lodash/isEqual'
+
+import { createMatrix } from '../../utils/paper-factories'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+import { OctopusLayerBase } from './octopus-layer-base'
+
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourceText } from '../source/source-text'
-import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
 import type { SourceTextTextStyle } from '../source/source-text-text-style'
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { isEqual, isEmpty } from 'lodash'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { createMatrix } from '../../utils/paper-factories'
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
-import { normalizeTextValue } from '@avocode/octopus-common/dist/utils/text'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -170,18 +174,31 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   @firstCallMemo()
   private get _textTransform(): Octopus['Transform'] {
-    const { top, left } = this._sourceText.boundingBox
-
     const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
     const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
-    matrix.invert()
-    matrix.tx -= left
-    matrix.ty -= top
-    matrix.invert()
-
+    if (this._sourceText.bounds !== undefined) {
+      const { left } = this._sourceText.bounds
+      const { top } = this._sourceText.boundingBox ?? this._sourceText.bounds
+      matrix.invert()
+      matrix.tx -= left
+      matrix.ty -= top
+      matrix.invert()
+    } else {
+      const align = this._horizontalAlign
+      const { width, height } = this._sourceLayer.bounds
+      if (align === 'RIGHT') {
+        matrix.tx -= width
+        matrix.ty -= height
+      }
+      if (align === 'CENTER') {
+        matrix.tx -= width / 2
+        matrix.ty -= height / 2
+      }
+    }
     return matrix.values
   }
 
+  @firstCallMemo()
   private get _horizontalAlign(): Octopus['Text']['horizontalAlign'] {
     return getMapped(
       this._sourceText.paragraphStyles[0]?.paragraphStyle?.align,
@@ -191,21 +208,19 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   private get _frame(): Octopus['TextFrame'] {
-    const { width, height } = this._sourceText.bounds
+    const { width, height } = this._sourceText.bounds || this._sourceLayer.bounds
     return { mode: 'FIXED', size: { width: round(width), height: round(height) } }
   }
 
   @firstCallMemo()
   get text(): Octopus['Text'] | null {
-    const value = normalizeTextValue(this._textValue)
+    const value = this._textValue
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
     const textTransform = this._textTransform
     const frame = this._frame
     const horizontalAlign = this._horizontalAlign
-
-    // TODO add text picture when octopus3 schema is prepared
 
     return {
       value,
@@ -221,7 +236,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
     const text = this.text
     if (!text) return null
-    return { type: 'TEXT', text } as const
+    return { type: 'TEXT', text: normalizeText(text) } as const
   }
 
   convert(): Octopus['TextLayer'] | null {
