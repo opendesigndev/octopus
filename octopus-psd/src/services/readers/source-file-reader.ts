@@ -2,6 +2,7 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import sizeOf from 'image-size'
+import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
 import { displayPerf } from '../../utils/console'
@@ -13,7 +14,7 @@ import type { RawArtboard } from '../../typings/raw'
 
 type SourceFileReaderOptions = {
   path: string
-  designId: string
+  designId?: string
 }
 
 export class SourceFileReader {
@@ -27,7 +28,7 @@ export class SourceFileReader {
 
   constructor(options: SourceFileReaderOptions) {
     this._path = options.path
-    this._designId = options.designId
+    this._designId = options.designId || uuidv4()
     this._sourceDesign = this._initSourceDesign()
   }
 
