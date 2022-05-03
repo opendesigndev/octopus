@@ -9,7 +9,7 @@ export async function renderOctopus(
 ): Promise<{ value: string | undefined; error: null | Error }> {
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `render-${id}.png`)
-  const fontsDir = path.join(await getPkgLocation(), 'fonts')
+  const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
     execSync(`${process.env.RENDERING_PATH} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`, {
