@@ -222,7 +222,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     const frame = this._frame
     const horizontalAlign = this._horizontalAlign
 
-    return {
+    const text: Octopus['Text'] = {
       value,
       defaultStyle,
       horizontalAlign,
@@ -231,12 +231,13 @@ export class OctopusLayerText extends OctopusLayerBase {
       textTransform,
       frame,
     }
+    return normalizeText(text)
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
     const text = this.text
     if (!text) return null
-    return { type: 'TEXT', text: normalizeText(text) } as const
+    return { type: 'TEXT', text }
   }
 
   convert(): Octopus['TextLayer'] | null {

@@ -29,10 +29,7 @@ export class OctopusEffectFillImage {
   }
 
   private get _image(): Octopus['Image'] {
-    const ref: Octopus['ImageRef'] = {
-      type: 'RESOURCE',
-      value: this._imagePath,
-    }
+    const ref: Octopus['ImageRef'] = { type: 'PATH', value: this._imagePath }
     return { ref }
   }
 

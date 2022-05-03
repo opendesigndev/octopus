@@ -90,13 +90,9 @@ export class OctopusManifest {
     return asString(this._sourceDesign.designId, OctopusManifest.DEFAULT_PSD_FILENAME)
   }
 
-  private _convertManifestBounds(bounds: SourceBounds) {
-    return {
-      x: bounds.left,
-      y: bounds.top,
-      w: bounds.width,
-      h: bounds.height,
-    }
+  private _convertManifestBounds(bounds: SourceBounds): Manifest['Bounds'] {
+    const { left: x, top: y, width, height } = bounds
+    return { x, y, width, height }
   }
 
   private _convertError(error: Error | null | undefined): Manifest['Error'] | undefined {
@@ -122,15 +118,12 @@ export class OctopusManifest {
     if (!raw) return null
 
     const images: Manifest['AssetImage'][] = this._octopusConverter.sourceDesign.images.map((image) => {
-      const path = this.getExportedRelativeImageByName(image.name)
-      const location: Manifest['ResourceLocation'] =
-        typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
+      const path = this.getExportedRelativeImageByName(image.name) ?? ''
+      const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
       return { location, refId: image.name }
     })
 
-    const fonts: Manifest['AssetFont'][] = this._getArtboardAssetsFonts(raw).map((font) => {
-      return { location: { type: 'TRANSIENT' }, name: font }
-    })
+    const fonts: Manifest['AssetFont'][] = this._getArtboardAssetsFonts(raw).map((font) => ({ name: font }))
 
     return {
       ...(images.length ? { images } : null),
@@ -138,7 +131,7 @@ export class OctopusManifest {
     }
   }
 
-  get artboards(): Manifest['Artboard'][] {
+  private get _artboard(): Manifest['Component'] {
     const sourceArtboard = this._sourceDesign.artboard
     const id = sourceArtboard.id
     const bounds = this._convertManifestBounds(sourceArtboard.bounds)
@@ -147,11 +140,10 @@ export class OctopusManifest {
     const status = this.getExportedArtboardById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
 
-    const path = this.getExportedArtboardRelativePathById(id)
-    const location: Manifest['ResourceLocation'] =
-      typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
+    const path = this.getExportedArtboardRelativePathById(id) ?? ''
+    const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
 
-    const artboard: Manifest['Artboard'] = {
+    return {
       id,
       name: id,
       status: {
@@ -164,7 +156,6 @@ export class OctopusManifest {
       assets,
       location,
     }
-    return [artboard]
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {
@@ -176,8 +167,7 @@ export class OctopusManifest {
       },
       name: this.name,
       pages: [],
-      artboards: this.artboards,
-      components: [],
+      components: [this._artboard],
       chunks: [],
       libraries: [],
     }
