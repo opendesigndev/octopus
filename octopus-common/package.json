@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-common",
-  "version": "3.0.0-rc.16",
+  "version": "3.0.0-rc.18",
   "license": "UNLICENSED",
   "description": "General utility functions for Octopus 3 common cases.",
   "main": "dist/index.js",
