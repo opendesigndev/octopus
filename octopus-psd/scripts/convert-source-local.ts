@@ -9,8 +9,7 @@ async function convert() {
   const [filePath] = process.argv.slice(2)
   const testDir = path.join(os.tmpdir(), uuidv4())
 
-  const designId = uuidv4()
-  const reader = new SourceFileReader({ path: filePath, designId })
+  const reader = new SourceFileReader({ path: filePath })
   const sourceDesign = await reader.sourceDesign
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
