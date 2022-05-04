@@ -146,6 +146,7 @@ export class OctopusManifest {
     return {
       id,
       name: id,
+      role: 'ARTBOARD',
       status: {
         value: statusValue,
         error: this._convertError(status?.error),

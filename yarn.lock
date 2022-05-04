@@ -23,10 +23,10 @@
   dependencies:
     abort-controller "3.0.0"
 
-"@avocode/manifest-ts@3.0.0-alpha.29":
-  version "3.0.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.29.tgz#f9c96af1bff961262da84e0fd184c5a8931ddfb8"
-  integrity sha512-Y7lrC/UvfsD8xX5Rp0zEAlyfvzn56gSjr+2tJg+b+2i8NxhL+kHYN+a4m89QVi9P9fy/38FjExIJFqTUJyrPVg==
+"@avocode/manifest-ts@3.0.0-alpha.32":
+  version "3.0.0-alpha.32"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.32.tgz#e6d3a2ef22e36191876c97ecfdde405bbc992378"
+  integrity sha512-c+Ud7Ty6kuLettviRmLRBIMLKPBRItRCo4v84O0eeoeGHFjV9l+aKp1xps5PoPpsALN7O9JVj/qs0BMH8V4FfQ==
 
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
@@ -46,15 +46,10 @@
     lodash "^4.13.1"
     raven "^1.1.4"
 
-"@avocode/octopus-ts@3.0.0-alpha.21":
-  version "3.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.21.tgz#6eba145e1f01d91a1720ccf1257ecdea1a5ea787"
-  integrity sha512-BmoxWfv2BQdt+DSaXw1YSZW/jb+IxXQNa/WQv6Y/ZKx9Y4HW4Kg2A/hk6YKBw3Oz/bRuYcyhDFbpxx0ArwDYWg==
-
-"@avocode/octopus-ts@3.0.0-alpha.29":
-  version "3.0.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.29.tgz#b4622d82bebc2e2004a6cb794b37427b92595d7b"
-  integrity sha512-HQsrfArkNeCQkrYDyJ96bKRfy0XZrvrl2CO7j86sd91tNm9xmum47j33gPokey5ykqb4zEpqFiLFTs0mqACjCw==
+"@avocode/octopus-ts@3.0.0-alpha.32":
+  version "3.0.0-alpha.32"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.32.tgz#cdd936e99ec12d4e26c15f548bfd1f948342c6e0"
+  integrity sha512-UWP2ayVD1B1bjblLmTr+7qsAKn9W9yNrWyQve7g0vLe6u2X8/yW9MAZBJPK7O/a3ZH1FaZ3UIxQUyym9+Y9csg==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"
