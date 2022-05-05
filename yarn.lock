@@ -28,6 +28,11 @@
   resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.26.tgz#dd1432c94ec64e7da4108ed4ece65d5e2baf65b2"
   integrity sha512-fUAB20h68CQNuUYuesXEyKEjCK4mhRGeWJeDSKVHX1k3R8ZJHhplehmpL3It8nkYyUnP2oK+fAqTJaqaK+Ld9A==
 
+"@avocode/manifest-ts@3.0.0-alpha.32":
+  version "3.0.0-alpha.32"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.32.tgz#e6d3a2ef22e36191876c97ecfdde405bbc992378"
+  integrity sha512-c+Ud7Ty6kuLettviRmLRBIMLKPBRItRCo4v84O0eeoeGHFjV9l+aKp1xps5PoPpsALN7O9JVj/qs0BMH8V4FfQ==
+
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-2.1.11.tgz#905886eeed52ba942a1e973a82ced59a65fe0ff9"
@@ -36,6 +41,16 @@
     lodash "^4.13.1"
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
+
+"@avocode/octopus-common@3.0.0-rc.18":
+  version "3.0.0-rc.18"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.18.tgz#7f99014c745457737e5e6caf36989d9885a28a75"
+  integrity sha512-dkuaQ2qOK3qGFTtTg4M4ypJRK7pKMwIz905bftzYO7RHxHz1D+KMeO4JIjdv517y3dyuVqtKMHXxjMOnKc7hoA==
+  dependencies:
+    "@sentry/node" "6.14.0"
+    lodash "^4.17.21"
+    read-pkg-up "7.0.1"
+    uuid "^8.3.2"
 
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
@@ -60,6 +75,11 @@
   version "3.0.0-alpha.26"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.26.tgz#d6e5753ababd45ffa281af4ac1056d2341f90c25"
   integrity sha512-qyq5jrRnlb0ycsJzE85pj2o+XpDu+viYJy+4RLmTKFy6tcI6cOjkIZPW6VPEaXIjswQlq51gqVLtY9aNS9XYtA==
+
+"@avocode/octopus-ts@3.0.0-alpha.32":
+  version "3.0.0-alpha.32"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.32.tgz#cdd936e99ec12d4e26c15f548bfd1f948342c6e0"
+  integrity sha512-UWP2ayVD1B1bjblLmTr+7qsAKn9W9yNrWyQve7g0vLe6u2X8/yW9MAZBJPK7O/a3ZH1FaZ3UIxQUyym9+Y9csg==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

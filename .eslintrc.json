@@ -29,6 +29,7 @@
     }
   },
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "warn",
     "import/default": "off",
     "import/no-named-as-default-member": "off",
@@ -44,7 +45,7 @@
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
-      "warn",
+      "off",
       {
         "prefer": "type-imports"
       }

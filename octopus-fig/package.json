@@ -1,0 +1,52 @@
+{
+  "name": "@avocode/octopus-fig",
+  "version": "3.0.0-rc.1",
+  "description": "Octopus Figma converter, converts figma files to Octopus 3+ format.",
+  "license": "UNLICENSED",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc --build ./tsconfig.json",
+    "clean:workdir": "rimraf ./workdir/*",
+    "clean": "rimraf ./node_modules ./lib ./workdir",
+    "convert:debug": "ts-node ./scripts/convert-source-debug.ts",
+    "convert:local": "ts-node ./scripts/convert-source-local.ts",
+    "prepack": "rimraf ./lib && yarn run build",
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@avocode/manifest-ts": "3.0.0-alpha.32",
+    "@avocode/octopus-common": "3.0.0-rc.18",
+    "@avocode/octopus-ts": "3.0.0-alpha.32",
+    "@avocode/psd-parser": "0.8.4",
+    "@sentry/node": "6.14.0",
+    "chalk": "^4.1.2",
+    "dotenv": "16.0.0",
+    "image-size": "^1.0.1",
+    "lodash": "^4.17.21",
+    "paper": "0.12.15",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
+    "time-stamp": "^2.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/jest": "^27.4.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "@types/rimraf": "^3.0.2",
+    "@types/uuid": "^8.3.1",
+    "jest": "^27.3.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "10.5.0",
+    "typescript": "4.4.4"
+  },
+  "files": [
+    "dist/src"
+  ]
+}

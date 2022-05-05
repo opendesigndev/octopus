@@ -5,9 +5,10 @@
   "workspaces": {
     "packages": [
       "octopus-common",
-      "octopus-xd",
       "octopus-ai",
-      "octopus-psd"
+      "octopus-fig",
+      "octopus-psd",
+      "octopus-xd"
     ],
     "nohoist": [
       "**"
