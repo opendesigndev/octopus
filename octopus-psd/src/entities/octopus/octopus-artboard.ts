@@ -10,18 +10,15 @@ import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
   octopusConverter: OctopusPSDConverter
 }
 
 export class OctopusArtboard {
-  private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusPSDConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
     this._octopusConverter = options.octopusConverter
-    this._sourceDesign = options.sourceDesign
     this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
   }
 
@@ -30,11 +27,11 @@ export class OctopusArtboard {
   }
 
   get sourceArtboard(): SourceArtboard {
-    return this._sourceDesign.artboard
+    return this.sourceDesign.artboard
   }
 
   get sourceDesign(): SourceDesign {
-    return this._sourceDesign
+    return this._octopusConverter.sourceDesign
   }
 
   get converter(): OctopusPSDConverter {

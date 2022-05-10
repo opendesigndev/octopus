@@ -130,7 +130,7 @@ export default class OctopusEffectFillImage {
     const imagePath = octopusManifest?.getExportedRelativeImagePathById(uid)
 
     const ref = {
-      type: 'RESOURCE',
+      type: 'PATH',
       value: imagePath ?? uid,
     } as const
 

@@ -23,11 +23,6 @@
   dependencies:
     abort-controller "3.0.0"
 
-"@avocode/manifest-ts@3.0.0-alpha.26":
-  version "3.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.26.tgz#dd1432c94ec64e7da4108ed4ece65d5e2baf65b2"
-  integrity sha512-fUAB20h68CQNuUYuesXEyKEjCK4mhRGeWJeDSKVHX1k3R8ZJHhplehmpL3It8nkYyUnP2oK+fAqTJaqaK+Ld9A==
-
 "@avocode/manifest-ts@3.0.0-alpha.32":
   version "3.0.0-alpha.32"
   resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.32.tgz#e6d3a2ef22e36191876c97ecfdde405bbc992378"
@@ -42,16 +37,6 @@
     tinycolor2 "^1.4.1"
     uuid "^3.1.0"
 
-"@avocode/octopus-common@3.0.0-rc.18":
-  version "3.0.0-rc.18"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-3.0.0-rc.18.tgz#7f99014c745457737e5e6caf36989d9885a28a75"
-  integrity sha512-dkuaQ2qOK3qGFTtTg4M4ypJRK7pKMwIz905bftzYO7RHxHz1D+KMeO4JIjdv517y3dyuVqtKMHXxjMOnKc7hoA==
-  dependencies:
-    "@sentry/node" "6.14.0"
-    lodash "^4.17.21"
-    read-pkg-up "7.0.1"
-    uuid "^8.3.2"
-
 "@avocode/octopus-photoshop@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-photoshop/-/octopus-photoshop-2.2.5.tgz#f03b6a2396dfc27e23bb592a62b2f9263348cc0a"
@@ -60,21 +45,6 @@
     "@avocode/octopus-common" "2.1.11"
     lodash "^4.13.1"
     raven "^1.1.4"
-
-"@avocode/octopus-ts@3.0.0-alpha.21":
-  version "3.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.21.tgz#6eba145e1f01d91a1720ccf1257ecdea1a5ea787"
-  integrity sha512-BmoxWfv2BQdt+DSaXw1YSZW/jb+IxXQNa/WQv6Y/ZKx9Y4HW4Kg2A/hk6YKBw3Oz/bRuYcyhDFbpxx0ArwDYWg==
-
-"@avocode/octopus-ts@3.0.0-alpha.23":
-  version "3.0.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.23.tgz#9ffdb29c20577c302dcf48a8e3696bc379bdd43a"
-  integrity sha512-v3HMlSxGsFIkugAXEO0/BGzdArwFykv5j18UZS4P/ZYe4xnxgja8nS9wfgvfon0UDynZXXCrw5TJMkGZ9MW7NA==
-
-"@avocode/octopus-ts@3.0.0-alpha.26":
-  version "3.0.0-alpha.26"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.26.tgz#d6e5753ababd45ffa281af4ac1056d2341f90c25"
-  integrity sha512-qyq5jrRnlb0ycsJzE85pj2o+XpDu+viYJy+4RLmTKFy6tcI6cOjkIZPW6VPEaXIjswQlq51gqVLtY9aNS9XYtA==
 
 "@avocode/octopus-ts@3.0.0-alpha.32":
   version "3.0.0-alpha.32"

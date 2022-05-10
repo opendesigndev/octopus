@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
 import { Queue } from '@avocode/octopus-common/dist/utils/queue'
@@ -18,7 +19,7 @@ import type SourceArtboard from './entities/source/source-artboard'
 import type SourceDesign from './entities/source/source-design'
 import type { Exporter } from './services/conversion/exporter'
 import type { Logger } from './typings'
-import type { OctopusManifestReport } from './typings/manifest'
+import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue'
 import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
@@ -43,7 +44,7 @@ export type ArtboardConversionResult = {
 }
 
 export type DesignConversionResult = {
-  manifest: OctopusManifestReport
+  manifest: Manifest['OctopusManifest']
   time: number
 }
 
@@ -136,7 +137,7 @@ export class OctopusXDConverter {
     return { id: targetArtboardId, value, error, time }
   }
 
-  private async _exportManifest(exporter: Exporter | null): Promise<OctopusManifestReport> {
+  private async _exportManifest(exporter: Exporter | null): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
@@ -151,13 +152,13 @@ export class OctopusXDConverter {
       artboardImages.map(async (image) => {
         const imageId = path.basename(image.path)
         const rawData = await image.getImageData()
-        const imagePath = await exporter?.exportImage?.(image.path, rawData)
+        const imagePath = await rejectTo(exporter?.exportImage?.(image.path, rawData) ?? Promise.reject(null))
         this.octopusManifest.setExportedImage(imageId, { path: imagePath })
         return image
       })
     )
     const converted = await this.convertArtboardById(artboard.meta.id)
-    const artboardPath = await exporter?.exportArtboard?.(artboard, converted)
+    const artboardPath = await rejectTo(exporter?.exportArtboard?.(artboard, converted) ?? Promise.reject(null))
     this.octopusManifest.setExportedArtboard(artboard.meta.id, {
       path: artboardPath,
       error: converted.error,
@@ -181,7 +182,7 @@ export class OctopusXDConverter {
   }
 
   async convertDesign(options?: ConvertDesignOptions): Promise<{
-    manifest: OctopusManifestReport
+    manifest: Manifest['OctopusManifest']
     artboards: ArtboardConversionResult[]
     images: { path: string; getImageData: () => Promise<Buffer> }[]
   }> {

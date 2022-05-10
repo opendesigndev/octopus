@@ -1,14 +1,14 @@
 import path from 'path'
-import compact from 'lodash/compact'
 
 import { asString } from '@avocode/octopus-common/dist/utils/as'
-// import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+
+import { SourceArtboard } from '../source/source-artboard'
 
 import type { OctopusFigConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
-// import type { SourceBounds } from '../../typings/source'
 import type { SourceDesign } from '../source/source-design'
-import { SourceArtboard } from '../source/source-artboard'
+// import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+// import type { SourceBounds } from '../../typings/source'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

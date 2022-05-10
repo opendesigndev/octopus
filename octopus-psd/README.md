@@ -66,6 +66,54 @@ Designed for manual runs.
 yarn convert:source:debug path/to/dir
 ```
 
+## Custom Usage
+
+There are three main processing steps:
+
+- reading source data (using _readers_)
+- conversion (using _convertor_ with `SourceDesign` instance produced by reader)
+- exporting (using _exporters_)
+
+Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones.
+
+```ts
+import os from 'os'
+import path from 'path'
+
+import { v4 as uuidv4 } from 'uuid'
+
+/**
+ * Reader (`PSDFileReader`) reads `.psd` files by given path.
+ * Exporter (`LocalExporter`) defines how and where save outputs.
+ * Converter takes `SourceDesign` entitiy which should be available from reader as constructor option and exporter as convertDesign option.
+ */
+import { OctopusPSDConverter, PSDFileReader, LocalExporter } from '../src'
+
+async function convert() {
+  const [filePath] = process.argv.slice(2)
+  const testDir = path.join(os.tmpdir(), uuidv4())
+  const reader = new PSDFileReader({ path: filePath })
+  const sourceDesign = await reader.sourceDesign
+  if (sourceDesign === null) {
+    console.error('Creating SourceDesign Failed')
+    return
+  }
+  const converter = new OctopusPSDConverter({ sourceDesign })
+  const exporter = new LocalExporter({ path: testDir })
+  await converter.convertDesign({ exporter })
+  await exporter.completed()
+  await reader.cleanup()
+  console.log(`Input: ${filePath}`)
+  console.log(`Output: ${testDir}`)
+}
+
+convert()
+```
+
+Check `src/services/exporters/` for more details about exporters.
+
+Check `src/services/readers/` for more details about readers
+
 ## Unit Tests
 
 ```

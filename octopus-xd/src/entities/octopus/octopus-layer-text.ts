@@ -373,7 +373,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     return ({ left: 'LEFT', right: 'RIGHT', center: 'CENTER' } as const)[align]
   }
 
-  private _getText(): Octopus['Text'] | null {
+  private get _text(): Octopus['Text'] | null {
     const value = this._getTextValue()
     if (typeof value !== 'string') return null
     const defaultStyle = this._getDefaultStyle()
@@ -384,9 +384,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const frame = this._getFrame()
     const horizontalAlign = this._getHorizontalAlign()
 
-    /** @TODO add octopus-common normalizations */
-
-    return {
+    const text: Octopus['Text'] = {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
@@ -395,16 +393,13 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       frame,
       horizontalAlign,
     }
+    return normalizeText(text)
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
-    const text = this._getText()
+    const text = this._text
     if (!text) return null
-
-    return {
-      type: 'TEXT',
-      text: normalizeText(text),
-    }
+    return { type: 'TEXT', text }
   }
 
   convert(): Octopus['TextLayer'] | null {

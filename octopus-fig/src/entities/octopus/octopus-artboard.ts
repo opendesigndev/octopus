@@ -2,13 +2,14 @@
 // import { OctopusLayerGroup } from './octopus-layer-group'
 // import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
-import type { OctopusFigConverter } from '../..'
-// import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
 import { SourceArtboard } from '../source/source-artboard'
+
+import type { OctopusFigConverter } from '../..'
+import type { Octopus } from '../../typings/octopus'
+import type { SourceDesign } from '../source/source-design'
+// import type { OctopusLayer } from '../../factories/create-octopus-layer'
 // import type { SourceBounds } from '../../typings/source'
 // import type { SourceArtboard } from '../source/source-artboard'
-import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string

@@ -3,7 +3,7 @@ import path from 'path'
 import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 
 import type { OctopusXDConverter } from '../..'
-import type { Artboard, OctopusManifestReport } from '../../typings/manifest'
+import type { Manifest } from '../../typings/manifest'
 
 type ImageDescriptor = { path: unknown }
 
@@ -96,8 +96,8 @@ export default class OctopusManifest {
     return {
       x: bounds.x,
       y: bounds.y,
-      w: bounds.width,
-      h: bounds.height,
+      width: bounds.width,
+      height: bounds.height,
     }
   }
 
@@ -128,21 +128,23 @@ export default class OctopusManifest {
       return {
         location:
           typeof location === 'string'
-            ? {
-                type: 'LOCAL_RESOURCE',
+            ? ({
+                type: 'RELATIVE',
                 path: location,
-              }
-            : {
-                type: 'TRANSIENT',
-              },
+              } as const)
+            : ({
+                type: 'RELATIVE',
+                path: '',
+              } as const),
         refId: image,
       }
     })
     const fonts = fontDeps.map((font) => {
       return {
         location: {
-          type: 'TRANSIENT',
-        },
+          type: 'RELATIVE',
+          path: '',
+        } as const,
         name: font,
       }
     })
@@ -153,59 +155,69 @@ export default class OctopusManifest {
     }
   }
 
-  get artboards(): Artboard[] {
+  get components(): Manifest['Component'][] {
     return this.manifestArtboardEntries
       .map((artboard) => {
         const id = artboard.id
         if (!id) return null
 
-        const pasteboard = artboard.path === 'pasteboard' ? { isPasteboard: true } : null
+        const role = artboard.path === 'pasteboard' ? ({ role: 'PASTEBOARD' } as const) : null
         const bounds =
           artboard.path === 'pasteboard' ? null : { bounds: this._convertManifestBounds(artboard['uxdesign#bounds']) }
 
         const exportLocation = this.getExportedRelativeArtboardPathById(id)
-        /** @TODO how to handle failed artboards? */
         const location =
           typeof exportLocation === 'string'
-            ? {
-                type: 'LOCAL_RESOURCE',
+            ? ({
+                type: 'RELATIVE',
                 path: exportLocation,
-              }
-            : {
-                type: 'TRANSIENT',
-              }
+              } as const)
+            : ({
+                type: 'RELATIVE',
+                path: '',
+              } as const)
         const status = this.getExportedArtboardById(id)
         const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PENDING'
+        const assets = this._getArtboardAssets(id)
         return {
           id,
           name: artboard.name,
           status: {
             value: statusValue,
-            error: status?.error ?? null,
-            time: status?.time ?? null,
+            ...(status?.error
+              ? {
+                  code: -1,
+                  message: status.error.message,
+                  stacktrace: status.error.stack,
+                }
+              : null),
+            ...(typeof status?.time === 'number'
+              ? {
+                  time: status.time,
+                }
+              : null),
           },
           ...bounds,
           dependencies: [],
           location,
-          assets: this._getArtboardAssets(id),
-          ...pasteboard,
+          ...(assets ? { assets } : null),
+          ...role,
         }
       })
-      .filter((artboardEntry) => artboardEntry) as Artboard[]
+      .filter((artboardEntry) => artboardEntry) as Manifest['Component'][]
   }
 
   /** @TODO guard with official types */
-  async convert(): Promise<OctopusManifestReport> {
+  async convert(): Promise<Manifest['OctopusManifest']> {
     return {
       version: await this.manifestVersion,
       origin: {
-        name: 'xd',
+        name: 'XD',
         version: this.xdVersion,
       },
       name: this.name,
       pages: [],
-      artboards: this.artboards,
-      components: [],
+      components: this.components,
       chunks: [],
       libraries: [],
     }
