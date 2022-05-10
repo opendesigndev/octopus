@@ -1,6 +1,6 @@
-# Octopus Converter for Photoshop
+# Octopus Converter for Adobe XD
 
-Photoshop to Octopus 3 converter.
+Adobe XD to Octopus 3 converter.
 
 ## Install
 
