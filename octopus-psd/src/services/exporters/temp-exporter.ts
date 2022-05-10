@@ -92,7 +92,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
     const manifestPath = await this._save(TempExporter.MANIFEST_NAME, this._stringify(manifest))
-    const manifestStatus = manifest.artboards[0]?.status?.value
+    const manifestStatus = manifest.components[0]?.status?.value
     if (manifestStatus === 'READY' || manifestStatus === 'FAILED') {
       this.emit('octopus:manifest', manifestPath)
     }
