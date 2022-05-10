@@ -55,6 +55,7 @@ export type RawLayerFrame = RawLayerBase & {
   clipsContent?: boolean
   background?: RawFill[]
   backgroundColor?: RawColor
+  children?: RawLayer[]
 }
 
 export type RawLayerRectangle = RawLayerBase & {

@@ -1,4 +1,4 @@
-import type { RawLayer } from './layer'
+import type { RawLayer, RawLayerFrame } from './layer'
 import type { RawTODO, RawColor } from './shared'
 
 export type RawDesign = {
@@ -20,10 +20,10 @@ export type RawDocument = {
   id?: string
   name?: string
   type?: 'DOCUMENT'
-  children?: RawCanvas[]
+  children?: RawPage[]
 }
 
-export type RawCanvas = {
+export type RawPage = {
   id?: string
   name?: string
   type?: 'CANVAS'
@@ -36,3 +36,5 @@ export type RawCanvas = {
     rotation: 'NONE'
   }
 }
+
+export type RawArtboard = RawLayerFrame

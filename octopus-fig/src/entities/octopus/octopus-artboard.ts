@@ -5,24 +5,29 @@
 import type { OctopusFigConverter } from '../..'
 // import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
+import { SourceArtboard } from '../source/source-artboard'
 // import type { SourceBounds } from '../../typings/source'
 // import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
+  targetArtboardId: string
   octopusConverter: OctopusFigConverter
 }
 
 export class OctopusArtboard {
-  private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusFigConverter
+  private _sourceArtboard: SourceArtboard
   // private _layers: OctopusLayer[]
   private _layers: []
 
   constructor(options: OctopusArtboardOptions) {
+    const artboard = options.octopusConverter.sourceDesign.getArtboardById(options.targetArtboardId)
+    if (!artboard) {
+      throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
+    }
+    this._sourceArtboard = artboard
     this._octopusConverter = options.octopusConverter
-    this._sourceDesign = options.sourceDesign
     this._layers = []
     // this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
   }
@@ -31,12 +36,12 @@ export class OctopusArtboard {
     return this
   }
 
-  // get sourceArtboard(): SourceArtboard {
-  //   return this._sourceDesign.artboard
-  // }
-
   get sourceDesign(): SourceDesign {
-    return this._sourceDesign
+    return this._octopusConverter.sourceDesign
+  }
+
+  get sourceArtboard(): SourceArtboard {
+    return this._sourceArtboard
   }
 
   get converter(): OctopusFigConverter {

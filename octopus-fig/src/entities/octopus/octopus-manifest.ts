@@ -1,12 +1,14 @@
 import path from 'path'
+import compact from 'lodash/compact'
 
 import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+// import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 
 import type { OctopusFigConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
 // import type { SourceBounds } from '../../typings/source'
 import type { SourceDesign } from '../source/source-design'
+import { SourceArtboard } from '../source/source-artboard'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
@@ -29,8 +31,8 @@ export class OctopusManifest {
 
   private _basePath: string | null
 
-  static DEFAULT_PSD_VERSION = '0'
-  static DEFAULT_PSD_FILENAME = 'Untitled'
+  static DEFAULT_FIG_VERSION = '0'
+  static DEFAULT_FIG_FILENAME = 'Untitled'
 
   constructor(options: OctopusManifestOptions) {
     this._sourceDesign = options.sourceDesign
@@ -82,12 +84,12 @@ export class OctopusManifest {
     return this._octopusConverter.pkgVersion
   }
 
-  get psdVersion(): string {
-    return OctopusManifest.DEFAULT_PSD_VERSION
+  get figVersion(): string {
+    return OctopusManifest.DEFAULT_FIG_VERSION
   }
 
   get name(): string {
-    return asString(this._sourceDesign.designId, OctopusManifest.DEFAULT_PSD_FILENAME)
+    return asString(this._sourceDesign.designId, OctopusManifest.DEFAULT_FIG_FILENAME)
   }
 
   // private _convertManifestBounds(bounds: SourceBounds) {
@@ -109,12 +111,12 @@ export class OctopusManifest {
     }
   }
 
-  private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
-    const entries = traverseAndFind(raw, (obj: unknown) => {
-      return Object(obj)?.fontPostScriptName
-    })
-    return [...new Set(entries)] as string[]
-  }
+  // private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
+  //   const entries = traverseAndFind(raw, (obj: unknown) => {
+  //     return Object(obj)?.fontPostScriptName
+  //   })
+  //   return [...new Set(entries)] as string[]
+  // }
 
   // private get _artboardAssets(): Manifest['Assets'] | null {
   //   const targetArtboard = this._octopusConverter.sourceDesign.artboard
@@ -138,13 +140,16 @@ export class OctopusManifest {
   //   }
   // }
 
-  get artboard(): Manifest['Component'] {
-    // const sourceArtboard = this._sourceDesign.artboard
-    // const id = sourceArtboard.id
-    // const bounds = this._convertManifestBounds(sourceArtboard.bounds)
-    // const assets = this._artboardAssets ?? undefined
+  get pages(): Manifest['Page'][] {
+    return this._sourceDesign.pages.map((page) => ({
+      id: page.id,
+      name: page.name,
+      children: page.children.map((elem) => ({ id: elem.id, type: 'COMPONENT' })),
+    }))
+  }
 
-    const id = 'TODO'
+  private _getArtboard(source: SourceArtboard): Manifest['Component'] {
+    const id = source.id
 
     const status = this.getExportedArtboardById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
@@ -154,7 +159,7 @@ export class OctopusManifest {
 
     return {
       id,
-      name: id,
+      name: source.name,
       status: {
         value: statusValue,
         error: this._convertError(status?.error),
@@ -164,19 +169,27 @@ export class OctopusManifest {
       dependencies: [],
       assets: {},
       location,
+      role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD',
     }
+  }
+
+  get components(): Manifest['Component'][] {
+    const components: SourceArtboard[] = []
+    this._sourceDesign.pages.forEach((page) => page.children.forEach((elem) => components.push(elem)))
+
+    return components.map((component) => this._getArtboard(component))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {
     return {
       version: await this.manifestVersion,
       origin: {
-        name: 'PHOTOSHOP',
-        version: this.psdVersion,
+        name: 'FIGMA',
+        version: this.figVersion,
       },
       name: this.name,
-      pages: [],
-      components: [this.artboard],
+      pages: this.pages,
+      components: this.components,
       chunks: [],
       libraries: [],
     }

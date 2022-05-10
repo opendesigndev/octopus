@@ -1,0 +1,73 @@
+import { SourceArtboard } from './source-artboard'
+import { SourceEntity } from './source-entity'
+
+import type { RawPage, RawLayer, RawLayerFrame } from '../../typings/raw'
+
+export class SourcePage extends SourceEntity {
+  protected _rawValue: RawPage
+  private _artboards: SourceArtboard[]
+  private _pasteboard: SourceArtboard | null
+
+  static DEFAULT_ID = 'page:1'
+
+  constructor(raw: RawPage) {
+    super(raw)
+    const { artboards, pasteboard } = this._initArtboards()
+    this._artboards = artboards
+    this._pasteboard = pasteboard
+  }
+
+  private _initArtboards(): { artboards: SourceArtboard[]; pasteboard: SourceArtboard | null } {
+    const frames: RawLayerFrame[] = []
+    const rest: RawLayer[] = []
+
+    this._rawValue?.children?.forEach((element) => {
+      if (element.type === 'FRAME') {
+        frames.push(element)
+      } else {
+        rest.push(element)
+      }
+    })
+
+    const artboards: SourceArtboard[] = frames.map((frame) => new SourceArtboard(frame))
+    const pasteboard: SourceArtboard | null =
+      rest.length > 0
+        ? new SourceArtboard(
+            {
+              ...this._rawValue,
+              type: 'FRAME',
+              children: rest,
+              id: `${this.id}:pasteboard`,
+              name: `${this.name}:pasteboard`,
+            },
+            true
+          )
+        : null
+
+    return { artboards, pasteboard }
+  }
+
+  get raw(): RawPage {
+    return this._rawValue
+  }
+
+  get artboards(): SourceArtboard[] {
+    return this._artboards
+  }
+
+  get pasteboard(): SourceArtboard | null {
+    return this._pasteboard
+  }
+
+  get children(): SourceArtboard[] {
+    return this.pasteboard ? [...this.artboards, this.pasteboard] : this.artboards
+  }
+
+  get id(): string {
+    return this._rawValue.id ?? SourcePage.DEFAULT_ID
+  }
+
+  get name(): string {
+    return this._rawValue.name ?? SourcePage.DEFAULT_ID
+  }
+}

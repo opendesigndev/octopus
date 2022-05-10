@@ -1,16 +1,17 @@
 import path from 'path'
 
-// import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 // import sizeOf from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
-// import { displayPerf } from '../../utils/console'
+import { displayPerf } from '../../utils/console'
+import { parseJsonFromFile } from '../../utils/files'
 // import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
-// import { logInfo } from '../instances/misc'
+import { logInfo } from '../instances/misc'
 
 import type { SourceImage } from '../../entities/source/source-design'
-// import type { RawArtboard } from '../../typings/raw'
+import type { RawDesign } from '../../typings/raw'
 
 type SourceFileReaderOptions = {
   path: string
@@ -44,14 +45,12 @@ export class SourceFileReader {
     return this._sourceDesign
   }
 
-  // private async _getSourceArtboard(): Promise<RawArtboard | null> {
-  //   const { time: timeRead, result } = await benchmarkAsync(() =>
-  //     parseJsonFromFile<RawArtboard>(path.join(this.path, SourceFileReader.SOURCE_FILE))
-  //   )
-  //   logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
+  private async _getRawDesign(): Promise<RawDesign | null> {
+    const { time: timeRead, result } = await benchmarkAsync(() => parseJsonFromFile<RawDesign>(this.path))
+    logInfo(`RawDesign prepared ${displayPerf(timeRead)}`)
 
-  //   return result
-  // }
+    return result
+  }
 
   private async _getImages(): Promise<SourceImage[]> {
     // const imagesPath = path.join(this.path, SourceFileReader.IMAGES_DIR)
@@ -79,12 +78,12 @@ export class SourceFileReader {
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
-    // const artboard = await this._getSourceArtboard()
-    // if (artboard == null) return null
+
+    const raw = await this._getRawDesign()
+    if (raw == null) return null
     const images = await this._getImages()
 
-    // const sourceDesign = new SourceDesign({ designId, artboard, images })
-    const sourceDesign = new SourceDesign({ designId, images })
+    const sourceDesign = new SourceDesign({ designId, images, raw })
     return sourceDesign
   }
 }

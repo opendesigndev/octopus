@@ -1,6 +1,8 @@
-// import { SourceArtboard } from './source-artboard'
+import { SourceArtboard } from './source-artboard'
+import { SourceEntity } from './source-entity'
+import { SourcePage } from './source-page'
 
-// import type { RawArtboard } from '../../typings/raw'
+import type { RawPage, RawDesign } from '../../typings/raw'
 
 export type SourceImage = {
   name: string
@@ -10,18 +12,19 @@ export type SourceImage = {
 }
 
 type SourceDesignOptions = {
-  // artboard: RawArtboard
+  raw: RawDesign
   images: SourceImage[]
   designId: string
 }
 
-export class SourceDesign {
+export class SourceDesign extends SourceEntity {
   private _designId: string
-  // private _artboard: SourceArtboard
+  private _pages: SourcePage[]
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    // this._artboard = new SourceArtboard(options.artboard)
+    super(options.raw)
+    this._pages = options.raw.document?.children?.map((page) => new SourcePage(page)) ?? []
     this._images = options.images
     this._designId = options.designId
   }
@@ -30,9 +33,13 @@ export class SourceDesign {
     return this._designId
   }
 
-  // get artboard(): SourceArtboard {
-  //   return this._artboard
-  // }
+  get pages(): SourcePage[] {
+    return this._pages
+  }
+
+  getPageById(id: string): SourcePage | null {
+    return this._pages.find((page) => page.id === id) ?? null
+  }
 
   get images(): SourceImage[] {
     return this._images
@@ -42,14 +49,24 @@ export class SourceDesign {
     return this.images.find((image) => image.name === name)
   }
 
+  get artboards(): SourceArtboard[] {
+    const artboards: SourceArtboard[] = []
+    this._pages.forEach((page) => artboards.concat(page.children))
+    return artboards
+  }
+
+  getArtboardById(id: string): SourceArtboard | null {
+    return this.artboards.find((artboard) => artboard.id === id) || null
+  }
+
   get values(): {
     designId: string
-    // artboard: RawArtboard
+    pages: RawPage[]
     images: SourceImage[]
   } {
     return {
       designId: this.designId,
-      // artboard: this.artboard.raw,
+      pages: this._pages.map((page) => page.raw),
       images: this.images,
     }
   }
