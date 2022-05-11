@@ -1,13 +1,9 @@
-import path from 'path'
-
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
-// import sizeOf from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
 import { displayPerf } from '../../utils/console'
 import { parseJsonFromFile } from '../../utils/files'
-// import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
 import { logInfo } from '../instances/misc'
 
 import type { SourceImage } from '../../entities/source/source-design'
@@ -22,10 +18,6 @@ export class SourceFileReader {
   private _path: string
   private _designId: string
   private _sourceDesign: Promise<SourceDesign | null>
-
-  static IMAGES_DIR = 'pictures'
-  static SOURCE_FILE = 'source.json'
-  static PATTERNS_DIR = path.join(SourceFileReader.IMAGES_DIR, 'patterns')
 
   constructor(options: SourceFileReaderOptions) {
     this._path = options.path
@@ -46,44 +38,21 @@ export class SourceFileReader {
   }
 
   private async _getRawDesign(): Promise<RawDesign | null> {
-    const { time: timeRead, result } = await benchmarkAsync(() => parseJsonFromFile<RawDesign>(this.path))
-    logInfo(`RawDesign prepared ${displayPerf(timeRead)}`)
-
+    const { time, result } = await benchmarkAsync(() => parseJsonFromFile<RawDesign>(this.path))
+    logInfo(`RawDesign prepared ${displayPerf(time)}`)
     return result
   }
 
   private async _getImages(): Promise<SourceImage[]> {
-    // const imagesPath = path.join(this.path, SourceFileReader.IMAGES_DIR)
-    // const images: SourceImage[] = ((await getFilesFromDir(imagesPath)) ?? []).map((image) => {
-    //   const name = image.name
-    //   const relativePath = path.join(SourceFileReader.IMAGES_DIR, name)
-    //   const imgPath = path.join(this.path, relativePath)
-    //   return { name, path: imgPath }
-    // })
-
-    // const patterns: SourceImage[] = []
-    // const patternsPath = path.join(this.path, SourceFileReader.PATTERNS_DIR)
-    // const patternsResults = (await getFilesFromDir(patternsPath)) ?? []
-    // for (const image of patternsResults) {
-    //   const name = image.name
-    //   const relativePath = path.join(SourceFileReader.PATTERNS_DIR, name)
-    //   const imgPath = path.join(this.path, relativePath)
-    //   const { width, height } = await sizeOf(imgPath)
-    //   patterns.push({ name, path: imgPath, width, height })
-    // }
-
-    // return [...images, ...patterns]
-    return []
+    return [] // TODO
   }
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {
-    const designId = this.designId
-
     const raw = await this._getRawDesign()
     if (raw == null) return null
     const images = await this._getImages()
+    const designId = this.designId
 
-    const sourceDesign = new SourceDesign({ designId, images, raw })
-    return sourceDesign
+    return new SourceDesign({ designId, images, raw })
   }
 }

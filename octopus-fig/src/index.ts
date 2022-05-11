@@ -12,12 +12,10 @@ import { TempExporter } from './services/exporters/temp-exporter'
 import { createEnvironment } from './services/general/environment'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
-import { logError } from './services/instances/misc'
 import { set as setSentry } from './services/instances/sentry'
 import { SourceFileReader } from './services/readers/source-file-reader'
 
 import type { SourceDesign } from './entities/source/source-design'
-import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
@@ -37,13 +35,10 @@ export type ConvertDesignResult = {
   images: ExportImage[]
 }
 
-type OctopusPSDConverterGeneralOptions = {
+type OctopusConverterOptions = {
+  sourceDesign: SourceDesign
   designId?: string
   logger?: Logger
-}
-
-type OctopusPSDConverterOptions = OctopusPSDConverterGeneralOptions & {
-  sourceDesign: SourceDesign
 }
 
 export type ArtboardConversionResult = {
@@ -89,7 +84,7 @@ export class OctopusFigConverter {
   static ARTBOARDS_QUEUE_PARALLELS = 5
   static PARTIAL_UPDATE_INTERVAL = 3000
 
-  constructor(options: OctopusPSDConverterOptions) {
+  constructor(options: OctopusConverterOptions) {
     this._setupLogger(options?.logger)
     setSentry(
       createSentry({
@@ -129,44 +124,16 @@ export class OctopusFigConverter {
     })
   }
 
-  private async _convertArtboardSafe(options: ArtboardConversionOptions) {
-    try {
-      const value = await new ArtboardConverter({ ...options, octopusConverter: this }).convert()
-      return { value, error: null }
-    } catch (error) {
-      logError('Converting Artboard failed', { error })
-      return { value: undefined, error }
-    }
-  }
-
   private async _convertArtboardByIdSafe(
     targetArtboardId: string
   ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
     try {
-      const value = await new ArtboardConverter({
-        targetArtboardId,
-        octopusConverter: this,
-      }).convert()
-
-      return {
-        value,
-        error: null,
-      }
-    } catch (err) {
-      return {
-        value: null,
-        error: err,
-      }
+      const value = await new ArtboardConverter({ targetArtboardId, octopusConverter: this }).convert()
+      return { value, error: null }
+    } catch (error) {
+      return { value: null, error }
     }
   }
-
-  // private async _convertArtboard(options: ArtboardConversionOptions): Promise<ArtboardConversionResult> {
-  //   // const id = options.sourceDesign.artboard.id
-  //   const id = 'TODO_ID'
-  //   const { time, result } = await benchmarkAsync(() => this._convertArtboardSafe(options))
-  //   const { value, error } = result
-  //   return { id, value, error, time }
-  // }
 
   async convertArtboardById(targetArtboardId: string): Promise<ArtboardConversionResult> {
     const { time, result } = await benchmarkAsync(async () => this._convertArtboardByIdSafe(targetArtboardId))
@@ -174,26 +141,16 @@ export class OctopusFigConverter {
     return { id: targetArtboardId, value, error, time }
   }
 
-  private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest']> {
+  private async _exportManifest(
+    exporter: AbstractExporter | null,
+    shouldEmit?: boolean
+  ): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
-    await exporter?.exportManifest?.({ manifest, time })
+    await exporter?.exportManifest?.({ manifest, time }, shouldEmit)
     return manifest
   }
 
   private async _exportArtboard(exporter: AbstractExporter | null, artboard: SourceArtboard): Promise<ArtboardExport> {
-    // const { images: imagesDep } = artboard.dependencies
-    // const artboardImages = this._sourceDesign.images.filter((image) =>
-    //   imagesDep.some((dep) => image.path.includes(dep))
-    // )
-    // const images = await Promise.all(
-    //   artboardImages.map(async (image) => {
-    //     const imageId = path.basename(image.path)
-    //     const rawData = await image.getImageData()
-    //     const imagePath = await exporter?.exportImage?.(image.path, rawData)
-    //     this.octopusManifest.setExportedImage(imageId, { path: imagePath })
-    //     return image
-    //   })
-    // )
     const images: ExportImage[] = [] // TODO
 
     const converted = await this.convertArtboardById(artboard.id)
@@ -246,7 +203,8 @@ export class OctopusFigConverter {
 
     /** Final trigger of manifest save */
     clearInterval(manifestInterval)
-    const manifest = await this._exportManifest(exporter)
+    const SHOULD_EMIT = true
+    const manifest = await this._exportManifest(exporter, SHOULD_EMIT)
 
     /** Trigger finalizer */
     exporter?.finalizeExport?.()

@@ -3,12 +3,12 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
-// import { getBoundsFor } from '../../utils/source'
+import { SourceBounds } from '../../typings/source'
+import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawArtboard, RawLayer } from '../../typings/raw'
-// import type { SourceBounds } from '../../typings/source'
 
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
@@ -66,9 +66,9 @@ export class SourceArtboard extends SourceEntity {
     return this._layers
   }
 
-  // get bounds(): SourceBounds {
-  //   return getBoundsFor(this._rawValue.bounds)
-  // }
+  get bounds(): SourceBounds | null {
+    return getBoundsFor(this._rawValue.absoluteBoundingBox)
+  }
 
   get id(): string {
     return this._rawValue.id ?? SourceArtboard.DEFAULT_ID

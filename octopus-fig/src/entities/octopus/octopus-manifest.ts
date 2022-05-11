@@ -1,14 +1,12 @@
 import path from 'path'
 
-import { asString } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import { SourceArtboard } from '../source/source-artboard'
 
 import type { OctopusFigConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceDesign } from '../source/source-design'
-// import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-// import type { SourceBounds } from '../../typings/source'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
@@ -85,21 +83,12 @@ export class OctopusManifest {
   }
 
   get figVersion(): string {
-    return OctopusManifest.DEFAULT_FIG_VERSION
+    return this._sourceDesign.schemaVersion ?? OctopusManifest.DEFAULT_FIG_VERSION
   }
 
   get name(): string {
-    return asString(this._sourceDesign.designId, OctopusManifest.DEFAULT_FIG_FILENAME)
+    return this._sourceDesign.name ?? OctopusManifest.DEFAULT_FIG_FILENAME
   }
-
-  // private _convertManifestBounds(bounds: SourceBounds) {
-  //   return {
-  //     x: bounds.left,
-  //     y: bounds.top,
-  //     w: bounds.width,
-  //     h: bounds.height,
-  //   }
-  // }
 
   private _convertError(error: Error | null | undefined): Manifest['Error'] | undefined {
     if (!error) return undefined
@@ -111,35 +100,6 @@ export class OctopusManifest {
     }
   }
 
-  // private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
-  //   const entries = traverseAndFind(raw, (obj: unknown) => {
-  //     return Object(obj)?.fontPostScriptName
-  //   })
-  //   return [...new Set(entries)] as string[]
-  // }
-
-  // private get _artboardAssets(): Manifest['Assets'] | null {
-  //   const targetArtboard = this._octopusConverter.sourceDesign.artboard
-  //   const raw = targetArtboard?.raw
-  //   if (!raw) return null
-
-  //   const images: Manifest['AssetImage'][] = this._octopusConverter.sourceDesign.images.map((image) => {
-  //     const path = this.getExportedRelativeImageByName(image.name)
-  //     const location: Manifest['ResourceLocation'] =
-  //       typeof path === 'string' ? { type: 'LOCAL_RESOURCE', path } : { type: 'TRANSIENT' }
-  //     return { location, refId: image.name }
-  //   })
-
-  //   const fonts: Manifest['AssetFont'][] = this._getArtboardAssetsFonts(raw).map((font) => {
-  //     return { location: { type: 'TRANSIENT' }, name: font }
-  //   })
-
-  //   return {
-  //     ...(images.length ? { images } : null),
-  //     ...(fonts.length ? { fonts } : null),
-  //   }
-  // }
-
   get pages(): Manifest['Page'][] {
     return this._sourceDesign.pages.map((page) => ({
       id: page.id,
@@ -148,11 +108,20 @@ export class OctopusManifest {
     }))
   }
 
+  private _getStatus(source: SourceArtboard): Manifest['Status'] {
+    const status = this.getExportedArtboardById(source.id)
+    const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
+    return {
+      value: statusValue,
+      error: this._convertError(status?.error),
+      time: status?.time ?? undefined,
+    }
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
-
-    const status = this.getExportedArtboardById(id)
-    const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
+    const bounds = source.bounds ?? undefined
+    const status = this._getStatus(source)
 
     const path = this.getExportedArtboardRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
@@ -160,24 +129,19 @@ export class OctopusManifest {
     return {
       id,
       name: source.name,
-      status: {
-        value: statusValue,
-        error: this._convertError(status?.error),
-        time: status?.time ?? undefined,
-      },
-      // bounds,
-      dependencies: [],
-      assets: {},
-      location,
       role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD',
+      status,
+      bounds,
+      dependencies: [],
+      assets: {}, // TODO
+      location,
     }
   }
 
   get components(): Manifest['Component'][] {
-    const components: SourceArtboard[] = []
-    this._sourceDesign.pages.forEach((page) => page.children.forEach((elem) => components.push(elem)))
-
-    return components.map((component) => this._getArtboard(component))
+    return this._sourceDesign.pages
+      .reduce((artboards, page) => push(artboards, ...page.children), [])
+      .map((artboard) => this._getArtboard(artboard))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {

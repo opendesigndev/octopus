@@ -20,6 +20,7 @@ type SourceDesignOptions = {
 }
 
 export class SourceDesign extends SourceEntity {
+  protected _rawValue: RawDesign
   private _designId: string
   private _pages: SourcePage[]
   private _images: SourceImage[]
@@ -33,6 +34,14 @@ export class SourceDesign extends SourceEntity {
 
   get designId(): string {
     return this._designId
+  }
+
+  get schemaVersion(): string | undefined {
+    return this._rawValue.schemaVersion !== undefined ? String(this._rawValue.schemaVersion) : undefined
+  }
+
+  get name(): string | undefined {
+    return this._rawValue.name
   }
 
   get pages(): SourcePage[] {

@@ -17,10 +17,24 @@ export class SourcePage extends SourceEntity {
     this._pasteboard = pasteboard
   }
 
+  private _initPasteboard(children: RawLayer[]): SourceArtboard | null {
+    if (children.length === 0) return null
+    const IS_PASTEBOARD = true
+    return new SourceArtboard(
+      {
+        ...this._rawValue,
+        id: `${this.id}:pasteboard`,
+        name: `${this.name}:pasteboard`,
+        type: 'FRAME',
+        children,
+      },
+      IS_PASTEBOARD
+    )
+  }
+
   private _initArtboards(): { artboards: SourceArtboard[]; pasteboard: SourceArtboard | null } {
     const frames: RawLayerFrame[] = []
     const rest: RawLayer[] = []
-
     this._rawValue?.children?.forEach((element) => {
       if (element.type === 'FRAME') {
         frames.push(element)
@@ -28,22 +42,8 @@ export class SourcePage extends SourceEntity {
         rest.push(element)
       }
     })
-
-    const artboards: SourceArtboard[] = frames.map((frame) => new SourceArtboard(frame))
-    const pasteboard: SourceArtboard | null =
-      rest.length > 0
-        ? new SourceArtboard(
-            {
-              ...this._rawValue,
-              type: 'FRAME',
-              children: rest,
-              id: `${this.id}:pasteboard`,
-              name: `${this.name}:pasteboard`,
-            },
-            true
-          )
-        : null
-
+    const artboards = frames.map((frame) => new SourceArtboard(frame))
+    const pasteboard = this._initPasteboard(rest)
     return { artboards, pasteboard }
   }
 

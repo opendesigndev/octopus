@@ -9,7 +9,7 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
 
-  exportManifest(_manifest: DesignConversionResult): Promise<unknown> {
+  exportManifest(_manifest: DesignConversionResult, _shouldEmit?: boolean): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
   }
 
