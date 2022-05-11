@@ -1,8 +1,5 @@
-import path from 'path'
-
-import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
 import { Queue, SafeResult } from '@avocode/octopus-common/dist/utils/queue'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
@@ -19,7 +16,7 @@ import { logError } from './services/instances/misc'
 import { set as setSentry } from './services/instances/sentry'
 import { SourceFileReader } from './services/readers/source-file-reader'
 
-import type { SourceDesign, SourceImage } from './entities/source/source-design'
+import type { SourceDesign } from './entities/source/source-design'
 import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
@@ -37,7 +34,7 @@ type ConvertDesignOptions = {
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
   artboards: ArtboardConversionResult[]
-  images: SourceImage[]
+  images: ExportImage[]
 }
 
 type OctopusPSDConverterGeneralOptions = {
@@ -227,44 +224,39 @@ export class OctopusFigConverter {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
     if (exporter == null) return null
 
+    this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
+
+    // /** Pass whole SourceDesign entity into exporter - mainly for dev purposes */
+    // exporter?.exportSourceDesign?.(this._sourceDesign)
+
     /** Init artboards queue */
     const queue = this._initArtboardQueue(exporter)
 
-    this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
-
-    /** First Manifest save  */
+    /** Init partial update */
     this._exportManifest(exporter)
-
-    /** Images */
-    const images = await Promise.all(
-      this._sourceDesign.images.map(async (image) => {
-        const imageId = path.basename(image.path)
-        const imagePath = await rejectTo(exporter?.exportImage?.(image.name, image.path))
-        if (typeof imagePath === 'string') {
-          this.octopusManifest.setExportedImage(imageId, imagePath)
-        }
-        return image
-      })
+    const manifestInterval = setInterval(
+      async () => this._exportManifest(exporter),
+      OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
     )
 
-    // /** Artboards */
-    // const artboards = await Promise.all(this._sourceDesign.pages.artboards.map(async (artboard) => {}))
+    /** Enqueue all artboards */
+    const allConverted = await Promise.all(this._sourceDesign.artboards.map((artboard) => queue.exec(artboard)))
 
-    // const artboardResult = await this._convertArtboard({ sourceDesign: this._sourceDesign })
-    // const artboardPath = await exporter?.exportArtboard?.(artboardResult)
-    // const { time, error } = artboardResult
-    // this.octopusManifest.setExportedArtboard(artboardResult.id, { path: artboardPath, time, error })
-    const artboards: ArtboardConversionResult[] = [] // TODO
+    /** At this moment all artboards + dependencies should be converted and exported */
 
-    /** Final trigger of Manifest save */
+    /** Final trigger of manifest save */
+    clearInterval(manifestInterval)
     const manifest = await this._exportManifest(exporter)
 
     /** Trigger finalizer */
     exporter?.finalizeExport?.()
 
+    /** Return transient outputs */
+    const images = [...new Set(allConverted.reduce((images, converted) => push(images, ...converted.images), []))]
+    const artboards = allConverted.map((converted) => converted.artboard)
+
     return {
       manifest,
-      // artboards: [artboardResult],
       artboards,
       images,
     }

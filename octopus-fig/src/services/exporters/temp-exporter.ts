@@ -2,6 +2,7 @@ import EventEmitter from 'events'
 import path from 'path'
 
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
@@ -22,8 +23,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
-  static SOURCE_NAME = 'source.json'
-  static OCTOPUS_NAME = 'octopus.json'
+  static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
   static MANIFEST_NAME = 'octopus-manifest.json'
 
   constructor(options: TempExporterOptions) {
@@ -68,14 +68,12 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    const octopusPath = await this._save(TempExporter.OCTOPUS_NAME, this._stringify(artboard.value))
-    const sourcePath = path.join(await this._outputDir, TempExporter.SOURCE_NAME)
+    const octopusPath = await this._save(TempExporter.OCTOPUS_NAME(artboard.id), this._stringify(artboard.value))
     const result = {
       id: artboard.id,
       time: artboard.time,
       error: artboard.error,
       octopusPath,
-      sourcePath,
     }
     this.emit('octopus:artboard', result)
     return octopusPath

@@ -21,8 +21,8 @@ async function convert() {
   await converter.convertDesign({ exporter })
   await exporter.completed()
 
-  console.log(`Input: ${filePath}`)
-  console.log(`Output: ${testDir}`)
+  console.info(`Input: ${filePath}`)
+  console.info(`Output: ${testDir}`)
 }
 
 convert()

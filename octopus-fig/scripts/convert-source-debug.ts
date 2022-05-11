@@ -30,7 +30,7 @@ export async function convertDesign({
   shouldRender = process.env.CONVERT_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const outputDir = path.join(await getPkgLocation(), 'workdir')
-  const designId = `${timestamp()}-${path.basename(location, '.psd')}`
+  const designId = `${timestamp()}-${path.basename(location, '.json')}`
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
@@ -43,13 +43,13 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.log(`\n${chalk.yellow('Artboard')} ${location} ${status}`)
-    console.log(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
-    console.log(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
+    console.info(`\n${chalk.yellow('Artboard')} ${location} ${status}`)
+    console.info(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
+    console.info(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })
 
   exporter.on('octopus:manifest', (manifest: string) => {
-    console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n\n`)
+    console.info(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
   const reader = new SourceFileReader({ path: location, designId })

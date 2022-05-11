@@ -2,6 +2,7 @@ import os from 'os'
 import path from 'path'
 
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
@@ -20,7 +21,7 @@ export class LocalExporter implements AbstractExporter {
   _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
-  static OCTOPUS_NAME = 'octopus.json'
+  static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
   static MANIFEST_NAME = 'octopus-manifest.json'
 
   constructor(options: LocalExporterOptions) {
@@ -64,7 +65,7 @@ export class LocalExporter implements AbstractExporter {
 
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))
+    return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), this._stringify(artboard.value))
   }
 
   async exportImage(name: string, location: string): Promise<string> {

@@ -1,3 +1,5 @@
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
 import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
 import { SourcePage } from './source-page'
@@ -50,9 +52,7 @@ export class SourceDesign extends SourceEntity {
   }
 
   get artboards(): SourceArtboard[] {
-    const artboards: SourceArtboard[] = []
-    this._pages.forEach((page) => artboards.concat(page.children))
-    return artboards
+    return this._pages.reduce((artboards, page) => push(artboards, ...page.children), [])
   }
 
   getArtboardById(id: string): SourceArtboard | null {

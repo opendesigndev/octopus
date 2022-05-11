@@ -55,8 +55,7 @@ export class OctopusArtboard {
   // }
 
   get id(): string {
-    return 'TODO'
-    // return this.sourceArtboard.id
+    return this.sourceArtboard.id
   }
 
   get version(): Promise<string> {
