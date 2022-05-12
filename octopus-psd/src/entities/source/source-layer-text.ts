@@ -15,7 +15,6 @@ type SourceLayerTextOptions = {
 
 export class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawLayerText
-  protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerTextOptions) {
     super(options)

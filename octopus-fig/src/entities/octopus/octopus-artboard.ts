@@ -2,14 +2,11 @@
 // import { OctopusLayerGroup } from './octopus-layer-group'
 // import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
-import { SourceArtboard } from '../source/source-artboard'
-
 import type { OctopusFigConverter } from '../..'
 import type { Octopus } from '../../typings/octopus'
+import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
 // import type { OctopusLayer } from '../../factories/create-octopus-layer'
-// import type { SourceBounds } from '../../typings/source'
-// import type { SourceArtboard } from '../source/source-artboard'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
@@ -49,10 +46,12 @@ export class OctopusArtboard {
     return this._octopusConverter
   }
 
-  // get dimensions(): { width: number; height: number } {
-  //   const { width, height } = this.sourceArtboard.bounds
-  //   return { width, height }
-  // }
+  get dimensions(): Octopus['Dimensions'] | undefined {
+    const bounds = this.sourceArtboard.bounds
+    if (!bounds) return undefined
+    const { width, height } = bounds
+    return { width, height }
+  }
 
   get id(): string {
     return this.sourceArtboard.id
@@ -72,28 +71,28 @@ export class OctopusArtboard {
   //   return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, visible, layers })
   // }
 
-  // get content(): Octopus['Layer'] {
-  //   const id = this.id
-  //   const bounds = this.sourceArtboard.bounds
+  get content(): Octopus['Layer'] {
+    return {} as Octopus['Layer'] // TODO
+    // const id = this.id
+    // const bounds = this.sourceArtboard.bounds
 
-  //   const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
-  //   if (!hasArtboards)
-  //     return this._layers.length > 1
-  //       ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
-  //       : this._getArtboardFromLayer(this._layers[0], bounds)
+    // const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
+    // if (!hasArtboards)
+    //   return this._layers.length > 1
+    //     ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
+    //     : this._getArtboardFromLayer(this._layers[0], bounds)
 
-  //   const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))
-  //   return OctopusLayerGroup.createBackground({ id, layers })
-  // }
+    // const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))
+    // return OctopusLayerGroup.createBackground({ id, layers })
+  }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
     return {
       id: this.id,
       type: 'ARTBOARD',
       version: await this.version,
-      // dimensions: this.dimensions,
-      // content: this.content,
-      content: {} as any,
+      dimensions: this.dimensions,
+      content: this.content,
     } as Octopus['OctopusDocument']
   }
 }

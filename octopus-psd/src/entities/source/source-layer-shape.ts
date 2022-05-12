@@ -17,7 +17,6 @@ type SourceLayerShapeOptions = {
 
 export class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawLayerShape
-  protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)

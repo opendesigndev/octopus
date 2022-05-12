@@ -16,7 +16,6 @@ import type { RawTextStyle } from './text'
 
 export type RawLayer =
   | RawLayerFrame
-  | RawLayerSlice
   | RawLayerRectangle
   | RawLayerLine
   | RawLayerVector
@@ -25,9 +24,10 @@ export type RawLayer =
   | RawLayerStar
   | RawLayerText
 
-export type RawLayerSlice = {
+export type RawSlice = {
   id?: string
   name?: string
+  visible?: boolean
   type?: 'SLICE'
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
@@ -38,6 +38,7 @@ export type RawLayerSlice = {
 export type RawLayerBase = {
   id?: string
   name?: string
+  visible?: boolean
   blendMode?: RawBlendMode
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
@@ -55,7 +56,7 @@ export type RawLayerFrame = RawLayerBase & {
   clipsContent?: boolean
   background?: RawFill[]
   backgroundColor?: RawColor
-  children?: RawLayer[]
+  children?: (RawLayer | RawSlice)[]
 }
 
 export type RawLayerRectangle = RawLayerBase & {
