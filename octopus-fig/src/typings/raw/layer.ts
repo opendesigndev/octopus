@@ -59,41 +59,34 @@ export type RawLayerFrame = RawLayerBase & {
   children?: (RawLayer | RawSlice)[]
 }
 
-export type RawLayerRectangle = RawLayerBase & {
+export type RawLayerShape = RawLayerBase & {
+  fillGeometry?: RawGeometry[]
+  strokeGeometry?: RawGeometry[]
+}
+
+export type RawLayerRectangle = RawLayerShape & {
   type?: 'RECTANGLE'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
 }
 
-export type RawLayerLine = RawLayerBase & {
+export type RawLayerLine = RawLayerShape & {
   type?: 'LINE'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
 }
 
-export type RawLayerVector = RawLayerBase & {
+export type RawLayerVector = RawLayerShape & {
   type?: 'VECTOR'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
 }
 
-export type RawLayerEllipse = RawLayerBase & {
+export type RawLayerEllipse = RawLayerShape & {
   type?: 'ELLIPSE'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
   arcData?: RawArcData
 }
 
-export type RawLayerPolygon = RawLayerBase & {
+export type RawLayerPolygon = RawLayerShape & {
   type?: 'REGULAR_POLYGON'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
 }
 
-export type RawLayerStar = RawLayerBase & {
+export type RawLayerStar = RawLayerShape & {
   type?: 'STAR'
-  fillGeometry?: RawGeometry[]
-  strokeGeometry?: RawGeometry[]
 }
 
 export type RawLayerText = RawLayerBase & {
