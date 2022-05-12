@@ -14,15 +14,7 @@ import type {
 } from './shared'
 import type { RawTextStyle } from './text'
 
-export type RawLayer =
-  | RawLayerFrame
-  | RawLayerRectangle
-  | RawLayerLine
-  | RawLayerVector
-  | RawLayerEllipse
-  | RawLayerPolygon
-  | RawLayerStar
-  | RawLayerText
+export type RawLayer = RawLayerFrame | RawLayerShape | RawLayerText
 
 export type RawSlice = {
   id?: string
@@ -60,33 +52,10 @@ export type RawLayerFrame = RawLayerBase & {
 }
 
 export type RawLayerShape = RawLayerBase & {
+  type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
-}
-
-export type RawLayerRectangle = RawLayerShape & {
-  type?: 'RECTANGLE'
-}
-
-export type RawLayerLine = RawLayerShape & {
-  type?: 'LINE'
-}
-
-export type RawLayerVector = RawLayerShape & {
-  type?: 'VECTOR'
-}
-
-export type RawLayerEllipse = RawLayerShape & {
-  type?: 'ELLIPSE'
   arcData?: RawArcData
-}
-
-export type RawLayerPolygon = RawLayerShape & {
-  type?: 'REGULAR_POLYGON'
-}
-
-export type RawLayerStar = RawLayerShape & {
-  type?: 'STAR'
 }
 
 export type RawLayerText = RawLayerBase & {

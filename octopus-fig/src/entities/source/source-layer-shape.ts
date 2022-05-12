@@ -1,18 +1,28 @@
 import { SourceLayerCommon } from './source-layer-common'
 
-import type { RawLayerRectangle } from '../../typings/raw'
+import type { RawLayerShape } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 
-type SourceLayerRectangleOptions = {
+type SourceLayerShapeOptions = {
   parent: SourceLayerParent
-  rawValue: RawLayerRectangle
+  rawValue: RawLayerShape
 }
 
-export class SourceLayerRectangle extends SourceLayerCommon {
-  protected _rawValue: RawLayerRectangle
+type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
 
-  constructor(options: SourceLayerRectangleOptions) {
+export class SourceLayerShape extends SourceLayerCommon {
+  protected _rawValue: RawLayerShape
+
+  constructor(options: SourceLayerShapeOptions) {
     super(options)
+  }
+
+  get type(): 'SHAPE' {
+    return 'SHAPE'
+  }
+
+  get shapeType(): SourceShapeType | undefined {
+    return this._rawValue.type
   }
 
   // TODO

@@ -28,12 +28,9 @@ export class OctopusLayerBase {
   static DEFAULT_TRANSLATION = [0, 0] as const
 
   static LAYER_TYPE_MAP = {
-    // backgroundLayer: 'MASK_GROUP',
     FRAME: 'GROUP',
-    // shapeLayer: 'SHAPE',
-    // textLayer: 'TEXT',
-    // layer: 'SHAPE',
-    // adjustmentLayer: 'SHAPE',
+    SHAPE: 'SHAPE',
+    TEXT: 'TEXT',
   } as const
 
   constructor(options: OctopusLayerBaseOptions) {

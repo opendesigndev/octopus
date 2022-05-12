@@ -15,5 +15,9 @@ export class SourceLayerText extends SourceLayerCommon {
     super(options)
   }
 
+  get type(): 'TEXT' {
+    return 'TEXT'
+  }
+
   // TODO
 }

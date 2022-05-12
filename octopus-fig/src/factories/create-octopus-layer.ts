@@ -3,14 +3,22 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
+import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import { SourceLayerShape } from '../entities/source/source-layer-shape'
+import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logWarn } from '../services/instances/misc'
 
 import type { SourceLayer } from './create-source-layer'
 
-export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup // TODO | OctopusLayerText | OctopusLayerShape
+export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText
 
-type OctopusLayerBuilders = typeof createOctopusLayerGroup | typeof createOctopusLayerSlice // TODO
+type OctopusLayerBuilders =
+  | typeof createOctopusLayerGroup
+  | typeof createOctopusLayerShape
+  | typeof createOctopusLayerText
+  | typeof createOctopusLayerSlice
 
 type CreateOctopusLayerOptions = {
   layer: SourceLayer
@@ -19,14 +27,9 @@ type CreateOctopusLayerOptions = {
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
   FRAME: createOctopusLayerGroup,
+  SHAPE: createOctopusLayerShape,
+  TEXT: createOctopusLayerText,
   SLICE: createOctopusLayerSlice,
-  RECTANGLE: createOctopusLayerTODO,
-  LINE: createOctopusLayerTODO,
-  VECTOR: createOctopusLayerTODO,
-  ELLIPSE: createOctopusLayerTODO,
-  REGULAR_POLYGON: createOctopusLayerTODO,
-  STAR: createOctopusLayerTODO,
-  TEXT: createOctopusLayerTODO,
 } as const
 
 function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
@@ -34,12 +37,18 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
   return new OctopusLayerGroup({ parent, sourceLayer })
 }
 
-function createOctopusLayerSlice(): null {
-  return null // slices are not part of octopus3 format
+function createOctopusLayerShape({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
+  const sourceLayer = layer as SourceLayerShape
+  return new OctopusLayerShape({ parent, sourceLayer })
 }
 
-function createOctopusLayerTODO(): null {
-  return null
+function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+  const sourceLayer = layer as SourceLayerText
+  return new OctopusLayerText({ parent, sourceLayer })
+}
+
+function createOctopusLayerSlice(): null {
+  return null // slices are not part of octopus3 format
 }
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {

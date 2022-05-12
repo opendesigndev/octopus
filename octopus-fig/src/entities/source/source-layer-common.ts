@@ -6,8 +6,6 @@ import type { SourceLayerFrame } from './source-layer-frame'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerFrame
 
-type SourceLayerType = 'FRAME' | 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'TEXT'
-
 type SourceLayerOptions = {
   parent: SourceLayerParent
   rawValue: RawLayer
@@ -20,10 +18,6 @@ export class SourceLayerCommon extends SourceEntity {
   constructor(options: SourceLayerOptions) {
     super(options.rawValue)
     this._parent = options.parent
-  }
-
-  get type(): SourceLayerType | undefined {
-    return this._rawValue.type
   }
 
   get id(): string | undefined {
