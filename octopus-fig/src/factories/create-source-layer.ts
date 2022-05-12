@@ -7,7 +7,7 @@ import { RawLayer, RawLayerFrame, RawSlice } from '../typings/raw'
 
 export type SourceLayer = SourceLayerFrame // TODO | SourceLayerTODO
 
-type SourceLayerBuilders = typeof createLayerFrame | typeof createLayerTODO // TODO
+type SourceLayerBuilders = typeof createLayerFrame | typeof createLayerSlice | typeof createLayerTODO // TODO
 
 type CreateLayerOptions = {
   layer: RawLayer | RawSlice
@@ -40,7 +40,7 @@ function createLayerTODO({ layer, parent }: CreateLayerOptions): null {
 }
 
 export function createSourceLayer(options: CreateLayerOptions): SourceLayer | null {
-  const type = (Object(options.layer) as RawLayer).type
+  const type = (Object(options.layer) as RawLayer | RawSlice).type
   const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
     logWarn('createSourceLayer: Unknown layer type', { type })

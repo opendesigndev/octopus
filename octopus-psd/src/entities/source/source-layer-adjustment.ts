@@ -13,7 +13,6 @@ type SourceLayerLayerOptions = {
 
 export class SourceLayerAdjustment extends SourceLayerCommon {
   protected _rawValue: RawLayerAdjustment
-  protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerLayerOptions) {
     super(options)

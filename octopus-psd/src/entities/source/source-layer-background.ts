@@ -10,7 +10,6 @@ type SourceLayerBackgroundOptions = {
 
 export class SourceLayerBackground extends SourceLayerCommon {
   protected _rawValue: RawLayerBackground
-  protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerBackgroundOptions) {
     super(options)

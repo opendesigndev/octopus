@@ -6,16 +6,7 @@ import type { SourceLayerFrame } from './source-layer-frame'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerFrame
 
-type SourceLayerType =
-  | 'FRAME'
-  | 'SLICE'
-  | 'RECTANGLE'
-  | 'LINE'
-  | 'VECTOR'
-  | 'ELLIPSE'
-  | 'REGULAR_POLYGON'
-  | 'STAR'
-  | 'TEXT'
+type SourceLayerType = 'FRAME' | 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'TEXT'
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
