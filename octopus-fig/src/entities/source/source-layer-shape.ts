@@ -8,7 +8,7 @@ type SourceLayerShapeOptions = {
   rawValue: RawLayerShape
 }
 
-type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
+type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'BOOLEAN_OPERATION'
 
 export class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawLayerShape

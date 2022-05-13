@@ -22,6 +22,7 @@ type CreateLayerOptions = {
 
 const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
   FRAME: createLayerFrame,
+  BOOLEAN_OPERATION: createLayerShape,
   ELLIPSE: createLayerShape,
   LINE: createLayerShape,
   RECTANGLE: createLayerShape,

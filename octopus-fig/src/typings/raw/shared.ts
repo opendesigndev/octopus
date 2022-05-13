@@ -54,6 +54,8 @@ export type RawConstraints = {
 
 export type RawWindingRule = 'NONZERO' | 'EVENODD'
 
+export type RawBooleanOperation = 'UNION' | 'SUBTRACT' | 'INTERSECT' | 'EXCLUDE'
+
 export type RawGeometry = {
   path?: string
   windingRule?: RawWindingRule

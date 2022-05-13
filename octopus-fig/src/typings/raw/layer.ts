@@ -4,6 +4,7 @@ import type {
   RawAlign,
   RawArcData,
   RawBlendMode,
+  RawBooleanOperation,
   RawBoundingBox,
   RawColor,
   RawConstraints,
@@ -51,11 +52,19 @@ export type RawLayerFrame = RawLayerBase & {
   children?: (RawLayer | RawSlice)[]
 }
 
-export type RawLayerShape = RawLayerBase & {
+export type RawLayerShape = RawLayerShapeSimple | RawLayerShapeBooleanOp
+
+export type RawLayerShapeSimple = RawLayerBase & {
   type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
   arcData?: RawArcData
+}
+
+export type RawLayerShapeBooleanOp = RawLayerBase & {
+  type?: 'BOOLEAN_OPERATION'
+  booleanOperation?: RawBooleanOperation
+  children?: RawLayerShape[]
 }
 
 export type RawLayerText = RawLayerBase & {

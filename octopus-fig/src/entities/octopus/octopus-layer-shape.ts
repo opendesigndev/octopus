@@ -18,7 +18,7 @@ export class OctopusLayerShape extends OctopusLayerBase {
   }
 
   private get _shape(): Octopus['Shape'] {
-    return 'TODO' as any // TODO
+    return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
