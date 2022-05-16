@@ -17,8 +17,34 @@ export class OctopusLayerShape extends OctopusLayerBase {
     super(options)
   }
 
+  get sourceLayer(): SourceLayerShape {
+    return this._sourceLayer
+  }
+
+  private get _fill(): Octopus['Fill'] {
+    return {
+      type: 'COLOR', // TODO
+      // visible, // TODO
+      // blendMode, // TODO
+      color: { r: 1, g: 0, b: 0, a: 1 }, // TODO
+    }
+  }
+
+  private get _path(): Octopus['PathLike'] {
+    if (this.sourceLayer.shapeType !== 'RECTANGLE') return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
+    return {
+      type: 'RECTANGLE',
+      rectangle: { x0: 0, y0: 0, x1: 50, y1: 50 }, // TODO
+    }
+  }
+
   private get _shape(): Octopus['Shape'] {
-    return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
+    return {
+      path: this._path,
+      // fillRule: components['schemas']['FillRule'] // TODO
+      fills: [this._fill],
+      // strokes: components['schemas']['VectorStroke'][] // TODO
+    }
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
