@@ -1,11 +1,10 @@
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
-import { Queue, SafeResult } from '@avocode/octopus-common/dist/utils/queue'
+import { Queue } from '@avocode/octopus-common/dist/utils/queue'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
-import { SourceArtboard } from './entities/source/source-artboard'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { TempExporter } from './services/exporters/temp-exporter'
@@ -15,11 +14,13 @@ import { logger, set as setLogger } from './services/instances/logger'
 import { set as setSentry } from './services/instances/sentry'
 import { SourceFileReader } from './services/readers/source-file-reader'
 
+import type { SourceArtboard } from './entities/source/source-artboard'
 import type { SourceDesign } from './entities/source/source-design'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
+import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
 export { LocalExporter, TempExporter }

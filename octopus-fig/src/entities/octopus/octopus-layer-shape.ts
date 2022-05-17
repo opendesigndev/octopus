@@ -36,6 +36,7 @@ export class OctopusLayerShape extends OctopusLayerBase {
   }
 
   private get _path(): Octopus['PathLike'] {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (this.sourceLayer.shapeType !== 'RECTANGLE') return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
     return this._pathRectangle
   }

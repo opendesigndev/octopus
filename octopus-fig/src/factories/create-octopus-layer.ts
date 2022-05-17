@@ -1,15 +1,15 @@
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
-import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
-import { SourceLayerFrame } from '../entities/source/source-layer-frame'
-import { SourceLayerShape } from '../entities/source/source-layer-shape'
-import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logWarn } from '../services/instances/misc'
 
+import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
+import type { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import type { SourceLayerShape } from '../entities/source/source-layer-shape'
+import type { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText

@@ -1,10 +1,10 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
 import { SourcePage } from './source-page'
 
 import type { RawPage, RawDesign } from '../../typings/raw'
+import type { SourceArtboard } from './source-artboard'
 
 export type SourceImage = {
   name: string

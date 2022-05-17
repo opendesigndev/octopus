@@ -1,8 +1,9 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { createOctopusLayers, OctopusLayer } from '../../factories/create-octopus-layer'
+import { createOctopusLayers } from '../../factories/create-octopus-layer'
 
 import type { OctopusFigConverter } from '../..'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'

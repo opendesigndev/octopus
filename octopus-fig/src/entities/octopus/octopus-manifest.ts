@@ -2,10 +2,9 @@ import path from 'path'
 
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { SourceArtboard } from '../source/source-artboard'
-
 import type { OctopusFigConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
+import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusManifestOptions = {
