@@ -1,8 +1,8 @@
-import { getSizeFor } from '../../utils/source'
+import { getGeometryFor, getSizeFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
 import type { RawLayerShape } from '../../typings/raw'
-import type { SourceSize } from '../../typings/source'
+import type { SourceGeometry, SourceSize } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerShapeOptions = {
@@ -29,6 +29,14 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get size(): SourceSize | null {
     return getSizeFor(this._rawValue.size)
+  }
+
+  get fillGeometry(): SourceGeometry[] {
+    return getGeometryFor(this._rawValue.fillGeometry)
+  }
+
+  get strokeGeometry(): SourceGeometry[] {
+    return getGeometryFor(this._rawValue.strokeGeometry)
   }
 
   // TODO

@@ -1,6 +1,8 @@
+import { DEFAULTS } from '../../utils/defaults'
 import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
+import type { SourceGeometry } from '../../typings/source'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
@@ -35,16 +37,55 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
   }
 
-  private get _path(): Octopus['PathLike'] {
+  private get _sourceShape(): 'LINE' | 'TRIANGLE' | 'RECTANGLE' | 'POLYGON' | 'ELLIPSE' | undefined {
+    switch (this.sourceLayer.shapeType) {
+      case 'RECTANGLE':
+        return 'RECTANGLE'
+      case 'LINE':
+        return 'LINE'
+      case 'ELLIPSE':
+        return 'ELLIPSE'
+      case 'REGULAR_POLYGON':
+      case 'STAR':
+        return 'POLYGON'
+      default:
+        return undefined
+    }
+  }
+
+  private get _firstGeometry(): SourceGeometry | undefined {
+    return [...this.sourceLayer.fillGeometry, ...this.sourceLayer.strokeGeometry][0]
+  }
+
+  private get _geometry(): Octopus['PathGeometry'] {
+    return this._firstGeometry?.path ?? DEFAULTS.EMPTY_PATH
+  }
+
+  private get _pathPath(): Octopus['Path'] {
+    const meta = { sourceShape: this._sourceShape }
+    const geometry = this._geometry
+    return { type: 'PATH', meta, geometry }
+  }
+
+  private get _pathBool(): Octopus['CompoundPath'] {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (this.sourceLayer.shapeType !== 'RECTANGLE') return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
-    return this._pathRectangle
+    return { type: 'COMPOUND', todo: 'TODO' } as any // TODO
+  }
+
+  private get _path(): Octopus['PathLike'] {
+    if (this.sourceLayer.shapeType === 'RECTANGLE') return this._pathRectangle
+    if (this.sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool
+    return this._pathPath
+  }
+
+  private get _fillRule(): Octopus['FillRule'] {
+    return this._firstGeometry?.fillRule ?? DEFAULTS.WINDING_RULE
   }
 
   private get _shape(): Octopus['Shape'] {
     return {
       path: this._path,
-      // fillRule: components['schemas']['FillRule'] // TODO
+      fillRule: this._fillRule,
       fills: [this._fill],
       // strokes: components['schemas']['VectorStroke'][] // TODO
     }

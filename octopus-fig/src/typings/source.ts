@@ -11,3 +11,10 @@ export type SourceSize = {
 }
 
 export type SourceTransform = [number, number, number, number, number, number]
+
+export type SourceFillRule = 'EVEN_ODD' | 'NON_ZERO'
+
+export type SourceGeometry = {
+  path: string
+  fillRule: SourceFillRule
+}

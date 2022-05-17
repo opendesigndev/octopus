@@ -52,7 +52,7 @@ export type RawLayerFrame = RawLayerBase & {
   children?: (RawLayer | RawSlice)[]
 }
 
-export type RawLayerShape = RawLayerShapeSimple | RawLayerShapeBooleanOp
+export type RawLayerShape = RawLayerShapeSimple & RawLayerShapeBooleanOp
 
 export type RawLayerShapeSimple = RawLayerBase & {
   type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'

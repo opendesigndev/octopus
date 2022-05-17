@@ -1,8 +1,10 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import type { RawBoundingBox, RawSize, RawTransform } from '../typings/raw'
-import type { SourceBounds, SourceSize, SourceTransform } from '../typings/source'
+import { DEFAULTS } from './defaults'
+
+import type { RawBoundingBox, RawGeometry, RawSize, RawTransform, RawWindingRule } from '../typings/raw'
+import type { SourceBounds, SourceFillRule, SourceGeometry, SourceSize, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)
@@ -27,4 +29,15 @@ export function getTransformFor(value: RawTransform | undefined): SourceTransfor
   const [a, c, tx] = m1
   const [b, d, ty] = m2
   return [a, b, c, d, tx, ty]
+}
+
+function mapFillRule(rule: RawWindingRule | undefined): SourceFillRule {
+  return rule === 'EVENODD' ? 'EVEN_ODD' : 'NON_ZERO'
+}
+
+export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
+  return values.map((value) => ({
+    path: value.path ?? DEFAULTS.EMPTY_PATH,
+    fillRule: mapFillRule(value.windingRule),
+  }))
 }
