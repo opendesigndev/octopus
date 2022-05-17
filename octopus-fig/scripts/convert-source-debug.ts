@@ -16,11 +16,9 @@ type ConvertAllOptions = {
 
 type ConvertedArtboard = {
   id: string
-  name: string
   time: number
   error: Error | null
   octopusPath: string
-  sourcePath: string
 }
 
 dotenv.config()
@@ -47,13 +45,13 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.info(`\n${chalk.yellow('Artboard')} ${location} ${status}`)
+    console.info(`\n${chalk.yellow('Artboard')} ${artboard.id} ${status}`)
     console.info(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
     console.info(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })
 
-  exporter.on('octopus:manifest', (manifest: string) => {
-    console.info(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
+  exporter.on('octopus:manifest', (manifestPath: string) => {
+    console.info(`\n${chalk.yellow(`Manifest:`)} file://${manifestPath}\n\n`)
   })
 
   const reader = new SourceFileReader({ path: location, designId })

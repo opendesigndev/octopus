@@ -1,4 +1,5 @@
 import { DEFAULTS } from '../../utils/defaults'
+import { simplifyPathData } from '../../utils/paper'
 import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
@@ -58,7 +59,7 @@ export class OctopusLayerShape extends OctopusLayerBase {
   }
 
   private get _geometry(): Octopus['PathGeometry'] {
-    return this._firstGeometry?.path ?? DEFAULTS.EMPTY_PATH
+    return simplifyPathData(this._firstGeometry?.path ?? DEFAULTS.EMPTY_PATH)
   }
 
   private get _pathPath(): Octopus['Path'] {
