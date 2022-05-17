@@ -1,6 +1,11 @@
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { SourceDesign } from '../../entities/source/source-design'
 
 export abstract class AbstractExporter {
+  exportSourceDesign?(_design: SourceDesign): Promise<unknown> {
+    throw new Error('Subclass of "Exporter" has no "exportSourceDesign" method implemented!')
+  }
+
   exportArtboard(_artboard: ArtboardConversionResult): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
   }

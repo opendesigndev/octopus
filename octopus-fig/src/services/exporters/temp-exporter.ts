@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { SourceDesign } from '../../entities/source/source-design'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -25,6 +26,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
   static MANIFEST_NAME = 'octopus-manifest.json'
+  static SOURCE_NAME = 'source.json'
 
   constructor(options: TempExporterOptions) {
     super()
@@ -64,6 +66,12 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   getBasePath(): Promise<string> {
     return this._outputDir
+  }
+
+  async exportSourceDesign(design: SourceDesign): Promise<string> {
+    const sourcePath = await this._save(TempExporter.SOURCE_NAME, this._stringify(design.raw))
+    this.emit('source:design', sourcePath)
+    return sourcePath
   }
 
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {

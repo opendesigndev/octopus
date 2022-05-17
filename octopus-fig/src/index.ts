@@ -183,8 +183,8 @@ export class OctopusFigConverter {
 
     this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
 
-    // /** Pass whole SourceDesign entity into exporter - mainly for dev purposes */
-    // exporter?.exportSourceDesign?.(this._sourceDesign)
+    /** Pass whole SourceDesign entity into exporter - mainly for dev purposes */
+    exporter?.exportSourceDesign?.(this._sourceDesign)
 
     /** Init artboards queue */
     const queue = this._initArtboardQueue(exporter)

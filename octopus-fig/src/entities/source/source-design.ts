@@ -9,8 +9,6 @@ import type { RawPage, RawDesign } from '../../typings/raw'
 export type SourceImage = {
   name: string
   path: string
-  width?: number
-  height?: number
 }
 
 type SourceDesignOptions = {
@@ -30,6 +28,10 @@ export class SourceDesign extends SourceEntity {
     this._pages = options.raw.document?.children?.map((page) => new SourcePage(page)) ?? []
     this._images = options.images
     this._designId = options.designId
+  }
+
+  get raw(): RawDesign {
+    return this._rawValue
   }
 
   get designId(): string {

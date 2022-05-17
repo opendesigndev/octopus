@@ -3,6 +3,7 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import chalk from 'chalk'
+import kebabCase from 'lodash/kebabCase'
 
 import { getPkgLocation } from './pkg-location'
 
@@ -14,11 +15,13 @@ export type RenderResult = {
 
 async function render(id: string, octopusPath: string) {
   const octopusDir = path.dirname(octopusPath)
-  const renderPath = path.join(octopusDir, `render-${id}.png`)
+  const renderPath = path.join(octopusDir, `render-${kebabCase(id)}.png`)
   const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
-    execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
+    execSync(`${process.env.RENDERING_PATH} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`, {
+      stdio: 'ignore',
+    })
     return { value: renderPath, error: null }
   } catch (error) {
     console.error(chalk.red(`Rendering failed while processing ${octopusPath}`))

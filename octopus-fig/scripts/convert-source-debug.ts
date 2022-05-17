@@ -33,6 +33,10 @@ export async function convertDesign({
   const designId = `${timestamp()}-${path.basename(location, '.json')}`
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
+  exporter.on('source:design', (sourcePath: string) => {
+    console.info(`\n${chalk.yellow('Source: ')} file://${sourcePath}`)
+  })
+
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? '❌' : '✅'
     const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
