@@ -39,6 +39,10 @@ export class SourceLayerShape extends SourceLayerCommon {
     return getGeometryFor(this._rawValue.strokeGeometry)
   }
 
+  get cornerRadius(): number | undefined {
+    return this._rawValue.cornerRadius
+  }
+
   // TODO
 
   // @firstCallMemo()

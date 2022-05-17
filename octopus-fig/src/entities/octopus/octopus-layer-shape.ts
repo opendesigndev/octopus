@@ -72,8 +72,12 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return { type: 'COMPOUND', todo: 'TODO' } as any // TODO
   }
 
+  private get _isRectangle(): boolean {
+    return this.sourceLayer.shapeType === 'RECTANGLE' && !this.sourceLayer.cornerRadius
+  }
+
   private get _path(): Octopus['PathLike'] {
-    if (this.sourceLayer.shapeType === 'RECTANGLE') return this._pathRectangle
+    if (this._isRectangle) return this._pathRectangle
     if (this.sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool
     return this._pathPath
   }

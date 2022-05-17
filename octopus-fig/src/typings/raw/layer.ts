@@ -59,6 +59,8 @@ export type RawLayerShapeSimple = RawLayerBase & {
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
   arcData?: RawArcData
+  cornerRadius?: number
+  rectangleCornerRadii?: number[]
 }
 
 export type RawLayerShapeBooleanOp = RawLayerBase & {
