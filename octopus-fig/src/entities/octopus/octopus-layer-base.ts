@@ -3,6 +3,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logWarn } from '../../services/instances/misc'
+import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -64,13 +65,9 @@ export class OctopusLayerBase {
   //   return convertBlendMode(this._sourceLayer.blendMode)
   // }
 
-  get layerTranslation(): readonly [number, number] {
-    return OctopusLayerBase.DEFAULT_TRANSLATION
+  get transform(): number[] {
+    return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
-
-  // get transform(): number[] {
-  //   return createDefaultTranslationMatrix(this.layerTranslation)
-  // }
 
   // get opacity(): number {
   //   return this._sourceLayer.opacity
@@ -108,7 +105,7 @@ export class OctopusLayerBase {
       id: this.id,
       name: this.name,
       type,
-      // transform: this.transform,
+      transform: this.transform,
       visible: this.visible,
       // blendMode: this.blendMode,
       // opacity: this.opacity,

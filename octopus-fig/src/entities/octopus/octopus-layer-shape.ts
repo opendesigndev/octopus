@@ -30,12 +30,14 @@ export class OctopusLayerShape extends OctopusLayerBase {
     }
   }
 
+  private get _pathRectangle(): Octopus['PathRectangle'] {
+    const { x, y } = this.sourceLayer.size ?? { x: 0, y: 0 }
+    return { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
+  }
+
   private get _path(): Octopus['PathLike'] {
     if (this.sourceLayer.shapeType !== 'RECTANGLE') return ('TODO - ' + this._sourceLayer.shapeType) as any // TODO
-    return {
-      type: 'RECTANGLE',
-      rectangle: { x0: 0, y0: 0, x1: 50, y1: 50 }, // TODO
-    }
+    return this._pathRectangle
   }
 
   private get _shape(): Octopus['Shape'] {

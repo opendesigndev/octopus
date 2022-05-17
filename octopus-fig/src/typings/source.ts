@@ -4,3 +4,10 @@ export type SourceBounds = {
   width: number
   height: number
 }
+
+export type SourceSize = {
+  x: number
+  y: number
+}
+
+export type SourceTransform = [number, number, number, number, number, number]

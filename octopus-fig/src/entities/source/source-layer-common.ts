@@ -3,6 +3,8 @@ import { SourceEntity } from './source-entity'
 
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceLayerFrame } from './source-layer-frame'
+import { SourceTransform } from '../../typings/source'
+import { getTransformFor } from '../../utils/source'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerFrame
 
@@ -69,6 +71,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendMode
+  }
+
+  get transform(): SourceTransform | null {
+    return getTransformFor(this._rawValue.relativeTransform)
   }
 
   // @firstCallMemo()

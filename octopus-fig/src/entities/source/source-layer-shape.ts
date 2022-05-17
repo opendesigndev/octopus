@@ -1,6 +1,8 @@
+import { getSizeFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
 import type { RawLayerShape } from '../../typings/raw'
+import type { SourceSize } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerShapeOptions = {
@@ -23,6 +25,10 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get shapeType(): SourceShapeType | undefined {
     return this._rawValue.type
+  }
+
+  get size(): SourceSize | null {
+    return getSizeFor(this._rawValue.size)
   }
 
   // TODO
