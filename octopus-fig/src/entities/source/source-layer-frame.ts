@@ -34,11 +34,6 @@ export class SourceLayerFrame extends SourceLayerCommon {
     return 'FRAME'
   }
 
-  // TODO
-  // get bounds(): SourceBounds {
-  //   return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : this._parent.bounds
-  // }
-
   get layers(): SourceLayer[] {
     return this._layers
   }

@@ -5,8 +5,9 @@ import { SourceEntity } from './source-entity'
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceTransform } from '../../typings/source'
 import type { SourceLayerFrame } from './source-layer-frame'
+import type { SourceLayerShape } from './source-layer-shape'
 
-export type SourceLayerParent = SourceArtboard | SourceLayerFrame
+export type SourceLayerParent = SourceArtboard | SourceLayerFrame | SourceLayerShape
 
 type SourceLayerOptions = {
   parent: SourceLayerParent

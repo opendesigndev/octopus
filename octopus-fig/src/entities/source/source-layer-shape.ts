@@ -1,7 +1,10 @@
+import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
 import { getGeometryFor, getSizeFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
-import type { RawLayerShape } from '../../typings/raw'
+import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
 import type { SourceGeometry, SourceSize } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
@@ -14,9 +17,20 @@ type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_PO
 
 export class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawLayerShape
+  private _layers: SourceLayerShape[]
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
+    this._layers = this._initLayers()
+  }
+
+  private _initLayers() {
+    const layers = asArray(this._rawValue?.children)
+    return layers.reduce(
+      (layers: SourceLayerShape[], layer: RawLayerShape) =>
+        push(layers, new SourceLayerShape({ parent: this, rawValue: layer })),
+      []
+    )
   }
 
   get type(): 'SHAPE' {
@@ -41,6 +55,14 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get cornerRadius(): number | undefined {
     return this._rawValue.cornerRadius
+  }
+
+  get layers(): SourceLayerShape[] {
+    return this._layers
+  }
+
+  get booleanOperation(): RawBooleanOperation | undefined {
+    return this._rawValue.booleanOperation
   }
 
   // TODO

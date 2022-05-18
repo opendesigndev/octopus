@@ -24,18 +24,19 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return this._sourceLayer
   }
 
-  private get _fill(): Octopus['Fill'] {
-    return {
-      type: 'COLOR', // TODO
-      // visible, // TODO
-      // blendMode, // TODO
-      color: { r: 1, g: 0, b: 0, a: 1 }, // TODO
-    }
+  private get _fills(): Octopus['Fill'][] {
+    return [
+      {
+        type: 'COLOR', // TODO
+        // visible, // TODO
+        // blendMode, // TODO
+        color: { r: 1, g: 0, b: 0, a: 1 }, // TODO
+      },
+    ]
   }
 
-  private get _pathRectangle(): Octopus['PathRectangle'] {
-    const { x, y } = this.sourceLayer.size ?? { x: 0, y: 0 }
-    return { type: 'RECTANGLE', rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
+  private get _strokes(): Octopus['VectorStroke'][] {
+    return [] // TODO
   }
 
   private get _sourceShape(): 'LINE' | 'TRIANGLE' | 'RECTANGLE' | 'POLYGON' | 'ELLIPSE' | undefined {
@@ -54,45 +55,65 @@ export class OctopusLayerShape extends OctopusLayerBase {
     }
   }
 
-  private get _firstGeometry(): SourceGeometry | undefined {
-    return [...this.sourceLayer.fillGeometry, ...this.sourceLayer.strokeGeometry][0]
+  get transform(): number[] {
+    return DEFAULTS.TRANSFORM
   }
 
-  private get _geometry(): Octopus['PathGeometry'] {
-    return simplifyPathData(this._firstGeometry?.path ?? DEFAULTS.EMPTY_PATH)
+  private _transform(sourceLayer: SourceLayerShape): number[] {
+    return sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
-  private get _pathPath(): Octopus['Path'] {
+  private _firstGeometry(sourceLayer: SourceLayerShape): SourceGeometry | undefined {
+    return [...sourceLayer.fillGeometry, ...sourceLayer.strokeGeometry][0]
+  }
+
+  private _geometry(sourceLayer: SourceLayerShape): Octopus['PathGeometry'] {
+    return simplifyPathData(this._firstGeometry(sourceLayer)?.path ?? DEFAULTS.EMPTY_PATH)
+  }
+
+  private _isRectangle(sourceLayer: SourceLayerShape): boolean {
+    return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadius
+  }
+
+  private _pathRectangle(sourceLayer: SourceLayerShape): Octopus['PathRectangle'] {
+    const visible = sourceLayer.visible
+    const transform = this._transform(sourceLayer)
+    const { x, y } = sourceLayer.size ?? { x: 0, y: 0 }
+    return { type: 'RECTANGLE', visible, transform, rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
+  }
+
+  private _pathPath(sourceLayer: SourceLayerShape): Octopus['Path'] {
+    const visible = sourceLayer.visible
+    const transform = this._transform(sourceLayer)
     const meta = { sourceShape: this._sourceShape }
-    const geometry = this._geometry
-    return { type: 'PATH', meta, geometry }
+    const geometry = this._geometry(sourceLayer)
+    return { type: 'PATH', visible, transform, meta, geometry }
   }
 
-  private get _pathBool(): Octopus['CompoundPath'] {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return { type: 'COMPOUND', todo: 'TODO' } as any // TODO
+  private _pathBool(sourceLayer: SourceLayerShape): Octopus['CompoundPath'] {
+    const op = sourceLayer.booleanOperation
+    const visible = sourceLayer.visible
+    const transform = this._transform(sourceLayer)
+    const paths = sourceLayer.layers.map((layer) => this._path(layer))
+    return { type: 'COMPOUND', op, visible, transform, paths }
   }
 
-  private get _isRectangle(): boolean {
-    return this.sourceLayer.shapeType === 'RECTANGLE' && !this.sourceLayer.cornerRadius
-  }
-
-  private get _path(): Octopus['PathLike'] {
-    if (this._isRectangle) return this._pathRectangle
-    if (this.sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool
-    return this._pathPath
+  private _path(sourceLayer: SourceLayerShape): Octopus['PathLike'] {
+    if (this._isRectangle(sourceLayer)) return this._pathRectangle(sourceLayer)
+    if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool(sourceLayer)
+    return this._pathPath(sourceLayer)
   }
 
   private get _fillRule(): Octopus['FillRule'] {
-    return this._firstGeometry?.fillRule ?? DEFAULTS.WINDING_RULE
+    return this._firstGeometry(this.sourceLayer)?.fillRule ?? DEFAULTS.WINDING_RULE
   }
 
   private get _shape(): Octopus['Shape'] {
     return {
-      path: this._path,
+      path: this._path(this.sourceLayer),
       fillRule: this._fillRule,
-      fills: [this._fill],
-      // strokes: components['schemas']['VectorStroke'][] // TODO
+      fills: this._fills,
+      strokes: this._strokes,
     }
   }
 
