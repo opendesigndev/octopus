@@ -1,5 +1,5 @@
 import type { RawEffect } from './effect'
-import type { RawFill } from './fill'
+import type { RawPaint } from './paint'
 import type {
   RawAlign,
   RawArcData,
@@ -10,7 +10,6 @@ import type {
   RawConstraints,
   RawGeometry,
   RawSize,
-  RawTODO,
   RawTransform,
 } from './shared'
 import type { RawTextStyle } from './text'
@@ -37,8 +36,8 @@ export type RawLayerBase = {
   constraints?: RawConstraints
   relativeTransform?: RawTransform
   size?: RawSize
-  fills?: RawFill[]
-  strokes?: RawFill[]
+  fills?: RawPaint[]
+  strokes?: RawPaint[]
   strokeWeight?: number | null
   strokeAlign?: RawAlign
   effects?: RawEffect[]
@@ -47,7 +46,7 @@ export type RawLayerBase = {
 export type RawLayerFrame = RawLayerBase & {
   type?: 'FRAME'
   clipsContent?: boolean
-  background?: RawFill[]
+  background?: RawPaint[]
   backgroundColor?: RawColor
   children?: (RawLayer | RawSlice)[]
 }
@@ -76,7 +75,7 @@ export type RawLayerText = RawLayerBase & {
   style?: RawTextStyle
   layoutVersion?: number
   characterStyleOverrides?: [] // TODO
-  styleOverrideTable?: RawTODO
+  styleOverrideTable?: unknown // TODO
   lineTypes?: ['NONE'] // TODO
   lineIndentations?: [0] // TODO
 }

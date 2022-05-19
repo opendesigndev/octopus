@@ -1,12 +1,12 @@
 import type { RawLayer, RawLayerFrame } from './layer'
-import type { RawTODO, RawColor } from './shared'
+import type { RawColor } from './shared'
 
 export type RawDesign = {
   document?: RawDocument
-  components?: RawTODO
-  componentSets?: RawTODO
+  components?: unknown // TODO
+  componentSets?: unknown // TODO
   schemaVersion?: number
-  styles?: RawTODO
+  styles?: unknown // TODO
   name?: string
   lastModified?: string
   thumbnailUrl?: string
@@ -20,21 +20,23 @@ export type RawDocument = {
   id?: string
   name?: string
   type?: 'DOCUMENT'
+  visible?: boolean
   children?: RawPage[]
+}
+
+type RawFlowStartingPoint = {
+  nodeId?: string
+  name?: string
 }
 
 export type RawPage = {
   id?: string
   name?: string
   type?: 'CANVAS'
+  visible?: boolean
   children?: RawLayer[]
   backgroundColor?: RawColor
-  prototypeStartNodeID?: null
-  flowStartingPoints?: RawTODO[]
-  prototypeDevice?: {
-    type: 'NONE'
-    rotation: 'NONE'
-  }
+  flowStartingPoints?: RawFlowStartingPoint[]
 }
 
 export type RawArtboard = RawLayerFrame

@@ -1,5 +1,3 @@
-export type RawTODO = unknown
-
 export type RawColor = {
   r?: number
   g?: number
