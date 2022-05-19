@@ -1,10 +1,14 @@
+import { push } from '@avocode/octopus-common/dist/utils/common'
+
 import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
+import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
 import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourcePaint } from '../source/source-paint'
 import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerShapeOptions = {
@@ -25,14 +29,10 @@ export class OctopusLayerShape extends OctopusLayerBase {
   }
 
   private get _fills(): Octopus['Fill'][] {
-    return [
-      {
-        type: 'COLOR', // TODO
-        // visible, // TODO
-        // blendMode, // TODO
-        color: { r: 1, g: 0, b: 0, a: 1 }, // TODO
-      },
-    ]
+    return this.sourceLayer.fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
+      const newFill = new OctopusEffectFill({ fill }).convert()
+      return newFill ? push(fills, newFill) : fills
+    }, [])
   }
 
   private get _strokes(): Octopus['VectorStroke'][] {

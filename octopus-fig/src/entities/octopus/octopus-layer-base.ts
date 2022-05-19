@@ -58,8 +58,8 @@ export class OctopusLayerBase {
     return asString(this._sourceLayer.name, 'Layer')
   }
 
-  get visible(): boolean | undefined {
-    return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
+  get visible(): boolean {
+    return this._sourceLayer.visible
   }
 
   get blendMode(): Octopus['BlendMode'] {
