@@ -5,12 +5,15 @@ export type RawColor = {
   a?: number
 }
 
-export type RawSize = {
+export type RawVector = {
   x?: number
   y?: number
 }
 
-export type RawPosition = RawSize
+export type RawSize = {
+  width?: number
+  height?: number
+}
 
 export type RawBoundingBox = {
   x?: number

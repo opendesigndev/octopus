@@ -1,4 +1,4 @@
-import type { RawBlendMode, RawColor, RawPosition, RawTransform } from './shared'
+import type { RawBlendMode, RawColor, RawVector, RawTransform } from './shared'
 
 export type RawStop = {
   color?: RawColor
@@ -32,7 +32,7 @@ export type RawPaint = {
   opacity?: number
   color?: RawColor
   blendMode?: RawBlendMode
-  gradientHandlePositions?: RawPosition[]
+  gradientHandlePositions?: RawVector[]
   gradientStops?: RawStop[]
   scaleMode?: RawScaleMode
   imageTransform?: RawTransform

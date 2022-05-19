@@ -9,7 +9,7 @@ import type {
   RawColor,
   RawConstraints,
   RawGeometry,
-  RawSize,
+  RawVector,
   RawTransform,
 } from './shared'
 import type { RawTextStyle } from './text'
@@ -24,19 +24,21 @@ export type RawSlice = {
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
-  size?: RawSize
+  size?: RawVector
 }
 
 export type RawLayerBase = {
   id?: string
   name?: string
+  locked?: boolean
   visible?: boolean
   blendMode?: RawBlendMode
+  preserveRatio?: boolean
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
   opacity?: number
-  size?: RawSize
+  size?: RawVector
   fills?: RawPaint[]
   strokes?: RawPaint[]
   strokeWeight?: number | null
@@ -52,9 +54,9 @@ export type RawLayerFrame = RawLayerBase & {
   children?: (RawLayer | RawSlice)[]
 }
 
-export type RawLayerShape = RawLayerShapeSimple & RawLayerShapeBooleanOp
+export type RawLayerShape = RawLayerVector & RawLayerBooleanOp
 
-export type RawLayerShapeSimple = RawLayerBase & {
+export type RawLayerVector = RawLayerBase & {
   type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
@@ -63,7 +65,7 @@ export type RawLayerShapeSimple = RawLayerBase & {
   rectangleCornerRadii?: number[]
 }
 
-export type RawLayerShapeBooleanOp = RawLayerBase & {
+export type RawLayerBooleanOp = RawLayerBase & {
   type?: 'BOOLEAN_OPERATION'
   booleanOperation?: RawBooleanOperation
   children?: RawLayerShape[]
