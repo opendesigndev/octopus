@@ -1,8 +1,10 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import { getGeometryFor, getSizeFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
+import { SourcePaint } from './source-paint'
 
 import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
 import type { SourceGeometry, SourceSize } from '../../typings/source'
@@ -65,32 +67,13 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this._rawValue.booleanOperation
   }
 
-  // TODO
+  @firstCallMemo()
+  get fills(): SourcePaint[] {
+    return this._rawValue.fills?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
+  }
 
-  // @firstCallMemo()
-  // get path(): SourcePath {
-  //   return new SourcePath(this._rawValue.path)
-  // }
-
-  // get pathComponents(): SourcePathComponent[] {
-  //   return this.path.pathComponents
-  // }
-
-  // get firstPathComponent(): SourcePathComponent | undefined {
-  //   return this.pathComponents[0]
-  // }
-
-  // get pathBounds(): SourceBounds {
-  //   return this.path.bounds
-  // }
-
-  // @firstCallMemo()
-  // get fill(): SourceEffectFill {
-  //   return new SourceEffectFill(this._rawValue.fill, this._rawValue.strokeStyle?.fillEnabled)
-  // }
-
-  // @firstCallMemo()
-  // get stroke(): SourceStroke {
-  //   return new SourceStroke(this._rawValue.strokeStyle)
-  // }
+  @firstCallMemo()
+  get strokes(): SourcePaint[] {
+    return this._rawValue.strokes?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
+  }
 }

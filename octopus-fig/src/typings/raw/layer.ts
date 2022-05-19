@@ -35,6 +35,7 @@ export type RawLayerBase = {
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
+  opacity?: number
   size?: RawSize
   fills?: RawPaint[]
   strokes?: RawPaint[]

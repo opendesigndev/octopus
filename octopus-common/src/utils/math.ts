@@ -3,9 +3,14 @@ export function mod(n: number, mod: number): number {
   return remainder >= 0 ? remainder : remainder + mod
 }
 
-export function round(n: number, precision = 2): number {
+/**
+ * Computes _number_ rounded to _precision_.
+ * @param number (number): The number to round.
+ * @param [precision=2] (number): The precision to round to (default 2).
+ */
+export function round(number: number, precision = 2): number {
   const multiplier = Math.pow(10, precision)
-  return Math.round(n * multiplier) / multiplier
+  return Math.round(number * multiplier) / multiplier
 }
 
 export function clamp(x: number, min: number, max: number): number {

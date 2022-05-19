@@ -3,6 +3,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logWarn } from '../../services/instances/misc'
+import { convertBlendMode } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
 
@@ -61,21 +62,17 @@ export class OctopusLayerBase {
     return typeof this._sourceLayer.visible === 'boolean' ? this._sourceLayer.visible : undefined
   }
 
-  // get blendMode(): Octopus['BlendMode'] {
-  //   return convertBlendMode(this._sourceLayer.blendMode)
-  // }
+  get blendMode(): Octopus['BlendMode'] {
+    return convertBlendMode(this._sourceLayer.blendMode)
+  }
 
   get transform(): number[] {
     return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
-  // get opacity(): number {
-  //   return this._sourceLayer.opacity
-  // }
-
-  // get fillOpacity(): number {
-  //   return this._sourceLayer.fillOpacity
-  // }
+  get opacity(): number {
+    return this._sourceLayer.opacity
+  }
 
   get type(): Octopus['LayerBase']['type'] | null {
     const type = String(this._sourceLayer.type)
@@ -107,8 +104,8 @@ export class OctopusLayerBase {
       type,
       transform: this.transform,
       visible: this.visible,
-      // blendMode: this.blendMode,
-      // opacity: this.opacity,
+      blendMode: this.blendMode,
+      opacity: this.opacity,
       // effects: this.effects,
     }
   }

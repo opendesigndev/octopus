@@ -31,6 +31,8 @@ export type RawBlendMode =
   | 'HARD_LIGHT'
   | 'HUE'
   | 'LIGHTEN'
+  | 'LINEAR_BURN'
+  | 'LINEAR_DODGE'
   | 'LUMINOSITY'
   | 'MULTIPLY'
   | 'NORMAL'

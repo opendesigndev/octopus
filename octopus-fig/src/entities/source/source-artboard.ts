@@ -1,13 +1,14 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
+import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawLayer } from '../../typings/raw'
+import type { RawArtboard, RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 export class SourceArtboard extends SourceEntity {
@@ -80,5 +81,13 @@ export class SourceArtboard extends SourceEntity {
 
   get isPasteboard(): boolean {
     return this._isPasteboard
+  }
+
+  get opacity(): number {
+    return round(this._rawValue.opacity ?? 1)
+  }
+
+  get blendMode(): RawBlendMode | undefined {
+    return this._rawValue.blendMode
   }
 }

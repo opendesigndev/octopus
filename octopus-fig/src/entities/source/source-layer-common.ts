@@ -1,3 +1,5 @@
+import { round } from '@avocode/octopus-common/dist/utils/math'
+
 import { getTransformFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
@@ -40,35 +42,13 @@ export class SourceLayerCommon extends SourceEntity {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  // get artboardColor(): SourceColor | null {
-  //   switch (this._rawValue.artboard?.artboardBackgroundType) {
-  //     case 1: // white
-  //       return getColorFor({ blue: 255, green: 255, red: 255 })
-  //     case 2: // black
-  //       return getColorFor({ blue: 0, green: 0, red: 0 })
-  //     case 3: // transparent
-  //       return null
-  //     case 4: // other
-  //       return getColorFor(this._rawValue.artboard?.color)
-  //   }
-  //   return null
-  // }
-
-  // get isArtboard(): boolean {
-  //   return this._rawValue.artboard !== undefined
-  // }
-
   get visible(): boolean {
     return this._rawValue.visible ?? true
   }
 
-  // get bounds(): SourceBounds {
-  //   return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : getBoundsFor(this._rawValue.bounds)
-  // }
-
-  // get opacity(): number {
-  //   return getUnitRatioFor(this._rawValue.blendOptions?.opacity?.value)
-  // }
+  get opacity(): number {
+    return round(this._rawValue.opacity ?? 1)
+  }
 
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendMode
@@ -77,14 +57,4 @@ export class SourceLayerCommon extends SourceEntity {
   get transform(): SourceTransform | null {
     return getTransformFor(this._rawValue.relativeTransform)
   }
-
-  // @firstCallMemo()
-  // get layerEffects(): SourceLayerEffects {
-  //   return new SourceLayerEffects(this._rawValue.layerEffects)
-  // }
-
-  // @firstCallMemo()
-  // get path(): SourcePath | undefined {
-  //   if (this._rawValue.path) return new SourcePath(this._rawValue.path)
-  // }
 }

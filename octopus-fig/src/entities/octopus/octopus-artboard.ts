@@ -1,6 +1,7 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { convertBlendMode } from '../../utils/convert'
 
 import type { OctopusFigConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -63,6 +64,8 @@ export class OctopusArtboard {
       name: this.sourceArtboard.name,
       type: 'GROUP',
       layers: getConverted(this._layers),
+      blendMode: convertBlendMode(this.sourceArtboard.blendMode),
+      opacity: this.sourceArtboard.opacity,
     } // TODO use MaskGroup
   }
 
