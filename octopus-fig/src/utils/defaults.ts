@@ -3,4 +3,5 @@ export const DEFAULTS = {
   BLEND_MODE: 'PASS_THROUGH' as const,
   EMPTY_PATH: 'MZ',
   WINDING_RULE: 'NON_ZERO' as const,
+  STROKE_ALIGN: 'CENTER' as const,
 }

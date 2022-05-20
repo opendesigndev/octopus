@@ -94,7 +94,7 @@ export class OctopusLayerShape extends OctopusLayerBase {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
     const transform = this._transform(sourceLayer)
-    const paths = sourceLayer.layers.map((layer) => this._path(layer))
+    const paths = sourceLayer.children.map((shape) => this._path(shape))
     return { type: 'COMPOUND', op, visible, transform, paths }
   }
 

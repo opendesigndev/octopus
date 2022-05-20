@@ -1,11 +1,14 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { getTransformFor } from '../../utils/source'
+import { DEFAULTS } from '../../utils/defaults'
+import { getSizeFor, getTransformFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
+import { SourcePaint } from './source-paint'
 
-import type { RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
+import type { RawAlign, RawBlendMode, RawLayer } from '../../typings/raw'
+import type { SourceSize, SourceTransform } from '../../typings/source'
 import type { SourceLayerFrame } from './source-layer-frame'
 import type { SourceLayerShape } from './source-layer-shape'
 
@@ -56,5 +59,35 @@ export class SourceLayerCommon extends SourceEntity {
 
   get transform(): SourceTransform | null {
     return getTransformFor(this._rawValue.relativeTransform)
+  }
+
+  @firstCallMemo()
+  get fills(): SourcePaint[] {
+    return this._rawValue.fills?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
+  }
+
+  @firstCallMemo()
+  get strokes(): SourcePaint[] {
+    return this._rawValue.strokes?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
+  }
+
+  get size(): SourceSize | null {
+    return getSizeFor(this._rawValue.size)
+  }
+
+  get cornerRadius(): number | undefined {
+    return this._rawValue.cornerRadius
+  }
+
+  get strokeWeight(): number {
+    return this._rawValue.strokeWeight ?? 0
+  }
+
+  get strokeAlign(): RawAlign {
+    return this._rawValue.strokeAlign ?? DEFAULTS.STROKE_ALIGN
+  }
+
+  get isMask(): boolean {
+    return this._rawValue.isMask ?? false
   }
 }
