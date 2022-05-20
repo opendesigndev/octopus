@@ -1,0 +1,45 @@
+{
+  "name": "@avocode/octopus-sketch",
+  "version": "3.0.0-rc.1",
+  "license": "UNLICENSED",
+  "main": "lib/src/index.js",
+  "scripts": {
+    "clean": "npx rimraf ./node_modules ./lib ./workdir",
+    "clean:workdir": "npx rimraf ./workdir/*",
+    "build": "npx tsc --build ./tsconfig.json",
+    "prepack": "npx rimraf ./lib && yarn run build",
+    "watch": "npx tsc -w",
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@avocode/manifest-ts": "3.0.0-alpha.32",
+    "@avocode/octopus-common": "3.0.0-rc.18",
+    "@avocode/octopus-ts": "3.0.0-alpha.32",
+    "@sentry/node": "6.14.0",
+    "@sketch-hq/sketch-file-format-ts": "^6.2.0",
+    "dotenv": "16.0.0",
+    "fflate": "^0.7.1",
+    "lodash": "^4.17.21",
+    "paper": "0.12.4",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "read-pkg-up": "7.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "@types/uuid": "^8.3.1",
+    "chalk": "^4.1.2",
+    "jest": "^27.3.1",
+    "ts-node": "10.5.0",
+    "typescript": "4.4.4"
+  },
+  "description": "Octopus Sketch converter, converts .sketch files to Octopus 3+ format.",
+  "files": [
+    "lib/src"
+  ]
+}
