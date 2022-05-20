@@ -6,7 +6,6 @@ import type {
   RawBlendMode,
   RawBooleanOperation,
   RawBoundingBox,
-  RawColor,
   RawConstraints,
   RawGeometry,
   RawVector,
@@ -39,6 +38,10 @@ export type RawLayerBase = {
   relativeTransform?: RawTransform
   opacity?: number
   size?: RawVector
+  cornerRadius?: number
+  rectangleCornerRadii?: number[]
+  isMask?: boolean
+  isMaskOutline?: boolean
   fills?: RawPaint[]
   strokes?: RawPaint[]
   strokeWeight?: number | null
@@ -49,20 +52,23 @@ export type RawLayerBase = {
 export type RawLayerFrame = RawLayerBase & {
   type?: 'FRAME'
   clipsContent?: boolean
-  background?: RawPaint[]
-  backgroundColor?: RawColor
   children?: (RawLayer | RawSlice)[]
 }
 
 export type RawLayerShape = RawLayerVector & RawLayerBooleanOp
 
+export type RawStrokeCap = 'NONE' | 'ROUND' | 'SQUARE' | 'LINE_ARROW' | 'TRIANGLE_ARROW'
+export type RawStrokeJoin = 'MITER' | 'BEVEL' | 'ROUND'
+
 export type RawLayerVector = RawLayerBase & {
   type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
+  strokeCap?: RawStrokeCap
+  strokeJoin?: RawStrokeJoin
+  strokeDashes?: number[]
+  strokeMiterAngle?: number
   arcData?: RawArcData
-  cornerRadius?: number
-  rectangleCornerRadii?: number[]
 }
 
 export type RawLayerBooleanOp = RawLayerBase & {
@@ -71,14 +77,15 @@ export type RawLayerBooleanOp = RawLayerBase & {
   children?: RawLayerShape[]
 }
 
-export type RawLayerText = RawLayerBase & {
+export type RawLineTypes = 'NONE' | 'ORDERED' | 'UNORDERED'
+
+export type RawLayerText = RawLayerVector & {
   type?: 'TEXT'
-  strokeGeometry?: RawGeometry[]
   characters?: string
   style?: RawTextStyle
   layoutVersion?: number
-  characterStyleOverrides?: [] // TODO
-  styleOverrideTable?: unknown // TODO
-  lineTypes?: ['NONE'] // TODO
-  lineIndentations?: [0] // TODO
+  characterStyleOverrides?: number[]
+  styleOverrideTable?: Map<number, RawTextStyle>
+  lineTypes?: RawLineTypes[]
+  lineIndentations?: number[]
 }

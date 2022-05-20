@@ -3,7 +3,7 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from './defaults'
 
-import type { RawBoundingBox, RawGeometry, RawSize, RawTransform, RawWindingRule } from '../typings/raw'
+import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
 import type { SourceBounds, SourceFillRule, SourceGeometry, SourceSize, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
@@ -16,7 +16,7 @@ export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | 
   return { x, y, width, height }
 }
 
-export function getSizeFor(value: RawSize | undefined): SourceSize | null {
+export function getSizeFor(value: RawVector | undefined): SourceSize | null {
   if (value?.x === undefined && value?.y === undefined) return null
   const x = round(asFiniteNumber(value?.x, 0))
   const y = round(asFiniteNumber(value?.y, 0))
