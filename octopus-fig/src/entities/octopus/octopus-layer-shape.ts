@@ -4,6 +4,7 @@ import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusStroke } from './octopus-stroke'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
@@ -36,7 +37,10 @@ export class OctopusLayerShape extends OctopusLayerBase {
   }
 
   private get _strokes(): Octopus['VectorStroke'][] {
-    return [] // TODO
+    return this.sourceLayer.strokes.reduce((strokes: Octopus['VectorStroke'][], fill: SourcePaint) => {
+      const stroke = new OctopusStroke({ fill, sourceLayer: this.sourceLayer }).convert()
+      return stroke ? push(strokes, stroke) : strokes
+    }, [])
   }
 
   private get _sourceShape(): 'LINE' | 'TRIANGLE' | 'RECTANGLE' | 'POLYGON' | 'ELLIPSE' | undefined {

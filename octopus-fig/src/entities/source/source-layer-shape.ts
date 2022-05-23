@@ -1,10 +1,11 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
+import { DEFAULTS } from '../../utils/defaults'
 import { getGeometryFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
-import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
+import type { RawAlign, RawBooleanOperation, RawLayerShape, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
 import type { SourceGeometry } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
@@ -55,5 +56,25 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get booleanOperation(): RawBooleanOperation | undefined {
     return this._rawValue.booleanOperation
+  }
+
+  get strokeWeight(): number {
+    return this._rawValue.strokeWeight ?? 0
+  }
+
+  get strokeAlign(): RawAlign {
+    return this._rawValue.strokeAlign ?? DEFAULTS.STROKE_ALIGN
+  }
+
+  get strokeCap(): RawStrokeCap {
+    return this._rawValue.strokeCap ?? DEFAULTS.STROKE_CAP
+  }
+
+  get strokeJoin(): RawStrokeJoin {
+    return this._rawValue.strokeJoin ?? DEFAULTS.STROKE_JOIN
+  }
+
+  get strokeDashes(): number[] {
+    return this._rawValue.strokeDashes ?? []
   }
 }
