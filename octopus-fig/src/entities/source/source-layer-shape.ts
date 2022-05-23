@@ -77,4 +77,8 @@ export class SourceLayerShape extends SourceLayerCommon {
   get strokeDashes(): number[] {
     return this._rawValue.strokeDashes ?? []
   }
+
+  get strokeMiterAngle(): number {
+    return this._rawValue.strokeMiterAngle ?? DEFAULTS.STROKE_MITER_ANGLE
+  }
 }
