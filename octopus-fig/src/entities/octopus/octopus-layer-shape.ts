@@ -1,6 +1,5 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { DEFAULTS } from '../../utils/defaults'
 import { OctopusEffectFill } from './octopus-fill'
 import { OctopusLayerBase } from './octopus-layer-base'
 import { OctopusPath } from './octopus-path'
@@ -42,10 +41,6 @@ export class OctopusLayerShape extends OctopusLayerBase {
       const stroke = new OctopusStroke({ fill, sourceLayer: this.sourceLayer }).convert()
       return stroke ? push(strokes, stroke) : strokes
     }, [])
-  }
-
-  get transform(): number[] {
-    return DEFAULTS.TRANSFORM
   }
 
   private get _shape(): Octopus['Shape'] {

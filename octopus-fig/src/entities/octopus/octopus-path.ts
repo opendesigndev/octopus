@@ -10,6 +10,11 @@ type OctopusPathOptions = {
   isStroke?: boolean
 }
 
+type PrivateOptions = {
+  sourceLayer: SourceLayerShape
+  isTopLayer: boolean
+}
+
 export class OctopusPath {
   private _sourceLayer: SourceLayerShape
   private _isStroke: boolean
@@ -39,8 +44,8 @@ export class OctopusPath {
     }
   }
 
-  private _transform(sourceLayer: SourceLayerShape): number[] {
-    return sourceLayer.transform ?? DEFAULTS.TRANSFORM
+  private _transform({ sourceLayer, isTopLayer }: PrivateOptions): number[] {
+    return isTopLayer ? DEFAULTS.TRANSFORM : sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
   private _firstGeometry(sourceLayer: SourceLayerShape): SourceGeometry | undefined {
@@ -57,33 +62,33 @@ export class OctopusPath {
     return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadius
   }
 
-  private _pathRectangle(sourceLayer: SourceLayerShape): Octopus['PathRectangle'] {
+  private _pathRectangle({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathRectangle'] {
     const visible = sourceLayer.visible
-    const transform = this._transform(sourceLayer)
+    const transform = this._transform({ sourceLayer, isTopLayer })
     const { x, y } = sourceLayer.size ?? { x: 0, y: 0 }
     return { type: 'RECTANGLE', visible, transform, rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
   }
 
-  private _pathPath(sourceLayer: SourceLayerShape): Octopus['Path'] {
+  private _pathPath({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['Path'] {
     const visible = sourceLayer.visible
-    const transform = this._transform(sourceLayer)
+    const transform = this._transform({ sourceLayer, isTopLayer })
     const meta = { sourceShape: this._sourceShape }
     const geometry = this._geometry(sourceLayer)
     return { type: 'PATH', visible, transform, meta, geometry }
   }
 
-  private _pathBool(sourceLayer: SourceLayerShape): Octopus['CompoundPath'] {
+  private _pathBool({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['CompoundPath'] {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
-    const transform = this._transform(sourceLayer)
-    const paths = sourceLayer.children.map((shape) => this._path(shape))
+    const transform = this._transform({ sourceLayer, isTopLayer })
+    const paths = sourceLayer.children.map((sourceLayer) => this._path({ sourceLayer, isTopLayer: false }))
     return { type: 'COMPOUND', op, visible, transform, paths }
   }
 
-  private _path(sourceLayer: SourceLayerShape): Octopus['PathLike'] {
-    if (this._isRectangle(sourceLayer)) return this._pathRectangle(sourceLayer)
-    if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool(sourceLayer)
-    return this._pathPath(sourceLayer)
+  private _path({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathLike'] {
+    if (this._isRectangle(sourceLayer)) return this._pathRectangle({ sourceLayer, isTopLayer })
+    if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool({ sourceLayer, isTopLayer })
+    return this._pathPath({ sourceLayer, isTopLayer })
   }
 
   get fillRule(): Octopus['FillRule'] {
@@ -91,6 +96,6 @@ export class OctopusPath {
   }
 
   convert(): Octopus['PathLike'] {
-    return this._path(this.sourceLayer)
+    return this._path({ sourceLayer: this.sourceLayer, isTopLayer: true })
   }
 }
