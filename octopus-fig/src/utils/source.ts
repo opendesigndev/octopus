@@ -5,7 +5,7 @@ import { DEFAULTS } from './defaults'
 
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
-import type { SourceBounds, SourceGeometry, SourceSize, SourceTransform } from '../typings/source'
+import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)
@@ -17,7 +17,7 @@ export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | 
   return { x, y, width, height }
 }
 
-export function getSizeFor(value: RawVector | undefined): SourceSize | null {
+export function getSizeFor(value: RawVector | undefined): Octopus['Vec2'] | null {
   if (value?.x === undefined && value?.y === undefined) return null
   const x = round(asFiniteNumber(value?.x, 0))
   const y = round(asFiniteNumber(value?.y, 0))

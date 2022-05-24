@@ -65,7 +65,7 @@ export class OctopusStroke {
 
   @firstCallMemo()
   get fill(): Octopus['Fill'] | null {
-    return new OctopusEffectFill({ fill: this._fill }).convert()
+    return new OctopusEffectFill({ fill: this._fill, parentLayer: this._sourceLayer }).convert()
   }
 
   get style(): Octopus['VectorStroke']['style'] {

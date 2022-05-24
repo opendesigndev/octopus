@@ -7,8 +7,9 @@ import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
 import { SourcePaint } from './source-paint'
 
+import type { Octopus } from '../../typings/octopus'
 import type { RawAlign, RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceSize, SourceTransform } from '../../typings/source'
+import type { SourceTransform } from '../../typings/source'
 import type { SourceLayerFrame } from './source-layer-frame'
 import type { SourceLayerShape } from './source-layer-shape'
 
@@ -71,7 +72,7 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.strokes?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
   }
 
-  get size(): SourceSize | null {
+  get size(): Octopus['Vec2'] | null {
     return getSizeFor(this._rawValue.size)
   }
 

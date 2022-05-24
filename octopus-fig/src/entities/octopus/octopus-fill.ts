@@ -4,17 +4,21 @@ import { convertBlendMode, convertColor, convertStop } from '../../utils/convert
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStop } from '../../typings/raw'
+import type { SourceLayerCommon } from '../source/source-layer-common'
 import type { SourcePaint } from '../source/source-paint'
 
 type OctopusFillOptions = {
   fill: SourcePaint
+  parentLayer: SourceLayerCommon
 }
 
 export class OctopusEffectFill {
   private _fill: SourcePaint
+  private _parentLayer: SourceLayerCommon
 
   constructor(options: OctopusFillOptions) {
     this._fill = options.fill
+    this._parentLayer = options.parentLayer
   }
 
   get fillType(): Octopus['FillType'] | null {
@@ -51,7 +55,7 @@ export class OctopusEffectFill {
 
   private get _gradientStops(): Octopus['GradientColorStop'][] {
     return this._fill.gradientStops.reduce((stops: Octopus['GradientColorStop'][], stop: RawStop) => {
-      const newStop = convertStop(stop)
+      const newStop = convertStop(stop, this.opacity)
       return newStop ? push(stops, newStop) : stops
     }, [])
   }
@@ -62,14 +66,34 @@ export class OctopusEffectFill {
     return { type, stops }
   }
 
-  private get _gradientTransform(): number[] {
-    return [1, 0, 0, 1, 100, 100] // TODO
+  private get _transformLinear(): Octopus['Transform'] | null {
+    const positions = this._fill.gradientHandlePositions
+    if (positions === null) return null
+    const [SP1, SP2] = positions
+
+    const [_a, _b, _c, _d, offsetX = 0, offsetY = 0] = this._parentLayer.transform ?? []
+
+    const size = this._parentLayer.size
+    if (size === null) return null
+    const { x: width, y: height } = size
+
+    const p1 = { x: width * SP1.x, y: height * SP1.y }
+    const p2 = { x: width * SP2.x, y: height * SP2.y }
+
+    const scaleX = p2.x - p1.x
+    const skewY = p2.y - p1.y
+    const skewX = p1.y - p2.y
+    const scaleY = p2.x - p1.x
+    const tx = p1.x + offsetX
+    const ty = p1.y + offsetY
+    return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
-  private get _positioning(): Octopus['FillPositioning'] {
+  private get _positioning(): Octopus['FillPositioning'] | null {
     const layout = 'FILL' // TODO
     const origin = 'LAYER' // TODO
-    const transform = this._gradientTransform
+    const transform = this._transformLinear
+    if (transform === null) return null
     return { layout, origin, transform }
   }
 
@@ -86,6 +110,7 @@ export class OctopusEffectFill {
     const blendMode = this.blendMode
     const gradient = this._gradient
     const positioning = this._positioning
+    if (positioning === null) return null
     return { type: 'GRADIENT', visible, blendMode, gradient, positioning }
   }
 

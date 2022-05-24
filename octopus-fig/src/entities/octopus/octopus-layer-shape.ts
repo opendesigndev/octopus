@@ -32,7 +32,7 @@ export class OctopusLayerShape extends OctopusLayerBase {
 
   private get _fills(): Octopus['Fill'][] {
     return this.sourceLayer.fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
-      const newFill = new OctopusEffectFill({ fill }).convert()
+      const newFill = new OctopusEffectFill({ fill, parentLayer: this.sourceLayer }).convert()
       return newFill ? push(fills, newFill) : fills
     }, [])
   }
