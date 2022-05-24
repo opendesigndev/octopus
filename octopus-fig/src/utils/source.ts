@@ -3,8 +3,9 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from './defaults'
 
+import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
-import type { SourceBounds, SourceFillRule, SourceGeometry, SourceSize, SourceTransform } from '../typings/source'
+import type { SourceBounds, SourceGeometry, SourceSize, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)
@@ -31,13 +32,13 @@ export function getTransformFor(value: RawTransform | undefined): SourceTransfor
   return [a, b, c, d, tx, ty]
 }
 
-function mapFillRule(rule: RawWindingRule | undefined): SourceFillRule {
+function getFillRule(rule: RawWindingRule | undefined): Octopus['FillRule'] {
   return rule === 'EVENODD' ? 'EVEN_ODD' : 'NON_ZERO'
 }
 
 export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   return values.map((value) => ({
     path: value.path ?? DEFAULTS.EMPTY_PATH,
-    fillRule: mapFillRule(value.windingRule),
+    fillRule: getFillRule(value.windingRule),
   }))
 }

@@ -4,7 +4,7 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 import { DEFAULTS } from './defaults'
 
 import type { Octopus } from '../typings/octopus'
-import type { RawBlendMode, RawColor } from '../typings/raw'
+import type { RawBlendMode, RawColor, RawStop } from '../typings/raw'
 
 const BLEND_MODES: Octopus['BlendMode'][] = [
   'COLOR',
@@ -33,11 +33,19 @@ export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode']
 }
 
 export function convertColor(color: RawColor | undefined, opacity = 1): Octopus['Color'] {
-  const finalOpacity = asFiniteNumber(color?.a, 1) * opacity
+  const finalOpacity = asFiniteNumber(color?.a, 0) * opacity
   return {
     r: round(asFiniteNumber(color?.r, 0), 4),
     g: round(asFiniteNumber(color?.g, 0), 4),
     b: round(asFiniteNumber(color?.b, 0), 4),
     a: round(finalOpacity, 4),
+  }
+}
+
+export function convertStop(stop?: RawStop, opacity = 1): Octopus['GradientColorStop'] | null {
+  if (stop?.color === undefined || stop?.position === undefined) return null
+  return {
+    color: convertColor(stop.color, opacity),
+    position: stop.position,
   }
 }

@@ -3,7 +3,7 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 import { getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
-import type { RawBlendMode, RawColor, RawGradientType, RawPaint } from '../../typings/raw'
+import type { RawBlendMode, RawColor, RawGradientType, RawPaint, RawStop, RawVector } from '../../typings/raw'
 import type { SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
@@ -39,5 +39,15 @@ export class SourcePaint extends SourceEntity {
 
   get imageTransform(): SourceTransform | null {
     return getTransformFor(this._rawValue.imageTransform)
+  }
+
+  get gradientStops(): RawStop[] {
+    return this._rawValue.gradientStops ?? []
+  }
+
+  get gradientHandlePositions(): [RawVector, RawVector, RawVector] | null {
+    const [p1, p2, p3] = this._rawValue.gradientHandlePositions ?? []
+    if ([p1?.x, p1?.y, p2?.x, p2?.y, p3?.x, p3?.y].some((n) => n === undefined)) return null
+    return [p1, p2, p3]
   }
 }

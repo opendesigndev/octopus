@@ -100,7 +100,7 @@ export class OctopusEffectFillGradient {
     return closest
   }
 
-  private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
+  private get _gradientStops(): Octopus['GradientColorStop'][] {
     const colorStops: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
     const opacityStops: SourceEffectFillGradientOpacity[] = this.fill.gradient?.opacities ?? []
 
