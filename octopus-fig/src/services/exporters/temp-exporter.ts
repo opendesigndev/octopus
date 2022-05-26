@@ -76,7 +76,10 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    const octopusPath = await this._save(TempExporter.OCTOPUS_NAME(artboard.id), this._stringify(artboard.value))
+    const octopusPath = await this._save(
+      TempExporter.OCTOPUS_NAME(`${artboard.id}-${artboard.value.content?.name}`),
+      this._stringify(artboard.value)
+    )
     this.emit('octopus:artboard', {
       id: artboard.id,
       time: artboard.time,

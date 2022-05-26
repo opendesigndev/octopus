@@ -15,7 +15,7 @@ export type RenderResult = {
 
 async function render(id: string, octopusPath: string) {
   const octopusDir = path.dirname(octopusPath)
-  const renderPath = path.join(octopusDir, `render-${kebabCase(id)}.png`)
+  const renderPath = path.join(octopusDir, `octopus-${kebabCase(id)}.png`)
   const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {

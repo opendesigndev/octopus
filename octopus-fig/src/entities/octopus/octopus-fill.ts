@@ -1,4 +1,6 @@
+import { lerpColor } from '@avocode/octopus-common/dist/utils/color'
 import { push } from '@avocode/octopus-common/dist/utils/common'
+import { invLerp, round } from '@avocode/octopus-common/dist/utils/math'
 
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
 
@@ -53,13 +55,29 @@ export class OctopusEffectFill {
     return convertColor(this._fill.color, this.opacity)
   }
 
-  private get _gradientStops(): Octopus['GradientColorStop'][] {
-    // TODO: For Angular gradient need to interpolate starting and ending points
-
-    return this._fill.gradientStops.reduce((stops: Octopus['GradientColorStop'][], stop: RawStop) => {
+  private get _gradientStops(): Octopus['GradientColorStop'][] | null {
+    const stops = this._fill.gradientStops.reduce((stops: Octopus['GradientColorStop'][], stop: RawStop) => {
       const newStop = convertStop(stop, this.opacity)
       return newStop ? push(stops, newStop) : stops
     }, [])
+    if (!stops.length) return null
+
+    if (this._gradientType === 'ANGULAR') {
+      const firstStop = stops[0]
+      const lastStop = stops[stops.length - 1]
+
+      if (round(firstStop.position) === 0 && round(lastStop.position) === 1) return stops
+      if (round(firstStop.position) === 0) return push(stops, { ...firstStop, position: 1 })
+      if (round(lastStop.position) === 0) return [{ ...lastStop, position: 0 }, ...stops]
+
+      const totalLen = firstStop.position + (1 - lastStop.position)
+      const ratio = invLerp(0, totalLen, firstStop.position)
+      const color = lerpColor(firstStop.color, lastStop.color, ratio)
+
+      return [{ color, position: 0 }, ...stops, { color, position: 1 }]
+    }
+
+    return stops
   }
 
   private get _gradientType(): Octopus['FillGradient']['gradient']['type'] | null {
@@ -81,6 +99,7 @@ export class OctopusEffectFill {
     const type = this._gradientType
     if (type === null) return null
     const stops = this._gradientStops
+    if (stops === null) return null
     return { type, stops }
   }
 
