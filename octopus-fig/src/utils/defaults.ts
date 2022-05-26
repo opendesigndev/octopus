@@ -1,6 +1,6 @@
 export const DEFAULTS = {
   TRANSFORM: [1, 0, 0, 1, 0, 0],
-  BLEND_MODE: 'PASS_THROUGH' as const,
+  BLEND_MODE: 'NORMAL' as const,
   EMPTY_PATH: 'MZ',
   WINDING_RULE: 'NON_ZERO' as const,
   STROKE_ALIGN: 'CENTER' as const,

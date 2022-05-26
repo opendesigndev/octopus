@@ -18,7 +18,7 @@ async function render(id: string, octopusPath: string) {
   const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   try {
-    execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
+    execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusPath} ${renderPath}`, { stdio: 'ignore' })
     return { value: renderPath, error: null }
   } catch (error) {
     console.error(chalk.red(`Rendering failed while processing ${octopusPath}`))
