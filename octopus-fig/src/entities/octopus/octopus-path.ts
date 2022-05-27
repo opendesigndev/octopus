@@ -55,7 +55,8 @@ export class OctopusPath {
   }
 
   private _geometry(sourceLayer: SourceLayerShape): Octopus['PathGeometry'] {
-    return simplifyPathData(this._firstGeometry(sourceLayer)?.path ?? DEFAULTS.EMPTY_PATH)
+    const path = this._firstGeometry(sourceLayer)?.path
+    return path ? simplifyPathData(path) : DEFAULTS.EMPTY_PATH
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {

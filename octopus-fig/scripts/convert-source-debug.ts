@@ -36,7 +36,7 @@ export async function convertDesign({
   })
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
-    const status = artboard.error ? '❌' : '✅'
+    const status = artboard.error ? `❌ ${artboard.error}` : '✅'
     const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
     const renderPath =
       render === null
