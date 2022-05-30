@@ -1,9 +1,11 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { getSizeFor, getTransformFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
+import { SourceEffect } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 import { SourcePaint } from './source-paint'
 
@@ -72,6 +74,14 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.strokes?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
   }
 
+  get effects(): SourceEffect[] {
+    const effects = this._rawValue.effects ?? []
+    return effects.reduce((effects, rawEffect) => {
+      const sourceEffect = new SourceEffect(rawEffect)
+      return sourceEffect ? push(effects, sourceEffect) : effects
+    }, [])
+  }
+
   get size(): Octopus['Vec2'] | null {
     return getSizeFor(this._rawValue.size)
   }
@@ -90,5 +100,9 @@ export class SourceLayerCommon extends SourceEntity {
 
   get isMask(): boolean {
     return this._rawValue.isMask ?? false
+  }
+
+  get isMaskOutline(): boolean {
+    return this._rawValue.isMaskOutline ?? false
   }
 }

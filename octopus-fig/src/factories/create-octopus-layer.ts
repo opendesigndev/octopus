@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
@@ -64,6 +64,6 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
   return layers.reduce((layers, sourceLayer) => {
     const octopusLayer = createOctopusLayer({ parent, layer: sourceLayer })
-    return octopusLayer ? [octopusLayer, ...layers] : layers
+    return octopusLayer ? push(layers, octopusLayer) : layers
   }, [])
 }

@@ -1,11 +1,13 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logWarn } from '../../services/instances/misc'
 import { convertBlendMode } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
+import { OctopusEffect } from './octopus-effect'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -88,10 +90,13 @@ export class OctopusLayerBase {
     return this.type !== null
   }
 
-  // @firstCallMemo()
-  // get effects(): Octopus['Effect'][] {
-  //   return new OctopusEffectsLayer({ parentLayer: this }).convert()
-  // }
+  @firstCallMemo()
+  get effects(): Octopus['Effect'][] {
+    return this.sourceLayer.effects.reduce((effects, sourceEffect) => {
+      const effect = new OctopusEffect(sourceEffect).convert()
+      return effect ? push(effects, effect) : effects
+    }, [])
+  }
 
   convertBase(): Octopus['LayerBase'] | null {
     if (!this.isConvertible) return null
@@ -106,7 +111,7 @@ export class OctopusLayerBase {
       visible: this.visible,
       blendMode: this.blendMode,
       opacity: this.opacity,
-      // effects: this.effects,
+      effects: this.effects,
     }
   }
 }
