@@ -173,7 +173,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   }
 
   @firstCallMemo()
-  private get _textTransform(): Octopus['Transform'] {
+  private get _transform(): Octopus['Transform'] {
     const { xx, xy, yx, yy, tx, ty } = this._sourceText.transform
     const matrix = createMatrix(xx, xy, yx, yy, tx, ty)
     if (this._sourceText.bounds !== undefined) {
@@ -218,7 +218,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     const defaultStyle = this._defaultStyle
     if (!defaultStyle) return null
     const styles = this._getStyles(defaultStyle)
-    const textTransform = this._textTransform
+    const transform = this._transform
     const frame = this._frame
     const horizontalAlign = this._horizontalAlign
 
@@ -228,7 +228,7 @@ export class OctopusLayerText extends OctopusLayerBase {
       horizontalAlign,
       baselinePolicy: 'OFFSET_BEARING',
       styles,
-      textTransform,
+      transform,
       frame,
     }
     return normalizeText(text)

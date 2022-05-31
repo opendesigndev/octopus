@@ -23,10 +23,10 @@
   dependencies:
     abort-controller "3.0.0"
 
-"@avocode/manifest-ts@3.0.0-alpha.32":
-  version "3.0.0-alpha.32"
-  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.32.tgz#e6d3a2ef22e36191876c97ecfdde405bbc992378"
-  integrity sha512-c+Ud7Ty6kuLettviRmLRBIMLKPBRItRCo4v84O0eeoeGHFjV9l+aKp1xps5PoPpsALN7O9JVj/qs0BMH8V4FfQ==
+"@avocode/manifest-ts@3.0.0-alpha.33":
+  version "3.0.0-alpha.33"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.33.tgz#8220b87c2966ffac905aed7f1a0394a1d1bcfc47"
+  integrity sha512-kpxW89i8rKH/ztUC7XO4dbK02+bb4mjG/rDCG6fiBuGpFZv5vqVRwHLgeQf525z31bPSrUcBIqQlYRXW4/34Jw==
 
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
@@ -50,6 +50,11 @@
   version "3.0.0-alpha.32"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.32.tgz#cdd936e99ec12d4e26c15f548bfd1f948342c6e0"
   integrity sha512-UWP2ayVD1B1bjblLmTr+7qsAKn9W9yNrWyQve7g0vLe6u2X8/yW9MAZBJPK7O/a3ZH1FaZ3UIxQUyym9+Y9csg==
+
+"@avocode/octopus-ts@3.0.0-alpha.33":
+  version "3.0.0-alpha.33"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.33.tgz#2437bfe9cb7a580328dfd7d6565a8fdca1f8b475"
+  integrity sha512-AuU6WB9JQqbGJzqcZnqHtjay1VH7y6/GRQAqbIMADlA1IdNK4+q6LRpn0vw6d+afxoDu3f2S9HCi+iyaZcNHpQ==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

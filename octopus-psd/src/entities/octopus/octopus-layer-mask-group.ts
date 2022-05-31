@@ -22,6 +22,7 @@ type OctopusLayerMaskGroupOptions = {
   mask: OctopusLayer
   layers: OctopusLayer[]
   maskBasis?: Octopus['MaskBasis']
+  maskChannels?: number[]
 }
 
 type CreateBackgroundOptions = {
@@ -52,6 +53,7 @@ export class OctopusLayerMaskGroup {
   private _mask: OctopusLayer
   private _layers: OctopusLayer[]
   private _maskBasis: Octopus['MaskBasis']
+  private _maskChannels: number[] | undefined
 
   static createBackground({
     id,
@@ -94,14 +96,14 @@ export class OctopusLayerMaskGroup {
     const raw: RawLayerLayer = { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName: bitmapMask }
     const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
     const maskAdapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer: maskSourceLayer })
-    maskAdapter.setFillBlendMode('BRIGHTNESS_TO_ALPHA')
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
     return new OctopusLayerMaskGroup({
       parent,
       id: `${octopusLayer.id}:BitmapMask`,
       mask,
       layers: [octopusLayer],
-      maskBasis: 'LAYER',
+      maskBasis: 'LAYER_AND_EFFECTS',
+      maskChannels: [1, 0, 0, 0, 0],
     })
   }
 
@@ -123,7 +125,7 @@ export class OctopusLayerMaskGroup {
 
   static createClippingMask({ mask, layers, parent }: CreateClippingMaskOptions): OctopusLayerMaskGroup {
     const id = `${mask.id}:ClippingMask`
-    const maskBasis = mask.sourceLayer.type === 'layer' ? 'FILL' : 'BODY_MINUS_STROKES'
+    const maskBasis = mask.sourceLayer.type === 'layer' ? 'FILL' : 'BODY_EMBED'
     return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
   }
 
@@ -133,6 +135,7 @@ export class OctopusLayerMaskGroup {
     this._mask = options.mask
     this._layers = options.layers
     this._maskBasis = options.maskBasis ?? 'BODY'
+    this._maskChannels = options.maskChannels
   }
 
   get sourceLayer(): SourceLayer {
@@ -160,6 +163,7 @@ export class OctopusLayerMaskGroup {
       id: this._id,
       type: this.type,
       maskBasis: this._maskBasis,
+      maskChannels: this._maskChannels,
       mask,
       layers: getConverted(this._layers),
     } as const
