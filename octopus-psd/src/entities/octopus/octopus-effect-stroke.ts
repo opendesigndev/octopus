@@ -63,6 +63,6 @@ export class OctopusEffectStroke extends OctopusEffectBase {
     if (stroke === null) return null
     const visible = this.visible
     const blendMode = this.blendMode
-    return { type: 'STROKE', stroke, visible, blendMode, basis: 'BODY_PLUS_STROKES' }
+    return { type: 'STROKE', stroke, visible, blendMode, basis: 'BODY_AND_STROKES' }
   }
 }

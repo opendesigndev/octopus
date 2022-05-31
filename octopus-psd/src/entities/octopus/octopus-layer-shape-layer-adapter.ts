@@ -17,7 +17,6 @@ type OctopusLayerShapeLayerAdapterOptions = {
 export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerLayer
-  private _fillBlendMode: Octopus['BlendMode'] | undefined
 
   constructor(options: OctopusLayerShapeLayerAdapterOptions) {
     super(options)
@@ -39,14 +38,6 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     return { type: 'RECTANGLE', rectangle, transform }
   }
 
-  get fillBlendMode(): Octopus['BlendMode'] | undefined {
-    return this._fillBlendMode
-  }
-
-  setFillBlendMode(blendMode: Octopus['BlendMode'] | undefined): void {
-    this._fillBlendMode = blendMode
-  }
-
   get opacity(): number {
     return this._sourceLayer.opacity * this._sourceLayer.fillOpacity
   }
@@ -65,7 +56,6 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
     const fill = new OctopusEffectFillImage({
       imagePath,
       transform,
-      blendMode: this.fillBlendMode,
       layout: 'STRETCH',
       origin: 'LAYER',
     }).convert()

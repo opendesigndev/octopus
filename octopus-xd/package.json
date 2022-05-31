@@ -15,9 +15,9 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@avocode/octopus-ts": "3.0.0-alpha.32",
-    "@avocode/manifest-ts": "3.0.0-alpha.32",
-    "@avocode/octopus-common": "3.0.0-rc.18",
+    "@avocode/octopus-ts": "3.0.0-alpha.33",
+    "@avocode/manifest-ts": "3.0.0-alpha.33",
+    "@avocode/octopus-common": "3.0.0-rc.19",
     "@sentry/node": "6.14.0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",

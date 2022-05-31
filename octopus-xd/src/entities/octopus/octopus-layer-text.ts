@@ -378,8 +378,8 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     if (typeof value !== 'string') return null
     const defaultStyle = this._getDefaultStyle()
     if (!defaultStyle) return null
-    const textTransform = this._getTextTransform()
-    if (!textTransform) return null
+    const transform = this._getTextTransform()
+    if (!transform) return null
     const styles = this._getStyles(value)
     const frame = this._getFrame()
     const horizontalAlign = this._getHorizontalAlign()
@@ -388,7 +388,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
       value,
       defaultStyle,
       baselinePolicy: 'SET',
-      textTransform,
+      transform,
       ...(styles.length ? { styles } : null),
       frame,
       horizontalAlign,
