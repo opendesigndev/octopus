@@ -110,4 +110,8 @@ export default class SourceDesign {
   getArtboardById(id: string): SourceArtboard | null {
     return this._artboards.find((entry) => entry.meta.id === id) || null
   }
+
+  getArtboardByInternalId(id: string): SourceArtboard | null {
+    return this._artboards.find((entry) => entry.meta.internalId === id) || null
+  }
 }
