@@ -24,7 +24,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   private _layers: OctopusLayer[]
 
   static createBackground({ id, layers }: CreateBackgroundOptions): Octopus['GroupLayer'] {
-    return { id: `${id}:background`, type: 'GROUP', layers }
+    return { id: `${id}-Background`, type: 'GROUP', layers }
   }
 
   constructor(options: OctopusLayerGroupOptions) {

@@ -28,6 +28,10 @@ const BLEND_MODES: Octopus['BlendMode'][] = [
   'SOFT_LIGHT',
 ]
 
+export function convertId(id: string): string {
+  return id.replaceAll(':', '-').replaceAll(';', '_')
+}
+
 export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode'] {
   return typeof blendMode === 'string' && blendMode in BLEND_MODES ? blendMode : DEFAULTS.BLEND_MODE
 }

@@ -1,7 +1,7 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { convertBlendMode } from '../../utils/convert'
+import { convertBlendMode, convertId } from '../../utils/convert'
 
 import type { OctopusFigConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -51,7 +51,7 @@ export class OctopusArtboard {
   }
 
   get id(): string {
-    return this.sourceArtboard.id
+    return convertId(this.sourceArtboard.id)
   }
 
   get version(): Promise<string> {
@@ -60,7 +60,7 @@ export class OctopusArtboard {
 
   private get _content(): Octopus['GroupLayer'] {
     return {
-      id: `${this.id}:background`,
+      id: `${this.id}-background`,
       name: this.sourceArtboard.name,
       type: 'GROUP',
       layers: getConverted(this._layers),

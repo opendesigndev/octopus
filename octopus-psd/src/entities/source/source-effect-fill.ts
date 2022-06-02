@@ -58,6 +58,6 @@ export class SourceEffectFill extends SourceEffectBase {
   }
 
   get enabled(): boolean {
-    return this._enabled ?? true
+    return this._enabled ?? this._rawValue?.enabled ?? true
   }
 }

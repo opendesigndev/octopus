@@ -4,7 +4,7 @@ import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logWarn } from '../../services/instances/misc'
-import { convertBlendMode } from '../../utils/convert'
+import { convertBlendMode, convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
 import { OctopusEffect } from './octopus-effect'
@@ -53,7 +53,7 @@ export class OctopusLayerBase {
   }
 
   get id(): string {
-    return this._id
+    return convertId(this._id)
   }
 
   get name(): string {

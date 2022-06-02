@@ -1,5 +1,6 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
+import { convertId } from '../../utils/convert'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -35,7 +36,7 @@ export class OctopusLayerMaskGroup {
   }
 
   get id(): string {
-    return this._id
+    return convertId(this._id)
   }
 
   get parentArtboard(): OctopusArtboard {

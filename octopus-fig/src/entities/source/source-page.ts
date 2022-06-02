@@ -1,3 +1,4 @@
+import { convertId } from '../../utils/convert'
 import { SourceArtboard } from './source-artboard'
 import { SourceEntity } from './source-entity'
 
@@ -8,7 +9,7 @@ export class SourcePage extends SourceEntity {
   private _artboards: SourceArtboard[]
   private _pasteboard: SourceArtboard | null
 
-  static DEFAULT_ID = 'page:1'
+  static DEFAULT_ID = 'page-1'
 
   constructor(raw: RawPage) {
     super(raw)
@@ -23,8 +24,8 @@ export class SourcePage extends SourceEntity {
     return new SourceArtboard(
       {
         ...this._rawValue,
-        id: `${this.id}:pasteboard`,
-        name: `${this.name}:pasteboard`,
+        id: `${this.id}-pasteboard`,
+        name: `${this.name}-pasteboard`,
         type: 'FRAME',
         children,
       },
@@ -64,7 +65,7 @@ export class SourcePage extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue.id ?? SourcePage.DEFAULT_ID
+    return convertId(this._rawValue.id ?? SourcePage.DEFAULT_ID)
   }
 
   get name(): string {

@@ -66,14 +66,14 @@ export class OctopusLayerMaskGroup {
     const rectangle = convertRectangle(bounds)
     const fills: Octopus['Fill'][] = color ? [{ type: 'COLOR', color: convertColor(color) }] : []
     const mask: Octopus['ShapeLayer'] = {
-      id: `${id}:backgroundMask`,
+      id: `${id}-BackgroundMask`,
       type: 'SHAPE',
       visible: fills.length > 0,
       shape: { path: { type: 'RECTANGLE', rectangle }, fills },
     }
     const meta = isArtboard ? { isArtboard } : undefined
     return {
-      id: `${id}:background`,
+      id: `${id}-Background`,
       type: 'MASK_GROUP',
       maskBasis: 'BODY',
       mask,
@@ -99,7 +99,7 @@ export class OctopusLayerMaskGroup {
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
     return new OctopusLayerMaskGroup({
       parent,
-      id: `${octopusLayer.id}:BitmapMask`,
+      id: `${octopusLayer.id}-BitmapMask`,
       mask,
       layers: [octopusLayer],
       maskBasis: 'LAYER_AND_EFFECTS',
@@ -119,12 +119,12 @@ export class OctopusLayerMaskGroup {
     const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
     const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
-    const id = `${octopusLayer.id}:ShapeMask`
+    const id = `${octopusLayer.id}-ShapeMask`
     return new OctopusLayerMaskGroup({ id, parent, mask, maskBasis: 'BODY', layers: [octopusLayer] })
   }
 
   static createClippingMask({ mask, layers, parent }: CreateClippingMaskOptions): OctopusLayerMaskGroup {
-    const id = `${mask.id}:ClippingMask`
+    const id = `${mask.id}-ClippingMask`
     const maskBasis = mask.sourceLayer.type === 'layer' ? 'FILL' : 'BODY_EMBED'
     return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
   }
