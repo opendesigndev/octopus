@@ -7,4 +7,11 @@ export const DEFAULTS = {
   STROKE_CAP: 'NONE' as const,
   STROKE_JOIN: 'MITER' as const,
   STROKE_MITER_ANGLE: 28.96,
+  TEXT: {
+    FONT_SIZE: 12,
+    FONT_WEIGHT: 400,
+    LETTER_SPACING: 0,
+    LINE_HEIGHT_PERCENT: 100,
+    LINE_HEIGHT_UNIT: 'INTRINSIC_%' as const,
+  },
 }
