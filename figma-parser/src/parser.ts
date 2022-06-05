@@ -1,7 +1,5 @@
-import { EventEmitter } from 'eventemitter3'
-
 import { Design } from './entities/obtainers/design'
-import { setLogger, setDefaults } from './services'
+import { setLogger, setDefaults, logger } from './services'
 import Config from './services/config'
 import { getPlatformFactories, setPlatformFactories } from './services/platforms'
 import { QueuesManager } from './services/queues-manager'
@@ -44,12 +42,15 @@ export type ParserOptions = {
   cacher?: ICacher
 }
 
-export class Parser extends EventEmitter {
+export class Parser {
   private _services: Services
   private _config: Config
 
+  static getLogger(): Logger | null {
+    return logger
+  }
+
   constructor(options: ParserOptions) {
-    super()
     this._setGlobals(options)
     this._config = new Config(options)
     this._services = this._initServices(options)
@@ -87,7 +88,7 @@ export class Parser extends EventEmitter {
 
   private _setGlobals(options: ParserOptions): void {
     if ('createEnvironment' in options.platformFactories) {
-      options.platformFactories.createEnvironment()
+      options.platformFactories.createEnvironment?.()?.()
     }
     setPlatformFactories(options.platformFactories)
     setDefaults()

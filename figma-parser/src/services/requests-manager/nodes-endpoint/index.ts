@@ -1,6 +1,6 @@
 import chunk from 'lodash/chunk'
 
-import { isObject, keys, without } from '../../../utils/common'
+import { isObject, keys } from '../../../utils/common'
 import { buildEndpoint } from '../../../utils/request'
 import { EndpointBase } from '../endpoint-base'
 
@@ -11,7 +11,7 @@ type NodesOptions = {
   requestsManager: RequestsManager
 }
 
-type DesignNodes = { designId: string; nodeIds: string[] }
+export type DesignNodes = { designId: string; nodeIds: string[] }
 
 export type NodeAddress = {
   nodeId: string
@@ -53,17 +53,21 @@ export class NodesEndpoint extends EndpointBase {
   ungroupResponses(responses: FigmaNodesResponse[], groups: DesignNodes[], ids: NodeAddress[]): FigmaNode[] {
     const map = responses.reduce((map, resp, index) => {
       const { designId } = groups[index]
-      const documentBase = without(resp, ['nodes'] as const)
+      // const documentBase = without(resp, ['nodes'] as const)
       const nodeIds = isObject(resp?.nodes) ? keys(resp.nodes) : []
-      map[designId] = Object.fromEntries(
+      const subMap = Object.fromEntries(
         nodeIds.map((nodeId) => {
-          const result = {
-            ...Object(documentBase),
-            nodes: { [nodeId]: resp?.nodes?.[nodeId] },
-          }
-          return [nodeId, result]
+          // const result = {
+          //   ...Object(documentBase),
+          //   nodes: { [nodeId]: resp?.nodes?.[nodeId] },
+          // }
+          return [nodeId, resp?.nodes?.[nodeId]]
         })
       ) as Record<typeof nodeIds[number], FigmaNode>
+      map[designId] = {
+        ...(map[designId] ?? {}),
+        ...subMap,
+      }
       return map
     }, {} as Record<string, Record<string, FigmaNode>>)
 

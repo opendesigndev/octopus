@@ -15,7 +15,7 @@ export class Queue<T, U> {
   private _available: number
   private _working: number
   private _drainLimit: number | null
-  private _awaiting: (() => void)[]
+  private _awaiting: number
   private _tasks: TaskControl<T>[]
 
   static safeValue<T>(value: T): SafeResult<T> {
@@ -34,7 +34,7 @@ export class Queue<T, U> {
     this._available = parallels
     this._drainLimit = drainLimit
     this._tasks = []
-    this._awaiting = []
+    this._awaiting = 0
     this._working = 0
   }
 
@@ -43,7 +43,7 @@ export class Queue<T, U> {
       name: this._name,
       available: this._available,
       working: this._working,
-      enqueued: this._awaiting.length,
+      enqueued: this._awaiting,
     }
   }
 
@@ -58,13 +58,7 @@ export class Queue<T, U> {
   }
 
   private _try(): void {
-    if (this._available > 0 && this._awaiting.length) {
-      this._available--
-      const runner = this._awaiting.shift()
-      if (typeof runner === 'function') {
-        runner()
-      }
-    }
+    if (this._available > 0 && this._awaiting) this._run()
   }
 
   private _resolveTasksWithResults(tasks: TaskControl<T>[], results: SafeResult<U>[]): void {
@@ -86,28 +80,27 @@ export class Queue<T, U> {
     tasks.forEach((task) => task.reject(err))
   }
 
-  private _createRunner(): () => Promise<void> {
-    return async (): Promise<void> => {
-      this._working++
-      const tasks = this._getTasks()
-      if (!tasks.length) {
-        this._finalizeTask()
-        return
-      }
-      try {
-        const results: SafeResult<U>[] = await this._factory(tasks.map((task) => task.task))
-        this._resolveTasksWithResults(tasks, results)
-      } catch (err) {
-        this._rejectTasks(tasks, err)
-      }
+  private async _run(): Promise<void> {
+    this._available--
+    this._working++
+    const tasks = this._getTasks()
+    if (!tasks.length) {
+      this._finalizeTask()
+      return
+    }
+    this._awaiting -= tasks.length
+    try {
+      const results: SafeResult<U>[] = await this._factory(tasks.map((task) => task.task))
+      this._resolveTasksWithResults(tasks, results)
+    } catch (err) {
+      this._rejectTasks(tasks, err)
     }
   }
 
   exec(task: T): Promise<U> {
     const { promise, resolve, reject } = detachPromiseControls<U>()
     this._tasks.push({ task, resolve, reject })
-    this._awaiting.push(this._createRunner())
-    // process.nextTick
+    this._awaiting++
     queueMicrotask(() => this._try())
     return promise
   }
@@ -124,10 +117,10 @@ export class Queue<T, U> {
     const promises = tasks.map((task) => {
       const { promise, resolve, reject } = detachPromiseControls<U>()
       this._tasks.push({ task, resolve, reject })
-      this._awaiting.push(this._createRunner())
+      this._awaiting++
+      queueMicrotask(() => this._try())
       return promise
     })
-    queueMicrotask(() => this._try())
     return promises
   }
 }

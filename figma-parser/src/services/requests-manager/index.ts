@@ -1,5 +1,8 @@
 import { FileEndpoint } from './file-endpoint'
+import { FillsEndpoint } from './fills-endpoint'
 import { NodesEndpoint } from './nodes-endpoint'
+import { PreviewsEndpoint } from './previews-endpoint'
+import { RenditionsEndpoint } from './renditions-endpoint'
 
 import type { Parser } from '../../parser'
 
@@ -12,6 +15,9 @@ export class RequestsManager {
   private _endpoints: {
     file: FileEndpoint
     nodes: NodesEndpoint
+    fills: FillsEndpoint
+    previews: PreviewsEndpoint
+    renditions: RenditionsEndpoint
   }
 
   constructor(options: RequestsManagerOptions) {
@@ -19,6 +25,9 @@ export class RequestsManager {
     this._endpoints = {
       file: new FileEndpoint({ requestsManager: this }),
       nodes: new NodesEndpoint({ requestsManager: this }),
+      fills: new FillsEndpoint({ requestsManager: this }),
+      previews: new PreviewsEndpoint({ requestsManager: this }),
+      renditions: new RenditionsEndpoint({ requestsManager: this }),
     }
   }
 
@@ -32,5 +41,17 @@ export class RequestsManager {
 
   get nodes(): NodesEndpoint {
     return this._endpoints.nodes
+  }
+
+  get fills(): FillsEndpoint {
+    return this._endpoints.fills
+  }
+
+  get previews(): PreviewsEndpoint {
+    return this._endpoints.previews
+  }
+
+  get renditions(): RenditionsEndpoint {
+    return this._endpoints.renditions
   }
 }

@@ -14,7 +14,6 @@ export default defineConfig({
     commonjsOptions: { include: [] },
     outDir: 'dist',
     emptyOutDir: false,
-    // sourcemap: 'inline',
     minify: 'none',
   },
   resolve: {

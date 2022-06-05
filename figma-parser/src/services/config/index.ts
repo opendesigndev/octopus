@@ -7,22 +7,23 @@ type Parallels = {
   defaultValue: number
   avocodeS3: number
   upload: number
+  renditions: number
 }
 
 export default class Config {
-  _tokenType: string
-  _designId: string
-  _token: string
-  _host: string
-  _targetIds: string[]
-  _pixelsLimit: number
-  _framePreviews: boolean
-  _verbose: boolean
-  _shouldFetchUsedComponents: boolean
-  _shouldRenderImagerefs: boolean
-  _shouldObtainLibraries: boolean
-  _shouldObtainStyles: boolean
-  _parallels: Parallels
+  private _tokenType: string
+  private _designId: string
+  private _token: string
+  private _host: string
+  private _targetIds: string[]
+  private _pixelsLimit: number
+  private _framePreviews: boolean
+  private _verbose: boolean
+  private _shouldFetchUsedComponents: boolean
+  private _shouldRenderImagerefs: boolean
+  private _shouldObtainLibraries: boolean
+  private _shouldObtainStyles: boolean
+  private _parallels: Parallels
 
   static DEFAULT_DOWNLOADER_RETRIES = 3
   static DEFAULT_FIGMA_TOKEN_HEADER = 'X-Figma-Token'
@@ -34,9 +35,11 @@ export default class Config {
   static DEFAULT_FIGMA_S3_PARALLELS = 1
   static DEFAULT_UPLOAD_PARALLELS = 15
   static DEFAULT_PARALLEL_REQUESTS = 3
+  static DEFAULT_PARALLEL_RENDITIONS = 3
   static DEFAULT_VERBOSE = true
   static DEFAULT_FIGMA_IDS_FETCH_USED_COMPONENTS = true
   static DEFAULT_FRAME_PREVIEWS = false
+  static DEFAULT_RENDITIONS_NODES = 10
 
   constructor(rawOptions: ParserOptions) {
     // options
@@ -54,6 +57,7 @@ export default class Config {
       avocodeS3: Config.DEFAULT_AVCD_S3_PARALLELS,
       defaultValue: rawOptions.parallelRequests,
       upload: Config.DEFAULT_UPLOAD_PARALLELS,
+      renditions: Config.DEFAULT_PARALLEL_RENDITIONS,
     }
     this._verbose = rawOptions.verbose
     this._shouldRenderImagerefs = rawOptions.renderImagerefs
@@ -128,5 +132,9 @@ export default class Config {
 
   get figmaTokenHeader(): string {
     return Config.DEFAULT_FIGMA_TOKEN_HEADER
+  }
+
+  get renditionNodes(): number {
+    return Config.DEFAULT_RENDITIONS_NODES
   }
 }

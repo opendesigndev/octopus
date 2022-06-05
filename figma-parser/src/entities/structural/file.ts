@@ -45,6 +45,10 @@ export class File {
     this._pages = this._initPages()
   }
 
+  get raw(): FigmaFile {
+    return this._file
+  }
+
   get documentRaw(): FigmaFile['document'] {
     return this._file?.document
   }

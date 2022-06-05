@@ -1,10 +1,8 @@
 import fromPairs from 'lodash/fromPairs'
 
-import { getPlatformFactories } from '../../platforms'
 import BenchmarkHTTPRequestNode from './benchmark-http-request-node'
 import BenchmarkSimpleNode from './benchmark-simple-node'
 
-import type { NodeFactories } from '../../platforms'
 import type { IBenchmarkHTTPRequest } from '../benchmark-http-request.iface'
 import type { IBenchmarkSimple, BenchmarkSimpleExport } from '../benchmark-simple.iface'
 import type { IBenchmarksTracker } from '../benchmarks-tracker.iface'
@@ -18,11 +16,11 @@ export default class BenchmarksTrackerNode implements IBenchmarksTracker {
     this._benchmarks = []
   }
   trackHttpResponse(response: Response): void {
-    const benchmark = getPlatformFactories<NodeFactories>().createBenchmarkHTTPRequest(response)
+    const benchmark = new BenchmarkHTTPRequestNode(response)
     this._benchmarks.push(benchmark)
   }
   async trackAsync<T>(label: string, fn: () => T): Promise<T> {
-    const benchmark = getPlatformFactories<NodeFactories>().createBenchmarkSimple(label)
+    const benchmark = new BenchmarkSimpleNode(label)
     this._benchmarks.push(benchmark)
     const result = await fn()
     benchmark.end()

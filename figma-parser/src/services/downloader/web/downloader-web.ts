@@ -8,7 +8,6 @@ import type { Parser } from '../../../parser'
 import type { DetachedPromiseControls } from '../../../utils/async'
 import type { SafeResult } from '../../../utils/queue'
 import type { IDownloader } from '../downloader.iface'
-import type { RequestDescriptor } from '../request-descriptor'
 import type { IResponse, JSONValue } from '../response.iface'
 import type { NormalizedOptions } from 'ky'
 import type { KyInstance } from 'ky/distribution/types/ky'
@@ -102,39 +101,13 @@ export class DownloaderWeb implements IDownloader {
     return ky.extend({ headers, retry, hooks })
   }
 
-  async _execRequest(request: RequestDescriptor): Promise<Response> {
-    switch (request.type) {
-      case 'simple-get': {
-        return this._client.get(request.url)
-      }
-      default: {
-        return Promise.reject(new Error('Request type is invalid'))
-      }
-    }
-  }
-
-  async execRequest(request: RequestDescriptor): Promise<IResponse> {
-    console.log(request)
-    return new ResponseWeb(await this._execRequest(request))
-  }
-
-  execRequestSafe(request: RequestDescriptor): Promise<SafeResult<IResponse>> {
-    return this._execRequest(request).then(
-      (response) => ({ value: new ResponseWeb(response), error: null }),
-      (error) => ({ value: undefined, error })
-    )
-  }
-
-  getOne(task: string): Promise<IResponse> {
-    return this.execRequest({
-      type: 'simple-get',
-      url: task,
-    })
+  async getOne(task: string): Promise<IResponse> {
+    return new ResponseWeb(await this._client.get(task))
   }
 
   getOneSafe(task: string): Promise<SafeResult<IResponse>> {
-    return this.getOne(task).then(
-      (response) => ({ value: response, error: null }),
+    return this._client.get(task).then(
+      (response) => ({ value: new ResponseWeb(response), error: null }),
       (error) => ({ value: undefined, error })
     )
   }
@@ -168,6 +141,17 @@ export class DownloaderWeb implements IDownloader {
   async getJSONSafe(task: string): Promise<SafeResult<JSONValue>> {
     return this.getJSON(task).then(
       (json) => ({ value: json, error: null }),
+      (error) => ({ value: undefined, error })
+    )
+  }
+
+  async rawRequest(cb: (raw: KyInstance) => Promise<Response>): Promise<IResponse> {
+    return new ResponseWeb(await cb(this.raw))
+  }
+
+  async rawRequestSafe(cb: (raw: KyInstance) => Promise<Response>): Promise<SafeResult<IResponse>> {
+    return cb(this.raw).then(
+      (response) => ({ value: new ResponseWeb(response), error: null }),
       (error) => ({ value: undefined, error })
     )
   }
