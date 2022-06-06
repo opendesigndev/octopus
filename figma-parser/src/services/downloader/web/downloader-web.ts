@@ -19,6 +19,7 @@ export type DownloaderWebOptions = {
 export class DownloaderWeb implements IDownloader {
   _parser: Parser
   _client: KyInstance
+  _pureClient: KyInstance
   _benchmarks: WeakMap<Request, { start: number; end: number }>
   _cache: Map<string, DetachedPromiseControls<Response>>
 
@@ -26,6 +27,7 @@ export class DownloaderWeb implements IDownloader {
     this._parser = options.parser
     this._benchmarks = new WeakMap()
     this._client = this._initClient()
+    this._pureClient = this._initPureClient()
     this._cache = new Map()
   }
 
@@ -101,6 +103,53 @@ export class DownloaderWeb implements IDownloader {
     return ky.extend({ headers, retry, hooks })
   }
 
+  private _initPureClient(): KyInstance {
+    // Retries
+    const retry = {
+      limit: this.parser.config.downloaderRetries,
+      statusCodes: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
+    }
+    // Hooks (before)
+    const verbosePrintCurrentRequest = (request: Request) => {
+      if (this.parser.config.isVerbose) {
+        logger?.info?.(`[${request.method}] ${request.url}`)
+      }
+    }
+    const registerRequestForBenchmark = (request: Request) => {
+      this._benchmarks.set(request, { start: performance.now(), end: 0 })
+    }
+    const returnFromCacheRequest = (request: Request) => {
+      const pending = this._cache.get(request.url)
+      if (pending) return pending.promise
+      this._cache.set(request.url, detachPromiseControls())
+    }
+    // Hooks (after)
+    const cacheRequest = (request: Request, options: NormalizedOptions, response: Response) => {
+      const requestHandlers = this._cache.get(request.url)
+      requestHandlers?.resolve(response)
+    }
+    const trackRequestBenchmarks = (request: Request, options: NormalizedOptions, response: Response) => {
+      const timings = this._benchmarks.get(request)
+      const benchmark = timings
+        ? { start: timings.start, end: timings.end, total: timings.end - timings.start, url: request.url }
+        : { start: 0, end: 0, total: 0, url: request.url }
+      this.parser.services.benchmarksTracker.trackHttpResponse(benchmark)
+      return response
+    }
+    const warnAboutNon200Code = (request: Request, options: NormalizedOptions, response: Response) => {
+      if (response.status !== 200 && this.parser.config.isVerbose) {
+        logger?.error?.(`Received different http response code than 200: ${response.status} on ${response.url}`)
+      }
+      return response
+    }
+
+    const beforeRequest = [verbosePrintCurrentRequest, registerRequestForBenchmark, returnFromCacheRequest]
+    const afterResponse = [cacheRequest, trackRequestBenchmarks, warnAboutNon200Code]
+    const hooks = { beforeRequest, afterResponse }
+    // Create extended client
+    return ky.extend({ retry, hooks })
+  }
+
   async getOne(task: string): Promise<IResponse> {
     return new ResponseWeb(await this._client.get(task))
   }
@@ -145,12 +194,23 @@ export class DownloaderWeb implements IDownloader {
     )
   }
 
-  async rawRequest(cb: (raw: KyInstance) => Promise<Response>): Promise<IResponse> {
+  async clientRequest(cb: (raw: KyInstance) => Promise<Response>): Promise<IResponse> {
     return new ResponseWeb(await cb(this.raw))
   }
 
-  async rawRequestSafe(cb: (raw: KyInstance) => Promise<Response>): Promise<SafeResult<IResponse>> {
+  async clientRequestSafe(cb: (raw: KyInstance) => Promise<Response>): Promise<SafeResult<IResponse>> {
     return cb(this.raw).then(
+      (response) => ({ value: new ResponseWeb(response), error: null }),
+      (error) => ({ value: undefined, error })
+    )
+  }
+
+  async rawRequest(cb: (raw: KyInstance) => Promise<Response>): Promise<IResponse> {
+    return new ResponseWeb(await cb(this._pureClient))
+  }
+
+  async rawRequestSafe(cb: (raw: KyInstance) => Promise<Response>): Promise<SafeResult<IResponse>> {
+    return cb(this._pureClient).then(
       (response) => ({ value: new ResponseWeb(response), error: null }),
       (error) => ({ value: undefined, error })
     )

@@ -79,6 +79,10 @@ export class Node {
     return flattenLayers(this._node?.document)
   }
 
+  get styles(): FigmaNode['styles'] {
+    return this._node.styles
+  }
+
   // get isComponent() {
   //   return get(this.document, 'type') === 'COMPONENT'
   // }

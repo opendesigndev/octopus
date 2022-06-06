@@ -2,13 +2,15 @@ import { EventEmitter } from 'eventemitter3'
 
 import { logger } from '../../services'
 import { File } from '../structural/file'
+import { FillsDescriptor } from '../structural/fills-descriptor'
 import { Node } from '../structural/node'
 import { FrameLike } from './frame-like'
+import { Library } from './library'
 
 import type { Parser } from '../../parser'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { ICacher } from '../../types/cacher'
-import type { FigmaFile, FigmaNode } from '../../types/figma'
+import type { FigmaFile, FigmaFillsDescriptor, FigmaNode } from '../../types/figma'
 
 type DesignOptions = {
   designId: string
@@ -25,6 +27,8 @@ export class Design extends EventEmitter {
   private _designId: string
   private _file: Promise<File>
   private _frameLikes: Promise<FrameLike[]>
+  private _fillsDescriptor: FillsDescriptor
+  private _libraries: Promise<Library[]>
 
   constructor(options: DesignOptions) {
     super()
@@ -32,12 +36,25 @@ export class Design extends EventEmitter {
     this._parser = options.parser
     this._file = this._initFile()
     this._frameLikes = this._initFrameLikes()
+    this._libraries = this._initLibraries()
 
     this._emitOnReady()
   }
 
-  private get _cacher(): ICacher | null {
+  get raw(): Promise<File> {
+    return this._file
+  }
+
+  get cacher(): ICacher | null {
     return this._parser.services.cacher
+  }
+
+  get parser(): Parser {
+    return this._parser
+  }
+
+  get designId(): string {
+    return this._designId
   }
 
   private _createTargetDesignIds(ids: string[]): NodeAddress[] {
@@ -46,13 +63,13 @@ export class Design extends EventEmitter {
 
   private _getCachedFrameLikes(ids: NodeAddress[]): Promise<FigmaNode>[] {
     return ids.map(
-      (id) => this._cacher?.resolveNode?.(id) ?? Promise.reject(`Cache missing frame-like ${id.designId}/${id.nodeId}`)
+      (id) => this.cacher?.resolveNode?.(id) ?? Promise.reject(`Cache missing frame-like ${id.designId}/${id.nodeId}`)
     )
   }
 
   private async _cacheRequestedFrameLike(id: NodeAddress, request: Promise<FigmaNode>): Promise<FigmaNode> {
     request.then((node) => {
-      this._cacher?.cacheNodes?.([[id, node]])
+      this.cacher?.cacheNodes?.([[id, node]])
     })
     return request
   }
@@ -60,7 +77,7 @@ export class Design extends EventEmitter {
   private async _initFrameLikes(): Promise<FrameLike[]> {
     const targetIds = this._createTargetDesignIds(await this._getTargetIds())
 
-    const { cached, noncached } = (await this._cacher?.nodes?.(targetIds)) ?? { cached: [], noncached: targetIds }
+    const { cached, noncached } = (await this.cacher?.nodes?.(targetIds)) ?? { cached: [], noncached: targetIds }
     const reorderedIds = [...cached, ...noncached]
 
     const cachedFrameLikes = this._getCachedFrameLikes(cached)
@@ -75,19 +92,10 @@ export class Design extends EventEmitter {
           id: reorderedIds[index],
           design: this,
         })
-        // const node = await request
-        // const nodes = unwrap([new Node({ node, id: reorderedIds[index] })])
-        // return nodes.map((node) => {
-        //   return new FrameLike({
-        //     node,
-        //     id: reorderedIds[index],
-        //     design: this,
-        //   })
-        // })
       })
     )
 
-    return frameLikes // .flat(1)
+    return frameLikes
   }
 
   private async _getTargetIds() {
@@ -104,7 +112,7 @@ export class Design extends EventEmitter {
   }
 
   private async _getCachedDesign(): Promise<FigmaFile | undefined> {
-    return this._cacher?.resolveDesign?.(this._designId)
+    return this.cacher?.resolveDesign?.(this._designId)
   }
 
   private async _requestDesign(): Promise<FigmaFile> {
@@ -119,7 +127,7 @@ export class Design extends EventEmitter {
 
     // Request & cache
     const design = await this._requestDesign()
-    this._cacher?.cacheDesigns?.([[this._designId, design]])
+    this.cacher?.cacheDesigns?.([[this._designId, design]])
 
     return new File({ file: design })
   }
@@ -128,18 +136,8 @@ export class Design extends EventEmitter {
     return Promise.all((await this._frameLikes).map((frameLike) => frameLike.ready()))
   }
 
-  async frameLikes(): Promise<FrameLike[]> {
-    await this._readyFrameLikes()
-    return this._frameLikes
-  }
-
-  get parser(): Parser {
-    return this._parser
-  }
-
-  async ready(): Promise<void> {
-    await this._readyFrameLikes()
-    return
+  private async _readyLibraries() {
+    return Promise.all((await this._libraries).map((library) => library.ready()))
   }
 
   private async _emitOnReady() {
@@ -150,8 +148,44 @@ export class Design extends EventEmitter {
     })
   }
 
-  get designId(): string {
-    return this._designId
+  private async _initLibraries() {
+    const { targetIds, shouldFetchUsedComponents, shouldObtainLibraries } = this.parser.config
+    if (!shouldObtainLibraries) return []
+
+    const design = await this._file
+    const allTargetIds = design.getTargetIds()
+    const skipComponentsIfScoped = targetIds.length && !shouldFetchUsedComponents
+    if (skipComponentsIfScoped) return []
+
+    const librariesDescriptors = design.getRemoteComponentsDescriptorsByIds(allTargetIds.remoteComponents)
+
+    return librariesDescriptors.map((descriptor) => {
+      return new Library({ design: this, componentMeta: descriptor })
+    })
+  }
+
+  async getLazyFillsDescriptor(): Promise<FillsDescriptor> {
+    if (!this._fillsDescriptor) {
+      const fillsDescriptor = await this.parser.qm.queues.fills.exec(this.designId)
+      this._fillsDescriptor = new FillsDescriptor({ fillsDescriptor: fillsDescriptor as FigmaFillsDescriptor })
+    }
+    return this._fillsDescriptor
+  }
+
+  async frameLikes(): Promise<FrameLike[]> {
+    await this._readyFrameLikes()
+    return this._frameLikes
+  }
+
+  async libraries(): Promise<Library[]> {
+    await this._readyLibraries()
+    return this._libraries
+  }
+
+  async ready(): Promise<void> {
+    await this._readyFrameLikes()
+    await this._readyLibraries()
+    return
   }
 
   async meta(): Promise<DesignMeta> {

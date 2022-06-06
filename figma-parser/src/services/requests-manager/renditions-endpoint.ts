@@ -1,10 +1,10 @@
 import chunk from 'lodash/chunk'
 
-import { buildEndpoint } from '../../../utils/request'
-import { EndpointBase } from '../endpoint-base'
+import { buildEndpoint } from '../../utils/request'
+import { EndpointBase } from './endpoint-base'
 
-import type { RequestsManager } from '..'
-import type { FigmaRenditionsResponse } from '../../../types/figma'
+import type { RequestsManager } from '.'
+import type { FigmaRenditionsResponse } from '../../types/figma'
 
 export type RenditionRequestOptions = {
   headers: Record<string, string>

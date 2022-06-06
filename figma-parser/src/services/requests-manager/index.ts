@@ -1,5 +1,6 @@
 import { FileEndpoint } from './file-endpoint'
 import { FillsEndpoint } from './fills-endpoint'
+import { LibraryEndpoint } from './library-endpoint'
 import { NodesEndpoint } from './nodes-endpoint'
 import { PreviewsEndpoint } from './previews-endpoint'
 import { RenditionsEndpoint } from './renditions-endpoint'
@@ -18,6 +19,7 @@ export class RequestsManager {
     fills: FillsEndpoint
     previews: PreviewsEndpoint
     renditions: RenditionsEndpoint
+    library: LibraryEndpoint
   }
 
   constructor(options: RequestsManagerOptions) {
@@ -28,6 +30,7 @@ export class RequestsManager {
       fills: new FillsEndpoint({ requestsManager: this }),
       previews: new PreviewsEndpoint({ requestsManager: this }),
       renditions: new RenditionsEndpoint({ requestsManager: this }),
+      library: new LibraryEndpoint({ requestsManager: this }),
     }
   }
 
@@ -53,5 +56,9 @@ export class RequestsManager {
 
   get renditions(): RenditionsEndpoint {
     return this._endpoints.renditions
+  }
+
+  get library(): LibraryEndpoint {
+    return this._endpoints.library
   }
 }

@@ -1,10 +1,15 @@
 // import { logger } from '..'
-
 import { Queue } from '../../utils/queue'
 
 import type { Node } from '../../entities/structural/node'
 import type { Parser } from '../../parser'
-import type { FigmaNode, FigmaNodesResponse, FigmaPreviewsResponse, FigmaRenditionsResponse } from '../../types/figma'
+import type {
+  FigmaComponent,
+  FigmaNode,
+  FigmaNodesResponse,
+  FigmaPreviewsResponse,
+  FigmaRenditionsResponse,
+} from '../../types/figma'
 import type { JSONValue } from '../downloader/response.iface'
 import type { NodeAddress } from '../requests-manager/nodes-endpoint'
 import type { RenditionRequestOptions } from '../requests-manager/renditions-endpoint'
@@ -23,6 +28,7 @@ type PreviewsDescriptorsQueue = Queue<string, JSONValue>
 type PreviewsQueue = Queue<Node, ArrayBuffer>
 type RenditionsDescriptorsQueue = Queue<{ url: string; options: RenditionRequestOptions }, JSONValue>
 type RenditionsQueue = Queue<string, ArrayBuffer>
+type LibrariesQueue = Queue<string, null | (NodeAddress & { component: FigmaNode })>
 
 type Queues = {
   nodesMerger: NodesMergerQueue
@@ -34,6 +40,7 @@ type Queues = {
   previews: PreviewsQueue
   renditionsDescriptors: RenditionsDescriptorsQueue
   renditions: RenditionsQueue
+  libraries: LibrariesQueue
 }
 
 export class QueuesManager {
@@ -52,15 +59,19 @@ export class QueuesManager {
       previews: this._initPreviewsQueue(),
       renditionsDescriptors: this._initRenditionsDescriptorsQueue(options),
       renditions: this._initRenditionsQueue(),
+      libraries: this._initLibrariesQueue(),
     }
 
     // if (options.parser.config.isVerbose) {
     //   setInterval(() => {
     //     logger?.info(
     //       'Queues status',
-    //       Object.values(this._queues).map((queue) => queue.status)
+    //       Object.values(this._queues).map(
+    //         (queue) =>
+    //           `enq ${queue.status.enqueued} av ${queue.status.available} wo ${queue.status.working} name ${queue.status.name} `
+    //       )
     //     )
-    //   }, 1000)
+    //   }, 5000)
     // }
   }
 
@@ -135,7 +146,10 @@ export class QueuesManager {
       parallels: options.parser.config.parallels.figmaS3,
       factory: async (urls: string[]) => {
         const [url] = urls
-        const buffer = await this._parser.downloader.getBuffer(url)
+        const response = await this._parser.downloader.rawRequest((raw: KyInstance) => {
+          return raw.get(url)
+        })
+        const buffer = await response.buffer
         return [Queue.safeValue(buffer)]
       },
     })
@@ -163,15 +177,12 @@ export class QueuesManager {
         const tasks = groups.map((group) => {
           return previewsEndpoint.prepareRequest(group.designId, group.nodeIds)
         })
-
         const responses = (await Promise.all(
           this._queues.previewsDescriptors.execMany(tasks)
         )) as FigmaPreviewsResponse[]
         const s3Links = previewsEndpoint.ungroupResponses(responses, groups, nodes)
-
-        return Promise.all(
-          this._queues.figmaS3.execMany(s3Links).map(async (promise) => Queue.safeValue(await promise))
-        )
+        const promises = this._queues.figmaS3.execMany(s3Links)
+        return Promise.all(promises.map(async (promise) => Queue.safeValue(await promise)))
       },
       drainLimit: null,
     })
@@ -184,7 +195,7 @@ export class QueuesManager {
       factory: async (requests: { url: string; options: RenditionRequestOptions }[]) => {
         const [request] = requests
         const { url, options } = request
-        const response = await this._parser.downloader.rawRequest((raw: KyInstance) => {
+        const response = await this._parser.downloader.clientRequest((raw: KyInstance) => {
           return raw.post(url, options)
         })
         return [Queue.safeValue(await response.json)]
@@ -218,6 +229,25 @@ export class QueuesManager {
         return ids.map((id) => Queue.safeValue(resultsMap[id]))
       },
       drainLimit: null,
+    })
+  }
+
+  private _initLibrariesQueue(): LibrariesQueue {
+    return new Queue({
+      name: 'Libraries Queue',
+      parallels: 10,
+      factory: async (componentIds: string[]) => {
+        const [componentId] = componentIds
+        const response = await this._parser.downloader.getJSONSafe(this._parser.rm.library.prepareRequest(componentId))
+        if (response.error) {
+          return [Queue.safeValue(null)]
+        }
+        const componentMeta = response.value as FigmaComponent
+        const id = { designId: componentMeta.meta.file_key, nodeId: componentMeta.meta.node_id }
+        const component = await this._queues.partialSync.exec(id)
+        const descriptor = { ...id, component }
+        return [Queue.safeValue(descriptor)]
+      },
     })
   }
 

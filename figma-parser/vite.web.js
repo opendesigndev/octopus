@@ -6,7 +6,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index-web.ts'),
+      entry: path.resolve(__dirname, 'scripts/test-web.ts'),
       name: 'FigmaParser',
       fileName: (format) => `figma-parser-web.${format}.js`,
       formats: ['umd'],

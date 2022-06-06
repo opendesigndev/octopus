@@ -1,6 +1,7 @@
 import { Fills } from './fills'
 import { Preview } from './preview'
 import { Renditions } from './rendition'
+import Styles from './styles'
 
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { Node } from '../structural/node'
@@ -19,6 +20,7 @@ export class FrameLike {
   _fills: Fills
   _renditions: Renditions
   _preview: Preview | null
+  _styles: Styles
 
   constructor(options: FrameLikeOptions) {
     this._design = options.design
@@ -26,6 +28,7 @@ export class FrameLike {
     this._fills = new Fills({ frameLike: this })
     this._renditions = new Renditions({ frameLike: this })
     this._preview = this._design.parser.config.framePreviews ? new Preview({ frameLike: this }) : null
+    this._styles = new Styles({ frameLike: this })
 
     this._emitOnReady()
   }

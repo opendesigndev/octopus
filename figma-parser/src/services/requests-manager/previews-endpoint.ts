@@ -1,13 +1,13 @@
 import chunk from 'lodash/chunk'
 
-import { isObject, keys } from '../../../utils/common'
-import { buildEndpoint } from '../../../utils/request'
-import { EndpointBase } from '../endpoint-base'
+import { isObject, keys } from '../../utils/common'
+import { buildEndpoint } from '../../utils/request'
+import { EndpointBase } from './endpoint-base'
 
-import type { RequestsManager } from '..'
-import type { Node } from '../../../entities/structural/node'
-import type { FigmaPreviewsResponse } from '../../../types/figma'
-import type { DesignNodes } from '../nodes-endpoint'
+import type { RequestsManager } from '.'
+import type { Node } from '../../entities/structural/node'
+import type { FigmaPreviewsResponse } from '../../types/figma'
+import type { DesignNodes } from './nodes-endpoint'
 
 type PreviewsEndpointOptions = {
   requestsManager: RequestsManager
@@ -67,14 +67,9 @@ export class PreviewsEndpoint extends EndpointBase {
   ungroupResponses(responses: FigmaPreviewsResponse[], groups: DesignNodes[], nodes: Node[]): string[] {
     const map = responses.reduce((map, resp, index) => {
       const { designId } = groups[index]
-      // const documentBase = without(resp, ['nodes'] as const)
       const nodeIds = isObject(resp?.images) ? keys(resp.images) : []
       const subMap = Object.fromEntries(
         nodeIds.map((nodeId) => {
-          // const result = {
-          //   ...Object(documentBase),
-          //   nodes: { [nodeId]: resp?.nodes?.[nodeId] },
-          // }
           return [nodeId, resp?.images?.[nodeId]]
         })
       ) as Record<typeof nodeIds[number], string>
@@ -90,56 +85,3 @@ export class PreviewsEndpoint extends EndpointBase {
     return nodes.map(({ nodeId, designId }) => map[designId][nodeId])
   }
 }
-
-// async _getPreviewsJSONWithPersonalToken(groupedIds: string[][], onReady: Function) {
-//   const ep = RequestsManager.ENDPOINTS.PERSONAL.PREVIEWS
-//   const targets = groupedIds.map(group => {
-//     return RequestsManager.buildEndpoint(ep, {
-//       host: this.fp.config.host,
-//       designId: this.fp.config.designId,
-//       slicedIds: group
-//     })
-//   })
-//   return this.getTargetPreviews(targets, onReady)
-// }
-
-// async _getPreviewsJSONWithBase64Token(groupedIds: string[][], onReady: Function) {
-//   const ep = RequestsManager.ENDPOINTS.BASE64.PREVIEWS
-//   const targets = groupedIds.map(group => {
-//     return RequestsManager.buildEndpoint(ep, {
-//       host: this.fp.config.host,
-//       token: this.fp.config.token,
-//       slicedIds: group
-//     })
-//   })
-//   return this.getTargetPreviews(targets, onReady)
-// }
-
-// async _getFillsJSONWithPersonalToken(designIds: string[], onReady: Function) {
-//   const ep = RequestsManager.ENDPOINTS.PERSONAL.FILLS
-//   const targets = designIds.map(designId => {
-//     return {
-//       url: RequestsManager.buildEndpoint(ep, {
-//         host: this.fp.config.host,
-//         designId
-//       }),
-//       designId
-//     }
-//   })
-//   return this._getFillsJSONTarget(targets, onReady)
-// }
-
-// async _getFillsJSONWithBase64Token(designIds: string[], onReady: Function) {
-//   const ep = RequestsManager.ENDPOINTS.BASE64.FILLS
-//   const targets = designIds.map(designId => {
-//     return {
-//       url: RequestsManager.buildEndpoint(ep, {
-//         token: this.fp.config.token,
-//         host: this.fp.config.host,
-//         designId
-//       }),
-//       designId
-//     }
-//   })
-//   return this._getFillsJSONTarget(targets, onReady)
-// }

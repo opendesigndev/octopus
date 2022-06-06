@@ -17,4 +17,8 @@ export interface IDownloader {
   getJSONSafe(task: string): Promise<SafeResult<JSONValue>>
   rawRequest(cb: (raw: Got | KyInstance) => Promise<GotResponse<Buffer> | Response>): Promise<IResponse>
   rawRequestSafe(cb: (raw: Got | KyInstance) => Promise<GotResponse<Buffer> | Response>): Promise<SafeResult<IResponse>>
+  clientRequest(cb: (raw: Got | KyInstance) => Promise<GotResponse<Buffer> | Response>): Promise<IResponse>
+  clientRequestSafe(
+    cb: (raw: Got | KyInstance) => Promise<GotResponse<Buffer> | Response>
+  ): Promise<SafeResult<IResponse>>
 }

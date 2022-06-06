@@ -9,6 +9,7 @@ import firstCallMemo from '../../utils/decorators'
 import { Page } from './page'
 
 import type {
+  ComponentDescriptor,
   FigmaArtboard,
   FigmaFile,
   FigmaGroupLike,
@@ -33,7 +34,6 @@ type ComponentSetMeta = {
 }
 type ComponentSetsMetaMap = { [key: string]: ComponentSetMeta }
 type SourceComponentsMap = { [key: string]: SourceComponent }
-type SourceComponentDescriptor = SourceComponent & { localId: string }
 type FileOptions = { file: FigmaFile }
 
 export class File {
@@ -103,7 +103,7 @@ export class File {
 
   @firstCallMemo()
   get localComponents(): FigmaLayer[] {
-    return this.flatLayers.filter((node) => node?.type === 'COMPONENT')
+    return (this.flatLayers as FigmaLayer[]).filter((node) => node?.type === 'COMPONENT')
   }
 
   @firstCallMemo()
@@ -121,7 +121,7 @@ export class File {
     return this.idParentsMap[id] || null
   }
 
-  getRemoteComponentsDescriptorsByIds(ids: string[]): SourceComponentDescriptor[] {
+  getRemoteComponentsDescriptorsByIds(ids: string[]): ComponentDescriptor[] {
     const targets: SourceComponentsMap = pick(this.componentsRaw, ids)
     return keys(targets).map((key) => ({ ...targets[key], localId: key }))
   }
@@ -161,7 +161,7 @@ export class File {
       if (layer?.type !== 'COMPONENT_SET') return sets
       const csId = layer?.id
       const csName = layer?.name
-      const variants = getChildren(layer).reduce((variants, variant) => {
+      const variants = getChildren<FigmaArtboard>(layer).reduce((variants, variant) => {
         if (variant?.type !== 'COMPONENT') return variants
         const id = variant?.id
         const name = variant?.name
