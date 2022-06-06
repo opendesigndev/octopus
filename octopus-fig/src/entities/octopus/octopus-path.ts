@@ -4,19 +4,17 @@ import { simplifyPathData } from '../../utils/paper'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
 import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerText } from '../source/source-layer-text'
 
-type OctopusPathOptions = {
-  sourceLayer: SourceLayerShape
-  isStroke?: boolean
-}
+type SourceLayer = SourceLayerShape | SourceLayerText
 
-type PrivateOptions = {
-  sourceLayer: SourceLayerShape
-  isTopLayer: boolean
-}
+type OctopusPathOptions = { sourceLayer: SourceLayer; isStroke?: boolean }
+
+type PrivateOptions = { sourceLayer: SourceLayer; isTopLayer: boolean }
+type PrivateShapeOptions = { sourceLayer: SourceLayerShape; isTopLayer: boolean }
 
 export class OctopusPath {
-  private _sourceLayer: SourceLayerShape
+  private _sourceLayer: SourceLayer
   private _isStroke: boolean
 
   constructor(options: OctopusPathOptions) {
@@ -24,11 +22,12 @@ export class OctopusPath {
     this._isStroke = options.isStroke ?? false
   }
 
-  get sourceLayer(): SourceLayerShape {
+  get sourceLayer(): SourceLayer {
     return this._sourceLayer
   }
 
   private get _sourceShape(): 'LINE' | 'TRIANGLE' | 'RECTANGLE' | 'POLYGON' | 'ELLIPSE' | undefined {
+    if (this.sourceLayer.type === 'TEXT') return undefined
     switch (this.sourceLayer.shapeType) {
       case 'RECTANGLE':
         return 'RECTANGLE'
@@ -48,13 +47,13 @@ export class OctopusPath {
     return isTopLayer ? DEFAULTS.TRANSFORM : sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
-  private _firstGeometry(sourceLayer: SourceLayerShape): SourceGeometry | undefined {
+  private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
     return this._isStroke
       ? sourceLayer.strokeGeometry[0] ?? sourceLayer.fillGeometry[0]
       : sourceLayer.fillGeometry[0] ?? sourceLayer.strokeGeometry[0]
   }
 
-  private _geometry(sourceLayer: SourceLayerShape): Octopus['PathGeometry'] {
+  private _geometry(sourceLayer: SourceLayer): Octopus['PathGeometry'] {
     const path = this._firstGeometry(sourceLayer)?.path
     return path ? simplifyPathData(path) : DEFAULTS.EMPTY_PATH
   }
@@ -63,7 +62,7 @@ export class OctopusPath {
     return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadius
   }
 
-  private _pathRectangle({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathRectangle'] {
+  private _pathRectangle({ sourceLayer, isTopLayer }: PrivateShapeOptions): Octopus['PathRectangle'] {
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
     const { x, y } = sourceLayer.size ?? { x: 0, y: 0 }
@@ -78,7 +77,7 @@ export class OctopusPath {
     return { type: 'PATH', visible, transform, meta, geometry }
   }
 
-  private _pathBool({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['CompoundPath'] {
+  private _pathBool({ sourceLayer, isTopLayer }: PrivateShapeOptions): Octopus['CompoundPath'] {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
@@ -87,6 +86,7 @@ export class OctopusPath {
   }
 
   private _path({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathLike'] {
+    if (sourceLayer.type === 'TEXT') return this._pathPath({ sourceLayer, isTopLayer })
     if (this._isRectangle(sourceLayer)) return this._pathRectangle({ sourceLayer, isTopLayer })
     if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool({ sourceLayer, isTopLayer })
     return this._pathPath({ sourceLayer, isTopLayer })

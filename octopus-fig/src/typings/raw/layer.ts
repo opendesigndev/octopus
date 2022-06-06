@@ -85,7 +85,7 @@ export type RawLayerText = RawLayerVector & {
   style?: RawTextStyle
   layoutVersion?: number
   characterStyleOverrides?: number[]
-  styleOverrideTable?: Map<number, RawTextStyle>
+  styleOverrideTable?: { [key: string]: RawTextStyle | undefined }
   lineTypes?: RawLineTypes[]
   lineIndentations?: number[]
 }

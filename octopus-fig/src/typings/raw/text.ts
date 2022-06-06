@@ -20,6 +20,7 @@ export type RawTextStyle = {
   textAlignHorizontal?: RawTextAlignHorizontal
   textAlignVertical?: RawTextAlignVertical
   letterSpacing?: number
+  opentypeFlags?: { [key: string]: number | undefined }
   lineHeightPx?: number
   lineHeightPercent?: number
   lineHeightPercentFontSize?: number

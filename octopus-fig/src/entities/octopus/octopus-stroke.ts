@@ -7,15 +7,18 @@ import { OctopusPath } from './octopus-path'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourcePaint } from '../source/source-paint'
 
+type SourceLayer = SourceLayerShape | SourceLayerText
+
 type OctopusStrokeOptions = {
-  sourceLayer: SourceLayerShape
+  sourceLayer: SourceLayer
   fill: SourcePaint
 }
 
 export class OctopusStroke {
-  protected _sourceLayer: SourceLayerShape
+  protected _sourceLayer: SourceLayer
   private _fill: SourcePaint
   protected _path: OctopusPath
 

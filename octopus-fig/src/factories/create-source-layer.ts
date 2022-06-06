@@ -21,7 +21,7 @@ type CreateLayerOptions = {
   parent: SourceLayerParent
 }
 
-const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
+const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   FRAME: createLayerFrame,
   BOOLEAN_OPERATION: createLayerShape,
   ELLIPSE: createLayerShape,

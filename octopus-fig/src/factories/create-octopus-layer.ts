@@ -25,7 +25,7 @@ type CreateOctopusLayerOptions = {
   parent: OctopusLayerParent
 }
 
-const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders } = {
+const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders | undefined } = {
   FRAME: createOctopusLayerGroup,
   SHAPE: createOctopusLayerShape,
   TEXT: createOctopusLayerText,

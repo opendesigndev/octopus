@@ -1,7 +1,7 @@
 import { convertId } from '../convert'
 
 describe('convertId', () => {
-  function testConvertId(id: string, result: string): void {
+  function testExample(id: string, result: string): void {
     test(`convertId(${id}) to be ${result}`, () => {
       expect(convertId(id)).toBe(result)
     })
@@ -19,5 +19,5 @@ describe('convertId', () => {
     ['1:22;333;Background', '1-22_333_Background'],
   ]
 
-  examples.forEach((example) => testConvertId(...example))
+  examples.forEach((example) => testExample(...example))
 })
