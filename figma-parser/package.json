@@ -44,5 +44,8 @@
   "files": [
     "lib/src"
   ],
-  "main": "./lib/src/index.js"
+  "exports": {
+    "node": "./lib/src/index-node.js",
+    "default": "./lib/src/index-web.js"
+  }
 }

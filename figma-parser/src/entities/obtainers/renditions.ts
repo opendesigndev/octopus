@@ -67,6 +67,17 @@ export class Renditions {
     return Object.fromEntries(renditions) as Record<string, Promise<ArrayBuffer>>
   }
 
+  async getRenditions(): Promise<Record<string, ArrayBuffer>> {
+    return Object.fromEntries(
+      await Promise.all(
+        Object.entries(await this._renditions).map(async ([id, promise]) => {
+          const buffer = await promise
+          return [id, buffer]
+        })
+      )
+    )
+  }
+
   async ready(): Promise<void> {
     const renditions = Object.values(await this._renditions)
     await Promise.all(renditions)

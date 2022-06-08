@@ -63,6 +63,17 @@ export class Fills {
     return Object.fromEntries(fills) as Record<string, Promise<ArrayBuffer>>
   }
 
+  async getFills(): Promise<Record<string, ArrayBuffer>> {
+    return Object.fromEntries(
+      await Promise.all(
+        Object.entries(await this._fills).map(async ([id, promise]) => {
+          const buffer = await promise
+          return [id, buffer]
+        })
+      )
+    )
+  }
+
   async ready(): Promise<void> {
     const fills = Object.values(await this._fills)
     await Promise.all(fills)

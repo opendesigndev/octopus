@@ -21,7 +21,7 @@ export type Style = {
 
 export default class Styles {
   _frameLike: FrameLike
-  _styles: Promise<Style[]>
+  _styles: Style[]
 
   constructor(options: StylesOptions) {
     this._frameLike = options.frameLike
@@ -69,7 +69,7 @@ export default class Styles {
     return targetLayers
   }
 
-  private async _initStyles(): Promise<Style[]> {
+  private _initStyles(): Style[] {
     if (!this._frameLike._design.parser.config.shouldObtainStyles) return []
 
     const sourceNodes = [this._frameLike.node]
@@ -82,16 +82,18 @@ export default class Styles {
       })
     ) as Record<string, Style>
 
-    return Promise.all(
-      allKeys.map(async (styleKey) => {
-        const styleLocal = stylesMap[styleKey]
-        const style = {
-          meta: frameLikeStyles?.[styleLocal.id],
-          ...styleLocal,
-        }
-        this._frameLike._design.emit('ready:style', style)
-        return style
-      })
-    )
+    return allKeys.map((styleKey) => {
+      const styleLocal = stylesMap[styleKey]
+      const style = {
+        meta: frameLikeStyles?.[styleLocal.id],
+        ...styleLocal,
+      }
+      this._frameLike._design.emit('ready:style', style)
+      return style
+    })
+  }
+
+  getStyles(): Style[] {
+    return this._styles
   }
 }

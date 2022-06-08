@@ -11,6 +11,7 @@ import type { Parser } from '../../parser'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { ICacher } from '../../types/cacher'
 import type { FigmaFile, FigmaFillsDescriptor, FigmaNode } from '../../types/figma'
+import type { ResolvedFrame } from './frame-like'
 
 type DesignOptions = {
   designId: string
@@ -27,7 +28,7 @@ export class Design extends EventEmitter {
   private _designId: string
   private _file: Promise<File>
   private _frameLikes: Promise<FrameLike[]>
-  private _fillsDescriptor: FillsDescriptor
+  private _fillsDescriptor: Promise<FillsDescriptor>
   private _libraries: Promise<Library[]>
 
   constructor(options: DesignOptions) {
@@ -91,6 +92,7 @@ export class Design extends EventEmitter {
           node,
           id: reorderedIds[index],
           design: this,
+          role: node.type === 'COMPONENT' ? 'component' : 'artboard',
         })
       })
     )
@@ -140,12 +142,53 @@ export class Design extends EventEmitter {
     return Promise.all((await this._libraries).map((library) => library.ready()))
   }
 
-  private async _emitOnReady() {
-    await this.ready()
-    this.emit('ready:design', {
+  async getResolvedDescriptor(): Promise<{
+    designId: string
+    design: FigmaFile
+    content: Promise<{
+      artboards: ResolvedFrame[]
+      components: ResolvedFrame[]
+      libraries: ResolvedFrame[]
+    }>
+  }> {
+    const artboards = this._frameLikes.then((frameLikes) => {
+      return Promise.all(
+        frameLikes
+          .filter((frameLike) => frameLike.role === 'artboard')
+          .map((frameLike) => {
+            return frameLike.getResolvedDescriptor()
+          })
+      )
+    })
+
+    const components = this._frameLikes.then((frameLikes) => {
+      return Promise.all(
+        frameLikes
+          .filter((frameLike) => frameLike.role === 'component')
+          .map((frameLike) => {
+            return frameLike.getResolvedDescriptor()
+          })
+      )
+    })
+
+    const libraries = this._libraries.then((libraries) => {
+      return Promise.all(libraries.map((library) => library.getResolvedDescriptor())).then((libraries) => {
+        return libraries.filter((library) => library) as ResolvedFrame[]
+      })
+    })
+
+    return {
       designId: this._designId,
       design: (await this._file).raw,
-    })
+      content: Promise.all([artboards, components, libraries]).then(async (result) => {
+        const [artboards, components, libraries] = result
+        return { artboards, components, libraries }
+      }),
+    }
+  }
+
+  private async _emitOnReady() {
+    this.emit('ready:design', await this.getResolvedDescriptor())
   }
 
   private async _initLibraries() {
@@ -166,8 +209,9 @@ export class Design extends EventEmitter {
 
   async getLazyFillsDescriptor(): Promise<FillsDescriptor> {
     if (!this._fillsDescriptor) {
-      const fillsDescriptor = await this.parser.qm.queues.fills.exec(this.designId)
-      this._fillsDescriptor = new FillsDescriptor({ fillsDescriptor: fillsDescriptor as FigmaFillsDescriptor })
+      this._fillsDescriptor = this.parser.qm.queues.fills.exec(this.designId).then((fillsDescriptor) => {
+        return new FillsDescriptor({ fillsDescriptor: fillsDescriptor as FigmaFillsDescriptor })
+      })
     }
     return this._fillsDescriptor
   }

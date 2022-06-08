@@ -53,6 +53,10 @@ export class Preview {
     return preview
   }
 
+  async getPreview(): Promise<ArrayBuffer> {
+    return this._preview
+  }
+
   async ready(): Promise<void> {
     await this._preview
     return
@@ -61,7 +65,7 @@ export class Preview {
   private async _emitOnReady() {
     await this.ready()
     this.design.emit('ready:preview', {
-      designId: this.design.designId,
+      designId: this._frameLike.node.designId,
       nodeId: this._frameLike.node.nodeId,
       buffer: await this._preview,
     })

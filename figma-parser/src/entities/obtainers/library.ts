@@ -5,6 +5,7 @@ import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint
 import type { ICacher } from '../../types/cacher'
 import type { ComponentDescriptor, FigmaNode } from '../../types/figma'
 import type { Design } from './design'
+import type { ResolvedFrame } from './frame-like'
 
 type LibraryOptions = {
   design: Design
@@ -23,7 +24,7 @@ export class Library {
     this._component = this._initComponent()
     this._frameLike = this._initFrameLike()
 
-    this._emitOnReady()
+    // this._emitOnReady()
   }
 
   get cacher(): ICacher | null {
@@ -73,19 +74,22 @@ export class Library {
         designId: component.designId,
         nodeId: component.nodeId,
       },
+      role: 'library',
     })
   }
 
-  private async _emitOnReady() {
-    await this.ready()
-    const component = await this._component
-    if (!component) return
-    this._design.emit('ready:library', {
-      designId: component.designId,
-      nodeId: component.nodeId,
-      component: component.raw,
-    })
+  async getResolvedDescriptor(): Promise<ResolvedFrame | null> {
+    const frameLike = await this._frameLike
+    if (!frameLike) return null
+    return frameLike.getResolvedDescriptor()
   }
+
+  // private async _emitOnReady() {
+  //   const resolved = await this.getResolvedDescriptor()
+  //   if (resolved) {
+  //     this._design.emit('ready:library', resolved)
+  //   }
+  // }
 
   async ready(): Promise<void> {
     await this._component
