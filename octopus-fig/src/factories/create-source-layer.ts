@@ -32,6 +32,8 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   VECTOR: createLayerShape,
   TEXT: createLayerText,
   SLICE: createLayerSlice,
+  // GROUP: createTODO,
+  // INSTANCE: createTODO,
 } as const
 
 function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerFrame {
