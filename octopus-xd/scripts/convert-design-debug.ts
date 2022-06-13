@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
+import { displayPerf } from '../src/utils/console'
 
 type ConvertAllOptions = {
   render?: boolean
@@ -58,7 +59,11 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
     ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}
     ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath}
     ${chalk.cyan(`Render:`)} ${
-      render === null ? '<none>' : render.error ? chalk.red(render.error.message) : `file://${render.value}`
+      render === null
+        ? '<none>'
+        : render.error
+        ? chalk.red(render.error.message)
+        : `file://${render.value} ${displayPerf(render?.time)}`
     }
     `)
   })

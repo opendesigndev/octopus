@@ -13,7 +13,7 @@ export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
   private _layers: SourceLayer[]
 
-  static DEFAULT_ID = 'artboard:1'
+  static DEFAULT_ID = 'artboard-1'
 
   constructor(raw: RawArtboard) {
     super(raw)

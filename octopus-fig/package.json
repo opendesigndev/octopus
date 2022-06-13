@@ -12,6 +12,7 @@
     "convert:api:local": "ts-node ./scripts/convert-api-local.ts",
     "convert:source:debug": "ts-node ./scripts/convert-source-debug.ts",
     "convert:source:local": "ts-node ./scripts/convert-source-local.ts",
+    "parse": "ts-node ./scripts/test-parse.ts",
     "prepack": "rimraf ./lib && yarn run build",
     "test": "yarn jest",
     "types:check": "tsc --noEmit",

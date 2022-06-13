@@ -60,14 +60,15 @@ Check `src/services/conversion/xd-file-reader` for more details about readers
 
 You can create `.env` file which will be autoloaded using `dotenv`.
 
-| Variable       | Type                                                 | Description                                                |
-| -------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
-| NODE_ENV       | production / development / debug                     | Node environment                                           |
-| LOG_LEVEL      | fatal / error / warn / info / debug / trace / silent | Log level                                                  |
-| SENTRY_DSN     | string                                               | Sentry DSN                                                 |
-| CONVERT_RENDER | boolean                                              | if true will trigger rendering when octopus3.json is ready |
-| RENDERING_PATH | string                                               | path to rendering command (e.g. orchestrator4.run)         |
-| FONTS_PATH     | string                                               | path to directory with fonts                               |
+| Variable                    | Type                                                 | Description                                                |
+| --------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
+| NODE_ENV                    | production / development / debug                     | Node environment                                           |
+| LOG_LEVEL                   | fatal / error / warn / info / debug / trace / silent | Log level                                                  |
+| SENTRY_DSN                  | string                                               | Sentry DSN                                                 |
+| CONVERT_RENDER              | boolean                                              | if true will trigger rendering when octopus3.json is ready |
+| RENDERING_PATH              | string                                               | path to rendering command (e.g. orchestrator4.run)         |
+| RENDERING_IGNORE_VALIDATION | boolean                                              | ignores the rendering validation                           |
+| FONTS_PATH                  | string                                               | path to directory with fonts                               |
 
 ---
 
