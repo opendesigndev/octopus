@@ -43,7 +43,7 @@ export default class OctopusEffectBlur {
   convert(): Octopus['EffectBlur'] {
     const visible = asBoolean(this._source.visible, true)
     const blur = asNumber(this._source.blur)
-    const basis = this._source.backgroundEffect ? 'BACKGROUND' : 'BODY'
+    const basis = this._source.backgroundEffect ? 'BACKGROUND' : 'LAYER_AND_EFFECTS'
     const filters = this.filters
 
     return {
