@@ -7,6 +7,7 @@ import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 import { displayPerf } from '../src/utils/console'
+import { timestamp } from './utils/timestamp'
 
 type ConvertAllOptions = {
   render?: boolean
@@ -33,7 +34,8 @@ type ConvertedResources = {
 dotenv.config()
 
 export async function convertAll(options: ConvertAllOptions): Promise<void> {
-  const exporter = new TempExporter({ tempDir: options.outputDir })
+  const designId = `${timestamp()}-${path.basename(options.filename, '.xd')}`
+  const exporter = new TempExporter({ tempDir: options.outputDir, id: designId })
   exporter.on('source:resources', (exportedResources: ConvertedResources) => {
     const { manifest, interactions, resources, images } = exportedResources
     console.log(`${chalk.yellow('Manifest: ')}
