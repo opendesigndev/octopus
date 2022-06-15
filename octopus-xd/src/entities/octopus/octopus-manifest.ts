@@ -158,8 +158,13 @@ export default class OctopusManifest {
   get components(): Manifest['Component'][] {
     return this.manifestArtboardEntries
       .map((artboard) => {
-        const id = artboard.id
-        if (!id) return null
+        const internalId = artboard.id
+        if (!internalId) return null
+
+        const sourceArtboard = this._octopusXdConverter.sourceDesign.getArtboardByInternalId(internalId)
+
+        if (!sourceArtboard) return null
+        const id = sourceArtboard.meta.id
 
         const role = artboard.path === 'pasteboard' ? ({ role: 'PASTEBOARD' } as const) : null
         const bounds =

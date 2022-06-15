@@ -4,6 +4,7 @@
   "license": "UNLICENSED",
   "workspaces": {
     "packages": [
+      "figma-parser",
       "octopus-common",
       "octopus-ai",
       "octopus-fig",

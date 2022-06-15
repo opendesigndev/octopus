@@ -83,8 +83,13 @@ export default class SourceArtboard {
     const manifestId = manifestEntry.id
     return {
       ...manifestEntry,
-      id: manifestId,
-      internalId,
+      // id: manifestId,
+      // internalId,
+      /**
+       * `id` fallbacks to `manifestId` - that's the case when pasteboard has `null` as internalId.
+       */
+      id: internalId ?? manifestId,
+      internalId: manifestId,
     }
   }
 
