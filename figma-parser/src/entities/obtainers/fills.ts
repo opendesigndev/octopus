@@ -7,6 +7,12 @@ type FillsOptions = {
   frameLike: FrameLike
 }
 
+export type ResolvedFill = {
+  designId: string
+  ref: string
+  buffer: ArrayBuffer
+}
+
 export class Fills {
   _frameLike: FrameLike
   _fills: Promise<Record<string, Promise<ArrayBuffer>>>
@@ -54,7 +60,8 @@ export class Fills {
       return [
         reorderedIds[index].ref,
         promise.then((buffer) => {
-          this.design.emit('ready:fill', { designId: this.design.designId, ref: reorderedIds[index].ref, buffer })
+          const fill: ResolvedFill = { designId: this.design.designId, ref: reorderedIds[index].ref, buffer }
+          this.design.emit('ready:fill', fill)
           return buffer
         }),
       ]

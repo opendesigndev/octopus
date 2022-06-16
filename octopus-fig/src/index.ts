@@ -16,14 +16,19 @@ import { logger, set as setLogger } from './services/instances/logger'
 import { set as setSentry } from './services/instances/sentry'
 import { SourceApiReader } from './services/readers/source-api-reader'
 
-import type { SourceImage } from './entities/source/source-design'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { RawDesign } from './typings/raw/design'
 import type { RawLayerFrame } from './typings/raw/layer'
-import type { Design, ResolvedDesign, ResolvedFrame } from '@avocode/figma-parser/lib/src/index-node'
+import type {
+  Design,
+  ResolvedDesign,
+  ResolvedFrame,
+  ResolvedFill,
+  ResolvedPreview,
+} from '@avocode/figma-parser/lib/src/index-node'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
 export { LocalExporter, TempExporter }
@@ -51,10 +56,7 @@ export type DesignConversionResult = {
   time: number
 }
 
-type ExportImage = { path: string; getImageData: () => Promise<Buffer> }
-
 type ArtboardExport = {
-  images: ExportImage[]
   artboard: ArtboardConversionResult
 }
 
@@ -137,7 +139,6 @@ export class OctopusFigConverter {
   }
 
   private async _exportArtboard(exporter: AbstractExporter | null, artboard: SourceArtboard): Promise<ArtboardExport> {
-    const images: ExportImage[] = [] // TODO
     const converted = await this.convertArtboard(artboard)
     const artboardPath = await exporter?.exportArtboard?.(converted)
     this._octopusManifest?.setExportedArtboard(artboard.id, {
@@ -145,7 +146,7 @@ export class OctopusFigConverter {
       error: converted.error,
       time: converted.time,
     })
-    return { images, artboard: converted }
+    return { artboard: converted }
   }
 
   async convertDesign(options?: ConvertDesignOptions): Promise<boolean | null> {
@@ -166,15 +167,14 @@ export class OctopusFigConverter {
 
     design.on('ready:design', async (design: ResolvedDesign) => {
       const designId = design.designId
-      const raw = design.design as unknown as RawDesign // TODO
-      const images = [] as SourceImage[] // TODO
-      const sourceDesign = new SourceDesign({ designId, images, raw })
+      const raw = design.design as unknown as RawDesign
+      const sourceDesign = new SourceDesign({ designId, raw })
 
       const octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this })
       this._octopusManifest = octopusManifest
       octopusManifest.registerBasePath(await exporter?.getBasePath?.())
 
-      exporter?.exportSourceDesign?.(sourceDesign)
+      exporter?.exportSource?.(sourceDesign.raw)
 
       /** Init partial update */
       this._exportManifest(exporter)
@@ -201,8 +201,18 @@ export class OctopusFigConverter {
 
     design.on('ready:artboard', async (frame: ResolvedFrame) => {
       const rawArtboard = frame.node.document as RawLayerFrame
+      exporter?.exportSource?.(rawArtboard, frame.nodeId)
+
       const sourceArtboard = new SourceArtboard(rawArtboard)
       queue.add(async () => await this._exportArtboard(exporter, sourceArtboard))
+    })
+
+    design.on('ready:fill', async (fill: ResolvedFill) => {
+      exporter?.exportImage?.(fill.ref, Buffer.from(fill.buffer))
+    })
+
+    design.on('ready:preview', async (preview: ResolvedPreview) => {
+      exporter?.exportPreview?.(preview.nodeId, Buffer.from(preview.buffer))
     })
 
     return true

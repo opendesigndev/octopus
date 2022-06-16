@@ -5,12 +5,11 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
-import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { makeDir, saveFile } from '../../utils/files'
 import { stringify } from '../../utils/misc'
 import { timestamp } from '../../utils/timestamp'
 
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
-import type { SourceDesign } from '../../entities/source/source-design'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -26,9 +25,10 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
+  static IMAGE_EXTNAME = '.png'
   static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
   static MANIFEST_NAME = 'octopus-manifest.json'
-  static SOURCE_NAME = 'source.json'
+  static SOURCE_NAME = (id: string): string => `source-${kebabCase(id)}.json`
 
   constructor(options: TempExporterOptions) {
     super()
@@ -67,8 +67,8 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return this._outputDir
   }
 
-  async exportSourceDesign(design: SourceDesign): Promise<string> {
-    const sourcePath = await this._save(TempExporter.SOURCE_NAME, stringify(design.raw))
+  async exportSource(raw: unknown, name = 'design'): Promise<string> {
+    const sourcePath = await this._save(TempExporter.SOURCE_NAME(name), stringify(raw))
     this.emit('source:design', sourcePath)
     return sourcePath
   }
@@ -86,13 +86,18 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return octopusPath
   }
 
-  async exportImage(name: string, location: string): Promise<string> {
-    const dir = await this._outputDir
-    const fullPath = path.join(dir, TempExporter.IMAGES_DIR_NAME, name)
-    const write = copyFile(location, fullPath)
-    this._assetsSaves.push(write)
-    await write
-    return fullPath
+  async exportImage(name: string, data: Buffer): Promise<string> {
+    const fullName = path.join(TempExporter.IMAGES_DIR_NAME, `${name}${TempExporter.IMAGE_EXTNAME}`)
+    const imagePath = await this._save(fullName, data)
+    this.emit('source:image', imagePath)
+    return imagePath
+  }
+
+  async exportPreview(name: string, data: Buffer): Promise<string> {
+    const fullName = path.join(`octopus-${kebabCase(name)}preview${TempExporter.IMAGE_EXTNAME}`)
+    const imagePath = await this._save(fullName, data)
+    this.emit('source:preview', imagePath)
+    return imagePath
   }
 
   async exportManifest({ manifest }: DesignConversionResult, shouldEmit = false): Promise<string> {

@@ -5,7 +5,7 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
-import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { makeDir, saveFile } from '../../utils/files'
 import { stringify } from '../../utils/misc'
 
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
@@ -22,6 +22,7 @@ export class LocalExporter implements AbstractExporter {
   _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
+  static IMAGE_EXTNAME = '.png'
   static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
   static MANIFEST_NAME = 'octopus-manifest.json'
 
@@ -65,12 +66,9 @@ export class LocalExporter implements AbstractExporter {
     return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), stringify(artboard.value))
   }
 
-  async exportImage(name: string, location: string): Promise<string> {
-    const dir = await this._outputDir
-    const fullPath = path.join(dir, LocalExporter.IMAGES_DIR_NAME, name)
-    const save = copyFile(location, fullPath)
-    this._assetsSaves.push(save)
-    return save
+  async exportImage(name: string, data: Buffer): Promise<string> {
+    const fullName = path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${LocalExporter.IMAGE_EXTNAME}`)
+    return await this._save(fullName, data)
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {

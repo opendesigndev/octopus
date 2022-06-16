@@ -29,9 +29,9 @@ export async function convertDesign({
   const outputDir = path.join(await getPkgLocation(), 'workdir')
   const exporter = new TempExporter({ tempDir: outputDir, designId })
 
-  exporter.on('source:design', (sourcePath: string) => {
-    console.info(`\n${chalk.yellow('Source: ')} file://${sourcePath}`)
-  })
+  exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))
+  exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
+  exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? `❌ ${artboard.error}` : '✅'

@@ -1,17 +1,20 @@
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
-import type { SourceDesign } from '../../entities/source/source-design'
 
 export abstract class AbstractExporter {
-  exportSourceDesign?(_design: SourceDesign): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportSourceDesign" method implemented!')
+  exportSource?(_raw: unknown, _name?: string): Promise<unknown> {
+    throw new Error('Subclass of "Exporter" has no "exportSource" method implemented!')
   }
 
   exportArtboard(_artboard: ArtboardConversionResult): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
   }
 
-  exportImage(_name: string, _path: string): Promise<unknown> {
+  exportImage?(_name: string, _data: Buffer): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
+  }
+
+  exportPreview?(_name: string, _data: Buffer): Promise<unknown> {
+    throw new Error('Subclass of "Exporter" has no "exportPreview" method implemented!')
   }
 
   exportManifest(_manifest: DesignConversionResult, _shouldEmit?: boolean): Promise<unknown> {
