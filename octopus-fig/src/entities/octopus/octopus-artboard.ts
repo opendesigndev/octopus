@@ -3,27 +3,23 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { convertBlendMode, convertId } from '../../utils/convert'
 
-import type { OctopusFigConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceArtboard } from '../source/source-artboard'
-import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
-  targetArtboardId: string
-  octopusConverter: OctopusFigConverter
+  sourceArtboard: SourceArtboard
+  version: string
 }
 
 export class OctopusArtboard {
-  private _octopusConverter: OctopusFigConverter
   private _sourceArtboard: SourceArtboard
+  private _version: string
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.octopusConverter.sourceDesign.getArtboardById(options.targetArtboardId)
-    if (!artboard) throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
-    this._sourceArtboard = artboard
-    this._octopusConverter = options.octopusConverter
+    this._sourceArtboard = options.sourceArtboard
+    this._version = options.version
     this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
   }
 
@@ -33,14 +29,6 @@ export class OctopusArtboard {
 
   get sourceArtboard(): SourceArtboard {
     return this._sourceArtboard
-  }
-
-  get converter(): OctopusFigConverter {
-    return this._octopusConverter
-  }
-
-  get sourceDesign(): SourceDesign {
-    return this.converter.sourceDesign
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
@@ -54,8 +42,8 @@ export class OctopusArtboard {
     return convertId(this.sourceArtboard.id)
   }
 
-  get version(): Promise<string> {
-    return this.converter.pkgVersion
+  get version(): string {
+    return this._version
   }
 
   private get _content(): Octopus['GroupLayer'] {
@@ -73,7 +61,7 @@ export class OctopusArtboard {
     return {
       id: this.id,
       type: 'ARTBOARD',
-      version: await this.version,
+      version: this.version,
       dimensions: this.dimensions,
       content: this._content,
     } as Octopus['OctopusDocument']

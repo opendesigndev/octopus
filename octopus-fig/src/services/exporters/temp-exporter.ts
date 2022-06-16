@@ -6,6 +6,8 @@ import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { stringify } from '../../utils/misc'
+import { timestamp } from '../../utils/timestamp'
 
 import type { ArtboardConversionResult, DesignConversionResult } from '../..'
 import type { SourceDesign } from '../../entities/source/source-design'
@@ -13,7 +15,7 @@ import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
-  id?: string
+  designId?: string
   tempDir: string
 }
 
@@ -36,14 +38,11 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     this._completed = detachPromiseControls<void>()
   }
 
-  private _stringify(value: unknown) {
-    return JSON.stringify(value, null, '  ')
-  }
-
   private async _initOutputDir(options: TempExporterOptions) {
-    const tempDir = path.join(this._tempDir, typeof options.id === 'string' ? options.id : uuidv4())
-    await makeDir(path.join(tempDir, TempExporter.IMAGES_DIR_NAME))
-    return tempDir
+    const dirName = typeof options.designId === 'string' ? `${timestamp()}-${options.designId}` : uuidv4()
+    const tempPath = path.join(this._tempDir, dirName)
+    await makeDir(path.join(tempPath, TempExporter.IMAGES_DIR_NAME))
+    return tempPath
   }
 
   private async _save(name: string | null, body: string | Buffer) {
@@ -69,7 +68,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportSourceDesign(design: SourceDesign): Promise<string> {
-    const sourcePath = await this._save(TempExporter.SOURCE_NAME, this._stringify(design.raw))
+    const sourcePath = await this._save(TempExporter.SOURCE_NAME, stringify(design.raw))
     this.emit('source:design', sourcePath)
     return sourcePath
   }
@@ -81,7 +80,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     }
     const octopusPath = await this._save(
       TempExporter.OCTOPUS_NAME(`${artboard.id}-${artboard.value.content?.name}`),
-      this._stringify(artboard.value)
+      stringify(artboard.value)
     )
     this.emit('octopus:artboard', { ...artboard, value: undefined, octopusPath })
     return octopusPath
@@ -97,7 +96,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportManifest({ manifest }: DesignConversionResult, shouldEmit = false): Promise<string> {
-    const manifestPath = await this._save(TempExporter.MANIFEST_NAME, this._stringify(manifest))
+    const manifestPath = await this._save(TempExporter.MANIFEST_NAME, stringify(manifest))
     if (shouldEmit) this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }

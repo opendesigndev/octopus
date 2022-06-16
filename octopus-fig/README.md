@@ -21,6 +21,7 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 | RENDERING_PATH              | string                                               | path to rendering command (e.g. orchestrator4.run)         |
 | RENDERING_IGNORE_VALIDATION | boolean                                              | ignores the rendering validation                           |
 | FONTS_PATH                  | string                                               | path to directory with fonts                               |
+| API_TOKEN                   | string                                               | Figma API token                                            |
 
 ## Convert Figma file
 

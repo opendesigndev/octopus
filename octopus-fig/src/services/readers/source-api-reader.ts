@@ -1,58 +1,53 @@
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
-import { v4 as uuidv4 } from 'uuid'
+import { createParser } from '@avocode/figma-parser/lib/src/index-node'
 
-import { SourceDesign } from '../../entities/source/source-design'
-import { displayPerf } from '../../utils/console'
-import { parseJsonFromFile } from '../../utils/files'
-import { logInfo } from '../instances/misc'
+import { ENV } from '../general/environment'
 
-import type { SourceImage } from '../../entities/source/source-design'
-import type { RawDesign } from '../../typings/raw'
+import type { Design } from '@avocode/figma-parser/lib/src/index-node'
 
 type SourceApiReaderOptions = {
-  path: string
-  designId?: string
+  designId: string
 }
 
 export class SourceApiReader {
-  private _path: string
   private _designId: string
-  private _sourceDesign: Promise<SourceDesign | null>
+  private _design: Promise<Design | null>
 
   constructor(options: SourceApiReaderOptions) {
-    this._path = options.path
-    this._designId = options.designId || uuidv4()
-    this._sourceDesign = this._initSourceDesign()
-  }
-
-  get path(): string {
-    return this._path
+    this._designId = options.designId
+    this._design = this._initSourceDesign()
   }
 
   get designId(): string {
     return this._designId
   }
 
-  get sourceDesign(): Promise<SourceDesign | null> {
-    return this._sourceDesign
+  async designPromise(): Promise<Design | null> {
+    return this._design
   }
 
-  private async _getRawDesign(): Promise<RawDesign | null> {
-    const { time, result } = await benchmarkAsync(() => parseJsonFromFile<RawDesign>(this.path))
-    logInfo(`RawDesign prepared ${displayPerf(time)}`)
-    return result
-  }
+  private async _initSourceDesign(): Promise<Design | null> {
+    const token = ENV.API_TOKEN
+    if (!token) return null
 
-  private async _getImages(): Promise<SourceImage[]> {
-    return [] // TODO
-  }
+    const parser = createParser({
+      designId: this.designId,
+      token,
+      ids: [],
+      host: 'api.figma.com',
+      pixelsLimit: 1e7,
+      framePreviews: true,
+      previewsParallels: 3,
+      tokenType: 'personal',
+      nodesParallels: 10,
+      s3Parallels: 10,
+      verbose: true,
+      figmaIdsFetchUsedComponents: true,
+      renderImagerefs: false,
+      shouldObtainLibraries: true,
+      shouldObtainStyles: true,
+      parallelRequests: 5,
+    })
 
-  private async _initSourceDesign(): Promise<SourceDesign | null> {
-    const raw = await this._getRawDesign()
-    if (raw == null) return null
-    const images = await this._getImages()
-    const designId = this.designId
-
-    return new SourceDesign({ designId, images, raw })
+    return parser.parse()
   }
 }

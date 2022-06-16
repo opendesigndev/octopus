@@ -6,6 +6,7 @@ import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { stringify } from '../../utils/misc'
 
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
 import type { AbstractExporter } from './abstract-exporter'
@@ -28,10 +29,6 @@ export class LocalExporter implements AbstractExporter {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []
     this._completed = detachPromiseControls<void>()
-  }
-
-  private _stringify(value: unknown) {
-    return JSON.stringify(value, null, '  ')
   }
 
   private async _initTempDir(options: LocalExporterOptions) {
@@ -65,7 +62,7 @@ export class LocalExporter implements AbstractExporter {
 
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), this._stringify(artboard.value))
+    return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), stringify(artboard.value))
   }
 
   async exportImage(name: string, location: string): Promise<string> {
@@ -77,6 +74,6 @@ export class LocalExporter implements AbstractExporter {
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    return this._save(LocalExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
+    return this._save(LocalExporter.MANIFEST_NAME, stringify(manifest.manifest))
   }
 }

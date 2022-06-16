@@ -4,9 +4,9 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
+import { displayPerf } from '../src/utils/console'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
-import { displayPerf } from '../src/utils/console'
 import { timestamp } from './utils/timestamp'
 
 type ConvertAllOptions = {

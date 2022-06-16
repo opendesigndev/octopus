@@ -1,10 +1,7 @@
-import { push } from '@avocode/octopus-common/dist/utils/common'
-
 import { SourceEntity } from './source-entity'
 import { SourcePage } from './source-page'
 
 import type { RawPage, RawDesign } from '../../typings/raw'
-import type { SourceArtboard } from './source-artboard'
 
 export type SourceImage = {
   name: string
@@ -50,24 +47,8 @@ export class SourceDesign extends SourceEntity {
     return this._pages
   }
 
-  getPageById(id: string): SourcePage | null {
-    return this._pages.find((page) => page.id === id) ?? null
-  }
-
   get images(): SourceImage[] {
     return this._images
-  }
-
-  getImageByName(name: string): SourceImage | undefined {
-    return this.images.find((image) => image.name === name)
-  }
-
-  get artboards(): SourceArtboard[] {
-    return this._pages.reduce((artboards, page) => push(artboards, ...page.children), [])
-  }
-
-  getArtboardById(id: string): SourceArtboard | null {
-    return this.artboards.find((artboard) => artboard.id === id) || null
   }
 
   get values(): {

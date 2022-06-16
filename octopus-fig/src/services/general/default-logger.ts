@@ -3,6 +3,8 @@ import isEmpty from 'lodash/isEmpty'
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
+import { ENV } from './environment'
+
 export function createDefaultLogger(): ReturnType<typeof pino> {
   return pino({
     formatters: {
@@ -18,9 +20,9 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
       },
     },
     messageKey: 'message',
-    level: process.env.LOG_LEVEL || 'debug',
+    level: ENV.LOG_LEVEL,
     prettyPrint:
-      process.env.NODE_ENV === 'debug'
+      ENV.NODE_ENV === 'debug'
         ? {
             levelFirst: true,
           }

@@ -3,26 +3,21 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { LocalExporter, OctopusFigConverter, SourceFileReader } from '../src'
+import { LocalExporter, OctopusFigConverter, SourceApiReader } from '../src'
 
-async function convert() {
-  const [filePath] = process.argv.slice(2)
+async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())
-
-  const designId = uuidv4()
-  const reader = new SourceFileReader({ path: filePath, designId }) // TODO
-  const sourceDesign = await reader.sourceDesign
-  if (sourceDesign === null) {
-    console.error('Creating SourceDesign Failed')
-    return
-  }
-  const converter = new OctopusFigConverter({ sourceDesign })
   const exporter = new LocalExporter({ path: testDir })
-  await converter.convertDesign({ exporter })
+
+  const reader = new SourceApiReader({ designId })
+  const designPromise = reader.designPromise()
+  const converter = new OctopusFigConverter({ designPromise })
+  converter.convertDesign({ exporter })
   await exporter.completed()
 
-  console.info(`Input: ${filePath}`)
-  console.info(`Output: ${testDir}`)
+  console.info()
+  console.info(`Output: file://${testDir}`)
 }
 
-convert()
+const designId = process.argv[2]
+convertDesign(designId)

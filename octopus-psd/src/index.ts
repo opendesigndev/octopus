@@ -75,6 +75,11 @@ export class OctopusPSDConverter {
     TEMP: TempExporter,
   }
 
+  static READERS = {
+    PSD: PSDFileReader,
+    SOURCE: SourceFileReader,
+  }
+
   constructor(options: OctopusPSDConverterOptions) {
     this._setupLogger(options?.logger)
     setSentry(

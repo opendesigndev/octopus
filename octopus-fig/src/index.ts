@@ -1,43 +1,40 @@
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
-import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue'
+import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import PQueue from 'p-queue'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
+import { SourceArtboard } from './entities/source/source-artboard'
+import { SourceDesign } from './entities/source/source-design'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { TempExporter } from './services/exporters/temp-exporter'
-import { createEnvironment } from './services/general/environment'
+import { ENV } from './services/general/environment'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
 import { set as setSentry } from './services/instances/sentry'
-import { SourceFileReader } from './services/readers/source-file-reader'
+import { SourceApiReader } from './services/readers/source-api-reader'
 
-import type { SourceArtboard } from './entities/source/source-artboard'
-import type { SourceDesign } from './entities/source/source-design'
+import type { SourceImage } from './entities/source/source-design'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue'
+import type { RawDesign } from './typings/raw/design'
+import type { RawLayerFrame } from './typings/raw/layer'
+import type { Design, ResolvedDesign, ResolvedFrame } from '@avocode/figma-parser/lib/src/index-node'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
 export { LocalExporter, TempExporter }
-export { SourceFileReader }
+export { SourceApiReader }
 
 type ConvertDesignOptions = {
   exporter?: AbstractExporter
 }
 
-export type ConvertDesignResult = {
-  manifest: Manifest['OctopusManifest']
-  artboards: ArtboardConversionResult[]
-  images: ExportImage[]
-}
-
 type OctopusConverterOptions = {
-  sourceDesign: SourceDesign
+  designPromise: Promise<Design | null>
   designId?: string
   logger?: Logger
 }
@@ -61,16 +58,11 @@ type ArtboardExport = {
   artboard: ArtboardConversionResult
 }
 
-/**
- * Loading of .env file.
- */
-createEnvironment()
-
 export class OctopusFigConverter {
   private _id: string
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _sourceDesign: SourceDesign
-  private _octopusManifest: OctopusManifest
+  private _designPromise: Promise<Design | null>
+  private _octopusManifest: OctopusManifest | undefined
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
@@ -78,34 +70,24 @@ export class OctopusFigConverter {
   }
 
   static READERS = {
-    SOURCE: SourceFileReader,
+    API: SourceApiReader,
   }
 
-  static ARTBOARDS_QUEUE_NAME = 'artboards'
-  static ARTBOARDS_QUEUE_PARALLELS = 5
+  static QUEUE_PARALLELS = 5
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: OctopusConverterOptions) {
     this._setupLogger(options?.logger)
     setSentry(
       createSentry({
-        dsn: process.env.SENTRY_DSN,
+        dsn: ENV.SENTRY,
         logger,
       })
     )
 
     this._id = options.designId || uuidv4()
-    this._sourceDesign = options.sourceDesign
-    this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter: this })
+    this._designPromise = options.designPromise
     this._pkg = readPackageUpAsync({ cwd: __dirname })
-  }
-
-  get sourceDesign(): SourceDesign {
-    return this._sourceDesign
-  }
-
-  get octopusManifest(): OctopusManifest {
-    return this._octopusManifest
   }
 
   get id(): string {
@@ -125,38 +107,40 @@ export class OctopusFigConverter {
     })
   }
 
-  private async _convertArtboardByIdSafe(
-    targetArtboardId: string
+  private async _convertArtboardSafe(
+    artboard: SourceArtboard
   ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
     try {
-      const value = await new ArtboardConverter({ targetArtboardId, octopusConverter: this }).convert()
+      const version = await this.pkgVersion
+      const value = await new ArtboardConverter({ artboard, version }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
     }
   }
 
-  async convertArtboardById(targetArtboardId: string): Promise<ArtboardConversionResult> {
-    const { time, result } = await benchmarkAsync(async () => this._convertArtboardByIdSafe(targetArtboardId))
+  async convertArtboard(artboard: SourceArtboard): Promise<ArtboardConversionResult> {
+    const { time, result } = await benchmarkAsync(async () => this._convertArtboardSafe(artboard))
     const { value, error } = result
-    return { id: targetArtboardId, value, error, time }
+    return { id: artboard.id, value, error, time }
   }
 
   private async _exportManifest(
     exporter: AbstractExporter | null,
     shouldEmit?: boolean
-  ): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+  ): Promise<Manifest['OctopusManifest'] | undefined> {
+    const octopusManifest = this._octopusManifest
+    if (!octopusManifest) return undefined
+    const { time, result: manifest } = await benchmarkAsync(() => octopusManifest.convert())
     await exporter?.exportManifest?.({ manifest, time }, shouldEmit)
     return manifest
   }
 
   private async _exportArtboard(exporter: AbstractExporter | null, artboard: SourceArtboard): Promise<ArtboardExport> {
     const images: ExportImage[] = [] // TODO
-
-    const converted = await this.convertArtboardById(artboard.id)
+    const converted = await this.convertArtboard(artboard)
     const artboardPath = await exporter?.exportArtboard?.(converted)
-    this.octopusManifest.setExportedArtboard(artboard.id, {
+    this._octopusManifest?.setExportedArtboard(artboard.id, {
       path: artboardPath,
       error: converted.error,
       time: converted.time,
@@ -164,60 +148,63 @@ export class OctopusFigConverter {
     return { images, artboard: converted }
   }
 
-  private _initArtboardQueue(exporter: AbstractExporter | null) {
-    return new Queue({
-      name: OctopusFigConverter.ARTBOARDS_QUEUE_NAME,
-      parallels: OctopusFigConverter.ARTBOARDS_QUEUE_PARALLELS,
-      factory: async (artboards: SourceArtboard[]): Promise<SafeResult<ArtboardExport>[]> => {
-        return Promise.all(
-          artboards.map(async (artboard) => {
-            return { value: await this._exportArtboard(exporter, artboard), error: null }
-          })
-        )
-      },
-    })
-  }
-
-  async convertDesign(options?: ConvertDesignOptions): Promise<ConvertDesignResult | null> {
+  async convertDesign(options?: ConvertDesignOptions): Promise<boolean | null> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
-    if (exporter == null) return null
-
-    this.octopusManifest.registerBasePath(await exporter?.getBasePath?.())
-
-    /** Pass whole SourceDesign entity into exporter - mainly for dev purposes */
-    exporter?.exportSourceDesign?.(this._sourceDesign)
+    if (exporter == null) {
+      logger.error('No Exporter provided')
+      return null
+    }
 
     /** Init artboards queue */
-    const queue = this._initArtboardQueue(exporter)
+    const queue = new PQueue({ concurrency: OctopusFigConverter.QUEUE_PARALLELS })
 
-    /** Init partial update */
-    this._exportManifest(exporter)
-    const manifestInterval = setInterval(
-      async () => this._exportManifest(exporter),
-      OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
-    )
-
-    /** Enqueue all artboards */
-    const allConverted = await Promise.all(this._sourceDesign.artboards.map((artboard) => queue.exec(artboard)))
-
-    /** At this moment all artboards + dependencies should be converted and exported */
-
-    /** Final trigger of manifest save */
-    clearInterval(manifestInterval)
-    const SHOULD_EMIT = true
-    const manifest = await this._exportManifest(exporter, SHOULD_EMIT)
-
-    /** Trigger finalizer */
-    exporter?.finalizeExport?.()
-
-    /** Return transient outputs */
-    const images = [...new Set(allConverted.reduce((images, converted) => push(images, ...converted.images), []))]
-    const artboards = allConverted.map((converted) => converted.artboard)
-
-    return {
-      manifest,
-      artboards,
-      images,
+    const design = await this._designPromise
+    if (design === null) {
+      logger.error('Creating Design Failed')
+      return null
     }
+
+    design.on('ready:design', async (design: ResolvedDesign) => {
+      const designId = design.designId
+      const raw = design.design as unknown as RawDesign // TODO
+      const images = [] as SourceImage[] // TODO
+      const sourceDesign = new SourceDesign({ designId, images, raw })
+
+      const octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this })
+      this._octopusManifest = octopusManifest
+      octopusManifest.registerBasePath(await exporter?.getBasePath?.())
+
+      exporter?.exportSourceDesign?.(sourceDesign)
+
+      /** Init partial update */
+      this._exportManifest(exporter)
+      const manifestInterval = setInterval(
+        async () => this._exportManifest(exporter),
+        OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
+      )
+
+      /** Wait till all artboards + dependencies are processed */
+      await design.content
+      queue.add(async () => 'last')
+      await queue.onIdle()
+
+      /** At this moment all artboards + dependencies should be converted and exported */
+
+      /** Final trigger of manifest save */
+      clearInterval(manifestInterval)
+      const SHOULD_EMIT = true
+      await this._exportManifest(exporter, SHOULD_EMIT)
+
+      /** Trigger finalizer */
+      exporter?.finalizeExport?.()
+    })
+
+    design.on('ready:artboard', async (frame: ResolvedFrame) => {
+      const rawArtboard = frame.node.document as RawLayerFrame
+      const sourceArtboard = new SourceArtboard(rawArtboard)
+      queue.add(async () => await this._exportArtboard(exporter, sourceArtboard))
+    })
+
+    return true
   }
 }
