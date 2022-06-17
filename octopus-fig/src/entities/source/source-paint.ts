@@ -51,4 +51,8 @@ export class SourcePaint extends SourceEntity {
     if ([p1?.x, p1?.y, p2?.x, p2?.y, p3?.x, p3?.y].some((n) => n === undefined)) return null
     return [p1, p2, p3] as [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']]
   }
+
+  get imageRef(): string | undefined {
+    return this._rawValue.imageRef
+  }
 }

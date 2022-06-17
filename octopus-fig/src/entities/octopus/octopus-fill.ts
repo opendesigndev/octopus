@@ -125,11 +125,23 @@ export class OctopusEffectFill {
     return [scaleX, skewY, skewX, scaleY, tx, ty]
   }
 
-  private get _positioning(): Octopus['FillPositioning'] | null {
+  private get _gradientPositioning(): Octopus['FillPositioning'] | null {
     const layout = 'FILL'
     const origin = 'LAYER'
     const transform = this._transform
     if (transform === null) return null
+    return { layout, origin, transform }
+  }
+
+  private get _imagePositioning(): Octopus['FillPositioning'] | null {
+    const layout = 'FILL'
+    const origin = 'LAYER'
+
+    const size = this._parentLayer.size
+    if (size === null) return null
+    const { x, y } = size
+
+    const transform = [x, 0, 0, y, 0, 0]
     return { layout, origin, transform }
   }
 
@@ -146,13 +158,24 @@ export class OctopusEffectFill {
     const blendMode = this.blendMode
     const gradient = this._gradient
     if (gradient === null) return null
-    const positioning = this._positioning
+    const positioning = this._gradientPositioning
     if (positioning === null) return null
     return { type: 'GRADIENT', visible, blendMode, gradient, positioning }
   }
 
   private get _fillImage(): Octopus['FillImage'] | null {
-    return null // TODO
+    const imageRef = this._fill.imageRef
+    if (!imageRef) return null
+    const image: Octopus['Image'] = { ref: { type: 'PATH', value: `images/${imageRef}.png` } }
+    const visible = this.visible
+    const blendMode = this.blendMode
+    const positioning = this._imagePositioning
+    if (positioning === null) return null
+    const filterOpacity: Octopus['ImageFilterOpacityMultiplier'] = { type: 'OPACITY_MULTIPLIER', opacity: this.opacity }
+    const colorAdjustment = {} // TODO
+    const filterAdjust: Octopus['ImageFilterFigmaAdjust'] = { type: 'FIGMA_COLOR_ADJUSTMENT', colorAdjustment }
+    const filters: Octopus['ImageFilter'][] = [filterOpacity, filterAdjust]
+    return { type: 'IMAGE', visible, blendMode, image, positioning, filters }
   }
 
   convert(): Octopus['Fill'] | null {
