@@ -24,6 +24,7 @@ export class OctopusManifest {
   private _exports: {
     images: Map<string, string>
     artboards: Map<string, ArtboardDescriptor>
+    artboardImageMap: Map<string, string[]>
   }
 
   private _basePath: string | null
@@ -38,6 +39,7 @@ export class OctopusManifest {
     this._exports = {
       images: new Map(),
       artboards: new Map(),
+      artboardImageMap: new Map(),
     }
   }
 
@@ -58,8 +60,20 @@ export class OctopusManifest {
     return path.relative(this._basePath, imagePath)
   }
 
-  setExportedImage(name: string, path: string): void {
+  setExportedImagePath(name: string, path: string): void {
     this._exports.images.set(name, path)
+  }
+
+  getExportedImagePath(name: string): string | undefined {
+    return this._exports.images.get(name)
+  }
+
+  setExportedArtboardImageMap(artboardId: string, imageIds: string[]): void {
+    this._exports.artboardImageMap.set(artboardId, imageIds)
+  }
+
+  getExportedArtboardImageMap(artboardId: string): string[] | undefined {
+    return this._exports.artboardImageMap.get(artboardId)
   }
 
   getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
@@ -117,6 +131,32 @@ export class OctopusManifest {
     }
   }
 
+  private _getAssetImage(imageName: string): Manifest['AssetImage'] | null {
+    const path = this.getExportedImagePath(imageName)
+    if (!path) return null
+
+    const location = { type: 'RELATIVE' as const, path }
+    return { location, refId: imageName }
+  }
+
+  private _getAssetImages(imageNames: string[]): Manifest['AssetImage'][] {
+    return imageNames.reduce((assetImages, imageName) => {
+      const assetImage = this._getAssetImage(imageName)
+      return assetImage ? push(assetImages, assetImage) : assetImages
+    }, [])
+  }
+
+  private _getAssetFonts(fonts: string[]): Manifest['AssetFont'][] {
+    return fonts.map((font) => ({ location: { type: 'RELATIVE', path: '' }, name: font }))
+  }
+
+  private _getAssets(source: SourceArtboard): Manifest['Assets'] {
+    const imageIds = this.getExportedArtboardImageMap(source.id) ?? []
+    const images = this._getAssetImages(imageIds)
+    const fonts = this._getAssetFonts(source.dependencies.fonts)
+    return { images, fonts }
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -124,6 +164,7 @@ export class OctopusManifest {
 
     const path = this.getExportedArtboardRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
+    const assets = this._getAssets(source)
 
     return {
       id,
@@ -132,7 +173,7 @@ export class OctopusManifest {
       status,
       bounds,
       dependencies: [],
-      assets: {}, // TODO
+      assets,
       location,
     }
   }

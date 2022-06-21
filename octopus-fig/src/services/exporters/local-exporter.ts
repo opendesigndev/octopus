@@ -66,8 +66,12 @@ export class LocalExporter implements AbstractExporter {
     return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), stringify(artboard.value))
   }
 
+  getImagePath(name: string): string {
+    return path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${LocalExporter.IMAGE_EXTNAME}`)
+  }
+
   async exportImage(name: string, data: Buffer): Promise<string> {
-    const fullName = path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${LocalExporter.IMAGE_EXTNAME}`)
+    const fullName = this.getImagePath(name)
     return await this._save(fullName, data)
   }
 

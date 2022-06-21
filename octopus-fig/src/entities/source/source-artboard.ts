@@ -1,6 +1,6 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { push, traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
@@ -11,6 +11,11 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawArtboard, RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
+type SourceArtboardOptions = {
+  rawArtboard: RawArtboard
+  isPasteboard?: boolean
+}
+
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
   private _layers: SourceLayer[]
@@ -18,10 +23,10 @@ export class SourceArtboard extends SourceEntity {
 
   static DEFAULT_ID = 'artboard:1'
 
-  constructor(raw: RawArtboard, isPasteboard?: boolean) {
-    super(raw)
+  constructor(options: SourceArtboardOptions) {
+    super(options.rawArtboard)
     this._layers = this._initLayers()
-    this._isPasteboard = isPasteboard ?? false
+    this._isPasteboard = options.isPasteboard ?? false
   }
 
   private _initLayers() {
@@ -35,28 +40,14 @@ export class SourceArtboard extends SourceEntity {
     return layers
   }
 
-  private _getArtboardAssetsImages(): string[] {
-    return [] // TODO
-    // const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
-    //   return Object(obj)?.style?.fill?.pattern?.meta?.ux?.uid
-    // })
-    // return [...new Set(entries)] as string[]
-  }
-
   private _getArtboardAssetsFonts(): string[] {
-    return [] // TODO
-    // const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
-    //   return Object(obj)?.postscriptName
-    // })
-    // return [...new Set(entries)] as string[]
+    const entries = traverseAndFind(this._rawValue, (obj: unknown) => Object(obj)?.fontPostScriptName)
+    return [...new Set(entries)] as string[]
   }
 
   @firstCallMemo()
-  get dependencies(): { images: string[]; fonts: string[] } {
-    return {
-      images: this._getArtboardAssetsImages(),
-      fonts: this._getArtboardAssetsFonts(),
-    }
+  get dependencies(): { fonts: string[] } {
+    return { fonts: this._getArtboardAssetsFonts() }
   }
 
   get raw(): RawArtboard {

@@ -9,6 +9,10 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
   }
 
+  getImagePath(_name: string): string {
+    throw new Error('Subclass of "Exporter" has no "getImagePath" method implemented!')
+  }
+
   exportImage?(_name: string, _data: Buffer): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }

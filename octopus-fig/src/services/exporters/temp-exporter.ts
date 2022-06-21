@@ -86,8 +86,12 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     return octopusPath
   }
 
+  getImagePath(name: string): string {
+    return path.join(TempExporter.IMAGES_DIR_NAME, `${name}${TempExporter.IMAGE_EXTNAME}`)
+  }
+
   async exportImage(name: string, data: Buffer): Promise<string> {
-    const fullName = path.join(TempExporter.IMAGES_DIR_NAME, `${name}${TempExporter.IMAGE_EXTNAME}`)
+    const fullName = this.getImagePath(name)
     const imagePath = await this._save(fullName, data)
     this.emit('source:image', imagePath)
     return imagePath
