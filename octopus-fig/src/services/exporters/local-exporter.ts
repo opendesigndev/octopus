@@ -23,8 +23,8 @@ export class LocalExporter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_PATH = (id: string): string => `octopus-${kebabCase(id)}.json`
-  static PREVIEW_PATH = (id: string): string => `octopus-${kebabCase(id)}preview${LocalExporter.IMAGE_EXTNAME}`
+  static OCTOPUS_PATH = (id: string): string => `${kebabCase(id)}-octopus.json`
+  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${LocalExporter.IMAGE_EXTNAME}`
   static MANIFEST_PATH = 'octopus-manifest.json'
 
   constructor(options: LocalExporterOptions) {

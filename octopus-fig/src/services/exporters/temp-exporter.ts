@@ -26,10 +26,10 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_PATH = (id: string): string => `octopus-${kebabCase(id)}.json`
-  static PREVIEW_PATH = (id: string): string => `octopus-${kebabCase(id)}preview${TempExporter.IMAGE_EXTNAME}`
+  static OCTOPUS_PATH = (id: string): string => `${kebabCase(id)}-octopus.json`
+  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${TempExporter.IMAGE_EXTNAME}`
   static MANIFEST_PATH = 'octopus-manifest.json'
-  static SOURCE_PATH = (id: string): string => `source-${kebabCase(id)}.json`
+  static SOURCE_PATH = (id: string): string => `${kebabCase(id)}-source.json`
 
   constructor(options: TempExporterOptions) {
     super()
@@ -79,10 +79,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
       this.emit('octopus:artboard', { ...artboard, value: undefined })
       return Promise.resolve(null)
     }
-    const octopusPath = await this._save(
-      TempExporter.OCTOPUS_PATH(`${artboard.id}-${artboard.value.content?.name}`),
-      stringify(artboard.value)
-    )
+    const octopusPath = await this._save(TempExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
     this.emit('octopus:artboard', { ...artboard, value: undefined, octopusPath })
     return octopusPath
   }

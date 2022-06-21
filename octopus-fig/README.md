@@ -25,7 +25,21 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 
 ## Convert Figma file
 
-// TODO
+### yarn convert:local
+
+Designed for running in automated runs.
+
+```
+yarn convert:local figma_design_hash
+```
+
+### yarn convert:debug
+
+Designed for manual runs.
+
+```
+yarn convert:debug figma_design_hash
+```
 
 ## Unit Tests
 
