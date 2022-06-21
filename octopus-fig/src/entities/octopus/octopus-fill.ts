@@ -6,6 +6,7 @@ import { convertBlendMode, convertColor, convertStop } from '../../utils/convert
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStop } from '../../typings/raw'
+import type { SourceTransform } from '../../typings/source'
 import type { SourceLayerCommon } from '../source/source-layer-common'
 import type { SourcePaint } from '../source/source-paint'
 
@@ -134,14 +135,14 @@ export class OctopusEffectFill {
   }
 
   private get _imagePositioning(): Octopus['FillPositioning'] | null {
-    const layout = 'FILL'
+    const layout = this._fill.scaleMode ?? 'FILL'
     const origin = 'LAYER'
 
     const size = this._parentLayer.size
     if (size === null) return null
     const { x, y } = size
 
-    const transform = [x, 0, 0, y, 0, 0]
+    const transform: SourceTransform = [x, 0, 0, y, 0, 0]
     return { layout, origin, transform }
   }
 
@@ -163,6 +164,16 @@ export class OctopusEffectFill {
     return { type: 'GRADIENT', visible, blendMode, gradient, positioning }
   }
 
+  private get _filterOpacity(): Octopus['ImageFilterOpacityMultiplier'] {
+    return { type: 'OPACITY_MULTIPLIER', opacity: this.opacity }
+  }
+
+  private get _filterAdjustment(): Octopus['ImageFilterFigmaAdjust'] {
+    const { exposure, contrast, saturation, temperature, tint, highlights, shadows } = this._fill.filters ?? {}
+    const colorAdjustment = { hue: exposure, contrast, saturation, temperature, tint, highlights, shadows }
+    return { type: 'FIGMA_COLOR_ADJUSTMENT', colorAdjustment }
+  }
+
   private get _fillImage(): Octopus['FillImage'] | null {
     const imageRef = this._fill.imageRef
     if (!imageRef) return null
@@ -171,10 +182,7 @@ export class OctopusEffectFill {
     const blendMode = this.blendMode
     const positioning = this._imagePositioning
     if (positioning === null) return null
-    const filterOpacity: Octopus['ImageFilterOpacityMultiplier'] = { type: 'OPACITY_MULTIPLIER', opacity: this.opacity }
-    const colorAdjustment = {} // TODO
-    const filterAdjust: Octopus['ImageFilterFigmaAdjust'] = { type: 'FIGMA_COLOR_ADJUSTMENT', colorAdjustment }
-    const filters: Octopus['ImageFilter'][] = [filterOpacity, filterAdjust]
+    const filters: Octopus['ImageFilter'][] = [this._filterOpacity, this._filterAdjustment]
     return { type: 'IMAGE', visible, blendMode, image, positioning, filters }
   }
 

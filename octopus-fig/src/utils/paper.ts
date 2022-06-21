@@ -1,5 +1,7 @@
 import paper from 'paper'
 
+import type { SourceTransform } from '../typings/source'
+
 paper.setup(new paper.Size(100, 100))
 
 const SIMPLIFY_TOLERANCE = 1
@@ -17,4 +19,14 @@ export function simplifyPathData(pathData: string): string {
   })
 
   return compound.pathData
+}
+
+const { Matrix, Point } = paper
+
+export function createPoint(x: number, y: number): paper.Point {
+  return new Point(x, y)
+}
+
+export function createMatrix([a, b, c, d, tx, ty]: SourceTransform): paper.Matrix {
+  return new Matrix(a, b, c, d, tx, ty)
 }

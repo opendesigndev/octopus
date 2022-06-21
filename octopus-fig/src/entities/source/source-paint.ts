@@ -4,7 +4,15 @@ import { getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { Octopus } from '../../typings/octopus'
-import type { RawBlendMode, RawColor, RawGradientType, RawPaint, RawStop } from '../../typings/raw'
+import type {
+  RawBlendMode,
+  RawColor,
+  RawGradientType,
+  RawImageFilters,
+  RawPaint,
+  RawScaleMode,
+  RawStop,
+} from '../../typings/raw'
 import type { SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
@@ -38,6 +46,10 @@ export class SourcePaint extends SourceEntity {
     return this._rawValue.blendMode
   }
 
+  get scaleMode(): RawScaleMode | undefined {
+    return this._rawValue.scaleMode
+  }
+
   get imageTransform(): SourceTransform | null {
     return getTransformFor(this._rawValue.imageTransform)
   }
@@ -54,5 +66,9 @@ export class SourcePaint extends SourceEntity {
 
   get imageRef(): string | undefined {
     return this._rawValue.imageRef
+  }
+
+  get filters(): RawImageFilters | undefined {
+    return this._rawValue.filters
   }
 }
