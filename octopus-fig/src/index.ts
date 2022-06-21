@@ -218,6 +218,10 @@ export class OctopusFigConverter {
     })
 
     design.on('ready:preview', async (preview: ResolvedPreview) => {
+      const previewId = preview.nodeId
+      const previewPath = exporter.getPreviewPath(previewId)
+
+      this._octopusManifest?.setExportedImagePath(previewId, previewPath)
       exporter?.exportPreview?.(preview.nodeId, Buffer.from(preview.buffer))
     })
 

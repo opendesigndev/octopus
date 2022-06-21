@@ -26,9 +26,10 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
-  static MANIFEST_NAME = 'octopus-manifest.json'
-  static SOURCE_NAME = (id: string): string => `source-${kebabCase(id)}.json`
+  static OCTOPUS_PATH = (id: string): string => `octopus-${kebabCase(id)}.json`
+  static PREVIEW_PATH = (id: string): string => `octopus-${kebabCase(id)}preview${TempExporter.IMAGE_EXTNAME}`
+  static MANIFEST_PATH = 'octopus-manifest.json'
+  static SOURCE_PATH = (id: string): string => `source-${kebabCase(id)}.json`
 
   constructor(options: TempExporterOptions) {
     super()
@@ -68,7 +69,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportSource(raw: unknown, name = 'design'): Promise<string> {
-    const sourcePath = await this._save(TempExporter.SOURCE_NAME(name), stringify(raw))
+    const sourcePath = await this._save(TempExporter.SOURCE_PATH(name), stringify(raw))
     this.emit('source:design', sourcePath)
     return sourcePath
   }
@@ -79,7 +80,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
       return Promise.resolve(null)
     }
     const octopusPath = await this._save(
-      TempExporter.OCTOPUS_NAME(`${artboard.id}-${artboard.value.content?.name}`),
+      TempExporter.OCTOPUS_PATH(`${artboard.id}-${artboard.value.content?.name}`),
       stringify(artboard.value)
     )
     this.emit('octopus:artboard', { ...artboard, value: undefined, octopusPath })
@@ -91,21 +92,25 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportImage(name: string, data: Buffer): Promise<string> {
-    const fullName = this.getImagePath(name)
-    const imagePath = await this._save(fullName, data)
-    this.emit('source:image', imagePath)
-    return imagePath
+    const imagePath = this.getImagePath(name)
+    const savedPath = await this._save(imagePath, data)
+    this.emit('source:image', savedPath)
+    return savedPath
   }
 
-  async exportPreview(name: string, data: Buffer): Promise<string> {
-    const fullName = path.join(`octopus-${kebabCase(name)}preview${TempExporter.IMAGE_EXTNAME}`)
-    const imagePath = await this._save(fullName, data)
-    this.emit('source:preview', imagePath)
-    return imagePath
+  getPreviewPath(id: string): string {
+    return TempExporter.PREVIEW_PATH(id)
+  }
+
+  async exportPreview(id: string, data: Buffer): Promise<string> {
+    const previewPath = this.getPreviewPath(id)
+    const savedPath = await this._save(previewPath, data)
+    this.emit('source:preview', savedPath)
+    return savedPath
   }
 
   async exportManifest({ manifest }: DesignConversionResult, shouldEmit = false): Promise<string> {
-    const manifestPath = await this._save(TempExporter.MANIFEST_NAME, stringify(manifest))
+    const manifestPath = await this._save(TempExporter.MANIFEST_PATH, stringify(manifest))
     if (shouldEmit) this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }

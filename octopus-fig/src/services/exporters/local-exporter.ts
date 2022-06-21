@@ -23,8 +23,9 @@ export class LocalExporter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_NAME = (id: string): string => `octopus-${kebabCase(id)}.json`
-  static MANIFEST_NAME = 'octopus-manifest.json'
+  static OCTOPUS_PATH = (id: string): string => `octopus-${kebabCase(id)}.json`
+  static PREVIEW_PATH = (id: string): string => `octopus-${kebabCase(id)}preview${LocalExporter.IMAGE_EXTNAME}`
+  static MANIFEST_PATH = 'octopus-manifest.json'
 
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
@@ -63,7 +64,7 @@ export class LocalExporter implements AbstractExporter {
 
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME(artboard.id), stringify(artboard.value))
+    return this._save(LocalExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
   }
 
   getImagePath(name: string): string {
@@ -75,7 +76,16 @@ export class LocalExporter implements AbstractExporter {
     return await this._save(fullName, data)
   }
 
+  getPreviewPath(id: string): string {
+    return LocalExporter.PREVIEW_PATH(id)
+  }
+
+  async exportPreview(id: string, data: Buffer): Promise<string> {
+    const previewPath = this.getPreviewPath(id)
+    return await this._save(previewPath, data)
+  }
+
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    return this._save(LocalExporter.MANIFEST_NAME, stringify(manifest.manifest))
+    return this._save(LocalExporter.MANIFEST_PATH, stringify(manifest.manifest))
   }
 }

@@ -17,6 +17,10 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
 
+  getPreviewPath(_name: string): string {
+    throw new Error('Subclass of "Exporter" has no "getPreviewPath" method implemented!')
+  }
+
   exportPreview?(_name: string, _data: Buffer): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportPreview" method implemented!')
   }

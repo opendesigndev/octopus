@@ -23,6 +23,7 @@ export class OctopusManifest {
   private _octopusConverter: OctopusFigConverter
   private _exports: {
     images: Map<string, string>
+    previews: Map<string, string>
     artboards: Map<string, ArtboardDescriptor>
     artboardImageMap: Map<string, string[]>
   }
@@ -38,6 +39,7 @@ export class OctopusManifest {
     this._basePath = null
     this._exports = {
       images: new Map(),
+      previews: new Map(),
       artboards: new Map(),
       artboardImageMap: new Map(),
     }
@@ -66,6 +68,14 @@ export class OctopusManifest {
 
   getExportedImagePath(name: string): string | undefined {
     return this._exports.images.get(name)
+  }
+
+  setExportedPreviewPath(id: string, path: string): void {
+    this._exports.images.set(id, path)
+  }
+
+  getExportedPreviewPath(id: string): string | undefined {
+    return this._exports.images.get(id)
   }
 
   setExportedArtboardImageMap(artboardId: string, imageIds: string[]): void {
@@ -157,6 +167,12 @@ export class OctopusManifest {
     return { images, fonts }
   }
 
+  private _getPreview(id: string): Manifest['ResourceLocation'] | undefined {
+    const previewPath = this.getExportedPreviewPath(id)
+    if (!previewPath) return
+    return { type: 'RELATIVE', path: previewPath }
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -165,6 +181,7 @@ export class OctopusManifest {
     const path = this.getExportedArtboardRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
+    const preview = this._getPreview(id)
 
     return {
       id,
@@ -173,6 +190,7 @@ export class OctopusManifest {
       status,
       bounds,
       dependencies: [],
+      preview,
       assets,
       location,
     }
