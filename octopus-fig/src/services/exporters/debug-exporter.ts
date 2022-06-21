@@ -13,12 +13,12 @@ import type { ArtboardConversionResult, DesignConversionResult } from '../..'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
-type TempExporterOptions = {
+type DebugExporterOptions = {
   designId?: string
   tempDir: string
 }
 
-export class TempExporter extends EventEmitter implements AbstractExporter {
+export class DebugExporter extends EventEmitter implements AbstractExporter {
   _outputDir: Promise<string>
   _tempDir: string
   _assetsSaves: Promise<unknown>[]
@@ -27,11 +27,11 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
   static OCTOPUS_PATH = (id: string): string => `${kebabCase(id)}-octopus.json`
-  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${TempExporter.IMAGE_EXTNAME}`
+  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${DebugExporter.IMAGE_EXTNAME}`
   static MANIFEST_PATH = 'octopus-manifest.json'
   static SOURCE_PATH = (id: string): string => `${kebabCase(id)}-source.json`
 
-  constructor(options: TempExporterOptions) {
+  constructor(options: DebugExporterOptions) {
     super()
     this._tempDir = options.tempDir
     this._outputDir = this._initOutputDir(options)
@@ -39,10 +39,10 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
     this._completed = detachPromiseControls<void>()
   }
 
-  private async _initOutputDir(options: TempExporterOptions) {
+  private async _initOutputDir(options: DebugExporterOptions) {
     const dirName = typeof options.designId === 'string' ? `${timestamp()}-${options.designId}` : uuidv4()
     const tempPath = path.join(this._tempDir, dirName)
-    await makeDir(path.join(tempPath, TempExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(tempPath, DebugExporter.IMAGES_DIR_NAME))
     return tempPath
   }
 
@@ -69,7 +69,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportSource(raw: unknown, name = 'design'): Promise<string> {
-    const sourcePath = await this._save(TempExporter.SOURCE_PATH(name), stringify(raw))
+    const sourcePath = await this._save(DebugExporter.SOURCE_PATH(name), stringify(raw))
     this.emit('source:design', sourcePath)
     return sourcePath
   }
@@ -79,13 +79,13 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
       this.emit('octopus:artboard', { ...artboard, value: undefined })
       return Promise.resolve(null)
     }
-    const octopusPath = await this._save(TempExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
+    const octopusPath = await this._save(DebugExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
     this.emit('octopus:artboard', { ...artboard, value: undefined, octopusPath })
     return octopusPath
   }
 
   getImagePath(name: string): string {
-    return path.join(TempExporter.IMAGES_DIR_NAME, `${name}${TempExporter.IMAGE_EXTNAME}`)
+    return path.join(DebugExporter.IMAGES_DIR_NAME, `${name}${DebugExporter.IMAGE_EXTNAME}`)
   }
 
   async exportImage(name: string, data: Buffer): Promise<string> {
@@ -96,7 +96,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   getPreviewPath(id: string): string {
-    return TempExporter.PREVIEW_PATH(id)
+    return DebugExporter.PREVIEW_PATH(id)
   }
 
   async exportPreview(id: string, data: Buffer): Promise<string> {
@@ -107,7 +107,7 @@ export class TempExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportManifest({ manifest }: DesignConversionResult, shouldEmit = false): Promise<string> {
-    const manifestPath = await this._save(TempExporter.MANIFEST_PATH, stringify(manifest))
+    const manifestPath = await this._save(DebugExporter.MANIFEST_PATH, stringify(manifest))
     if (shouldEmit) this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }

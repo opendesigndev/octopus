@@ -3,7 +3,7 @@ import path from 'path'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusFigConverter, SourceApiReader, TempExporter } from '../src'
+import { OctopusFigConverter, SourceApiReader, DebugExporter } from '../src'
 import { displayPerf } from '../src/utils/console'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
@@ -27,11 +27,11 @@ export async function convertDesign({
   shouldRender = process.env.CONVERT_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const outputDir = path.join(await getPkgLocation(), 'workdir')
-  const exporter = new TempExporter({ tempDir: outputDir, designId })
+  const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
-  exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))
-  exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
-  exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
+  // exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))
+  // exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
+  // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? `❌ ${artboard.error}` : '✅'

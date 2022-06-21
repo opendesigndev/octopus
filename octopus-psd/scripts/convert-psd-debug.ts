@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
 
-import { OctopusPSDConverter, PSDFileReader, TempExporter } from '../src'
+import { OctopusPSDConverter, PSDFileReader, DebugExporter } from '../src'
 import { displayPerf } from '../src/utils/console'
 import { getFilesFromDir, isDirectory } from '../src/utils/files'
 import { getPkgLocation } from './utils/pkg-location'
@@ -34,7 +34,7 @@ export async function convertDesign({
   shouldRender = process.env.CONVERT_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const exporter = new TempExporter({ tempDir: outputDir, id: designId })
+  const exporter = new DebugExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? '❌' : '✅'

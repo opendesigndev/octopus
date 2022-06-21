@@ -8,8 +8,8 @@ import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { SourceArtboard } from './entities/source/source-artboard'
 import { SourceDesign } from './entities/source/source-design'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
+import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
-import { TempExporter } from './services/exporters/temp-exporter'
 import { ENV } from './services/general/environment'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
@@ -31,7 +31,7 @@ import type {
 } from '@avocode/figma-parser/lib/src/index-node'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
-export { LocalExporter, TempExporter }
+export { LocalExporter, DebugExporter }
 export { SourceApiReader }
 
 type ConvertDesignOptions = {
@@ -68,7 +68,7 @@ export class OctopusFigConverter {
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
-    TEMP: TempExporter,
+    DEBUG: DebugExporter,
   }
 
   static READERS = {

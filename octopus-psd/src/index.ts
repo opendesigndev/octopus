@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
+import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
-import { TempExporter } from './services/exporters/temp-exporter'
 import { createEnvironment } from './services/general/environment'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
@@ -25,7 +25,7 @@ import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
-export { LocalExporter, TempExporter }
+export { LocalExporter, DebugExporter }
 export { PSDFileReader, SourceFileReader }
 
 type ConvertDesignOptions = {
@@ -72,7 +72,7 @@ export class OctopusPSDConverter {
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
-    TEMP: TempExporter,
+    DEBUG: DebugExporter,
   }
 
   static READERS = {
