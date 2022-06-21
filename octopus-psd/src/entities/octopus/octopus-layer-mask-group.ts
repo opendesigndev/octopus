@@ -125,7 +125,7 @@ export class OctopusLayerMaskGroup {
 
   static createClippingMask({ mask, layers, parent }: CreateClippingMaskOptions): OctopusLayerMaskGroup {
     const id = `${mask.id}-ClippingMask`
-    const maskBasis = mask.sourceLayer.type === 'layer' ? 'FILL' : 'BODY_EMBED'
+    const maskBasis = mask.sourceLayer.type === 'layer' ? 'FILL_EMBED' : 'BODY_EMBED'
     return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
   }
 
