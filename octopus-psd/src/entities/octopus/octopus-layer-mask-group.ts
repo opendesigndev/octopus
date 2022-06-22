@@ -102,7 +102,7 @@ export class OctopusLayerMaskGroup {
       id: `${octopusLayer.id}-BitmapMask`,
       mask,
       layers: [octopusLayer],
-      maskBasis: 'LAYER_AND_EFFECTS',
+      maskBasis: 'FILL',
       maskChannels: [1, 0, 0, 0, 0],
     })
   }
