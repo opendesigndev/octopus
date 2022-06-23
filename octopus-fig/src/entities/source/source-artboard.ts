@@ -1,14 +1,13 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import { push, traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
+import { SourceLayerFrame } from './source-layer-frame'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawBlendMode, RawLayer } from '../../typings/raw'
+import type { RawArtboard, RawBlendMode } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 type SourceArtboardOptions = {
@@ -18,26 +17,15 @@ type SourceArtboardOptions = {
 
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
-  private _layers: SourceLayer[]
+  private _sourceFrame: SourceLayerFrame
   private _isPasteboard: boolean
 
   static DEFAULT_ID = 'artboard:1'
 
   constructor(options: SourceArtboardOptions) {
     super(options.rawArtboard)
-    this._layers = this._initLayers()
+    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
     this._isPasteboard = options.isPasteboard ?? false
-  }
-
-  private _initLayers() {
-    const layers = asArray(this._rawValue?.children).reduce((layers: SourceLayer[], layer: RawLayer) => {
-      const sourceLayer = createSourceLayer({
-        layer,
-        parent: this,
-      })
-      return sourceLayer ? push(layers, sourceLayer) : layers
-    }, [])
-    return layers
   }
 
   private _getArtboardAssetsFonts(): string[] {
@@ -54,8 +42,12 @@ export class SourceArtboard extends SourceEntity {
     return this._rawValue
   }
 
+  get sourceFrame(): SourceLayerFrame {
+    return this._sourceFrame
+  }
+
   get layers(): SourceLayer[] {
-    return this._layers
+    return this.sourceFrame.layers
   }
 
   get bounds(): SourceBounds | null {

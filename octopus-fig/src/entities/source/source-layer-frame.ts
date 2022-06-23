@@ -23,11 +23,14 @@ export class SourceLayerFrame extends SourceLayerCommon {
   }
 
   private _initLayers() {
-    const layers = asArray(this._rawValue?.children)
-    return layers.reduce((layers: SourceLayer[], layer: RawLayer) => {
+    return asArray(this._rawValue?.children).reduce((layers: SourceLayer[], layer: RawLayer) => {
       const sourceLayer = createSourceLayer({ layer, parent: this })
       return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
+  }
+
+  get hasBackgroundMask(): boolean {
+    return this.fills.length > 0 || this.strokes.length > 0
   }
 
   get type(): 'FRAME' {

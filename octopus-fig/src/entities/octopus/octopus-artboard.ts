@@ -1,7 +1,6 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { convertBlendMode, convertId } from '../../utils/convert'
+import { convertId } from '../../utils/convert'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -46,15 +45,28 @@ export class OctopusArtboard {
     return this._version
   }
 
-  private get _content(): Octopus['GroupLayer'] {
-    return {
-      id: `${this.id}-background`,
-      name: this.sourceArtboard.name,
-      type: 'GROUP',
-      layers: getConverted(this._layers),
-      blendMode: convertBlendMode(this.sourceArtboard.blendMode),
-      opacity: this.sourceArtboard.opacity,
-    } // TODO use MaskGroup
+  private get _content(): Octopus['MaskGroupLayer'] | undefined {
+    // console.info('')
+
+    const isArtboard = true // TODO
+    const background = OctopusLayerMaskGroup.createBackground({
+      // parent: this.parentArtboard,
+      frame: this.sourceArtboard.sourceFrame,
+      layers: this._layers,
+      isArtboard,
+    })
+
+    if (!background) return
+    return background
+
+    // return {
+    //   id: `${this.id}-background`,
+    //   name: this.sourceArtboard.name,
+    //   type: 'GROUP',
+    //   layers: getConverted(this._layers),
+    //   blendMode: convertBlendMode(this.sourceArtboard.blendMode),
+    //   opacity: this.sourceArtboard.opacity,
+    // } // TODO use MaskGroup
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

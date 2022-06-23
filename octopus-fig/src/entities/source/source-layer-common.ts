@@ -1,6 +1,7 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
+import { v4 as uuid } from 'uuid'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
@@ -31,8 +32,8 @@ export class SourceLayerCommon extends SourceEntity {
     this._parent = options.parent
   }
 
-  get id(): string | undefined {
-    return this._rawValue.id
+  get id(): string {
+    return this._rawValue.id ?? uuid()
   }
 
   get name(): string | undefined {

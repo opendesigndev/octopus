@@ -1,12 +1,12 @@
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
+import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { logWarn } from '../services/instances/misc'
 
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
-import type { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
@@ -32,8 +32,12 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders | undefined } =
   SLICE: createOctopusLayerSlice,
 } as const
 
-function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
+function createOctopusLayerGroup({
+  layer,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup {
   const sourceLayer = layer as SourceLayerFrame
+  if (sourceLayer.hasBackgroundMask) return new OctopusLayerMaskGroup({ parent, sourceLayer })
   return new OctopusLayerGroup({ parent, sourceLayer })
 }
 
