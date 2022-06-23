@@ -5,6 +5,7 @@ import { DEFAULTS } from './defaults'
 
 import type { Octopus } from '../typings/octopus'
 import type { RawBlendMode, RawColor, RawStop } from '../typings/raw'
+import type { SourceVector } from '../typings/source'
 
 const BLEND_MODES: Octopus['BlendMode'][] = [
   'COLOR',
@@ -52,4 +53,8 @@ export function convertStop(stop?: RawStop, opacity = 1): Octopus['GradientColor
     color: convertColor(stop.color, opacity),
     position: stop.position,
   }
+}
+
+export function convertRectangle({ x, y }: SourceVector): Octopus['Rectangle'] {
+  return { x0: 0, x1: x, y0: 0, y1: y }
 }

@@ -1,16 +1,17 @@
 import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
 import { logWarn } from '../../services/instances/misc'
-import { OctopusEffectFill } from './octopus-fill'
+import { OctopusFill } from './octopus-fill'
 import { OctopusPath } from './octopus-path'
 
 import type { Octopus } from '../../typings/octopus'
+import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourcePaint } from '../source/source-paint'
 
-type SourceLayer = SourceLayerShape | SourceLayerText
+type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
 
 type OctopusStrokeOptions = {
   sourceLayer: SourceLayer
@@ -31,6 +32,13 @@ export class OctopusStroke {
     ROUND: 'ROUND',
     SQUARE: 'SQUARE',
   } as const
+
+  static convertStrokes(strokes: SourcePaint[], sourceLayer: SourceLayer): Octopus['VectorStroke'][] {
+    return strokes.reduce((strokes: Octopus['VectorStroke'][], fill: SourcePaint) => {
+      const stroke = new OctopusStroke({ fill, sourceLayer }).convert()
+      return stroke ? push(strokes, stroke) : strokes
+    }, [])
+  }
 
   constructor(options: OctopusStrokeOptions) {
     this._sourceLayer = options.sourceLayer
@@ -68,7 +76,7 @@ export class OctopusStroke {
 
   @firstCallMemo()
   get fill(): Octopus['Fill'] | null {
-    return new OctopusEffectFill({ fill: this._fill, parentLayer: this._sourceLayer }).convert()
+    return new OctopusFill({ fill: this._fill, parentLayer: this._sourceLayer }).convert()
   }
 
   get style(): Octopus['VectorStroke']['style'] {

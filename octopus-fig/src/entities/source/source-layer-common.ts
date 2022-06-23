@@ -3,15 +3,15 @@ import { push } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from '../../utils/defaults'
-import { getSizeFor, getTransformFor } from '../../utils/source'
+import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
 import { SourceEffect } from './source-effect-fill'
 import { SourceEntity } from './source-entity'
 import { SourcePaint } from './source-paint'
 
 import type { Octopus } from '../../typings/octopus'
-import type { RawAlign, RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
+import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
+import type { SourceGeometry, SourceTransform } from '../../typings/source'
 import type { SourceLayerFrame } from './source-layer-frame'
 import type { SourceLayerShape } from './source-layer-shape'
 
@@ -74,6 +74,38 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.strokes?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []
   }
 
+  get fillGeometry(): SourceGeometry[] {
+    return getGeometryFor(this._rawValue.fillGeometry)
+  }
+
+  get strokeGeometry(): SourceGeometry[] {
+    return getGeometryFor(this._rawValue.strokeGeometry)
+  }
+
+  get strokeWeight(): number {
+    return this._rawValue.strokeWeight ?? 0
+  }
+
+  get strokeAlign(): RawAlign {
+    return this._rawValue.strokeAlign ?? DEFAULTS.STROKE_ALIGN
+  }
+
+  get strokeCap(): RawStrokeCap {
+    return this._rawValue.strokeCap ?? DEFAULTS.STROKE_CAP
+  }
+
+  get strokeJoin(): RawStrokeJoin {
+    return this._rawValue.strokeJoin ?? DEFAULTS.STROKE_JOIN
+  }
+
+  get strokeDashes(): number[] {
+    return this._rawValue.strokeDashes ?? []
+  }
+
+  get strokeMiterAngle(): number {
+    return this._rawValue.strokeMiterAngle ?? DEFAULTS.STROKE_MITER_ANGLE
+  }
+
   get effects(): SourceEffect[] {
     const effects = this._rawValue.effects ?? []
     return effects.reduce((effects, rawEffect) => {
@@ -88,14 +120,6 @@ export class SourceLayerCommon extends SourceEntity {
 
   get cornerRadius(): number | undefined {
     return this._rawValue.cornerRadius
-  }
-
-  get strokeWeight(): number {
-    return this._rawValue.strokeWeight ?? 0
-  }
-
-  get strokeAlign(): RawAlign {
-    return this._rawValue.strokeAlign ?? DEFAULTS.STROKE_ALIGN
   }
 
   get isMask(): boolean {

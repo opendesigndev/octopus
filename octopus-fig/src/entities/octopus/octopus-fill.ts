@@ -15,9 +15,16 @@ type OctopusFillOptions = {
   parentLayer: SourceLayerCommon
 }
 
-export class OctopusEffectFill {
+export class OctopusFill {
   private _fill: SourcePaint
   private _parentLayer: SourceLayerCommon
+
+  static convertFills(fills: SourcePaint[], parentLayer: SourceLayerCommon): Octopus['Fill'][] {
+    return fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
+      const newFill = new OctopusFill({ fill, parentLayer }).convert()
+      return newFill ? push(fills, newFill) : fills
+    }, [])
+  }
 
   constructor(options: OctopusFillOptions) {
     this._fill = options.fill

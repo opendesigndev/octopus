@@ -1,12 +1,14 @@
+import { convertRectangle } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
+import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerText } from '../source/source-layer-text'
 
-type SourceLayer = SourceLayerShape | SourceLayerText
+type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
 
 type OctopusPathOptions = { sourceLayer: SourceLayer; isStroke?: boolean }
 
@@ -27,7 +29,7 @@ export class OctopusPath {
   }
 
   private get _sourceShape(): 'LINE' | 'TRIANGLE' | 'RECTANGLE' | 'POLYGON' | 'ELLIPSE' | undefined {
-    if (this.sourceLayer.type === 'TEXT') return undefined
+    if (this.sourceLayer.type !== 'SHAPE') return undefined
     switch (this.sourceLayer.shapeType) {
       case 'RECTANGLE':
         return 'RECTANGLE'
@@ -59,14 +61,16 @@ export class OctopusPath {
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
-    return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadius
+    return sourceLayer.shapeType === 'RECTANGLE'
   }
 
-  private _pathRectangle({ sourceLayer, isTopLayer }: PrivateShapeOptions): Octopus['PathRectangle'] {
+  private _pathRectangle({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathRectangle'] {
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
-    const { x, y } = sourceLayer.size ?? { x: 0, y: 0 }
-    return { type: 'RECTANGLE', visible, transform, rectangle: { x0: 0, y0: 0, x1: x, y1: y } }
+    const size = sourceLayer.size ?? { x: 0, y: 0 }
+    const rectangle = convertRectangle(size)
+    const cornerRadius = sourceLayer.cornerRadius
+    return { type: 'RECTANGLE', visible, transform, rectangle, cornerRadius }
   }
 
   private _pathPath({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['Path'] {
@@ -87,6 +91,7 @@ export class OctopusPath {
 
   private _path({ sourceLayer, isTopLayer }: PrivateOptions): Octopus['PathLike'] {
     if (sourceLayer.type === 'TEXT') return this._pathPath({ sourceLayer, isTopLayer })
+    if (sourceLayer.type === 'FRAME') return this._pathRectangle({ sourceLayer, isTopLayer })
     if (this._isRectangle(sourceLayer)) return this._pathRectangle({ sourceLayer, isTopLayer })
     if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._pathBool({ sourceLayer, isTopLayer })
     return this._pathPath({ sourceLayer, isTopLayer })

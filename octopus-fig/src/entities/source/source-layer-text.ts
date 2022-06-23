@@ -1,10 +1,7 @@
-import { DEFAULTS } from '../../utils/defaults'
-import { getGeometryFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceTextStyle } from './source-text-style'
 
-import type { RawAlign, RawLayerText, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
-import type { SourceGeometry } from '../../typings/source'
+import type { RawLayerText } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerTextOptions = {
@@ -21,38 +18,6 @@ export class SourceLayerText extends SourceLayerCommon {
 
   get type(): 'TEXT' {
     return 'TEXT'
-  }
-
-  get fillGeometry(): SourceGeometry[] {
-    return getGeometryFor(this._rawValue.fillGeometry)
-  }
-
-  get strokeGeometry(): SourceGeometry[] {
-    return getGeometryFor(this._rawValue.strokeGeometry)
-  }
-
-  get strokeWeight(): number {
-    return this._rawValue.strokeWeight ?? 0
-  }
-
-  get strokeAlign(): RawAlign {
-    return this._rawValue.strokeAlign ?? DEFAULTS.STROKE_ALIGN
-  }
-
-  get strokeCap(): RawStrokeCap {
-    return this._rawValue.strokeCap ?? DEFAULTS.STROKE_CAP
-  }
-
-  get strokeJoin(): RawStrokeJoin {
-    return this._rawValue.strokeJoin ?? DEFAULTS.STROKE_JOIN
-  }
-
-  get strokeDashes(): number[] {
-    return this._rawValue.strokeDashes ?? []
-  }
-
-  get strokeMiterAngle(): number {
-    return this._rawValue.strokeMiterAngle ?? DEFAULTS.STROKE_MITER_ANGLE
   }
 
   get characters(): string {

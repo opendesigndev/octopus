@@ -49,19 +49,10 @@ export type RawLayerBase = {
   effects?: RawEffect[]
 }
 
-export type RawLayerFrame = RawLayerBase & {
-  type?: 'FRAME'
-  clipsContent?: boolean
-  children?: (RawLayer | RawSlice)[]
-}
-
-export type RawLayerShape = RawLayerVector & RawLayerBooleanOp
-
 export type RawStrokeCap = 'NONE' | 'ROUND' | 'SQUARE' | 'LINE_ARROW' | 'TRIANGLE_ARROW'
 export type RawStrokeJoin = 'MITER' | 'BEVEL' | 'ROUND'
 
 export type RawLayerVector = RawLayerBase & {
-  type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
   fillGeometry?: RawGeometry[]
   strokeGeometry?: RawGeometry[]
   strokeCap?: RawStrokeCap
@@ -70,6 +61,17 @@ export type RawLayerVector = RawLayerBase & {
   strokeMiterAngle?: number
   arcData?: RawArcData
 }
+
+export type RawLayerFrame = RawLayerVector & {
+  type?: 'FRAME'
+  clipsContent?: boolean
+  children?: (RawLayer | RawSlice)[]
+}
+
+export type RawLayerShape = RawLayerVector &
+  RawLayerBooleanOp & {
+    type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
+  }
 
 export type RawLayerBooleanOp = RawLayerBase & {
   type?: 'BOOLEAN_OPERATION'

@@ -6,7 +6,7 @@ import { logWarn } from '../../services/instances/misc'
 import { DEFAULTS } from '../../utils/defaults'
 import { notZero } from '../../utils/misc'
 import { inferPostScriptName } from '../../utils/text'
-import { OctopusEffectFill } from './octopus-fill'
+import { OctopusFill } from './octopus-fill'
 import { OctopusLayerBase } from './octopus-layer-base'
 import { OctopusStroke } from './octopus-stroke'
 
@@ -57,7 +57,7 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getFills(fills: SourcePaint[]): Octopus['Fill'][] {
     return fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
-      const newFill = new OctopusEffectFill({ fill, parentLayer: this.sourceLayer }).convert()
+      const newFill = new OctopusFill({ fill, parentLayer: this.sourceLayer }).convert()
       return newFill ? push(fills, newFill) : fills
     }, [])
   }

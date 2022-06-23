@@ -7,6 +7,11 @@ export type SourceBounds = {
   height: number
 }
 
+export type SourceVector = {
+  x: number
+  y: number
+}
+
 export type SourceTransform = [number, number, number, number, number, number]
 
 export type SourceGeometry = {
