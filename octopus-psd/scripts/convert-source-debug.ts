@@ -1,11 +1,11 @@
 import path from 'path'
 
+import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
 
 import { OctopusPSDConverter, SourceFileReader, DebugExporter } from '../src'
-import { displayPerf } from '../src/utils/console'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'

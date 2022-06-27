@@ -1,11 +1,11 @@
 import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import sizeOf from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
-import { displayPerf } from '../../utils/console'
 import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
 import { logInfo } from '../instances/misc'
 
