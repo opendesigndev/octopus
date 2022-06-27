@@ -2,7 +2,7 @@ import { logWarn } from '../../services/instances/misc'
 import { convertBlendMode, convertColor } from '../../utils/convert'
 
 import type { Octopus } from '../../typings/octopus'
-import type { SourceEffect } from '../source/source-effect-fill'
+import type { SourceEffect } from '../source/source-effect'
 
 export class OctopusEffect {
   private _effect: SourceEffect

@@ -20,7 +20,7 @@ export class SourceArtboard extends SourceEntity {
   private _sourceFrame: SourceLayerFrame
   private _isPasteboard: boolean
 
-  static DEFAULT_ID = 'artboard:1'
+  static DEFAULT_ID = 'artboard-1'
 
   constructor(options: SourceArtboardOptions) {
     super(options.rawArtboard)

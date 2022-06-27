@@ -39,7 +39,7 @@ type ConvertDesignOptions = {
 }
 
 type OctopusConverterOptions = {
-  designPromise: Promise<Design | null>
+  design: Design | null
   designId?: string
   logger?: Logger
 }
@@ -63,7 +63,7 @@ type ArtboardExport = {
 export class OctopusFigConverter {
   private _id: string
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _designPromise: Promise<Design | null>
+  private _design: Design | null
   private _octopusManifest: OctopusManifest | undefined
 
   static EXPORTERS = {
@@ -88,7 +88,7 @@ export class OctopusFigConverter {
     )
 
     this._id = options.designId || uuidv4()
-    this._designPromise = options.designPromise
+    this._design = options.design
     this._pkg = readPackageUpAsync({ cwd: __dirname })
   }
 
@@ -127,14 +127,15 @@ export class OctopusFigConverter {
     return { id: artboard.id, value, error, time }
   }
 
-  private async _exportManifest(
-    exporter: AbstractExporter | null,
-    shouldEmit?: boolean
-  ): Promise<Manifest['OctopusManifest'] | undefined> {
+  private async _exportManifest(options: {
+    exporter: AbstractExporter | null
+    isFinal?: boolean
+  }): Promise<Manifest['OctopusManifest'] | undefined> {
+    const { exporter, isFinal } = options
     const octopusManifest = this._octopusManifest
     if (!octopusManifest) return undefined
     const { time, result: manifest } = await benchmarkAsync(() => octopusManifest.convert())
-    await exporter?.exportManifest?.({ manifest, time }, shouldEmit)
+    await exporter?.exportManifest?.({ manifest, time }, isFinal)
     return manifest
   }
 
@@ -159,7 +160,7 @@ export class OctopusFigConverter {
     /** Init artboards queue */
     const queue = new PQueue({ concurrency: OctopusFigConverter.QUEUE_PARALLELS })
 
-    const design = await this._designPromise
+    const design = this._design
     if (design === null) {
       logger.error('Creating Design Failed')
       return null
@@ -177,9 +178,9 @@ export class OctopusFigConverter {
       exporter?.exportSource?.(sourceDesign.raw)
 
       /** Init partial update */
-      this._exportManifest(exporter)
+      this._exportManifest({ exporter })
       const manifestInterval = setInterval(
-        async () => this._exportManifest(exporter),
+        async () => this._exportManifest({ exporter }),
         OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
       )
 
@@ -192,8 +193,7 @@ export class OctopusFigConverter {
 
       /** Final trigger of manifest save */
       clearInterval(manifestInterval)
-      const SHOULD_EMIT = true
-      await this._exportManifest(exporter, SHOULD_EMIT)
+      await this._exportManifest({ exporter, isFinal: true })
 
       /** Trigger finalizer */
       exporter?.finalizeExport?.()

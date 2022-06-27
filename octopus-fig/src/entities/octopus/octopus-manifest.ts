@@ -51,17 +51,6 @@ export class OctopusManifest {
     }
   }
 
-  getExportedImageByName(name: string): string | undefined {
-    return this._exports.images.get(name)
-  }
-
-  getExportedRelativeImageByName(name: string): string | undefined {
-    const imagePath = this._exports.images.get(name)
-    if (imagePath === undefined) return undefined
-    if (this._basePath === null) return imagePath
-    return path.relative(this._basePath, imagePath)
-  }
-
   setExportedImagePath(name: string, path: string): void {
     this._exports.images.set(name, path)
   }
@@ -157,7 +146,7 @@ export class OctopusManifest {
   }
 
   private _getAssetFonts(fonts: string[]): Manifest['AssetFont'][] {
-    return fonts.map((font) => ({ location: { type: 'RELATIVE', path: '' }, name: font }))
+    return fonts.map((font) => ({ name: font }))
   }
 
   private _getAssets(source: SourceArtboard): Manifest['Assets'] {
@@ -186,7 +175,7 @@ export class OctopusManifest {
     return {
       id,
       name: source.name,
-      role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD',
+      role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD', // TODO fix for components
       status,
       bounds,
       dependencies: [],

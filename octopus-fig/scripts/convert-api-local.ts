@@ -10,8 +10,7 @@ async function convertDesign(designId: string) {
   const exporter = new LocalExporter({ path: testDir })
 
   const reader = new SourceApiReader({ designId })
-  const designPromise = reader.designPromise()
-  const converter = new OctopusFigConverter({ designPromise })
+  const converter = new OctopusFigConverter({ design: reader.design })
   converter.convertDesign({ exporter })
   await exporter.completed()
 

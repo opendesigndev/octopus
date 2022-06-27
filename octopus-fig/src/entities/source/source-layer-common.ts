@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid'
 import { DEFAULTS } from '../../utils/defaults'
 import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
-import { SourceEffect } from './source-effect-fill'
+import { SourceEffect } from './source-effect'
 import { SourceEntity } from './source-entity'
 import { SourcePaint } from './source-paint'
 

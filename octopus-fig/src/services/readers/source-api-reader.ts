@@ -10,7 +10,7 @@ type SourceApiReaderOptions = {
 
 export class SourceApiReader {
   private _designId: string
-  private _design: Promise<Design | null>
+  private _design: Design | null
 
   constructor(options: SourceApiReaderOptions) {
     this._designId = options.designId
@@ -21,11 +21,11 @@ export class SourceApiReader {
     return this._designId
   }
 
-  async designPromise(): Promise<Design | null> {
+  get design(): Design | null {
     return this._design
   }
 
-  private async _initSourceDesign(): Promise<Design | null> {
+  private _initSourceDesign(): Design | null {
     const token = ENV.API_TOKEN
     if (!token) return null
 
