@@ -9,7 +9,8 @@ import { makeDir, saveFile } from '../../utils/files'
 import { stringify } from '../../utils/misc'
 import { timestamp } from '../../utils/timestamp'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { ArtboardConversionResult } from '../..'
+import type { Manifest } from '../../typings/manifest'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -26,10 +27,10 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_PATH = (id: string): string => `${kebabCase(id)}-octopus.json`
-  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${DebugExporter.IMAGE_EXTNAME}`
   static MANIFEST_PATH = 'octopus-manifest.json'
-  static SOURCE_PATH = (id: string): string => `${kebabCase(id)}-source.json`
+  static getOctopusPath = (id: string): string => `${kebabCase(id)}-octopus.json`
+  static getPreviewPath = (id: string): string => `${kebabCase(id)}-preview${DebugExporter.IMAGE_EXTNAME}`
+  static getSourcePath = (id: string): string => `${kebabCase(id)}-source.json`
 
   constructor(options: DebugExporterOptions) {
     super()
@@ -69,18 +70,18 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportSource(raw: unknown, name = 'design'): Promise<string> {
-    const sourcePath = await this._save(DebugExporter.SOURCE_PATH(name), stringify(raw))
+    const sourcePath = await this._save(DebugExporter.getSourcePath(name), stringify(raw))
     this.emit('source:design', sourcePath)
     return sourcePath
   }
 
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) {
-      this.emit('octopus:artboard', { ...artboard, value: undefined })
+      this.emit('octopus:artboard', { ...artboard })
       return Promise.resolve(null)
     }
-    const octopusPath = await this._save(DebugExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
-    this.emit('octopus:artboard', { ...artboard, value: undefined, octopusPath })
+    const octopusPath = await this._save(DebugExporter.getOctopusPath(artboard.id), stringify(artboard.value))
+    this.emit('octopus:artboard', { ...artboard, octopusPath })
     return octopusPath
   }
 
@@ -88,27 +89,27 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return path.join(DebugExporter.IMAGES_DIR_NAME, `${name}${DebugExporter.IMAGE_EXTNAME}`)
   }
 
-  async exportImage(name: string, data: Buffer): Promise<string> {
+  async exportImage(name: string, data: ArrayBuffer): Promise<string> {
     const imagePath = this.getImagePath(name)
-    const savedPath = await this._save(imagePath, data)
+    const savedPath = await this._save(imagePath, Buffer.from(data))
     this.emit('source:image', savedPath)
-    return savedPath
+    return imagePath
   }
 
   getPreviewPath(id: string): string {
-    return DebugExporter.PREVIEW_PATH(id)
+    return DebugExporter.getPreviewPath(id)
   }
 
-  async exportPreview(id: string, data: Buffer): Promise<string> {
+  async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
     const previewPath = this.getPreviewPath(id)
-    const savedPath = await this._save(previewPath, data)
+    const savedPath = await this._save(previewPath, Buffer.from(data))
     this.emit('source:preview', savedPath)
-    return savedPath
+    return previewPath
   }
 
-  async exportManifest({ manifest }: DesignConversionResult, shouldEmit = false): Promise<string> {
+  async exportManifest(manifest: Manifest['OctopusManifest'], isFinal = false): Promise<string> {
     const manifestPath = await this._save(DebugExporter.MANIFEST_PATH, stringify(manifest))
-    if (shouldEmit) this.emit('octopus:manifest', manifestPath)
+    if (isFinal) this.emit('octopus:manifest', manifestPath)
     return manifestPath
   }
 }

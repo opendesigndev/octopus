@@ -8,7 +8,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { makeDir, saveFile } from '../../utils/files'
 import { stringify } from '../../utils/misc'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
+import type { ArtboardConversionResult } from '../../../src'
+import type { Manifest } from '../../typings/manifest'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -23,9 +24,9 @@ export class LocalExporter implements AbstractExporter {
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
-  static OCTOPUS_PATH = (id: string): string => `${kebabCase(id)}-octopus.json`
-  static PREVIEW_PATH = (id: string): string => `${kebabCase(id)}-preview${LocalExporter.IMAGE_EXTNAME}`
   static MANIFEST_PATH = 'octopus-manifest.json'
+  static getOctopusPath = (id: string): string => `${kebabCase(id)}-octopus.json`
+  static getPreviewPath = (id: string): string => `${kebabCase(id)}-preview${LocalExporter.IMAGE_EXTNAME}`
 
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
@@ -64,28 +65,30 @@ export class LocalExporter implements AbstractExporter {
 
   exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_PATH(artboard.id), stringify(artboard.value))
+    return this._save(LocalExporter.getOctopusPath(artboard.id), stringify(artboard.value))
   }
 
   getImagePath(name: string): string {
     return path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${LocalExporter.IMAGE_EXTNAME}`)
   }
 
-  async exportImage(name: string, data: Buffer): Promise<string> {
-    const fullName = this.getImagePath(name)
-    return await this._save(fullName, data)
+  async exportImage(name: string, data: ArrayBuffer): Promise<string> {
+    const imagePath = this.getImagePath(name)
+    await this._save(imagePath, Buffer.from(data))
+    return imagePath
   }
 
   getPreviewPath(id: string): string {
-    return LocalExporter.PREVIEW_PATH(id)
+    return LocalExporter.getPreviewPath(id)
   }
 
-  async exportPreview(id: string, data: Buffer): Promise<string> {
+  async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
     const previewPath = this.getPreviewPath(id)
-    return await this._save(previewPath, data)
+    await this._save(previewPath, Buffer.from(data))
+    return previewPath
   }
 
-  async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    return this._save(LocalExporter.MANIFEST_PATH, stringify(manifest.manifest))
+  async exportManifest(manifest: Manifest['OctopusManifest']): Promise<string> {
+    return this._save(LocalExporter.MANIFEST_PATH, stringify(manifest))
   }
 }

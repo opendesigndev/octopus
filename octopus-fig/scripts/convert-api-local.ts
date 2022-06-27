@@ -11,7 +11,7 @@ async function convertDesign(designId: string) {
 
   const reader = new SourceApiReader({ designId })
   const converter = new OctopusFigConverter({ design: reader.design })
-  converter.convertDesign({ exporter })
+  await converter.convertDesign({ exporter })
   await exporter.completed()
 
   console.info()

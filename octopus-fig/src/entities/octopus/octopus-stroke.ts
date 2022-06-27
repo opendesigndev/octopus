@@ -48,7 +48,7 @@ export class OctopusStroke {
 
   get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
     const strokeAlign = this._sourceLayer.strokeAlign
-    if (!OctopusStroke.STROKE_ALIGNS.some((align) => align === strokeAlign)) {
+    if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
       logWarn('Unknown Stroke Align', { strokeAlign })
       return null
     }
@@ -67,7 +67,7 @@ export class OctopusStroke {
 
   get lineJoin(): 'ROUND' | 'MITER' | 'BEVEL' | null {
     const strokeJoin = this._sourceLayer.strokeJoin
-    if (!OctopusStroke.STROKE_JOINS.some((join) => join === strokeJoin)) {
+    if (!OctopusStroke.STROKE_JOINS.includes(strokeJoin)) {
       logWarn('Unknown Stroke join', { strokeJoin })
       return null
     }

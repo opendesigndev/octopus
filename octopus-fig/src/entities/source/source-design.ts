@@ -1,7 +1,7 @@
 import { SourceEntity } from './source-entity'
 import { SourcePage } from './source-page'
 
-import type { RawPage, RawDesign } from '../../typings/raw'
+import type { RawDesign } from '../../typings/raw'
 
 type SourceDesignOptions = {
   raw: RawDesign
@@ -37,15 +37,5 @@ export class SourceDesign extends SourceEntity {
 
   get pages(): SourcePage[] {
     return this._pages
-  }
-
-  get values(): {
-    designId: string
-    pages: RawPage[]
-  } {
-    return {
-      designId: this.designId,
-      pages: this._pages.map((page) => page.raw),
-    }
   }
 }

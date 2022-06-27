@@ -1,3 +1,5 @@
+import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceTextStyle } from './source-text-style'
 
@@ -32,6 +34,7 @@ export class SourceLayerText extends SourceLayerCommon {
     return this._rawValue.characterStyleOverrides ?? []
   }
 
+  @firstCallMemo()
   get styleOverrideTable(): { [key: string]: SourceTextStyle | undefined } {
     const styleOverrideTable = this._rawValue.styleOverrideTable ?? {}
     return Object.keys(styleOverrideTable).reduce((table, key) => {
@@ -42,6 +45,7 @@ export class SourceLayerText extends SourceLayerCommon {
     }, {} as { [key: string]: SourceTextStyle })
   }
 
+  @firstCallMemo()
   get defaultStyle(): SourceTextStyle | null {
     if (!this._rawValue.style) return null
     return new SourceTextStyle(this._rawValue.style)

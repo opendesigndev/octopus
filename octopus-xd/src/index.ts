@@ -26,6 +26,7 @@ import type { NormalizedReadResult, NormalizedPackageJson } from 'read-pkg-up'
 
 type ConvertDesignOptions = {
   exporter?: Exporter
+  partialUpdateInterval?: number
 }
 
 type OctopusXDConverterGeneralOptions = {
@@ -199,7 +200,7 @@ export class OctopusXDConverter {
     /** Init partial update */
     const manifestInterval = setInterval(
       async () => this._exportManifest(exporter),
-      OctopusXDConverter.PARTIAL_UPDATE_INTERVAL
+      options?.partialUpdateInterval || OctopusXDConverter.PARTIAL_UPDATE_INTERVAL
     )
 
     /** Enqueue all artboards */

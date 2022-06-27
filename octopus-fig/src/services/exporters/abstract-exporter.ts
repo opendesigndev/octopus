@@ -1,4 +1,5 @@
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { ArtboardConversionResult } from '../..'
+import type { Manifest } from '../../typings/manifest'
 
 export abstract class AbstractExporter {
   exportSource?(_raw: unknown, _name?: string): Promise<unknown> {
@@ -9,23 +10,15 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
   }
 
-  getImagePath(_name: string): string {
-    throw new Error('Subclass of "Exporter" has no "getImagePath" method implemented!')
-  }
-
-  exportImage?(_name: string, _data: Buffer): Promise<unknown> {
+  exportImage?(_name: string, _data: unknown): Promise<string> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
 
-  getPreviewPath(_name: string): string {
-    throw new Error('Subclass of "Exporter" has no "getPreviewPath" method implemented!')
-  }
-
-  exportPreview?(_name: string, _data: Buffer): Promise<unknown> {
+  exportPreview?(_name: string, _data: unknown): Promise<string> {
     throw new Error('Subclass of "Exporter" has no "exportPreview" method implemented!')
   }
 
-  exportManifest(_manifest: DesignConversionResult, _shouldEmit?: boolean): Promise<unknown> {
+  exportManifest(_manifest: Manifest['OctopusManifest'], _isFinal?: boolean): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
   }
 

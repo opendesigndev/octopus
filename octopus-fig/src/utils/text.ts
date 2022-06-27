@@ -1,3 +1,5 @@
+import { keys } from '@avocode/octopus-common/dist/utils/common'
+
 export function _inferPostScriptType(weight: number | undefined): string {
   if (!weight) return 'Regular'
 
@@ -13,11 +15,11 @@ export function _inferPostScriptType(weight: number | undefined): string {
     '900': 'Black',
   }
 
-  const pair = Object.keys(types).reduce((pair, type, index, arr) => {
+  const pair = keys(types).reduce((pair, type, index, arr) => {
     if (!pair) {
       if (index === arr.length - 1) return null
       const next = arr[index + 1]
-      if (+type <= weight && +next >= weight) {
+      if (Number(type) <= weight && Number(next) >= weight) {
         return [type, next]
       }
     }

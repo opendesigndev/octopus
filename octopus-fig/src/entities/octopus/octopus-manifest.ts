@@ -22,8 +22,8 @@ export class OctopusManifest {
   private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusFigConverter
   private _exports: {
-    images: Map<string, string>
-    previews: Map<string, string>
+    images: Map<string, string | undefined>
+    previews: Map<string, string | undefined>
     artboards: Map<string, ArtboardDescriptor>
     artboardImageMap: Map<string, string[]>
   }
@@ -51,19 +51,19 @@ export class OctopusManifest {
     }
   }
 
-  setExportedImagePath(name: string, path: string): void {
+  setExportedImagePath(name: string, path: string | undefined): void {
     this._exports.images.set(name, path)
   }
 
-  getExportedImagePath(name: string): string | undefined {
+  getExportedRelativeImagePath(name: string): string | undefined {
     return this._exports.images.get(name)
   }
 
-  setExportedPreviewPath(id: string, path: string): void {
+  setExportedPreviewPath(id: string, path: string | undefined): void {
     this._exports.images.set(id, path)
   }
 
-  getExportedPreviewPath(id: string): string | undefined {
+  getExportedRelativePreviewPath(id: string): string | undefined {
     return this._exports.images.get(id)
   }
 
@@ -108,7 +108,7 @@ export class OctopusManifest {
     return {
       code: UNKNOWN_CODE,
       message: error.message,
-      stacktrace: error.stack ? [error.stack] : undefined,
+      stacktrace: error.stack ? error.stack.split('\n') : undefined,
     }
   }
 
@@ -131,9 +131,7 @@ export class OctopusManifest {
   }
 
   private _getAssetImage(imageName: string): Manifest['AssetImage'] | null {
-    const path = this.getExportedImagePath(imageName)
-    if (!path) return null
-
+    const path = this.getExportedRelativeImagePath(imageName) ?? ''
     const location = { type: 'RELATIVE' as const, path }
     return { location, refId: imageName }
   }
@@ -157,7 +155,7 @@ export class OctopusManifest {
   }
 
   private _getPreview(id: string): Manifest['ResourceLocation'] | undefined {
-    const previewPath = this.getExportedPreviewPath(id)
+    const previewPath = this.getExportedRelativePreviewPath(id)
     if (!previewPath) return
     return { type: 'RELATIVE', path: previewPath }
   }

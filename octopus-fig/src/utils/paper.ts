@@ -4,7 +4,7 @@ import type { SourceTransform } from '../typings/source'
 
 paper.setup(new paper.Size(100, 100))
 
-const SIMPLIFY_TOLERANCE = 1
+const SIMPLIFY_TOLERANCE = 0.00000001
 
 /**
  * @see https://gitlab.avcd.cz/backend/backend/-/issues/2312
