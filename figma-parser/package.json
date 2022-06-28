@@ -45,7 +45,7 @@
   ],
   "main": "./lib/src/index-web.js",
   "exports": {
-    ".": "./lib/src/index-web.js",
-    "./lib/src/index-node": "./lib/src/index-node.js"
+    "node": "./lib/src/index-node.js",
+    "default": "./lib/src/index-web.js"
   }
 }

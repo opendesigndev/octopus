@@ -1,4 +1,4 @@
-import { createParser } from '@avocode/figma-parser/lib/src/index-node'
+import { createParser } from '@avocode/figma-parser'
 
 import { ENV } from '../general/environment'
 
