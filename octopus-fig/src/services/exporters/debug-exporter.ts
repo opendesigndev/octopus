@@ -67,10 +67,6 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     this._completed.resolve()
   }
 
-  getBasePath(): Promise<string> {
-    return this._outputDir
-  }
-
   get manifestPath(): string | undefined {
     return this._manifestPath
   }

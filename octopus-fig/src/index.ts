@@ -166,9 +166,7 @@ export class OctopusFigConverter {
       const raw = design.design as unknown as RawDesign
       const sourceDesign = new SourceDesign({ designId, raw })
 
-      const octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this })
-      this._octopusManifest = octopusManifest
-      octopusManifest.registerBasePath(await exporter?.getBasePath?.())
+      this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this })
 
       exporter?.exportRawDesign?.(sourceDesign.raw)
 

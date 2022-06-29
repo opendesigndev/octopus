@@ -50,10 +50,6 @@ export class LocalExporter implements AbstractExporter {
     return fullPath
   }
 
-  getBasePath(): Promise<string> {
-    return this._outputDir
-  }
-
   async completed(): Promise<void> {
     await this._completed.promise
     await Promise.all(this._assetsSaves)

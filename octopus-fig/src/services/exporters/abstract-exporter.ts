@@ -29,6 +29,4 @@ export abstract class AbstractExporter {
   finalizeExport(): void {
     throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
   }
-
-  abstract getBasePath(): Promise<string>
 }

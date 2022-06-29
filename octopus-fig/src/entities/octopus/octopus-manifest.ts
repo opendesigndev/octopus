@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import type { OctopusFigConverter } from '../..'
@@ -28,15 +26,12 @@ export class OctopusManifest {
     artboardImageMap: Map<string, string[]>
   }
 
-  private _basePath: string | null
-
   static DEFAULT_FIG_VERSION = '0'
   static DEFAULT_FIG_FILENAME = 'Untitled'
 
   constructor(options: OctopusManifestOptions) {
     this._sourceDesign = options.sourceDesign
     this._octopusConverter = options.octopusConverter
-    this._basePath = null
     this._exports = {
       images: new Map(),
       previews: new Map(),
@@ -45,17 +40,11 @@ export class OctopusManifest {
     }
   }
 
-  registerBasePath(path: string | undefined): void {
-    if (typeof path === 'string') {
-      this._basePath = path
-    }
-  }
-
   setExportedImagePath(name: string, path: string | undefined): void {
     this._exports.images.set(name, path)
   }
 
-  getExportedRelativeImagePath(name: string): string | undefined {
+  getExportedImagePath(name: string): string | undefined {
     return this._exports.images.get(name)
   }
 
@@ -63,7 +52,7 @@ export class OctopusManifest {
     this._exports.images.set(id, path)
   }
 
-  getExportedRelativePreviewPath(id: string): string | undefined {
+  getExportedPreviewPath(id: string): string | undefined {
     return this._exports.images.get(id)
   }
 
@@ -79,11 +68,10 @@ export class OctopusManifest {
     return this._exports.artboards.get(id)
   }
 
-  getExportedArtboardRelativePathById(id: string): string | undefined {
+  getExportedArtboardPathById(id: string): string | undefined {
     const artboardResult = this._exports.artboards.get(id)
     if (typeof artboardResult?.path !== 'string') return undefined
-    if (this._basePath === null) return artboardResult.path
-    return path.relative(this._basePath, artboardResult.path)
+    return artboardResult.path
   }
 
   setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
@@ -131,7 +119,7 @@ export class OctopusManifest {
   }
 
   private _getAssetImage(imageName: string): Manifest['AssetImage'] | null {
-    const path = this.getExportedRelativeImagePath(imageName) ?? ''
+    const path = this.getExportedImagePath(imageName) ?? ''
     const location = { type: 'RELATIVE' as const, path }
     return { location, refId: imageName }
   }
@@ -155,7 +143,7 @@ export class OctopusManifest {
   }
 
   private _getPreview(id: string): Manifest['ResourceLocation'] | undefined {
-    const previewPath = this.getExportedRelativePreviewPath(id)
+    const previewPath = this.getExportedPreviewPath(id)
     if (!previewPath) return
     return { type: 'RELATIVE', path: previewPath }
   }
@@ -165,7 +153,7 @@ export class OctopusManifest {
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
 
-    const path = this.getExportedArtboardRelativePathById(id) ?? ''
+    const path = this.getExportedArtboardPathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
     const preview = this._getPreview(id)
