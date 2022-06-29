@@ -24,6 +24,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   _tempDir: string
   _assetsSaves: Promise<unknown>[]
   _completed: DetachedPromiseControls<void>
+  _manifestPath: string | undefined
 
   static IMAGES_DIR_NAME = 'images'
   static IMAGE_EXTNAME = '.png'
@@ -62,6 +63,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   finalizeExport(): void {
+    this.emit('octopus:manifest', this.manifestPath)
     this._completed.resolve()
   }
 
@@ -69,10 +71,24 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return this._outputDir
   }
 
-  async exportSource(raw: unknown, name = 'design'): Promise<string> {
-    const sourcePath = await this._save(DebugExporter.getSourcePath(name), stringify(raw))
-    this.emit('source:design', sourcePath)
-    return sourcePath
+  get manifestPath(): string | undefined {
+    return this._manifestPath
+  }
+
+  set manifestPath(path: string | undefined) {
+    this._manifestPath = path
+  }
+
+  async exportRawDesign(raw: unknown): Promise<string> {
+    const rawPath = await this._save(DebugExporter.getSourcePath('design'), stringify(raw))
+    this.emit('raw:design', rawPath)
+    return rawPath
+  }
+
+  async exportRawComponent(raw: unknown, name: string): Promise<string> {
+    const rawPath = await this._save(DebugExporter.getSourcePath(name), stringify(raw))
+    this.emit('raw:component', rawPath)
+    return rawPath
   }
 
   async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
@@ -107,9 +123,8 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return previewPath
   }
 
-  async exportManifest(manifest: Manifest['OctopusManifest'], isFinal = false): Promise<string> {
-    const manifestPath = await this._save(DebugExporter.MANIFEST_PATH, stringify(manifest))
-    if (isFinal) this.emit('octopus:manifest', manifestPath)
-    return manifestPath
+  async exportManifest(manifest: Manifest['OctopusManifest']): Promise<string> {
+    this.manifestPath = await this._save(DebugExporter.MANIFEST_PATH, stringify(manifest))
+    return this.manifestPath
   }
 }

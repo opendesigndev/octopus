@@ -1,4 +1,4 @@
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls, rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import PQueue from 'p-queue'
@@ -125,15 +125,11 @@ export class OctopusFigConverter {
     return { id: artboard.id, value, error, time }
   }
 
-  private async _exportManifest(options: {
-    exporter: AbstractExporter | null
-    isFinal?: boolean
-  }): Promise<Manifest['OctopusManifest'] | undefined> {
-    const { exporter, isFinal } = options
+  private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest'] | undefined> {
     const octopusManifest = this._octopusManifest
     if (!octopusManifest) return undefined
     const { result: manifest } = await benchmarkAsync(() => octopusManifest.convert())
-    await exporter?.exportManifest?.(manifest, isFinal)
+    exporter?.exportManifest && (await rejectTo(exporter.exportManifest?.(manifest)))
     return manifest
   }
 
@@ -142,7 +138,7 @@ export class OctopusFigConverter {
     artboard: SourceArtboard
   ): Promise<ArtboardConversionResult> {
     const converted = await this.convertArtboard(artboard)
-    const artboardPath = await exporter?.exportArtboard?.(converted)
+    const artboardPath = exporter?.exportArtboard && (await rejectTo(exporter.exportArtboard?.(converted)))
     this._octopusManifest?.setExportedArtboard(artboard.id, {
       path: artboardPath,
       error: converted.error,
@@ -174,12 +170,12 @@ export class OctopusFigConverter {
       this._octopusManifest = octopusManifest
       octopusManifest.registerBasePath(await exporter?.getBasePath?.())
 
-      exporter?.exportSource?.(sourceDesign.raw)
+      exporter?.exportRawDesign?.(sourceDesign.raw)
 
       /** Init partial update */
-      this._exportManifest({ exporter })
+      this._exportManifest(exporter)
       const manifestInterval = setInterval(
-        async () => this._exportManifest({ exporter }),
+        async () => this._exportManifest(exporter),
         options?.partialUpdateInterval || OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
       )
 
@@ -191,7 +187,7 @@ export class OctopusFigConverter {
 
       /** Final trigger of manifest save */
       clearInterval(manifestInterval)
-      conversionResult.manifest = await this._exportManifest({ exporter, isFinal: true })
+      conversionResult.manifest = await this._exportManifest(exporter)
 
       /** Trigger finalizer */
       exporter?.finalizeExport?.()
@@ -200,7 +196,7 @@ export class OctopusFigConverter {
 
     design.on('ready:artboard', async (frame: ResolvedFrame) => {
       const rawArtboard = frame.node.document as RawLayerFrame
-      exporter?.exportSource?.(rawArtboard, frame.nodeId)
+      exporter?.exportRawComponent?.(rawArtboard, frame.nodeId)
 
       const fillIds = Object.keys(frame.fills)
       this._octopusManifest?.setExportedArtboardImageMap(frame.nodeId, fillIds)

@@ -21,6 +21,7 @@ export class SourceArtboard extends SourceEntity {
   private _isPasteboard: boolean
 
   static DEFAULT_ID = 'artboard-1'
+  static DEFAULT_NAME = 'Artboard'
 
   constructor(options: SourceArtboardOptions) {
     super(options.rawArtboard)
@@ -59,7 +60,7 @@ export class SourceArtboard extends SourceEntity {
   }
 
   get name(): string {
-    return this._rawValue.name ?? SourceArtboard.DEFAULT_ID
+    return this._rawValue.name ?? SourceArtboard.DEFAULT_NAME
   }
 
   get isPasteboard(): boolean {
