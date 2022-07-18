@@ -38,6 +38,7 @@ export { SourceApiReader }
 type ConvertDesignOptions = {
   exporter?: AbstractExporter
   partialUpdateInterval?: number
+  skipReturn?: boolean
 }
 
 type OctopusConverterOptions = {
@@ -56,6 +57,8 @@ export type ArtboardConversionResult = {
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined
   artboards: ArtboardConversionResult[]
+  images: { name: string; data: ArrayBuffer }[]
+  previews: { id: string; data: ArrayBuffer }[]
 }
 
 export class OctopusFigConverter {
@@ -149,8 +152,9 @@ export class OctopusFigConverter {
 
   async convertDesign(options?: ConvertDesignOptions): Promise<DesignConversionResult | null> {
     const finalizeConvert = detachPromiseControls<void>()
-    const conversionResult: DesignConversionResult = { manifest: undefined, artboards: [] }
+    const conversionResult: DesignConversionResult = { manifest: undefined, artboards: [], images: [], previews: [] }
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
+    const shouldReturn = !(options?.skipReturn ?? false)
 
     /** Init artboards queue */
     const queue = new PQueue({ concurrency: OctopusFigConverter.QUEUE_PARALLELS })
@@ -201,7 +205,7 @@ export class OctopusFigConverter {
       const sourceArtboard = new SourceArtboard({ rawArtboard })
       queue.add(async () => {
         const artboard = await this._exportArtboard(exporter, sourceArtboard)
-        conversionResult.artboards.push(artboard)
+        if (shouldReturn) conversionResult.artboards.push(artboard)
       })
     })
 
@@ -209,15 +213,17 @@ export class OctopusFigConverter {
       const fillName = fill.ref
       const fillPath = await exporter?.exportImage?.(fillName, fill.buffer)
       this._octopusManifest?.setExportedImagePath(fillName, fillPath)
+      if (shouldReturn) conversionResult.images.push({ name: fillName, data: fill.buffer })
     })
 
     design.on('ready:preview', async (preview: ResolvedPreview) => {
       const previewId = preview.nodeId
       const previewPath = await exporter?.exportPreview?.(preview.nodeId, preview.buffer)
       this._octopusManifest?.setExportedImagePath(previewId, previewPath)
+      if (shouldReturn) conversionResult.previews.push({ id: previewId, data: preview.buffer })
     })
 
     await finalizeConvert.promise
-    return conversionResult
+    return shouldReturn ? conversionResult : null
   }
 }
