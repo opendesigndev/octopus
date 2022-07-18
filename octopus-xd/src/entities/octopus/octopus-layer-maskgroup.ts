@@ -77,7 +77,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     const height = asNumber(rawGroup?.meta?.ux?.viewportHeight, 1)
 
     const rect = {
-      id: `${asString(this._sourceLayer.id)}:mask`,
+      id: `${asString(this._sourceLayer.id)}-mask`,
       name: `${asString(this._sourceLayer.name)} mask`,
       type: 'shape',
       transform: { a: 1, b: 0, c: 0, d: 1, tx, ty },
@@ -99,7 +99,7 @@ export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
     const height = asNumber(rawGroup?.meta?.ux?.repeatGrid?.height, 1)
 
     const rect = {
-      id: `${asString(this._sourceLayer.id)}:mask`,
+      id: `${asString(this._sourceLayer.id)}-mask`,
       name: `${asString(this._sourceLayer.name)} mask`,
       type: 'shape',
       transform: { a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 },
