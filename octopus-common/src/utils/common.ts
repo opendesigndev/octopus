@@ -63,3 +63,13 @@ export function push<T, U>(arr: (T | U)[], ...values: U[]): (T | U)[] {
   arr.push(...values)
   return arr
 }
+
+export function removeUndefined<T extends Record<string | number | symbol, unknown>>(origin: T): T {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const newObj = {} as any
+  keys(origin).forEach((key: string) => {
+    if (origin[key] === Object(origin[key])) newObj[key] = removeUndefined(origin[key] as T)
+    else if (origin[key] !== undefined) newObj[key] = origin[key]
+  })
+  return newObj
+}
