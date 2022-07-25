@@ -56,7 +56,7 @@ export class OctopusPath {
   }
 
   private _geometry(sourceLayer: SourceLayer): Octopus['PathGeometry'] {
-    const path = this._firstGeometry(sourceLayer)?.path
+    const path = this._firstGeometry(sourceLayer)?.path // TODO return path for all geometries
     return path ? simplifyPathData(path) : DEFAULTS.EMPTY_PATH
   }
 

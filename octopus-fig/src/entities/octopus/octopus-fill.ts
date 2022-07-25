@@ -149,7 +149,7 @@ export class OctopusFill {
     if (size === null) return null
     const { x, y } = size
 
-    const transform: SourceTransform = [x, 0, 0, y, 0, 0]
+    const transform: SourceTransform = [x, 0, 0, y, 0, 0] // TODO missing imageTransform
     return { layout, origin, transform }
   }
 
