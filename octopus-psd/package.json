@@ -1,9 +1,9 @@
 {
   "name": "@avocode/octopus-psd",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.3",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "UNLICENSED",
-  "main": "dist/src/index.js",
+  "main": "lib/src/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
     "clean:workdir": "rimraf ./workdir/*",
@@ -49,6 +49,6 @@
     "typescript": "4.4.4"
   },
   "files": [
-    "dist/src"
+    "lib/src"
   ]
 }
