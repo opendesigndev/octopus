@@ -79,7 +79,7 @@ export default class SourceArtboard {
 
   get meta(): RawGeneralEntry & RawArtboardSpecific & { id: string; internalId: string | null } {
     const manifestEntry = this._getManifestEntryByPath()
-    const internalId = this._rawValue.children?.[0]?.artboard?.ref || null
+    const internalId = this._rawValue.children?.[0]?.id || this._rawValue.children?.[0]?.artboard?.ref || null
     const manifestId = manifestEntry.id
     return {
       ...manifestEntry,
