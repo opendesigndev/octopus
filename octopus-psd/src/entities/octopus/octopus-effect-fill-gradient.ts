@@ -80,9 +80,7 @@ export class OctopusEffectFillGradient {
     const STOP_MAX_LOCATION = 4096
     const _location = this.isInverse ? STOP_MAX_LOCATION - location : location
     const position = _location / STOP_MAX_LOCATION
-    const interpolation = 'LINEAR'
-    const interpolationParameter = 1
-    return { color, interpolation, interpolationParameter, position }
+    return { color, position }
   }
 
   private _getClosestStops<T extends GradientSourceStop>(location: number, stops: T[]): GradientClosestStops<T> {
@@ -100,7 +98,7 @@ export class OctopusEffectFillGradient {
     return closest
   }
 
-  private get _gradientStops(): Octopus['FillGradient']['gradient']['stops'] {
+  private get _gradientStops(): Octopus['GradientColorStop'][] {
     const colorStops: SourceEffectFillGradientColor[] = this.fill.gradient?.colors ?? []
     const opacityStops: SourceEffectFillGradientOpacity[] = this.fill.gradient?.opacities ?? []
 

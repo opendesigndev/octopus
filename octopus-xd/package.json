@@ -25,6 +25,7 @@
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "read-pkg-up": "7.0.1",
+    "time-stamp": "^2.2.0",
     "uuid": "^8.3.2",
     "fflate": "^0.7.1"
   },

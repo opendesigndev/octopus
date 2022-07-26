@@ -17,8 +17,11 @@ async function render(id: string, octopusPath: string) {
   const renderPath = path.join(octopusDir, 'render.png')
   const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
+  const ignoreValidation = process.env.RENDERING_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
   try {
-    execSync(`${process.env.RENDERING_PATH} ${fontsOption} ${octopusDir} ${renderPath}`, { stdio: 'ignore' })
+    execSync(`${process.env.RENDERING_PATH} ${ignoreValidation} ${fontsOption} ${octopusPath} ${renderPath}`, {
+      stdio: 'ignore',
+    })
     return { value: renderPath, error: null }
   } catch (error) {
     console.error(chalk.red(`Rendering failed while processing ${octopusPath}`))

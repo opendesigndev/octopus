@@ -20,8 +20,9 @@ export function detachPromiseControls<T>(): DetachedPromiseControls<T> {
 
 export function rejectTo<T>(promise: Promise<T>): Promise<T | null>
 export function rejectTo<T, U>(promise: Promise<T>, errValue: U): Promise<T | U>
+export function rejectTo<T>(promise: unknown): Promise<T | null>
 export function rejectTo<T, U>(promise: Promise<T>, errValue: U | null = null): Promise<T | U | null> {
-  return promise.then(
+  return Promise.resolve(promise).then(
     (value) => value,
     () => errValue
   )

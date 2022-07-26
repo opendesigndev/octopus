@@ -1,6 +1,6 @@
 {
   "name": "@avocode/figma-parser",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.2",
   "license": "UNLICENSED",
   "description": "Figma parser, downloads assets from Figma APIs",
   "devDependencies": {
@@ -21,8 +21,7 @@
     "bundle": "yarn run bundle:web",
     "bundle:web": "npx vite build -c vite.web.js",
     "build": "npx tsc --build ./tsconfig.json",
-    "clean": "npx rimraf ./node_modules ./lib ./workdir",
-    "clean:workdir": "npx rimraf ./workdir/*",
+    "clean": "npx rimraf ./node_modules ./lib",
     "prepack": "npx rimraf ./lib && yarn run build",
     "watch": "npx tsc -w",
     "test": "echo 'Tests are not implemented yet'",
@@ -44,6 +43,7 @@
   "files": [
     "lib/src"
   ],
+  "main": "./lib/src/index-web.js",
   "exports": {
     "node": "./lib/src/index-node.js",
     "default": "./lib/src/index-web.js"

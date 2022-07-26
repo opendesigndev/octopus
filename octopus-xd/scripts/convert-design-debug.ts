@@ -1,11 +1,13 @@
 import path from 'path'
 
+import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
+import { timestamp } from './utils/timestamp'
 
 type ConvertAllOptions = {
   render?: boolean
@@ -32,7 +34,8 @@ type ConvertedResources = {
 dotenv.config()
 
 export async function convertAll(options: ConvertAllOptions): Promise<void> {
-  const exporter = new TempExporter({ tempDir: options.outputDir })
+  const designId = `${timestamp()}-${path.basename(options.filename, '.xd')}`
+  const exporter = new TempExporter({ tempDir: options.outputDir, id: designId })
   exporter.on('source:resources', (exportedResources: ConvertedResources) => {
     const { manifest, interactions, resources, images } = exportedResources
     console.log(`${chalk.yellow('Manifest: ')}
@@ -58,7 +61,11 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
     ${chalk.cyan(`Source:`)} file://${artboard.sourcePath}
     ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath}
     ${chalk.cyan(`Render:`)} ${
-      render === null ? '<none>' : render.error ? chalk.red(render.error.message) : `file://${render.value}`
+      render === null
+        ? '<none>'
+        : render.error
+        ? chalk.red(render.error.message)
+        : `file://${render.value} ${displayPerf(render?.time)}`
     }
     `)
   })

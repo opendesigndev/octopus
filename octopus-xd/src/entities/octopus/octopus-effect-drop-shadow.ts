@@ -55,7 +55,8 @@ export default class OctopusEffectDropShadow {
         choke: defaults.EFFECTS.SHADOW_CHOKE,
         color: parseXDColor(color),
       },
-      basis: this._effectsBasisMissing ? 'BODY' : 'LAYER_AND_EFFECTS',
+      // basis: this._effectsBasisMissing ? 'BODY' : 'LAYER_AND_EFFECTS', // TODO Clean
+      basis: 'BODY' /** @TODO test `BODY` and consult with rendering team */,
     } as const
   }
 }

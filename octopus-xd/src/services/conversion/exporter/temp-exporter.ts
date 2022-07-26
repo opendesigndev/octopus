@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import type { Exporter } from '.'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
 import type SourceArtboard from '../../../entities/source/source-artboard'
-import type sourceDesign from '../../../entities/source/source-design'
+import type SourceDesign from '../../../entities/source/source-design'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
@@ -70,7 +70,7 @@ export class TempExporter extends EventEmitter implements Exporter {
     return this._outputDir
   }
 
-  async exportSourceDesign(design: sourceDesign): Promise<SourceResources> {
+  async exportSourceDesign(design: SourceDesign): Promise<SourceResources> {
     const saveManifest = this._save(TempExporter.MANIFEST_NAME, this._stringify(design.manifest.raw))
     const saveInteractions = this._save(TempExporter.INTERACTIONS_NAME, this._stringify(design.interactions.raw))
     const saveResources = this._save(TempExporter.RESOURCES_NAME, this._stringify(design.resources.raw))

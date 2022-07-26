@@ -12,6 +12,8 @@ import type { Logger } from './services/logger/logger'
 import type { NodeFactories, WebFactories } from './services/platforms'
 import type { ICacher } from './types/cacher'
 
+export type { Design }
+
 type Services = {
   downloader: IDownloader
   benchmarksTracker: IBenchmarksTracker

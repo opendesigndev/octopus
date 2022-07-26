@@ -23,6 +23,16 @@ type DesignMeta = {
   name: string
 }
 
+export type ResolvedDesign = {
+  designId: string
+  design: FigmaFile
+  content: Promise<{
+    artboards: ResolvedFrame[]
+    components: ResolvedFrame[]
+    libraries: ResolvedFrame[]
+  }>
+}
+
 export class Design extends EventEmitter {
   private _parser: Parser
   private _designId: string
@@ -142,15 +152,7 @@ export class Design extends EventEmitter {
     return Promise.all((await this._libraries).map((library) => library.ready()))
   }
 
-  async getResolvedDescriptor(): Promise<{
-    designId: string
-    design: FigmaFile
-    content: Promise<{
-      artboards: ResolvedFrame[]
-      components: ResolvedFrame[]
-      libraries: ResolvedFrame[]
-    }>
-  }> {
+  async getResolvedDescriptor(): Promise<ResolvedDesign> {
     const artboards = this._frameLikes.then((frameLikes) => {
       return Promise.all(
         frameLikes

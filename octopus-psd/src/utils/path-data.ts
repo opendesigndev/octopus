@@ -69,5 +69,5 @@ export function createPathData(
 ): string {
   const subpaths = pathComponent?.subpathListKey ?? []
   const pathItem = processSubpaths(subpaths, layerTranslation)
-  return pathItem?.pathData || 'MZ'
+  return pathItem?.pathData || ''
 }

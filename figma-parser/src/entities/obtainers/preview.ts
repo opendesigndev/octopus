@@ -7,6 +7,12 @@ type PreviewOptions = {
   frameLike: FrameLike
 }
 
+export type ResolvedPreview = {
+  designId: string
+  nodeId: string
+  buffer: ArrayBuffer
+}
+
 export class Preview {
   _frameLike: FrameLike
   _preview: Promise<ArrayBuffer>
@@ -64,10 +70,11 @@ export class Preview {
 
   private async _emitOnReady() {
     await this.ready()
-    this.design.emit('ready:preview', {
+    const preview: ResolvedPreview = {
       designId: this._frameLike.node.designId,
       nodeId: this._frameLike.node.nodeId,
       buffer: await this._preview,
-    })
+    }
+    this.design.emit('ready:preview', preview)
   }
 }

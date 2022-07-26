@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
+import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
-import { TempExporter } from './services/exporters/temp-exporter'
 import { createEnvironment } from './services/general/environment'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
@@ -19,14 +19,13 @@ import { PSDFileReader } from './services/readers/psd-file-reader'
 import { SourceFileReader } from './services/readers/source-file-reader'
 
 import type { SourceDesign, SourceImage } from './entities/source/source-design'
-import type { ArtboardConversionOptions } from './services/conversion/artboard-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
-export { LocalExporter, TempExporter }
+export { LocalExporter, DebugExporter }
 export { PSDFileReader, SourceFileReader }
 
 type ConvertDesignOptions = {
@@ -73,7 +72,12 @@ export class OctopusPSDConverter {
 
   static EXPORTERS = {
     LOCAL: LocalExporter,
-    TEMP: TempExporter,
+    DEBUG: DebugExporter,
+  }
+
+  static READERS = {
+    PSD: PSDFileReader,
+    SOURCE: SourceFileReader,
   }
 
   constructor(options: OctopusPSDConverterOptions) {
@@ -116,9 +120,9 @@ export class OctopusPSDConverter {
     })
   }
 
-  private async _convertArtboardSafe(options: ArtboardConversionOptions) {
+  private async _convertArtboardSafe() {
     try {
-      const value = await new ArtboardConverter({ ...options, octopusConverter: this }).convert()
+      const value = await new ArtboardConverter({ octopusConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
       logError('Converting Artboard failed', { error })
@@ -126,9 +130,8 @@ export class OctopusPSDConverter {
     }
   }
 
-  private async _convertArtboard(options: ArtboardConversionOptions): Promise<ArtboardConversionResult> {
-    const id = options.sourceDesign.artboard.id
-    const { time, result } = await benchmarkAsync(() => this._convertArtboardSafe(options))
+  private async _convertArtboardById(id: string): Promise<ArtboardConversionResult> {
+    const { time, result } = await benchmarkAsync(() => this._convertArtboardSafe())
     const { value, error } = result
     return { id, value, error, time }
   }
@@ -161,7 +164,7 @@ export class OctopusPSDConverter {
     )
 
     /** Artboard */
-    const artboardResult = await this._convertArtboard({ sourceDesign: this._sourceDesign })
+    const artboardResult = await this._convertArtboardById(this._sourceDesign.artboard.id)
     const artboardPath = await exporter?.exportArtboard?.(artboardResult)
     const { time, error } = artboardResult
     this.octopusManifest.setExportedArtboard(artboardResult.id, { path: artboardPath, time, error })

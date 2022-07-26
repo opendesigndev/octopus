@@ -1,6 +1,7 @@
 import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import { parsePsd } from '@avocode/psd-parser'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
@@ -8,7 +9,6 @@ import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
-import { displayPerf } from '../../utils/console'
 import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
 import { logInfo } from '../instances/misc'
 

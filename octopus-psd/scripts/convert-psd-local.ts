@@ -20,8 +20,9 @@ async function convert() {
   await converter.convertDesign({ exporter })
   await exporter.completed()
 
-  console.log(`Input: ${filePath}`)
-  console.log(`Output: ${testDir}`)
+  console.info()
+  console.info(`Input: ${filePath}`)
+  console.info(`Output: ${testDir}`)
 
   await reader.cleanup()
 }

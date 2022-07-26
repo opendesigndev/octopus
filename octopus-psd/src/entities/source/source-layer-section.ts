@@ -17,7 +17,6 @@ type SourceLayerSectionOptions = {
 
 export class SourceLayerSection extends SourceLayerCommon {
   protected _rawValue: RawLayerSection
-  protected _parent: SourceLayerParent
   private _layers: SourceLayer[]
 
   constructor(options: SourceLayerSectionOptions) {

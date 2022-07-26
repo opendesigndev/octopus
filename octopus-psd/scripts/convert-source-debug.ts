@@ -1,11 +1,11 @@
 import path from 'path'
 
+import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
 
-import { OctopusPSDConverter, SourceFileReader, TempExporter } from '../src'
-import { displayPerf } from '../src/utils/console'
+import { OctopusPSDConverter, SourceFileReader, DebugExporter } from '../src'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
@@ -32,7 +32,7 @@ export async function convertDesign({
 }: ConvertAllOptions): Promise<void> {
   const outputDir = path.join(await getPkgLocation(), 'workdir')
   const designId = `${timestamp()}-${kebabCase(path.basename(location, '.psd'))}`
-  const exporter = new TempExporter({ tempDir: outputDir, id: designId })
+  const exporter = new DebugExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
     const status = artboard.error ? '❌' : '✅'
