@@ -10,7 +10,7 @@ type OctopusManifestOptions = {
   octopusConverter: OctopusFigConverter
 }
 
-type ArtboardDescriptor = {
+export type ArtboardDescriptor = {
   path: unknown
   error: Error | null
   time: number | null

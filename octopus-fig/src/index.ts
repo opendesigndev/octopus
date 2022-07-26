@@ -1,4 +1,4 @@
-import { detachPromiseControls, rejectTo } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import PQueue from 'p-queue'
@@ -132,8 +132,27 @@ export class OctopusFigConverter {
     const octopusManifest = this._octopusManifest
     if (!octopusManifest) return undefined
     const { result: manifest } = await benchmarkAsync(() => octopusManifest.convert())
-    exporter?.exportManifest && (await rejectTo(exporter.exportManifest?.(manifest)))
+
+    try {
+      await exporter?.exportManifest?.(manifest)
+    } catch (error) {
+      logger.error(error)
+    }
+
     return manifest
+  }
+
+  private async _exportArtboardSafe(
+    exporter: AbstractExporter | null,
+    converted: ArtboardConversionResult
+  ): Promise<{ artboardPath: string | null; error: Error | null }> {
+    try {
+      const artboardPath = await exporter?.exportArtboard?.(converted)
+      if (!artboardPath) return { artboardPath: null, error: new Error('Export Artboard failed - no artboardPath') }
+      return { artboardPath, error: null }
+    } catch (error) {
+      return { artboardPath: null, error }
+    }
   }
 
   private async _exportArtboard(
@@ -141,12 +160,15 @@ export class OctopusFigConverter {
     artboard: SourceArtboard
   ): Promise<ArtboardConversionResult> {
     const converted = await this.convertArtboard(artboard)
-    const artboardPath = exporter?.exportArtboard && (await rejectTo(exporter.exportArtboard?.(converted)))
+
+    const { artboardPath, error } = await this._exportArtboardSafe(exporter, converted)
+
     this._octopusManifest?.setExportedArtboard(artboard.id, {
       path: artboardPath,
-      error: converted.error,
+      error: converted.error ?? error,
       time: converted.time,
     })
+
     return converted
   }
 

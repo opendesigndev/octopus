@@ -54,6 +54,10 @@ export class SourcePaint extends SourceEntity {
     return getTransformFor(this._rawValue.imageTransform)
   }
 
+  get scalingFactor(): number {
+    return round(this._rawValue.scalingFactor ?? 1)
+  }
+
   get gradientStops(): RawStop[] {
     return this._rawValue.gradientStops ?? []
   }

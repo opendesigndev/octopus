@@ -10,7 +10,7 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportRawComponent" method implemented!')
   }
 
-  exportArtboard(_artboard: ArtboardConversionResult): Promise<unknown> {
+  exportArtboard(_artboard: ArtboardConversionResult): Promise<string | null> {
     throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
   }
 
