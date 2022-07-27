@@ -9,6 +9,7 @@ import type { RawStop } from '../../typings/raw'
 import type { SourceTransform } from '../../typings/source'
 import type { SourceLayerCommon } from '../source/source-layer-common'
 import type { SourcePaint } from '../source/source-paint'
+import { createMatrix } from '../../utils/paper'
 
 type OctopusFillOptions = {
   fill: SourcePaint
@@ -149,7 +150,44 @@ export class OctopusFill {
     if (size === null) return null
     const { x, y } = size
 
-    const transform: SourceTransform = [x, 0, 0, y, 0, 0] // TODO missing imageTransform
+    if (layout === 'TILE') {
+      const scalingFactor = this._fill.scalingFactor
+
+      const picX = 914 // TODO get the picture real width and height
+      const picY = 914
+
+      const transform: SourceTransform = [picX * scalingFactor, 0, 0, picY * scalingFactor, 0, 0]
+      return { layout, origin, transform }
+    }
+
+    if (this._fill.imageTransform) {
+      const [a, b, c, d, tx, ty] = this._fill.imageTransform // transform matrix from figma api
+
+      const { x, y } = size // layer size
+
+      const scaleX = !a ? 0 : x / a
+      const scaleY = !d ? 0 : y / d
+
+      const skewY = -b * scaleY // TODO HERE
+      const skewX = -c * scaleX // TODO HERE
+      // const skewY = -b * y
+      // const skewX = -c * x
+      // const skewY = !b ? 0 : y / b
+      // const skewX = !c ? 0 : x / c
+      // const skewY = b * -ty * scaleY
+      // const skewX = c * -tx * scaleX
+      // const skewY = b
+      // const skewX = c
+
+      const translateX = -tx * scaleX
+      const translateY = -ty * scaleY
+
+      const transform = [scaleX, skewY, skewX, scaleY, translateX, translateY]
+
+      return { layout, origin, transform }
+    }
+
+    const transform: SourceTransform = [x, 0, 0, y, 0, 0]
     return { layout, origin, transform }
   }
 
