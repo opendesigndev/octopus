@@ -6,6 +6,7 @@ import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 import { SourceLayerFrame } from './source-layer-frame'
 
+import type { ImageSizeMap } from '../..'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawArtboard, RawBlendMode } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
@@ -13,20 +14,27 @@ import type { SourceBounds } from '../../typings/source'
 type SourceArtboardOptions = {
   rawArtboard: RawArtboard
   isPasteboard?: boolean
+  imageSizeMap?: ImageSizeMap
 }
 
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
   private _sourceFrame: SourceLayerFrame
   private _isPasteboard: boolean
+  private _imageSizeMap: ImageSizeMap
 
   static DEFAULT_ID = 'artboard-1'
   static DEFAULT_NAME = 'Artboard'
 
   constructor(options: SourceArtboardOptions) {
     super(options.rawArtboard)
-    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
     this._isPasteboard = options.isPasteboard ?? false
+    this._imageSizeMap = options.imageSizeMap ?? {}
+    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
+  }
+
+  getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
+    return ref ? this._imageSizeMap[ref] : undefined
   }
 
   private _getArtboardAssetsFonts(): string[] {

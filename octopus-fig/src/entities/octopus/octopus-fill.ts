@@ -146,19 +146,22 @@ export class OctopusFill {
     const layout = this._fill.scaleMode ?? 'FILL'
     const origin = 'LAYER'
 
-    const size = this._parentLayer.size
-    if (size === null) return null
-    const { x, y } = size
-
     if (layout === 'TILE') {
+      const imageRef = this._fill.imageRef
+      if (!imageRef) return null
+      const imageSize = this._parentLayer.parentArtboard.getImageSize(imageRef)
+      if (!imageSize) return null
+
       const scalingFactor = this._fill.scalingFactor
+      const { width, height } = imageSize
 
-      const picX = 914 // TODO get the picture real width and height
-      const picY = 914
-
-      const transform: SourceTransform = [picX * scalingFactor, 0, 0, picY * scalingFactor, 0, 0]
+      const transform: SourceTransform = [width * scalingFactor, 0, 0, height * scalingFactor, 0, 0]
       return { layout, origin, transform }
     }
+
+    const size = this._parentLayer.size
+    if (!size) return null
+    const { x, y } = size
 
     if (this._fill.imageTransform) {
       const transform = createMatrix(this._fill.imageTransform)

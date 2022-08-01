@@ -1,6 +1,7 @@
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import sizeOf from 'image-size'
 import PQueue from 'p-queue'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
@@ -46,6 +47,8 @@ type OctopusConverterOptions = {
   designId?: string
   logger?: Logger
 }
+
+export type ImageSizeMap = { [key: string]: { width: number; height: number } }
 
 export type ArtboardConversionResult = {
   id: string
@@ -178,6 +181,8 @@ export class OctopusFigConverter {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
     const shouldReturn = !(options?.skipReturn ?? false)
 
+    const imageSizeMap: ImageSizeMap = {}
+
     /** Init artboards queue */
     const queue = new PQueue({ concurrency: OctopusFigConverter.QUEUE_PARALLELS })
 
@@ -224,7 +229,7 @@ export class OctopusFigConverter {
 
       const fillIds = Object.keys(frame.fills)
       this._octopusManifest?.setExportedArtboardImageMap(frame.nodeId, fillIds)
-      const sourceArtboard = new SourceArtboard({ rawArtboard })
+      const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap }) // TODO isPasteboard
       queue.add(async () => {
         const artboard = await this._exportArtboard(exporter, sourceArtboard)
         if (shouldReturn) conversionResult.artboards.push(artboard)
@@ -234,6 +239,10 @@ export class OctopusFigConverter {
     design.on('ready:fill', async (fill: ResolvedFill) => {
       const fillName = fill.ref
       const fillPath = await exporter?.exportImage?.(fillName, fill.buffer)
+
+      const { width, height } = await sizeOf(Buffer.from(fill.buffer))
+      if (width && height) imageSizeMap[fillName] = { width, height }
+
       this._octopusManifest?.setExportedImagePath(fillName, fillPath)
       if (shouldReturn) conversionResult.images.push({ name: fillName, data: fill.buffer })
     })
