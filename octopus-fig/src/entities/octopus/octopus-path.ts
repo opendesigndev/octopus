@@ -1,3 +1,6 @@
+import { push } from '@avocode/octopus-common/dist/utils/common'
+import first from 'lodash/first'
+
 import { convertRectangle } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
@@ -49,15 +52,26 @@ export class OctopusPath {
     return isTopLayer ? DEFAULTS.TRANSFORM : sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
-  private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
+  private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
     return this._isStroke
-      ? sourceLayer.strokeGeometry[0] ?? sourceLayer.fillGeometry[0]
-      : sourceLayer.fillGeometry[0] ?? sourceLayer.strokeGeometry[0]
+      ? sourceLayer.strokeGeometry.length
+        ? sourceLayer.strokeGeometry
+        : sourceLayer.fillGeometry
+      : sourceLayer.fillGeometry.length
+      ? sourceLayer.fillGeometry
+      : sourceLayer.strokeGeometry
+  }
+
+  private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
+    return first(this._geometries(sourceLayer) ?? [])
   }
 
   private _geometry(sourceLayer: SourceLayer): Octopus['PathGeometry'] {
-    const path = this._firstGeometry(sourceLayer)?.path // TODO return path for all geometries
-    return path ? simplifyPathData(path) : DEFAULTS.EMPTY_PATH
+    const geometries = this._geometries(sourceLayer)?.reduce(
+      (paths: string[], cur: SourceGeometry) => push(paths, simplifyPathData(cur.path)),
+      []
+    )
+    return geometries ? geometries.join(' ') : DEFAULTS.EMPTY_PATH
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
