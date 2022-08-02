@@ -35,9 +35,20 @@ const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders | undefined } =
 function createOctopusLayerGroup({
   layer,
   parent,
-}: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup {
+}: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup | null {
   const sourceLayer = layer as SourceLayerFrame
-  if (sourceLayer.hasBackgroundMask) return new OctopusLayerMaskGroup({ parent, sourceLayer })
+  if (sourceLayer.hasBackgroundMask) {
+    const maskLayer = OctopusLayerMaskGroup.createBackgroundMask(sourceLayer)
+    if (!maskLayer) return null
+    const id = `${sourceLayer.id}-Background`
+
+    const mask = createOctopusLayer({ layer: sourceLayer, parent })?.convert()
+    if (!mask) return null
+
+    const layers = createOctopusLayers(sourceLayer.layers, parent)
+
+    return new OctopusLayerMaskGroup({ id, parent, mask, layers })
+  }
   return new OctopusLayerGroup({ parent, sourceLayer })
 }
 
@@ -65,9 +76,65 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   return builder(options)
 }
 
+export function createClippingMask(
+  parent: OctopusLayerParent,
+  mask: OctopusLayer,
+  layers: OctopusLayer[],
+  isMaskOutline: boolean
+): OctopusLayerMaskGroup | null {
+  return isMaskOutline
+    ? OctopusLayerMaskGroup.createClippingMaskOutline({ parent, mask, layers })
+    : OctopusLayerMaskGroup.createClippingMask({ parent, mask, layers })
+}
+
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
-  return layers.reduce((layers, sourceLayer) => {
+  let mask: OctopusLayer | null = null
+  let maskIsOutline = false
+  let maskLayers: OctopusLayer[] = []
+  const octopusLayers = layers.reduce((layers, sourceLayer) => {
     const octopusLayer = createOctopusLayer({ parent, layer: sourceLayer })
-    return octopusLayer ? push(layers, octopusLayer) : layers
+
+    if (!octopusLayer) return layers
+
+    if (sourceLayer.isMask) {
+      if (!sourceLayer.visible) {
+        if (mask !== null) {
+          const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
+          mask = null
+          maskIsOutline = false
+          maskLayers = []
+          if (!clippingMask) return push(layers, octopusLayer)
+          return push(layers, clippingMask, octopusLayer)
+        }
+        mask = null
+        maskIsOutline = false
+        maskLayers = []
+        return push(layers, octopusLayer)
+      }
+      if (mask !== null) {
+        const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
+        mask = octopusLayer
+        maskIsOutline = sourceLayer.isMaskOutline
+        maskLayers = []
+        if (!clippingMask) return layers
+        return push(layers, clippingMask)
+      }
+      mask = octopusLayer
+      maskIsOutline = sourceLayer.isMaskOutline
+      maskLayers = []
+      return layers
+    }
+
+    if (mask !== null) {
+      maskLayers.push(octopusLayer)
+      return layers
+    }
+
+    return push(layers, octopusLayer)
   }, [])
+
+  if (!mask) return octopusLayers
+  const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
+  if (!clippingMask) return octopusLayers
+  return push(octopusLayers, clippingMask)
 }

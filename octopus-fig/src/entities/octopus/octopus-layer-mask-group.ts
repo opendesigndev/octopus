@@ -1,9 +1,9 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { convertId, convertRectangle } from '../../utils/convert'
+import { DEFAULTS } from '../../utils/defaults'
+import { OctopusArtboard } from './octopus-artboard'
 import { OctopusFill } from './octopus-fill'
-import { OctopusLayerBase } from './octopus-layer-base'
 import { OctopusStroke } from './octopus-stroke'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -11,17 +11,13 @@ import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { OctopusLayerParent } from './octopus-layer-base'
 
-// type OctopusLayerMaskGroupOptions = {
-//   parent: OctopusLayerParent
-//   id: string
-//   mask: OctopusLayer
-//   layers: OctopusLayer[]
-//   maskBasis?: Octopus['MaskBasis']
-// }
-
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerFrame
+  id: string
+  mask: Octopus['Layer']
+  maskBasis?: Octopus['MaskBasis']
+  maskChannels?: number[]
+  layers: OctopusLayer[]
 }
 
 type CreateBackgroundOptions = {
@@ -30,16 +26,20 @@ type CreateBackgroundOptions = {
   layers: OctopusLayer[]
   isArtboard?: boolean
 }
-export class OctopusLayerMaskGroup extends OctopusLayerBase {
-  protected _parent: OctopusLayerParent
-  protected _sourceLayer: SourceLayerFrame
-  private _layers: OctopusLayer[]
 
-  // private _parent: OctopusLayerParent
-  // private _id: string
-  // private _mask: OctopusLayer
-  // private _layers: OctopusLayer[]
-  // private _maskBasis: Octopus['MaskBasis']
+type CreateMaskGroupOptions = {
+  mask: OctopusLayer
+  layers: OctopusLayer[]
+  parent: OctopusLayerParent
+}
+
+export class OctopusLayerMaskGroup {
+  private _parent: OctopusLayerParent
+  private _id: string
+  private _mask: Octopus['Layer']
+  private _maskBasis: Octopus['MaskBasis'] | undefined
+  private _maskChannels: number[] | undefined
+  private _layers: OctopusLayer[]
 
   static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
     if (!frame.size) return null
@@ -70,7 +70,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerBase {
     const meta = isArtboard ? { isArtboard } : undefined
     const visible = true // TODO
     return {
-      id, //: `${id}-Background`, // TODO
+      id: `${id}-Background`,
       type: 'MASK_GROUP',
       maskBasis: 'BODY',
       mask,
@@ -80,9 +80,36 @@ export class OctopusLayerMaskGroup extends OctopusLayerBase {
     }
   }
 
+  static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
+    const id = `${mask.id}-ClippingMask`
+    const maskBasis = 'FILL'
+    const maskLayer = mask.convert()
+    if (!maskLayer) return null
+    maskLayer.visible = false
+    const maskChannels = undefined
+
+    return new OctopusLayerMaskGroup({ id, parent, mask: maskLayer, layers, maskBasis, maskChannels })
+  }
+
+  static createClippingMaskOutline({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
+    const id = `${mask.id}-ClippingMask`
+    const maskBasis = 'BODY'
+    const maskLayer = mask.convert()
+    if (!maskLayer) return null
+    maskLayer.visible = false
+    const maskChannels = undefined
+
+    return new OctopusLayerMaskGroup({ id, parent, mask: maskLayer, layers, maskBasis, maskChannels })
+  }
+
   constructor(options: OctopusLayerMaskGroupOptions) {
-    super(options)
-    this._layers = createOctopusLayers(this._sourceLayer.layers, this)
+    this._id = options.id
+    this._mask = options.mask
+    this._maskBasis = options.maskBasis
+    this._maskChannels = options.maskChannels
+    this._layers = options.layers
+
+    // this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
   // constructor(options: OctopusLayerMaskGroupOptions) {
@@ -93,21 +120,33 @@ export class OctopusLayerMaskGroup extends OctopusLayerBase {
   //   this._maskBasis = options.maskBasis ?? 'BODY'
   // }
 
-  get sourceLayer(): SourceLayerFrame {
-    return this._sourceLayer
+  // get sourceLayer(): SourceLayerFrame {
+  //   return this._sourceLayer
+  // }
+
+  get id(): string {
+    return convertId(this._id)
   }
 
-  // get id(): string {
-  //   return convertId(this._id)
-  // }
+  get transform(): number[] {
+    return DEFAULTS.TRANSFORM
+  }
 
-  // get parentArtboard(): OctopusArtboard {
-  //   const parent = this._parent as OctopusLayerParent
-  //   return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
-  // }
+  get maskBasis(): Octopus['MaskBasis'] {
+    return this._maskBasis ?? 'BODY'
+  }
 
-  private get _maskBasis() {
-    return 'BODY' as const // TODO
+  get maskChannels(): number[] {
+    return this._maskChannels ?? [0, 0, 0, 1, 0]
+  }
+
+  get mask(): Octopus['Layer'] {
+    return this._mask
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    const parent = this._parent as OctopusLayerParent
+    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
   get type(): 'MASK_GROUP' {
@@ -115,14 +154,12 @@ export class OctopusLayerMaskGroup extends OctopusLayerBase {
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {
-    const mask = OctopusLayerMaskGroup.createBackgroundMask(this.sourceLayer)
-    if (!mask) return null
-
     return {
       id: this.id,
       type: this.type,
-      maskBasis: this._maskBasis,
-      mask,
+      maskBasis: this.maskBasis,
+      maskChannels: this.maskChannels,
+      mask: this.mask,
       transform: this.transform,
       layers: getConverted(this._layers),
     } as const

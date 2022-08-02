@@ -108,10 +108,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
   let clippedLayers: OctopusLayer[] = []
   return layers.reduce((layers, sourceLayer) => {
-    const octopusLayer = createOctopusLayer({
-      parent,
-      layer: sourceLayer,
-    })
+    const octopusLayer = createOctopusLayer({ parent, layer: sourceLayer })
 
     if (!octopusLayer) return layers
 
