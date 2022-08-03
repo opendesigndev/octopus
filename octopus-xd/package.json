@@ -48,5 +48,9 @@
   "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "files": [
     "lib/src"
-  ]
+  ],
+  "exports": {
+    "node": "./lib/src/index-node.js",
+    "default": "./lib/src/index-web.js"
+  }
 }
