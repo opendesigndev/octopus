@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-common",
-  "version": "3.0.0-rc.20",
+  "version": "3.0.0-rc.21",
   "license": "UNLICENSED",
   "description": "General utility functions for Octopus 3 common cases.",
   "main": "dist/index.js",
@@ -14,9 +14,7 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sentry/node": "6.14.0",
     "lodash": "^4.17.21",
-    "read-pkg-up": "7.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
