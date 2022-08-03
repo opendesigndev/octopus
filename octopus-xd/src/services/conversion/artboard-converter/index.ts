@@ -1,6 +1,6 @@
 import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
 
-import type { OctopusXDConverter } from '../../..'
+import type { OctopusXDConverter } from '../../../octopus-xd-converter'
 import type { Octopus } from '../../../typings/octopus'
 
 export type ArtboardConversionOptions = {

@@ -1,12 +1,9 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
+import paper from 'paper'
 
-import type paper from 'paper'
+const { CompoundPath, Curve, Path, Point, Segment, Size, Rectangle, Matrix, Group } = paper
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Paper = require('paper')
-const { CompoundPath, Curve, Path, Point, Segment, Size, Rectangle, Matrix, Group } = Paper
-
-Paper.setup(new Size(640, 480))
+paper.setup(new Size(640, 480))
 
 export function createSize(width: number, height?: number): paper.Size {
   return new Size(width, height === undefined ? width : height)
@@ -26,7 +23,7 @@ export function createSegmentI(point: paper.Point, handleIn: paper.Point): paper
 export function createSegmentO(point: paper.Point, handleOut: paper.Point): paper.Segment {
   return createSegment(point, undefined, handleOut)
 }
-export function createPath(options: Record<string, unknown> | paper.Segment[] | string): paper.Path {
+export function createPath(options: string): paper.Path {
   return new Path(options)
 }
 export function createPathRectangle(point: paper.Point, size: paper.Size): paper.Path.Rectangle {

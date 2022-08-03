@@ -27,7 +27,7 @@ type SourceDesignOptions = {
   }
   images: {
     path: string
-    getImageData: () => Promise<Buffer>
+    getImageData: GetImageData
   }[]
   artboards: {
     path: string
@@ -35,12 +35,14 @@ type SourceDesignOptions = {
   }[]
 }
 
+export type GetImageData = () => Promise<Uint8Array>
+
 export default class SourceDesign {
   private _manifest: SourceManifest
   private _interactions: SourceInteractions
   private _resources: SourceResources
   private _artboards: SourceArtboard[]
-  private _images: { path: string; getImageData: () => Promise<Buffer> }[]
+  private _images: { path: string; getImageData: GetImageData }[]
 
   constructor(options: SourceDesignOptions) {
     this._manifest = new SourceManifest({
@@ -86,7 +88,7 @@ export default class SourceDesign {
 
   get images(): {
     path: string
-    getImageData: () => Promise<Buffer>
+    getImageData: GetImageData
   }[] {
     return this._images
   }

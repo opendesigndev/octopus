@@ -9,7 +9,7 @@ import OctopusArtboardDimensions from './octopus-artboard-dimensions'
 import OctopusLayerGroup from './octopus-layer-group'
 import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
 
-import type { OctopusXDConverter } from '../..'
+import type { OctopusXDConverter } from '../../octopus-xd-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { RawLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
 import type SourceArtboard from '../source/source-artboard'

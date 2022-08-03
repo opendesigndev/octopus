@@ -9,9 +9,9 @@ import { createMatrix } from '../../utils/paper'
 import OctopusArtboard from './octopus-artboard'
 import OctopusEffectsLayer from './octopus-effects-layer'
 
-import type { OctopusXDConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { OctopusXDConverter } from '../../octopus-xd-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Raw3DMatrix } from '../../typings/source'
@@ -110,10 +110,6 @@ export default class OctopusLayerCommon {
   get type(): 'SHAPE' | 'GROUP' | 'TEXT' | null {
     const type = String(this._sourceLayer.type).toLowerCase()
     if (!(type in OctopusLayerCommon.LAYER_TYPES)) {
-      const converter = this.converter
-      if (converter) {
-        converter.sentry?.captureMessage('Unknown layer type', { extra: { type } })
-      }
       return null
       // throw new Error(`Invalid layer property "type": "${this._sourceLayer.type}"`)
     }
