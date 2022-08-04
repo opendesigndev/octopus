@@ -28,6 +28,7 @@ export class OctopusLayerBase {
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
+  protected _visible: boolean
 
   static DEFAULT_TRANSLATION = [0, 0] as const
 
@@ -40,6 +41,7 @@ export class OctopusLayerBase {
   constructor(options: OctopusLayerBaseOptions) {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
+    this._visible = this._sourceLayer.visible
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
@@ -61,7 +63,11 @@ export class OctopusLayerBase {
   }
 
   get visible(): boolean {
-    return this._sourceLayer.visible
+    return this._visible
+  }
+
+  set visible(isVisible: boolean) {
+    this._visible = isVisible
   }
 
   get blendMode(): Octopus['BlendMode'] {

@@ -14,14 +14,14 @@ import type { OctopusLayerParent } from './octopus-layer-base'
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
   id: string
-  mask: Octopus['Layer']
+  mask: OctopusLayer
   maskBasis?: Octopus['MaskBasis']
   maskChannels?: number[]
   layers: OctopusLayer[]
+  visible?: boolean
 }
 
 type CreateBackgroundOptions = {
-  // parent: OctopusLayerParent
   frame: SourceLayerFrame
   layers: OctopusLayer[]
   isArtboard?: boolean
@@ -36,10 +36,11 @@ type CreateMaskGroupOptions = {
 export class OctopusLayerMaskGroup {
   private _parent: OctopusLayerParent
   private _id: string
-  private _mask: Octopus['Layer']
+  private _mask: OctopusLayer
   private _maskBasis: Octopus['MaskBasis'] | undefined
   private _maskChannels: number[] | undefined
   private _layers: OctopusLayer[]
+  protected _visible: boolean
 
   static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
     if (!frame.size) return null
@@ -58,7 +59,6 @@ export class OctopusLayerMaskGroup {
   }
 
   static createBackground({
-    // parent,
     frame,
     layers,
     isArtboard = false,
@@ -82,24 +82,16 @@ export class OctopusLayerMaskGroup {
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
-    const maskBasis = 'FILL'
-    const maskLayer = mask.convert()
-    if (!maskLayer) return null
-    maskLayer.visible = false
-    const maskChannels = undefined
-
-    return new OctopusLayerMaskGroup({ id, parent, mask: maskLayer, layers, maskBasis, maskChannels })
+    const maskBasis = 'LAYER_AND_EFFECTS'
+    mask.visible = false
+    return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
   }
 
   static createClippingMaskOutline({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
     const maskBasis = 'BODY'
-    const maskLayer = mask.convert()
-    if (!maskLayer) return null
-    maskLayer.visible = false
-    const maskChannels = undefined
-
-    return new OctopusLayerMaskGroup({ id, parent, mask: maskLayer, layers, maskBasis, maskChannels })
+    mask.visible = false
+    return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
   }
 
   constructor(options: OctopusLayerMaskGroupOptions) {
@@ -108,21 +100,8 @@ export class OctopusLayerMaskGroup {
     this._maskBasis = options.maskBasis
     this._maskChannels = options.maskChannels
     this._layers = options.layers
-
-    // this._layers = createOctopusLayers(this._sourceLayer.layers, this)
+    this._visible = options.visible ?? true
   }
-
-  // constructor(options: OctopusLayerMaskGroupOptions) {
-  //   this._parent = options.parent
-  //   this._id = options.id
-  //   this._mask = options.mask
-  //   this._layers = options.layers
-  //   this._maskBasis = options.maskBasis ?? 'BODY'
-  // }
-
-  // get sourceLayer(): SourceLayerFrame {
-  //   return this._sourceLayer
-  // }
 
   get id(): string {
     return convertId(this._id)
@@ -136,11 +115,11 @@ export class OctopusLayerMaskGroup {
     return this._maskBasis ?? 'BODY'
   }
 
-  get maskChannels(): number[] {
-    return this._maskChannels ?? [0, 0, 0, 1, 0]
+  get maskChannels(): number[] | undefined {
+    return this._maskChannels
   }
 
-  get mask(): Octopus['Layer'] {
+  get mask(): OctopusLayer {
     return this._mask
   }
 
@@ -153,13 +132,24 @@ export class OctopusLayerMaskGroup {
     return 'MASK_GROUP'
   }
 
+  get visible(): boolean {
+    return this._visible
+  }
+
+  set visible(isVisible: boolean) {
+    this._visible = isVisible
+  }
+
   convert(): Octopus['MaskGroupLayer'] | null {
+    const mask = this.mask.convert()
+    if (!mask) return null
+
     return {
       id: this.id,
       type: this.type,
       maskBasis: this.maskBasis,
       maskChannels: this.maskChannels,
-      mask: this.mask,
+      mask,
       transform: this.transform,
       layers: getConverted(this._layers),
     } as const

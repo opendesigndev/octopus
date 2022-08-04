@@ -42,7 +42,7 @@ function createOctopusLayerGroup({
     if (!maskLayer) return null
     const id = `${sourceLayer.id}-Background`
 
-    const mask = createOctopusLayer({ layer: sourceLayer, parent })?.convert()
+    const mask = createOctopusLayer({ layer: sourceLayer, parent })
     if (!mask) return null
 
     const layers = createOctopusLayers(sourceLayer.layers, parent)
