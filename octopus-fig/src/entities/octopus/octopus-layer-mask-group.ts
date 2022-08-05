@@ -1,5 +1,7 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
+import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { createSourceLayer } from '../../factories/create-source-layer'
 import { convertId, convertRectangle } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
@@ -8,6 +10,7 @@ import { OctopusStroke } from './octopus-stroke'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
+import type { RawLayerShape } from '../../typings/raw'
 import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { OctopusLayerParent } from './octopus-layer-base'
 
@@ -19,6 +22,7 @@ type OctopusLayerMaskGroupOptions = {
   maskChannels?: number[]
   layers: OctopusLayer[]
   visible?: boolean
+  transform?: number[]
 }
 
 type CreateBackgroundOptions = {
@@ -34,14 +38,25 @@ type CreateMaskGroupOptions = {
 }
 
 export class OctopusLayerMaskGroup {
+  protected _visible: boolean
   private _parent: OctopusLayerParent
   private _id: string
   private _mask: OctopusLayer
-  private _maskBasis: Octopus['MaskBasis'] | undefined
-  private _maskChannels: number[] | undefined
   private _layers: OctopusLayer[]
-  protected _visible: boolean
+  private _maskBasis?: Octopus['MaskBasis']
+  private _maskChannels?: number[]
+  private _transform?: number[]
 
+  static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
+    const rawLayer = frame.raw as RawLayerShape
+    rawLayer.type = 'RECTANGLE' as const
+    delete rawLayer.relativeTransform
+    const sourceLayer = createSourceLayer({ layer: rawLayer, parent: frame.parent })
+    if (!sourceLayer) return null
+    return createOctopusLayer({ layer: sourceLayer, parent })
+  }
+
+  // TODO HERE zkontroluj jestli je potreba
   static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
     if (!frame.size) return null
 
@@ -58,6 +73,7 @@ export class OctopusLayerMaskGroup {
     }
   }
 
+  // TODO HERE zkontroluj jestli je potreba
   static createBackground({
     frame,
     layers,
@@ -101,6 +117,7 @@ export class OctopusLayerMaskGroup {
     this._maskChannels = options.maskChannels
     this._layers = options.layers
     this._visible = options.visible ?? true
+    this._transform = options.transform
   }
 
   get id(): string {
@@ -108,7 +125,7 @@ export class OctopusLayerMaskGroup {
   }
 
   get transform(): number[] {
-    return DEFAULTS.TRANSFORM
+    return this._transform ?? DEFAULTS.TRANSFORM
   }
 
   get maskBasis(): Octopus['MaskBasis'] {

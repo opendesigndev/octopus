@@ -19,7 +19,7 @@ export type RawSlice = {
   id?: string
   name?: string
   visible?: boolean
-  type?: 'SLICE'
+  type: 'SLICE'
   absoluteBoundingBox?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
@@ -63,18 +63,13 @@ export type RawLayerVector = RawLayerBase & {
 }
 
 export type RawLayerFrame = RawLayerVector & {
-  type?: 'FRAME'
+  type: 'FRAME'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
 }
 
-export type RawLayerShape = RawLayerVector &
-  RawLayerBooleanOp & {
-    type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
-  }
-
-export type RawLayerBooleanOp = RawLayerBase & {
-  type?: 'BOOLEAN_OPERATION'
+export type RawLayerShape = RawLayerVector & {
+  type: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'BOOLEAN_OPERATION'
   booleanOperation?: RawBooleanOperation
   children?: RawLayerShape[]
 }
@@ -82,7 +77,7 @@ export type RawLayerBooleanOp = RawLayerBase & {
 export type RawLineTypes = 'NONE' | 'ORDERED' | 'UNORDERED'
 
 export type RawLayerText = RawLayerVector & {
-  type?: 'TEXT'
+  type: 'TEXT'
   characters?: string
   style?: RawTextStyle
   layoutVersion?: number
