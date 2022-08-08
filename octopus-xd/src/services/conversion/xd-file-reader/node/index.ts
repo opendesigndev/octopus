@@ -5,7 +5,7 @@ import path from 'path'
 import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
-import SourceDesign from '../../../../entities/source/source-design'
+import { SourceDesign } from '../../../../entities/source/source-design'
 import { unzipArray } from '../unzip'
 
 import type { ArrayBuffersSourceTree } from '../../../../../src/typings'

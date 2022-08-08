@@ -1,4 +1,4 @@
-import type SourceDesign from './source-design'
+import type { SourceDesign } from './source-design'
 
 export type RawSourceInteractions = Record<string, unknown>
 
@@ -8,7 +8,7 @@ type SourceInteractionsOptions = {
   design: SourceDesign
 }
 
-export default class SourceInteractions {
+export class SourceInteractions {
   private _rawValue: RawSourceInteractions
   private _path: string
   private _design: SourceDesign

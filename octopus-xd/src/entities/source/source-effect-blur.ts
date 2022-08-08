@@ -4,7 +4,7 @@ export type SourceEffectBlurOptions = {
   effect: RawBlur
 }
 
-export default class SourceEffectBlur {
+export class SourceEffectBlur {
   private _rawEffect: RawBlur
 
   constructor(options: SourceEffectBlurOptions) {

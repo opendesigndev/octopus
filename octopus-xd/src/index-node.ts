@@ -4,7 +4,7 @@ import { OctopusXDConverter } from './octopus-xd-converter'
 import { createEnvironmentNode } from './services/general/environment'
 import { createLoggerNode } from './services/general/logger/node/logger-node'
 
-import type SourceDesign from './entities/source/source-design'
+import type { SourceDesign } from './entities/source/source-design'
 import type { OctopusXDConverterOptions } from './octopus-xd-converter'
 import type { NodeFactories } from './services/general/platforms'
 

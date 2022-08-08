@@ -1,11 +1,11 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import Expander from '../../services/conversion/expander'
-import PasteboardNormalizer from '../../services/conversion/pasteboard-normalizer'
-import SourceArtboard from './source-artboard'
-import SourceInteractions from './source-interactions'
-import SourceManifest from './source-manifest'
-import SourceResources from './source-resources'
+import { Expander } from '../../services/conversion/expander'
+import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer'
+import { SourceArtboard } from './source-artboard'
+import { SourceInteractions } from './source-interactions'
+import { SourceManifest } from './source-manifest'
+import { SourceResources } from './source-resources'
 
 import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
@@ -37,7 +37,7 @@ type SourceDesignOptions = {
 
 export type GetImageData = () => Promise<Uint8Array>
 
-export default class SourceDesign {
+export class SourceDesign {
   private _manifest: SourceManifest
   private _interactions: SourceInteractions
   private _resources: SourceResources

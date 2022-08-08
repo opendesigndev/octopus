@@ -1,4 +1,4 @@
-import SourceDesign from '../../../../entities/source/source-design'
+import { SourceDesign } from '../../../../entities/source/source-design'
 import { unzipArray } from '../unzip'
 
 import type { ArrayBuffersSourceTree } from '../../../../../src/typings'

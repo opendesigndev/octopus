@@ -1,26 +1,26 @@
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import defaults from '../../utils/defaults'
+import { DEFAULTS } from '../../utils/defaults'
 import { uuidv4FromSeed } from '../../utils/id'
 import { convertArrayToPaperMatrix, convertObjectMatrixToArray, convertPaperMatrixToObject } from '../../utils/matrix'
 import { createMatrix } from '../../utils/paper'
-import SourceLayerGroup from '../source/source-layer-group'
-import OctopusArtboardDimensions from './octopus-artboard-dimensions'
-import OctopusLayerGroup from './octopus-layer-group'
-import OctopusLayerMaskGroup from './octopus-layer-maskgroup'
+import { SourceLayerGroup } from '../source/source-layer-group'
+import { OctopusArtboardDimensions } from './octopus-artboard-dimensions'
+import { OctopusLayerGroup } from './octopus-layer-group'
+import { OctopusLayerMaskGroup } from './octopus-layer-maskgroup'
 
 import type { OctopusXDConverter } from '../../octopus-xd-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { RawLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
-import type SourceArtboard from '../source/source-artboard'
-import type SourceDesign from '../source/source-design'
+import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceDesign } from '../source/source-design'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
   octopusXdConverter: OctopusXDConverter
 }
 
-export default class OctopusArtboard {
+export class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusXdConverter: OctopusXDConverter
   private _backgroundRaw: RawShapeLayer
@@ -89,7 +89,7 @@ export default class OctopusArtboard {
 
   private _offsetMatrix(node: RawLayer, x: number, y: number) {
     const artboardMatrix = createMatrix(1, 0, 0, 1, -x, -y)
-    const arrayMatrix = convertObjectMatrixToArray(node.transform) || defaults.TRANSFORM
+    const arrayMatrix = convertObjectMatrixToArray(node.transform) || DEFAULTS.TRANSFORM
     const matrix = arrayMatrix.map((n) => asFiniteNumber(n, 0)) as [number, number, number, number, number, number]
     const layerMatrix = convertArrayToPaperMatrix(matrix)
     return {

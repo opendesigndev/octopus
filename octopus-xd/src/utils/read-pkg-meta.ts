@@ -1,6 +1,6 @@
 import * as pkg from '../../package.json'
 
-export default function readPackageMeta() {
+export function readPackageMeta() {
   return {
     name: pkg.name,
     version: pkg.version,

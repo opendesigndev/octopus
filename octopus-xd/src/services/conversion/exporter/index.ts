@@ -1,5 +1,5 @@
-import type SourceArtboard from '../../../entities/source/source-artboard'
-import type SourceDesign from '../../../entities/source/source-design'
+import type { SourceArtboard } from '../../../entities/source/source-artboard'
+import type { SourceDesign } from '../../../entities/source/source-design'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../octopus-xd-converter'
 
 export abstract class Exporter {

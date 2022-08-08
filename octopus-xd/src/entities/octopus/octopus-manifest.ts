@@ -24,7 +24,7 @@ type RawManifestBounds = {
   height: number
 }
 
-export default class OctopusManifest {
+export class OctopusManifest {
   private _octopusXdConverter: OctopusXDConverter
   private _exports: {
     images: Map<string, ImageDescriptor>

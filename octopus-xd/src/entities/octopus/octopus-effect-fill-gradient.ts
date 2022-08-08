@@ -2,16 +2,16 @@ import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import { parseXDColor } from '../../utils/color'
-import defaults from '../../utils/defaults'
+import { DEFAULTS } from '../../utils/defaults'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper'
-import SourceEffectFillGradient from '../source/source-effect-gradient-fill'
+import { SourceEffectFillGradient } from '../source/source-effect-gradient-fill'
 
 import type { Defined } from '../../typings/helpers'
 import type { Octopus } from '../../typings/octopus'
 import type { RawFillGradient, RawGradientLinear, RawGradientRadial, RawGradientResources } from '../../typings/source'
-import type SourceResources from '../source/source-resources'
-import type OctopusBounds from './octopus-bounds'
+import type { SourceResources } from '../source/source-resources'
+import type { OctopusBounds } from './octopus-bounds'
 
 type OctopusEffectFillGradientOptions = {
   source: SourceEffectFillGradient
@@ -27,7 +27,7 @@ type OctopusEffectFillGradientFromRawOptions = {
   compoundOffset: { x: number; y: number }
 }
 
-export default class OctopusEffectFillGradient {
+export class OctopusEffectFillGradient {
   private _source: SourceEffectFillGradient
   private _resources: SourceResources
   private _effectBounds: OctopusBounds
@@ -151,7 +151,7 @@ export default class OctopusEffectFillGradient {
     return {
       type: 'GRADIENT',
       visible,
-      blendMode: defaults.BLEND_MODE,
+      blendMode: DEFAULTS.BLEND_MODE,
       gradient: {
         type,
         stops,

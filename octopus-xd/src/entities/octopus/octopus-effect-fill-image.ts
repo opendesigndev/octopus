@@ -1,13 +1,13 @@
 import { asBoolean, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 
-import defaults from '../../utils/defaults'
+import { DEFAULTS } from '../../utils/defaults'
 import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
-import SourceEffectFillImage from '../source/source-effect-image-fill'
+import { SourceEffectFillImage } from '../source/source-effect-image-fill'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawFillImage } from '../../typings/source'
-import type OctopusBounds from './octopus-bounds'
-import type OctopusLayerShape from './octopus-layer-shape'
+import type { OctopusBounds } from './octopus-bounds'
+import type { OctopusLayerShape } from './octopus-layer-shape'
 
 type OctopusEffectFillImageOptions = {
   source: SourceEffectFillImage
@@ -21,7 +21,7 @@ type OctopusEffectFillImageFromRawOptions = {
   octopusLayer: OctopusLayerShape
 }
 
-export default class OctopusEffectFillImage {
+export class OctopusEffectFillImage {
   private _source: SourceEffectFillImage
   private _effectBounds: OctopusBounds
   private _octopusLayer: OctopusLayerShape
@@ -136,14 +136,14 @@ export default class OctopusEffectFillImage {
 
     const scaleBehavior = this._source.scaleBehavior
 
-    const fillType = scaleBehavior ? OctopusEffectFillImage.TYPES[scaleBehavior] : defaults.EFFECTS.IMAGE_FILL_TYPE
+    const fillType = scaleBehavior ? OctopusEffectFillImage.TYPES[scaleBehavior] : DEFAULTS.EFFECTS.IMAGE_FILL_TYPE
 
     const transform = fillType === 'FILL' ? this._getTransformFill() : this._getTransformStretch()
 
     return {
       type: 'IMAGE' as const,
       visible,
-      blendMode: defaults.BLEND_MODE,
+      blendMode: DEFAULTS.BLEND_MODE,
       image: {
         ref,
       },

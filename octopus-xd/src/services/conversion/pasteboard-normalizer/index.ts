@@ -1,6 +1,6 @@
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 
-import type SourceManifest from '../../../entities/source/source-manifest'
+import type { SourceManifest } from '../../../entities/source/source-manifest'
 import type { RawArtboard, RawPasteboard } from '../../../typings/source'
 
 type PasteboardNormalizerOptions = {
@@ -8,7 +8,7 @@ type PasteboardNormalizerOptions = {
   pasteboard: RawPasteboard
 }
 
-export default class PasteboardNormalizer {
+export class PasteboardNormalizer {
   private _pasteboard: RawPasteboard
   private _manifest: SourceManifest
 

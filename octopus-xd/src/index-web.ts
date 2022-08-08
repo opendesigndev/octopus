@@ -3,7 +3,7 @@ import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-web
 import { OctopusXDConverter } from './octopus-xd-converter'
 import { createLoggerWeb } from './services/general/logger/web/logger-web'
 
-import type SourceDesign from './entities/source/source-design'
+import type { SourceDesign } from './entities/source/source-design'
 import type { OctopusXDConverterOptions } from './octopus-xd-converter'
 import type { WebFactories } from './services/general/platforms'
 

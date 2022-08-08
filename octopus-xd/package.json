@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-xd",
-  "version": "3.0.0-rc.17",
+  "version": "3.0.0-rc.18",
   "license": "UNLICENSED",
   "main": "lib/src/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.21",
+    "@avocode/octopus-common": "3.0.0-rc.22",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "blueimp-md5": "^2.19.0",
     "dotenv": "16.0.0",

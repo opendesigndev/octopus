@@ -1,4 +1,4 @@
-import SourceLayerCommon from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common'
 
 import type { Defined } from '../../typings/helpers'
 import type { RawTextLayer } from '../../typings/source'
@@ -9,7 +9,7 @@ type SourceLayerTextOptions = {
   rawValue: RawTextLayer
 }
 
-export default class SourceLayerText extends SourceLayerCommon {
+export class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawTextLayer
   protected _parent: SourceLayerParent
 

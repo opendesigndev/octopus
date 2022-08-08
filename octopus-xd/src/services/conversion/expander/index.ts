@@ -7,14 +7,14 @@ import without from 'lodash/without'
 
 import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
 
-import type SourceResources from '../../../entities/source/source-resources'
+import type { SourceResources } from '../../../entities/source/source-resources'
 import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
 
 type ExpanderOptions = {
   resources: SourceResources
 }
 
-export default class Expander {
+export class Expander {
   private _resources: SourceResources
   private _symbols: RawLayer[]
 

@@ -1,4 +1,4 @@
-import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
+import { OctopusArtboard } from '../../../entities/octopus/octopus-artboard'
 
 import type { OctopusXDConverter } from '../../../octopus-xd-converter'
 import type { Octopus } from '../../../typings/octopus'
@@ -11,7 +11,7 @@ export type ArtboardConverterOptions = ArtboardConversionOptions & {
   octopusXdConverter: OctopusXDConverter
 }
 
-export default class ArtboardConverter {
+export class ArtboardConverter {
   private _targetArtboardId: string
   private _octopusXdConverter: OctopusXDConverter
 

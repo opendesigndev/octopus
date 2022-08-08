@@ -2,12 +2,12 @@ import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 import { v4 as uuidv4 } from 'uuid'
 
-import BLEND_MODES from '../../utils/blend-modes'
-import DEFAULTS from '../../utils/defaults'
+import { BLEND_MODES } from '../../utils/blend-modes'
+import { DEFAULTS } from '../../utils/defaults'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import { createMatrix } from '../../utils/paper'
-import OctopusArtboard from './octopus-artboard'
-import OctopusEffectsLayer from './octopus-effects-layer'
+import { OctopusArtboard } from './octopus-artboard'
+import { OctopusEffectsLayer } from './octopus-effects-layer'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -15,8 +15,8 @@ import type { OctopusXDConverter } from '../../octopus-xd-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Raw3DMatrix } from '../../typings/source'
-import type OctopusLayerGroup from './octopus-layer-group'
-import type OctopusLayerMaskGroup from './octopus-layer-maskgroup'
+import type { OctopusLayerGroup } from './octopus-layer-group'
+import type { OctopusLayerMaskGroup } from './octopus-layer-maskgroup'
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
@@ -24,7 +24,7 @@ type OctopusLayerCommonOptions = {
 }
 
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
-export default class OctopusLayerCommon {
+export class OctopusLayerCommon {
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
