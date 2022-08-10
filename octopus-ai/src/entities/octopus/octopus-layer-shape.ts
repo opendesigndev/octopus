@@ -6,21 +6,21 @@ import {
   getIsPositiveOrientation,
   getNorthEastSouthWestCoords,
   getNorthWestSouthEastCoords,
-} from '../../utils/coords'
-import createShape from '../../utils/create-shape'
-import OctopusEffectsShape from './octopus-effects-shape'
-import OctopusLayerCommon from './octopus-layer-common'
-import OctopusPoint from './octopus-point'
+} from '../../utils/coords.js'
+import createShape from '../../utils/create-shape.js'
+import OctopusEffectsShape from './octopus-effects-shape.js'
+import OctopusLayerCommon from './octopus-layer-common.js'
+import OctopusPoint from './octopus-point.js'
 
-import type { Coord } from '../../typings'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RawShapeLayerSubPathPoint } from '../../typings/raw'
-import type { RectCoords } from '../../utils/coords'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceLayerShapeSubPath from '../source/source-layer-shape-subpath'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { NormalizedPoint } from './octopus-point'
+import type { Coord } from '../../typings/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawShapeLayerSubPathPoint } from '../../typings/raw/index.js'
+import type { RectCoords } from '../../utils/coords.js'
+import type SourceLayerShapeSubPath from '../source/source-layer-shape-subpath.js'
+import type SourceLayerShape from '../source/source-layer-shape.js'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { NormalizedPoint } from './octopus-point.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

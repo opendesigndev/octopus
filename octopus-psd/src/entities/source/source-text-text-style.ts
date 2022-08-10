@@ -1,10 +1,10 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { getColorFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getColorFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawTextStyle } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
+import type { RawTextStyle } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined

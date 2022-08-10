@@ -1,6 +1,6 @@
 import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises'
 
-import { logWarn } from '../services/instances/misc'
+import { logWarn } from '../services/instances/misc.js'
 
 import type { Dirent } from 'fs'
 

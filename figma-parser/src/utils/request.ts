@@ -1,4 +1,4 @@
-import { keys } from './common'
+import { keys } from './common.js'
 
 export function buildEndpoint(endpointPattern: string, rawOptions: Record<string, string | string[]>): string {
   const options = Object(rawOptions) as typeof rawOptions

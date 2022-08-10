@@ -1,11 +1,11 @@
-import fromPairs from 'lodash/fromPairs'
+import fromPairs from 'lodash/fromPairs.js'
 
-import BenchmarkHTTPRequestNode from './benchmark-http-request-node'
-import BenchmarkSimpleNode from './benchmark-simple-node'
+import BenchmarkHTTPRequestNode from './benchmark-http-request-node.js'
+import BenchmarkSimpleNode from './benchmark-simple-node.js'
 
-import type { IBenchmarkHTTPRequest } from '../benchmark-http-request.iface'
-import type { IBenchmarkSimple, BenchmarkSimpleExport } from '../benchmark-simple.iface'
-import type { IBenchmarksTracker } from '../benchmarks-tracker.iface'
+import type { IBenchmarkHTTPRequest } from '../benchmark-http-request.iface.js'
+import type { IBenchmarkSimple, BenchmarkSimpleExport } from '../benchmark-simple.iface.js'
+import type { IBenchmarksTracker } from '../benchmarks-tracker.iface.js'
 import type { Response } from 'got'
 
 type Benchmark = IBenchmarkSimple | IBenchmarkHTTPRequest

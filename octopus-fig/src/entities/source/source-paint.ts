@@ -1,9 +1,9 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { getTransformFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getTransformFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { Octopus } from '../../typings/octopus'
+import type { Octopus } from '../../typings/octopus.js'
 import type {
   RawBlendMode,
   RawColor,
@@ -12,8 +12,8 @@ import type {
   RawPaint,
   RawScaleMode,
   RawStop,
-} from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
+} from '../../typings/raw/index.js'
+import type { SourceTransform } from '../../typings/source.js'
 
 type SourcePaintOptions = {
   rawValue: RawPaint

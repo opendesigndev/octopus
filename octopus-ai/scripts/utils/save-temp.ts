@@ -4,7 +4,7 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { getPkgLocation } from './pkg-location'
+import { getPkgLocation } from './pkg-location.js'
 
 type CreateTempSaverOptions = {
   id?: string

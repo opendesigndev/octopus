@@ -1,6 +1,6 @@
 import { performance } from 'perf_hooks'
 
-import type { BenchmarkSimpleExport, IBenchmarkSimple } from '../benchmark-simple.iface'
+import type { BenchmarkSimpleExport, IBenchmarkSimple } from '../benchmark-simple.iface.js'
 
 export default class BenchmarkSimpleNode implements IBenchmarkSimple {
   _label: string

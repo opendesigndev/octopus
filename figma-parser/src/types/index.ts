@@ -1,8 +1,8 @@
-// import FigmaDesignLightStructure from './figma-entities/figma-design-light-structure'
-// import FigmaNode from './figma-entities/figma-node'
-// import FigmaParser from '.'
-// // import { OctopusManifestReport } from './services/octopus-manifest/octopus-manifest-types'
-// import { LibDescriptorMeta } from './utils/libraries-utils'
+// import FigmaDesignLightStructure from './figma-entities/figma-design-light-structure.js'
+// import FigmaNode from './figma-entities/figma-node.js'
+// import FigmaParser from './index.js'
+// // import { OctopusManifestReport } from './services/octopus-manifest/octopus-manifest-types.js'
+// import { LibDescriptorMeta } from './utils/libraries-utils.js'
 
 // export type FigmaLayer = {
 //   renditionRef: string

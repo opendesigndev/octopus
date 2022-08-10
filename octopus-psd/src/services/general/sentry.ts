@@ -1,6 +1,6 @@
 import * as sentry from '@sentry/node'
 
-import type { Logger } from '../../typings'
+import type { Logger } from '../../typings/index.js'
 
 type CreateSentryOptions = {
   dsn?: string

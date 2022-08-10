@@ -3,7 +3,7 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 
-import { getPkgLocation } from './pkg-location'
+import { getPkgLocation } from './pkg-location.js'
 
 export type RenderResult = {
   value: string | undefined

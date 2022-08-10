@@ -1,4 +1,4 @@
-import type { BenchmarkSimpleExport, IBenchmarkSimple } from '../benchmark-simple.iface'
+import type { BenchmarkSimpleExport, IBenchmarkSimple } from '../benchmark-simple.iface.js'
 
 export default class BenchmarkSimpleWeb implements IBenchmarkSimple {
   _label: string

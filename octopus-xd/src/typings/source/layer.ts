@@ -1,10 +1,10 @@
-import type { RawTextLayer } from '.'
-import type { RawGroupLayer } from './group-layer'
-import type { RawShapeLayer } from './shape-layer'
-import type { RawShapeMaskGroupLayer } from './shape-mask-group-layer'
-import type { RawStyle } from './style'
-import type { RawTransform } from './transform'
-import type { RawVisualBounds } from './visual-bounds'
+import type { RawGroupLayer } from './group-layer.js'
+import type { RawTextLayer } from './index.js'
+import type { RawShapeLayer } from './shape-layer.js'
+import type { RawShapeMaskGroupLayer } from './shape-mask-group-layer.js'
+import type { RawStyle } from './style.js'
+import type { RawTransform } from './transform.js'
+import type { RawVisualBounds } from './visual-bounds.js'
 
 export type RawLayerCommon = {
   visible?: boolean

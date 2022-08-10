@@ -1,4 +1,4 @@
-import type { RawPaint } from './paint'
+import type { RawPaint } from './paint.js'
 
 export type RawTextAlignHorizontal = 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED'
 

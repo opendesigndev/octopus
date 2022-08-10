@@ -1,13 +1,13 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
 
-import type OctopusAIConverter from '../..'
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
-import type SourceArtboard from '../source/source-artboard'
-import type SourceDesign from '../source/source-design'
-import type SourceResources from '../source/source-resources'
+import type OctopusAIConverter from '../../index.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type SourceArtboard from '../source/source-artboard.js'
+import type SourceDesign from '../source/source-design.js'
+import type SourceResources from '../source/source-resources.js'
 
 type OctopusArtboardOptions = {
   sourceDesign: SourceDesign

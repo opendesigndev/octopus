@@ -1,13 +1,13 @@
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { getBoundsFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { getBoundsFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawLayer } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawArtboard, RawLayer } from '../../typings/raw/index.js'
+import type { SourceBounds } from '../../typings/source.js'
 
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard

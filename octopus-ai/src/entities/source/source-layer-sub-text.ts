@@ -1,13 +1,13 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
+import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
 import type {
   RawGraphicsStateMatrix,
   RawResourcesFontTextFont,
   RawResourcesFontTextFontFontDescriptor,
   RawTextLayerText,
-} from '../../typings/raw'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state'
-import type SourceLayerText from './source-layer-text'
+} from '../../typings/raw/index.js'
+import type SourceLayerText from './source-layer-text.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextNormalizedOptions = {

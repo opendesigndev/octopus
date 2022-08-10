@@ -1,11 +1,11 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { RawBlendMode } from '../typings/raw'
-import type { SourceBounds, SourceColor, SourceOffset, SourceVectorXY } from '../typings/source'
+import type { Octopus } from '../typings/octopus.js'
+import type { RawBlendMode } from '../typings/raw/index.js'
+import type { SourceBounds, SourceColor, SourceOffset, SourceVectorXY } from '../typings/source.js'
 
 const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   blendDivide: 'DIVIDE',

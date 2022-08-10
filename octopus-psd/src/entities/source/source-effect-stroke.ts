@@ -1,9 +1,9 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { SourceEffectBase } from './source-effect-base'
-import { SourceEffectFill } from './source-effect-fill'
+import { SourceEffectBase } from './source-effect-base.js'
+import { SourceEffectFill } from './source-effect-fill.js'
 
-import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
+import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw/index.js'
 
 export class SourceEffectStroke extends SourceEffectBase {
   protected _rawValue: RawEffectStroke | undefined

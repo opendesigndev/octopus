@@ -1,8 +1,8 @@
-import { flattenLayers, getChildren } from '../../utils/common-design'
-import firstCallMemo from '../../utils/decorators'
-import { Artboard } from './artboard'
+import { flattenLayers, getChildren } from '../../utils/common-design.js'
+import firstCallMemo from '../../utils/decorators.js'
+import { Artboard } from './artboard.js'
 
-import type { FigmaLayer, FigmaPage } from '../../types/figma'
+import type { FigmaLayer, FigmaPage } from '../../types/figma.js'
 
 type PageOptions = {
   page: FigmaPage

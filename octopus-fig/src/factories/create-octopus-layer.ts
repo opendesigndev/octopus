@@ -1,16 +1,16 @@
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
-import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
-import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
-import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group.js'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
+import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
+import { logWarn } from '../services/instances/misc.js'
 
-import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
-import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
-import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { SourceLayerText } from '../entities/source/source-layer-text'
-import type { SourceLayer } from './create-source-layer'
+import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base.js'
+import type { SourceLayerFrame } from '../entities/source/source-layer-frame.js'
+import type { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import type { SourceLayerText } from '../entities/source/source-layer-text.js'
+import type { SourceLayer } from './create-source-layer.js'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText
 

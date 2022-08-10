@@ -1,10 +1,10 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import { getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceEffectBase } from './source-effect-base'
+import { getColorFor, getUnitRatioFor } from '../../utils/source.js'
+import { SourceEffectBase } from './source-effect-base.js'
 
-import type { RawBlendMode, RawEffectBevelEmboss } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
+import type { RawBlendMode, RawEffectBevelEmboss } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 
 export class SourceEffectBevelEmboss extends SourceEffectBase {
   protected _rawValue: RawEffectBevelEmboss | undefined

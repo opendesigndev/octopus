@@ -1,11 +1,11 @@
-import { FileEndpoint } from './file-endpoint'
-import { FillsEndpoint } from './fills-endpoint'
-import { LibraryEndpoint } from './library-endpoint'
-import { NodesEndpoint } from './nodes-endpoint'
-import { PreviewsEndpoint } from './previews-endpoint'
-import { RenditionsEndpoint } from './renditions-endpoint'
+import { FileEndpoint } from './file-endpoint.js'
+import { FillsEndpoint } from './fills-endpoint.js'
+import { LibraryEndpoint } from './library-endpoint.js'
+import { NodesEndpoint } from './nodes-endpoint.js'
+import { PreviewsEndpoint } from './previews-endpoint.js'
+import { RenditionsEndpoint } from './renditions-endpoint.js'
 
-import type { Parser } from '../../parser'
+import type { Parser } from '../../parser.js'
 
 type RequestsManagerOptions = {
   parser: Parser

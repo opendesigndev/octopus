@@ -1,13 +1,14 @@
-import got from 'got'
+import { got } from 'got'
 
-import { logger } from '../..'
-import { ResponseNode } from './response-node'
+import { logger } from '../../index.js'
+import { ResponseNode } from './response-node.js'
 
-import type { Parser } from '../../../parser'
-import type { SafeResult } from '../../../utils/queue'
-import type { IDownloader } from '../downloader.iface'
-import type { IResponse, JSONValue } from '../response.iface'
-import type { Got, NormalizedOptions, Response } from 'got'
+import type { Parser } from '../../../parser.js'
+import type { SafeResult } from '../../../utils/queue.js'
+import type { IDownloader } from '../downloader.iface.js'
+import type { IResponse, JSONValue } from '../response.iface.js'
+import type { Got, Response } from 'got'
+type NormalizedOptions = any // TODO: replace this
 
 export type DownloaderNodeOptions = {
   parser: Parser
@@ -53,7 +54,7 @@ export class DownloaderNode implements IDownloader {
     // Retries
     const retry = {
       limit: this.parser.config.downloaderRetries,
-      errorCodes: [...got.defaults.options.retry.errorCodes, 'EPROTO'],
+      errorCodes: [...(got.defaults.options.retry.errorCodes || []), 'EPROTO'],
     }
     // Hooks
     const verbosePrintCurrentRequest = (options: NormalizedOptions) => {
@@ -94,7 +95,7 @@ export class DownloaderNode implements IDownloader {
     // Retries
     const retry = {
       limit: this.parser.config.downloaderRetries,
-      errorCodes: [...got.defaults.options.retry.errorCodes, 'EPROTO'],
+      errorCodes: [...(got.defaults.options.retry.errorCodes || []), 'EPROTO'],
     }
     // Hooks
     const verbosePrintCurrentRequest = (options: NormalizedOptions) => {

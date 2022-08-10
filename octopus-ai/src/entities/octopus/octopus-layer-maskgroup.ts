@@ -1,8 +1,8 @@
-// import OctopusLayerCommon from './octopus-layer-common'
-// import { OctopusLayerParent } from '../../typings/octopus-entities'
-// import SourceLayerShape from '../source/source-layer-shape'
+// import OctopusLayerCommon from './octopus-layer-common.js'
+// import { OctopusLayerParent } from '../../typings/octopus-entities.js'
+// import SourceLayerShape from '../source/source-layer-shape.js'
 
-// import OctopusLayerShape from './octopus-layer-shape'
+// import OctopusLayerShape from './octopus-layer-shape.js'
 
 // type OctopusLayerMaskOptions = {
 //   parent: OctopusLayerParent

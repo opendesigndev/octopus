@@ -1,8 +1,8 @@
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash/isEqual.js'
 
-import { asArray } from '../utils/as'
+import { asArray } from '../utils/as.js'
 
-import type { Octopus } from '../typings/octopus-common'
+import type { Octopus } from '../typings/octopus-common/index.js'
 
 function normalizeRanges(ranges: Octopus['StyleRange']['ranges']): Octopus['StyleRange']['ranges'] {
   const sorted = ranges.slice().sort((a, b) => a.from - b.from)

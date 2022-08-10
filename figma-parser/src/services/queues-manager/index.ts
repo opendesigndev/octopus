@@ -1,19 +1,20 @@
-// import { logger } from '..'
-import { Queue } from '../../utils/queue'
+// import { logger } from '...js'
+import { Queue } from '../../utils/queue.js'
 
-import type { Node } from '../../entities/structural/node'
-import type { Parser } from '../../parser'
+import type { Node } from '../../entities/structural/node.js'
+import type { Parser } from '../../parser.js'
 import type {
   FigmaComponent,
   FigmaNode,
   FigmaNodesResponse,
   FigmaPreviewsResponse,
   FigmaRenditionsResponse,
-} from '../../types/figma'
-import type { JSONValue } from '../downloader/response.iface'
-import type { NodeAddress } from '../requests-manager/nodes-endpoint'
-import type { RenditionRequestOptions } from '../requests-manager/renditions-endpoint'
-import type { KyInstance } from 'ky/distribution/types/ky'
+} from '../../types/figma.js'
+import type { JSONValue } from '../downloader/response.iface.js'
+import type { NodeAddress } from '../requests-manager/nodes-endpoint.js'
+import type { RenditionRequestOptions } from '../requests-manager/renditions-endpoint.js'
+import type ky from 'ky'
+type KyInstance = typeof ky
 
 type QueuesManagerOptions = {
   parser: Parser

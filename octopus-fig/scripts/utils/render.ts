@@ -3,9 +3,9 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import chalk from 'chalk'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from 'lodash/kebabCase.js'
 
-import { getPkgLocation } from './pkg-location'
+import { getPkgLocation } from './pkg-location.js'
 
 export type RenderResult = {
   value: string | undefined

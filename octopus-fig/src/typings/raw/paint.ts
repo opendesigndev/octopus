@@ -1,4 +1,4 @@
-import type { RawBlendMode, RawColor, RawVector, RawTransform } from './shared'
+import type { RawBlendMode, RawColor, RawVector, RawTransform } from './shared.js'
 
 export type RawStop = {
   color?: RawColor

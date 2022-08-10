@@ -1,8 +1,8 @@
-import type { Parser } from '../../parser'
-import type { IBenchmarksTracker } from '../benchmarks-tracker/benchmarks-tracker.iface'
-import type { IDownloader } from '../downloader/downloader.iface'
-import type { LoggerFactory } from '../logger/logger-factory.iface'
-import type { SentryFactory } from '../sentry/sentry-factory.iface'
+import type { Parser } from '../../parser.js'
+import type { IBenchmarksTracker } from '../benchmarks-tracker/benchmarks-tracker.iface.js'
+import type { IDownloader } from '../downloader/downloader.iface.js'
+import type { LoggerFactory } from '../logger/logger-factory.iface.js'
+import type { SentryFactory } from '../sentry/sentry-factory.iface.js'
 
 // Downloader
 type NodeDownloaderFactory = (options: { parser: Parser }) => IDownloader

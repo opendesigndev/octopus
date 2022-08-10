@@ -1,6 +1,6 @@
 import util from 'util'
 
-import isObjectLike from 'lodash/isObjectLike'
+import isObjectLike from 'lodash/isObjectLike.js'
 
 export function JSONFromTypedArray(typedArray: Uint8Array): unknown {
   return JSON.parse(Buffer.from(typedArray).toString())

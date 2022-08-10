@@ -1,6 +1,6 @@
-import fromPairs from 'lodash/fromPairs'
+import fromPairs from 'lodash/fromPairs.js'
 
-import { isObject } from './common'
+import { isObject } from './common.js'
 
 export function getChildren<U extends { children: unknown[] }>(struct: U): U['children']
 export function getChildren<T>(struct: Record<PropertyKey, unknown>, childrenProp: string): T[]

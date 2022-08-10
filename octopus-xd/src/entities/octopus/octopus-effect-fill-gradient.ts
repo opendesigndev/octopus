@@ -1,17 +1,22 @@
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
-import { parseXDColor } from '../../utils/color'
-import { DEFAULTS } from '../../utils/defaults'
-import { convertObjectMatrixToArray } from '../../utils/matrix'
-import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper'
-import { SourceEffectFillGradient } from '../source/source-effect-gradient-fill'
+import { parseXDColor } from '../../utils/color.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { convertObjectMatrixToArray } from '../../utils/matrix.js'
+import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper.js'
+import { SourceEffectFillGradient } from '../source/source-effect-gradient-fill.js'
 
-import type { Defined } from '../../typings/helpers'
-import type { Octopus } from '../../typings/octopus'
-import type { RawFillGradient, RawGradientLinear, RawGradientRadial, RawGradientResources } from '../../typings/source'
-import type { SourceResources } from '../source/source-resources'
-import type { OctopusBounds } from './octopus-bounds'
+import type { Defined } from '../../typings/helpers.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type {
+  RawFillGradient,
+  RawGradientLinear,
+  RawGradientRadial,
+  RawGradientResources,
+} from '../../typings/source/index.js'
+import type { SourceResources } from '../source/source-resources.js'
+import type { OctopusBounds } from './octopus-bounds.js'
 
 type OctopusEffectFillGradientOptions = {
   source: SourceEffectFillGradient

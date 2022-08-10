@@ -1,12 +1,12 @@
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import { SourceLayerFrame } from '../entities/source/source-layer-frame'
-import { SourceLayerShape } from '../entities/source/source-layer-shape'
-import { SourceLayerText } from '../entities/source/source-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { SourceLayerFrame } from '../entities/source/source-layer-frame.js'
+import { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import { SourceLayerText } from '../entities/source/source-layer-text.js'
+import { logWarn } from '../services/instances/misc.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { RawLayer, RawLayerShape, RawLayerFrame, RawLayerText, RawSlice } from '../typings/raw'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
+import type { RawLayer, RawLayerShape, RawLayerFrame, RawLayerText, RawSlice } from '../typings/raw/index.js'
 
 export type SourceLayer = SourceLayerFrame | SourceLayerShape | SourceLayerText
 

@@ -2,13 +2,13 @@ import { lerpColor } from '@avocode/octopus-common/dist/utils/color'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 import { invLerp, round } from '@avocode/octopus-common/dist/utils/math'
 
-import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
+import { convertBlendMode, convertColor, convertStop } from '../../utils/convert.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawStop } from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
-import type { SourceLayerCommon } from '../source/source-layer-common'
-import type { SourcePaint } from '../source/source-paint'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawStop } from '../../typings/raw/index.js'
+import type { SourceTransform } from '../../typings/source.js'
+import type { SourceLayerCommon } from '../source/source-layer-common.js'
+import type { SourcePaint } from '../source/source-paint.js'
 
 type OctopusFillOptions = {
   fill: SourcePaint

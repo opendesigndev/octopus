@@ -1,4 +1,4 @@
-import type { IResponse, JSONValue } from '../response.iface'
+import type { IResponse, JSONValue } from '../response.iface.js'
 import type { Response } from 'got'
 
 function bufCopy(buf: Buffer): ArrayBuffer {

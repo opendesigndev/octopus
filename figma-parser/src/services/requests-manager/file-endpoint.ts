@@ -1,7 +1,7 @@
-import { buildEndpoint } from '../../utils/request'
-import { EndpointBase } from './endpoint-base'
+import { buildEndpoint } from '../../utils/request.js'
+import { EndpointBase } from './endpoint-base.js'
 
-import type { RequestsManager } from '.'
+import type { RequestsManager } from './index.js'
 
 type FileEndpointOptions = {
   requestsManager: RequestsManager

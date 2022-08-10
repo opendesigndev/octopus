@@ -1,8 +1,8 @@
-import { getSizeFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getSizeFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawBlendMode, RawColor, RawEffect, RawEffectType } from '../../typings/raw'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawBlendMode, RawColor, RawEffect, RawEffectType } from '../../typings/raw/index.js'
 
 export class SourceEffect extends SourceEntity {
   protected _rawValue: RawEffect | undefined

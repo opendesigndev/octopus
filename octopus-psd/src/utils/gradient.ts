@@ -1,6 +1,6 @@
 import { mod, tan } from '@avocode/octopus-common/dist/utils/math'
 
-import { createPath, createPoint } from './paper-factories'
+import { createPath, createPoint } from './paper-factories.js'
 
 type Point = { x: number; y: number }
 

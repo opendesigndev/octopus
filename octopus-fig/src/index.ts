@@ -5,31 +5,25 @@ import PQueue from 'p-queue'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusManifest } from './entities/octopus/octopus-manifest'
-import { SourceArtboard } from './entities/source/source-artboard'
-import { SourceDesign } from './entities/source/source-design'
-import { ArtboardConverter } from './services/conversion/artboard-converter'
-import { DebugExporter } from './services/exporters/debug-exporter'
-import { LocalExporter } from './services/exporters/local-exporter'
-import { ENV } from './services/general/environment'
-import { createSentry } from './services/general/sentry'
-import { logger, set as setLogger } from './services/instances/logger'
-import { set as setSentry } from './services/instances/sentry'
-import { SourceApiReader } from './services/readers/source-api-reader'
+import { OctopusManifest } from './entities/octopus/octopus-manifest.js'
+import { SourceArtboard } from './entities/source/source-artboard.js'
+import { SourceDesign } from './entities/source/source-design.js'
+import { ArtboardConverter } from './services/conversion/artboard-converter.js'
+import { DebugExporter } from './services/exporters/debug-exporter.js'
+import { LocalExporter } from './services/exporters/local-exporter.js'
+import { ENV } from './services/general/environment.js'
+import { createSentry } from './services/general/sentry.js'
+import { logger, set as setLogger } from './services/instances/logger.js'
+import { set as setSentry } from './services/instances/sentry.js'
+import { SourceApiReader } from './services/readers/source-api-reader.js'
 
-import type { AbstractExporter } from './services/exporters/abstract-exporter'
-import type { Logger } from './typings'
-import type { Manifest } from './typings/manifest'
-import type { Octopus } from './typings/octopus'
-import type { RawDesign } from './typings/raw/design'
-import type { RawLayerFrame } from './typings/raw/layer'
-import type {
-  Design,
-  ResolvedDesign,
-  ResolvedFrame,
-  ResolvedFill,
-  ResolvedPreview,
-} from '@avocode/figma-parser/lib/src/index-node'
+import type { AbstractExporter } from './services/exporters/abstract-exporter.js'
+import type { Logger } from './typings/index.js'
+import type { Manifest } from './typings/manifest.js'
+import type { Octopus } from './typings/octopus.js'
+import type { RawDesign } from './typings/raw/design.js'
+import type { RawLayerFrame } from './typings/raw/layer.js'
+import type { Design, ResolvedDesign, ResolvedFrame, ResolvedFill, ResolvedPreview } from '@avocode/figma-parser'
 import type { NormalizedReadResult } from 'read-pkg-up'
 
 export { LocalExporter, DebugExporter }

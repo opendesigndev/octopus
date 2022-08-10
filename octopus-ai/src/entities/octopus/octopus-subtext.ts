@@ -1,9 +1,9 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
+import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type SourceLayerSubText from '../source/source-layer-sub-text'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type SourceLayerSubText from '../source/source-layer-sub-text.js'
 
 type OctopusSubTextOptions = {
   sourceLayer: SourceLayerSubText

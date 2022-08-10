@@ -1,8 +1,8 @@
-import { flattenLayers, traverseAndFind } from '../../utils/common-design'
-import firstCallMemo from '../../utils/decorators'
+import { flattenLayers, traverseAndFind } from '../../utils/common-design.js'
+import firstCallMemo from '../../utils/decorators.js'
 
-import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
-import type { FigmaLayer, FigmaNode } from '../../types/figma'
+import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint.js'
+import type { FigmaLayer, FigmaNode } from '../../types/figma.js'
 
 type NodeOptions = {
   node: FigmaNode

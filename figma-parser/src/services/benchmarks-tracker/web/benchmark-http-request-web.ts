@@ -1,4 +1,4 @@
-import type { BenchmarkHTTPRequestExport, IBenchmarkHTTPRequest } from '../benchmark-http-request.iface'
+import type { BenchmarkHTTPRequestExport, IBenchmarkHTTPRequest } from '../benchmark-http-request.iface.js'
 
 export type ResponseBenchmarkProps = {
   start: number

@@ -1,6 +1,6 @@
-import { _inferPostScriptType, inferPostScriptName } from '../text'
+import { _inferPostScriptType, inferPostScriptName } from '../text.js'
 
-import type { InferPostScriptNameOptions } from '../text'
+import type { InferPostScriptNameOptions } from '../text.js'
 
 describe('_inferPostScriptType', () => {
   function testExample(weight: number | undefined, result: string): void {

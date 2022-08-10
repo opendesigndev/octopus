@@ -1,4 +1,4 @@
-import type { RawColor } from './shared'
+import type { RawColor } from './shared.js'
 
 export type RawTextStyle = {
   autoKerning?: boolean

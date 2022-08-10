@@ -1,12 +1,12 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getMatrixFor, getBoundsFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
-import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
-import { SourceTextTextStyleRange } from './source-text-text-style-range'
+import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range.js'
+import { SourceTextTextStyleRange } from './source-text-text-style-range.js'
 
-import type { RawText } from '../../typings/raw'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
+import type { RawText } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceMatrix } from '../../typings/source.js'
 
 export class SourceText extends SourceEntity {
   protected _rawValue: RawText | undefined

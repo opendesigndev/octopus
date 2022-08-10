@@ -1,9 +1,9 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import type { OctopusFigConverter } from '../..'
-import type { Manifest } from '../../typings/manifest'
-import type { SourceArtboard } from '../source/source-artboard'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusFigConverter } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

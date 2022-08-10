@@ -1,18 +1,18 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logWarn } from '../../services/instances/misc'
-import { convertBlendMode } from '../../utils/convert'
-import { createDefaultTranslationMatrix } from '../../utils/path'
-import { OctopusArtboard } from './octopus-artboard'
-import { OctopusEffectsLayer } from './octopus-effects-layer'
+import { logWarn } from '../../services/instances/misc.js'
+import { convertBlendMode } from '../../utils/convert.js'
+import { createDefaultTranslationMatrix } from '../../utils/path.js'
+import { OctopusArtboard } from './octopus-artboard.js'
+import { OctopusEffectsLayer } from './octopus-effects-layer.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerGroup } from './octopus-layer-group'
-import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { OctopusLayerGroup } from './octopus-layer-group.js'
+import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
 import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard

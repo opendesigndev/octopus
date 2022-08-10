@@ -1,4 +1,4 @@
-import type { RawGraphicsState } from './graphics-state'
+import type { RawGraphicsState } from './graphics-state.js'
 
 export type RawShapeLayerSubPathPoint = {
   Type?: string

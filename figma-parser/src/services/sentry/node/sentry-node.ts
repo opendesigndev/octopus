@@ -1,6 +1,6 @@
 import * as sentry from '@sentry/node'
 
-import type { CreateSentryOptions, SentryFactory } from '../sentry-factory.iface'
+import type { CreateSentryOptions, SentryFactory } from '../sentry-factory.iface.js'
 
 const createSentryNode: SentryFactory = (options: CreateSentryOptions): typeof sentry | null => {
   const { dsn, env, logger } = options

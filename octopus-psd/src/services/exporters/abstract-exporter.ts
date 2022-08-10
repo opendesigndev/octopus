@@ -1,4 +1,4 @@
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { ArtboardConversionResult, DesignConversionResult } from '../../index.js'
 
 export abstract class AbstractExporter {
   exportArtboard(_artboard: ArtboardConversionResult): Promise<unknown> {

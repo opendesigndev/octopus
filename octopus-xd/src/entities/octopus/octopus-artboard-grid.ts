@@ -1,10 +1,10 @@
 import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { parseXDColor } from '../../utils/color'
-import { OctopusBounds } from './octopus-bounds'
+import { parseXDColor } from '../../utils/color.js'
+import { OctopusBounds } from './octopus-bounds.js'
 
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusArtboard } from './octopus-artboard.js'
 
 type OctopusArtboardGridOptions = {
   octopusArtboard: OctopusArtboard

@@ -1,12 +1,12 @@
-import * as FirstCallMemo from './decorators/first-call-memo'
-import * as TextPostprocessor from './postprocessors/text'
-import * as As from './utils/as'
-import * as Async from './utils/async'
-import * as Color from './utils/color'
-import * as Common from './utils/common'
-import * as MathUtils from './utils/math'
-import * as Queue from './utils/queue-node'
-import * as UtilityTypes from './utils/utility-types'
+import * as FirstCallMemo from './decorators/first-call-memo.js'
+import * as TextPostprocessor from './postprocessors/text.js'
+import * as As from './utils/as.js'
+import * as Async from './utils/async.js'
+import * as Color from './utils/color.js'
+import * as Common from './utils/common.js'
+import * as MathUtils from './utils/math.js'
+import * as Queue from './utils/queue-node.js'
+import * as UtilityTypes from './utils/utility-types.js'
 
 export const decorators = {
   firstCallMemo: FirstCallMemo,

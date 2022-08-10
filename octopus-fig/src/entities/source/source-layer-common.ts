@@ -1,20 +1,20 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 import { v4 as uuid } from 'uuid'
 
-import { DEFAULTS } from '../../utils/defaults'
-import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
-import { SourceArtboard } from './source-artboard'
-import { SourceEffect } from './source-effect'
-import { SourceEntity } from './source-entity'
-import { SourcePaint } from './source-paint'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source.js'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceEffect } from './source-effect.js'
+import { SourceEntity } from './source-entity.js'
+import { SourcePaint } from './source-paint.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
-import type { SourceGeometry, SourceTransform } from '../../typings/source'
-import type { SourceLayerFrame } from './source-layer-frame'
-import type { SourceLayerShape } from './source-layer-shape'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw/index.js'
+import type { SourceGeometry, SourceTransform } from '../../typings/source.js'
+import type { SourceLayerFrame } from './source-layer-frame.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerFrame | SourceLayerShape
 

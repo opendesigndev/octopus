@@ -1,4 +1,4 @@
-import type { RawBlur } from '../../typings/source'
+import type { RawBlur } from '../../typings/source/index.js'
 
 export type SourceEffectBlurOptions = {
   effect: RawBlur

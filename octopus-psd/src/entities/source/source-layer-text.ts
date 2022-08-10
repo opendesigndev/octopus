@@ -1,12 +1,12 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getBoundsFor } from '../../utils/source'
-import { SourceLayerCommon } from './source-layer-common'
-import { SourceText } from './source-text'
+import { getBoundsFor } from '../../utils/source.js'
+import { SourceLayerCommon } from './source-layer-common.js'
+import { SourceText } from './source-text.js'
 
-import type { RawLayerText } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawLayerText } from '../../typings/raw/index.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent

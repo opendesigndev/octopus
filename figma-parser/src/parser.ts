@@ -1,16 +1,16 @@
-import { Design } from './entities/obtainers/design'
-import { setLogger, setDefaults, logger } from './services'
-import Config from './services/config'
-import { getPlatformFactories, setPlatformFactories } from './services/platforms'
-import { QueuesManager } from './services/queues-manager'
-import { RequestsManager } from './services/requests-manager'
-import { isObject } from './utils/common'
+import { Design } from './entities/obtainers/design.js'
+import Config from './services/config/index.js'
+import { setLogger, setDefaults, logger } from './services/index.js'
+import { getPlatformFactories, setPlatformFactories } from './services/platforms/index.js'
+import { QueuesManager } from './services/queues-manager/index.js'
+import { RequestsManager } from './services/requests-manager/index.js'
+import { isObject } from './utils/common.js'
 
-import type { IBenchmarksTracker } from './services/benchmarks-tracker/benchmarks-tracker.iface'
-import type { IDownloader } from './services/downloader/downloader.iface'
-import type { Logger } from './services/logger/logger'
-import type { NodeFactories, WebFactories } from './services/platforms'
-import type { ICacher } from './types/cacher'
+import type { IBenchmarksTracker } from './services/benchmarks-tracker/benchmarks-tracker.iface.js'
+import type { IDownloader } from './services/downloader/downloader.iface.js'
+import type { Logger } from './services/logger/logger.js'
+import type { NodeFactories, WebFactories } from './services/platforms/index.js'
+import type { ICacher } from './types/cacher.js'
 
 export type { Design }
 

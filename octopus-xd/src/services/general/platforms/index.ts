@@ -1,4 +1,4 @@
-import type { LoggerFactory } from '../logger/logger-factory.iface'
+import type { LoggerFactory } from '../logger/logger-factory.iface.js'
 
 // Logger
 type NodeLoggerFactory = () => LoggerFactory

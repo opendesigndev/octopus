@@ -1,8 +1,9 @@
-import type { Parser } from '../../parser'
-import type { SafeResult } from '../../utils/queue'
-import type { IResponse, JSONValue } from './response.iface'
-import type { Got, Response as GotResponse } from 'got/dist/source'
-import type { KyInstance } from 'ky/distribution/types/ky'
+import type { Parser } from '../../parser.js'
+import type { SafeResult } from '../../utils/queue.js'
+import type { IResponse, JSONValue } from './response.iface.js'
+import type { Got, Response as GotResponse } from 'got'
+import type ky from 'ky'
+type KyInstance = typeof ky
 
 export interface IDownloader {
   get parser(): Parser

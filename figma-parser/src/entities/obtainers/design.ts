@@ -1,17 +1,17 @@
 import { EventEmitter } from 'eventemitter3'
 
-import { logger } from '../../services'
-import { File } from '../structural/file'
-import { FillsDescriptor } from '../structural/fills-descriptor'
-import { Node } from '../structural/node'
-import { FrameLike } from './frame-like'
-import { Library } from './library'
+import { logger } from '../../services/index.js'
+import { File } from '../structural/file.js'
+import { FillsDescriptor } from '../structural/fills-descriptor.js'
+import { Node } from '../structural/node.js'
+import { FrameLike } from './frame-like.js'
+import { Library } from './library.js'
 
-import type { Parser } from '../../parser'
-import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
-import type { ICacher } from '../../types/cacher'
-import type { FigmaFile, FigmaFillsDescriptor, FigmaNode } from '../../types/figma'
-import type { ResolvedFrame } from './frame-like'
+import type { Parser } from '../../parser.js'
+import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint.js'
+import type { ICacher } from '../../types/cacher.js'
+import type { FigmaFile, FigmaFillsDescriptor, FigmaNode } from '../../types/figma.js'
+import type { ResolvedFrame } from './frame-like.js'
 
 type DesignOptions = {
   designId: string

@@ -1,4 +1,4 @@
-import type { FigmaArtboard } from '../../types/figma'
+import type { FigmaArtboard } from '../../types/figma.js'
 
 type ArtboardOptions = {
   artboard: FigmaArtboard

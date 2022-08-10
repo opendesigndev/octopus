@@ -8,7 +8,7 @@ import type {
   RawResourcesShadingKey,
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
-} from '../../typings/raw/resources'
+} from '../../typings/raw/resources.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceResourcesOptions = {

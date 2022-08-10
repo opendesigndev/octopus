@@ -1,14 +1,14 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { SourceEffectFill } from './source-effect-fill'
-import { SourceEntity } from './source-entity'
+import { SourceEffectFill } from './source-effect-fill.js'
+import { SourceEntity } from './source-entity.js'
 
 import type {
   RawShapeStrokeStyle,
   RawStrokeStyleLineAlignment,
   RawStrokeStyleLineCapType,
   RawStrokeStyleLineJoinType,
-} from '../../typings/raw'
+} from '../../typings/raw/index.js'
 
 export class SourceStroke extends SourceEntity {
   protected _rawValue: RawShapeStrokeStyle | undefined

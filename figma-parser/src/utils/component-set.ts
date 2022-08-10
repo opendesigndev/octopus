@@ -1,5 +1,5 @@
-import { Node } from '../entities/structural/node'
-import { getChildren } from './common-design'
+import { Node } from '../entities/structural/node.js'
+import { getChildren } from './common-design.js'
 
 function _getComponentSetComponents(componentSet: Node): Node[] {
   const { designId } = componentSet

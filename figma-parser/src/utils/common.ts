@@ -1,5 +1,5 @@
-import pick from 'lodash/pick'
-import { default as wo } from 'lodash/without'
+import pick from 'lodash/pick.js'
+import { default as wo } from 'lodash/without.js'
 
 export function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
   return Boolean(anyValue && (typeof anyValue === 'object' || typeof anyValue === 'function'))

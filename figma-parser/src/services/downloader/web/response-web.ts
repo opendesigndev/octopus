@@ -1,4 +1,4 @@
-import type { IResponse, JSONValue } from '../response.iface'
+import type { IResponse, JSONValue } from '../response.iface.js'
 
 export class ResponseWeb implements IResponse {
   private _body: Response

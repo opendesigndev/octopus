@@ -2,15 +2,15 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
 import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
-import sizeOf from 'image-size'
+import { imageSize } from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../entities/source/source-design'
-import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
-import { logInfo } from '../instances/misc'
+import { SourceDesign } from '../../entities/source/source-design.js'
+import { parseJsonFromFile, getFilesFromDir } from '../../utils/files.js'
+import { logInfo } from '../instances/misc.js'
 
-import type { SourceImage } from '../../entities/source/source-design'
-import type { RawArtboard } from '../../typings/raw'
+import type { SourceImage } from '../../entities/source/source-design.js'
+import type { RawArtboard } from '../../typings/raw/index.js'
 
 type SourceFileReaderOptions = {
   path: string
@@ -69,7 +69,7 @@ export class SourceFileReader {
       const name = image.name
       const relativePath = path.join(SourceFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this.path, relativePath)
-      const { width, height } = await sizeOf(imgPath)
+      const { width, height } = await imageSize(imgPath)
       patterns.push({ name, path: imgPath, width, height })
     }
 

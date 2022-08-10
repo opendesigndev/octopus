@@ -1,10 +1,10 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { SourceLayerCommon } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw/index.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

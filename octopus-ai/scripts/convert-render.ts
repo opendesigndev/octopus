@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 
-import { convertAll } from './utils/convert-all'
-import { renderOctopus } from './utils/render-to-octopus'
+import { convertAll } from './utils/convert-all.js'
+import { renderOctopus } from './utils/render-to-octopus.js'
 
 dotenv.config()
 ;(async () => {

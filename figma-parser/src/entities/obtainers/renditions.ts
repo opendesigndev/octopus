@@ -1,8 +1,8 @@
-import type { Parser } from '../../parser'
-import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
-import type { ICacher } from '../../types/cacher'
-import type { Design } from './design'
-import type { FrameLike } from './frame-like'
+import type { Parser } from '../../parser.js'
+import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint.js'
+import type { ICacher } from '../../types/cacher.js'
+import type { Design } from './design.js'
+import type { FrameLike } from './frame-like.js'
 
 type RenditionsOptions = {
   frameLike: FrameLike

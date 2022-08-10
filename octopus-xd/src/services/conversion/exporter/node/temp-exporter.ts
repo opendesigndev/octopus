@@ -5,10 +5,10 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { Exporter } from '../'
-import type { SourceArtboard } from '../../../../entities/source/source-artboard'
-import type { SourceDesign } from '../../../../entities/source/source-design'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter'
+import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
+import type { SourceDesign } from '../../../../entities/source/source-design.js'
+import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { Exporter } from '../index.js'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {

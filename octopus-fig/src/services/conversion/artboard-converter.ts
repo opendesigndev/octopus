@@ -1,7 +1,7 @@
-import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
+import { OctopusArtboard } from '../../entities/octopus/octopus-artboard.js'
 
-import type { SourceArtboard } from '../../entities/source/source-artboard'
-import type { Octopus } from '../../typings/octopus'
+import type { SourceArtboard } from '../../entities/source/source-artboard.js'
+import type { Octopus } from '../../typings/octopus.js'
 
 export type ArtboardConverterOptions = {
   artboard: SourceArtboard

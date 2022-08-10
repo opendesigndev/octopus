@@ -1,12 +1,12 @@
-import fromPairs from 'lodash/fromPairs'
-import pick from 'lodash/pick'
+import fromPairs from 'lodash/fromPairs.js'
+import pick from 'lodash/pick.js'
 
-import { findArtboardUsedComponents } from '../../utils/artboard'
-import { asArray } from '../../utils/as'
-import { keys } from '../../utils/common'
-import { buildParentsMap, getChildren, getVariantPropsFromName } from '../../utils/common-design'
-import firstCallMemo from '../../utils/decorators'
-import { Page } from './page'
+import { findArtboardUsedComponents } from '../../utils/artboard.js'
+import { asArray } from '../../utils/as.js'
+import { buildParentsMap, getChildren, getVariantPropsFromName } from '../../utils/common-design.js'
+import { keys } from '../../utils/common.js'
+import firstCallMemo from '../../utils/decorators.js'
+import { Page } from './page.js'
 
 import type {
   ComponentDescriptor,
@@ -16,9 +16,9 @@ import type {
   FigmaLayer,
   SourceComponent,
   TargetIds,
-} from '../../types/figma'
-import type { Artboard } from './artboard'
-import type { Node } from './node'
+} from '../../types/figma.js'
+import type { Artboard } from './artboard.js'
+import type { Node } from './node.js'
 
 type Variant = { name: string; id: string }
 type ComponentSet = {

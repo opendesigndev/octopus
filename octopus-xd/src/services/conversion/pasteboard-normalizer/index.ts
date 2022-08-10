@@ -1,7 +1,7 @@
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 
-import type { SourceManifest } from '../../../entities/source/source-manifest'
-import type { RawArtboard, RawPasteboard } from '../../../typings/source'
+import type { SourceManifest } from '../../../entities/source/source-manifest.js'
+import type { RawArtboard, RawPasteboard } from '../../../typings/source/index.js'
 
 type PasteboardNormalizerOptions = {
   manifest: SourceManifest

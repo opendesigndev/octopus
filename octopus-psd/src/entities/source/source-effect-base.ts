@@ -1,6 +1,6 @@
-import { SourceEntity } from './source-entity'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawBlendMode, RawEffectShadow } from '../../typings/raw'
+import type { RawBlendMode, RawEffectShadow } from '../../typings/raw/index.js'
 
 export class SourceEffectBase extends SourceEntity {
   protected _rawValue: RawEffectShadow | undefined

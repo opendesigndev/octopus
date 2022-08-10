@@ -4,10 +4,10 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
-import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { copyFile, makeDir, saveFile } from '../../utils/files.js'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
-import type { AbstractExporter } from './abstract-exporter'
+import type { ArtboardConversionResult, DesignConversionResult } from '../../../src/index.js'
+import type { AbstractExporter } from './abstract-exporter.js'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {

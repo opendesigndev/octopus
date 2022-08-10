@@ -1,7 +1,7 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-import type { LoggerFactory } from '../logger-factory.iface'
+import type { LoggerFactory } from '../logger-factory.iface.js'
 
 const createLoggerNode: LoggerFactory = (): ReturnType<typeof pino> => {
   return pino({

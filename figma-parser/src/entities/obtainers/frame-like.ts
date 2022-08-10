@@ -1,13 +1,13 @@
-import { Fills } from './fills'
-import { Preview } from './preview'
-import { Renditions } from './renditions'
-import Styles from './styles'
+import { Fills } from './fills.js'
+import { Preview } from './preview.js'
+import { Renditions } from './renditions.js'
+import Styles from './styles.js'
 
-import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
-import type { FigmaNode } from '../../types/figma'
-import type { Node } from '../structural/node'
-import type { Design } from './design'
-import type { Style } from './styles'
+import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint.js'
+import type { FigmaNode } from '../../types/figma.js'
+import type { Node } from '../structural/node.js'
+import type { Design } from './design.js'
+import type { Style } from './styles.js'
 
 type FrameLikeOptions = {
   design: Design

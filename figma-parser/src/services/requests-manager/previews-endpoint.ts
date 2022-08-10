@@ -1,13 +1,13 @@
-import chunk from 'lodash/chunk'
+import chunk from 'lodash/chunk.js'
 
-import { isObject, keys } from '../../utils/common'
-import { buildEndpoint } from '../../utils/request'
-import { EndpointBase } from './endpoint-base'
+import { isObject, keys } from '../../utils/common.js'
+import { buildEndpoint } from '../../utils/request.js'
+import { EndpointBase } from './endpoint-base.js'
 
-import type { RequestsManager } from '.'
-import type { Node } from '../../entities/structural/node'
-import type { FigmaPreviewsResponse } from '../../types/figma'
-import type { DesignNodes } from './nodes-endpoint'
+import type { Node } from '../../entities/structural/node.js'
+import type { FigmaPreviewsResponse } from '../../types/figma.js'
+import type { RequestsManager } from './index.js'
+import type { DesignNodes } from './nodes-endpoint.js'
 
 type PreviewsEndpointOptions = {
   requestsManager: RequestsManager

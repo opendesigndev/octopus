@@ -1,11 +1,11 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceEffectBase } from './source-effect-base'
-import { SourceEffectFillGradient } from './source-effect-fill-gradient'
+import { getColorFor, getUnitRatioFor } from '../../utils/source.js'
+import { SourceEffectBase } from './source-effect-base.js'
+import { SourceEffectFillGradient } from './source-effect-fill-gradient.js'
 
-import type { RawFill, RawFillPattern } from '../../typings/raw'
-import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
+import type { RawFill, RawFillPattern } from '../../typings/raw/index.js'
+import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source.js'
 
 export class SourceEffectFill extends SourceEffectBase {
   protected _rawValue: RawFill | undefined

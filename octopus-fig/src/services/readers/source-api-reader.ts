@@ -1,8 +1,8 @@
 import { createParser } from '@avocode/figma-parser'
 
-import { ENV } from '../general/environment'
+import { ENV } from '../general/environment.js'
 
-import type { Design } from '@avocode/figma-parser/lib/src/index-node'
+import type { Design } from '@avocode/figma-parser'
 
 type SourceApiReaderOptions = {
   designId: string

@@ -1,12 +1,12 @@
-import type { RawLayerEffects } from './effects'
-import type { RawLayerAdjustment } from './layer-adjustment'
-import type { RawLayerBackground } from './layer-background'
-import type { RawLayerLayer } from './layer-layer'
-import type { RawLayerSection } from './layer-section'
-import type { RawLayerShape } from './layer-shape'
-import type { RawLayerText } from './layer-text'
-import type { RawPathComponent } from './path-component'
-import type { RawBlendOptions, RawBounds, RawColor } from './shared'
+import type { RawLayerEffects } from './effects.js'
+import type { RawLayerAdjustment } from './layer-adjustment.js'
+import type { RawLayerBackground } from './layer-background.js'
+import type { RawLayerLayer } from './layer-layer.js'
+import type { RawLayerSection } from './layer-section.js'
+import type { RawLayerShape } from './layer-shape.js'
+import type { RawLayerText } from './layer-text.js'
+import type { RawPathComponent } from './path-component.js'
+import type { RawBlendOptions, RawBounds, RawColor } from './shared.js'
 
 export type RawShapeMask = {
   bounds?: RawBounds

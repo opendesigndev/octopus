@@ -1,9 +1,9 @@
 import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 
-import { pathRelative } from '../../utils/fs-path'
+import { pathRelative } from '../../utils/fs-path.js'
 
-import type { OctopusXDConverter } from '../../octopus-xd-converter'
-import type { Manifest } from '../../typings/manifest'
+import type { OctopusXDConverter } from '../../octopus-xd-converter.js'
+import type { Manifest } from '../../typings/manifest/index.js'
 
 type ImageDescriptor = { path: unknown }
 

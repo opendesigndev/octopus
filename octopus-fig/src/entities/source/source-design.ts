@@ -1,7 +1,7 @@
-import { SourceEntity } from './source-entity'
-import { SourcePage } from './source-page'
+import { SourceEntity } from './source-entity.js'
+import { SourcePage } from './source-page.js'
 
-import type { RawDesign } from '../../typings/raw'
+import type { RawDesign } from '../../typings/raw/index.js'
 
 type SourceDesignOptions = {
   raw: RawDesign

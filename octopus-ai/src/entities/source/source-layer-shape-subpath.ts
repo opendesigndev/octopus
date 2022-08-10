@@ -1,7 +1,7 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw'
-import type SourceLayerShape from './source-layer-shape'
+import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw/index.js'
+import type SourceLayerShape from './source-layer-shape.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerShapeOptions = {

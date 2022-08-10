@@ -1,9 +1,9 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { SourceEntity } from './source-entity'
-import { SourceTextTextStyle } from './source-text-text-style'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextTextStyle } from './source-text-text-style.js'
 
-import type { RawTextStyleRange } from '../../typings/raw'
+import type { RawTextStyleRange } from '../../typings/raw/index.js'
 
 export class SourceTextTextStyleRange extends SourceEntity {
   protected _rawValue: RawTextStyleRange | undefined

@@ -1,4 +1,4 @@
-import SourceArtboard from './source-artboard'
+import SourceArtboard from './source-artboard.js'
 
 import type {
   RawLayer,
@@ -6,11 +6,11 @@ import type {
   RawGraphicsState,
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
-} from '../../typings/raw'
-import type SourceLayerGroup from './source-layer-group'
-import type SourceLayerShape from './source-layer-shape'
-import type SourceLayerXObject from './source-layer-x-object'
-import type SourceResources from './source-resources'
+} from '../../typings/raw/index.js'
+import type SourceLayerGroup from './source-layer-group.js'
+import type SourceLayerShape from './source-layer-shape.js'
+import type SourceLayerXObject from './source-layer-x-object.js'
+import type SourceResources from './source-resources.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape

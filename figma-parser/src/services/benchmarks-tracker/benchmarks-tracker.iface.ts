@@ -1,4 +1,4 @@
-import type { IBenchmarkHTTPRequest } from './benchmark-http-request.iface'
+import type { IBenchmarkHTTPRequest } from './benchmark-http-request.iface.js'
 
 export interface IBenchmarksTracker {
   trackHttpResponse(response: unknown): void

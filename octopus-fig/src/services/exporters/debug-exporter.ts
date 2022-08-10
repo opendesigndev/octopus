@@ -2,16 +2,16 @@ import EventEmitter from 'events'
 import path from 'path'
 
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from 'lodash/kebabCase.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDir, saveFile } from '../../utils/files'
-import { stringify } from '../../utils/misc'
-import { timestamp } from '../../utils/timestamp'
+import { makeDir, saveFile } from '../../utils/files.js'
+import { stringify } from '../../utils/misc.js'
+import { timestamp } from '../../utils/timestamp.js'
 
-import type { ArtboardConversionResult } from '../..'
-import type { Manifest } from '../../typings/manifest'
-import type { AbstractExporter } from './abstract-exporter'
+import type { ArtboardConversionResult } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { AbstractExporter } from './abstract-exporter.js'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type DebugExporterOptions = {

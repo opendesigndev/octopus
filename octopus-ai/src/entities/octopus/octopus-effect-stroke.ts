@@ -1,10 +1,10 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
+import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceResources from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type SourceLayerShape from '../source/source-layer-shape.js'
+import type SourceResources from '../source/source-resources.js'
 
 type OctopusEffectStrokeOptions = {
   resources: SourceResources

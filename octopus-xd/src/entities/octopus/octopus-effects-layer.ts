@@ -1,12 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { OctopusEffectBlur } from './octopus-effect-blur'
-import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow'
+import { OctopusEffectBlur } from './octopus-effect-blur.js'
+import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { RawBlur, RawEffectDropShadow } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawBlur, RawEffectDropShadow } from '../../typings/source/index.js'
 
 type OctopusEffectsLayerOptions = {
   sourceLayer: SourceLayer

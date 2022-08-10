@@ -3,10 +3,10 @@ import path from 'path'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 
-import type { OctopusPSDConverter } from '../..'
-import type { Manifest } from '../../typings/manifest'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusPSDConverter } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

@@ -1,14 +1,14 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { getBoundsFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
-import { SourceLayerFrame } from './source-layer-frame'
+import { getBoundsFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
+import { SourceLayerFrame } from './source-layer-frame.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawBlendMode } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawArtboard, RawBlendMode } from '../../typings/raw/index.js'
+import type { SourceBounds } from '../../typings/source.js'
 
 type SourceArtboardOptions = {
   rawArtboard: RawArtboard

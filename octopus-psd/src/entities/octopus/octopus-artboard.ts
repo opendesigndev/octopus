@@ -1,13 +1,13 @@
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { OctopusLayerGroup } from './octopus-layer-group'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
+import { OctopusLayerGroup } from './octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
 
-import type { OctopusPSDConverter } from '../..'
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceArtboard } from '../source/source-artboard'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusPSDConverter } from '../../index.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusArtboardOptions = {
   octopusConverter: OctopusPSDConverter

@@ -1,8 +1,8 @@
-import OctopusArtboard from '../../../entities/octopus/octopus-artboard'
+import OctopusArtboard from '../../../entities/octopus/octopus-artboard.js'
 
-import type OctopusAIConverter from '../../..'
-import type SourceDesign from '../../../entities/source/source-design'
-import type { Octopus } from '../../../typings/octopus'
+import type SourceDesign from '../../../entities/source/source-design.js'
+import type OctopusAIConverter from '../../../index.js'
+import type { Octopus } from '../../../typings/octopus/index.js'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string

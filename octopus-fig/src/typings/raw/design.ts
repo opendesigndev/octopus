@@ -1,5 +1,5 @@
-import type { RawLayer, RawLayerFrame } from './layer'
-import type { RawColor } from './shared'
+import type { RawLayer, RawLayerFrame } from './layer.js'
+import type { RawColor } from './shared.js'
 
 export type RawDesign = {
   document?: RawDocument

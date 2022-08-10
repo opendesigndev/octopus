@@ -3,6 +3,7 @@
   "version": "3.0.0-rc.2",
   "license": "UNLICENSED",
   "description": "Figma parser, downloads assets from Figma APIs",
+  "type": "module",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@types/chalk": "^2.2.0",
@@ -14,16 +15,16 @@
     "chalk": "^4.1.2",
     "jest": "^27.3.1",
     "ts-node": "10.5.0",
-    "typescript": "4.4.4",
+    "typescript": "4.7.4",
     "vite": "^2.9.1"
   },
   "scripts": {
     "bundle": "yarn run bundle:web",
     "bundle:web": "npx vite build -c vite.web.js",
-    "build": "npx tsc --build ./tsconfig.json",
+    "build": "tsc --build ./tsconfig.json",
     "clean": "npx rimraf ./node_modules ./lib",
     "prepack": "npx rimraf ./lib && yarn run build",
-    "watch": "npx tsc -w",
+    "watch": "tsc -w",
     "test": "echo 'Tests are not implemented yet'",
     "types:check": "tsc --noEmit"
   },
@@ -32,8 +33,8 @@
     "@sentry/node": "6.14.0",
     "dotenv": "16.0.0",
     "eventemitter3": "^4.0.7",
-    "got": "^11.5.1",
-    "ky": "^0.30.0",
+    "got": "^12.3.1",
+    "ky": "^0.31.1",
     "lodash": "^4.17.21",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
@@ -41,11 +42,11 @@
     "uuid": "^8.3.2"
   },
   "files": [
-    "lib/src"
+    "dist/src"
   ],
-  "main": "./lib/src/index-web.js",
+  "types": "./dist/src/index-web.d.ts",
   "exports": {
-    "node": "./lib/src/index-node.js",
-    "default": "./lib/src/index-web.js"
+    "node": "./dist/src/index-node.js",
+    "default": "./dist/src/index-web.js"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    // Node.js 14 will be EOL 2023-04-30 and supporting all bundlers AND node is
+    // much easier if we do not support node 14 https://github.com/nodejs/Release
+    // Best config for node 16 from: https://stackoverflow.com/a/67371788
+    // for browsers consumers should transpile+bundle themselves
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2021", "DOM"],
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "target": "ES2020",
+    "moduleDetection": "force",
+
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "skipLibCheck": true
+  }
+}

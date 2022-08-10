@@ -8,8 +8,8 @@ import type {
   RawRadiiCorners,
   RawTextBounds,
   RawUnitPoint,
-} from '../typings/raw'
-import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source'
+} from '../typings/raw/index.js'
+import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
 
 function getValue(value: number | RawUnitPoint | undefined): number | undefined {
   return typeof value === 'object' ? value.value : value

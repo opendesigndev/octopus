@@ -1,8 +1,8 @@
-import { convertId } from '../../utils/convert'
-import { SourceArtboard } from './source-artboard'
-import { SourceEntity } from './source-entity'
+import { convertId } from '../../utils/convert.js'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawPage, RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { RawPage, RawLayer, RawLayerFrame } from '../../typings/raw/index.js'
 
 export class SourcePage extends SourceEntity {
   protected _rawValue: RawPage

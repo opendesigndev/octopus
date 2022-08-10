@@ -1,10 +1,10 @@
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { convertId } from '../../utils/convert'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
+import { convertId } from '../../utils/convert.js'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceArtboard } from '../source/source-artboard'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
 
 type OctopusArtboardOptions = {
   sourceArtboard: SourceArtboard

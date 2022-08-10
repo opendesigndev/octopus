@@ -3,7 +3,7 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { LocalExporter, OctopusFigConverter, SourceApiReader } from '../src'
+import { LocalExporter, OctopusFigConverter, SourceApiReader } from '../src/index.js'
 
 async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())

@@ -1,5 +1,5 @@
-import type { Logger } from '../logger/logger'
-import type { Sentry } from './sentry'
+import type { Logger } from '../logger/logger.js'
+import type { Sentry } from './sentry.js'
 
 export type CreateSentryOptions = {
   dsn?: string

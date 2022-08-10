@@ -1,8 +1,8 @@
-import { SourceLayerCommon } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { RawLayerLayer } from '../../typings/raw'
-import type { RawSmartObject } from '../../typings/raw/smart-object'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawLayerLayer } from '../../typings/raw/index.js'
+import type { RawSmartObject } from '../../typings/raw/smart-object.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerLayerOptions = {
   parent: SourceLayerParent

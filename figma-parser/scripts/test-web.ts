@@ -1,4 +1,4 @@
-import { createParser } from '../src/index-web'
+import { createParser } from '../src/index-web.js'
 
 const parser = createParser({
   designId: '9lJg7hAgjsDgrpueS30dMg', // 'kBEFObmdY1v5G5Qr3go5Uh', // ,

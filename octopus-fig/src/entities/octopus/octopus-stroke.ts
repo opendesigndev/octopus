@@ -1,15 +1,15 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
-import { OctopusFill } from './octopus-fill'
-import { OctopusPath } from './octopus-path'
+import { logWarn } from '../../services/instances/misc.js'
+import { OctopusFill } from './octopus-fill.js'
+import { OctopusPath } from './octopus-path.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { SourcePaint } from '../source/source-paint'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerFrame } from '../source/source-layer-frame.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { SourcePaint } from '../source/source-paint.js'
 
 type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
 

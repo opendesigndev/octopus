@@ -3,7 +3,7 @@
 // import chalk from 'chalk'
 // import path from 'path'
 
-// import { getFileLocation } from './get-file-location'
+// import { getFileLocation } from './get-file-location.js'
 // import { extractPrivateData } from '@avocode/ai-private-data-parser'
 //import privateDataparser from 'node_modules/@avocode/ai-private-data-parser/dist/cli.js'
 //const PRIVATE_DATA_PARSER = 'node_modules/@avocode/ai-private-data-parser/dist/cli.js'

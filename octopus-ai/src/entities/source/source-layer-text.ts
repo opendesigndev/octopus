@@ -1,12 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash/isEqual.js'
 
-import SourceLayerCommon from './source-layer-common'
-import SourceLayerSubText from './source-layer-sub-text'
+import SourceLayerCommon from './source-layer-common.js'
+import SourceLayerSubText from './source-layer-sub-text.js'
 
-import type { RawTextLayer } from '../../typings/raw'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawTextLayer } from '../../typings/raw/index.js'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextOptions = {

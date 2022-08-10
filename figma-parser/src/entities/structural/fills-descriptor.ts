@@ -1,4 +1,4 @@
-import type { FigmaFillsDescriptor } from '../../types/figma'
+import type { FigmaFillsDescriptor } from '../../types/figma.js'
 
 type FillsDescriptorOptions = {
   fillsDescriptor: FigmaFillsDescriptor

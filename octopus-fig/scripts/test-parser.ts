@@ -1,6 +1,6 @@
-import { createParser } from '@avocode/figma-parser/lib/src/index-node'
+import { createParser } from '@avocode/figma-parser'
 
-import { ENV } from '../src/services/general/environment'
+import { ENV } from '../src/services/general/environment.js'
 
 const DEFAULT_ID = 'nFrTs6F4OjiSPMsAAAp16a'
 

@@ -1,4 +1,4 @@
-import { detachPromiseControls } from './async'
+import { detachPromiseControls } from './async.js'
 
 export type SafeResult<T> = { error: null; value: T } | { error: Error; value: void }
 export type QueueOptions<T, U> = {

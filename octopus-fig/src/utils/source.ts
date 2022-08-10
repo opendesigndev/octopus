@@ -1,11 +1,11 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
-import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source'
+import type { Octopus } from '../typings/octopus.js'
+import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw/index.js'
+import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source.js'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)

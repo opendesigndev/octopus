@@ -5,10 +5,10 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, TempExporter, XDFileReader } from '../src/index-node'
-import { getPkgLocation } from './utils/pkg-location'
-import { renderOctopus } from './utils/render'
-import { timestamp } from './utils/timestamp'
+import { createConverter, TempExporter, XDFileReader } from '../src/index-node.js'
+import { getPkgLocation } from './utils/pkg-location.js'
+import { renderOctopus } from './utils/render.js'
+import { timestamp } from './utils/timestamp.js'
 
 type ConvertAllOptions = {
   render?: boolean

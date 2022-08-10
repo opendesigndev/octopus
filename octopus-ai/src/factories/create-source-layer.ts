@@ -1,11 +1,11 @@
-import SourceLayerGroup from '../entities/source/source-layer-group'
-import SourceLayerShape from '../entities/source/source-layer-shape'
-import SourceLayerText from '../entities/source/source-layer-text'
+import SourceLayerGroup from '../entities/source/source-layer-group.js'
+import SourceLayerShape from '../entities/source/source-layer-shape.js'
+import SourceLayerText from '../entities/source/source-layer-text.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { RawGroupLayer, RawTextLayer } from '../typings/raw'
-import type { RawLayer } from '../typings/raw/layer'
-import type { RawShapeLayer } from '../typings/raw/shape-layer'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
+import type { RawGroupLayer, RawTextLayer } from '../typings/raw/index.js'
+import type { RawLayer } from '../typings/raw/layer.js'
+import type { RawShapeLayer } from '../typings/raw/shape-layer.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayer = SourceLayerGroup | SourceLayerText | SourceLayerShape

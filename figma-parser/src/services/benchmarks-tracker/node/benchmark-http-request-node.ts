@@ -1,6 +1,6 @@
-import { asNumber } from '../../../utils/as'
+import { asNumber } from '../../../utils/as.js'
 
-import type { BenchmarkHTTPRequestExport, IBenchmarkHTTPRequest } from '../benchmark-http-request.iface'
+import type { BenchmarkHTTPRequestExport, IBenchmarkHTTPRequest } from '../benchmark-http-request.iface.js'
 import type { Response } from 'got'
 
 type ResponseTimings = {
@@ -19,7 +19,8 @@ export default class BenchmarkHTTPRequestNode implements IBenchmarkHTTPRequest {
       end: asNumber(response.timings.end, 0),
       total: asNumber(response.timings.phases.total, 0),
     }
-    this._requestUrl = response.request.options.url.href
+    const url = response.request.options.url ?? ''
+    this._requestUrl = typeof url === 'string' ? url : url.href
   }
 
   export(): BenchmarkHTTPRequestExport {

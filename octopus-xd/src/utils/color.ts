@@ -1,6 +1,6 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import type { RawColor } from '../typings/source'
+import type { RawColor } from '../typings/source/index.js'
 
 export function parseXDColor(color: RawColor | null | void): { r: number; g: number; b: number; a: number } {
   if (color?.mode !== 'RGB') {

@@ -88,7 +88,7 @@ import { v4 as uuidv4 } from 'uuid'
  * Exporter (`LocalExporter`) defines how and where save outputs.
  * Converter takes `SourceDesign` entitiy which should be available from reader as constructor option and exporter as convertDesign option.
  */
-import { OctopusPSDConverter, PSDFileReader, LocalExporter } from '../src'
+import { OctopusPSDConverter, PSDFileReader, LocalExporter } from '../src/index.js'
 
 async function convert() {
   const [filePath] = process.argv.slice(2)

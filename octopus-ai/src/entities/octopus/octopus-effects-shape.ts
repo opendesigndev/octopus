@@ -1,12 +1,12 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import OctopusEffectFill, { ColorSpace } from './octopus-effect-color-fill'
-import OctopusEffectGradientFill from './octopus-effect-fill-gradient'
-import OctopusEffectStroke from './octopus-effect-stroke'
+import OctopusEffectFill, { ColorSpace } from './octopus-effect-color-fill.js'
+import OctopusEffectGradientFill from './octopus-effect-fill-gradient.js'
+import OctopusEffectStroke from './octopus-effect-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceResources from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type SourceLayerShape from '../source/source-layer-shape.js'
+import type SourceResources from '../source/source-resources.js'
 
 type OctopusEffectsShapeOptions = {
   sourceLayer: SourceLayerShape

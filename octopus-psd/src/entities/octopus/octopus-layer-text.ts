@@ -1,21 +1,21 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
-import isEmpty from 'lodash/isEmpty'
-import isEqual from 'lodash/isEqual'
+import isEmpty from 'lodash/isEmpty.js'
+import isEqual from 'lodash/isEqual.js'
 
-import { createMatrix } from '../../utils/paper-factories'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { OctopusLayerBase } from './octopus-layer-base'
+import { createMatrix } from '../../utils/paper-factories.js'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { OctopusLayerBase } from './octopus-layer-base.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { SourceText } from '../source/source-text'
-import type { SourceTextTextStyle } from '../source/source-text-text-style'
-import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { SourceText } from '../source/source-text.js'
+import type { SourceTextTextStyle } from '../source/source-text-text-style.js'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range.js'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

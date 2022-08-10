@@ -1,8 +1,8 @@
-import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
+import { OctopusArtboard } from '../../entities/octopus/octopus-artboard.js'
 
-import type { OctopusPSDConverter } from '../..'
-import type { SourceDesign } from '../../entities/source/source-design'
-import type { Octopus } from '../../typings/octopus'
+import type { OctopusPSDConverter } from '../../index.js'
+import type { SourceDesign } from '../../entities/source/source-design.js'
+import type { Octopus } from '../../typings/octopus.js'
 
 export type ArtboardConverterOptions = {
   octopusConverter: OctopusPSDConverter

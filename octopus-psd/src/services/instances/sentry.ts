@@ -1,4 +1,4 @@
-import type { createSentry } from '../general/sentry'
+import type { createSentry } from '../general/sentry.js'
 
 type Sentry = ReturnType<typeof createSentry>
 

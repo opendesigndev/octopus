@@ -1,7 +1,7 @@
-import type { RequestsManager } from '.'
-import type Config from '../config'
-import type { IDownloader } from '../downloader/downloader.iface'
-import type { QueuesManager } from '../queues-manager'
+import type Config from '../config/index.js'
+import type { IDownloader } from '../downloader/downloader.iface.js'
+import type { QueuesManager } from '../queues-manager/index.js'
+import type { RequestsManager } from './index.js'
 
 type EndpointBaseOptions = { requestsManager: RequestsManager }
 

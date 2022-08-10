@@ -1,7 +1,7 @@
-import { getPlatformFactories } from './platforms'
+import { getPlatformFactories } from './platforms/index.js'
 
-import type { Logger } from '../services/logger/logger'
-import type { SentryFactory } from './sentry/sentry-factory.iface'
+import type { Logger } from '../services/logger/logger.js'
+import type { SentryFactory } from './sentry/sentry-factory.iface.js'
 
 type Sentry = ReturnType<SentryFactory>
 

@@ -1,12 +1,12 @@
-import { convertRectangle } from '../../utils/convert'
-import { DEFAULTS } from '../../utils/defaults'
-import { simplifyPathData } from '../../utils/paper'
+import { convertRectangle } from '../../utils/convert.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { simplifyPathData } from '../../utils/paper.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceGeometry } from '../../typings/source'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerText } from '../source/source-layer-text'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceGeometry } from '../../typings/source.js'
+import type { SourceLayerFrame } from '../source/source-layer-frame.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
 
 type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
 

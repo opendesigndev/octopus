@@ -1,4 +1,4 @@
-import type { RawLayer, RawLayerCommon } from './layer'
+import type { RawLayer, RawLayerCommon } from './layer.js'
 
 export type RawLayerSection = RawLayerCommon & {
   type?: 'layerSection'

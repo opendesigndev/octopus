@@ -1,4 +1,4 @@
-import type { ParserOptions } from '../../parser'
+import type { ParserOptions } from '../../parser.js'
 
 type Parallels = {
   previews: number

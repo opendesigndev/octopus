@@ -1,12 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { createSourceLayerShape } from '../../factories/create-source-layer'
-import SourceLayerCommon from './source-layer-common'
-import SourceLayerShapeSubPath from './source-layer-shape-subpath'
+import { createSourceLayerShape } from '../../factories/create-source-layer.js'
+import SourceLayerCommon from './source-layer-common.js'
+import SourceLayerShapeSubPath from './source-layer-shape-subpath.js'
 
-import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../typings/raw'
-import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
-import type { SourceLayerParent } from './source-layer-common'
+import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../typings/raw/index.js'
+import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerShapeOptions = {

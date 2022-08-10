@@ -1,5 +1,5 @@
-import type { Coord } from '../../typings'
-import type { OctopusPoint as OctopusPointType } from '../../utils/create-shape'
+import type { Coord } from '../../typings/index.js'
+import type { OctopusPoint as OctopusPointType } from '../../utils/create-shape.js'
 
 export type NormalizedPoint = { anchor: Coord; inBezier?: Coord; outBezier?: Coord }
 

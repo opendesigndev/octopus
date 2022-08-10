@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs'
 
-import type { RawSource } from '../../src/typings/raw'
+import type { RawSource } from '../../src/typings/raw/index.js'
 
 const SOURCE_ADDRESS = './temp/input/source.json'
 

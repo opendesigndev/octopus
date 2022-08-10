@@ -1,4 +1,4 @@
-import type { Octopus } from '../typings/octopus-common'
+import type { Octopus } from '../typings/octopus-common/index.js'
 
 function normalizeTextValue(value: string): string {
   // eslint-disable-next-line no-control-regex

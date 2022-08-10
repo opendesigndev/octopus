@@ -1,6 +1,6 @@
-import { SourceArtboard } from './source-artboard'
+import { SourceArtboard } from './source-artboard.js'
 
-import type { RawArtboard } from '../../typings/raw'
+import type { RawArtboard } from '../../typings/raw/index.js'
 
 export type SourceImage = {
   name: string

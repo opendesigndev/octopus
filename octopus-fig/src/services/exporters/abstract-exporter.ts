@@ -1,5 +1,5 @@
-import type { ArtboardConversionResult } from '../..'
-import type { Manifest } from '../../typings/manifest'
+import type { ArtboardConversionResult } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
 
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {

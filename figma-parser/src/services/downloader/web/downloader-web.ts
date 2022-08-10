@@ -1,16 +1,16 @@
 import ky from 'ky'
 
-import { logger } from '../..'
-import { detachPromiseControls } from '../../../utils/async'
-import { ResponseWeb } from './response-web'
+import { detachPromiseControls } from '../../../utils/async.js'
+import { logger } from '../../index.js'
+import { ResponseWeb } from './response-web.js'
 
-import type { Parser } from '../../../parser'
-import type { DetachedPromiseControls } from '../../../utils/async'
-import type { SafeResult } from '../../../utils/queue'
-import type { IDownloader } from '../downloader.iface'
-import type { IResponse, JSONValue } from '../response.iface'
+import type { Parser } from '../../../parser.js'
+import type { DetachedPromiseControls } from '../../../utils/async.js'
+import type { SafeResult } from '../../../utils/queue.js'
+import type { IDownloader } from '../downloader.iface.js'
+import type { IResponse, JSONValue } from '../response.iface.js'
 import type { NormalizedOptions } from 'ky'
-import type { KyInstance } from 'ky/distribution/types/ky'
+type KyInstance = typeof ky
 
 export type DownloaderWebOptions = {
   parser: Parser

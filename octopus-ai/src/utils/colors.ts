@@ -1,7 +1,7 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { clamp } from '@avocode/octopus-common/dist/utils/math'
 
-import type { RawResourcesColorSpace } from '../typings/raw'
+import type { RawResourcesColorSpace } from '../typings/raw/index.js'
 
 export type RgbColorComponents = [number, number, number]
 

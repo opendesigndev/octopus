@@ -1,4 +1,4 @@
-import type { RawCombineOperation, RawGradientType, RawPointHV, RawShapeStrokeOffset } from './raw'
+import type { RawCombineOperation, RawGradientType, RawPointHV, RawShapeStrokeOffset } from './raw/index.js'
 
 export type SourceCombineOperation = RawCombineOperation
 

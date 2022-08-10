@@ -1,14 +1,14 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceArtboard } from './source-artboard'
-import { SourceLayerEffects } from './source-effects-layer'
-import { SourceEntity } from './source-entity'
-import { SourcePath } from './source-path'
+import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source.js'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceLayerEffects } from './source-effects-layer.js'
+import { SourceEntity } from './source-entity.js'
+import { SourcePath } from './source-path.js'
 
-import type { RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
-import type { SourceLayerSection } from './source-layer-section'
+import type { RawBlendMode, RawLayer } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceColor } from '../../typings/source.js'
+import type { SourceLayerSection } from './source-layer-section.js'
 
 export type SourceLayerParent = SourceArtboard | SourceLayerSection
 

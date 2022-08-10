@@ -1,18 +1,18 @@
 import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { OctopusLayerCommon } from './octopus-layer-common'
+import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RawGroupLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
-import type { SourceLayerGroup } from '../source/source-layer-group'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { OctopusLayerShape } from './octopus-layer-shape'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { RawGroupLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source/index.js'
+import type { SourceLayerGroup } from '../source/source-layer-group.js'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { OctopusLayerShape } from './octopus-layer-shape.js'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent

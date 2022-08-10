@@ -1,19 +1,19 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'
-import { OctopusEffectGlowInner } from './octopus-effect-glow-inner'
-import { OctopusEffectGlowOuter } from './octopus-effect-glow-outer'
-import { OctopusEffectOverlayColor } from './octopus-effect-overlay-color'
-import { OctopusEffectOverlayGradient } from './octopus-effect-overlay-gradient'
-import { OctopusEffectOverlayPattern } from './octopus-effect-overlay-pattern'
-import { OctopusEffectSatin } from './octopus-effect-satin'
-import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop'
-import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss.js'
+import { OctopusEffectGlowInner } from './octopus-effect-glow-inner.js'
+import { OctopusEffectGlowOuter } from './octopus-effect-glow-outer.js'
+import { OctopusEffectOverlayColor } from './octopus-effect-overlay-color.js'
+import { OctopusEffectOverlayGradient } from './octopus-effect-overlay-gradient.js'
+import { OctopusEffectOverlayPattern } from './octopus-effect-overlay-pattern.js'
+import { OctopusEffectSatin } from './octopus-effect-satin.js'
+import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop.js'
+import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner.js'
+import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerEffects } from '../source/source-effects-layer'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerEffects } from '../source/source-effects-layer.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusEffectLayerOptions = {
   parentLayer: OctopusLayerBase

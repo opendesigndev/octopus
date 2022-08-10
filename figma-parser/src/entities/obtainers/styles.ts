@@ -1,13 +1,13 @@
-import fromPairs from 'lodash/fromPairs'
+import fromPairs from 'lodash/fromPairs.js'
 
-import { keys, without } from '../../utils/common'
+import { keys, without } from '../../utils/common.js'
 
-import type { Parser } from '../../parser'
-import type { ICacher } from '../../types/cacher'
-import type { FigmaLayer } from '../../types/figma'
-import type { Node } from '../structural/node'
-import type { Design } from './design'
-import type { FrameLike } from './frame-like'
+import type { Parser } from '../../parser.js'
+import type { ICacher } from '../../types/cacher.js'
+import type { FigmaLayer } from '../../types/figma.js'
+import type { Node } from '../structural/node.js'
+import type { Design } from './design.js'
+import type { FrameLike } from './frame-like.js'
 
 type StylesOptions = {
   frameLike: FrameLike

@@ -1,6 +1,6 @@
-import { clamp, lerp, round } from './math'
+import { clamp, lerp, round } from './math.js'
 
-import type { Octopus } from '../typings/octopus-common'
+import type { Octopus } from '../typings/octopus-common/index.js'
 
 type Color = { r?: number; g?: number; b?: number; a?: number }
 

@@ -1,5 +1,5 @@
-import { logger } from './logger'
-import { sentry } from './sentry'
+import { logger } from './logger.js'
+import { sentry } from './sentry.js'
 
 import type { Extras } from '@sentry/types'
 
