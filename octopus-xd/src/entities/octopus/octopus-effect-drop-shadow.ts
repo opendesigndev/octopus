@@ -2,8 +2,8 @@ import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import { parseXDColor } from '../../utils/color'
-import defaults from '../../utils/defaults'
-import SourceEffectDropShadow from '../source/source-effect-drop-shadow'
+import { DEFAULTS } from '../../utils/defaults'
+import { SourceEffectDropShadow } from '../source/source-effect-drop-shadow'
 
 import type { Defined } from '../../typings/helpers'
 import type { Octopus } from '../../typings/octopus'
@@ -14,7 +14,7 @@ type OctopusEffectDropShadowOptions = {
   effectsBasisMissing: boolean
 }
 
-export default class OctopusEffectDropShadow {
+export class OctopusEffectDropShadow {
   private _source: SourceEffectDropShadow
   private _effectsBasisMissing: boolean
 
@@ -45,14 +45,14 @@ export default class OctopusEffectDropShadow {
     return {
       type: 'DROP_SHADOW',
       visible,
-      blendMode: defaults.BLEND_MODE,
+      blendMode: DEFAULTS.BLEND_MODE,
       shadow: {
         offset: {
           x: asNumber(dx),
           y: asNumber(dy),
         },
         blur: asNumber(r) * 2,
-        choke: defaults.EFFECTS.SHADOW_CHOKE,
+        choke: DEFAULTS.EFFECTS.SHADOW_CHOKE,
         color: parseXDColor(color),
       },
       // basis: this._effectsBasisMissing ? 'BODY' : 'LAYER_AND_EFFECTS', // TODO Clean

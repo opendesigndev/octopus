@@ -1,4 +1,4 @@
-export default {
+export const DEFAULTS = {
   TRANSFORM: [1, 0, 0, 1, 0, 0],
   BLEND_MODE: 'NORMAL',
   EFFECTS: {

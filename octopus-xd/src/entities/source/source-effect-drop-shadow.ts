@@ -5,7 +5,7 @@ export type SourceEffectDropShadowOptions = {
   effect: RawEffectDropShadow
 }
 
-export default class SourceEffectDropShadow {
+export class SourceEffectDropShadow {
   private _rawEffect: RawEffectDropShadow
 
   constructor(options: SourceEffectDropShadowOptions) {

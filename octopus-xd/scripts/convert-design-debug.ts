@@ -1,10 +1,11 @@
+import fs from 'fs/promises'
 import path from 'path'
 
 import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusXDConverter, TempExporter, XDFileReader } from '../src'
+import { createConverter, TempExporter, XDFileReader } from '../src/index-node'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
@@ -74,9 +75,10 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
     file://${manifest}`)
   })
 
-  const reader = new XDFileReader({ path: options.filename, storeAssetsOnFs: true })
+  const file = await fs.readFile(options.filename)
+  const reader = new XDFileReader({ file, storeAssetsOnFs: true })
   const sourceDesign = await reader.sourceDesign
-  const converter = new OctopusXDConverter({ sourceDesign })
+  const converter = createConverter({ sourceDesign })
   converter.convertDesign({ exporter })
   await exporter.completed()
   await reader.cleanup()

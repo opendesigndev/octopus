@@ -2,14 +2,14 @@ import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { parseXDColor } from '../../utils/color'
-import OctopusBounds from './octopus-bounds'
+import { OctopusBounds } from './octopus-bounds'
 
-import type OctopusArtboard from './octopus-artboard'
+import type { OctopusArtboard } from './octopus-artboard'
 
 type OctopusArtboardGridOptions = {
   octopusArtboard: OctopusArtboard
 }
-export default class OctopusArtboardGrid {
+export class OctopusArtboardGrid {
   private _octopusArtboard: OctopusArtboard
 
   constructor(options: OctopusArtboardGridOptions) {

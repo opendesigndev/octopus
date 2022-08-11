@@ -2,17 +2,17 @@ import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import defaults from '../../utils/defaults'
+import { DEFAULTS } from '../../utils/defaults'
 import { convertArrayToPaperMatrix, convertObjectToPaperMatrix } from '../../utils/matrix'
 import { createMatrix } from '../../utils/paper'
 import { buildShapePathSafe } from '../../utils/path-builders'
-import OctopusEffectsShape from './octopus-effects-shape'
-import OctopusLayerCommon from './octopus-layer-common'
+import { OctopusEffectsShape } from './octopus-effects-shape'
+import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { Raw2DMatrix, RawShapeCompound, RawShapeRect } from '../../typings/source'
-import type SourceLayerShape from '../source/source-layer-shape'
+import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { LayerSpecifics } from './octopus-layer-common'
 import type paper from 'paper'
 
@@ -26,7 +26,7 @@ type ShapeData = {
   normalizationOffset: { x: number; y: number }
   compilationOffset: { x: number; y: number }
 }
-export default class OctopusLayerShape extends OctopusLayerCommon {
+export class OctopusLayerShape extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerShape
   private _children: OctopusLayerShape[]
   private _shapeData: ShapeData
@@ -102,7 +102,7 @@ export default class OctopusLayerShape extends OctopusLayerCommon {
 
   private _convertBooleanOp(shape: RawShapeCompound) {
     const rawOp = shape.operation as keyof typeof OctopusLayerShape.BOOLEAN_OPS
-    return OctopusLayerShape.BOOLEAN_OPS[rawOp] ?? defaults.SHAPE.BOOLEAN_OP
+    return OctopusLayerShape.BOOLEAN_OPS[rawOp] ?? DEFAULTS.SHAPE.BOOLEAN_OP
   }
 
   private _getShapeAsCompound(): Octopus['CompoundPath'] {

@@ -9,7 +9,7 @@ export type SourceEffectFillImageOptions = {
   effect: RawFillImage
 }
 
-export default class SourceEffectFillImage {
+export class SourceEffectFillImage {
   private _rawEffect: RawFillImage
 
   constructor(options: SourceEffectFillImageOptions) {

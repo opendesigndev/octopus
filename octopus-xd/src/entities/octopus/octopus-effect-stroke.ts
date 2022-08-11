@@ -1,9 +1,9 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import defaults from '../../utils/defaults'
-import SourceEffectStroke from '../source/source-effect-stroke'
-import OctopusEffectFillColor from './octopus-effect-fill-color'
+import { DEFAULTS } from '../../utils/defaults'
+import { SourceEffectStroke } from '../source/source-effect-stroke'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStroke } from '../../typings/source'
@@ -13,7 +13,7 @@ type OctopusEffectStrokeOptions = {
   source: SourceEffectStroke
 }
 
-export default class OctopusEffectStroke {
+export class OctopusEffectStroke {
   private _source: SourceEffectStroke
 
   static LINE_JOIN_MAP = {
@@ -56,7 +56,7 @@ export default class OctopusEffectStroke {
     const style = dashing ? 'DASHED' : 'SOLID'
 
     const { LINE_JOIN_MAP, LINE_CAP_MAP, POSITION_MAP } = OctopusEffectStroke
-    const { STROKE_JOIN, STROKE_CAP, STROKE_POSITION } = defaults.EFFECTS
+    const { STROKE_JOIN, STROKE_CAP, STROKE_POSITION } = DEFAULTS.EFFECTS
 
     const lineJoin = getMapped(this._source.join, LINE_JOIN_MAP, STROKE_JOIN)
     const lineCap = getMapped(this._source.cap, LINE_CAP_MAP, STROKE_CAP)

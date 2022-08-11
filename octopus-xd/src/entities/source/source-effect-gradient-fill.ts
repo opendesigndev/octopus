@@ -5,7 +5,7 @@ export type SourceEffectFillGradientOptions = {
   effect: RawFillGradient
 }
 
-export default class SourceEffectFillGradient {
+export class SourceEffectFillGradient {
   private _rawEffect: RawFillGradient
 
   constructor(options: SourceEffectFillGradientOptions) {

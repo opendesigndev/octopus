@@ -7,7 +7,7 @@ type OctopusBoundsOptions = {
   h: number
 }
 
-export default class OctopusBounds {
+export class OctopusBounds {
   private _x: number
   private _y: number
   private _w: number

@@ -1,4 +1,4 @@
-import type SourceDesign from './source-design'
+import type { SourceDesign } from './source-design'
 
 export type RawGeneralEntry = {
   id: string
@@ -27,7 +27,7 @@ type SourceManifestOptions = {
   design: SourceDesign
 }
 
-export default class SourceManifest {
+export class SourceManifest {
   protected _rawValue: RawSourceManifest
   private _path: string
   private _design: SourceDesign

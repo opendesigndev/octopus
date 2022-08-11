@@ -3,23 +3,23 @@ import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
-import OctopusLayerCommon from './octopus-layer-common'
+import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { RawGroupLayer, RawShapeLayer, RawShapeMaskGroupLayer } from '../../typings/source'
-import type SourceLayerGroup from '../source/source-layer-group'
+import type { SourceLayerGroup } from '../source/source-layer-group'
 import type { LayerSpecifics } from './octopus-layer-common'
-import type OctopusLayerShape from './octopus-layer-shape'
+import type { OctopusLayerShape } from './octopus-layer-shape'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerGroup
 }
 
-export default class OctopusLayerMaskGroup extends OctopusLayerCommon {
+export class OctopusLayerMaskGroup extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerGroup
   private _layers: OctopusLayer[]
   private _mask: OctopusLayerShape | null

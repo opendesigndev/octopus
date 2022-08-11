@@ -1,7 +1,7 @@
 import type { Defined } from '../../typings/helpers'
 import type { RawShapeLayer } from '../../typings/source'
 import type { RawResources } from '../../typings/source/resources'
-import type SourceDesign from './source-design'
+import type { SourceDesign } from './source-design'
 
 type SourceResourcesOptions = {
   rawValue: RawResources
@@ -9,7 +9,7 @@ type SourceResourcesOptions = {
   design: SourceDesign
 }
 
-export default class SourceResources {
+export class SourceResources {
   protected _rawValue: RawResources
   private _path: string
   private _design: SourceDesign

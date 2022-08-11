@@ -4,7 +4,7 @@ export type SourceEffectFillColorOptions = {
   effect: RawFillColor
 }
 
-export default class SourceEffectFillColor {
+export class SourceEffectFillColor {
   private _rawEffect: RawFillColor
 
   constructor(options: SourceEffectFillColorOptions) {

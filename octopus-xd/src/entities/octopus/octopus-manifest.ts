@@ -1,8 +1,8 @@
-import path from 'path'
-
 import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
 
-import type { OctopusXDConverter } from '../..'
+import { pathRelative } from '../../utils/fs-path'
+
+import type { OctopusXDConverter } from '../../octopus-xd-converter'
 import type { Manifest } from '../../typings/manifest'
 
 type ImageDescriptor = { path: unknown }
@@ -24,7 +24,7 @@ type RawManifestBounds = {
   height: number
 }
 
-export default class OctopusManifest {
+export class OctopusManifest {
   private _octopusXdConverter: OctopusXDConverter
   private _exports: {
     images: Map<string, ImageDescriptor>
@@ -58,7 +58,7 @@ export default class OctopusManifest {
     const image = this._exports.images.get(id)
     if (typeof image?.path !== 'string') return undefined
     if (this._basePath === null) return image.path
-    return path.relative(this._basePath, image.path)
+    return pathRelative(this._basePath, image.path)
   }
 
   setExportedImage(id: string, imageDescriptor: ImageDescriptor): void {
@@ -73,15 +73,15 @@ export default class OctopusManifest {
     const artboard = this._exports.artboards.get(id)
     if (typeof artboard?.path !== 'string') return undefined
     if (this._basePath === null) return artboard.path
-    return path.relative(this._basePath, artboard.path)
+    return pathRelative(this._basePath, artboard.path)
   }
 
   setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
     this._exports.artboards.set(id, artboard)
   }
 
-  get manifestVersion(): Promise<string> {
-    return this._octopusXdConverter.pkg.then((pkg) => pkg.version)
+  get manifestVersion(): string {
+    return this._octopusXdConverter.pkg.version
   }
 
   get xdVersion(): string {
