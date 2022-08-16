@@ -4,8 +4,8 @@ import convertColor, { parseColor } from '../../utils/colors'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace } from '../../typings/raw/resources'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceLayerSubText from '../source/source-layer-sub-text'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceLayerSubText } from '../source/source-layer-sub-text'
 
 export enum ColorSpace {
   STROKING = 'ColorSpaceStroking',
@@ -18,7 +18,7 @@ type OctopusEffectColorFillOptions = {
   colorSpaceValue: string | RawResourcesColorSpace[string]
 }
 
-export default class OctopusEffectColorFill {
+export class OctopusEffectColorFill {
   private _sourceLayer: SourceLayerShape | SourceLayerSubText
   private _colorSpaceType: ColorSpace
   private _colorSpaceValue: string | RawResourcesColorSpace[string]
@@ -45,6 +45,7 @@ export default class OctopusEffectColorFill {
 
   convert(): Octopus['FillColor'] {
     const [r, g, b] = parseColor(this._parseColor())
+    console.log('___rgb', r, g, b)
     return {
       type: 'COLOR' as const,
       color: { r, g, b, a: 1 },

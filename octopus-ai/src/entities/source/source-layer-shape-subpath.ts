@@ -1,16 +1,15 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw'
-import type SourceLayerShape from './source-layer-shape'
+import type { SourceLayerShape } from './source-layer-shape'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerShape
   rawValue: RawShapeLayerSubPath
-  path: number[]
 }
 
-export default class SourceLayerShapeSubPath {
+export class SourceLayerShapeSubPath {
   protected _rawValue: RawShapeLayerSubPath
   private _points: RawShapeLayerSubPathPoint[]
   private _parent: SourceLayerShape
@@ -46,5 +45,9 @@ export default class SourceLayerShapeSubPath {
 
   get points(): RawShapeLayerSubPathPoint[] {
     return this._points
+  }
+
+  get rawValue(): RawShapeLayerSubPath {
+    return this._rawValue
   }
 }

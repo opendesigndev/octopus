@@ -1,28 +1,39 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import isEqual from 'lodash/isEqual'
 
-import SourceLayerCommon from './source-layer-common'
-import SourceLayerSubText from './source-layer-sub-text'
+import { createSourceLayerShape } from '../../factories/create-source-layer'
+import { initChildLayers } from '../../utils/layer'
+import { createSoftMask, initClippingMask } from '../../utils/mask'
+import { SourceLayerCommon } from './source-layer-common'
+import { SourceLayerSubText } from './source-layer-sub-text'
 
 import type { RawTextLayer } from '../../typings/raw'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayerShape } from './source-layer-shape'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
   rawValue: RawTextLayer
-  path: number[]
 }
 
-export default class SourceLayerText extends SourceLayerCommon {
+export class SourceLayerText extends SourceLayerCommon {
   static DEFAULT_NAME = '<TextLayer>'
 
   protected _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerSubText[]
+  private _clippingPaths: SourceLayerShape[] | null
+  private _mask: Nullable<SourceLayerShape>
+  private _softMask: Nullable<SourceLayerXObjectForm>
+
   constructor(options: SourceLayerTextOptions) {
     super(options)
     this._normalizedTexts = this._initTexts()
+    this._clippingPaths = this._initClippingPaths()
+    this._mask = this._initMask()
+    this._softMask = this._initSoftMask()
   }
 
   private _initTexts() {
@@ -48,6 +59,24 @@ export default class SourceLayerText extends SourceLayerCommon {
     return textSubLayers
   }
 
+  private _initClippingPaths(): SourceLayerShape[] {
+    return initChildLayers({
+      parent: this._parent,
+      layers: this._clippingPath,
+      builder: createSourceLayerShape,
+    }) as SourceLayerShape[]
+  }
+
+  private _initMask(): Nullable<SourceLayerShape> {
+    const mask = initClippingMask(this)
+
+    if (!mask) {
+      return null
+    }
+
+    return mask
+  }
+
   get texts(): Nullable<SourceLayerSubText[]> {
     return this._normalizedTexts
   }
@@ -58,5 +87,25 @@ export default class SourceLayerText extends SourceLayerCommon {
 
   get name(): string {
     return SourceLayerText.DEFAULT_NAME
+  }
+
+  private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+    return this.graphicsState?.ClippingPath
+  }
+
+  get clippingPaths(): SourceLayerShape[] | null {
+    return this._clippingPaths
+  }
+
+  get mask(): Nullable<SourceLayerShape> {
+    return this._mask
+  }
+
+  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+    return createSoftMask({ sMask: this.sMask, parent: this._parent })
+  }
+
+  get softMask(): Nullable<SourceLayerXObjectForm> {
+    return this._softMask
   }
 }

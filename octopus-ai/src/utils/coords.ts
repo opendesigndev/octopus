@@ -94,3 +94,15 @@ export function hasExpectedType(point: RawShapeLayerSubPathPoint): boolean {
 export function invertYCooords(coords: number[], artboardHeight: number): number[] {
   return coords.map((coord, index) => (index % 2 ? artboardHeight - coord : coord))
 }
+
+export function parseRectangleCoords(coords: number[]): RectCoords {
+  const [, , width, height] = coords
+  const rectPoints = createRectPoints(coords)
+  const isPositiveOrientation = getIsPositiveOrientation(width, height)
+
+  if (isPositiveOrientation) {
+    return getNorthWestSouthEastCoords(rectPoints)
+  }
+
+  return getNorthEastSouthWestCoords(rectPoints)
+}
