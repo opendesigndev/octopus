@@ -45,7 +45,7 @@ export class OctopusEffectColorFill {
 
   convert(): Octopus['FillColor'] {
     const [r, g, b] = parseColor(this._parseColor())
-    console.log('___rgb', r, g, b)
+
     return {
       type: 'COLOR' as const,
       color: { r, g, b, a: 1 },

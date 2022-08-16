@@ -55,7 +55,6 @@ export abstract class OctopusLayerCommon {
 
   get blendMode(): Octopus['LayerBase']['blendMode'] {
     const blendModeKey = this._sourceLayer.blendMode
-
     if (!blendModeKey) {
       return BLEND_MODES.Normal
     }
