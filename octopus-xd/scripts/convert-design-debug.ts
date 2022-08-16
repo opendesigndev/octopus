@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
@@ -66,7 +65,7 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
         ? '<none>'
         : render.error
         ? chalk.red(render.error.message)
-        : `file://${render.value} ${displayPerf(render?.time)}`
+        : `file://${render.value} ${render?.time}`
     }
     `)
   })

@@ -2,29 +2,31 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 
-import type OctopusAIConverter from '../..'
+import type { OctopusAIConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import type SourceArtboard from '../source/source-artboard'
-import type SourceDesign from '../source/source-design'
-import type SourceResources from '../source/source-resources'
+import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceDesign } from '../source/source-design'
+import type { SourceResources } from '../source/source-resources'
+import type { OctopusManifest } from './octopus-manifest'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
 }
 
-export default class OctopusArtboard {
+export class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.sourceDesign.getArtboardById(options.targetArtboardId)
+    const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
+
     if (!artboard) {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
+
     this._octopusAIConverter = options.octopusAIConverter
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
@@ -40,10 +42,7 @@ export default class OctopusArtboard {
     }, [])
   }
 
-  get dimensions(): Octopus['Dimensions'] {
-    return this._sourceArtboard.dimensions
-  }
-
+  //@todo remove this if not necessary later
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)
@@ -54,6 +53,10 @@ export default class OctopusArtboard {
     return this._sourceArtboard.resources
   }
 
+  get sourceDesign(): SourceDesign {
+    return this._octopusAIConverter.sourceDesign
+  }
+
   get id(): string {
     return this._sourceArtboard.id
   }
@@ -61,6 +64,14 @@ export default class OctopusArtboard {
   private async _getVersion(): Promise<string> {
     const pkg = await this._octopusAIConverter.pkg
     return pkg.version
+  }
+
+  get manifest(): OctopusManifest {
+    return this._octopusAIConverter.manifest
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    return this
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

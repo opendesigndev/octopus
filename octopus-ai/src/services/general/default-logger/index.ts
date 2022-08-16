@@ -1,7 +1,7 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-export default function createDefaultLogger(): ReturnType<typeof pino> {
+export function createDefaultLogger(): ReturnType<typeof pino> {
   return pino({
     formatters: {
       bindings: ({ pid }) => {
