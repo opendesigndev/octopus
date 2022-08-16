@@ -1,41 +1,36 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
-
 import { createSourceLayer } from '../../factories/create-source-layer'
-import SourceArtboard from './source-artboard'
-import SourceLayerCommon from './source-layer-common'
+import { initChildLayers } from '../../utils/layer'
+import { createSoftMask } from '../../utils/mask'
+import { SourceArtboard } from './source-artboard'
+import { SourceLayerCommon } from './source-layer-common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawGroupLayer, RawLayer } from '../../typings/raw'
+import type { RawGroupLayer } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent
   rawValue: RawGroupLayer
-  path: number[]
 }
 
-export default class SourceLayerGroup extends SourceLayerCommon {
+export class SourceLayerGroup extends SourceLayerCommon {
   static DEFAULT_NAME = '<Group>'
 
   protected _rawValue: RawGroupLayer
   private _children: SourceLayer[]
+  private _softMask: Nullable<SourceLayerXObjectForm>
 
   constructor(options: SourceLayerGroupOptions) {
     super(options)
     this._rawValue = options.rawValue
     this._children = this._initChildren()
+    this._softMask = this._initSoftMask()
   }
 
   private _initChildren() {
-    const children = asArray(this._rawValue?.Kids)
-    return children.reduce((children: SourceLayer[], layer: RawLayer, i: number) => {
-      const sourceLayer = createSourceLayer({
-        layer,
-        parent: this,
-        path: [...this.path, i],
-      })
-      return sourceLayer ? [...children, sourceLayer] : children
-    }, [])
+    return initChildLayers({ parent: this, layers: this._rawValue.Kids, builder: createSourceLayer }) as SourceLayer[]
   }
 
   get children(): SourceLayer[] {
@@ -52,5 +47,13 @@ export default class SourceLayerGroup extends SourceLayerCommon {
     const name = this._parent.resources.getPropertiesById(propertiesId)?.Name
 
     return name ?? SourceLayerGroup.DEFAULT_NAME
+  }
+
+  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+    return createSoftMask({ sMask: this.sMask, parent: this._parent })
+  }
+
+  get softMask(): Nullable<SourceLayerXObjectForm> {
+    return this._softMask
   }
 }

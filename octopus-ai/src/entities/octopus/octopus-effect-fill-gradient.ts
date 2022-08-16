@@ -7,15 +7,15 @@ import convertColor from '../../utils/colors'
 import type { Coord, GradientColorStop, GradientStop, RgbColorComponents } from '../../typings'
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace, RawResourcesShadingKeyFunctionFunction } from '../../typings/raw/resources'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceResources from '../source/source-resources'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceResources } from '../source/source-resources'
 
 type OctopusEffectGradientFillOptions = {
   sourceLayer: SourceLayerShape
   resources: SourceResources
 }
 
-export default class OctopusEffectGradientFill {
+export class OctopusEffectGradientFill {
   static DEFAULT_RGB_COLOR = [0, 0, 0]
 
   private _resources: SourceResources
@@ -149,8 +149,6 @@ export default class OctopusEffectGradientFill {
   }
 
   private _parsePositioning(): Octopus['FillGradient']['positioning'] {
-    //@todo provided  default values but changing makes no difference
-    //https://octopus-schema.avocode.com/#FillPositioning
     return {
       layout: 'FILL',
       origin: 'LAYER',

@@ -1,22 +1,24 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import OctopusLayerCommon from './octopus-layer-common'
+import { initChildLayers } from '../../utils/layer'
+import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type SourceLayerGroup from '../source/source-layer-group'
+import type { SourceLayerGroup } from '../source/source-layer-group'
+import type { SourceLayerXObjectForm } from '../source/source-layer-x-object-form'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerGroup
+  sourceLayer: SourceLayerGroup | SourceLayerXObjectForm
 }
 
-export default class OctopusLayerGroup extends OctopusLayerCommon {
+export class OctopusLayerGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[]
-  protected _sourceLayer: SourceLayerGroup
+  protected _sourceLayer: SourceLayerGroup | SourceLayerXObjectForm
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)
@@ -24,13 +26,11 @@ export default class OctopusLayerGroup extends OctopusLayerCommon {
   }
 
   private _initLayers(): OctopusLayer[] {
-    return this._sourceLayer.children.reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [...layers, octopusLayer] : layers
-    }, [])
+    return initChildLayers({
+      parent: this,
+      layers: this._sourceLayer.children,
+      builder: createOctopusLayer,
+    }) as OctopusLayer[]
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> | null {

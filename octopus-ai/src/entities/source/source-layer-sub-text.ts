@@ -7,7 +7,7 @@ import type {
   RawTextLayerText,
 } from '../../typings/raw'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
-import type SourceLayerText from './source-layer-text'
+import type { SourceLayerText } from './source-layer-text'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextNormalizedOptions = {
@@ -15,7 +15,7 @@ type SourceLayerTextNormalizedOptions = {
   rawValue: RawTextLayerText
 }
 
-export default class SourceLayerSubText {
+export class SourceLayerSubText {
   private _rawValue: RawTextLayerText
   private _parent: SourceLayerText
   static DEFAULT_TEXT_MATRIX = [1, 0, 0, 1, 0, 0] as RawGraphicsStateMatrix

@@ -1,4 +1,4 @@
-import SourceArtboard from './source-artboard'
+import { SourceArtboard } from './source-artboard'
 
 import type {
   RawLayer,
@@ -6,35 +6,30 @@ import type {
   RawGraphicsState,
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
+  RawResourcesExtGStateSmask,
 } from '../../typings/raw'
-import type SourceLayerGroup from './source-layer-group'
-import type SourceLayerShape from './source-layer-shape'
-import type SourceLayerXObject from './source-layer-x-object'
-import type SourceResources from './source-resources'
+import type { SourceLayerGroup } from './source-layer-group'
+import type { SourceLayerShape } from './source-layer-shape'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
+import type { SourceResources } from './source-resources'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
-export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
+export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
 
 type SourceLayerCommonOptions = {
   parent: SourceLayerParent
   rawValue: RawLayer
-  path: number[]
 }
-type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject' | 'Shading'
+export type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject' | 'Shading' | XObjectSubtype
+export type XObjectSubtype = 'Form' | 'Image'
 
-export default class SourceLayerCommon {
+export class SourceLayerCommon {
   protected _parent: SourceLayerParent
   protected _rawValue: RawLayer
-  protected _path: number[]
 
   constructor(options: SourceLayerCommonOptions) {
-    this._path = options.path
     this._rawValue = options.rawValue
     this._parent = options.parent
-  }
-
-  get path(): number[] {
-    return this._path
   }
 
   get type(): Nullable<LayerType> {
@@ -53,7 +48,7 @@ export default class SourceLayerCommon {
   }
 
   get resources(): Nullable<SourceResources> {
-    return this.parentArtboard?.resources
+    return this._parent?.resources
   }
 
   get parentArtboardDimensions(): { width: number; height: number } {
@@ -70,7 +65,7 @@ export default class SourceLayerCommon {
 
   get extGState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
+    return this.resources?.ExtGState?.[specifiedParameters]
   }
 
   get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {
@@ -78,7 +73,17 @@ export default class SourceLayerCommon {
   }
 
   get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
-    return this.extGState?.SMask?.G?.Shading?.Sh0?.Function
+    const g = this.sMask?.G
+
+    if (!g || !('Shading' in g)) {
+      return null
+    }
+
+    return g.Shading?.Sh0?.Function
+  }
+
+  get sMask(): Nullable<RawResourcesExtGStateSmask> {
+    return this.extGState?.SMask
   }
 
   get opacity(): Nullable<number> {

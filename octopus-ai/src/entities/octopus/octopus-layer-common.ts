@@ -1,9 +1,12 @@
+import uniqueId from 'lodash/uniqueId'
+
 import { BLEND_MODES } from '../../utils/blend-modes'
+import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type SourceResources from '../source/source-resources'
+import type { SourceResources } from '../source/source-resources'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
@@ -13,7 +16,7 @@ type OctopusLayerCommonOptions = {
   sourceLayer: SourceLayer
 }
 
-export default abstract class OctopusLayerCommon {
+export abstract class OctopusLayerCommon {
   static DEFAULT_OPACITY = 1
 
   protected _id: string
@@ -24,7 +27,7 @@ export default abstract class OctopusLayerCommon {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
 
-    this._id = options.sourceLayer.path.join(':')
+    this._id = uniqueId()
   }
 
   get parent(): OctopusLayerParent {
@@ -34,6 +37,7 @@ export default abstract class OctopusLayerCommon {
   get id(): string {
     return this._id
   }
+  /** @TODO check if this is needed */
 
   // get hiddenContentIds(): number[] {
   //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
@@ -42,6 +46,11 @@ export default abstract class OctopusLayerCommon {
 
   get resources(): SourceResources | undefined {
     return this._parent.resources
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    const parent = this._parent as OctopusLayerParent
+    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
   get blendMode(): Octopus['LayerBase']['blendMode'] {
@@ -71,7 +80,7 @@ export default abstract class OctopusLayerCommon {
       blendMode: this.blendMode,
       opacity: this.opacity,
       id: this.id,
-      name: this._sourceLayer.name,
+      ...(this._sourceLayer.name ? { name: this._sourceLayer.name } : null),
     }
   }
 }

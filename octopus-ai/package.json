@@ -4,12 +4,8 @@
   "description": "\"Octopus AI converter, converts .ai files to Octopus 3+ format.\"",
   "main": "dist/src/index.js",
   "scripts": {
-    "create:cleanup": "rimraf temp/input",
-    "create:create": "./temp/parser/parse_ai_docker.sh temp/file/$FILE temp/input",
-    "create": "yarn create:cleanup && yarn create:create && yarn create:private",
-    "create:private": "node node_modules/@avocode/ai-private-data-parser/dist/cli.js temp/file/$FILE temp/privateData/private.json",
-    "convert:all": "npx ts-node ./scripts/convert-render.ts",
-    "render:test": "npx ts-node ./scripts/render-test.ts",
+    "convert:debug": "npx ts-node ./scripts/convert-render-debug.ts",
+    "convert:all": "npx ts-node ./scripts/convert-design.ts",
     "test": "echo 'Tests are not implemented yet'",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
@@ -20,6 +16,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@avocode/octopus-common": "3.0.0-rc.20",
+    "@opendesign/illustrator-parser-pdfcpu": "^1.0.0",
+    "@avocode/manifest-ts": "3.0.0-alpha.33",
     "@sentry/node": "6.14.0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",
@@ -30,8 +28,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@avocode/ai-private-data-parser": "^0.1.0-alpha.3",
-    "@avocode/octopus-ts": "3.0.0-alpha.32",
+    "@avocode/octopus-ts": "3.0.0-alpha.33",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",

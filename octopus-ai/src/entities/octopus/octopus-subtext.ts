@@ -1,9 +1,9 @@
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
-import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
+import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill'
 
 import type { Octopus } from '../../typings/octopus'
-import type SourceLayerSubText from '../source/source-layer-sub-text'
+import type { SourceLayerSubText } from '../source/source-layer-sub-text'
 
 type OctopusSubTextOptions = {
   sourceLayer: SourceLayerSubText
@@ -60,7 +60,7 @@ export default class OctopusSubText {
       value,
       defaultStyle: style,
       baselinePolicy: 'SET',
-      textTransform: this._sourceLayer.textTransformMatrix,
+      transform: this._sourceLayer.textTransformMatrix,
     }
   }
 }
