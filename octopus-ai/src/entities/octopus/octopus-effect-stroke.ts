@@ -26,8 +26,11 @@ export class OctopusEffectStroke {
   }
 
   private _parseDashing() {
-    const dashing = this._sourceLayer.dashing
+    const { dashing: rawDashing } = this._sourceLayer
+    const dashing = rawDashing.length % 2 === 0 ? rawDashing : ([...rawDashing, rawDashing.at(-1)] as number[])
+
     const dashOffset = this._sourceLayer.dashOffset
+
     return { dashing, dashOffset }
   }
 

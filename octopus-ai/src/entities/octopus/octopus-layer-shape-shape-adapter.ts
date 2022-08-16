@@ -50,7 +50,6 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     return {
       rectangle,
       type: 'RECTANGLE',
-      transform: this._sourceLayer.transformMatrix,
     }
   }
 
@@ -135,12 +134,10 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
 
   private _parsePath(path: SourceLayerShapeSubPath): Octopus['Path'] {
     const geometry = this._createSubpathGeometry(path)
-    const transform = this._sourceLayer.transformMatrix
 
     return {
       type: 'PATH',
       geometry,
-      transform,
     }
   }
 
@@ -229,6 +226,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     return {
       ...common,
       ...specific,
+      transform: this._sourceLayer.transformMatrix,
     } as const
   }
 }
