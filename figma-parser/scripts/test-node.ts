@@ -14,7 +14,7 @@ const parser = createParser({
   verbose: true,
   figmaIdsFetchUsedComponents: true,
   renderImagerefs: false,
-  shouldObtainLibraries: true,
+  shouldObtainLibraries: false,
   shouldObtainStyles: true,
   parallelRequests: 10,
 })

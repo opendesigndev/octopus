@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-fig",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.5",
   "description": "Octopus Figma converter, converts Figma designs to Octopus 3+ format.",
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
@@ -19,7 +19,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@avocode/figma-parser": "3.0.0-rc.4",
+    "@avocode/figma-parser": "3.0.0-rc.5",
     "@avocode/manifest-ts": "3.0.0-alpha.33",
     "@avocode/octopus-common": "3.0.0-rc.22",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
@@ -47,6 +47,7 @@
     "typescript": "4.6.4"
   },
   "files": [
-    "dist/src"
+    "lib/src",
+    "lib/package.json"
   ]
 }
