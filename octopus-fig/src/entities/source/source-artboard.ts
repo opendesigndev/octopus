@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 

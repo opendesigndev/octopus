@@ -4,7 +4,7 @@ import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { logger } from '../services'
 
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
@@ -59,7 +59,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   const type = options.layer.type
   const builder = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (!builder) {
-    logWarn('createOctopusLayer: Unknown layer type', { type })
+    logger?.warn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

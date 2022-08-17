@@ -1,6 +1,6 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
-import type { OctopusFigConverter } from '../..'
+import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
@@ -78,8 +78,8 @@ export class OctopusManifest {
     this._exports.artboards.set(id, artboard)
   }
 
-  get manifestVersion(): Promise<string> {
-    return this._octopusConverter.pkgVersion
+  get manifestVersion(): string {
+    return this._octopusConverter.pkg.version
   }
 
   get figVersion(): string {
@@ -179,7 +179,7 @@ export class OctopusManifest {
 
   async convert(): Promise<Manifest['OctopusManifest']> {
     return {
-      version: await this.manifestVersion,
+      version: this.manifestVersion,
       origin: {
         name: 'FIGMA',
         version: this.figVersion,

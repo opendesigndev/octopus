@@ -1,7 +1,5 @@
 import { createParser } from '@avocode/figma-parser/lib/src/index-node'
 
-import { ENV } from '../src/services/general/environment'
-
 const DEFAULT_ID = 'nFrTs6F4OjiSPMsAAAp16a'
 
 const log = (name: string) => (design: unknown) => {
@@ -12,7 +10,7 @@ const log = (name: string) => (design: unknown) => {
 }
 
 const parse = async (designId = DEFAULT_ID) => {
-  const token = ENV.API_TOKEN
+  const token = process.env.API_TOKEN
   if (!token) return
 
   const parser = createParser({

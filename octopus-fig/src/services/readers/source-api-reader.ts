@@ -1,53 +1,56 @@
 import { createParser } from '@avocode/figma-parser'
 
-import { ENV } from '../general/environment'
-
 import type { Design } from '@avocode/figma-parser/lib/src/index-node'
+import type { Logger } from '@avocode/figma-parser/lib/src/services/logger/logger'
+import type { ICacher } from '@avocode/figma-parser/lib/src/types/cacher'
 
-type SourceApiReaderOptions = {
+export type SourceApiReaderOptions = {
   designId: string
+  host: string
+  token: string
+  ids: string[]
+  pixelsLimit: number
+  framePreviews: boolean
+  tokenType: string
+  previewsParallels: number
+  nodesParallels: number
+  s3Parallels: number
+  verbose: boolean
+  figmaIdsFetchUsedComponents: boolean
+  renderImagerefs: boolean
+  shouldObtainLibraries: boolean
+  shouldObtainStyles: boolean
+  parallelRequests: number
+  logger?: Logger
+  cacher?: ICacher
 }
 
 export class SourceApiReader {
-  private _designId: string
-  private _design: Design | null
+  private _options: SourceApiReaderOptions
+  private _design: Design
+  private _parser: ReturnType<typeof createParser>
 
   constructor(options: SourceApiReaderOptions) {
-    this._designId = options.designId
-    this._design = this._initSourceDesign()
+    this._options = options
+    this._parser = this._initParser()
   }
 
   get designId(): string {
-    return this._designId
+    return this._options.designId
   }
 
-  get design(): Design | null {
+  get frameLikeIds() {
+    return this._parser.getFrameLikeIds()
+  }
+
+  parse(ids?: string[]): Design {
+    if (!this._design) {
+      this._design = this._parser.parse(ids)
+    }
     return this._design
   }
 
-  private _initSourceDesign(): Design | null {
-    const token = ENV.API_TOKEN
-    if (!token) return null
-
-    const parser = createParser({
-      designId: this.designId,
-      token,
-      ids: [],
-      host: 'api.figma.com',
-      pixelsLimit: 1e7,
-      framePreviews: true,
-      previewsParallels: 3,
-      tokenType: 'personal',
-      nodesParallels: 10,
-      s3Parallels: 10,
-      verbose: true,
-      figmaIdsFetchUsedComponents: true,
-      renderImagerefs: false,
-      shouldObtainLibraries: true,
-      shouldObtainStyles: true,
-      parallelRequests: 5,
-    })
-
-    return parser.parse()
+  private _initParser(): ReturnType<typeof createParser> {
+    return createParser(this._options)
   }
 }

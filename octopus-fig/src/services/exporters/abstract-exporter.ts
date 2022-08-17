@@ -1,4 +1,4 @@
-import type { ArtboardConversionResult } from '../..'
+import type { ArtboardConversionResult } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 
 export abstract class AbstractExporter {
