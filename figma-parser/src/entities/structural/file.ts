@@ -14,6 +14,7 @@ import type {
   FigmaFile,
   FigmaGroupLike,
   FigmaLayer,
+  NamedTargetIds,
   SourceComponent,
   TargetIds,
 } from '../../types/figma'
@@ -102,6 +103,16 @@ export class File {
   }
 
   @firstCallMemo()
+  get componentNamedIds(): { name: string; id: string }[] {
+    return keys(this.componentsRaw).map((key) => {
+      return {
+        name: this.componentsRaw[key].name,
+        id: key,
+      }
+    })
+  }
+
+  @firstCallMemo()
   get localComponents(): FigmaLayer[] {
     return (this.flatLayers as FigmaLayer[]).filter((node) => node?.type === 'COMPONENT')
   }
@@ -112,9 +123,25 @@ export class File {
   }
 
   @firstCallMemo()
+  get localComponentNamedIds(): { name: string; id: string }[] {
+    return this.localComponents.map((node) => {
+      return {
+        name: node?.name,
+        id: node?.id,
+      }
+    })
+  }
+
+  @firstCallMemo()
   get remoteComponentIds(): string[] {
     const local = this.localComponentIds
     return this.componentIds.filter((id: string) => !local.includes(id))
+  }
+
+  @firstCallMemo()
+  get remoteComponentNamedIds(): { name: string; id: string }[] {
+    const local = this.localComponentIds
+    return this.componentNamedIds.filter((namedId: { name: string; id: string }) => !local.includes(namedId.id))
   }
 
   getParentOf(id: string): FigmaGroupLike | null {
@@ -134,6 +161,19 @@ export class File {
       }),
       localComponents: this.localComponentIds,
       remoteComponents: this.remoteComponentIds,
+    }
+  }
+
+  getNamedFrameLikeIds(): NamedTargetIds {
+    return {
+      topLevelArtboards: this._findDefaultTargetArtboards().map((artboard) => {
+        return {
+          name: artboard.name,
+          id: artboard.id,
+        }
+      }),
+      localComponents: this.localComponentNamedIds,
+      remoteComponents: this.remoteComponentNamedIds,
     }
   }
 

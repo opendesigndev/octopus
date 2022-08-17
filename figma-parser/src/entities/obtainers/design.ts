@@ -16,6 +16,7 @@ import type { ResolvedFrame } from './frame-like'
 type DesignOptions = {
   designId: string
   parser: Parser
+  cachedFile: File | null
 }
 
 type DesignMeta = {
@@ -45,7 +46,7 @@ export class Design extends EventEmitter {
     super()
     this._designId = options.designId
     this._parser = options.parser
-    this._file = this._initFile()
+    this._file = options.cachedFile ? Promise.resolve(options.cachedFile) : this._initFile()
     this._frameLikes = this._initFrameLikes()
     this._libraries = this._initLibraries()
 
@@ -108,6 +109,11 @@ export class Design extends EventEmitter {
     )
 
     return frameLikes
+  }
+
+  async getFrameLikeIds() {
+    const file = await this._file
+    return file.getNamedFrameLikeIds()
   }
 
   private async _getTargetIds() {
