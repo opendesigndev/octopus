@@ -1,10 +1,10 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initOctopusLayerChildren } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerGroup } from '../source/source-layer-group'
@@ -13,7 +13,7 @@ import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerGroup | SourceLayerXObjectForm
+  layerSequence: LayerSequence
 }
 
 export class OctopusLayerGroup extends OctopusLayerCommon {
@@ -26,11 +26,10 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
   }
 
   private _initLayers(): OctopusLayer[] {
-    return initChildLayers({
+    return initOctopusLayerChildren({
       parent: this,
       layers: this._sourceLayer.children,
-      builder: createOctopusLayer,
-    }) as OctopusLayer[]
+    })
   }
 
   private _convertTypeSpecific(): LayerSpecifics<Octopus['GroupLayer']> | null {

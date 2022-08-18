@@ -1,7 +1,6 @@
 import path from 'path/posix'
 
-import { createSourceLayerShape } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceLayerCommon } from './source-layer-common'
 
@@ -55,10 +54,9 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
   }
 
   private _initClippingPaths(): SourceLayerShape[] {
-    return initChildLayers({
+    return initSourceLayerChildren({
       parent: this._parent,
-      layers: this._clippingPath,
-      builder: createSourceLayerShape,
+      layers: this._clippingPath ?? [],
     }) as SourceLayerShape[]
   }
 

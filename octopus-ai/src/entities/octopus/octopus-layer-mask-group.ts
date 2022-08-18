@@ -3,6 +3,7 @@ import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { ClippedSourceLayer } from '../../factories/create-source-layer'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerShape } from '../source/source-layer-shape'
@@ -10,7 +11,7 @@ import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerShape
+  layerSequence: LayerSequence
 }
 
 export class OctopusLayerMaskGroup extends OctopusLayerCommon {
@@ -24,11 +25,10 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
 
   constructor(options: OctopusLayerMaskOptions) {
     super(options)
-    this._sourceLayer = options.sourceLayer
   }
 
   addChildLayerToMaskGroup(layer: ClippedSourceLayer): void {
-    const octopusLayer = buildOctopusLayer({ layer, parent: this })
+    const octopusLayer = buildOctopusLayer({ layerSequence: { sourceLayers: [layer] }, parent: this })
 
     if (!octopusLayer) {
       return
@@ -44,7 +44,10 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
       return null
     }
 
-    const mask = createOctopusLayerShapeFromShapeAdapter({ layer: sourceMask, parent: this }).convert()
+    const mask = createOctopusLayerShapeFromShapeAdapter({
+      layerSequence: { sourceLayers: [sourceMask] },
+      parent: this,
+    }).convert()
 
     return mask
   }

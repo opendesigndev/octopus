@@ -7,12 +7,8 @@ import { OctopusLayerSoftMaskGroup } from '../entities/octopus/octopus-layer-sof
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { getMaskGroupHashKey } from '../utils/mask'
 
-import type { SourceLayerWithSoftMask } from '../entities/octopus/octopus-layer-soft-mask-group'
-import type { SourceLayerGroup } from '../entities/source/source-layer-group'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { SourceLayerText } from '../entities/source/source-layer-text'
-import type { SourceLayerXObjectForm } from '../entities/source/source-layer-x-object-form'
-import type { SourceLayerXObjectImage } from '../entities/source/source-layer-x-object-image'
+import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { ClippedSourceLayer, SourceLayer } from './create-source-layer'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
@@ -25,58 +21,70 @@ export type OctopusLayer =
   | OctopusLayerSoftMaskGroup
 
 export type CreateOctopusLayerOptions = {
-  layer: SourceLayer
+  layerSequence: LayerSequence
   parent: OctopusLayerParent
 }
 
-export function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
+export function createOctopusLayerGroup({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
   return new OctopusLayerGroup({
     parent,
-    sourceLayer: layer as SourceLayerGroup | SourceLayerXObjectForm,
+    layerSequence,
   })
 }
 
-export function createOctopusLayerMaskGroup({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
+export function createOctopusLayerMaskGroup({
+  layerSequence,
+  parent,
+}: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
   return new OctopusLayerMaskGroup({
     parent,
-    sourceLayer: layer as SourceLayerShape,
+    layerSequence,
   })
 }
 
 export function createOctopusLayerShapeFromShapeAdapter({
-  layer,
+  layerSequence,
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerShape {
-  const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: layer as SourceLayerShape })
+  const adapter = new OctopusLayerShapeShapeAdapter({
+    parent,
+    layerSequence,
+  })
   return new OctopusLayerShape({ adapter })
 }
 
 export function createOctopusLayerShapeFromXObjectImageAdapter({
-  layer,
+  layerSequence,
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerShape {
-  const adapter = new OctopusLayerShapeXObjectImageAdapter({ parent, sourceLayer: layer as SourceLayerXObjectImage })
+  const adapter = new OctopusLayerShapeXObjectImageAdapter({
+    parent,
+    layerSequence,
+  })
   return new OctopusLayerShape({ adapter })
 }
 
 export function createOctopusLayerSoftMaskGroup({
-  layer,
+  layerSequence,
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerSoftMaskGroup {
-  return new OctopusLayerSoftMaskGroup({ sourceLayer: layer as SourceLayerWithSoftMask, parent })
+  return new OctopusLayerSoftMaskGroup({
+    layerSequence,
+    parent,
+  })
 }
 
-function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerText {
+function createOctopusLayerText({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerText {
   return new OctopusLayerText({
     parent,
-    sourceLayer: layer as SourceLayerText,
+    layerSequence,
   })
 }
 
 type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
 export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
-  const type = (Object(options.layer) as SourceLayer).type || ''
+  const type = (Object(options.layerSequence.sourceLayers[0]) as SourceLayer).type || ''
   const builders: {
     [key: string]: Builder
   } = {
@@ -110,7 +118,7 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
   const maskGroup =
     maskGroupExists && maskGroupHashKey
       ? OctopusLayerMaskGroup.registry[maskGroupHashKey]
-      : createOctopusLayerMaskGroup({ layer: mask, parent })
+      : createOctopusLayerMaskGroup({ layerSequence: { sourceLayers: [mask] }, parent })
 
   return { maskGroupHashKey, maskGroup }
 }
@@ -134,13 +142,14 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
  * created.
  */
 export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
-  const { layer, parent } = options
+  const { layerSequence, parent } = options
 
+  const layer = layerSequence.sourceLayers[0]
   if (layer.softMask) {
-    return createOctopusLayerSoftMaskGroup({ layer, parent })
+    return createOctopusLayerSoftMaskGroup({ layerSequence, parent })
   }
 
-  const clippedLayer = options.layer as ClippedSourceLayer
+  const clippedLayer = layer as ClippedSourceLayer
 
   const { mask } = clippedLayer
 

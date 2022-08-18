@@ -9,7 +9,7 @@ export class SourceDesign {
   private _artboards: SourceArtboard[]
   private _images: SourceImage[]
   private _metaData: Metadata
-  private _additionalTexData: Nullable<AdditionalTextData>
+  private _additionalTexData: AdditionalTextData
 
   constructor(sourceTree: SourceTree) {
     this._artboards = sourceTree.artboards.map((rawArtboard, index) => new SourceArtboard(rawArtboard, index + 1))
@@ -30,7 +30,7 @@ export class SourceDesign {
     return this._artboards
   }
 
-  get additionalTextData(): Nullable<AdditionalTextData> {
+  get additionalTextData(): AdditionalTextData {
     return this._additionalTexData
   }
 

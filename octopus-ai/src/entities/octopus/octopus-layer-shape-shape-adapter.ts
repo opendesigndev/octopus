@@ -6,6 +6,7 @@ import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import OctopusPoint from './octopus-point'
 
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Coord } from '../../typings'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
@@ -18,7 +19,7 @@ import type { NormalizedPoint } from './octopus-point'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerShape
+  layerSequence: LayerSequence
 }
 
 export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements OctopusLayerShapeAdapter {
@@ -57,7 +58,12 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     return asArray(
       this._sourceLayer.clippingPaths
         ?.map((sourceLayer) => {
-          return { ...new OctopusLayerShapeShapeAdapter({ parent: this._parent, sourceLayer })._getPath() }
+          return {
+            ...new OctopusLayerShapeShapeAdapter({
+              parent: this._parent,
+              layerSequence: { sourceLayers: [sourceLayer] },
+            })._getPath(),
+          }
         })
         .filter((path) => !!path) as Octopus['PathLike'][]
     )

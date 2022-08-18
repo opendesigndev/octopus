@@ -1,8 +1,7 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import isEqual from 'lodash/isEqual'
 
-import { createSourceLayerShape } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceLayerSubText } from './source-layer-sub-text'
@@ -60,10 +59,9 @@ export class SourceLayerText extends SourceLayerCommon {
   }
 
   private _initClippingPaths(): SourceLayerShape[] {
-    return initChildLayers({
+    return initSourceLayerChildren({
       parent: this._parent,
-      layers: this._clippingPath,
-      builder: createSourceLayerShape,
+      layers: this._clippingPath ?? [],
     }) as SourceLayerShape[]
   }
 
@@ -103,6 +101,10 @@ export class SourceLayerText extends SourceLayerCommon {
 
   private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
     return createSoftMask({ sMask: this.sMask, parent: this._parent })
+  }
+
+  get textValue(): string {
+    return this.texts?.map((text) => text.value).join('') ?? ''
   }
 
   get softMask(): Nullable<SourceLayerXObjectForm> {

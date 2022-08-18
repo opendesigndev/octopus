@@ -2,6 +2,7 @@ import { parseRectangleCoords } from '../../utils/coords'
 import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
@@ -9,7 +10,7 @@ import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerShapeXObjectImageAdapterOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerXObjectImage
+  layerSequence: LayerSequence
 }
 
 export class OctopusLayerShapeXObjectImageAdapter extends OctopusLayerCommon implements OctopusLayerShapeAdapter {
