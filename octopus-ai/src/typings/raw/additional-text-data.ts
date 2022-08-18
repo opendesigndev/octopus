@@ -3,14 +3,14 @@ export type AdditionalTextDataTextFrame = Partial<{
   height: number
 }>
 
-export type AdditionalTextDataTextLayer = {
+export type AdditionalTextDataText = {
   content: string
   index: number
-  name: string
+  name?: string
   frame?: AdditionalTextDataTextFrame
 }
 
 export type AdditionalTextData = {
-  TextLayers: AdditionalTextDataTextLayer[]
+  TextLayers?: AdditionalTextDataText[]
   LayerNames: string[]
 }

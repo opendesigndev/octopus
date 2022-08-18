@@ -1,5 +1,4 @@
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerCommon } from './source-layer-common'
@@ -45,10 +44,9 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
   private _initChildren(): SourceLayer[] {
     if (this.subtype === 'Form') {
       const data = this._rawValue?.Data
-      return initChildLayers({
+      return initSourceLayerChildren({
         layers: Array.isArray(data) ? data : [],
         parent: this,
-        builder: createSourceLayer,
       }) as SourceLayer[]
     }
 
@@ -60,10 +58,9 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
   }
 
   private _initClippingPaths(): SourceLayerShape[] {
-    return initChildLayers({
+    return initSourceLayerChildren({
       parent: this,
-      layers: this._clippingPath,
-      builder: createSourceLayer,
+      layers: this._clippingPath ?? [],
     }) as SourceLayerShape[]
   }
 

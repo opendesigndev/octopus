@@ -4,6 +4,7 @@ import { BLEND_MODES } from '../../utils/blend-modes'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceResources } from '../source/source-resources'
@@ -13,7 +14,7 @@ export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'typ
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayer
+  layerSequence: LayerSequence
 }
 
 export abstract class OctopusLayerCommon {
@@ -25,7 +26,7 @@ export abstract class OctopusLayerCommon {
 
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent
-    this._sourceLayer = options.sourceLayer
+    this._sourceLayer = options.layerSequence.sourceLayers[0]
 
     this._id = uniqueId()
   }

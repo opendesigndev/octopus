@@ -8,12 +8,14 @@ import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
 import { createSentry } from './services/general/sentry'
 import { logger, set as setLogger } from './services/instances/logger'
+import { set as setTextLayerGroupingService } from './services/instances/text-layer-grouping-service'
 
 import type { SourceDesign } from './entities/source/source-design'
 import type { Exporter } from './services/conversion/exporter'
 import type { Logger, SourceImage } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
+import type { AdditionalTextData } from './typings/raw'
 import type { NormalizedPackageJson, NormalizedReadResult } from 'read-pkg-up'
 
 type ConvertDesignOptions = {
@@ -67,6 +69,7 @@ export class OctopusAIConverter {
 
   constructor(options: OctopusAIConverterOptions) {
     this._setupLogger(options?.logger)
+    this._setupTextLayerGroupingService(options.sourceDesign.additionalTextData)
     this._pkg = readPackageUpAsync({ cwd: __dirname })
     this._sentry = createSentry({ dsn: process.env.SENTRY_DSN, logger })
     this._sourceDesign = options.sourceDesign
@@ -79,6 +82,10 @@ export class OctopusAIConverter {
 
   private _setupLogger(logger?: Logger) {
     if (logger) setLogger(logger)
+  }
+
+  private _setupTextLayerGroupingService(additionalTextData: AdditionalTextData) {
+    setTextLayerGroupingService(additionalTextData)
   }
 
   get pkg(): Promise<NormalizedPackageJson> {

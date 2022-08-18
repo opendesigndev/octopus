@@ -1,6 +1,4 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
-
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { initOctopusLayerChildren } from '../../utils/layer'
 
 import type { OctopusAIConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -33,16 +31,10 @@ export class OctopusArtboard {
   }
 
   private _initLayers() {
-    return asArray(this._sourceArtboard?.children).reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [...layers, octopusLayer] : layers
-    }, [])
+    return initOctopusLayerChildren({ layers: this._sourceArtboard.children, parent: this })
   }
 
-  //@todo remove this if not necessary later
+  // @todo remove this if not necessary later
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)

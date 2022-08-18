@@ -4,8 +4,7 @@ import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-me
 import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { SourceResources } from './source-resources'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -27,11 +26,10 @@ export class SourceArtboard {
   }
 
   private _initChildren() {
-    return initChildLayers({
-      builder: createSourceLayer,
+    return initSourceLayerChildren({
       parent: this,
       layers: this._rawArtboard?.Contents?.Data,
-    }) as SourceLayer[]
+    })
   }
 
   get layers(): SourceLayer[] {
@@ -73,6 +71,7 @@ export class SourceArtboard {
   get hiddenContentObjectIds(): RawObjectId[] {
     return this._rawArtboard.OCProperties?.D?.OFF ?? []
   }
+
   /**@TODO check fonts when you come to that */
   private _getArtboardAssetsFonts(): string[] {
     const entries = traverseAndFind(this._rawArtboard?.Resources?.Font ?? {}, (obj: unknown) => {

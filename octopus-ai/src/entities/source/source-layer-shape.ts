@@ -1,7 +1,6 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { createSourceLayerShape } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceLayerShapeSubPath } from './source-layer-shape-subpath'
@@ -40,10 +39,9 @@ export class SourceLayerShape extends SourceLayerCommon {
   }
 
   private _initClippingPaths(): SourceLayerShape[] {
-    return initChildLayers({
+    return initSourceLayerChildren({
       parent: this._parent,
       layers: this._clippingPath,
-      builder: createSourceLayerShape,
     }) as SourceLayerShape[]
   }
 

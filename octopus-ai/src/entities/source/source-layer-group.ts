@@ -1,5 +1,4 @@
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { initChildLayers } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask } from '../../utils/mask'
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerCommon } from './source-layer-common'
@@ -30,7 +29,10 @@ export class SourceLayerGroup extends SourceLayerCommon {
   }
 
   private _initChildren() {
-    return initChildLayers({ parent: this, layers: this._rawValue.Kids, builder: createSourceLayer }) as SourceLayer[]
+    return initSourceLayerChildren({
+      parent: this,
+      layers: this._rawValue.Kids,
+    })
   }
 
   get children(): SourceLayer[] {

@@ -9,13 +9,6 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@avocode/ai-private-data-parser@^0.1.0-alpha.3":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@avocode/ai-private-data-parser/-/ai-private-data-parser-0.1.1.tgz#1f8d28a7e83d74fc6e4b0be1e80db6f515797861"
-  integrity sha512-J2yoz5Zk2Dqz+PQLOj2f/RfK+7DsxF28KeqtAeKs92vyC3hRmg2Qu/g5U69KWErtG17OK3xizuORRvgH8QKm6w==
-  dependencies:
-    "@bokuweb/zstd-wasm" "0.0.14"
-
 "@avocode/cancel-token@^1.3.0":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@avocode/cancel-token/-/cancel-token-1.4.2.tgz#d50daf61ba8fd5d8eec9a922e8cfac81e5bf1e03"
@@ -55,11 +48,6 @@
     "@avocode/octopus-common" "2.1.11"
     lodash "^4.13.1"
     raven "^1.1.4"
-
-"@avocode/octopus-ts@3.0.0-alpha.32":
-  version "3.0.0-alpha.32"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.32.tgz#cdd936e99ec12d4e26c15f548bfd1f948342c6e0"
-  integrity sha512-UWP2ayVD1B1bjblLmTr+7qsAKn9W9yNrWyQve7g0vLe6u2X8/yW9MAZBJPK7O/a3ZH1FaZ3UIxQUyym9+Y9csg==
 
 "@avocode/octopus-ts@3.0.0-alpha.33":
   version "3.0.0-alpha.33"
@@ -366,11 +354,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bokuweb/zstd-wasm@0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@bokuweb/zstd-wasm/-/zstd-wasm-0.0.14.tgz#7a966aeab675ba42cbcf6cba84c70a3aece1cca9"
-  integrity sha512-5pkce57OteVrDbtkEi2lWF8viH4MtMLry6BikYV1xtkVxTXQuOu6cLBv08yGWrEfw/oRp6TAkpTAndOVx9OpKA==
-
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-consumer/-/source-map-consumer-0.8.0.tgz#33bf4b7b39c178821606f669bbc447a6a629786b"
@@ -635,6 +618,116 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@morphic-ts/adt@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/adt/-/adt-3.0.0.tgz#7c63a5a7919df93c63d51c62635dd52f5f507378"
+  integrity sha512-6ci3vrN19sHBPKpyZc4qnHECqk59lxftm8h1NZLfECsHpcdM4l8mkKakZ5OQ6m90oKxZrIJqgZAzSr3hJ2hZ5g==
+  dependencies:
+    fp-ts "^2.5.3"
+    monocle-ts "^2.0.1"
+
+"@morphic-ts/algebras@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/algebras/-/algebras-3.0.0.tgz#19984787af0445222879e95ce0841b3ade462dc5"
+  integrity sha512-hPVproq3vAi/OqSGJmHi3oqVc9fDN/PODen+9diFBcy6j/rAwpaB/sjhBB0UbRaYxbLqjhGePxXImSjto9OoHA==
+  dependencies:
+    "@morphic-ts/common" "^3.0.0"
+
+"@morphic-ts/batteries@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/batteries/-/batteries-3.0.0.tgz#d4026fdbfc070066e0121354e9f21ecd4b84c886"
+  integrity sha512-gFR+6aKRbcIUxXK/7JjnBjrM6RQqiw35StqgE2bzl3wxHrWvAeciDBAU9FcfeLIe0TcbtqyVeqcFTrF99RUJLw==
+  dependencies:
+    "@morphic-ts/adt" "^3.0.0"
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/eq-interpreters" "^3.0.0"
+    "@morphic-ts/fastcheck-interpreters" "^3.0.0"
+    "@morphic-ts/io-ts-interpreters" "^3.0.0"
+    "@morphic-ts/json-schema-interpreters" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+    "@morphic-ts/ord-interpreters" "^3.0.0"
+    "@morphic-ts/show-interpreters" "^3.0.0"
+    "@morphic-ts/summoners" "^3.0.0"
+
+"@morphic-ts/common@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/common/-/common-3.0.0.tgz#bf47631785b171e51f4d9546002c05706eeafaa7"
+  integrity sha512-X5473jHmD9pHCyrEvvgeMDnezKAWh6pl1doFmwEfiZZmCm0ZGrfVbnt7LbwWuFNDkBgKXIBj1R2ERRL0qQk9IQ==
+
+"@morphic-ts/eq-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/eq-interpreters/-/eq-interpreters-3.0.0.tgz#eec7fbe066a4404bdccaedd3fa884c44b6c42224"
+  integrity sha512-fA/vkoAq60dvojLAZRdr6q1gu5FkxOgGHKY83JpN7PA25EMOjV+HYPYSfMlvqRtaDMYC+tPV1oLGKzc898RcvQ==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+    fast-equals "^2.0.0"
+
+"@morphic-ts/fastcheck-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/fastcheck-interpreters/-/fastcheck-interpreters-3.0.0.tgz#264afdbf0cffbc2d13c84b9e116e8747e308eed7"
+  integrity sha512-hdMC1h3yO3leOnboZzImJmoqNj/xyaXRPsOn1gKXCQHUWDRPMVcQO7rX7zDWLuArJuCYF2gCROvH8a6oMLCdhw==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
+"@morphic-ts/io-ts-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/io-ts-interpreters/-/io-ts-interpreters-3.0.0.tgz#cb89751d6273e9ad4707a96c8d787ff0d6fdb305"
+  integrity sha512-wkKQIlTpBWkrKEs5f+/8iJmCo1vW/aBKb85aW+/325gh676igY4qWYc9X9p59ElKh6UXwxI04dGiO5h2ECQoAg==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
+"@morphic-ts/json-schema-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/json-schema-interpreters/-/json-schema-interpreters-3.0.0.tgz#e79f9ce97ea3f0da41341c600559d28b6122c901"
+  integrity sha512-KmQEn5uuCWnCkIl773bjOQFc9K3nQl+ur5rm32vCCwQDxGk0Q2MFHA5W5lvybfh6f3FGVLpzmCp6OT9qUC3lHw==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
+"@morphic-ts/model-algebras@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/model-algebras/-/model-algebras-3.0.0.tgz#3afc602f41fd632215ad2c6d53b301ac8c182447"
+  integrity sha512-1It0q+HfyDTeE0hGvKfjXiRWXnkg6hWudPlzn2b5AqFIZcuqW71jY0mlrua2AfaBRGXU4W7xLlDqIox0wrfPUw==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+
+"@morphic-ts/ord-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/ord-interpreters/-/ord-interpreters-3.0.0.tgz#866c3e84e63f27063ff0360be9a6e8f93537da3d"
+  integrity sha512-lAwHRPZNbHtReqj7vkLD+1TmfZuA3jglqzNV4GANG7SlrH1VwmTgJkEs80Y1WY+mKpzEd3Tozzp41vK7mX494Q==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
+"@morphic-ts/show-interpreters@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/show-interpreters/-/show-interpreters-3.0.0.tgz#7b4c5bf8937b3c4c2bdaf49c29c0d3ea88d0758e"
+  integrity sha512-W6Vs6AyrDKPMkF2Fwnw6fspx+xiAwRPOxuJ9U2gEeRAanA1izbscx6J+bZTA0MKTk0GiJH/B1B6mnJ5Z1lpdsA==
+  dependencies:
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
+"@morphic-ts/summoners@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@morphic-ts/summoners/-/summoners-3.0.0.tgz#7e9ad76f711ec921b3100c72aede9476df33308e"
+  integrity sha512-6F0IKdd/lD5UDkAcDJVRmx9S5UWlxttLWRaW3+s7ux8IGn+6WZ/EgcgYePfzytlqRwzDD+2wfEg3vNnTVJ2Bkw==
+  dependencies:
+    "@morphic-ts/adt" "^3.0.0"
+    "@morphic-ts/algebras" "^3.0.0"
+    "@morphic-ts/common" "^3.0.0"
+    "@morphic-ts/model-algebras" "^3.0.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -655,6 +748,16 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@opendesign/illustrator-parser-pdfcpu@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@opendesign/illustrator-parser-pdfcpu/-/illustrator-parser-pdfcpu-1.0.0.tgz#dcd093f68b8c751dbc9aa6ee50b903ab6409a92c"
+  integrity sha512-HcSO1TC2nDe4XxAmiaY420rN2gesr9n6S9PJv2rCao60r/xNrLQDSJpnYHFSHN/o4rYCuxgC0BpIP0L/E/aT5A==
+  dependencies:
+    "@morphic-ts/batteries" "^3.0.0"
+    gl-matrix "^3.4.3"
+    immutable "^4.1.0"
+    marky "^1.2.4"
 
 "@rollup/plugin-node-resolve@^13.1.3":
   version "13.3.0"
@@ -2322,6 +2425,11 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
+fast-equals@^2.0.0:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/fast-equals/-/fast-equals-2.0.4.tgz#3add9410585e2d7364c2deeb6a707beadb24b927"
+  integrity sha512-caj/ZmjHljPrZtbzJ3kfH5ia/k4mTJe/qSiXAGzxZWRZgsgDV0cvNaQULqUX8t0/JVlzzEdYOwCN5DmzTxoD4w==
+
 fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
@@ -2428,6 +2536,11 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+fp-ts@^2.5.3:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.12.2.tgz#a191db2dbbb04f48a0e75050b94f57cc876c7b40"
+  integrity sha512-v8J7ud+nTkP5Zz17GhpCsY19wiRbB9miuj61nBcCJyDpu52zs9Z4O7OLDfYoKFQMJ9EsSZA7W1vRgC1d3jy5qw==
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2491,6 +2604,11 @@ get-symbol-description@^1.0.0:
   dependencies:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
+
+gl-matrix@^3.4.3:
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.4.3.tgz#fc1191e8320009fd4d20e9339595c6041ddc22c9"
+  integrity sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==
 
 glob-parent@^5.1.2:
   version "5.1.2"
@@ -2683,6 +2801,11 @@ image-size@^1.0.1:
   integrity sha512-VAwkvNSNGClRw9mDHhc5Efax8PLlsOGcUTh0T/LIriC8vPA3U5PdqXWqkz406MoYHMKW8Uf9gWr05T/rYB44kQ==
   dependencies:
     queue "6.0.2"
+
+immutable@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.1.0.tgz#f795787f0db780183307b9eb2091fcac1f6fafef"
+  integrity sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==
 
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
@@ -3560,6 +3683,11 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
+marky@^1.2.4:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/marky/-/marky-1.2.5.tgz#55796b688cbd72390d2d399eaaf1832c9413e3c0"
+  integrity sha512-q9JtQJKjpsVxCRVgQ+WapguSbKC3SQ5HEzFGPAJMStgh3QjCawp00UKv3MTTAArTmGmmPUvllHZoNbZ3gs0I+Q==
+
 merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
@@ -3621,6 +3749,11 @@ minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+
+monocle-ts@^2.0.1:
+  version "2.3.13"
+  resolved "https://registry.yarnpkg.com/monocle-ts/-/monocle-ts-2.3.13.tgz#7c8af489613cd5175df2ea3c02c57c6151995e5d"
+  integrity sha512-D5Ygd3oulEoAm3KuGO0eeJIrhFf1jlQIoEVV2DYsZUMz42j4tGxgct97Aq68+F8w4w4geEnwFa8HayTS/7lpKQ==
 
 mri@1.1.4:
   version "1.1.4"
