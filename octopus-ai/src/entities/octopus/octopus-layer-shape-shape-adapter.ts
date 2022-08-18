@@ -54,29 +54,6 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     }
   }
 
-  private _createClippingPaths(): Octopus['PathLike'][] {
-    return asArray(
-      this._sourceLayer.clippingPaths
-        ?.map((sourceLayer) => {
-          return {
-            ...new OctopusLayerShapeShapeAdapter({
-              parent: this._parent,
-              layerSequence: { sourceLayers: [sourceLayer] },
-            })._getPath(),
-          }
-        })
-        .filter((path) => !!path) as Octopus['PathLike'][]
-    )
-  }
-
-  private _parseClippingCompound(paths: Octopus['PathLike'][]): Octopus['CompoundPath'] {
-    return {
-      type: 'COMPOUND',
-      op: 'INTERSECT',
-      paths,
-    }
-  }
-
   private _parseCompound(subpaths: SourceLayerShapeSubPath[]): Octopus['CompoundPath'] | null {
     const paths = subpaths.map((subpath) => this._getPathFromSubpath(subpath))
 
@@ -147,23 +124,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     }
   }
 
-  private _parseSourceShading(): Octopus['PathLike'] | null {
-    const paths = this._createClippingPaths().filter((path) => path)
-
-    if (paths.length) {
-      return this._parseClippingCompound(paths)
-    }
-
-    const coords = this._sourceLayer.parentArtboardMediaBox
-
-    return this._parseRect(coords)
-  }
-
-  private _getPath(): Octopus['PathLike'] | null {
-    if (this._sourceLayer.type === 'Shading') {
-      return this._parseSourceShading()
-    }
-
+  public _getPath(): Octopus['PathLike'] | null {
     const sourceSubpaths = this._sourceLayer.subpaths
 
     if (sourceSubpaths.length > 1) {

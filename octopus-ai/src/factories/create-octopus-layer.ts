@@ -1,5 +1,6 @@
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import { OctopusLayerShading } from '../entities/octopus/octopus-layer-shading'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
 import { OctopusLayerShapeXObjectImageAdapter } from '../entities/octopus/octopus-layer-shape-x-object-image-adapter'
@@ -19,27 +20,19 @@ export type OctopusLayer =
   | OctopusLayerText
   | OctopusLayerMaskGroup
   | OctopusLayerSoftMaskGroup
+  | OctopusLayerShading
 
 export type CreateOctopusLayerOptions = {
   layerSequence: LayerSequence
   parent: OctopusLayerParent
 }
 
-export function createOctopusLayerGroup({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerGroup {
-  return new OctopusLayerGroup({
-    parent,
-    layerSequence,
-  })
+export function createOctopusLayerGroup(options: CreateOctopusLayerOptions): OctopusLayerGroup {
+  return new OctopusLayerGroup(options)
 }
 
-export function createOctopusLayerMaskGroup({
-  layerSequence,
-  parent,
-}: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
-  return new OctopusLayerMaskGroup({
-    parent,
-    layerSequence,
-  })
+export function createOctopusLayerMaskGroup(options: CreateOctopusLayerOptions): OctopusLayerMaskGroup {
+  return new OctopusLayerMaskGroup(options)
 }
 
 export function createOctopusLayerShapeFromShapeAdapter({
@@ -51,6 +44,10 @@ export function createOctopusLayerShapeFromShapeAdapter({
     layerSequence,
   })
   return new OctopusLayerShape({ adapter })
+}
+
+export function createOctopusLayerShading(options: CreateOctopusLayerOptions): OctopusLayerShading {
+  return new OctopusLayerShading(options)
 }
 
 export function createOctopusLayerShapeFromXObjectImageAdapter({
@@ -74,11 +71,8 @@ export function createOctopusLayerSoftMaskGroup({
   })
 }
 
-function createOctopusLayerText({ layerSequence, parent }: CreateOctopusLayerOptions): OctopusLayerText {
-  return new OctopusLayerText({
-    parent,
-    layerSequence,
-  })
+function createOctopusLayerText(options: CreateOctopusLayerOptions): OctopusLayerText {
+  return new OctopusLayerText(options)
 }
 
 type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
@@ -93,7 +87,7 @@ export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullable<
     Path: createOctopusLayerShapeFromShapeAdapter,
     TextGroup: createOctopusLayerText,
     Image: createOctopusLayerShapeFromXObjectImageAdapter,
-    Shading: createOctopusLayerShapeFromShapeAdapter,
+    Shading: createOctopusLayerShading,
   }
   const builder = builders[type]
   return typeof builder === 'function' ? builder(options) : null
