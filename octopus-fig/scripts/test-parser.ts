@@ -1,4 +1,4 @@
-import { createParser } from '@avocode/figma-parser/lib/src/index-node'
+import { createParser } from '@avocode/figma-parser'
 
 const DEFAULT_ID = 'nFrTs6F4OjiSPMsAAAp16a'
 
