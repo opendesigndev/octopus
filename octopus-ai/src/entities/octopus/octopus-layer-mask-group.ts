@@ -15,13 +15,13 @@ type OctopusLayerMaskOptions = {
 }
 
 export class OctopusLayerMaskGroup extends OctopusLayerCommon {
+  private _layers: OctopusLayer[] = []
+  protected _sourceLayer: SourceLayerShape
+
   static registerMaskGroup(key: string, maskGroup: OctopusLayerMaskGroup): void {
     this.registry[key] = maskGroup
   }
-
-  public _sourceLayer: SourceLayerShape
   static registry: { [keyCheck: string]: OctopusLayerMaskGroup } = {}
-  private _layers: OctopusLayer[] = []
 
   constructor(options: OctopusLayerMaskOptions) {
     super(options)

@@ -25,7 +25,7 @@ export class TempExporter extends EventEmitter implements Exporter {
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
   static METADATA_NAME = 'metadata.json'
-  static ADDITIONAL_TEXT_DATA = 'additionalTextData.json'
+  static ADDITIONAL_TEXT_DATA = 'additional-text-data.json'
 
   constructor(options: TempExporterOptions) {
     super()
@@ -47,13 +47,14 @@ export class TempExporter extends EventEmitter implements Exporter {
 
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
+
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
     const write = fsp.writeFile(fullPath, body)
     this._assetsSaves.push(write)
 
     await write
 
-    return path.resolve('./' + fullPath)
+    return fullPath
   }
 
   getBasePath(): Promise<string> {
@@ -84,6 +85,7 @@ export class TempExporter extends EventEmitter implements Exporter {
   async exportArtboard(source: SourceArtboard, artboard: ArtboardConversionResult): Promise<string> {
     const sourcePath = await this._save(`source-${artboard.id}.json`, this._stringify(source.raw))
     const octopusPath = await this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
+
     const result = {
       id: artboard.id,
       name: source.name,

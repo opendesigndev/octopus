@@ -23,7 +23,7 @@ export class LocalExporter implements Exporter {
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
   static METADATA_NAME = 'metadata.json'
-  static ADDITIONAL_TEXT_DATA = 'additionalTextData.json'
+  static ADDITIONAL_TEXT_DATA = 'additional-text-data.json'
 
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)

@@ -11,11 +11,14 @@ type SourceLayerShapeOptions = {
 
 export class SourceLayerShapeSubPath {
   protected _rawValue: RawShapeLayerSubPath
+  private _parent: SourceLayerShape
+
   private _points: RawShapeLayerSubPathPoint[]
   private _coords: number[]
 
   constructor(options: SourceLayerShapeOptions) {
     this._rawValue = options.rawValue
+    this._parent = options.parent
 
     this._points = asArray(
       options.rawValue?.Points?.map((point) => ({

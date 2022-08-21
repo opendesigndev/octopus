@@ -12,7 +12,7 @@ import type {
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type PointTypeSumPair = { sum: number; type: string }
-type SubpathSumPair = { sum: number; type: string } & { points: PointTypeSumPair[] }
+type SubpathSumPair = PointTypeSumPair & { points: PointTypeSumPair[] }
 
 function getPointSum(point: RawShapeLayerSubPathPoint): number {
   return (

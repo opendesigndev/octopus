@@ -16,10 +16,10 @@ type OctopusEffectGradientFillOptions = {
 }
 
 export class OctopusEffectGradientFill {
-  static DEFAULT_RGB_COLOR = [0, 0, 0]
-
   private _resources: SourceResources
   private _sourceLayer: SourceLayerShape
+
+  static DEFAULT_RGB_COLOR = [0, 0, 0]
 
   constructor(options: OctopusEffectGradientFillOptions) {
     this._resources = options.resources

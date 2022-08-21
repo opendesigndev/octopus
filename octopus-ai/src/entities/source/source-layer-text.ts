@@ -19,13 +19,13 @@ type SourceLayerTextOptions = {
 }
 
 export class SourceLayerText extends SourceLayerCommon {
-  static DEFAULT_NAME = '<TextLayer>'
-
   protected _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerSubText[]
   private _clippingPaths: SourceLayerShape[] | null
   private _mask: Nullable<SourceLayerShape>
   private _softMask: Nullable<SourceLayerXObjectForm>
+
+  static DEFAULT_NAME = '<TextLayer>'
 
   constructor(options: SourceLayerTextOptions) {
     super(options)

@@ -2,11 +2,10 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { LocalExporter, OctopusAIConverter } from '../src'
-import { getFileLocation } from './utils/get-file-location'
 
 dotenv.config()
 ;(async () => {
-  const filePath = getFileLocation()
+  const filePath = process.argv.slice(2)[0]
 
   if (!filePath) {
     console.log(`${chalk.red('could not find file path')}`)

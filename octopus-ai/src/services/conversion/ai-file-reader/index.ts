@@ -25,15 +25,15 @@ export type RawSourceData = {
 }
 
 export class AIFileReader {
-  static RELATIVE_PATH_TO_ROOT = '../../../../'
-
-  static getOutputResourcesBaseDir(): string {
-    return path.join(__dirname, '../../../../', process.env.RESOURCES_DIR ?? '')
-  }
-
   private _sourceDesign: Promise<SourceDesign>
   private _instanceResourcesDir: string
   private _images: Record<string, string>
+
+  static BITMAPS_FOLDER_NAME = 'bitmaps'
+
+  static getOutputResourcesBaseDir(): string {
+    return path.join(process.env.RESOURCES_DIR ?? '')
+  }
 
   constructor(options: AIFileReaderOptions) {
     this._sourceDesign = this._initSourceDesign(options.path)
@@ -56,38 +56,33 @@ export class AIFileReader {
       ArtBoardRefs(ctx).map((ref) => {
         return ArtBoard(ctx, ref)
       })
-    )) as never as RawArtboardEntry[]
+    )) as unknown as RawArtboardEntry[]
 
     return { artboards, additionalTextData, metadata: { version } }
   }
 
-  private async _loadImages(): Promise<Promise<SourceImage>[]> {
+  private _loadImages(): SourceImage[] {
     const resourcesDirPath = this._instanceResourcesDir
-    return Object.values(this._images)
-      .map(async (imagePath) => {
-        const imageId = path.basename(imagePath)
-        const fullPath = `${resourcesDirPath}/bitmaps/${imageId}`
 
-        try {
-          return {
-            id: imageId,
-            path: fullPath,
-            getImageData: () => fsp.readFile(fullPath),
-          }
-        } catch (_) {
-          logger.error('Failed to read image:', fullPath)
-          return null
-        }
-      })
-      .filter((img) => !!img) as Promise<SourceImage>[]
+    return Object.values(this._images).map((imagePath) => {
+      const imageId = path.basename(imagePath)
+      const fullPath = path.join(resourcesDirPath, AIFileReader.BITMAPS_FOLDER_NAME, imageId)
+
+      return {
+        id: imageId,
+        path: fullPath,
+        getImageData: () => fsp.readFile(fullPath).catch(() => logger.error('Failed to read image:', fullPath)),
+      }
+    })
   }
 
   private async _createSourceTree(filePath: string): Promise<SourceTree> {
     const { artboards, additionalTextData, metadata } = await this._getSourceData(filePath)
 
-    const images = await Promise.all(await this._loadImages())
+    const images = this._loadImages()
+
     if (!metadata) {
-      throw new Error('Missing metada from file input')
+      throw new Error('Missing metadata from file input')
     }
 
     if (!artboards?.length) {

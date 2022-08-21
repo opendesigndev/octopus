@@ -1,16 +1,7 @@
-export type AdditionalTextDataTextFrame = Partial<{
-  width: number
-  height: number
-}>
+import type { PrivateData } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
 
-export type AdditionalTextDataText = {
-  content: string
-  index: number
-  name?: string
-  frame?: AdditionalTextDataTextFrame
-}
+type PromiseAdditionalTextData = ReturnType<typeof PrivateData>
+type Awaited<T> = T extends PromiseLike<infer U> ? U : T
 
-export type AdditionalTextData = {
-  TextLayers?: AdditionalTextDataText[]
-  LayerNames: string[]
-}
+export type AdditionalTextData = Awaited<Awaited<PromiseAdditionalTextData>>
+export type AdditionalTextDataText = Required<AdditionalTextData>['TextLayers'][0]
