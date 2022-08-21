@@ -19,6 +19,8 @@ type OctopusLayerShapeOptions = {
 }
 
 export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLayerShapeAdapter {
+  protected _sourceLayer: SourceLayerShape
+
   static DEFAULT_RECT_COORDS = [0, 0, 0, 0]
   static DEFAULT_GEOMETRY = 'MZ'
   static FILL_RULE = {
@@ -26,8 +28,6 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
     'even-odd': 'EVEN_ODD',
   } as const
   static DEFAULT_FILL_RULE = 'EVEN_ODD' as const
-
-  protected _sourceLayer: SourceLayerShape
 
   constructor(options: OctopusLayerShapeOptions) {
     super(options)

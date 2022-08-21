@@ -15,11 +15,11 @@ type SourceLayerGroupOptions = {
 }
 
 export class SourceLayerGroup extends SourceLayerCommon {
-  static DEFAULT_NAME = '<Group>'
-
   protected _rawValue: RawGroupLayer
   private _children: SourceLayer[]
   private _softMask: Nullable<SourceLayerXObjectForm>
+
+  static DEFAULT_NAME = '<Group>'
 
   constructor(options: SourceLayerGroupOptions) {
     super(options)

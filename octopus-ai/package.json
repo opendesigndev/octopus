@@ -1,11 +1,15 @@
 {
   "name": "@avocode/octopus-ai",
   "version": "3.0.0-rc.1",
-  "description": "\"Octopus AI converter, converts .ai files to Octopus 3+ format.\"",
+  "description": "Octopus AI converter, converts .ai files to Octopus 3+ format.",
+  "files": [
+    "lib/src",
+    "lib/package.json"
+  ],
   "main": "dist/src/index.js",
   "scripts": {
-    "convert:debug": "npx ts-node ./scripts/convert-render-debug.ts",
-    "convert:all": "npx ts-node ./scripts/convert-design.ts",
+    "convert:debug": "ts-node ./scripts/convert-render-debug.ts",
+    "convert:all": "ts-node ./scripts/convert-design.ts",
     "test": "echo 'Tests are not implemented yet'",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
@@ -18,17 +22,17 @@
     "@avocode/octopus-common": "3.0.0-rc.20",
     "@opendesign/illustrator-parser-pdfcpu": "^1.0.0",
     "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@sentry/node": "6.14.0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",
     "paper": "^0.12.15",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "read-pkg-up": "7.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "@avocode/octopus-ts": "3.0.0-alpha.33",
+    "time-stamp": "^2.2.0"
   },
   "devDependencies": {
-    "@avocode/octopus-ts": "3.0.0-alpha.33",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",

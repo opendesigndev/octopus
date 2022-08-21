@@ -10,10 +10,10 @@ type OctopusEffectImageFillOptions = {
 }
 
 export class OctopusEffectImageFill {
-  static REVERSE_IMAGE_MATRIX = [1, 0, 0, -1, 0, 1]
-
   private _parent: OctopusLayerParent
   private _sourceLayer: SourceLayerXObjectImage
+
+  static REVERSE_IMAGE_MATRIX = [1, 0, 0, -1, 0, 1]
 
   constructor(options: OctopusEffectImageFillOptions) {
     this._sourceLayer = options.sourceLayer

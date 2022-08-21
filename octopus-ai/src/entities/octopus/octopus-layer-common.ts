@@ -18,11 +18,11 @@ type OctopusLayerCommonOptions = {
 }
 
 export abstract class OctopusLayerCommon {
-  static DEFAULT_OPACITY = 1
-
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
+
+  static DEFAULT_OPACITY = 1
 
   constructor(options: OctopusLayerCommonOptions) {
     this._parent = options.parent

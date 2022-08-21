@@ -18,8 +18,8 @@ export class SourceArtboard {
   private _id: string
   private _resources: SourceResources
 
-  constructor(rawArtboard: RawArtboardEntry, id: number) {
-    this._id = String(id)
+  constructor(rawArtboard: RawArtboardEntry, id: string) {
+    this._id = id
     this._rawArtboard = rawArtboard
     this._resources = new SourceResources({ rawValue: this._rawArtboard.Resources })
     this._children = this._initChildren()

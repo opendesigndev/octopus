@@ -18,12 +18,12 @@ type OctopusLayerSoftMaskGroupOptions = {
 type MaskChannels = [number, number, number, number, number]
 /**  @TODO rendering is not supporting yet masking with groups. check when rendering is ready. **/
 export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
+  protected _sourceLayer: SourceLayerWithSoftMask
+  private _layers: OctopusLayer[]
+
   static LUMINOSITY_MASK_CHANNELS: MaskChannels = [0.299, 0.587, 0.114, 0, 0]
   static INVERSE_LUMINOSITY_MASK_CHANNELS: MaskChannels = [-0.299, -0.587, -0.114, 0, 1]
   static DEFAULT_MASK_CHANNELS: MaskChannels = [0, 0, 0, 1, 0]
-
-  protected _sourceLayer: SourceLayerWithSoftMask
-  private _layers: OctopusLayer[]
 
   constructor(options: OctopusLayerSoftMaskGroupOptions) {
     super(options)

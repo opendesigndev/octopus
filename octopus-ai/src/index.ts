@@ -6,8 +6,7 @@ import { AIFileReader } from './services/conversion/ai-file-reader'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
-import { createSentry } from './services/general/sentry'
-import { logger, set as setLogger } from './services/instances/logger'
+import { set as setLogger } from './services/instances/logger'
 import { set as setTextLayerGroupingService } from './services/instances/text-layer-grouping-service'
 
 import type { SourceDesign } from './entities/source/source-design'
@@ -48,7 +47,6 @@ export type DesignConversionResult = {
 
 export class OctopusAIConverter {
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _sentry: ReturnType<typeof createSentry>
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
 
@@ -71,7 +69,6 @@ export class OctopusAIConverter {
     this._setupLogger(options?.logger)
     this._setupTextLayerGroupingService(options.sourceDesign.additionalTextData)
     this._pkg = readPackageUpAsync({ cwd: __dirname })
-    this._sentry = createSentry({ dsn: process.env.SENTRY_DSN, logger })
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ octopusAIConverter: this })
   }
@@ -95,10 +92,6 @@ export class OctopusAIConverter {
       }
       return normalized.packageJson
     })
-  }
-
-  get sentry(): ReturnType<typeof createSentry> {
-    return this._sentry
   }
 
   get manifest(): OctopusManifest {

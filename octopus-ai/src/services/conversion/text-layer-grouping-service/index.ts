@@ -15,6 +15,13 @@ export type LayerSequence = {
 }
 
 export class TextLayerGroupingService {
+  private _originalAdditionalTextData: AdditionalTextData
+  private _additionalTextDataWithOctopusSpecialCharacters: AdditionalTextData
+  private _additionalTextData: AdditionalTextData
+  private _currentMatches: Nullable<CurrentMatch[]>
+  private _layerSequences: LayerSequence[] = []
+  private _lastTextLayerSequence: Nullable<LayerSequence>
+
   static END_LINE = '\r'
   static DOUBLE_END_LINE = '\r\r'
   static END_LINE_OCTOPUS = '\n'
@@ -38,13 +45,6 @@ export class TextLayerGroupingService {
     TextLayerGroupingService.END_LINE_OCTOPUS,
     TextLayerGroupingService.DOUBLE_END_LINE_OCTOPUS,
   ]
-
-  private _originalAdditionalTextData: AdditionalTextData
-  private _additionalTextDataWithOctopusSpecialCharacters: AdditionalTextData
-  private _additionalTextData: AdditionalTextData
-  private _currentMatches: Nullable<CurrentMatch[]>
-  private _layerSequences: LayerSequence[] = []
-  private _lastTextLayerSequence: Nullable<LayerSequence>
 
   constructor(additionalTextData: AdditionalTextData) {
     this._originalAdditionalTextData = { ...additionalTextData }
@@ -72,7 +72,7 @@ export class TextLayerGroupingService {
 
     return {
       ...originalAdditionalTextData,
-      TextLayers: originalAdditionalTextData?.TextLayers?.map((text) => {
+      TextLayers: originalAdditionalTextData?.TextLayers?.map((text: AdditionalTextDataText) => {
         const content = text.content
 
         return {
@@ -120,8 +120,8 @@ export class TextLayerGroupingService {
     }
 
     this._currentMatches = texts
-      .map((text) => ({ ...text, remainder: text.content }))
-      .filter((text) => typeof text.content === 'string') as CurrentMatch[]
+      .map((text: AdditionalTextDataText) => ({ ...text, remainder: text.content }))
+      .filter((text: AdditionalTextDataText) => typeof text.content === 'string') as CurrentMatch[]
 
     this._currentMatches = this._getRemainingTextMatches(sourceLayerText)
   }
@@ -133,7 +133,10 @@ export class TextLayerGroupingService {
 
     this._additionalTextData = {
       ...this._additionalTextData,
-      TextLayers: this._additionalTextData?.TextLayers?.filter((text) => text.index !== bestMatch.index) ?? [],
+      TextLayers:
+        this._additionalTextData?.TextLayers?.filter(
+          (text: AdditionalTextDataText) => text.index !== bestMatch.index
+        ) ?? [],
     }
   }
 
@@ -164,7 +167,9 @@ export class TextLayerGroupingService {
       }
     }
 
-    const content = this._additionalTextData?.TextLayers?.filter((text) => text.index === bestMatch.index)[0]?.content
+    const content = this._additionalTextData?.TextLayers?.filter(
+      (text: AdditionalTextDataText) => text.index === bestMatch.index
+    )[0]?.content
 
     bestMatch = {
       ...bestMatch,
@@ -181,7 +186,7 @@ export class TextLayerGroupingService {
     if (bestMatch && typeof bestMatch.index === 'number' && lastTextLayerSequence) {
       this._eliminateMatchFromAdditionalTextData(bestMatch)
       const lastTextLayerSequenceText = this._additionalTextDataWithOctopusSpecialCharacters.TextLayers?.find(
-        (additionalText) => additionalText.index === bestMatch.index
+        (additionalText: AdditionalTextDataText) => additionalText.index === bestMatch.index
       )
 
       lastTextLayerSequence.additionalTextDataText = lastTextLayerSequenceText
