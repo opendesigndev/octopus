@@ -1,4 +1,8 @@
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import uniqueId from 'lodash/uniqueId'
+
 import { initOctopusLayerChildren } from '../../utils/layer'
+import { parseRect } from '../../utils/rectangle'
 
 import type { OctopusAIConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -34,7 +38,44 @@ export class OctopusArtboard {
     return initOctopusLayerChildren({ layers: this._sourceArtboard.children, parent: this })
   }
 
-  // @todo remove this if not necessary later
+  private _createMask(): Octopus['ShapeLayer'] {
+    return {
+      type: 'SHAPE',
+      id: uniqueId(),
+      shape: {
+        path: parseRect(this._sourceArtboard.mediaBox),
+        fills: [
+          {
+            type: 'COLOR',
+            visible: true,
+            blendMode: 'NORMAL',
+            color: {
+              r: 1,
+              g: 1,
+              b: 1,
+              a: 1,
+            },
+          },
+        ],
+      },
+    }
+  }
+
+  private _createParentMaskGroup(): Octopus['MaskGroupLayer'] {
+    const layers = getConverted(this._layers)
+
+    return {
+      id: uniqueId(),
+      type: 'MASK_GROUP',
+      mask: this._createMask(),
+      maskBasis: 'BODY',
+      layers,
+    }
+  }
+
+  /** @TODO check if this is needed
+   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden 
+   */
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)
@@ -67,16 +108,8 @@ export class OctopusArtboard {
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {
-    const parentGroupLayer = this._layers[0]
-
-    if (!parentGroupLayer) {
+    if (!this._layers || !this._layers.length) {
       throw new Error('Artboard is missing content')
-    }
-
-    const content = parentGroupLayer.convert()
-
-    if (!content) {
-      throw new Error('Error converting parent group layer')
     }
 
     if (typeof this._sourceArtboard.id !== 'string') {
@@ -90,8 +123,7 @@ export class OctopusArtboard {
       version: await this._getVersion(),
       id: this.id,
       dimensions,
-      //@todo look at notes (this will change in future to handle backgrounds)
-      content,
+      content: this._createParentMaskGroup(),
     }
   }
 }

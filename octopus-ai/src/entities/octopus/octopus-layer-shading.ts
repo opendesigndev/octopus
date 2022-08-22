@@ -1,6 +1,6 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { parseRectangleCoords } from '../../utils/coords'
+import { parseRect } from '../../utils/rectangle'
 import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
@@ -8,9 +8,7 @@ import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapt
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RectCoords } from '../../utils/coords'
 import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerShapeSubPath } from '../source/source-layer-shape-subpath'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerShapeOptions = {
@@ -31,19 +29,6 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
 
   constructor(options: OctopusLayerShapeOptions) {
     super(options)
-  }
-
-  private _parseRectangleCoords(coords: number[]): RectCoords {
-    return parseRectangleCoords(coords)
-  }
-
-  private _parseRect(coords: SourceLayerShapeSubPath['_coords']): Octopus['PathRectangle'] {
-    const rectangle = this._parseRectangleCoords(coords)
-
-    return {
-      rectangle,
-      type: 'RECTANGLE',
-    }
   }
 
   private _createClippingPaths(): Octopus['PathLike'][] {
@@ -94,7 +79,7 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
 
     const coords = this._sourceLayer.parentArtboardMediaBox
 
-    return this._parseRect(coords)
+    return parseRect(coords)
   }
 
   private _getShapes(): Octopus['Shape'] | null {

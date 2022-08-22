@@ -79,6 +79,7 @@ type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
 export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
   const type = (Object(options.layerSequence.sourceLayers[0]) as SourceLayer).type || ''
+
   const builders: {
     [key: string]: Builder
   } = {
@@ -90,7 +91,9 @@ export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullable<
     Shading: createOctopusLayerShading,
   }
   const builder = builders[type]
-  return typeof builder === 'function' ? builder(options) : null
+  const layer = typeof builder === 'function' ? builder(options) : null
+
+  return layer
 }
 
 type GetClippingMaskGroupOptions = {

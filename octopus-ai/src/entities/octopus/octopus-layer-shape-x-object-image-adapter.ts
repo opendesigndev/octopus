@@ -1,4 +1,4 @@
-import { parseRectangleCoords } from '../../utils/coords'
+import { parseRect } from '../../utils/rectangle'
 import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
@@ -35,21 +35,12 @@ export class OctopusLayerShapeXObjectImageAdapter extends OctopusLayerCommon imp
     })
   }
 
-  private _parseRect(): Octopus['PathRectangle'] {
-    const rectangle = parseRectangleCoords([0, 0, 1, 1])
-
-    return {
-      rectangle,
-      type: 'RECTANGLE',
-    }
-  }
-
   private _getShape(): Octopus['Shape'] | null {
     const shapeEffects = this._createShapeEffects().convert()
 
     const fillShape: Octopus['Shape'] = {
       ...shapeEffects,
-      path: this._parseRect(),
+      path: parseRect([0, 0, 1, 1]),
     } as const
 
     return fillShape

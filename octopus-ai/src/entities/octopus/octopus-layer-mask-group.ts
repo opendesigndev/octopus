@@ -2,7 +2,7 @@ import { buildOctopusLayer, createOctopusLayerShapeFromShapeAdapter } from '../.
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { ClippedSourceLayer } from '../../factories/create-source-layer'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
@@ -27,7 +27,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
     super(options)
   }
 
-  addChildLayerToMaskGroup(layer: ClippedSourceLayer): void {
+  addChildLayerToMaskGroup(layer: SourceLayer): void {
     const octopusLayer = buildOctopusLayer({ layerSequence: { sourceLayers: [layer] }, parent: this })
 
     if (!octopusLayer) {

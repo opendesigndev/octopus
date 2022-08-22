@@ -1,7 +1,8 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { isValid, parseRectangleCoords } from '../../utils/coords'
+import { isValid } from '../../utils/coords'
 import { createShape } from '../../utils/create-shape'
+import { parseRect } from '../../utils/rectangle'
 import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import OctopusPoint from './octopus-point'
@@ -11,7 +12,6 @@ import type { Coord } from '../../typings'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { RawShapeLayerSubPathPoint } from '../../typings/raw'
-import type { RectCoords } from '../../utils/coords'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerShapeSubPath } from '../source/source-layer-shape-subpath'
 import type { LayerSpecifics } from './octopus-layer-common'
@@ -39,19 +39,6 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
 
   private _isRect(subPath: SourceLayerShapeSubPath): boolean {
     return subPath.type === 'Rect'
-  }
-
-  private _parseRectangleCoords(coords: number[]): RectCoords {
-    return parseRectangleCoords(coords)
-  }
-
-  private _parseRect(coords: SourceLayerShapeSubPath['_coords']): Octopus['PathRectangle'] {
-    const rectangle = this._parseRectangleCoords(coords)
-
-    return {
-      rectangle,
-      type: 'RECTANGLE',
-    }
   }
 
   private _parseCompound(subpaths: SourceLayerShapeSubPath[]): Octopus['CompoundPath'] | null {
@@ -140,7 +127,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
 
   private _getPathFromSubpath(sourceSubpath: SourceLayerShapeSubPath): Octopus['PathLike'] {
     if (this._isRect(sourceSubpath)) {
-      return this._parseRect(sourceSubpath.coords ?? OctopusLayerShapeShapeAdapter.DEFAULT_RECT_COORDS)
+      return parseRect(sourceSubpath.coords ?? OctopusLayerShapeShapeAdapter.DEFAULT_RECT_COORDS)
     }
 
     return this._parsePath(sourceSubpath)

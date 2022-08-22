@@ -18,9 +18,11 @@ export class ArtboardConverter {
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    return new OctopusArtboard({
+    const artboard = new OctopusArtboard({
       sourceArtboard: this._sourceArtboard,
       version: this._version,
-    }).convert()
+    })
+
+    return artboard.convert()
   }
 }
