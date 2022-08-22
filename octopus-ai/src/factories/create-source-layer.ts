@@ -109,5 +109,6 @@ export function createSourceLayer(options: CreateLayerOptions): Nullable<SourceL
     XObject: createXObject,
   }
   const builder = builders[type as string]
+
   return typeof builder === 'function' ? builder(options) : null
 }
