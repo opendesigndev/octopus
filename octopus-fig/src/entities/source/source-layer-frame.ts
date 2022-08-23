@@ -37,6 +37,10 @@ export class SourceLayerFrame extends SourceLayerCommon {
     return 'FRAME'
   }
 
+  get clipsContent(): boolean {
+    return this._rawValue.clipsContent ?? true
+  }
+
   get layers(): SourceLayer[] {
     return this._layers
   }

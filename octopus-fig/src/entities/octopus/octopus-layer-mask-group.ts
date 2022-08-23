@@ -1,12 +1,10 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
-import { convertId, convertRectangle } from '../../utils/convert'
+import { convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
-import { OctopusFill } from './octopus-fill'
-import { OctopusStroke } from './octopus-stroke'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -23,11 +21,12 @@ type OctopusLayerMaskGroupOptions = {
   layers: OctopusLayer[]
   visible?: boolean
   transform?: number[]
+  isArtboard?: boolean
 }
 
-type CreateBackgroundOptions = {
-  frame: SourceLayerFrame
-  layers: OctopusLayer[]
+type CreateBackgroundMaskGroupOptions = {
+  sourceLayer: SourceLayerFrame
+  parent: OctopusLayerParent
   isArtboard?: boolean
 }
 
@@ -46,9 +45,11 @@ export class OctopusLayerMaskGroup {
   private _maskBasis?: Octopus['MaskBasis']
   private _maskChannels?: number[]
   private _transform?: number[]
+  private _isArtboard: boolean
 
   static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
-    const rawLayer = frame.raw as RawLayerShape
+    const rawLayer = { ...(frame.raw as RawLayerShape) }
+    rawLayer.id = `${rawLayer.id}-BackgroundMask`
     rawLayer.type = 'RECTANGLE' as const
     delete rawLayer.relativeTransform
     const sourceLayer = createSourceLayer({ layer: rawLayer, parent: frame.parent })
@@ -56,45 +57,62 @@ export class OctopusLayerMaskGroup {
     return createOctopusLayer({ layer: sourceLayer, parent })
   }
 
-  // TODO HERE zkontroluj jestli je potreba
-  static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
-    if (!frame.size) return null
-
-    const id = convertId(frame.id)
-    const rectangle = convertRectangle(frame.size)
-    const cornerRadius = frame.cornerRadius
-    const fills = OctopusFill.convertFills(frame.fills, frame)
-    const strokes = OctopusStroke.convertStrokes(frame.strokes, frame)
-    return {
-      id: `${id}-BackgroundMask`,
-      type: 'SHAPE' as const,
-      visible: fills.length > 0 || strokes.length > 0,
-      shape: { path: { type: 'RECTANGLE', rectangle, cornerRadius }, fills, strokes },
-    }
-  }
-
-  // TODO HERE zkontroluj jestli je potreba
-  static createBackground({
-    frame,
-    layers,
+  static createBackgroundMaskGroup({
+    sourceLayer,
+    parent,
     isArtboard = false,
-  }: CreateBackgroundOptions): Octopus['MaskGroupLayer'] | null {
-    const id = convertId(frame.id)
-    const mask = OctopusLayerMaskGroup.createBackgroundMask(frame)
+  }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
+    const id = `${sourceLayer.id}-Background`
+    const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
+    // const transform = sourceLayer.transform ?? undefined
+    const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
-
-    const meta = isArtboard ? { isArtboard } : undefined
-    const visible = true // TODO
-    return {
-      id: `${id}-Background`,
-      type: 'MASK_GROUP',
-      maskBasis: 'BODY',
-      mask,
-      layers: getConverted(layers),
-      meta,
-      visible,
-    }
+    const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID' //'BODY' //'BODY_EMBED' //'LAYER_AND_EFFECTS'
+    const layers = createOctopusLayers(sourceLayer.layers, parent)
+    return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard })
   }
+
+  // // TODO HERE zkontroluj jestli je potreba
+  // static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
+  //   if (!frame.size) return null
+
+  //   const id = convertId(frame.id)
+  //   const rectangle = convertRectangle(frame.size)
+  //   const cornerRadius = frame.cornerRadius
+  //   const fills = OctopusFill.convertFills(frame.fills, frame)
+  //   const strokes = OctopusStroke.convertStrokes(frame.strokes, frame)
+  //   return {
+  //     id: `${id}-BackgroundMask`,
+  //     type: 'SHAPE' as const,
+  //     visible: fills.length > 0 || strokes.length > 0,
+  //     shape: { path: { type: 'RECTANGLE', rectangle, cornerRadius }, fills, strokes },
+  //   }
+  // }
+
+  // static createBackground({
+  //   frame,
+  //   parent,
+  //   isArtboard = false,
+  // }: CreateBackgroundOptions): Octopus['MaskGroupLayer'] | undefined {
+  //   const id = convertId(frame.id)
+
+  //   // const mask = OctopusLayerMaskGroup.createBackgroundMask(frame)
+
+  //   const mask = OctopusLayerMaskGroup.createBackgroundLayer(frame, parent)?.convert()
+  //   if (!mask) return
+
+  //   const meta = isArtboard ? { isArtboard } : undefined
+  //   const visible = true // TODO
+  //   return {
+  //     id: `${id}-Background`,
+  //     type: 'MASK_GROUP',
+  //     maskBasis: 'BODY',
+  //     mask,
+  //     layers: getConverted(parent.layers),
+  //     meta,
+  //     visible,
+  //   }
+  // }
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
@@ -118,6 +136,7 @@ export class OctopusLayerMaskGroup {
     this._layers = options.layers
     this._visible = options.visible ?? true
     this._transform = options.transform
+    this._isArtboard = options.isArtboard ?? false
   }
 
   get id(): string {
@@ -157,6 +176,15 @@ export class OctopusLayerMaskGroup {
     this._visible = isVisible
   }
 
+  get layers(): OctopusLayer[] {
+    return this._layers
+  }
+
+  get meta(): Octopus['LayerMeta'] | undefined {
+    const isArtboard = this._isArtboard
+    return isArtboard ? { isArtboard } : undefined
+  }
+
   convert(): Octopus['MaskGroupLayer'] | null {
     const mask = this.mask.convert()
     if (!mask) return null
@@ -169,6 +197,7 @@ export class OctopusLayerMaskGroup {
       mask,
       transform: this.transform,
       layers: getConverted(this._layers),
+      meta: this.meta,
     } as const
   }
 }

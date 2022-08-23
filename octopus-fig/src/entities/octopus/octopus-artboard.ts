@@ -31,10 +31,12 @@ export class OctopusArtboard {
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    const bounds = this.sourceArtboard.bounds
-    if (!bounds) return undefined
-    const { width, height } = bounds
-    return { width, height }
+    return undefined
+    // if (!this._sourceArtboard.clipsContent) return undefined
+    // const bounds = this.sourceArtboard.bounds
+    // if (!bounds) return undefined
+    // const { width, height } = bounds
+    // return { width, height }
   }
 
   get id(): string {
@@ -45,28 +47,14 @@ export class OctopusArtboard {
     return this._version
   }
 
+  get layers(): OctopusLayer[] {
+    return this._layers
+  }
+
   private get _content(): Octopus['MaskGroupLayer'] | undefined {
-    // console.info('')
-
-    const isArtboard = true // TODO
-    const background = OctopusLayerMaskGroup.createBackground({
-      // parent: this.parentArtboard,
-      frame: this.sourceArtboard.sourceFrame,
-      layers: this._layers,
-      isArtboard,
-    })
-
-    if (!background) return
-    return background
-
-    // return {
-    //   id: `${this.id}-background`,
-    //   name: this.sourceArtboard.name,
-    //   type: 'GROUP',
-    //   layers: getConverted(this._layers),
-    //   blendMode: convertBlendMode(this.sourceArtboard.blendMode),
-    //   opacity: this.sourceArtboard.opacity,
-    // } // TODO use MaskGroup
+    const sourceLayer = this.sourceArtboard.sourceFrame
+    const maskGroup = OctopusLayerMaskGroup.createBackgroundMaskGroup({ sourceLayer, parent: this, isArtboard: true })
+    return maskGroup?.convert() ?? undefined
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

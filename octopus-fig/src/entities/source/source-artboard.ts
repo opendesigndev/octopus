@@ -60,6 +60,10 @@ export class SourceArtboard extends SourceEntity {
   }
 
   get bounds(): SourceBounds | null {
+    return getBoundsFor(this._rawValue.absoluteRenderBounds)
+  }
+
+  get boundingBox(): SourceBounds | null {
     return getBoundsFor(this._rawValue.absoluteBoundingBox)
   }
 
@@ -81,5 +85,9 @@ export class SourceArtboard extends SourceEntity {
 
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendMode
+  }
+
+  get clipsContent(): boolean {
+    return this._rawValue.clipsContent ?? true
   }
 }

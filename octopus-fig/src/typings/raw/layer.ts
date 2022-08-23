@@ -34,6 +34,7 @@ export type RawLayerBase = {
   blendMode?: RawBlendMode
   preserveRatio?: boolean
   absoluteBoundingBox?: RawBoundingBox
+  absoluteRenderBounds?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
   opacity?: number

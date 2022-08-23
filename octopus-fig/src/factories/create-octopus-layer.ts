@@ -38,13 +38,7 @@ function createOctopusLayerGroup({
 }: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup | null {
   const sourceLayer = layer as SourceLayerFrame
   if (sourceLayer.hasBackgroundMask) {
-    const id = `${sourceLayer.id}-Background`
-    const transform = sourceLayer.transform ?? undefined
-    const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
-    if (!mask) return null
-    const maskBasis = 'LAYER_AND_EFFECTS'
-    const layers = createOctopusLayers(sourceLayer.layers, parent)
-    return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent })
+    return OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent, sourceLayer })
   }
   return new OctopusLayerGroup({ parent, sourceLayer })
 }

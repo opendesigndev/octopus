@@ -99,8 +99,9 @@ export class OctopusStroke {
     return this._sourceLayer.strokeMiterAngle
   }
 
-  get path(): Octopus['PathLike'] {
-    return this._path.convert()
+  get path(): Octopus['PathLike'] | undefined {
+    const converted = this._path.convert() as Octopus['Path']
+    return converted.geometry ? converted : undefined
   }
 
   get fillRule(): Octopus['FillRule'] {

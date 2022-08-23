@@ -263,7 +263,7 @@ export class OctopusFigConverter {
 
       const fillIds = Object.keys(frame.fills)
       this._octopusManifest?.setExportedArtboardImageMap(frame.nodeId, fillIds)
-      const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap }) // TODO isPasteboard
+      const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap })
       const artboardPromise = queue.exec(sourceArtboard)
       awaitingArtboards.push(artboardPromise)
       const artboard = await artboardPromise
