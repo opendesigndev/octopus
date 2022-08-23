@@ -1,4 +1,3 @@
-//@todo file copy from octopus-xd
 import { promises as fsp } from 'fs'
 import path from 'path'
 

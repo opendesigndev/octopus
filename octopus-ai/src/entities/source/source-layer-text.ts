@@ -1,6 +1,7 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import isEqual from 'lodash/isEqual'
 
+import { logger } from '../../services/instances/logger'
 import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceLayerCommon } from './source-layer-common'
@@ -51,8 +52,7 @@ export class SourceLayerText extends SourceLayerCommon {
     })
 
     if (!equalDescendantMatrices) {
-      //@todo: use logger
-      console.error('initTexts', 'Different transform matrix in the same text group')
+      logger.error('initTexts', 'Different transform matrix in the same text group')
     }
 
     return textSubLayers

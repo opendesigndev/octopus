@@ -1,4 +1,3 @@
-//@todo file copy from octopus-xd
 import path from 'path'
 
 import readPackageUpAsync from 'read-pkg-up'

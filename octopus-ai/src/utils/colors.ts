@@ -1,6 +1,8 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { clamp } from '@avocode/octopus-common/dist/utils/math'
 
+import { logger } from '../services/instances/logger'
+
 import type { RawResourcesColorSpace } from '../typings/raw'
 
 export type RgbColorComponents = [number, number, number]
@@ -13,8 +15,8 @@ export function getColorSpaceName(colorSpace: Record<string, unknown> | string |
   if (Array.isArray(colorSpace) && typeof colorSpace[0] === 'string') {
     return colorSpace[0]
   }
-  //@todo solve warnings. console should not be present
-  console.warn('getColorSpaceName', 'Unexpected ColorSpace format', { colorSpace })
+
+  logger.warn('getColorSpaceName', 'Unexpected ColorSpace format', { colorSpace })
   return null
 }
 
@@ -29,8 +31,7 @@ export function guessColorSpaceByComponents(color: number[]): RgbColorComponents
         return cmykToRgb(color)
     }
   }
-  //@todo solve warnings. console should not be present
-  console.warn('guessColorSpaceByComponents', 'Falling back to default color for', { color })
+  logger.warn('guessColorSpaceByComponents', 'Falling back to default color for', { color })
   return [0, 0, 0]
 }
 
@@ -112,8 +113,7 @@ export default function convertColor(
     case 'ICCBased':
       return convertRGBToRGBA(convertICCBased(color))
     default:
-      //@todo: remove console logger
-      console.warn('convertColor', 'Unknown ColorSpace', { colorSpaceName })
+      logger.warn('convertColor', 'Unknown ColorSpace', { colorSpaceName })
       return convertRGBToRGBA(guessColorSpaceByComponents(color))
   }
 }
