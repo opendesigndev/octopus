@@ -1,12 +1,11 @@
-import compact from 'lodash/compact'
-import isEmpty from 'lodash/isEmpty'
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-import { ENV } from './environment'
+import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory'
 
-export function createDefaultLogger(): ReturnType<typeof pino> {
+const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enabled: true }): ReturnType<typeof pino> => {
   return pino({
+    enabled: options.enabled,
     formatters: {
       bindings: ({ pid }) => {
         return {
@@ -20,9 +19,9 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
       },
     },
     messageKey: 'message',
-    level: ENV.LOG_LEVEL,
+    level: process.env.LOG_LEVEL || 'debug',
     prettyPrint:
-      ENV.NODE_ENV === 'debug'
+      process.env.NODE_ENV === 'debug'
         ? {
             levelFirst: true,
           }
@@ -31,10 +30,12 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
     timestamp: pino.stdTimeFunctions.isoTime,
     hooks: {
       logMethod: function (args, method) {
-        const [message, ...extra] = args
-        const _extra = !isEmpty(compact(extra)) ? { extra } : null
-        method.apply(this, [_extra, message])
+        const [message] = args
+        const extra = args.length > 1 ? { extra: args.slice(1) } : null
+        method.apply(this, [extra, message])
       },
     },
   })
 }
+
+export { createLoggerNode }

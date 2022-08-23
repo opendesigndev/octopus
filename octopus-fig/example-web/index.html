@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div style="width: 100px; height: 100px; border: 1px solid red;" id="xxx"></div>
+  <script src="./octopus-fig-web.umd.js"></script>
+  <script>
+
+    // const worker = new Worker('./octopus-xd-web-worker.umd.js')
+
+    // class OctopusXDProcessor {
+    //   constructor(buffer) {
+    //     this._msgId = 0
+    //     this._designIndex = this._registerFile(buffer)
+    //   }
+
+    //   _process(type, args, moveOwnership = null) {
+    //     return new Promise((resolve) => {
+    //       const msgId = this._msgId++
+    //       worker.postMessage({ type, args: [msgId, ...args]}, moveOwnership)
+    //       const handler = ({ data }) => {
+    //         const { msgId: responseId, response } = Object(data)
+    //         if (msgId === responseId) {
+    //           worker.removeEventListener('message', handler)
+    //           resolve(response)
+    //         }
+    //       }
+    //       worker.addEventListener('message', handler)
+    //     })
+    //   }
+
+    //   _registerFile(buffer) {
+    //     return this._process('register-file', [buffer], [buffer])
+    //   }
+
+    //   async getArtboardsList() {
+    //     const index = await this._designIndex
+    //     return this._process('get-artboards', [index])
+    //   }
+
+    //   async parseArtboard(artboardId) {
+    //     const index = await this._designIndex
+    //     return this._process('parse-artboard', [index, artboardId])
+    //   }
+    // }
+
+
+    // Check main thread lags
+    let i = 0
+    setInterval(() => { xxx.style.transform = `rotate(${ i += 5 }deg)` }, 30)
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const { createConverter, SourceApiReader } = OctopusFig
+
+      const designId = 'kA7FQv3NUKkkwja4RLBRC0' //'aoZAhPTVzGi1rXnU35YPVb'
+      const token = '376694-3ac3693b-cd97-4cd3-97b1-dc54aea109bf'
+      const ids = [] //['2:2'] // ['1:2', '111:28']
+
+      const readerOptions = {
+        designId,
+        token,
+        ids,
+        host: 'api.figma.com',
+        pixelsLimit: 1e7,
+        framePreviews: true,
+        previewsParallels: 3,
+        tokenType: 'personal',
+        nodesParallels: 10,
+        s3Parallels: 10,
+        verbose: true,
+        figmaIdsFetchUsedComponents: true,
+        renderImagerefs: false,
+        shouldObtainLibraries: true,
+        shouldObtainStyles: true,
+        parallelRequests: 5,
+      }
+      
+      try {
+        const reader = new SourceApiReader(readerOptions)
+        
+        console.info('ids:', await reader.frameLikeIds)
+        
+        const design = reader.parse(ids)
+        const converter = createConverter({ design })
+        const result = await converter.convertDesign()
+        console.info('Result:', result)
+      } catch(err) {
+        console.error('Some error happened:', err)
+      }
+    })
+  </script>
+</body>
+</html>

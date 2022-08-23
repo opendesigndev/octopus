@@ -128,3 +128,18 @@ export type TargetIds = {
   localComponents: string[]
   remoteComponents: string[]
 }
+
+export type NamedTargetIds = {
+  topLevelArtboards: {
+    name: string
+    id: string
+  }[]
+  localComponents: {
+    name: string
+    id: string
+  }[]
+  remoteComponents: {
+    name: string
+    id: string
+  }[]
+}

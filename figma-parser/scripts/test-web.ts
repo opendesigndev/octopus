@@ -1,7 +1,7 @@
 import { createParser } from '../src/index-web'
 
 const parser = createParser({
-  designId: '9lJg7hAgjsDgrpueS30dMg', // 'kBEFObmdY1v5G5Qr3go5Uh', // ,
+  designId: '9lJg7hAgjsDgrpueS30dMg', // 'kBEFObmdY1v5G5Qr3go5Uh', // ,'9lJg7hAgjsDgrpueS30dMg' // ['1:2', '111:28']
   // https://app.avcd.cz/figma-import?filename=ololo&desktop=false&filekey=9lJg7hAgjsDgrpueS30dMg&ids=1:2&token=
   token: '117960-0bf13919-ba73-427d-800a-07c02b5f71a3',
   ids: [], // ['306:789'],

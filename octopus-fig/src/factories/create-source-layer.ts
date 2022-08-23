@@ -3,7 +3,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { logger } from '../services'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { RawLayer, RawLayerShape, RawLayerFrame, RawLayerText, RawSlice } from '../typings/raw'
@@ -56,7 +56,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
   const type = (Object(options.layer) as RawLayer | RawSlice).type
   const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
-    logWarn('createSourceLayer: Unknown layer type', { type })
+    logger?.warn('createSourceLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

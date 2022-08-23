@@ -5,12 +5,12 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
-import { makeDir, saveFile } from '../../utils/files'
-import { stringify } from '../../utils/misc'
+import { makeDir, saveFile } from '../../../utils/files'
+import { stringify } from '../../../utils/misc'
 
-import type { ArtboardConversionResult } from '../../../src'
-import type { Manifest } from '../../typings/manifest'
-import type { AbstractExporter } from './abstract-exporter'
+import type { ArtboardConversionResult } from '../../../octopus-fig-converter'
+import type { Manifest } from '../../../typings/manifest'
+import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {

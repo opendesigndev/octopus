@@ -1,16 +1,19 @@
 import { Design } from './entities/obtainers/design'
+import { File } from './entities/structural/file'
 import { setLogger, setDefaults, logger } from './services'
 import Config from './services/config'
 import { getPlatformFactories, setPlatformFactories } from './services/platforms'
 import { QueuesManager } from './services/queues-manager'
 import { RequestsManager } from './services/requests-manager'
 import { isObject } from './utils/common'
+import firstCallMemo from './utils/decorators'
 
 import type { IBenchmarksTracker } from './services/benchmarks-tracker/benchmarks-tracker.iface'
 import type { IDownloader } from './services/downloader/downloader.iface'
 import type { Logger } from './services/logger/logger'
 import type { NodeFactories, WebFactories } from './services/platforms'
 import type { ICacher } from './types/cacher'
+import type { FigmaFile, NamedTargetIds } from './types/figma'
 
 export type { Design }
 
@@ -26,7 +29,7 @@ export type ParserOptions = {
   designId: string
   host: string
   token: string
-  ids: string[]
+  ids?: string[]
   pixelsLimit: number
   framePreviews: boolean
   tokenType: string
@@ -47,6 +50,7 @@ export type ParserOptions = {
 export class Parser {
   private _services: Services
   private _config: Config
+  private _cachedFile: File | null
 
   static getLogger(): Logger | null {
     return logger
@@ -56,6 +60,7 @@ export class Parser {
     this._setGlobals(options)
     this._config = new Config(options)
     this._services = this._initServices(options)
+    this._cachedFile = null
   }
 
   get config(): Config {
@@ -97,10 +102,22 @@ export class Parser {
     if (isObject(options.logger)) setLogger(options.logger)
   }
 
-  parse(): Design {
+  @firstCallMemo()
+  async getFrameLikeIds(): Promise<NamedTargetIds> {
+    const url = this.rm.file.prepareRequest(this.config.designId)
+    const figmaFile = (await this.downloader.getJSON(url)) as FigmaFile
+    this._cachedFile = new File({ file: figmaFile })
+    return this._cachedFile.getNamedFrameLikeIds()
+  }
+
+  parse(ids?: string[]): Design {
+    if (Array.isArray(ids)) {
+      this._config.setIds(ids)
+    }
     return new Design({
       designId: this.config.designId,
       parser: this,
+      cachedFile: this._cachedFile,
     })
   }
 }
