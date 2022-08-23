@@ -4,7 +4,7 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusFigConverter, SourceApiReader, DebugExporter } from '../src'
+import { createConverter, DebugExporter, SourceApiReader } from '../src/index-node'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
@@ -52,8 +52,27 @@ export async function convertDesign({
     console.info(`\n${chalk.yellow(`Manifest:`)} file://${manifestPath}\n\n`)
   })
 
-  const reader = new SourceApiReader({ designId })
-  const converter = new OctopusFigConverter({ design: reader.design })
+  const readerOptions = {
+    designId,
+    token: process.env.API_TOKEN as string,
+    ids: [],
+    host: 'api.figma.com',
+    pixelsLimit: 1e7,
+    framePreviews: true,
+    previewsParallels: 3,
+    tokenType: 'personal',
+    nodesParallels: 10,
+    s3Parallels: 10,
+    verbose: true,
+    figmaIdsFetchUsedComponents: true,
+    renderImagerefs: false,
+    shouldObtainLibraries: true,
+    shouldObtainStyles: true,
+    parallelRequests: 5,
+  }
+
+  const reader = new SourceApiReader(readerOptions)
+  const converter = createConverter({ design: reader.parse() })
   await converter.convertDesign({ exporter, skipReturn: true })
   await exporter.completed()
 }

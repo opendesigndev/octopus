@@ -1,8 +1,8 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
-import OctopusEffectBlur from './octopus-effect-blur'
-import OctopusEffectDropShadow from './octopus-effect-drop-shadow'
+import { OctopusEffectBlur } from './octopus-effect-blur'
+import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -15,7 +15,7 @@ type OctopusEffectsLayerOptions = {
 /**
  * Primarily Raster effects (vector ones are placed on `shape` descriptor).
  */
-export default class OctopusEffectsLayer {
+export class OctopusEffectsLayer {
   private _sourceLayer: SourceLayer
 
   constructor(options: OctopusEffectsLayerOptions) {

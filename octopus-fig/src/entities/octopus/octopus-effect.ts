@@ -1,4 +1,4 @@
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services'
 import { convertBlendMode, convertColor } from '../../utils/convert'
 
 import type { Octopus } from '../../typings/octopus'
@@ -80,7 +80,7 @@ export class OctopusEffect {
       case 'BACKGROUND_BLUR':
         return this._backgroundBlur
       default:
-        logWarn('Unknown Effect type', { type })
+        logger?.warn('Unknown Effect type', { type })
         return null
     }
   }

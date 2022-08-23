@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
@@ -6,8 +6,8 @@ import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 import { SourceLayerFrame } from './source-layer-frame'
 
-import type { ImageSizeMap } from '../..'
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { ImageSizeMap } from '../../octopus-fig-converter'
 import type { RawArtboard, RawBlendMode } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 

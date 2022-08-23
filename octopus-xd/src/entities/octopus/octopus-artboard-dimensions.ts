@@ -1,13 +1,13 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
 import type { Octopus } from '../../typings/octopus'
-import type SourceArtboard from '../source/source-artboard'
+import type { SourceArtboard } from '../source/source-artboard'
 
 type OctopusDimensionsOptions = {
   sourceArtboard: SourceArtboard
 }
 
-export default class OctopusArtboardDimensions {
+export class OctopusArtboardDimensions {
   private _sourceArtboard: SourceArtboard
 
   constructor(options: OctopusDimensionsOptions) {

@@ -3,14 +3,33 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { LocalExporter, OctopusFigConverter, SourceApiReader } from '../src'
+import { LocalExporter, createConverter, SourceApiReader } from '../src/index-node'
 
 async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())
   const exporter = new LocalExporter({ path: testDir })
 
-  const reader = new SourceApiReader({ designId })
-  const converter = new OctopusFigConverter({ design: reader.design })
+  const readerOptions = {
+    designId,
+    token: process.env.API_TOKEN as string,
+    ids: [],
+    host: 'api.figma.com',
+    pixelsLimit: 1e7,
+    framePreviews: true,
+    previewsParallels: 3,
+    tokenType: 'personal',
+    nodesParallels: 10,
+    s3Parallels: 10,
+    verbose: true,
+    figmaIdsFetchUsedComponents: true,
+    renderImagerefs: false,
+    shouldObtainLibraries: true,
+    shouldObtainStyles: true,
+    parallelRequests: 5,
+  }
+
+  const reader = new SourceApiReader(readerOptions)
+  const converter = createConverter({ design: reader.parse() })
   await converter.convertDesign({ exporter, skipReturn: true })
   await exporter.completed()
 

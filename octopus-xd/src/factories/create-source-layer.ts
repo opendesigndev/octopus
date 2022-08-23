@@ -1,6 +1,6 @@
-import SourceLayerGroup from '../entities/source/source-layer-group'
-import SourceLayerShape from '../entities/source/source-layer-shape'
-import SourceLayerText from '../entities/source/source-layer-text'
+import { SourceLayerGroup } from '../entities/source/source-layer-group'
+import { SourceLayerShape } from '../entities/source/source-layer-shape'
+import { SourceLayerText } from '../entities/source/source-layer-text'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { RawGroupLayer, RawLayer, RawShapeLayer, RawTextLayer } from '../typings/source'

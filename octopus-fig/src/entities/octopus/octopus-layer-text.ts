@@ -1,8 +1,8 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
 import { notZero } from '../../utils/misc'
 import { inferPostScriptName } from '../../utils/text'
@@ -85,7 +85,7 @@ export class OctopusLayerText extends OctopusLayerBase {
   private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | null {
     const postScriptName = this._parsePostScriptName(textStyle)
     if (!postScriptName) {
-      logWarn('Unknown font postScriptName', { textStyle })
+      logger?.warn('Unknown font postScriptName', { textStyle })
       return null
     }
     return { postScriptName, family: textStyle.fontFamily }
@@ -175,7 +175,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     const horizontalAlign = this.sourceLayer.defaultStyle?.textAlignHorizontal
     const result = getMapped(horizontalAlign, OctopusLayerText.HORIZONTAL_ALIGN_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke Cap', { horizontalAlign })
+      logger?.warn('Unknown Stroke Cap', { horizontalAlign })
       return 'LEFT'
     }
     return result

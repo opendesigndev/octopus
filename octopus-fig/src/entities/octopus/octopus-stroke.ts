@@ -1,7 +1,7 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services'
 import { OctopusFill } from './octopus-fill'
 import { OctopusPath } from './octopus-path'
 
@@ -49,7 +49,7 @@ export class OctopusStroke {
   get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
     const strokeAlign = this._sourceLayer.strokeAlign
     if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
-      logWarn('Unknown Stroke Align', { strokeAlign })
+      logger?.warn('Unknown Stroke Align', { strokeAlign })
       return null
     }
     return strokeAlign
@@ -59,7 +59,7 @@ export class OctopusStroke {
     const strokeCap = this._sourceLayer.strokeCap
     const result = getMapped(strokeCap, OctopusStroke.STROKE_CAP_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke Cap', { strokeCap })
+      logger?.warn('Unknown Stroke Cap', { strokeCap })
       return null
     }
     return result
@@ -68,7 +68,7 @@ export class OctopusStroke {
   get lineJoin(): 'ROUND' | 'MITER' | 'BEVEL' | null {
     const strokeJoin = this._sourceLayer.strokeJoin
     if (!OctopusStroke.STROKE_JOINS.includes(strokeJoin)) {
-      logWarn('Unknown Stroke join', { strokeJoin })
+      logger?.warn('Unknown Stroke join', { strokeJoin })
       return null
     }
     return strokeJoin

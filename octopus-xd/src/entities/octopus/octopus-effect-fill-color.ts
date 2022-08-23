@@ -1,8 +1,8 @@
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 
 import { parseXDColor } from '../../utils/color'
-import defaults from '../../utils/defaults'
-import SourceEffectFillColor from '../source/source-effect-color-fill'
+import { DEFAULTS } from '../../utils/defaults'
+import { SourceEffectFillColor } from '../source/source-effect-color-fill'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFillColorOptions } from '../source/source-effect-color-fill'
@@ -11,7 +11,7 @@ type OctopusEffectFillColorOptions = {
   source: SourceEffectFillColor
 }
 
-export default class OctopusEffectFillColor {
+export class OctopusEffectFillColor {
   private _source: SourceEffectFillColor
 
   static fromRaw(options: SourceEffectFillColorOptions): OctopusEffectFillColor {
@@ -35,7 +35,7 @@ export default class OctopusEffectFillColor {
     return {
       type: 'COLOR' as const,
       visible,
-      blendMode: defaults.BLEND_MODE,
+      blendMode: DEFAULTS.BLEND_MODE,
       color: parseXDColor(color),
     }
   }

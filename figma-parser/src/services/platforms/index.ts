@@ -2,7 +2,6 @@ import type { Parser } from '../../parser'
 import type { IBenchmarksTracker } from '../benchmarks-tracker/benchmarks-tracker.iface'
 import type { IDownloader } from '../downloader/downloader.iface'
 import type { LoggerFactory } from '../logger/logger-factory.iface'
-import type { SentryFactory } from '../sentry/sentry-factory.iface'
 
 // Downloader
 type NodeDownloaderFactory = (options: { parser: Parser }) => IDownloader
@@ -16,10 +15,6 @@ type WebBenchmarksTrackerFactory = () => IBenchmarksTracker
 type NodeLoggerFactory = () => LoggerFactory
 type WebLoggerFactory = () => LoggerFactory
 
-// Sentry
-type NodeSentryFactory = () => SentryFactory
-type WebSentryFactory = () => SentryFactory
-
 // Environment (Node only)
 type NodeEnvironmentFactory = () => () => void
 
@@ -28,7 +23,6 @@ export type NodeFactories = {
   createDownloader: NodeDownloaderFactory
   createBenchmarksTracker: NodeBenchmarksTrackerFactory
   createLoggerFactory: NodeLoggerFactory
-  createSentryFactory: NodeSentryFactory
   createEnvironment: NodeEnvironmentFactory
 }
 
@@ -37,7 +31,6 @@ export type WebFactories = {
   createDownloader: WebDownloaderFactory
   createBenchmarksTracker: WebBenchmarksTrackerFactory
   createLoggerFactory: WebLoggerFactory
-  createSentryFactory: WebSentryFactory
 }
 
 let factories: NodeFactories | WebFactories

@@ -1,4 +1,4 @@
-export default {
+export const BLEND_MODES = {
   'pass-through': 'PASS_THROUGH',
   normal: 'NORMAL',
   darken: 'DARKEN',

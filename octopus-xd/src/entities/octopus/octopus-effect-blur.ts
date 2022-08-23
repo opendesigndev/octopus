@@ -1,6 +1,6 @@
 import { asBoolean, asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import SourceEffectBlur from '../source/source-effect-blur'
+import { SourceEffectBlur } from '../source/source-effect-blur'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectBlurOptions } from '../source/source-effect-blur'
@@ -9,7 +9,7 @@ type OctopusEffectBlurOptions = {
   source: SourceEffectBlur
 }
 
-export default class OctopusEffectBlur {
+export class OctopusEffectBlur {
   private _source: SourceEffectBlur
 
   static fromRaw(options: SourceEffectBlurOptions): OctopusEffectBlur {

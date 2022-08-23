@@ -49,7 +49,7 @@ export default class Config {
     this._host = rawOptions.host
     this._pixelsLimit = rawOptions.pixelsLimit
     this._framePreviews = rawOptions.framePreviews
-    this._targetIds = rawOptions.ids
+    this._targetIds = rawOptions.ids ?? []
     this._parallels = {
       previews: rawOptions.previewsParallels,
       nodes: rawOptions.nodesParallels,
@@ -64,6 +64,11 @@ export default class Config {
     this._shouldObtainLibraries = rawOptions.shouldObtainLibraries
     this._shouldObtainStyles = rawOptions.shouldObtainStyles
     this._shouldFetchUsedComponents = rawOptions.figmaIdsFetchUsedComponents
+  }
+
+  setIds(ids: string[]): void {
+    if (!Array.isArray(ids)) return
+    this._targetIds = ids
   }
 
   get isPersonalToken(): boolean {

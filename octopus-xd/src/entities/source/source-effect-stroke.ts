@@ -4,7 +4,7 @@ export type SourceEffectStrokeOptions = {
   effect: RawStroke
 }
 
-export default class SourceEffectStroke {
+export class SourceEffectStroke {
   private _rawEffect: RawStroke
 
   constructor(options: SourceEffectStrokeOptions) {

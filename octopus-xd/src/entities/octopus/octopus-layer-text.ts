@@ -2,16 +2,16 @@ import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
 import { getPresentProps, push } from '@avocode/octopus-common/dist/utils/common'
 
-import defaults from '../../utils/defaults'
+import { DEFAULTS } from '../../utils/defaults'
 import { convertObjectMatrixToArray } from '../../utils/matrix'
 import { createMatrix } from '../../utils/paper'
-import OctopusEffectsText from './octopus-effects-text'
-import OctopusLayerCommon from './octopus-layer-common'
+import { OctopusEffectsText } from './octopus-effects-text'
+import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { RawRangedStyle, RawTextLayer, RawTextParagraphRange } from '../../typings/source'
-import type SourceLayerText from '../source/source-layer-text'
+import type { SourceLayerText } from '../source/source-layer-text'
 import type { LayerSpecifics } from './octopus-layer-common'
 
 type OctopusLayerTextOptions = {
@@ -30,7 +30,7 @@ type MergedTextStyle = RawTextParagraphRange & {
   metaUxStyle: NormalizedRawRangedStyle | null
 }
 
-export default class OctopusLayerText extends OctopusLayerCommon {
+export class OctopusLayerText extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerText
 
   constructor(options: OctopusLayerTextOptions) {
@@ -116,7 +116,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _parseLayerWideRange(layer: RawTextLayer) {
     const decorations = asArray(layer?.style?.textAttributes?.decoration)
     const fontLetterSpacing = asNumber(layer?.style?.textAttributes?.letterSpacing, 0)
-    const fontSize = asNumber(layer?.style?.font?.size, defaults.TEXT.LAYER_FONT_SIZE)
+    const fontSize = asNumber(layer?.style?.font?.size, DEFAULTS.TEXT.LAYER_FONT_SIZE)
     const letterSpacing = (fontLetterSpacing * fontSize) / 1000
     const psNameRaw = asString(layer?.style?.font?.postscriptName, '')
     const family = asString(layer?.style?.font?.family, '')
@@ -127,10 +127,10 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     const underline = decorations.includes('underline') ? 'SINGLE' : 'NONE'
 
     return {
-      bold: defaults.TEXT.STYLE_BOLD,
-      italic: defaults.TEXT.STYLE_ITALIC,
-      smallcaps: defaults.TEXT.STYLE_SMALLCAPS,
-      kerning: defaults.TEXT.STYLE_KERNING,
+      bold: DEFAULTS.TEXT.STYLE_BOLD,
+      italic: DEFAULTS.TEXT.STYLE_ITALIC,
+      smallcaps: DEFAULTS.TEXT.STYLE_SMALLCAPS,
+      kerning: DEFAULTS.TEXT.STYLE_KERNING,
       paragraphSpacing,
       name: family,
       type: style,
@@ -147,7 +147,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
   private _parseParagraphWideRange(range: MergedTextStyle) {
     const layerFontSize = asNumber(
       this._sourceLayer.raw?.style?.font?.size,
-      asNumber(range?.metaUxStyle?.fontSize, defaults.TEXT.LAYER_FONT_SIZE)
+      asNumber(range?.metaUxStyle?.fontSize, DEFAULTS.TEXT.LAYER_FONT_SIZE)
     )
 
     const decorations = asArray(range?.style?.textAttributes?.decoration)
@@ -267,7 +267,7 @@ export default class OctopusLayerText extends OctopusLayerCommon {
     if (!offset) return null
 
     // Current layer matrix.
-    const matrices = [defaults.TRANSFORM.slice(), convertObjectMatrixToArray(offsetMatrixParagraph)]
+    const matrices = [DEFAULTS.TRANSFORM.slice(), convertObjectMatrixToArray(offsetMatrixParagraph)]
       .filter((matrix) => {
         return Array.isArray(matrix)
       })

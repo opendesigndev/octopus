@@ -1,8 +1,8 @@
 import type { Defined } from '../../typings/helpers'
 import type { RawLayer } from '../../typings/source'
-import type SourceArtboard from './source-artboard'
-import type SourceLayerGroup from './source-layer-group'
-import type SourceLayerShape from './source-layer-shape'
+import type { SourceArtboard } from './source-artboard'
+import type { SourceLayerGroup } from './source-layer-group'
+import type { SourceLayerShape } from './source-layer-shape'
 
 /** Just a helper types */
 type DefinedStyle = Defined<RawLayer['style']>
@@ -10,7 +10,7 @@ type DefinedUx = Defined<Defined<RawLayer['meta']>['ux']>
 
 export type SourceLayerParent = SourceArtboard | SourceLayerGroup | SourceLayerShape
 
-export default class SourceLayerCommon {
+export class SourceLayerCommon {
   protected _parent: SourceLayerParent
   protected _rawValue: RawLayer
 
