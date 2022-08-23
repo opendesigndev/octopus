@@ -1,6 +1,7 @@
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-web'
 
 import { OctopusFigConverter } from './octopus-fig-converter'
+import { imageSize } from './services/general/image-size/image-size-web'
 import { createLoggerWeb } from './services/general/logger/web/logger-web'
 
 import type { SourceDesign } from './entities/source/source-design'
@@ -21,6 +22,7 @@ export function createConverter(options: Omit<OctopusConverterOptions, 'platform
           benchmarkAsync,
         }
       },
+      createImageSizeService: () => imageSize,
     } as WebFactories,
   })
 }

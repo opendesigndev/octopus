@@ -1,7 +1,6 @@
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
-import sizeOf from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
@@ -13,6 +12,7 @@ import { getPlatformFactories, setPlatformFactories } from './services/general/p
 import { readPackageMeta } from './utils/read-pkg-meta'
 
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
+import type { ImageSize } from './services/general/image-size/image-size'
 import type { NodeFactories, WebFactories } from './services/general/platforms'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
@@ -42,7 +42,7 @@ export type OctopusConverterOptions = {
   loggerEnabled?: boolean
 }
 
-export type ImageSizeMap = { [key: string]: { width: number; height: number } }
+export type ImageSizeMap = { [key: string]: ImageSize }
 
 export type ArtboardConversionResult = {
   id: string
@@ -74,6 +74,7 @@ export class OctopusFigConverter {
     benchmark: {
       benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
     }
+    imageSize: (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
   }
 
   static ARTBOARDS_QUEUE_PARALLELS = 5
@@ -108,6 +109,7 @@ export class OctopusFigConverter {
   private _initServices() {
     return {
       benchmark: getPlatformFactories().createBenchmarkService(),
+      imageSize: getPlatformFactories().createImageSizeService(),
     }
   }
 
@@ -272,8 +274,8 @@ export class OctopusFigConverter {
       const fillName = fill.ref
       const fillPath = await exporter?.exportImage?.(fillName, fill.buffer)
 
-      const { width, height } = await sizeOf(Buffer.from(fill.buffer))
-      if (width && height) imageSizeMap[fillName] = { width, height }
+      const imageSize = await this._services.imageSize(fill.buffer)
+      if (imageSize) imageSizeMap[fillName] = imageSize
 
       this._octopusManifest?.setExportedImagePath(fillName, fillPath)
       if (shouldReturn) conversionResult.images.push({ name: fillName, data: fill.buffer })

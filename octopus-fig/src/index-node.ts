@@ -2,6 +2,7 @@ import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-nod
 
 import { OctopusFigConverter } from './octopus-fig-converter'
 import { createEnvironmentNode } from './services/general/environment'
+import { imageSize } from './services/general/image-size/image-size-node'
 import { createLoggerNode } from './services/general/logger/node/logger-node'
 
 import type { SourceDesign } from './entities/source/source-design'
@@ -25,6 +26,7 @@ export function createConverter(options: Omit<OctopusConverterOptions, 'platform
           benchmarkAsync,
         }
       },
+      createImageSizeService: () => imageSize,
     } as NodeFactories,
   })
 }
