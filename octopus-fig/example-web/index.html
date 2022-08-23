@@ -49,17 +49,22 @@
     //   }
     // }
 
-    window.addEventListener('DOMContentLoaded', async () => {
 
+    // Check main thread lags
+    let i = 0
+    setInterval(() => { xxx.style.transform = `rotate(${ i += 5 }deg)` }, 30)
+
+    window.addEventListener('DOMContentLoaded', async () => {
       const { createConverter, SourceApiReader } = OctopusFig
 
-      const designId = '9lJg7hAgjsDgrpueS30dMg' // ['1:2', '111:28']
-      const token = '117960-0bf13919-ba73-427d-800a-07c02b5f71a3'
+      const designId = 'kA7FQv3NUKkkwja4RLBRC0' //'aoZAhPTVzGi1rXnU35YPVb'
+      const token = '376694-3ac3693b-cd97-4cd3-97b1-dc54aea109bf'
+      const ids = [] //['2:2'] // ['1:2', '111:28']
 
       const readerOptions = {
         designId,
         token,
-        ids: [],
+        ids,
         host: 'api.figma.com',
         pixelsLimit: 1e7,
         framePreviews: true,
@@ -77,44 +82,16 @@
       
       try {
         const reader = new SourceApiReader(readerOptions)
-
-        console.log('ids', await reader.frameLikeIds)
-
-        // previews / error handling
-
-        const d = reader.parse(['111:28'])
-        const converter = createConverter({ design: d })
+        
+        console.info('ids:', await reader.frameLikeIds)
+        
+        const design = reader.parse(ids)
+        const converter = createConverter({ design })
         const result = await converter.convertDesign()
-        console.log(result)
+        console.info('Result:', result)
       } catch(err) {
-        // console.log('some error happend', err)
+        console.error('Some error happened:', err)
       }
-
-
-
-
-
-
-
-
-
-      // Check main thread lags
-      // let i = 0
-      // setInterval(() => {
-      //   xxx.style.transform = `rotate(${ i += 5 }deg)`
-      // }, 30)
-
-      // setInterval(async () => {
-      //   xxx.innerHTML = Number(xxx.innerHTML || 0) + 1
-
-      //   const buffer = await (await fetch('./file.xd')).arrayBuffer()
-      //   const processor = new OctopusXDProcessor(buffer)
-      //   console.log(await processor.getArtboardsList())
-      //   console.log(await processor.parseArtboard('a62b640d-b785-49e2-b55f-74643228d67a'))
-      // }, 500)
-
-      // console.log(OctopusFig)
-
     })
   </script>
 </body>

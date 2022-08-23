@@ -18,8 +18,8 @@ export function createConverter(options: Omit<OctopusConverterOptions, 'platform
   return new OctopusFigConverter({
     ...options,
     platformFactories: {
-      createLoggerFactory: () => createLoggerNode,
-      createEnvironment: () => createEnvironmentNode,
+      createLoggerFactory: createLoggerNode,
+      createEnvironment: createEnvironmentNode,
       createBenchmarkService: () => {
         return {
           benchmarkAsync,

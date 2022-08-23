@@ -1,12 +1,8 @@
 import pino from 'pino'
 
-import type { LoggerFactory } from '../logger-factory.iface'
+import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory'
 
-type CreateLoggerWebOptions = {
-  enabled: boolean
-}
-
-const createLoggerWeb: LoggerFactory = (options: CreateLoggerWebOptions): ReturnType<typeof pino> => {
+const createLoggerWeb: LoggerFactory = (options: CreateLoggerOptions): ReturnType<typeof pino> => {
   return pino({
     enabled: options.enabled,
     browser: { asObject: true },

@@ -1,15 +1,9 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-import type { LoggerFactory } from '../logger-factory.iface'
+import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory'
 
-type CreateLoggerNodeOptions = {
-  enabled: boolean
-}
-
-const createLoggerNode: LoggerFactory = (
-  options: CreateLoggerNodeOptions = { enabled: true }
-): ReturnType<typeof pino> => {
+const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enabled: true }): ReturnType<typeof pino> => {
   return pino({
     enabled: options.enabled,
     formatters: {

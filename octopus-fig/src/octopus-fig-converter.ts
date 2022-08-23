@@ -110,7 +110,7 @@ export class OctopusFigConverter {
 
   private _setGlobals(options: OctopusConverterOptions): void {
     if ('createEnvironment' in options.platformFactories) {
-      options.platformFactories.createEnvironment?.()?.()
+      options.platformFactories.createEnvironment?.()
     }
     setPlatformFactories(options.platformFactories)
     setDefaults({

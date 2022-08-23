@@ -15,7 +15,7 @@ export function createConverter(options: Omit<OctopusConverterOptions, 'platform
   return new OctopusFigConverter({
     ...options,
     platformFactories: {
-      createLoggerFactory: () => createLoggerWeb,
+      createLoggerFactory: createLoggerWeb,
       createBenchmarkService: () => {
         return {
           benchmarkAsync,

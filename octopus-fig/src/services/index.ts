@@ -1,7 +1,7 @@
 import { getPlatformFactories } from './general/platforms'
 
 import type { Logger } from './general/logger/logger'
-import type { CreateLoggerOptions } from './general/logger/logger-factory.iface'
+import type { CreateLoggerOptions } from './general/logger/logger-factory'
 
 type DefaultOptions = {
   logger: CreateLoggerOptions
@@ -14,5 +14,5 @@ export function setLogger(instance: Logger): void {
 }
 
 export function setDefaults(options: DefaultOptions): void {
-  logger = getPlatformFactories().createLoggerFactory()(options.logger)
+  logger = getPlatformFactories().createLoggerFactory(options.logger)
 }

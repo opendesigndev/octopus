@@ -1,11 +1,11 @@
-import type { LoggerFactory } from '../logger/logger-factory.iface'
+import type { LoggerFactory } from '../logger/logger-factory'
 
 // Logger
-type NodeLoggerFactory = () => LoggerFactory
-type WebLoggerFactory = () => LoggerFactory
+type NodeLoggerFactory = LoggerFactory
+type WebLoggerFactory = LoggerFactory
 
 // Environment (Node only)
-type NodeEnvironmentFactory = () => () => void
+type NodeEnvironmentFactory = () => void
 
 // Benchmark service
 type NodeBenchmarkFactory = () => {
