@@ -2,6 +2,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import chunk from 'lodash/chunk'
 import zipWith from 'lodash/zipWith'
 
+import { logger } from '../../services/instances/logger'
 import convertColor from '../../utils/colors'
 
 import type { Coord, GradientColorStop, GradientStop, RgbColorComponents } from '../../typings'
@@ -83,6 +84,7 @@ export class OctopusEffectGradientFill {
         if (i === bounds.length) {
           acc.push({ ...stops[1], position: 1 })
         }
+
         return acc
       },
       []
@@ -142,8 +144,7 @@ export class OctopusEffectGradientFill {
       case 3:
         return this._parseRadialGradient()
       default:
-        //@todo use logger
-        console.warn('parseShading', 'Unsupported shading type', { shadingType })
+        logger.warn('parseShading', 'Unsupported shading type', { shadingType })
         return this._parseLinearGradient()
     }
   }

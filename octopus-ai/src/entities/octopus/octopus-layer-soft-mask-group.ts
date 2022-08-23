@@ -1,3 +1,5 @@
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+
 import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
@@ -91,7 +93,7 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
       maskChannels,
       type: 'MASK_GROUP' as const,
       maskBasis: 'LAYER_AND_EFFECTS',
-      layers: this._layers.map((layer) => layer.convert()).filter((converted) => converted) as Octopus['Layer'][],
+      layers: getConverted(this._layers),
       mask,
     } as const
   }
