@@ -44,10 +44,7 @@ export class SourceApiReader {
   }
 
   parse(ids?: string[]): Design {
-    if (!this._design) {
-      this._design = this._parser.parse(ids)
-    }
-    return this._design
+    return this._parser.parse(ids)
   }
 
   private _initParser(): ReturnType<typeof createParser> {
