@@ -17,6 +17,8 @@ export type RawSourceXObjectDecodeParms = Partial<{
 
 export type XObjectSubtype = 'Form' | 'Image'
 
+export type RawResourcesXObjectImage = { Image: string }
+
 export type RawResourcesXObject = Partial<{
   Group: Partial<{
     I: boolean

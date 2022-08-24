@@ -4,12 +4,17 @@ import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
 import { SourceLayerCommon } from './source-layer-common'
 
-import type { RawGraphicsState, RawResourcesExtGState, RawResourcesXObject, XObjectSubtype } from '../../typings/raw'
+import type {
+  RawGraphicsState,
+  RawResourcesExtGState,
+  RawResourcesXObject,
+  RawResourcesXObjectImage,
+  XObjectSubtype,
+} from '../../typings/raw'
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { SourceResources } from './source-resources'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerXObjectImageOptions = {
@@ -39,16 +44,12 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     return this._rawValue.Name
   }
 
-  get parentResources(): Nullable<SourceResources> {
-    return this._parent.resources
-  }
-
   get graphicsState(): Nullable<RawGraphicsState> {
     const xObject = this._xObject
     return xObject ? xObject.GraphicsState : null
   }
 
-  get extGState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
     return this._parent.resources?.ExtGState?.[specifiedParameters]
   }
@@ -76,32 +77,10 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
 
   get fileName(): Nullable<string> {
     const { subtype } = this
+    if (!subtype || subtype !== 'Image') return null
+    const data = this._rawValue?.Data as RawResourcesXObjectImage
 
-    if (!subtype) {
-      return null
-    }
-
-    if (this._rawValue.Subtype !== 'Image') {
-      return null
-    }
-
-    const data = this._rawValue?.Data as Record<string, string>
-
-    if (!data) {
-      return null
-    }
-
-    if (!(subtype in data)) {
-      return null
-    }
-
-    const name = data[subtype]
-
-    if (!name) {
-      return null
-    }
-
-    return path.basename(name)
+    return data?.[subtype] ? path.basename(data[subtype]) : null
   }
 
   private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {

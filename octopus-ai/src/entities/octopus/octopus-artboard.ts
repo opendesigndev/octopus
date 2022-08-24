@@ -103,10 +103,6 @@ export class OctopusArtboard {
     return this._octopusAIConverter.manifest
   }
 
-  get parentArtboard(): OctopusArtboard {
-    return this
-  }
-
   async convert(): Promise<Octopus['OctopusDocument']> {
     if (!this._layers || !this._layers.length) {
       throw new Error('Artboard is missing content')

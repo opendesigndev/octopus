@@ -52,7 +52,7 @@ export class SourceLayerText extends SourceLayerCommon {
     })
 
     if (!equalDescendantMatrices) {
-      logger.error('initTexts', 'Different transform matrix in the same text group')
+      logger.error('Different transform matrix in the same text group')
     }
 
     return textSubLayers

@@ -4,7 +4,7 @@ import { initOctopusLayerChildren } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerGroup } from '../source/source-layer-group'

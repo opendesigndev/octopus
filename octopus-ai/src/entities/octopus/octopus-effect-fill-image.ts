@@ -1,16 +1,16 @@
 import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { OctopusEffectParent } from '../../typings/octopus-entities'
 import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 /** @TODO check images as mask when rendering is ready */
 type OctopusEffectImageFillOptions = {
   sourceLayer: SourceLayerXObjectImage
-  parent: OctopusLayerParent
+  parent: OctopusEffectParent
 }
 
 export class OctopusEffectImageFill {
-  private _parent: OctopusLayerParent
+  private _parent: OctopusEffectParent
   private _sourceLayer: SourceLayerXObjectImage
 
   static REVERSE_IMAGE_MATRIX = [1, 0, 0, -1, 0, 1]
@@ -21,12 +21,6 @@ export class OctopusEffectImageFill {
   }
 
   _parseImageRef(): Nullable<Octopus['ImageRef']> {
-    const imageName = this._sourceLayer.name
-
-    if (!imageName) {
-      return null
-    }
-
     const imageId = this._sourceLayer.fileName
     if (!imageId) {
       return null

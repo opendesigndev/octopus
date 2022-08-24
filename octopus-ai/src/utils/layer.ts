@@ -2,7 +2,7 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
 import { createOctopusLayer } from '../factories/create-octopus-layer'
 import { createSourceLayer } from '../factories/create-source-layer'
-import { textLayerGroupingService } from '../services/instances/text-layer-grouping-service'
+import { layerGroupingService } from '../services/instances/layer-grouping-service'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { OctopusLayer } from '../factories/create-octopus-layer'
@@ -35,7 +35,7 @@ type InitOctopusLayerSequenceOptions = {
 
 export function initOctopusLayerChildren({ layers, parent }: InitOctopusLayerSequenceOptions): OctopusLayer[] {
   const children = asArray(layers)
-  const layerSequences = textLayerGroupingService?.getLayerSequences(children)
+  const layerSequences = layerGroupingService?.getLayerSequences(children)
 
   if (!layerSequences) {
     return []

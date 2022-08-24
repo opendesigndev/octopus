@@ -1,4 +1,5 @@
 import { SourceArtboard } from './source-artboard'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form'
 
 import type {
   RawLayer,
@@ -10,7 +11,6 @@ import type {
 } from '../../typings/raw'
 import type { SourceLayerGroup } from './source-layer-group'
 import type { SourceLayerShape } from './source-layer-shape'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
 import type { SourceResources } from './source-resources'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
@@ -47,8 +47,16 @@ export class SourceLayerCommon {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
+  get resourcesTarget(): Nullable<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget
+  }
+
   get resources(): Nullable<SourceResources> {
-    return this._parent?.resources
+    return this.resourcesTarget?.resources
   }
 
   get parentArtboardDimensions(): { width: number; height: number } {
@@ -63,13 +71,13 @@ export class SourceLayerCommon {
     return 'GraphicsState' in this._rawValue ? this._rawValue.GraphicsState : null
   }
 
-  get extGState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
     return this.resources?.ExtGState?.[specifiedParameters]
   }
 
   get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {
-    return this.extGState?.BM
+    return this.externalGraphicState?.BM
   }
 
   get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
@@ -83,11 +91,11 @@ export class SourceLayerCommon {
   }
 
   get sMask(): Nullable<RawResourcesExtGStateSmask> {
-    return this.extGState?.SMask
+    return this.externalGraphicState?.SMask
   }
 
   get opacity(): Nullable<number> {
-    return this.extGState?.CA
+    return this.externalGraphicState?.CA
   }
 
   get transformMatrix(): RawGraphicsStateMatrix {

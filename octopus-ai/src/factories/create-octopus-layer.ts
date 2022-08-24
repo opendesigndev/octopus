@@ -9,9 +9,9 @@ import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { getMaskGroupHashKey } from '../utils/mask'
 
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
+import type { LayerSequence } from '../services/conversion/layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
-import type { ClippedSourceLayer, SourceLayer } from './create-source-layer'
+import type { SourceLayer } from './create-source-layer'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayer =
@@ -101,7 +101,7 @@ type GetClippingMaskGroupOptions = {
   parent: OctopusLayerParent
 }
 
-function doesMaskGroupExist(maskGroupHashKey: string | null) {
+function isMaskGroupRegistered(maskGroupHashKey: string | null) {
   return Boolean(maskGroupHashKey && OctopusLayerMaskGroup.registry[maskGroupHashKey])
 }
 
@@ -110,7 +110,7 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
   maskGroupHashKey: string | null
 } {
   const maskGroupHashKey = getMaskGroupHashKey(mask)
-  const maskGroupExists = doesMaskGroupExist(maskGroupHashKey)
+  const maskGroupExists = isMaskGroupRegistered(maskGroupHashKey)
 
   const maskGroup =
     maskGroupExists && maskGroupHashKey
@@ -141,26 +141,23 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
 export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
   const { layerSequence, parent } = options
 
-  const layer = layerSequence.sourceLayers[0]
+  const [layer] = layerSequence.sourceLayers
+
   if (layer.softMask) {
     return createOctopusLayerSoftMaskGroup({ layerSequence, parent })
   }
 
-  const clippedLayer = layer as ClippedSourceLayer
-
-  const { mask } = clippedLayer
-
-  if (!mask) {
+  if (!('mask' in layer) || !layer.mask) {
     return buildOctopusLayer(options)
   }
 
-  const { maskGroup, maskGroupHashKey } = getClippingMaskGroup({ parent, mask })
+  const { maskGroup, maskGroupHashKey } = getClippingMaskGroup({ parent, mask: layer.mask })
 
   if (maskGroup) {
-    maskGroup.addChildLayerToMaskGroup(clippedLayer)
+    maskGroup.addChildLayerToMaskGroup(layer)
   }
 
-  if (doesMaskGroupExist(maskGroupHashKey)) {
+  if (isMaskGroupRegistered(maskGroupHashKey)) {
     return null
   }
 
