@@ -4,10 +4,11 @@ import { BLEND_MODES } from '../../utils/blend-modes'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceResources } from '../source/source-resources'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
@@ -38,6 +39,7 @@ export abstract class OctopusLayerCommon {
   get id(): string {
     return this._id
   }
+
   /** @TODO check if this is needed
    tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden* 
    */
@@ -46,8 +48,8 @@ export abstract class OctopusLayerCommon {
   //   return hiddenContentIds
   // }
 
-  get resources(): SourceResources | undefined {
-    return this._parent.resources
+  get resources(): Nullable<SourceResources> {
+    return this._sourceLayer.resources
   }
 
   get parentArtboard(): OctopusArtboard {

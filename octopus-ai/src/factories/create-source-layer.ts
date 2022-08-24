@@ -18,8 +18,6 @@ export type SourceLayer =
   | SourceLayerXObjectForm
   | SourceLayerXObjectImage
 
-export type ClippedSourceLayer = SourceLayerShape | SourceLayerText | SourceLayerXObjectForm | SourceLayerXObjectImage
-
 type Builder = (options: CreateLayerOptions) => Nullable<SourceLayer>
 
 type CreateLayerOptions = {
@@ -60,7 +58,7 @@ function createXObject({ layer, parent }: CreateLayerOptions): SourceLayerXObjec
     return null
   }
 
-  const resourcesXObject = parent.resources?.xObject(xObjectName)
+  const resourcesXObject = parent.resources?.getXObjectByName(xObjectName)
 
   if (!resourcesXObject) {
     return null
@@ -91,10 +89,6 @@ export function createSourceLayerText({ layer, parent }: CreateLayerOptions): So
     parent,
     rawValue: layer as RawTextLayer,
   })
-}
-
-export function createSourceLayerXObject({ layer, parent }: CreateLayerOptions): Nullable<SourceLayerXObjectForm> {
-  return new SourceLayerXObjectForm({ rawValue: layer as RawXObjectLayer, parent })
 }
 
 export function createSourceLayer(options: CreateLayerOptions): Nullable<SourceLayer> {

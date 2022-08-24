@@ -5,7 +5,7 @@ import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerShape } from '../source/source-layer-shape'
@@ -66,7 +66,7 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
     return new OctopusEffectsShape({
       sourceLayer,
       resources,
-      parent: this._parent,
+      parent: this,
     })
   }
 

@@ -7,7 +7,7 @@ import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import OctopusPoint from './octopus-point'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
 import type { Coord } from '../../typings'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
@@ -65,7 +65,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     return new OctopusEffectsShape({
       sourceLayer,
       resources,
-      parent: this._parent,
+      parent: this,
     })
   }
 

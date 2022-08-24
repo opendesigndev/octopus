@@ -31,7 +31,7 @@ export class SourceResources {
     return this._rawValue?.Properties
   }
 
-  xObject(name: string): Nullable<RawResourcesXObject> {
+  getXObjectByName(name: string): Nullable<RawResourcesXObject> {
     return this._rawValue?.XObject?.[name]
   }
 

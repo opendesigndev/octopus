@@ -6,7 +6,7 @@ import { OctopusEffectImageFill } from './octopus-effect-fill-image'
 import { OctopusEffectStroke } from './octopus-effect-stroke'
 
 import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { OctopusEffectParent } from '../../typings/octopus-entities'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
 import type { SourceResources } from '../source/source-resources'
@@ -14,7 +14,7 @@ import type { SourceResources } from '../source/source-resources'
 type OctopusEffectsShapeOptions = {
   sourceLayer: SourceLayerShape | SourceLayerXObjectImage
   resources: SourceResources
-  parent: OctopusLayerParent
+  parent: OctopusEffectParent
 }
 
 export type ShapeEffects = {
@@ -25,7 +25,7 @@ export type ShapeEffects = {
 export class OctopusEffectsShape {
   private _sourceLayer: SourceLayerShape | SourceLayerXObjectImage
   private _resources: SourceResources
-  private _parent: OctopusLayerParent
+  private _parent: OctopusEffectParent
 
   constructor(options: OctopusEffectsShapeOptions) {
     this._sourceLayer = options.sourceLayer

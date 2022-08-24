@@ -70,7 +70,7 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
     file://${octopusPath}`)
   })
 
-  await converter.convertDesign({ exporter })
+  converter.convertDesign({ exporter })
 }
 
 async function convert() {

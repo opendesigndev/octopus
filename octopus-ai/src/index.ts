@@ -1,3 +1,4 @@
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import readPackageUpAsync from 'read-pkg-up'
 
@@ -6,8 +7,9 @@ import { AIFileReader } from './services/conversion/ai-file-reader'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
+import { LayerGroupingService } from './services/conversion/layer-grouping-service'
+import { set as setLayerGroupingService } from './services/instances/layer-grouping-service'
 import { set as setLogger } from './services/instances/logger'
-import { set as setTextLayerGroupingService } from './services/instances/text-layer-grouping-service'
 
 import type { SourceDesign } from './entities/source/source-design'
 import type { Exporter } from './services/conversion/exporter'
@@ -82,7 +84,8 @@ export class OctopusAIConverter {
   }
 
   private _setupTextLayerGroupingService(additionalTextData: AdditionalTextData) {
-    setTextLayerGroupingService(additionalTextData)
+    const instance = new LayerGroupingService(additionalTextData)
+    setLayerGroupingService(instance)
   }
 
   get pkg(): Promise<NormalizedPackageJson> {
@@ -118,9 +121,11 @@ export class OctopusAIConverter {
   }
 
   async convertArtboardById(targetArtboardId: string): Promise<ArtboardConversionResult> {
-    const timeStart = performance.now()
-    const { value, error } = await this._convertArtboardByIdSafe(targetArtboardId)
-    const time = performance.now() - timeStart
+    const {
+      result: { value, error },
+      time,
+    } = await benchmarkAsync(() => this._convertArtboardByIdSafe(targetArtboardId))
+
     return { id: targetArtboardId, value, error, time }
   }
 
@@ -160,9 +165,7 @@ export class OctopusAIConverter {
     }, Promise.resolve([]))
 
     /** Manifest */
-    const timeStart = performance.now()
-    const manifest = await this._octopusManifest.convert()
-    const time = performance.now() - timeStart
+    const { time, result: manifest } = await benchmarkAsync(() => this._octopusManifest.convert())
 
     await exporter?.exportManifest?.({ manifest, time })
 

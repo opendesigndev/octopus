@@ -105,7 +105,7 @@ export type RawResourcesExtGState = {
     Type: string
     ca: number
     op: boolean
-    ObjID: 38
+    ObjID: number
   }>
 }
 

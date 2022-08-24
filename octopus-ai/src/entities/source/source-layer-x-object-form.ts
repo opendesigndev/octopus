@@ -1,6 +1,5 @@
 import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
-import { SourceArtboard } from './source-artboard'
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceResources } from './source-resources'
 
@@ -8,7 +7,6 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawGraphicsState, RawResourcesExtGState, RawResourcesXObject } from '../../typings/raw'
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
 import type { SourceLayerParent, XObjectSubtype } from './source-layer-common'
-import type { SourceLayerGroup } from './source-layer-group'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
@@ -82,13 +80,6 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
     return this._mask
   }
 
-  get parentArtboard(): SourceArtboard | null {
-    if (!this._parent) return null
-
-    const parent = this._parent as SourceLayerGroup | SourceArtboard
-    return parent instanceof SourceArtboard ? parent : parent.parentArtboard
-  }
-
   private _initResources(): Nullable<SourceResources> {
     const rawResources = this._rawValue.Resources
     return rawResources ? new SourceResources({ rawValue: rawResources }) : undefined
@@ -123,7 +114,7 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
     return xObject ? xObject.GraphicsState : null
   }
 
-  get extGState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
     return this._parent.resources?.ExtGState?.[specifiedParameters]
   }
