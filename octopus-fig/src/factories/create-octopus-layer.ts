@@ -82,6 +82,13 @@ export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerP
   let mask: OctopusLayer | null = null
   let maskIsOutline = false
   let maskLayers: OctopusLayer[] = []
+
+  const resetValues = (_mask: OctopusLayer | null = null, _maskIsOutline = false) => {
+    mask = _mask
+    maskIsOutline = _maskIsOutline
+    maskLayers = []
+  }
+
   const octopusLayers = layers.reduce((layers, sourceLayer) => {
     const octopusLayer = createOctopusLayer({ parent, layer: sourceLayer })
 
@@ -91,32 +98,30 @@ export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerP
       if (!sourceLayer.visible) {
         if (mask !== null) {
           const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-          mask = null
-          maskIsOutline = false
-          maskLayers = []
+          resetValues()
           if (!clippingMask) return push(layers, octopusLayer)
           return push(layers, clippingMask, octopusLayer)
         }
-        mask = null
-        maskIsOutline = false
-        maskLayers = []
+        resetValues()
         return push(layers, octopusLayer)
       }
       if (mask !== null) {
         const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-        mask = octopusLayer
-        maskIsOutline = sourceLayer.isMaskOutline
-        maskLayers = []
+        resetValues(octopusLayer, sourceLayer.isMaskOutline)
         if (!clippingMask) return layers
         return push(layers, clippingMask)
       }
-      mask = octopusLayer
-      maskIsOutline = sourceLayer.isMaskOutline
-      maskLayers = []
+      resetValues(octopusLayer, sourceLayer.isMaskOutline)
       return layers
     }
 
     if (mask !== null) {
+      if (sourceLayer.type === 'FRAME') {
+        const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
+        resetValues()
+        if (!clippingMask) return push(layers, octopusLayer)
+        return push(layers, clippingMask, octopusLayer)
+      }
       maskLayers.push(octopusLayer)
       return layers
     }

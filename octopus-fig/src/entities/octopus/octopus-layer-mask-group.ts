@@ -64,55 +64,13 @@ export class OctopusLayerMaskGroup {
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
     const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
-    // const transform = sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
-    const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID' //'BODY' //'BODY_EMBED' //'LAYER_AND_EFFECTS'
+    const maskBasis = 'BODY' // https://gitlab.avcd.cz/backend/rendering/-/issues/524
+    // const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
     const layers = createOctopusLayers(sourceLayer.layers, parent)
     return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard })
   }
-
-  // // TODO HERE zkontroluj jestli je potreba
-  // static createBackgroundMask(frame: SourceLayerFrame): Octopus['Layer'] | null {
-  //   if (!frame.size) return null
-
-  //   const id = convertId(frame.id)
-  //   const rectangle = convertRectangle(frame.size)
-  //   const cornerRadius = frame.cornerRadius
-  //   const fills = OctopusFill.convertFills(frame.fills, frame)
-  //   const strokes = OctopusStroke.convertStrokes(frame.strokes, frame)
-  //   return {
-  //     id: `${id}-BackgroundMask`,
-  //     type: 'SHAPE' as const,
-  //     visible: fills.length > 0 || strokes.length > 0,
-  //     shape: { path: { type: 'RECTANGLE', rectangle, cornerRadius }, fills, strokes },
-  //   }
-  // }
-
-  // static createBackground({
-  //   frame,
-  //   parent,
-  //   isArtboard = false,
-  // }: CreateBackgroundOptions): Octopus['MaskGroupLayer'] | undefined {
-  //   const id = convertId(frame.id)
-
-  //   // const mask = OctopusLayerMaskGroup.createBackgroundMask(frame)
-
-  //   const mask = OctopusLayerMaskGroup.createBackgroundLayer(frame, parent)?.convert()
-  //   if (!mask) return
-
-  //   const meta = isArtboard ? { isArtboard } : undefined
-  //   const visible = true // TODO
-  //   return {
-  //     id: `${id}-Background`,
-  //     type: 'MASK_GROUP',
-  //     maskBasis: 'BODY',
-  //     mask,
-  //     layers: getConverted(parent.layers),
-  //     meta,
-  //     visible,
-  //   }
-  // }
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
