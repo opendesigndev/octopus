@@ -11,8 +11,6 @@ import type { SourceLayer } from '../factories/create-source-layer'
 import type { RawResourcesExtGStateSmask, RawResourcesXObject } from '../typings/raw'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
-type TransformedObjectToArray = [string, unknown][]
-
 export function initClippingMask(layer: SourceLayer): Nullable<SourceLayerShape> {
   if (!('clippingPaths' in layer)) {
     return
@@ -90,17 +88,11 @@ export function hashObject(obj: { [key: string]: unknown }): string {
   return hashOfObjectSeed(Object.entries(obj).map(([key, value]) => [key, hashAny(value)]))
 }
 
-function transformObjectToSortedArray(point: Record<string, unknown>): TransformedObjectToArray {
-  return Object.entries({ ...point }).sort(([keyA], [keyB]) => {
-    return keyA > keyB ? 0 : 1
-  })
-}
-
 function normalizeSubPath(
   subPath: SourceLayerShapeSubPath
-): Pick<SourceLayerShapeSubPath, 'type' | 'coords' | 'closed'> & { points: TransformedObjectToArray[] } {
+): Pick<SourceLayerShapeSubPath, 'type' | 'coords' | 'closed'> & { points: string[] } {
   return {
-    points: subPath.points.map((point) => transformObjectToSortedArray(point)),
+    points: subPath.points.map((point) => hashObject(pick(point, 'Type', 'Coords'))),
     ...pick(subPath, 'type', 'coords', 'closed'),
   }
 }

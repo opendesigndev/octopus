@@ -1,14 +1,14 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import uniqueId from 'lodash/uniqueId'
 
 import { buildOctopusLayer, createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerMaskOptions = {
@@ -18,7 +18,7 @@ type OctopusLayerMaskOptions = {
 
 export class OctopusLayerMaskGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[] = []
-  protected _sourceLayer: SourceLayerShape
+  protected _id: string
 
   static registerMaskGroup(key: string, maskGroup: OctopusLayerMaskGroup): void {
     this.registry[key] = maskGroup
@@ -27,6 +27,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
 
   constructor(options: OctopusLayerMaskOptions) {
     super(options)
+    this._id = uniqueId()
   }
 
   addChildLayerToMaskGroup(layer: SourceLayer): void {

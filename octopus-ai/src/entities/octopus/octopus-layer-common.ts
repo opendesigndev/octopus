@@ -1,10 +1,8 @@
-import uniqueId from 'lodash/uniqueId'
-
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceResources } from '../source/source-resources'
@@ -26,10 +24,10 @@ export abstract class OctopusLayerCommon {
   static DEFAULT_OPACITY = 1
 
   constructor(options: OctopusLayerCommonOptions) {
+    const [sourceLayer] = options.layerSequence.sourceLayers
     this._parent = options.parent
-    this._sourceLayer = options.layerSequence.sourceLayers[0]
-
-    this._id = uniqueId()
+    this._sourceLayer = sourceLayer
+    this._id = sourceLayer.id
   }
 
   get parent(): OctopusLayerParent {

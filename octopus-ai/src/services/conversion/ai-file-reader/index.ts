@@ -32,7 +32,11 @@ export class AIFileReader {
   static BITMAPS_FOLDER_NAME = 'bitmaps'
 
   static getOutputResourcesBaseDir(): string {
-    return path.join(process.env.RESOURCES_DIR ?? '')
+    if (!process.env.RESOURCES_DIR) {
+      throw new Error('Resources Directory not set')
+    }
+
+    return process.env.RESOURCES_DIR
   }
 
   constructor(options: AIFileReaderOptions) {
@@ -51,7 +55,7 @@ export class AIFileReader {
     this._images = ctx.Bitmaps
 
     const version = ctx.aiFile.Version
-    const additionalTextData = (await PrivateData(ctx)) as never as AdditionalTextData
+    const additionalTextData = (await PrivateData(ctx)) as unknown as AdditionalTextData
     const artboards = (await Promise.all(
       ArtBoardRefs(ctx).map((ref) => {
         return ArtBoard(ctx, ref)
@@ -71,7 +75,11 @@ export class AIFileReader {
       return {
         id: imageId,
         path: fullPath,
-        getImageData: () => fsp.readFile(fullPath).catch(() => logger.error('Failed to read image:', fullPath)),
+        getImageData: () =>
+          fsp.readFile(fullPath).catch((err) => {
+            logger.error('Failed to read image', fullPath)
+            throw err
+          }),
       }
     })
   }

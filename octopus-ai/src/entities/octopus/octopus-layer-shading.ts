@@ -5,9 +5,10 @@ import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
-import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { RawGraphicsStateMatrix } from '../../typings/raw'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { LayerSpecifics } from './octopus-layer-common'
 
@@ -20,7 +21,7 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
   protected _sourceLayer: SourceLayerShape
 
   static DEFAULT_RECT_COORDS = [0, 0, 0, 0]
-  static DEFAULT_GEOMETRY = 'MZ'
+  static DEFAULT_GEOMETRY = ''
   static FILL_RULE = {
     'nonzero-winding-number': 'NON_ZERO',
     'even-odd': 'EVEN_ODD',
@@ -39,11 +40,11 @@ export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLa
             ...new OctopusLayerShapeShapeAdapter({
               parent: this._parent,
               layerSequence: { sourceLayers: [sourceLayer] },
-            })._getPath(),
+            }).getPath(),
             transform: sourceLayer.transformMatrix,
           }
         })
-        .filter((path) => !!path) as Octopus['PathLike'][]
+        .filter((path): path is Octopus['PathLike'] & { transform: RawGraphicsStateMatrix } => Boolean(path))
     )
   }
 

@@ -1,11 +1,12 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import uniqueId from 'lodash/uniqueId'
 
 import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerXObjectForm } from '../source/source-layer-x-object-form'
@@ -22,6 +23,7 @@ type MaskChannels = [number, number, number, number, number]
 export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
   protected _sourceLayer: SourceLayerWithSoftMask
   private _layers: OctopusLayer[]
+  protected _id: string
 
   static LUMINOSITY_MASK_CHANNELS: MaskChannels = [0.299, 0.587, 0.114, 0, 0]
   static INVERSE_LUMINOSITY_MASK_CHANNELS: MaskChannels = [-0.299, -0.587, -0.114, 0, 1]
@@ -31,6 +33,7 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
     super(options)
 
     this._layers = this._initLayers()
+    this._id = uniqueId()
   }
 
   private _createMask() {

@@ -1,5 +1,3 @@
-import uniqueId from 'lodash/uniqueId'
-
 import { SourceArtboard } from './source-artboard'
 
 import type { Metadata } from '../../services/conversion/ai-file-reader'
@@ -14,7 +12,7 @@ export class SourceDesign {
   private _additionalTexData: AdditionalTextData
 
   constructor(sourceTree: SourceTree) {
-    this._artboards = sourceTree.artboards.map((rawArtboard) => new SourceArtboard(rawArtboard, uniqueId()))
+    this._artboards = sourceTree.artboards.map((rawArtboard) => new SourceArtboard(rawArtboard))
     this._images = sourceTree.images
     this._additionalTexData = sourceTree.additionalTextData
     this._metaData = sourceTree.metadata

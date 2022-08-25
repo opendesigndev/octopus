@@ -1,3 +1,5 @@
+import uniqueId from 'lodash/uniqueId'
+
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerXObjectForm } from './source-layer-x-object-form'
 
@@ -26,10 +28,16 @@ export type XObjectSubtype = 'Form' | 'Image'
 export class SourceLayerCommon {
   protected _parent: SourceLayerParent
   protected _rawValue: RawLayer
+  protected _id: string
 
   constructor(options: SourceLayerCommonOptions) {
     this._rawValue = options.rawValue
     this._parent = options.parent
+    this._id = uniqueId()
+  }
+
+  get id(): string {
+    return this._id
   }
 
   get type(): Nullable<LayerType> {
@@ -73,7 +81,7 @@ export class SourceLayerCommon {
 
   get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this.resources?.ExtGState?.[specifiedParameters]
+    return this.resources?.externalGraphicState?.[specifiedParameters]
   }
 
   get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {

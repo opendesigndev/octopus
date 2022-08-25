@@ -7,7 +7,7 @@ import { AIFileReader } from './services/conversion/ai-file-reader'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
-import { LayerGroupingService } from './services/conversion/layer-grouping-service'
+import { LayerGroupingService } from './services/conversion/text-layer-grouping-service'
 import { set as setLayerGroupingService } from './services/instances/layer-grouping-service'
 import { set as setLogger } from './services/instances/logger'
 

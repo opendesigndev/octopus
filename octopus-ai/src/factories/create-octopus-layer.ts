@@ -9,7 +9,7 @@ import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { getMaskGroupHashKey } from '../utils/mask'
 
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { LayerSequence } from '../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { SourceLayer } from './create-source-layer'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'

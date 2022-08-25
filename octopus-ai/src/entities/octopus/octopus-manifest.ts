@@ -1,6 +1,6 @@
 import path from 'path'
 
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 
 import type { OctopusAIConverter } from '../..'
@@ -90,32 +90,33 @@ export class OctopusManifest {
     }
   }
 
-  private _getArtboardAssets(artboardId: string) {
+  private _getArtboardAssets(artboardId: string): Manifest['Assets'] {
     const targetArtboard = this._octopusAIConverter.sourceDesign.getArtboardById(artboardId)
-    const { fonts, images } = targetArtboard?.dependencies || { fonts: [], images: [] }
+    const { fonts: fontsDeps, images: imagesDeps } = targetArtboard?.dependencies || { fonts: [], images: [] }
 
-    images.map((image) => {
+    const images = imagesDeps.map((image: string) => {
       const location = this.getExportedRelativeImageById(image)
       return {
         location:
           typeof location === 'string'
-            ? {
-                type: 'LOCAL_RESOURCE',
+            ? ({
+                type: 'RELATIVE',
                 path: location,
-              }
-            : {
-                type: 'TRANSIENT',
-              },
+              } as const)
+            : ({
+                type: 'RELATIVE',
+                path: '',
+              } as const),
         refId: image,
       }
     })
 
-    // @todo check this when you get to texts
-    fonts.map((font) => {
+    const fonts = fontsDeps.map((font: string) => {
       return {
         location: {
-          type: 'TRANSIENT',
-        },
+          type: 'RELATIVE',
+          path: '',
+        } as const,
         name: font,
       }
     })
@@ -136,11 +137,12 @@ export class OctopusManifest {
         const location =
           typeof exportLocation === 'string'
             ? {
-                type: 'LOCAL_RESOURCE',
+                type: 'RELATIVE',
                 path: exportLocation,
               }
             : {
-                type: 'TRANSIENT',
+                type: 'RELATIVE',
+                path: '',
               }
 
         const bounds = this._convertManifestBounds(artboard.mediaBox)

@@ -39,7 +39,7 @@ export class SourceResources {
     return this.properties?.[id]
   }
 
-  get ExtGState(): Nullable<RawResourcesExtGState> {
+  get externalGraphicState(): Nullable<RawResourcesExtGState> {
     return this._rawValue?.ExtGState
   }
 
