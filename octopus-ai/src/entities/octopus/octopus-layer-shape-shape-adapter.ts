@@ -7,7 +7,7 @@ import { OctopusEffectsShape } from './octopus-effects-shape'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import OctopusPoint from './octopus-point'
 
-import type { LayerSequence } from '../../services/conversion/layer-grouping-service'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Coord } from '../../typings'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
@@ -26,7 +26,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
   protected _sourceLayer: SourceLayerShape
 
   static DEFAULT_RECT_COORDS = [0, 0, 0, 0]
-  static DEFAULT_GEOMETRY = 'MZ'
+  static DEFAULT_GEOMETRY = ''
   static FILL_RULE = {
     'nonzero-winding-number': 'NON_ZERO',
     'even-odd': 'EVEN_ODD',
@@ -111,7 +111,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
     }
   }
 
-  public _getPath(): Octopus['PathLike'] | null {
+  public getPath(): Octopus['PathLike'] | null {
     const sourceSubpaths = this._sourceLayer.subpaths
 
     if (sourceSubpaths.length > 1) {
@@ -134,7 +134,7 @@ export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements
   }
 
   private _getShapes(): Octopus['Shape'] | null {
-    const path = this._getPath()
+    const path = this.getPath()
     const shapeEffects = this._createShapeEffects().convert()
 
     if (!path) {

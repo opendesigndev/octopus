@@ -48,7 +48,7 @@ export class OctopusEffectsShape {
     sourceLayer: SourceLayerShape
   ): (OctopusEffectColorFill | OctopusEffectGradientFill)[] {
     const fills = []
-    if (sourceLayer.isFill) {
+    if (sourceLayer.hasFill) {
       const colorSpaceValue = this._resources.getColorSpaceValue(sourceLayer.colorSpaceNonStroking ?? '') ?? ''
 
       fills.push(

@@ -116,7 +116,7 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
 
   get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
+    return this._parent.resources?.externalGraphicState?.[specifiedParameters]
   }
 
   get clippingPaths(): SourceLayerShape[] | null {

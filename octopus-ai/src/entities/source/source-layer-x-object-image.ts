@@ -51,7 +51,7 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
 
   get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
+    return this._parent.resources?.externalGraphicState?.[specifiedParameters]
   }
 
   private _initClippingPaths(): SourceLayerShape[] {

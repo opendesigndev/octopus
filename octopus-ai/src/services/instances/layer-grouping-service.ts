@@ -1,4 +1,4 @@
-import type { LayerGroupingService } from '../conversion/layer-grouping-service'
+import type { LayerGroupingService } from '../conversion/text-layer-grouping-service'
 
 export let layerGroupingService: LayerGroupingService | null = null
 

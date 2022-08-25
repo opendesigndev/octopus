@@ -139,7 +139,7 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.parentArtboard?.dimensions?.height || 0
   }
 
-  get isFill(): boolean {
+  get hasFill(): boolean {
     return Boolean(this._rawValue.Fill)
   }
 
