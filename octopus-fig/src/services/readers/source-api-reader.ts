@@ -39,8 +39,8 @@ export class SourceApiReader {
     return this._options.designId
   }
 
-  get frameLikeIds() {
-    return this._parser.getFrameLikeIds()
+  get getFileMeta() {
+    return this._parser.getFileMeta()
   }
 
   parse(ids?: string[]): Design {
