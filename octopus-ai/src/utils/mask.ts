@@ -90,9 +90,9 @@ export function hashObject(obj: { [key: string]: unknown }): string {
 
 function normalizeSubPath(
   subPath: SourceLayerShapeSubPath
-): Pick<SourceLayerShapeSubPath, 'type' | 'coords' | 'closed'> & { points: string[] } {
+): Pick<SourceLayerShapeSubPath, 'type' | 'coords' | 'closed' | 'points'> {
   return {
-    points: subPath.points.map((point) => hashObject(pick(point, 'Type', 'Coords'))),
+    points: subPath.points.map((point) => pick(point, 'Type', 'Coords')),
     ...pick(subPath, 'type', 'coords', 'closed'),
   }
 }
