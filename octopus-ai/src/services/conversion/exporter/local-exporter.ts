@@ -90,6 +90,10 @@ export class LocalExporter implements Exporter {
     return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
   }
 
+  finalizeExport(): void {
+    this._completed.resolve()
+  }
+
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
     return this._save(LocalExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest))
   }

@@ -102,6 +102,10 @@ export class TempExporter extends EventEmitter implements Exporter {
     return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(name)), data)
   }
 
+  finalizeExport(): void {
+    this._completed.resolve()
+  }
+
   async exportManifest(designConversionResult: DesignConversionResult): Promise<string> {
     const manifestPath = await this._save(
       TempExporter.OCTOPUS_MANIFEST_NAME,
