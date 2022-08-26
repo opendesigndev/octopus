@@ -259,13 +259,15 @@ export class OctopusFigConverter {
 
     design.on('ready:artboard', async (frame: ResolvedFrame) => {
       const rawArtboard = frame.node.document as RawLayerFrame
-      exporter?.exportRawComponent?.(rawArtboard, frame.nodeId)
+      const sourcePathPromise = exporter?.exportRawComponent?.(rawArtboard, frame.nodeId)
 
       const fillIds = Object.keys(frame.fills)
       this._octopusManifest?.setExportedArtboardImageMap(frame.nodeId, fillIds)
       const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap })
       const artboardPromise = queue.exec(sourceArtboard)
       awaitingArtboards.push(artboardPromise)
+
+      this._octopusManifest?.setExportedSourcePath(frame.nodeId, await sourcePathPromise)
       const artboard = await artboardPromise
       if (shouldReturn) conversionResult.artboards.push(artboard)
     })

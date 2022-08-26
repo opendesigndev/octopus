@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@avocode/figma-parser": "3.0.0-rc.5",
-    "@avocode/manifest-ts": "3.0.0-alpha.33",
+    "@avocode/manifest-ts": "3.0.0-alpha.36",
     "@avocode/octopus-common": "3.0.0-rc.22",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "chalk": "^4.1.2",

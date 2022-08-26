@@ -24,6 +24,7 @@ export class OctopusManifest {
     previews: Map<string, string | undefined>
     artboards: Map<string, ArtboardDescriptor>
     artboardImageMap: Map<string, string[]>
+    artboardSourcePath: Map<string, string | undefined>
   }
 
   static DEFAULT_FIG_VERSION = '0'
@@ -37,6 +38,7 @@ export class OctopusManifest {
       previews: new Map(),
       artboards: new Map(),
       artboardImageMap: new Map(),
+      artboardSourcePath: new Map(),
     }
   }
 
@@ -62,6 +64,14 @@ export class OctopusManifest {
 
   getExportedArtboardImageMap(artboardId: string): string[] | undefined {
     return this._exports.artboardImageMap.get(artboardId)
+  }
+
+  setExportedSourcePath(artboardId: string, sourcePath?: string): void {
+    this._exports.artboardSourcePath.set(artboardId, sourcePath)
+  }
+
+  getExportedSourcePath(artboardId: string): string | undefined {
+    return this._exports.artboardSourcePath.get(artboardId)
   }
 
   getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
@@ -142,6 +152,17 @@ export class OctopusManifest {
     return { images, fonts }
   }
 
+  private _getSourceArtifact(path: string): Manifest['Artifact'] {
+    return { type: 'SOURCE', location: { type: 'RELATIVE', path } }
+  }
+
+  private _getArtifacts(source: SourceArtboard): Manifest['Artifact'][] {
+    const artifacts: Manifest['Artifact'][] = []
+    const sourcePath = this.getExportedSourcePath(source.id)
+    if (sourcePath) artifacts.push(this._getSourceArtifact(sourcePath))
+    return artifacts
+  }
+
   private _getPreview(id: string): Manifest['ResourceLocation'] | undefined {
     const previewPath = this.getExportedPreviewPath(id)
     if (!previewPath) return
@@ -156,6 +177,7 @@ export class OctopusManifest {
     const path = this.getExportedArtboardPathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
+    const artifacts = this._getArtifacts(source)
     const preview = this._getPreview(id)
 
     return {
@@ -167,6 +189,7 @@ export class OctopusManifest {
       dependencies: [],
       preview,
       assets,
+      artifacts,
       location,
     }
   }

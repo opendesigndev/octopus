@@ -6,7 +6,7 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportRawDesign" method implemented!')
   }
 
-  exportRawComponent?(_raw: unknown, _name: string): Promise<unknown> {
+  exportRawComponent?(_raw: unknown, _name: string): Promise<string> {
     throw new Error('Subclass of "Exporter" has no "exportRawComponent" method implemented!')
   }
 

@@ -28,6 +28,11 @@
   resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.33.tgz#8220b87c2966ffac905aed7f1a0394a1d1bcfc47"
   integrity sha512-kpxW89i8rKH/ztUC7XO4dbK02+bb4mjG/rDCG6fiBuGpFZv5vqVRwHLgeQf525z31bPSrUcBIqQlYRXW4/34Jw==
 
+"@avocode/manifest-ts@3.0.0-alpha.36":
+  version "3.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.36.tgz#4bc7937116ec62d84d68b9adf7c59eb015faf1b2"
+  integrity sha512-65P8bh2BKdQldrD2sVDO9q2NQY4Y98KzUsUimKpBYj83K8cAsBHf3N+HLzElI5DqrZZq69bS1LsIzLP0AgRFLw==
+
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/@avocode/octopus-common/-/octopus-common-2.1.11.tgz#905886eeed52ba942a1e973a82ced59a65fe0ff9"

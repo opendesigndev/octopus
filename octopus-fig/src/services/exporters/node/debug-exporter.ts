@@ -76,14 +76,16 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportRawDesign(raw: unknown): Promise<string> {
-    const rawPath = await this._save(DebugExporter.getSourcePath('design'), stringify(raw))
-    this.emit('raw:design', rawPath)
+    const rawPath = DebugExporter.getSourcePath('design')
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:design', savedPath)
     return rawPath
   }
 
   async exportRawComponent(raw: unknown, name: string): Promise<string> {
-    const rawPath = await this._save(DebugExporter.getSourcePath(name), stringify(raw))
-    this.emit('raw:component', rawPath)
+    const rawPath = DebugExporter.getSourcePath(name)
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:component', savedPath)
     return rawPath
   }
 
