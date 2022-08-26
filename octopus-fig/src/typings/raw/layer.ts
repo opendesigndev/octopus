@@ -64,9 +64,14 @@ export type RawLayerVector = RawLayerBase & {
 }
 
 export type RawLayerFrame = RawLayerVector & {
-  type: 'FRAME'
+  type: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
+}
+
+export type RawLayerInstance = RawLayerFrame & {
+  type: 'INSTANCE'
+  componentIdString?: string
 }
 
 export type RawLayerShape = RawLayerVector & {

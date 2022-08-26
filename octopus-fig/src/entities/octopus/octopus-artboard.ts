@@ -31,12 +31,12 @@ export class OctopusArtboard {
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    return undefined
-    // if (!this._sourceArtboard.clipsContent) return undefined
-    // const bounds = this.sourceArtboard.bounds
-    // if (!bounds) return undefined
-    // const { width, height } = bounds
-    // return { width, height }
+    if (!this._sourceArtboard.clipsContent) return undefined
+    if (this._sourceArtboard.sourceFrame.strokes?.length > 0) return undefined
+    const bounds = this.sourceArtboard.bounds
+    if (!bounds) return undefined
+    const { width, height } = bounds
+    return { width, height }
   }
 
   get id(): string {
