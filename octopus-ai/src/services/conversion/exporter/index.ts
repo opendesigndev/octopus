@@ -10,4 +10,5 @@ export interface Exporter {
   exportArtboard?(_source: SourceArtboard, _artboard: ArtboardConversionResult): Promise<unknown>
   exportManifest?(_manifest: DesignConversionResult): Promise<unknown>
   getBasePath(): Promise<string>
+  finalizeExport(): void
 }
