@@ -48,7 +48,7 @@ class OctopusFigWorker {
   }
 
   async _getArtboards(msgId: number, index: number) {
-    postMessage({ msgId, response: await this._readers[index].frameLikeIds })
+    postMessage({ msgId, response: await this._readers[index].getFileMeta })
   }
 
   async _parseArtboard(msgId: number, index: number, artboardId: string) {

@@ -14,7 +14,6 @@ import type {
   FigmaFile,
   FigmaGroupLike,
   FigmaLayer,
-  NamedTargetIds,
   SourceComponent,
   TargetIds,
 } from '../../types/figma'
@@ -36,6 +35,24 @@ type ComponentSetMeta = {
 type ComponentSetsMetaMap = { [key: string]: ComponentSetMeta }
 type SourceComponentsMap = { [key: string]: SourceComponent }
 type FileOptions = { file: FigmaFile }
+
+export type NamedPagedId = {
+  name: string
+  id: string
+  page: {
+    id: string
+    name: string
+  }
+}
+
+export type FileMeta = {
+  designName: string
+  content: {
+    topLevelArtboards: NamedPagedId[]
+    localComponents: NamedPagedId[]
+    remoteComponents: { name: string; id: string }[]
+  }
+}
 
 export class File {
   private _file: FigmaFile
@@ -164,16 +181,39 @@ export class File {
     }
   }
 
-  getNamedFrameLikeIds(): NamedTargetIds {
+  private _getNamedPagedIdsFrom(page: Page, targets: (Artboard | FigmaLayer)[]): NamedPagedId[] {
+    return targets.map((target) => {
+      return {
+        name: target.name,
+        id: target.id,
+        page: {
+          id: page.id,
+          name: page.name,
+        },
+      }
+    })
+  }
+
+  getFileMeta() {
+    const topLevelArtboards = this._pages.reduce<NamedPagedId[]>((artboards, page) => {
+      const pageArtboards = this._getNamedPagedIdsFrom(page, page.getTopLevelArtboards())
+      artboards.push(...pageArtboards)
+      return artboards
+    }, [])
+
+    const localComponents = this._pages.reduce<NamedPagedId[]>((components, page) => {
+      const pageComponents = this._getNamedPagedIdsFrom(page, page.getLocalComponents())
+      components.push(...pageComponents)
+      return components
+    }, [])
+
     return {
-      topLevelArtboards: this._findDefaultTargetArtboards().map((artboard) => {
-        return {
-          name: artboard.name,
-          id: artboard.id,
-        }
-      }),
-      localComponents: this.localComponentNamedIds,
-      remoteComponents: this.remoteComponentNamedIds,
+      designName: this.name,
+      content: {
+        topLevelArtboards,
+        localComponents,
+        remoteComponents: this.remoteComponentNamedIds,
+      },
     }
   }
 
