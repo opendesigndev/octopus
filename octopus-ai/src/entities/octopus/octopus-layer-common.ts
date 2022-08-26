@@ -1,30 +1,33 @@
 import { BLEND_MODES } from '../../utils/blend-modes'
+import { OctopusArtboard } from './octopus-artboard'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type SourceResources from '../source/source-resources'
+import type { SourceResources } from '../source/source-resources'
+import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 
 type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayer
+  layerSequence: LayerSequence
 }
 
-export default abstract class OctopusLayerCommon {
-  static DEFAULT_OPACITY = 1
-
+export abstract class OctopusLayerCommon {
   protected _id: string
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayer
 
-  constructor(options: OctopusLayerCommonOptions) {
-    this._parent = options.parent
-    this._sourceLayer = options.sourceLayer
+  static DEFAULT_OPACITY = 1
 
-    this._id = options.sourceLayer.path.join(':')
+  constructor(options: OctopusLayerCommonOptions) {
+    const [sourceLayer] = options.layerSequence.sourceLayers
+    this._parent = options.parent
+    this._sourceLayer = sourceLayer
+    this._id = sourceLayer.id
   }
 
   get parent(): OctopusLayerParent {
@@ -35,18 +38,25 @@ export default abstract class OctopusLayerCommon {
     return this._id
   }
 
+  /** @TODO check if this is needed
+   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden* 
+   */
   // get hiddenContentIds(): number[] {
   //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
   //   return hiddenContentIds
   // }
 
-  get resources(): SourceResources | undefined {
-    return this._parent.resources
+  get resources(): Nullable<SourceResources> {
+    return this._sourceLayer.resources
+  }
+
+  get parentArtboard(): OctopusArtboard {
+    const parent = this._parent as OctopusLayerParent
+    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
   }
 
   get blendMode(): Octopus['LayerBase']['blendMode'] {
     const blendModeKey = this._sourceLayer.blendMode
-
     if (!blendModeKey) {
       return BLEND_MODES.Normal
     }
@@ -71,7 +81,7 @@ export default abstract class OctopusLayerCommon {
       blendMode: this.blendMode,
       opacity: this.opacity,
       id: this.id,
-      name: this._sourceLayer.name,
+      ...(this._sourceLayer.name ? { name: this._sourceLayer.name } : null),
     }
   }
 }

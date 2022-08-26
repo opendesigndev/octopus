@@ -1,49 +1,81 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import uniqueId from 'lodash/uniqueId'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
+import { initOctopusLayerChildren } from '../../utils/layer'
+import { parseRect } from '../../utils/rectangle'
 
-import type OctopusAIConverter from '../..'
+import type { OctopusAIConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import type SourceArtboard from '../source/source-artboard'
-import type SourceDesign from '../source/source-design'
-import type SourceResources from '../source/source-resources'
+import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceDesign } from '../source/source-design'
+import type { SourceResources } from '../source/source-resources'
+import type { OctopusManifest } from './octopus-manifest'
 
 type OctopusArtboardOptions = {
-  sourceDesign: SourceDesign
   targetArtboardId: string
   octopusAIConverter: OctopusAIConverter
 }
 
-export default class OctopusArtboard {
+export class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
   private _octopusAIConverter: OctopusAIConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.sourceDesign.getArtboardById(options.targetArtboardId)
+    const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
+
     if (!artboard) {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
+
     this._octopusAIConverter = options.octopusAIConverter
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
   }
 
   private _initLayers() {
-    return asArray(this._sourceArtboard?.children).reduce((layers, sourceLayer) => {
-      const octopusLayer = createOctopusLayer({
-        parent: this,
-        layer: sourceLayer,
-      })
-      return octopusLayer ? [...layers, octopusLayer] : layers
-    }, [])
+    return initOctopusLayerChildren({ layers: this._sourceArtboard.children, parent: this })
   }
 
-  get dimensions(): Octopus['Dimensions'] {
-    return this._sourceArtboard.dimensions
+  private _createMask(): Octopus['ShapeLayer'] {
+    return {
+      type: 'SHAPE',
+      id: uniqueId(),
+      shape: {
+        path: parseRect(this._sourceArtboard.mediaBox),
+        fills: [
+          {
+            type: 'COLOR',
+            visible: true,
+            blendMode: 'NORMAL',
+            color: {
+              r: 1,
+              g: 1,
+              b: 1,
+              a: 1,
+            },
+          },
+        ],
+      },
+    }
   }
 
+  private _createParentMaskGroup(): Octopus['MaskGroupLayer'] {
+    const layers = getConverted(this._layers)
+
+    return {
+      id: uniqueId(),
+      type: 'MASK_GROUP',
+      mask: this._createMask(),
+      maskBasis: 'BODY',
+      layers,
+    }
+  }
+
+  /** @TODO check if this is needed
+   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden 
+   */
   // get hiddenContentIds(): number[] {
   //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
   //     .map((c) => c.ObjID)
@@ -52,6 +84,10 @@ export default class OctopusArtboard {
 
   get resources(): SourceResources {
     return this._sourceArtboard.resources
+  }
+
+  get sourceDesign(): SourceDesign {
+    return this._octopusAIConverter.sourceDesign
   }
 
   get id(): string {
@@ -63,17 +99,13 @@ export default class OctopusArtboard {
     return pkg.version
   }
 
+  get manifest(): OctopusManifest {
+    return this._octopusAIConverter.manifest
+  }
+
   async convert(): Promise<Octopus['OctopusDocument']> {
-    const parentGroupLayer = this._layers[0]
-
-    if (!parentGroupLayer) {
+    if (!this._layers || !this._layers.length) {
       throw new Error('Artboard is missing content')
-    }
-
-    const content = parentGroupLayer.convert()
-
-    if (!content) {
-      throw new Error('Error converting parent group layer')
     }
 
     if (typeof this._sourceArtboard.id !== 'string') {
@@ -87,8 +119,7 @@ export default class OctopusArtboard {
       version: await this._getVersion(),
       id: this.id,
       dimensions,
-      //@todo look at notes (this will change in future to handle backgrounds)
-      content,
+      content: this._createParentMaskGroup(),
     }
   }
 }

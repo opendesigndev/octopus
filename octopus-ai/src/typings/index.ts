@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
+
+import type { Metadata } from '../services/conversion/ai-file-reader'
+import type { RawArtboardEntry, AdditionalTextData } from './raw'
+
 // Services
 export interface Logger {
   fatal: Function
@@ -12,7 +16,6 @@ export interface Logger {
 
 export type Coord = [number, number]
 export type RgbColorComponents = [number, number, number]
-//@todo sort out dual type
 export type GradientStop = {
   color: RgbColorComponents
   exp?: number
@@ -25,4 +28,13 @@ export type GradientColorStop = {
   interpolation?: 'LINEAR' | 'POWER' | 'REVERSE_POWER'
   interpolationParameternumber?: number
   color: Color
+}
+
+export type SourceImage = { id: string; getImageData: () => Promise<Buffer>; path: string }
+
+export type SourceTree = {
+  metadata: Metadata
+  images: SourceImage[]
+  artboards: RawArtboardEntry[]
+  additionalTextData: AdditionalTextData
 }

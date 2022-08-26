@@ -48,7 +48,7 @@ const createSubpath = (subpath: OctopusSubpath): paper.Path => {
   return shape
 }
 
-export default function createShape(subpath: OctopusSubpath): Nullable<paper.Path> {
+export function createShape(subpath: OctopusSubpath): Nullable<paper.Path> {
   if (!isSubpathValid(subpath)) {
     return null
   }

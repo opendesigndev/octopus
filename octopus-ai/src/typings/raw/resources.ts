@@ -1,3 +1,5 @@
+import type { RawResourcesXObject } from './resources-x-object'
+
 export type RawObjectId = { ObjID?: number }
 
 type RawResourcesFontTextFontFontDescriptorFontFile3 = {
@@ -85,9 +87,11 @@ export type RawResourcesColorSpace = {
   [key: string]: Record<string, unknown>
 }
 
-export type RawResourcesExtGStateSmask = {
-  G?: RawResources
-}
+export type RawResourcesExtGStateSmask = Partial<{
+  G: RawResources | RawResourcesXObject
+  S: string
+  TR: string
+}>
 
 export type RawResourcesExtGState = {
   [key: string]: Partial<{
@@ -101,7 +105,7 @@ export type RawResourcesExtGState = {
     Type: string
     ca: number
     op: boolean
-    ObjID: 38
+    ObjID: number
   }>
 }
 
@@ -137,11 +141,15 @@ export type RawResourcesShading = {
   [shadingName: string]: RawResourcesShadingKey
 }
 
-export type RawResources = {
-  ColorSpace?: RawResourcesColorSpace
-  ExtGState?: RawResourcesExtGState
-  Font?: RawResourcesFont
-  ProcSet?: string[]
-  Properties?: RawResourcesProperties
-  Shading?: RawResourcesShading
-}
+export type RawResources = Partial<{
+  ColorSpace: RawResourcesColorSpace
+  ExtGState: RawResourcesExtGState
+  Font: RawResourcesFont
+  ProcSet: string[]
+  Properties: RawResourcesProperties
+  Shading: RawResourcesShading
+  XObject: {
+    [name: string]: RawResourcesXObject
+  }
+  BBox?: number[]
+}>

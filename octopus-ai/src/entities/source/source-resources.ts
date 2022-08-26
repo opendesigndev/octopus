@@ -8,14 +8,15 @@ import type {
   RawResourcesShadingKey,
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
-} from '../../typings/raw/resources'
+  RawResourcesXObject,
+} from '../../typings/raw'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources
 }
 
-export default class SourceResources {
+export class SourceResources {
   protected _rawValue?: RawResources
 
   constructor(options: SourceResourcesOptions) {
@@ -30,11 +31,15 @@ export default class SourceResources {
     return this._rawValue?.Properties
   }
 
+  getXObjectByName(name: string): Nullable<RawResourcesXObject> {
+    return this._rawValue?.XObject?.[name]
+  }
+
   getPropertiesById(id: string): Nullable<RawResourcesProperties[string]> {
     return this.properties?.[id]
   }
 
-  get ExtGState(): Nullable<RawResourcesExtGState> {
+  get externalGraphicState(): Nullable<RawResourcesExtGState> {
     return this._rawValue?.ExtGState
   }
 
@@ -54,7 +59,7 @@ export default class SourceResources {
     return this._rawValue?.Shading?.[shadingName]
   }
 
-  getShadingCoords(shadingName: string /*, artboardHeight: number*/): Nullable<RawResourcesShadingKey['Coords']> {
+  getShadingCoords(shadingName: string): Nullable<RawResourcesShadingKey['Coords']> {
     return this.getShading(shadingName)?.Coords ?? [0, 0, 0, 0]
   }
 

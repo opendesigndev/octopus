@@ -1,10 +1,10 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 
-import OctopusEffectColorFill, { ColorSpace } from './octopus-effect-color-fill'
+import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill'
 
 import type { Octopus } from '../../typings/octopus'
-import type SourceLayerShape from '../source/source-layer-shape'
-import type SourceResources from '../source/source-resources'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourceResources } from '../source/source-resources'
 
 type OctopusEffectStrokeOptions = {
   resources: SourceResources
@@ -13,7 +13,7 @@ type OctopusEffectStrokeOptions = {
 
 type LineJoin = 'MITER' | 'ROUND' | 'BEVEL'
 
-export default class OctopusEffectStroke {
+export class OctopusEffectStroke {
   private _resources: SourceResources
   private _sourceLayer: SourceLayerShape
 
@@ -26,7 +26,9 @@ export default class OctopusEffectStroke {
   }
 
   private _parseDashing() {
-    const dashing = this._sourceLayer.dashing
+    const { dashing: rawDashing } = this._sourceLayer
+    const dashing = rawDashing.length % 2 === 0 ? rawDashing : ([...rawDashing, rawDashing.at(-1)] as number[])
+
     const dashOffset = this._sourceLayer.dashOffset
 
     return { dashing, dashOffset }

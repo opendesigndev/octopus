@@ -1,33 +1,37 @@
-import SourceArtboard from './source-artboard'
+import { SourceArtboard } from './source-artboard'
 
-import type { RawSource } from '../../typings/raw'
-import type { RawArtboardEntry } from '../../typings/raw/artboard'
+import type { Metadata } from '../../services/conversion/ai-file-reader'
+import type { SourceImage, SourceTree } from '../../typings'
+import type { AdditionalTextData } from '../../typings/raw'
 import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
 
-type SourceDesignOptions = {
-  artboards: RawArtboardEntry[]
-}
-
-export default class SourceDesign {
+export class SourceDesign {
   private _artboards: SourceArtboard[]
+  private _images: SourceImage[]
+  private _metaData: Metadata
+  private _additionalTexData: AdditionalTextData
 
-  static fromRawSource(source: RawSource): SourceDesign {
-    if (!source?.Root?.Pages?.Kids) {
-      throw new Error('Missing "Kids" array entry from the source design.')
-    }
-    const options = {
-      artboards: source.Root.Pages.Kids,
-    }
-
-    return new this(options)
+  constructor(sourceTree: SourceTree) {
+    this._artboards = sourceTree.artboards.map((rawArtboard) => new SourceArtboard(rawArtboard))
+    this._images = sourceTree.images
+    this._additionalTexData = sourceTree.additionalTextData
+    this._metaData = sourceTree.metadata
   }
 
-  constructor(options: SourceDesignOptions) {
-    this._artboards = options.artboards.map((rawArtboard, index) => new SourceArtboard(rawArtboard, index + 1))
+  get metadaData(): Metadata {
+    return this._metaData
+  }
+
+  get images(): SourceImage[] {
+    return this._images
   }
 
   get artboards(): SourceArtboard[] {
     return this._artboards
+  }
+
+  get additionalTextData(): AdditionalTextData {
+    return this._additionalTexData
   }
 
   getArtboardById(id: string): Nullable<SourceArtboard> {
