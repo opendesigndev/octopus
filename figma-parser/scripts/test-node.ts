@@ -21,6 +21,11 @@ const parser = createParser({
 
 const design = parser.parse()
 
+;(async () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  console.log('odsss', require('util').inspect(await design.getFrameLikeIds(), { depth: null }))
+})()
+
 design.on('ready:design', (design) => {
   console.log('ready:design', design)
 })

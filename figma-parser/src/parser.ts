@@ -8,12 +8,13 @@ import { RequestsManager } from './services/requests-manager'
 import { isObject } from './utils/common'
 import firstCallMemo from './utils/decorators'
 
+import type { FileMeta } from './entities/structural/file'
 import type { IBenchmarksTracker } from './services/benchmarks-tracker/benchmarks-tracker.iface'
 import type { IDownloader } from './services/downloader/downloader.iface'
 import type { Logger } from './services/logger/logger'
 import type { NodeFactories, WebFactories } from './services/platforms'
 import type { ICacher } from './types/cacher'
-import type { FigmaFile, NamedTargetIds } from './types/figma'
+import type { FigmaFile } from './types/figma'
 
 export type { Design }
 
@@ -103,11 +104,11 @@ export class Parser {
   }
 
   @firstCallMemo()
-  async getFrameLikeIds(): Promise<NamedTargetIds> {
+  async getFileMeta(): Promise<FileMeta> {
     const url = this.rm.file.prepareRequest(this.config.designId)
     const figmaFile = (await this.downloader.getJSON(url)) as FigmaFile
     this._cachedFile = new File({ file: figmaFile })
-    return this._cachedFile.getNamedFrameLikeIds()
+    return this._cachedFile.getFileMeta()
   }
 
   parse(ids?: string[]): Design {

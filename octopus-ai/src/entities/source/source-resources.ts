@@ -8,57 +8,62 @@ import type {
   RawResourcesShadingKey,
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
-} from '../../typings/raw/resources'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+  RawResourcesXObject,
+} from '../../typings/raw'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources
 }
 
-export default class SourceResources {
+export class SourceResources {
   protected _rawValue?: RawResources
 
   constructor(options: SourceResourcesOptions) {
     this._rawValue = options.rawValue
   }
 
-  get raw(): Nullable<RawResources> {
+  get raw(): Nullish<RawResources> {
     return this._rawValue
   }
 
-  get properties(): Nullable<RawResourcesProperties> {
+  get properties(): Nullish<RawResourcesProperties> {
     return this._rawValue?.Properties
   }
 
-  getPropertiesById(id: string): Nullable<RawResourcesProperties[string]> {
+  getXObjectByName(name: string): Nullish<RawResourcesXObject> {
+    return this._rawValue?.XObject?.[name]
+  }
+
+  getPropertiesById(id: string): Nullish<RawResourcesProperties[string]> {
     return this.properties?.[id]
   }
 
-  get ExtGState(): Nullable<RawResourcesExtGState> {
+  get externalGraphicState(): Nullish<RawResourcesExtGState> {
     return this._rawValue?.ExtGState
   }
 
-  get font(): Nullable<RawResourcesFont> {
+  get font(): Nullish<RawResourcesFont> {
     return this._rawValue?.Font
   }
 
-  getFontById(fontId: string): Nullable<RawResourcesFontTextFont> {
+  getFontById(fontId: string): Nullish<RawResourcesFontTextFont> {
     return this.font?.[fontId]
   }
 
-  get colorSpace(): Nullable<RawResourcesColorSpace> {
+  get colorSpace(): Nullish<RawResourcesColorSpace> {
     return this._rawValue?.ColorSpace
   }
 
-  getShading(shadingName: string): Nullable<RawResourcesShadingKey> {
+  getShading(shadingName: string): Nullish<RawResourcesShadingKey> {
     return this._rawValue?.Shading?.[shadingName]
   }
 
-  getShadingCoords(shadingName: string /*, artboardHeight: number*/): Nullable<RawResourcesShadingKey['Coords']> {
+  getShadingCoords(shadingName: string): Nullish<RawResourcesShadingKey['Coords']> {
     return this.getShading(shadingName)?.Coords ?? [0, 0, 0, 0]
   }
 
-  getShadingType(shadingName: string): Nullable<RawResourcesShadingKey['ShadingType']> {
+  getShadingType(shadingName: string): Nullish<RawResourcesShadingKey['ShadingType']> {
     return this._rawValue?.Shading?.[shadingName]['ShadingType']
   }
 
@@ -67,23 +72,23 @@ export default class SourceResources {
     return (Array.isArray(colorSpace) ? colorSpace[0] : colorSpace) ?? ''
   }
 
-  getShadingFunction(shadingName: string): Nullable<RawResourcesShadingKeyFunction> {
+  getShadingFunction(shadingName: string): Nullish<RawResourcesShadingKeyFunction> {
     return this.getShading(shadingName)?.Function
   }
 
-  getShadingFunctionBounds(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Bounds']> {
+  getShadingFunctionBounds(shadingName: string): Nullish<RawResourcesShadingKeyFunction['Bounds']> {
     return this.getShadingFunction(shadingName)?.Bounds
   }
 
-  getShadingFunctionFunctions(shadingName: string): Nullable<RawResourcesShadingKeyFunctionFunction[]> {
+  getShadingFunctionFunctions(shadingName: string): Nullish<RawResourcesShadingKeyFunctionFunction[]> {
     return this.getShadingFunction(shadingName)?.Functions
   }
 
-  getShadingFunctionEncode(shadingName: string): Nullable<RawResourcesShadingKeyFunction['Encode']> {
+  getShadingFunctionEncode(shadingName: string): Nullish<RawResourcesShadingKeyFunction['Encode']> {
     return this.getShadingFunction(shadingName)?.Encode
   }
 
-  getColorSpaceValue(colorspace?: string): Nullable<string | RawResourcesColorSpace[string]> {
+  getColorSpaceValue(colorspace?: string): Nullish<string | RawResourcesColorSpace[string]> {
     if (!colorspace) {
       return null
     }

@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'

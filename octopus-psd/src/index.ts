@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'

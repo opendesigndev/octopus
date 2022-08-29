@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark'
+import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import { parsePsd } from '@avocode/psd-parser'
 import chalk from 'chalk'

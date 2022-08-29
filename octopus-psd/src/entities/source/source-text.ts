@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { getMatrixFor, getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'

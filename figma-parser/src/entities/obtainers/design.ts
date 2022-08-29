@@ -113,7 +113,7 @@ export class Design extends EventEmitter {
 
   async getFrameLikeIds() {
     const file = await this._file
-    return file.getNamedFrameLikeIds()
+    return file.getFileMeta()
   }
 
   private async _getTargetIds() {

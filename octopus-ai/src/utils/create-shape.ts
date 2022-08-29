@@ -4,7 +4,7 @@
  */
 import { createPath, createPoint, createSegment } from './paper-factories'
 
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type PointType = 'point' | 'bezier'
 export type OctopusPoint = {
@@ -48,7 +48,7 @@ const createSubpath = (subpath: OctopusSubpath): paper.Path => {
   return shape
 }
 
-export default function createShape(subpath: OctopusSubpath): Nullable<paper.Path> {
+export function createShape(subpath: OctopusSubpath): Nullish<paper.Path> {
   if (!isSubpathValid(subpath)) {
     return null
   }

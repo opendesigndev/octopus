@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.20",
+    "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "@avocode/psd-parser": "0.8.4",
     "@sentry/node": "6.14.0",

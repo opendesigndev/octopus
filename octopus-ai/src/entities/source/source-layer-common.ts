@@ -1,4 +1,7 @@
-import SourceArtboard from './source-artboard'
+import uniqueId from 'lodash/uniqueId'
+
+import { SourceArtboard } from './source-artboard'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form'
 
 import type {
   RawLayer,
@@ -6,38 +9,38 @@ import type {
   RawGraphicsState,
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
+  RawResourcesExtGStateSmask,
 } from '../../typings/raw'
-import type SourceLayerGroup from './source-layer-group'
-import type SourceLayerShape from './source-layer-shape'
-import type SourceLayerXObject from './source-layer-x-object'
-import type SourceResources from './source-resources'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { SourceLayerGroup } from './source-layer-group'
+import type { SourceLayerShape } from './source-layer-shape'
+import type { SourceResources } from './source-resources'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
-export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObject | SourceLayerShape
+export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
 
 type SourceLayerCommonOptions = {
   parent: SourceLayerParent
   rawValue: RawLayer
-  path: number[]
 }
-type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject' | 'Shading'
+export type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject' | 'Shading' | XObjectSubtype
+export type XObjectSubtype = 'Form' | 'Image'
 
-export default class SourceLayerCommon {
+export class SourceLayerCommon {
   protected _parent: SourceLayerParent
   protected _rawValue: RawLayer
-  protected _path: number[]
+  protected _id: string
 
   constructor(options: SourceLayerCommonOptions) {
-    this._path = options.path
     this._rawValue = options.rawValue
     this._parent = options.parent
+    this._id = uniqueId()
   }
 
-  get path(): number[] {
-    return this._path
+  get id(): string {
+    return this._id
   }
 
-  get type(): Nullable<LayerType> {
+  get type(): Nullish<LayerType> {
     return this._rawValue.Type
   }
 
@@ -52,8 +55,16 @@ export default class SourceLayerCommon {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  get resources(): Nullable<SourceResources> {
-    return this.parentArtboard?.resources
+  get resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget
+  }
+
+  get resources(): Nullish<SourceResources> {
+    return this.resourcesTarget?.resources
   }
 
   get parentArtboardDimensions(): { width: number; height: number } {
@@ -64,25 +75,35 @@ export default class SourceLayerCommon {
     return this.parentArtboardDimensions.height
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     return 'GraphicsState' in this._rawValue ? this._rawValue.GraphicsState : null
   }
 
-  get extGState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullish<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
-    return this._parent.resources?.ExtGState?.[specifiedParameters]
+    return this.resources?.externalGraphicState?.[specifiedParameters]
   }
 
-  get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {
-    return this.extGState?.BM
+  get blendMode(): Nullish<RawResourcesExtGState[string]['BM']> {
+    return this.externalGraphicState?.BM
   }
 
-  get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
-    return this.extGState?.SMask?.G?.Shading?.Sh0?.Function
+  get gradientMask(): Nullish<RawResourcesShadingKeyFunction> {
+    const g = this.sMask?.G
+
+    if (!g || !('Shading' in g)) {
+      return null
+    }
+
+    return g.Shading?.Sh0?.Function
   }
 
-  get opacity(): Nullable<number> {
-    return this.extGState?.CA
+  get sMask(): Nullish<RawResourcesExtGStateSmask> {
+    return this.externalGraphicState?.SMask
+  }
+
+  get opacity(): Nullish<number> {
+    return this.externalGraphicState?.CA
   }
 
   get transformMatrix(): RawGraphicsStateMatrix {
