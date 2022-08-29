@@ -12,7 +12,7 @@ import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -23,8 +23,8 @@ export class SourceLayerText extends SourceLayerCommon {
   protected _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerSubText[]
   private _clippingPaths: SourceLayerShape[] | null
-  private _mask: Nullable<SourceLayerShape>
-  private _softMask: Nullable<SourceLayerXObjectForm>
+  private _mask: Nullish<SourceLayerShape>
+  private _softMask: Nullish<SourceLayerXObjectForm>
 
   static DEFAULT_NAME = '<TextLayer>'
 
@@ -65,7 +65,7 @@ export class SourceLayerText extends SourceLayerCommon {
     }) as SourceLayerShape[]
   }
 
-  private _initMask(): Nullable<SourceLayerShape> {
+  private _initMask(): Nullish<SourceLayerShape> {
     const mask = initClippingMask(this)
 
     if (!mask) {
@@ -75,11 +75,11 @@ export class SourceLayerText extends SourceLayerCommon {
     return mask
   }
 
-  get texts(): Nullable<SourceLayerSubText[]> {
+  get texts(): Nullish<SourceLayerSubText[]> {
     return this._normalizedTexts
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     return this._normalizedTexts[0].graphicsState
   }
 
@@ -87,7 +87,7 @@ export class SourceLayerText extends SourceLayerCommon {
     return SourceLayerText.DEFAULT_NAME
   }
 
-  private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+  private get _clippingPath(): Nullish<RawGraphicsState['ClippingPath']> {
     return this.graphicsState?.ClippingPath
   }
 
@@ -95,11 +95,11 @@ export class SourceLayerText extends SourceLayerCommon {
     return this._clippingPaths
   }
 
-  get mask(): Nullable<SourceLayerShape> {
+  get mask(): Nullish<SourceLayerShape> {
     return this._mask
   }
 
-  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+  private _initSoftMask(): Nullish<SourceLayerXObjectForm> {
     return createSoftMask({ sMask: this.sMask, parent: this._parent })
   }
 
@@ -107,7 +107,7 @@ export class SourceLayerText extends SourceLayerCommon {
     return this.texts?.map((text) => text.value).join('') ?? ''
   }
 
-  get softMask(): Nullable<SourceLayerXObjectForm> {
+  get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
   }
 }

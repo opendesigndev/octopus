@@ -15,7 +15,7 @@ import type { RawXObjectLayer } from '../../typings/raw/x-object'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerXObjectImageOptions = {
   parent: SourceLayerParent
@@ -25,9 +25,9 @@ type SourceLayerXObjectImageOptions = {
 
 export class SourceLayerXObjectImage extends SourceLayerCommon {
   protected _rawValue: RawResourcesXObject
-  private _xObject: Nullable<RawXObjectLayer>
-  private _softMask: Nullable<SourceLayerXObjectForm>
-  private _mask: Nullable<SourceLayerShape>
+  private _xObject: Nullish<RawXObjectLayer>
+  private _softMask: Nullish<SourceLayerXObjectForm>
+  private _mask: Nullish<SourceLayerShape>
   private _clippingPaths: SourceLayerShape[] | null
 
   constructor(options: SourceLayerXObjectImageOptions) {
@@ -40,16 +40,16 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     this._mask = this._initMask()
   }
 
-  get name(): Nullable<string> {
+  get name(): Nullish<string> {
     return this._rawValue.Name
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     const xObject = this._xObject
     return xObject ? xObject.GraphicsState : null
   }
 
-  get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullish<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
     return this._parent.resources?.externalGraphicState?.[specifiedParameters]
   }
@@ -61,11 +61,11 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     }) as SourceLayerShape[]
   }
 
-  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+  private _initSoftMask(): Nullish<SourceLayerXObjectForm> {
     return createSoftMask({ sMask: this.sMask, parent: this._parent })
   }
 
-  private _initMask(): Nullable<SourceLayerShape> {
+  private _initMask(): Nullish<SourceLayerShape> {
     const mask = initClippingMask(this)
 
     if (!mask) {
@@ -75,7 +75,7 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     return mask
   }
 
-  get fileName(): Nullable<string> {
+  get fileName(): Nullish<string> {
     const { subtype } = this
     if (!subtype || subtype !== 'Image') return null
     const data = this._rawValue?.Data as RawResourcesXObjectImage
@@ -83,15 +83,15 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     return data?.[subtype] ? path.basename(data[subtype]) : null
   }
 
-  private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+  private get _clippingPath(): Nullish<RawGraphicsState['ClippingPath']> {
     return this.graphicsState?.ClippingPath
   }
 
-  get softMask(): Nullable<SourceLayerXObjectForm> {
+  get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
   }
 
-  get mask(): Nullable<SourceLayerShape> {
+  get mask(): Nullish<SourceLayerShape> {
     return this._mask
   }
 
@@ -99,11 +99,11 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     return this._clippingPaths
   }
 
-  get subtype(): Nullable<XObjectSubtype> {
+  get subtype(): Nullish<XObjectSubtype> {
     return this._rawValue.Subtype
   }
 
-  get type(): Nullable<XObjectSubtype> {
+  get type(): Nullish<XObjectSubtype> {
     return this.subtype
   }
 }

@@ -12,7 +12,7 @@ import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { SourceLayer } from './create-source-layer'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayer =
   | OctopusLayerGroup
@@ -77,7 +77,7 @@ function createOctopusLayerText(options: CreateOctopusLayerOptions): OctopusLaye
 
 type Builder = (options: CreateOctopusLayerOptions) => OctopusLayer
 
-export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
+export function buildOctopusLayer(options: CreateOctopusLayerOptions): Nullish<OctopusLayer> {
   const type = (Object(options.layerSequence.sourceLayers[0]) as SourceLayer).type || ''
 
   const builders: {
@@ -138,7 +138,7 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
  *  There is no optimalization for soft masks. If layer has a soft mask new OctopusLayerSoftMaskGroup is
  * created.
  */
-export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullable<OctopusLayer> {
+export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullish<OctopusLayer> {
   const { layerSequence, parent } = options
 
   const [layer] = layerSequence.sourceLayers

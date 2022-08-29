@@ -9,7 +9,7 @@ import type { RawGroupLayer, RawResourcesXObject, RawTextLayer } from '../typing
 import type { RawLayer } from '../typings/raw/layer'
 import type { RawShapeLayer } from '../typings/raw/shape-layer'
 import type { RawXObjectLayer } from '../typings/raw/x-object'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayer =
   | SourceLayerGroup
@@ -18,7 +18,7 @@ export type SourceLayer =
   | SourceLayerXObjectForm
   | SourceLayerXObjectImage
 
-type Builder = (options: CreateLayerOptions) => Nullable<SourceLayer>
+type Builder = (options: CreateLayerOptions) => Nullish<SourceLayer>
 
 type CreateLayerOptions = {
   layer: RawLayer
@@ -91,7 +91,7 @@ export function createSourceLayerText({ layer, parent }: CreateLayerOptions): So
   })
 }
 
-export function createSourceLayer(options: CreateLayerOptions): Nullable<SourceLayer> {
+export function createSourceLayer(options: CreateLayerOptions): Nullish<SourceLayer> {
   const rawLayer = Object(options.layer) as RawLayer
   const type = rawLayer.Type
 

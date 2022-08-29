@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { logWarn } from '../../services/instances/misc'
 import { convertOffset } from '../../utils/convert'

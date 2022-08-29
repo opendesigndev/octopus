@@ -8,7 +8,7 @@ import type {
 } from '../../typings/raw'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerText } from './source-layer-text'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextNormalizedOptions = {
   parent: SourceLayerText
@@ -25,7 +25,7 @@ export class SourceLayerSubText {
     this._parent = options.parent
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     return this._rawValue.GraphicsState
   }
 
@@ -42,14 +42,14 @@ export class SourceLayerSubText {
     return clonedCtm as RawGraphicsStateMatrix
   }
 
-  get font(): Nullable<RawResourcesFontTextFont> {
+  get font(): Nullish<RawResourcesFontTextFont> {
     const fontId = this.graphicsState?.TextFont || ''
     const resources = this._parent.resources
 
     return resources?.getFontById(fontId)
   }
 
-  get fontDescriptor(): Nullable<RawResourcesFontTextFontFontDescriptor> {
+  get fontDescriptor(): Nullish<RawResourcesFontTextFontFontDescriptor> {
     return this.font?.FontDescriptor
   }
 
@@ -57,11 +57,11 @@ export class SourceLayerSubText {
     return this.font?.BaseFont ?? ''
   }
 
-  get fontWeight(): Nullable<number> {
+  get fontWeight(): Nullish<number> {
     return this.fontDescriptor?.FontWeight
   }
 
-  get fontFamily(): Nullable<string> {
+  get fontFamily(): Nullish<string> {
     return this.fontDescriptor?.FontFamily
   }
 
@@ -71,7 +71,7 @@ export class SourceLayerSubText {
     return round(Math.sqrt(c * c + d * d), 2)
   }
 
-  get textMatrix(): Nullable<RawGraphicsStateMatrix> {
+  get textMatrix(): Nullish<RawGraphicsStateMatrix> {
     return this._rawValue?.TextMatrix
   }
 
@@ -83,7 +83,7 @@ export class SourceLayerSubText {
     return this.graphicsState?.TextCharSpace || 0
   }
 
-  get parsedTextValue(): Nullable<string> {
+  get parsedTextValue(): Nullish<string> {
     const stringOrArrayText = this._rawValue.Text
 
     return Array.isArray(stringOrArrayText)
@@ -91,19 +91,19 @@ export class SourceLayerSubText {
       : stringOrArrayText
   }
 
-  get colorSpaceNonStroking(): Nullable<string> {
+  get colorSpaceNonStroking(): Nullish<string> {
     return this.graphicsState?.ColorSpaceNonStroking
   }
 
-  get colorNonStroking(): Nullable<number[]> {
+  get colorNonStroking(): Nullish<number[]> {
     return this.graphicsState?.ColorNonStroking
   }
 
-  get colorSpaceStroking(): Nullable<string> {
+  get colorSpaceStroking(): Nullish<string> {
     return this.graphicsState?.ColorSpaceStroking
   }
 
-  get colorStroking(): Nullable<number[]> {
+  get colorStroking(): Nullish<number[]> {
     return this.graphicsState?.ColorStroking
   }
 

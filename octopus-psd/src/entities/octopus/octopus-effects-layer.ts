@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { OctopusEffectBevelEmboss } from './octopus-effect-bevel-emboss'
 import { OctopusEffectGlowInner } from './octopus-effect-glow-inner'

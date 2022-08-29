@@ -20,7 +20,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.22",
+    "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "@opendesign/illustrator-parser-pdfcpu": "^1.0.0",
     "crc-32": "^1.2.2",

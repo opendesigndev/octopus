@@ -7,7 +7,7 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawGroupLayer } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent
@@ -17,7 +17,7 @@ type SourceLayerGroupOptions = {
 export class SourceLayerGroup extends SourceLayerCommon {
   protected _rawValue: RawGroupLayer
   private _children: SourceLayer[]
-  private _softMask: Nullable<SourceLayerXObjectForm>
+  private _softMask: Nullish<SourceLayerXObjectForm>
 
   static DEFAULT_NAME = '<Group>'
 
@@ -51,11 +51,11 @@ export class SourceLayerGroup extends SourceLayerCommon {
     return name ?? SourceLayerGroup.DEFAULT_NAME
   }
 
-  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+  private _initSoftMask(): Nullish<SourceLayerXObjectForm> {
     return createSoftMask({ sMask: this.sMask, parent: this._parent })
   }
 
-  get softMask(): Nullable<SourceLayerXObjectForm> {
+  get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
   }
 }

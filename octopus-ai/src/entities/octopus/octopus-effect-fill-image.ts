@@ -1,7 +1,7 @@
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusEffectParent } from '../../typings/octopus-entities'
 import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 /** @TODO check images as mask when rendering is ready */
 type OctopusEffectImageFillOptions = {
@@ -20,7 +20,7 @@ export class OctopusEffectImageFill {
     this._parent = options.parent
   }
 
-  _parseImageRef(): Nullable<Octopus['ImageRef']> {
+  _parseImageRef(): Nullish<Octopus['ImageRef']> {
     const imageId = this._sourceLayer.fileName
     if (!imageId) {
       return null
@@ -38,7 +38,7 @@ export class OctopusEffectImageFill {
     }
   }
 
-  _parseImage(): Nullable<Octopus['Image']> {
+  _parseImage(): Nullish<Octopus['Image']> {
     const ref = this._parseImageRef()
 
     if (!ref) {
@@ -58,7 +58,7 @@ export class OctopusEffectImageFill {
     }
   }
 
-  convert(): Nullable<Octopus['FillImage']> {
+  convert(): Nullish<Octopus['FillImage']> {
     const image = this._parseImage()
 
     if (!image) {

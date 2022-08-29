@@ -9,9 +9,9 @@ import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerShapeSubPath } from '../entities/source/source-layer-shape-subpath'
 import type { SourceLayer } from '../factories/create-source-layer'
 import type { RawResourcesExtGStateSmask, RawResourcesXObject } from '../typings/raw'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
-export function initClippingMask(layer: SourceLayer): Nullable<SourceLayerShape> {
+export function initClippingMask(layer: SourceLayer): Nullish<SourceLayerShape> {
   if (!('clippingPaths' in layer)) {
     return
   }
@@ -29,11 +29,11 @@ export function initClippingMask(layer: SourceLayer): Nullable<SourceLayerShape>
 }
 
 type CreateSoftMaskOptions = {
-  sMask: Nullable<RawResourcesExtGStateSmask>
+  sMask: Nullish<RawResourcesExtGStateSmask>
   parent: SourceLayerParent
 }
 
-export function createSoftMask({ sMask, parent }: CreateSoftMaskOptions): Nullable<SourceLayerXObjectForm> {
+export function createSoftMask({ sMask, parent }: CreateSoftMaskOptions): Nullish<SourceLayerXObjectForm> {
   const g = sMask?.G
 
   if (!g) {
