@@ -35,6 +35,7 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   GROUP: createLayerFrame,
   INSTANCE: createLayerFrame,
   COMPONENT: createLayerFrame,
+  COMPONENT_SET: createLayerFrame,
 } as const
 
 function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerFrame {
