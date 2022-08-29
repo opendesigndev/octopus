@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { OctopusEffectFill } from './octopus-effect-fill'
 import { OctopusLayerBase } from './octopus-layer-base'

@@ -3,7 +3,7 @@ import { removeTrailingHyphen } from '../../../utils/text'
 import type { SourceLayerText } from '../../../entities/source/source-layer-text'
 import type { SourceLayer } from '../../../factories/create-source-layer'
 import type { AdditionalTextData, AdditionalTextDataText } from '../../../typings/raw'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type CurrentMatch = AdditionalTextDataText & {
   remainder: string
@@ -31,7 +31,7 @@ export class LayerGroupingService {
   /** @_currentMatches field contains matches against incoming block of text with @remainder field
    * which indicates remaining text to be matched. Matched text is sliced out from the @remainder field.
    */
-  private _currentMatches: Nullable<CurrentMatch[]>
+  private _currentMatches: Nullish<CurrentMatch[]>
 
   /** @_layerSequences is result of whole procedure as we need coherent sequence of SourceLayerText which will
    * form 1 OctopusTextLayer. For other layers than SourceLayerText, is only 1 layer in the sequence.
@@ -42,7 +42,7 @@ export class LayerGroupingService {
    * so that we can either push next SourceTextLayer into sequence or start new sequence if next SourceTextLayer is not part
    * of the sequence
    */
-  private _lastTextLayerSequence: Nullable<LayerSequence>
+  private _lastTextLayerSequence: Nullish<LayerSequence>
 
   static END_LINE = '\r'
   static DOUBLE_END_LINE = '\r\r'
@@ -110,7 +110,7 @@ export class LayerGroupingService {
    * can differ due to trailing hyphens which are not present in AdditionalTextData but can be present in
    * original text.
    */
-  private _getRemainingTextMatches(sourceLayerText: SourceLayerText): Nullable<CurrentMatch[]> {
+  private _getRemainingTextMatches(sourceLayerText: SourceLayerText): Nullish<CurrentMatch[]> {
     const sourceText = sourceLayerText.textValue
     const octopusStringLengths: number[] = []
 
@@ -159,7 +159,7 @@ export class LayerGroupingService {
   /** Whenever we find and use best match in AdditionalTextData, we need to remove it so it does not
    * get used again. All source texts should be covered by AdditionalTextData once and only once.
    */
-  private _eliminateMatchFromAdditionalTextData(bestMatch: Nullable<CurrentMatch>): void {
+  private _eliminateMatchFromAdditionalTextData(bestMatch: Nullish<CurrentMatch>): void {
     if (!bestMatch) {
       return
     }
@@ -193,7 +193,7 @@ export class LayerGroupingService {
    * AdditionalTextData can have texts which are longer than input text as some of the texts are hidden,
    * but we need to put in all text from additonalTextData into octopus.
    */
-  private _getBestMatch(): Nullable<CurrentMatch> {
+  private _getBestMatch(): Nullish<CurrentMatch> {
     if (!this._currentMatches?.length) {
       return null
     }

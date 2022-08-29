@@ -9,7 +9,7 @@ import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../t
 import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -20,8 +20,8 @@ export class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawShapeLayer
   private _subpaths: SourceLayerShapeSubPath[]
   private _clippingPaths: SourceLayerShape[] | null
-  private _mask: Nullable<SourceLayerShape>
-  private _softMask: Nullable<SourceLayerXObjectForm>
+  private _mask: Nullish<SourceLayerShape>
+  private _softMask: Nullish<SourceLayerXObjectForm>
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
@@ -45,7 +45,7 @@ export class SourceLayerShape extends SourceLayerCommon {
     }) as SourceLayerShape[]
   }
 
-  private _initMask(): Nullable<SourceLayerShape> {
+  private _initMask(): Nullish<SourceLayerShape> {
     const mask = initClippingMask(this)
 
     if (!mask) {
@@ -55,11 +55,11 @@ export class SourceLayerShape extends SourceLayerCommon {
     return mask
   }
 
-  private _initSoftMask(): Nullable<SourceLayerXObjectForm> {
+  private _initSoftMask(): Nullish<SourceLayerXObjectForm> {
     return createSoftMask({ sMask: this.sMask, parent: this._parent })
   }
 
-  get softMask(): Nullable<SourceLayerXObjectForm> {
+  get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
   }
 
@@ -83,15 +83,15 @@ export class SourceLayerShape extends SourceLayerCommon {
     this._subpaths = subpaths
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     return this._rawValue.GraphicsState
   }
 
-  get mask(): Nullable<SourceLayerShape> {
+  get mask(): Nullish<SourceLayerShape> {
     return this._mask
   }
 
-  get dashPattern(): Nullable<DashPattern> {
+  get dashPattern(): Nullish<DashPattern> {
     return this.graphicsState?.DashPattern
   }
 
@@ -103,7 +103,7 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.dashPattern?.[1] ?? 0
   }
 
-  get fillRule(): Nullable<RawShapeLayerFillRule> {
+  get fillRule(): Nullish<RawShapeLayerFillRule> {
     return this._rawValue.FillRule
   }
 
@@ -115,19 +115,19 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.LineCap || 0
   }
 
-  get colorStroking(): Nullable<number[]> {
+  get colorStroking(): Nullish<number[]> {
     return this.graphicsState?.ColorStroking
   }
 
-  get colorSpaceNonStroking(): Nullable<string> {
+  get colorSpaceNonStroking(): Nullish<string> {
     return this.graphicsState?.ColorSpaceNonStroking
   }
 
-  get colorSpaceStroking(): Nullable<string> {
+  get colorSpaceStroking(): Nullish<string> {
     return this.graphicsState?.ColorSpaceStroking
   }
 
-  get colorNonStroking(): Nullable<number[]> {
+  get colorNonStroking(): Nullish<number[]> {
     return this.graphicsState?.ColorNonStroking
   }
 
@@ -143,11 +143,11 @@ export class SourceLayerShape extends SourceLayerCommon {
     return Boolean(this._rawValue.Fill)
   }
 
-  get stroke(): Nullable<boolean> {
+  get stroke(): Nullish<boolean> {
     return this._rawValue.Stroke
   }
 
-  private get _clippingPath(): Nullable<RawGraphicsState['ClippingPath']> {
+  private get _clippingPath(): Nullish<RawGraphicsState['ClippingPath']> {
     return this.graphicsState?.ClippingPath
   }
 

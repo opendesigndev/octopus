@@ -9,10 +9,10 @@ import type { OctopusLayer } from '../factories/create-octopus-layer'
 import type { SourceLayer } from '../factories/create-source-layer'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { RawLayer } from '../typings/raw'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type InitSourceLayerChildrenOptions = {
-  layers: Nullable<RawLayer[]>
+  layers: Nullish<RawLayer[]>
   parent: SourceLayerParent
 }
 
@@ -29,7 +29,7 @@ export function initSourceLayerChildren({ layers, parent }: InitSourceLayerChild
 }
 
 type InitOctopusLayerSequenceOptions = {
-  layers: Nullable<SourceLayer[]>
+  layers: Nullish<SourceLayer[]>
   parent: OctopusLayerParent
 }
 

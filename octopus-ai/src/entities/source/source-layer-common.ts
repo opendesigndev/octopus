@@ -14,7 +14,7 @@ import type {
 import type { SourceLayerGroup } from './source-layer-group'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceResources } from './source-resources'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
 
@@ -40,7 +40,7 @@ export class SourceLayerCommon {
     return this._id
   }
 
-  get type(): Nullable<LayerType> {
+  get type(): Nullish<LayerType> {
     return this._rawValue.Type
   }
 
@@ -55,7 +55,7 @@ export class SourceLayerCommon {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  get resourcesTarget(): Nullable<SourceArtboard | SourceLayerXObjectForm> {
+  get resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
     if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
       return this._parent
     }
@@ -63,7 +63,7 @@ export class SourceLayerCommon {
     return this._parent.resourcesTarget
   }
 
-  get resources(): Nullable<SourceResources> {
+  get resources(): Nullish<SourceResources> {
     return this.resourcesTarget?.resources
   }
 
@@ -75,20 +75,20 @@ export class SourceLayerCommon {
     return this.parentArtboardDimensions.height
   }
 
-  get graphicsState(): Nullable<RawGraphicsState> {
+  get graphicsState(): Nullish<RawGraphicsState> {
     return 'GraphicsState' in this._rawValue ? this._rawValue.GraphicsState : null
   }
 
-  get externalGraphicState(): Nullable<RawResourcesExtGState[string]> {
+  get externalGraphicState(): Nullish<RawResourcesExtGState[string]> {
     const specifiedParameters = this.graphicsState?.SpecifiedParameters || ''
     return this.resources?.externalGraphicState?.[specifiedParameters]
   }
 
-  get blendMode(): Nullable<RawResourcesExtGState[string]['BM']> {
+  get blendMode(): Nullish<RawResourcesExtGState[string]['BM']> {
     return this.externalGraphicState?.BM
   }
 
-  get gradientMask(): Nullable<RawResourcesShadingKeyFunction> {
+  get gradientMask(): Nullish<RawResourcesShadingKeyFunction> {
     const g = this.sMask?.G
 
     if (!g || !('Shading' in g)) {
@@ -98,11 +98,11 @@ export class SourceLayerCommon {
     return g.Shading?.Sh0?.Function
   }
 
-  get sMask(): Nullable<RawResourcesExtGStateSmask> {
+  get sMask(): Nullish<RawResourcesExtGStateSmask> {
     return this.externalGraphicState?.SMask
   }
 
-  get opacity(): Nullable<number> {
+  get opacity(): Nullish<number> {
     return this.externalGraphicState?.CA
   }
 

@@ -3,7 +3,7 @@ import { SourceArtboard } from './source-artboard'
 import type { Metadata } from '../../services/conversion/ai-file-reader'
 import type { SourceImage, SourceTree } from '../../typings'
 import type { AdditionalTextData } from '../../typings/raw'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export class SourceDesign {
   private _artboards: SourceArtboard[]
@@ -34,7 +34,7 @@ export class SourceDesign {
     return this._additionalTexData
   }
 
-  getArtboardById(id: string): Nullable<SourceArtboard> {
+  getArtboardById(id: string): Nullish<SourceArtboard> {
     return this.artboards.find((entry) => entry.id === id) || null
   }
 }

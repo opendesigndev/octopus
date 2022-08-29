@@ -21,7 +21,7 @@
   "dependencies": {
     "@avocode/figma-parser": "3.0.0-rc.6",
     "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.22",
+    "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "chalk": "^4.1.2",
     "dotenv": "16.0.0",

@@ -11,7 +11,7 @@ import { SourceResources } from './source-resources'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawObjectId } from '../../typings/raw'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 export class SourceArtboard {
   private _rawArtboard: RawArtboardEntry
@@ -41,11 +41,11 @@ export class SourceArtboard {
     return this._id
   }
 
-  get name(): Nullable<string> {
+  get name(): Nullish<string> {
     return this._rawArtboard.Name
   }
 
-  get children(): Nullable<SourceLayer[]> {
+  get children(): Nullish<SourceLayer[]> {
     return this._children
   }
 

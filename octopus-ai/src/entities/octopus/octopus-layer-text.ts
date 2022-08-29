@@ -13,7 +13,7 @@ import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { AdditionalTextDataText } from '../../typings/raw'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { LayerSpecifics } from './octopus-layer-common'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -27,8 +27,8 @@ export class OctopusLayerText extends OctopusLayerCommon {
 
   protected _sourceLayers: SourceLayerText[]
   private _octopusSubTexts: Octopus['Text'][]
-  private _octopusTextValue: Nullable<string>
-  private _additionalTextDataText: Nullable<AdditionalTextDataText>
+  private _octopusTextValue: Nullish<string>
+  private _additionalTextDataText: Nullish<AdditionalTextDataText>
 
   constructor({ layerSequence, parent }: OctopusLayerTextOptions) {
     super({ layerSequence, parent })
@@ -57,10 +57,10 @@ export class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _getLineHeight(
-    prevLineHeight: Nullable<number>,
-    currentTy: Nullable<number>,
-    prevTy: Nullable<number>
-  ): Nullable<number> {
+    prevLineHeight: Nullish<number>,
+    currentTy: Nullish<number>,
+    prevTy: Nullish<number>
+  ): Nullish<number> {
     if (!currentTy || !prevTy) {
       return prevLineHeight
     }
@@ -74,7 +74,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
   }
 
   private _getSubtextsWithLineHeights(octopusSubTexts: Octopus['Text'][]): Octopus['Text'][] {
-    let prevLineHeight: Nullable<number>
+    let prevLineHeight: Nullish<number>
 
     return octopusSubTexts.map((octopusSubText, index) => {
       const prevIndex = index - 1
@@ -92,7 +92,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     })
   }
 
-  private _getOctopusTextSliceLength(subtext: string): Nullable<number> {
+  private _getOctopusTextSliceLength(subtext: string): Nullish<number> {
     if (!this._octopusTextValue) {
       return null
     }
@@ -113,7 +113,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     return octopusStringLength
   }
 
-  private _getOctopusTextSlice(subtext: string, isLast: boolean): Nullable<string> {
+  private _getOctopusTextSlice(subtext: string, isLast: boolean): Nullish<string> {
     if (isLast || !this._octopusTextValue) {
       return this._octopusTextValue
     }
@@ -130,7 +130,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
     return octopusTextSlice
   }
 
-  private _getFrame(): Nullable<Octopus['TextFrame']> {
+  private _getFrame(): Nullish<Octopus['TextFrame']> {
     const width = this._additionalTextDataText?.frame?.width
     const height = this._additionalTextDataText?.frame?.height
 

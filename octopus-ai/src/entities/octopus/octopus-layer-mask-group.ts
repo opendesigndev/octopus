@@ -9,7 +9,7 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { Nullable } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent
@@ -40,7 +40,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
     this._layers.push(octopusLayer)
   }
 
-  private _createMask(): Nullable<Octopus['ShapeLayer']> {
+  private _createMask(): Nullish<Octopus['ShapeLayer']> {
     const sourceMask = this._sourceLayer
 
     if (!sourceMask) {

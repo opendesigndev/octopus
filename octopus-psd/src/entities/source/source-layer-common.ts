@@ -1,4 +1,4 @@
-import firstCallMemo from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceArtboard } from './source-artboard'
