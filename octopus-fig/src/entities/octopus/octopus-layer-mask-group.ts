@@ -66,8 +66,7 @@ export class OctopusLayerMaskGroup {
     const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
-    const maskBasis = 'BODY' // https://gitlab.avcd.cz/backend/rendering/-/issues/524
-    // const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
+    const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
     const layers = createOctopusLayers(sourceLayer.layers, parent)
     return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard })
   }
