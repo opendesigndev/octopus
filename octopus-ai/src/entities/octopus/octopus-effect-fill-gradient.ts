@@ -5,11 +5,12 @@ import zipWith from 'lodash/zipWith'
 import { logger } from '../../services/instances/logger'
 import convertColor from '../../utils/colors'
 
-import type { Coord, GradientColorStop, GradientStop, RgbColorComponents } from '../../typings'
+import type { Coord, GradientStop, RgbColorComponents } from '../../typings'
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace, RawResourcesShadingKeyFunctionFunction } from '../../typings/raw/resources'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceResources } from '../source/source-resources'
+import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
 type OctopusEffectGradientFillOptions = {
   sourceLayer: SourceLayerShape
@@ -27,15 +28,37 @@ export class OctopusEffectGradientFill {
     this._sourceLayer = options.sourceLayer
   }
 
+  private _parseInterpolation({
+    encodeParam,
+    interpolationParameter,
+  }: {
+    encodeParam: Nullish<number>
+    interpolationParameter: Nullish<number>
+  }): Octopus['GradientColorStop']['interpolation'] {
+    if (typeof interpolationParameter === undefined || interpolationParameter === null) {
+      return
+    }
+
+    if (encodeParam === 1) {
+      return 'REVERSE_POWER'
+    }
+
+    return 'POWER'
+  }
+
+  //** @TODO check if interpolation and interPolationparameter are working correctly when it gets fixed in ode-renderer */
   private _parseType2Function(
     fn: RawResourcesShadingKeyFunctionFunction,
     encode: Coord,
     colorSpace: string
   ): [GradientStop, GradientStop] {
+    const interpolationParameter = fn.N
+    const interpolation = this._parseInterpolation({ encodeParam: encode[0], interpolationParameter })
+
     const stop1 = {
       color: this._getColorFromBlock(fn, 'C0', encode, colorSpace),
-      exp: fn.N ?? 1,
-      reverseExp: encode[0] === 1,
+      ...(interpolationParameter ? { interpolationParameter } : null),
+      ...(interpolation ? { interpolation } : null),
     }
 
     const stop2 = {
@@ -76,7 +99,6 @@ export class OctopusEffectGradientFill {
     const bounds = asArray(this._resources.getShadingFunctionBounds(shadingName))
     const functions = asArray(this._resources.getShadingFunctionFunctions(shadingName))
     const encode = this._readEncode(functions.length)
-
     return zipWith(functions, encode, (f, e) => this._parseType2Function(f, e, colorSpace)).reduce(
       (acc: GradientStop[], stops, i) => {
         acc.push({ ...stops[0], position: i === 0 ? 0 : bounds[i - 1] })
@@ -91,7 +113,7 @@ export class OctopusEffectGradientFill {
     )
   }
 
-  private _parseStops() {
+  private _parseStops(): Octopus['GradientColorStop'][] {
     const shadingName = this._sourceLayer.name
     const colorSpace = this._resources.getShadingColorSpace(shadingName)
     const colorStops = this._parseType3Function(colorSpace)
@@ -100,15 +122,14 @@ export class OctopusEffectGradientFill {
     return zipWith(colorStops, alphaStops, this._mergeColorWithAlpha)
   }
 
-  private _mergeColorWithAlpha(colorStop: GradientStop, a: number): GradientColorStop {
-    //@ sort out dual color (check type file)
+  private _mergeColorWithAlpha(colorStop: GradientStop, a: number): Octopus['GradientColorStop'] {
     const [r, g, b] = colorStop.color as RgbColorComponents
     const color = { r, g, b, a }
 
     return {
+      ...colorStop,
       color,
-      position: colorStop.position ?? 0,
-    }
+    } as Octopus['GradientColorStop']
   }
 
   private _parseAlphaStops(colorStopCount: number): number[] {
