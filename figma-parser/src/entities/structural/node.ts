@@ -49,7 +49,7 @@ export class Node {
   @firstCallMemo()
   get allImageRefs(): string[] {
     const artboardRefs = traverseAndFind<string>(this.document, (obj: Record<string, unknown>) => {
-      if ('imageRef' in obj) return obj.imageRef
+      if ('imageRef' in obj && typeof obj.imageRef === 'string') return obj.imageRef
     })
     // CommonUtils.matchAll(JSON.stringify(this.document), /"imageRef":"([^"]+)"/g)
     return [

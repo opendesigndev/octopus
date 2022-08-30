@@ -16,19 +16,15 @@ export interface Logger {
 
 export type Coord = [number, number]
 export type RgbColorComponents = [number, number, number]
+
 export type GradientStop = {
   color: RgbColorComponents
-  exp?: number
+  interpolation?: 'LINEAR' | 'POWER' | 'REVERSE_POWER'
+  interpolationParameter?: number
   position?: number
 }
 
 export type Color = { r: number; g: number; b: number; a: number }
-export type GradientColorStop = {
-  position: number
-  interpolation?: 'LINEAR' | 'POWER' | 'REVERSE_POWER'
-  interpolationParameternumber?: number
-  color: Color
-}
 
 export type SourceImage = { id: string; getImageData: () => Promise<Buffer>; path: string }
 
