@@ -15,6 +15,8 @@ import type { RawTextStyle } from './text'
 
 export type RawLayer = RawLayerFrame | RawLayerShape | RawLayerText
 
+export type RawLayerType = RawLayer['type']
+
 export type RawSlice = {
   id?: string
   name?: string
@@ -64,13 +66,9 @@ export type RawLayerVector = RawLayerBase & {
 }
 
 export type RawLayerFrame = RawLayerVector & {
-  type: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET'
+  type: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
-}
-
-export type RawLayerInstance = RawLayerFrame & {
-  type: 'INSTANCE'
   componentIdString?: string
 }
 

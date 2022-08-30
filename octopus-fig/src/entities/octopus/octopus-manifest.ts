@@ -169,6 +169,12 @@ export class OctopusManifest {
     return { type: 'RELATIVE', path: previewPath }
   }
 
+  private _getRole(source: SourceArtboard): Manifest['Component']['role'] {
+    if (source.isPasteboard) return 'PASTEBOARD'
+    if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
+    return 'ARTBOARD'
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -178,12 +184,13 @@ export class OctopusManifest {
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
     const artifacts = this._getArtifacts(source)
+    const role = this._getRole(source)
     const preview = this._getPreview(id)
 
     return {
       id,
       name: source.name,
-      role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD', // TODO fix for components
+      role,
       status,
       bounds,
       dependencies: [],

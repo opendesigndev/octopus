@@ -33,8 +33,8 @@ export class SourceLayerFrame extends SourceLayerCommon {
     return this.fills.length > 0 || this.strokes.length > 0
   }
 
-  get type(): 'FRAME' {
-    return 'FRAME'
+  get type(): 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE' {
+    return this._rawValue.type
   }
 
   get clipsContent(): boolean {

@@ -106,7 +106,7 @@ export class OctopusPath {
   private _getPath({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathLike'] {
     if (this._isStroke) return this._getPathPath({ sourceLayer, isTopLayer })
     if (sourceLayer.type === 'TEXT') return this._getPathPath({ sourceLayer, isTopLayer })
-    if (sourceLayer.type === 'FRAME') return this._getPathRectangle({ sourceLayer, isTopLayer })
+    if (sourceLayer.type !== 'SHAPE') return this._getPathRectangle({ sourceLayer, isTopLayer })
     if (this._isRectangle(sourceLayer)) return this._getPathRectangle({ sourceLayer, isTopLayer })
     if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._getPathBool({ sourceLayer, isTopLayer })
     return this._getPathPath({ sourceLayer, isTopLayer })

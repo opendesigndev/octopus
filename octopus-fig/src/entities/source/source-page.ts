@@ -36,7 +36,7 @@ export class SourcePage extends SourceEntity {
     this._rawValue?.children?.forEach((element) => {
       if (element.type === 'FRAME') {
         frames.push(element)
-      } else {
+      } else if (element.type !== 'COMPONENT' && element.type !== 'COMPONENT_SET') {
         rest.push(element)
       }
     })
