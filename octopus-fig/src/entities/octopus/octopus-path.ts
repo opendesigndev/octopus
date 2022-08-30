@@ -53,13 +53,8 @@ export class OctopusPath {
   }
 
   private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
-    return this._isStroke
-      ? sourceLayer.strokeGeometry.length
-        ? sourceLayer.strokeGeometry
-        : sourceLayer.fillGeometry
-      : sourceLayer.fillGeometry.length
-      ? sourceLayer.fillGeometry
-      : sourceLayer.strokeGeometry
+    if (this._isStroke) return sourceLayer.strokeGeometry
+    return sourceLayer.fillGeometry.length ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
   }
 
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {

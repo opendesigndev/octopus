@@ -5,6 +5,7 @@ import { SourceLayerCommon } from './source-layer-common'
 
 import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
+import type { SourcePaint } from './source-paint'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -45,5 +46,10 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get booleanOperation(): RawBooleanOperation | undefined {
     return this._rawValue.booleanOperation
+  }
+
+  get fills(): SourcePaint[] {
+    if (this.shapeType === 'VECTOR' && !this.fillGeometry.length) return []
+    return super.fills
   }
 }

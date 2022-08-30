@@ -15,7 +15,7 @@ import type { SourceLayer } from './create-source-layer'
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText
 
 type OctopusLayerBuilders =
-  | typeof createOctopusLayerGroup
+  | typeof createOctopusLayerGroupLike
   | typeof createOctopusLayerShape
   | typeof createOctopusLayerText
   | typeof createOctopusLayerSlice
@@ -26,13 +26,17 @@ type CreateOctopusLayerOptions = {
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders | undefined } = {
-  FRAME: createOctopusLayerGroup,
+  GROUP: createOctopusLayerGroupLike,
+  FRAME: createOctopusLayerGroupLike,
+  INSTANCE: createOctopusLayerGroupLike,
+  COMPONENT: createOctopusLayerGroupLike,
+  COMPONENT_SET: createOctopusLayerGroupLike,
   SHAPE: createOctopusLayerShape,
   TEXT: createOctopusLayerText,
   SLICE: createOctopusLayerSlice,
 } as const
 
-function createOctopusLayerGroup({
+function createOctopusLayerGroupLike({
   layer,
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup | null {
