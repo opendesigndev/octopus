@@ -105,7 +105,7 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
 
-    if (!specific) {
+    if (!specific || specific.layers.length === 0) {
       return null
     }
 

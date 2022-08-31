@@ -5,8 +5,9 @@ import { createSourceLayer } from '../factories/create-source-layer'
 import { layerGroupingService } from '../services/instances/layer-grouping-service'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { OctopusLayer } from '../factories/create-octopus-layer'
+import type { OctopusLayer, CreateOctopusLayerOptions } from '../factories/create-octopus-layer'
 import type { SourceLayer } from '../factories/create-source-layer'
+import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { RawLayer } from '../typings/raw'
 import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
@@ -28,6 +29,27 @@ export function initSourceLayerChildren({ layers, parent }: InitSourceLayerChild
   }, [])
 }
 
+type CreateOctopusLayersFromSequencesOptions = {
+  parent: OctopusLayerParent
+  layerSequences: LayerSequence[]
+  builder: (options: CreateOctopusLayerOptions) => Nullish<OctopusLayer>
+}
+
+export function createOctopusLayersFromSequences({
+  layerSequences,
+  parent,
+  builder,
+}: CreateOctopusLayersFromSequencesOptions): OctopusLayer[] {
+  return layerSequences.reduce<OctopusLayer[]>((children, layerSequence) => {
+    const childLayer = builder({
+      layerSequence,
+      parent,
+    })
+
+    return childLayer ? [...children, childLayer] : children
+  }, [])
+}
+
 type InitOctopusLayerSequenceOptions = {
   layers: Nullish<SourceLayer[]>
   parent: OctopusLayerParent
@@ -41,12 +63,5 @@ export function initOctopusLayerChildren({ layers, parent }: InitOctopusLayerSeq
     return []
   }
 
-  return layerSequences.reduce<OctopusLayer[]>((children, layerSequence) => {
-    const childLayer = createOctopusLayer({
-      layerSequence,
-      parent,
-    })
-
-    return childLayer ? [...children, childLayer] : children
-  }, [])
+  return createOctopusLayersFromSequences({ layerSequences, parent, builder: createOctopusLayer })
 }

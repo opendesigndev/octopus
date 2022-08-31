@@ -101,20 +101,16 @@ type GetClippingMaskGroupOptions = {
   parent: OctopusLayerParent
 }
 
-function isMaskGroupRegistered(maskGroupHashKey: string | null) {
-  return Boolean(maskGroupHashKey && OctopusLayerMaskGroup.registry[maskGroupHashKey])
-}
-
 function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
   maskGroup: OctopusLayerMaskGroup | null
   maskGroupHashKey: string | null
 } {
   const maskGroupHashKey = getMaskGroupHashKey(mask)
-  const maskGroupExists = isMaskGroupRegistered(maskGroupHashKey)
+  const maskGroupExists = OctopusLayerMaskGroup.isMaskGroupRegistered(maskGroupHashKey)
 
   const maskGroup =
     maskGroupExists && maskGroupHashKey
-      ? OctopusLayerMaskGroup.registry[maskGroupHashKey]
+      ? OctopusLayerMaskGroup.getRegisteredMaskGroup(maskGroupHashKey)
       : createOctopusLayerMaskGroup({ layerSequence: { sourceLayers: [mask] }, parent })
 
   return { maskGroupHashKey, maskGroup }
@@ -127,6 +123,10 @@ function getClippingMaskGroup({ mask, parent }: GetClippingMaskGroupOptions): {
  * from source ClippingPath where ClippingPath serves as a mask and layer as a child. If other layer has same ClippingPath, it is
  * added to the existing OctopusLayerMaskGroup as a child.
  * To find out whether the ClippingPath is the same, I create hashKey as identifier for each new OctopusLayerMaskGroup from path sourcePaths.
+ * Also, we need to keep in mind that order of octopus layer is important. Therefore, if there is layer in between two layers which have
+ * same ClippingPath, we need to create new OctopusLayerMaskGroup. This  is further complicated by the fact that child layers of OctopusLayerMaskGroup can
+ * have children of their own and therefore it is impossible to set flag which signals if next layer should have its own maskGroup disregarding the hashKey
+ * (static private _isNextChildLayerMaskedByNewMask in OctopusLayerMaskGroup ). To prevent child layers changing the flag, we build childLayers in point of convert.
  *
  * Source layer can also have a soft mask. If it has a soft mask, soft mask is created and clip mask is ignored. Source Illustrator file has Resources
  * section which contains useful information about properties needed for correct rendering. Except of that, it can contain softMask. Each layer can be connected to
@@ -144,24 +144,27 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): Nullish<
   const [layer] = layerSequence.sourceLayers
 
   if (layer.softMask) {
+    OctopusLayerMaskGroup.setIsNextChildLayerMaskedByNewMask(true)
     return createOctopusLayerSoftMaskGroup({ layerSequence, parent })
   }
 
   if (!('mask' in layer) || !layer.mask) {
+    OctopusLayerMaskGroup.setIsNextChildLayerMaskedByNewMask(true)
     return buildOctopusLayer(options)
   }
 
   const { maskGroup, maskGroupHashKey } = getClippingMaskGroup({ parent, mask: layer.mask })
-
   if (maskGroup) {
-    maskGroup.addChildLayerToMaskGroup(layer)
+    maskGroup.addLayerSequence(layerSequence)
   }
 
-  if (isMaskGroupRegistered(maskGroupHashKey)) {
+  if (OctopusLayerMaskGroup.isMaskGroupRegistered(maskGroupHashKey)) {
+    OctopusLayerMaskGroup.setIsNextChildLayerMaskedByNewMask(false)
     return null
   }
 
   if (maskGroupHashKey && maskGroup) {
+    OctopusLayerMaskGroup.setIsNextChildLayerMaskedByNewMask(false)
     OctopusLayerMaskGroup.registerMaskGroup(maskGroupHashKey, maskGroup)
   }
 

@@ -45,7 +45,9 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
 
-    if (!common || !specific) return null
+    if (!specific || specific.layers.length === 0) {
+      return null
+    }
 
     return {
       ...common,
