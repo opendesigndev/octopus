@@ -1,4 +1,4 @@
-import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
@@ -82,59 +82,46 @@ export function createClippingMask(
     : OctopusLayerMaskGroup.createClippingMask({ parent, mask, layers })
 }
 
+function isMaskBreaker(sourceLayer: SourceLayer) {
+  return sourceLayer.type === 'FRAME' || !sourceLayer.visible
+}
+
+function intoGroups(children: SourceLayer[]): SourceLayer[][] {
+  const sequenceCandidates = [...children].reduce((candidates, layer, index) => {
+    if (index === 0 || layer.isMask) candidates.push([])
+    candidates[candidates.length - 1].push(layer)
+    return candidates
+  }, [] as SourceLayer[][])
+
+  return sequenceCandidates
+    .reduce((sequences, candidate) => {
+      let maskContext = candidate[0].isMask
+      const subSeqs = candidate.reduce((subSeqs, layer, index) => {
+        if (index === 0 || isMaskBreaker(layer) || !maskContext) subSeqs.push([])
+        if (isMaskBreaker(layer)) maskContext = false
+        subSeqs[subSeqs.length - 1].push(layer)
+        return subSeqs
+      }, [] as SourceLayer[][])
+      sequences.push(subSeqs)
+      return sequences
+    }, [] as SourceLayer[][][])
+    .flat(1)
+}
+
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
-  let mask: OctopusLayer | null = null
-  let maskIsOutline = false
-  let maskLayers: OctopusLayer[] = []
-
-  const resetValues = (_mask: OctopusLayer | null = null, _maskIsOutline = false) => {
-    mask = _mask
-    maskIsOutline = _maskIsOutline
-    maskLayers = []
-  }
-
-  const octopusLayers = layers.reduce((layers, sourceLayer) => {
-    const octopusLayer = createOctopusLayer({ parent, layer: sourceLayer })
-
-    if (!octopusLayer) return layers
-
-    if (sourceLayer.isMask) {
-      if (!sourceLayer.visible) {
-        if (mask !== null) {
-          const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-          resetValues()
-          if (!clippingMask) return push(layers, octopusLayer)
-          return push(layers, clippingMask, octopusLayer)
-        }
-        resetValues()
-        return push(layers, octopusLayer)
+  const sequences = intoGroups(layers)
+  return sequences
+    .map((seq) => {
+      if (seq.length > 1) {
+        const [sourceMask, ...sourceMaskLayers] = seq
+        const mask = createOctopusLayer({ parent, layer: sourceMask })
+        if (!mask) return null
+        const maskLayers = sourceMaskLayers
+          .map((layer) => createOctopusLayer({ parent, layer }))
+          .filter((a) => a) as OctopusLayer[]
+        return createClippingMask(parent, mask, maskLayers, sourceMask.isMaskOutline)
       }
-      if (mask !== null) {
-        const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-        resetValues(octopusLayer, sourceLayer.isMaskOutline)
-        if (!clippingMask) return layers
-        return push(layers, clippingMask)
-      }
-      resetValues(octopusLayer, sourceLayer.isMaskOutline)
-      return layers
-    }
-
-    if (mask !== null) {
-      if (sourceLayer.type === 'FRAME') {
-        const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-        resetValues()
-        if (!clippingMask) return push(layers, octopusLayer)
-        return push(layers, clippingMask, octopusLayer)
-      }
-      maskLayers.push(octopusLayer)
-      return layers
-    }
-
-    return push(layers, octopusLayer)
-  }, [])
-
-  if (!mask) return octopusLayers
-  const clippingMask = createClippingMask(parent, mask, maskLayers, maskIsOutline)
-  if (!clippingMask) return octopusLayers
-  return push(octopusLayers, clippingMask)
+      return createOctopusLayer({ parent, layer: seq[0] })
+    })
+    .filter((a) => a) as OctopusLayer[]
 }
