@@ -95,6 +95,10 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.graphicsState?.DashPattern
   }
 
+  get miterLimit(): Nullish<number> {
+    return this.graphicsState?.MiterLimit
+  }
+
   get dashing(): number[] {
     return this.dashPattern?.[0] ?? []
   }
