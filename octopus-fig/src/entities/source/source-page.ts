@@ -34,9 +34,9 @@ export class SourcePage extends SourceEntity {
     const frames: RawLayerFrame[] = []
     const rest: RawLayer[] = []
     this._rawValue?.children?.forEach((element) => {
-      if (element.type === 'FRAME') {
+      if (element.type === 'FRAME' || element.type === 'COMPONENT' || element.type === 'COMPONENT_SET') {
         frames.push(element)
-      } else if (element.type !== 'COMPONENT' && element.type !== 'COMPONENT_SET') {
+      } else {
         rest.push(element)
       }
     })

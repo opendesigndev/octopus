@@ -3,26 +3,26 @@ import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
 import type { SourceArtboard } from '../../entities/source/source-artboard'
 import type { Octopus } from '../../typings/octopus'
 
-export type ArtboardConverterOptions = {
-  artboard: SourceArtboard
+export type DocumentConverterOptions = {
+  source: SourceArtboard
   version: string
 }
 
-export class ArtboardConverter {
+export class DocumentConverter {
   private _sourceArtboard: SourceArtboard
   private _version: string
 
-  constructor(options: ArtboardConverterOptions) {
-    this._sourceArtboard = options.artboard
+  constructor(options: DocumentConverterOptions) {
+    this._sourceArtboard = options.source
     this._version = options.version
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    const artboard = new OctopusArtboard({
+    const document = new OctopusArtboard({
       sourceArtboard: this._sourceArtboard,
       version: this._version,
     })
 
-    return artboard.convert()
+    return document.convert()
   }
 }

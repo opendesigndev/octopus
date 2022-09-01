@@ -7,9 +7,10 @@ import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { SourceArtboard } from './entities/source/source-artboard'
 import { SourceDesign } from './entities/source/source-design'
 import { logger, setDefaults, setLogger } from './services'
-import { ArtboardConverter } from './services/conversion/artboard-converter'
+import { DocumentConverter } from './services/conversion/document-converter'
 import { getPlatformFactories, setPlatformFactories } from './services/general/platforms'
 import { readPackageMeta } from './utils/read-pkg-meta'
+import { getRole } from './utils/source'
 
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { ImageSize } from './services/general/image-size/image-size'
@@ -44,7 +45,7 @@ export type OctopusConverterOptions = {
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 
-export type ArtboardConversionResult = {
+export type DocumentConversionResult = {
   id: string
   value: Octopus['OctopusDocument'] | null
   error: Error | null
@@ -53,16 +54,9 @@ export type ArtboardConversionResult = {
 
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined
-  artboards: ArtboardConversionResult[]
+  components: DocumentConversionResult[]
   images: { name: string; data: ArrayBuffer }[]
   previews: { id: string; data: ArrayBuffer }[]
-}
-
-export type ArtboardConversionWithAssetsResult = ArtboardConversionResult & {
-  images: {
-    id: string
-    image: Uint8Array
-  }[]
 }
 
 export class OctopusFigConverter {
@@ -77,8 +71,8 @@ export class OctopusFigConverter {
     imageSize: (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
   }
 
-  static ARTBOARDS_QUEUE_PARALLELS = 5
-  static ARTBOARDS_QUEUE_NAME = 'Artboards queue'
+  static DOCUMENT_QUEUE_PARALLELS = 5
+  static DOCUMENT_QUEUE_NAME = 'Document queue'
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: OctopusConverterOptions) {
@@ -130,24 +124,24 @@ export class OctopusFigConverter {
     return this._pkg
   }
 
-  private async _convertArtboardSafe(
-    artboard: SourceArtboard
+  private async _convertDocumentSafe(
+    source: SourceArtboard
   ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
     try {
       const version = await this.pkg.version
-      const value = await new ArtboardConverter({ artboard, version }).convert()
+      const value = await new DocumentConverter({ source, version }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
     }
   }
 
-  async convertArtboard(artboard: SourceArtboard): Promise<ArtboardConversionResult> {
+  async convertDocument(source: SourceArtboard): Promise<DocumentConversionResult> {
     const { time, result } = await this._services.benchmark.benchmarkAsync(async () =>
-      this._convertArtboardSafe(artboard)
+      this._convertDocumentSafe(source)
     )
     const { value, error } = result
-    return { id: artboard.id, value, error, time }
+    return { id: source.id, value, error, time }
   }
 
   private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest'] | undefined> {
@@ -164,29 +158,30 @@ export class OctopusFigConverter {
     return manifest
   }
 
-  private async _exportArtboardSafe(
+  private async _exportDocumentSafe(
     exporter: AbstractExporter | null,
-    converted: ArtboardConversionResult
-  ): Promise<{ artboardPath: string | null; error: Error | null }> {
+    converted: DocumentConversionResult,
+    role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD'
+  ): Promise<{ path: string | null; error: Error | null }> {
     try {
-      const artboardPath = await exporter?.exportArtboard?.(converted)
-      if (!artboardPath) return { artboardPath: null, error: new Error('Export Artboard failed - no artboardPath') }
-      return { artboardPath, error: null }
+      const path = await exporter?.exportDocument?.(converted, role)
+      if (!path) return { path: null, error: new Error('Export Artboard failed - no path') }
+      return { path, error: null }
     } catch (error) {
-      return { artboardPath: null, error }
+      return { path: null, error }
     }
   }
 
-  private async _exportArtboard(
+  private async _exportDocument(
     exporter: AbstractExporter | null,
-    artboard: SourceArtboard
-  ): Promise<ArtboardConversionResult> {
-    const converted = await this.convertArtboard(artboard)
+    source: SourceArtboard
+  ): Promise<DocumentConversionResult> {
+    const converted = await this.convertDocument(source)
 
-    const { artboardPath, error } = await this._exportArtboardSafe(exporter, converted)
+    const { path, error } = await this._exportDocumentSafe(exporter, converted, getRole(source))
 
-    this._octopusManifest?.setExportedArtboard(artboard.id, {
-      path: artboardPath,
+    this._octopusManifest?.setExportedComponent(source, {
+      path,
       error: converted.error ?? error,
       time: converted.time,
     })
@@ -194,15 +189,16 @@ export class OctopusFigConverter {
     return converted
   }
 
-  private _initArtboardQueue(exporter: AbstractExporter | null) {
+  private _initDocumentQueue(exporter: AbstractExporter | null) {
     return new Queue({
-      name: OctopusFigConverter.ARTBOARDS_QUEUE_NAME,
-      parallels: OctopusFigConverter.ARTBOARDS_QUEUE_PARALLELS,
-      factory: async (artboards: SourceArtboard[]): Promise<SafeResult<ArtboardConversionResult>[]> => {
+      name: OctopusFigConverter.DOCUMENT_QUEUE_NAME,
+      parallels: OctopusFigConverter.DOCUMENT_QUEUE_PARALLELS,
+      factory: async (sources: SourceArtboard[]): Promise<SafeResult<DocumentConversionResult>[]> => {
         return Promise.all(
-          artboards.map(async (artboard) => {
-            return { value: await this._exportArtboard(exporter, artboard), error: null }
-          })
+          sources.map(async (source) => ({
+            value: await this._exportDocument(exporter, source),
+            error: null,
+          }))
         )
       },
     })
@@ -210,15 +206,30 @@ export class OctopusFigConverter {
 
   async convertDesign(options?: ConvertDesignOptions): Promise<DesignConversionResult | null> {
     const finalizeConvert = detachPromiseControls<void>()
-    const conversionResult: DesignConversionResult = { manifest: undefined, artboards: [], images: [], previews: [] }
+    const conversionResult: DesignConversionResult = { manifest: undefined, components: [], images: [], previews: [] }
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
     const shouldReturn = !(options?.skipReturn ?? false)
-    const awaitingArtboards: Promise<ArtboardConversionResult>[] = []
+    const awaitingArtboards: Promise<DocumentConversionResult>[] = []
 
     const imageSizeMap: ImageSizeMap = {}
 
-    /** Init artboards queue */
-    const queue = this._initArtboardQueue(exporter)
+    const convertDocument = async (frame: ResolvedFrame) => {
+      const rawArtboard = frame.node.document as RawLayerFrame
+      const sourcePathPromise = exporter?.exportRawDocument?.(rawArtboard, frame.nodeId)
+
+      const fillIds = Object.keys(frame.fills)
+      this._octopusManifest?.setExportedComponentImageMap(frame.nodeId, fillIds)
+      const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap })
+      const artboardPromise = queue.exec(sourceArtboard)
+      awaitingArtboards.push(artboardPromise)
+
+      this._octopusManifest?.setExportedSourcePath(frame.nodeId, await sourcePathPromise)
+      const artboard = await artboardPromise
+      if (shouldReturn) conversionResult.components.push(artboard)
+    }
+
+    /** Init document queue */
+    const queue = this._initDocumentQueue(exporter)
 
     const design = this._design
     if (design === null) {
@@ -242,11 +253,11 @@ export class OctopusFigConverter {
         options?.partialUpdateInterval || OctopusFigConverter.PARTIAL_UPDATE_INTERVAL
       )
 
-      /** Wait till all artboards + dependencies are processed */
+      /** Wait till all documents + dependencies are processed */
       await design.content
       await Promise.all(awaitingArtboards)
 
-      /** At this moment all artboards + dependencies should be converted and exported */
+      /** At this moment all documents + dependencies should be converted and exported */
 
       /** Final trigger of manifest save */
       clearInterval(manifestInterval)
@@ -257,20 +268,11 @@ export class OctopusFigConverter {
       finalizeConvert.resolve()
     })
 
-    design.on('ready:artboard', async (frame: ResolvedFrame) => {
-      const rawArtboard = frame.node.document as RawLayerFrame
-      const sourcePathPromise = exporter?.exportRawComponent?.(rawArtboard, frame.nodeId)
+    design.on('ready:artboard', async (frame: ResolvedFrame) => convertDocument(frame))
 
-      const fillIds = Object.keys(frame.fills)
-      this._octopusManifest?.setExportedArtboardImageMap(frame.nodeId, fillIds)
-      const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap })
-      const artboardPromise = queue.exec(sourceArtboard)
-      awaitingArtboards.push(artboardPromise)
+    design.on('ready:component', async (frame: ResolvedFrame) => convertDocument(frame))
 
-      this._octopusManifest?.setExportedSourcePath(frame.nodeId, await sourcePathPromise)
-      const artboard = await artboardPromise
-      if (shouldReturn) conversionResult.artboards.push(artboard)
-    })
+    design.on('ready:library', async (frame: ResolvedFrame) => convertDocument(frame))
 
     design.on('ready:fill', async (fill: ResolvedFill) => {
       const fillName = fill.ref

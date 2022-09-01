@@ -13,7 +13,7 @@ type ConvertAllOptions = {
   designId: string
 }
 
-type ConvertedArtboard = {
+type ConvertedDocumentResult = {
   id: string
   time: number
   error: Error | null
@@ -33,9 +33,9 @@ export async function convertDesign({
   // exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
   // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
-  exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
-    const status = artboard.error ? `❌ ${artboard.error}` : '✅'
-    const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
+  exporter.on('octopus:document', async (result: ConvertedDocumentResult, role: string) => {
+    const status = result.error ? `❌ ${result.error}` : '✅'
+    const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =
       render === null
         ? '<none>'
@@ -43,8 +43,8 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.info(`\n${chalk.yellow('Artboard')} ${artboard.id} ${status}`)
-    console.info(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
+    console.info(`\n${chalk.yellow(role)} ${result.id} ${status}`)
+    console.info(`  ${chalk.cyan(`Octopus:`)} file://${result.octopusPath} ${displayPerf(result.time)}`)
     console.info(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })
 

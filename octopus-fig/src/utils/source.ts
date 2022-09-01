@@ -3,6 +3,7 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from './defaults'
 
+import type { SourceArtboard } from '../entities/source/source-artboard'
 import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
@@ -44,11 +45,17 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   }))
 }
 
+export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
+  if (source.isPasteboard) return 'PASTEBOARD'
+  if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
+  return 'ARTBOARD'
+}
+
 export function getArtboardTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
   const bounds = sourceLayer.bounds
-  const transform = sourceLayer.transform
-  if (!bounds || !transform) return undefined
-  const { x, y } = bounds
-  const [a, b, c, d, tx, ty] = transform
-  return [a, b, c, d, tx - x, ty - y]
+  const boundingBox = sourceLayer.boundingBox
+  if (!bounds || !boundingBox) return undefined
+  const { x: x0, y: y0 } = bounds
+  const { x: x1, y: y1 } = boundingBox
+  return [1, 0, 0, 1, x1 - x0, y1 - y0]
 }

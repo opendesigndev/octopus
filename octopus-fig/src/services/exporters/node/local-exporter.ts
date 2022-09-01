@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
-import type { ArtboardConversionResult } from '../../../octopus-fig-converter'
+import type { DocumentConversionResult } from '../../../octopus-fig-converter'
 import type { Manifest } from '../../../typings/manifest'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
@@ -59,9 +59,11 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
-  exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
-    if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.getOctopusPath(artboard.id), stringify(artboard.value))
+  async exportDocument(result: DocumentConversionResult): Promise<string | null> {
+    if (!result.value) return Promise.resolve(null)
+    const path = LocalExporter.getOctopusPath(result.id)
+    await this._save(path, stringify(result.value))
+    return path
   }
 
   getImagePath(name: string): string {

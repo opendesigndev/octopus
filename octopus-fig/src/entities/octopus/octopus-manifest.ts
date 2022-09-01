@@ -1,5 +1,7 @@
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
+import { getRole } from '../../utils/source'
+
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceArtboard } from '../source/source-artboard'
@@ -10,11 +12,13 @@ type OctopusManifestOptions = {
   octopusConverter: OctopusFigConverter
 }
 
-export type ArtboardDescriptor = {
+export type ComponentDescriptor = {
   path: unknown
   error: Error | null
   time: number | null
 }
+
+type ComponentSourceWithDescriptor = { source: SourceArtboard; descriptor: ComponentDescriptor }
 
 export class OctopusManifest {
   private _sourceDesign: SourceDesign
@@ -22,9 +26,9 @@ export class OctopusManifest {
   private _exports: {
     images: Map<string, string | undefined>
     previews: Map<string, string | undefined>
-    artboards: Map<string, ArtboardDescriptor>
-    artboardImageMap: Map<string, string[]>
-    artboardSourcePath: Map<string, string | undefined>
+    components: Map<string, ComponentSourceWithDescriptor>
+    componentImageMap: Map<string, string[]>
+    componentSourcePath: Map<string, string | undefined>
   }
 
   static DEFAULT_FIG_VERSION = '0'
@@ -36,9 +40,9 @@ export class OctopusManifest {
     this._exports = {
       images: new Map(),
       previews: new Map(),
-      artboards: new Map(),
-      artboardImageMap: new Map(),
-      artboardSourcePath: new Map(),
+      components: new Map(),
+      componentImageMap: new Map(),
+      componentSourcePath: new Map(),
     }
   }
 
@@ -58,34 +62,34 @@ export class OctopusManifest {
     return this._exports.images.get(id)
   }
 
-  setExportedArtboardImageMap(artboardId: string, imageIds: string[]): void {
-    this._exports.artboardImageMap.set(artboardId, imageIds)
+  setExportedComponentImageMap(componentId: string, imageIds: string[]): void {
+    this._exports.componentImageMap.set(componentId, imageIds)
   }
 
-  getExportedArtboardImageMap(artboardId: string): string[] | undefined {
-    return this._exports.artboardImageMap.get(artboardId)
+  getExportedComponentImageMap(componentId: string): string[] | undefined {
+    return this._exports.componentImageMap.get(componentId)
   }
 
-  setExportedSourcePath(artboardId: string, sourcePath?: string): void {
-    this._exports.artboardSourcePath.set(artboardId, sourcePath)
+  setExportedSourcePath(componentId: string, sourcePath?: string): void {
+    this._exports.componentSourcePath.set(componentId, sourcePath)
   }
 
-  getExportedSourcePath(artboardId: string): string | undefined {
-    return this._exports.artboardSourcePath.get(artboardId)
+  getExportedSourcePath(componentId: string): string | undefined {
+    return this._exports.componentSourcePath.get(componentId)
   }
 
-  getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
-    return this._exports.artboards.get(id)
+  getExportedComponentDescriptorById(id: string): ComponentDescriptor | undefined {
+    return this._exports.components.get(id)?.descriptor
   }
 
-  getExportedArtboardPathById(id: string): string | undefined {
-    const artboardResult = this._exports.artboards.get(id)
-    if (typeof artboardResult?.path !== 'string') return undefined
-    return artboardResult.path
+  getExportedComponentPathById(id: string): string | undefined {
+    const componentResult = this._exports.components.get(id)
+    if (typeof componentResult?.descriptor?.path !== 'string') return undefined
+    return componentResult.descriptor.path
   }
 
-  setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
-    this._exports.artboards.set(id, artboard)
+  setExportedComponent(source: SourceArtboard, descriptor: ComponentDescriptor): void {
+    this._exports.components.set(source.id, { source, descriptor })
   }
 
   get manifestVersion(): string {
@@ -119,7 +123,7 @@ export class OctopusManifest {
   }
 
   private _getStatus(source: SourceArtboard): Manifest['Status'] {
-    const status = this.getExportedArtboardById(source.id)
+    const status = this.getExportedComponentDescriptorById(source.id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
     return {
       value: statusValue,
@@ -146,7 +150,7 @@ export class OctopusManifest {
   }
 
   private _getAssets(source: SourceArtboard): Manifest['Assets'] {
-    const imageIds = this.getExportedArtboardImageMap(source.id) ?? []
+    const imageIds = this.getExportedComponentImageMap(source.id) ?? []
     const images = this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
     return { images, fonts }
@@ -169,22 +173,16 @@ export class OctopusManifest {
     return { type: 'RELATIVE', path: previewPath }
   }
 
-  private _getRole(source: SourceArtboard): Manifest['Component']['role'] {
-    if (source.isPasteboard) return 'PASTEBOARD'
-    if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
-    return 'ARTBOARD'
-  }
-
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
 
-    const path = this.getExportedArtboardPathById(id) ?? ''
+    const path = this.getExportedComponentPathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
     const artifacts = this._getArtifacts(source)
-    const role = this._getRole(source)
+    const role = getRole(source)
     const preview = this._getPreview(id)
 
     return {
@@ -202,9 +200,7 @@ export class OctopusManifest {
   }
 
   get components(): Manifest['Component'][] {
-    return this._sourceDesign.pages
-      .reduce((artboards, page) => push(artboards, ...page.children), [])
-      .map((artboard) => this._getArtboard(artboard))
+    return Array.from(this._exports.components.values()).map((component) => this._getArtboard(component.source))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {
