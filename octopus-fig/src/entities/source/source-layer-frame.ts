@@ -2,10 +2,12 @@ import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
+import { getBoundsFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerFrameOptions = {
@@ -43,5 +45,13 @@ export class SourceLayerFrame extends SourceLayerCommon {
 
   get layers(): SourceLayer[] {
     return this._layers
+  }
+
+  get bounds(): SourceBounds | null {
+    return getBoundsFor(this._rawValue.absoluteRenderBounds)
+  }
+
+  get boundingBox(): SourceBounds | null {
+    return getBoundsFor(this._rawValue.absoluteBoundingBox)
   }
 }

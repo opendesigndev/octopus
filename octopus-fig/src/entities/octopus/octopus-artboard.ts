@@ -31,9 +31,8 @@ export class OctopusArtboard {
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    if (!this._sourceArtboard.clipsContent) return undefined
-    if (this._sourceArtboard.sourceFrame.strokes?.length > 0) return undefined
-    const bounds = this.sourceArtboard.bounds
+    // const bounds = this.sourceArtboard.boundingBox
+    const bounds = this.sourceArtboard.bounds // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     if (!bounds) return undefined
     const { width, height } = bounds
     return { width, height }

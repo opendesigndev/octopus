@@ -4,6 +4,7 @@ import { createOctopusLayer, createOctopusLayers } from '../../factories/create-
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
+import { getArtboardTransform } from '../../utils/source'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -63,7 +64,8 @@ export class OctopusLayerMaskGroup {
     isArtboard = false,
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
-    const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
+    // const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
+    const transform = isArtboard ? getArtboardTransform(sourceLayer) : sourceLayer.transform ?? undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
