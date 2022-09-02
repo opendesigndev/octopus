@@ -1,20 +1,23 @@
 import type { RawLayer, RawLayerFrame } from './layer'
 import type { RawColor } from './shared'
 
-type ComponentSet = {
+export type RawComponentSets = { [key: string]: RawComponentSet | undefined }
+export type RawComponentSet = {
   key?: string
   name?: string
   description?: string
 }
 
-type Component = {
+export type RawComponents = { [key: string]: RawComponent | undefined }
+export type RawComponent = {
   key?: string
   name?: string
   description?: string
   componentSetId?: string
 }
 
-type Style = {
+export type RawStyles = { [key: string]: RawStyle | undefined }
+export type RawStyle = {
   key?: string
   name?: string
   description?: string
@@ -23,10 +26,10 @@ type Style = {
 
 export type RawDesign = {
   document?: RawDocument
-  components?: { [key: string]: Component }
-  componentSets?: { [key: string]: ComponentSet }
+  components?: RawComponents
+  componentSets?: RawComponentSets
   schemaVersion?: number
-  styles?: { [key: string]: Style }
+  styles?: RawStyles
   name?: string
   lastModified?: string
   thumbnailUrl?: string

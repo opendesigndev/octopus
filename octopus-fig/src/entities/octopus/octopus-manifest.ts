@@ -173,6 +173,31 @@ export class OctopusManifest {
     return { type: 'RELATIVE', path: previewPath }
   }
 
+  private _getVariantProperties(name = ''): Manifest['VariantMeta']['properties'] {
+    const properties: Manifest['VariantMeta']['properties'] = {}
+    name.split(', ').forEach((part) => {
+      const property = part.split('=')
+      if (property.length !== 2) return
+      const [key, value] = property
+      properties[key] = value
+    })
+    return properties
+  }
+
+  private _getVariant(id: string): Manifest['VariantMeta'] | undefined {
+    const component = this._sourceDesign.components[id]
+    if (!component) return undefined
+    const { componentSetId: setId, description } = component
+    if (!setId) return undefined
+    const componentSet = this._sourceDesign.componentSets[setId]
+    if (!componentSet) return undefined
+    const { name: setName, description: setDescription } = componentSet
+    if (!setName) return undefined
+    const of = { id: setId, name: setName, description: setDescription }
+    const properties = this._getVariantProperties(component.name)
+    return { of, properties, description }
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -184,6 +209,7 @@ export class OctopusManifest {
     const artifacts = this._getArtifacts(source)
     const role = getRole(source)
     const preview = this._getPreview(id)
+    const variant = this._getVariant(id)
 
     return {
       id,
@@ -195,6 +221,7 @@ export class OctopusManifest {
       preview,
       assets,
       artifacts,
+      variant,
       location,
     }
   }
