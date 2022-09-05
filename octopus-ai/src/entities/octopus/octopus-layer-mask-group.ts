@@ -35,6 +35,10 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
     this._registry[this._getMaskGroupHashKeyWithOrder(hashKey)] = maskGroup
   }
 
+  static resetRegistry() {
+    this._registry = {}
+  }
+
   static getRegisteredMaskGroup(hashkKey: string): OctopusLayerMaskGroup {
     const maskGroupHashKey = this._getMaskGroupHashKeyWithOrder(hashkKey)
 
