@@ -21,42 +21,28 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
   private _layerSequences: LayerSequence[] = []
   protected _id: string
 
-  private static _maskGroupOrder = 0
-  private static _isNextChildLayerMaskedByNewMask = false
-
   private static _registry: { [keyCheck: string]: OctopusLayerMaskGroup } = {}
 
-  private static _getMaskGroupHashKeyWithOrder(hashKey: string): string {
-    return `${hashKey}-${this._maskGroupOrder}`
-  }
-
   static registerMaskGroup(hashKey: string, maskGroup: OctopusLayerMaskGroup): void {
-    this._maskGroupOrder = this._maskGroupOrder + 1
-    this._registry[this._getMaskGroupHashKeyWithOrder(hashKey)] = maskGroup
+    this.resetRegistry()
+
+    this._registry[hashKey] = maskGroup
   }
 
   static resetRegistry() {
     this._registry = {}
   }
 
-  static getRegisteredMaskGroup(hashkKey: string): OctopusLayerMaskGroup {
-    const maskGroupHashKey = this._getMaskGroupHashKeyWithOrder(hashkKey)
-
-    return this._registry[maskGroupHashKey]
+  static getStoredMaskGroup(hashkKey: string): OctopusLayerMaskGroup {
+    return this._registry[hashkKey]
   }
 
   static isMaskGroupRegistered(hashKey: string | null) {
-    if (!hashKey || this._isNextChildLayerMaskedByNewMask) {
+    if (!hashKey) {
       return false
     }
 
-    const maskGroupHashKey = this._getMaskGroupHashKeyWithOrder(hashKey)
-
-    return Boolean(OctopusLayerMaskGroup._registry[maskGroupHashKey])
-  }
-
-  static setIsNextChildLayerMaskedByNewMask(isNextChildLayerMaskedByNewMask: boolean): void {
-    this._isNextChildLayerMaskedByNewMask = isNextChildLayerMaskedByNewMask
+    return Boolean(OctopusLayerMaskGroup._registry[hashKey])
   }
 
   constructor(options: OctopusLayerMaskOptions) {
