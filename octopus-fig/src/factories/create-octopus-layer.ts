@@ -86,42 +86,47 @@ function isMaskBreaker(sourceLayer: SourceLayer) {
   return sourceLayer.type === 'FRAME' || !sourceLayer.visible
 }
 
-function intoGroups(children: SourceLayer[]): SourceLayer[][] {
-  const sequenceCandidates = [...children].reduce((candidates, layer, index) => {
+/**
+ * Split layers into groups.
+ * Group layers clipped by mask layer.
+ * Clipping mask is the first one in it's group.
+ */
+function intoGroups(layers: SourceLayer[]): SourceLayer[][] {
+  const groupCandidates = [...layers].reduce((candidates, layer, index) => {
     if (index === 0 || layer.isMask) candidates.push([])
     candidates[candidates.length - 1].push(layer)
     return candidates
   }, [] as SourceLayer[][])
 
-  return sequenceCandidates
-    .reduce((sequences, candidate) => {
+  return groupCandidates
+    .reduce((groups, candidate) => {
       let maskContext = candidate[0].isMask
-      const subSeqs = candidate.reduce((subSeqs, layer, index) => {
-        if (index === 0 || isMaskBreaker(layer) || !maskContext) subSeqs.push([])
+      const subGroups = candidate.reduce((subGroups, layer, index) => {
+        if (index === 0 || isMaskBreaker(layer) || !maskContext) subGroups.push([])
         if (isMaskBreaker(layer)) maskContext = false
-        subSeqs[subSeqs.length - 1].push(layer)
-        return subSeqs
+        subGroups[subGroups.length - 1].push(layer)
+        return subGroups
       }, [] as SourceLayer[][])
-      sequences.push(subSeqs)
-      return sequences
+      groups.push(subGroups)
+      return groups
     }, [] as SourceLayer[][][])
     .flat(1)
 }
 
 export function createOctopusLayers(layers: SourceLayer[], parent: OctopusLayerParent): OctopusLayer[] {
-  const sequences = intoGroups(layers)
-  return sequences
-    .map((seq) => {
-      if (seq.length > 1) {
-        const [sourceMask, ...sourceMaskLayers] = seq
+  const groups = intoGroups(layers)
+  return groups
+    .map((group) => {
+      if (group[0].isMask) {
+        const [sourceMask, ...sourceMaskLayers] = group
         const mask = createOctopusLayer({ parent, layer: sourceMask })
         if (!mask) return null
         const maskLayers = sourceMaskLayers
           .map((layer) => createOctopusLayer({ parent, layer }))
-          .filter((a) => a) as OctopusLayer[]
+          .filter((layer): layer is OctopusLayer => Boolean(layer))
         return createClippingMask(parent, mask, maskLayers, sourceMask.isMaskOutline)
       }
-      return createOctopusLayer({ parent, layer: seq[0] })
+      return createOctopusLayer({ parent, layer: group[0] })
     })
-    .filter((a) => a) as OctopusLayer[]
+    .filter((layer): layer is OctopusLayer => Boolean(layer))
 }
