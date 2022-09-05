@@ -19,6 +19,15 @@ export type Style = {
   source: FigmaLayer
 }
 
+export type ResolvedStyle = Style & {
+  meta: {
+    key: string
+    name: string
+    styleType: string
+    description: string
+  }
+}
+
 export default class Styles {
   _frameLike: FrameLike
   _styles: Style[]
@@ -69,7 +78,7 @@ export default class Styles {
     return targetLayers
   }
 
-  private _initStyles(): Style[] {
+  private _initStyles(): ResolvedStyle[] {
     if (!this._frameLike._design.parser.config.shouldObtainStyles) return []
 
     const sourceNodes = [this._frameLike.node]
@@ -84,7 +93,7 @@ export default class Styles {
 
     return allKeys.map((styleKey) => {
       const styleLocal = stylesMap[styleKey]
-      const style = {
+      const style: ResolvedStyle = {
         meta: frameLikeStyles?.[styleLocal.id],
         ...styleLocal,
       }
