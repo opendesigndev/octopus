@@ -89,6 +89,13 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return rawPath
   }
 
+  async exportRawChunk(raw: unknown, name: string): Promise<string> {
+    const rawPath = DebugExporter.getSourcePath(name)
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:chunk', savedPath)
+    return rawPath
+  }
+
   async exportDocument(result: DocumentConversionResult, role: Manifest['Component']['role']): Promise<string | null> {
     if (!result.value) {
       this.emit('octopus:document', { ...result }, role)

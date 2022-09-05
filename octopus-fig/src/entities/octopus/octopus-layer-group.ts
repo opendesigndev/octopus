@@ -23,7 +23,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
     this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
-  get type(): Octopus['LayerBase']['type'] | null {
+  get type(): Octopus['GroupLayer']['type'] | null {
     return 'GROUP'
   }
 

@@ -19,11 +19,12 @@ import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { RawDesign } from './typings/raw/design'
-import type { RawLayerFrame } from './typings/raw/layer'
+import type { RawLayer, RawLayerFrame } from './typings/raw/layer'
 import type {
   Design,
   ResolvedDesign,
   ResolvedFrame,
+  ResolvedStyle,
   ResolvedFill,
   ResolvedPreview,
 } from '@avocode/figma-parser/lib/src/index-node'
@@ -266,6 +267,12 @@ export class OctopusFigConverter {
       /** Trigger finalizer */
       exporter?.finalizeExport?.()
       finalizeConvert.resolve()
+    })
+
+    design.on('ready:style', async (style: ResolvedStyle) => {
+      const rawChunk = style.source as RawLayer
+      const chunkPath = await exporter?.exportRawChunk?.(rawChunk, style.id)
+      this._octopusManifest?.setExportedChunk(style, chunkPath)
     })
 
     design.on('ready:artboard', async (frame: ResolvedFrame) => convertDocument(frame))

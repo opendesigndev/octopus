@@ -1,11 +1,13 @@
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 
+import { logger } from '../../services'
 import { getRole } from '../../utils/source'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
+import type { ResolvedStyle } from '@avocode/figma-parser/lib/src/index-node'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
@@ -29,10 +31,18 @@ export class OctopusManifest {
     components: Map<string, ComponentSourceWithDescriptor>
     componentImageMap: Map<string, string[]>
     componentSourcePath: Map<string, string | undefined>
+    chunks: Map<string, { style: ResolvedStyle; sourcePath?: string } | undefined>
   }
 
   static DEFAULT_FIG_VERSION = '0'
   static DEFAULT_FIG_FILENAME = 'Untitled'
+
+  static CHUNK_TYPE_MAP = {
+    FILL: 'STYLE_FILL',
+    TEXT: 'STYLE_TEXT',
+    EFFECT: 'STYLE_EFFECT',
+    GRID: 'STYLE_GRID',
+  } as const
 
   constructor(options: OctopusManifestOptions) {
     this._sourceDesign = options.sourceDesign
@@ -43,6 +53,7 @@ export class OctopusManifest {
       components: new Map(),
       componentImageMap: new Map(),
       componentSourcePath: new Map(),
+      chunks: new Map(),
     }
   }
 
@@ -76,6 +87,14 @@ export class OctopusManifest {
 
   getExportedSourcePath(componentId: string): string | undefined {
     return this._exports.componentSourcePath.get(componentId)
+  }
+
+  setExportedChunk(style: ResolvedStyle, sourcePath?: string): void {
+    this._exports.chunks.set(style.id, { style, sourcePath })
+  }
+
+  getExportedChunk(chunkId: string): { style: ResolvedStyle; sourcePath?: string } | undefined {
+    return this._exports.chunks.get(chunkId)
   }
 
   getExportedComponentDescriptorById(id: string): ComponentDescriptor | undefined {
@@ -198,6 +217,25 @@ export class OctopusManifest {
     return { of, properties, description }
   }
 
+  private _getChunk(style?: ResolvedStyle, sourcePath?: string): Manifest['Chunk'] | undefined {
+    if (!style || !sourcePath) return undefined
+    const { id, meta } = style
+    const { name, description, styleType } = meta
+    const type = getMapped(styleType, OctopusManifest.CHUNK_TYPE_MAP, undefined)
+    if (!type) {
+      logger?.warn('Unknown chunk type', { styleType })
+      return undefined
+    }
+    const location = { type: 'RELATIVE', path: sourcePath } as const
+    return { id, name, description, type, location }
+  }
+
+  get chunks(): Manifest['Chunk'][] {
+    return Array.from(this._exports.chunks.values())
+      .map((chunk) => this._getChunk(chunk?.style, chunk?.sourcePath))
+      .filter((chunk): chunk is Manifest['Chunk'] => Boolean(chunk))
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -240,7 +278,7 @@ export class OctopusManifest {
       name: this.name,
       pages: this.pages,
       components: this.components,
-      chunks: [],
+      chunks: this.chunks,
       libraries: [],
     }
   }

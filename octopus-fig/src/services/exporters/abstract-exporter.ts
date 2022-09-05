@@ -10,6 +10,10 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportRawDocument" method implemented!')
   }
 
+  exportRawChunk?(_raw: unknown, _name: string): Promise<string> {
+    throw new Error('Subclass of "Exporter" has no "exportRawChunk" method implemented!')
+  }
+
   exportDocument(_result: DocumentConversionResult, _role?: Manifest['Component']['role']): Promise<string | null> {
     throw new Error('Subclass of "Exporter" has no "exportDocument" method implemented!')
   }
