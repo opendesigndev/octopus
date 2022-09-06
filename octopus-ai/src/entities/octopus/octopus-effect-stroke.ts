@@ -19,6 +19,10 @@ export class OctopusEffectStroke {
 
   static LINE_JOIN_MAP = ['MITER', 'ROUND', 'BEVEL'] as const
   static LINE_CAP_MAP = ['BUTT', 'ROUND', 'SQUARE'] as const
+
+  /**@TODO remove this later. Rendering is having default miterLimit when not provided. For now we provide our own
+   * for certainty.
+   */
   static DEFAULT_MITER_LIMIT = 20
 
   constructor(options: OctopusEffectStrokeOptions) {
