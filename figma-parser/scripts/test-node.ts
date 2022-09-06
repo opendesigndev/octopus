@@ -1,9 +1,9 @@
 import { createParser } from '../src/index-node'
 
 const parser = createParser({
-  designId: '9lJg7hAgjsDgrpueS30dMg', // 'kBEFObmdY1v5G5Qr3go5Uh', // ,
-  token: '117960-0bf13919-ba73-427d-800a-07c02b5f71a3',
-  ids: ['1:2', '111:28'], // ['306:789'],
+  designId: 'seOu5Dewcc8tbHIxgWBHR9', // 'kBEFObmdY1v5G5Qr3go5Uh', // ,
+  token: '376694-3ac3693b-cd97-4cd3-97b1-dc54aea109bf',
+  ids: [], // ['306:789'],
   host: 'api.figma.com',
   pixelsLimit: 1e7,
   framePreviews: true,
