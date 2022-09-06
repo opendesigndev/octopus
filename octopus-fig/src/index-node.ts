@@ -15,7 +15,7 @@ export { SourceApiReader } from './services/readers/source-api-reader'
 
 export type { SourceDesign }
 
-export function createConverter(options: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
+export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({
     ...options,
     platformFactories: {

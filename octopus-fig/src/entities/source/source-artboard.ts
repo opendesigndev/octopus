@@ -7,7 +7,7 @@ import { SourceEntity } from './source-entity'
 import { SourceLayerFrame } from './source-layer-frame'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { ImageSizeMap } from '../../octopus-fig-converter'
+import type { ImageSizeMap } from '../../services/conversion/design-converter'
 import type { RawArtboard, RawBlendMode } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 

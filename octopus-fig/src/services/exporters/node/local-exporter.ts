@@ -8,8 +8,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
-import type { DocumentConversionResult } from '../../../octopus-fig-converter'
 import type { Manifest } from '../../../typings/manifest'
+import type { DocumentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 

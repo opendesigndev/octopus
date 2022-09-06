@@ -12,7 +12,7 @@ export type { SourceDesign }
 
 export { SourceApiReader } from './services/readers/source-api-reader'
 
-export function createConverter(options: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
+export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({
     ...options,
     platformFactories: {

@@ -86,8 +86,8 @@
         console.info('ids:', await reader.frameLikeIds)
         
         const design = reader.parse(ids)
-        const converter = createConverter({ design })
-        const result = await converter.convertDesign()
+        const converter = createConverter()
+        const result = await converter.convertDesign({ design })
         console.info('Result:', result)
       } catch(err) {
         console.error('Some error happened:', err)

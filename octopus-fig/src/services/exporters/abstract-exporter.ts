@@ -1,5 +1,5 @@
-import type { DocumentConversionResult } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
+import type { DocumentConversionResult } from '../conversion/design-converter'
 
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {
