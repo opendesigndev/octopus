@@ -19,7 +19,7 @@ import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { RawDesign } from './typings/raw/design'
-import type { RawLayer, RawLayerFrame } from './typings/raw/layer'
+import type { RawLayerFrame } from './typings/raw/layer'
 import type {
   Design,
   ResolvedDesign,
@@ -211,7 +211,6 @@ export class OctopusFigConverter {
     const exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
     const shouldReturn = !(options?.skipReturn ?? false)
     const awaitingArtboards: Promise<DocumentConversionResult>[] = []
-
     const imageSizeMap: ImageSizeMap = {}
 
     const convertDocument = async (frame: ResolvedFrame) => {
@@ -270,15 +269,12 @@ export class OctopusFigConverter {
     })
 
     design.on('ready:style', async (style: ResolvedStyle) => {
-      const rawChunk = style.source as RawLayer
-      const chunkPath = await exporter?.exportRawChunk?.(rawChunk, style.id)
+      const chunkPath = await exporter?.exportRawChunk?.(style, style.id)
       this._octopusManifest?.setExportedChunk(style, chunkPath)
     })
 
     design.on('ready:artboard', async (frame: ResolvedFrame) => convertDocument(frame))
-
     design.on('ready:component', async (frame: ResolvedFrame) => convertDocument(frame))
-
     design.on('ready:library', async (frame: ResolvedFrame) => convertDocument(frame))
 
     design.on('ready:fill', async (fill: ResolvedFill) => {

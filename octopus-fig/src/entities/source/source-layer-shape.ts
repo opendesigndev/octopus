@@ -1,11 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 
+import { createSourceLayer } from '../../factories/create-source-layer'
 import { SourceLayerCommon } from './source-layer-common'
 
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
-import type { SourcePaint } from './source-paint'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -16,7 +17,7 @@ type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_PO
 
 export class SourceLayerShape extends SourceLayerCommon {
   protected _rawValue: RawLayerShape
-  private _children: SourceLayerShape[]
+  private _children: SourceLayer[]
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)
@@ -25,11 +26,10 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   private _initLayers() {
     const children = asArray(this._rawValue?.children)
-    return children.reduce(
-      (children: SourceLayerShape[], layer: RawLayerShape) =>
-        push(children, new SourceLayerShape({ parent: this, rawValue: layer })),
-      []
-    )
+    return children.reduce((children: SourceLayerShape[], layer: RawLayerShape) => {
+      const sourceLayer = createSourceLayer({ parent: this, layer })
+      return sourceLayer ? push(children, sourceLayer) : children
+    }, [])
   }
 
   get type(): 'SHAPE' {
@@ -40,16 +40,11 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this._rawValue.type
   }
 
-  get children(): SourceLayerShape[] {
+  get children(): SourceLayer[] {
     return this._children
   }
 
   get booleanOperation(): RawBooleanOperation | undefined {
     return this._rawValue.booleanOperation
-  }
-
-  get fills(): SourcePaint[] {
-    if (this.shapeType === 'VECTOR' && !this.fillGeometry.length) return []
-    return super.fills
   }
 }

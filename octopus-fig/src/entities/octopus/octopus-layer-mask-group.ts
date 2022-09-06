@@ -70,7 +70,8 @@ export class OctopusLayerMaskGroup {
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
     const layers = createOctopusLayers(sourceLayer.layers, parent)
-    return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard })
+    const visible = sourceLayer.visible
+    return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard, visible })
   }
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
@@ -156,6 +157,7 @@ export class OctopusLayerMaskGroup {
       mask,
       transform: this.transform,
       layers: getConverted(this._layers),
+      visible: this.visible,
       meta: this.meta,
     } as const
   }
