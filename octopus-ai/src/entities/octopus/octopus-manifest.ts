@@ -61,7 +61,8 @@ export class OctopusManifest {
     const artboardPath = this._exports.artboards.get(id)
     if (artboardPath === undefined) return undefined
     if (this._basePath === null) return artboardPath
-    return path.resolve(this._basePath, artboardPath)
+
+    return path.relative(this._basePath, artboardPath)
   }
 
   setExportedArtboard(id: string, path: string): void {
@@ -96,6 +97,7 @@ export class OctopusManifest {
 
     const images = imagesDeps.map((image: string) => {
       const location = this.getExportedRelativeImageById(image)
+
       return {
         location:
           typeof location === 'string'
