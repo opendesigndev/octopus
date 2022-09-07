@@ -1,58 +1,38 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import uniqueId from 'lodash/uniqueId'
 
-import { buildOctopusLayer, createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
-import { createOctopusLayersFromSequences } from '../../utils/layer'
+import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
+import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group'
 import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
-type OctopusLayerMaskOptions = {
+export type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent
-  layerSequence: LayerSequence
+  layerSequences: LayerSequence[]
 }
 
 export class OctopusLayerMaskGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[] = []
-  private _layerSequences: LayerSequence[] = []
   protected _id: string
 
-  private static _registry: { [keyCheck: string]: OctopusLayerMaskGroup } = {}
-
-  static registerMaskGroup(hashKey: string, maskGroup: OctopusLayerMaskGroup): void {
-    this.resetRegistry()
-
-    this._registry[hashKey] = maskGroup
-  }
-
-  static resetRegistry() {
-    this._registry = {}
-  }
-
-  static getStoredMaskGroup(hashkKey: string): OctopusLayerMaskGroup {
-    return this._registry[hashkKey]
-  }
-
-  static isMaskGroupRegistered(hashKey: string | null) {
-    if (!hashKey) {
-      return false
-    }
-
-    return Boolean(OctopusLayerMaskGroup._registry[hashKey])
-  }
-
-  constructor(options: OctopusLayerMaskOptions) {
-    super(options)
+  constructor({ parent, layerSequences }: OctopusLayerMaskOptions) {
+    super({
+      parent,
+      layerSequence: { sourceLayers: [(layerSequences[0].sourceLayers[0] as SourceLayerWithMask).mask] },
+    })
 
     this._id = uniqueId()
-  }
 
-  addLayerSequence(layerSequence: LayerSequence): void {
-    this._layerSequences.push(layerSequence)
+    this._layers = createOctopusLayersFromLayerSequences({
+      layerSequences: layerSequences,
+      parent: this,
+    })
   }
 
   private _createMask(): Nullish<Octopus['ShapeLayer']> {
@@ -72,11 +52,6 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
 
   private _convertTypeSpecific() {
     const mask = this._createMask()
-    this._layers = createOctopusLayersFromSequences({
-      layerSequences: this._layerSequences,
-      parent: this,
-      builder: buildOctopusLayer,
-    })
 
     if (!mask) {
       return null

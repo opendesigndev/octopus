@@ -1,5 +1,4 @@
 import { OctopusArtboard } from '../../../entities/octopus/octopus-artboard'
-import { OctopusLayerMaskGroup } from '../../../entities/octopus/octopus-layer-mask-group'
 
 import type { OctopusAIConverter } from '../../..'
 import type { Octopus } from '../../../typings/octopus'
@@ -22,8 +21,6 @@ export class ArtboardConverter {
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    OctopusLayerMaskGroup.resetRegistry()
-
     return new OctopusArtboard({
       octopusAIConverter: this._octopusAIConverter,
       targetArtboardId: this._targetArtboardId,

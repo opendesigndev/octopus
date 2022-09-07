@@ -1,11 +1,12 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import { createOctopusLayer } from '../factories/create-octopus-layer'
+import { buildOctopusLayer, createOctopusLayer } from '../factories/create-octopus-layer'
 import { createSourceLayer } from '../factories/create-source-layer'
-import { layerGroupingService } from '../services/instances/layer-grouping-service'
+import { LayerGroupingService } from '../services/conversion/layer-grouping-service'
+import { textLayerGroupingService } from '../services/instances/text-layer-grouping-service'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { OctopusLayer, CreateOctopusLayerOptions } from '../factories/create-octopus-layer'
+import type { OctopusLayer } from '../factories/create-octopus-layer'
 import type { SourceLayer } from '../factories/create-source-layer'
 import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
@@ -32,16 +33,14 @@ export function initSourceLayerChildren({ layers, parent }: InitSourceLayerChild
 type CreateOctopusLayersFromSequencesOptions = {
   parent: OctopusLayerParent
   layerSequences: LayerSequence[]
-  builder: (options: CreateOctopusLayerOptions) => Nullish<OctopusLayer>
 }
 
-export function createOctopusLayersFromSequences({
+export function createOctopusLayersFromLayerSequences({
   layerSequences,
   parent,
-  builder,
 }: CreateOctopusLayersFromSequencesOptions): OctopusLayer[] {
   return layerSequences.reduce<OctopusLayer[]>((children, layerSequence) => {
-    const childLayer = builder({
+    const childLayer = buildOctopusLayer({
       layerSequence,
       parent,
     })
@@ -57,11 +56,24 @@ type InitOctopusLayerSequenceOptions = {
 
 export function initOctopusLayerChildren({ layers, parent }: InitOctopusLayerSequenceOptions): OctopusLayer[] {
   const children = asArray(layers)
-  const layerSequences = layerGroupingService?.getLayerSequences(children)
 
-  if (!layerSequences) {
+  if (!textLayerGroupingService) {
     return []
   }
 
-  return createOctopusLayersFromSequences({ layerSequences, parent, builder: createOctopusLayer })
+  const layerGroupingService = new LayerGroupingService(textLayerGroupingService)
+  const layerSequenceGroups = layerGroupingService.getLayerSequences(children)
+
+  if (!layerSequenceGroups) {
+    return []
+  }
+
+  return layerSequenceGroups.reduce<OctopusLayer[]>((children, layerSequences) => {
+    const childLayer = createOctopusLayer({
+      layerSequences,
+      parent,
+    })
+
+    return childLayer ? [...children, childLayer] : children
+  }, [])
 }

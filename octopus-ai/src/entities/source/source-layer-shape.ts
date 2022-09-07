@@ -28,8 +28,8 @@ export class SourceLayerShape extends SourceLayerCommon {
     this._rawValue = options.rawValue
     this._subpaths = this._initSubpaths()
     this._clippingPaths = this._initClippingPaths()
-    this._mask = this._initMask()
     this._softMask = this._initSoftMask()
+    this._mask = this._initMask()
   }
 
   private _initSubpaths() {
@@ -46,6 +46,10 @@ export class SourceLayerShape extends SourceLayerCommon {
   }
 
   private _initMask(): Nullish<SourceLayerShape> {
+    if (this.softMask) {
+      return null
+    }
+
     const mask = initClippingMask(this)
 
     if (!mask) {

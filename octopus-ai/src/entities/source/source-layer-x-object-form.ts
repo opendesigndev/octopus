@@ -63,6 +63,10 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
   }
 
   private _initMask(): Nullish<SourceLayerShape> {
+    if (this._softMask) {
+      return null
+    }
+
     const mask = initClippingMask(this)
 
     if (!mask) {

@@ -14,7 +14,7 @@ export type LayerSequence = {
   additionalTextDataText?: AdditionalTextDataText
 }
 
-export class LayerGroupingService {
+export class TextLayerGroupingservice {
   private _originalAdditionalTextData: AdditionalTextData
 
   /** @_additionalTextDataWithOctopusSpecialCharacters is used to replace text in merged text layers.
@@ -50,30 +50,30 @@ export class LayerGroupingService {
   static DOUBLE_END_LINE_OCTOPUS = '\u2029'
 
   static OCTOPUS_DICTIONARY = {
-    [LayerGroupingService.END_LINE]: LayerGroupingService.END_LINE_OCTOPUS,
-    [LayerGroupingService.DOUBLE_END_LINE]: LayerGroupingService.DOUBLE_END_LINE_OCTOPUS,
+    [TextLayerGroupingservice.END_LINE]: TextLayerGroupingservice.END_LINE_OCTOPUS,
+    [TextLayerGroupingservice.DOUBLE_END_LINE]: TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
   }
   static ADDITIONAL_TEXT_DATA_DICTIONARY = {
-    [LayerGroupingService.END_LINE]: '',
-    [LayerGroupingService.DOUBLE_END_LINE]: '',
+    [TextLayerGroupingservice.END_LINE]: '',
+    [TextLayerGroupingservice.DOUBLE_END_LINE]: '',
   }
 
-  static SPECIAL_CHARACTERS = Object.keys(LayerGroupingService.ADDITIONAL_TEXT_DATA_DICTIONARY).sort(
+  static SPECIAL_CHARACTERS = Object.keys(TextLayerGroupingservice.ADDITIONAL_TEXT_DATA_DICTIONARY).sort(
     (a, b) => b.length - a.length
   )
   static TEXT_LAYER = 'TextGroup'
   static MIN_HEIGHT_DIFFERENCE = 0.1
   static OCTOPUS_EXTRA_CHARACTERS = [
-    LayerGroupingService.END_LINE_OCTOPUS,
-    LayerGroupingService.DOUBLE_END_LINE_OCTOPUS,
+    TextLayerGroupingservice.END_LINE_OCTOPUS,
+    TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
   ]
 
   constructor(additionalTextData: AdditionalTextData) {
     this._originalAdditionalTextData = { ...additionalTextData }
     this._additionalTextDataWithOctopusSpecialCharacters = this._initAdditionalTextData(
-      LayerGroupingService.OCTOPUS_DICTIONARY
+      TextLayerGroupingservice.OCTOPUS_DICTIONARY
     )
-    this._additionalTextData = this._initAdditionalTextData(LayerGroupingService.ADDITIONAL_TEXT_DATA_DICTIONARY)
+    this._additionalTextData = this._initAdditionalTextData(TextLayerGroupingservice.ADDITIONAL_TEXT_DATA_DICTIONARY)
     this._currentMatches = []
   }
 
@@ -262,7 +262,7 @@ export class LayerGroupingService {
 
   getLayerSequences(sourceLayers: SourceLayer[]): LayerSequence[] {
     sourceLayers.forEach((sourceLayer: SourceLayer, index: number) => {
-      if (sourceLayer.type !== LayerGroupingService.TEXT_LAYER || !this._originalAdditionalTextData) {
+      if (sourceLayer.type !== TextLayerGroupingservice.TEXT_LAYER || !this._originalAdditionalTextData) {
         this._layerSequences.push({ sourceLayers: [sourceLayer] })
       } else {
         this._pushTextLayer(sourceLayer as SourceLayerText)

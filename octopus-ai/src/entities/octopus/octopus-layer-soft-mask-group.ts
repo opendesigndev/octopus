@@ -9,9 +9,11 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerXObjectForm } from '../source/source-layer-x-object-form'
 
 export type SourceLayerWithSoftMask = SourceLayer & { softMask: SourceLayerXObjectForm }
+export type SourceLayerWithMask = SourceLayer & { mask: SourceLayerShape }
 
 type OctopusLayerSoftMaskGroupOptions = {
   parent: OctopusLayerParent

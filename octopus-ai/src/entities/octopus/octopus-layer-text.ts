@@ -2,7 +2,7 @@ import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 import flatten from 'lodash/flatten'
 
-import { LayerGroupingService } from '../../services/conversion/text-layer-grouping-service'
+import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service'
 import { removeTrailingHyphen } from '../../utils/text'
 import { OctopusLayerCommon } from './octopus-layer-common'
 import OctopusSubText from './octopus-subtext'
@@ -107,7 +107,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
       return
     }
 
-    if (LayerGroupingService.OCTOPUS_EXTRA_CHARACTERS.includes(this._octopusTextValue[octopusStringLength])) {
+    if (TextLayerGroupingservice.OCTOPUS_EXTRA_CHARACTERS.includes(this._octopusTextValue[octopusStringLength])) {
       octopusStringLength = octopusStringLength + 1
     }
     return octopusStringLength

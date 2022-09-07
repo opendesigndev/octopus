@@ -32,8 +32,8 @@ export class SourceLayerText extends SourceLayerCommon {
     super(options)
     this._normalizedTexts = this._initTexts()
     this._clippingPaths = this._initClippingPaths()
-    this._mask = this._initMask()
     this._softMask = this._initSoftMask()
+    this._mask = this._initMask()
   }
 
   private _initTexts() {
@@ -66,6 +66,10 @@ export class SourceLayerText extends SourceLayerCommon {
   }
 
   private _initMask(): Nullish<SourceLayerShape> {
+    if (this.softMask) {
+      return null
+    }
+
     const mask = initClippingMask(this)
 
     if (!mask) {
