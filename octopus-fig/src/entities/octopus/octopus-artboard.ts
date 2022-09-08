@@ -1,6 +1,7 @@
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { convertId } from '../../utils/convert'
+import { OctopusLayerGroup } from './octopus-layer-group'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -50,9 +51,11 @@ export class OctopusArtboard {
     return this._layers
   }
 
-  private get _content(): Octopus['MaskGroupLayer'] | undefined {
+  private get _content(): Octopus['MaskGroupLayer'] | Octopus['GroupLayer'] | undefined {
     const sourceLayer = this.sourceArtboard.sourceFrame
-    const maskGroup = OctopusLayerMaskGroup.createBackgroundMaskGroup({ sourceLayer, parent: this, isArtboard: true })
+    const maskGroup = sourceLayer.hasBackgroundMask
+      ? OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent: this, sourceLayer, isArtboard: true })
+      : new OctopusLayerGroup({ parent: this, sourceLayer, isArtboard: true })
     return maskGroup?.convert() ?? undefined
   }
 

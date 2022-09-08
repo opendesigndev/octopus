@@ -65,7 +65,7 @@ export class OctopusLayerMaskGroup {
     isArtboard = false,
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
-    const artboardTransform = env.NODE_ENV === 'debug' ? getArtboardTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const artboardTransform = isArtboard && env.NODE_ENV === 'debug' ? getArtboardTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     const transform = isArtboard ? artboardTransform : sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
