@@ -1,6 +1,7 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
+import { env } from '../services'
 import { DEFAULTS } from './defaults'
 
 import type { SourceArtboard } from '../entities/source/source-artboard'
@@ -52,6 +53,7 @@ export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PAS
 }
 
 export function getArtboardTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
+  if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
   const bounds = sourceLayer.bounds
   const boundingBox = sourceLayer.boundingBox
   if (!bounds || !boundingBox) return undefined

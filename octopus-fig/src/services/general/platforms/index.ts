@@ -1,3 +1,4 @@
+import type { Env } from '../environment'
 import type { ImageSize } from '../image-size/image-size'
 import type { LoggerFactory } from '../logger/logger-factory'
 
@@ -6,7 +7,7 @@ type NodeLoggerFactory = LoggerFactory
 type WebLoggerFactory = LoggerFactory
 
 // Environment (Node only)
-type NodeEnvironmentFactory = () => void
+type NodeEnvironmentFactory = () => Env
 
 // Benchmark service
 type NodeBenchmarkFactory = () => {
@@ -23,9 +24,9 @@ type WebImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | un
 // Node stack
 export type NodeFactories = {
   createLoggerFactory: NodeLoggerFactory
-  createEnvironment: NodeEnvironmentFactory
   createBenchmarkService: NodeBenchmarkFactory
   createImageSizeService: NodeImageSizeFactory
+  createEnvironment: NodeEnvironmentFactory
 }
 
 // Web stack
@@ -33,6 +34,7 @@ export type WebFactories = {
   createLoggerFactory: WebLoggerFactory
   createBenchmarkService: WebBenchmarkFactory
   createImageSizeService: WebImageSizeFactory
+  createEnvironment: null
 }
 
 let factories: NodeFactories | WebFactories

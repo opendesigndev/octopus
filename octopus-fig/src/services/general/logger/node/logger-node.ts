@@ -1,6 +1,8 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
+import { env } from '../../..'
+
 import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory'
 
 const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enabled: true }): ReturnType<typeof pino> => {
@@ -19,9 +21,9 @@ const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enable
       },
     },
     messageKey: 'message',
-    level: process.env.LOG_LEVEL || 'debug',
+    level: env.LOG_LEVEL || 'debug',
     prettyPrint:
-      process.env.NODE_ENV === 'debug'
+      env.NODE_ENV === 'debug'
         ? {
             levelFirst: true,
           }

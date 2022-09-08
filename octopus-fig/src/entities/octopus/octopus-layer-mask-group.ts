@@ -2,6 +2,7 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
+import { env } from '../../services'
 import { convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { getArtboardTransform } from '../../utils/source'
@@ -64,8 +65,8 @@ export class OctopusLayerMaskGroup {
     isArtboard = false,
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
-    // const transform = isArtboard ? undefined : sourceLayer.transform ?? undefined
-    const transform = isArtboard ? getArtboardTransform(sourceLayer) : sourceLayer.transform ?? undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const artboardTransform = env.NODE_ENV === 'debug' ? getArtboardTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const transform = isArtboard ? artboardTransform : sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
