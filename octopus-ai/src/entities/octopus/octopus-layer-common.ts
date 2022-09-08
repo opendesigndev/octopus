@@ -38,14 +38,6 @@ export abstract class OctopusLayerCommon {
     return this._id
   }
 
-  /** @TODO check if this is needed
-   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden* 
-   */
-  // get hiddenContentIds(): number[] {
-  //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
-  //   return hiddenContentIds
-  // }
-
   get resources(): Nullish<SourceResources> {
     return this._sourceLayer.resources
   }

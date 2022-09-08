@@ -41,6 +41,14 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
     }
   }
 
+  private get _isVisible() {
+    if (!('isVisible' in this._sourceLayer)) {
+      return true
+    }
+
+    return this._sourceLayer.isVisible
+  }
+
   convert(): Octopus['GroupLayer'] | null {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
@@ -52,6 +60,7 @@ export class OctopusLayerGroup extends OctopusLayerCommon {
     return {
       ...common,
       ...specific,
+      visible: this._isVisible,
     }
   }
 }

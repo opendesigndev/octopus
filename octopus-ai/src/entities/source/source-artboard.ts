@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { asArray, asNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asArray, asFiniteNumber, asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import uniqueId from 'lodash/uniqueId'
 
@@ -73,7 +73,12 @@ export class SourceArtboard {
     return this._rawArtboard.OCProperties?.D?.OFF ?? []
   }
 
-  /**@TODO check fonts when you come to that */
+  get hiddenContentIds(): number[] {
+    return asArray(this.hiddenContentObjectIds, [])
+      .map((c) => c.ObjID)
+      .filter((id) => asFiniteNumber(id)) as number[]
+  }
+
   private _getArtboardAssetsFonts(): string[] {
     const entries = traverseAndFind(this._rawArtboard?.Resources?.Font ?? {}, (obj: unknown) => {
       return Object(obj)?.BaseFont

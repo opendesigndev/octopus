@@ -39,8 +39,24 @@ export class SourceLayerGroup extends SourceLayerCommon {
     return this._children
   }
 
+  get propertiesId(): Nullish<string> {
+    return this._rawValue.Properties
+  }
+
+  get objectId(): Nullish<number> {
+    const propertiesId = this.propertiesId
+
+    if (!propertiesId) {
+      return null
+    }
+
+    const properties = this._parent.resources?.getPropertiesById(propertiesId)
+
+    return properties?.ObjID
+  }
+
   get name(): string {
-    const propertiesId = this._rawValue.Properties
+    const propertiesId = this.propertiesId
 
     if (!(this._parent instanceof SourceArtboard) || !propertiesId) {
       return SourceLayerGroup.DEFAULT_NAME
@@ -57,5 +73,13 @@ export class SourceLayerGroup extends SourceLayerCommon {
 
   get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
+  }
+
+  get isVisible(): boolean {
+    if (!this.objectId && this.objectId !== 0) {
+      return true
+    }
+
+    return !this.hiddenContentIds.includes(this.objectId)
   }
 }
