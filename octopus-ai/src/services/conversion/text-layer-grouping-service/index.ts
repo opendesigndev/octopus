@@ -46,16 +46,28 @@ export class TextLayerGroupingservice {
 
   static END_LINE = '\r'
   static DOUBLE_END_LINE = '\r\r'
+
+  /**  these are new special characters found in text END_LINE_UNICODE was easy to google, but T I have no idea what it
+   * is. Opened issue with new special characters being introduced and asked for mapping.
+   * https://gitlab.avcd.cz/opendesign/illustrator-parser-pdfcpu/-/issues/4
+   */
+  static END_LINE_UNICODE = '\u0003'
+  static T = '\t'
+
   static END_LINE_OCTOPUS = '\n'
   static DOUBLE_END_LINE_OCTOPUS = '\u2029'
 
   static OCTOPUS_DICTIONARY = {
     [TextLayerGroupingservice.END_LINE]: TextLayerGroupingservice.END_LINE_OCTOPUS,
     [TextLayerGroupingservice.DOUBLE_END_LINE]: TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
+    [TextLayerGroupingservice.END_LINE_UNICODE]: TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
+    [TextLayerGroupingservice.T]: '',
   }
   static ADDITIONAL_TEXT_DATA_DICTIONARY = {
     [TextLayerGroupingservice.END_LINE]: '',
     [TextLayerGroupingservice.DOUBLE_END_LINE]: '',
+    [TextLayerGroupingservice.END_LINE_UNICODE]: '',
+    [TextLayerGroupingservice.T]: '',
   }
 
   static SPECIAL_CHARACTERS = Object.keys(TextLayerGroupingservice.ADDITIONAL_TEXT_DATA_DICTIONARY).sort(
