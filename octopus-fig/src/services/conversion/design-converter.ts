@@ -52,6 +52,8 @@ export type DesignConversionResult = {
   previews: { id: string; data: ArrayBuffer }[]
 }
 
+const IS_LIBRARY = true
+
 export class DesignConverter {
   private _design: Design | null
   private _designId: string
@@ -201,17 +203,20 @@ export class DesignConverter {
     this._finalizeConvert.resolve()
   }
 
-  private async _convertDocument(frame: ResolvedFrame) {
-    const rawArtboard = frame.node.document as RawLayerFrame
-    const sourcePathPromise = this._exporter?.exportRawDocument?.(rawArtboard, frame.nodeId)
+  private async _convertDocument(frame: ResolvedFrame, isLibrary = false) {
+    const { designId, designName, designDescription, nodeId, node, fills } = frame
+    if (isLibrary) this.octopusManifest?.setExportedLibrary(designId, designName ?? '', nodeId, designDescription)
 
-    const fillIds = Object.keys(frame.fills)
-    this.octopusManifest?.setExportedComponentImageMap(frame.nodeId, fillIds)
+    const rawArtboard = node.document as RawLayerFrame
+    const sourcePathPromise = this._exporter?.exportRawDocument?.(rawArtboard, nodeId)
+
+    const fillIds = Object.keys(fills)
+    this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
     const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap: this._imageSizeMap })
     const artboardPromise = this._queue.exec(sourceArtboard)
     this._awaitingArtboards.push(artboardPromise)
 
-    this.octopusManifest?.setExportedSourcePath(frame.nodeId, await sourcePathPromise)
+    this.octopusManifest?.setExportedSourcePath(nodeId, await sourcePathPromise)
     const artboard = await artboardPromise
     if (this._shouldReturn) this._conversionResult.components.push(artboard)
   }
@@ -252,7 +257,7 @@ export class DesignConverter {
 
     design.on('ready:artboard', (artboard) => this._convertDocument(artboard))
     design.on('ready:component', (component) => this._convertDocument(component))
-    design.on('ready:library', (library) => this._convertDocument(library))
+    design.on('ready:library', (library) => this._convertDocument(library, IS_LIBRARY))
 
     design.on('ready:fill', (fill) => this._convertFill(fill))
     design.on('ready:preview', (preview) => this._convertPreview(preview))

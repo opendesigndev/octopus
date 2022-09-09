@@ -31,6 +31,7 @@ export class OctopusManifest {
     components: Map<string, ComponentSourceWithDescriptor>
     componentImageMap: Map<string, string[]>
     componentSourcePath: Map<string, string | undefined>
+    libraries: Map<string, Manifest['Library']>
     chunks: Map<string, { style: ResolvedStyle; sourcePath?: string } | undefined>
   }
 
@@ -53,6 +54,7 @@ export class OctopusManifest {
       components: new Map(),
       componentImageMap: new Map(),
       componentSourcePath: new Map(),
+      libraries: new Map(),
       chunks: new Map(),
     }
   }
@@ -95,6 +97,15 @@ export class OctopusManifest {
 
   getExportedChunk(chunkId: string): { style: ResolvedStyle; sourcePath?: string } | undefined {
     return this._exports.chunks.get(chunkId)
+  }
+
+  setExportedLibrary(id: string, name: string, childId: string, description?: string): void {
+    const library = this._exports.libraries.get(id)
+    if (!library) {
+      this._exports.libraries.set(id, { id, name, description, children: [{ id: childId, type: 'COMPONENT' }] })
+    } else {
+      library.children = push(library.children, { id: childId, type: 'COMPONENT' })
+    }
   }
 
   getExportedComponentDescriptorById(id: string): ComponentDescriptor | undefined {
@@ -236,6 +247,10 @@ export class OctopusManifest {
       .filter((chunk): chunk is Manifest['Chunk'] => Boolean(chunk))
   }
 
+  get libraries(): Manifest['Library'][] {
+    return Array.from(this._exports.libraries.values())
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
@@ -279,7 +294,7 @@ export class OctopusManifest {
       pages: this.pages,
       components: this.components,
       chunks: this.chunks,
-      libraries: [],
+      libraries: this.libraries,
     }
   }
 }
