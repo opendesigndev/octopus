@@ -43,8 +43,15 @@ export class Fills {
   }
 
   private async _requestFills(fills: { designId: string; ref: string }[]): Promise<Promise<ArrayBuffer>[]> {
+    if (!fills.length) return []
     const s3Links = (await this.design.getLazyFillsDescriptor()).getImagesUrlsByIds(fills.map((fill) => fill.ref))
-    return this.parser.qm.queues.figmaS3.execMany(s3Links)
+    const requestFills = this.parser.qm.queues.figmaS3.execMany(s3Links)
+    requestFills.forEach((req, index) => {
+      req.then((image) => {
+        this.cacher?.cacheFills?.([[fills[index].designId, fills[index].ref, image]])
+      })
+    })
+    return requestFills
   }
 
   private async _initFills() {
