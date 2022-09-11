@@ -15,7 +15,15 @@ type LibraryOptions = {
 export class Library {
   _design: Design
   _componentMeta: ComponentDescriptor
-  _component: Promise<Node | null>
+  _component: Promise<{
+    node: Node
+    meta: {
+      name: string
+      description: string
+      designId: string
+      designNodeId: string
+    }
+  } | null>
   _frameLike: Promise<FrameLike | null>
 
   constructor(options: LibraryOptions) {
@@ -31,21 +39,36 @@ export class Library {
     return this._design.cacher
   }
 
-  private async _requestComponent(): Promise<(NodeAddress & { component: FigmaNode }) | null> {
+  private async _requestComponent(): Promise<
+    (NodeAddress & { name: string; description: string } & { component: FigmaNode }) | null
+  > {
     return this._design.parser.qm.queues.libraries.exec(this._componentMeta.key)
   }
 
-  private async _getCachedComponent(): Promise<(NodeAddress & { component: FigmaNode }) | undefined> {
+  private async _getCachedComponent(): Promise<
+    (NodeAddress & { name: string; description: string } & { component: FigmaNode }) | undefined
+  > {
     return this.cacher?.resolveComponent?.(this._componentMeta.key)
   }
 
-  private async _initComponent(): Promise<Node | null> {
+  private async _initComponent(): Promise<{
+    node: Node
+    meta: { name: string; description: string; designId: string; designNodeId: string }
+  } | null> {
     const cachedComponent = await this._getCachedComponent()
     if (cachedComponent) {
-      return new Node({
-        id: { designId: cachedComponent.designId, nodeId: cachedComponent.nodeId },
-        node: cachedComponent.component,
-      })
+      return {
+        node: new Node({
+          id: { designId: cachedComponent.designId, nodeId: cachedComponent.nodeId },
+          node: cachedComponent.component,
+        }),
+        meta: {
+          name: cachedComponent.name,
+          description: cachedComponent.description,
+          designId: cachedComponent.designId,
+          designNodeId: cachedComponent.nodeId,
+        },
+      }
     }
 
     const component = await this._requestComponent()
@@ -55,13 +78,21 @@ export class Library {
 
     this.cacher?.cacheComponents?.([[this._componentMeta.key, component]])
 
-    return new Node({
-      id: {
+    return {
+      node: new Node({
+        id: {
+          designId: component.designId,
+          nodeId: component.nodeId,
+        },
+        node: component.component,
+      }),
+      meta: {
+        name: component.name,
+        description: component.description,
         designId: component.designId,
-        nodeId: component.nodeId,
+        designNodeId: component.nodeId,
       },
-      node: component.component,
-    })
+    }
   }
 
   private async _initFrameLike() {
@@ -69,12 +100,13 @@ export class Library {
     if (!component) return null
     return new FrameLike({
       design: this._design,
-      node: component,
+      node: component.node,
       id: {
-        designId: component.designId,
-        nodeId: component.nodeId,
+        designId: component.node.designId,
+        nodeId: component.node.nodeId,
       },
       role: 'library',
+      libraryMeta: component.meta,
     })
   }
 

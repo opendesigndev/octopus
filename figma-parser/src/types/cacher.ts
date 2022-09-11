@@ -16,7 +16,9 @@ export interface ICacher {
   resolvePreview(id: NodeAddress): Promise<ArrayBuffer>
   resolveFill(designId: string, ref: string): Promise<ArrayBuffer>
   resolveRendition(id: NodeAddress): Promise<ArrayBuffer>
-  resolveComponent(componentId: string): Promise<NodeAddress & { component: FigmaNode }>
+  resolveComponent(
+    componentId: string
+  ): Promise<NodeAddress & { name: string; description: string } & { component: FigmaNode }>
 
   cacheDesigns(designs: [string, FigmaFile][]): void
   cacheNodes(nodes: [NodeAddress, FigmaNode][]): void

@@ -14,6 +14,12 @@ type FrameLikeOptions = {
   node: Node
   id: NodeAddress
   role: 'artboard' | 'component' | 'library'
+  libraryMeta?: {
+    name: string
+    designId: string
+    designNodeId: string
+    description: string
+  }
 }
 
 export type ResolvedFrame = {
@@ -26,6 +32,12 @@ export type ResolvedFrame = {
   preview: ArrayBuffer | null
   renditions: Record<string, ArrayBuffer>
   styles: Style[]
+  libraryMeta?: {
+    name: string
+    designId: string
+    designNodeId: string
+    description: string
+  }
 }
 
 export class FrameLike {
@@ -37,6 +49,7 @@ export class FrameLike {
   _preview: Preview | null
   _styles: Styles
   _role: 'artboard' | 'component' | 'library'
+  _libraryMeta: FrameLikeOptions['libraryMeta']
 
   constructor(options: FrameLikeOptions) {
     this._design = options.design
@@ -46,6 +59,7 @@ export class FrameLike {
     this._preview = this._design.parser.config.framePreviews ? new Preview({ frameLike: this }) : null
     this._styles = new Styles({ frameLike: this })
     this._role = options.role
+    this._libraryMeta = options.libraryMeta
 
     this._emitOnReady()
   }
@@ -85,7 +99,10 @@ export class FrameLike {
   }
 
   private async _emitOnReady() {
-    this._design.emit(`ready:${this._role}`, await this.getResolvedDescriptor())
+    this._design.emit(`ready:${this._role}`, {
+      ...(await this.getResolvedDescriptor()),
+      ...(this._libraryMeta ? { libraryMeta: this._libraryMeta } : null),
+    })
   }
 
   fillsIds(): string[] {
