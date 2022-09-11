@@ -93,19 +93,15 @@ export class DesignConverter {
     return this._octopusManifest
   }
 
-  set octopusManifest(manifest: OctopusManifest | undefined) {
-    this._octopusManifest = manifest
-  }
-
   get sourceDesign(): Design | null {
     return this._design
   }
 
-  private async _convertDocumentSafe(
+  private async _convertSourceArtboardSafe(
     source: SourceArtboard
   ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
     try {
-      const version = await this._octopusConverter.pkg.version
+      const version = this._octopusConverter.pkg.version
       const value = await new DocumentConverter({ source, version }).convert()
       return { value, error: null }
     } catch (error) {
@@ -113,8 +109,10 @@ export class DesignConverter {
     }
   }
 
-  private async convertDocument(source: SourceArtboard): Promise<DocumentConversionResult> {
-    const { time, result } = await this._octopusConverter.benchmarkAsync(async () => this._convertDocumentSafe(source))
+  private async _convertSourceArtboard(source: SourceArtboard): Promise<DocumentConversionResult> {
+    const { time, result } = await this._octopusConverter.benchmarkAsync(async () =>
+      this._convertSourceArtboardSafe(source)
+    )
     const { value, error } = result
     return { id: source.id, value, error, time }
   }
@@ -122,7 +120,7 @@ export class DesignConverter {
   private async _exportManifest(): Promise<Manifest['OctopusManifest'] | undefined> {
     const octopusManifest = this.octopusManifest
     if (!octopusManifest) return undefined
-    const { result: manifest } = await this._octopusConverter.benchmarkAsync(() => octopusManifest.convert())
+    const manifest = await octopusManifest.convert()
 
     try {
       await this._exporter?.exportManifest?.(manifest)
@@ -147,7 +145,7 @@ export class DesignConverter {
   }
 
   private async _exportDocument(source: SourceArtboard): Promise<DocumentConversionResult> {
-    const converted = await this.convertDocument(source)
+    const converted = await this._convertSourceArtboard(source)
 
     const { path, error } = await this._exportDocumentSafe(converted, getRole(source))
 
@@ -180,7 +178,7 @@ export class DesignConverter {
     const raw = design.design as unknown as RawDesign
     const sourceDesign = new SourceDesign({ designId, raw })
 
-    this.octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
+    this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
 
     this._exporter?.exportRawDesign?.(sourceDesign.raw)
 
@@ -203,7 +201,7 @@ export class DesignConverter {
     this._finalizeConvert.resolve()
   }
 
-  private async _convertDocument(frame: ResolvedFrame, isLibrary = false) {
+  private async _convertFrame(frame: ResolvedFrame, isLibrary = false) {
     const { designId, designName, designDescription, nodeId, node, fills } = frame
     if (isLibrary) this.octopusManifest?.setExportedLibrary(designId, designName ?? '', nodeId, designDescription)
 
@@ -255,9 +253,9 @@ export class DesignConverter {
 
     design.on('ready:style', (chunk) => this._convertChunk(chunk))
 
-    design.on('ready:artboard', (artboard) => this._convertDocument(artboard))
-    design.on('ready:component', (component) => this._convertDocument(component))
-    design.on('ready:library', (library) => this._convertDocument(library, IS_LIBRARY))
+    design.on('ready:artboard', (artboard) => this._convertFrame(artboard))
+    design.on('ready:component', (component) => this._convertFrame(component))
+    design.on('ready:library', (library) => this._convertFrame(library, IS_LIBRARY))
 
     design.on('ready:fill', (fill) => this._convertFill(fill))
     design.on('ready:preview', (preview) => this._convertPreview(preview))

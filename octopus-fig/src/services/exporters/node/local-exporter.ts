@@ -60,7 +60,7 @@ export class LocalExporter implements AbstractExporter {
   }
 
   async exportDocument(result: DocumentConversionResult): Promise<string | null> {
-    if (!result.value) return Promise.resolve(null)
+    if (!result.value) return null
     const path = LocalExporter.getOctopusPath(result.id)
     await this._save(path, stringify(result.value))
     return path
