@@ -20,6 +20,13 @@ export type ComponentDescriptor = {
   time: number | null
 }
 
+export type SetExportedLibraryOptions = {
+  name: string
+  designId: string
+  description: string
+  designNodeId: string
+}
+
 type ComponentSourceWithDescriptor = { source: SourceArtboard; descriptor: ComponentDescriptor }
 
 export class OctopusManifest {
@@ -99,12 +106,13 @@ export class OctopusManifest {
     return this._exports.chunks.get(chunkId)
   }
 
-  setExportedLibrary(id: string, name: string, childId: string, description?: string): void {
+  setExportedLibrary(options: SetExportedLibraryOptions): void {
+    const { designId: id, name, designNodeId, description } = options
     const library = this._exports.libraries.get(id)
     if (!library) {
-      this._exports.libraries.set(id, { id, name, description, children: [{ id: childId, type: 'COMPONENT' }] })
+      this._exports.libraries.set(id, { id, name, description, children: [{ id: designNodeId, type: 'COMPONENT' }] })
     } else {
-      library.children = push(library.children, { id: childId, type: 'COMPONENT' })
+      library.children = push(library.children, { id: designNodeId, type: 'COMPONENT' })
     }
   }
 

@@ -202,8 +202,8 @@ export class DesignConverter {
   }
 
   private async _convertFrame(frame: ResolvedFrame, isLibrary = false) {
-    const { designId, designName, designDescription, nodeId, node, fills } = frame
-    if (isLibrary) this.octopusManifest?.setExportedLibrary(designId, designName ?? '', nodeId, designDescription)
+    const { libraryMeta, nodeId, node, fills } = frame
+    if (isLibrary && libraryMeta) this.octopusManifest?.setExportedLibrary(libraryMeta)
 
     const rawArtboard = node.document as RawLayerFrame
     const sourcePathPromise = this._exporter?.exportRawDocument?.(rawArtboard, nodeId)
