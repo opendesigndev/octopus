@@ -11,9 +11,9 @@ import { AIFileReader } from './services/conversion/ai-file-reader'
 import { ArtboardConverter } from './services/conversion/artboard-converter'
 import { LocalExporter } from './services/conversion/exporter/local-exporter'
 import { TempExporter } from './services/conversion/exporter/temp-exporter'
-import { LayerGroupingService } from './services/conversion/text-layer-grouping-service'
-import { set as setLayerGroupingService } from './services/instances/layer-grouping-service'
+import { TextLayerGroupingservice } from './services/conversion/text-layer-grouping-service'
 import { set as setLogger } from './services/instances/logger'
+import { set as setTextLayerGroupingService } from './services/instances/text-layer-grouping-service'
 
 import type { SourceArtboard } from './entities/source/source-artboard'
 import type { SourceDesign } from './entities/source/source-design'
@@ -100,8 +100,8 @@ export class OctopusAIConverter {
   }
 
   private _setupTextLayerGroupingService(additionalTextData: AdditionalTextData) {
-    const instance = new LayerGroupingService(additionalTextData)
-    setLayerGroupingService(instance)
+    const instance = new TextLayerGroupingservice(additionalTextData)
+    setTextLayerGroupingService(instance)
   }
 
   get pkg(): Promise<NormalizedPackageJson> {

@@ -73,15 +73,6 @@ export class OctopusArtboard {
     }
   }
 
-  /** @TODO check if this is needed
-   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden 
-   */
-  // get hiddenContentIds(): number[] {
-  //   return asArray(this._sourceArtboard.hiddenContentObjectIds, [])
-  //     .map((c) => c.ObjID)
-  //     .filter((id) => asFiniteNumber(id)) as number[]
-  // }
-
   get resources(): SourceResources {
     return this._sourceArtboard.resources
   }

@@ -1,3 +1,4 @@
+import { logger } from '../../services/instances/logger'
 import { BLEND_MODES } from '../../utils/blend-modes'
 import { OctopusArtboard } from './octopus-artboard'
 
@@ -25,6 +26,11 @@ export abstract class OctopusLayerCommon {
 
   constructor(options: OctopusLayerCommonOptions) {
     const [sourceLayer] = options.layerSequence.sourceLayers
+
+    if (options.layerSequence.sourceLayers.length > 1 && sourceLayer.type !== 'TextGroup') {
+      logger.error('Constructor (OctopusLayerCommon) recieved more layers than 1')
+    }
+
     this._parent = options.parent
     this._sourceLayer = sourceLayer
     this._id = sourceLayer.id
@@ -37,14 +43,6 @@ export abstract class OctopusLayerCommon {
   get id(): string {
     return this._id
   }
-
-  /** @TODO check if this is needed
-   tried to find when this is applicable (hiding layers) but layers are not present in the source file when hidden* 
-   */
-  // get hiddenContentIds(): number[] {
-  //   const hiddenContentIds: number[] = this._parent.hiddenContentIds || []
-  //   return hiddenContentIds
-  // }
 
   get resources(): Nullish<SourceResources> {
     return this._sourceLayer.resources
@@ -76,12 +74,21 @@ export abstract class OctopusLayerCommon {
     return this._sourceLayer.opacity ?? OctopusLayerCommon.DEFAULT_OPACITY
   }
 
+  private get _isVisible() {
+    if (!('isVisible' in this._sourceLayer)) {
+      return true
+    }
+
+    return this._sourceLayer.isVisible
+  }
+
   convertCommon(): Omit<Octopus['LayerBase'], 'type'> {
     return {
       blendMode: this.blendMode,
       opacity: this.opacity,
       id: this.id,
       ...(this._sourceLayer.name ? { name: this._sourceLayer.name } : null),
+      visible: this._isVisible,
     }
   }
 }

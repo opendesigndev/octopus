@@ -116,4 +116,8 @@ export class SourceLayerCommon {
 
     return clonedCtm as RawGraphicsStateMatrix
   }
+
+  get hiddenContentIds(): number[] {
+    return this.parentArtboard?.hiddenContentIds || []
+  }
 }

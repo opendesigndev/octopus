@@ -1,43 +1,93 @@
+import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import uniqueId from 'lodash/uniqueId'
 
-import { buildOctopusLayer, createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
+import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
+import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { SourceLayer } from '../../factories/create-source-layer'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
+import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group'
 import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
-type OctopusLayerMaskOptions = {
+export type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent
-  layerSequence: LayerSequence
+  layerSequences: LayerSequence[]
 }
 
 export class OctopusLayerMaskGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[] = []
   protected _id: string
 
-  static registerMaskGroup(key: string, maskGroup: OctopusLayerMaskGroup): void {
-    this.registry[key] = maskGroup
-  }
-  static registry: { [keyCheck: string]: OctopusLayerMaskGroup } = {}
+  constructor({ parent, layerSequences }: OctopusLayerMaskOptions) {
+    super({
+      parent,
+      layerSequence: { sourceLayers: [(layerSequences[0].sourceLayers[0] as SourceLayerWithMask).mask] },
+    })
 
-  constructor(options: OctopusLayerMaskOptions) {
-    super(options)
     this._id = uniqueId()
+
+    this._layers = createOctopusLayersFromLayerSequences({
+      layerSequences: layerSequences,
+      parent: this,
+    })
   }
 
-  addChildLayerToMaskGroup(layer: SourceLayer): void {
-    const octopusLayer = buildOctopusLayer({ layerSequence: { sourceLayers: [layer] }, parent: this })
+  private _doesPathConsistsOnlyFromRectSubpaths(path: Octopus['ShapeLayer']['shape']['path'] & { type: 'COMPOUND' }) {
+    return !path.paths.some((subpath) => {
+      return subpath.type !== 'RECTANGLE'
+    })
+  }
 
-    if (!octopusLayer) {
-      return
+  private _normalizeRectSubpaths(rectSubpaths: Octopus['PathRectangle'][]): Required<Octopus['Rectangle']>[] {
+    return rectSubpaths.map((subpath: Octopus['PathRectangle']) => {
+      const {
+        rectangle: { x0, x1, y0, y1 },
+      } = subpath
+
+      return {
+        x0: Math.min(asNumber(x0), asNumber(x1)),
+        x1: Math.max(asNumber(x0), asNumber(x1)),
+        y0: Math.min(asNumber(y0), asNumber(y1)),
+        y1: Math.max(asNumber(y0), asNumber(y1)),
+      }
+    })
+  }
+
+  private _createIntersectionFromRectangles(
+    rectSubpaths: Required<Octopus['PathRectangle']['rectangle']>[]
+  ): Required<Octopus['PathRectangle']['rectangle']> {
+    return rectSubpaths.reduce((rectFinal, currentRect) => {
+      return {
+        ...rectFinal,
+        x0: Math.max(rectFinal.x0, currentRect.x0),
+        x1: Math.min(rectFinal.x1, currentRect.x1),
+        y0: Math.max(rectFinal.y0, currentRect.y0),
+        y1: Math.min(rectFinal.y0, currentRect.y0),
+      }
+    })
+  }
+
+  /** Taken comment from illustrator2 :  Sometimes, the clipping paths have no intersections (it can happen when the clipping mask is
+     out of artbaord). We can skip the original layer in that case. */
+  private _isMaskValid(mask: Octopus['ShapeLayer']): boolean {
+    const { path } = mask.shape
+
+    if (!path || path.type !== 'COMPOUND') {
+      return true
     }
 
-    this._layers.push(octopusLayer)
+    if (!this._doesPathConsistsOnlyFromRectSubpaths(path)) {
+      return true
+    }
+
+    const normalizedRectangles = this._normalizeRectSubpaths(path.paths as Octopus['PathRectangle'][])
+    const { x0, x1, y1, y0 } = this._createIntersectionFromRectangles(normalizedRectangles)
+
+    return x1 - x0 > 0 && y1 - y0 > 0
   }
 
   private _createMask(): Nullish<Octopus['ShapeLayer']> {
@@ -51,6 +101,10 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
       layerSequence: { sourceLayers: [sourceMask] },
       parent: this,
     }).convert()
+
+    if (!mask || !this._isMaskValid(mask)) {
+      return null
+    }
 
     return mask
   }
@@ -74,7 +128,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
     const common = this.convertCommon()
     const specific = this._convertTypeSpecific()
 
-    if (!specific) {
+    if (!specific || specific.layers.length === 0) {
       return null
     }
 
