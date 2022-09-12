@@ -1,3 +1,6 @@
+import { push } from '@avocode/octopus-common/dist/utils/common'
+import first from 'lodash/first'
+
 import { convertRectangle } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
@@ -49,15 +52,21 @@ export class OctopusPath {
     return isTopLayer ? DEFAULTS.TRANSFORM : sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
+  private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
+    if (this._isStroke) return sourceLayer.strokeGeometry
+    return sourceLayer.fillGeometry.length ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
+  }
+
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
-    return this._isStroke
-      ? sourceLayer.strokeGeometry[0] ?? sourceLayer.fillGeometry[0]
-      : sourceLayer.fillGeometry[0] ?? sourceLayer.strokeGeometry[0]
+    return first(this._geometries(sourceLayer) ?? [])
   }
 
   private _geometry(sourceLayer: SourceLayer): Octopus['PathGeometry'] {
-    const path = this._firstGeometry(sourceLayer)?.path // TODO return path for all geometries
-    return path ? simplifyPathData(path) : DEFAULTS.EMPTY_PATH
+    const geometries = this._geometries(sourceLayer)?.reduce(
+      (paths: string[], cur: SourceGeometry) => push(paths, simplifyPathData(cur.path)),
+      []
+    )
+    return geometries ? geometries.join(' ') : DEFAULTS.EMPTY_PATH
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
@@ -85,14 +94,16 @@ export class OctopusPath {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
-    const paths = sourceLayer.children.map((sourceLayer) => this._getPath({ sourceLayer, isTopLayer: false }))
+    const paths = sourceLayer.children
+      .filter((sourceLayer): sourceLayer is SourceLayerShape => sourceLayer.type === 'SHAPE') // https://gitlab.avcd.cz/opendesign/octopus-converters/-/issues/9
+      .map((sourceLayer) => this._getPath({ sourceLayer, isTopLayer: false }))
     return { type: 'COMPOUND', op, visible, transform, paths }
   }
 
   private _getPath({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathLike'] {
     if (this._isStroke) return this._getPathPath({ sourceLayer, isTopLayer })
     if (sourceLayer.type === 'TEXT') return this._getPathPath({ sourceLayer, isTopLayer })
-    if (sourceLayer.type === 'FRAME') return this._getPathRectangle({ sourceLayer, isTopLayer })
+    if (sourceLayer.type !== 'SHAPE') return this._getPathRectangle({ sourceLayer, isTopLayer })
     if (this._isRectangle(sourceLayer)) return this._getPathRectangle({ sourceLayer, isTopLayer })
     if (sourceLayer.shapeType === 'BOOLEAN_OPERATION') return this._getPathBool({ sourceLayer, isTopLayer })
     return this._getPathPath({ sourceLayer, isTopLayer })

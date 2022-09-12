@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-
-export function createEnvironmentNode(): dotenv.DotenvConfigOutput {
-  return dotenv.config()
+export interface Env {
+  [key: string]: string | undefined
 }

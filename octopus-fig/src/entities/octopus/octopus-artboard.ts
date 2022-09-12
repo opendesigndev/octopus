@@ -1,5 +1,7 @@
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { env } from '../../services'
 import { convertId } from '../../utils/convert'
+import { OctopusLayerGroup } from './octopus-layer-group'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -31,7 +33,7 @@ export class OctopusArtboard {
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    const bounds = this.sourceArtboard.bounds
+    const bounds = env.NODE_ENV === 'debug' ? this.sourceArtboard.bounds : this.sourceArtboard.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     if (!bounds) return undefined
     const { width, height } = bounds
     return { width, height }
@@ -45,28 +47,16 @@ export class OctopusArtboard {
     return this._version
   }
 
-  private get _content(): Octopus['MaskGroupLayer'] | undefined {
-    // console.info('')
+  get layers(): OctopusLayer[] {
+    return this._layers
+  }
 
-    const isArtboard = true // TODO
-    const background = OctopusLayerMaskGroup.createBackground({
-      // parent: this.parentArtboard,
-      frame: this.sourceArtboard.sourceFrame,
-      layers: this._layers,
-      isArtboard,
-    })
-
-    if (!background) return
-    return background
-
-    // return {
-    //   id: `${this.id}-background`,
-    //   name: this.sourceArtboard.name,
-    //   type: 'GROUP',
-    //   layers: getConverted(this._layers),
-    //   blendMode: convertBlendMode(this.sourceArtboard.blendMode),
-    //   opacity: this.sourceArtboard.opacity,
-    // } // TODO use MaskGroup
+  private get _content(): Octopus['MaskGroupLayer'] | Octopus['GroupLayer'] | undefined {
+    const sourceLayer = this.sourceArtboard.sourceFrame
+    const maskGroup = sourceLayer.hasBackgroundMask
+      ? OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent: this, sourceLayer, isArtboard: true })
+      : new OctopusLayerGroup({ parent: this, sourceLayer, isArtboard: true })
+    return maskGroup?.convert() ?? undefined
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

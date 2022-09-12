@@ -1,8 +1,11 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 import { round } from '@avocode/octopus-common/dist/utils/math'
 
+import { env } from '../services'
 import { DEFAULTS } from './defaults'
 
+import type { SourceArtboard } from '../entities/source/source-artboard'
+import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
 import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source'
@@ -41,4 +44,20 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
     path: value.path ?? DEFAULTS.EMPTY_PATH,
     fillRule: getFillRule(value.windingRule),
   }))
+}
+
+export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
+  if (source.isPasteboard) return 'PASTEBOARD'
+  if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
+  return 'ARTBOARD'
+}
+
+export function getArtboardTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
+  if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+  const bounds = sourceLayer.bounds
+  const boundingBox = sourceLayer.boundingBox
+  if (!bounds || !boundingBox) return undefined
+  const { x: x0, y: y0 } = bounds
+  const { x: x1, y: y1 } = boundingBox
+  return [1, 0, 0, 1, x1 - x0, y1 - y0]
 }

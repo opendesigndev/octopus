@@ -1,17 +1,21 @@
-import type { ArtboardConversionResult } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
+import type { DocumentConversionResult } from '../conversion/design-converter'
 
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportRawDesign" method implemented!')
   }
 
-  exportRawComponent?(_raw: unknown, _name: string): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportRawComponent" method implemented!')
+  exportRawDocument?(_raw: unknown, _name: string): Promise<string> {
+    throw new Error('Subclass of "Exporter" has no "exportRawDocument" method implemented!')
   }
 
-  exportArtboard(_artboard: ArtboardConversionResult): Promise<string | null> {
-    throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
+  exportRawChunk?(_raw: unknown, _name: string): Promise<string> {
+    throw new Error('Subclass of "Exporter" has no "exportRawChunk" method implemented!')
+  }
+
+  exportDocument(_result: DocumentConversionResult, _role?: Manifest['Component']['role']): Promise<string | null> {
+    throw new Error('Subclass of "Exporter" has no "exportDocument" method implemented!')
   }
 
   exportImage?(_name: string, _data: ArrayBuffer): Promise<string> {

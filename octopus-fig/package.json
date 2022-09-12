@@ -19,14 +19,14 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@avocode/figma-parser": "3.0.0-rc.7",
-    "@avocode/manifest-ts": "3.0.0-alpha.33",
+    "@avocode/figma-parser": "3.0.0-rc.10",
+    "@avocode/manifest-ts": "3.0.0-alpha.36",
     "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
     "chalk": "^4.1.2",
     "dotenv": "16.0.0",
+    "image-size": "^1.0.1",
     "lodash": "^4.17.21",
-    "p-queue": "^6.6.2",
     "paper": "0.12.15",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",

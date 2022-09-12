@@ -18,6 +18,8 @@ type FrameLikeOptions = {
 
 export type ResolvedFrame = {
   designId: string
+  designName?: string
+  designDescription?: string
   nodeId: string
   node: FigmaNode
   fills: Record<string, ArrayBuffer>

@@ -3,6 +3,7 @@ import { push } from '@avocode/octopus-common/dist/utils/common'
 import { invLerp, round } from '@avocode/octopus-common/dist/utils/math'
 
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
+import { createMatrix } from '../../utils/paper'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawStop } from '../../typings/raw'
@@ -145,11 +146,32 @@ export class OctopusFill {
     const layout = this._fill.scaleMode ?? 'FILL'
     const origin = 'LAYER'
 
+    if (layout === 'TILE') {
+      const imageRef = this._fill.imageRef
+      if (!imageRef) return null
+      const imageSize = this._parentLayer.parentArtboard.getImageSize(imageRef)
+      if (!imageSize) return null
+
+      const scalingFactor = this._fill.scalingFactor
+      const { width, height } = imageSize
+
+      const transform: SourceTransform = [width * scalingFactor, 0, 0, height * scalingFactor, 0, 0]
+      return { layout, origin, transform }
+    }
+
     const size = this._parentLayer.size
-    if (size === null) return null
+    if (!size) return null
     const { x, y } = size
 
-    const transform: SourceTransform = [x, 0, 0, y, 0, 0] // TODO missing imageTransform
+    if (this._fill.imageTransform) {
+      const transform = createMatrix(this._fill.imageTransform)
+        .invert()
+        .prepend(createMatrix([x, 0, 0, y, 0, 0])).values
+
+      return { layout, origin, transform }
+    }
+
+    const transform: SourceTransform = [x, 0, 0, y, 0, 0]
     return { layout, origin, transform }
   }
 

@@ -15,6 +15,8 @@ import type { RawTextStyle } from './text'
 
 export type RawLayer = RawLayerFrame | RawLayerShape | RawLayerText
 
+export type RawLayerType = RawLayer['type']
+
 export type RawSlice = {
   id?: string
   name?: string
@@ -34,6 +36,7 @@ export type RawLayerBase = {
   blendMode?: RawBlendMode
   preserveRatio?: boolean
   absoluteBoundingBox?: RawBoundingBox
+  absoluteRenderBounds?: RawBoundingBox
   constraints?: RawConstraints
   relativeTransform?: RawTransform
   opacity?: number
@@ -63,18 +66,14 @@ export type RawLayerVector = RawLayerBase & {
 }
 
 export type RawLayerFrame = RawLayerVector & {
-  type?: 'FRAME'
+  type?: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
+  componentId?: string
 }
 
-export type RawLayerShape = RawLayerVector &
-  RawLayerBooleanOp & {
-    type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR'
-  }
-
-export type RawLayerBooleanOp = RawLayerBase & {
-  type?: 'BOOLEAN_OPERATION'
+export type RawLayerShape = RawLayerVector & {
+  type?: 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'BOOLEAN_OPERATION'
   booleanOperation?: RawBooleanOperation
   children?: RawLayerShape[]
 }

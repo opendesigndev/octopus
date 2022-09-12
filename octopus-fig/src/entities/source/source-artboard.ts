@@ -7,26 +7,34 @@ import { SourceEntity } from './source-entity'
 import { SourceLayerFrame } from './source-layer-frame'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { ImageSizeMap } from '../../services/conversion/design-converter'
 import type { RawArtboard, RawBlendMode } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 type SourceArtboardOptions = {
   rawArtboard: RawArtboard
   isPasteboard?: boolean
+  imageSizeMap?: ImageSizeMap
 }
 
 export class SourceArtboard extends SourceEntity {
   protected _rawValue: RawArtboard
   private _sourceFrame: SourceLayerFrame
   private _isPasteboard: boolean
+  private _imageSizeMap: ImageSizeMap
 
   static DEFAULT_ID = 'artboard-1'
   static DEFAULT_NAME = 'Artboard'
 
   constructor(options: SourceArtboardOptions) {
     super(options.rawArtboard)
-    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
     this._isPasteboard = options.isPasteboard ?? false
+    this._imageSizeMap = options.imageSizeMap ?? {}
+    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
+  }
+
+  getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
+    return ref ? this._imageSizeMap[ref] : undefined
   }
 
   private _getArtboardAssetsFonts(): string[] {
@@ -52,6 +60,10 @@ export class SourceArtboard extends SourceEntity {
   }
 
   get bounds(): SourceBounds | null {
+    return getBoundsFor(this._rawValue.absoluteRenderBounds)
+  }
+
+  get boundingBox(): SourceBounds | null {
     return getBoundsFor(this._rawValue.absoluteBoundingBox)
   }
 
@@ -73,5 +85,9 @@ export class SourceArtboard extends SourceEntity {
 
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendMode
+  }
+
+  get clipsContent(): boolean {
+    return this._rawValue.clipsContent ?? true
   }
 }

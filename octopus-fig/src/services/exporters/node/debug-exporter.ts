@@ -9,8 +9,8 @@ import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 import { timestamp } from '../../../utils/timestamp'
 
-import type { ArtboardConversionResult } from '../../../octopus-fig-converter'
 import type { Manifest } from '../../../typings/manifest'
+import type { DocumentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -76,25 +76,35 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportRawDesign(raw: unknown): Promise<string> {
-    const rawPath = await this._save(DebugExporter.getSourcePath('design'), stringify(raw))
-    this.emit('raw:design', rawPath)
+    const rawPath = DebugExporter.getSourcePath('design')
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:design', savedPath)
     return rawPath
   }
 
-  async exportRawComponent(raw: unknown, name: string): Promise<string> {
-    const rawPath = await this._save(DebugExporter.getSourcePath(name), stringify(raw))
-    this.emit('raw:component', rawPath)
+  async exportRawDocument(raw: unknown, name: string): Promise<string> {
+    const rawPath = DebugExporter.getSourcePath(name)
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:component', savedPath)
     return rawPath
   }
 
-  async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
-    if (!artboard.value) {
-      this.emit('octopus:artboard', { ...artboard })
+  async exportRawChunk(raw: unknown, name: string): Promise<string> {
+    const rawPath = DebugExporter.getSourcePath(name)
+    const savedPath = await this._save(rawPath, stringify(raw))
+    this.emit('raw:chunk', savedPath)
+    return rawPath
+  }
+
+  async exportDocument(result: DocumentConversionResult, role: Manifest['Component']['role']): Promise<string | null> {
+    if (!result.value) {
+      this.emit('octopus:document', { ...result }, role)
       return Promise.resolve(null)
     }
-    const octopusPath = await this._save(DebugExporter.getOctopusPath(artboard.id), stringify(artboard.value))
-    this.emit('octopus:artboard', { ...artboard, octopusPath })
-    return octopusPath
+    const path = DebugExporter.getOctopusPath(result.id)
+    const octopusPath = await this._save(path, stringify(result.value))
+    this.emit('octopus:document', { ...result, octopusPath }, role)
+    return path
   }
 
   getImagePath(name: string): string {

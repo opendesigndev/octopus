@@ -1,20 +1,26 @@
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+
+import { logger } from '../../services'
+import { getRole } from '../../utils/source'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
+import type { ResolvedStyle } from '@avocode/figma-parser/lib/src/index-node'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
   octopusConverter: OctopusFigConverter
 }
 
-export type ArtboardDescriptor = {
+export type ComponentDescriptor = {
   path: unknown
   error: Error | null
   time: number | null
 }
+
+type ComponentSourceWithDescriptor = { source: SourceArtboard; descriptor: ComponentDescriptor }
 
 export class OctopusManifest {
   private _sourceDesign: SourceDesign
@@ -22,12 +28,22 @@ export class OctopusManifest {
   private _exports: {
     images: Map<string, string | undefined>
     previews: Map<string, string | undefined>
-    artboards: Map<string, ArtboardDescriptor>
-    artboardImageMap: Map<string, string[]>
+    components: Map<string, ComponentSourceWithDescriptor>
+    componentImageMap: Map<string, string[]>
+    componentSourcePath: Map<string, string | undefined>
+    libraries: Map<string, Manifest['Library']>
+    chunks: Map<string, { style: ResolvedStyle; sourcePath?: string } | undefined>
   }
 
   static DEFAULT_FIG_VERSION = '0'
   static DEFAULT_FIG_FILENAME = 'Untitled'
+
+  static CHUNK_TYPE_MAP = {
+    FILL: 'STYLE_FILL',
+    TEXT: 'STYLE_TEXT',
+    EFFECT: 'STYLE_EFFECT',
+    GRID: 'STYLE_GRID',
+  } as const
 
   constructor(options: OctopusManifestOptions) {
     this._sourceDesign = options.sourceDesign
@@ -35,8 +51,11 @@ export class OctopusManifest {
     this._exports = {
       images: new Map(),
       previews: new Map(),
-      artboards: new Map(),
-      artboardImageMap: new Map(),
+      components: new Map(),
+      componentImageMap: new Map(),
+      componentSourcePath: new Map(),
+      libraries: new Map(),
+      chunks: new Map(),
     }
   }
 
@@ -56,26 +75,51 @@ export class OctopusManifest {
     return this._exports.images.get(id)
   }
 
-  setExportedArtboardImageMap(artboardId: string, imageIds: string[]): void {
-    this._exports.artboardImageMap.set(artboardId, imageIds)
+  setExportedComponentImageMap(componentId: string, imageIds: string[]): void {
+    this._exports.componentImageMap.set(componentId, imageIds)
   }
 
-  getExportedArtboardImageMap(artboardId: string): string[] | undefined {
-    return this._exports.artboardImageMap.get(artboardId)
+  getExportedComponentImageMap(componentId: string): string[] | undefined {
+    return this._exports.componentImageMap.get(componentId)
   }
 
-  getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
-    return this._exports.artboards.get(id)
+  setExportedSourcePath(componentId: string, sourcePath?: string): void {
+    this._exports.componentSourcePath.set(componentId, sourcePath)
   }
 
-  getExportedArtboardPathById(id: string): string | undefined {
-    const artboardResult = this._exports.artboards.get(id)
-    if (typeof artboardResult?.path !== 'string') return undefined
-    return artboardResult.path
+  getExportedSourcePath(componentId: string): string | undefined {
+    return this._exports.componentSourcePath.get(componentId)
   }
 
-  setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
-    this._exports.artboards.set(id, artboard)
+  setExportedChunk(style: ResolvedStyle, sourcePath?: string): void {
+    this._exports.chunks.set(style.id, { style, sourcePath })
+  }
+
+  getExportedChunk(chunkId: string): { style: ResolvedStyle; sourcePath?: string } | undefined {
+    return this._exports.chunks.get(chunkId)
+  }
+
+  setExportedLibrary(id: string, name: string, childId: string, description?: string): void {
+    const library = this._exports.libraries.get(id)
+    if (!library) {
+      this._exports.libraries.set(id, { id, name, description, children: [{ id: childId, type: 'COMPONENT' }] })
+    } else {
+      library.children = push(library.children, { id: childId, type: 'COMPONENT' })
+    }
+  }
+
+  getExportedComponentDescriptorById(id: string): ComponentDescriptor | undefined {
+    return this._exports.components.get(id)?.descriptor
+  }
+
+  getExportedComponentPathById(id: string): string | undefined {
+    const componentResult = this._exports.components.get(id)
+    if (typeof componentResult?.descriptor?.path !== 'string') return undefined
+    return componentResult.descriptor.path
+  }
+
+  setExportedComponent(source: SourceArtboard, descriptor: ComponentDescriptor): void {
+    this._exports.components.set(source.id, { source, descriptor })
   }
 
   get manifestVersion(): string {
@@ -109,7 +153,7 @@ export class OctopusManifest {
   }
 
   private _getStatus(source: SourceArtboard): Manifest['Status'] {
-    const status = this.getExportedArtboardById(source.id)
+    const status = this.getExportedComponentDescriptorById(source.id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
     return {
       value: statusValue,
@@ -136,10 +180,21 @@ export class OctopusManifest {
   }
 
   private _getAssets(source: SourceArtboard): Manifest['Assets'] {
-    const imageIds = this.getExportedArtboardImageMap(source.id) ?? []
+    const imageIds = this.getExportedComponentImageMap(source.id) ?? []
     const images = this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
     return { images, fonts }
+  }
+
+  private _getSourceArtifact(path: string): Manifest['Artifact'] {
+    return { type: 'SOURCE', location: { type: 'RELATIVE', path } }
+  }
+
+  private _getArtifacts(source: SourceArtboard): Manifest['Artifact'][] {
+    const artifacts: Manifest['Artifact'][] = []
+    const sourcePath = this.getExportedSourcePath(source.id)
+    if (sourcePath) artifacts.push(this._getSourceArtifact(sourcePath))
+    return artifacts
   }
 
   private _getPreview(id: string): Manifest['ResourceLocation'] | undefined {
@@ -148,33 +203,84 @@ export class OctopusManifest {
     return { type: 'RELATIVE', path: previewPath }
   }
 
+  private _getVariantProperties(name = ''): Manifest['VariantMeta']['properties'] {
+    const properties: Manifest['VariantMeta']['properties'] = {}
+    name.split(', ').forEach((part) => {
+      const property = part.split('=')
+      if (property.length !== 2) return
+      const [key, value] = property
+      properties[key] = value
+    })
+    return properties
+  }
+
+  private _getVariant(id: string): Manifest['VariantMeta'] | undefined {
+    const component = this._sourceDesign.components[id]
+    if (!component) return undefined
+    const { componentSetId: setId, description } = component
+    if (!setId) return undefined
+    const componentSet = this._sourceDesign.componentSets[setId]
+    if (!componentSet) return undefined
+    const { name: setName, description: setDescription } = componentSet
+    if (!setName) return undefined
+    const of = { id: setId, name: setName, description: setDescription }
+    const properties = this._getVariantProperties(component.name)
+    return { of, properties, description }
+  }
+
+  private _getChunk(style?: ResolvedStyle, sourcePath?: string): Manifest['Chunk'] | undefined {
+    if (!style || !sourcePath) return undefined
+    const { id, meta } = style
+    const { name, description, styleType } = meta
+    const type = getMapped(styleType, OctopusManifest.CHUNK_TYPE_MAP, undefined)
+    if (!type) {
+      logger?.warn('Unknown chunk type', { styleType })
+      return undefined
+    }
+    const location = { type: 'RELATIVE', path: sourcePath } as const
+    return { id, name, description, type, location }
+  }
+
+  get chunks(): Manifest['Chunk'][] {
+    return Array.from(this._exports.chunks.values())
+      .map((chunk) => this._getChunk(chunk?.style, chunk?.sourcePath))
+      .filter((chunk): chunk is Manifest['Chunk'] => Boolean(chunk))
+  }
+
+  get libraries(): Manifest['Library'][] {
+    return Array.from(this._exports.libraries.values())
+  }
+
   private _getArtboard(source: SourceArtboard): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
 
-    const path = this.getExportedArtboardPathById(id) ?? ''
+    const path = this.getExportedComponentPathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
+    const artifacts = this._getArtifacts(source)
+    const role = getRole(source)
     const preview = this._getPreview(id)
+    const variant = this._getVariant(id)
 
     return {
       id,
       name: source.name,
-      role: source.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD', // TODO fix for components
+      role,
       status,
       bounds,
       dependencies: [],
       preview,
       assets,
+      artifacts,
+      variant,
       location,
     }
   }
 
   get components(): Manifest['Component'][] {
-    return this._sourceDesign.pages
-      .reduce((artboards, page) => push(artboards, ...page.children), [])
-      .map((artboard) => this._getArtboard(artboard))
+    return Array.from(this._exports.components.values()).map((component) => this._getArtboard(component.source))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {
@@ -187,8 +293,8 @@ export class OctopusManifest {
       name: this.name,
       pages: this.pages,
       components: this.components,
-      chunks: [],
-      libraries: [],
+      chunks: this.chunks,
+      libraries: this.libraries,
     }
   }
 }

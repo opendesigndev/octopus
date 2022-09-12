@@ -52,8 +52,8 @@ class OctopusFigWorker {
   }
 
   async _parseArtboard(msgId: number, index: number, artboardId: string) {
-    const converter = createConverter({ sourceDesign: this._readers[index].parse([artboardId]) }) as OctopusFigConverter
-    const result = await converter.convertDesign()
+    const converter = createConverter() as OctopusFigConverter
+    const result = await converter.convertDesign({ design: this._readers[index].parse([artboardId]) })
     postMessage({ msgId, response: result })
   }
 }

@@ -82,12 +82,9 @@ export class OctopusLayerText extends OctopusLayerBase {
     return inferPostScriptName({ fontFamily, weight, italic })
   }
 
-  private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | null {
+  private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | undefined {
     const postScriptName = this._parsePostScriptName(textStyle)
-    if (!postScriptName) {
-      logger?.warn('Unknown font postScriptName', { textStyle })
-      return null
-    }
+    if (!postScriptName) return undefined
     return { postScriptName, family: textStyle.fontFamily }
   }
 
@@ -100,8 +97,6 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getStyle(textStyle: SourceTextStyle): Octopus['TextStyle'] | null {
     const font = this._getFont(textStyle)
-    if (!font) return null
-
     const fontSize = textStyle.fontSize
     const lineHeight = this._getLineHeight(textStyle)
     const kerning = textStyle.kerning
@@ -123,7 +118,10 @@ export class OctopusLayerText extends OctopusLayerBase {
     const textStyle = this.sourceLayer.defaultStyle
     if (!textStyle) return null
     const font = this._getFont(textStyle)
-    if (!font) return null
+    if (!font) {
+      logger?.warn('Unknown font', { textStyle })
+      return null
+    }
 
     const fontSize = textStyle.fontSize ?? DEFAULTS.TEXT.FONT_SIZE
     const lineHeight = this._getLineHeight(textStyle)
