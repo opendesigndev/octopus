@@ -739,10 +739,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@opendesign/illustrator-parser-pdfcpu@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@opendesign/illustrator-parser-pdfcpu/-/illustrator-parser-pdfcpu-1.0.0.tgz"
-  integrity sha512-HcSO1TC2nDe4XxAmiaY420rN2gesr9n6S9PJv2rCao60r/xNrLQDSJpnYHFSHN/o4rYCuxgC0BpIP0L/E/aT5A==
+"@opendesign/illustrator-parser-pdfcpu@^1.0.1-0":
+  version "1.0.1-0"
+  resolved "https://registry.yarnpkg.com/@opendesign/illustrator-parser-pdfcpu/-/illustrator-parser-pdfcpu-1.0.1-0.tgz#5c9f3296d758042e239303c242d29e0c5f084702"
+  integrity sha512-2gXgQdm5kvjb6RUq1MHcd9U7eza71+d7Ng4xFtMwQfgsKOVD49VQr3dnuh3lr2he0uRCLNU9YGoBZF73JIrNmA==
   dependencies:
     "@morphic-ts/batteries" "^3.0.0"
     gl-matrix "^3.4.3"
@@ -1756,11 +1756,6 @@ cookie@^0.4.1:
   version "0.4.2"
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.4.2.tgz"
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
-
-crc-32@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/crc-32/-/crc-32-1.2.2.tgz"
-  integrity sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==
 
 create-require@^1.1.0:
   version "1.1.1"
