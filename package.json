@@ -5,6 +5,7 @@
   "workspaces": {
     "packages": [
       "figma-parser",
+      "figma-parser-s3-plugin",
       "octopus-common",
       "octopus-ai",
       "octopus-fig",
