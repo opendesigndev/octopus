@@ -38,7 +38,11 @@ export class SourceArtboard extends SourceEntity {
   }
 
   private _getArtboardAssetsFonts(): string[] {
-    const entries = traverseAndFind(this._rawValue, (obj: unknown) => Object(obj)?.fontPostScriptName)
+    const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
+      const o = Object(obj)
+      if (o?.fontPostScriptName) return o?.fontPostScriptName
+      if (o?.fontPostScriptName === null && o?.fontFamily) return o?.fontFamily
+    })
     return [...new Set(entries)] as string[]
   }
 
