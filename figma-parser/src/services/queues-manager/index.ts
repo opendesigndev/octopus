@@ -28,7 +28,10 @@ type PreviewsDescriptorsQueue = Queue<string, JSONValue>
 type PreviewsQueue = Queue<Node, ArrayBuffer>
 type RenditionsDescriptorsQueue = Queue<{ url: string; options: RenditionRequestOptions }, JSONValue>
 type RenditionsQueue = Queue<string, ArrayBuffer>
-type LibrariesQueue = Queue<string, null | (NodeAddress & { component: FigmaNode })>
+type LibrariesQueue = Queue<
+  string,
+  null | (NodeAddress & { name: string; description: string } & { component: FigmaNode })
+>
 
 type Queues = {
   nodesMerger: NodesMergerQueue
@@ -243,7 +246,12 @@ export class QueuesManager {
           return [Queue.safeValue(null)]
         }
         const componentMeta = response.value as FigmaComponent
-        const id = { designId: componentMeta.meta.file_key, nodeId: componentMeta.meta.node_id }
+        const id = {
+          designId: componentMeta.meta.file_key,
+          nodeId: componentMeta.meta.node_id,
+          name: componentMeta.meta.name,
+          description: componentMeta.meta.description,
+        }
         const component = await this._queues.partialSync.exec(id)
         const descriptor = { ...id, component }
         return [Queue.safeValue(descriptor)]
