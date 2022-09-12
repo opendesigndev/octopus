@@ -123,6 +123,10 @@ export class SourceLayerCommon extends SourceEntity {
     return this._rawValue.cornerRadius
   }
 
+  get cornerRadii(): number[] | undefined {
+    return this._rawValue.rectangleCornerRadii
+  }
+
   get isMask(): boolean {
     return this._rawValue.isMask ?? false
   }
