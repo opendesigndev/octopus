@@ -34,7 +34,7 @@ export function convertId(id: string): string {
 }
 
 export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode'] {
-  return typeof blendMode === 'string' && blendMode in BLEND_MODES ? blendMode : DEFAULTS.BLEND_MODE
+  return typeof blendMode === 'string' && BLEND_MODES.includes(blendMode) ? blendMode : DEFAULTS.BLEND_MODE
 }
 
 export function convertColor(color: RawColor | undefined, opacity = 1): Octopus['Color'] {
