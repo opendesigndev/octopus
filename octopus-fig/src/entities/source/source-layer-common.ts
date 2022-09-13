@@ -23,6 +23,9 @@ type SourceLayerOptions = {
   rawValue: RawLayer
 }
 
+export const FRAME_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'COMPONENT_SET', 'INSTANCE'] as const
+export type FrameTypes = typeof FRAME_TYPES[number]
+
 export class SourceLayerCommon extends SourceEntity {
   protected _rawValue: RawLayer
   protected _parent: SourceLayerParent
@@ -59,6 +62,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   get blendMode(): RawBlendMode | undefined {
     return this._rawValue.blendMode
+  }
+
+  get isFrameLike(): boolean {
+    return (FRAME_TYPES as readonly string[]).includes(this._rawValue.type ?? '')
   }
 
   get transform(): SourceTransform | null {

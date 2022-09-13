@@ -52,20 +52,18 @@ export class OctopusEffect {
 
   private get _blur(): Octopus['EffectBlur'] {
     const visible = this.visible
-    const blendMode = this.blendMode
     const basis = 'LAYER_AND_EFFECTS'
     const blur = this._effect.radius / 2
 
-    return { type: 'BLUR', visible, blendMode, basis, blur }
+    return { type: 'BLUR', visible, basis, blur }
   }
 
   private get _backgroundBlur(): Octopus['EffectBlur'] {
     const visible = this.visible
-    const blendMode = this.blendMode
     const basis = 'BACKGROUND'
     const blur = this._effect.radius
 
-    return { type: 'BLUR', visible, blendMode, basis, blur }
+    return { type: 'BLUR', visible, basis, blur }
   }
 
   convert(): Octopus['Effect'] | null {

@@ -37,6 +37,14 @@ export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode']
   return typeof blendMode === 'string' && BLEND_MODES.includes(blendMode) ? blendMode : DEFAULTS.BLEND_MODE
 }
 
+export function convertLayerBlendMode(
+  blendMode: RawBlendMode | undefined,
+  { isFrameLike = false }: { isFrameLike?: boolean }
+): Octopus['BlendMode'] {
+  if (!isFrameLike && blendMode === 'PASS_THROUGH') return DEFAULTS.BLEND_MODE // Figma issue, 'PASS_THROUGH' does not make sense on end layers.
+  return convertBlendMode(blendMode)
+}
+
 export function convertColor(color: RawColor | undefined, opacity = 1): Octopus['Color'] {
   const finalOpacity = asFiniteNumber(color?.a, 0) * opacity
   return {

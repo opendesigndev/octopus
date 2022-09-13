@@ -26,8 +26,8 @@ type CreateOctopusLayerOptions = {
 }
 
 const OCTOPUS_BUILDER_MAP: { [key: string]: OctopusLayerBuilders | undefined } = {
-  GROUP: createOctopusLayerGroupLike,
   FRAME: createOctopusLayerGroupLike,
+  GROUP: createOctopusLayerGroupLike,
   INSTANCE: createOctopusLayerGroupLike,
   COMPONENT: createOctopusLayerGroupLike,
   COMPONENT_SET: createOctopusLayerGroupLike,

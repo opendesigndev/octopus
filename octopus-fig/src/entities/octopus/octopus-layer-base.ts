@@ -4,7 +4,7 @@ import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from '../../services'
-import { convertBlendMode, convertId } from '../../utils/convert'
+import { convertLayerBlendMode, convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusArtboard } from './octopus-artboard'
 import { OctopusEffect } from './octopus-effect'
@@ -71,7 +71,8 @@ export class OctopusLayerBase {
   }
 
   get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._sourceLayer.blendMode)
+    const { isFrameLike } = this._sourceLayer
+    return convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
   }
 
   get transform(): number[] {
@@ -113,10 +114,10 @@ export class OctopusLayerBase {
       id: this.id,
       name: this.name,
       type,
-      transform: this.transform,
       visible: this.visible,
-      blendMode: this.blendMode,
       opacity: this.opacity,
+      blendMode: this.blendMode,
+      transform: this.transform,
       effects: this.effects,
     }
   }

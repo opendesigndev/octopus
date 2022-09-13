@@ -3,26 +3,29 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { env } from '../../services'
-import { convertId } from '../../utils/convert'
+import { convertId, convertLayerBlendMode } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { getArtboardTransform } from '../../utils/source'
 import { OctopusArtboard } from './octopus-artboard'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { RawLayerShape } from '../../typings/raw'
+import type { RawBlendMode, RawLayerShape } from '../../typings/raw'
 import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
   id: string
+  name?: string
   mask: OctopusLayer
   maskBasis?: Octopus['MaskBasis']
   maskChannels?: number[]
   layers: OctopusLayer[]
   visible?: boolean
   transform?: number[]
+  opacity?: number
+  blendMode?: RawBlendMode
   isArtboard?: boolean
 }
 
@@ -42,17 +45,21 @@ export class OctopusLayerMaskGroup {
   protected _visible: boolean
   private _parent: OctopusLayerParent
   private _id: string
+  private _name?: string
   private _mask: OctopusLayer
   private _layers: OctopusLayer[]
   private _maskBasis?: Octopus['MaskBasis']
   private _maskChannels?: number[]
   private _transform?: number[]
+  private _opacity?: number
+  private _blendMode?: RawBlendMode
   private _isArtboard: boolean
 
   static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
     const rawLayer = { ...(frame.raw as RawLayerShape) }
     rawLayer.id = `${rawLayer.id}-BackgroundMask`
     rawLayer.type = 'RECTANGLE' as const
+    delete rawLayer.opacity
     delete rawLayer.relativeTransform
     const sourceLayer = createSourceLayer({ layer: rawLayer, parent: frame.parent })
     if (!sourceLayer) return null
@@ -72,7 +79,22 @@ export class OctopusLayerMaskGroup {
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
     const layers = createOctopusLayers(sourceLayer.layers, parent)
     const visible = sourceLayer.visible
-    return new OctopusLayerMaskGroup({ id, mask, maskBasis, layers, transform, parent, isArtboard, visible })
+    const blendMode = sourceLayer.blendMode
+    const opacity = sourceLayer.opacity
+    const name = sourceLayer.name
+    return new OctopusLayerMaskGroup({
+      id,
+      name,
+      mask,
+      maskBasis,
+      layers,
+      transform,
+      parent,
+      blendMode,
+      opacity,
+      visible,
+      isArtboard,
+    })
   }
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
@@ -91,17 +113,24 @@ export class OctopusLayerMaskGroup {
 
   constructor(options: OctopusLayerMaskGroupOptions) {
     this._id = options.id
+    this._name = options.name
     this._mask = options.mask
     this._maskBasis = options.maskBasis
     this._maskChannels = options.maskChannels
     this._layers = options.layers
     this._visible = options.visible ?? true
     this._transform = options.transform
+    this._opacity = options.opacity
+    this._blendMode = options.blendMode
     this._isArtboard = options.isArtboard ?? false
   }
 
   get id(): string {
     return convertId(this._id)
+  }
+
+  get name(): string | undefined {
+    return this._name
   }
 
   get transform(): number[] {
@@ -141,6 +170,14 @@ export class OctopusLayerMaskGroup {
     return this._layers
   }
 
+  get opacity(): number | undefined {
+    return this._opacity
+  }
+
+  get blendMode(): Octopus['BlendMode'] {
+    return convertLayerBlendMode(this._blendMode, { isFrameLike: true })
+  }
+
   get meta(): Octopus['LayerMeta'] | undefined {
     const isArtboard = this._isArtboard
     return isArtboard ? { isArtboard } : undefined
@@ -152,13 +189,16 @@ export class OctopusLayerMaskGroup {
 
     return {
       id: this.id,
+      name: this.name,
       type: this.type,
+      visible: this.visible,
+      opacity: this.opacity,
+      blendMode: this.blendMode,
       maskBasis: this.maskBasis,
       maskChannels: this.maskChannels,
       mask,
       transform: this.transform,
       layers: getConverted(this._layers),
-      visible: this.visible,
       meta: this.meta,
     } as const
   }
