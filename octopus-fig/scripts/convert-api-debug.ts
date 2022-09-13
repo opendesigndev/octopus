@@ -22,6 +22,8 @@ type ConvertedDocumentResult = {
 
 dotenv.config()
 
+const converter = createConverter()
+
 export async function convertDesign({
   designId,
   shouldRender = process.env.CONVERT_RENDER === 'true',
@@ -72,10 +74,15 @@ export async function convertDesign({
   }
 
   const reader = new SourceApiReader(readerOptions)
-  const converter = createConverter()
   await converter.convertDesign({ design: reader.parse(), exporter, skipReturn: true })
   await exporter.completed()
 }
 
-const designId = process.argv[2]
-convertDesign({ designId })
+export async function convertDesigns(designIds: string[], shouldRender?: boolean) {
+  for (const designId of designIds) {
+    await convertDesign({ designId, shouldRender })
+  }
+}
+
+const designIds = process.argv.slice(2)
+convertDesigns(designIds)
