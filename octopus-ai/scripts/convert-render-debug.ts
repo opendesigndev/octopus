@@ -19,8 +19,9 @@ type ConvertAllOptions = {
 
 export async function convertAll({ render, filePath, outputDir }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${path.basename(filePath, '.ai')}`
+  const octopusAIConverter = new OctopusAIConverter({})
 
-  const converter = await OctopusAIConverter.fromPath({ filePath })
+  const designConverter = await octopusAIConverter.getDesignConverter(filePath)
 
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
@@ -70,7 +71,7 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
     file://${octopusPath}`)
   })
 
-  converter.convertDesign({ exporter })
+  designConverter.convertDesign({ exporter })
 }
 
 async function convert() {

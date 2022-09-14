@@ -1,6 +1,5 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import uniqueId from 'lodash/uniqueId'
 
 import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
 import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
@@ -28,7 +27,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
       layerSequence: { sourceLayers: [(layerSequences[0].sourceLayers[0] as SourceLayerWithMask).mask] },
     })
 
-    this._id = uniqueId()
+    this._id = this.parentArtboard.designConverter.uniqueId()
 
     this._layers = createOctopusLayersFromLayerSequences({
       layerSequences: layerSequences,

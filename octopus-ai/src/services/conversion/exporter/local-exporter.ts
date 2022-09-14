@@ -6,9 +6,9 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
 import type { Exporter, AuxiliaryData } from '.'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
 import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
+import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {

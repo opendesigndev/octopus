@@ -11,7 +11,9 @@ dotenv.config()
     console.log(`${chalk.red('could not find file path')}`)
     return
   }
-  const converter = await OctopusAIConverter.fromPath({ filePath })
+
+  const octopusAIConverter = new OctopusAIConverter({})
+  const designConverter = await octopusAIConverter.getDesignConverter(filePath)
   const tempDir = process.env.OUTPUT_DIR
 
   if (!tempDir) {
@@ -19,5 +21,5 @@ dotenv.config()
   }
 
   const exporter = new LocalExporter({ path: tempDir })
-  await converter.convertDesign({ exporter })
+  await designConverter.convertDesign({ exporter })
 })()

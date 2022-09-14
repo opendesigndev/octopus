@@ -1,11 +1,10 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import uniqueId from 'lodash/uniqueId'
 
 import { initOctopusLayerChildren } from '../../utils/layer'
 import { parseRect } from '../../utils/rectangle'
 
-import type { OctopusAIConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceArtboard } from '../source/source-artboard'
 import type { SourceDesign } from '../source/source-design'
@@ -14,24 +13,26 @@ import type { OctopusManifest } from './octopus-manifest'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string
-  octopusAIConverter: OctopusAIConverter
+  designConverter: DesignConverter
 }
 
 export class OctopusArtboard {
   private _sourceArtboard: SourceArtboard
-  private _octopusAIConverter: OctopusAIConverter
+  private _designConverter: DesignConverter
   private _layers: OctopusLayer[]
+  private _id: string
 
   constructor(options: OctopusArtboardOptions) {
-    const artboard = options.octopusAIConverter.sourceDesign.getArtboardById(options.targetArtboardId)
+    const artboard = options.designConverter.sourceDesign.getArtboardById(options.targetArtboardId)
 
     if (!artboard) {
       throw new Error(`Can't find target artboard by id "${options.targetArtboardId}"`)
     }
 
-    this._octopusAIConverter = options.octopusAIConverter
+    this._designConverter = options.designConverter
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
+    this._id = this._designConverter.uniqueId()
   }
 
   private _initLayers() {
@@ -41,7 +42,7 @@ export class OctopusArtboard {
   private _createMask(): Octopus['ShapeLayer'] {
     return {
       type: 'SHAPE',
-      id: uniqueId(),
+      id: this._designConverter.uniqueId(),
       shape: {
         path: parseRect(this._sourceArtboard.mediaBox),
         fills: [
@@ -65,7 +66,7 @@ export class OctopusArtboard {
     const layers = getConverted(this._layers)
 
     return {
-      id: uniqueId(),
+      id: this._designConverter.uniqueId(),
       type: 'MASK_GROUP',
       mask: this._createMask(),
       maskBasis: 'BODY',
@@ -78,20 +79,24 @@ export class OctopusArtboard {
   }
 
   get sourceDesign(): SourceDesign {
-    return this._octopusAIConverter.sourceDesign
+    return this._designConverter.sourceDesign
   }
 
   get id(): string {
-    return this._sourceArtboard.id
+    return this._id
   }
 
   private async _getVersion(): Promise<string> {
-    const pkg = await this._octopusAIConverter.pkg
+    const pkg = await this._designConverter.octopusAIConverter.pkg
     return pkg.version
   }
 
   get manifest(): OctopusManifest {
-    return this._octopusAIConverter.manifest
+    return this._designConverter.manifest
+  }
+
+  get designConverter(): DesignConverter {
+    return this._designConverter
   }
 
   async convert(): Promise<Octopus['OctopusDocument']> {

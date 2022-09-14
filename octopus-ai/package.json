@@ -14,7 +14,9 @@
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "types:check": "tsc --noEmit",
     "watch": "tsc -w",
-    "test": "echo 'Tests are not implemented yet'"
+    "test": "echo 'Tests are not implemented yet'",
+    "integration-test": "ts-node test/integration/main.ts",
+    "cleanup:resources": "ts-node ./scripts/cleanup-resources.ts"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -22,7 +24,7 @@
     "@avocode/manifest-ts": "3.0.0-alpha.33",
     "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
-    "@opendesign/illustrator-parser-pdfcpu": "^1.0.1-0",
+    "@opendesign/illustrator-parser-pdfcpu": "^1.0.2-0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",
     "paper": "^0.12.15",
@@ -41,7 +43,9 @@
     "@types/pino": "^6.3.3",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
+    "handlebars": "^4.7.7",
     "jest": "^27.3.1",
+    "jsondiffpatch": "^0.4.1",
     "ts-jest": "^27.1.3",
     "ts-node": "10.4.0"
   }

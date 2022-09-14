@@ -5,3 +5,8 @@ node_modules/
 sample/
 workdir/
 temp/
+test/integration/assets/
+test/integration/report/
+
+
+

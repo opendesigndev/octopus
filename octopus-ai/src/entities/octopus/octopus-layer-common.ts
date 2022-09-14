@@ -33,7 +33,7 @@ export abstract class OctopusLayerCommon {
 
     this._parent = options.parent
     this._sourceLayer = sourceLayer
-    this._id = sourceLayer.id
+    this._id = this.parentArtboard.designConverter.uniqueId()
   }
 
   get parent(): OctopusLayerParent {
