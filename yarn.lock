@@ -16,23 +16,6 @@
   dependencies:
     abort-controller "3.0.0"
 
-"@avocode/figma-parser@3.0.0-rc.12":
-  version "3.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/@avocode/figma-parser/-/figma-parser-3.0.0-rc.12.tgz#c200739f7ed0b24505def2bfe4b99a534e7cc5a0"
-  integrity sha512-tdT8yXLe0/b0FBE+gwqUHYw0IUGuUCx5tKBqnN3vAs5zBmvZrMe/G8N3O7qqYFGcdwcshbFOIoh9YKS1rtRSFA==
-  dependencies:
-    "@sentry/browser" "6.14.0"
-    "@sentry/node" "6.14.0"
-    dotenv "16.0.0"
-    eventemitter3 "^4.0.7"
-    got "^11.5.1"
-    ky "^0.30.0"
-    lodash "^4.17.21"
-    pino "^6.7.0"
-    pino-pretty "^4.3.0"
-    read-pkg-up "7.0.1"
-    uuid "^8.3.2"
-
 "@avocode/manifest-ts@3.0.0-alpha.33":
   version "3.0.0-alpha.33"
   resolved "https://registry.npmjs.org/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.33.tgz"
