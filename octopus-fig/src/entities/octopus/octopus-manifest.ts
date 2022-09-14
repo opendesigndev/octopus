@@ -107,10 +107,10 @@ export class OctopusManifest {
   }
 
   setExportedLibrary(options: SetExportedLibraryOptions): void {
-    const { designId: id, name, designNodeId, description } = options
+    const { designId: id, name, designNodeId } = options
     const library = this._exports.libraries.get(id)
     if (!library) {
-      this._exports.libraries.set(id, { id, name, description, children: [{ id: designNodeId, type: 'COMPONENT' }] })
+      this._exports.libraries.set(id, { id, name, children: [{ id: designNodeId, type: 'COMPONENT' }] })
     } else {
       library.children = push(library.children, { id: designNodeId, type: 'COMPONENT' })
     }

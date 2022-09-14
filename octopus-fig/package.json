@@ -19,7 +19,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@avocode/figma-parser": "3.0.0-rc.11",
+    "@avocode/figma-parser": "3.0.0-rc.12",
     "@avocode/manifest-ts": "3.0.0-alpha.36",
     "@avocode/octopus-common": "3.0.0-rc.23",
     "@avocode/octopus-ts": "3.0.0-alpha.33",
