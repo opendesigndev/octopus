@@ -41,7 +41,7 @@ function createOctopusLayerGroupLike({
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup | null {
   const sourceLayer = layer as SourceLayerFrame
-  if (sourceLayer.hasBackgroundMask) {
+  if (sourceLayer.hasBackgroundMask || sourceLayer.clipsContent) {
     return OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent, sourceLayer })
   }
   return new OctopusLayerGroup({ parent, sourceLayer })
