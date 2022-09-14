@@ -14,7 +14,7 @@ const parser = createParser({
   verbose: true,
   figmaIdsFetchUsedComponents: true,
   renderImagerefs: false,
-  shouldObtainLibraries: false,
+  shouldObtainLibraries: true,
   shouldObtainStyles: true,
   parallelRequests: 10,
 })
@@ -23,15 +23,12 @@ const design = parser.parse()
 
 ;(async () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  console.log('odsss', require('util').inspect(await design.getFrameLikeIds(), { depth: null }))
+  // console.log('odsss', require('util').inspect(await design.getFrameLikeIds(), { depth: null }))
 })()
 
 design.on('ready:design', (design) => {
   console.log('ready:design', design)
 })
-design.on('ready:frame-like', (frameLike) => {
-  console.log('ready:frame-like', {
-    designId: frameLike.designId,
-    nodeId: frameLike.nodeId,
-  })
+design.on('ready:library', (frameLike) => {
+  console.log('ready:library', frameLike)
 })
