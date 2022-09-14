@@ -87,7 +87,7 @@ export class Library {
         node: component.component,
       }),
       meta: {
-        name: component.name,
+        name: component.component._fromDocument?.name ?? '',
         description: component.description,
         designId: component.designId,
         designNodeId: component.nodeId,

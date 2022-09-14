@@ -21,6 +21,15 @@ export type FigmaNode = {
   >
   name: string
   components: Record<string, SourceComponent>
+  _fromDocument?: {
+    name: string
+    lastModified: string
+    thumbnailUrl: string
+    version: string
+    role: string
+    editorType: string
+    linkAccess: string
+  }
 }
 
 export type FigmaNodesResponse = {

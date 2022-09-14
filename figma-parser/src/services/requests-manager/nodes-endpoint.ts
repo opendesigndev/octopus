@@ -1,6 +1,6 @@
 import chunk from 'lodash/chunk'
 
-import { isObject, keys } from '../../utils/common'
+import { isObject, keys, without } from '../../utils/common'
 import { buildEndpoint } from '../../utils/request'
 import { EndpointBase } from './endpoint-base'
 
@@ -53,7 +53,7 @@ export class NodesEndpoint extends EndpointBase {
   ungroupResponses(responses: FigmaNodesResponse[], groups: DesignNodes[], ids: NodeAddress[]): FigmaNode[] {
     const map = responses.reduce((map, resp, index) => {
       const { designId } = groups[index]
-      // const documentBase = without(resp, ['nodes'] as const)
+      const documentBase = without(resp, ['nodes'] as const)
       const nodeIds = isObject(resp?.nodes) ? keys(resp.nodes) : []
       const subMap = Object.fromEntries(
         nodeIds.map((nodeId) => {
@@ -61,7 +61,13 @@ export class NodesEndpoint extends EndpointBase {
           //   ...Object(documentBase),
           //   nodes: { [nodeId]: resp?.nodes?.[nodeId] },
           // }
-          return [nodeId, resp?.nodes?.[nodeId]]
+          return [
+            nodeId,
+            {
+              ...resp?.nodes?.[nodeId],
+              _fromDocument: documentBase,
+            },
+          ]
         })
       ) as Record<typeof nodeIds[number], FigmaNode>
       map[designId] = {
