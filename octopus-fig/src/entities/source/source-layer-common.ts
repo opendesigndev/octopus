@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
-import { SourceArtboard } from './source-artboard'
+import { SourceComponent } from './source-component'
 import { SourceEffect } from './source-effect'
 import { SourceEntity } from './source-entity'
 import { SourcePaint } from './source-paint'
@@ -16,7 +16,7 @@ import type { SourceGeometry, SourceTransform } from '../../typings/source'
 import type { SourceLayerFrame } from './source-layer-frame'
 import type { SourceLayerShape } from './source-layer-shape'
 
-export type SourceLayerParent = SourceArtboard | SourceLayerFrame | SourceLayerShape
+export type SourceLayerParent = SourceComponent | SourceLayerFrame | SourceLayerShape
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
@@ -47,9 +47,9 @@ export class SourceLayerCommon extends SourceEntity {
     return this._parent
   }
 
-  get parentArtboard(): SourceArtboard {
+  get parentComponent(): SourceComponent {
     const parent = this._parent
-    return parent instanceof SourceArtboard ? parent : parent.parentArtboard
+    return parent instanceof SourceComponent ? parent : parent.parentComponent
   }
 
   get visible(): boolean {

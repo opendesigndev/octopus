@@ -1,36 +1,36 @@
 import { convertId } from '../../utils/convert'
-import { SourceArtboard } from './source-artboard'
+import { SourceComponent } from './source-component'
 import { SourceEntity } from './source-entity'
 
 import type { RawPage, RawLayer, RawLayerFrame } from '../../typings/raw'
 
 export class SourcePage extends SourceEntity {
   protected _rawValue: RawPage
-  private _artboards: SourceArtboard[]
-  private _pasteboard: SourceArtboard | null
+  private _components: SourceComponent[]
+  private _pasteboard: SourceComponent | null
 
   static DEFAULT_ID = 'page-1'
 
   constructor(raw: RawPage) {
     super(raw)
-    const { artboards, pasteboard } = this._initArtboards()
-    this._artboards = artboards
+    const { components, pasteboard } = this._initComponents()
+    this._components = components
     this._pasteboard = pasteboard
   }
 
-  private _initPasteboard(children: RawLayer[]): SourceArtboard | null {
+  private _initPasteboard(children: RawLayer[]): SourceComponent | null {
     if (children.length === 0) return null
-    const rawArtboard = {
+    const rawFrame = {
       ...this._rawValue,
       id: `${this.id}-pasteboard`,
       name: `${this.name}-pasteboard`,
       type: 'FRAME' as const,
       children,
     }
-    return new SourceArtboard({ rawArtboard, isPasteboard: true })
+    return new SourceComponent({ rawFrame, isPasteboard: true })
   }
 
-  private _initArtboards(): { artboards: SourceArtboard[]; pasteboard: SourceArtboard | null } {
+  private _initComponents(): { components: SourceComponent[]; pasteboard: SourceComponent | null } {
     const frames: RawLayerFrame[] = []
     const rest: RawLayer[] = []
     this._rawValue?.children?.forEach((element) => {
@@ -40,25 +40,25 @@ export class SourcePage extends SourceEntity {
         rest.push(element)
       }
     })
-    const artboards = frames.map((rawArtboard) => new SourceArtboard({ rawArtboard }))
+    const components = frames.map((rawFrame) => new SourceComponent({ rawFrame }))
     const pasteboard = this._initPasteboard(rest)
-    return { artboards, pasteboard }
+    return { components, pasteboard }
   }
 
   get raw(): RawPage {
     return this._rawValue
   }
 
-  get artboards(): SourceArtboard[] {
-    return this._artboards
+  get components(): SourceComponent[] {
+    return this._components
   }
 
-  get pasteboard(): SourceArtboard | null {
+  get pasteboard(): SourceComponent | null {
     return this._pasteboard
   }
 
-  get children(): SourceArtboard[] {
-    return this.pasteboard ? [...this.artboards, this.pasteboard] : this.artboards
+  get children(): SourceComponent[] {
+    return this.pasteboard ? [...this.components, this.pasteboard] : this.components
   }
 
   get id(): string {

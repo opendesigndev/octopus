@@ -35,7 +35,7 @@ export async function convertDesign({
   // exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
   // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
-  exporter.on('octopus:document', async (result: ConvertedDocumentResult, role: string) => {
+  exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =

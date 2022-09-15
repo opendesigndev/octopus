@@ -5,8 +5,8 @@ import { createSourceLayer } from '../../factories/create-source-layer'
 import { env } from '../../services'
 import { convertId, convertLayerBlendMode } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
-import { getArtboardTransform } from '../../utils/source'
-import { OctopusArtboard } from './octopus-artboard'
+import { getTopComponentTransform } from '../../utils/source'
+import { OctopusComponent } from './octopus-component'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -26,13 +26,13 @@ type OctopusLayerMaskGroupOptions = {
   transform?: number[]
   opacity?: number
   blendMode?: RawBlendMode
-  isArtboard?: boolean
+  isTopComponent?: boolean
 }
 
 type CreateBackgroundMaskGroupOptions = {
   sourceLayer: SourceLayerFrame
   parent: OctopusLayerParent
-  isArtboard?: boolean
+  isTopComponent?: boolean
 }
 
 type CreateMaskGroupOptions = {
@@ -53,7 +53,7 @@ export class OctopusLayerMaskGroup {
   private _transform?: number[]
   private _opacity?: number
   private _blendMode?: RawBlendMode
-  private _isArtboard: boolean
+  private _isTopComponent: boolean
 
   static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
     const rawLayer = { ...(frame.raw as RawLayerShape) }
@@ -69,11 +69,12 @@ export class OctopusLayerMaskGroup {
   static createBackgroundMaskGroup({
     sourceLayer,
     parent,
-    isArtboard = false,
+    isTopComponent = false,
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
-    const artboardTransform = isArtboard && env.NODE_ENV === 'debug' ? getArtboardTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
-    const transform = isArtboard ? artboardTransform : sourceLayer.transform ?? undefined
+    const topComponentTransform =
+      isTopComponent && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const transform = isTopComponent ? topComponentTransform : sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
@@ -93,7 +94,7 @@ export class OctopusLayerMaskGroup {
       blendMode,
       opacity,
       visible,
-      isArtboard,
+      isTopComponent,
     })
   }
 
@@ -122,7 +123,7 @@ export class OctopusLayerMaskGroup {
     this._transform = options.transform
     this._opacity = options.opacity
     this._blendMode = options.blendMode
-    this._isArtboard = options.isArtboard ?? false
+    this._isTopComponent = options.isTopComponent ?? false
   }
 
   get id(): string {
@@ -149,9 +150,9 @@ export class OctopusLayerMaskGroup {
     return this._mask
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
+    return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
   get type(): 'MASK_GROUP' {
@@ -179,7 +180,7 @@ export class OctopusLayerMaskGroup {
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._isArtboard
+    const isArtboard = this._isTopComponent
     return isArtboard ? { isArtboard } : undefined
   }
 

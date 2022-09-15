@@ -8,36 +8,36 @@ import { SourceLayerFrame } from './source-layer-frame'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { ImageSizeMap } from '../../services/conversion/design-converter'
-import type { RawArtboard, RawBlendMode } from '../../typings/raw'
+import type { RawBlendMode, RawLayerFrame } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
-type SourceArtboardOptions = {
-  rawArtboard: RawArtboard
+type SourceComponentOptions = {
+  rawFrame: RawLayerFrame
   isPasteboard?: boolean
   imageSizeMap?: ImageSizeMap
 }
 
-export class SourceArtboard extends SourceEntity {
-  protected _rawValue: RawArtboard
+export class SourceComponent extends SourceEntity {
+  protected _rawValue: RawLayerFrame
   private _sourceFrame: SourceLayerFrame
   private _isPasteboard: boolean
   private _imageSizeMap: ImageSizeMap
 
-  static DEFAULT_ID = 'artboard-1'
-  static DEFAULT_NAME = 'Artboard'
+  static DEFAULT_ID = 'component-1'
+  static DEFAULT_NAME = 'Component'
 
-  constructor(options: SourceArtboardOptions) {
-    super(options.rawArtboard)
+  constructor(options: SourceComponentOptions) {
+    super(options.rawFrame)
     this._isPasteboard = options.isPasteboard ?? false
     this._imageSizeMap = options.imageSizeMap ?? {}
-    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawArtboard, parent: this })
+    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawFrame, parent: this })
   }
 
   getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
     return ref ? this._imageSizeMap[ref] : undefined
   }
 
-  private _getArtboardAssetsFonts(): string[] {
+  private _getAssetFonts(): string[] {
     const entries = traverseAndFind(this._rawValue, (obj: unknown) => {
       const o = Object(obj)
       if (o?.fontPostScriptName) return o?.fontPostScriptName
@@ -48,10 +48,10 @@ export class SourceArtboard extends SourceEntity {
 
   @firstCallMemo()
   get dependencies(): { fonts: string[] } {
-    return { fonts: this._getArtboardAssetsFonts() }
+    return { fonts: this._getAssetFonts() }
   }
 
-  get raw(): RawArtboard {
+  get raw(): RawLayerFrame {
     return this._rawValue
   }
 
@@ -72,11 +72,11 @@ export class SourceArtboard extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue.id ?? SourceArtboard.DEFAULT_ID
+    return this._rawValue.id ?? SourceComponent.DEFAULT_ID
   }
 
   get name(): string {
-    return this._rawValue.name ?? SourceArtboard.DEFAULT_NAME
+    return this._rawValue.name ?? SourceComponent.DEFAULT_NAME
   }
 
   get isPasteboard(): boolean {

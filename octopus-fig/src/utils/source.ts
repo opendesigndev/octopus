@@ -4,7 +4,7 @@ import { round } from '@avocode/octopus-common/dist/utils/math'
 import { env } from '../services'
 import { DEFAULTS } from './defaults'
 
-import type { SourceArtboard } from '../entities/source/source-artboard'
+import type { SourceComponent } from '../entities/source/source-component'
 import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
@@ -46,13 +46,13 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   }))
 }
 
-export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
+export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
   return 'ARTBOARD'
 }
 
-export function getArtboardTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
+export function getTopComponentTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
   if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
   const bounds = sourceLayer.bounds
   const boundingBox = sourceLayer.boundingBox

@@ -9,7 +9,7 @@ import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
 import type { Manifest } from '../../../typings/manifest'
-import type { DocumentConversionResult } from '../../conversion/design-converter'
+import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -59,7 +59,7 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
-  async exportDocument(result: DocumentConversionResult): Promise<string | null> {
+  async exportComponent(result: ComponentConversionResult): Promise<string | null> {
     if (!result.value) return null
     const path = LocalExporter.getOctopusPath(result.id)
     await this._save(path, stringify(result.value))

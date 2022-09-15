@@ -10,7 +10,7 @@ import { stringify } from '../../../utils/misc'
 import { timestamp } from '../../../utils/timestamp'
 
 import type { Manifest } from '../../../typings/manifest'
-import type { DocumentConversionResult } from '../../conversion/design-converter'
+import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -82,7 +82,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return rawPath
   }
 
-  async exportRawDocument(raw: unknown, name: string): Promise<string> {
+  async exportRawComponent(raw: unknown, name: string): Promise<string> {
     const rawPath = DebugExporter.getSourcePath(name)
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:component', savedPath)
@@ -96,14 +96,17 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return rawPath
   }
 
-  async exportDocument(result: DocumentConversionResult, role: Manifest['Component']['role']): Promise<string | null> {
+  async exportComponent(
+    result: ComponentConversionResult,
+    role: Manifest['Component']['role']
+  ): Promise<string | null> {
     if (!result.value) {
-      this.emit('octopus:document', { ...result }, role)
+      this.emit('octopus:component', { ...result }, role)
       return Promise.resolve(null)
     }
     const path = DebugExporter.getOctopusPath(result.id)
     const octopusPath = await this._save(path, stringify(result.value))
-    this.emit('octopus:document', { ...result, octopusPath }, role)
+    this.emit('octopus:component', { ...result, octopusPath }, role)
     return path
   }
 

@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { logger } from '../../services'
 import { convertLayerBlendMode, convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
-import { OctopusArtboard } from './octopus-artboard'
+import { OctopusComponent } from './octopus-component'
 import { OctopusEffect } from './octopus-effect'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -15,7 +15,7 @@ import type { OctopusLayerGroup } from './octopus-layer-group'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
 
-export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard
+export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 
 type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
@@ -49,9 +49,9 @@ export class OctopusLayerBase {
     return this._sourceLayer
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
+    return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
   get id(): string {
