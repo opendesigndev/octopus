@@ -18,8 +18,13 @@ export type Metadata = {
   version: string
 }
 
+export type RawArtboardSource = {
+  artboard: RawArtboardEntry
+  id: string
+}
+
 export type RawSourceData = {
-  artboards: RawArtboardEntry[]
+  artboards: RawArtboardSource[]
   additionalTextData: AdditionalTextData
   metadata: Metadata
 }
@@ -57,10 +62,10 @@ export class AIFileReader {
     const version = ctx.aiFile.Version
     const additionalTextData = (await PrivateData(ctx)) as unknown as AdditionalTextData
     const artboards = (await Promise.all(
-      ArtBoardRefs(ctx).map((ref) => {
-        return ArtBoard(ctx, ref)
+      ArtBoardRefs(ctx).map(async (ref) => {
+        return { artboard: await ArtBoard(ctx, ref), id: String(ref.idx) }
       })
-    )) as unknown as RawArtboardEntry[]
+    )) as unknown as RawArtboardSource[]
 
     return { artboards, additionalTextData, metadata: { version } }
   }

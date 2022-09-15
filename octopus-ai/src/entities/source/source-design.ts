@@ -12,7 +12,7 @@ export class SourceDesign {
   private _additionalTexData: AdditionalTextData
 
   constructor(sourceTree: SourceTree) {
-    this._artboards = sourceTree.artboards.map((rawArtboard) => new SourceArtboard(rawArtboard))
+    this._artboards = sourceTree.artboards.map((artboardSource) => new SourceArtboard(artboardSource))
     this._images = sourceTree.images
     this._additionalTexData = sourceTree.additionalTextData
     this._metaData = sourceTree.metadata
