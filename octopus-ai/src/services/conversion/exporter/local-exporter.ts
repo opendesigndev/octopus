@@ -5,6 +5,8 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
+import { createOctopusArtboardFileName } from '../../../utils/exporter'
+
 import type { Exporter, AuxiliaryData } from '.'
 import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
@@ -83,7 +85,7 @@ export class LocalExporter implements Exporter {
 
   exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
-    return this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
+    return this._save(createOctopusArtboardFileName(artboard.value?.id ?? ''), this._stringify(artboard.value))
   }
 
   exportImage(name: string, data: Buffer): Promise<string> {

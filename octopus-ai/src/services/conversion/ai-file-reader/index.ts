@@ -1,8 +1,11 @@
 import fsp from 'fs/promises'
+import os from 'os'
 import path from 'path'
 
 import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
 import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import rimraf from 'rimraf'
+import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../../entities/source/source-design'
 import { logger } from '../../../services/instances/logger'
@@ -12,19 +15,15 @@ import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw'
 
 type AIFileReaderOptions = {
   path: string
+  resourcesDir?: string
 }
 
 export type Metadata = {
   version: string
 }
 
-export type RawArtboardSource = {
-  artboard: RawArtboardEntry
-  id: string
-}
-
 export type RawSourceData = {
-  artboards: RawArtboardSource[]
+  artboards: RawArtboardEntry[]
   additionalTextData: AdditionalTextData
   metadata: Metadata
 }
@@ -33,18 +32,12 @@ export class AIFileReader {
   private _sourceDesign: Promise<SourceDesign>
   private _instanceResourcesDir: string
   private _images: Record<string, string>
+  private _resourcesDir: string
 
   static BITMAPS_FOLDER_NAME = 'bitmaps'
 
-  static getOutputResourcesBaseDir(): string {
-    if (!process.env.RESOURCES_DIR) {
-      throw new Error('Resources Directory not set')
-    }
-
-    return process.env.RESOURCES_DIR
-  }
-
   constructor(options: AIFileReaderOptions) {
+    this._resourcesDir = path.join(os.tmpdir(), uuidv4())
     this._sourceDesign = this._initSourceDesign(options.path)
   }
 
@@ -53,8 +46,9 @@ export class AIFileReader {
   }
 
   private async _getSourceData(file: string): Promise<RawSourceData> {
-    const resourcesDir = AIFileReader.getOutputResourcesBaseDir()
-    const ctx = await FSContext({ file, workdir: resourcesDir })
+    await fsp.mkdir(this._resourcesDir)
+
+    const ctx = await FSContext({ file, workdir: this._resourcesDir })
 
     this._instanceResourcesDir = ctx.BaseDir
     this._images = ctx.Bitmaps
@@ -62,12 +56,20 @@ export class AIFileReader {
     const version = ctx.aiFile.Version
     const additionalTextData = (await PrivateData(ctx)) as unknown as AdditionalTextData
     const artboards = (await Promise.all(
-      ArtBoardRefs(ctx).map(async (ref) => {
-        return { artboard: await ArtBoard(ctx, ref), id: String(ref.idx) }
+      ArtBoardRefs(ctx).map((ref) => {
+        return ArtBoard(ctx, ref)
       })
-    )) as unknown as RawArtboardSource[]
+    )) as unknown as RawArtboardEntry[]
 
     return { artboards, additionalTextData, metadata: { version } }
+  }
+
+  async cleanup(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      rimraf(this._resourcesDir, (error: Error | null | undefined) => {
+        error ? reject(error) : resolve()
+      })
+    })
   }
 
   private _loadImages(): SourceImage[] {

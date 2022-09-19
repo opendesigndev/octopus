@@ -5,6 +5,8 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
+import { createOctopusArtboardFileName } from '../../../utils/exporter'
+
 import type { Exporter, AuxiliaryData } from '.'
 import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
@@ -82,9 +84,17 @@ export class TempExporter extends EventEmitter implements Exporter {
     return result
   }
 
+  async completed(): Promise<void> {
+    await this._completed.promise
+    await Promise.all(this._assetsSaves)
+  }
+
   async exportArtboard(source: SourceArtboard, artboard: ArtboardConversionResult): Promise<string> {
     const sourcePath = await this._save(`source-${artboard.id}.json`, this._stringify(source.raw))
-    const octopusPath = await this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
+    const octopusPath = await this._save(
+      createOctopusArtboardFileName(artboard.value?.id ?? ''),
+      this._stringify(artboard.value)
+    )
 
     const result = {
       id: artboard.id,

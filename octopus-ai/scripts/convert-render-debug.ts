@@ -4,7 +4,9 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { TempExporter, OctopusAIConverter } from '../src'
+import { OctopusAIConverter } from '../src'
+import { AIFileReader } from '../src/services/conversion/ai-file-reader'
+import { TempExporter } from '../src/services/conversion/design-converter'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render-octopus'
 import { timestamp } from './utils/timestamp'
@@ -19,14 +21,11 @@ type ConvertAllOptions = {
 
 export async function convertAll({ render, filePath, outputDir }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${path.basename(filePath, '.ai')}`
-  const octopusAIConverter = new OctopusAIConverter({})
-
-  const designConverter = await octopusAIConverter.getDesignConverter(filePath)
 
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:manifest', (manifest) => {
-    console.log(`${chalk.yellow('Octopus-manifest: ')}
+    console.log(`${chalk.yellow('octopus-manifest: ')}
     file://${manifest}`)
   })
 
@@ -71,7 +70,19 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
     file://${octopusPath}`)
   })
 
-  designConverter.convertDesign({ exporter })
+  const reader = new AIFileReader({ path: filePath })
+
+  const sourceDesign = await reader.sourceDesign
+
+  if (sourceDesign === null) {
+    console.error('Creating SourceDesign Failed')
+    return
+  }
+
+  const octopusAIConverter = new OctopusAIConverter({})
+  octopusAIConverter.convertDesign({ exporter, sourceDesign })
+  await exporter.completed()
+  reader.cleanup()
 }
 
 async function convert() {

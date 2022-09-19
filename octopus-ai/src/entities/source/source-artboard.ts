@@ -8,22 +8,29 @@ import { initSourceLayerChildren } from '../../utils/layer'
 import { SourceResources } from './source-resources'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboardSource } from '../../services/conversion/ai-file-reader'
 import type { RawObjectId } from '../../typings/raw'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
+import type { SourceDesign } from './source-design'
 import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 
+type SourceArtboardOptions = { artboard: RawArtboardEntry; sourceDesign: SourceDesign }
 export class SourceArtboard {
   private _rawArtboard: RawArtboardEntry
   private _children: SourceLayer[]
   private _id: string
   private _resources: SourceResources
+  private _sourceDesign: SourceDesign
 
-  constructor({ id, artboard }: RawArtboardSource) {
-    this._id = id
+  constructor({ artboard, sourceDesign }: SourceArtboardOptions) {
     this._rawArtboard = artboard
     this._resources = new SourceResources({ rawValue: this._rawArtboard.Resources })
+    this._sourceDesign = sourceDesign
+    this._id = sourceDesign.uniqueId()
     this._children = this._initChildren()
+  }
+
+  get sourceDesign() {
+    return this._sourceDesign
   }
 
   private _initChildren() {

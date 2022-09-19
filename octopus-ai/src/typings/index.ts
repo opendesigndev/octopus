@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import type { Metadata, RawArtboardSource } from '../services/conversion/ai-file-reader'
-import type { AdditionalTextData } from './raw'
+import type { Metadata } from '../services/conversion/ai-file-reader'
+import type { AdditionalTextData, RawArtboardEntry } from './raw'
 
 // Services
 export interface Logger {
@@ -31,6 +31,6 @@ export type SourceImage = { id: string; getImageData: () => Promise<Buffer>; pat
 export type SourceTree = {
   metadata: Metadata
   images: SourceImage[]
-  artboards: RawArtboardSource[]
+  artboards: RawArtboardEntry[]
   additionalTextData: AdditionalTextData
 }

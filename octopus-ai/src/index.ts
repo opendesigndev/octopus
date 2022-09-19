@@ -1,11 +1,11 @@
 import readPackageUpAsync from 'read-pkg-up'
 
 import { DesignConverter } from './services/conversion/design-converter'
-import { LocalExporter } from './services/conversion/exporter/local-exporter'
-import { TempExporter } from './services/conversion/exporter/temp-exporter'
 import { set as setLogger } from './services/instances/logger'
 
 import type { SourceDesign } from './entities/source/source-design'
+import type { ConvertDesignResult } from './services/conversion/design-converter'
+import type { Exporter } from './services/conversion/exporter'
 import type { Logger } from './typings'
 import type { NormalizedPackageJson, NormalizedReadResult } from 'read-pkg-up'
 
@@ -15,20 +15,10 @@ type OctopusAIConverteOptions = {
 
 export class OctopusAIConverter {
   private _pkg: Promise<NormalizedReadResult | undefined>
-  private _sourceDesign: SourceDesign
-
-  static EXPORTERS = {
-    LOCAL: LocalExporter,
-    TEMP: TempExporter,
-  }
 
   constructor(options: OctopusAIConverteOptions) {
     this._setupLogger(options?.logger)
     this._pkg = readPackageUpAsync({ cwd: __dirname })
-  }
-
-  get sourceDesign(): SourceDesign {
-    return this._sourceDesign
   }
 
   private _setupLogger(logger?: Logger) {
@@ -44,10 +34,22 @@ export class OctopusAIConverter {
     })
   }
 
-  getDesignConverter(filePath: string): Promise<DesignConverter> {
-    return DesignConverter.fromPath({ octopusAIconverter: this, filePath })
+  async convertDesign({
+    exporter,
+    sourceDesign,
+    partialUpdateInterval,
+  }: {
+    exporter?: Exporter
+    sourceDesign: SourceDesign
+    partialUpdateInterval?: number
+  }): Promise<ConvertDesignResult> {
+    const designConverter = new DesignConverter({
+      sourceDesign,
+      octopusAIconverter: this,
+      exporter,
+      partialUpdateInterval,
+    })
+
+    return designConverter.convert()
   }
 }
-
-export { LocalExporter }
-export { TempExporter }

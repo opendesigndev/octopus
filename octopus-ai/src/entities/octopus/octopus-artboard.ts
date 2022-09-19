@@ -7,7 +7,6 @@ import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceArtboard } from '../source/source-artboard'
-import type { SourceDesign } from '../source/source-design'
 import type { SourceResources } from '../source/source-resources'
 import type { OctopusManifest } from './octopus-manifest'
 
@@ -32,7 +31,7 @@ export class OctopusArtboard {
     this._designConverter = options.designConverter
     this._sourceArtboard = artboard
     this._layers = this._initLayers()
-    this._id = this._designConverter.uniqueId()
+    this._id = this._sourceArtboard.id
   }
 
   private _initLayers() {
@@ -42,7 +41,7 @@ export class OctopusArtboard {
   private _createMask(): Octopus['ShapeLayer'] {
     return {
       type: 'SHAPE',
-      id: this._designConverter.uniqueId(),
+      id: this._sourceArtboard.sourceDesign.uniqueId(),
       shape: {
         path: parseRect(this._sourceArtboard.mediaBox),
         fills: [
@@ -66,7 +65,7 @@ export class OctopusArtboard {
     const layers = getConverted(this._layers)
 
     return {
-      id: this._designConverter.uniqueId(),
+      id: this._sourceArtboard.sourceDesign.uniqueId(),
       type: 'MASK_GROUP',
       mask: this._createMask(),
       maskBasis: 'BODY',
@@ -76,10 +75,6 @@ export class OctopusArtboard {
 
   get resources(): SourceResources {
     return this._sourceArtboard.resources
-  }
-
-  get sourceDesign(): SourceDesign {
-    return this._designConverter.sourceDesign
   }
 
   get id(): string {

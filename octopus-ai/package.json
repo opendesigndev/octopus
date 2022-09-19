@@ -14,9 +14,10 @@
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "types:check": "tsc --noEmit",
     "watch": "tsc -w",
-    "test": "echo 'Tests are not implemented yet'",
-    "integration-test": "ts-node test/integration/main.ts",
-    "cleanup:resources": "ts-node ./scripts/cleanup-resources.ts"
+    "test": "yarn test:unit && yarn test:integration",
+    "test:unit": "echo 'Unit tests are not implemented yet'",
+    "test:integration": "ts-node test/integration $selectedTest|| echo report: file:///$(pwd)/test/integration/report/test-report.html",
+    "test:integration:update": "ts-node test/integration/update-tests.ts"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -31,6 +32,7 @@
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
     "read-pkg-up": "7.0.1",
+    "rimraf": "^3.0.2",
     "time-stamp": "^2.2.0",
     "tslib": "^2.4.0",
     "uuid": "^8.3.2"
@@ -41,6 +43,7 @@
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
     "@types/pino": "^6.3.3",
+    "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
     "handlebars": "^4.7.7",

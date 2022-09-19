@@ -21,7 +21,7 @@ lib/
 sample
 
 */example-web/*.umd.js
-octopus-ai/test/integration/report/test-report.html
+**/*/test-report.html
 
 # Created by https://www.gitignore.io/api/git,node,code,webstorm,sublimetext
 # Edit at https://www.gitignore.io/?templates=git,node,code,webstorm,sublimetext

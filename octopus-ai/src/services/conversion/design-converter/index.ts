@@ -2,12 +2,11 @@ import path from 'path'
 
 import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
-import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
+import { push } from '@avocode/octopus-common/dist/utils/common'
 import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
 
 import { OctopusManifest } from '../../../entities/octopus/octopus-manifest'
 import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service'
-import { AIFileReader } from '../ai-file-reader'
 import { ArtboardConverter } from '../artboard-converter'
 import { LocalExporter } from '../exporter/local-exporter'
 import { TempExporter } from '../exporter/temp-exporter'
@@ -23,21 +22,20 @@ import type { AdditionalTextData } from '../../../typings/raw'
 import type { Exporter } from '../exporter'
 import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
 
-type ConvertDesignOptions = {
+type DesignConverterGeneralOptions = {
+  octopusAIconverter: OctopusAIConverter
   exporter?: Exporter
   partialUpdateInterval?: number
 }
 
-type DesignConverterGeneralOptions = {
-  octopusAIconverter: OctopusAIConverter
-}
-
-type DesignConverterFromPathOptions = DesignConverterGeneralOptions & {
-  filePath: string
-}
-
 type OctopusAIConverterOptions = DesignConverterGeneralOptions & {
   sourceDesign: SourceDesign
+}
+
+export type ConvertDesignResult = {
+  manifest: Manifest['OctopusManifest']
+  artboards: ArtboardConversionResult[]
+  images: SourceImage[]
 }
 
 export type ArtboardConversionResult = {
@@ -61,43 +59,24 @@ export class DesignConverter {
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _octopusAIConverter: OctopusAIConverter
-  private _uniqueId: () => string
-
-  static EXPORTERS = {
-    LOCAL: LocalExporter,
-    TEMP: TempExporter,
-  }
+  private _exporter?: Exporter
+  private _partialUpdateInterval: number
 
   static PARTIAL_UPDATE_INTERVAL = 3000
   static ARTBOARDS_QUEUE_PARALLELS = 5
   static ARTBOARDS_QUEUE_NAME = 'artboards'
-
-  static async fromPath(options: DesignConverterFromPathOptions): Promise<DesignConverter> {
-    const sourceDesign = await new AIFileReader({ path: options.filePath }).sourceDesign
-
-    return new this({
-      sourceDesign,
-      octopusAIconverter: options.octopusAIconverter,
-    })
-  }
 
   constructor(options: OctopusAIConverterOptions) {
     this._setupTextLayerGroupingService(options.sourceDesign.additionalTextData)
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ designConverter: this })
     this._octopusAIConverter = options.octopusAIconverter
-    this._uniqueId = ((i: number) => () => {
-      i = i + 1
-      return String(i)
-    })(0)
+    this._exporter = options.exporter
+    this._partialUpdateInterval = options.partialUpdateInterval ?? DesignConverter.PARTIAL_UPDATE_INTERVAL
   }
 
   get sourceDesign(): SourceDesign {
     return this._sourceDesign
-  }
-
-  get uniqueId() {
-    return this._uniqueId
   }
 
   private _setupTextLayerGroupingService(additionalTextData: AdditionalTextData) {
@@ -187,12 +166,8 @@ export class DesignConverter {
     })
   }
 
-  async convertDesign(options?: ConvertDesignOptions): Promise<{
-    manifest: Manifest['OctopusManifest']
-    artboards: ArtboardConversionResult[]
-    images: SourceImage[]
-  }> {
-    const exporter = isObject(options?.exporter) ? (options?.exporter as Exporter) : null
+  async convert(): Promise<ConvertDesignResult> {
+    const exporter = this._exporter ?? null
 
     this._octopusManifest.registerBasePath(await exporter?.getBasePath?.())
 
@@ -200,10 +175,7 @@ export class DesignConverter {
 
     const queue = this._initArtboardQueue(exporter)
 
-    const manifestInterval = setInterval(
-      async () => this._exportManifest(exporter),
-      options?.partialUpdateInterval || DesignConverter.PARTIAL_UPDATE_INTERVAL
-    )
+    const manifestInterval = setInterval(async () => this._exportManifest(exporter), this._partialUpdateInterval)
 
     const allConverted = await Promise.all(this._sourceDesign.artboards.map((artboard) => queue.exec(artboard)))
 
