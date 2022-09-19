@@ -19,6 +19,9 @@ async function test() {
     /**@TODO maybe in future change template to jsondiff.com template */
     fs.writeFileSync(path.join(process.cwd(), '/test/integration/report/test-report.html'), html)
     console.error('Tests failed')
+
+    console.error(`file:///${path.join(process.cwd(), 'test/integration/report/test-report.html')}`)
+
     process.exit(1)
   }
 

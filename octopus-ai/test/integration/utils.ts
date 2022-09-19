@@ -9,7 +9,7 @@ import type { SourceDesign } from '../../src/entities/source/source-design'
 dotenv.config()
 
 export function getCommandLineArgs(): { selectedTest: string | undefined } {
-  return { selectedTest: process.env.selectedTest }
+  return { selectedTest: process.argv[2] }
 }
 
 export function lazyRead<T>(path: string) {

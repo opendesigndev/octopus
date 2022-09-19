@@ -16,7 +16,7 @@
     "watch": "tsc -w",
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "echo 'Unit tests are not implemented yet'",
-    "test:integration": "ts-node test/integration $selectedTest|| echo report: file:///$(pwd)/test/integration/report/test-report.html",
+    "test:integration": "ts-node test/integration",
     "test:integration:update": "ts-node test/integration/update-tests.ts"
   },
   "author": "",
