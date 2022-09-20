@@ -7,7 +7,7 @@ import type { RawResourcesColorSpace } from '../typings/raw'
 
 export type RgbColorComponents = [number, number, number]
 
-export function getColorSpaceName(colorSpace: Record<string, unknown> | string | null): string | null {
+export function getColorSpaceName(colorSpace: Record<string, unknown> | string | null | string[]): string | null {
   if (typeof colorSpace === 'string') {
     return colorSpace
   }
@@ -99,10 +99,9 @@ export function convertRGBToRGBA(color: RgbColorComponents): RgbColorComponents 
 
 export default function convertColor(
   color: number[],
-  colorSpace: RawResourcesColorSpace['key'] | string
+  colorSpace: RawResourcesColorSpace['key'] | string | string[]
 ): RgbColorComponents {
   const colorSpaceName = getColorSpaceName(colorSpace || null)
-
   switch (colorSpace) {
     case 'DeviceRGB':
       return convertRGBToRGBA(convertDeviceRGB(color))
