@@ -6,3 +6,5 @@ sample/
 workdir/
 example-web/
 temp/
+**/test/integration/assets/
+**/test/integration/report/

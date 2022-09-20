@@ -1,3 +1,4 @@
+import { uniqueIdFactory } from '../../utils/layer'
 import { SourceArtboard } from './source-artboard'
 
 import type { Metadata } from '../../services/conversion/ai-file-reader'
@@ -10,9 +11,13 @@ export class SourceDesign {
   private _images: SourceImage[]
   private _metaData: Metadata
   private _additionalTexData: AdditionalTextData
+  private _uniqueId: () => string
 
   constructor(sourceTree: SourceTree) {
-    this._artboards = sourceTree.artboards.map((rawArtboard) => new SourceArtboard(rawArtboard))
+    this._uniqueId = uniqueIdFactory(1)
+    this._artboards = sourceTree.artboards.map(
+      (artboardSource) => new SourceArtboard({ artboard: artboardSource, sourceDesign: this })
+    )
     this._images = sourceTree.images
     this._additionalTexData = sourceTree.additionalTextData
     this._metaData = sourceTree.metadata
@@ -36,5 +41,9 @@ export class SourceDesign {
 
   getArtboardById(id: string): Nullish<SourceArtboard> {
     return this.artboards.find((entry) => entry.id === id) || null
+  }
+
+  get uniqueId() {
+    return this._uniqueId
   }
 }
