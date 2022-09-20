@@ -55,19 +55,21 @@ export class TestUpdater {
     )
   }
 
-  private _cleanupExpectedDirs(testsAssets: TestAssets[]): Promise<TestAssets & { expectedDirPath: string }>[] {
-    return testsAssets.map(async (testAssets) => {
-      const { expectedDirPath } = testAssets
-      if (expectedDirPath) {
-        await fsp.rm(expectedDirPath, { recursive: true, force: true })
-      }
+  private _cleanupExpectedDirs(testsAssets: TestAssets[]): Promise<(TestAssets & { expectedDirPath: string })[]> {
+    return Promise.all(
+      testsAssets.map(async (testAssets) => {
+        const { expectedDirPath } = testAssets
+        if (expectedDirPath) {
+          await fsp.rm(expectedDirPath, { recursive: true, force: true })
+        }
 
-      const createdExpectedDirPath = path.join(testAssets.testPath, AssetsReader.EXPECTED_DIR_NAME)
+        const createdExpectedDirPath = path.join(testAssets.testPath, AssetsReader.EXPECTED_DIR_NAME)
 
-      await fsp.mkdir(createdExpectedDirPath)
+        await fsp.mkdir(createdExpectedDirPath)
 
-      return { ...testAssets, expectedDirPath: createdExpectedDirPath }
-    })
+        return { ...testAssets, expectedDirPath: createdExpectedDirPath }
+      })
+    )
   }
 
   private _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<void[][]> {
@@ -87,8 +89,8 @@ export class TestUpdater {
   }
 
   async update(): Promise<void> {
-    const testsAssets = await Promise.all(await this._getTestsAssets())
-    const testAssetsWithCleanExpectedDirs = await Promise.all(this._cleanupExpectedDirs(testsAssets))
+    const testsAssets = await this._getTestsAssets()
+    const testAssetsWithCleanExpectedDirs = await this._cleanupExpectedDirs(testsAssets)
     this._saveAssets(testAssetsWithCleanExpectedDirs)
   }
 }

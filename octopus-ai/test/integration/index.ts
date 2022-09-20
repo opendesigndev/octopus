@@ -1,10 +1,26 @@
 import fs from 'fs'
 import path from 'path'
 
-import { createReport } from './create-report'
+import handlebars from 'handlebars'
+
 import { AssetsReader } from './services/assets-reader'
 import { Tester } from './services/tester'
 import { getCommandLineArgs } from './utils'
+
+import type { Fail } from './services/tester'
+
+function createReport(failed: Fail[]): string {
+  const source = fs.readFileSync(path.join(__dirname, '/report/report-template.hbs')).toString()
+
+  const template = handlebars.compile(source)
+
+  const context = {
+    failed,
+  }
+  const html = template(context)
+
+  return html
+}
 
 async function test() {
   const { selectedTest } = getCommandLineArgs()
@@ -16,11 +32,13 @@ async function test() {
 
   if (!success) {
     const html = createReport(failed)
+    const pathToReport = path.join(__dirname, 'report/test-report.html')
+
     /**@TODO maybe in future change template to jsondiff.com template */
-    fs.writeFileSync(path.join(__dirname, 'report/test-report.html'), html)
+    fs.writeFileSync(pathToReport, html)
     console.error('Tests failed')
 
-    console.error(`file:///${path.join(process.cwd(), 'test/integration/report/test-report.html')}`)
+    console.error(`file:///${pathToReport}`)
 
     process.exit(1)
   }
