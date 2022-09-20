@@ -36,20 +36,20 @@ export class AssetsReader {
   private _selectedTest?: string
 
   static DESIGN_FILE_EXTENSION = '.ai'
-  static ASSETS_DIR_SUBPATH = 'test/integration/assets'
+  static ASSETS_DIR_RELATIVE_PATH = '../assets'
   static EXPECTED_DIR_NAME = 'expected'
 
   constructor({ selectedTest }: AssetsReaderOptions) {
-    this._assetsDirPath = this._getFullpath([])
+    this._assetsDirPath = this._getFullPath([])
     this._selectedTest = selectedTest
   }
 
-  private _getFullpath(subpaths: string[]) {
-    return path.join(process.cwd(), AssetsReader.ASSETS_DIR_SUBPATH, ...subpaths)
+  private _getFullPath(subpaths: string[]) {
+    return path.join(__dirname, AssetsReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {
-    const testDirectories = await Promise.all(await this.getTestsDirectoryData())
+    const testDirectories = await this.getTestsDirectoryData()
     return Promise.all(
       testDirectories.map(async (testDirectoryData) => {
         const { expectedDirPath } = testDirectoryData
@@ -63,7 +63,7 @@ export class AssetsReader {
     )
   }
 
-  async getTestsDirectoryData(): Promise<Promise<TestDirectoryData>[]> {
+  async getTestsDirectoryData(): Promise<TestDirectoryData[]> {
     const testNames = await fsp.readdir(this._assetsDirPath)
     const filteredTestNames = this._selectedTest
       ? testNames.filter((testName) => testName === this._selectedTest)
@@ -73,24 +73,26 @@ export class AssetsReader {
       console.error('No files found!')
     }
 
-    return filteredTestNames.map(async (testName) => {
-      const testPath = this._getFullpath([testName])
-      const testDirContent = await fsp.readdir(testPath)
+    return Promise.all(
+      filteredTestNames.map(async (testName) => {
+        const testPath = this._getFullPath([testName])
+        const testDirContent = await fsp.readdir(testPath)
 
-      const expectedDirName = testDirContent.find((child) => child === AssetsReader.EXPECTED_DIR_NAME)
-      const aiFileName = testDirContent.find((child) => child.endsWith(AssetsReader.DESIGN_FILE_EXTENSION))
+        const expectedDirName = testDirContent.find((child) => child === AssetsReader.EXPECTED_DIR_NAME)
+        const aiFileName = testDirContent.find((child) => child.endsWith(AssetsReader.DESIGN_FILE_EXTENSION))
 
-      if (!aiFileName) {
-        throw new Error(`Missing .ai file in ${testPath}`)
-      }
+        if (!aiFileName) {
+          throw new Error(`Missing .ai file in ${testPath}`)
+        }
 
-      return {
-        testName,
-        testPath,
-        expectedDirPath: expectedDirName ? this._getFullpath([testName, expectedDirName]) : null,
-        designPath: this._getFullpath([testName, aiFileName]),
-      }
-    })
+        return {
+          testName,
+          testPath,
+          expectedDirPath: expectedDirName ? this._getFullPath([testName, expectedDirName]) : null,
+          designPath: this._getFullPath([testName, aiFileName]),
+        }
+      })
+    )
   }
 
   async getTestsComponents(): Promise<TestComponents[]> {
@@ -101,7 +103,7 @@ export class AssetsReader {
         (filePath) => path.basename(filePath) === LocalExporter.OCTOPUS_MANIFEST_NAME
       )
       const artboards = testDirectoryTree.expectedPaths.filter((filePath) =>
-        /octopus-([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9]).json/.test(path.basename(filePath))
+        /octopus-[0-9]+\.json$/.test(path.basename(filePath))
       )
 
       if (!artboards?.length) {

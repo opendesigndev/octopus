@@ -80,9 +80,9 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
   }
 
   const octopusAIConverter = new OctopusAIConverter({})
-  octopusAIConverter.convertDesign({ exporter, sourceDesign })
+  await octopusAIConverter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
-  reader.cleanup()
+  await reader.cleanup()
 }
 
 async function convert() {

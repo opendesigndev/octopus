@@ -4,7 +4,6 @@ import path from 'path'
 
 import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
 import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
-import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../../entities/source/source-design'
@@ -46,7 +45,7 @@ export class AIFileReader {
   }
 
   private async _getSourceData(file: string): Promise<RawSourceData> {
-    await fsp.mkdir(this._resourcesDir)
+    await fsp.mkdir(this._resourcesDir, { recursive: true })
 
     const ctx = await FSContext({ file, workdir: this._resourcesDir })
 
@@ -65,11 +64,7 @@ export class AIFileReader {
   }
 
   async cleanup(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      rimraf(this._resourcesDir, (error: Error | null | undefined) => {
-        error ? reject(error) : resolve()
-      })
-    })
+    fsp.rm(this._resourcesDir, { force: true, recursive: true })
   }
 
   private _loadImages(): SourceImage[] {

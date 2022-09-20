@@ -12,7 +12,7 @@ import type { Octopus } from '../../../src/typings/octopus'
 import type { TestDirectoryData } from './assets-reader'
 
 interface TestUpdaterAssetsReader {
-  getTestsDirectoryData: () => Promise<Promise<TestDirectoryData>[]>
+  getTestsDirectoryData: () => Promise<TestDirectoryData[]>
 }
 
 type TestAssets = {
@@ -32,42 +32,34 @@ export class TestUpdater {
     this._octopusAIConverter = new OctopusAIConverter({})
   }
 
-  private async _cleanTestDir(dirPath: string) {
-    const assetNames = await fsp.readdir(dirPath)
-    return assetNames.map((assetName) => {
-      const assetPath = path.join(dirPath, assetName)
-      return fsp.unlink(assetPath)
-    })
-  }
+  private async _getTestsAssets(): Promise<TestAssets[]> {
+    const testsDirectoryData = await this._assetsReader.getTestsDirectoryData()
+    return Promise.all(
+      testsDirectoryData.map(async ({ designPath, expectedDirPath, testName, testPath }) => {
+        const sourceDesign = await getSourceDesign(designPath)
 
-  private async _getTestsAssets(): Promise<Promise<TestAssets>[]> {
-    const testsDirectoryData = await Promise.all(await this._assetsReader.getTestsDirectoryData())
-    return testsDirectoryData.map(async ({ designPath, expectedDirPath, testName, testPath }) => {
-      const sourceDesign = await getSourceDesign(designPath)
+        const { artboards: artboardConversionResults, manifest } = await this._octopusAIConverter.convertDesign({
+          sourceDesign,
+        })
 
-      const { artboards: artboardConversionResults, manifest } = await this._octopusAIConverter.convertDesign({
-        sourceDesign,
+        return {
+          artboards: artboardConversionResults
+            .map((artboardConversionResult) => artboardConversionResult.value)
+            .filter((artboard): artboard is Octopus['OctopusDocument'] => Boolean(artboard)),
+          manifest: manifest,
+          expectedDirPath,
+          testName,
+          testPath,
+        }
       })
-
-      return {
-        artboards: artboardConversionResults
-          .map((artboardConversionResult) => artboardConversionResult.value)
-          .filter((artboard): artboard is Octopus['OctopusDocument'] => Boolean(artboard)),
-        manifest: manifest,
-        expectedDirPath,
-        testName,
-        testPath,
-      }
-    })
+    )
   }
 
   private _cleanupExpectedDirs(testsAssets: TestAssets[]): Promise<TestAssets & { expectedDirPath: string }>[] {
     return testsAssets.map(async (testAssets) => {
       const { expectedDirPath } = testAssets
       if (expectedDirPath) {
-        await this._cleanTestDir(expectedDirPath)
-
-        return { ...testAssets, expectedDirPath }
+        await fsp.rm(expectedDirPath, { recursive: true, force: true })
       }
 
       const createdExpectedDirPath = path.join(testAssets.testPath, AssetsReader.EXPECTED_DIR_NAME)
@@ -78,16 +70,20 @@ export class TestUpdater {
     })
   }
 
-  private _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<Promise<void>[]>[] {
-    return testAssets.map(async ({ artboards, manifest, expectedDirPath }) => {
-      const manifestPath = path.join(expectedDirPath, TempExporter.OCTOPUS_MANIFEST_NAME)
-      await fsp.writeFile(manifestPath, JSON.stringify(manifest, null, 2))
+  private _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<void[][]> {
+    return Promise.all(
+      testAssets.map(async ({ artboards, manifest, expectedDirPath }) => {
+        const manifestPath = path.join(expectedDirPath, TempExporter.OCTOPUS_MANIFEST_NAME)
+        await fsp.writeFile(manifestPath, JSON.stringify(manifest, null, 2))
 
-      return artboards.map((artboard) => {
-        const artboardPath = path.join(expectedDirPath, createOctopusArtboardFileName(artboard.id))
-        return fsp.writeFile(artboardPath, JSON.stringify(artboard, null, 2))
+        return Promise.all(
+          artboards.map((artboard) => {
+            const artboardPath = path.join(expectedDirPath, createOctopusArtboardFileName(artboard.id))
+            return fsp.writeFile(artboardPath, JSON.stringify(artboard, null, 2))
+          })
+        )
       })
-    })
+    )
   }
 
   async update(): Promise<void> {

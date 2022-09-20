@@ -17,7 +17,7 @@ async function test() {
   if (!success) {
     const html = createReport(failed)
     /**@TODO maybe in future change template to jsondiff.com template */
-    fs.writeFileSync(path.join(process.cwd(), '/test/integration/report/test-report.html'), html)
+    fs.writeFileSync(path.join(__dirname, 'report/test-report.html'), html)
     console.error('Tests failed')
 
     console.error(`file:///${path.join(process.cwd(), 'test/integration/report/test-report.html')}`)

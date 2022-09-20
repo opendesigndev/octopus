@@ -33,8 +33,6 @@ export class Tester {
   private _assetsReader: TesterAssetsReader
   private _octopusAIConverter: OctopusAIConverter
 
-  static ARTBOARD_FILENAME_PREFIX = 'octopus-'
-
   constructor(assetsReader: AssetsReader) {
     this._assetsReader = assetsReader
     this._octopusAIConverter = new OctopusAIConverter({})
