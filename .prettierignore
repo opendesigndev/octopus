@@ -6,5 +6,5 @@ sample/
 workdir/
 example-web/
 temp/
-octopus-ai/test/integration/assets/
-octopus-ai/test/integration/report/
+**/test/integration/assets/
+**/test/integration/report/
