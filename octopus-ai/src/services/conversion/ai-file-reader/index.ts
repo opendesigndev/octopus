@@ -1,8 +1,10 @@
 import fsp from 'fs/promises'
+import os from 'os'
 import path from 'path'
 
 import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
 import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../../entities/source/source-design'
 import { logger } from '../../../services/instances/logger'
@@ -12,6 +14,7 @@ import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw'
 
 type AIFileReaderOptions = {
   path: string
+  resourcesDir?: string
 }
 
 export type Metadata = {
@@ -28,18 +31,12 @@ export class AIFileReader {
   private _sourceDesign: Promise<SourceDesign>
   private _instanceResourcesDir: string
   private _images: Record<string, string>
+  private _resourcesDir: string
 
   static BITMAPS_FOLDER_NAME = 'bitmaps'
 
-  static getOutputResourcesBaseDir(): string {
-    if (!process.env.RESOURCES_DIR) {
-      throw new Error('Resources Directory not set')
-    }
-
-    return process.env.RESOURCES_DIR
-  }
-
   constructor(options: AIFileReaderOptions) {
+    this._resourcesDir = path.join(os.tmpdir(), uuidv4())
     this._sourceDesign = this._initSourceDesign(options.path)
   }
 
@@ -48,8 +45,9 @@ export class AIFileReader {
   }
 
   private async _getSourceData(file: string): Promise<RawSourceData> {
-    const resourcesDir = AIFileReader.getOutputResourcesBaseDir()
-    const ctx = await FSContext({ file, workdir: resourcesDir })
+    await fsp.mkdir(this._resourcesDir, { recursive: true })
+
+    const ctx = await FSContext({ file, workdir: this._resourcesDir })
 
     this._instanceResourcesDir = ctx.BaseDir
     this._images = ctx.Bitmaps
@@ -63,6 +61,10 @@ export class AIFileReader {
     )) as unknown as RawArtboardEntry[]
 
     return { artboards, additionalTextData, metadata: { version } }
+  }
+
+  async cleanup(): Promise<void> {
+    fsp.rm(this._resourcesDir, { force: true, recursive: true })
   }
 
   private _loadImages(): SourceImage[] {

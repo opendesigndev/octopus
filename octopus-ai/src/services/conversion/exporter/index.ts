@@ -1,6 +1,6 @@
-import type { ArtboardConversionResult, DesignConversionResult } from '../../..'
 import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
+import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter'
 
 export type AuxiliaryData = { metadata: string; images: string[]; additionalTextData: string | null }
 

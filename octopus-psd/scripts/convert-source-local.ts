@@ -17,6 +17,7 @@ async function convert() {
   }
   const converter = new OctopusPSDConverter({ sourceDesign })
   const exporter = new LocalExporter({ path: testDir })
+
   await converter.convertDesign({ exporter })
   await exporter.completed()
 

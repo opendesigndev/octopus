@@ -3,16 +3,16 @@ import path from 'path'
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { asString } from '@avocode/octopus-common/dist/utils/as'
 
-import type { OctopusAIConverter } from '../..'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { RawArtboardMediaBox } from '../../typings/raw'
 
 type OctopusManifestOptions = {
-  octopusAIConverter: OctopusAIConverter
+  designConverter: DesignConverter
 }
 
 export class OctopusManifest {
-  private _octopusAIConverter: OctopusAIConverter
+  private _designConverter: DesignConverter
   private _exports: {
     images: Map<string, string>
     artboards: Map<string, string>
@@ -23,7 +23,7 @@ export class OctopusManifest {
   static DEFAULT_AI_FILENAME = 'Untitled'
 
   constructor(options: OctopusManifestOptions) {
-    this._octopusAIConverter = options.octopusAIConverter
+    this._designConverter = options.designConverter
     this._basePath = null
     this._exports = {
       images: new Map(),
@@ -70,11 +70,11 @@ export class OctopusManifest {
   }
 
   get manifestVersion(): Promise<string> {
-    return this._octopusAIConverter.pkg.then((pkg) => pkg.version)
+    return this._designConverter.octopusAIConverter.pkg.then((pkg) => pkg.version)
   }
 
   get AIVersion(): string {
-    return asString(this._octopusAIConverter.sourceDesign.metadaData.version, OctopusManifest.DEFAULT_AI_VERSION)
+    return asString(this._designConverter.sourceDesign.metadaData.version, OctopusManifest.DEFAULT_AI_VERSION)
   }
 
   get name(): string {
@@ -92,7 +92,7 @@ export class OctopusManifest {
   }
 
   private _getArtboardAssets(artboardId: string): Manifest['Assets'] {
-    const targetArtboard = this._octopusAIConverter.sourceDesign.getArtboardById(artboardId)
+    const targetArtboard = this._designConverter.sourceDesign.getArtboardById(artboardId)
     const { fonts: fontsDeps, images: imagesDeps } = targetArtboard?.dependencies || { fonts: [], images: [] }
 
     const images = imagesDeps.map((image: string) => {
@@ -131,7 +131,7 @@ export class OctopusManifest {
 
   @firstCallMemo()
   get components(): Manifest['Component'][] {
-    return this._octopusAIConverter.sourceDesign.artboards
+    return this._designConverter.sourceDesign.artboards
       .map((artboard) => {
         const id = artboard.id
         if (!id) return null

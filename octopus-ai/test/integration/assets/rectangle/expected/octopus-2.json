@@ -1,0 +1,112 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.1",
+  "id": "2",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "7",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "8",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "5",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "6",
+            "name": "<Rectangle>",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "NON_ZERO",
+              "path": {
+                "rectangle": {
+                  "x0": 437.011,
+                  "y0": 403.845,
+                  "x1": 139.25800000000004,
+                  "y1": 626.317
+                },
+                "type": "RECTANGLE"
+              },
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "thickness": 1,
+                  "fill": {
+                    "type": "COLOR",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "position": "CENTER",
+                  "visible": true,
+                  "style": "SOLID",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT"
+                }
+              ]
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              -1,
+              0,
+              841.89
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

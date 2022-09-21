@@ -77,3 +77,10 @@ export function initOctopusLayerChildren({ layers, parent }: InitOctopusLayerSeq
     return childLayer ? [...children, childLayer] : children
   }, [])
 }
+
+export function uniqueIdFactory(startingCounter: number): () => string {
+  return () => {
+    startingCounter = startingCounter + 1
+    return String(startingCounter)
+  }
+}

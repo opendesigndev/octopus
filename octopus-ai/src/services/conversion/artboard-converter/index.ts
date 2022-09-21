@@ -1,28 +1,28 @@
 import { OctopusArtboard } from '../../../entities/octopus/octopus-artboard'
 
-import type { OctopusAIConverter } from '../../..'
 import type { Octopus } from '../../../typings/octopus'
+import type { DesignConverter } from '../design-converter'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string
 }
 
 export type ArtboardConverterOptions = ArtboardConversionOptions & {
-  octopusAIConverter: OctopusAIConverter
+  designConverter: DesignConverter
 }
 
 export class ArtboardConverter {
   private _targetArtboardId: string
-  private _octopusAIConverter: OctopusAIConverter
+  private _designConverter: DesignConverter
 
   constructor(options: ArtboardConverterOptions) {
-    this._octopusAIConverter = options.octopusAIConverter
+    this._designConverter = options.designConverter
     this._targetArtboardId = options.targetArtboardId
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
     return new OctopusArtboard({
-      octopusAIConverter: this._octopusAIConverter,
+      designConverter: this._designConverter,
       targetArtboardId: this._targetArtboardId,
     }).convert()
   }

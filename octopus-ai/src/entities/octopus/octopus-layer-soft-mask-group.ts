@@ -1,5 +1,4 @@
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
-import uniqueId from 'lodash/uniqueId'
 
 import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
@@ -35,7 +34,7 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
     super(options)
 
     this._layers = this._initLayers()
-    this._id = uniqueId()
+    this._id = this._sourceLayer.parentArtboard.sourceDesign.uniqueId()
   }
 
   private _createMask() {

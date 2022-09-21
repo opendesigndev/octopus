@@ -1,5 +1,3 @@
-import uniqueId from 'lodash/uniqueId'
-
 import { SourceArtboard } from './source-artboard'
 import { SourceLayerXObjectForm } from './source-layer-x-object-form'
 
@@ -33,7 +31,7 @@ export class SourceLayerCommon {
   constructor(options: SourceLayerCommonOptions) {
     this._rawValue = options.rawValue
     this._parent = options.parent
-    this._id = uniqueId()
+    this._id = this.parentArtboard.sourceDesign.uniqueId()
   }
 
   get id(): string {
@@ -48,9 +46,7 @@ export class SourceLayerCommon {
     return this._rawValue
   }
 
-  get parentArtboard(): SourceArtboard | null {
-    if (!this._parent) return null
-
+  get parentArtboard(): SourceArtboard {
     const parent = this._parent as SourceLayerGroup | SourceArtboard
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
