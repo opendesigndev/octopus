@@ -1,0 +1,61 @@
+{
+  "version": "3.0.0-rc.6",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Simple Shapes",
+  "pages": [
+    {
+      "id": "0-1",
+      "name": "Page 1",
+      "children": [
+        {
+          "id": "1:2",
+          "type": "COMPONENT"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "1:2",
+      "name": "Frame IO",
+      "role": "ARTBOARD",
+      "status": {
+        "value": "READY",
+        "time": 15.537999987602234
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 375,
+        "height": 250
+      },
+      "dependencies": [],
+      "preview": {
+        "type": "RELATIVE",
+        "path": "1-2-preview.png"
+      },
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [
+        {
+          "type": "SOURCE",
+          "location": {
+            "type": "RELATIVE",
+            "path": "1-2-source.json"
+          }
+        }
+      ],
+      "location": {
+        "type": "RELATIVE",
+        "path": "1-2-octopus.json"
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

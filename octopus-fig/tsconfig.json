@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": true,
-    "lib": ["es2019", "ES2015.Proxy", "dom"],
+    "lib": ["es2019", "ES2015.Proxy", "dom", "ES2021.String"],
     "paths": {}
   },
   "include": ["src/**/*", "test/**/*", "scripts"]

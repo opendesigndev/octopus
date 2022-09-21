@@ -18,7 +18,6 @@ import type { RawLayerFrame } from '../../typings/raw/layer'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { ImageSize } from '../general/image-size/image-size'
 import type {
-  Design,
   ResolvedDesign,
   ResolvedFrame,
   ResolvedStyle,
@@ -27,9 +26,11 @@ import type {
 } from '@avocode/figma-parser/lib/src/index-node'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+// eslint-disable-next-line import/no-named-as-default
+import type EventEmitter from 'eventemitter3'
 
 export type DesignConverterOptions = {
-  design: Design | null
+  design: EventEmitter | null
   designId?: string
   exporter?: AbstractExporter
   partialUpdateInterval?: number
@@ -55,7 +56,7 @@ export type DesignConversionResult = {
 const IS_LIBRARY = true
 
 export class DesignConverter {
-  private _design: Design | null
+  private _design: EventEmitter | null
   private _designId: string
   private _octopusManifest: OctopusManifest | undefined
   private _octopusConverter: OctopusFigConverter
@@ -93,7 +94,7 @@ export class DesignConverter {
     return this._octopusManifest
   }
 
-  get sourceDesign(): Design | null {
+  get sourceDesign(): EventEmitter | null {
     return this._design
   }
 

@@ -27,6 +27,7 @@ export class LocalExporter implements AbstractExporter {
   static MANIFEST_PATH = 'octopus-manifest.json'
   static getOctopusPath = (id: string): string => `${kebabCase(id)}-octopus.json`
   static getPreviewPath = (id: string): string => `${kebabCase(id)}-preview${LocalExporter.IMAGE_EXTNAME}`
+  static getSourcePath = (id: string): string => `${kebabCase(id)}-source.json`
 
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
@@ -59,6 +60,23 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
+  async exportRawDesign(raw: unknown): Promise<string> {
+    const rawPath = LocalExporter.getSourcePath('design')
+    await this._save(rawPath, stringify(raw))
+    return rawPath
+  }
+
+  async exportRawComponent(raw: unknown, name: string): Promise<string> {
+    const rawPath = LocalExporter.getSourcePath(name)
+    await this._save(rawPath, stringify(raw))
+    return rawPath
+  }
+
+  async exportRawChunk(raw: unknown, name: string): Promise<string> {
+    const rawPath = LocalExporter.getSourcePath(name)
+    await this._save(rawPath, stringify(raw))
+    return rawPath
+  }
   async exportComponent(result: ComponentConversionResult): Promise<string | null> {
     if (!result.value) return null
     const path = LocalExporter.getOctopusPath(result.id)

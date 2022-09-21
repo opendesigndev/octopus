@@ -17,11 +17,7 @@ export function createConverter(options?: Omit<OctopusConverterOptions, 'platfor
     ...options,
     platformFactories: {
       createLoggerFactory: createLoggerWeb,
-      createBenchmarkService: () => {
-        return {
-          benchmarkAsync,
-        }
-      },
+      createBenchmarkService: () => ({ benchmarkAsync }),
       createImageSizeService: () => imageSize,
     } as WebFactories,
   })

@@ -1,9 +1,14 @@
 import os from 'os'
 import path from 'path'
 
+import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
 import { LocalExporter, createConverter, SourceApiReader } from '../src/index-node'
+
+dotenv.config()
+
+const converter = createConverter()
 
 async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())
@@ -29,7 +34,6 @@ async function convertDesign(designId: string) {
   }
 
   const reader = new SourceApiReader(readerOptions)
-  const converter = createConverter()
   await converter.convertDesign({ design: reader.parse(), exporter, skipReturn: true })
   await exporter.completed()
 

@@ -6,8 +6,18 @@ import type { Dirent } from 'fs'
 
 export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null> {
   try {
-    const imagesResults = await readdir(dirPath, { withFileTypes: true })
-    return imagesResults.filter((image) => !image.isDirectory())
+    const results = await readdir(dirPath, { withFileTypes: true })
+    return results.filter((result) => !result.isDirectory())
+  } catch (e) {
+    logger?.warn(`Reading directory '${dirPath}' was not successful`)
+    return null
+  }
+}
+
+export async function getDirsFromDir(dirPath: string): Promise<Dirent[] | null> {
+  try {
+    const results = await readdir(dirPath, { withFileTypes: true })
+    return results.filter((result) => result.isDirectory())
   } catch (e) {
     logger?.warn(`Reading directory '${dirPath}' was not successful`)
     return null
