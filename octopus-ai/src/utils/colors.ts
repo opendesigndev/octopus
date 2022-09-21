@@ -37,29 +37,29 @@ export function guessColorSpaceByComponents(color: number[]): RgbColorComponents
 
 export function convertDeviceRGB(color: number[]): RgbColorComponents {
   if (color.length !== 3) {
-    console.warn('convertDeviceRGB', `Unexpected color component count ${color.length}`, { color })
+    logger.warn('convertDeviceRGB', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return normalizeRgb(color)
 }
 
-export function convertDeviceCMYK(color: number[]): RgbColorComponents {
+function convertDeviceCMYK(color: number[]): RgbColorComponents {
   if (color.length !== 4) {
-    console.warn('convertDeviceCMYK', `Unexpected color component count ${color.length}`, { color })
+    logger.warn('convertDeviceCMYK', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return cmykToRgb(color)
 }
 
-export function convertDeviceGray(color: number[]): RgbColorComponents {
+function convertDeviceGray(color: number[]): RgbColorComponents {
   if (color.length !== 1) {
-    console.warn('convertDeviceGray', `Unexpected color component count ${color.length}`, { color })
+    logger.warn('convertDeviceGray', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return grayToRgb(color)
 }
 
-export function convertICCBased(color: number[]): RgbColorComponents {
+function convertICCBased(color: number[]): RgbColorComponents {
   /* ICC based color profile contain N components (Grayscae, RGB or CMYK).
    * It also contains color profile stream, that is ignored for now and the
    * color space is guessed by number of components.
@@ -67,17 +67,17 @@ export function convertICCBased(color: number[]): RgbColorComponents {
   return guessColorSpaceByComponents(color)
 }
 
-export function normalizeRgb(color: number[]): RgbColorComponents {
+function normalizeRgb(color: number[]): RgbColorComponents {
   const [r, g, b] = color.map((c) => c * 255)
   return roundComponents([r, g, b])
 }
 
-export function grayToRgb(color: number[]): RgbColorComponents {
+function grayToRgb(color: number[]): RgbColorComponents {
   const c = color[0] * 255
   return roundComponents([c, c, c])
 }
 
-export function cmykToRgb(color: number[]): RgbColorComponents {
+function cmykToRgb(color: number[]): RgbColorComponents {
   const [c, m, y, k] = color
   const r = 255 * (1 - c) * (1 - k)
   const g = 255 * (1 - m) * (1 - k)
@@ -85,7 +85,7 @@ export function cmykToRgb(color: number[]): RgbColorComponents {
   return roundComponents([r, g, b])
 }
 
-export function roundComponents(components: RgbColorComponents): RgbColorComponents {
+function roundComponents(components: RgbColorComponents): RgbColorComponents {
   return components.map((component) => Math.round(component)) as RgbColorComponents
 }
 
@@ -93,11 +93,11 @@ export function parseColor(colorCompontents: number[]): number[] {
   return colorCompontents.map((channel) => clamp(asFiniteNumber(channel, 0), 0, 1))
 }
 
-export function convertRGBToRGBA(color: RgbColorComponents): RgbColorComponents {
+function convertRGBToRGBA(color: RgbColorComponents): RgbColorComponents {
   return color.map((c) => c / 255) as RgbColorComponents
 }
 
-export default function convertColor(
+export function convertColor(
   color: number[],
   colorSpace: RawResourcesColorSpace['key'] | string | string[]
 ): RgbColorComponents {
