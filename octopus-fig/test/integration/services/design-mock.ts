@@ -26,22 +26,12 @@ export class DesignMock extends EventEmitter {
   }
 
   private async _emitOnReady() {
-    console.info()
-    console.info('_emitOnReady 1')
-    console.info()
     const eventData = (await parseJsonFromFile<Event[]>(this._eventDataPath)) ?? []
-
-    console.info()
-    console.info('_emitOnReady 2')
-    console.info(eventData.length)
-    console.info()
-
     for (const e of eventData) {
       if (e.event === 'ready:design') {
         e.data.content = this._finalizeDesign.promise
       }
 
-      console.info('EMIT: ', e.event)
       this.emit(e.event, e.data)
     }
 

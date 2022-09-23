@@ -6,7 +6,8 @@ import handlebars from 'handlebars'
 import { makeDir, saveFile } from '../../src/utils/files'
 import { AssetReader } from './services/asset-reader'
 import { Tester } from './services/tester'
-import { getCommandLineArgs, timestamp } from './utils'
+import { getCommandLineArgs } from './utils/argv'
+import { timestamp } from './utils/timestamp'
 
 import type { Fail } from './services/tester'
 
@@ -22,12 +23,10 @@ async function test() {
   const { selectedAsset } = getCommandLineArgs()
 
   const assetsReader = new AssetReader({ selectedAsset })
-  const tester = new Tester(assetsReader)
+  const testComponents = await assetsReader.getTestsComponents()
+  const tester = new Tester(testComponents)
 
   const failed = (await tester.test()) ?? []
-  // const failed = [{ name: 'TODO', json: '{todo:todo1}', diff: '{todo:todo2}' }]
-  // const failed = [] as Fail[]
-
   if (failed.length) {
     const html = createReport(failed)
 

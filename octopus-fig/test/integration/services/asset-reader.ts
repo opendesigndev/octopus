@@ -1,8 +1,8 @@
 import path from 'path'
 
-import { LocalExporter } from '../../../src/index-node'
+import { MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
 import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
-import { lazyRead } from '../utils'
+import { lazyRead } from '../utils/lazy-read'
 
 import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
@@ -13,6 +13,7 @@ export type Component<T> = {
 }
 
 export type TestComponents = {
+  assetId: string
   eventDataPath: string
   artboards: Component<Octopus['OctopusDocument']>[]
   manifest: Component<Manifest['OctopusManifest']>
@@ -83,7 +84,7 @@ export class AssetReader {
 
     return testDirectoryTrees.map((testDirectoryTree): TestComponents => {
       const manifest = testDirectoryTree.expectedPaths.find(
-        (filePath) => path.basename(filePath) === LocalExporter.MANIFEST_PATH
+        (filePath) => path.basename(filePath) === MANIFEST_FILE_NAME
       )
       const artboards = testDirectoryTree.expectedPaths.filter((filePath) =>
         /[0-9]+-octopus\.json$/.test(path.basename(filePath))
@@ -98,6 +99,7 @@ export class AssetReader {
       }
 
       return {
+        assetId: testDirectoryTree.testName,
         eventDataPath: testDirectoryTree.eventDataPath,
         manifest: {
           path: manifest,

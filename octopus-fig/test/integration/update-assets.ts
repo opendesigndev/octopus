@@ -1,7 +1,7 @@
 /** Updates Assets: Download the Source from FigmaApi and update tests */
 
 import { AssetUpdater } from './services/asset-updater'
-import { getCommandLineArgs } from './utils'
+import { getCommandLineArgs } from './utils/argv'
 
 async function updateTests() {
   const { selectedAsset } = getCommandLineArgs()

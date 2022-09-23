@@ -1,0 +1,295 @@
+{
+  "id": "312-5",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.6",
+  "dimensions": {
+    "width": 400,
+    "height": 360
+  },
+  "content": {
+    "id": "312-5-Background",
+    "name": "Frame in Frame NoCLIP",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "SOLID",
+    "mask": {
+      "id": "312-5-BackgroundMask",
+      "name": "Frame in Frame NoCLIP",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 300,
+            "y0": 0,
+            "y1": 200
+          },
+          "cornerRadius": 20
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": [
+          {
+            "style": "SOLID",
+            "dashing": [],
+            "visible": true,
+            "fill": {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0.8773,
+                "b": 0.9333,
+                "a": 1
+              }
+            },
+            "thickness": 30,
+            "position": "CENTER",
+            "lineJoin": "MITER",
+            "lineCap": "BUTT",
+            "miterLimit": 28.96,
+            "fillRule": "NON_ZERO"
+          }
+        ]
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      50,
+      15
+    ],
+    "layers": [
+      {
+        "id": "312-6-Background",
+        "name": "Frame 1",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "312-6-BackgroundMask",
+          "name": "Frame 1",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 350,
+                "y0": 0,
+                "y1": 300
+              },
+              "cornerRadius": 20
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0.7125,
+                  "b": 0.7125,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8072,
+                    "g": 1,
+                    "b": 0.2583,
+                    "a": 1
+                  }
+                },
+                "thickness": 2,
+                "position": "INSIDE",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO"
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          -25,
+          45
+        ],
+        "layers": [
+          {
+            "id": "312-7",
+            "name": "Rectangle RED",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              -25,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 400,
+                  "y0": 0,
+                  "y1": 200
+                },
+                "cornerRadius": 60
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.7167,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                {
+                  "type": "GRADIENT",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "gradient": {
+                    "type": "RADIAL",
+                    "stops": [
+                      {
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.7
+                        },
+                        "position": 0
+                      },
+                      {
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0
+                        },
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "positioning": {
+                    "layout": "FILL",
+                    "origin": "LAYER",
+                    "transform": [
+                      -54.85714125299074,
+                      25.000020791634824,
+                      -50.00004158326959,
+                      -83.99999416111481,
+                      312.0000003513211,
+                      136.99998564600756
+                    ]
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

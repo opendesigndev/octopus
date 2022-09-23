@@ -4,6 +4,7 @@ import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 import { SourceApiReader } from '../../../src/index-node'
 import { getDirsFromDir, makeDir, saveFile } from '../../../src/utils/files'
+import { stringify } from '../utils/stringify'
 
 import type {
   ResolvedDesign,
@@ -120,7 +121,7 @@ export class AssetUpdater {
 
     const eventDataPath = await saveFile(
       this._getFullPath(selectedAsset, AssetUpdater.ASSET_EVENT_DATA),
-      JSON.stringify(this._eventQueue)
+      stringify(this._eventQueue)
     )
 
     console.info(`Asset '${selectedAsset}' updated: ${eventDataPath}\n`)

@@ -1,0 +1,131 @@
+{
+  "id": "374-14",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.6",
+  "dimensions": {
+    "width": 500,
+    "height": 500
+  },
+  "content": {
+    "id": "374-14-Background",
+    "name": "bug-multi-fills",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "374-14-BackgroundMask",
+      "name": "bug-multi-fills",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 500,
+            "y0": 0,
+            "y1": 500
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 0.3
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "374-13",
+        "name": "Vector",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {},
+            "geometry": "M200,400c110.457,0 200,-89.543 200,-200c0,-110.457 -89.543,-200 -200,-200c-110.457,0 -200,89.543 -200,200c0,110.457 89.543,200 200,200zM200,366.667c92.047,0 166.667,-74.62 166.667,-166.667c0,-92.047 -74.62,-166.6667 -166.667,-166.6667c-92.047,0 -166.6667,74.6197 -166.6667,166.6667c0,92.047 74.6197,166.667 166.6667,166.667z M400,200c0,9.205 -7.462,16.672 -16.667,16.672c-9.204,0 -16.666,-7.467 -16.666,-16.672c0,-9.205 7.462,-16.661 16.666,-16.661c9.205,0 16.667,7.456 16.667,16.661z"
+          },
+          "fillRule": "EVEN_ODD",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.851,
+                "g": 0.851,
+                "b": 0.851,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

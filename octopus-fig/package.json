@@ -17,6 +17,7 @@
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "yarn jest",
     "test:integration": "ts-node test/integration",
+    "test:integration:update": "yarn test:integration:update:assets && yarn test:integration:update:tests",
     "test:integration:update:assets": "ts-node test/integration/update-assets.ts",
     "test:integration:update:tests": "ts-node test/integration/update-tests.ts",
     "types:check": "tsc --noEmit",

@@ -1,0 +1,162 @@
+{
+  "id": "318-13",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.6",
+  "dimensions": {
+    "width": 306,
+    "height": 106
+  },
+  "content": {
+    "id": "318-13-Background",
+    "name": "Property 1=Default",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "SOLID",
+    "mask": {
+      "id": "318-13-BackgroundMask",
+      "name": "Property 1=Default",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 300,
+            "y0": 0,
+            "y1": 100
+          },
+          "cornerRadius": 40
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.4062,
+              "g": 0.625,
+              "b": 0.3516,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": [
+          {
+            "style": "SOLID",
+            "dashing": [],
+            "visible": true,
+            "fill": {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            },
+            "thickness": 6,
+            "position": "CENTER",
+            "lineJoin": "MITER",
+            "lineCap": "BUTT",
+            "miterLimit": 28.96,
+            "fillRule": "NON_ZERO"
+          }
+        ]
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      3,
+      3
+    ],
+    "layers": [
+      {
+        "id": "318-15",
+        "name": "Hello",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          25,
+          25
+        ],
+        "effects": [],
+        "text": {
+          "value": "Button",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Arial-BoldMT",
+              "family": "Arial"
+            },
+            "fontSize": 36,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "letterCase": "UPPERCASE",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [],
+          "horizontalAlign": "CENTER",
+          "verticalAlign": "CENTER",
+          "frame": {
+            "mode": "FIXED",
+            "size": {
+              "width": 250,
+              "height": 50
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}
