@@ -67,7 +67,7 @@ export class TextLayerGroupingservice {
     [TextLayerGroupingservice.END_LINE]: '',
     [TextLayerGroupingservice.DOUBLE_END_LINE]: '',
     [TextLayerGroupingservice.END_LINE_UNICODE]: '',
-    [TextLayerGroupingservice.TAB]: '',
+    [TextLayerGroupingservice.TAB]: ' ',
   }
 
   static SPECIAL_CHARACTERS = Object.keys(TextLayerGroupingservice.ADDITIONAL_TEXT_DATA_DICTIONARY).sort(

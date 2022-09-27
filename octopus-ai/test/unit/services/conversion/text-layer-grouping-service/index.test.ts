@@ -2,7 +2,7 @@
 
 import { TextLayerGroupingservice } from '../../../../../src/services/conversion/text-layer-grouping-service'
 
-describe('TextLayerGroupingService', () => {
+describe('services/conversion/text-layer-grouping-service', () => {
   it('groups text layers and selects shortests matching additionalTextData', () => {
     const privateData = {
       TextLayers: [
