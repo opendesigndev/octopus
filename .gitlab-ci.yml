@@ -20,9 +20,8 @@ lint:
 test:
   stage: test
   script:
+    - echo "hello world" > ci-test.out
     - yarn test
   artifacts:
     paths:
-      - "**/octopus-fig/test/integration/*"
-      - "package.json"
-      - "**/*.md"
+      - ci-test.out
