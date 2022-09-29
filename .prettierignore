@@ -8,3 +8,4 @@ example-web/
 temp/
 **/test/integration/assets/
 **/test/integration/report/
+.gitlab-ci.yml

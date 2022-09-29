@@ -21,3 +21,8 @@ test:
   stage: test
   script:
     - yarn test
+  artifacts:
+    paths:
+      - "**/octopus-fig/test/integration/*"
+      - "package.json"
+      - "**/*.md"
