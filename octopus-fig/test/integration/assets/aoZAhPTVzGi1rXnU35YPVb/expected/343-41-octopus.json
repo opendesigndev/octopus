@@ -3,8 +3,8 @@
   "type": "ARTBOARD",
   "version": "3.0.0-rc.6",
   "dimensions": {
-    "width": 306,
-    "height": 106
+    "width": 300,
+    "height": 100
   },
   "content": {
     "id": "343-41-Background",
@@ -72,8 +72,8 @@
       0,
       0,
       1,
-      3,
-      3
+      0,
+      0
     ],
     "layers": [
       {
