@@ -19,5 +19,8 @@ lint:
 
 test:
   stage: test
+  artifacts: 
+    paths:
+      - ./my.out
   script:
-    - yarn test
+    - echo "Hello" > ./my.out
