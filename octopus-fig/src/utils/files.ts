@@ -1,4 +1,4 @@
-import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises'
+import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile, rm } from 'fs/promises'
 
 import { logger } from '../services'
 
@@ -53,6 +53,15 @@ export async function makeDir(path: string): Promise<string> {
     await mkdir(path, { recursive: true })
   } catch (e) {
     logger?.warn(`Making directory '${path}' was not successful`)
+  }
+  return path
+}
+
+export async function rmDir(path: string): Promise<string> {
+  try {
+    await rm(path, { recursive: true, force: true })
+  } catch (e) {
+    logger?.warn(`Removing directory '${path}' was not successful`)
   }
   return path
 }

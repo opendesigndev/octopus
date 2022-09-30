@@ -1,8 +1,8 @@
-import fsp from 'fs/promises'
 import path from 'path'
 
 import { createConverter } from '../../../src/index-node'
 import { getOctopusFileName, MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
+import { makeDir, saveFile, rmDir } from '../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 import { AssetReader } from './asset-reader'
@@ -56,37 +56,33 @@ export class TestUpdater {
       testsAssets.map(async (testAssets) => {
         const { expectedDirPath } = testAssets
         if (expectedDirPath) {
-          await fsp.rm(expectedDirPath, { recursive: true, force: true })
+          await rmDir(expectedDirPath)
         }
 
         const createdExpectedDirPath = path.join(testAssets.testPath, AssetReader.EXPECTED_DIR_NAME)
 
-        await fsp.mkdir(createdExpectedDirPath)
+        await makeDir(createdExpectedDirPath)
 
         return { ...testAssets, expectedDirPath: createdExpectedDirPath }
       })
     )
   }
 
-  private _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<void[][]> {
-    return Promise.all(
-      testAssets.map(async ({ components, manifest, expectedDirPath }) => {
-        const manifestPath = path.join(expectedDirPath, MANIFEST_FILE_NAME)
-        await fsp.writeFile(manifestPath, stringify(manifest))
+  private async _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<void> {
+    for (const { components, manifest, expectedDirPath } of testAssets) {
+      const manifestPath = path.join(expectedDirPath, MANIFEST_FILE_NAME)
+      await saveFile(manifestPath, stringify(manifest))
 
-        return Promise.all(
-          components.map((component) => {
-            const componentPath = path.join(expectedDirPath, getOctopusFileName(component.id))
-            return fsp.writeFile(componentPath, stringify(component))
-          })
-        )
-      })
-    )
+      for (const component of components) {
+        const componentPath = path.join(expectedDirPath, getOctopusFileName(component.id))
+        await saveFile(componentPath, stringify(component))
+      }
+    }
   }
 
   async update(): Promise<void> {
     const testsAssets = await this._getTestsAssets()
     const testAssetsWithCleanExpectedDirs = await this._cleanupExpectedDirs(testsAssets)
-    this._saveAssets(testAssetsWithCleanExpectedDirs)
+    await this._saveAssets(testAssetsWithCleanExpectedDirs)
   }
 }
