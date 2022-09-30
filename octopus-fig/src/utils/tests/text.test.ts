@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest'
+
 import { _inferPostScriptType, inferPostScriptName } from '../text'
 
 import type { InferPostScriptNameOptions } from '../text'

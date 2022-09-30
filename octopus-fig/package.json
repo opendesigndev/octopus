@@ -14,7 +14,7 @@
     "convert:local": "ts-node ./scripts/convert-api-local.ts",
     "parse": "ts-node ./scripts/test-parse.ts",
     "prepack": "rimraf ./lib && yarn run build",
-    "test": "yarn jest",
+    "test": "vitest run",
     "types:check": "tsc --noEmit",
     "watch": "tsc -w"
   },
@@ -34,17 +34,15 @@
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
-    "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
     "@types/pino": "^6.3.3",
     "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
-    "jest": "^27.3.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^27.1.3",
     "ts-node": "10.8.0",
-    "typescript": "4.6.4"
+    "typescript": "4.6.4",
+    "vitest": "^0.23.4"
   },
   "files": [
     "lib/src",

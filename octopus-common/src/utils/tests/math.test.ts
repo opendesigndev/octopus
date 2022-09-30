@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest'
+
 import { cos, invLerp, lerp, mod, sin, tan } from '../math'
 
 describe('mod', () => {

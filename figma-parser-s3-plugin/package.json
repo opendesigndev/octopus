@@ -3,13 +3,6 @@
   "version": "3.0.0-rc.1",
   "license": "UNLICENSED",
   "description": "Figma Parser S3 plugin",
-  "devDependencies": {
-    "@types/lodash": "^4.14.178",
-    "@types/node": "*",
-    "@types/pino": "^6.3.3",
-    "ts-node": "10.5.0",
-    "typescript": "4.4.4"
-  },
   "scripts": {
     "build": "npx tsc --build ./tsconfig.json",
     "clean": "npx rimraf ./node_modules ./lib",
@@ -24,6 +17,13 @@
     "lodash": "^4.17.21",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.178",
+    "@types/node": "*",
+    "@types/pino": "^6.3.3",
+    "ts-node": "10.5.0",
+    "typescript": "4.6.4"
   },
   "files": [
     "lib/src"
