@@ -1,4 +1,4 @@
-export * from './artboard'
+export * from './component'
 export * from './effects'
 export * from './layer'
 export * from './layer-adjustment'

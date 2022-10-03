@@ -1,6 +1,6 @@
-import { SourceArtboard } from './source-artboard'
+import { SourceComponent } from './source-component'
 
-import type { RawArtboard } from '../../typings/raw'
+import type { RawComponent } from '../../typings/raw'
 
 export type SourceImage = {
   name: string
@@ -10,18 +10,18 @@ export type SourceImage = {
 }
 
 type SourceDesignOptions = {
-  artboard: RawArtboard
+  component: RawComponent
   images: SourceImage[]
   designId: string
 }
 
 export class SourceDesign {
   private _designId: string
-  private _artboard: SourceArtboard
+  private _component: SourceComponent
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._artboard = new SourceArtboard(options.artboard)
+    this._component = new SourceComponent(options.component)
     this._images = options.images
     this._designId = options.designId
   }
@@ -30,8 +30,8 @@ export class SourceDesign {
     return this._designId
   }
 
-  get artboard(): SourceArtboard {
-    return this._artboard
+  get component(): SourceComponent {
+    return this._component
   }
 
   get images(): SourceImage[] {
@@ -44,12 +44,12 @@ export class SourceDesign {
 
   get values(): {
     designId: string
-    artboard: RawArtboard
+    component: RawComponent
     images: SourceImage[]
   } {
     return {
       designId: this.designId,
-      artboard: this.artboard.raw,
+      component: this.component.raw,
       images: this.images,
     }
   }

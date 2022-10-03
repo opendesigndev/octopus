@@ -9,7 +9,7 @@ import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceImage } from '../source/source-design'
 import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusFillOptions = {
@@ -29,8 +29,8 @@ export class OctopusEffectFill {
     this._isStroke = options.isStroke ?? false
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
+  private get _parentComponent(): OctopusComponent {
+    return this._parentLayer.parentComponent
   }
 
   private get _sourceLayerBounds(): SourceBounds {
@@ -49,11 +49,11 @@ export class OctopusEffectFill {
   }
 
   private get _imagePath(): string | undefined {
-    return this._parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
+    return this._parentComponent.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
   }
 
   private get _image(): SourceImage | undefined {
-    return this._parentArtboard.sourceDesign.getImageByName(this._imageName)
+    return this._parentComponent.sourceDesign.getImageByName(this._imageName)
   }
 
   private get _offset(): [x: number, y: number] {

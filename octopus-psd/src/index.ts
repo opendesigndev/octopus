@@ -7,7 +7,7 @@ import readPackageUpAsync from 'read-pkg-up'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
-import { ArtboardConverter } from './services/conversion/artboard-converter'
+import { ComponentConverter } from './services/conversion/component-converter'
 import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { createEnvironment } from './services/general/environment'
@@ -34,7 +34,7 @@ type ConvertDesignOptions = {
 
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
-  artboards: ArtboardConversionResult[]
+  components: ComponentConversionResult[]
   images: SourceImage[]
 }
 
@@ -47,7 +47,7 @@ type OctopusPSDConverterOptions = OctopusPSDConverterGeneralOptions & {
   sourceDesign: SourceDesign
 }
 
-export type ArtboardConversionResult = {
+export type ComponentConversionResult = {
   id: string
   value: Octopus['OctopusDocument'] | undefined
   error: Error | null
@@ -120,18 +120,18 @@ export class OctopusPSDConverter {
     })
   }
 
-  private async _convertArtboardSafe() {
+  private async _convertComponentSafe() {
     try {
-      const value = await new ArtboardConverter({ octopusConverter: this }).convert()
+      const value = await new ComponentConverter({ octopusConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
-      logError('Converting Artboard failed', { error })
+      logError('Converting Component failed', { error })
       return { value: undefined, error }
     }
   }
 
-  private async _convertArtboardById(id: string): Promise<ArtboardConversionResult> {
-    const { time, result } = await benchmarkAsync(() => this._convertArtboardSafe())
+  private async _convertComponentById(id: string): Promise<ComponentConversionResult> {
+    const { time, result } = await benchmarkAsync(() => this._convertComponentSafe())
     const { value, error } = result
     return { id, value, error, time }
   }
@@ -163,11 +163,11 @@ export class OctopusPSDConverter {
       })
     )
 
-    /** Artboard */
-    const artboardResult = await this._convertArtboardById(this._sourceDesign.artboard.id)
-    const artboardPath = await exporter?.exportArtboard?.(artboardResult)
-    const { time, error } = artboardResult
-    this.octopusManifest.setExportedArtboard(artboardResult.id, { path: artboardPath, time, error })
+    /** Component */
+    const componentResult = await this._convertComponentById(this._sourceDesign.component.id)
+    const componentPath = await exporter?.exportComponent?.(componentResult)
+    const { time, error } = componentResult
+    this.octopusManifest.setExportedComponent(componentResult.id, { path: componentPath, time, error })
 
     /** Final trigger of Manifest save */
     const manifest = await this._exportManifest(exporter)
@@ -177,7 +177,7 @@ export class OctopusPSDConverter {
 
     return {
       manifest,
-      artboards: [artboardResult],
+      components: [componentResult],
       images,
     }
   }

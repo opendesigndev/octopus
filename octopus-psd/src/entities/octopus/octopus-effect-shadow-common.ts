@@ -5,7 +5,7 @@ import { OctopusEffectBase } from './octopus-effect-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectShadow } from '../source/source-effect-shadow'
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
 
 type OctopusShadowCommonOptions = {
@@ -23,8 +23,8 @@ export class OctopusEffectShadowCommon extends OctopusEffectBase {
     this._shadow = options.effect
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
+  private get _parentComponent(): OctopusComponent {
+    return this._parentLayer.parentComponent
   }
 
   /**
@@ -55,7 +55,7 @@ export class OctopusEffectShadowCommon extends OctopusEffectBase {
 
   private get _offset(): Octopus['Vec2'] {
     const angle = this._shadow.useGlobalAngle
-      ? this._parentArtboard.sourceArtboard.globalLightAngle
+      ? this._parentComponent.sourceComponent.globalLightAngle
       : this._shadow.localLightingAngle
     const distance = this._shadow.distance
 

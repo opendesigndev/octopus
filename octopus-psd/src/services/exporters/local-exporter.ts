@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../src'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -62,9 +62,9 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
-  exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
-    if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))
+  exportComponent(component: ComponentConversionResult): Promise<string | null> {
+    if (!component.value) return Promise.resolve(null)
+    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(component.value))
   }
 
   async exportImage(name: string, location: string): Promise<string> {

@@ -13,7 +13,7 @@ import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
 import { logInfo } from '../instances/misc'
 
 import type { SourceImage } from '../../entities/source/source-design'
-import type { RawArtboard } from '../../typings/raw'
+import type { RawComponent } from '../../typings/raw'
 
 type PSDFileReaderOptions = {
   path: string
@@ -70,14 +70,14 @@ export class PSDFileReader {
     }
   }
 
-  private async _getSourceArtboard(): Promise<RawArtboard | null> {
+  private async _getSourceComponent(): Promise<RawComponent | null> {
     const { time: timeParse } = await benchmarkAsync(() => parsePsd(this.path, this._parsePsdOptions))
     logInfo(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
 
     const { time: timeRead, result } = await benchmarkAsync(() =>
-      parseJsonFromFile<RawArtboard>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
+      parseJsonFromFile<RawComponent>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
     )
-    logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
+    logInfo(`RawComponent prepared ${displayPerf(timeRead)}`)
 
     return result
   }
@@ -107,10 +107,10 @@ export class PSDFileReader {
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
-    const artboard = await this._getSourceArtboard()
-    if (artboard == null) return null
+    const component = await this._getSourceComponent()
+    if (component == null) return null
     const images = await this._getImages()
-    const sourceDesign = new SourceDesign({ designId, artboard, images })
+    const sourceDesign = new SourceDesign({ designId, component, images })
     return sourceDesign
   }
 }

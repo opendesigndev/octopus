@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { ComponentConversionResult, DesignConversionResult } from '../..'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
@@ -66,18 +66,18 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
     return this._outputDir
   }
 
-  async exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
-    if (!artboard.value) return Promise.resolve(null)
-    const octopusPath = await this._save(DebugExporter.OCTOPUS_NAME, this._stringify(artboard.value))
+  async exportComponent(component: ComponentConversionResult): Promise<string | null> {
+    if (!component.value) return Promise.resolve(null)
+    const octopusPath = await this._save(DebugExporter.OCTOPUS_NAME, this._stringify(component.value))
     const sourcePath = path.join(await this._outputDir, DebugExporter.SOURCE_NAME)
     const result = {
-      id: artboard.id,
-      time: artboard.time,
-      error: artboard.error,
+      id: component.id,
+      time: component.time,
+      error: component.error,
       octopusPath,
       sourcePath,
     }
-    this.emit('octopus:artboard', result)
+    this.emit('octopus:component', result)
     return octopusPath
   }
 

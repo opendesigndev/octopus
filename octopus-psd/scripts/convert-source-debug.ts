@@ -15,7 +15,7 @@ type ConvertAllOptions = {
   location: string
 }
 
-type ConvertedArtboard = {
+type ConvertedComponent = {
   id: string
   name: string
   time: number
@@ -34,9 +34,9 @@ export async function convertDesign({
   const designId = `${timestamp()}-${kebabCase(path.basename(location, '.psd'))}`
   const exporter = new DebugExporter({ tempDir: outputDir, id: designId })
 
-  exporter.on('octopus:artboard', async (artboard: ConvertedArtboard) => {
-    const status = artboard.error ? '❌' : '✅'
-    const render = shouldRender && !artboard.error ? await renderOctopus(artboard.id, artboard.octopusPath) : null
+  exporter.on('octopus:component', async (component: ConvertedComponent) => {
+    const status = component.error ? '❌' : '✅'
+    const render = shouldRender && !component.error ? await renderOctopus(component.id, component.octopusPath) : null
     const renderPath =
       render === null
         ? '<none>'
@@ -44,8 +44,8 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.log(`\n${chalk.yellow('Artboard')} ${location} ${status}`)
-    console.log(`  ${chalk.cyan(`Octopus:`)} file://${artboard.octopusPath} ${displayPerf(artboard.time)}`)
+    console.log(`\n${chalk.yellow('Component')} ${location} ${status}`)
+    console.log(`  ${chalk.cyan(`Octopus:`)} file://${component.octopusPath} ${displayPerf(component.time)}`)
     console.log(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })
 

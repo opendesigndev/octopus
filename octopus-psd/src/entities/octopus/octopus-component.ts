@@ -6,28 +6,28 @@ import type { OctopusPSDConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'
-import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 
-type OctopusArtboardOptions = {
+type OctopusComponentOptions = {
   octopusConverter: OctopusPSDConverter
 }
 
-export class OctopusArtboard {
+export class OctopusComponent {
   private _octopusConverter: OctopusPSDConverter
   private _layers: OctopusLayer[]
 
-  constructor(options: OctopusArtboardOptions) {
+  constructor(options: OctopusComponentOptions) {
     this._octopusConverter = options.octopusConverter
-    this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
+    this._layers = createOctopusLayers(this.sourceComponent.layers, this)
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     return this
   }
 
-  get sourceArtboard(): SourceArtboard {
-    return this.sourceDesign.artboard
+  get sourceComponent(): SourceComponent {
+    return this.sourceDesign.component
   }
 
   get sourceDesign(): SourceDesign {
@@ -39,12 +39,12 @@ export class OctopusArtboard {
   }
 
   get dimensions(): { width: number; height: number } {
-    const { width, height } = this.sourceArtboard.bounds
+    const { width, height } = this.sourceComponent.bounds
     return { width, height }
   }
 
   get id(): string {
-    return this.sourceArtboard.id
+    return this.sourceComponent.id
   }
 
   get version(): Promise<string> {
@@ -63,7 +63,7 @@ export class OctopusArtboard {
 
   get content(): Octopus['Layer'] {
     const id = this.id
-    const bounds = this.sourceArtboard.bounds
+    const bounds = this.sourceComponent.bounds
 
     const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
     if (!hasArtboards)

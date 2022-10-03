@@ -10,7 +10,7 @@ import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
 import { logInfo } from '../instances/misc'
 
 import type { SourceImage } from '../../entities/source/source-design'
-import type { RawArtboard } from '../../typings/raw'
+import type { RawComponent } from '../../typings/raw'
 
 type SourceFileReaderOptions = {
   path: string
@@ -44,11 +44,11 @@ export class SourceFileReader {
     return this._sourceDesign
   }
 
-  private async _getSourceArtboard(): Promise<RawArtboard | null> {
+  private async _getSourceComponent(): Promise<RawComponent | null> {
     const { time: timeRead, result } = await benchmarkAsync(() =>
-      parseJsonFromFile<RawArtboard>(path.join(this.path, SourceFileReader.SOURCE_FILE))
+      parseJsonFromFile<RawComponent>(path.join(this.path, SourceFileReader.SOURCE_FILE))
     )
-    logInfo(`RawArtboard prepared ${displayPerf(timeRead)}`)
+    logInfo(`RawComponent prepared ${displayPerf(timeRead)}`)
 
     return result
   }
@@ -78,11 +78,11 @@ export class SourceFileReader {
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
-    const artboard = await this._getSourceArtboard()
-    if (artboard == null) return null
+    const component = await this._getSourceComponent()
+    if (component == null) return null
     const images = await this._getImages()
 
-    const sourceDesign = new SourceDesign({ designId, artboard, images })
+    const sourceDesign = new SourceDesign({ designId, component, images })
     return sourceDesign
   }
 }

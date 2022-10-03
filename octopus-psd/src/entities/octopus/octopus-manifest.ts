@@ -13,7 +13,7 @@ type OctopusManifestOptions = {
   octopusConverter: OctopusPSDConverter
 }
 
-type ArtboardDescriptor = {
+type ComponentDescriptor = {
   path: unknown
   error: Error | null
   time: number | null
@@ -24,7 +24,7 @@ export class OctopusManifest {
   private _octopusConverter: OctopusPSDConverter
   private _exports: {
     images: Map<string, string>
-    artboards: Map<string, ArtboardDescriptor>
+    components: Map<string, ComponentDescriptor>
   }
 
   private _basePath: string | null
@@ -38,7 +38,7 @@ export class OctopusManifest {
     this._basePath = null
     this._exports = {
       images: new Map(),
-      artboards: new Map(),
+      components: new Map(),
     }
   }
 
@@ -63,19 +63,19 @@ export class OctopusManifest {
     this._exports.images.set(name, path)
   }
 
-  getExportedArtboardById(id: string): ArtboardDescriptor | undefined {
-    return this._exports.artboards.get(id)
+  getExportedComponentById(id: string): ComponentDescriptor | undefined {
+    return this._exports.components.get(id)
   }
 
-  getExportedArtboardRelativePathById(id: string): string | undefined {
-    const artboardResult = this._exports.artboards.get(id)
-    if (typeof artboardResult?.path !== 'string') return undefined
-    if (this._basePath === null) return artboardResult.path
-    return path.relative(this._basePath, artboardResult.path)
+  getExportedComponentRelativePathById(id: string): string | undefined {
+    const componentResult = this._exports.components.get(id)
+    if (typeof componentResult?.path !== 'string') return undefined
+    if (this._basePath === null) return componentResult.path
+    return path.relative(this._basePath, componentResult.path)
   }
 
-  setExportedArtboard(id: string, artboard: ArtboardDescriptor): void {
-    this._exports.artboards.set(id, artboard)
+  setExportedComponent(id: string, component: ComponentDescriptor): void {
+    this._exports.components.set(id, component)
   }
 
   get manifestVersion(): Promise<string> {
@@ -105,16 +105,16 @@ export class OctopusManifest {
     }
   }
 
-  private _getArtboardAssetsFonts(raw: Record<string, unknown>): string[] {
+  private _getComponentAssetsFonts(raw: Record<string, unknown>): string[] {
     const entries = traverseAndFind(raw, (obj: unknown) => {
       return Object(obj)?.fontPostScriptName
     })
     return [...new Set(entries)] as string[]
   }
 
-  private get _artboardAssets(): Manifest['Assets'] | null {
-    const targetArtboard = this._octopusConverter.sourceDesign.artboard
-    const raw = targetArtboard?.raw
+  private get _componentAssets(): Manifest['Assets'] | null {
+    const targetComponent = this._octopusConverter.sourceDesign.component
+    const raw = targetComponent?.raw
     if (!raw) return null
 
     const images: Manifest['AssetImage'][] = this._octopusConverter.sourceDesign.images.map((image) => {
@@ -123,7 +123,7 @@ export class OctopusManifest {
       return { location, refId: image.name }
     })
 
-    const fonts: Manifest['AssetFont'][] = this._getArtboardAssetsFonts(raw).map((font) => ({ name: font }))
+    const fonts: Manifest['AssetFont'][] = this._getComponentAssetsFonts(raw).map((font) => ({ name: font }))
 
     return {
       ...(images.length ? { images } : null),
@@ -131,16 +131,16 @@ export class OctopusManifest {
     }
   }
 
-  private get _artboard(): Manifest['Component'] {
-    const sourceArtboard = this._sourceDesign.artboard
-    const id = sourceArtboard.id
-    const bounds = this._convertManifestBounds(sourceArtboard.bounds)
-    const assets = this._artboardAssets ?? undefined
+  private get _component(): Manifest['Component'] {
+    const sourceComponent = this._sourceDesign.component
+    const id = sourceComponent.id
+    const bounds = this._convertManifestBounds(sourceComponent.bounds)
+    const assets = this._componentAssets ?? undefined
 
-    const status = this.getExportedArtboardById(id)
+    const status = this.getExportedComponentById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
 
-    const path = this.getExportedArtboardRelativePathById(id) ?? ''
+    const path = this.getExportedComponentRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
 
     return {
@@ -168,7 +168,7 @@ export class OctopusManifest {
       },
       name: this.name,
       pages: [],
-      components: [this._artboard],
+      components: [this._component],
       chunks: [],
       libraries: [],
     }

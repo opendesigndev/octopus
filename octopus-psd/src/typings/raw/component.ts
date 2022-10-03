@@ -11,7 +11,7 @@ type RawLight = {
   angle?: number
 }
 
-export type RawArtboard = {
+export type RawComponent = {
   bounds?: RawBounds
   depth?: number
   exporterVersion?: string

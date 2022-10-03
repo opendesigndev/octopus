@@ -1,7 +1,7 @@
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
 import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceArtboard } from './source-artboard'
+import { SourceComponent } from './source-component'
 import { SourceLayerEffects } from './source-effects-layer'
 import { SourceEntity } from './source-entity'
 import { SourcePath } from './source-path'
@@ -10,7 +10,7 @@ import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
 
-export type SourceLayerParent = SourceArtboard | SourceLayerSection
+export type SourceLayerParent = SourceComponent | SourceLayerSection
 
 type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer' | 'adjustmentLayer'
 
@@ -44,9 +44,9 @@ export class SourceLayerCommon extends SourceEntity {
     return this._parent
   }
 
-  get parentArtboard(): SourceArtboard {
+  get parentComponent(): SourceComponent {
     const parent = this._parent
-    return parent instanceof SourceArtboard ? parent : parent.parentArtboard
+    return parent instanceof SourceComponent ? parent : parent.parentComponent
   }
 
   get artboardColor(): SourceColor | null {

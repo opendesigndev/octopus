@@ -13,7 +13,7 @@ import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
 import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
 
@@ -50,8 +50,8 @@ export class OctopusEffectFillGradient {
     this._isStroke = options.isStroke ?? false
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
+  private get _parentComponent(): OctopusComponent {
+    return this._parentLayer.parentComponent
   }
 
   private get _sourceLayerBounds(): SourceBounds {
@@ -141,7 +141,7 @@ export class OctopusEffectFillGradient {
       const { width, height } = this._sourceLayerBounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
-    const { width, height } = this._parentArtboard.dimensions
+    const { width, height } = this._parentComponent.dimensions
     const { left, top } = this._sourceLayerBounds
     return { width, height, boundTx: left, boundTy: top }
   }

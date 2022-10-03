@@ -1,22 +1,22 @@
-import { OctopusArtboard } from '../../entities/octopus/octopus-artboard'
+import { OctopusComponent } from '../../entities/octopus/octopus-component'
 
 import type { OctopusPSDConverter } from '../..'
 import type { SourceDesign } from '../../entities/source/source-design'
 import type { Octopus } from '../../typings/octopus'
 
-export type ArtboardConverterOptions = {
+export type ComponentConverterOptions = {
   octopusConverter: OctopusPSDConverter
 }
 
-export class ArtboardConverter {
+export class ComponentConverter {
   _sourceDesign: SourceDesign
   _octopusConverter: OctopusPSDConverter
 
-  constructor(options: ArtboardConverterOptions) {
+  constructor(options: ComponentConverterOptions) {
     this._octopusConverter = options.octopusConverter
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    return new OctopusArtboard({ octopusConverter: this._octopusConverter }).convert()
+    return new OctopusComponent({ octopusConverter: this._octopusConverter }).convert()
   }
 }

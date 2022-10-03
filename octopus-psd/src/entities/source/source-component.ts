@@ -6,16 +6,16 @@ import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawLayer } from '../../typings/raw'
+import type { RawComponent, RawLayer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
-export class SourceArtboard extends SourceEntity {
-  protected _rawValue: RawArtboard
+export class SourceComponent extends SourceEntity {
+  protected _rawValue: RawComponent
   private _layers: SourceLayer[]
 
-  static DEFAULT_ID = 'artboard-1'
+  static DEFAULT_ID = 'component-1'
 
-  constructor(raw: RawArtboard) {
+  constructor(raw: RawComponent) {
     super(raw)
     this._layers = this._initLayers()
   }
@@ -31,7 +31,7 @@ export class SourceArtboard extends SourceEntity {
     return layers
   }
 
-  get raw(): RawArtboard {
+  get raw(): RawComponent {
     return this._rawValue
   }
 
@@ -44,7 +44,7 @@ export class SourceArtboard extends SourceEntity {
   }
 
   get id(): string {
-    return SourceArtboard.DEFAULT_ID
+    return SourceComponent.DEFAULT_ID
   }
 
   get resolution(): number | undefined {

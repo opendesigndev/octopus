@@ -2,7 +2,7 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { convertColor, convertRectangle } from '../../utils/convert'
-import { OctopusArtboard } from './octopus-artboard'
+import { OctopusComponent } from './octopus-component'
 import { OctopusLayerShape } from './octopus-layer-shape'
 import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
@@ -91,7 +91,7 @@ export class OctopusLayerMaskGroup {
     const bitmapMask = sourceLayer.bitmapMask
     if (!bitmapMask) return octopusLayer
 
-    const { width, height } = octopusLayer.parentArtboard.dimensions
+    const { width, height } = octopusLayer.parentComponent.dimensions
     const bounds = { left: 0, right: width, top: 0, bottom: height }
     const raw: RawLayerLayer = { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName: bitmapMask }
     const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
@@ -146,9 +146,9 @@ export class OctopusLayerMaskGroup {
     return this._id
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
+    return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
   get type(): 'MASK_GROUP' {
