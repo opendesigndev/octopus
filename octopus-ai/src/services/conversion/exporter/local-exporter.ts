@@ -14,13 +14,13 @@ import type { ArtboardConversionResult, DesignConversionResult } from '../design
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {
-  path: string
+  path?: string
 }
 
 export class LocalExporter implements Exporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
