@@ -16,7 +16,6 @@ const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   darken: 'DARKEN',
   darkerColor: 'DARKER_COLOR',
   difference: 'DIFFERENCE',
-  dissolve: 'DISSOLVE',
   exclusion: 'EXCLUSION',
   hardLight: 'HARD_LIGHT',
   hardMix: 'HARD_MIX',

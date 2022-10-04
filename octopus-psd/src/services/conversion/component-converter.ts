@@ -4,17 +4,22 @@ import type { Octopus } from '../../typings/octopus'
 import type { DesignConverter } from './design-converter'
 
 export type ComponentConverterOptions = {
+  componentId: string
   designConverter: DesignConverter
 }
 
 export class ComponentConverter {
+  _componentId: string
   _designConverter: DesignConverter
 
-  constructor(options: ComponentConverterOptions) {
-    this._designConverter = options.designConverter
+  constructor({ componentId, designConverter }: ComponentConverterOptions) {
+    this._componentId = componentId
+    this._designConverter = designConverter
   }
 
-  convert(): Promise<Octopus['OctopusDocument']> {
-    return new OctopusComponent({ designConverter: this._designConverter }).convert()
+  async convert(): Promise<Octopus['OctopusDocument'] | null> {
+    const sourceComponent = this._designConverter.sourceDesign.getComponentById(this._componentId)
+    if (!sourceComponent) return null
+    return new OctopusComponent({ sourceComponent, designConverter: this._designConverter }).convert()
   }
 }

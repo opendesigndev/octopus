@@ -6,6 +6,7 @@ import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
 import type { OctopusPSDConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceBounds } from '../../typings/source'
+import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusManifestOptions = {
@@ -113,7 +114,7 @@ export class OctopusManifest {
   }
 
   private get _componentAssets(): Manifest['Assets'] | null {
-    const targetComponent = this._sourceDesign.component
+    const targetComponent = this._sourceDesign.components[0] // TODO HERE
     const raw = targetComponent?.raw
     if (!raw) return null
 
@@ -131,14 +132,17 @@ export class OctopusManifest {
     }
   }
 
-  private get _component(): Manifest['Component'] {
-    const sourceComponent = this._sourceDesign.component
+  private _convertComponent(sourceComponent: SourceComponent): Manifest['Component'] {
     const id = sourceComponent.id
     const bounds = this._convertManifestBounds(sourceComponent.bounds)
     const assets = this._componentAssets ?? undefined
 
-    const status = this.getExportedComponentById(id)
-    const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
+    const compDescriptor = this.getExportedComponentById(id)
+    const status = {
+      value: compDescriptor ? (compDescriptor.error ? 'FAILED' : 'READY') : 'PROCESSING',
+      error: this._convertError(compDescriptor?.error),
+      time: compDescriptor?.time ?? undefined,
+    } as const
 
     const path = this.getExportedComponentRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
@@ -147,11 +151,7 @@ export class OctopusManifest {
       id,
       name: id,
       role: 'ARTBOARD',
-      status: {
-        value: statusValue,
-        error: this._convertError(status?.error),
-        time: status?.time ?? undefined,
-      },
+      status,
       bounds,
       dependencies: [],
       assets,
@@ -159,16 +159,17 @@ export class OctopusManifest {
     }
   }
 
+  private get _components(): Manifest['Component'][] {
+    return this._sourceDesign.components.map((component) => this._convertComponent(component))
+  }
+
   async convert(): Promise<Manifest['OctopusManifest']> {
     return {
       version: await this.manifestVersion,
-      origin: {
-        name: 'PHOTOSHOP',
-        version: this.psdVersion,
-      },
+      origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
       pages: [],
-      components: [this._component],
+      components: this._components,
       chunks: [],
       libraries: [],
     }

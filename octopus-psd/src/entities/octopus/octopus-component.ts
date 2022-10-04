@@ -10,14 +10,17 @@ import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusComponentOptions = {
+  sourceComponent: SourceComponent
   designConverter: DesignConverter
 }
 
 export class OctopusComponent {
+  private _sourceComponent: SourceComponent
   private _designConverter: DesignConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusComponentOptions) {
+    this._sourceComponent = options.sourceComponent
     this._designConverter = options.designConverter
     this._layers = createOctopusLayers(this.sourceComponent.layers, this)
   }
@@ -27,7 +30,7 @@ export class OctopusComponent {
   }
 
   get sourceComponent(): SourceComponent {
-    return this.sourceDesign.component
+    return this._sourceComponent
   }
 
   get sourceDesign(): SourceDesign {

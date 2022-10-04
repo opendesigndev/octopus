@@ -17,11 +17,11 @@ type SourceDesignOptions = {
 
 export class SourceDesign {
   private _designId: string
-  private _component: SourceComponent
+  private _components: SourceComponent[]
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._component = new SourceComponent(options.component)
+    this._components = [new SourceComponent(options.component)] // TODO HERE
     this._images = options.images
     this._designId = options.designId
   }
@@ -30,27 +30,23 @@ export class SourceDesign {
     return this._designId
   }
 
-  get component(): SourceComponent {
-    return this._component
+  get components(): SourceComponent[] {
+    return this._components
+  }
+
+  get componentIds(): string[] {
+    return this._components.map((comp) => comp.id)
   }
 
   get images(): SourceImage[] {
     return this._images
   }
 
-  getImageByName(name: string): SourceImage | undefined {
-    return this.images.find((image) => image.name === name)
+  getComponentById(id: string): SourceComponent | undefined {
+    return this.components.find((comp) => comp.id === id)
   }
 
-  get values(): {
-    designId: string
-    component: RawComponent
-    images: SourceImage[]
-  } {
-    return {
-      designId: this.designId,
-      component: this.component.raw,
-      images: this.images,
-    }
+  getImageByName(name: string): SourceImage | undefined {
+    return this.images.find((image) => image.name === name)
   }
 }

@@ -69,26 +69,41 @@ export class DesignConverter {
     return this._octopusConverter
   }
 
-  private async _convertComponentSafe() {
-    try {
-      const value = await new ComponentConverter({ designConverter: this }).convert()
-      return { value, error: null }
-    } catch (error) {
-      logError('Converting Component failed', { error })
-      return { value: undefined, error }
-    }
-  }
-
-  private async _convertComponentById(id: string): Promise<ComponentConversionResult> {
-    const { time, result } = await benchmarkAsync(() => this._convertComponentSafe())
-    const { value, error } = result
-    return { id, value, error, time }
-  }
-
   private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
+  }
+
+  private async _convertComponentSafe(componentId: string) {
+    try {
+      const value = await new ComponentConverter({ componentId, designConverter: this }).convert()
+      if (!value) throw new Error('Component convert error')
+      return { value, error: null }
+    } catch (error) {
+      logError('Converting Component failed', { componentId, error })
+      return { value: undefined, error }
+    }
+  }
+
+  private async getComponentResult(id: string): Promise<ComponentConversionResult> {
+    const { time, result } = await benchmarkAsync(() => this._convertComponentSafe(id))
+    const { value, error } = result
+    return { id, value, error, time }
+  }
+
+  private async _convertComponent(id: string) {
+    const componentResult = await this.getComponentResult(id)
+    const componentPath = await this._exporter?.exportComponent?.(componentResult)
+    const { time, error } = componentResult
+    this.octopusManifest.setExportedComponent(componentResult.id, { path: componentPath, time, error })
+    return componentResult
+  }
+
+  private async _convertComponents(): Promise<ComponentConversionResult[]> {
+    const componentIds = this._sourceDesign.componentIds
+    const componentResult = await this._convertComponent(componentIds[0]) // TODO HERE
+    return [componentResult]
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
@@ -110,10 +125,7 @@ export class DesignConverter {
     )
 
     /** Component */
-    const componentResult = await this._convertComponentById(this._sourceDesign.component.id)
-    const componentPath = await this._exporter?.exportComponent?.(componentResult)
-    const { time, error } = componentResult
-    this.octopusManifest.setExportedComponent(componentResult.id, { path: componentPath, time, error })
+    const components = await this._convertComponents() // TODO HERE
 
     /** Final trigger of Manifest save */
     const manifest = await this._exportManifest(this._exporter)
@@ -123,7 +135,7 @@ export class DesignConverter {
 
     return {
       manifest,
-      components: [componentResult],
+      components,
       images,
     }
   }
