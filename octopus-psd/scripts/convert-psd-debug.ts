@@ -28,6 +28,8 @@ type ConvertedComponent = {
 
 dotenv.config()
 
+const converter = new OctopusPSDConverter()
+
 export async function convertDesign({
   outputDir,
   filePath,
@@ -62,8 +64,7 @@ export async function convertDesign({
     console.error('Creating SourceDesign Failed')
     return
   }
-  const converter = new OctopusPSDConverter({ sourceDesign })
-  converter.convertDesign({ exporter })
+  converter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
 }
 

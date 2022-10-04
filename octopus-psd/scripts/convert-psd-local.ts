@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { LocalExporter, OctopusPSDConverter, PSDFileReader } from '../src'
 
+const converter = new OctopusPSDConverter()
+
 async function convert() {
   const [filePath] = process.argv.slice(2)
   const testDir = path.join(os.tmpdir(), uuidv4())
@@ -15,9 +17,9 @@ async function convert() {
     console.error('Creating SourceDesign Failed')
     return
   }
-  const converter = new OctopusPSDConverter({ sourceDesign })
   const exporter = new LocalExporter({ path: testDir })
-  await converter.convertDesign({ exporter })
+
+  await converter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
 
   console.info()

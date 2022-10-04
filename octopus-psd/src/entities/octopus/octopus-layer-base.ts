@@ -10,6 +10,7 @@ import { OctopusComponent } from './octopus-component'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerGroup } from './octopus-layer-group'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
@@ -44,6 +45,10 @@ export class OctopusLayerBase {
     this._parent = options.parent
     this._sourceLayer = options.sourceLayer
     this._id = asString(this._sourceLayer.id, uuidv4())
+  }
+
+  protected get _designConverter(): DesignConverter {
+    return this._parent.parentComponent.designConverter
   }
 
   get sourceLayer(): SourceLayer {

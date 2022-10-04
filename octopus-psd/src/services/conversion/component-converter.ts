@@ -1,22 +1,20 @@
 import { OctopusComponent } from '../../entities/octopus/octopus-component'
 
-import type { OctopusPSDConverter } from '../..'
-import type { SourceDesign } from '../../entities/source/source-design'
 import type { Octopus } from '../../typings/octopus'
+import type { DesignConverter } from './design-converter'
 
 export type ComponentConverterOptions = {
-  octopusConverter: OctopusPSDConverter
+  designConverter: DesignConverter
 }
 
 export class ComponentConverter {
-  _sourceDesign: SourceDesign
-  _octopusConverter: OctopusPSDConverter
+  _designConverter: DesignConverter
 
   constructor(options: ComponentConverterOptions) {
-    this._octopusConverter = options.octopusConverter
+    this._designConverter = options.designConverter
   }
 
   convert(): Promise<Octopus['OctopusDocument']> {
-    return new OctopusComponent({ octopusConverter: this._octopusConverter }).convert()
+    return new OctopusComponent({ designConverter: this._designConverter }).convert()
   }
 }

@@ -113,11 +113,11 @@ export class OctopusManifest {
   }
 
   private get _componentAssets(): Manifest['Assets'] | null {
-    const targetComponent = this._octopusConverter.sourceDesign.component
+    const targetComponent = this._sourceDesign.component
     const raw = targetComponent?.raw
     if (!raw) return null
 
-    const images: Manifest['AssetImage'][] = this._octopusConverter.sourceDesign.images.map((image) => {
+    const images: Manifest['AssetImage'][] = this._sourceDesign.images.map((image) => {
       const path = this.getExportedRelativeImageByName(image.name) ?? ''
       const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
       return { location, refId: image.name }

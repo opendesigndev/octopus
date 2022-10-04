@@ -41,7 +41,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
   }
 
   private get _imagePath(): string | undefined {
-    return this._parentLayer.parentComponent.converter.octopusManifest.getExportedRelativeImageByName(this._imageName)
+    return this._designConverter.octopusManifest.getExportedRelativeImageByName(this._imageName)
   }
 
   private get _image(): SourceImage | undefined {

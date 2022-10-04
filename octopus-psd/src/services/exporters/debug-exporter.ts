@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
-import type { ComponentConversionResult, DesignConversionResult } from '../..'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 

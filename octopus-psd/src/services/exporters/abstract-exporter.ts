@@ -1,4 +1,4 @@
-import type { ComponentConversionResult, DesignConversionResult } from '../..'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 
 export abstract class AbstractExporter {
   exportComponent(_component: ComponentConversionResult): Promise<unknown> {

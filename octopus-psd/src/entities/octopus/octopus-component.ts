@@ -2,23 +2,23 @@ import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { OctopusLayerGroup } from './octopus-layer-group'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
-import type { OctopusPSDConverter } from '../..'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 
 type OctopusComponentOptions = {
-  octopusConverter: OctopusPSDConverter
+  designConverter: DesignConverter
 }
 
 export class OctopusComponent {
-  private _octopusConverter: OctopusPSDConverter
+  private _designConverter: DesignConverter
   private _layers: OctopusLayer[]
 
   constructor(options: OctopusComponentOptions) {
-    this._octopusConverter = options.octopusConverter
+    this._designConverter = options.designConverter
     this._layers = createOctopusLayers(this.sourceComponent.layers, this)
   }
 
@@ -31,11 +31,11 @@ export class OctopusComponent {
   }
 
   get sourceDesign(): SourceDesign {
-    return this._octopusConverter.sourceDesign
+    return this._designConverter.sourceDesign
   }
 
-  get converter(): OctopusPSDConverter {
-    return this._octopusConverter
+  get designConverter(): DesignConverter {
+    return this._designConverter
   }
 
   get dimensions(): { width: number; height: number } {
@@ -48,7 +48,7 @@ export class OctopusComponent {
   }
 
   get version(): Promise<string> {
-    return this._octopusConverter.pkgVersion
+    return this._designConverter.octopusConverter.pkgVersion
   }
 
   private _getArtboardFromLayer(layer: OctopusLayer, parentBounds?: SourceBounds): Octopus['MaskGroupLayer'] {
