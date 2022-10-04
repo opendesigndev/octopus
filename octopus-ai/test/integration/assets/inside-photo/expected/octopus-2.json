@@ -1,0 +1,191 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.1",
+  "id": "2",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "15",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "16",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "8",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "9",
+            "name": "<Path>",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "geometry": "M0,0l-251.05,144.944l128.652,222.831l251.05,-144.944z"
+              },
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              -1,
+              299.334,
+              482.0448
+            ]
+          },
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "11",
+            "name": "<Path>",
+            "visible": true,
+            "type": "MASK_GROUP",
+            "maskBasis": "BODY",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "12",
+                "name": "X",
+                "visible": true,
+                "type": "SHAPE",
+                "shape": {
+                  "path": {
+                    "rectangle": {
+                      "x0": 0,
+                      "y0": 0,
+                      "x1": 1,
+                      "y1": 1
+                    },
+                    "type": "RECTANGLE"
+                  }
+                },
+                "transform": [
+                  -93.800135,
+                  218.9947665,
+                  194.3766251,
+                  83.2556281,
+                  206.6250228,
+                  166.1668426
+                ]
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "14",
+              "name": "<Path>",
+              "visible": true,
+              "type": "SHAPE",
+              "shape": {
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "geometry": "M185.281,425.694l-68.748,39.692l90.092,210.337l194.377,-83.255l-93.801,-218.995z"
+                }
+              },
+              "transform": [
+                1,
+                0,
+                0,
+                -1,
+                0,
+                841.89
+              ]
+            }
+          },
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "13",
+            "name": "<Path>",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "geometry": "M0,0l-251.05,144.944l128.652,222.831l251.05,-144.944z"
+              },
+              "strokes": [
+                {
+                  "thickness": 3,
+                  "fill": {
+                    "type": "COLOR",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "position": "CENTER",
+                  "visible": true,
+                  "style": "SOLID",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT"
+                }
+              ]
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              -1,
+              299.334,
+              482.0448
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
