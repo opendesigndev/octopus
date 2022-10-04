@@ -107,4 +107,21 @@ describe('OctopusLayerMaskGroup', () => {
       expect(maskGroup['_isMaskValid'](mask)).toEqual(true)
     })
   })
+
+  describe('blendMode', () => {
+    it('returns blendMode from the first child which does not have blendmode NORMAL', () => {
+      const maskGroup = getTestingMaskGroup()
+      maskGroup['_layers'].push({ blendMode: 'COLOR' } as any)
+      maskGroup['_layers'].push({ blendMode: 'COLOR_BURN' } as any)
+      maskGroup['_layers'].push({ blendMode: 'NORMAL' } as any)
+
+      expect(maskGroup.blendMode).toEqual('COLOR')
+    })
+
+    it('returns blendMode NORMAL if there are no blendModes on children', () => {
+      const maskGroup = getTestingMaskGroup()
+
+      expect(maskGroup.blendMode).toEqual('NORMAL')
+    })
+  })
 })

@@ -11,6 +11,10 @@ export class OctopusLayerShape {
     this._adapter = options.adapter
   }
 
+  get blendMode(): Octopus['LayerBase']['blendMode'] {
+    return this._adapter.blendMode
+  }
+
   convert(): Octopus['ShapeLayer'] | null {
     return this._adapter.convert()
   }
