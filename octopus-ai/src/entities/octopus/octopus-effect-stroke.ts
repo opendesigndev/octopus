@@ -1,4 +1,5 @@
 import { asNumber } from '@avocode/octopus-common/dist/utils/as'
+import chunk from 'lodash/chunk'
 
 import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill'
 
@@ -24,19 +25,31 @@ export class OctopusEffectStroke {
    * for certainty.
    */
   static DEFAULT_MITER_LIMIT = 20
+  static MIN_DASH_INPUT = 0.001
 
   constructor(options: OctopusEffectStrokeOptions) {
     this._resources = options.resources
     this._sourceLayer = options.sourceLayer
   }
 
-  private _parseDashing() {
-    const { dashing: rawDashing, miterLimit: rawMiterLimit } = this._sourceLayer
-    const dashing = rawDashing.length % 2 === 0 ? rawDashing : ([...rawDashing, rawDashing.at(-1)] as number[])
+  private _parseDashing(): number[] {
+    const { dashing: rawDashing } = this._sourceLayer
+    return chunk(rawDashing, 2)
+      .map(([dash, offset]) => {
+        return [
+          Math.max(dash, OctopusEffectStroke.MIN_DASH_INPUT),
+          Math.max(offset ?? 0, OctopusEffectStroke.MIN_DASH_INPUT),
+        ]
+      })
+      .flat()
+  }
+
+  private _parseDashProperties() {
+    const { miterLimit: rawMiterLimit } = this._sourceLayer
     const miterLimit = rawMiterLimit ?? OctopusEffectStroke.DEFAULT_MITER_LIMIT
     const dashOffset = this._sourceLayer.dashOffset
 
-    return { dashing, dashOffset, miterLimit }
+    return { dashing: this._parseDashing(), dashOffset, miterLimit }
   }
 
   private get _lineJoin(): LineJoin {
@@ -48,7 +61,7 @@ export class OctopusEffectStroke {
   }
 
   convert(): Octopus['VectorStroke'] | null {
-    const dashProperties = this._parseDashing()
+    const dashProperties = this._parseDashProperties()
     const style = dashProperties.dashing.length ? 'DASHED' : 'SOLID'
     const colorSpaceValue = this._resources.getColorSpaceValue(this._sourceLayer.colorSpaceStroking ?? '') ?? ''
 
