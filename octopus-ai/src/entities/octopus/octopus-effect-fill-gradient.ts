@@ -3,7 +3,7 @@ import chunk from 'lodash/chunk'
 import zipWith from 'lodash/zipWith'
 
 import { logger } from '../../services/instances/logger'
-import convertColor from '../../utils/colors'
+import { convertColor } from '../../utils/colors'
 
 import type { Coord, GradientStop, RgbColorComponents } from '../../typings'
 import type { Octopus } from '../../typings/octopus'

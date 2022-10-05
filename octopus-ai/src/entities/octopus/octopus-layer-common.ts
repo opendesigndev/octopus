@@ -12,7 +12,7 @@ import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
 
-type OctopusLayerCommonOptions = {
+export type OctopusLayerCommonOptions = {
   parent: OctopusLayerParent
   layerSequence: LayerSequence
 }

@@ -52,7 +52,7 @@ export class TextLayerGroupingservice {
    * https://gitlab.avcd.cz/opendesign/illustrator-parser-pdfcpu/-/issues/4
    */
   static END_LINE_UNICODE = '\u0003'
-  static T = '\t'
+  static TAB = '\t'
 
   static END_LINE_OCTOPUS = '\n'
   static DOUBLE_END_LINE_OCTOPUS = '\u2029'
@@ -61,20 +61,19 @@ export class TextLayerGroupingservice {
     [TextLayerGroupingservice.END_LINE]: TextLayerGroupingservice.END_LINE_OCTOPUS,
     [TextLayerGroupingservice.DOUBLE_END_LINE]: TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
     [TextLayerGroupingservice.END_LINE_UNICODE]: TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
-    [TextLayerGroupingservice.T]: '',
+    [TextLayerGroupingservice.TAB]: ' ',
   }
   static ADDITIONAL_TEXT_DATA_DICTIONARY = {
     [TextLayerGroupingservice.END_LINE]: '',
     [TextLayerGroupingservice.DOUBLE_END_LINE]: '',
     [TextLayerGroupingservice.END_LINE_UNICODE]: '',
-    [TextLayerGroupingservice.T]: '',
+    [TextLayerGroupingservice.TAB]: ' ',
   }
 
   static SPECIAL_CHARACTERS = Object.keys(TextLayerGroupingservice.ADDITIONAL_TEXT_DATA_DICTIONARY).sort(
     (a, b) => b.length - a.length
   )
   static TEXT_LAYER = 'TextGroup'
-  static MIN_HEIGHT_DIFFERENCE = 0.1
   static OCTOPUS_EXTRA_CHARACTERS = [
     TextLayerGroupingservice.END_LINE_OCTOPUS,
     TextLayerGroupingservice.DOUBLE_END_LINE_OCTOPUS,
@@ -175,7 +174,6 @@ export class TextLayerGroupingservice {
     if (!bestMatch) {
       return
     }
-
     this._additionalTextData = {
       ...this._additionalTextData,
       TextLayers:

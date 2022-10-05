@@ -1,6 +1,6 @@
 import { asArray } from '@avocode/octopus-common/dist/utils/as'
 
-import convertColor, { parseColor } from '../../utils/colors'
+import { convertColor, parseColor } from '../../utils/colors'
 
 import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace } from '../../typings/raw/resources'

@@ -68,7 +68,6 @@ export class OctopusEffectsShape {
         })
       )
     }
-
     return fills
   }
 
