@@ -130,7 +130,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "11",
             "name": "<Path>",

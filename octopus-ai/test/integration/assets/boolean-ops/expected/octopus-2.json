@@ -125,7 +125,7 @@
             ]
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "22",
             "name": "<Rectangle>",
@@ -207,7 +207,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "25",
             "name": "<Rectangle>",
@@ -297,7 +297,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "28",
             "name": "<Rectangle>",
@@ -370,7 +370,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "31",
             "name": "<Rectangle>",
@@ -452,7 +452,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "34",
             "name": "<Rectangle>",
@@ -525,7 +525,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "37",
             "name": "<Rectangle>",

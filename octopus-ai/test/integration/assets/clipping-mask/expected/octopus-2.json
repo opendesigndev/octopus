@@ -48,7 +48,7 @@
         "type": "GROUP",
         "layers": [
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "14",
             "name": "<Path>",
@@ -116,7 +116,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "17",
             "name": "<Path>",
@@ -192,7 +192,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "20",
             "name": "<Path>",
@@ -260,7 +260,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "23",
             "name": "<Path>",
