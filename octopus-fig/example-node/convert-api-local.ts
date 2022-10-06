@@ -12,7 +12,6 @@ const converter = createConverter()
 
 async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())
-  const exporter = new LocalExporter({ path: testDir })
 
   const readerOptions = {
     designId,
@@ -32,9 +31,11 @@ async function convertDesign(designId: string) {
     shouldObtainStyles: true,
     parallelRequests: 5,
   }
-
   const reader = new SourceApiReader(readerOptions)
-  await converter.convertDesign({ design: reader.parse(), exporter, skipReturn: true })
+
+  const exporter = new LocalExporter({ path: testDir })
+
+  await converter.convertDesign({ designEmitter: reader.parse(), exporter, skipReturn: true })
   await exporter.completed()
 
   console.info()

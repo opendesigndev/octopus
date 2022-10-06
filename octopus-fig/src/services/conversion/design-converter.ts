@@ -30,7 +30,7 @@ import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
 import type EventEmitter from 'eventemitter3'
 
 export type DesignConverterOptions = {
-  design: EventEmitter | null
+  designEmitter: EventEmitter | null
   designId?: string
   exporter?: AbstractExporter
   partialUpdateInterval?: number
@@ -56,7 +56,7 @@ export type DesignConversionResult = {
 const IS_LIBRARY = true
 
 export class DesignConverter {
-  private _design: EventEmitter | null
+  private _designEmitter: EventEmitter | null
   private _designId: string
   private _octopusManifest: OctopusManifest | undefined
   private _octopusConverter: OctopusFigConverter
@@ -74,7 +74,7 @@ export class DesignConverter {
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: DesignConverterOptions, octopusConverter: OctopusFigConverter) {
-    this._design = options.design || null
+    this._designEmitter = options.designEmitter || null
     this._designId = options.designId || uuidv4()
     this._octopusConverter = octopusConverter
 
@@ -92,10 +92,6 @@ export class DesignConverter {
 
   get octopusManifest(): OctopusManifest | undefined {
     return this._octopusManifest
-  }
-
-  get sourceDesign(): EventEmitter | null {
-    return this._design
   }
 
   private async _convertSourceComponentSafe(
@@ -244,22 +240,22 @@ export class DesignConverter {
   }
 
   async convert(): Promise<DesignConversionResult | null> {
-    const design = this._design
-    if (design === null) {
+    const designEmitter = this._designEmitter
+    if (designEmitter === null) {
       logger?.error('Creating Design Failed')
       return null
     }
 
-    design.on('ready:design', (design) => this._convertDesign(design))
+    designEmitter.on('ready:design', (design) => this._convertDesign(design))
 
-    design.on('ready:style', (chunk) => this._convertChunk(chunk))
+    designEmitter.on('ready:style', (chunk) => this._convertChunk(chunk))
 
-    design.on('ready:artboard', (artboard) => this._convertFrame(artboard))
-    design.on('ready:component', (component) => this._convertFrame(component))
-    design.on('ready:library', (library) => this._convertFrame(library, IS_LIBRARY))
+    designEmitter.on('ready:artboard', (artboard) => this._convertFrame(artboard))
+    designEmitter.on('ready:component', (component) => this._convertFrame(component))
+    designEmitter.on('ready:library', (library) => this._convertFrame(library, IS_LIBRARY))
 
-    design.on('ready:fill', (fill) => this._convertFill(fill))
-    design.on('ready:preview', (preview) => this._convertPreview(preview))
+    designEmitter.on('ready:fill', (fill) => this._convertFill(fill))
+    designEmitter.on('ready:preview', (preview) => this._convertPreview(preview))
 
     await this._finalizeConvert.promise
     return this._shouldReturn ? this._conversionResult : null

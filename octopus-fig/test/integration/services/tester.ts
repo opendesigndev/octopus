@@ -6,7 +6,7 @@ import { createConverter } from '../../../src/index-node'
 import { getOctopusFileName, MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
-import { DesignMock } from './design-mock'
+import { DesignEmitterMock } from './design-emitter-mock'
 
 import type { OctopusFigConverter } from '../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../src/typings/manifest'
@@ -60,9 +60,9 @@ export class Tester {
     return await Promise.all(
       testComponentsArray.map(
         async ({ artboards: artboardExpected, manifest: manifestExpected, eventDataPath, assetId }) => {
-          const design = new DesignMock(eventDataPath)
+          const designEmitter = new DesignEmitterMock(eventDataPath)
 
-          const result = await this._octopusConverter.convertDesign({ design })
+          const result = await this._octopusConverter.convertDesign({ designEmitter })
           const { components, manifest: manifestGenerated } = result ?? {}
 
           const artboardsGenerated = (components ?? [])

@@ -13,7 +13,7 @@ type ResolvedContent = {
   libraries: ResolvedFrame[]
 }
 
-export class DesignMock extends EventEmitter {
+export class DesignEmitterMock extends EventEmitter {
   private _eventDataPath: string
   private _finalizeDesign: DetachedPromiseControls<ResolvedContent>
 

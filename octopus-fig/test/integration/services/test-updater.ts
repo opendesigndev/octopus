@@ -6,7 +6,7 @@ import { makeDir, saveFile, rmDir } from '../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 import { AssetReader } from './asset-reader'
-import { DesignMock } from './design-mock'
+import { DesignEmitterMock } from './design-emitter-mock'
 
 import type { OctopusFigConverter } from '../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../src/typings/manifest'
@@ -33,9 +33,9 @@ export class TestUpdater {
   private async _getTestsAssets(): Promise<TestAssets[]> {
     return Promise.all(
       this._testsDirectoryData.map(async ({ eventDataPath, expectedDirPath, testName, testPath }) => {
-        const design = new DesignMock(eventDataPath)
+        const designEmitter = new DesignEmitterMock(eventDataPath)
 
-        const result = await this._octopusConverter.convertDesign({ design })
+        const result = await this._octopusConverter.convertDesign({ designEmitter })
         const { components, manifest } = result ?? {}
 
         return {

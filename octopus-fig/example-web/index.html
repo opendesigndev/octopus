@@ -11,45 +11,6 @@
   <script src="./octopus-fig-web.umd.js"></script>
   <script>
 
-    // const worker = new Worker('./octopus-xd-web-worker.umd.js')
-
-    // class OctopusXDProcessor {
-    //   constructor(buffer) {
-    //     this._msgId = 0
-    //     this._designIndex = this._registerFile(buffer)
-    //   }
-
-    //   _process(type, args, moveOwnership = null) {
-    //     return new Promise((resolve) => {
-    //       const msgId = this._msgId++
-    //       worker.postMessage({ type, args: [msgId, ...args]}, moveOwnership)
-    //       const handler = ({ data }) => {
-    //         const { msgId: responseId, response } = Object(data)
-    //         if (msgId === responseId) {
-    //           worker.removeEventListener('message', handler)
-    //           resolve(response)
-    //         }
-    //       }
-    //       worker.addEventListener('message', handler)
-    //     })
-    //   }
-
-    //   _registerFile(buffer) {
-    //     return this._process('register-file', [buffer], [buffer])
-    //   }
-
-    //   async getArtboardsList() {
-    //     const index = await this._designIndex
-    //     return this._process('get-artboards', [index])
-    //   }
-
-    //   async parseArtboard(artboardId) {
-    //     const index = await this._designIndex
-    //     return this._process('parse-artboard', [index, artboardId])
-    //   }
-    // }
-
-
     // Check main thread lags
     let i = 0
     setInterval(() => { xxx.style.transform = `rotate(${ i += 5 }deg)` }, 30)
@@ -57,7 +18,7 @@
     window.addEventListener('DOMContentLoaded', async () => {
       const { createConverter, SourceApiReader } = OctopusFig
 
-      const designId = 'aoZAhPTVzGi1rXnU35YPVb'// 'WfetgXUknoxDzmN1m5kRTA' //'kA7FQv3NUKkkwja4RLBRC0'
+      const designId = 'aoZAhPTVzGi1rXnU35YPVb'
       const token = '376694-3ac3693b-cd97-4cd3-97b1-dc54aea109bf'
       const ids = [] 
 
