@@ -2,7 +2,7 @@
   "name": "@avocode/octopus-fig",
   "version": "3.0.0-rc.6",
   "description": "Octopus Figma converter, converts Figma designs to Octopus 3+ format.",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "main": "dist/src/index.js",
   "scripts": {
     "bundle": "yarn run bundle:web",
