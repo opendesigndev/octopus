@@ -1,0 +1,249 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.1",
+  "id": "2",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "17",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "18",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "9",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "10",
+            "name": "<Path>",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "geometry": "M0,0l-7.152,41.55l-9.387,-2.246l7.599,-39.978z"
+              },
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ]
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              -1,
+              402.1614,
+              310.99530000000004
+            ]
+          },
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "13",
+            "name": "Sh0",
+            "visible": true,
+            "maskChannels": [
+              0.299,
+              0.587,
+              0.114,
+              0,
+              0
+            ],
+            "type": "MASK_GROUP",
+            "maskBasis": "LAYER_AND_EFFECTS",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "12",
+                "name": "Sh0",
+                "visible": true,
+                "type": "SHAPE",
+                "shape": {
+                  "fillRule": "EVEN_ODD",
+                  "path": {
+                    "type": "COMPOUND",
+                    "op": "INTERSECT",
+                    "paths": [
+                      {
+                        "type": "PATH",
+                        "geometry": "M209.911,545.296c0,0 -5.668,-86.295 48.653,-125.593v0l142.423,112.015l-15.044,39.441z",
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          -1,
+                          0,
+                          841.89
+                        ]
+                      }
+                    ]
+                  },
+                  "fills": [
+                    {
+                      "type": "GRADIENT",
+                      "gradient": {
+                        "type": "RADIAL",
+                        "stops": [
+                          {
+                            "color": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            },
+                            "interpolationParameter": 1,
+                            "interpolation": "POWER",
+                            "position": 0
+                          },
+                          {
+                            "color": {
+                              "r": 0.9098039215686274,
+                              "g": 0.2784313725490196,
+                              "b": 0.38823529411764707,
+                              "a": 1
+                            },
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "positioning": {
+                        "layout": "FILL",
+                        "origin": "LAYER",
+                        "transform": [
+                          -115.593483,
+                          104.034111,
+                          -104.0341187,
+                          -115.5935059,
+                          395.1357727,
+                          284.68205320000004
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "14",
+              "name": "<XObjectForm>",
+              "visible": false,
+              "type": "GROUP",
+              "layers": [
+                {
+                  "blendMode": "NORMAL",
+                  "opacity": 1,
+                  "id": "15",
+                  "name": "Sh0",
+                  "visible": true,
+                  "type": "SHAPE",
+                  "shape": {
+                    "fillRule": "EVEN_ODD",
+                    "path": {
+                      "rectangle": {
+                        "x0": 0,
+                        "y0": 0,
+                        "x1": 595.276,
+                        "y1": 841.89
+                      },
+                      "type": "RECTANGLE"
+                    },
+                    "fills": [
+                      {
+                        "type": "GRADIENT",
+                        "gradient": {
+                          "type": "RADIAL",
+                          "stops": [
+                            {
+                              "color": {
+                                "r": 1,
+                                "g": 1,
+                                "b": 1,
+                                "a": 1
+                              },
+                              "interpolationParameter": 1,
+                              "interpolation": "POWER",
+                              "position": 0
+                            },
+                            {
+                              "color": {
+                                "r": 0,
+                                "g": 0,
+                                "b": 0,
+                                "a": 1
+                              },
+                              "position": 1
+                            }
+                          ]
+                        },
+                        "positioning": {
+                          "layout": "FILL",
+                          "origin": "LAYER",
+                          "transform": [
+                            -115.593483,
+                            104.034111,
+                            -104.0341187,
+                            -115.5935059,
+                            395.1357727,
+                            284.68205320000004
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

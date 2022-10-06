@@ -1,0 +1,115 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.1",
+  "id": "2",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "11",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "12",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "6",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "PASS_THROUGH",
+            "opacity": 1,
+            "id": "8",
+            "name": "<Path>",
+            "visible": true,
+            "type": "MASK_GROUP",
+            "maskBasis": "BODY",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "9",
+                "name": "X",
+                "visible": true,
+                "type": "SHAPE",
+                "shape": {
+                  "path": {
+                    "rectangle": {
+                      "x0": 0,
+                      "y0": 0,
+                      "x1": 1,
+                      "y1": 1
+                    },
+                    "type": "RECTANGLE"
+                  }
+                },
+                "transform": [
+                  259,
+                  0,
+                  0,
+                  -194,
+                  193.9077148,
+                  416.62632809999997
+                ]
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "10",
+              "name": "<Path>",
+              "visible": true,
+              "type": "SHAPE",
+              "shape": {
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "geometry": "M222.987,619.264l-29.079,-50.367v-102.084l71.966,-41.55h179.84l7.194,12.46v176.664l-8.447,4.877z"
+                }
+              },
+              "transform": [
+                1,
+                0,
+                0,
+                -1,
+                0,
+                841.89
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
