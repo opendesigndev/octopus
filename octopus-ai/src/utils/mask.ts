@@ -43,9 +43,5 @@ export function createSoftMask({ sMask, parent }: CreateSoftMaskOptions): Nullis
 
   const rawSourceXObject = g as RawResourcesXObject
 
-  if (!rawSourceXObject) {
-    return null
-  }
-
   return new SourceLayerXObjectForm({ parent, rawValue: rawSourceXObject })
 }

@@ -69,10 +69,6 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
     const maskType = this._sourceLayer.sMask?.S
     const TR = this._sourceLayer.sMask?.TR
 
-    if (!maskType) {
-      return OctopusLayerSoftMaskGroup.DEFAULT_MASK_CHANNELS
-    }
-
     if (maskType === 'Luminosity' && !TR) {
       return OctopusLayerSoftMaskGroup.LUMINOSITY_MASK_CHANNELS
     }
