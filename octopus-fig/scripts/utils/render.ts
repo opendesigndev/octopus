@@ -18,10 +18,10 @@ async function render(id: string, octopusPath: string) {
   const renderPath = path.join(octopusDir, `${kebabCase(id)}-render.png`)
   const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
-  const ignoreValidation = process.env.RENDERING_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
+  const ignoreValidation = process.env.ODE_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
   try {
     execSync(
-      `${process.env.RENDERING_PATH} ${ignoreValidation} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`,
+      `${process.env.ODE_RENDERER_CMD} ${ignoreValidation} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`,
       {
         stdio: 'ignore',
       }

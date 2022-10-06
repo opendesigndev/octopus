@@ -26,7 +26,7 @@ const converter = createConverter()
 
 export async function convertDesign({
   designId,
-  shouldRender = process.env.CONVERT_RENDER === 'true',
+  shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const outputDir = path.join(await getPkgLocation(), 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
