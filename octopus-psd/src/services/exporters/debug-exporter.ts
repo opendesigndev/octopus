@@ -4,6 +4,7 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
+import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
@@ -21,11 +22,6 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   _assetsSaves: Promise<unknown>[]
   _completed: DetachedPromiseControls<void>
 
-  static IMAGES_DIR_NAME = 'images'
-  static SOURCE_NAME = 'source.json'
-  static OCTOPUS_NAME = 'octopus.json'
-  static MANIFEST_NAME = 'octopus-manifest.json'
-
   constructor(options: DebugExporterOptions) {
     super()
     this._tempDir = options.tempDir
@@ -40,7 +36,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   private async _initOutputDir(options: DebugExporterOptions) {
     const tempDir = path.join(this._tempDir, typeof options.id === 'string' ? options.id : uuidv4())
-    await makeDir(path.join(tempDir, DebugExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(tempDir, IMAGES_DIR_NAME))
     return tempDir
   }
 
@@ -68,8 +64,8 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   async exportComponent(component: ComponentConversionResult): Promise<string | null> {
     if (!component.value) return Promise.resolve(null)
-    const octopusPath = await this._save(DebugExporter.OCTOPUS_NAME, this._stringify(component.value))
-    const sourcePath = path.join(await this._outputDir, DebugExporter.SOURCE_NAME)
+    const octopusPath = await this._save(getOctopusFileName(component.id), this._stringify(component.value))
+    const sourcePath = path.join(await this._outputDir, SOURCE_NAME)
     const result = {
       id: component.id,
       time: component.time,
@@ -83,7 +79,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   async exportImage(name: string, location: string): Promise<string> {
     const dir = await this._outputDir
-    const fullPath = path.join(dir, DebugExporter.IMAGES_DIR_NAME, name)
+    const fullPath = path.join(dir, IMAGES_DIR_NAME, name)
     const write = copyFile(location, fullPath)
     this._assetsSaves.push(write)
     await write
@@ -91,7 +87,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
-    const manifestPath = await this._save(DebugExporter.MANIFEST_NAME, this._stringify(manifest))
+    const manifestPath = await this._save(MANIFEST_NAME, this._stringify(manifest))
     const manifestStatus = manifest.components[0]?.status?.value
     if (manifestStatus === 'READY' || manifestStatus === 'FAILED') {
       this.emit('octopus:manifest', manifestPath)

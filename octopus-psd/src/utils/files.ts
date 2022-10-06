@@ -1,4 +1,4 @@
-import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile } from 'fs/promises'
+import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile, rm } from 'fs/promises'
 
 import { logWarn } from '../services/instances/misc'
 
@@ -8,6 +8,16 @@ export async function getFilesFromDir(dirPath: string): Promise<Dirent[] | null>
   try {
     const imagesResults = await readdir(dirPath, { withFileTypes: true })
     return imagesResults.filter((image) => !image.isDirectory())
+  } catch (e) {
+    logWarn(`Reading directory '${dirPath}' was not successful`)
+    return null
+  }
+}
+
+export async function getDirsFromDir(dirPath: string): Promise<Dirent[] | null> {
+  try {
+    const results = await readdir(dirPath, { withFileTypes: true })
+    return results.filter((result) => result.isDirectory())
   } catch (e) {
     logWarn(`Reading directory '${dirPath}' was not successful`)
     return null
@@ -43,6 +53,15 @@ export async function makeDir(path: string): Promise<string> {
     await mkdir(path, { recursive: true })
   } catch (e) {
     logWarn(`Making directory '${path}' was not successful`)
+  }
+  return path
+}
+
+export async function rmDir(path: string): Promise<string> {
+  try {
+    await rm(path, { recursive: true, force: true })
+  } catch (e) {
+    logWarn(`Removing directory '${path}' was not successful`)
   }
   return path
 }

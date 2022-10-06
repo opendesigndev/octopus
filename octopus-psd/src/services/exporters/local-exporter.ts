@@ -4,6 +4,7 @@ import path from 'path'
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
+import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
 
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
@@ -19,10 +20,6 @@ export class LocalExporter implements AbstractExporter {
   _assetsSaves: Promise<unknown>[]
   _completed: DetachedPromiseControls<void>
 
-  static IMAGES_DIR_NAME = 'images'
-  static OCTOPUS_NAME = 'octopus.json'
-  static MANIFEST_NAME = 'octopus-manifest.json'
-
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []
@@ -36,7 +33,7 @@ export class LocalExporter implements AbstractExporter {
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
-    await makeDir(path.join(dir, LocalExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(dir, IMAGES_DIR_NAME))
     return dir
   }
 
@@ -64,18 +61,18 @@ export class LocalExporter implements AbstractExporter {
 
   exportComponent(component: ComponentConversionResult): Promise<string | null> {
     if (!component.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(component.value))
+    return this._save(getOctopusFileName(component.id), this._stringify(component.value))
   }
 
   async exportImage(name: string, location: string): Promise<string> {
     const dir = await this._outputDir
-    const fullPath = path.join(dir, LocalExporter.IMAGES_DIR_NAME, name)
+    const fullPath = path.join(dir, IMAGES_DIR_NAME, name)
     const save = copyFile(location, fullPath)
     this._assetsSaves.push(save)
     return save
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    return this._save(LocalExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
+    return this._save(MANIFEST_NAME, this._stringify(manifest.manifest))
   }
 }
