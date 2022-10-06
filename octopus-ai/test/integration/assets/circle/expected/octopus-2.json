@@ -48,7 +48,7 @@
         "type": "GROUP",
         "layers": [
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "10",
             "name": "<Rectangle>",
@@ -121,7 +121,7 @@
             }
           },
           {
-            "blendMode": "NORMAL",
+            "blendMode": "PASS_THROUGH",
             "opacity": 1,
             "id": "13",
             "name": "<Rectangle>",

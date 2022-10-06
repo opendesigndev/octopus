@@ -2,7 +2,6 @@ import { asNumber } from '@avocode/octopus-common/dist/utils/as'
 import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 
 import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
-import { BLEND_MODES } from '../../utils/blend-modes'
 import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'
 
@@ -55,11 +54,6 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
         y1: Math.max(asNumber(y0), asNumber(y1)),
       }
     })
-  }
-
-  get blendMode(): Octopus['LayerBase']['blendMode'] {
-    const childLayerWithBlendMode = this._layers.find((layer) => layer.blendMode !== BLEND_MODES.Normal)
-    return childLayerWithBlendMode ? childLayerWithBlendMode.blendMode : BLEND_MODES.Normal
   }
 
   private _createIntersectionFromRectangles(
@@ -127,6 +121,10 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
       layers: getConverted(this._layers),
       mask,
     } as const
+  }
+
+  get blendMode(): Octopus['LayerBase']['blendMode'] {
+    return 'PASS_THROUGH'
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {
