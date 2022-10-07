@@ -59,13 +59,13 @@ export class OctopusComponent {
     return maskGroup?.convert() ?? undefined
   }
 
-  async convert(): Promise<Octopus['OctopusDocument']> {
+  async convert(): Promise<Octopus['OctopusComponent']> {
     return {
       id: this.id,
       type: 'ARTBOARD',
       version: this.version,
       dimensions: this.dimensions,
       content: this._content,
-    } as Octopus['OctopusDocument']
+    } as Octopus['OctopusComponent']
   }
 }

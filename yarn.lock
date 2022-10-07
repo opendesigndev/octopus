@@ -21,10 +21,10 @@
   resolved "https://registry.npmjs.org/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.33.tgz"
   integrity sha512-kpxW89i8rKH/ztUC7XO4dbK02+bb4mjG/rDCG6fiBuGpFZv5vqVRwHLgeQf525z31bPSrUcBIqQlYRXW4/34Jw==
 
-"@avocode/manifest-ts@3.0.0-alpha.36":
-  version "3.0.0-alpha.36"
-  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.36.tgz#4bc7937116ec62d84d68b9adf7c59eb015faf1b2"
-  integrity sha512-65P8bh2BKdQldrD2sVDO9q2NQY4Y98KzUsUimKpBYj83K8cAsBHf3N+HLzElI5DqrZZq69bS1LsIzLP0AgRFLw==
+"@avocode/manifest-ts@3.0.0-alpha.37":
+  version "3.0.0-alpha.37"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.37.tgz#7a49d2e526a0d5f5298ade51d7617353804e53f7"
+  integrity sha512-Lo5N1x1WEAZkPHPsn5r3K8r4T5KbAn+oscD/U3ZIOz4V02C3jNWrwqm63IJdgyvc/ZjR2MoubtY84ftQd680pg==
 
 "@avocode/octopus-common@2.1.11":
   version "2.1.11"
@@ -57,10 +57,10 @@
   resolved "https://registry.npmjs.org/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.33.tgz"
   integrity sha512-AuU6WB9JQqbGJzqcZnqHtjay1VH7y6/GRQAqbIMADlA1IdNK4+q6LRpn0vw6d+afxoDu3f2S9HCi+iyaZcNHpQ==
 
-"@avocode/octopus-ts@3.0.0-alpha.36":
-  version "3.0.0-alpha.36"
-  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.36.tgz#305822ea3669eecf8cb514698532c63a14232095"
-  integrity sha512-C5BDYt7nV1BcWDn+jf4wMYPVF1P/5jNq7lq18PtT1mFfNCbHHVrxxMWRUbguk3D+jaC2s5zFA2+GzcDUYnKw8w==
+"@avocode/octopus-ts@3.0.0-alpha.37":
+  version "3.0.0-alpha.37"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.37.tgz#f4d2e10918b09abfc0cced7a81e6aea8e6e09c0d"
+  integrity sha512-3VLnZs+5oLp525Ve7buF2MJCvL1thM8KK8/LyV3U2CH6aRPGUra1qRSQuGIsmspAX/0+aFGdpWv8WRnvtjA6wA==
 
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"

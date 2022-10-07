@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@avocode/figma-parser": "3.0.0-rc.12",
-    "@avocode/manifest-ts": "3.0.0-alpha.36",
-    "@avocode/octopus-common": "3.0.0-rc.23",
-    "@avocode/octopus-ts": "3.0.0-alpha.36",
+    "@avocode/manifest-ts": "3.0.0-alpha.37",
+    "@avocode/octopus-common": "3.0.0-rc.25",
+    "@avocode/octopus-ts": "3.0.0-alpha.37",
     "dotenv": "16.0.0",
     "image-size": "^1.0.1",
     "lodash": "^4.17.21",

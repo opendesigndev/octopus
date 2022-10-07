@@ -13,7 +13,10 @@ import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
 import type { TestComponents, Component } from './asset-reader'
 
-type ComponentGroup = { expected: Component<Octopus['OctopusDocument']> | null; generated: Octopus['OctopusDocument'] }
+type ComponentGroup = {
+  expected: Component<Octopus['OctopusComponent']> | null
+  generated: Octopus['OctopusComponent']
+}
 
 type ConvertedDesign = {
   assetId: string
@@ -28,8 +31,8 @@ type CompareComponentsOptions = {
 }
 
 type MapComponentsOptions = {
-  expected?: Component<Octopus['OctopusDocument']>[]
-  generated: Octopus['OctopusDocument'][]
+  expected?: Component<Octopus['OctopusComponent']>[]
+  generated: Octopus['OctopusComponent'][]
 }
 
 export type Fail = { name: string; json: string; diff: string }
@@ -67,7 +70,7 @@ export class Tester {
 
           const componentsGenValues = (componentsGenerated ?? [])
             .map((conversionResult) => conversionResult.value)
-            .filter((component): component is Octopus['OctopusDocument'] => Boolean(component))
+            .filter((component): component is Octopus['OctopusComponent'] => Boolean(component))
 
           const components: ConvertedDesign['components'] = this._mapComponents({
             expected: componentExpected,

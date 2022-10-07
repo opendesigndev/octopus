@@ -14,7 +14,7 @@ import type { Octopus } from '../../../src/typings/octopus'
 import type { TestDirectoryData } from './asset-reader'
 
 type TestAssets = {
-  components: Octopus['OctopusDocument'][]
+  components: Octopus['OctopusComponent'][]
   manifest?: Manifest['OctopusManifest']
   expectedDirPath: string | null
   testName: string
@@ -41,7 +41,7 @@ export class TestUpdater {
         return {
           components: (components ?? [])
             .map((conversionResult) => conversionResult.value)
-            .filter((component): component is Octopus['OctopusDocument'] => Boolean(component)),
+            .filter((component): component is Octopus['OctopusComponent'] => Boolean(component)),
           manifest: cleanManifest(manifest),
           expectedDirPath,
           testName,

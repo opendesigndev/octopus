@@ -41,7 +41,7 @@ export type ImageSizeMap = { [key: string]: ImageSize }
 
 export type ComponentConversionResult = {
   id: string
-  value: Octopus['OctopusDocument'] | null
+  value: Octopus['OctopusComponent'] | null
   error: Error | null
   time: number
 }
@@ -96,7 +96,7 @@ export class DesignConverter {
 
   private async _convertSourceComponentSafe(
     source: SourceComponent
-  ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
+  ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
       const version = this._octopusConverter.pkg.version
       const value = await new ComponentConverter({ source, version }).convert()

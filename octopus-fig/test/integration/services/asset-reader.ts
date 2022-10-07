@@ -15,7 +15,7 @@ export type Component<T> = {
 export type TestComponents = {
   assetId: string
   eventDataPath: string
-  components: Component<Octopus['OctopusDocument']>[]
+  components: Component<Octopus['OctopusComponent']>[]
   manifest: Component<Manifest['OctopusManifest']>
 }
 
