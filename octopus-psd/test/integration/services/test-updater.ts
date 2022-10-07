@@ -3,6 +3,7 @@ import path from 'path'
 import { OctopusPSDConverter } from '../../../src'
 import { MANIFEST_NAME, getOctopusFileName } from '../../../src/utils/exporter'
 import { saveFile, rmDir, makeDir } from '../../../src/utils/files'
+import { cleanManifest } from '../utils/asset-cleaner'
 import { getSourceDesign } from '../utils/source'
 import { stringify } from '../utils/stringify'
 import { AssetReader } from './asset-reader'
@@ -53,7 +54,7 @@ export class TestUpdater {
           components: componentsResults
             .map((componentConversionResult) => componentConversionResult.value)
             .filter((component): component is Octopus['OctopusDocument'] => Boolean(component)),
-          manifest,
+          manifest: cleanManifest(manifest),
           expectedDirPath,
           testName,
           testPath,

@@ -9,7 +9,7 @@ import type { Octopus } from '../../../src/typings/octopus'
 
 export type Component<T> = {
   path: string
-  read: () => Promise<T>
+  read: () => Promise<T | null>
 }
 
 export type TestComponents = {
