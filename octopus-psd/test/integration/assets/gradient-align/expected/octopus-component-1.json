@@ -1,0 +1,333 @@
+{
+  "id": "component-1",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.5",
+  "dimensions": {
+    "width": 2000,
+    "height": 500
+  },
+  "content": {
+    "id": "component-1-Background",
+    "type": "MASK_GROUP",
+    "maskBasis": "BODY",
+    "mask": {
+      "id": "component-1-BackgroundMask",
+      "type": "SHAPE",
+      "visible": false,
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "rectangle": {
+            "x0": 0,
+            "x1": 2000,
+            "y0": 0,
+            "y1": 500
+          }
+        },
+        "fills": []
+      }
+    },
+    "layers": [
+      {
+        "id": "2",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          50
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [],
+        "shape": {
+          "fillRule": "EVEN_ODD",
+          "path": {
+            "type": "RECTANGLE",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "y0": 0,
+              "x1": 200,
+              "y1": 400
+            },
+            "cornerRadius": 0
+          },
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.949,
+                      "g": 0.9412,
+                      "b": 0.2784,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0845,
+                      "b": 0.7176,
+                      "a": 1
+                    },
+                    "position": 0.1318359375
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.281494140625
+                  },
+                  {
+                    "color": {
+                      "r": 0.9999,
+                      "g": 0,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.466552734375
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.667236328125
+                  },
+                  {
+                    "color": {
+                      "r": 0.1181,
+                      "g": 0.102,
+                      "b": 0.7882,
+                      "a": 1
+                    },
+                    "position": 0.79736328125
+                  },
+                  {
+                    "color": {
+                      "r": 0.943,
+                      "g": 1,
+                      "b": 0.0314,
+                      "a": 1
+                    },
+                    "position": 0.903564453125
+                  },
+                  {
+                    "color": {
+                      "r": 0.1176,
+                      "g": 0.851,
+                      "b": 0.3098,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  1000,
+                  0,
+                  0,
+                  1000,
+                  952,
+                  202
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "position": "CENTER",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "style": "SOLID",
+              "thickness": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "3",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          399.9999999999999,
+          50
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [],
+        "shape": {
+          "fillRule": "EVEN_ODD",
+          "path": {
+            "type": "RECTANGLE",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "y0": 0,
+              "x1": 1500,
+              "y1": 400
+            },
+            "cornerRadius": 0
+          },
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.949,
+                      "g": 0.9412,
+                      "b": 0.2784,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0845,
+                      "b": 0.7176,
+                      "a": 1
+                    },
+                    "position": 0.1318359375
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.281494140625
+                  },
+                  {
+                    "color": {
+                      "r": 0.9999,
+                      "g": 0,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.466552734375
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.667236328125
+                  },
+                  {
+                    "color": {
+                      "r": 0.1181,
+                      "g": 0.102,
+                      "b": 0.7882,
+                      "a": 1
+                    },
+                    "position": 0.79736328125
+                  },
+                  {
+                    "color": {
+                      "r": 0.943,
+                      "g": 1,
+                      "b": 0.0314,
+                      "a": 1
+                    },
+                    "position": 0.903564453125
+                  },
+                  {
+                    "color": {
+                      "r": 0.1176,
+                      "g": 0.851,
+                      "b": 0.3098,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  1000,
+                  0,
+                  0,
+                  1000,
+                  602,
+                  202
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "position": "CENTER",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "style": "SOLID",
+              "thickness": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

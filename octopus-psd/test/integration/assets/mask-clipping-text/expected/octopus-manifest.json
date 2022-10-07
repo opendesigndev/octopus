@@ -1,0 +1,51 @@
+{
+  "version": "3.0.0-rc.5",
+  "origin": {
+    "name": "PHOTOSHOP",
+    "version": "0"
+  },
+  "pages": [],
+  "components": [
+    {
+      "id": "component-1",
+      "name": "component-1",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "1.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "4.png"
+          }
+        ],
+        "fonts": [
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}
