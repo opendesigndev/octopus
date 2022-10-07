@@ -1,10 +1,10 @@
-import fsp from 'fs/promises'
+import { parseJsonFromFile } from '../../../src/utils/files'
 
 export function lazyRead<T>(path: string) {
-  let data: T
+  let data: T | null
   return async () => {
     if (data === undefined) {
-      data = JSON.parse(await fsp.readFile(path, 'utf-8'))
+      data = await parseJsonFromFile(path)
     }
     return data
   }

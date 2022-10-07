@@ -57,6 +57,11 @@
   resolved "https://registry.npmjs.org/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.33.tgz"
   integrity sha512-AuU6WB9JQqbGJzqcZnqHtjay1VH7y6/GRQAqbIMADlA1IdNK4+q6LRpn0vw6d+afxoDu3f2S9HCi+iyaZcNHpQ==
 
+"@avocode/octopus-ts@3.0.0-alpha.36":
+  version "3.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@avocode/octopus-ts/-/octopus-ts-3.0.0-alpha.36.tgz#305822ea3669eecf8cb514698532c63a14232095"
+  integrity sha512-C5BDYt7nV1BcWDn+jf4wMYPVF1P/5jNq7lq18PtT1mFfNCbHHVrxxMWRUbguk3D+jaC2s5zFA2+GzcDUYnKw8w==
+
 "@avocode/psd-parser@0.8.4":
   version "0.8.4"
   resolved "https://registry.npmjs.org/@avocode/psd-parser/-/psd-parser-0.8.4.tgz"

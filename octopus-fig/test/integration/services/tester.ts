@@ -13,21 +13,21 @@ import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
 import type { TestComponents, Component } from './asset-reader'
 
-type ArtboardGroup = { expected: Component<Octopus['OctopusDocument']> | null; generated: Octopus['OctopusDocument'] }
+type ComponentGroup = { expected: Component<Octopus['OctopusDocument']> | null; generated: Octopus['OctopusDocument'] }
 
 type ConvertedDesign = {
   assetId: string
-  artboards: ArtboardGroup[]
+  components: ComponentGroup[]
   manifest: { expected: Component<Manifest['OctopusManifest']> | null; generated?: Manifest['OctopusManifest'] }
 }
 
-type CompareArtboardsOptions = {
-  artboards: ArtboardGroup[]
-  differ: jsondiffpatch.DiffPatcher
+type CompareComponentsOptions = {
   assetId: string
+  components: ComponentGroup[]
+  differ: jsondiffpatch.DiffPatcher
 }
 
-type MapArtboardsOptions = {
+type MapComponentsOptions = {
   expected?: Component<Octopus['OctopusDocument']>[]
   generated: Octopus['OctopusDocument'][]
 }
@@ -43,13 +43,13 @@ export class Tester {
     this._octopusConverter = createConverter()
   }
 
-  private _mapArtboards({ expected, generated }: MapArtboardsOptions): ArtboardGroup[] {
-    return generated.map((generatedArtboard) => {
+  private _mapComponents({ expected, generated }: MapComponentsOptions): ComponentGroup[] {
+    return generated.map((generatedComponent) => {
       return {
-        generated: generatedArtboard,
+        generated: generatedComponent,
         expected: expected
-          ? expected.find(({ path: artboardPath }) => {
-              return path.basename(artboardPath) === getOctopusFileName(generatedArtboard.id)
+          ? expected.find(({ path: componentPath }) => {
+              return path.basename(componentPath) === getOctopusFileName(generatedComponent.id)
             }) ?? null
           : null,
       }
@@ -59,64 +59,64 @@ export class Tester {
   private async _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign[]> {
     return await Promise.all(
       testComponentsArray.map(
-        async ({ artboards: artboardExpected, manifest: manifestExpected, eventDataPath, assetId }) => {
+        async ({ components: componentExpected, manifest: manifestExpected, eventDataPath, assetId }) => {
           const designEmitter = new DesignEmitterMock(eventDataPath)
 
           const result = await this._octopusConverter.convertDesign({ designEmitter })
-          const { components, manifest: manifestGenerated } = result ?? {}
+          const { components: componentsGenerated, manifest: manifestGenerated } = result ?? {}
 
-          const artboardsGenerated = (components ?? [])
+          const componentsGenValues = (componentsGenerated ?? [])
             .map((conversionResult) => conversionResult.value)
-            .filter((artboard): artboard is Octopus['OctopusDocument'] => Boolean(artboard))
+            .filter((component): component is Octopus['OctopusDocument'] => Boolean(component))
 
-          const artboards: ConvertedDesign['artboards'] = this._mapArtboards({
-            expected: artboardExpected,
-            generated: artboardsGenerated,
+          const components: ConvertedDesign['components'] = this._mapComponents({
+            expected: componentExpected,
+            generated: componentsGenValues,
           })
           const manifest: ConvertedDesign['manifest'] = {
             expected: manifestExpected,
             generated: cleanManifest(manifestGenerated),
           }
 
-          return { assetId, artboards, manifest }
+          return { assetId, components, manifest }
         }
       )
     )
   }
 
-  private _compareArtboards({ artboards, differ, assetId }: CompareArtboardsOptions): Promise<Fail[]> {
-    const failedArtboards = artboards.reduce<Promise<Fail[]>>(async (failedArtboards, artboardGroup) => {
-      const { generated, expected } = artboardGroup
-      const expectedArtboard = await expected?.read()
-      const delta = differ.diff(expectedArtboard, generated)
+  private _compareComponents({ components, differ, assetId }: CompareComponentsOptions): Promise<Fail[]> {
+    const failedComponents = components.reduce<Promise<Fail[]>>(async (failedComponents, componentGroup) => {
+      const { generated, expected } = componentGroup
+      const expectedComponent = await expected?.read()
+      const delta = differ.diff(expectedComponent, generated)
 
       if (delta) {
-        const failed = await failedArtboards
+        const failed = await failedComponents
 
-        const nameExt = expected?.path ? path.basename(expected?.path) : `missing artboard ${generated.id}`
+        const nameExt = expected?.path ? path.basename(expected?.path) : `missing component ${generated.id}`
 
         failed.push({
           name: `${assetId} / ${nameExt}`,
           json: stringify(generated),
-          diff: jsondiffpatch.formatters.html.format(delta, expectedArtboard),
+          diff: jsondiffpatch.formatters.html.format(delta, expectedComponent),
         })
       }
 
-      return failedArtboards
+      return failedComponents
     }, Promise.resolve([]))
 
-    return failedArtboards
+    return failedComponents
   }
 
   private _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
     const differ = jsondiffpatch.create()
 
-    const failed = designs.reduce<Promise<Fail[]>>(async (failedDesign, { artboards, manifest, assetId }) => {
+    const failed = designs.reduce<Promise<Fail[]>>(async (failedDesign, { components, manifest, assetId }) => {
       const failed = await failedDesign
 
-      const failedArtboards = await this._compareArtboards({ differ, assetId, artboards })
-      if (failedArtboards.length) {
-        failed.push(...failedArtboards)
+      const failedComponents = await this._compareComponents({ differ, assetId, components })
+      if (failedComponents.length) {
+        failed.push(...failedComponents)
       }
 
       const { expected, generated: manifestGenerated } = manifest
