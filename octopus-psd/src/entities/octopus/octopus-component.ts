@@ -78,13 +78,13 @@ export class OctopusComponent {
     return OctopusLayerGroup.createBackground({ id, layers })
   }
 
-  async convert(): Promise<Octopus['OctopusDocument']> {
+  async convert(): Promise<Octopus['OctopusComponent']> {
     return {
       id: this.id,
       type: 'ARTBOARD',
       version: await this.version,
       dimensions: this.dimensions,
       content: this.content,
-    } as Octopus['OctopusDocument']
+    } as Octopus['OctopusComponent']
   }
 }

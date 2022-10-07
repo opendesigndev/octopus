@@ -29,7 +29,7 @@ export type ConvertDesignResult = {
 
 export type ComponentConversionResult = {
   id: string
-  value: Octopus['OctopusDocument'] | undefined
+  value: Octopus['OctopusComponent'] | undefined
   error: Error | null
   time: number
 }

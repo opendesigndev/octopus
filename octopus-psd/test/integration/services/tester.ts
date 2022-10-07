@@ -12,7 +12,10 @@ import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
 import type { AssetReader, TestComponents, Component } from './asset-reader'
 
-type ComponentGroup = { expected: Component<Octopus['OctopusDocument']> | null; generated: Octopus['OctopusDocument'] }
+type ComponentGroup = {
+  expected: Component<Octopus['OctopusComponent']> | null
+  generated: Octopus['OctopusComponent']
+}
 
 type ConvertedDesign = {
   designId: string
@@ -43,8 +46,8 @@ export class Tester {
     expected,
     generated,
   }: {
-    expected?: Component<Octopus['OctopusDocument']>[]
-    generated: Octopus['OctopusDocument'][]
+    expected?: Component<Octopus['OctopusComponent']>[]
+    generated: Octopus['OctopusComponent'][]
   }): ComponentGroup[] {
     return generated.map((generatedComponent) => {
       return {
@@ -76,7 +79,7 @@ export class Tester {
 
         const generatedComponents = componentsGenerated
           .map((conversionResult) => conversionResult.value)
-          .filter((component): component is Octopus['OctopusDocument'] => Boolean(component))
+          .filter((component): component is Octopus['OctopusComponent'] => Boolean(component))
 
         const components: ConvertedDesign['components'] = this._mapComponents({
           expected: componentComponents,

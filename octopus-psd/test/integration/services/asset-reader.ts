@@ -15,7 +15,7 @@ export type Component<T> = {
 export type TestComponents = {
   designId: string
   designPath: string
-  components: Component<Octopus['OctopusDocument']>[]
+  components: Component<Octopus['OctopusComponent']>[]
   manifest: Component<Manifest['OctopusManifest']>
 }
 

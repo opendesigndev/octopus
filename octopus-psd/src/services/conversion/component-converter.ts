@@ -17,7 +17,7 @@ export class ComponentConverter {
     this._designConverter = designConverter
   }
 
-  async convert(): Promise<Octopus['OctopusDocument'] | null> {
+  async convert(): Promise<Octopus['OctopusComponent'] | null> {
     const sourceComponent = this._designConverter.sourceDesign.getComponentById(this._componentId)
     if (!sourceComponent) return null
     return new OctopusComponent({ sourceComponent, designConverter: this._designConverter }).convert()

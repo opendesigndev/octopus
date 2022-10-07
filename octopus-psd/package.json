@@ -21,9 +21,9 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@avocode/manifest-ts": "3.0.0-alpha.36",
+    "@avocode/manifest-ts": "3.0.0-alpha.37",
     "@avocode/octopus-common": "3.0.0-rc.23",
-    "@avocode/octopus-ts": "3.0.0-alpha.36",
+    "@avocode/octopus-ts": "3.0.0-alpha.37",
     "@avocode/psd-parser": "0.8.4",
     "@sentry/node": "6.14.0",
     "chalk": "^4.1.2",
