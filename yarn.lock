@@ -21,10 +21,10 @@
   resolved "https://registry.npmjs.org/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.33.tgz"
   integrity sha512-kpxW89i8rKH/ztUC7XO4dbK02+bb4mjG/rDCG6fiBuGpFZv5vqVRwHLgeQf525z31bPSrUcBIqQlYRXW4/34Jw==
 
-"@avocode/manifest-ts@3.0.0-alpha.36":
-  version "3.0.0-alpha.36"
-  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.36.tgz#4bc7937116ec62d84d68b9adf7c59eb015faf1b2"
-  integrity sha512-65P8bh2BKdQldrD2sVDO9q2NQY4Y98KzUsUimKpBYj83K8cAsBHf3N+HLzElI5DqrZZq69bS1LsIzLP0AgRFLw==
+"@avocode/manifest-ts@3.0.0-alpha.37":
+  version "3.0.0-alpha.37"
+  resolved "https://registry.yarnpkg.com/@avocode/manifest-ts/-/manifest-ts-3.0.0-alpha.37.tgz#7a49d2e526a0d5f5298ade51d7617353804e53f7"
+  integrity sha512-Lo5N1x1WEAZkPHPsn5r3K8r4T5KbAn+oscD/U3ZIOz4V02C3jNWrwqm63IJdgyvc/ZjR2MoubtY84ftQd680pg==
 
 "@avocode/manifest-ts@3.0.0-alpha.37":
   version "3.0.0-alpha.37"
@@ -4733,11 +4733,6 @@ typedarray-to-buffer@^3.1.5:
   integrity sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==
   dependencies:
     is-typedarray "^1.0.0"
-
-typescript@4.4.4:
-  version "4.4.4"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.4.4.tgz"
-  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
 
 typescript@4.6.4:
   version "4.6.4"

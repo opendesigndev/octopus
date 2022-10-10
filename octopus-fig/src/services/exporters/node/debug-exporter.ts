@@ -2,6 +2,7 @@ import EventEmitter from 'events'
 import path from 'path'
 
 import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { timestamp } from '@avocode/octopus-common/dist/utils/timestamp'
 import { v4 as uuidv4 } from 'uuid'
 
 import {
@@ -14,7 +15,6 @@ import {
 } from '../../../utils/exporter'
 import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
-import { timestamp } from '../../../utils/timestamp'
 
 import type { Manifest } from '../../../typings/manifest'
 import type { ComponentConversionResult } from '../../conversion/design-converter'

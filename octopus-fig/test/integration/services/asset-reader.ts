@@ -9,13 +9,13 @@ import type { Octopus } from '../../../src/typings/octopus'
 
 export type Component<T> = {
   path: string
-  read: () => Promise<T>
+  read: () => Promise<T | null>
 }
 
 export type TestComponents = {
   assetId: string
   eventDataPath: string
-  artboards: Component<Octopus['OctopusDocument']>[]
+  components: Component<Octopus['OctopusComponent']>[]
   manifest: Component<Manifest['OctopusManifest']>
 }
 
@@ -86,12 +86,12 @@ export class AssetReader {
       const manifest = testDirectoryTree.expectedPaths.find(
         (filePath) => path.basename(filePath) === MANIFEST_FILE_NAME
       )
-      const artboards = testDirectoryTree.expectedPaths.filter((filePath) =>
+      const components = testDirectoryTree.expectedPaths.filter((filePath) =>
         /[0-9]+-octopus\.json$/.test(path.basename(filePath))
       )
 
-      if (!artboards?.length) {
-        console.error(`missing artboards in: ${testDirectoryTree.testName}/${AssetReader.EXPECTED_DIR_NAME}`)
+      if (!components?.length) {
+        console.error(`missing components in: ${testDirectoryTree.testName}/${AssetReader.EXPECTED_DIR_NAME}`)
       }
 
       if (!manifest) {
@@ -101,16 +101,8 @@ export class AssetReader {
       return {
         assetId: testDirectoryTree.testName,
         eventDataPath: testDirectoryTree.eventDataPath,
-        manifest: {
-          path: manifest,
-          read: lazyRead(manifest),
-        },
-        artboards: artboards.map((artboard) => {
-          return {
-            path: artboard,
-            read: lazyRead(artboard),
-          }
-        }),
+        manifest: { path: manifest, read: lazyRead(manifest) },
+        components: components.map((component) => ({ path: component, read: lazyRead(component) })),
       }
     })
   }

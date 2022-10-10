@@ -17,7 +17,7 @@ export class ComponentConverter {
     this._version = options.version
   }
 
-  convert(): Promise<Octopus['OctopusDocument']> {
+  convert(): Promise<Octopus['OctopusComponent']> {
     const component = new OctopusComponent({
       source: this._source,
       version: this._version,

@@ -1,11 +1,11 @@
 # Octopus Converter for Figma
 
-Figma to Octopus 3 converter.
+Figma HTTP API format to Octopus 3 converter.
 
 ## Install
 
 ```
-yarn
+yarn add @opendesign/octopus-fig
 ```
 
 ### .env variables
@@ -19,7 +19,7 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 
 #### .env demo variables
 
-ENV variables for our demo scripts located in `/example-node/*`
+ENV variables for our demo scripts located in `/examples/node/*`
 
 | Variable              | Type    | Description                                                    |
 | --------------------- | ------- | -------------------------------------------------------------- |
@@ -43,6 +43,7 @@ You can find it in the URL of the design: `https://www.figma.com/file/__HERE__/.
 Designed for manual runs.
 
 ```
+yarn
 yarn convert:debug FIGMA_DESIGN_HASH
 ```
 
@@ -51,19 +52,16 @@ yarn convert:debug FIGMA_DESIGN_HASH
 Designed for running in automated runs.
 
 ```
+yarn
 yarn convert:local FIGMA_DESIGN_HASH
 ```
-
-Check `example-node/` for more details about usage in node.
 
 ---
 
 ## Demo: Example Web
 
-Run `yarn bundle` and then open `example-web/index.html` in [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+Run `yarn bundle` and then open `examples/web/index.html` in [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 Look for `Result:` in console output.
-
-Check `example-web/` for more details about usage in web browser.
 
 ---
 
@@ -77,62 +75,15 @@ There are three main processing steps:
 
 Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
 
-```ts
-import os from 'os'
-import path from 'path'
+Check [`examples/node/convert-api-local.ts`](./examples/node/convert-api-local.ts) for example usage in automated runs.
 
-import dotenv from 'dotenv'
-import { v4 as uuidv4 } from 'uuid'
+Check [`examples/node/convert-api-debug.ts`](./examples/node/convert-api-debug.ts) for example usage in custom manual runs.
 
-import { LocalExporter, createConverter, SourceApiReader } from '../src/index-node'
+Check [`examples/web/`](./examples/web/) for more details about usage in web browser.
 
-dotenv.config()
+Check [`src/services/exporters/`](./src/services/exporters/) for more details about exporters.
 
-const converter = createConverter()
-
-async function convertDesign(designId: string) {
-  const testDir = path.join(os.tmpdir(), uuidv4())
-
-  const readerOptions = {
-    designId,
-    token: process.env.API_TOKEN as string,
-    ids: [],
-    host: 'api.figma.com',
-    pixelsLimit: 1e7,
-    framePreviews: true,
-    previewsParallels: 3,
-    tokenType: 'personal',
-    nodesParallels: 10,
-    s3Parallels: 10,
-    verbose: true,
-    figmaIdsFetchUsedComponents: true,
-    renderImagerefs: false,
-    shouldObtainLibraries: true,
-    shouldObtainStyles: true,
-    parallelRequests: 5,
-  }
-  const reader = new SourceApiReader(readerOptions)
-
-  const exporter = new LocalExporter({ path: testDir })
-
-  await converter.convertDesign({ designEmitter: reader.parse(), exporter })
-  await exporter.completed()
-
-  console.info()
-  console.info(`Output: file://${testDir}`)
-}
-
-const designId = process.argv[2]
-convertDesign(designId)
-```
-
-Check `example-node/` for more details about usage in node.
-
-Check `example-web/` for more details about usage in web browser.
-
-Check `src/services/exporters/` for more details about exporters.
-
-Check `src/services/readers/` for more details about readers
+Check [`src/services/readers/`](./src/services/readers/) for more details about readers
 
 ---
 
@@ -142,4 +93,21 @@ Check `src/services/readers/` for more details about readers
 yarn test
 ```
 
-runs unit & integration tests
+Runs Unit & Integration tests.
+
+#### Unit Tests
+
+```
+yarn test:unit
+```
+
+Runs Unit tests using jest framework.
+
+#### Integration Tests
+
+```
+yarn test:integration
+```
+
+Runs Integration tests using our custom framework.
+Tries to convert `octopus components` + `manifest` for saved designs and compares them using `jsondiffpatch` with saved expected output.
