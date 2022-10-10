@@ -1,13 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 
+import { timestamp } from '@avocode/octopus-common/dist/utils/timestamp'
 import handlebars from 'handlebars'
 
 import { makeDir, saveFile } from '../../src/utils/files'
 import { AssetReader } from './services/asset-reader'
 import { Tester } from './services/tester'
 import { getCommandLineArgs } from './utils/argv'
-import { timestamp } from './utils/timestamp'
 
 import type { Fail } from './services/tester'
 

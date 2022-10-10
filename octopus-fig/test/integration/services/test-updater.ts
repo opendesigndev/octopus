@@ -25,8 +25,8 @@ export class TestUpdater {
   private _testsDirectoryData: TestDirectoryData[]
   private _octopusConverter: OctopusFigConverter
 
-  constructor(_testsDirectoryData: TestDirectoryData[]) {
-    this._testsDirectoryData = _testsDirectoryData
+  constructor(testsDirectoryData: TestDirectoryData[]) {
+    this._testsDirectoryData = testsDirectoryData
     this._octopusConverter = createConverter()
   }
 

@@ -4,7 +4,7 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, DebugExporter, SourceApiReader } from '../src/index-node'
+import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 

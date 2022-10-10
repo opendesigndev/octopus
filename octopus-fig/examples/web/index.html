@@ -42,13 +42,13 @@
       }
       
       try {
+        const converter = createConverter()
         const reader = new SourceApiReader(readerOptions)
         
         console.info('ids:', await reader.frameLikeIds)
         
-        const design = reader.parse(ids)
-        const converter = createConverter()
-        const result = await converter.convertDesign({ design })
+        const designEmitter = reader.parse(ids)
+        const result = await converter.convertDesign({ designEmitter })
         console.info('Result:', result)
       } catch(err) {
         console.error('Some error happened:', err)

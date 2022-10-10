@@ -21,6 +21,7 @@ lib/
 sample
 
 */example-web/*.umd.js
+*/examples/web/*.umd.js
 **/*/test-report*.html
 
 # Created by https://www.gitignore.io/api/git,node,code,webstorm,sublimetext
