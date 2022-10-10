@@ -5,7 +5,7 @@ Photoshop to Octopus 3 converter.
 ## Install
 
 ```
-yarn
+yarn add @opendesign/octopus-psd
 ```
 
 ### .env variables
@@ -19,7 +19,7 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 
 #### .env demo variables
 
-ENV variables for our demo scripts located in `/example-node/*`
+ENV variables for our demo scripts located in `/examples/node/*`
 
 | Variable              | Type    | Description                                                    |
 | --------------------- | ------- | -------------------------------------------------------------- |
@@ -89,56 +89,37 @@ There are three main processing steps:
 
 Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones.
 
-```ts
-import os from 'os'
-import path from 'path'
+Check [`examples/node/convert-psd-local.ts`](./examples/node/convert-api-local.ts) for example usage in automated runs.
 
-import { v4 as uuidv4 } from 'uuid'
+Check [`examples/node/convert-psd-debug.ts`](./examples/node/convert-api-debug.ts) for example usage in custom manual runs.
 
-/**
- * Reader (`PSDFileReader`) reads `.psd` files by given path.
- * Exporter (`LocalExporter`) defines how and where save outputs.
- * Converter takes `SourceDesign` entitiy which should be available from reader as constructor option and exporter as convertDesign option.
- */
-import { LocalExporter, OctopusPSDConverter, PSDFileReader } from '../src'
+Check [`src/services/exporters/`](./src/services/exporters/) for more details about exporters.
 
-const converter = new OctopusPSDConverter()
-
-async function convert() {
-  const [filePath] = process.argv.slice(2)
-  const testDir = path.join(os.tmpdir(), uuidv4())
-
-  const reader = new PSDFileReader({ path: filePath })
-  const sourceDesign = await reader.sourceDesign
-  if (sourceDesign === null) {
-    console.error('Creating SourceDesign Failed')
-    return
-  }
-  const exporter = new LocalExporter({ path: testDir })
-
-  await converter.convertDesign({ exporter, sourceDesign })
-  await exporter.completed()
-
-  console.info()
-  console.info(`Input: ${filePath}`)
-  console.info(`Output: ${testDir}`)
-
-  await reader.cleanup()
-}
-
-convert()
-```
-
-Check `example-node/` for more details about usage in node.
-
-Check `src/services/exporters/` for more details about exporters.
-
-Check `src/services/readers/` for more details about readers.
+Check [`src/services/readers/`](./src/services/readers/) for more details about readers
 
 ---
 
-## Unit Tests
+## Tests
 
 ```
 yarn test
 ```
+
+Runs Unit & Integration tests.
+
+#### Unit Tests
+
+```
+yarn test:unit
+```
+
+Runs Unit tests using Jest framework.
+
+#### Integration Tests
+
+```
+yarn test:integration
+```
+
+Runs Integration tests using our custom framework.
+Tries to convert `octopus components` + `manifest` for saved designs and compares them using `jsondiffpatch` with saved expected output.

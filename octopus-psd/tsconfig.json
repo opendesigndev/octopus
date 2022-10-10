@@ -18,5 +18,5 @@
       "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]
     }
   },
-  "include": ["src", "test", "example-node"]
+  "include": ["src", "test", "examples/node"]
 }
