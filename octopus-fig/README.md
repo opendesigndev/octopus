@@ -73,6 +73,8 @@ There are three main processing steps:
 - conversion (using _converter_ with `DesignEmitter` instance produced by reader)
 - exporting (using _exporters_)
 
+Readers in other convertors returns `SourceDesign`. But for `octopus-fig` we introduce different approach. Here we are requesting the Figma API for the data. So to make parsing quicker, instead of complete SourceDesign, we are returning `DesignEmitter`, which emits the requested data when he receives them from the Figma API.
+
 Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
 
 Check [`examples/node/convert-api-local.ts`](./examples/node/convert-api-local.ts) for example usage in automated runs.
