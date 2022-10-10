@@ -3,7 +3,7 @@ import { asString } from '@avocode/octopus-common/dist/utils/as'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { convertBlendMode } from '../../utils/convert'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { OctopusComponent } from './octopus-component'
@@ -96,7 +96,7 @@ export class OctopusLayerBase {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Layer type', { type })
+      logger.warn('Unknown Layer type', { type })
       return null
     }
     return result

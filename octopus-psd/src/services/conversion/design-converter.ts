@@ -6,7 +6,7 @@ import { isObject } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
-import { logError } from '../instances/misc'
+import { logger } from '../instances/logger'
 import { ComponentConverter } from './component-converter'
 
 import type { OctopusPSDConverter } from '../..'
@@ -81,7 +81,7 @@ export class DesignConverter {
       if (!value) throw new Error('Component convert error')
       return { value, error: null }
     } catch (error) {
-      logError('Converting Component failed', { componentId, error })
+      logger.error('Converting Component failed', { componentId, error })
       return { value: undefined, error }
     }
   }

@@ -1,7 +1,7 @@
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { OctopusEffectFill } from './octopus-effect-fill'
 
 import type { Octopus } from '../../typings/octopus'
@@ -50,7 +50,7 @@ export class OctopusStroke {
     const lineAlignment = this._stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
+      logger.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
       return null
     }
     return result
@@ -60,7 +60,7 @@ export class OctopusStroke {
     const lineCap = this._stroke.lineCap
     const result = getMapped(lineCap, OctopusStroke.STROKE_LINE_CAP_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke line cap', { lineCap, stroke: this._stroke })
+      logger.warn('Unknown Stroke line cap', { lineCap, stroke: this._stroke })
       return null
     }
     return result
@@ -70,7 +70,7 @@ export class OctopusStroke {
     const lineJoin = this._stroke.lineJoin
     const result = getMapped(lineJoin, OctopusStroke.STROKE_LINE_JOIN_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke line join', { lineJoin, stroke: this._stroke })
+      logger.warn('Unknown Stroke line join', { lineJoin, stroke: this._stroke })
       return null
     }
     return result

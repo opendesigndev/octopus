@@ -1,7 +1,7 @@
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { OctopusEffectBase } from './octopus-effect-base'
 import { OctopusEffectFill } from './octopus-effect-fill'
 
@@ -34,7 +34,7 @@ export class OctopusEffectStroke extends OctopusEffectBase {
     const lineAlignment = this._stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusEffectStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
+      logger.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
       return null
     }
     return result

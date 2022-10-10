@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design'
 import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
-import { logInfo } from '../instances/misc'
+import { logger } from '../instances/logger'
 
 import type { SourceImage } from '../../entities/source/source-design'
 import type { RawComponent } from '../../typings/raw'
@@ -72,12 +72,12 @@ export class PSDFileReader {
 
   private async _getSourceComponent(): Promise<RawComponent | null> {
     const { time: timeParse } = await benchmarkAsync(() => parsePsd(this.path, this._parsePsdOptions))
-    logInfo(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
+    logger.info(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
 
     const { time: timeRead, result } = await benchmarkAsync(() =>
       parseJsonFromFile<RawComponent>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
     )
-    logInfo(`RawComponent prepared ${displayPerf(timeRead)}`)
+    logger.info(`RawComponent prepared ${displayPerf(timeRead)}`)
 
     return result
   }

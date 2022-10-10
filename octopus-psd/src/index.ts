@@ -4,9 +4,7 @@ import { DesignConverter } from './services/conversion/design-converter'
 import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
 import { createEnvironment } from './services/general/environment'
-import { createSentry } from './services/general/sentry'
-import { logger, set as setLogger } from './services/instances/logger'
-import { set as setSentry } from './services/instances/sentry'
+import { set as setLogger } from './services/instances/logger'
 import { PSDFileReader } from './services/readers/psd-file-reader'
 import { SourceFileReader } from './services/readers/source-file-reader'
 
@@ -41,12 +39,6 @@ export class OctopusPSDConverter {
 
   constructor(options?: OctopusPSDConverterOptions) {
     this._setupLogger(options?.logger)
-    setSentry(
-      createSentry({
-        dsn: process.env.SENTRY_DSN,
-        logger,
-      })
-    )
 
     this._pkg = readPackageUpAsync({ cwd: __dirname })
   }

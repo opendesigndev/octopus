@@ -3,7 +3,7 @@ import { getMapped } from '@avocode/octopus-common/dist/utils/common'
 import { invLerp, lerp } from '@avocode/octopus-common/dist/utils/math'
 import uniq from 'lodash/uniq'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { convertColor, convertOffset } from '../../utils/convert'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
@@ -66,7 +66,7 @@ export class OctopusEffectFillGradient {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Fill Gradient type', { type })
+      logger.warn('Unknown Fill Gradient type', { type })
       return null
     }
     return result

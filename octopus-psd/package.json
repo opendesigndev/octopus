@@ -25,7 +25,6 @@
     "@avocode/octopus-common": "3.0.0-rc.26",
     "@avocode/octopus-ts": "3.0.0-alpha.37",
     "@avocode/psd-parser": "0.8.4",
-    "@sentry/node": "6.14.0",
     "@types/lodash": "^4.14.178",
     "@types/pino": "^6.3.3",
     "@types/rimraf": "^3.0.2",

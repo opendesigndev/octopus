@@ -1,4 +1,4 @@
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { OctopusEffectBase } from './octopus-effect-base'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 
@@ -29,7 +29,7 @@ export class OctopusEffectOverlayColor extends OctopusEffectBase {
   get overlay(): OctopusEffectFillColor | null {
     const color = this._color
     if (color === null) {
-      logWarn('Unknown effect overlay color', { fill: this._fill })
+      logger.warn('Unknown effect overlay color', { fill: this._fill })
       return null
     }
     const opacity = this._fill.opacity

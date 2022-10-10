@@ -1,6 +1,6 @@
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { convertOffset } from '../../utils/convert'
 import { createMatrix } from '../../utils/paper-factories'
 import { OctopusEffectBase } from './octopus-effect-base'
@@ -63,7 +63,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logWarn('Unknown image', { image, id: this._fill?.pattern?.ID })
+      logger.warn('Unknown image', { image, id: this._fill?.pattern?.ID })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)
