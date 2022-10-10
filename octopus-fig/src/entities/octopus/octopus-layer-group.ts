@@ -3,7 +3,7 @@ import { getConverted } from '@avocode/octopus-common/dist/utils/common'
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
-import { getArtboardTransform } from '../../utils/source'
+import { getTopComponentTransform } from '../../utils/source'
 import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
@@ -14,18 +14,18 @@ import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerFrame
-  isArtboard?: boolean
+  isTopComponent?: boolean
 }
 
 export class OctopusLayerGroup extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerFrame
   private _layers: OctopusLayer[]
-  private _isArtboard: boolean
+  private _isTopComponent: boolean
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)
-    this._isArtboard = options.isArtboard ?? false
+    this._isTopComponent = options.isTopComponent ?? false
     this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
@@ -34,15 +34,15 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   }
 
   get transform(): number[] {
-    if (this._isArtboard)
+    if (this._isTopComponent)
       return env.NODE_ENV === 'debug' // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
-        ? getArtboardTransform(this._sourceLayer) ?? DEFAULTS.TRANSFORM
+        ? getTopComponentTransform(this._sourceLayer) ?? DEFAULTS.TRANSFORM
         : DEFAULTS.TRANSFORM
     return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._isArtboard
+    const isArtboard = this._isTopComponent
     return isArtboard ? { isArtboard } : undefined
   }
 

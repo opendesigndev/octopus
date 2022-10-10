@@ -6,41 +6,41 @@ import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceComponent } from '../source/source-component'
 
-type OctopusArtboardOptions = {
-  sourceArtboard: SourceArtboard
+type OctopusComponentOptions = {
+  source: SourceComponent
   version: string
 }
 
-export class OctopusArtboard {
-  private _sourceArtboard: SourceArtboard
+export class OctopusComponent {
+  private _source: SourceComponent
   private _version: string
   private _layers: OctopusLayer[]
 
-  constructor(options: OctopusArtboardOptions) {
-    this._sourceArtboard = options.sourceArtboard
+  constructor(options: OctopusComponentOptions) {
+    this._source = options.source
     this._version = options.version
-    this._layers = createOctopusLayers(this.sourceArtboard.layers, this)
+    this._layers = createOctopusLayers(this.source.layers, this)
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     return this
   }
 
-  get sourceArtboard(): SourceArtboard {
-    return this._sourceArtboard
+  get source(): SourceComponent {
+    return this._source
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    const bounds = env.NODE_ENV === 'debug' ? this.sourceArtboard.bounds : this.sourceArtboard.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const bounds = env.NODE_ENV === 'debug' ? this.source.bounds : this.source.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     if (!bounds) return undefined
     const { width, height } = bounds
     return { width, height }
   }
 
   get id(): string {
-    return convertId(this.sourceArtboard.id)
+    return convertId(this.source.id)
   }
 
   get version(): string {
@@ -52,20 +52,20 @@ export class OctopusArtboard {
   }
 
   private get _content(): Octopus['MaskGroupLayer'] | Octopus['GroupLayer'] | undefined {
-    const sourceLayer = this.sourceArtboard.sourceFrame
+    const sourceLayer = this.source.sourceFrame
     const maskGroup = sourceLayer.hasBackgroundMask
-      ? OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent: this, sourceLayer, isArtboard: true })
-      : new OctopusLayerGroup({ parent: this, sourceLayer, isArtboard: true })
+      ? OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent: this, sourceLayer, isTopComponent: true })
+      : new OctopusLayerGroup({ parent: this, sourceLayer, isTopComponent: true })
     return maskGroup?.convert() ?? undefined
   }
 
-  async convert(): Promise<Octopus['OctopusDocument']> {
+  async convert(): Promise<Octopus['OctopusComponent']> {
     return {
       id: this.id,
       type: 'ARTBOARD',
       version: this.version,
       dimensions: this.dimensions,
       content: this._content,
-    } as Octopus['OctopusDocument']
+    } as Octopus['OctopusComponent']
   }
 }

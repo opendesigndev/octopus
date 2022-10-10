@@ -5,7 +5,7 @@ import { getRole } from '../../utils/source'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
-import type { SourceArtboard } from '../source/source-artboard'
+import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 import type { ResolvedStyle } from '@avocode/figma-parser/lib/src/index-node'
 
@@ -20,7 +20,14 @@ export type ComponentDescriptor = {
   time: number | null
 }
 
-type ComponentSourceWithDescriptor = { source: SourceArtboard; descriptor: ComponentDescriptor }
+export type SetExportedLibraryOptions = {
+  name: string
+  designId: string
+  description: string
+  designNodeId: string
+}
+
+type ComponentSourceWithDescriptor = { source: SourceComponent; descriptor: ComponentDescriptor }
 
 export class OctopusManifest {
   private _sourceDesign: SourceDesign
@@ -99,12 +106,13 @@ export class OctopusManifest {
     return this._exports.chunks.get(chunkId)
   }
 
-  setExportedLibrary(id: string, name: string, childId: string, description?: string): void {
+  setExportedLibrary(options: SetExportedLibraryOptions): void {
+    const { designId: id, name, designNodeId } = options
     const library = this._exports.libraries.get(id)
     if (!library) {
-      this._exports.libraries.set(id, { id, name, description, children: [{ id: childId, type: 'COMPONENT' }] })
+      this._exports.libraries.set(id, { id, name, children: [{ id: designNodeId, type: 'COMPONENT' }] })
     } else {
-      library.children = push(library.children, { id: childId, type: 'COMPONENT' })
+      library.children = push(library.children, { id: designNodeId, type: 'COMPONENT' })
     }
   }
 
@@ -118,7 +126,7 @@ export class OctopusManifest {
     return componentResult.descriptor.path
   }
 
-  setExportedComponent(source: SourceArtboard, descriptor: ComponentDescriptor): void {
+  setExportedComponent(source: SourceComponent, descriptor: ComponentDescriptor): void {
     this._exports.components.set(source.id, { source, descriptor })
   }
 
@@ -152,7 +160,7 @@ export class OctopusManifest {
     }))
   }
 
-  private _getStatus(source: SourceArtboard): Manifest['Status'] {
+  private _getStatus(source: SourceComponent): Manifest['Status'] {
     const status = this.getExportedComponentDescriptorById(source.id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
     return {
@@ -179,7 +187,7 @@ export class OctopusManifest {
     return fonts.map((font) => ({ name: font }))
   }
 
-  private _getAssets(source: SourceArtboard): Manifest['Assets'] {
+  private _getAssets(source: SourceComponent): Manifest['Assets'] {
     const imageIds = this.getExportedComponentImageMap(source.id) ?? []
     const images = this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
@@ -190,7 +198,7 @@ export class OctopusManifest {
     return { type: 'SOURCE', location: { type: 'RELATIVE', path } }
   }
 
-  private _getArtifacts(source: SourceArtboard): Manifest['Artifact'][] {
+  private _getArtifacts(source: SourceComponent): Manifest['Artifact'][] {
     const artifacts: Manifest['Artifact'][] = []
     const sourcePath = this.getExportedSourcePath(source.id)
     if (sourcePath) artifacts.push(this._getSourceArtifact(sourcePath))
@@ -251,7 +259,7 @@ export class OctopusManifest {
     return Array.from(this._exports.libraries.values())
   }
 
-  private _getArtboard(source: SourceArtboard): Manifest['Component'] {
+  private _getComponent(source: SourceComponent): Manifest['Component'] {
     const id = source.id
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
@@ -280,7 +288,7 @@ export class OctopusManifest {
   }
 
   get components(): Manifest['Component'][] {
-    return Array.from(this._exports.components.values()).map((component) => this._getArtboard(component.source))
+    return Array.from(this._exports.components.values()).map((component) => this._getComponent(component.source))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {

@@ -4,7 +4,7 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, DebugExporter, SourceApiReader } from '../src/index-node'
+import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node'
 import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
@@ -22,9 +22,11 @@ type ConvertedDocumentResult = {
 
 dotenv.config()
 
+const converter = createConverter()
+
 export async function convertDesign({
   designId,
-  shouldRender = process.env.CONVERT_RENDER === 'true',
+  shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const outputDir = path.join(await getPkgLocation(), 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
@@ -33,7 +35,7 @@ export async function convertDesign({
   // exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
   // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
-  exporter.on('octopus:document', async (result: ConvertedDocumentResult, role: string) => {
+  exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =
@@ -72,10 +74,15 @@ export async function convertDesign({
   }
 
   const reader = new SourceApiReader(readerOptions)
-  const converter = createConverter()
-  await converter.convertDesign({ design: reader.parse(), exporter, skipReturn: true })
+  await converter.convertDesign({ designEmitter: reader.parse(), exporter, skipReturn: true })
   await exporter.completed()
 }
 
-const designId = process.argv[2]
-convertDesign({ designId })
+export async function convertDesigns(designIds: string[], shouldRender?: boolean) {
+  for (const designId of designIds) {
+    await convertDesign({ designId, shouldRender })
+  }
+}
+
+const designIds = process.argv.slice(2)
+convertDesigns(designIds)

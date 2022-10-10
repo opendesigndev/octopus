@@ -8,7 +8,7 @@ import { SourceLayerCommon } from './source-layer-common'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer, RawLayerFrame } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
+import type { FrameTypes, SourceLayerParent } from './source-layer-common'
 
 type SourceLayerFrameOptions = {
   parent: SourceLayerParent
@@ -35,7 +35,7 @@ export class SourceLayerFrame extends SourceLayerCommon {
     return this.fills.length > 0 || this.strokes.length > 0
   }
 
-  get type(): 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE' {
+  get type(): FrameTypes {
     return this._rawValue.type ?? 'FRAME'
   }
 

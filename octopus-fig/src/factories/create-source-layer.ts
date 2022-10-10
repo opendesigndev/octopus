@@ -23,6 +23,10 @@ type CreateLayerOptions = {
 
 const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   FRAME: createLayerFrame,
+  GROUP: createLayerFrame,
+  INSTANCE: createLayerFrame,
+  COMPONENT: createLayerFrame,
+  COMPONENT_SET: createLayerFrame,
   BOOLEAN_OPERATION: createLayerShape,
   ELLIPSE: createLayerShape,
   LINE: createLayerShape,
@@ -32,10 +36,6 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   VECTOR: createLayerShape,
   TEXT: createLayerText,
   SLICE: createLayerSlice,
-  GROUP: createLayerFrame,
-  INSTANCE: createLayerFrame,
-  COMPONENT: createLayerFrame,
-  COMPONENT_SET: createLayerFrame,
 } as const
 
 function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerFrame {

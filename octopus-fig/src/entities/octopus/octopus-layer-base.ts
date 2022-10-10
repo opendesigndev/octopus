@@ -4,9 +4,9 @@ import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from '../../services'
-import { convertBlendMode, convertId } from '../../utils/convert'
+import { convertLayerBlendMode, convertId } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
-import { OctopusArtboard } from './octopus-artboard'
+import { OctopusComponent } from './octopus-component'
 import { OctopusEffect } from './octopus-effect'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -15,7 +15,7 @@ import type { OctopusLayerGroup } from './octopus-layer-group'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
 
-export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard
+export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 
 type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
@@ -49,9 +49,9 @@ export class OctopusLayerBase {
     return this._sourceLayer
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
+    return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
   get id(): string {
@@ -71,7 +71,8 @@ export class OctopusLayerBase {
   }
 
   get blendMode(): Octopus['BlendMode'] {
-    return convertBlendMode(this._sourceLayer.blendMode)
+    const { isFrameLike } = this._sourceLayer
+    return convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
   }
 
   get transform(): number[] {
@@ -113,10 +114,10 @@ export class OctopusLayerBase {
       id: this.id,
       name: this.name,
       type,
-      transform: this.transform,
       visible: this.visible,
-      blendMode: this.blendMode,
       opacity: this.opacity,
+      blendMode: this.blendMode,
+      transform: this.transform,
       effects: this.effects,
     }
   }

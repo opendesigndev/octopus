@@ -70,7 +70,7 @@ export class OctopusPath {
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
-    return sourceLayer.shapeType === 'RECTANGLE'
+    return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadii
   }
 
   private _getPathRectangle({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathRectangle'] {

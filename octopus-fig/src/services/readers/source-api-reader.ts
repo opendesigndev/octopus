@@ -1,8 +1,9 @@
 import { createParser } from '@avocode/figma-parser'
 
-import type { Design } from '@avocode/figma-parser/lib/src/index-node'
 import type { Logger } from '@avocode/figma-parser/lib/src/services/logger/logger'
 import type { ICacher } from '@avocode/figma-parser/lib/src/types/cacher'
+// eslint-disable-next-line import/no-named-as-default
+import type EventEmitter from 'eventemitter3'
 
 export type SourceApiReaderOptions = {
   designId: string
@@ -27,7 +28,6 @@ export type SourceApiReaderOptions = {
 
 export class SourceApiReader {
   private _options: SourceApiReaderOptions
-  private _design: Design
   private _parser: ReturnType<typeof createParser>
 
   constructor(options: SourceApiReaderOptions) {
@@ -43,7 +43,7 @@ export class SourceApiReader {
     return this._parser.getFileMeta()
   }
 
-  parse(ids?: string[]): Design {
+  parse(ids?: string[]): EventEmitter {
     return this._parser.parse(ids)
   }
 

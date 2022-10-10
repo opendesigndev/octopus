@@ -1,0 +1,49 @@
+{
+  "version": "3.0.0-rc.6",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Simple Text",
+  "pages": [
+    {
+      "id": "0-1",
+      "name": "Page 1",
+      "children": [
+        {
+          "id": "2:3",
+          "type": "COMPONENT"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "2:3",
+      "name": "Text Frame ",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 800,
+        "height": 200
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "TimesNewRomanPSMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

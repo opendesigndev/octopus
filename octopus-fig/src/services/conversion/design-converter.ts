@@ -4,11 +4,11 @@ import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
-import { SourceArtboard } from '../../entities/source/source-artboard'
+import { SourceComponent } from '../../entities/source/source-component'
 import { SourceDesign } from '../../entities/source/source-design'
 import { logger } from '../../services'
 import { getRole } from '../../utils/source'
-import { DocumentConverter } from '../conversion/document-converter'
+import { ComponentConverter } from './component-converter'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
@@ -18,7 +18,6 @@ import type { RawLayerFrame } from '../../typings/raw/layer'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { ImageSize } from '../general/image-size/image-size'
 import type {
-  Design,
   ResolvedDesign,
   ResolvedFrame,
   ResolvedStyle,
@@ -27,9 +26,11 @@ import type {
 } from '@avocode/figma-parser/lib/src/index-node'
 import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
 import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+// eslint-disable-next-line import/no-named-as-default
+import type EventEmitter from 'eventemitter3'
 
 export type DesignConverterOptions = {
-  design: Design | null
+  designEmitter: EventEmitter | null
   designId?: string
   exporter?: AbstractExporter
   partialUpdateInterval?: number
@@ -38,16 +39,16 @@ export type DesignConverterOptions = {
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 
-export type DocumentConversionResult = {
+export type ComponentConversionResult = {
   id: string
-  value: Octopus['OctopusDocument'] | null
+  value: Octopus['OctopusComponent'] | null
   error: Error | null
   time: number
 }
 
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined
-  components: DocumentConversionResult[]
+  components: ComponentConversionResult[]
   images: { name: string; data: ArrayBuffer }[]
   previews: { id: string; data: ArrayBuffer }[]
 }
@@ -55,7 +56,7 @@ export type DesignConversionResult = {
 const IS_LIBRARY = true
 
 export class DesignConverter {
-  private _design: Design | null
+  private _designEmitter: EventEmitter | null
   private _designId: string
   private _octopusManifest: OctopusManifest | undefined
   private _octopusConverter: OctopusFigConverter
@@ -63,17 +64,17 @@ export class DesignConverter {
   private _partialUpdateInterval: number
   private _shouldReturn: boolean
   private _imageSizeMap: ImageSizeMap = {}
-  private _queue: Queue<SourceArtboard, DocumentConversionResult>
-  private _awaitingArtboards: Promise<DocumentConversionResult>[] = []
+  private _queue: Queue<SourceComponent, ComponentConversionResult>
+  private _awaitingComponents: Promise<ComponentConversionResult>[] = []
   private _conversionResult: DesignConversionResult = { manifest: undefined, components: [], images: [], previews: [] }
   private _finalizeConvert: DetachedPromiseControls<void>
 
-  static DOCUMENT_QUEUE_PARALLELS = 5
-  static DOCUMENT_QUEUE_NAME = 'Document queue'
+  static COMPONENT_QUEUE_PARALLELS = 5
+  static COMPONENT_QUEUE_NAME = 'Component queue'
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: DesignConverterOptions, octopusConverter: OctopusFigConverter) {
-    this._design = options.design || null
+    this._designEmitter = options.designEmitter || null
     this._designId = options.designId || uuidv4()
     this._octopusConverter = octopusConverter
 
@@ -82,7 +83,7 @@ export class DesignConverter {
     this._shouldReturn = !(options.skipReturn ?? false)
 
     this._finalizeConvert = detachPromiseControls<void>()
-    this._queue = this._initDocumentQueue()
+    this._queue = this._initComponentQueue()
   }
 
   get id(): string {
@@ -93,25 +94,21 @@ export class DesignConverter {
     return this._octopusManifest
   }
 
-  get sourceDesign(): Design | null {
-    return this._design
-  }
-
-  private async _convertSourceArtboardSafe(
-    source: SourceArtboard
-  ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
+  private async _convertSourceComponentSafe(
+    source: SourceComponent
+  ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
       const version = this._octopusConverter.pkg.version
-      const value = await new DocumentConverter({ source, version }).convert()
+      const value = await new ComponentConverter({ source, version }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
     }
   }
 
-  private async _convertSourceArtboard(source: SourceArtboard): Promise<DocumentConversionResult> {
+  private async _convertSourceComponent(source: SourceComponent): Promise<ComponentConversionResult> {
     const { time, result } = await this._octopusConverter.benchmarkAsync(async () =>
-      this._convertSourceArtboardSafe(source)
+      this._convertSourceComponentSafe(source)
     )
     const { value, error } = result
     return { id: source.id, value, error, time }
@@ -131,23 +128,23 @@ export class DesignConverter {
     return manifest
   }
 
-  private async _exportDocumentSafe(
-    converted: DocumentConversionResult,
+  private async _exportComponentSafe(
+    converted: ComponentConversionResult,
     role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD'
   ): Promise<{ path: string | null; error: Error | null }> {
     try {
-      const path = await this._exporter?.exportDocument?.(converted, role)
-      if (!path) return { path: null, error: new Error('Export Artboard failed - no path') }
+      const path = await this._exporter?.exportComponent?.(converted, role)
+      if (!path) return { path: null, error: new Error('Export Component failed - no path') }
       return { path, error: null }
     } catch (error) {
       return { path: null, error }
     }
   }
 
-  private async _exportDocument(source: SourceArtboard): Promise<DocumentConversionResult> {
-    const converted = await this._convertSourceArtboard(source)
+  private async _exportComponent(source: SourceComponent): Promise<ComponentConversionResult> {
+    const converted = await this._convertSourceComponent(source)
 
-    const { path, error } = await this._exportDocumentSafe(converted, getRole(source))
+    const { path, error } = await this._exportComponentSafe(converted, getRole(source))
 
     this.octopusManifest?.setExportedComponent(source, {
       path,
@@ -158,14 +155,14 @@ export class DesignConverter {
     return converted
   }
 
-  private _initDocumentQueue() {
+  private _initComponentQueue() {
     return new Queue({
-      name: DesignConverter.DOCUMENT_QUEUE_NAME,
-      parallels: DesignConverter.DOCUMENT_QUEUE_PARALLELS,
-      factory: async (sources: SourceArtboard[]): Promise<SafeResult<DocumentConversionResult>[]> => {
+      name: DesignConverter.COMPONENT_QUEUE_NAME,
+      parallels: DesignConverter.COMPONENT_QUEUE_PARALLELS,
+      factory: async (sources: SourceComponent[]): Promise<SafeResult<ComponentConversionResult>[]> => {
         return Promise.all(
           sources.map(async (source) => ({
-            value: await this._exportDocument(source),
+            value: await this._exportComponent(source),
             error: null,
           }))
         )
@@ -186,11 +183,11 @@ export class DesignConverter {
     this._exportManifest()
     const manifestInterval = setInterval(async () => this._exportManifest(), this._partialUpdateInterval)
 
-    /** Wait till all documents + dependencies are processed */
+    /** Wait till all components + dependencies are processed */
     await design.content
-    await Promise.all(this._awaitingArtboards)
+    await Promise.all(this._awaitingComponents)
 
-    /** At this moment all documents + dependencies should be converted and exported */
+    /** At this moment all components + dependencies should be converted and exported */
 
     /** Final trigger of manifest save */
     clearInterval(manifestInterval)
@@ -202,21 +199,21 @@ export class DesignConverter {
   }
 
   private async _convertFrame(frame: ResolvedFrame, isLibrary = false) {
-    const { designId, designName, designDescription, nodeId, node, fills } = frame
-    if (isLibrary) this.octopusManifest?.setExportedLibrary(designId, designName ?? '', nodeId, designDescription)
+    const { libraryMeta, nodeId, node, fills } = frame
+    if (isLibrary && libraryMeta) this.octopusManifest?.setExportedLibrary(libraryMeta)
 
-    const rawArtboard = node.document as RawLayerFrame
-    const sourcePathPromise = this._exporter?.exportRawDocument?.(rawArtboard, nodeId)
+    const rawFrame = node.document as RawLayerFrame
+    const sourcePathPromise = this._exporter?.exportRawComponent?.(rawFrame, nodeId)
 
     const fillIds = Object.keys(fills)
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
-    const sourceArtboard = new SourceArtboard({ rawArtboard, imageSizeMap: this._imageSizeMap })
-    const artboardPromise = this._queue.exec(sourceArtboard)
-    this._awaitingArtboards.push(artboardPromise)
+    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
+    const componentPromise = this._queue.exec(sourceComponent)
+    this._awaitingComponents.push(componentPromise)
 
     this.octopusManifest?.setExportedSourcePath(nodeId, await sourcePathPromise)
-    const artboard = await artboardPromise
-    if (this._shouldReturn) this._conversionResult.components.push(artboard)
+    const component = await componentPromise
+    if (this._shouldReturn) this._conversionResult.components.push(component)
   }
 
   private async _convertChunk(style: ResolvedStyle) {
@@ -243,22 +240,22 @@ export class DesignConverter {
   }
 
   async convert(): Promise<DesignConversionResult | null> {
-    const design = this._design
-    if (design === null) {
+    const designEmitter = this._designEmitter
+    if (designEmitter === null) {
       logger?.error('Creating Design Failed')
       return null
     }
 
-    design.on('ready:design', (design) => this._convertDesign(design))
+    designEmitter.on('ready:design', (design) => this._convertDesign(design))
 
-    design.on('ready:style', (chunk) => this._convertChunk(chunk))
+    designEmitter.on('ready:style', (chunk) => this._convertChunk(chunk))
 
-    design.on('ready:artboard', (artboard) => this._convertFrame(artboard))
-    design.on('ready:component', (component) => this._convertFrame(component))
-    design.on('ready:library', (library) => this._convertFrame(library, IS_LIBRARY))
+    designEmitter.on('ready:artboard', (artboard) => this._convertFrame(artboard))
+    designEmitter.on('ready:component', (component) => this._convertFrame(component))
+    designEmitter.on('ready:library', (library) => this._convertFrame(library, IS_LIBRARY))
 
-    design.on('ready:fill', (fill) => this._convertFill(fill))
-    design.on('ready:preview', (preview) => this._convertPreview(preview))
+    designEmitter.on('ready:fill', (fill) => this._convertFill(fill))
+    designEmitter.on('ready:preview', (preview) => this._convertPreview(preview))
 
     await this._finalizeConvert.promise
     return this._shouldReturn ? this._conversionResult : null

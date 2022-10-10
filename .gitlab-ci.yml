@@ -5,6 +5,7 @@ stages:
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+  - node -v
   - yarn
   - yarn build
 
@@ -21,3 +22,7 @@ test:
   stage: test
   script:
     - yarn test
+  artifacts:
+    when: on_failure
+    paths:
+      - '**/report/*.html'

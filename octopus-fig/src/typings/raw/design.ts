@@ -1,4 +1,4 @@
-import type { RawLayer, RawLayerFrame } from './layer'
+import type { RawLayer } from './layer'
 import type { RawColor } from './shared'
 
 export type RawComponentSets = { [key: string]: RawComponentSet | undefined }
@@ -61,5 +61,3 @@ export type RawPage = {
   backgroundColor?: RawColor
   flowStartingPoints?: RawFlowStartingPoint[]
 }
-
-export type RawArtboard = RawLayerFrame

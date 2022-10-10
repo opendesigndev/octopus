@@ -1,7 +1,7 @@
 {
   "private": true,
   "version": "3.0.0",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "workspaces": {
     "packages": [
       "figma-parser",
