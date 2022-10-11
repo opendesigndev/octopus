@@ -112,7 +112,11 @@ export class Tester {
   }
 
   private _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
-    const differ = jsondiffpatch.create()
+    const differ = jsondiffpatch.create({
+      propertyFilter: (name: string) => {
+        return name === 'version' ? false : true // ignore version
+      },
+    })
 
     const failed = designs.reduce<Promise<Fail[]>>(async (failedDesign, { components, manifest, assetId }) => {
       const failed = await failedDesign
