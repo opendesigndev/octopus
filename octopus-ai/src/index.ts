@@ -5,7 +5,7 @@ import { set as setLogger } from './services/instances/logger'
 
 import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
-import type { Exporter } from './services/conversion/exporter'
+import type { Exporter } from './services/conversion/exporters'
 import type { Logger } from './typings'
 import type { NormalizedPackageJson, NormalizedReadResult } from 'read-pkg-up'
 
