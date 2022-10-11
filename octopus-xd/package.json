@@ -3,11 +3,10 @@
   "version": "3.0.0-rc.18",
   "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "license": "Apache-2.0",
-  "main": "lib/src/index.js",
   "scripts": {
     "bundle": "yarn run bundle:web",
     "bundle:web": "npx vite build -c vite.web.js && npx vite build -c vite.web.worker.js",
-    "clean": "npx rimraf ./node_modules ./lib ./workdir",
+    "clean": "npx rimraf ./node_modules ./lib ./dist ./workdir",
     "convert:all": "npx ts-node ./scripts/convert-design.ts",
     "convert:all:debug": "npx ts-node ./scripts/convert-design-debug.ts",
     "clean:workdir": "npx rimraf ./workdir/*",
@@ -50,6 +49,7 @@
     "lib/src",
     "lib/package.json"
   ],
+  "main": "lib/src/index-web.js",
   "exports": {
     "node": "./lib/src/index-node.js",
     "default": "./lib/src/index-web.js"
