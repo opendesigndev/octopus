@@ -1,8 +1,8 @@
 {
   "name": "@avocode/octopus-common",
   "version": "3.0.0-rc.26",
-  "license": "UNLICENSED",
   "description": "General utility functions for Octopus 3 common cases.",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",

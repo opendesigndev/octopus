@@ -1,8 +1,8 @@
 {
   "name": "@avocode/figma-parser",
   "version": "3.0.0-rc.13",
-  "license": "UNLICENSED",
   "description": "Figma parser, downloads assets from Figma APIs",
+  "license": "Apache-2.0",
   "scripts": {
     "bundle": "yarn run bundle:web",
     "bundle:web": "npx vite build -c vite.web.js",

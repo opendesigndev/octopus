@@ -1,8 +1,8 @@
 {
   "name": "@avocode/figma-parser-s3-plugin",
   "version": "3.0.0-rc.2",
-  "license": "UNLICENSED",
   "description": "Figma Parser S3 plugin",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
     "clean": "npx rimraf ./node_modules ./lib",

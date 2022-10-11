@@ -1,7 +1,7 @@
 {
   "name": "@avocode/octopus-fig",
   "version": "3.0.0-rc.7",
-  "description": "Figma HTTP API format to Octopus 3 converter.",
+  "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "main": "dist/src/index.js",
   "scripts": {

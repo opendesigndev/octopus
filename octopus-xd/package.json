@@ -1,7 +1,8 @@
 {
   "name": "@avocode/octopus-xd",
   "version": "3.0.0-rc.18",
-  "license": "UNLICENSED",
+  "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
+  "license": "Apache-2.0",
   "main": "lib/src/index.js",
   "scripts": {
     "bundle": "yarn run bundle:web",
@@ -45,7 +46,6 @@
     "typescript": "4.6.4",
     "vite": "^2.9.1"
   },
-  "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "files": [
     "lib/src",
     "lib/package.json"
