@@ -107,14 +107,11 @@ export class OctopusManifest {
   }
 
   private _getComponentAssetsFonts(raw: Record<string, unknown>): string[] {
-    const entries = traverseAndFind(raw, (obj: unknown) => {
-      return Object(obj)?.fontPostScriptName
-    })
+    const entries = traverseAndFind(raw, (obj: unknown) => Object(obj)?.fontPostScriptName)
     return [...new Set(entries)] as string[]
   }
 
-  private get _componentAssets(): Manifest['Assets'] | null {
-    const targetComponent = this._sourceDesign.components[0] // TODO HERE
+  private _getComponentAssets(targetComponent: SourceComponent): Manifest['Assets'] | null {
     const raw = targetComponent?.raw
     if (!raw) return null
 
@@ -134,8 +131,8 @@ export class OctopusManifest {
 
   private _convertComponent(sourceComponent: SourceComponent): Manifest['Component'] {
     const id = sourceComponent.id
-    const bounds = this._convertManifestBounds(sourceComponent.bounds)
-    const assets = this._componentAssets ?? undefined
+    const name = sourceComponent.name
+    const role = sourceComponent.isPasteboard ? 'PASTEBOARD' : 'ARTBOARD'
 
     const compDescriptor = this.getExportedComponentById(id)
     const status = {
@@ -144,19 +141,14 @@ export class OctopusManifest {
       time: compDescriptor?.time ?? undefined,
     } as const
 
+    const bounds = this._convertManifestBounds(sourceComponent.bounds)
+    const dependencies: Manifest['Component']['dependencies'] = []
+    const assets = this._getComponentAssets(sourceComponent) ?? undefined
+
     const path = this.getExportedComponentRelativePathById(id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
 
-    return {
-      id,
-      name: id,
-      role: 'ARTBOARD',
-      status,
-      bounds,
-      dependencies: [],
-      assets,
-      location,
-    }
+    return { id, name, role, status, bounds, dependencies, assets, location }
   }
 
   private get _components(): Manifest['Component'][] {

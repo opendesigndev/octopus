@@ -1,6 +1,6 @@
 import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
 
-import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
+import { isArtboard, getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceComponent } from './source-component'
 import { SourceLayerEffects } from './source-effects-layer'
 import { SourceEntity } from './source-entity'
@@ -64,7 +64,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get isArtboard(): boolean {
-    return this._rawValue.artboard !== undefined
+    return isArtboard(this._rawValue)
   }
 
   get visible(): boolean {

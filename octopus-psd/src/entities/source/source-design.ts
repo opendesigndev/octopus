@@ -1,3 +1,4 @@
+import { isArtboard } from '../../utils/source'
 import { SourceComponent } from './source-component'
 
 import type { RawComponent } from '../../typings/raw'
@@ -21,9 +22,16 @@ export class SourceDesign {
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._components = [new SourceComponent(options.component)] // TODO HERE
+    this._components = this._initComponents(options.component)
     this._images = options.images
     this._designId = options.designId
+  }
+
+  private _initComponents(raw: RawComponent): SourceComponent[] {
+    const components = [new SourceComponent({ raw, isPasteboard: true })]
+    const artboards = raw.layers?.filter((layer) => isArtboard(layer)) ?? []
+    artboards.forEach((artboard) => components.push(new SourceComponent({ raw: { ...raw, ...artboard } })))
+    return components
   }
 
   get designId(): string {

@@ -1,6 +1,7 @@
 import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
 
 import type {
+  RawLayer,
   RawBounds,
   RawColor,
   RawMatrix,
@@ -10,6 +11,10 @@ import type {
   RawUnitPoint,
 } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source'
+
+export function isArtboard(raw: RawLayer) {
+  return Boolean(raw.artboard)
+}
 
 function getValue(value: number | RawUnitPoint | undefined): number | undefined {
   return typeof value === 'object' ? value.value : value

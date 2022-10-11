@@ -50,6 +50,10 @@ export class OctopusComponent {
     return this.sourceComponent.id
   }
 
+  get name(): string {
+    return this.sourceComponent.name
+  }
+
   get version(): Promise<string> {
     return this._designConverter.octopusConverter.pkgVersion
   }

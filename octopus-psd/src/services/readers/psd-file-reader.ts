@@ -66,7 +66,7 @@ export class PSDFileReader {
       outDir: this._outDir,
       imagesSubfolder: PSDFileReader.IMAGES_DIR,
       previewPath: path.join(this._outDir, PSDFileReader.RENDER_IMG),
-      octopusFileName: 'octopus-v2.json', // TODO remove in the end when octopus2 is not needed
+      octopusFileName: 'version-2.json',
     }
   }
 
