@@ -1,6 +1,6 @@
 {
   "name": "@avocode/octopus-fig",
-  "version": "3.0.0-rc.9",
+  "version": "3.0.0-rc.10",
   "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "scripts": {
@@ -33,8 +33,8 @@
     "image-size": "^1.0.1",
     "lodash": "^4.17.21",
     "paper": "0.12.15",
-    "pino-pretty": "^4.3.0",
     "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -53,11 +53,15 @@
     "typescript": "4.6.4"
   },
   "files": [
-    "lib/src"
+    "lib/src",
+    "lib/package.json",
+    "node.js",
+    "web.js"
   ],
-  "main": "./lib/src/index-web.js",
+  "type": "module",
   "exports": {
-    "node": "./lib/src/index-node.js",
-    "default": "./lib/src/index-web.js"
+    ".": "./lib/src/index-web.js",
+    "./web.js": "./lib/src/index-web.js",
+    "./node.js": "./lib/src/index-node.js"
   }
 }
