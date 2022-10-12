@@ -87,7 +87,7 @@ async function convert() {
   await convertAll({
     filePath,
     render: process.env.SHOULD_RENDER === 'true',
-    outputDir: path.join(process.cwd(), 'workdir'),
+    outputDir: path.join(__dirname, '../../', 'workdir'),
   })
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "@avocode/octopus-ai",
+  "name": "@opendesign/octopus-ai",
   "version": "3.0.0-rc.1",
   "description": "Octopus Adobe Illustrator format to Octopus 3+ converter.",
   "files": [
