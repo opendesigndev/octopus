@@ -3,6 +3,7 @@ import path from 'path'
 import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
@@ -10,10 +11,12 @@ import { logger } from '../instances/logger'
 import { ComponentConverter } from './component-converter'
 
 import type { OctopusPSDConverter } from '../..'
+import type { SourceComponent } from '../../entities/source/source-component'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design'
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
+import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
 
 export type DesignConverterOptions = {
   sourceDesign: SourceDesign
@@ -29,7 +32,7 @@ export type ConvertDesignResult = {
 
 export type ComponentConversionResult = {
   id: string
-  value: Octopus['OctopusComponent'] | undefined
+  value: Octopus['OctopusComponent'] | null
   error: Error | null
   time: number
 }
@@ -44,6 +47,10 @@ export class DesignConverter {
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _exporter: AbstractExporter | null
+
+  static COMPONENT_QUEUE_PARALLELS = 5
+  static COMPONENT_QUEUE_NAME = 'Component queue'
+  static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: DesignConverterOptions, octopusConverter: OctopusPSDConverter) {
     this._designId = options?.designId || uuidv4()
@@ -69,48 +76,65 @@ export class DesignConverter {
     return this._octopusConverter
   }
 
-  private async _exportManifest(exporter: AbstractExporter | null): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
-    await exporter?.exportManifest?.({ manifest, time })
-    return manifest
-  }
-
-  private async _convertComponentSafe(componentId: string) {
+  private async _convertSourceComponentSafe(
+    componentId: string
+  ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
       const value = await new ComponentConverter({ componentId, designConverter: this }).convert()
-      if (!value) throw new Error('Component convert error')
       return { value, error: null }
     } catch (error) {
       logger.error('Converting Component failed', { componentId, error })
-      return { value: undefined, error }
+      return { value: null, error }
     }
   }
 
-  private async getComponentResult(id: string): Promise<ComponentConversionResult> {
-    const { time, result } = await benchmarkAsync(() => this._convertComponentSafe(id))
+  private async _convertSourceComponent(componentId: string): Promise<ComponentConversionResult> {
+    const { time, result } = await benchmarkAsync(() => this._convertSourceComponentSafe(componentId))
     const { value, error } = result
-    return { id, value, error, time }
+    return { id: componentId, value, error, time }
   }
 
-  private async _convertComponent(id: string) {
-    const componentResult = await this.getComponentResult(id)
+  private async _exportComponent(source: SourceComponent): Promise<ComponentConversionResult> {
+    const componentId = source.id
+    const componentResult = await this._convertSourceComponent(componentId)
+
     const componentPath = await this._exporter?.exportComponent?.(componentResult)
     const { time, error } = componentResult
     this.octopusManifest.setExportedComponent(componentResult.id, { path: componentPath, time, error })
+
     return componentResult
   }
 
-  private async _convertComponents(): Promise<ComponentConversionResult[]> {
-    const componentIds = this._sourceDesign.componentIds
-    const componentResult = await this._convertComponent(componentIds[0]) // TODO HERE
-    return [componentResult]
+  private _initComponentQueue() {
+    return new Queue({
+      name: DesignConverter.COMPONENT_QUEUE_NAME,
+      parallels: DesignConverter.COMPONENT_QUEUE_PARALLELS,
+      factory: async (sources: SourceComponent[]): Promise<SafeResult<ComponentConversionResult>[]> => {
+        return Promise.all(
+          sources.map(async (source) => ({
+            value: await this._exportComponent(source),
+            error: null,
+          }))
+        )
+      },
+    })
+  }
+
+  private async _exportManifest(): Promise<Manifest['OctopusManifest']> {
+    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+    await this._exporter?.exportManifest?.({ manifest, time })
+    return manifest
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
     this.octopusManifest.registerBasePath(await this._exporter?.getBasePath?.())
 
-    /** First Manifest save  */
-    this._exportManifest(this._exporter)
+    /** Init artboards queue */
+    const queue = this._initComponentQueue()
+
+    /** Init partial update + first manifest save */
+    const manifestInterval = setInterval(async () => this._exportManifest(), DesignConverter.PARTIAL_UPDATE_INTERVAL)
+    this._exportManifest()
 
     /** Images */
     const images = await Promise.all(
@@ -124,19 +148,18 @@ export class DesignConverter {
       })
     )
 
-    /** Component */
-    const components = await this._convertComponents() // TODO HERE
+    /** Enqueue all artboards */
+    const components = await Promise.all(this._sourceDesign.components.map((artboard) => queue.exec(artboard)))
 
-    /** Final trigger of Manifest save */
-    const manifest = await this._exportManifest(this._exporter)
+    /** At this moment all artboards + dependencies should be converted and exported */
+
+    /** Final trigger of manifest save */
+    clearInterval(manifestInterval)
+    const manifest = await this._exportManifest()
 
     /** Trigger finalizer */
     this._exporter?.finalizeExport?.()
 
-    return {
-      manifest,
-      components,
-      images,
-    }
+    return { manifest, components, images }
   }
 }

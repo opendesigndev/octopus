@@ -1,5 +1,5 @@
 {
-  "id": "component-1",
+  "id": "pasteboard-1",
   "type": "ARTBOARD",
   "version": "3.0.0-rc.5",
   "dimensions": {
@@ -7,11 +7,11 @@
     "height": 1000
   },
   "content": {
-    "id": "component-1-Background",
+    "id": "pasteboard-1-Background",
     "type": "MASK_GROUP",
     "maskBasis": "BODY",
     "mask": {
-      "id": "component-1-BackgroundMask",
+      "id": "pasteboard-1-BackgroundMask",
       "type": "SHAPE",
       "visible": false,
       "shape": {

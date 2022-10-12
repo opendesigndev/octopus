@@ -33,7 +33,7 @@ export async function convertDesign({
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const tempDir = path.join(process.cwd(), 'workdir')
+  const tempDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {
@@ -53,7 +53,7 @@ export async function convertDesign({
   })
 
   exporter.on('octopus:manifest', (manifest: string) => {
-    console.log(`  ${chalk.cyan(`Manifest:`)} file://${manifest}\n\n`)
+    console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
   const reader = new PSDFileReader({ path: filePath, designId })

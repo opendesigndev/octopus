@@ -1,0 +1,161 @@
+{
+  "id": "31",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.5",
+  "dimensions": {
+    "width": 300,
+    "height": 300
+  },
+  "content": {
+    "id": "31-Background",
+    "type": "MASK_GROUP",
+    "maskBasis": "BODY",
+    "mask": {
+      "id": "31-BackgroundMask",
+      "type": "SHAPE",
+      "visible": false,
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "rectangle": {
+            "x0": 0,
+            "x1": 300,
+            "y0": 12,
+            "y1": 312
+          }
+        },
+        "fills": []
+      }
+    },
+    "layers": [
+      {
+        "id": "29",
+        "name": "Rectangle 2",
+        "type": "SHAPE",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          127,
+          48
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [],
+        "shape": {
+          "fillRule": "EVEN_ODD",
+          "path": {
+            "type": "PATH",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "geometry": "M2.00002,0h140.99998c1.1046,0 1.99996,0.89543 1.99996,2v101c0,1.10459 -0.89537,2.00001 -1.99996,2.00001h-130.99998c-6.62744,0 -12.00003,-5.37259 -12.00003,-12.00001v-91.00001c0,-1.10457 0.89543,-2 2.00003,-2z"
+          },
+          "fills": [
+            {
+              "type": "COLOR",
+              "color": {
+                "r": 0.4588,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "position": "CENTER",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "style": "SOLID",
+              "thickness": 5
+            }
+          ]
+        }
+      },
+      {
+        "id": "30",
+        "name": "Rectangle 3",
+        "type": "SHAPE",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          119,
+          180
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [],
+        "shape": {
+          "fillRule": "EVEN_ODD",
+          "path": {
+            "type": "RECTANGLE",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "y0": 0,
+              "x1": 160,
+              "y1": 115
+            },
+            "cornerRadius": 0
+          },
+          "fills": [
+            {
+              "type": "COLOR",
+              "color": {
+                "r": 0.4588,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "position": "CENTER",
+              "lineJoin": "ROUND",
+              "lineCap": "ROUND",
+              "style": "SOLID",
+              "thickness": 5
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

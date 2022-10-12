@@ -7,9 +7,9 @@
   "pages": [],
   "components": [
     {
-      "id": "component-1",
-      "name": "component-1",
-      "role": "ARTBOARD",
+      "id": "pasteboard-1",
+      "name": "Pasteboard",
+      "role": "PASTEBOARD",
       "bounds": {
         "x": 0,
         "y": 0,

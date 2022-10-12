@@ -7,14 +7,65 @@
   "pages": [],
   "components": [
     {
-      "id": "component-1",
-      "name": "component-1",
-      "role": "ARTBOARD",
+      "id": "pasteboard-1",
+      "name": "Pasteboard",
+      "role": "PASTEBOARD",
       "bounds": {
         "x": 0,
         "y": 0,
         "width": 1098,
         "height": 312
+      },
+      "dependencies": [],
+      "assets": {},
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "31",
+      "name": "Artboard 2",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 0,
+        "y": 12,
+        "width": 300,
+        "height": 300
+      },
+      "dependencies": [],
+      "assets": {},
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "36",
+      "name": "Artboard 3",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 798,
+        "y": 0,
+        "width": 300,
+        "height": 300
+      },
+      "dependencies": [],
+      "assets": {},
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "5",
+      "name": "Artboard 1",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 398,
+        "y": 0,
+        "width": 300,
+        "height": 300
       },
       "dependencies": [],
       "assets": {},

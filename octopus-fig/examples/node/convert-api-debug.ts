@@ -27,7 +27,7 @@ export async function convertDesign({
   designId,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
-  const outputDir = path.join(process.cwd(), 'workdir')
+  const outputDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
   // exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))

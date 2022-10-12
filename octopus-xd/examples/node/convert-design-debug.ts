@@ -2,12 +2,12 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
+import { timestamp } from '@avocode/octopus-common/dist/utils/timestamp'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { createConverter, TempExporter, XDFileReader } from '../../src/index-node'
 import { renderOctopus } from './utils/render'
-import { timestamp } from './utils/timestamp'
 
 type ConvertAllOptions = {
   render?: boolean
@@ -90,7 +90,7 @@ async function convert() {
     await convertAll({
       filename,
       render: process.env.CONVERT_RENDER === 'true',
-      outputDir: path.join(process.cwd(), 'workdir'),
+      outputDir: path.join(__dirname, '../../', 'workdir'),
     })
   }
 }
