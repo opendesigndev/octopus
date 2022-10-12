@@ -3,14 +3,12 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { getPkgLocation } from './pkg-location'
-
 type CreateTempSaverOptions = {
   id?: string
 }
 
 async function getWorkDirTempLocation(id: string | void) {
-  const workdir = path.join(await getPkgLocation(), 'workdir')
+  const workdir = path.join(process.cwd(), 'workdir')
   const location = path.join(workdir, typeof id === 'string' ? id : uuidv4())
   await fsp.mkdir(location, { recursive: true })
   return location

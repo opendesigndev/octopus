@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
+import { benchmark } from '@avocode/octopus-common/dist/utils/benchmark-node'
 import { push } from '@avocode/octopus-common/dist/utils/common'
 import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
 
@@ -92,9 +92,9 @@ export class DesignConverter {
     return this._octopusManifest
   }
 
-  private async _convertArtboardByIdSafe(targetArtboardId: string) {
+  private _convertArtboardByIdSafe(targetArtboardId: string) {
     try {
-      const value = await new ArtboardConverter({
+      const value = new ArtboardConverter({
         targetArtboardId,
         designConverter: this,
       }).convert()
@@ -111,17 +111,17 @@ export class DesignConverter {
     }
   }
 
-  async convertArtboardById(targetArtboardId: string): Promise<ArtboardConversionResult> {
+  convertArtboardById(targetArtboardId: string): ArtboardConversionResult {
     const {
       result: { value, error },
       time,
-    } = await benchmarkAsync(() => this._convertArtboardByIdSafe(targetArtboardId))
+    } = benchmark(() => this._convertArtboardByIdSafe(targetArtboardId))
 
     return { id: targetArtboardId, value, error, time }
   }
 
   private async _exportManifest(exporter: Exporter | null): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.manifest.convert())
+    const { time, result: manifest } = benchmark(() => this.manifest.convert())
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
   }
@@ -142,7 +142,7 @@ export class DesignConverter {
       })
     )
 
-    const converted = await this.convertArtboardById(artboard.id)
+    const converted = this.convertArtboardById(artboard.id)
     const artboardPath = (await rejectTo(
       exporter?.exportArtboard?.(artboard, converted) ?? Promise.reject('')
     )) as string

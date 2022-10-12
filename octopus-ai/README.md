@@ -1,6 +1,6 @@
 # Octopus Converter for Adobe Illustrator
 
-Adobe Illustrator to Octopus 3 converter.
+Adobe Illustrator to Octopus 3+ converter.
 
 ## Install
 
@@ -26,18 +26,19 @@ ENV variables for our demo scripts located in `/examples/node/*`
 | SHOULD_RENDER         | boolean | if true will trigger ODE rendering when octopus3.json is ready |
 | ODE_RENDERER_CMD      | string  | path to ODE renderer command (e.g. ode-renderer-cli)           |
 | ODE_IGNORE_VALIDATION | boolean | ignores the ODE rendering validation                           |
+| FONTS_PATH            | string  | path to directory with fonts                                   |
 
 ## Demo: Example Node
 
 Converts your Adobe Illustrator designs from API into Octopus3+ format.
-You need pass in path to Adobe Illustrator file you wish to convert.
+You need path to Adobe Illustrator file you wish to convert.
 
 ### yarn convert:debug
 
 Designed for manual runs.
 
 ```
-yarn convert:debug <PATH-TO-AI-FILE>
+yarn convert:debug PATH_TO_AI_FILE
 ```
 
 ### yarn convert:local
@@ -45,7 +46,7 @@ yarn convert:debug <PATH-TO-AI-FILE>
 Designed for running in automated runs.
 
 ```
-yarn convert:local <PATH-TO-AI-FILE>
+yarn convert:local PATH_TO_AI_FILE
 ```
 
 ## Usage
@@ -54,7 +55,7 @@ There are three main processing steps:
 
 - reading source data using `sourceDesign` getter from `AIFileReader` instance and obtaining `SourceDesign` instance
 - conversion of SourceDesign instance using `convertDesign` method of `OctopusAIConverter` instance
-- exporting using exporters passed in to `convertDesign` method of `OctopusAIConverter` instance
+- exporting using exporter passed in to `convertDesign` method of `OctopusAIConverter` instance
 
 Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
 
@@ -115,3 +116,11 @@ or
 ```
 yarn test:integration boolean-ops
 ```
+
+&nbsp;
+
+[![License](https://img.shields.io/badge/license-Apache%202.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Editor](https://img.shields.io/badge/editor-Adobe%20Illustrator-orange)](https://www.adobe.com/products/illustrator.html)
+[![Types](https://img.shields.io/badge/types-Typescript-blue)](https://www.typescriptlang.org/docs/)
+[![Environment](https://img.shields.io/badge/environment-Node.js-brightgreen)](https://nodejs.org/en/)
+[![Format](https://img.shields.io/badge/format-Octopus%203%2B-blue)](https://octopus-schema.avocode.com/)
