@@ -5,8 +5,7 @@ import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, TempExporter, XDFileReader } from '../src/index-node'
-import { getPkgLocation } from './utils/pkg-location'
+import { createConverter, TempExporter, XDFileReader } from '../../src/index-node'
 import { renderOctopus } from './utils/render'
 import { timestamp } from './utils/timestamp'
 
@@ -91,7 +90,7 @@ async function convert() {
     await convertAll({
       filename,
       render: process.env.CONVERT_RENDER === 'true',
-      outputDir: path.join(await getPkgLocation(), 'workdir'),
+      outputDir: path.join(process.cwd(), 'workdir'),
     })
   }
 }

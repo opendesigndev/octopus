@@ -7,8 +7,8 @@
     "bundle": "yarn run bundle:web",
     "bundle:web": "npx vite build -c vite.web.js && npx vite build -c vite.web.worker.js",
     "clean": "npx rimraf ./node_modules ./lib ./dist ./workdir",
-    "convert:all": "npx ts-node ./scripts/convert-design.ts",
-    "convert:all:debug": "npx ts-node ./scripts/convert-design-debug.ts",
+    "convert:all": "npx ts-node ./examples/node/convert-design.ts",
+    "convert:all:debug": "npx ts-node ./examples/node/convert-design-debug.ts",
     "clean:workdir": "npx rimraf ./workdir/*",
     "build": "tsc --build ./tsconfig.json",
     "prepack": "npx rimraf ./lib && yarn run build",
@@ -31,7 +31,6 @@
     "paper": "0.12.4",
     "pino-pretty": "^4.3.0",
     "pino": "^6.7.0",
-    "read-pkg-up": "7.0.1",
     "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
   },

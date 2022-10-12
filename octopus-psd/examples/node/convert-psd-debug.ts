@@ -8,13 +8,11 @@ import kebabCase from 'lodash/kebabCase'
 
 import { OctopusPSDConverter, PSDFileReader, DebugExporter } from '../../src'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files'
-import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
   filePath: string
-  outputDir: string
 }
 
 type ConvertedComponent = {
@@ -31,12 +29,12 @@ dotenv.config()
 const converter = new OctopusPSDConverter()
 
 export async function convertDesign({
-  outputDir,
   filePath,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const exporter = new DebugExporter({ tempDir: outputDir, id: designId })
+  const tempDir = path.join(process.cwd(), 'workdir')
+  const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {
     const status = component.error ? '❌' : '✅'
@@ -73,10 +71,7 @@ async function convertDir(dirPath: string) {
     const files = (await getFilesFromDir(dirPath)) ?? []
     for (const file of files) {
       if (!/\.psd$/i.test(file.name)) continue
-      await convertDesign({
-        filePath: path.join(dirPath, file.name),
-        outputDir: path.join(await getPkgLocation(), 'workdir'),
-      })
+      await convertDesign({ filePath: path.join(dirPath, file.name) })
     }
   } catch (err) {
     console.info(`Reading directory '${dirPath}' was not successful`, err)
@@ -88,10 +83,7 @@ async function convert(locations: string[]) {
     if (await isDirectory(location)) {
       await convertDir(location)
     } else {
-      await convertDesign({
-        filePath: location,
-        outputDir: path.join(await getPkgLocation(), 'workdir'),
-      })
+      await convertDesign({ filePath: location })
     }
   }
 }

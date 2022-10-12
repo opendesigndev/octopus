@@ -3,8 +3,6 @@ import path from 'path'
 
 import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
 
-import { getPkgLocation } from './pkg-location'
-
 export type RenderResult = {
   value: string | undefined
   error: Error | null
@@ -14,7 +12,7 @@ export type RenderResult = {
 async function render(id: string, octopusPath: string): Promise<{ value: string | undefined; error: null | Error }> {
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `render-${id}.png`)
-  const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
+  const fontsDir = process.env.FONTS_PATH ?? path.join(process.cwd(), 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   const ignoreValidation = process.env.RENDERING_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
   try {

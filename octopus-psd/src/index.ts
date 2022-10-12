@@ -1,5 +1,3 @@
-import readPackageUpAsync from 'read-pkg-up'
-
 import { DesignConverter } from './services/conversion/design-converter'
 import { DebugExporter } from './services/exporters/debug-exporter'
 import { LocalExporter } from './services/exporters/local-exporter'
@@ -7,10 +5,10 @@ import { createEnvironment } from './services/general/environment'
 import { set as setLogger } from './services/instances/logger'
 import { PSDFileReader } from './services/readers/psd-file-reader'
 import { SourceFileReader } from './services/readers/source-file-reader'
+import { readPackageMeta } from './utils/read-pkg-meta'
 
 import type { ConvertDesignResult, DesignConverterOptions } from './services/conversion/design-converter'
 import type { Logger } from './typings'
-import type { NormalizedReadResult } from 'read-pkg-up'
 
 export { LocalExporter, DebugExporter }
 export { PSDFileReader, SourceFileReader }
@@ -25,8 +23,6 @@ type OctopusPSDConverterOptions = {
 createEnvironment()
 
 export class OctopusPSDConverter {
-  private _pkg: Promise<NormalizedReadResult | undefined>
-
   static EXPORTERS = {
     LOCAL: LocalExporter,
     DEBUG: DebugExporter,
@@ -39,21 +35,14 @@ export class OctopusPSDConverter {
 
   constructor(options?: OctopusPSDConverterOptions) {
     this._setupLogger(options?.logger)
-
-    this._pkg = readPackageUpAsync({ cwd: __dirname })
   }
 
   private _setupLogger(logger?: Logger) {
     if (logger) setLogger(logger)
   }
 
-  get pkgVersion(): Promise<string> {
-    return this._pkg.then((normalized) => {
-      if (!normalized) {
-        throw new Error(`File "package.json" not found, can't infer "version" property of Octopus`)
-      }
-      return normalized.packageJson.version
-    })
+  get pkgVersion(): string {
+    return readPackageMeta().version
   }
 
   async convertDesign(options: DesignConverterOptions): Promise<ConvertDesignResult | null> {

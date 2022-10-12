@@ -7,7 +7,6 @@ import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
 
 import { OctopusPSDConverter, SourceFileReader, DebugExporter } from '../../src'
-import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
@@ -32,9 +31,9 @@ export async function convertDesign({
   location,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
-  const outputDir = path.join(await getPkgLocation(), 'workdir')
+  const tempDir = path.join(process.cwd(), 'workdir')
   const designId = `${timestamp()}-${kebabCase(path.basename(location, '.psd'))}`
-  const exporter = new DebugExporter({ tempDir: outputDir, id: designId })
+  const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {
     const status = component.error ? '❌' : '✅'

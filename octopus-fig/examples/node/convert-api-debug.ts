@@ -5,7 +5,6 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node'
-import { getPkgLocation } from './utils/pkg-location'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
@@ -28,7 +27,7 @@ export async function convertDesign({
   designId,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
-  const outputDir = path.join(await getPkgLocation(), 'workdir')
+  const outputDir = path.join(process.cwd(), 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
   // exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))

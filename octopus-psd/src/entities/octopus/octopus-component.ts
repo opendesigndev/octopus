@@ -54,7 +54,7 @@ export class OctopusComponent {
     return this.sourceComponent.name
   }
 
-  get version(): Promise<string> {
+  get version(): string {
     return this._designConverter.octopusConverter.pkgVersion
   }
 
@@ -86,7 +86,7 @@ export class OctopusComponent {
     return {
       id: this.id,
       type: 'ARTBOARD',
-      version: await this.version,
+      version: this.version,
       dimensions: this.dimensions,
       content: this.content,
     } as Octopus['OctopusComponent']

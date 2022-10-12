@@ -12,7 +12,7 @@ export default defineConfig({
       formats: ['umd'],
     },
     commonjsOptions: { include: [] },
-    outDir: 'example-web',
+    outDir: 'examples/web',
     emptyOutDir: false,
     // minify: 'none',
   },
