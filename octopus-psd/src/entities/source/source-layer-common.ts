@@ -1,6 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
-import { isArtboard, getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
+import { isArtboard, getBoundsFor, getUnitRatioFor, getArtboardColor } from '../../utils/source'
 import { SourceComponent } from './source-component'
 import { SourceLayerEffects } from './source-effects-layer'
 import { SourceEntity } from './source-entity'
@@ -50,17 +50,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get artboardColor(): SourceColor | null {
-    switch (this._rawValue.artboard?.artboardBackgroundType) {
-      case 1: // white
-        return getColorFor({ blue: 255, green: 255, red: 255 })
-      case 2: // black
-        return getColorFor({ blue: 0, green: 0, red: 0 })
-      case 3: // transparent
-        return null
-      case 4: // other
-        return getColorFor(this._rawValue.artboard?.color)
-    }
-    return null
+    return getArtboardColor(this._rawValue)
   }
 
   get isArtboard(): boolean {

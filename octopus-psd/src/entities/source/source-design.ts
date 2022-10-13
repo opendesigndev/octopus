@@ -28,6 +28,8 @@ export class SourceDesign {
   }
 
   private _initComponents(raw: RawComponent): SourceComponent[] {
+    if (raw.layers?.length === 1 && isArtboard(raw.layers[0]))
+      return [new SourceComponent({ raw: { ...raw, ...raw.layers[0] } })] // no pasteboard for 1 artboard
     const components = [new SourceComponent({ raw, isPasteboard: true })]
     const artboards = raw.layers?.filter((layer) => isArtboard(layer)) ?? []
     artboards.forEach((artboard) => components.push(new SourceComponent({ raw: { ...raw, ...artboard } })))

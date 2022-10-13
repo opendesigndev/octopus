@@ -16,6 +16,20 @@ export function isArtboard(raw: RawLayer) {
   return Boolean(raw.artboard)
 }
 
+export function getArtboardColor(raw: RawLayer): SourceColor | null {
+  switch (raw.artboard?.artboardBackgroundType) {
+    case 1: // white
+      return getColorFor({ blue: 255, green: 255, red: 255 })
+    case 2: // black
+      return getColorFor({ blue: 0, green: 0, red: 0 })
+    case 3: // transparent
+      return null
+    case 4: // other
+      return getColorFor(raw.artboard?.color)
+  }
+  return null
+}
+
 function getValue(value: number | RawUnitPoint | undefined): number | undefined {
   return typeof value === 'object' ? value.value : value
 }

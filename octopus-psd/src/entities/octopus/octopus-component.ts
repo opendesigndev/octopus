@@ -61,21 +61,37 @@ export class OctopusComponent {
   private _getArtboardFromLayer(layer: OctopusLayer, parentBounds?: SourceBounds): Octopus['MaskGroupLayer'] {
     const id = layer.id
     const bounds = parentBounds ?? layer.sourceLayer?.bounds
-    const color = layer.sourceLayer?.artboardColor ?? null
     const isArtboard = layer.sourceLayer?.isArtboard
     const visible = layer.sourceLayer.visible
+    const transform = this.sourceComponent.isArtboard ? [1, 0, 0, 1, -bounds.left, -bounds.top] : undefined
+    const color = this.sourceComponent.isArtboard
+      ? this.sourceComponent.artboardColor
+      : layer.sourceLayer?.artboardColor ?? null
+
     const layers = layer.type === 'GROUP' ? (layer as OctopusLayerGroup).layers : [layer]
-    return OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, color, isArtboard, visible, layers })
+
+    const params = { id, parent: this, isArtboard, bounds, color, visible, transform, layers }
+    return OctopusLayerMaskGroup.createBackground(params)
   }
 
   get content(): Octopus['Layer'] {
     const id = this.id
     const bounds = this.sourceComponent.bounds
+    const isArtboard = this.sourceComponent.isArtboard
+    const transform = isArtboard ? [1, 0, 0, 1, -bounds.left, -bounds.top] : undefined
+    const color = isArtboard ? this.sourceComponent.artboardColor : undefined
 
-    const hasArtboards = this._layers.length > 1 && !this._layers.every((layer) => !layer.sourceLayer?.isArtboard)
+    const hasArtboards = this._layers.some((layer) => layer.sourceLayer?.isArtboard)
     if (!hasArtboards)
       return this._layers.length > 1
-        ? OctopusLayerMaskGroup.createBackground({ parent: this, id, bounds, layers: this._layers })
+        ? OctopusLayerMaskGroup.createBackground({
+            parent: this,
+            id,
+            bounds,
+            color,
+            layers: this._layers,
+            transform,
+          })
         : this._getArtboardFromLayer(this._layers[0], bounds)
 
     const layers = this._layers.map((layer) => this._getArtboardFromLayer(layer))

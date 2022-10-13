@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.7",
   "origin": {
     "name": "PHOTOSHOP",
     "version": "0"
@@ -13,62 +13,107 @@
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 1098,
-        "height": 312
+        "width": 927,
+        "height": 930
       },
       "dependencies": [],
-      "assets": {},
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "11.png"
+          }
+        ],
+        "fonts": [
+          {
+            "name": "Avenir-Black"
+          }
+        ]
+      },
       "location": {
         "type": "RELATIVE",
         "path": ""
       }
     },
     {
-      "id": "31",
+      "id": "9",
       "name": "Artboard 2",
       "role": "ARTBOARD",
       "bounds": {
-        "x": 0,
-        "y": 12,
-        "width": 300,
-        "height": 300
+        "x": 469,
+        "y": 124,
+        "width": 390,
+        "height": 312
       },
       "dependencies": [],
-      "assets": {},
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "11.png"
+          }
+        ]
+      },
       "location": {
         "type": "RELATIVE",
         "path": ""
       }
     },
     {
-      "id": "36",
-      "name": "Artboard 3",
-      "role": "ARTBOARD",
-      "bounds": {
-        "x": 798,
-        "y": 0,
-        "width": 300,
-        "height": 300
-      },
-      "dependencies": [],
-      "assets": {},
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "5",
+      "id": "3",
       "name": "Artboard 1",
       "role": "ARTBOARD",
       "bounds": {
-        "x": 398,
+        "x": 0,
         "y": 0,
-        "width": 300,
-        "height": 300
+        "width": 390,
+        "height": 312
       },
       "dependencies": [],
-      "assets": {},
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "11.png"
+          }
+        ]
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "20",
+      "name": "Artboard 3",
+      "role": "ARTBOARD",
+      "bounds": {
+        "x": 0,
+        "y": 618,
+        "width": 390,
+        "height": 312
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "11.png"
+          }
+        ]
+      },
       "location": {
         "type": "RELATIVE",
         "path": ""

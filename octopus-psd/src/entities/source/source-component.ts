@@ -2,12 +2,12 @@ import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/a
 import { push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
-import { getBoundsFor } from '../../utils/source'
+import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawComponent, RawLayer } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
+import type { SourceBounds, SourceColor } from '../../typings/source'
 
 export type SourceComponentOptions = {
   raw: RawComponent & RawLayer
@@ -59,6 +59,14 @@ export class SourceComponent extends SourceEntity {
 
   get isPasteboard(): boolean {
     return this._isPasteboard
+  }
+
+  get isArtboard(): boolean {
+    return isArtboard(this._rawValue)
+  }
+
+  get artboardColor(): SourceColor | null {
+    return getArtboardColor(this._rawValue)
   }
 
   get resolution(): number | undefined {

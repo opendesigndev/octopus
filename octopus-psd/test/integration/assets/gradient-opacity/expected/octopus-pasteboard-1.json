@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.7",
   "dimensions": {
     "width": 300,
     "height": 300
@@ -9,6 +9,7 @@
   "content": {
     "id": "5-Background",
     "type": "MASK_GROUP",
+    "visible": true,
     "maskBasis": "BODY",
     "mask": {
       "id": "5-BackgroundMask",
@@ -151,7 +152,6 @@
           ]
         }
       }
-    ],
-    "visible": true
+    ]
   }
 }

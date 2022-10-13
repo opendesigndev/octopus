@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-fig",
-  "version": "3.0.0-rc.15",
+  "version": "3.0.0-rc.18",
   "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "scripts": {

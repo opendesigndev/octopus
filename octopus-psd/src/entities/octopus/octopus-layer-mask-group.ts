@@ -33,6 +33,7 @@ type CreateBackgroundOptions = {
   layers: OctopusLayer[]
   isArtboard?: boolean
   visible?: boolean
+  transform?: number[]
 }
 
 type CreateWrapMaskOptions<T> = {
@@ -62,6 +63,7 @@ export class OctopusLayerMaskGroup {
     layers,
     isArtboard,
     visible,
+    transform,
   }: CreateBackgroundOptions): Octopus['MaskGroupLayer'] {
     const rectangle = convertRectangle(bounds)
     const fills: Octopus['Fill'][] = color ? [{ type: 'COLOR', color: convertColor(color) }] : []
@@ -75,11 +77,12 @@ export class OctopusLayerMaskGroup {
     return {
       id: `${id}-Background`,
       type: 'MASK_GROUP',
+      visible,
+      transform,
       maskBasis: 'BODY',
       mask,
       layers: getConverted(layers),
       meta,
-      visible,
     }
   }
 
