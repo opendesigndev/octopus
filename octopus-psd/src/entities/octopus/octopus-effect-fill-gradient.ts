@@ -1,6 +1,6 @@
-import { lerpColor, multiplyAlpha } from '@avocode/octopus-common/dist/utils/color'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { invLerp, lerp } from '@avocode/octopus-common/dist/utils/math'
+import { lerpColor, multiplyAlpha } from '@opendesign/octopus-common/dist/utils/color'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { invLerp, lerp } from '@opendesign/octopus-common/dist/utils/math'
 import uniq from 'lodash/uniq'
 
 import { logger } from '../../services/instances/logger'
@@ -15,7 +15,7 @@ import type { SourceEffectFillGradientColor } from '../source/source-effect-fill
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
 import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
-import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { ElementOf } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 

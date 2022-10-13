@@ -1,8 +1,8 @@
 import path from 'path'
 
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
-import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
 import { parsePsd } from '@avocode/psd-parser'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
 import rimraf from 'rimraf'

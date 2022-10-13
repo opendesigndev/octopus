@@ -1,6 +1,6 @@
 {
-  "name": "@avocode/octopus-ai",
-  "version": "3.0.0-rc.1",
+  "name": "@opendesign/octopus-ai",
+  "version": "3.0.0-rc.2",
   "description": "Octopus AI converter, converts .ai files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "main": "lib/src/index.js",
@@ -17,9 +17,9 @@
     "test:integration:update": "ts-node test/integration/update-tests.ts"
   },
   "dependencies": {
-    "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.23",
-    "@avocode/octopus-ts": "3.0.0-alpha.33",
+    "@opendesign/manifest-ts": "3.0.0-alpha.38",
+    "@opendesign/octopus-common": "3.0.0-rc.27",
+    "@opendesign/octopus-ts": "3.0.0-alpha.38",
     "@opendesign/illustrator-parser-pdfcpu": "^1.0.4-0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",

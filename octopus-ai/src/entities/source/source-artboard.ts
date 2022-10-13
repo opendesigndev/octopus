@@ -1,8 +1,8 @@
 import path from 'path'
 
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { asArray, asFiniteNumber, asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
 
 import { initSourceLayerChildren } from '../../utils/layer'
 import { SourceResources } from './source-resources'
@@ -11,7 +11,7 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawObjectId } from '../../typings/raw'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
 import type { SourceDesign } from './source-design'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type SourceArtboardOptions = { artboard: RawArtboardEntry; sourceDesign: SourceDesign }
 export class SourceArtboard {

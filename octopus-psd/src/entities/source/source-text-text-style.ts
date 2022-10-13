@@ -1,4 +1,4 @@
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { getColorFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'

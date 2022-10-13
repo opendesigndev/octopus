@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services/instances/logger'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'

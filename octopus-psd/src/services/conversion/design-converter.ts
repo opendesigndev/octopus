@@ -1,9 +1,9 @@
 import path from 'path'
 
-import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
@@ -16,7 +16,7 @@ import type { SourceDesign, SourceImage } from '../../entities/source/source-des
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 export type DesignConverterOptions = {
   sourceDesign: SourceDesign

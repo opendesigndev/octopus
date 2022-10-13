@@ -1,6 +1,6 @@
 {
-  "name": "@avocode/octopus-xd",
-  "version": "3.0.0-rc.18",
+  "name": "@opendesign/octopus-xd",
+  "version": "3.0.0-rc.19",
   "description": "Octopus XD converter, converts .xd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "scripts": {
@@ -17,9 +17,9 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@avocode/manifest-ts": "3.0.0-alpha.33",
-    "@avocode/octopus-common": "3.0.0-rc.23",
-    "@avocode/octopus-ts": "3.0.0-alpha.33",
+    "@opendesign/manifest-ts": "3.0.0-alpha.38",
+    "@opendesign/octopus-common": "3.0.0-rc.27",
+    "@opendesign/octopus-ts": "3.0.0-alpha.38",
     "@types/blueimp-md5": "^2.18.0",
     "@types/lodash": "^4.14.178",
     "@types/pino": "^6.3.3",

@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import path from 'path'
 
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
 
 export type RenderResult = {
   value: string | undefined

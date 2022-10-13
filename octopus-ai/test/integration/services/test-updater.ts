@@ -16,7 +16,7 @@ interface TestUpdaterAssetsReader {
 }
 
 type TestAssets = {
-  artboards: Octopus['OctopusDocument'][]
+  artboards: Octopus['OctopusComponent'][]
   manifest: Manifest['OctopusManifest']
   expectedDirPath: string | null
   testName: string
@@ -45,7 +45,7 @@ export class TestUpdater {
         return {
           artboards: artboardConversionResults
             .map((artboardConversionResult) => artboardConversionResult.value)
-            .filter((artboard): artboard is Octopus['OctopusDocument'] => Boolean(artboard)),
+            .filter((artboard): artboard is Octopus['OctopusComponent'] => Boolean(artboard)),
           manifest: manifest,
           expectedDirPath,
           testName,

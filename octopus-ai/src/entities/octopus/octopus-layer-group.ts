@@ -1,4 +1,4 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { initOctopusLayerChildren } from '../../utils/layer'
 import { OctopusLayerCommon } from './octopus-layer-common'

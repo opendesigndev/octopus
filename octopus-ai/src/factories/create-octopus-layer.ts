@@ -11,7 +11,7 @@ import type { OctopusLayerMaskOptions } from '../entities/octopus/octopus-layer-
 import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { SourceLayer } from './create-source-layer'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayer =
   | OctopusLayerGroup

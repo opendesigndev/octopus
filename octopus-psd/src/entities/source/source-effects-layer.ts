@@ -1,4 +1,4 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
 import { getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss'

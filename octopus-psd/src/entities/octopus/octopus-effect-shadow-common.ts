@@ -1,4 +1,4 @@
-import { clamp, cos, round, sin } from '@avocode/octopus-common/dist/utils/math'
+import { clamp, cos, round, sin } from '@opendesign/octopus-common/dist/utils/math'
 
 import { convertColor } from '../../utils/convert'
 import { OctopusEffectBase } from './octopus-effect-base'

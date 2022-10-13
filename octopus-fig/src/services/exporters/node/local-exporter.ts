@@ -1,7 +1,7 @@
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
 import {
@@ -18,7 +18,7 @@ import { stringify } from '../../../utils/misc'
 import type { Manifest } from '../../../typings/manifest'
 import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {
   path: string

@@ -1,5 +1,5 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
 import get from 'lodash/get'
 
 import type { RawArtboardEntry, RawLayer } from '../typings/source'

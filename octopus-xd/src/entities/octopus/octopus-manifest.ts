@@ -1,4 +1,4 @@
-import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
+import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as'
 
 import { pathRelative } from '../../utils/fs-path'
 

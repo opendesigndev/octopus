@@ -1,4 +1,4 @@
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import type {
   RawGraphicsStateMatrix,
@@ -8,7 +8,7 @@ import type {
 } from '../../typings/raw'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerText } from './source-layer-text'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type SourceLayerTextNormalizedOptions = {
   parent: SourceLayerText

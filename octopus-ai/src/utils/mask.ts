@@ -4,7 +4,7 @@ import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayer } from '../factories/create-source-layer'
 import type { RawResourcesExtGStateSmask, RawResourcesXObject } from '../typings/raw'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 export function initClippingMask(layer: SourceLayer): Nullish<SourceLayerShape> {
   if (!('clippingPaths' in layer)) {

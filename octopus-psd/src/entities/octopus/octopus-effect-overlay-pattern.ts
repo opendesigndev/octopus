@@ -1,4 +1,4 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
 import { logger } from '../../services/instances/logger'
 import { convertOffset } from '../../utils/convert'

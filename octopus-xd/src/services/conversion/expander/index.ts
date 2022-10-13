@@ -1,5 +1,5 @@
-import { asArray, asString } from '@avocode/octopus-common/dist/utils/as'
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
 import cloneDeep from 'lodash/cloneDeep'
 import mergeWith from 'lodash/mergeWith'
 import pick from 'lodash/pick'

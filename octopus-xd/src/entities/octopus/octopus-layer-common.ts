@@ -1,5 +1,5 @@
-import { asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { asNumber, asString } from '@opendesign/octopus-common/dist/utils/as'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 import { v4 as uuidv4 } from 'uuid'
 
 import { BLEND_MODES } from '../../utils/blend-modes'

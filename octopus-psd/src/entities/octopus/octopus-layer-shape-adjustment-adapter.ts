@@ -1,5 +1,5 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { OctopusEffectFill } from './octopus-effect-fill'

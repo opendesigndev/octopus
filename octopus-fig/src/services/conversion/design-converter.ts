@@ -1,6 +1,6 @@
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
@@ -23,9 +23,9 @@ import type {
   ResolvedStyle,
   ResolvedFill,
   ResolvedPreview,
-} from '@avocode/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+} from '@opendesign/figma-parser/lib/src/index-node'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 

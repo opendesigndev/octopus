@@ -1,4 +1,4 @@
-import { asString } from '@avocode/octopus-common/dist/utils/as'
+import { asString } from '@opendesign/octopus-common/dist/utils/as'
 
 import type { SourceManifest } from '../../../entities/source/source-manifest'
 import type { RawArtboard, RawPasteboard } from '../../../typings/source'

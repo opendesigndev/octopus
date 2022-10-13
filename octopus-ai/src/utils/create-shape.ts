@@ -4,7 +4,7 @@
  */
 import { createPath, createPoint, createSegment } from './paper-factories'
 
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type PointType = 'point' | 'bezier'
 export type OctopusPoint = {

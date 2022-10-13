@@ -1,7 +1,7 @@
 import path from 'path'
 
-import { displayPerf } from '@avocode/octopus-common/dist/utils/console'
-import { timestamp } from '@avocode/octopus-common/dist/utils/timestamp'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
+import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'

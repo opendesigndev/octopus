@@ -1,6 +1,6 @@
-import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
-import { isObject, push } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
+import { isObject, push } from '@opendesign/octopus-common/dist/utils/common'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { setDefaults, setLogger } from './services'
@@ -16,7 +16,7 @@ import type { NodeFactories, WebFactories } from './services/general/platforms'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 export type ConvertDesignOptions = {
   exporter?: Exporter
@@ -35,7 +35,7 @@ export type OctopusXDConverterOptions = OctopusXDConverterGeneralOptions & {
 
 export type ArtboardConversionResult = {
   id: string
-  value: Octopus['OctopusDocument'] | null
+  value: Octopus['OctopusComponent'] | null
   error: Error | null
   time: number
 }
@@ -116,7 +116,7 @@ export class OctopusXDConverter {
 
   private async _convertArtboardByIdSafe(
     targetArtboardId: string
-  ): Promise<{ value: Octopus['OctopusDocument'] | null; error: Error | null }> {
+  ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
       const value = await new ArtboardConverter({
         targetArtboardId,

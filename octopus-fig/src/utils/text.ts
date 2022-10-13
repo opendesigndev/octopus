@@ -1,4 +1,4 @@
-import { keys } from '@avocode/octopus-common/dist/utils/common'
+import { keys } from '@opendesign/octopus-common/dist/utils/common'
 
 export function _inferPostScriptType(weight: number | undefined): string {
   if (!weight) return 'Regular'

@@ -1,5 +1,5 @@
 {
-  "name": "@avocode/figma-parser-s3-plugin",
+  "name": "@opendesign/figma-parser-s3-plugin",
   "version": "3.0.0-rc.2",
   "description": "Figma Parser S3 plugin",
   "license": "Apache-2.0",

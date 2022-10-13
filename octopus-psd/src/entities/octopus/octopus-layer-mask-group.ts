@@ -1,4 +1,4 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { convertColor, convertRectangle } from '../../utils/convert'

@@ -1,7 +1,7 @@
 import path from 'path'
 
-import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
+import { asString } from '@opendesign/octopus-common/dist/utils/as'
+import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
 
 import type { OctopusPSDConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'

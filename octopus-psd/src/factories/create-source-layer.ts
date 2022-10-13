@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'

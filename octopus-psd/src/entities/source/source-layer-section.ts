@@ -1,5 +1,5 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'

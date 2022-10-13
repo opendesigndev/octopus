@@ -1,4 +1,4 @@
-import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
 
 import type {
   RawLayer,

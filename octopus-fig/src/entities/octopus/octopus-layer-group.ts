@@ -1,4 +1,4 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { env } from '../../services'

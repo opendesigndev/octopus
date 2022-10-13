@@ -1,4 +1,4 @@
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-web'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-web'
 
 import { OctopusXDConverter } from './octopus-xd-converter'
 import { createLoggerWeb } from './services/general/logger/web/logger-web'

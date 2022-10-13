@@ -1,4 +1,4 @@
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as'
 
 import { isValid } from '../../utils/coords'
 import { createShape } from '../../utils/create-shape'

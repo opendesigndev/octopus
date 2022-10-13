@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { asString } from '@opendesign/octopus-common/dist/utils/as'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from '../../services/instances/logger'
@@ -14,7 +14,7 @@ import type { DesignConverter } from '../../services/conversion/design-converter
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerGroup } from './octopus-layer-group'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { NotNull } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 

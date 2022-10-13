@@ -1,5 +1,5 @@
-import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { env } from '../services'
 import { DEFAULTS } from './defaults'
