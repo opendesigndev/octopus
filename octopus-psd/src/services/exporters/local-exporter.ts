@@ -20,6 +20,10 @@ export class LocalExporter implements AbstractExporter {
   _assetsSaves: Promise<unknown>[]
   _completed: DetachedPromiseControls<void>
 
+  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  static MANIFEST_NAME = MANIFEST_NAME
+  static getOctopusFileName = getOctopusFileName
+
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []

@@ -22,6 +22,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   _assetsSaves: Promise<unknown>[]
   _completed: DetachedPromiseControls<void>
 
+  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  static MANIFEST_NAME = MANIFEST_NAME
+  static SOURCE_NAME = SOURCE_NAME
+  static getOctopusFileName = getOctopusFileName
+
   constructor(options: DebugExporterOptions) {
     super()
     this._tempDir = options.tempDir
