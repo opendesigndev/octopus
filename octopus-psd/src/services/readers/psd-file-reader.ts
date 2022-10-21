@@ -15,7 +15,7 @@ import { logger } from '../instances/logger'
 import type { SourceImage } from '../../entities/source/source-design'
 import type { RawComponent } from '../../typings/raw'
 
-type PSDFileReaderOptions = {
+export type PSDFileReaderOptions = {
   path: string
   designId?: string
 }
@@ -31,24 +31,41 @@ export class PSDFileReader {
   static SOURCE_FILE = 'source.json'
   static PATTERNS_DIR = path.join(PSDFileReader.IMAGES_DIR, 'patterns')
 
+  /**
+   * Converts given PSD file into SourceDesign.
+   * @constructor
+   * @param {PSDFileReaderOptions} options
+   */
   constructor(options: PSDFileReaderOptions) {
     this._path = options.path
     this._designId = options.designId || uuidv4()
     this._sourceDesign = this._initSourceDesign()
   }
 
+  /**
+   * Path to the PSD file
+   */
   get path(): string {
     return this._path
   }
 
+  /**
+   * Design ID
+   */
   get designId(): string {
     return this._designId
   }
 
+  /**
+   * returns SourceDesign or null if error happened
+   */
   get sourceDesign(): Promise<SourceDesign | null> {
     return this._sourceDesign
   }
 
+  /**
+   * Cleans TempDir where source.json and source images were saved
+   */
   async cleanup(): Promise<void> {
     return new Promise((resolve, reject) => {
       rimraf(this._outDir, (error: Error | null | undefined) => {

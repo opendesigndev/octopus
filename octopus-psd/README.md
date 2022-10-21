@@ -78,6 +78,12 @@ yarn convert:psd:local sample/some-file.psd
 
 ---
 
+## JSDoc
+
+Command `yarn jsdoc` will generate JSDoc for public Classes into `./jsdoc` folder
+
+---
+
 ## Tests
 
 ```

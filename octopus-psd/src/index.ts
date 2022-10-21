@@ -7,14 +7,22 @@ import { PSDFileReader } from './services/readers/psd-file-reader'
 import { SourceFileReader } from './services/readers/source-file-reader'
 import { readPackageMeta } from './utils/read-pkg-meta'
 
-import type { ConvertDesignResult, DesignConverterOptions } from './services/conversion/design-converter'
+import type { SourceDesign } from './entities/source/source-design'
+import type { ConvertDesignResult } from './services/conversion/design-converter'
+import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
 
 export { LocalExporter, DebugExporter }
 export { PSDFileReader, SourceFileReader }
 
-type OctopusPSDConverterOptions = {
+export type OctopusPSDConverterOptions = {
   logger?: Logger
+}
+
+export type DesignConverterOptions = {
+  sourceDesign: SourceDesign
+  designId?: string
+  exporter?: AbstractExporter
 }
 
 /**
@@ -33,6 +41,11 @@ export class OctopusPSDConverter {
     SOURCE: SourceFileReader,
   }
 
+  /**
+   * Octopus PSD converter.
+   * @constructor
+   * @param {OctopusPSDConverterOptions} [options]
+   */
   constructor(options?: OctopusPSDConverterOptions) {
     this._setupLogger(options?.logger)
   }
@@ -41,10 +54,19 @@ export class OctopusPSDConverter {
     if (logger) setLogger(logger)
   }
 
+  /**
+   * Returns version from package.json
+   * @returns {string} version
+   */
   get pkgVersion(): string {
     return readPackageMeta().version
   }
 
+  /**
+   * Converts given SourceDesign into Octopus entities
+   * @param {DesignConverterOptions} [options]
+   * @returns {Promise<ConvertDesignResult | null>} returns ConvertDesignResult object or null if conversion fails
+   */
   async convertDesign(options: DesignConverterOptions): Promise<ConvertDesignResult | null> {
     return new DesignConverter(options, this).convert()
   }

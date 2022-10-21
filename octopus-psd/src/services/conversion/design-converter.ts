@@ -10,19 +10,13 @@ import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
 import { logger } from '../instances/logger'
 import { ComponentConverter } from './component-converter'
 
-import type { OctopusPSDConverter } from '../..'
+import type { DesignConverterOptions, OctopusPSDConverter } from '../..'
 import type { SourceComponent } from '../../entities/source/source-component'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design'
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
-
-export type DesignConverterOptions = {
-  sourceDesign: SourceDesign
-  designId?: string
-  exporter?: AbstractExporter
-}
 
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']

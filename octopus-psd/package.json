@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
     "clean:workdir": "rimraf ./workdir/*",
-    "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report",
+    "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report ./jsdoc",
     "convert:psd:debug": "ts-node ./examples/node/convert-psd-debug.ts",
     "convert:psd:local": "ts-node ./examples/node/convert-psd-local.ts",
     "convert:source:debug": "ts-node ./examples/node/convert-source-debug.ts",
@@ -17,13 +17,14 @@
     "test:integration": "ts-node test/integration",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "types:check": "tsc --noEmit",
+    "jsdoc": "yarn build && jsdoc -d jsdoc lib/src/index.js lib/src/services/exporters lib/src/services/readers",
     "watch": "tsc -w"
   },
   "dependencies": {
+    "@avocode/psd-parser": "0.8.4",
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
     "@opendesign/octopus-common": "3.0.0-rc.27",
     "@opendesign/octopus-ts": "3.0.0-alpha.38",
-    "@avocode/psd-parser": "0.8.4",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/pino": "^6.3.3",
@@ -34,8 +35,8 @@
     "image-size": "^1.0.1",
     "lodash": "^4.17.21",
     "paper": "0.12.15",
-    "pino-pretty": "^4.3.0",
     "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
     "rimraf": "^3.0.2",
     "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
@@ -45,6 +46,7 @@
     "@types/node": "*",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
+    "jsdoc": "^3.6.11",
     "jsondiffpatch": "^0.4.1",
     "ts-jest": "^27.1.3",
     "ts-node": "10.5.0",
