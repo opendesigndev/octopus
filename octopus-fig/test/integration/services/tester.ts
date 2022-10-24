@@ -3,7 +3,7 @@ import path from 'path'
 import * as jsondiffpatch from 'jsondiffpatch'
 
 import { createConverter } from '../../../src/index-node'
-import { getOctopusFileName, MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
+import { getOctopusFileName, MANIFEST_NAME } from '../../../src/utils/exporter'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 import { DesignEmitterMock } from './design-emitter-mock'
@@ -132,7 +132,7 @@ export class Tester {
 
       if (manifestDelta) {
         failed.push({
-          name: `${assetId} / ${MANIFEST_FILE_NAME}`,
+          name: `${assetId} / ${MANIFEST_NAME}`,
           json: stringify(manifestGenerated),
           diff: jsondiffpatch.formatters.html.format(manifestDelta, manifestExpected),
         })

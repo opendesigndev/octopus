@@ -9,8 +9,8 @@ export type ComponentConverterOptions = {
 }
 
 export class ComponentConverter {
-  _componentId: string
-  _designConverter: DesignConverter
+  private _componentId: string
+  private _designConverter: DesignConverter
 
   constructor({ componentId, designConverter }: ComponentConverterOptions) {
     this._componentId = componentId

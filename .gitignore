@@ -19,7 +19,6 @@ dist
 output/
 lib/
 sample
-jsdoc/
 
 */example-web/*.umd.js
 */examples/web/*.umd.js

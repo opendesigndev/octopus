@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'
 
-import { OctopusPSDConverter, PSDFileReader, DebugExporter } from '../../src'
+import { OctopusPSDConverter } from '../../src'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files'
 import { renderOctopus } from './utils/render'
 
@@ -27,6 +27,8 @@ type ConvertedComponent = {
 dotenv.config()
 
 const converter = new OctopusPSDConverter()
+const DebugExporter = OctopusPSDConverter.EXPORTERS.DEBUG
+const PSDFileReader = OctopusPSDConverter.READERS.PSD
 
 export async function convertDesign({
   filePath,

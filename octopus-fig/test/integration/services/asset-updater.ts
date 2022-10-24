@@ -2,7 +2,7 @@ import path from 'path'
 
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
-import { SourceApiReader } from '../../../src/index-node'
+import { SourceApiReader } from '../../../src/services/readers/source-api-reader'
 import { getDirsFromDir, makeDir, saveFile } from '../../../src/utils/files'
 import { stringify } from '../utils/stringify'
 

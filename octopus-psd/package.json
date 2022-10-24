@@ -9,15 +9,13 @@
     "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report ./jsdoc",
     "convert:psd:debug": "ts-node ./examples/node/convert-psd-debug.ts",
     "convert:psd:local": "ts-node ./examples/node/convert-psd-local.ts",
-    "convert:source:debug": "ts-node ./examples/node/convert-source-debug.ts",
-    "convert:source:local": "ts-node ./examples/node/convert-source-local.ts",
     "prepack": "rimraf ./lib && yarn run build",
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "yarn jest",
     "test:integration": "ts-node test/integration",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "types:check": "tsc --noEmit",
-    "jsdoc": "yarn build && jsdoc -d jsdoc lib/src/index.js lib/src/services/exporters lib/src/services/readers",
+    "typedoc": "typedoc --excludePrivate src/index.ts",
     "watch": "tsc -w"
   },
   "dependencies": {
@@ -46,10 +44,10 @@
     "@types/node": "*",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
-    "jsdoc": "^3.6.11",
     "jsondiffpatch": "^0.4.1",
     "ts-jest": "^27.1.3",
     "ts-node": "10.5.0",
+    "typedoc": "^0.23.18",
     "typescript": "4.6.4"
   },
   "files": [

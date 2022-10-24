@@ -15,9 +15,9 @@ type LocalExporterOptions = {
 }
 
 export class LocalExporter implements Exporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'

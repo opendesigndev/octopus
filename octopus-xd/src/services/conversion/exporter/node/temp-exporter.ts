@@ -19,10 +19,10 @@ type TempExporterOptions = {
 type SourceResources = { manifest: string; interactions: string; resources: string }
 
 export class TempExporter extends EventEmitter implements Exporter {
-  _outputDir: Promise<string>
-  _tempDir: string
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _tempDir: string
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'

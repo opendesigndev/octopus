@@ -13,13 +13,17 @@ import type { AbstractExporter } from './abstract-exporter'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 export type LocalExporterOptions = {
-  path: string
+  /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */
+  path?: string
 }
 
+/**
+ * Exporter created to be used in automated runs.
+ */
 export class LocalExporter implements AbstractExporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = IMAGES_DIR_NAME
   static MANIFEST_NAME = MANIFEST_NAME

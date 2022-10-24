@@ -78,9 +78,9 @@ yarn convert:psd:local sample/some-file.psd
 
 ---
 
-## JSDoc
+## TypeDoc
 
-Command `yarn jsdoc` will generate JSDoc for public Classes into `./jsdoc` folder
+Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
 
 ---
 

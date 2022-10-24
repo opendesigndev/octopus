@@ -16,8 +16,8 @@ type ParseArtboard = (msgId: number, index: number, artboardId: string) => void
 type Handler = RegisterFile | GetArtboards | ParseArtboard
 
 class OctopusFigWorker {
-  _lastIndex: number
-  _readers: { [key: string]: SrcApiReader }
+  private _lastIndex: number
+  private _readers: { [key: string]: SrcApiReader }
 
   constructor() {
     this._lastIndex = 0
@@ -25,7 +25,7 @@ class OctopusFigWorker {
     this._initCommands()
   }
 
-  _initCommands() {
+  private _initCommands() {
     const handlers: { [key: string]: Handler } = {
       'register-file': this._registerFile.bind(this),
       'get-artboards': this._getArtboards.bind(this),
@@ -40,18 +40,18 @@ class OctopusFigWorker {
     })
   }
 
-  async _registerFile(msgId: number, options: SourceApiReaderOptions) {
+  private async _registerFile(msgId: number, options: SourceApiReaderOptions) {
     const index = this._lastIndex++
     const reader = new SourceApiReader(options)
     this._readers[index] = reader
     postMessage({ msgId, response: index })
   }
 
-  async _getArtboards(msgId: number, index: number) {
+  private async _getArtboards(msgId: number, index: number) {
     postMessage({ msgId, response: await this._readers[index].getFileMeta })
   }
 
-  async _parseArtboard(msgId: number, index: number, artboardId: string) {
+  private async _parseArtboard(msgId: number, index: number, artboardId: string) {
     const converter = createConverter() as OctopusFigConverter
     const result = await converter.convertDesign({ designEmitter: this._readers[index].parse([artboardId]) })
     postMessage({ msgId, response: result })

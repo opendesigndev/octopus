@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
+import { MANIFEST_NAME } from '../../../src/utils/exporter'
 import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
 import { lazyRead } from '../utils/lazy-read'
 
@@ -83,9 +83,7 @@ export class AssetReader {
     const testDirectoryTrees = await this._getTestDirectoryFullData()
 
     return testDirectoryTrees.map((testDirectoryTree): TestComponents => {
-      const manifest = testDirectoryTree.expectedPaths.find(
-        (filePath) => path.basename(filePath) === MANIFEST_FILE_NAME
-      )
+      const manifest = testDirectoryTree.expectedPaths.find((filePath) => path.basename(filePath) === MANIFEST_NAME)
       const components = testDirectoryTree.expectedPaths.filter((filePath) =>
         /[0-9]+-octopus\.json$/.test(path.basename(filePath))
       )

@@ -89,6 +89,12 @@ Look for `Result:` in console output.
 
 ---
 
+## TypeDoc
+
+Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
+
+---
+
 ## Tests
 
 ```

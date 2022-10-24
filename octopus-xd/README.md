@@ -92,6 +92,12 @@ Useful and verbose script for debugging. Accepts multiple paths.
 
 ---
 
+## TypeDoc
+
+Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
+
+---
+
 ## Unit Tests
 
 ```

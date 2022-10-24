@@ -6,6 +6,7 @@ import type { ICacher } from '@opendesign/figma-parser/lib/src/types/cacher'
 import type EventEmitter from 'eventemitter3'
 
 export type SourceApiReaderOptions = {
+  /** Figma design HASH ID */
   designId: string
   host: string
   token: string
@@ -26,15 +27,27 @@ export type SourceApiReaderOptions = {
   cacher?: ICacher
 }
 
+/**
+ * Reader that downloads given design from Figma API and provide them through `EventEmitter` calls.
+ */
 export class SourceApiReader {
   private _options: SourceApiReaderOptions
   private _parser: ReturnType<typeof createParser>
 
+  /**
+   * Downloads given Figma design and provide them through `EventEmitter` calls.
+   * @constructor
+   * @param {SourceApiReaderOptions} options
+   */
   constructor(options: SourceApiReaderOptions) {
     this._options = options
     this._parser = this._initParser()
   }
 
+  /**
+   * Figma design hash.
+   * Can be found in the URL of the design: `https://www.figma.com/file/__DESIGN_HASH__`
+   */
   get designId(): string {
     return this._options.designId
   }
@@ -43,6 +56,10 @@ export class SourceApiReader {
     return this._parser.getFileMeta()
   }
 
+  /**
+   * Returns `EventEmitter` which is needed in OctopusFigConverter.
+   * @param {string[]} [ids] Optional IDs of wanted artboards. If not provided, whole design will be parsed.
+   */
   parse(ids?: string[]): EventEmitter {
     return this._parser.parse(ids)
   }

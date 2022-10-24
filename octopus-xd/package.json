@@ -14,6 +14,7 @@
     "prepack": "npx rimraf ./lib && yarn run build",
     "watch": "tsc -w",
     "test": "echo 'Tests are not implemented yet'",
+    "typedoc": "typedoc --excludePrivate src/index-node.ts src/index-web.ts",
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
@@ -29,8 +30,8 @@
     "fflate": "^0.7.1",
     "lodash": "^4.17.21",
     "paper": "0.12.4",
-    "pino-pretty": "^4.3.0",
     "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
     "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
   },
@@ -41,6 +42,7 @@
     "chalk": "^4.1.2",
     "jest": "^27.3.1",
     "ts-node": "10.5.0",
+    "typedoc": "^0.23.18",
     "typescript": "4.6.4",
     "vite": "^2.9.1"
   },

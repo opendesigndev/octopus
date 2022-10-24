@@ -10,7 +10,7 @@ import {
   getSourceFileName,
   IMAGES_DIR_NAME,
   IMAGE_EXTNAME,
-  MANIFEST_FILE_NAME,
+  MANIFEST_NAME,
 } from '../../../utils/exporter'
 import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
@@ -21,14 +21,29 @@ import type { AbstractExporter } from '../abstract-exporter'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {
+  /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */
   path: string
 }
 
+/**
+ * Exporter created to be used in automated runs.
+ */
 export class LocalExporter implements AbstractExporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
+  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  static MANIFEST_NAME = MANIFEST_NAME
+  static getSourceFileName = getSourceFileName
+  static getOctopusFileName = getOctopusFileName
+  static getPreviewFileName = getPreviewFileName
+
+  /**
+   * Exports octopus assets into given or system TempDir
+   * @constructor
+   * @param {DebugExporterOptions} [options]
+   */
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []
@@ -38,7 +53,7 @@ export class LocalExporter implements AbstractExporter {
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
-    await makeDir(path.join(dir, IMAGES_DIR_NAME))
+    await makeDir(path.join(dir, LocalExporter.IMAGES_DIR_NAME))
     return dir
   }
 
@@ -60,51 +75,87 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
+  /**
+   * Exports given design raw data.
+   * @param {unknown} raw Design raw data
+   * @returns {Promise<string>} returns path to the exported RawDesign
+   */
   async exportRawDesign(raw: unknown): Promise<string> {
-    const rawPath = getSourceFileName('design')
+    const rawPath = LocalExporter.getSourceFileName('design')
     await this._save(rawPath, stringify(raw))
     return rawPath
   }
 
+  /**
+   * Exports raw data of given Component.
+   * @param {unknown} raw Component raw data
+   * @param {string} name Name of given Component
+   * @returns {Promise<string>} returns path to the exported RawComponent
+   */
   async exportRawComponent(raw: unknown, name: string): Promise<string> {
-    const rawPath = getSourceFileName(name)
+    const rawPath = LocalExporter.getSourceFileName(name)
     await this._save(rawPath, stringify(raw))
     return rawPath
   }
 
+  /**
+   * Exports raw data of given chunk.
+   * @param {unknown} raw Chunk raw data
+   * @param {string} name Name of given Chunk
+   * @returns {Promise<string>} returns path to the exported RawChunk
+   */
   async exportRawChunk(raw: unknown, name: string): Promise<string> {
-    const rawPath = getSourceFileName(name)
+    const rawPath = LocalExporter.getSourceFileName(name)
     await this._save(rawPath, stringify(raw))
     return rawPath
   }
+
+  /**
+   * Exports given OctopusComponent
+   * @param {ComponentConversionResult} result contains converted OctopusComponent or Error if conversion failed
+   * @returns {Promise<string | null>} returns path to the exported OctopusComponent or `null` if conversion failed
+   */
   async exportComponent(result: ComponentConversionResult): Promise<string | null> {
     if (!result.value) return null
-    const path = getOctopusFileName(result.id)
+    const path = LocalExporter.getOctopusFileName(result.id)
     await this._save(path, stringify(result.value))
     return path
   }
 
   getImagePath(name: string): string {
-    return path.join(IMAGES_DIR_NAME, `${name}${IMAGE_EXTNAME}`)
+    return path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${IMAGE_EXTNAME}`)
   }
 
+  /**
+   * Exports given Image into folder specified in `LocalExporter.IMAGES_DIR_NAME`
+   * @param {string} name Name of the exported Image
+   * @param {ArrayBuffer} data Image data represented as buffer of binary data
+   * @returns {Promise<string>} returns path to the exported Image
+   */
   async exportImage(name: string, data: ArrayBuffer): Promise<string> {
     const imagePath = this.getImagePath(name)
     await this._save(imagePath, Buffer.from(data))
     return imagePath
   }
 
-  // getPreviewPath(id: string): string {
-  //   return getPreviewPath(id)
-  // }
-
+  /**
+   * Exports given Image Preview into folder specified in `LocalExporter.getPreviewFileName()`
+   * @param {string} id ID of the exported Image
+   * @param {ArrayBuffer} data Image data represented as buffer of binary data
+   * @returns {Promise<string>} returns path to the exported Image Preview
+   */
   async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
-    const previewPath = getPreviewFileName(id)
+    const previewPath = LocalExporter.getPreviewFileName(id)
     await this._save(previewPath, Buffer.from(data))
     return previewPath
   }
 
+  /**
+   * Exports given converted OctopusManifest.
+   * @param {Manifest['OctopusManifest']} manifest Given converted OctopusManifest data object.
+   * @returns {Promise<string>} returns path to the OctopusManifest
+   */
   async exportManifest(manifest: Manifest['OctopusManifest']): Promise<string> {
-    return this._save(MANIFEST_FILE_NAME, stringify(manifest))
+    return this._save(LocalExporter.MANIFEST_NAME, stringify(manifest))
   }
 }

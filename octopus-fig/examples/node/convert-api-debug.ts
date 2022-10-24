@@ -4,7 +4,7 @@ import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node'
+import { createConverter, OctopusFigConverter } from '../../src/index-node'
 import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
@@ -22,6 +22,8 @@ type ConvertedDocumentResult = {
 dotenv.config()
 
 const converter = createConverter()
+const DebugExporter = OctopusFigConverter.EXPORTERS.DEBUG
+const SourceApiReader = OctopusFigConverter.READERS.API
 
 export async function convertDesign({
   designId,
