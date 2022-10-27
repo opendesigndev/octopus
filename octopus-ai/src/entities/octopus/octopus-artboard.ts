@@ -82,8 +82,7 @@ export class OctopusArtboard {
   }
 
   private _getVersion(): string {
-    const pkg = this._designConverter.octopusAIConverter.pkg
-    return pkg.version
+    return this._designConverter.octopusAIConverter.pkgVersion
   }
 
   get manifest(): OctopusManifest {

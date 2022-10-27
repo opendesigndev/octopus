@@ -70,7 +70,7 @@ export class OctopusManifest {
   }
 
   get manifestVersion(): string {
-    return this._designConverter.octopusAIConverter.pkg.version
+    return this._designConverter.octopusAIConverter.pkgVersion
   }
 
   get AIVersion(): string {

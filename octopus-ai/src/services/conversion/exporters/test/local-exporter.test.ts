@@ -79,30 +79,24 @@ describe('LocalExporter', () => {
     const design: any = {
       metaData: { version: 'ai-3' },
       additionalTextData: { Texts: [{ content: 'hello' }] },
-      images: [
-        { id: 'image1.jpg', getImageData: async () => 'base64;image1' },
-        { id: 'image2.jpg', getImageData: async () => 'base64;image2' },
-      ],
     }
 
-    it('saves images, metadata and additionalTextData', async () => {
+    it('saves images and metadata', async () => {
       const instance = new LocalExporter({})
       const result = await instance.exportAuxiliaryData(design)
 
       expect(result).toEqual({
         additionalTextData: 'tmpdir/randomdirname/additional-text-data.json',
-        images: ['tmpdir/randomdirname/images/image1.jpg', 'tmpdir/randomdirname/images/image2.jpg'],
         metadata: 'tmpdir/randomdirname/metadata.json',
       })
     })
 
-    it('saves images, metadata and returns null for additionalTextData path when its undefined', async () => {
+    it('saves  metadata and returns null for additionalTextData path when its undefined', async () => {
       const instance = new LocalExporter({})
       const result = await instance.exportAuxiliaryData({ ...design, additionalTextData: null })
 
       expect(result).toEqual({
         additionalTextData: null,
-        images: ['tmpdir/randomdirname/images/image1.jpg', 'tmpdir/randomdirname/images/image2.jpg'],
         metadata: 'tmpdir/randomdirname/metadata.json',
       })
     })

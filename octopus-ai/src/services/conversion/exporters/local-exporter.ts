@@ -17,6 +17,9 @@ type LocalExporterOptions = {
   path?: string
 }
 
+/**
+ * Exporter created to be used in automated runs.
+ */
 export class LocalExporter implements Exporter {
   private _outputDir: Promise<string>
   private _assetsSaves: Promise<unknown>[]
@@ -37,6 +40,11 @@ export class LocalExporter implements Exporter {
     return JSON.stringify(value, null, '  ')
   }
 
+  /**
+   * Exports octopus assets into provided or system created dir
+   * @constructor
+   * @param {DebugExporterOptions} [options]
+   */
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
@@ -58,22 +66,20 @@ export class LocalExporter implements Exporter {
     return this._outputDir
   }
 
+  /**
+   * Exports metadata and additional text data
+   * @param {SourceDesign} sourceDesign c
+   * @returns {Promise<AuxiliaryData>} returns metadata and additional text data
+   */
   async exportAuxiliaryData(design: SourceDesign): Promise<AuxiliaryData> {
     const saveMetadata = this._save(LocalExporter.METADATA_NAME, this._stringify(design.metadaData))
     const saveAdditionalTextData = design.additionalTextData
       ? this._save(LocalExporter.ADDITIONAL_TEXT_DATA, this._stringify(design.additionalTextData))
       : null
 
-    const saveImages = Promise.all(
-      design.images.map(async (image) => {
-        const rawValue = await image.getImageData()
-        return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, image.id), rawValue)
-      })
-    )
+    const [metadata, additionalTextData] = await Promise.all([saveMetadata, saveAdditionalTextData])
 
-    const [metadata, images, additionalTextData] = await Promise.all([saveMetadata, saveImages, saveAdditionalTextData])
-
-    const result = { metadata, images, additionalTextData }
+    const result = { metadata, additionalTextData }
 
     return result
   }
@@ -83,11 +89,22 @@ export class LocalExporter implements Exporter {
     await Promise.all(this._assetsSaves)
   }
 
+  /**
+   * Exports given Octopus Artboard
+   * @param {ArtboardConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
+   * @returns {Promise<string | null>} returns path to the exported OctopusArtboard
+   */
   exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
     return this._save(createOctopusArtboardFileName(artboard.value?.id ?? ''), this._stringify(artboard.value))
   }
 
+  /**
+   * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
+   * @param {string} name Name of the exported Image
+   * @param {Buffer} data Data representation of given image
+   * @returns {Promise<string>} returns path to the exported Image
+   */
   exportImage(name: string, data: Buffer): Promise<string> {
     return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
   }
@@ -96,6 +113,11 @@ export class LocalExporter implements Exporter {
     this._completed.resolve()
   }
 
+  /**
+   * Exports given converted OctopusManifest.
+   * @param {DesignConversionResult} result contains converted OctopusManifest + conversion Time
+   * @returns {Promise<string>} returns path to the OctopusManifest
+   */
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
     return this._save(LocalExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest))
   }

@@ -2,7 +2,7 @@ import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
 import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter'
 
-export type AuxiliaryData = { metadata: string; images: string[]; additionalTextData: string | null }
+export type AuxiliaryData = { metadata: string; additionalTextData: string | null }
 
 export interface Exporter {
   exportAuxiliaryData?(_design: SourceDesign): Promise<AuxiliaryData>

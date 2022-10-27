@@ -24,11 +24,13 @@ import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web
 
 type DesignConverterGeneralOptions = {
   octopusAIconverter: OctopusAIConverter
+  /** Optional Exporter. */
   exporter?: Exporter
   partialUpdateInterval?: number
 }
 
 type OctopusAIConverterOptions = DesignConverterGeneralOptions & {
+  /** SourceDesign instance encapsulates all the source design data. It consists of artboards, images and other assets. It's possible to generate using either built-in `AIFileReader` or by custom reader. */
   sourceDesign: SourceDesign
 }
 
@@ -173,20 +175,24 @@ export class DesignConverter {
 
     exporter?.exportAuxiliaryData?.(this._sourceDesign)
 
+    /** Init artboards queue */
     const queue = this._initArtboardQueue(exporter)
 
+    /** Init partial update + first manifest save */
     const manifestInterval = setInterval(async () => this._exportManifest(exporter), this._partialUpdateInterval)
 
+    /** Enqueue all artboards */
     const allConverted = await Promise.all(this._sourceDesign.artboards.map((artboard) => queue.exec(artboard)))
+    const artboards = allConverted.map((converted) => converted.artboard)
 
+    /** Final trigger of manifest save */
     clearInterval(manifestInterval)
     const manifest = await this._exportManifest(exporter)
-    /** Manifest */
-
-    exporter?.finalizeExport?.()
 
     const images = [...new Set(allConverted.reduce((images, converted) => push(images, ...converted.images), []))]
-    const artboards = allConverted.map((converted) => converted.artboard)
+
+    /** Trigger finalizer */
+    exporter?.finalizeExport?.()
 
     return {
       manifest,

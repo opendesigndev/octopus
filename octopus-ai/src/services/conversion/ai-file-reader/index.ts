@@ -13,7 +13,9 @@ import type { SourceImage, SourceTree } from '../../../typings'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw'
 
 type AIFileReaderOptions = {
+  /** Path to the .ai file. */
   path: string
+  /** Path to directory where output is temporarily saved */
   resourcesDir?: string
 }
 
@@ -27,6 +29,9 @@ export type RawSourceData = {
   metadata: Metadata
 }
 
+/**
+ * Reader that converts Adobe Illustrator file into `SourceDesign` object.
+ */
 export class AIFileReader {
   private _sourceDesign: Promise<SourceDesign>
   private _instanceResourcesDir: string
@@ -35,6 +40,11 @@ export class AIFileReader {
 
   static BITMAPS_FOLDER_NAME = 'bitmaps'
 
+  /**
+   * Converts given PSD file into SourceDesign.
+   * @constructor
+   * @param {AIFileReaderOptions} options
+   */
   constructor(options: AIFileReaderOptions) {
     this._resourcesDir = path.join(os.tmpdir(), uuidv4())
     this._sourceDesign = this._initSourceDesign(options.path)
@@ -63,6 +73,9 @@ export class AIFileReader {
     return { artboards, additionalTextData, metadata: { version } }
   }
 
+  /**
+   * Cleans temporary directory where source.json and source images were saved.
+   */
   async cleanup(): Promise<void> {
     fsp.rm(this._resourcesDir, { force: true, recursive: true })
   }
@@ -115,6 +128,10 @@ export class AIFileReader {
     return new SourceDesign(sourceTree)
   }
 
+  /**
+   * Returns `SourceDesign` instance built from given design path using `@opendesign/illustrator-parser-pdfcpu`.
+   * @returns {SourceDesign } Returns `SourceDesign` instance
+   */
   get sourceDesign(): Promise<SourceDesign> {
     return this._sourceDesign
   }
