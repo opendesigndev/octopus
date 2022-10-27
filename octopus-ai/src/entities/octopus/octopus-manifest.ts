@@ -69,8 +69,8 @@ export class OctopusManifest {
     this._exports.artboards.set(id, path)
   }
 
-  get manifestVersion(): Promise<string> {
-    return this._designConverter.octopusAIConverter.pkg.then((pkg) => pkg.version)
+  get manifestVersion(): string {
+    return this._designConverter.octopusAIConverter.pkg.version
   }
 
   get AIVersion(): string {
@@ -162,9 +162,9 @@ export class OctopusManifest {
       .filter((artboardEntry) => artboardEntry) as Manifest['Component'][]
   }
 
-  async convert(): Promise<Manifest['OctopusManifest']> {
+  convert(): Manifest['OctopusManifest'] {
     return {
-      version: await this.manifestVersion,
+      version: this.manifestVersion,
       origin: {
         name: 'illustrator',
         version: this.AIVersion,

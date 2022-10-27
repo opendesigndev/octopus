@@ -1,12 +1,18 @@
 {
   "name": "@opendesign/octopus-ai",
   "version": "3.0.0-rc.2",
-  "description": "Octopus AI converter, converts .ai files to Octopus 3+ format.",
+  "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
   "main": "lib/src/index.js",
+  "keywords": [
+    "Octopus 3+",
+    "Node.js",
+    "Adobe Illustrator",
+    "Typescript"
+  ],
   "scripts": {
-    "convert:debug": "ts-node ./examples/node/convert-api-debug.ts",
-    "convert:local": "ts-node ./examples/node/convert-api-local.ts",
+    "convert:debug": "ts-node ./examples/node/convert-debug.ts",
+    "convert:local": "ts-node ./examples/node/convert-local.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "types:check": "tsc --noEmit",
@@ -26,7 +32,6 @@
     "paper": "^0.12.15",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
-    "read-pkg-up": "7.0.1",
     "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
   },
