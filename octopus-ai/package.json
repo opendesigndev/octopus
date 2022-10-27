@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/src/index.js",
   "scripts": {
-    "convert:debug": "ts-node ./scripts/convert-render-debug.ts",
-    "convert:all": "ts-node ./scripts/convert-design.ts",
+    "convert:debug": "ts-node ./examples/node/convert-api-debug.ts",
+    "convert:local": "ts-node ./examples/node/convert-api-local.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "rimraf ./node_modules ./lib ./workdir",
     "types:check": "tsc --noEmit",

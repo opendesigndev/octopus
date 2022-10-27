@@ -1,9 +1,9 @@
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusAIConverter } from '../src'
-import { AIFileReader } from '../src/services/conversion/ai-file-reader'
-import { LocalExporter } from '../src/services/conversion/design-converter'
+import { OctopusAIConverter } from '../../src'
+import { AIFileReader } from '../../src/services/conversion/ai-file-reader'
+import { LocalExporter } from '../../src/services/conversion/design-converter'
 
 dotenv.config()
 ;(async () => {
@@ -14,7 +14,7 @@ dotenv.config()
     return
   }
 
-  const tempDir = process.env.OUTPUT_DIR
+  const tempDir = './workdir'
 
   if (!tempDir) {
     return null
