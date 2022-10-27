@@ -2,7 +2,7 @@ import { promises as fsp } from 'fs'
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
 import { createOctopusArtboardFileName } from '../../../utils/exporter'
@@ -11,7 +11,7 @@ import type { Exporter, AuxiliaryData } from '.'
 import type { SourceArtboard } from '../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../entities/source/source-design'
 import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {
   path?: string

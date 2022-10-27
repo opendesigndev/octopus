@@ -1,4 +1,4 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color'
 import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity'

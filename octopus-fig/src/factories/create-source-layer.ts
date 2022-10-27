@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'

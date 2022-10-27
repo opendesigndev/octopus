@@ -17,6 +17,39 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 | NODE_ENV  | production / development / debug                     | Node environment |
 | LOG_LEVEL | fatal / error / warn / info / debug / trace / silent | Log level        |
 
+---
+
+## Usage
+
+There are three main processing steps:
+
+- reading source data (using _readers_)
+- conversion (using _converter_ with `EventEmitter` instance produced by reader)
+- exporting (using _exporters_)
+
+Readers used in other Octopus converters return `SourceDesign` instance, which, actually, is object with static values inside. In case of Figma, we have slightly different approach because of it's asynchronous origin (requesting values using HTTP). So, to provide source data as fast as possible to the converter we use `EventEmitter` inside of Figma Reader's `SourceDesign` instance. This makes it possible to process data almost as fast as it's downloaded from Figma's API.
+
+Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
+
+Check [`examples/node/convert-api-local.ts`](./examples/node/convert-api-local.ts) for example usage in automated runs.
+
+Check [`examples/node/convert-api-debug.ts`](./examples/node/convert-api-debug.ts) for example usage in custom manual runs.
+
+Check [`examples/web/`](./examples/web/) for more details about usage in web browser.
+
+Check [`src/services/exporters/`](./src/services/exporters/) for more details about exporters.
+
+Check [`src/services/readers/`](./src/services/readers/) for more details about readers
+
+---
+
+## Demo: Example Node
+
+Converts your Figma designs from API into Octopus3+ format.
+Before you start you need to add [your Figma API token](https://www.figma.com/developers/api#access-tokens) into `.env` file.
+Then you need to find `FIGMA_DESIGN_HASH` for the design you want to convert.
+You can find it in the URL of the design: `https://www.figma.com/file/__HERE__/...`
+
 #### .env demo variables
 
 ENV variables for our demo scripts located in `/examples/node/*`
@@ -28,15 +61,6 @@ ENV variables for our demo scripts located in `/examples/node/*`
 | ODE_RENDERER_CMD      | string  | path to ODE renderer command (e.g. ode-renderer-cli)           |
 | ODE_IGNORE_VALIDATION | boolean | ignores the ODE rendering validation                           |
 | FONTS_PATH            | string  | path to directory with fonts                                   |
-
----
-
-## Demo: Example Node
-
-Converts your Figma designs from API into Octopus3+ format.
-Before you start you need to add [your Figma API token](https://www.figma.com/developers/api#access-tokens) into `.env` file.
-Then you need to find `FIGMA_DESIGN_HASH` for the design you want to convert.
-You can find it in the URL of the design: `https://www.figma.com/file/__HERE__/...`
 
 ### yarn convert:debug
 
@@ -65,25 +89,9 @@ Look for `Result:` in console output.
 
 ---
 
-## Usage
+## TypeDoc
 
-There are three main processing steps:
-
-- reading source data (using _readers_)
-- conversion (using _converter_ with `DesignEmitter` instance produced by reader)
-- exporting (using _exporters_)
-
-Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
-
-Check [`examples/node/convert-api-local.ts`](./examples/node/convert-api-local.ts) for example usage in automated runs.
-
-Check [`examples/node/convert-api-debug.ts`](./examples/node/convert-api-debug.ts) for example usage in custom manual runs.
-
-Check [`examples/web/`](./examples/web/) for more details about usage in web browser.
-
-Check [`src/services/exporters/`](./src/services/exporters/) for more details about exporters.
-
-Check [`src/services/readers/`](./src/services/readers/) for more details about readers
+Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
 
 ---
 

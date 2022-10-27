@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { createDefaultTranslationMatrix } from '../../utils/path'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 import { OctopusLayerBase } from './octopus-layer-base'
@@ -46,9 +46,9 @@ export class OctopusLayerShapeLayerAdapter extends OctopusLayerBase {
   private get _fills(): Octopus['Fill'][] | null {
     const imageName = this.sourceLayer.imageName
     if (imageName === undefined) return null
-    const imagePath = this._parent.parentArtboard.converter.octopusManifest.getExportedRelativeImageByName(imageName)
+    const imagePath = this._designConverter.octopusManifest.getExportedRelativeImageByName(imageName)
     if (imagePath === undefined) {
-      logWarn('Unknown image', { imagePath, imageName })
+      logger.warn('Unknown image', { imagePath, imageName })
       return null
     }
     const { width, height } = this.sourceLayer.bounds

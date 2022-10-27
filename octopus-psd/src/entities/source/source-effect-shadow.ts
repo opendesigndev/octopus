@@ -1,4 +1,4 @@
-import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
 
 import { getColorFor, getUnitRatioFor } from '../../utils/source'
 import { SourceEffectBase } from './source-effect-base'

@@ -1,5 +1,5 @@
-import { asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { SourceEffectStroke } from '../source/source-effect-stroke'

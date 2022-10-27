@@ -1,5 +1,5 @@
-import { asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
 import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
@@ -10,7 +10,7 @@ import type { LayerSequence } from '../../services/conversion/text-layer-groupin
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 export type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent

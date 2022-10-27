@@ -1,21 +1,22 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { asString } from '@avocode/octopus-common/dist/utils/as'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { asString } from '@opendesign/octopus-common/dist/utils/as'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { convertBlendMode } from '../../utils/convert'
 import { createDefaultTranslationMatrix } from '../../utils/path'
-import { OctopusArtboard } from './octopus-artboard'
+import { OctopusComponent } from './octopus-component'
 import { OctopusEffectsLayer } from './octopus-effects-layer'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { OctopusLayerGroup } from './octopus-layer-group'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import type { NotNull } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { NotNull } from '@opendesign/octopus-common/dist/utils/utility-types'
 
-export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusArtboard
+export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 
 type OctopusLayerBaseOptions = {
   parent: OctopusLayerParent
@@ -46,13 +47,17 @@ export class OctopusLayerBase {
     this._id = asString(this._sourceLayer.id, uuidv4())
   }
 
+  protected get _designConverter(): DesignConverter {
+    return this._parent.parentComponent.designConverter
+  }
+
   get sourceLayer(): SourceLayer {
     return this._sourceLayer
   }
 
-  get parentArtboard(): OctopusArtboard {
+  get parentComponent(): OctopusComponent {
     const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusArtboard ? parent : parent.parentArtboard
+    return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
   get id(): string {
@@ -91,7 +96,7 @@ export class OctopusLayerBase {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Layer type', { type })
+      logger.warn('Unknown Layer type', { type })
       return null
     }
     return result

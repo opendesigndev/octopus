@@ -1,4 +1,4 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { initOctopusLayerChildren } from '../../utils/layer'
 import { parseRect } from '../../utils/rectangle'
@@ -94,7 +94,7 @@ export class OctopusArtboard {
     return this._designConverter
   }
 
-  async convert(): Promise<Octopus['OctopusDocument']> {
+  async convert(): Promise<Octopus['OctopusComponent']> {
     if (!this._layers || !this._layers.length) {
       throw new Error('Artboard is missing content')
     }

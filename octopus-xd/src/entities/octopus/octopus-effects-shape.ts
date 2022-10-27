@@ -1,4 +1,4 @@
-import { getConverted } from '@avocode/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 
 import { OctopusBounds } from './octopus-bounds'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'

@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 
-import { getBoundsFor, getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceArtboard } from './source-artboard'
+import { isArtboard, getBoundsFor, getUnitRatioFor, getArtboardColor } from '../../utils/source'
+import { SourceComponent } from './source-component'
 import { SourceLayerEffects } from './source-effects-layer'
 import { SourceEntity } from './source-entity'
 import { SourcePath } from './source-path'
@@ -10,7 +10,7 @@ import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
 
-export type SourceLayerParent = SourceArtboard | SourceLayerSection
+export type SourceLayerParent = SourceComponent | SourceLayerSection
 
 type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer' | 'adjustmentLayer'
 
@@ -44,27 +44,17 @@ export class SourceLayerCommon extends SourceEntity {
     return this._parent
   }
 
-  get parentArtboard(): SourceArtboard {
+  get parentComponent(): SourceComponent {
     const parent = this._parent
-    return parent instanceof SourceArtboard ? parent : parent.parentArtboard
+    return parent instanceof SourceComponent ? parent : parent.parentComponent
   }
 
   get artboardColor(): SourceColor | null {
-    switch (this._rawValue.artboard?.artboardBackgroundType) {
-      case 1: // white
-        return getColorFor({ blue: 255, green: 255, red: 255 })
-      case 2: // black
-        return getColorFor({ blue: 0, green: 0, red: 0 })
-      case 3: // transparent
-        return null
-      case 4: // other
-        return getColorFor(this._rawValue.artboard?.color)
-    }
-    return null
+    return getArtboardColor(this._rawValue)
   }
 
   get isArtboard(): boolean {
-    return this._rawValue.artboard !== undefined
+    return isArtboard(this._rawValue)
   }
 
   get visible(): boolean {

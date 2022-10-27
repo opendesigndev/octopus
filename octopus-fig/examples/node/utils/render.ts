@@ -1,11 +1,9 @@
 import { execSync } from 'child_process'
 import path from 'path'
 
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
 import chalk from 'chalk'
 import kebabCase from 'lodash/kebabCase'
-
-import { getPkgLocation } from './pkg-location'
 
 export type RenderResult = {
   value: string | undefined
@@ -16,7 +14,7 @@ export type RenderResult = {
 async function render(id: string, octopusPath: string) {
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `${kebabCase(id)}-render.png`)
-  const fontsDir = process.env.FONTS_PATH ?? path.join(await getPkgLocation(), 'fonts')
+  const fontsDir = process.env.FONTS_PATH ?? path.join(__dirname, '../../../', 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   const ignoreValidation = process.env.ODE_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
   try {

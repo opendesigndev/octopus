@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { createConverter } from '../../../src/index-node'
-import { getOctopusFileName, MANIFEST_FILE_NAME } from '../../../src/utils/exporter'
+import { getOctopusFileName, MANIFEST_NAME } from '../../../src/utils/exporter'
 import { makeDir, saveFile, rmDir } from '../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
@@ -70,7 +70,7 @@ export class TestUpdater {
 
   private async _saveAssets(testAssets: (TestAssets & { expectedDirPath: string })[]): Promise<void> {
     for (const { components, manifest, expectedDirPath } of testAssets) {
-      const manifestPath = path.join(expectedDirPath, MANIFEST_FILE_NAME)
+      const manifestPath = path.join(expectedDirPath, MANIFEST_NAME)
       await saveFile(manifestPath, stringify(manifest))
 
       for (const component of components) {

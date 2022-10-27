@@ -1,9 +1,9 @@
-import { lerpColor, multiplyAlpha } from '@avocode/octopus-common/dist/utils/color'
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
-import { invLerp, lerp } from '@avocode/octopus-common/dist/utils/math'
+import { lerpColor, multiplyAlpha } from '@opendesign/octopus-common/dist/utils/color'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { invLerp, lerp } from '@opendesign/octopus-common/dist/utils/math'
 import uniq from 'lodash/uniq'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { convertColor, convertOffset } from '../../utils/convert'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
@@ -13,9 +13,9 @@ import type { SourceBounds, SourceGradientType } from '../../typings/source'
 import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
-import type { ElementOf } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { ElementOf } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -50,8 +50,8 @@ export class OctopusEffectFillGradient {
     this._isStroke = options.isStroke ?? false
   }
 
-  private get _parentArtboard(): OctopusArtboard {
-    return this._parentLayer.parentArtboard
+  private get _parentComponent(): OctopusComponent {
+    return this._parentLayer.parentComponent
   }
 
   private get _sourceLayerBounds(): SourceBounds {
@@ -66,7 +66,7 @@ export class OctopusEffectFillGradient {
     const type: SourceGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Fill Gradient type', { type })
+      logger.warn('Unknown Fill Gradient type', { type })
       return null
     }
     return result
@@ -141,7 +141,7 @@ export class OctopusEffectFillGradient {
       const { width, height } = this._sourceLayerBounds
       return { width, height, boundTx: 0, boundTy: 0 }
     }
-    const { width, height } = this._parentArtboard.dimensions
+    const { width, height } = this._parentComponent.dimensions
     const { left, top } = this._sourceLayerBounds
     return { width, height, boundTx: left, boundTy: top }
   }

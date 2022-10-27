@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual'
 import type { SourceLayerShape } from '../../../entities/source/source-layer-shape'
 import type { SourceLayer } from '../../../factories/create-source-layer'
 import type { LayerSequence } from '../text-layer-grouping-service'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type SourceLayerMasked = SourceLayer & {
   mask: SourceLayerShape

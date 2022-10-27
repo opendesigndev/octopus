@@ -1,8 +1,8 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { getMapped, keys } from '@avocode/octopus-common/dist/utils/common'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { getMapped, keys } from '@opendesign/octopus-common/dist/utils/common'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 import isEmpty from 'lodash/isEmpty'
 import isEqual from 'lodash/isEqual'
 

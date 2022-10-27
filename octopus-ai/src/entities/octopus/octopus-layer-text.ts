@@ -1,5 +1,5 @@
-import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
-import { asArray } from '@avocode/octopus-common/dist/utils/as'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as'
 import flatten from 'lodash/flatten'
 
 import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service'
@@ -13,7 +13,7 @@ import type { OctopusLayerParent } from '../../typings/octopus-entities'
 import type { AdditionalTextDataText } from '../../typings/raw'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { LayerSpecifics } from './octopus-layer-common'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

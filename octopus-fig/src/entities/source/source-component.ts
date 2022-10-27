@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { traverseAndFind } from '@avocode/octopus-common/dist/utils/common'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'

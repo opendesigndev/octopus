@@ -1,6 +1,6 @@
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
@@ -10,7 +10,7 @@ import { logger } from '../../services'
 import { getRole } from '../../utils/source'
 import { ComponentConverter } from './component-converter'
 
-import type { OctopusFigConverter } from '../../octopus-fig-converter'
+import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { RawDesign } from '../../typings/raw/design'
@@ -23,19 +23,11 @@ import type {
   ResolvedStyle,
   ResolvedFill,
   ResolvedPreview,
-} from '@avocode/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+} from '@opendesign/figma-parser/lib/src/index-node'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
-
-export type DesignConverterOptions = {
-  designEmitter: EventEmitter | null
-  designId?: string
-  exporter?: AbstractExporter
-  partialUpdateInterval?: number
-  skipReturn?: boolean
-}
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 

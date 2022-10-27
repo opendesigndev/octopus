@@ -1,6 +1,7 @@
-import { SourceArtboard } from './source-artboard'
+import { isArtboard } from '../../utils/source'
+import { SourceComponent } from './source-component'
 
-import type { RawArtboard } from '../../typings/raw'
+import type { RawComponent } from '../../typings/raw'
 
 export type SourceImage = {
   name: string
@@ -10,47 +11,52 @@ export type SourceImage = {
 }
 
 type SourceDesignOptions = {
-  artboard: RawArtboard
+  component: RawComponent
   images: SourceImage[]
   designId: string
 }
 
 export class SourceDesign {
   private _designId: string
-  private _artboard: SourceArtboard
+  private _components: SourceComponent[]
   private _images: SourceImage[]
 
   constructor(options: SourceDesignOptions) {
-    this._artboard = new SourceArtboard(options.artboard)
+    this._components = this._initComponents(options.component)
     this._images = options.images
     this._designId = options.designId
+  }
+
+  private _initComponents(raw: RawComponent): SourceComponent[] {
+    if (raw.layers?.length === 1 && isArtboard(raw.layers[0]))
+      return [new SourceComponent({ raw: { ...raw, ...raw.layers[0] } })] // no pasteboard for 1 artboard
+    const components = [new SourceComponent({ raw, isPasteboard: true })]
+    const artboards = raw.layers?.filter((layer) => isArtboard(layer)) ?? []
+    artboards.forEach((artboard) => components.push(new SourceComponent({ raw: { ...raw, ...artboard } })))
+    return components
   }
 
   get designId(): string {
     return this._designId
   }
 
-  get artboard(): SourceArtboard {
-    return this._artboard
+  get components(): SourceComponent[] {
+    return this._components
+  }
+
+  get componentIds(): string[] {
+    return this._components.map((comp) => comp.id)
   }
 
   get images(): SourceImage[] {
     return this._images
   }
 
-  getImageByName(name: string): SourceImage | undefined {
-    return this.images.find((image) => image.name === name)
+  getComponentById(id: string): SourceComponent | undefined {
+    return this.components.find((comp) => comp.id === id)
   }
 
-  get values(): {
-    designId: string
-    artboard: RawArtboard
-    images: SourceImage[]
-  } {
-    return {
-      designId: this.designId,
-      artboard: this.artboard.raw,
-      images: this.images,
-    }
+  getImageByName(name: string): SourceImage | undefined {
+    return this.images.find((image) => image.name === name)
   }
 }

@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
 import { SourceLayerBackground } from '../entities/source/source-layer-background'
@@ -6,7 +6,7 @@ import { SourceLayerLayer } from '../entities/source/source-layer-layer'
 import { SourceLayerSection } from '../entities/source/source-layer-section'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { logger } from '../services/instances/logger'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type {
@@ -77,7 +77,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
   const type = (Object(options.layer) as RawLayer).type
   const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
   if (typeof builder !== 'function') {
-    logWarn('createSourceLayer: Unknown layer type', { type })
+    logger.warn('createSourceLayer: Unknown layer type', { type })
     return null
   }
   return builder(options)

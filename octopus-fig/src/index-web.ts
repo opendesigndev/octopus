@@ -1,4 +1,4 @@
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-web'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-web'
 
 import { OctopusFigConverter } from './octopus-fig-converter'
 import { imageSize } from './services/general/image-size/image-size-web'

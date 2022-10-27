@@ -1,8 +1,14 @@
-import type { ArtboardConversionResult, DesignConversionResult } from '../..'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 
 export abstract class AbstractExporter {
-  exportArtboard(_artboard: ArtboardConversionResult): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportArtboard" method implemented!')
+  static IMAGES_DIR_NAME: string
+  static MANIFEST_NAME: string
+  static getOctopusFileName(_id: string): string {
+    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
+  }
+
+  exportComponent(_component: ComponentConversionResult): Promise<unknown> {
+    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
   }
 
   exportImage(_name: string, _path: string): Promise<unknown> {

@@ -1,4 +1,4 @@
-import { asArray, asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { uuidv4FromSeed } from '../../utils/id'
@@ -144,7 +144,7 @@ export class OctopusArtboard {
         })
   }
 
-  async convert(): Promise<Octopus['OctopusDocument']> {
+  async convert(): Promise<Octopus['OctopusComponent']> {
     if (typeof this._sourceArtboard.meta.id !== 'string') {
       throw new Error("Artboard 'id' property is missing.")
     }

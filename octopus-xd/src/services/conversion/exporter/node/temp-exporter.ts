@@ -2,14 +2,14 @@ import EventEmitter from 'events'
 import { promises as fsp } from 'fs'
 import path from 'path'
 
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
 import type { Exporter } from '../'
 import type { SourceArtboard } from '../../../../entities/source/source-artboard'
 import type { SourceDesign } from '../../../../entities/source/source-design'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type TempExporterOptions = {
   id?: string
@@ -19,10 +19,10 @@ type TempExporterOptions = {
 type SourceResources = { manifest: string; interactions: string; resources: string }
 
 export class TempExporter extends EventEmitter implements Exporter {
-  _outputDir: Promise<string>
-  _tempDir: string
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _tempDir: string
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'

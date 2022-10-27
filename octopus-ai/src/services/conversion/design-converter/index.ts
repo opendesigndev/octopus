@@ -1,9 +1,9 @@
 import path from 'path'
 
-import { rejectTo } from '@avocode/octopus-common/dist/utils/async'
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
-import { push } from '@avocode/octopus-common/dist/utils/common'
-import { Queue } from '@avocode/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 import { OctopusManifest } from '../../../entities/octopus/octopus-manifest'
 import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service'
@@ -20,7 +20,7 @@ import type { Manifest } from '../../../typings/manifest'
 import type { Octopus } from '../../../typings/octopus'
 import type { AdditionalTextData } from '../../../typings/raw'
 import type { Exporter } from '../exporter'
-import type { SafeResult } from '@avocode/octopus-common/dist/utils/queue-web'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 type DesignConverterGeneralOptions = {
   octopusAIconverter: OctopusAIConverter
@@ -40,7 +40,7 @@ export type ConvertDesignResult = {
 
 export type ArtboardConversionResult = {
   id: string
-  value: Octopus['OctopusDocument'] | null
+  value: Octopus['OctopusComponent'] | null
   error: Error | null
   time: number
 }

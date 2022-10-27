@@ -3,7 +3,7 @@
  * It's slightly modified to generate paper.PathItem from given SourcePathComponent and return it's pathData.
  */
 
-import { logError } from '../services/instances/misc'
+import { logger } from '../services/instances/logger'
 import { createPath, createPoint, createSegment, createTranslationMatrix } from './paper-factories'
 
 import type { SourcePathComponent } from '../entities/source/source-path-component'
@@ -58,7 +58,7 @@ const processSubpaths = (
       return prev?.exclude(current)
     })
   } catch (error) {
-    logError('PathData: processSubpaths failed', error)
+    logger.error('PathData: processSubpaths failed', error)
     return null
   }
 }

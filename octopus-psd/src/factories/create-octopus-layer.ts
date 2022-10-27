@@ -1,4 +1,4 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
@@ -7,7 +7,7 @@ import { OctopusLayerShapeAdjustmentAdapter } from '../entities/octopus/octopus-
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
-import { logWarn } from '../services/instances/misc'
+import { logger } from '../services/instances/logger'
 
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import type { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
@@ -90,7 +90,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   const type = options.layer.type
   const result = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (!result) {
-    logWarn('createOctopusLayer: Unknown layer type', { type })
+    logger.warn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   const { builder, shouldCheckShapeMask } = result

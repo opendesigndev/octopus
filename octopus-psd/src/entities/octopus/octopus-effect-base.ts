@@ -1,5 +1,6 @@
 import { convertBlendMode } from '../../utils/convert'
 
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectBase } from '../source/source-effect-base'
 import type { SourceLayerEffects } from '../source/source-effects-layer'
@@ -21,6 +22,10 @@ export class OctopusEffectBase {
 
   protected get _effects(): SourceLayerEffects {
     return this._parentLayer.sourceLayer.layerEffects
+  }
+
+  protected get _designConverter(): DesignConverter {
+    return this._parentLayer.parentComponent.designConverter
   }
 
   get blendMode(): Octopus['BlendMode'] {

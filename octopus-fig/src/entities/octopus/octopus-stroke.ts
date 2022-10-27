@@ -1,5 +1,5 @@
-import { firstCallMemo } from '@avocode/octopus-common/dist/decorators/first-call-memo'
-import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { OctopusFill } from './octopus-fill'

@@ -1,5 +1,5 @@
-import { asFiniteNumber } from '@avocode/octopus-common/dist/utils/as'
-import { round } from '@avocode/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { DEFAULTS } from './defaults'
 
@@ -16,7 +16,6 @@ const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   darken: 'DARKEN',
   darkerColor: 'DARKER_COLOR',
   difference: 'DIFFERENCE',
-  dissolve: 'DISSOLVE',
   exclusion: 'EXCLUSION',
   hardLight: 'HARD_LIGHT',
   hardMix: 'HARD_MIX',

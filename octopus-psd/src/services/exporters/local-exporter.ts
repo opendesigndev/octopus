@@ -1,42 +1,49 @@
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
+import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter'
 import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { stringify } from '../../utils/stringify'
 
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../src'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 import type { AbstractExporter } from './abstract-exporter'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
-type LocalExporterOptions = {
-  path: string
+export type LocalExporterOptions = {
+  /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */
+  path?: string
 }
 
+/**
+ * Exporter created to be used in automated runs.
+ */
 export class LocalExporter implements AbstractExporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
-  static IMAGES_DIR_NAME = 'images'
-  static OCTOPUS_NAME = 'octopus.json'
-  static MANIFEST_NAME = 'octopus-manifest.json'
+  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  static MANIFEST_NAME = MANIFEST_NAME
+  static getOctopusFileName = getOctopusFileName
 
+  /**
+   * Exports octopus assets into given or system TempDir
+   * @constructor
+   * @param {DebugExporterOptions} [options]
+   */
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []
     this._completed = detachPromiseControls<void>()
   }
 
-  private _stringify(value: unknown) {
-    return JSON.stringify(value, null, '  ')
-  }
-
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
-    await makeDir(path.join(dir, LocalExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(dir, IMAGES_DIR_NAME))
     return dir
   }
 
@@ -62,20 +69,36 @@ export class LocalExporter implements AbstractExporter {
     this._completed.resolve()
   }
 
-  exportArtboard(artboard: ArtboardConversionResult): Promise<string | null> {
-    if (!artboard.value) return Promise.resolve(null)
-    return this._save(LocalExporter.OCTOPUS_NAME, this._stringify(artboard.value))
+  /**
+   * Exports given OctopusComponent
+   * @param {ComponentConversionResult} result contains converted OctopusComponent or Error if conversion failed
+   * @returns {Promise<string | null>} returns path to the exported OctopusComponent or `null` if conversion failed
+   */
+  exportComponent(result: ComponentConversionResult): Promise<string | null> {
+    if (!result.value) return Promise.resolve(null)
+    return this._save(getOctopusFileName(result.id), stringify(result.value))
   }
 
+  /**
+   * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
+   * @param {string} name Name of the exported Image
+   * @param {string} location Location of the given Image
+   * @returns {Promise<string>} returns path to the exported Image
+   */
   async exportImage(name: string, location: string): Promise<string> {
     const dir = await this._outputDir
-    const fullPath = path.join(dir, LocalExporter.IMAGES_DIR_NAME, name)
+    const fullPath = path.join(dir, IMAGES_DIR_NAME, name)
     const save = copyFile(location, fullPath)
     this._assetsSaves.push(save)
     return save
   }
 
-  async exportManifest(manifest: DesignConversionResult): Promise<string> {
-    return this._save(LocalExporter.MANIFEST_NAME, this._stringify(manifest.manifest))
+  /**
+   * Exports given converted OctopusManifest.
+   * @param {DesignConversionResult} result contains converted OctopusManifest + conversion Time
+   * @returns {Promise<string>} returns path to the OctopusManifest
+   */
+  async exportManifest(result: DesignConversionResult): Promise<string> {
+    return this._save(MANIFEST_NAME, stringify(result.manifest))
   }
 }

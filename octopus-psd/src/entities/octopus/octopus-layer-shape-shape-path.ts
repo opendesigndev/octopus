@@ -1,6 +1,6 @@
-import { getMapped } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
-import { logWarn } from '../../services/instances/misc'
+import { logger } from '../../services/instances/logger'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
 import { createPathData } from '../../utils/path-data'
 
@@ -65,7 +65,7 @@ export class OctopusLayerShapeShapePath {
   private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
     const result = getMapped(operation, OctopusLayerShapeShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
-      logWarn('Unknown Compound operation', { operation })
+      logger.warn('Unknown Compound operation', { operation })
       return 'UNION'
     }
     return result
@@ -109,7 +109,7 @@ export class OctopusLayerShapeShapePath {
     const path = pathComponents[0]
     const layerTranslation = this._parentLayer.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === '') logWarn('PathData generated empty')
+    if (geometry === '') logger.warn('PathData generated empty')
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',

@@ -1,4 +1,4 @@
-import { push } from '@avocode/octopus-common/dist/utils/common'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { Expander } from '../../services/conversion/expander'
 import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer'

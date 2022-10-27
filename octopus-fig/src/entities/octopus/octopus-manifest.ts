@@ -1,4 +1,4 @@
-import { getMapped, push } from '@avocode/octopus-common/dist/utils/common'
+import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { getRole } from '../../utils/source'
@@ -7,7 +7,7 @@ import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
-import type { ResolvedStyle } from '@avocode/figma-parser/lib/src/index-node'
+import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

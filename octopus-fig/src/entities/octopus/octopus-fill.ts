@@ -1,6 +1,6 @@
-import { lerpColor } from '@avocode/octopus-common/dist/utils/color'
-import { push } from '@avocode/octopus-common/dist/utils/common'
-import { invLerp, round } from '@avocode/octopus-common/dist/utils/math'
+import { lerpColor } from '@opendesign/octopus-common/dist/utils/color'
+import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
 import { createMatrix } from '../../utils/paper'

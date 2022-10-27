@@ -1,6 +1,6 @@
-import { normalizeText } from '@avocode/octopus-common/dist/postprocessors/text'
-import { asArray, asNumber, asString } from '@avocode/octopus-common/dist/utils/as'
-import { getPresentProps, push } from '@avocode/octopus-common/dist/utils/common'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
+import { asArray, asNumber, asString } from '@opendesign/octopus-common/dist/utils/as'
+import { getPresentProps, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { convertObjectMatrixToArray } from '../../utils/matrix'

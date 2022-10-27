@@ -2,22 +2,22 @@ import { promises as fsp } from 'fs'
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
 import type { Exporter } from '..'
 import type { SourceArtboard } from '../../../../entities/source/source-artboard'
 import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter'
-import type { DetachedPromiseControls } from '@avocode/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type LocalExporterOptions = {
   path: string
 }
 
 export class LocalExporter implements Exporter {
-  _outputDir: Promise<string>
-  _assetsSaves: Promise<unknown>[]
-  _completed: DetachedPromiseControls<void>
+  private _outputDir: Promise<string>
+  private _assetsSaves: Promise<unknown>[]
+  private _completed: DetachedPromiseControls<void>
 
   static IMAGES_DIR_NAME = 'images'
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'

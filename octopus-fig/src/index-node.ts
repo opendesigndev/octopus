@@ -1,4 +1,4 @@
-import { benchmarkAsync } from '@avocode/octopus-common/dist/utils/benchmark-node'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
 
 import { OctopusFigConverter } from './octopus-fig-converter'
 import { createEnvironmentNode } from './services/general/environment/node/env-node'

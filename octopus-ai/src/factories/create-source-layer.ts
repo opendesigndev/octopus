@@ -9,7 +9,7 @@ import type { RawGroupLayer, RawResourcesXObject, RawTextLayer } from '../typing
 import type { RawLayer } from '../typings/raw/layer'
 import type { RawShapeLayer } from '../typings/raw/shape-layer'
 import type { RawXObjectLayer } from '../typings/raw/x-object'
-import type { Nullish } from '@avocode/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 export type SourceLayer =
   | SourceLayerGroup

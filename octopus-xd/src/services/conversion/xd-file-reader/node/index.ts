@@ -2,7 +2,7 @@ import fsp from 'fs/promises'
 import os from 'os'
 import path from 'path'
 
-import { JSONFromTypedArray } from '@avocode/octopus-common/dist/utils/common'
+import { JSONFromTypedArray } from '@opendesign/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../../../entities/source/source-design'

@@ -1,5 +1,5 @@
-import { asFiniteNumber, asNumber } from '@avocode/octopus-common/dist/utils/as'
-import { isObject } from '@avocode/octopus-common/dist/utils/common'
+import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createMatrix } from './paper'
 

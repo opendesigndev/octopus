@@ -20,7 +20,7 @@ export class ArtboardConverter {
     this._targetArtboardId = options.targetArtboardId
   }
 
-  convert(): Promise<Octopus['OctopusDocument']> {
+  convert(): Promise<Octopus['OctopusComponent']> {
     return new OctopusArtboard({
       octopusXdConverter: this._octopusXdConverter,
       targetArtboardId: this._targetArtboardId,
