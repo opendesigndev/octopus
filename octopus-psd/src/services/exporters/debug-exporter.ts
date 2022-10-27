@@ -1,12 +1,12 @@
 import EventEmitter from 'events'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter'
-import { copyFile, makeDir, saveFile } from '../../utils/files'
-import { stringify } from '../../utils/stringify'
+import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
+import { copyFile, makeDir, saveFile } from '../../utils/files.js'
+import { stringify } from '../../utils/stringify.js'
 
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 import type { AbstractExporter } from './abstract-exporter'
@@ -56,6 +56,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   private async _save(name: string | null, body: string | Buffer) {
     const dir = await this._outputDir
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
+
     const write = saveFile(fullPath, body)
     this._assetsSaves.push(write)
     await write

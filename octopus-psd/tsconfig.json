@@ -5,14 +5,16 @@
     "declaration": true,
     "rootDir": "./",
     "outDir": "./lib/",
-    "module": "CommonJS",
+    "module": "esnext",
     "target": "ES2019",
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "allowJs": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+
     "lib": ["es2019", "ES2015.Proxy", "dom"],
     "paths": {
       "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]

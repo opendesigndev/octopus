@@ -1,8 +1,8 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color'
-import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity'
-import { SourceEntity } from './source-entity'
+import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color.js'
+import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity.js'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawFillGradient } from '../../typings/raw'
 

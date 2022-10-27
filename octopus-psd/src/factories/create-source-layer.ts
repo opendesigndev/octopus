@@ -1,12 +1,12 @@
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
-import { SourceLayerBackground } from '../entities/source/source-layer-background'
-import { SourceLayerLayer } from '../entities/source/source-layer-layer'
-import { SourceLayerSection } from '../entities/source/source-layer-section'
-import { SourceLayerShape } from '../entities/source/source-layer-shape'
-import { SourceLayerText } from '../entities/source/source-layer-text'
-import { logger } from '../services/instances/logger'
+import { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment.js'
+import { SourceLayerBackground } from '../entities/source/source-layer-background.js'
+import { SourceLayerLayer } from '../entities/source/source-layer-layer.js'
+import { SourceLayerSection } from '../entities/source/source-layer-section.js'
+import { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import { SourceLayerText } from '../entities/source/source-layer-text.js'
+import { logger } from '../services/instances/logger.js'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type {

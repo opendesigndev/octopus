@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEntity } from './source-entity'
-import { SourceTextTextStyle } from './source-text-text-style'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextTextStyle } from './source-text-text-style.js'
 
 import type { RawTextStyleRange } from '../../typings/raw'
 

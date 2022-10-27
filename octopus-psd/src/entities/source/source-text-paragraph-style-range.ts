@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEntity } from './source-entity'
-import { SourceTextParagraphStyle } from './source-text-paragraph-style'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextParagraphStyle } from './source-text-paragraph-style.js'
 
 import type { RawParagraphStyleRange } from '../../typings/raw'
 

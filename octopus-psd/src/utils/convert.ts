@@ -1,7 +1,7 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
 
 import type { Octopus } from '../typings/octopus'
 import type { RawBlendMode } from '../typings/raw'

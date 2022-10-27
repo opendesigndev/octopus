@@ -1,11 +1,11 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { convertColor, convertRectangle } from '../../utils/convert'
-import { OctopusComponent } from './octopus-component'
-import { OctopusLayerShape } from './octopus-layer-shape'
-import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
-import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { convertColor, convertRectangle } from '../../utils/convert.js'
+import { OctopusComponent } from './octopus-component.js'
+import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter.js'
+import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
+import { OctopusLayerShape } from './octopus-layer-shape.js'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'

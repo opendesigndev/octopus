@@ -1,4 +1,4 @@
-import { SourceEntity } from './source-entity'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawParagraphStyle } from '../../typings/raw'
 import type { SourceAlign } from '../../typings/source'

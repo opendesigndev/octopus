@@ -1,5 +1,5 @@
-import compact from 'lodash/compact'
-import isEmpty from 'lodash/isEmpty'
+import compact from 'lodash/compact.js'
+import isEmpty from 'lodash/isEmpty.js'
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 

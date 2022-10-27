@@ -1,4 +1,4 @@
-import type { Octopus } from '../../typings/octopus'
+import type { Octopus } from '../../typings/octopus.js'
 
 type OctopusFillImageOptions = {
   imagePath: string
