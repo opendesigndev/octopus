@@ -4,13 +4,11 @@ import path from 'path'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter, OctopusFigConverter } from '../../src/index-node'
+import { createConverter, LocalExporter, SourceApiReader } from '../../src/index-node'
 
 dotenv.config()
 
 const converter = createConverter()
-const LocalExporter = OctopusFigConverter.EXPORTERS.LOCAL
-const SourceApiReader = OctopusFigConverter.READERS.API
 
 async function convertDesign(designId: string) {
   const testDir = path.join(os.tmpdir(), uuidv4())

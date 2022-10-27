@@ -24,7 +24,7 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 There are three main processing steps:
 
 - reading source data (using _readers_)
-- conversion (using _converter_ with `DesignEmitter` instance produced by reader)
+- conversion (using _converter_ with `EventEmitter` instance produced by reader)
 - exporting (using _exporters_)
 
 Readers used in other Octopus converters return `SourceDesign` instance, which, actually, is object with static values inside. In case of Figma, we have slightly different approach because of it's asynchronous origin (requesting values using HTTP). So, to provide source data as fast as possible to the converter we use `EventEmitter` inside of Figma Reader's `SourceDesign` instance. This makes it possible to process data almost as fast as it's downloaded from Figma's API.

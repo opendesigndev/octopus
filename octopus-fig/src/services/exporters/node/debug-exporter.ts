@@ -17,8 +17,10 @@ import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
 import type { Manifest } from '../../../typings/manifest'
+import type { RawDesign, RawLayerFrame } from '../../../typings/raw'
 import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
+import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type DebugExporterOptions = {
@@ -85,10 +87,10 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   /**
    * Exports given design raw data.
-   * @param {unknown} raw Design raw data
+   * @param {RawDesign} raw Design raw data
    * @returns {Promise<string>} returns path to the exported RawDesign
    */
-  async exportRawDesign(raw: unknown): Promise<string> {
+  async exportRawDesign(raw: RawDesign): Promise<string> {
     const rawPath = DebugExporter.getSourceFileName('design')
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:design', savedPath)
@@ -97,11 +99,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   /**
    * Exports raw data of given Component.
-   * @param {unknown} raw Component raw data
+   * @param {RawLayerFrame} raw Component raw data
    * @param {string} name Name of given Component
    * @returns {Promise<string>} returns path to the exported RawComponent
    */
-  async exportRawComponent(raw: unknown, name: string): Promise<string> {
+  async exportRawComponent(raw: RawLayerFrame, name: string): Promise<string> {
     const rawPath = DebugExporter.getSourceFileName(name)
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:component', savedPath)
@@ -110,11 +112,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   /**
    * Exports raw data of given chunk.
-   * @param {unknown} raw Chunk raw data
+   * @param {ResolvedStyle} raw Chunk raw data
    * @param {string} name Name of given Chunk
    * @returns {Promise<string>} returns path to the exported RawChunk
    */
-  async exportRawChunk(raw: unknown, name: string): Promise<string> {
+  async exportRawChunk(raw: ResolvedStyle, name: string): Promise<string> {
     const rawPath = DebugExporter.getSourceFileName(name)
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:chunk', savedPath)

@@ -47,6 +47,7 @@ export class SourceApiReader {
   /**
    * Figma design hash.
    * Can be found in the URL of the design: `https://www.figma.com/file/__DESIGN_HASH__`
+   * @returns {string} returns Figma design hash
    */
   get designId(): string {
     return this._options.designId
@@ -59,6 +60,7 @@ export class SourceApiReader {
   /**
    * Returns `EventEmitter` which is needed in OctopusFigConverter.
    * @param {string[]} [ids] Optional IDs of wanted artboards. If not provided, whole design will be parsed.
+   * @returns {EventEmitter} returns `EventEmitter` providing source data to the OctopusFigConverter
    */
   parse(ids?: string[]): EventEmitter {
     return this._parser.parse(ids)

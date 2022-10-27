@@ -63,7 +63,8 @@ export class PSDFileReader {
   }
 
   /**
-   * returns `SourceDesign` or `null` if error happened.
+   * Returns `SourceDesign` instance built from given design path using `@avocode/psd-parser`. It encapsulates all the design assets required by converter as input.
+   * @returns {SourceDesign | null} Returns `SourceDesign` instance or `null` if parsing was not successful.
    */
   get sourceDesign(): Promise<SourceDesign | null> {
     return this._sourceDesign

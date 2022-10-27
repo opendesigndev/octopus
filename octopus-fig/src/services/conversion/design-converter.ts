@@ -10,7 +10,7 @@ import { logger } from '../../services'
 import { getRole } from '../../utils/source'
 import { ComponentConverter } from './component-converter'
 
-import type { OctopusFigConverter } from '../../octopus-fig-converter'
+import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { RawDesign } from '../../typings/raw/design'
@@ -28,14 +28,6 @@ import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/ut
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
-
-export type DesignConverterOptions = {
-  designEmitter: EventEmitter | null
-  designId?: string
-  exporter?: AbstractExporter
-  partialUpdateInterval?: number
-  skipReturn?: boolean
-}
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 
