@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "incremental": true,
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"],
     "declaration": true,
@@ -12,7 +13,7 @@
     "strictNullChecks": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
 
     "lib": ["es2019", "ES2015.Proxy", "dom"],

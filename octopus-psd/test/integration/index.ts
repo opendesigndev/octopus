@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import * as url from 'url'
+import { fileURLToPath } from 'url'
 
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import handlebars from 'handlebars'
@@ -17,10 +17,7 @@ const REPORT_FOLDER = 'report'
 function createReport(failed: Fail[]): string {
   const source = fs
     .readFileSync(
-      path.join(
-        url.fileURLToPath(new URL('.', import.meta.url)),
-        '../../../test/integration/assets/report-template.hbs'
-      )
+      path.join(fileURLToPath(new URL(import.meta.url)), '../../../../test/integration/assets/report-template.hbs')
     )
     .toString()
   const template = handlebars.compile(source)
@@ -37,10 +34,10 @@ async function test() {
 
   if (!success) {
     const html = createReport(failed)
-    await makeDir(path.join(url.fileURLToPath(new URL('.', import.meta.url)), REPORT_FOLDER))
+    await makeDir(path.join(fileURLToPath(new URL(import.meta.url)), '../', REPORT_FOLDER))
 
     const reportPath = path.join(
-      url.fileURLToPath(new URL('.', import.meta.url)),
+      fileURLToPath(new URL('.', import.meta.url)),
       REPORT_FOLDER,
       `test-report-${timestamp()}.html`
     )

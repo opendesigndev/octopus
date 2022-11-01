@@ -1,5 +1,5 @@
 import { basename, join as pathJoin } from 'path'
-import * as url from 'url'
+import { fileURLToPath } from 'url'
 
 import { MANIFEST_NAME } from '../../../src/utils/exporter.js'
 import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files.js'
@@ -38,7 +38,7 @@ export class AssetReader {
   private _selectedTest?: string
 
   static DESIGN_FILE_EXTENSION = '.psd'
-  static ASSETS_DIR_RELATIVE_PATH = '../../../../test/integration/assets'
+  static ASSETS_DIR_RELATIVE_PATH = '../../../../../test/integration/assets'
   static EXPECTED_DIR_NAME = 'expected'
 
   constructor({ selectedTest }: AssetReaderOptions) {
@@ -47,7 +47,7 @@ export class AssetReader {
   }
 
   private _getFullPath(...subpaths: string[]) {
-    return pathJoin(url.fileURLToPath(new URL('.', import.meta.url)), AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    return pathJoin(fileURLToPath(new URL(import.meta.url)), AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {
