@@ -1,5 +1,4 @@
-import { AIFileReader } from './services/conversion/ai-file-reader'
-import { DesignConverter, LocalExporter, TempExporter } from './services/conversion/design-converter'
+import { DesignConverter } from './services/conversion/design-converter'
 import { set as setLogger } from './services/instances/logger'
 import { readPackageMeta } from './utils/read-pkg-meta'
 
@@ -15,11 +14,15 @@ type OctopusAIConverteOptions = {
 }
 
 export type ConvertDesignOptions = {
-  /** SourceDesign instance encapsulates all the source design data. It consists of artboards, images and other assets. It's possible to generate using either built-in `PSDFileReader` or by custom reader. */
+  /** SourceDesign instance encapsulates all the source design data.
+   * It consists of artboards, images and other assets.
+   * It's possible to generate using either built-in `PSDFileReader` or by custom reader.
+   */
   sourceDesign: SourceDesign
-  /** OctopusManifest updating Interval (in milliseconds) */
+  /** Designates after how many milliseconds during the conversion process
+   * file containing metadata (OctopusManifest) gets periodically updated
+   */
   partialUpdateInterval?: number
-  /** Optional Exporter. */
   exporter?: Exporter
 }
 
@@ -69,5 +72,4 @@ export class OctopusAIConverter {
   }
 }
 
-export { LocalExporter, TempExporter, AIFileReader }
 export type { Exporter, SourceDesign }

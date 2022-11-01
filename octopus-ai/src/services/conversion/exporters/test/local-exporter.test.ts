@@ -7,7 +7,7 @@ import path from 'path'
 import { mocked } from 'jest-mock'
 import { v4 as uuidv4 } from 'uuid'
 
-import { LocalExporter } from '../../design-converter'
+import { LocalExporter } from '../local-exporter'
 
 jest.mock('os')
 jest.mock('uuid')

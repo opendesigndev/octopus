@@ -14,7 +14,7 @@
     "convert:debug": "ts-node ./examples/node/convert-debug.ts",
     "convert:local": "ts-node ./examples/node/convert-local.ts",
     "build": "tsc --build ./tsconfig.json",
-    "clean": "rimraf ./node_modules ./lib ./workdir ./jsdoc",
+    "clean": "rimraf ./node_modules ./lib ./workdir ./docs",
     "types:check": "tsc --noEmit",
     "watch": "tsc -w",
     "test": "yarn test:unit && yarn test:integration",

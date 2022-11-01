@@ -75,8 +75,9 @@ export class TempExporter extends EventEmitter implements Exporter {
 
   /**
    * Exports metadata and additional text data
-   * @param {SourceDesign} sourceDesign c
-   * @returns {Promise<AuxiliaryData>} returns metadata and additional text data
+   * @param {SourceDesign} instance of SourceDesign is container for preprocessed input data, such as artboards,
+   * metadata, images, etc.
+   * @returns {Promise<AuxiliaryData>} (metadata and additional text data)
    */
   async exportAuxiliaryData(design: SourceDesign): Promise<AuxiliaryData> {
     const saveMetadata = this._save(TempExporter.METADATA_NAME, this._stringify(design.metadaData))
@@ -123,10 +124,10 @@ export class TempExporter extends EventEmitter implements Exporter {
   }
 
   /**
-   * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
+   * Exports given Image into folder specified in `TempExporter.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
    * @param {Buffer} data Data representation of given image
-   * @returns {Promise<string>} returns path to the exported Image
+   * @returns {Promise<string>} which designates path to the exported Image
    */
   async exportImage(name: string, data: Buffer): Promise<string> {
     return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(name)), data)

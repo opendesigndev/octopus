@@ -2,7 +2,8 @@ import fsp from 'fs/promises'
 import path from 'path'
 
 import { OctopusAIConverter } from '../../../src'
-import { TempExporter } from '../../../src/services/conversion/design-converter'
+import { AIFileReader } from '../../../src/services/conversion/ai-file-reader'
+import { TempExporter } from '../../../src/services/conversion/exporters/temp-exporter'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter'
 import { getSourceDesign } from '../utils'
 import { AssetsReader } from './assets-reader'
@@ -36,11 +37,15 @@ export class TestUpdater {
     const testsDirectoryData = await this._assetsReader.getTestsDirectoryData()
     return Promise.all(
       testsDirectoryData.map(async ({ designPath, expectedDirPath, testName, testPath }) => {
-        const sourceDesign = await getSourceDesign(designPath)
+        const fileReader = new AIFileReader({ path: designPath })
+
+        const sourceDesign = await getSourceDesign(fileReader)
 
         const { artboards: artboardConversionResults, manifest } = await this._octopusAIConverter.convertDesign({
           sourceDesign,
         })
+
+        await fileReader.cleanup()
 
         return {
           artboards: artboardConversionResults

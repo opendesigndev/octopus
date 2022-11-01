@@ -13,9 +13,8 @@ async function render(id: string, octopusPath: string): Promise<{ value: string 
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `render-${id}.png`)
 
-  const fontsDir = process.env.FONTS_PATH ?? 'fonts'
-  const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
-  console.log('___fontsOptions', fontsOption)
+  const fontsDir = process.env.FONTS_PATH ?? path.join(__dirname, '../../../fonts')
+  const fontsOption = `--fonts ${fontsDir}`
   const ignoreValidation = process.env.ODE_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
 
   const command = `${process.env.ODE_RENDERER_CMD} ${ignoreValidation} ${fontsOption} ${octopusPath} ${renderPath}`

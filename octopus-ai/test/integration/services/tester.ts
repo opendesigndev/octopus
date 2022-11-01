@@ -3,6 +3,7 @@ import path from 'path'
 import * as jsondiffpatch from 'jsondiffpatch'
 
 import { OctopusAIConverter } from '../../../src'
+import { AIFileReader } from '../../../src/services/conversion/ai-file-reader'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter'
 import { getSourceDesign } from '../utils'
 
@@ -60,12 +61,13 @@ export class Tester {
   private _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign>[] {
     const convertedDesigns = testComponentsArray.map(
       async ({ artboards: artboardComponents, manifest: manifestComponent, designPath }) => {
-        const sourceDesign: SourceDesign = await getSourceDesign(designPath)
+        const fileReader = new AIFileReader({ path: designPath })
+        const sourceDesign: SourceDesign = await getSourceDesign(fileReader)
 
         const { artboards: artboardConversionResults, manifest } = await this._octopusAIConverter.convertDesign({
           sourceDesign,
         })
-
+        fileReader.cleanup()
         const generatedArtboards = artboardConversionResults
           .map((conversionResult) => conversionResult.value)
           .filter((artboard): artboard is Octopus['OctopusComponent'] => Boolean(artboard))
@@ -77,7 +79,6 @@ export class Tester {
         }
       }
     )
-
     return convertedDesigns
   }
 
@@ -152,9 +153,7 @@ export class Tester {
 
   async test(): Promise<Fail[]> {
     const savedTestComponents = await this._assetsReader.getTestsComponents()
-
     const designs = await Promise.all(this._getDesigns(savedTestComponents))
-
     return this._compare(designs)
   }
 }

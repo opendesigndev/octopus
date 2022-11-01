@@ -1,7 +1,7 @@
 import fsp from 'fs/promises'
 import path from 'path'
 
-import { LocalExporter } from '../../../src/services/conversion/design-converter'
+import { LocalExporter } from '../../../src/services/conversion/exporters/local-exporter'
 import { lazyRead } from '../utils'
 
 import type { Manifest } from '../../../src/typings/manifest'
@@ -113,7 +113,6 @@ export class AssetsReader {
       if (!manifest) {
         throw new Error(`missing manifest in: ${testDirectoryTree.testName}/${AssetsReader.EXPECTED_DIR_NAME}`)
       }
-
       return {
         designPath: testDirectoryTree.designPath,
         manifest: {

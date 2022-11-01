@@ -41,7 +41,7 @@ export class AIFileReader {
   static BITMAPS_FOLDER_NAME = 'bitmaps'
 
   /**
-   * Converts given PSD file into SourceDesign.
+   * Converts given AI file into SourceDesign.
    * @constructor
    * @param {AIFileReaderOptions} options
    */
@@ -77,7 +77,7 @@ export class AIFileReader {
    * Cleans temporary directory where source.json and source images were saved.
    */
   async cleanup(): Promise<void> {
-    fsp.rm(this._resourcesDir, { force: true, recursive: true })
+    return fsp.rm(this._resourcesDir, { force: true, recursive: true })
   }
 
   private _loadImages(): SourceImage[] {

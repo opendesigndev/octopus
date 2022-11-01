@@ -30,6 +30,11 @@ export class LocalExporter implements Exporter {
   static METADATA_NAME = 'metadata.json'
   static ADDITIONAL_TEXT_DATA = 'additional-text-data.json'
 
+  /**
+   * Exports octopus assets into provided or system created directory
+   * @constructor
+   * @param {LocalExporterOptions} [options]
+   */
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
     this._assetsSaves = []
@@ -40,11 +45,6 @@ export class LocalExporter implements Exporter {
     return JSON.stringify(value, null, '  ')
   }
 
-  /**
-   * Exports octopus assets into provided or system created dir
-   * @constructor
-   * @param {DebugExporterOptions} [options]
-   */
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
@@ -68,8 +68,9 @@ export class LocalExporter implements Exporter {
 
   /**
    * Exports metadata and additional text data
-   * @param {SourceDesign} sourceDesign c
-   * @returns {Promise<AuxiliaryData>} returns metadata and additional text data
+   * @param {SourceDesign} instance of SourceDesign is container for preprocessed input data, such as artboards,
+   * metadata, images, etc.
+   * @returns {Promise<AuxiliaryData>} (metadata and additional text data)
    */
   async exportAuxiliaryData(design: SourceDesign): Promise<AuxiliaryData> {
     const saveMetadata = this._save(LocalExporter.METADATA_NAME, this._stringify(design.metadaData))
@@ -100,10 +101,10 @@ export class LocalExporter implements Exporter {
   }
 
   /**
-   * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
+   * Exports given Image into folder specified in `LocalExporter.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
    * @param {Buffer} data Data representation of given image
-   * @returns {Promise<string>} returns path to the exported Image
+   * @returns {Promise<string>} which designates path to the exported Image
    */
   exportImage(name: string, data: Buffer): Promise<string> {
     return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)

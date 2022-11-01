@@ -8,8 +8,6 @@ import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
 import { OctopusManifest } from '../../../entities/octopus/octopus-manifest'
 import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service'
 import { ArtboardConverter } from '../artboard-converter'
-import { LocalExporter } from '../exporters/local-exporter'
-import { TempExporter } from '../exporters/temp-exporter'
 import { TextLayerGroupingservice } from '../text-layer-grouping-service'
 
 import type { OctopusAIConverter } from '../../..'
@@ -24,7 +22,6 @@ import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web
 
 type DesignConverterGeneralOptions = {
   octopusAIconverter: OctopusAIConverter
-  /** Optional Exporter. */
   exporter?: Exporter
   partialUpdateInterval?: number
 }
@@ -201,6 +198,3 @@ export class DesignConverter {
     }
   }
 }
-
-export { LocalExporter }
-export { TempExporter }
