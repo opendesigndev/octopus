@@ -81,9 +81,8 @@ export class OctopusArtboard {
     return this._id
   }
 
-  private async _getVersion(): Promise<string> {
-    const pkg = await this._designConverter.octopusAIConverter.pkg
-    return pkg.version
+  private _getVersion(): string {
+    return this._designConverter.octopusAIConverter.pkgVersion
   }
 
   get manifest(): OctopusManifest {
@@ -94,7 +93,7 @@ export class OctopusArtboard {
     return this._designConverter
   }
 
-  async convert(): Promise<Octopus['OctopusComponent']> {
+  convert(): Octopus['OctopusComponent'] {
     if (!this._layers || !this._layers.length) {
       throw new Error('Artboard is missing content')
     }
@@ -107,7 +106,7 @@ export class OctopusArtboard {
 
     return {
       type: 'ARTBOARD',
-      version: await this._getVersion(),
+      version: this._getVersion(),
       id: this.id,
       dimensions,
       content: this._createParentMaskGroup(),

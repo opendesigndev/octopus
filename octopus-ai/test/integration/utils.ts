@@ -2,9 +2,8 @@ import fsp from 'fs/promises'
 
 import dotenv from 'dotenv'
 
-import { AIFileReader } from '../../src/services/conversion/ai-file-reader'
-
 import type { SourceDesign } from '../../src/entities/source/source-design'
+import type { AIFileReader } from '../../src/services/conversion/ai-file-reader'
 
 dotenv.config()
 
@@ -22,10 +21,8 @@ export function lazyRead<T>(path: string) {
   }
 }
 
-export async function getSourceDesign(designPath: string): Promise<SourceDesign> {
-  const fileReader = new AIFileReader({ path: designPath })
+export async function getSourceDesign(fileReader: AIFileReader): Promise<SourceDesign> {
   const sourceDesign = await fileReader.sourceDesign
-  await fileReader.cleanup()
 
   return sourceDesign
 }
