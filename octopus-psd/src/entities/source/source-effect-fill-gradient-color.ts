@@ -1,5 +1,5 @@
-import { getColorFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getColorFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawShapeGradientColor } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'

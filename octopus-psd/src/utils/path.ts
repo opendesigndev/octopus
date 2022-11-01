@@ -1,4 +1,4 @@
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
 
 type Point = { x?: number; y?: number }
 export type Points = (Point | undefined)[]

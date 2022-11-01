@@ -1,9 +1,9 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { logger } from '../../services/instances/logger'
-import { createDefaultTranslationMatrix } from '../../utils/path'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { OctopusLayerBase } from './octopus-layer-base'
+import { logger } from '../../services/instances/logger.js'
+import { createDefaultTranslationMatrix } from '../../utils/path.js'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
+import { OctopusLayerBase } from './octopus-layer-base.js'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerLayer } from '../source/source-layer-layer'

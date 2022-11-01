@@ -1,5 +1,5 @@
-import { getUnitRatioFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getUnitRatioFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawShapeTransparency } from '../../typings/raw'
 

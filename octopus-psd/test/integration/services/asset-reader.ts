@@ -1,8 +1,9 @@
 import { basename, join as pathJoin } from 'path'
+import { fileURLToPath } from 'url'
 
-import { MANIFEST_NAME } from '../../../src/utils/exporter'
-import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
-import { lazyRead } from '../utils/lazy-read'
+import { MANIFEST_NAME } from '../../../src/utils/exporter.js'
+import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files.js'
+import { lazyRead } from '../utils/lazy-read.js'
 
 import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
@@ -37,7 +38,7 @@ export class AssetReader {
   private _selectedTest?: string
 
   static DESIGN_FILE_EXTENSION = '.psd'
-  static ASSETS_DIR_RELATIVE_PATH = '../assets'
+  static ASSETS_DIR_RELATIVE_PATH = '../../../../../test/integration/assets'
   static EXPECTED_DIR_NAME = 'expected'
 
   constructor({ selectedTest }: AssetReaderOptions) {
@@ -46,7 +47,7 @@ export class AssetReader {
   }
 
   private _getFullPath(...subpaths: string[]) {
-    return pathJoin(__dirname, AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    return pathJoin(fileURLToPath(new URL(import.meta.url)), AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {

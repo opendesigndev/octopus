@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawOrigin } from '../../typings/raw'
 import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source'

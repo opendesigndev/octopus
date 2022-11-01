@@ -1,6 +1,6 @@
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash/cloneDeep.js'
 
-import type { Manifest } from '../../../src/typings/manifest'
+import type { Manifest } from '../../../src/typings/manifest.js'
 
 export function cleanManifest(input?: Manifest['OctopusManifest']): Manifest['OctopusManifest'] | undefined {
   if (!input) return undefined

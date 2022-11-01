@@ -1,10 +1,10 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { isArtboard, getBoundsFor, getUnitRatioFor, getArtboardColor } from '../../utils/source'
-import { SourceComponent } from './source-component'
-import { SourceLayerEffects } from './source-effects-layer'
-import { SourceEntity } from './source-entity'
-import { SourcePath } from './source-path'
+import { isArtboard, getBoundsFor, getUnitRatioFor, getArtboardColor } from '../../utils/source.js'
+import { SourceComponent } from './source-component.js'
+import { SourceLayerEffects } from './source-effects-layer.js'
+import { SourceEntity } from './source-entity.js'
+import { SourcePath } from './source-path.js'
 
 import type { RawBlendMode, RawLayer } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'

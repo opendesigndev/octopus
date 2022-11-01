@@ -1,9 +1,9 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { getBoundsFor } from '../../utils/source'
-import { SourceLayerCommon } from './source-layer-common'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { getBoundsFor } from '../../utils/source.js'
+import { SourceLayerCommon } from './source-layer-common.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawLayer, RawLayerSection } from '../../typings/raw'

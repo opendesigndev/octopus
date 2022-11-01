@@ -1,4 +1,4 @@
-import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusLayerBase } from './octopus-layer-base.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'

@@ -1,4 +1,4 @@
-import { isRectangle } from '../path'
+import { isRectangle } from '../path.js'
 
 import type { Points } from '../path'
 

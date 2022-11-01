@@ -1,14 +1,14 @@
 import path from 'path'
 
-import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
-import { isObject } from '@opendesign/octopus-common/dist/utils/common'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
-import { logger } from '../instances/logger'
-import { ComponentConverter } from './component-converter'
+import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
+import { logger } from '../instances/logger.js'
+import { ComponentConverter } from './component-converter.js'
 
 import type { DesignConverterOptions, OctopusPSDConverter } from '../..'
 import type { SourceComponent } from '../../entities/source/source-component'

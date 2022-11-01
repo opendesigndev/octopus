@@ -1,7 +1,7 @@
 import path from 'path'
 
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import sizeOf from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 

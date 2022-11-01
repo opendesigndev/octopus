@@ -1,4 +1,4 @@
-import { createDefaultLogger } from '../general/default-logger'
+import { createDefaultLogger } from '../general/default-logger.js'
 
 import type { Logger } from '../../typings'
 

@@ -1,6 +1,6 @@
-import { AssetReader } from './services/asset-reader'
-import { TestUpdater } from './services/test-updater'
-import { getCommandLineArgs } from './utils/argv'
+import { AssetReader } from './services/asset-reader.js'
+import { TestUpdater } from './services/test-updater.js'
+import { getCommandLineArgs } from './utils/argv.js'
 
 async function updateTests() {
   const { selectedTest } = getCommandLineArgs()

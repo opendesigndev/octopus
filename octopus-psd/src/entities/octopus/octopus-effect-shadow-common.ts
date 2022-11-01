@@ -1,7 +1,7 @@
-import { clamp, cos, round, sin } from '@opendesign/octopus-common/dist/utils/math'
+import { clamp, cos, round, sin } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { convertColor } from '../../utils/convert'
-import { OctopusEffectBase } from './octopus-effect-base'
+import { convertColor } from '../../utils/convert.js'
+import { OctopusEffectBase } from './octopus-effect-base.js'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectShadow } from '../source/source-effect-shadow'

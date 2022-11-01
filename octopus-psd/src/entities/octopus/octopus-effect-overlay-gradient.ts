@@ -1,5 +1,5 @@
-import { OctopusEffectBase } from './octopus-effect-base'
-import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
+import { OctopusEffectBase } from './octopus-effect-base.js'
+import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectFill } from '../source/source-effect-fill'

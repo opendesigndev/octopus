@@ -1,4 +1,4 @@
-import { SourceEntity } from './source-entity'
+import { SourceEntity } from './source-entity.js'
 
 import type { RawBlendMode, RawEffectShadow } from '../../typings/raw'
 

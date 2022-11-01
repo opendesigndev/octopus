@@ -1,9 +1,9 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEffectFill } from './source-effect-fill'
-import { SourceLayerCommon } from './source-layer-common'
-import { SourcePath } from './source-path'
-import { SourceStroke } from './source-stroke'
+import { SourceEffectFill } from './source-effect-fill.js'
+import { SourceLayerCommon } from './source-layer-common.js'
+import { SourcePath } from './source-path.js'
+import { SourceStroke } from './source-stroke.js'
 
 import type { RawLayerShape } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'

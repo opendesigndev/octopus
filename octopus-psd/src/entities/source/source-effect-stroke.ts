@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEffectBase } from './source-effect-base'
-import { SourceEffectFill } from './source-effect-fill'
+import { SourceEffectBase } from './source-effect-base.js'
+import { SourceEffectFill } from './source-effect-fill.js'
 
 import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw'
 
