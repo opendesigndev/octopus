@@ -26,7 +26,9 @@ Check [`src/services/conversion/exporters/`](./src/services/conversion/exporters
 
 Check [`src/services/conversion/ai-file-reader/`](./src/services/conversion/ai-file-reader/index.ts) for more details about AIFileReader
 
----
+## TypeDoc
+
+Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
 
 ## Demo: Node Examples
 
@@ -69,10 +71,6 @@ ENV variables for our demo scripts located in `/examples/node/*`
 | ODE_IGNORE_VALIDATION | boolean | ignores the ODE rendering validation                           |
 | FONTS_PATH            | string  | path to directory with fonts                                   |
 | OUTPUT_DIR            | string  | relative path to directory where output is saved               |
-
-## TypeDoc
-
-Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
 
 ## Tests
 

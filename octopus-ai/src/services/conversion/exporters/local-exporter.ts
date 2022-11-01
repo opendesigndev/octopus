@@ -29,9 +29,9 @@ export class LocalExporter implements Exporter {
   static OCTOPUS_MANIFEST_NAME = 'octopus-manifest.json'
   static METADATA_NAME = 'metadata.json'
   static ADDITIONAL_TEXT_DATA = 'additional-text-data.json'
-
+  static OCTOPUS_SUBFOLDER = 'octopusAI'
   /**
-   * Exports octopus assets into provided or system created directory
+   * Exports octopus assets into system created directory
    * @constructor
    * @param {LocalExporterOptions} [options]
    */
@@ -46,8 +46,9 @@ export class LocalExporter implements Exporter {
   }
 
   private async _initTempDir(options: LocalExporterOptions) {
-    const tempFallback = path.join(os.tmpdir(), uuidv4())
+    const tempFallback = path.join(os.tmpdir(), LocalExporter.OCTOPUS_SUBFOLDER, uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
+
     await fsp.mkdir(path.join(dir, LocalExporter.IMAGES_DIR_NAME), { recursive: true })
     return dir
   }
@@ -68,9 +69,9 @@ export class LocalExporter implements Exporter {
 
   /**
    * Exports metadata and additional text data
-   * @param {SourceDesign} instance of SourceDesign is container for preprocessed input data, such as artboards,
-   * metadata, images, etc.
-   * @returns {Promise<AuxiliaryData>} (metadata and additional text data)
+   * @param {SourceDesign} instance of SourceDesign is container for preprocessed input data,
+   * such as artboards, metadata, images, etc.
+   * @returns {Promise<AuxiliaryData>} metadata and additional text data
    */
   async exportAuxiliaryData(design: SourceDesign): Promise<AuxiliaryData> {
     const saveMetadata = this._save(LocalExporter.METADATA_NAME, this._stringify(design.metadaData))
@@ -93,7 +94,7 @@ export class LocalExporter implements Exporter {
   /**
    * Exports given Octopus Artboard
    * @param {ArtboardConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
-   * @returns {Promise<string | null>} returns path to the exported OctopusArtboard
+   * @returns {Promise<string | null>} path to the exported OctopusArtboard
    */
   exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
@@ -117,7 +118,7 @@ export class LocalExporter implements Exporter {
   /**
    * Exports given converted OctopusManifest.
    * @param {DesignConversionResult} result contains converted OctopusManifest + conversion Time
-   * @returns {Promise<string>} returns path to the OctopusManifest
+   * @returns {Promise<string>} path to the OctopusManifest
    */
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
     return this._save(LocalExporter.OCTOPUS_MANIFEST_NAME, this._stringify(manifest))

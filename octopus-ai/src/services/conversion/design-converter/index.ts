@@ -27,7 +27,11 @@ type DesignConverterGeneralOptions = {
 }
 
 type OctopusAIConverterOptions = DesignConverterGeneralOptions & {
-  /** SourceDesign instance encapsulates all the source design data. It consists of artboards, images and other assets. It's possible to generate using either built-in `AIFileReader` or by custom reader. */
+  /**
+   * SourceDesign instance encapsulates all the source design data.
+   * It consists of artboards, images and other assets.
+   * It's possible to generate using either built-in `AIFileReader` or by custom reader.
+   */
   sourceDesign: SourceDesign
 }
 

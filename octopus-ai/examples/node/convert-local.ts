@@ -1,5 +1,9 @@
+import os from 'os'
+import path from 'path'
+
 import chalk from 'chalk'
 import dotenv from 'dotenv'
+import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusAIConverter } from '../../src'
 import { AIFileReader } from '../../src/services/conversion/ai-file-reader'
@@ -14,8 +18,6 @@ dotenv.config()
     return
   }
 
-  const tempDir = process.env.OUTPUT_DIR ?? './workdir'
-
   const reader = new AIFileReader({ path: filePath })
 
   const sourceDesign = await reader.sourceDesign
@@ -26,8 +28,10 @@ dotenv.config()
   }
 
   const octopusAIConverter = new OctopusAIConverter({})
-  const exporter = new LocalExporter({ path: tempDir })
+  const testDir = path.join(os.tmpdir(), LocalExporter.OCTOPUS_SUBFOLDER, uuidv4())
+  const exporter = new LocalExporter({ path: testDir })
   await octopusAIConverter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
+  console.info(`Output: file://${testDir}`)
   await reader.cleanup()
 })()

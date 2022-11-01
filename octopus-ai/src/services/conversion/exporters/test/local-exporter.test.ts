@@ -37,9 +37,9 @@ describe('LocalExporter', () => {
 
     it('creates path for tempDir when not provided', async () => {
       const instance = new LocalExporter({})
-      expect(await instance['_outputDir']).toEqual('tmpdir/randomdirname')
+      expect(await instance['_outputDir']).toEqual('tmpdir/octopusAI/randomdirname')
       expect(fs.promises.mkdir).toHaveBeenCalledWith(
-        path.join('tmpdir/randomdirname/', LocalExporter.IMAGES_DIR_NAME),
+        path.join('tmpdir/octopusAI/randomdirname', LocalExporter.IMAGES_DIR_NAME),
         {
           recursive: true,
         }
@@ -57,8 +57,8 @@ describe('LocalExporter', () => {
       const assetPath = await instance['_save']('someImage.jpg', 'base64')
 
       expect(instance['_assetsSaves']).toEqual([Promise.resolve()])
-      expect(fs.promises.writeFile).toHaveBeenCalledWith('tmpdir/randomdirname/someImage.jpg', 'base64')
-      expect(assetPath).toEqual('tmpdir/randomdirname/someImage.jpg')
+      expect(fs.promises.writeFile).toHaveBeenCalledWith('tmpdir/octopusAI/randomdirname/someImage.jpg', 'base64')
+      expect(assetPath).toEqual('tmpdir/octopusAI/randomdirname/someImage.jpg')
     })
 
     it('saves to path provided in constructor', async () => {
@@ -86,8 +86,8 @@ describe('LocalExporter', () => {
       const result = await instance.exportAuxiliaryData(design)
 
       expect(result).toEqual({
-        additionalTextData: 'tmpdir/randomdirname/additional-text-data.json',
-        metadata: 'tmpdir/randomdirname/metadata.json',
+        additionalTextData: 'tmpdir/octopusAI/randomdirname/additional-text-data.json',
+        metadata: 'tmpdir/octopusAI/randomdirname/metadata.json',
       })
     })
 
@@ -97,7 +97,7 @@ describe('LocalExporter', () => {
 
       expect(result).toEqual({
         additionalTextData: null,
-        metadata: 'tmpdir/randomdirname/metadata.json',
+        metadata: 'tmpdir/octopusAI/randomdirname/metadata.json',
       })
     })
   })
@@ -107,7 +107,9 @@ describe('LocalExporter', () => {
       const instance = new LocalExporter({})
       const artboard: any = { value: { id: '1' } }
 
-      expect(await instance.exportArtboard({} as any, artboard)).toEqual('tmpdir/randomdirname/octopus-1.json')
+      expect(await instance.exportArtboard({} as any, artboard)).toEqual(
+        'tmpdir/octopusAI/randomdirname/octopus-1.json'
+      )
     })
 
     it('resolves to null when arbtoard has no value', async () => {

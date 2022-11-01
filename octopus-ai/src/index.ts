@@ -14,12 +14,14 @@ type OctopusAIConverteOptions = {
 }
 
 export type ConvertDesignOptions = {
-  /** SourceDesign instance encapsulates all the source design data.
+  /**
+   * SourceDesign instance encapsulates all the source design data.
    * It consists of artboards, images and other assets.
-   * It's possible to generate using either built-in `PSDFileReader` or by custom reader.
+   * It's possible to generate using either built-in `AIFileReader` or by custom reader.
    */
   sourceDesign: SourceDesign
-  /** Designates after how many milliseconds during the conversion process
+  /**
+   * Designates after how many milliseconds during the conversion process
    * file containing metadata (OctopusManifest) gets periodically updated
    */
   partialUpdateInterval?: number
@@ -31,9 +33,9 @@ export type ConvertDesignOptions = {
  * Main class for converting Adobe Illustrator documents to Octopus3 schema.
  *
  * There are three main processing steps:
- * - reading source data (using _reader_)
+ * - reading source data (using _reader)
  * - conversion (using `.convertDesign()` method with `SourceDesign` instance produced by reader)
- * - exporting (using _exporter_)
+ * - exporting (using _exporter)
  */
 export class OctopusAIConverter {
   private _pkg: ProjectPackage
@@ -48,7 +50,6 @@ export class OctopusAIConverter {
   }
 
   /**
-   * Returns version from package.json
    * @returns {string} version
    */
   get pkgVersion(): string {
@@ -58,7 +59,7 @@ export class OctopusAIConverter {
   /**
    * Converts given SourceDesign into Octopus entities
    * @param {ConvertDesignOptions} [options]
-   * @returns {Promise<ConvertDesignResult | null>} returns ConvertDesignResult object
+   * @returns {Promise<ConvertDesignResult | null>} ConvertDesignResult object
    */
   convertDesign({ exporter, sourceDesign, partialUpdateInterval }: ConvertDesignOptions): Promise<ConvertDesignResult> {
     const designConverter = new DesignConverter({

@@ -130,7 +130,7 @@ export class AIFileReader {
 
   /**
    * Returns `SourceDesign` instance built from given design path using `@opendesign/illustrator-parser-pdfcpu`.
-   * @returns {SourceDesign } Returns `SourceDesign` instance
+   * @returns {SourceDesign }
    */
   get sourceDesign(): Promise<SourceDesign> {
     return this._sourceDesign
