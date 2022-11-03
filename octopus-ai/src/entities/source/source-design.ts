@@ -14,7 +14,7 @@ export class SourceDesign {
   private _uniqueId: () => string
 
   constructor(sourceTree: SourceTree) {
-    this._uniqueId = uniqueIdFactory(1)
+    this._uniqueId = uniqueIdFactory(0)
     this._artboards = sourceTree.artboards.map(
       (artboardSource) => new SourceArtboard({ artboard: artboardSource, sourceDesign: this })
     )

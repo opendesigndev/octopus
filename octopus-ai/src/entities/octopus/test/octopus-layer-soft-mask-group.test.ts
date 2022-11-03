@@ -11,7 +11,7 @@ function getTestingSoftMaskGroup(sourceLayerProps?: Record<string, any>) {
   const options: any = {
     parent: {},
     layerSequence: {
-      sourceLayers: [{ parentArtboard: { sourceDesign: { uniqueId: () => 1 } }, ...sourceLayerProps }],
+      sourceLayers: [{ parentArtboard: { uniqueId: () => 1 }, ...sourceLayerProps }],
     },
   }
 

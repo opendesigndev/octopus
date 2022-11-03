@@ -41,7 +41,7 @@ export class OctopusArtboard {
   private _createMask(): Octopus['ShapeLayer'] {
     return {
       type: 'SHAPE',
-      id: this._sourceArtboard.sourceDesign.uniqueId(),
+      id: this._sourceArtboard.uniqueId(),
       shape: {
         path: parseRect(this._sourceArtboard.mediaBox),
         fills: [
@@ -65,7 +65,7 @@ export class OctopusArtboard {
     const layers = getConverted(this._layers)
 
     return {
-      id: this._sourceArtboard.sourceDesign.uniqueId(),
+      id: this._sourceArtboard.uniqueId(),
       type: 'MASK_GROUP',
       mask: this._createMask(),
       maskBasis: 'BODY',

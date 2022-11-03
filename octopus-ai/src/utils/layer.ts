@@ -78,9 +78,9 @@ export function initOctopusLayerChildren({ layers, parent }: InitOctopusLayerSeq
   }, [])
 }
 
-export function uniqueIdFactory(startingCounter: number): () => string {
+export function uniqueIdFactory(startingCounter: number, prefix?: string): () => string {
   return () => {
     startingCounter = startingCounter + 1
-    return String(startingCounter)
+    return prefix ? `${prefix}-${String(startingCounter)}` : String(startingCounter)
   }
 }

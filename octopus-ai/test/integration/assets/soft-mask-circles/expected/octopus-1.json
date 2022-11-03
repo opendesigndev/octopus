@@ -1,0 +1,351 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.2",
+  "id": "1",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "1-24",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "1-25",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "1-12",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "1-19",
+            "name": "<XObjectForm>",
+            "visible": true,
+            "maskChannels": [
+              0.299,
+              0.587,
+              0.114,
+              0,
+              0
+            ],
+            "type": "MASK_GROUP",
+            "maskBasis": "LAYER_AND_EFFECTS",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "1-14",
+                "name": "<XObjectForm>",
+                "visible": true,
+                "type": "GROUP",
+                "layers": [
+                  {
+                    "blendMode": "NORMAL",
+                    "opacity": 1,
+                    "id": "1-15",
+                    "name": "<Path>",
+                    "visible": true,
+                    "type": "SHAPE",
+                    "shape": {
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "geometry": "M0,0c0,-62.96 -78.798,-114 -176,-114c-97.202,0 -176,51.04 -176,114c0,62.96 78.798,114 176,114c97.202,0 176,-51.04 176,-114z"
+                      },
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "color": {
+                            "r": 0.20784313725490197,
+                            "g": 0.6588235294117647,
+                            "b": 0.8784313725490196,
+                            "a": 1
+                          }
+                        }
+                      ]
+                    },
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      458,
+                      338
+                    ]
+                  },
+                  {
+                    "blendMode": "NORMAL",
+                    "opacity": 1,
+                    "id": "1-16",
+                    "name": "<Path>",
+                    "visible": true,
+                    "type": "SHAPE",
+                    "shape": {
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "geometry": "M0,0c0,-62.96 -78.798,-114 -176,-114c-97.202,0 -176,51.04 -176,114c0,62.96 78.798,114 176,114c97.202,0 176,-51.04 176,-114z"
+                      },
+                      "strokes": [
+                        {
+                          "thickness": 1,
+                          "fill": {
+                            "type": "COLOR",
+                            "color": {
+                              "r": 0.11372549019607843,
+                              "g": 0.11372549019607843,
+                              "b": 0.10588235294117647,
+                              "a": 1
+                            }
+                          },
+                          "position": "CENTER",
+                          "visible": true,
+                          "style": "SOLID",
+                          "lineJoin": "MITER",
+                          "lineCap": "BUTT"
+                        }
+                      ]
+                    },
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      458,
+                      338
+                    ]
+                  },
+                  {
+                    "blendMode": "NORMAL",
+                    "opacity": 1,
+                    "id": "1-17",
+                    "name": "<Path>",
+                    "visible": true,
+                    "type": "SHAPE",
+                    "shape": {
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "geometry": "M0,0c0,-61.027 -65.814,-110.5 -147,-110.5c-81.186,0 -147,49.473 -147,110.5c0,61.027 65.814,110.5 147,110.5c81.186,0 147,-49.473 147,-110.5z"
+                      },
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "color": {
+                            "r": 0.8862745098039215,
+                            "g": 0.023529411764705882,
+                            "b": 0.07450980392156863,
+                            "a": 1
+                          }
+                        }
+                      ]
+                    },
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      510,
+                      467.5
+                    ]
+                  },
+                  {
+                    "blendMode": "NORMAL",
+                    "opacity": 1,
+                    "id": "1-18",
+                    "name": "<Path>",
+                    "visible": true,
+                    "type": "SHAPE",
+                    "shape": {
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "geometry": "M0,0c0,-61.027 -65.814,-110.5 -147,-110.5c-81.186,0 -147,49.473 -147,110.5c0,61.027 65.814,110.5 147,110.5c81.186,0 147,-49.473 147,-110.5z"
+                      },
+                      "strokes": [
+                        {
+                          "thickness": 1,
+                          "fill": {
+                            "type": "COLOR",
+                            "color": {
+                              "r": 0.11372549019607843,
+                              "g": 0.11372549019607843,
+                              "b": 0.10588235294117647,
+                              "a": 1
+                            }
+                          },
+                          "position": "CENTER",
+                          "visible": true,
+                          "style": "SOLID",
+                          "lineJoin": "MITER",
+                          "lineCap": "BUTT"
+                        }
+                      ]
+                    },
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      510,
+                      467.5
+                    ]
+                  }
+                ]
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "1-20",
+              "name": "<XObjectForm>",
+              "visible": false,
+              "type": "GROUP",
+              "layers": [
+                {
+                  "blendMode": "NORMAL",
+                  "opacity": 1,
+                  "id": "1-21",
+                  "name": "<Rectangle>",
+                  "visible": true,
+                  "type": "SHAPE",
+                  "shape": {
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "rectangle": {
+                        "x0": 510.5,
+                        "y0": 263.39,
+                        "x1": 105.5,
+                        "y1": 618.39
+                      },
+                      "type": "RECTANGLE"
+                    },
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ]
+                  },
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    -1,
+                    0,
+                    841.89
+                  ]
+                },
+                {
+                  "blendMode": "NORMAL",
+                  "opacity": 1,
+                  "id": "1-22",
+                  "name": "<XObjectForm>",
+                  "visible": true,
+                  "type": "GROUP",
+                  "layers": [
+                    {
+                      "blendMode": "NORMAL",
+                      "opacity": 1,
+                      "id": "1-23",
+                      "name": "<Rectangle>",
+                      "visible": true,
+                      "type": "SHAPE",
+                      "shape": {
+                        "fillRule": "NON_ZERO",
+                        "path": {
+                          "rectangle": {
+                            "x0": 387,
+                            "y0": 242.89,
+                            "x1": 12,
+                            "y1": 559.89
+                          },
+                          "type": "RECTANGLE"
+                        },
+                        "fills": [
+                          {
+                            "type": "COLOR",
+                            "color": {
+                              "r": 0,
+                              "g": 0.5843137254901961,
+                              "b": 0.25098039215686274,
+                              "a": 1
+                            }
+                          }
+                        ],
+                        "strokes": [
+                          {
+                            "thickness": 1,
+                            "fill": {
+                              "type": "COLOR",
+                              "color": {
+                                "r": 0.11372549019607843,
+                                "g": 0.11372549019607843,
+                                "b": 0.10588235294117647,
+                                "a": 1
+                              }
+                            },
+                            "position": "CENTER",
+                            "visible": true,
+                            "style": "SOLID",
+                            "lineJoin": "MITER",
+                            "lineCap": "BUTT"
+                          }
+                        ]
+                      },
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        -1,
+                        0,
+                        841.89
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

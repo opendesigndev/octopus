@@ -10,7 +10,7 @@ function getTestingMaskGroup() {
         sourceLayers: [
           {
             mask: {
-              parentArtboard: { sourceDesign: { uniqueId: () => 1 } },
+              parentArtboard: { uniqueId: () => 1 },
               mask: {},
             },
           },

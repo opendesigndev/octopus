@@ -1,0 +1,210 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.2",
+  "id": "1",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "1-9",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "1-10",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "1-5",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "1-6",
+            "name": "Sh0",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "COMPOUND",
+                "op": "INTERSECT",
+                "paths": [
+                  {
+                    "rectangle": {
+                      "x0": 485.326,
+                      "y0": 362.643,
+                      "x1": 61.730999999999995,
+                      "y1": 536.8
+                    },
+                    "type": "RECTANGLE",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      0,
+                      841.89
+                    ]
+                  }
+                ]
+              },
+              "fills": [
+                {
+                  "type": "GRADIENT",
+                  "gradient": {
+                    "type": "LINEAR",
+                    "stops": [
+                      {
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0
+                      },
+                      {
+                        "color": {
+                          "r": 1,
+                          "g": 0.9254901960784314,
+                          "b": 0,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0.188101
+                      },
+                      {
+                        "color": {
+                          "r": 0.9686274509803922,
+                          "g": 0.9686274509803922,
+                          "b": 0.9686274509803922,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0.312251
+                      },
+                      {
+                        "color": {
+                          "r": 0,
+                          "g": 0.6274509803921569,
+                          "b": 0.6,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0.72557
+                      },
+                      {
+                        "color": {
+                          "r": 0.11372549019607843,
+                          "g": 0.11372549019607843,
+                          "b": 0.10588235294117647,
+                          "a": 1
+                        },
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "positioning": {
+                    "layout": "FILL",
+                    "origin": "LAYER",
+                    "transform": [
+                      423.59552,
+                      0,
+                      0,
+                      423.59552,
+                      61.7303352,
+                      392.1685339
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "1-7",
+            "name": "<Rectangle>",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "NON_ZERO",
+              "path": {
+                "rectangle": {
+                  "x0": 485.326,
+                  "y0": 362.643,
+                  "x1": 61.730999999999995,
+                  "y1": 536.8
+                },
+                "type": "RECTANGLE"
+              },
+              "strokes": [
+                {
+                  "thickness": 1,
+                  "fill": {
+                    "type": "COLOR",
+                    "color": {
+                      "r": 0.11372549019607843,
+                      "g": 0.11372549019607843,
+                      "b": 0.10588235294117647,
+                      "a": 1
+                    }
+                  },
+                  "position": "CENTER",
+                  "visible": true,
+                  "style": "SOLID",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT"
+                }
+              ]
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              -1,
+              0,
+              841.89
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

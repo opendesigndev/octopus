@@ -1,0 +1,212 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.2",
+  "id": "1",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "1-13",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "1-14",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "1-6",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "NORMAL",
+            "opacity": 1,
+            "id": "1-7",
+            "name": "Sh0",
+            "visible": true,
+            "type": "SHAPE",
+            "shape": {
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "COMPOUND",
+                "op": "INTERSECT",
+                "paths": [
+                  {
+                    "type": "PATH",
+                    "geometry": "M176.815,567.455c19.479,-7.902 44.831,-12.677 72.556,-12.677v0c61.434,0 111.236,23.454 111.236,52.387v0c0,25.907 -39.922,47.42 -92.376,51.638v0c-47.769,-5.723 -85.655,-43.59 -91.416,-91.348z",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      -1,
+                      0,
+                      841.89
+                    ]
+                  }
+                ]
+              },
+              "fills": [
+                {
+                  "type": "GRADIENT",
+                  "gradient": {
+                    "type": "RADIAL",
+                    "stops": [
+                      {
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0
+                      },
+                      {
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "interpolationParameter": 1,
+                        "interpolation": "POWER",
+                        "position": 0.528811
+                      },
+                      {
+                        "color": {
+                          "r": 0.11372549019607843,
+                          "g": 0.11372549019607843,
+                          "b": 0.10588235294117647,
+                          "a": 1
+                        },
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "positioning": {
+                    "layout": "FILL",
+                    "origin": "LAYER",
+                    "transform": [
+                      104.7752838,
+                      0,
+                      0,
+                      104.7752838,
+                      280.8314514,
+                      287.11235109999996
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "blendMode": "PASS_THROUGH",
+            "opacity": 1,
+            "id": "1-9",
+            "name": "<Path>",
+            "visible": true,
+            "type": "MASK_GROUP",
+            "maskBasis": "BODY",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "1-10",
+                "name": "<Path>",
+                "visible": true,
+                "type": "SHAPE",
+                "shape": {
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "geometry": "M0,0c0,-57.866 -46.909,-104.775 -104.775,-104.775c-57.866,0 -104.776,46.909 -104.776,104.775c0,57.866 46.91,104.775 104.776,104.775c57.866,0 104.775,-46.909 104.775,-104.775z"
+                  },
+                  "strokes": [
+                    {
+                      "thickness": 1,
+                      "fill": {
+                        "type": "COLOR",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      },
+                      "position": "CENTER",
+                      "visible": true,
+                      "style": "SOLID",
+                      "lineJoin": "MITER",
+                      "lineCap": "BUTT"
+                    }
+                  ]
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  -1,
+                  385.6068,
+                  287.1124
+                ]
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "1-12",
+              "name": "<Path>",
+              "visible": true,
+              "type": "SHAPE",
+              "shape": {
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "geometry": "M138.135,607.165c0,-28.933 49.802,-52.387 111.236,-52.387v0c61.434,0 111.236,23.454 111.236,52.387v0c0,28.933 -49.802,52.388 -111.236,52.388v0c-61.434,0 -111.236,-23.455 -111.236,-52.388z"
+                }
+              },
+              "transform": [
+                1,
+                0,
+                0,
+                -1,
+                0,
+                841.89
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
