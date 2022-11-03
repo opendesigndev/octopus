@@ -23,7 +23,7 @@ class MockClass extends OctopusLayerCommon {
 
 function getMockInstance(sourceLayerProps?: Record<string, any>) {
   const options: any = {
-    layerSequence: { sourceLayers: [{ parentArtboard: { sourceDesign: { uniqueId: () => 1 } }, ...sourceLayerProps }] },
+    layerSequence: { sourceLayers: [{ parentArtboard: { uniqueId: () => 1 }, ...sourceLayerProps }] },
     parent: {},
   }
 

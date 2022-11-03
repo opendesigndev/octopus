@@ -4,7 +4,7 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as'
 import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
 
-import { initSourceLayerChildren } from '../../utils/layer'
+import { initSourceLayerChildren, uniqueIdFactory } from '../../utils/layer'
 import { SourceResources } from './source-resources'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
@@ -20,12 +20,14 @@ export class SourceArtboard {
   private _id: string
   private _resources: SourceResources
   private _sourceDesign: SourceDesign
+  private _uniqueId: () => string
 
   constructor({ artboard, sourceDesign }: SourceArtboardOptions) {
     this._rawArtboard = artboard
     this._resources = new SourceResources({ rawValue: this._rawArtboard.Resources })
     this._sourceDesign = sourceDesign
     this._id = sourceDesign.uniqueId()
+    this._uniqueId = uniqueIdFactory(0, this._id)
     this._children = this._initChildren()
   }
 
@@ -110,5 +112,9 @@ export class SourceArtboard {
       images: this._getArtboardAssetsImages(),
       fonts: this._getArtboardAssetsFonts(),
     }
+  }
+
+  get uniqueId() {
+    return this._uniqueId
   }
 }

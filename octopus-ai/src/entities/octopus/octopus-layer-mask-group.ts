@@ -27,7 +27,7 @@ export class OctopusLayerMaskGroup extends OctopusLayerCommon {
       layerSequence: { sourceLayers: [(layerSequences[0].sourceLayers[0] as SourceLayerWithMask).mask] },
     })
 
-    this._id = this._sourceLayer.parentArtboard.sourceDesign.uniqueId()
+    this._id = this._sourceLayer.parentArtboard.uniqueId()
 
     this._layers = createOctopusLayersFromLayerSequences({
       layerSequences: layerSequences,

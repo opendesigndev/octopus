@@ -34,7 +34,7 @@ export class OctopusLayerSoftMaskGroup extends OctopusLayerCommon {
     super(options)
 
     this._layers = this._initLayers()
-    this._id = this._sourceLayer.parentArtboard.sourceDesign.uniqueId()
+    this._id = this._sourceLayer.parentArtboard.uniqueId()
   }
 
   private _createMask() {

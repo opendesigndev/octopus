@@ -31,7 +31,7 @@ export class SourceLayerCommon {
   constructor(options: SourceLayerCommonOptions) {
     this._rawValue = options.rawValue
     this._parent = options.parent
-    this._id = this.parentArtboard.sourceDesign.uniqueId()
+    this._id = this.parentArtboard.uniqueId()
   }
 
   get id(): string {
