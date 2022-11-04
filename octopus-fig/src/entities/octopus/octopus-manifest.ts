@@ -1,6 +1,7 @@
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
+import { convertId } from '../../utils/convert'
 import { getRole } from '../../utils/source'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
@@ -74,45 +75,49 @@ export class OctopusManifest {
     return this._exports.images.get(name)
   }
 
-  setExportedPreviewPath(id: string, path: string | undefined): void {
-    this._exports.images.set(id, path)
+  setExportedPreviewPath(componentId: string, path: string | undefined): void {
+    this._exports.previews.set(convertId(componentId), path)
   }
 
-  getExportedPreviewPath(id: string): string | undefined {
-    return this._exports.images.get(id)
+  getExportedPreviewPath(componentId: string): string | undefined {
+    return this._exports.previews.get(convertId(componentId))
   }
 
   setExportedComponentImageMap(componentId: string, imageIds: string[]): void {
-    this._exports.componentImageMap.set(componentId, imageIds)
+    this._exports.componentImageMap.set(convertId(componentId), imageIds)
   }
 
   getExportedComponentImageMap(componentId: string): string[] | undefined {
-    return this._exports.componentImageMap.get(componentId)
+    return this._exports.componentImageMap.get(convertId(componentId))
   }
 
   setExportedSourcePath(componentId: string, sourcePath?: string): void {
-    this._exports.componentSourcePath.set(componentId, sourcePath)
+    this._exports.componentSourcePath.set(convertId(componentId), sourcePath)
   }
 
   getExportedSourcePath(componentId: string): string | undefined {
-    return this._exports.componentSourcePath.get(componentId)
+    return this._exports.componentSourcePath.get(convertId(componentId))
   }
 
   setExportedChunk(style: ResolvedStyle, sourcePath?: string): void {
-    this._exports.chunks.set(style.id, { style, sourcePath })
+    const id = convertId(style.id)
+    this._exports.chunks.set(id, { style, sourcePath })
   }
 
   getExportedChunk(chunkId: string): { style: ResolvedStyle; sourcePath?: string } | undefined {
-    return this._exports.chunks.get(chunkId)
+    return this._exports.chunks.get(convertId(chunkId))
   }
 
   setExportedLibrary(options: SetExportedLibraryOptions): void {
-    const { designId: id, name, designNodeId } = options
+    const { designId, name, designNodeId } = options
+    const id = convertId(designId)
+    const child = { id: convertId(designNodeId), type: 'COMPONENT' as const }
     const library = this._exports.libraries.get(id)
     if (!library) {
-      this._exports.libraries.set(id, { id, name, children: [{ id: designNodeId, type: 'COMPONENT' }] })
+      const meta = { originalId: designId }
+      this._exports.libraries.set(id, { id, name, meta, children: [child] })
     } else {
-      library.children = push(library.children, { id: designNodeId, type: 'COMPONENT' })
+      library.children = push(library.children, child)
     }
   }
 
@@ -127,7 +132,8 @@ export class OctopusManifest {
   }
 
   setExportedComponent(source: SourceComponent, descriptor: ComponentDescriptor): void {
-    this._exports.components.set(source.id, { source, descriptor })
+    const id = convertId(source.id)
+    this._exports.components.set(id, { source, descriptor })
   }
 
   get manifestVersion(): string {
@@ -156,12 +162,14 @@ export class OctopusManifest {
     return this._sourceDesign.pages.map((page) => ({
       id: page.id,
       name: page.name,
-      children: page.children.map((elem) => ({ id: elem.id, type: 'COMPONENT' })),
+      meta: { originalId: page.originalId },
+      children: page.children.map((elem) => ({ id: convertId(elem.id), type: 'COMPONENT' })),
     }))
   }
 
   private _getStatus(source: SourceComponent): Manifest['Status'] {
-    const status = this.getExportedComponentDescriptorById(source.id)
+    const id = convertId(source.id)
+    const status = this.getExportedComponentDescriptorById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
     return {
       value: statusValue,
@@ -188,7 +196,8 @@ export class OctopusManifest {
   }
 
   private _getAssets(source: SourceComponent): Manifest['Assets'] {
-    const imageIds = this.getExportedComponentImageMap(source.id) ?? []
+    const id = convertId(source.id)
+    const imageIds = this.getExportedComponentImageMap(id) ?? []
     const images = this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
     return { images, fonts }
@@ -199,8 +208,9 @@ export class OctopusManifest {
   }
 
   private _getArtifacts(source: SourceComponent): Manifest['Artifact'][] {
+    const id = convertId(source.id)
     const artifacts: Manifest['Artifact'][] = []
-    const sourcePath = this.getExportedSourcePath(source.id)
+    const sourcePath = this.getExportedSourcePath(id)
     if (sourcePath) artifacts.push(this._getSourceArtifact(sourcePath))
     return artifacts
   }
@@ -223,7 +233,7 @@ export class OctopusManifest {
   }
 
   private _getVariant(id: string): Manifest['VariantMeta'] | undefined {
-    const component = this._sourceDesign.components[id]
+    const component = this._sourceDesign.getComponentById(id)
     if (!component) return undefined
     const { componentSetId: setId, description } = component
     if (!setId) return undefined
@@ -231,22 +241,23 @@ export class OctopusManifest {
     if (!componentSet) return undefined
     const { name: setName, description: setDescription } = componentSet
     if (!setName) return undefined
-    const of = { id: setId, name: setName, description: setDescription }
+    const of = { id: convertId(setId), name: setName, meta: { originalId: setId }, description: setDescription }
     const properties = this._getVariantProperties(component.name)
     return { of, properties, description }
   }
 
   private _getChunk(style?: ResolvedStyle, sourcePath?: string): Manifest['Chunk'] | undefined {
     if (!style || !sourcePath) return undefined
-    const { id, meta } = style
-    const { name, description, styleType } = meta
+    const id = convertId(style.id)
+    const { name, description, styleType } = style.meta
     const type = getMapped(styleType, OctopusManifest.CHUNK_TYPE_MAP, undefined)
     if (!type) {
       logger?.warn('Unknown chunk type', { styleType })
       return undefined
     }
     const location = { type: 'RELATIVE', path: sourcePath } as const
-    return { id, name, description, type, location }
+    const meta = { originalId: style.id }
+    return { id, name, meta, description, type, location }
   }
 
   get chunks(): Manifest['Chunk'][] {
@@ -271,11 +282,13 @@ export class OctopusManifest {
     const role = getRole(source)
     const preview = this._getPreview(id)
     const variant = this._getVariant(id)
+    const meta = { originalId: source.originalId }
 
     return {
       id,
       name: source.name,
       role,
+      meta,
       status,
       bounds,
       dependencies: [],

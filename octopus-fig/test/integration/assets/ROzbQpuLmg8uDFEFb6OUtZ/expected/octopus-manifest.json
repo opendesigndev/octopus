@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.18",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -9,9 +9,12 @@
     {
       "id": "0-1",
       "name": "Page 1",
+      "meta": {
+        "originalId": "0:1"
+      },
       "children": [
         {
-          "id": "2:3",
+          "id": "2-3",
           "type": "COMPONENT"
         }
       ]
@@ -19,9 +22,12 @@
   ],
   "components": [
     {
-      "id": "2:3",
+      "id": "2-3",
       "name": "Text Frame ",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "2:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,

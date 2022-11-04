@@ -65,6 +65,10 @@ export class SourcePage extends SourceEntity {
     return convertId(this._rawValue.id ?? SourcePage.DEFAULT_ID)
   }
 
+  get originalId(): string | undefined {
+    return this._rawValue.id
+  }
+
   get name(): string {
     return this._rawValue.name ?? SourcePage.DEFAULT_ID
   }

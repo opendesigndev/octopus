@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.18",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -9,9 +9,12 @@
     {
       "id": "41-2",
       "name": "shapes",
+      "meta": {
+        "originalId": "41:2"
+      },
       "children": [
         {
-          "id": "41:3",
+          "id": "41-3",
           "type": "COMPONENT"
         }
       ]
@@ -19,9 +22,12 @@
     {
       "id": "73-2",
       "name": "gradients",
+      "meta": {
+        "originalId": "73:2"
+      },
       "children": [
         {
-          "id": "73:3",
+          "id": "73-3",
           "type": "COMPONENT"
         }
       ]
@@ -29,13 +35,16 @@
     {
       "id": "181-41",
       "name": "images",
+      "meta": {
+        "originalId": "181:41"
+      },
       "children": [
         {
-          "id": "182:42",
+          "id": "182-42",
           "type": "COMPONENT"
         },
         {
-          "id": "390:13",
+          "id": "390-13",
           "type": "COMPONENT"
         }
       ]
@@ -43,9 +52,12 @@
     {
       "id": "114-2",
       "name": "texts",
+      "meta": {
+        "originalId": "114:2"
+      },
       "children": [
         {
-          "id": "114:3",
+          "id": "114-3",
           "type": "COMPONENT"
         }
       ]
@@ -53,13 +65,16 @@
     {
       "id": "106-2",
       "name": "masks",
+      "meta": {
+        "originalId": "106:2"
+      },
       "children": [
         {
-          "id": "106:3",
+          "id": "106-3",
           "type": "COMPONENT"
         },
         {
-          "id": "312:5",
+          "id": "312-5",
           "type": "COMPONENT"
         }
       ]
@@ -67,9 +82,12 @@
     {
       "id": "55-2",
       "name": "effects",
+      "meta": {
+        "originalId": "55:2"
+      },
       "children": [
         {
-          "id": "55:3",
+          "id": "55-3",
           "type": "COMPONENT"
         }
       ]
@@ -77,13 +95,16 @@
     {
       "id": "318-2",
       "name": "components",
+      "meta": {
+        "originalId": "318:2"
+      },
       "children": [
         {
-          "id": "318:5",
+          "id": "318-5",
           "type": "COMPONENT"
         },
         {
-          "id": "343:40",
+          "id": "343-40",
           "type": "COMPONENT"
         }
       ]
@@ -91,13 +112,16 @@
     {
       "id": "161-2",
       "name": "other",
+      "meta": {
+        "originalId": "161:2"
+      },
       "children": [
         {
-          "id": "161:3",
+          "id": "161-3",
           "type": "COMPONENT"
         },
         {
-          "id": "387:13",
+          "id": "387-13",
           "type": "COMPONENT"
         }
       ]
@@ -105,29 +129,32 @@
     {
       "id": "66-2",
       "name": "bugs",
+      "meta": {
+        "originalId": "66:2"
+      },
       "children": [
         {
-          "id": "66:3",
+          "id": "66-3",
           "type": "COMPONENT"
         },
         {
-          "id": "369:13",
+          "id": "369-13",
           "type": "COMPONENT"
         },
         {
-          "id": "374:14",
+          "id": "374-14",
           "type": "COMPONENT"
         },
         {
-          "id": "375:17",
+          "id": "375-17",
           "type": "COMPONENT"
         },
         {
-          "id": "377:19",
+          "id": "377-19",
           "type": "COMPONENT"
         },
         {
-          "id": "391:36",
+          "id": "391-36",
           "type": "COMPONENT"
         }
       ]
@@ -135,9 +162,12 @@
   ],
   "components": [
     {
-      "id": "114:3",
+      "id": "114-3",
       "name": "texts-01",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "114:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -169,9 +199,12 @@
       }
     },
     {
-      "id": "312:5",
+      "id": "312-5",
       "name": "Frame in Frame NoCLIP",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "312:5"
+      },
       "bounds": {
         "x": 4450,
         "y": -15,
@@ -190,9 +223,12 @@
       }
     },
     {
-      "id": "55:3",
+      "id": "55-3",
       "name": "effects",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "55:3"
+      },
       "bounds": {
         "x": 246,
         "y": -65,
@@ -211,9 +247,12 @@
       }
     },
     {
-      "id": "318:5",
+      "id": "318-5",
       "name": "Frame 1",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "318:5"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -239,9 +278,12 @@
       }
     },
     {
-      "id": "161:3",
+      "id": "161-3",
       "name": "groups-01",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "161:3"
+      },
       "bounds": {
         "x": -37,
         "y": -29,
@@ -260,9 +302,12 @@
       }
     },
     {
-      "id": "387:13",
+      "id": "387-13",
       "name": "blend-mode-passThrough",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "387:13"
+      },
       "bounds": {
         "x": 1100,
         "y": 0,
@@ -285,9 +330,12 @@
       }
     },
     {
-      "id": "66:3",
+      "id": "66-3",
       "name": "bug-linear-gradient",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "66:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -306,9 +354,12 @@
       }
     },
     {
-      "id": "369:13",
+      "id": "369-13",
       "name": "bug-bg-blur",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "369:13"
+      },
       "bounds": {
         "x": 650,
         "y": 0,
@@ -327,9 +378,12 @@
       }
     },
     {
-      "id": "374:14",
+      "id": "374-14",
       "name": "bug-multi-fills",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "374:14"
+      },
       "bounds": {
         "x": 0,
         "y": 600,
@@ -348,9 +402,12 @@
       }
     },
     {
-      "id": "375:17",
+      "id": "375-17",
       "name": "bug-text-emoji",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "375:17"
+      },
       "bounds": {
         "x": 600,
         "y": 600,
@@ -379,9 +436,12 @@
       }
     },
     {
-      "id": "377:19",
+      "id": "377-19",
       "name": "bug-opacity",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "377:19"
+      },
       "bounds": {
         "x": 1200,
         "y": 0,
@@ -400,9 +460,12 @@
       }
     },
     {
-      "id": "391:36",
+      "id": "391-36",
       "name": "bug-effect-on-group",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "391:36"
+      },
       "bounds": {
         "x": 350,
         "y": 0,
@@ -421,9 +484,12 @@
       }
     },
     {
-      "id": "318:13",
+      "id": "318-13",
       "name": "Property 1=Default",
       "role": "COMPONENT",
+      "meta": {
+        "originalId": "318:13"
+      },
       "bounds": {
         "x": 67,
         "y": 50,
@@ -442,8 +508,11 @@
       "artifacts": [],
       "variant": {
         "of": {
-          "id": "325:10",
+          "id": "325-10",
           "name": "Button",
+          "meta": {
+            "originalId": "325:10"
+          },
           "description": ""
         },
         "properties": {
@@ -457,9 +526,12 @@
       }
     },
     {
-      "id": "325:9",
+      "id": "325-9",
       "name": "Property 1=Red",
       "role": "COMPONENT",
+      "meta": {
+        "originalId": "325:9"
+      },
       "bounds": {
         "x": 447,
         "y": 42,
@@ -478,8 +550,11 @@
       "artifacts": [],
       "variant": {
         "of": {
-          "id": "325:10",
+          "id": "325-10",
           "name": "Button",
+          "meta": {
+            "originalId": "325:10"
+          },
           "description": ""
         },
         "properties": {
@@ -493,9 +568,12 @@
       }
     },
     {
-      "id": "343:14",
+      "id": "343-14",
       "name": "Hover=Default",
       "role": "COMPONENT",
+      "meta": {
+        "originalId": "343:14"
+      },
       "bounds": {
         "x": 47,
         "y": -183,
@@ -514,8 +592,11 @@
       "artifacts": [],
       "variant": {
         "of": {
-          "id": "343:40",
+          "id": "343-40",
           "name": "Button",
+          "meta": {
+            "originalId": "343:40"
+          },
           "description": ""
         },
         "properties": {
@@ -529,9 +610,12 @@
       }
     },
     {
-      "id": "343:41",
+      "id": "343-41",
       "name": "Hover=Active",
       "role": "COMPONENT",
+      "meta": {
+        "originalId": "343:41"
+      },
       "bounds": {
         "x": 377,
         "y": -183,
@@ -550,8 +634,11 @@
       "artifacts": [],
       "variant": {
         "of": {
-          "id": "343:40",
+          "id": "343-40",
           "name": "Button",
+          "meta": {
+            "originalId": "343:40"
+          },
           "description": ""
         },
         "properties": {
@@ -565,9 +652,12 @@
       }
     },
     {
-      "id": "41:3",
+      "id": "41-3",
       "name": "shapes",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "41:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -594,9 +684,12 @@
       }
     },
     {
-      "id": "73:3",
+      "id": "73-3",
       "name": "gradients",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "73:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -623,9 +716,12 @@
       }
     },
     {
-      "id": "182:42",
+      "id": "182-42",
       "name": "Sooma",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "182:42"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -652,9 +748,12 @@
       }
     },
     {
-      "id": "390:13",
+      "id": "390-13",
       "name": "Pikachu",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "390:13"
+      },
       "bounds": {
         "x": 4510,
         "y": 0,
@@ -695,9 +794,12 @@
       }
     },
     {
-      "id": "106:3",
+      "id": "106-3",
       "name": "masks-01",
       "role": "ARTBOARD",
+      "meta": {
+        "originalId": "106:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -742,9 +844,12 @@
       }
     },
     {
-      "id": "1:3",
+      "id": "1-3",
       "name": "BUTTON COMP",
       "role": "COMPONENT",
+      "meta": {
+        "originalId": "1:3"
+      },
       "bounds": {
         "x": 0,
         "y": 0,
@@ -772,9 +877,12 @@
     {
       "id": "bfYRb6sa5T1PZfsXMmMhMO",
       "name": "SHARED Components - Dont DELETE",
+      "meta": {
+        "originalId": "bfYRb6sa5T1PZfsXMmMhMO"
+      },
       "children": [
         {
-          "id": "1:3",
+          "id": "1-3",
           "type": "COMPONENT"
         }
       ]

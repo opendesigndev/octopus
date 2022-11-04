@@ -33,6 +33,10 @@ export function convertId(id: string): string {
   return id.replaceAll(':', '-').replaceAll(';', '_')
 }
 
+export function deconvertId(id: string): string {
+  return id.replaceAll('-', ':').replaceAll('_', ';')
+}
+
 export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode'] {
   return typeof blendMode === 'string' && BLEND_MODES.includes(blendMode) ? blendMode : DEFAULTS.BLEND_MODE
 }

@@ -2,6 +2,7 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
 import { round } from '@opendesign/octopus-common/dist/utils/math'
 
+import { convertId } from '../../utils/convert'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 import { SourceLayerFrame } from './source-layer-frame'
@@ -72,7 +73,11 @@ export class SourceComponent extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue.id ?? SourceComponent.DEFAULT_ID
+    return convertId(this._rawValue.id ?? SourceComponent.DEFAULT_ID)
+  }
+
+  get originalId(): string | undefined {
+    return this._rawValue.id
   }
 
   get name(): string {
