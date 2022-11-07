@@ -6,6 +6,7 @@
     "packages": [
       "figma-parser",
       "figma-parser-s3-plugin",
+      "figma-plugin",
       "octopus-common",
       "octopus-ai",
       "octopus-fig",

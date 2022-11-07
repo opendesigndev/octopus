@@ -1,32 +1,34 @@
 <h2>OpenDesign Plugin</h2>
 
-<button id="copy" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">Copy to clipboard</button>
+<button id="copy" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+  Copy to clipboard
+</button>
 <button id="cancel">Cancel</button>
-<br>
+<br />
 <p>Selection count:</p>
 <p id="count">init</p>
 <code id="text">init</code>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>new ClipboardJS('#copy')</script>
 <script>
-
-// const eventListeners: { type: String; callback: Function }[] = [];
-// export const dispatch = (action: String, data?: any) => {
-// 	parent.postMessage({ pluginMessage: { action, data } }, '*');
-// };
-// export const handleEvent = (type: String, callback: Function) => {
-// 	eventListeners.push({ type, callback });
-// };
-// window.onmessage = event => {
-// 	const message = event.data.pluginMessage;
-// 	if (message) {
-// 		for (let eventListener of eventListeners) {
-// 	 	if (message.action === eventListener.type) eventListener.callback(message.data);
-// 		}
-// 	}
-// };
-
+  new ClipboardJS('#copy')
+</script>
+<script>
+  // const eventListeners: { type: String; callback: Function }[] = [];
+  // export const dispatch = (action: String, data?: any) => {
+  // 	parent.postMessage({ pluginMessage: { action, data } }, '*');
+  // };
+  // export const handleEvent = (type: String, callback: Function) => {
+  // 	eventListeners.push({ type, callback });
+  // };
+  // window.onmessage = event => {
+  // 	const message = event.data.pluginMessage;
+  // 	if (message) {
+  // 		for (let eventListener of eventListeners) {
+  // 	 	if (message.action === eventListener.type) eventListener.callback(message.data);
+  // 		}
+  // 	}
+  // };
 
   document.getElementById('copy').onclick = () => {
     const data = 'TODO DATA' // TODO
@@ -36,7 +38,6 @@
   document.getElementById('cancel').onclick = () => {
     parent.postMessage({ pluginMessage: { action: 'close' } }, '*')
   }
-
 
   window.onfocus = () => {
     console.info('ON FOCUS')
@@ -54,25 +55,20 @@
 
     console.info('message', message)
 
-
-    if(message.action === 'selectionchange') {
-
+    if (message.action === 'selectionchange') {
       const source = message.data
       const selectionLength = source?.content?.length ?? 0
 
-      const countElem = document.getElementById("count")
+      const countElem = document.getElementById('count')
       countElem.innerText = selectionLength
 
       const sourceString = JSON.stringify(source, null, 2)
 
-      const textElem = document.getElementById("text")
+      const textElem = document.getElementById('text')
       textElem.innerText = sourceString
 
       const copyElem = document.getElementById('copy')
       copyElem.setAttribute('data-clipboard-text', sourceString)
-
     }
-
   }
-
 </script>

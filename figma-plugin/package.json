@@ -1,11 +1,14 @@
 {
-  "name": "open-design-figma-plugin",
-  "version": "3.0.0",
+  "name": "figma-plugin",
+  "version": "3.0.0-rc.1",
   "description": "OpenDesign Figma Plugin",
-  "main": "code.js",
+  "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf ./node_modules ./lib ./dist",
     "build": "esbuild src/code.ts --sourcemap --bundle --outfile=dist/code.js",
+    "lint": "echo 'Linting is not implemented yet'",
+    "test": "echo 'Tests are not implemented yet'",
+    "types:check": "tsc --noEmit",
     "watch": "tsc --watch --noEmit"
   },
   "dependencies": {
@@ -17,5 +20,9 @@
     "esbuild": "0.15.12",
     "rimraf": "^3.0.2",
     "typescript": "4.8.4"
-  }
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "code.js"
 }

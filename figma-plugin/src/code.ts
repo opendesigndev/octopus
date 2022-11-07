@@ -1,7 +1,7 @@
 // import Clipboard from 'clipboard'
 import _ from 'lodash' // TODO Remove lodash
-import { version } from '../package.json'
 
+import { version } from '../package.json'
 import { dispatch, handleEvent } from './codeMessageHandler'
 
 figma.showUI(__html__, { height: 240, width: 300 })
@@ -19,6 +19,8 @@ const getSource = () => {
 const nodeToObject = (node) => {
   const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
   const blacklist = ['parent', 'children', 'removed']
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: any = { id: node.id, type: node.type }
   if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
   for (const [name, prop] of props) {

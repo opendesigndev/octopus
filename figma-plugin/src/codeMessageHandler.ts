@@ -1,10 +1,10 @@
-const eventListeners: { type: String; callback: Function }[] = []
+const eventListeners: { type: string; callback: (data: unknown) => void }[] = []
 
-export const dispatch = (action: String, data?: any) => {
+export const dispatch = (action: string, data?: unknown) => {
   figma.ui.postMessage({ action, data })
 }
 
-export const handleEvent = (type: String, callback: Function) => {
+export const handleEvent = (type: string, callback: (data: unknown) => void) => {
   eventListeners.push({ type, callback })
 }
 
