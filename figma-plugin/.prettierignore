@@ -1,0 +1,7 @@
+dist/
+docs/
+lib/
+node_modules/
+sample/
+workdir/
+temp/
