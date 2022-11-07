@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-ai",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.4",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
   "main": "lib/src/index.js",
@@ -21,7 +21,8 @@
     "test:unit": "yarn jest",
     "test:integration": "ts-node test/integration",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
-    "typedoc": "typedoc --excludePrivate src/index.ts"
+    "typedoc": "typedoc --excludePrivate src/index.ts",
+    "prepack": "rimraf ./lib && yarn run build"
   },
   "dependencies": {
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
