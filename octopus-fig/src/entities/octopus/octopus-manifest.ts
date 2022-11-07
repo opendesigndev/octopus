@@ -1,6 +1,7 @@
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
+import { convertId } from '../../utils/convert'
 import { getRole } from '../../utils/source'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter'
@@ -74,12 +75,12 @@ export class OctopusManifest {
     return this._exports.images.get(name)
   }
 
-  setExportedPreviewPath(id: string, path: string | undefined): void {
-    this._exports.images.set(id, path)
+  setExportedPreviewPath(componentId: string, path: string | undefined): void {
+    this._exports.previews.set(componentId, path)
   }
 
-  getExportedPreviewPath(id: string): string | undefined {
-    return this._exports.images.get(id)
+  getExportedPreviewPath(componentId: string): string | undefined {
+    return this._exports.previews.get(componentId)
   }
 
   setExportedComponentImageMap(componentId: string, imageIds: string[]): void {
@@ -107,12 +108,15 @@ export class OctopusManifest {
   }
 
   setExportedLibrary(options: SetExportedLibraryOptions): void {
-    const { designId: id, name, designNodeId } = options
-    const library = this._exports.libraries.get(id)
+    const { designId, name, designNodeId } = options
+    const id = convertId(designId)
+    const child = { id: convertId(designNodeId), type: 'COMPONENT' as const }
+    const library = this._exports.libraries.get(designId)
     if (!library) {
-      this._exports.libraries.set(id, { id, name, children: [{ id: designNodeId, type: 'COMPONENT' }] })
+      const meta = { originalId: designId }
+      this._exports.libraries.set(designId, { id, name, meta, children: [child] })
     } else {
-      library.children = push(library.children, { id: designNodeId, type: 'COMPONENT' })
+      library.children = push(library.children, child)
     }
   }
 
@@ -154,14 +158,16 @@ export class OctopusManifest {
 
   get pages(): Manifest['Page'][] {
     return this._sourceDesign.pages.map((page) => ({
-      id: page.id,
+      id: convertId(page.id),
       name: page.name,
-      children: page.children.map((elem) => ({ id: elem.id, type: 'COMPONENT' })),
+      meta: { originalId: page.id },
+      children: page.children.map((elem) => ({ id: convertId(elem.id), type: 'COMPONENT' })),
     }))
   }
 
   private _getStatus(source: SourceComponent): Manifest['Status'] {
-    const status = this.getExportedComponentDescriptorById(source.id)
+    const id = source.id
+    const status = this.getExportedComponentDescriptorById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
     return {
       value: statusValue,
@@ -223,7 +229,7 @@ export class OctopusManifest {
   }
 
   private _getVariant(id: string): Manifest['VariantMeta'] | undefined {
-    const component = this._sourceDesign.components[id]
+    const component = this._sourceDesign.getComponentById(id)
     if (!component) return undefined
     const { componentSetId: setId, description } = component
     if (!setId) return undefined
@@ -231,22 +237,23 @@ export class OctopusManifest {
     if (!componentSet) return undefined
     const { name: setName, description: setDescription } = componentSet
     if (!setName) return undefined
-    const of = { id: setId, name: setName, description: setDescription }
+    const of = { id: convertId(setId), name: setName, meta: { originalId: setId }, description: setDescription }
     const properties = this._getVariantProperties(component.name)
     return { of, properties, description }
   }
 
   private _getChunk(style?: ResolvedStyle, sourcePath?: string): Manifest['Chunk'] | undefined {
     if (!style || !sourcePath) return undefined
-    const { id, meta } = style
-    const { name, description, styleType } = meta
+    const id = convertId(style.id)
+    const { name, description, styleType } = style.meta
     const type = getMapped(styleType, OctopusManifest.CHUNK_TYPE_MAP, undefined)
     if (!type) {
       logger?.warn('Unknown chunk type', { styleType })
       return undefined
     }
     const location = { type: 'RELATIVE', path: sourcePath } as const
-    return { id, name, description, type, location }
+    const meta = { originalId: style.id }
+    return { id, name, meta, description, type, location }
   }
 
   get chunks(): Manifest['Chunk'][] {
@@ -260,22 +267,24 @@ export class OctopusManifest {
   }
 
   private _getComponent(source: SourceComponent): Manifest['Component'] {
-    const id = source.id
+    const id = convertId(source.id)
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
 
-    const path = this.getExportedComponentPathById(id) ?? ''
+    const path = this.getExportedComponentPathById(source.id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
     const assets = this._getAssets(source)
     const artifacts = this._getArtifacts(source)
     const role = getRole(source)
-    const preview = this._getPreview(id)
-    const variant = this._getVariant(id)
+    const preview = this._getPreview(source.id)
+    const variant = this._getVariant(source.id)
+    const meta = { originalId: source.id }
 
     return {
       id,
       name: source.name,
       role,
+      meta,
       status,
       bounds,
       dependencies: [],

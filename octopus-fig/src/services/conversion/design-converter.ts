@@ -227,7 +227,7 @@ export class DesignConverter {
   private async _convertPreview(preview: ResolvedPreview) {
     const previewId = preview.nodeId
     const previewPath = await this._exporter?.exportPreview?.(preview.nodeId, preview.buffer)
-    this.octopusManifest?.setExportedImagePath(previewId, previewPath)
+    this.octopusManifest?.setExportedPreviewPath(previewId, previewPath)
     if (this._shouldReturn) this._conversionResult.previews.push({ id: previewId, data: preview.buffer })
   }
 

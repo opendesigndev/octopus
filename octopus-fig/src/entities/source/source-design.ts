@@ -1,7 +1,7 @@
 import { SourceEntity } from './source-entity'
 import { SourcePage } from './source-page'
 
-import type { RawComponents, RawComponentSets, RawDesign, RawStyles } from '../../typings/raw'
+import type { RawComponent, RawComponents, RawComponentSets, RawDesign, RawStyles } from '../../typings/raw'
 
 type SourceDesignOptions = {
   raw: RawDesign
@@ -41,6 +41,10 @@ export class SourceDesign extends SourceEntity {
 
   get components(): RawComponents {
     return this._rawValue.components ?? {}
+  }
+
+  getComponentById(id: string): RawComponent | undefined {
+    return this.components[id]
   }
 
   get componentSets(): RawComponentSets {
