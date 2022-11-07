@@ -1,4 +1,3 @@
-import { convertId } from '../../utils/convert'
 import { SourceComponent } from './source-component'
 import { SourceEntity } from './source-entity'
 
@@ -62,7 +61,7 @@ export class SourcePage extends SourceEntity {
   }
 
   get id(): string {
-    return convertId(this._rawValue.id ?? SourcePage.DEFAULT_ID)
+    return this._rawValue.id ?? SourcePage.DEFAULT_ID
   }
 
   get name(): string {
