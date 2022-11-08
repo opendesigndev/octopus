@@ -1,0 +1,173 @@
+{
+  "id": "66-3",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.6",
+  "dimensions": {
+    "width": 300,
+    "height": 500
+  },
+  "content": {
+    "id": "66-3-Background",
+    "name": "bug-linear-gradient",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "66-3-BackgroundMask",
+      "name": "bug-linear-gradient",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 300,
+            "y0": 0,
+            "y1": 500
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.5292,
+              "g": 0.5292,
+              "b": 0.5292,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "66-4",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          6.123234262925839e-17,
+          -1,
+          1,
+          6.123234262925839e-17,
+          50,
+          450
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.4976148307323456
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5013185143470764
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -399.9999523162835,
+                  200.00001192092645,
+                  -200.00001192092645,
+                  -99.99998807907087,
+                  399.99997615814067,
+                  -0.000011920927533992653
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

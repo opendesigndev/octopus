@@ -1,0 +1,1159 @@
+{
+  "id": "182-42",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.6",
+  "dimensions": {
+    "width": 4382,
+    "height": 3719
+  },
+  "content": {
+    "id": "182-42-Background",
+    "name": "Sooma",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "182-42-BackgroundMask",
+      "name": "Sooma",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 4382,
+            "y0": 0,
+            "y1": 3719
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "182-43",
+        "name": "sodoma 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          112,
+          99
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  768,
+                  0,
+                  0,
+                  1080,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-44",
+        "name": "sodoma 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          112,
+          1339
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -840.6228682948213,
+                  -500.48570728828463,
+                  514.2492784394208,
+                  -863.7402992207337,
+                  838.5048498300116,
+                  1675.518379411736
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-45",
+        "name": "sodoma 8",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1516,
+          1435
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -721.3316431035468,
+                  2.3603763503499604e-13,
+                  -1.766753012485498e-13,
+                  -963.6967368199687,
+                  863.2930593763754,
+                  1255.6244469328365
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-46",
+        "name": "sodoma 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3242,
+          355
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  679.7320099402726,
+                  357.47499532700425,
+                  -502.6991962194568,
+                  955.8731389785083,
+                  315.5900516281711,
+                  20.9777513991962
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-47",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1954,
+          939
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  683.1130984662004,
+                  350.97075092093,
+                  -316.14552960834686,
+                  615.3309089897881,
+                  365.53939239902894,
+                  152.5243093902036
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-48",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          787,
+          1860
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -0.4871198237565889,
+                  767.9998212414691,
+                  -691.7947228818693,
+                  -0.438786620865818,
+                  895.1640860260883,
+                  251.89461075591427
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-49",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2240,
+          1743
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -767.6286568165624,
+                  23.87898685927096,
+                  -21.50958328002126,
+                  -691.460369932753,
+                  943.5923039827334,
+                  969.4657808863761
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-50",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3008,
+          1516
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -45.165803977037825,
+                  -766.6707463866658,
+                  690.5974889103156,
+                  -40.68420594022327,
+                  226.30732441260446,
+                  1039.3526211871078
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-51",
+        "name": "PROBLEM 001",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2411,
+          0
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  767.8823380083509,
+                  -13.442549828594652,
+                  12.108705805021447,
+                  691.6888892112506,
+                  159.02766063817967,
+                  296.5519793285582
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-52",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          152,
+          2367
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -475.3416970304171,
+                  603.2198741585464,
+                  -543.3651264062855,
+                  -428.1757304517799,
+                  1058.3766036035377,
+                  548.1530597720349
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-53",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1543,
+          2339
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  -542.907900674551,
+                  -543.2080773034158,
+                  489.3080035085142,
+                  -489.0376135394614,
+                  575.8230922588428,
+                  1151.797997094781
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-54",
+        "name": "PROBLEM",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3008,
+          2394
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  557.3417515633806,
+                  -528.3882580950178,
+                  475.9587370167642,
+                  502.03924225399305,
+                  32.37292711545663,
+                  648.8496203923683
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-55",
+        "name": "sodoma 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.7117835879325867,
+          0.7023988366127014,
+          -0.7023988366127014,
+          0.7117835879325867,
+          1406.324462890625,
+          99
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 300,
+              "y0": 0,
+              "y1": 421.88
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  300,
+                  0,
+                  0,
+                  421.88,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-56",
+        "name": "sodoma 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.8482750058174133,
+          -0.5295559763908386,
+          0.5295559763908386,
+          0.8482750058174133,
+          1322,
+          799.5064086914062
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 1472,
+              "y0": 0,
+              "y1": 636
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "FIT",
+                "origin": "LAYER",
+                "transform": [
+                  1472,
+                  0,
+                  0,
+                  636,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "182-57",
+        "name": "sodoma 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.9292359352111816,
+          0.36948686838150024,
+          -0.36948686838150024,
+          0.9292359352111816,
+          1186.0457763671875,
+          769
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 768,
+              "y0": 0,
+              "y1": 1080
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [],
+          "strokes": []
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

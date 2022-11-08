@@ -1,0 +1,146 @@
+{
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.2",
+  "id": "1",
+  "dimensions": {
+    "width": 595.276,
+    "height": 841.89
+  },
+  "content": {
+    "id": "1-9",
+    "type": "MASK_GROUP",
+    "mask": {
+      "type": "SHAPE",
+      "id": "1-10",
+      "shape": {
+        "path": {
+          "rectangle": {
+            "x0": 0,
+            "y0": 0,
+            "x1": 595.276,
+            "y1": 841.89
+          },
+          "type": "RECTANGLE"
+        },
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ]
+      }
+    },
+    "maskBasis": "BODY",
+    "layers": [
+      {
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "id": "1-4",
+        "name": "Layer 1",
+        "visible": true,
+        "type": "GROUP",
+        "layers": [
+          {
+            "blendMode": "PASS_THROUGH",
+            "opacity": 1,
+            "id": "1-6",
+            "name": "<Rectangle>",
+            "visible": true,
+            "type": "MASK_GROUP",
+            "maskBasis": "BODY",
+            "layers": [
+              {
+                "blendMode": "NORMAL",
+                "opacity": 1,
+                "id": "1-7",
+                "name": "<Path>",
+                "visible": true,
+                "type": "SHAPE",
+                "shape": {
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "geometry": "M0,0c-77.63,-87.821 -119.02,-100.839 -142.683,-91.463c-56.429,22.356 -30.455,179.346 -75.61,189.024c-23.159,4.964 -55.1,-30.95 -64.634,-65.854c-16.961,-62.098 36.791,-121.792 73.171,-162.195c22.68,-25.187 60.445,-60.335 118.293,-89.024"
+                  },
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "color": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": [
+                    {
+                      "thickness": 1,
+                      "fill": {
+                        "type": "COLOR",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      },
+                      "position": "CENTER",
+                      "visible": true,
+                      "style": "SOLID",
+                      "lineJoin": "MITER",
+                      "lineCap": "BUTT"
+                    }
+                  ]
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  -1,
+                  382.7805,
+                  442.7317
+                ]
+              }
+            ],
+            "mask": {
+              "blendMode": "NORMAL",
+              "opacity": 1,
+              "id": "1-8",
+              "name": "<Rectangle>",
+              "visible": true,
+              "type": "SHAPE",
+              "shape": {
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "rectangle": {
+                    "x0": 595.276,
+                    "y0": 0,
+                    "x1": 0,
+                    "y1": 841.89
+                  },
+                  "type": "RECTANGLE"
+                }
+              },
+              "transform": [
+                1,
+                0,
+                0,
+                -1,
+                0,
+                841.89
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

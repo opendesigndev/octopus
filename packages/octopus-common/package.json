@@ -1,0 +1,36 @@
+{
+  "name": "@opendesign/octopus-common",
+  "version": "3.0.0-rc.27",
+  "description": "General utility functions for Octopus 3 common cases.",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build ./tsconfig.json",
+    "prepack": "yarn clean-build",
+    "clean": "rimraf ./node_modules ./dist",
+    "clean-build": "rimraf ./dist && yarn run build",
+    "watch": "tsc -w",
+    "test": "yarn jest",
+    "types:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@opendesign/octopus-ts": "3.0.0-alpha.38",
+    "@types/lodash": "^4.14.178",
+    "@types/uuid": "^8.3.1",
+    "crc-32": "^1.2.2",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@types/node": "*",
+    "jest": "^27.3.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "10.4.0",
+    "typescript": "4.6.4"
+  },
+  "files": [
+    "dist"
+  ]
+}

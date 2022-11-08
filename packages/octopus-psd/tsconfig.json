@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"],
+    "declaration": true,
+    "rootDir": "./",
+    "outDir": "./lib/",
+    "module": "esnext",
+    "target": "ES2019",
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    "lib": ["es2019", "ES2015.Proxy", "dom"],
+    "paths": {
+      "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]
+    }
+  },
+  "include": ["src", "test", "examples/node"]
+}

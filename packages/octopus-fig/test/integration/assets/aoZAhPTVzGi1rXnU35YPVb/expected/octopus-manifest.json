@@ -1,0 +1,891 @@
+{
+  "version": "3.0.0-rc.18",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Complex",
+  "pages": [
+    {
+      "id": "41-2",
+      "name": "shapes",
+      "meta": {
+        "originalId": "41:2"
+      },
+      "children": [
+        {
+          "id": "41-3",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "73-2",
+      "name": "gradients",
+      "meta": {
+        "originalId": "73:2"
+      },
+      "children": [
+        {
+          "id": "73-3",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "181-41",
+      "name": "images",
+      "meta": {
+        "originalId": "181:41"
+      },
+      "children": [
+        {
+          "id": "182-42",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "390-13",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "114-2",
+      "name": "texts",
+      "meta": {
+        "originalId": "114:2"
+      },
+      "children": [
+        {
+          "id": "114-3",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "106-2",
+      "name": "masks",
+      "meta": {
+        "originalId": "106:2"
+      },
+      "children": [
+        {
+          "id": "106-3",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "312-5",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "55-2",
+      "name": "effects",
+      "meta": {
+        "originalId": "55:2"
+      },
+      "children": [
+        {
+          "id": "55-3",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "318-2",
+      "name": "components",
+      "meta": {
+        "originalId": "318:2"
+      },
+      "children": [
+        {
+          "id": "318-5",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "343-40",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "161-2",
+      "name": "other",
+      "meta": {
+        "originalId": "161:2"
+      },
+      "children": [
+        {
+          "id": "161-3",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "387-13",
+          "type": "COMPONENT"
+        }
+      ]
+    },
+    {
+      "id": "66-2",
+      "name": "bugs",
+      "meta": {
+        "originalId": "66:2"
+      },
+      "children": [
+        {
+          "id": "66-3",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "369-13",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "374-14",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "375-17",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "377-19",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "391-36",
+          "type": "COMPONENT"
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "114-3",
+      "name": "texts-01",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "114:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1000,
+        "height": 1000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "ArialMT"
+          },
+          {
+            "name": "Arial-BoldItalicMT"
+          },
+          {
+            "name": "Arial-ItalicMT"
+          },
+          {
+            "name": "Urbanist-SemiBold"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "312-5",
+      "name": "Frame in Frame NoCLIP",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "312:5"
+      },
+      "bounds": {
+        "x": 4450,
+        "y": -15,
+        "width": 400,
+        "height": 360
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "55-3",
+      "name": "effects",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "55:3"
+      },
+      "bounds": {
+        "x": 246,
+        "y": -65,
+        "width": 1325,
+        "height": 1000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "318-5",
+      "name": "Frame 1",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "318:5"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 850,
+        "height": 650
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "ArialMT"
+          },
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "161-3",
+      "name": "groups-01",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "161:3"
+      },
+      "bounds": {
+        "x": -37,
+        "y": -29,
+        "width": 1120,
+        "height": 890
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "387-13",
+      "name": "blend-mode-passThrough",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "387:13"
+      },
+      "bounds": {
+        "x": 1100,
+        "y": 0,
+        "width": 425,
+        "height": 635
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Inter"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "66-3",
+      "name": "bug-linear-gradient",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "66:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 500
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "369-13",
+      "name": "bug-bg-blur",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "369:13"
+      },
+      "bounds": {
+        "x": 650,
+        "y": 0,
+        "width": 500,
+        "height": 500
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "374-14",
+      "name": "bug-multi-fills",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "374:14"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 600,
+        "width": 500,
+        "height": 500
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "375-17",
+      "name": "bug-text-emoji",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "375:17"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 600,
+        "width": 500,
+        "height": 200
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Urbanist-SemiBold"
+          },
+          {
+            "name": "ArialMT"
+          },
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "377-19",
+      "name": "bug-opacity",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "377:19"
+      },
+      "bounds": {
+        "x": 1200,
+        "y": 0,
+        "width": 741,
+        "height": 380
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "391-36",
+      "name": "bug-effect-on-group",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "391:36"
+      },
+      "bounds": {
+        "x": 350,
+        "y": 0,
+        "width": 250,
+        "height": 500
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "318-13",
+      "name": "Property 1=Default",
+      "role": "COMPONENT",
+      "meta": {
+        "originalId": "318:13"
+      },
+      "bounds": {
+        "x": 67,
+        "y": 50,
+        "width": 306,
+        "height": 106
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "variant": {
+        "of": {
+          "id": "325-10",
+          "name": "Button",
+          "meta": {
+            "originalId": "325:10"
+          },
+          "description": ""
+        },
+        "properties": {
+          "Property 1": "Default"
+        },
+        "description": ""
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "325-9",
+      "name": "Property 1=Red",
+      "role": "COMPONENT",
+      "meta": {
+        "originalId": "325:9"
+      },
+      "bounds": {
+        "x": 447,
+        "y": 42,
+        "width": 306,
+        "height": 106
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "variant": {
+        "of": {
+          "id": "325-10",
+          "name": "Button",
+          "meta": {
+            "originalId": "325:10"
+          },
+          "description": ""
+        },
+        "properties": {
+          "Property 1": "Red"
+        },
+        "description": ""
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "343-14",
+      "name": "Hover=Default",
+      "role": "COMPONENT",
+      "meta": {
+        "originalId": "343:14"
+      },
+      "bounds": {
+        "x": 47,
+        "y": -183,
+        "width": 306,
+        "height": 106
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "variant": {
+        "of": {
+          "id": "343-40",
+          "name": "Button",
+          "meta": {
+            "originalId": "343:40"
+          },
+          "description": ""
+        },
+        "properties": {
+          "Hover": "Default"
+        },
+        "description": ""
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "343-41",
+      "name": "Hover=Active",
+      "role": "COMPONENT",
+      "meta": {
+        "originalId": "343:41"
+      },
+      "bounds": {
+        "x": 377,
+        "y": -183,
+        "width": 306,
+        "height": 106
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Arial-BoldMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "variant": {
+        "of": {
+          "id": "343-40",
+          "name": "Button",
+          "meta": {
+            "originalId": "343:40"
+          },
+          "description": ""
+        },
+        "properties": {
+          "Hover": "Active"
+        },
+        "description": ""
+      },
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "41-3",
+      "name": "shapes",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "41:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 500,
+        "height": 500
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "73-3",
+      "name": "gradients",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "73:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 5000,
+        "height": 5000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "182-42",
+      "name": "Sooma",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "182:42"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 4382,
+        "height": 3719
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "390-13",
+      "name": "Pikachu",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "390:13"
+      },
+      "bounds": {
+        "x": 4510,
+        "y": 0,
+        "width": 2000,
+        "height": 2000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "765f7d8454f8058d34df9e3eb5a776f9c61ee48e"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "f0890718ee8b114c23368579f5d832c263672e43"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "106-3",
+      "name": "masks-01",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "106:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 4374,
+        "height": 2475
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "891bbf6705621050b98cd567ca0b1601b5809bf9"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "c7f3503450cd3f959c25ad8d41f02efe69c8cd8e"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "39528832ab1a5d464806e5a5c13fbbfea93bc90b"
+          }
+        ],
+        "fonts": [
+          {
+            "name": "ArialMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "1-3",
+      "name": "BUTTON COMP",
+      "role": "COMPONENT",
+      "meta": {
+        "originalId": "1:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 300,
+        "height": 100
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "ArialMT"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": [
+    {
+      "id": "bfYRb6sa5T1PZfsXMmMhMO",
+      "name": "SHARED Components - Dont DELETE",
+      "meta": {
+        "originalId": "bfYRb6sa5T1PZfsXMmMhMO"
+      },
+      "children": [
+        {
+          "id": "1-3",
+          "type": "COMPONENT"
+        }
+      ]
+    }
+  ]
+}

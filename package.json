@@ -4,13 +4,13 @@
   "license": "Apache-2.0",
   "workspaces": {
     "packages": [
-      "figma-parser",
-      "figma-parser-s3-plugin",
-      "octopus-common",
-      "octopus-ai",
-      "octopus-fig",
-      "octopus-psd",
-      "octopus-xd"
+      "packages/figma-parser",
+      "packages/figma-parser-s3-plugin",
+      "packages/octopus-common",
+      "packages/octopus-ai",
+      "packages/octopus-fig",
+      "packages/octopus-psd",
+      "packages/octopus-xd"
     ],
     "nohoist": [
       "**"
@@ -21,9 +21,6 @@
     "clean": "rimraf ./node_modules && yarn workspaces run clean",
     "clean-init": "yarn clean && yarn && yarn build",
     "test": "yarn workspaces run test",
-    "xd:unpack": "yarn workspace @opendesign/octopus-xd unpack-xd-file",
-    "xd:clean-workdir": "yarn workspace @opendesign/octopus-xd clean-workdir",
-    "xd:watch": "yarn workspace @opendesign/octopus-xd watch",
     "lint": "yarn run lint:prettier && yarn run lint:eslint",
     "lint:eslint": "eslint . --ext .ts --max-warnings=0",
     "lint:prettier": "prettier -c .",
