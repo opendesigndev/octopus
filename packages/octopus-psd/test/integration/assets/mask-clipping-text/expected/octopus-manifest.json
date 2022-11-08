@@ -32,6 +32,13 @@
               "path": ""
             },
             "refId": "4.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "6.png"
           }
         ],
         "fonts": [

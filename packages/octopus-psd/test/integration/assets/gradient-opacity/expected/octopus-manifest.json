@@ -17,7 +17,17 @@
         "height": 300
       },
       "dependencies": [],
-      "assets": {},
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "5.png"
+          }
+        ]
+      },
       "location": {
         "type": "RELATIVE",
         "path": ""
