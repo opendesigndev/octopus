@@ -6,14 +6,18 @@ import { dispatch, handleEvent } from './codeMessageHandler'
 
 figma.showUI(__html__, { height: 240, width: 300 })
 
-console.log('THIS', this)
+// console.log('THIS', this)
 
 const getSource = () => {
-  const content = figma.currentPage.selection.map((node) => nodeToObject(node))
+  const selectedContent = figma.currentPage.selection.map((node) => nodeToObject(node))
 
-  if (!content.length) return null
+  if (!selectedContent.length) return null
 
-  return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, content }
+  const document = { id: figma.root.id, name: figma.root.name }
+  const currentPage = { id: figma.currentPage.id, name: figma.currentPage.name }
+  const timestamp = new Date().toISOString()
+
+  return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, document, currentPage, selectedContent, timestamp }
 }
 
 const nodeToObject = (node) => {
