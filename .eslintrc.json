@@ -24,7 +24,7 @@
     "import/resolver": {
       "typescript": {
         "alwaysTryTypes": true,
-        "project": ["octopus-common", "octopus-xd", "octopus-ai", "octopus-psd", "figma-parser"]
+        "project": "packages/*/tsconfig.json"
       }
     }
   },
