@@ -1,7 +1,7 @@
 {
-  "name": "@opendesign/figma-plugin",
+  "name": "@opendesign/figma-source-plugin",
   "version": "3.0.0-rc.1",
-  "description": "OpenDesign Figma Plugin",
+  "description": "Figma Source Plugin",
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf ./node_modules ./lib ./dist",

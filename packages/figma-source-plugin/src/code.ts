@@ -16,8 +16,9 @@ const getSource = () => {
   const document = { id: figma.root.id, name: figma.root.name }
   const currentPage = { id: figma.currentPage.id, name: figma.currentPage.name }
   const timestamp = new Date().toISOString()
+  const context = { document, currentPage, selectedContent }
 
-  return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, document, currentPage, selectedContent, timestamp }
+  return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
 }
 
 const nodeToObject = (node) => {
