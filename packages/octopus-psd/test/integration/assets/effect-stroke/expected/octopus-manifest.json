@@ -31,7 +31,21 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "647a569a-9629-464e-9b38-69be215a3b23.png"
+            "refId": "2.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "3.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "94bb282b-242c-9e4c-99bb-37a5ff444667.png"
           }
         ]
       },

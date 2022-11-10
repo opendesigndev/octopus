@@ -25,6 +25,13 @@
               "path": ""
             },
             "refId": "1.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "2.png"
           }
         ]
       },
