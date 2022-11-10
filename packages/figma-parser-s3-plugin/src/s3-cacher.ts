@@ -2,6 +2,8 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 
 import type { S3Plugin } from '.'
+import type { ICacher } from './types/cacher'
+import type { FigmaFile, FigmaNode } from './types/figma'
 
 export type S3CacherOptions = {
   s3Plugin: S3Plugin
@@ -26,7 +28,7 @@ type CacheMap = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Cache = { [key: string]: any }
 
-export class S3Cacher {
+export class S3Cacher implements ICacher {
   _s3Plugin: S3Plugin
   _cache: Cache
   _cacheMap: Promise<CacheMap>
@@ -139,7 +141,7 @@ export class S3Cacher {
     )
   }
 
-  async resolveDesign(designId: string): Promise<unknown> {
+  async resolveDesign(designId: string): Promise<FigmaFile> {
     const design = await this._get(this._getDesignCacheKey(designId))
     return JSON.parse(design as string)
   }
@@ -178,7 +180,7 @@ export class S3Cacher {
     )
   }
 
-  async resolveNode(id: NodeAddress): Promise<unknown> {
+  async resolveNode(id: NodeAddress): Promise<FigmaNode> {
     const node = await this._get(this._getFrameLikeCacheKey(id.designId, id.nodeId))
     return JSON.parse(node as string)
   }
@@ -202,7 +204,9 @@ export class S3Cacher {
     return `libraries.${componentId}`
   }
 
-  async resolveComponent(componentId: string): Promise<NodeAddress & { component: Record<PropertyKey, unknown> }> {
+  async resolveComponent(
+    componentId: string
+  ): Promise<NodeAddress & { name: string; description: string } & { component: FigmaNode }> {
     const component = await this._get(this._getLibCacheKey(componentId))
     return JSON.parse(component as string)
   }

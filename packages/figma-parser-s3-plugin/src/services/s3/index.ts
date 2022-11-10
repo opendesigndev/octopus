@@ -2,15 +2,16 @@ import { promises as fsp } from 'fs'
 
 import AWS from 'aws-sdk'
 
-import { fromEnv } from '../../utils/env'
-
 import type { S3Plugin } from '../..'
 
 type S3Options = {
-  accessKeyId?: string
-  secretAccessKey?: string
-  region?: string
+  accessKeyId: string
+  secretAccessKey: string
+  region: string
   verbose?: boolean
+  acl?: string
+  uploadBucket?: string
+  downloadBucket?: string
   s3Plugin: S3Plugin
 }
 
@@ -22,24 +23,15 @@ type UploadOptions = {
 }
 
 type UploadFileOptions = {
-  bucket: string | null
+  bucket?: string
   key: string
   filePath: string
   ACL?: string
 }
 
 type DownloadOptions = {
-  bucket: string | null
+  bucket?: string
   key: string
-}
-
-type Defaults = {
-  accessKeyId: string
-  secretAccessKey: string
-  region: string
-  ACL: string
-  uploadBucket: string | null
-  downloadBucket: string | null
 }
 
 export default class S3 {
@@ -49,22 +41,19 @@ export default class S3 {
   _secretAccessKey: string
   _region: string
   _s3Plugin: S3Plugin
-
-  static DEFAULTS: Defaults = {
-    accessKeyId: fromEnv('AWS_ACCESS_KEY_ID', 'string'),
-    secretAccessKey: fromEnv('AWS_SECRET_ACCESS_KEY', 'string'),
-    region: fromEnv('AWS_S3_DESIGN_REGION', 'string', 'eu-west-1'),
-    ACL: fromEnv('AWS_S3_ACL', 'string', 'public-read'),
-    uploadBucket: fromEnv('AWS_S3_UPLOAD_BUCKET_NAME', 'string', fromEnv('AWS_S3_BUCKET_NAME', 'string', null)),
-    downloadBucket: fromEnv('AWS_S3_DOWNLOAD_BUCKET_NAME', 'string', fromEnv('AWS_S3_BUCKET_NAME', 'string', null)),
-  }
+  _acl?: string
+  _uploadBucket?: string
+  _downloadBucket?: string
 
   constructor(options: S3Options) {
     const {
-      accessKeyId = S3.DEFAULTS.accessKeyId,
-      secretAccessKey = S3.DEFAULTS.secretAccessKey,
-      region = S3.DEFAULTS.region,
+      accessKeyId,
+      secretAccessKey,
+      region = 'eu-west-1',
       verbose = false,
+      acl = 'public-read',
+      uploadBucket,
+      downloadBucket,
       s3Plugin,
     } = Object(options) as S3Options
 
@@ -72,6 +61,9 @@ export default class S3 {
     this._accessKeyId = accessKeyId
     this._secretAccessKey = secretAccessKey
     this._region = region
+    this._acl = acl
+    this._uploadBucket = uploadBucket
+    this._downloadBucket = downloadBucket
 
     this._verbose = verbose
     if (this._verbose) {
@@ -80,23 +72,26 @@ export default class S3 {
     this._s3 = new AWS.S3({ accessKeyId, secretAccessKey, region })
   }
 
-  get options(): { accessKeyId: string; secretAccessKey: string; region: string; verbose: boolean } {
+  get options(): Omit<S3Options, 's3Plugin'> {
     return {
       accessKeyId: this._accessKeyId,
       secretAccessKey: this._secretAccessKey,
       region: this._region,
       verbose: this._verbose,
+      acl: this._acl,
+      uploadBucket: this._uploadBucket,
+      downloadBucket: this._downloadBucket,
     }
   }
 
   upload({
-    bucket = S3.DEFAULTS.uploadBucket,
+    bucket = this._uploadBucket,
     key,
     body,
-    ACL = S3.DEFAULTS.ACL,
+    ACL = this._acl,
   }: UploadOptions): Promise<AWS.S3.ManagedUpload.SendData> {
     if (!bucket) {
-      throw new Error('No bucket found at "AWS_S3_UPLOAD_BUCKET_NAME" or "AWS_S3_BUCKET_NAME" environment variables')
+      throw new Error('Upload bucket have not been provided!')
     }
     if (this._verbose) {
       this._s3Plugin.logger.info('S3 Upload', key)
@@ -114,18 +109,18 @@ export default class S3 {
   }
 
   async uploadFile({
-    bucket = S3.DEFAULTS.uploadBucket,
+    bucket = this._uploadBucket,
     key,
     filePath,
-    ACL = S3.DEFAULTS.ACL,
+    ACL = this._acl,
   }: UploadFileOptions): Promise<AWS.S3.ManagedUpload.SendData> {
     const body = await fsp.readFile(filePath)
     return this.upload({ bucket, key, body, ACL })
   }
 
-  async downloadRaw({ bucket = S3.DEFAULTS.downloadBucket, key }: DownloadOptions): Promise<AWS.S3.GetObjectOutput> {
+  async downloadRaw({ bucket = this._downloadBucket, key }: DownloadOptions): Promise<AWS.S3.GetObjectOutput> {
     if (!bucket) {
-      throw new Error('No bucket found at "AWS_S3_DOWNLOAD_BUCKET_NAME" or "AWS_S3_BUCKET_NAME" environment variables')
+      throw new Error('Download bucket have not been provided!')
     }
     if (this._verbose) {
       this._s3Plugin.logger.info('S3 Download', key)
@@ -142,7 +137,7 @@ export default class S3 {
     })
   }
 
-  async download({ bucket = S3.DEFAULTS.downloadBucket, key }: DownloadOptions): Promise<string | Buffer> {
+  async download({ bucket = this._downloadBucket, key }: DownloadOptions): Promise<string | Buffer> {
     return this.downloadRaw({ bucket, key }).then((data: AWS.S3.GetObjectOutput) => data.Body as string | Buffer)
   }
 

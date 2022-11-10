@@ -115,10 +115,16 @@ export class Parser {
     if (Array.isArray(ids)) {
       this._config.setIds(ids)
     }
-    return new Design({
+    const design = new Design({
       designId: this.config.designId,
       parser: this,
       cachedFile: this._cachedFile,
     })
+
+    design.ready().then(() => {
+      this._services.cacher?.finalize()
+    })
+
+    return design
   }
 }
