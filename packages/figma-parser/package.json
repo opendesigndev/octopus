@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/figma-parser",
-  "version": "3.0.0-rc.13",
+  "version": "3.0.0-rc.14",
   "description": "Figma parser, downloads assets from Figma APIs",
   "license": "Apache-2.0",
   "scripts": {
