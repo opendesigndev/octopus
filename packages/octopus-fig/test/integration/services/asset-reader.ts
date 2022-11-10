@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { MANIFEST_NAME } from '../../../src/utils/exporter'
+import { MANIFEST_NAME } from '../../../src/utils/const'
 import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
 import { lazyRead } from '../utils/lazy-read'
 

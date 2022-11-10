@@ -1,7 +1,8 @@
 import path from 'path'
 
 import { createConverter } from '../../../src/index-node'
-import { getOctopusFileName, MANIFEST_NAME } from '../../../src/utils/exporter'
+import { getOctopusFileName } from '../../../src/services/exporters/node/local-exporter'
+import { MANIFEST_NAME } from '../../../src/utils/const'
 import { makeDir, saveFile, rmDir } from '../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'

@@ -1,22 +1,22 @@
 {
-  "id": "375-17",
+  "id": "318-13",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.19",
   "dimensions": {
-    "width": 500,
-    "height": 200
+    "width": 300,
+    "height": 100
   },
   "content": {
-    "id": "375-17-Background",
-    "name": "bug-text-emoji",
+    "id": "318-13-Background",
+    "name": "Property 1=Default",
     "type": "MASK_GROUP",
     "visible": true,
     "opacity": 1,
     "blendMode": "PASS_THROUGH",
-    "maskBasis": "BODY_EMBED",
+    "maskBasis": "SOLID",
     "mask": {
-      "id": "375-17-BackgroundMask",
-      "name": "bug-text-emoji",
+      "id": "318-13-BackgroundMask",
+      "name": "Property 1=Default",
       "type": "SHAPE",
       "visible": true,
       "opacity": 1,
@@ -44,10 +44,11 @@
           ],
           "rectangle": {
             "x0": 0,
-            "x1": 500,
+            "x1": 300,
             "y0": 0,
-            "y1": 200
-          }
+            "y1": 100
+          },
+          "cornerRadius": 40
         },
         "fillRule": "NON_ZERO",
         "fills": [
@@ -56,14 +57,37 @@
             "visible": true,
             "blendMode": "NORMAL",
             "color": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0.4062,
+              "g": 0.625,
+              "b": 0.3516,
               "a": 1
             }
           }
         ],
-        "strokes": []
+        "strokes": [
+          {
+            "style": "SOLID",
+            "dashing": [],
+            "visible": true,
+            "fill": {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            },
+            "thickness": 6,
+            "position": "CENTER",
+            "lineJoin": "MITER",
+            "lineCap": "BUTT",
+            "miterLimit": 28.96,
+            "fillRule": "NON_ZERO"
+          }
+        ]
       }
     },
     "transform": [
@@ -76,8 +100,8 @@
     ],
     "layers": [
       {
-        "id": "375-16",
-        "name": "Emoji",
+        "id": "318-15",
+        "name": "Hello",
         "type": "TEXT",
         "visible": true,
         "opacity": 1,
@@ -87,77 +111,43 @@
           0,
           0,
           1,
-          114,
-          76
+          25,
+          25
         ],
         "effects": [],
         "text": {
-          "value": "👍 Emojito 🤣",
+          "value": "Button",
           "defaultStyle": {
             "font": {
-              "postScriptName": "Urbanist-SemiBold",
-              "family": "Urbanist"
+              "postScriptName": "Arial-BoldMT",
+              "family": "Arial"
             },
             "fontSize": 36,
-            "lineHeight": 46,
-            "letterSpacing": 0.36,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "letterCase": "UPPERCASE",
             "fills": [
               {
                 "type": "COLOR",
                 "visible": true,
                 "blendMode": "NORMAL",
                 "color": {
-                  "r": 0.098,
-                  "g": 0.1333,
-                  "b": 0.3216,
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
                   "a": 1
                 }
               }
             ],
             "strokes": []
           },
-          "styles": [
-            {
-              "style": {
-                "font": {
-                  "postScriptName": "ArialMT",
-                  "family": "Arial"
-                },
-                "fontSize": 36,
-                "lineHeight": 46,
-                "letterSpacing": 0.36
-              },
-              "ranges": [
-                {
-                  "from": 0,
-                  "to": 1
-                }
-              ]
-            },
-            {
-              "style": {
-                "font": {
-                  "postScriptName": "Arial-BoldMT",
-                  "family": "Arial"
-                },
-                "fontSize": 36,
-                "lineHeight": 46,
-                "letterSpacing": 0.36
-              },
-              "ranges": [
-                {
-                  "from": 1,
-                  "to": 11
-                }
-              ]
-            }
-          ],
-          "horizontalAlign": "LEFT",
-          "verticalAlign": "TOP",
+          "styles": [],
+          "horizontalAlign": "CENTER",
+          "verticalAlign": "CENTER",
           "frame": {
-            "mode": "AUTO_WIDTH",
+            "mode": "FIXED",
             "size": {
-              "width": 229,
+              "width": 250,
               "height": 50
             }
           },
