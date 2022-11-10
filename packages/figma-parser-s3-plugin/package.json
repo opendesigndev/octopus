@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/figma-parser-s3-plugin",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "description": "Figma Parser S3 plugin",
   "license": "Apache-2.0",
   "scripts": {

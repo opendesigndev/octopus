@@ -46,7 +46,7 @@ export class Renditions {
       }
     })
 
-    const { cached, noncached } = (await this.cacher?.renditions(ids)) ?? { cached: [], noncached: ids }
+    const { cached, noncached } = (await this.cacher?.renditions?.(ids)) ?? { cached: [], noncached: ids }
     const cachedFills = this._getCachedRenditions(cached)
     const requestedFills = await this._requestRenditions(noncached)
     const reorderedIds = [...cached, ...noncached]
