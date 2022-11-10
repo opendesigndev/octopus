@@ -2,16 +2,10 @@ import os from 'os'
 import path from 'path'
 
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
-import {
-  getOctopusFileName,
-  getPreviewFileName,
-  getSourceFileName,
-  IMAGES_DIR_NAME,
-  IMAGE_EXTNAME,
-  MANIFEST_NAME,
-} from '../../../utils/exporter'
+import { MANIFEST_NAME } from '../../../utils/const'
 import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
@@ -25,6 +19,21 @@ import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/ut
 type LocalExporterOptions = {
   /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */
   path: string
+}
+
+export const IMAGES_DIR_NAME = 'images'
+export const IMAGE_EXTNAME = '.png'
+
+export function getOctopusFileName(id: string): string {
+  return `octopus-${kebabCase(id)}.json`
+}
+
+export function getPreviewFileName(id: string): string {
+  return `preview-${kebabCase(id)}${IMAGE_EXTNAME}`
+}
+
+export function getSourceFileName(id: string): string {
+  return `source-${kebabCase(id)}.json`
 }
 
 /**

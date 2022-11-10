@@ -1,22 +1,22 @@
 {
-  "id": "2-3",
+  "id": "375-17",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.19",
   "dimensions": {
-    "width": 800,
+    "width": 500,
     "height": 200
   },
   "content": {
-    "id": "2-3-Background",
-    "name": "Text Frame ",
+    "id": "375-17-Background",
+    "name": "bug-text-emoji",
     "type": "MASK_GROUP",
     "visible": true,
     "opacity": 1,
     "blendMode": "PASS_THROUGH",
     "maskBasis": "BODY_EMBED",
     "mask": {
-      "id": "2-3-BackgroundMask",
-      "name": "Text Frame ",
+      "id": "375-17-BackgroundMask",
+      "name": "bug-text-emoji",
       "type": "SHAPE",
       "visible": true,
       "opacity": 1,
@@ -44,7 +44,7 @@
           ],
           "rectangle": {
             "x0": 0,
-            "x1": 800,
+            "x1": 500,
             "y0": 0,
             "y1": 200
           }
@@ -76,8 +76,8 @@
     ],
     "layers": [
       {
-        "id": "2-4",
-        "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "id": "375-16",
+        "name": "Emoji",
         "type": "TEXT",
         "visible": true,
         "opacity": 1,
@@ -87,43 +87,78 @@
           0,
           0,
           1,
-          25,
-          25
+          114,
+          76
         ],
         "effects": [],
         "text": {
-          "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
+          "value": "👍 Emojito 🤣",
           "defaultStyle": {
             "font": {
-              "postScriptName": "TimesNewRomanPSMT",
-              "family": "Times New Roman"
+              "postScriptName": "Urbanist-SemiBold",
+              "family": "Urbanist"
             },
-            "fontSize": 20,
-            "lineHeight": 0,
-            "letterSpacing": 0,
+            "fontSize": 36,
+            "lineHeight": 46,
+            "letterSpacing": 0.36,
             "fills": [
               {
                 "type": "COLOR",
                 "visible": true,
                 "blendMode": "NORMAL",
                 "color": {
-                  "r": 0,
-                  "g": 0,
-                  "b": 0,
+                  "r": 0.098,
+                  "g": 0.1333,
+                  "b": 0.3216,
                   "a": 1
                 }
               }
             ],
             "strokes": []
           },
-          "styles": [],
+          "styles": [
+            {
+              "style": {
+                "font": {
+                  "postScriptName": "ArialMT",
+                  "family": "Arial"
+                },
+                "fontSize": 36,
+                "lineHeight": 46,
+                "letterSpacing": 0.36
+              },
+              "ranges": [
+                {
+                  "from": 0,
+                  "to": 1
+                }
+              ]
+            },
+            {
+              "style": {
+                "font": {
+                  "postScriptName": "Arial-BoldMT",
+                  "family": "Arial"
+                },
+                "fontSize": 36,
+                "lineHeight": 46,
+                "letterSpacing": 0.36
+              },
+              "ranges": [
+                {
+                  "from": 1,
+                  "to": 11
+                }
+              ]
+            }
+          ],
           "horizontalAlign": "LEFT",
           "verticalAlign": "TOP",
           "frame": {
-            "mode": "FIXED",
+            "mode": "AUTO_WIDTH",
             "size": {
-              "width": 750,
-              "height": 150
+              "width": 229,
+              "height": 50
             }
           },
           "baselinePolicy": "OFFSET_ASCENDER"
