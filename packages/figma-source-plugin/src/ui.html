@@ -3,7 +3,6 @@
 <button id="copy" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
   Copy to clipboard
 </button>
-<button id="cancel">Cancel</button>
 <br />
 <p>Selection count:</p>
 <p id="count">init</p>
@@ -35,9 +34,9 @@
     parent.postMessage({ pluginMessage: { action: 'copy', data } }, '*')
   }
 
-  document.getElementById('cancel').onclick = () => {
-    parent.postMessage({ pluginMessage: { action: 'close' } }, '*')
-  }
+  // document.getElementById('cancel').onclick = () => {
+  //   parent.postMessage({ pluginMessage: { action: 'close' } }, '*')
+  // }
 
   window.onfocus = () => {
     console.info('ON FOCUS')
@@ -57,7 +56,7 @@
 
     if (message.action === 'selectionchange') {
       const source = message.data
-      const selectionLength = source?.content?.length ?? 0
+      const selectionLength = source?.context?.selectedContent?.length ?? 0
 
       const countElem = document.getElementById('count')
       countElem.innerText = selectionLength

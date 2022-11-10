@@ -12,6 +12,7 @@ import type { NodeFactories } from './services/general/platforms'
 export { LocalExporter } from './services/exporters/node/local-exporter'
 export { DebugExporter } from './services/exporters/node/debug-exporter'
 export { SourceApiReader } from './services/readers/source-api-reader'
+export { SourcePluginReader } from './services/readers/source-plugin-reader'
 
 export type { SourceDesign }
 

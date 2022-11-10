@@ -67,6 +67,6 @@ handleEvent('copy', (data) => {
   // })
 })
 
-handleEvent('close', () => {
-  figma.closePlugin()
-})
+// handleEvent('close', () => {
+//   figma.closePlugin()
+// })
