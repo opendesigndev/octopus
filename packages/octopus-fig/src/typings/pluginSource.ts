@@ -8,7 +8,8 @@ export type PluginSource = {
 export type PluginSourceContext = {
   document?: PluginSourceDocument
   currentPage?: PluginSourceCurrentPage
-  selectedContent?: unknown[] // TODO
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  selectedContent?: any[] // TODO
 }
 
 export type PluginSourceDocument = {

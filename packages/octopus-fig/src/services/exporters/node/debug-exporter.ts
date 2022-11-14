@@ -90,7 +90,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   finalizeExport(): void {
-    this.emit('octopus:manifest', this._manifestPath)
+    if (this._manifestPath) this.emit('octopus:manifest', this._manifestPath)
     this._completed.resolve()
   }
 

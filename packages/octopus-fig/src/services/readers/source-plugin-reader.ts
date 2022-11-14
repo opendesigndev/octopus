@@ -12,7 +12,7 @@ export type SourcePluginReaderOptions = {
  * Reader that downloads given design from Figma API and provide them through `EventEmitter` calls.
  */
 export class SourcePluginReader {
-  private _parser: DesignEmitter
+  private _pluginSource: PluginSource
 
   /**
    * Downloads given Figma design and provide them through `EventEmitter` calls.
@@ -20,7 +20,7 @@ export class SourcePluginReader {
    * @param {SourcePluginReaderOptions} options
    */
   constructor(options: SourcePluginReaderOptions) {
-    this._parser = new DesignEmitter(options.pluginSource)
+    this._pluginSource = options.pluginSource
   }
 
   /**
@@ -28,6 +28,6 @@ export class SourcePluginReader {
    * @returns {EventEmitter} returns `EventEmitter` providing source data to the OctopusFigConverter
    */
   parse(): EventEmitter {
-    return this._parser
+    return new DesignEmitter(this._pluginSource)
   }
 }

@@ -7,8 +7,8 @@ import { DEFAULTS } from './defaults'
 import type { SourceComponent } from '../entities/source/source-component'
 import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
 import type { Octopus } from '../typings/octopus'
-import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
-import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source'
+import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule, RawColor } from '../typings/raw'
+import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)
@@ -50,6 +50,13 @@ export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PA
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
   return 'ARTBOARD'
+}
+
+export function getColorFor(color: RawColor | undefined): SourceColor | undefined {
+  const { r, g, b, a: rawA } = color ?? {}
+  if (r === undefined || g === undefined || b === undefined) return undefined
+  const a = rawA === undefined ? 1 : rawA
+  return { r, g, b, a }
 }
 
 export function getTopComponentTransform(sourceLayer: SourceLayerFrame): number[] | undefined {

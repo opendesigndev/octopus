@@ -1,19 +1,11 @@
 import { round } from '@opendesign/octopus-common/dist/utils/math'
 
-import { getTransformFor } from '../../utils/source'
+import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { Octopus } from '../../typings/octopus'
-import type {
-  RawBlendMode,
-  RawColor,
-  RawGradientType,
-  RawImageFilters,
-  RawPaint,
-  RawScaleMode,
-  RawStop,
-} from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
+import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
+import type { SourceColor, SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
   rawValue: RawPaint
@@ -38,8 +30,8 @@ export class SourcePaint extends SourceEntity {
     return round(this._rawValue.opacity ?? 1)
   }
 
-  get color(): RawColor | undefined {
-    return this._rawValue.color
+  get color(): SourceColor | undefined {
+    return getColorFor(this._rawValue.color)
   }
 
   get blendMode(): RawBlendMode | undefined {

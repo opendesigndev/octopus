@@ -1,7 +1,7 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls, sleep } from '@opendesign/octopus-common/dist/utils/async'
 import { EventEmitter } from 'eventemitter3'
 
-import { convertToEvents } from './source-event-convertor'
+import { convertToEvents } from './event-convertor'
 
 import type { PluginSource } from '../../../typings/pluginSource'
 import type { ResolvedContent } from './types'
@@ -20,6 +20,8 @@ export class DesignEmitter extends EventEmitter {
   }
 
   private async _emitOnReady() {
+    await sleep(100) // BOH delay emitting till convertor is ready
+
     const eventData = convertToEvents(this._eventSourceData)
     for (const e of eventData) {
       if (e.event === 'ready:design') {

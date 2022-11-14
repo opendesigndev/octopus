@@ -167,9 +167,10 @@ export class DesignConverter {
     const raw = design.design as unknown as RawDesign
     const sourceDesign = new SourceDesign({ designId, raw })
 
-    this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
-
-    this._exporter?.exportRawDesign?.(sourceDesign.raw)
+    if (sourceDesign.raw) {
+      this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
+      this._exporter?.exportRawDesign?.(sourceDesign.raw)
+    } // skip this for partial converts (FigmaPlugin source)
 
     /** Init partial update */
     this._exportManifest()
@@ -197,8 +198,9 @@ export class DesignConverter {
     const rawFrame = node.document as RawLayerFrame
     const sourcePathPromise = this._exporter?.exportRawComponent?.(rawFrame, nodeId)
 
-    const fillIds = Object.keys(fills)
+    const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
+
     const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)

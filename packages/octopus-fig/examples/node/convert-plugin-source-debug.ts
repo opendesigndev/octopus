@@ -3,6 +3,7 @@ import path from 'path'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
+import kebabCase from 'lodash/kebabCase'
 
 import { createConverter, DebugExporter, SourcePluginReader } from '../../src/index-node'
 import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files'
@@ -34,13 +35,9 @@ export async function convertDesign({
   const { id: documentId, name: documentName } = pluginSource?.context?.document ?? {}
   if (!pluginSource || !documentId || !documentName) return // TODO log error
 
-  const designId = `${documentId}-${documentName}`
+  const designId = kebabCase(`${documentId}-${documentName}`)
   const outputDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
-
-  // exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))
-  // exporter.on('source:image', (imagePath: string) => console.info(`${chalk.yellow(`Image:`)} file://${imagePath}`))
-  // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
   exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
     const status = result.error ? `❌ ${result.error}` : '✅'
@@ -62,7 +59,7 @@ export async function convertDesign({
   })
 
   const reader = new SourcePluginReader({ pluginSource })
-  await converter.convertDesign({ designEmitter: reader.parse(), exporter, skipReturn: true })
+  await converter.convertDesign({ designEmitter: reader.parse(), exporter })
   await exporter.completed()
 }
 
