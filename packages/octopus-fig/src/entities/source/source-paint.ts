@@ -60,6 +60,10 @@ export class SourcePaint extends SourceEntity {
     return [p1, p2, p3] as [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']]
   }
 
+  get gradientTransform(): SourceTransform | null {
+    return getTransformFor(this._rawValue.gradientTransform)
+  }
+
   get imageRef(): string | undefined {
     return this._rawValue.imageRef
   }

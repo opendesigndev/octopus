@@ -39,6 +39,8 @@ export async function convertDesign({
   const outputDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
+  console.info(`Converting design: ${designId}\n`)
+
   exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
@@ -49,13 +51,13 @@ export async function convertDesign({
         ? chalk.red(render.error.message)
         : `file://${render.value} ${displayPerf(render.time)}`
 
-    console.info(`\n${chalk.yellow(role)} ${result.id} ${status}`)
+    console.info(`${chalk.yellow(role)} ${result.id} ${status}`)
     console.info(`  ${chalk.cyan(`Octopus:`)} file://${result.octopusPath} ${displayPerf(result.time)}`)
-    console.info(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
+    console.info(`  ${chalk.cyan(`Render:`)} ${renderPath}\n`)
   })
 
   exporter.on('octopus:manifest', (manifestPath: string) => {
-    console.info(`\n${chalk.yellow(`Manifest:`)} file://${manifestPath}\n\n`)
+    console.info(`${chalk.yellow(`Manifest:`)} file://${manifestPath}\n\n`)
   })
 
   const reader = new SourcePluginReader({ pluginSource })

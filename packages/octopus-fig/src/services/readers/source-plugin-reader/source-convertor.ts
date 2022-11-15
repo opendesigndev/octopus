@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import isArray from 'lodash/isArray'
+import isNumber from 'lodash/isNumber'
 
 import type { RawLayer } from '../../../typings/raw'
 
@@ -8,6 +9,19 @@ function fixGeometry(geometry: any): any {
     geometry.path = geometry.data
     delete geometry.data
   }
+}
+
+function fixChildTransform(layer: any, subTx: number, subTy: number): any {
+  const [[a, c, tx], [b, d, ty]] = layer.relativeTransform ?? [[], []]
+  if (!isNumber(tx) || !isNumber(ty)) return layer
+  layer.relativeTransform = [
+    [a, c, tx - subTx],
+    [b, d, ty - subTy],
+  ]
+  if (isArray(layer.children)) {
+    layer.children.forEach((child: unknown) => fixChildTransform(child, subTx, subTy))
+  }
+  return layer
 }
 
 export function convert(raw: any): RawLayer {
@@ -61,8 +75,16 @@ export function convert(raw: any): RawLayer {
     ]
   }
 
+  // GROUP transform fix
+  if (type === 'GROUP') {
+    const [[_a, _c, tx], [_b, _d, ty]] = raw.relativeTransform
+    if (isArray(raw.children) && isNumber(tx) && isNumber(ty)) {
+      raw.children.forEach((child: unknown) => fixChildTransform(child, tx, ty))
+    }
+  }
+
   if (isArray(raw.children)) {
-    raw.children = raw.children.map((child: unknown) => convert(child))
+    raw.children.forEach((child: unknown) => convert(child))
   }
 
   return raw
