@@ -1,18 +1,17 @@
 import { promises as fsp } from 'fs'
 
-import AWS from 'aws-sdk'
-
 import type { S3Plugin } from '../..'
+import type AWS from 'aws-sdk'
 
 type S3Options = {
-  accessKeyId: string
-  secretAccessKey: string
-  region: string
   verbose?: boolean
+  buckets?: {
+    upload: string
+    download: string
+  }
   acl?: string
-  uploadBucket?: string
-  downloadBucket?: string
   s3Plugin: S3Plugin
+  s3: AWS.S3
 }
 
 type UploadOptions = {
@@ -37,55 +36,28 @@ type DownloadOptions = {
 export default class S3 {
   _s3: AWS.S3
   _verbose: boolean
-  _accessKeyId: string
-  _secretAccessKey: string
-  _region: string
+  _acl: string
   _s3Plugin: S3Plugin
-  _acl?: string
-  _uploadBucket?: string
-  _downloadBucket?: string
+  _buckets?: {
+    upload: string
+    download: string
+  }
 
   constructor(options: S3Options) {
-    const {
-      accessKeyId,
-      secretAccessKey,
-      region = 'eu-west-1',
-      verbose = false,
-      acl = 'public-read',
-      uploadBucket,
-      downloadBucket,
-      s3Plugin,
-    } = Object(options) as S3Options
+    const { verbose = false, buckets, acl = 'public-read', s3Plugin, s3 } = Object(options) as S3Options
 
     this._s3Plugin = s3Plugin
-    this._accessKeyId = accessKeyId
-    this._secretAccessKey = secretAccessKey
-    this._region = region
+    this._buckets = buckets
     this._acl = acl
-    this._uploadBucket = uploadBucket
-    this._downloadBucket = downloadBucket
-
+    this._s3 = s3
     this._verbose = verbose
     if (this._verbose) {
       this._s3Plugin.logger.info('S3 instance has been created')
     }
-    this._s3 = new AWS.S3({ accessKeyId, secretAccessKey, region })
-  }
-
-  get options(): Omit<S3Options, 's3Plugin'> {
-    return {
-      accessKeyId: this._accessKeyId,
-      secretAccessKey: this._secretAccessKey,
-      region: this._region,
-      verbose: this._verbose,
-      acl: this._acl,
-      uploadBucket: this._uploadBucket,
-      downloadBucket: this._downloadBucket,
-    }
   }
 
   upload({
-    bucket = this._uploadBucket,
+    bucket = this._buckets?.upload,
     key,
     body,
     ACL = this._acl,
@@ -109,7 +81,7 @@ export default class S3 {
   }
 
   async uploadFile({
-    bucket = this._uploadBucket,
+    bucket = this._buckets?.upload,
     key,
     filePath,
     ACL = this._acl,
@@ -118,7 +90,7 @@ export default class S3 {
     return this.upload({ bucket, key, body, ACL })
   }
 
-  async downloadRaw({ bucket = this._downloadBucket, key }: DownloadOptions): Promise<AWS.S3.GetObjectOutput> {
+  async downloadRaw({ bucket = this._buckets?.download, key }: DownloadOptions): Promise<AWS.S3.GetObjectOutput> {
     if (!bucket) {
       throw new Error('Download bucket have not been provided!')
     }
@@ -137,7 +109,7 @@ export default class S3 {
     })
   }
 
-  async download({ bucket = this._downloadBucket, key }: DownloadOptions): Promise<string | Buffer> {
+  async download({ bucket = this._buckets?.download, key }: DownloadOptions): Promise<string | Buffer> {
     return this.downloadRaw({ bucket, key }).then((data: AWS.S3.GetObjectOutput) => data.Body as string | Buffer)
   }
 

@@ -16,7 +16,7 @@ const converter = createConverter()
 class PathLocator implements IPathLocator {
   _prefix: string
   constructor() {
-    this._prefix = 'test'
+    this._prefix = 'qweqwe'
   }
   async getCacheMap(): Promise<string> {
     return `${this._prefix}/cache-map.json`
@@ -43,17 +43,15 @@ async function convertDesign() {
   const testDir = path.join(os.tmpdir(), uuidv4())
 
   const cacherOptions = {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
-    region: 'us-east-1',
     verbose: true,
     pathLocator: new PathLocator(),
-    uploadParallels: 5,
-    downloadParallels: 5,
-    uploadBucket: 'your-bucket-name',
-    downloadBucket: 'your-bucket-name',
+    parallels: { upload: 5, download: 5 },
+    buckets: { upload: 'test-bucket', download: 'test-bucket' },
+    // s3: new AWS.S3(/** */),
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const cacher = new S3Plugin(cacherOptions)
 
   const readerOptions = {
@@ -75,6 +73,9 @@ async function convertDesign() {
     parallelRequests: 5,
     cacher: cacher.cacher,
   }
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const reader = new SourceApiReader(readerOptions)
 
   const exporter = new LocalExporter({ path: testDir })
