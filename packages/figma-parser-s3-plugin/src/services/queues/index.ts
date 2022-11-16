@@ -2,7 +2,7 @@ import { Queue } from '../../utils/queue'
 
 import type { S3Plugin } from '../..'
 import type { S3ServiceDownloadOptions, S3ServiceUploadOptions } from '../../types'
-import type * as AWS from 'aws-sdk'
+import type AWS from 'aws-sdk'
 
 type QueuesOptions = {
   s3Plugin: S3Plugin

@@ -4,29 +4,24 @@ import S3 from './services/s3'
 
 import type { Logger, S3Service } from './types'
 import type { IPathLocator } from './types/path-locator'
+import type AWS from 'aws-sdk'
 
 type S3CacherWithInstanceOptions = {
   logger?: Logger
-  s3service: S3Service
   verbose?: boolean
   pathLocator: IPathLocator
-  uploadParallels: number
-  downloadParallels: number
-}
-type S3CacherWithCredentialsOptions = {
-  logger?: Logger
-  accessKeyId: string
-  secretAccessKey: string
-  region: string
-  verbose?: boolean
-  pathLocator: IPathLocator
-  uploadParallels: number
-  downloadParallels: number
-  uploadBucket?: string
-  downloadBucket?: string
+  parallels?: {
+    upload: number
+    download: number
+  }
+  buckets: {
+    upload: string
+    download: string
+  }
   acl?: string
+  s3: AWS.S3
 }
-export type S3CacherOptions = S3CacherWithInstanceOptions | S3CacherWithCredentialsOptions
+export type S3CacherOptions = S3CacherWithInstanceOptions
 
 export type { IPathLocator }
 
@@ -42,12 +37,9 @@ export class S3Plugin {
 
   constructor(options: S3CacherOptions) {
     this._logger = options.logger ?? this._createLogger()
-    this._s3 = 's3service' in options ? options.s3service : this._createS3(options)
+    this._s3 = this._createS3(options)
     this._pathLocator = options.pathLocator
-    this._parallels = {
-      upload: options.uploadParallels ?? 5,
-      download: options.downloadParallels ?? 5,
-    }
+    this._parallels = options.parallels ?? { upload: 5, download: 5 }
     this._cacher = new S3Cacher({
       s3Plugin: this,
     })
@@ -65,16 +57,13 @@ export class S3Plugin {
     return createLogger()
   }
 
-  private _createS3(options: S3CacherWithCredentialsOptions) {
+  private _createS3(options: S3CacherOptions) {
     return new S3({
-      accessKeyId: options.accessKeyId,
-      secretAccessKey: options.secretAccessKey,
-      region: options.region,
       verbose: options.verbose,
       s3Plugin: this,
-      uploadBucket: options.uploadBucket,
-      downloadBucket: options.downloadBucket,
       acl: options.acl,
+      buckets: options.buckets,
+      s3: options.s3,
     })
   }
 }
