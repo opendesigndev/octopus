@@ -8,8 +8,12 @@ export type EventFrame = {
   event: 'ready:artboard' | 'ready:component' | 'ready:library'
   data: ResolvedFrame
 }
+export type EventFill = {
+  event: 'ready:fill'
+  data: ResolvedFill
+}
 
-export type Event = EventDesign | EventFrame
+export type Event = EventDesign | EventFrame | EventFill
 
 export type ResolvedContent = {
   artboards: ResolvedFrame[]
@@ -26,4 +30,10 @@ export type ResolvedFrame = {
   designId: string
   nodeId: string
   node: { document: RawLayer }
+}
+
+export type ResolvedFill = {
+  designId: string
+  ref: string
+  buffer: Buffer
 }

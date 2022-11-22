@@ -5,11 +5,14 @@ export type PluginSource = {
   context?: PluginSourceContext
 }
 
+type ImageMap = { [key: string]: string | undefined }
+
 export type PluginSourceContext = {
   document?: PluginSourceDocument
   currentPage?: PluginSourceCurrentPage
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selectedContent?: any[] // TODO
+  imageMap?: ImageMap
 }
 
 export type PluginSourceDocument = {
