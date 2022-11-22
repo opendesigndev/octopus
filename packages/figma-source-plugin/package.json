@@ -12,6 +12,7 @@
     "watch": "tsc --watch --noEmit"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
     "clipboard": "2.0.11",
     "lodash": "^4.17.21"
   },

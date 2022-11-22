@@ -1,4 +1,6 @@
 // import Clipboard from 'clipboard'
+import { Buffer } from 'buffer'
+
 import _ from 'lodash' // TODO Remove lodash
 
 import { version } from '../package.json'
@@ -8,20 +10,25 @@ figma.showUI(__html__, { height: 240, width: 300 })
 
 // console.log('THIS', this)
 
-const getSource = () => {
-  const selectedContent = figma.currentPage.selection.map((node) => nodeToObject(node))
+type ImageMap = { [key: string]: string | undefined }
+let imageMap: ImageMap = {}
+
+const getSource = async () => {
+  imageMap = {} // clear imageMap
+  const selectedPromises = figma.currentPage.selection.map((node) => nodeToObject(node))
+  const selectedContent = await Promise.all(selectedPromises)
 
   if (!selectedContent.length) return null
 
   const document = { id: figma.root.id, name: figma.root.name }
   const currentPage = { id: figma.currentPage.id, name: figma.currentPage.name }
   const timestamp = new Date().toISOString()
-  const context = { document, currentPage, selectedContent }
+  const context = { document, currentPage, selectedContent, imageMap }
 
   return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
 }
 
-const nodeToObject = (node) => {
+const nodeToObject = async (node) => {
   const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
   const blacklist = ['parent', 'children', 'removed']
 
@@ -34,12 +41,23 @@ const nodeToObject = (node) => {
       if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
     }
   }
-  if (node.children) obj.children = node.children.map((child) => nodeToObject(child))
-  if (node.masterComponent) obj.masterComponent = nodeToObject(node.masterComponent)
+  if (node.fills?.length > 0) {
+    for (const paint of node.fills) {
+      if (paint.type === 'IMAGE') {
+        const image = figma.getImageByHash(paint.imageHash)
+        if (!imageMap[image.hash]) {
+          const bytes = await image.getBytesAsync()
+          imageMap[image.hash] = Buffer.from(bytes).toString('base64')
+        }
+      }
+    }
+  }
+  if (node.children) obj.children = await Promise.all(node.children.map((child) => nodeToObject(child)))
+  if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent)
   return obj
 }
 
-const sendSelectionchange = () => dispatch('selectionchange', getSource())
+const sendSelectionchange = async () => dispatch('selectionchange', await getSource())
 figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
