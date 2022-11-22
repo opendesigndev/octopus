@@ -1,7 +1,7 @@
 {
   "id": "182-42",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.22",
   "dimensions": {
     "width": 4382,
     "height": 3719
@@ -1147,7 +1147,41 @@
             }
           },
           "fillRule": "NON_ZERO",
-          "fills": [],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                }
+              },
+              "positioning": {
+                "layout": "TILE",
+                "origin": "LAYER",
+                "transform": [
+                  576,
+                  0,
+                  0,
+                  810,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
           "strokes": []
         }
       }
