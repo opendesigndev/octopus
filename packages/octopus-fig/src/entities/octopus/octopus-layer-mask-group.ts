@@ -61,6 +61,7 @@ export class OctopusLayerMaskGroup {
     rawLayer.type = 'RECTANGLE' as const
     delete rawLayer.opacity
     delete rawLayer.relativeTransform
+    delete rawLayer.rectangleCornerRadii // Gitlab Issue #17
     const sourceLayer = createSourceLayer({ layer: rawLayer, parent: frame.parent })
     if (!sourceLayer) return null
     return createOctopusLayer({ layer: sourceLayer, parent })

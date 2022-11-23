@@ -94,10 +94,11 @@ export class OctopusPath {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
+    const geometry = this._geometry(sourceLayer) || undefined
     const paths = sourceLayer.children
       .filter((sourceLayer): sourceLayer is SourceLayerShape => sourceLayer.type === 'SHAPE') // https://gitlab.avcd.cz/opendesign/octopus-converters/-/issues/9
       .map((sourceLayer) => this._getPath({ sourceLayer, isTopLayer: false }))
-    return { type: 'COMPOUND', op, visible, transform, paths }
+    return { type: 'COMPOUND', op, visible, transform, paths, geometry }
   }
 
   private _getPath({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathLike'] {

@@ -24,6 +24,16 @@ function fixChildTransform(layer: any, subTx: number, subTy: number): any {
   return layer
 }
 
+function fixFill(fill: any): any {
+  if (!fill.imageRef && fill.imageHash) {
+    fill.imageRef = fill.imageHash
+    delete fill.imageHash
+  }
+  if (fill.scaleMode === 'CROP') {
+    fill.scaleMode = 'STRETCH'
+  }
+}
+
 export function convert(raw: any): RawLayer {
   const { type } = raw
 
@@ -37,6 +47,10 @@ export function convert(raw: any): RawLayer {
   const { fillGeometry, strokeGeometry } = raw
   if (isArray(fillGeometry)) fillGeometry.forEach(fixGeometry)
   if (isArray(strokeGeometry)) strokeGeometry.forEach(fixGeometry)
+
+  // FILLS fix
+  const { fills } = raw
+  if (isArray(fills)) fills.forEach(fixFill)
 
   // CornerRadii fix
   const { cornerRadius, rectangleCornerRadii, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius } = raw
@@ -83,9 +97,6 @@ export function convert(raw: any): RawLayer {
     }
   }
 
-  if (isArray(raw.children)) {
-    raw.children.forEach((child: unknown) => convert(child))
-  }
-
+  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child))
   return raw
 }

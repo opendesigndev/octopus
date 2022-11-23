@@ -20,14 +20,13 @@ export class DesignEmitter extends EventEmitter {
   }
 
   private async _emitOnReady() {
-    await sleep(100) // BOH delay emitting till convertor is ready
-
     const eventData = convertToEvents(this._eventSourceData)
     for (const e of eventData) {
       if (e.event === 'ready:design') {
         e.data.content = this._finalizeDesign.promise
       }
 
+      await sleep(10)
       this.emit(e.event, e.data)
     }
 
