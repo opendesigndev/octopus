@@ -12,7 +12,9 @@ export type PluginSourceContext = {
   currentPage?: PluginSourceCurrentPage
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selectedContent?: any[] // TODO
-  imageMap?: ImageMap
+  assets?: {
+    images?: ImageMap
+  }
 }
 
 export type PluginSourceDocument = {
