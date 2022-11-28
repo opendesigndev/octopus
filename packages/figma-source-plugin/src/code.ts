@@ -4,7 +4,10 @@ import { Buffer } from 'buffer'
 import { version } from '../package.json'
 import { dispatch, handleEvent } from './codeMessageHandler'
 
-figma.showUI(__html__, { height: 240, width: 300 })
+figma.showUI(__html__, { height: 360, width: 300 })
+
+// skip invisible nodes for faster performance
+figma.skipInvisibleInstanceChildren = true
 
 // console.log('THIS', this)
 
@@ -73,7 +76,7 @@ handleEvent('COPY_PRESSED', async () => {
   dispatch('COPY_RESPONSE', stringify(source))
 })
 
-handleEvent('CLOSE', () => {
-  // console.info('HANDLE CLOSE') // TODO
-  figma.closePlugin()
+handleEvent('CLOSE', (data) => {
+  const message = typeof data === 'string' ? data : undefined
+  figma.closePlugin(message)
 })

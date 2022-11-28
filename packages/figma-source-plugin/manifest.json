@@ -1,5 +1,5 @@
 {
-  "name": "figma-plugin",
+  "name": "Squid",
   "id": "1167075253977114041",
   "api": "1.0.0",
   "main": "dist/code.js",

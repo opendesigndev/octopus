@@ -1,6 +1,6 @@
-<h2>Octopus Plugin</h2>
+<img src="./logo.png" width="300" height="140"/>
 
-<button id="copy">Copy</button>
+<button id="copy">Copy to clipboard</button>
 <button id="hidden" hidden=true data-clipboard-text="">HIDDEN</button>
 <br />
 <p>Selection count: <b id="count">init</b></p>
@@ -31,18 +31,17 @@
   clipboard.on('success', async (e) => {
     console.info('CLIPBOARD SUCCESS', e) // TODO
     await sleep(100) // need to sleep a while to make sure the clipboard is updated before closing
-    parent.postMessage({ pluginMessage: { action: 'CLOSE' } }, '*')
+    parent.postMessage({ pluginMessage: { action: 'CLOSE', data: 'Copy was successful, paste into Squid' } }, '*')
   })
   clipboard.on('error', async (e) => {
     console.info('CLIPBOARD ERROR', e) // TODO
-    parent.postMessage({ pluginMessage: { action: 'CLOSE' } }, '*')
+    parent.postMessage({ pluginMessage: { action: 'CLOSE', data: 'Copy was unsuccessful' } }, '*')
   })
 
 
 
   const copyElem = document.getElementById('copy')
   copyElem.onclick = async () => {
-    // console.info('HERE Copying...') // TODO
     copyElem.innerText = 'Copying...'
     copyElem.setAttribute('disabled', true)
     await sleep(20) // need to sleep a while to update the copy button
