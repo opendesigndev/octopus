@@ -2,7 +2,9 @@
 import isArray from 'lodash/isArray'
 import isNumber from 'lodash/isNumber'
 
-import type { RawLayer } from '../../../typings/raw'
+import type { StyledTextSegment, TextNode } from '../../../figma-plugin-api'
+import type { SourceAssets } from '../../../typings/pluginSource'
+import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
 
 function fixGeometry(geometry: any): any {
   if (geometry && geometry.data && geometry.path === undefined) {
@@ -34,8 +36,38 @@ function fixFill(fill: any): any {
   }
 }
 
-export function convert(raw: any): RawLayer {
-  const { type } = raw
+function fixTextStyle(textNode: TextNode, textStyle: StyledTextSegment): RawTextStyle {
+  const { fontName, fontWeight, fontSize, textCase, textDecoration, lineHeight } = textStyle
+  const { textAlignHorizontal, textAlignVertical, listSpacing, textAutoResize, paragraphSpacing, paragraphIndent } =
+    textNode
+  const fontFamily = fontName.family
+  const italic = fontName.style.includes('Italic')
+  const letterSpacing = textStyle.letterSpacing.value
+  const fills = textStyle.fills as RawPaint[]
+  const lineHeightPx = lineHeight.unit === 'PIXELS' ? lineHeight.value : undefined
+  const lineHeightPercent = lineHeight.unit === 'PERCENT' ? lineHeight.value : undefined
+  return {
+    fontFamily,
+    fontWeight,
+    fontSize,
+    textAlignHorizontal,
+    textAlignVertical,
+    letterSpacing,
+    italic,
+    textCase,
+    textDecoration,
+    listSpacing,
+    textAutoResize,
+    paragraphSpacing,
+    paragraphIndent,
+    lineHeightPx,
+    lineHeightPercent,
+    fills,
+  }
+}
+
+export function convert(raw: any, assets: SourceAssets = {}): RawLayer {
+  const { id, type } = raw
 
   // missing Size fix
   const { size, width, height } = raw
@@ -97,6 +129,16 @@ export function convert(raw: any): RawLayer {
     }
   }
 
-  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child))
+  // TEXT transform fix
+  if (type === 'TEXT' && id) {
+    const styles = assets.styledTextSegments?.[id] ?? []
+    if (styles.length > 0) {
+      raw.style = fixTextStyle(raw, styles[0])
+    }
+
+    // TODO HERE HERE
+  }
+
+  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child, assets))
   return raw
 }

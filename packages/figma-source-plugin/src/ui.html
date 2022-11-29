@@ -1,7 +1,7 @@
-<img src="./logo.png" width="300" height="140"/>
+<img src="./logo.png" width="300" height="140" />
 
 <button id="copy">Copy to clipboard</button>
-<button id="hidden" hidden=true data-clipboard-text="">HIDDEN</button>
+<button id="hidden" hidden="true" data-clipboard-text="">HIDDEN</button>
 <br />
 <p>Selection count: <b id="count">init</b></p>
 <code id="text">init</code>
@@ -23,8 +23,13 @@
   // 		}
   // 	}
   // };
-  function sleep(ms) { return new Promise((resolve) => { setTimeout(() => { resolve() }, ms) }) }
-
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve()
+      }, ms)
+    })
+  }
 
   const clipboard = new ClipboardJS('#hidden')
   // console.info('CLIPBOARD', clipboard) // TODO
@@ -37,8 +42,6 @@
     console.info('CLIPBOARD ERROR', e) // TODO
     parent.postMessage({ pluginMessage: { action: 'CLOSE', data: 'Copy was unsuccessful' } }, '*')
   })
-
-
 
   const copyElem = document.getElementById('copy')
   copyElem.onclick = async () => {
@@ -60,8 +63,8 @@
     if (message.action === 'SELECTION_CHANGE') {
       const source = message.data
       const selectionLength = source?.context?.selectedContent?.length ?? 0
-      const selectionNames = selectionLength > 0 ? source?.context?.selectedContent?.map(c => c.name).join(`\n`) : ''
-      
+      const selectionNames = selectionLength > 0 ? source?.context?.selectedContent?.map((c) => c.name).join(`\n`) : ''
+
       const countElem = document.getElementById('count')
       countElem.innerText = selectionLength
 

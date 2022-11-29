@@ -36,7 +36,7 @@ export function convertToEvents(source: PluginSource): Event[] {
         designId,
         nodeId,
         node: {
-          document: convert(content),
+          document: convert(content, assets),
         },
       },
     })

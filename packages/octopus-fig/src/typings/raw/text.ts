@@ -4,7 +4,7 @@ export type RawTextAlignHorizontal = 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED'
 
 export type RawTextAlignVertical = 'TOP' | 'CENTER' | 'BOTTOM'
 
-export type RawTextAutoResize = 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT'
+export type RawTextAutoResize = 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT' | 'TRUNCATE'
 
 export type RawTextCase = 'ORIGINAL' | 'UPPER' | 'LOWER' | 'TITLE' | 'SMALL_CAPS' | 'SMALL_CAPS_FORCED'
 
