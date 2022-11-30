@@ -1,0 +1,185 @@
+{
+  "id": "pasteboard-1",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.7",
+  "dimensions": {
+    "width": 300,
+    "height": 300
+  },
+  "content": {
+    "id": "pasteboard-1-Background",
+    "type": "MASK_GROUP",
+    "maskBasis": "BODY",
+    "mask": {
+      "id": "pasteboard-1-BackgroundMask",
+      "type": "SHAPE",
+      "visible": false,
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "rectangle": {
+            "x0": 0,
+            "x1": 300,
+            "y0": 0,
+            "y1": 300
+          }
+        },
+        "fills": []
+      }
+    },
+    "layers": [
+      {
+        "id": "2",
+        "name": "Mm",
+        "type": "TEXT",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [
+          {
+            "type": "STROKE",
+            "stroke": {
+              "thickness": 2,
+              "position": "INSIDE",
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 0.112,
+                  "g": 0.2762,
+                  "b": 0.9843,
+                  "a": 1
+                }
+              }
+            },
+            "visible": true,
+            "blendMode": "NORMAL",
+            "basis": "BODY_AND_STROKES"
+          }
+        ],
+        "text": {
+          "value": "Mm",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "ArialMT",
+              "family": "ArialMT",
+              "style": "Regular"
+            },
+            "fontSize": 121.49665,
+            "lineHeight": 145.8,
+            "letterSpacing": 0,
+            "kerning": true,
+            "features": [],
+            "ligatures": "STANDARD",
+            "underline": "NONE",
+            "linethrough": false,
+            "letterCase": "NONE",
+            "fills": [
+              {
+                "type": "COLOR",
+                "color": {
+                  "r": 1,
+                  "g": 0.0628,
+                  "b": 0.0628,
+                  "a": 0.15
+                }
+              }
+            ]
+          },
+          "horizontalAlign": "CENTER",
+          "baselinePolicy": "OFFSET_BEARING",
+          "styles": [],
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            15.8984375,
+            28.05267333984375
+          ],
+          "frame": {
+            "mode": "FIXED",
+            "size": {
+              "width": 269.67,
+              "height": 269.78
+            }
+          }
+        }
+      },
+      {
+        "id": "3",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          71,
+          169
+        ],
+        "visible": true,
+        "blendMode": "NORMAL",
+        "opacity": 1,
+        "effects": [],
+        "shape": {
+          "fillRule": "EVEN_ODD",
+          "path": {
+            "type": "RECTANGLE",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "y0": 0,
+              "x1": 145,
+              "y1": 87
+            },
+            "cornerRadius": 0
+          },
+          "fills": [
+            {
+              "type": "COLOR",
+              "color": {
+                "r": 0.1411,
+                "g": 0,
+                "b": 1,
+                "a": 0.15
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "fill": {
+                "type": "COLOR",
+                "color": {
+                  "r": 1,
+                  "g": 0.1608,
+                  "b": 0.1608,
+                  "a": 1
+                }
+              },
+              "position": "CENTER",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "style": "SOLID",
+              "thickness": 10
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
