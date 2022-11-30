@@ -2,7 +2,7 @@
 import { Buffer } from 'buffer'
 
 import { version } from '../package.json'
-import { dispatch, handleEvent } from './codeMessageHandler'
+import { dispatch, handleEvent } from './code-message-handler'
 
 figma.showUI(__html__, { height: 360, width: 300 })
 
@@ -14,9 +14,6 @@ figma.skipInvisibleInstanceChildren = true
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
 
-type StyledTextSegmentsMap = { [key: string]: StyledTextSegment[] | undefined }
-let styledTextSegmentsMap: StyledTextSegmentsMap = {}
-
 // CONSTANTS
 const FULL_SCAN = true
 const QUICK_SCAN = false
@@ -25,7 +22,6 @@ const stringify = (val) => JSON.stringify(val, null, 2)
 
 const getSource = async (isFullScan = false) => {
   imageMap = {} // clear imageMap
-  styledTextSegmentsMap = {} // clear styledTextSegmentsMap
 
   const selectedPromises = figma.currentPage.selection.map((node) => nodeToObject(node, isFullScan))
   const selectedContent = await Promise.all(selectedPromises)
@@ -35,7 +31,7 @@ const getSource = async (isFullScan = false) => {
   const document = { id: figma.root.id, name: figma.root.name }
   const currentPage = { id: figma.currentPage.id, name: figma.currentPage.name }
   const timestamp = new Date().toISOString()
-  const assets = { images: imageMap, styledTextSegments: styledTextSegmentsMap }
+  const assets = { images: imageMap }
   const context = { document, currentPage, selectedContent, assets }
 
   return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
@@ -48,6 +44,8 @@ const nodeToObject = async (node, isFullScan = false) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: any = { id: node.id, type: node.type }
   if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
+  if (isFullScan && node.children)
+    obj.children = await Promise.all(node.children.map((child) => nodeToObject(child, isFullScan)))
   for (const [name, prop] of props) {
     if (prop.get && blacklist.indexOf(name) < 0) {
       obj[name] = prop.get.call(node)
@@ -66,7 +64,7 @@ const nodeToObject = async (node, isFullScan = false) => {
     }
   }
   if (node.type === 'TEXT') {
-    styledTextSegmentsMap[node.id] = node.getStyledTextSegments([
+    obj.styledTextSegments = node.getStyledTextSegments([
       'fontSize',
       'fontName',
       'fontWeight',
@@ -82,8 +80,6 @@ const nodeToObject = async (node, isFullScan = false) => {
       'hyperlink',
     ])
   }
-  if (isFullScan && node.children)
-    obj.children = await Promise.all(node.children.map((child) => nodeToObject(child, isFullScan)))
   if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent, isFullScan)
   return obj
 }

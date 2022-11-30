@@ -45,7 +45,7 @@
 
   const copyElem = document.getElementById('copy')
   copyElem.onclick = async () => {
-    copyElem.innerText = 'Copying...'
+    copyElem.textContent = 'Copying...' 
     copyElem.setAttribute('disabled', true)
     await sleep(20) // need to sleep a while to update the copy button
     parent.postMessage({ pluginMessage: { action: 'COPY_PRESSED' } }, '*')
@@ -66,10 +66,10 @@
       const selectionNames = selectionLength > 0 ? source?.context?.selectedContent?.map((c) => c.name).join(`\n`) : ''
 
       const countElem = document.getElementById('count')
-      countElem.innerText = selectionLength
+      countElem.textContent = selectionLength
 
       const textElem = document.getElementById('text')
-      textElem.innerText = selectionNames
+      textElem.textContent = selectionNames
     }
 
     if (message.action === 'COPY_RESPONSE') {

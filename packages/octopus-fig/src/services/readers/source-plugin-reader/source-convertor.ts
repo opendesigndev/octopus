@@ -3,7 +3,6 @@ import isArray from 'lodash/isArray'
 import isNumber from 'lodash/isNumber'
 
 import type { StyledTextSegment, TextNode } from '../../../figma-plugin-api'
-import type { SourceAssets } from '../../../typings/pluginSource'
 import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
 
 function fixGeometry(geometry: any): any {
@@ -66,7 +65,7 @@ function fixTextStyle(textNode: TextNode, textStyle: StyledTextSegment): RawText
   }
 }
 
-export function convert(raw: any, assets: SourceAssets = {}): RawLayer {
+export function convert(raw: any): RawLayer {
   const { id, type } = raw
 
   // missing Size fix
@@ -130,15 +129,13 @@ export function convert(raw: any, assets: SourceAssets = {}): RawLayer {
   }
 
   // TEXT transform fix
-  if (type === 'TEXT' && id) {
-    const styles = assets.styledTextSegments?.[id] ?? []
-    if (styles.length > 0) {
-      raw.style = fixTextStyle(raw, styles[0])
-    }
+  const { styledTextSegments } = raw
+  if (type === 'TEXT' && styledTextSegments?.length > 0) {
+    raw.style = fixTextStyle(raw, styledTextSegments[0])
 
     // TODO HERE HERE
   }
 
-  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child, assets))
+  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child))
   return raw
 }
