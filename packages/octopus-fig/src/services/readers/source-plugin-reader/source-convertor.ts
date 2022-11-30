@@ -65,8 +65,8 @@ function fixTextStyle(textNode: TextNode, textStyle: StyledTextSegment): RawText
   }
 }
 
-export function convert(raw: any): RawLayer {
-  const { id, type } = raw
+export function normalizeRaw(raw: any): RawLayer {
+  const { type } = raw
 
   // missing Size fix
   const { size, width, height } = raw
@@ -136,6 +136,6 @@ export function convert(raw: any): RawLayer {
     // TODO HERE HERE
   }
 
-  if (isArray(raw.children)) raw.children.forEach((child: unknown) => convert(child))
+  if (isArray(raw.children)) raw.children.forEach((child: unknown) => normalizeRaw(child))
   return raw
 }

@@ -1,4 +1,4 @@
-import { convert } from './source-convertor'
+import { normalizeRaw } from './source-convertor'
 
 import type { PluginSource } from '../../../typings/pluginSource'
 import type { Event, EventDesign } from './types'
@@ -36,7 +36,7 @@ export function convertToEvents(source: PluginSource): Event[] {
         designId,
         nodeId,
         node: {
-          document: convert(content),
+          document: normalizeRaw(content),
         },
       },
     })

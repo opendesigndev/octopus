@@ -25,9 +25,7 @@ export class DesignEmitter extends EventEmitter {
       if (e.event === 'ready:design') {
         e.data.content = this._finalizeDesign.promise
       }
-
-      await sleep(10)
-      this.emit(e.event, e.data)
+      queueMicrotask(() => this.emit(e.event, e.data))
     }
 
     this._finalizeDesign.resolve()

@@ -21,6 +21,9 @@ type ConvertedDocumentResult = {
   time: number
   error: Error | null
   octopusPath: string
+  dependencies: {
+    images: Promise<string>[]
+  }
 }
 
 dotenv.config()
@@ -42,6 +45,7 @@ export async function convertDesign({
   console.info(`Converting design: ${designId}\n`)
 
   exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
+    if (result.dependencies.images) await Promise.all(result.dependencies.images)
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =

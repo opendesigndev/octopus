@@ -44,12 +44,12 @@
   })
 
   const copyElem = document.getElementById('copy')
-  copyElem.onclick = async () => {
-    copyElem.textContent = 'Copying...' 
+  copyElem.addEventListener('click', async () => {
+    copyElem.textContent = 'Copying...'
     copyElem.setAttribute('disabled', true)
     await sleep(20) // need to sleep a while to update the copy button
     parent.postMessage({ pluginMessage: { action: 'COPY_PRESSED' } }, '*')
-  }
+  })
 
   // window.onfocus = () => { console.info('ON FOCUS') }
   // window.onblur = () => { console.info('ON BLUR') }
