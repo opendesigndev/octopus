@@ -1,4 +1,4 @@
-import { detachPromiseControls, sleep } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { EventEmitter } from 'eventemitter3'
 
 import { convertToEvents } from './event-convertor'
@@ -8,19 +8,19 @@ import type { ResolvedContent } from './types'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 export class DesignEmitter extends EventEmitter {
-  private _eventSourceData: PluginSource
+  private _sourceData: PluginSource
   private _finalizeDesign: DetachedPromiseControls<ResolvedContent>
 
-  constructor(eventSourceData: PluginSource) {
+  constructor(sourceData: PluginSource) {
     super()
-    this._eventSourceData = eventSourceData
+    this._sourceData = sourceData
     this._finalizeDesign = detachPromiseControls<ResolvedContent>()
 
     this._emitOnReady()
   }
 
   private async _emitOnReady() {
-    const eventData = convertToEvents(this._eventSourceData)
+    const eventData = convertToEvents(this._sourceData)
     for (const e of eventData) {
       if (e.event === 'ready:design') {
         e.data.content = this._finalizeDesign.promise

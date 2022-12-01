@@ -1,6 +1,6 @@
-import { DesignEmitter } from './source-plugin-reader/design-emitter'
+import { DesignEmitter } from './design-emitter'
 
-import type { PluginSource } from '../../typings/pluginSource'
+import type { PluginSource } from '../../../typings/pluginSource'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
