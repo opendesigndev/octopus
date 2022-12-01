@@ -1,4 +1,4 @@
-import { normalizeRaw } from './source-normalizer'
+import { SourceNormalizer } from './source-normalizer'
 
 import type { PluginSource } from '../../../typings/pluginSource'
 import type { Event, EventDesign } from './types'
@@ -22,7 +22,8 @@ export function convertToEvents(source: PluginSource): Event[] {
   for (const content of selectedContent ?? []) {
     const nodeId = content.id
     if (!nodeId) continue
-    const data = { designId, nodeId, node: { document: normalizeRaw(content) } }
+    const document = new SourceNormalizer(content).normalize()
+    const data = { designId, nodeId, node: { document } }
     events.push({ event: 'ready:artboard', data })
   }
 
