@@ -136,12 +136,30 @@ export function normalizeRaw(raw: any): RawLayer {
     raw.strokeWeight = max([strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight, 1])
   }
 
-  // TEXT transform fix
+  // TEXT fix
   const { styledTextSegments } = raw
   if (type === 'TEXT' && styledTextSegments?.length > 0) {
-    raw.style = fixTextStyle(raw, styledTextSegments[0])
+    const getNextCharacterStyleOverrides = (value: number, length: number): number[] => Array(length).fill(value)
 
-    // TODO HERE HERE
+    // initialize
+    const characterStyleOverrides: number[] = []
+    const styleOverrideTable: { [key: string]: RawTextStyle | undefined } = {}
+
+    styledTextSegments.forEach((segment: StyledTextSegment, key: number) => {
+      const nextCharacterStyleOverrides = getNextCharacterStyleOverrides(key, segment.end - segment.start)
+      characterStyleOverrides.push(...nextCharacterStyleOverrides)
+
+      const rawTextStyle = fixTextStyle(raw, segment)
+      if (key === 0) {
+        raw.style = rawTextStyle
+      } else {
+        styleOverrideTable[key] = rawTextStyle
+      }
+    })
+
+    raw.characterStyleOverrides = characterStyleOverrides
+    raw.styleOverrideTable = styleOverrideTable
+    delete raw.styledTextSegments
   }
 
   if (isArray(raw.children)) raw.children.forEach((child: unknown) => normalizeRaw(child))
