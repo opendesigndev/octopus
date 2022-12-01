@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import isArray from 'lodash/isArray'
 import isNumber from 'lodash/isNumber'
+import max from 'lodash/max'
 
 import type { StyledTextSegment, TextNode } from '../../../figma-plugin-api'
 import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
@@ -126,6 +127,13 @@ export function normalizeRaw(raw: any): RawLayer {
     if (isArray(raw.children) && isNumber(tx) && isNumber(ty)) {
       raw.children.forEach((child: unknown) => fixChildTransform(child, tx, ty))
     }
+  }
+
+  // STROKE fix
+  const { strokeWeight } = raw
+  if (strokeWeight === 'Mixed') {
+    const { strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight } = raw
+    raw.strokeWeight = max([strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight, 1])
   }
 
   // TEXT transform fix
