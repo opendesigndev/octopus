@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // import Clipboard from 'clipboard'
 import { Buffer } from 'buffer'
 
-import { version } from '../package.json'
+// import { version } from '../../package.json'
+
 import { dispatch, handleEvent } from './code-message-handler'
+
+const version = '1.0.0' // TODO
 
 figma.showUI(__html__, { height: 360, width: 300 })
 
@@ -18,7 +23,7 @@ let imageMap: ImageMap = {}
 const FULL_SCAN = true
 const QUICK_SCAN = false
 
-const stringify = (val) => JSON.stringify(val, null, 2)
+const stringify = (val: unknown) => JSON.stringify(val, null, 2)
 
 const getSource = async (isFullScan = false) => {
   imageMap = {} // clear imageMap
@@ -37,7 +42,7 @@ const getSource = async (isFullScan = false) => {
   return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
 }
 
-const nodeToObject = async (node, isFullScan = false) => {
+const nodeToObject = async (node: any, isFullScan = false) => {
   const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
   const blacklist = ['parent', 'children', 'removed']
 
@@ -45,7 +50,7 @@ const nodeToObject = async (node, isFullScan = false) => {
   const obj: any = { id: node.id, type: node.type }
   if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
   if (isFullScan && node.children)
-    obj.children = await Promise.all(node.children.map((child) => nodeToObject(child, isFullScan)))
+    obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child, isFullScan)))
   for (const [name, prop] of props) {
     if (prop.get && blacklist.indexOf(name) < 0) {
       obj[name] = prop.get.call(node)
@@ -56,7 +61,7 @@ const nodeToObject = async (node, isFullScan = false) => {
     for (const paint of node.fills) {
       if (paint.type === 'IMAGE') {
         const image = figma.getImageByHash(paint.imageHash)
-        if (!imageMap[image.hash]) {
+        if (image?.hash && !imageMap[image.hash]) {
           const bytes = await image.getBytesAsync()
           imageMap[image.hash] = Buffer.from(bytes).toString('base64')
         }
