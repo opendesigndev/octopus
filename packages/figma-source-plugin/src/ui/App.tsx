@@ -13,17 +13,10 @@ function App() {
     // parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
   }
 
-  const onCancel = () => {
-    console.info('XXX onCancel')
-
-    // parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-  }
-
   return (
     <main>
       <header>
         <img src={logoPng} />
-        <h2>Rectangle Creator</h2>
       </header>
       <section>
         <input id='input' type='number' min='0' ref={inputRef} />
@@ -33,7 +26,6 @@ function App() {
         <button className='brand' onClick={onCreate}>
           Create
         </button>
-        <button onClick={onCancel}>Cancel</button>
       </footer>
     </main>
   )
