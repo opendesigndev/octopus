@@ -11,6 +11,7 @@ import type { WebFactories } from './services/general/platforms'
 export type { SourceDesign }
 
 export { SourceApiReader } from './services/readers/source-api-reader'
+export { SourcePluginReader } from './services/readers/source-plugin-reader'
 
 export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({

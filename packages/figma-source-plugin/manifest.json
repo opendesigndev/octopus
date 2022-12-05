@@ -1,8 +1,8 @@
 {
   "name": "Squid",
-  "id": "1167075253977114041",
+  "id": "",
   "api": "1.0.0",
-  "main": "dist/code.js",
   "editorType": ["figma"],
-  "ui": "src/ui.html"
+  "main": "dist/code.js",
+  "ui": "dist/index.html"
 }

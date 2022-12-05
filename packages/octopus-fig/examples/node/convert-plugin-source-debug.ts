@@ -64,7 +64,7 @@ export async function convertDesign({
     console.info(`${chalk.yellow(`Manifest:`)} file://${manifestPath}\n\n`)
   })
 
-  const reader = new SourcePluginReader({ pluginSource })
+  const reader = new SourcePluginReader(pluginSource)
   await converter.convertDesign({ designEmitter: reader.parse(), exporter })
   await exporter.completed()
 }
