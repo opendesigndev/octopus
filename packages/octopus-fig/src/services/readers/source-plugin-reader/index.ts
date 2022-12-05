@@ -4,10 +4,6 @@ import type { PluginSource } from '../../../typings/pluginSource'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
-export type SourcePluginReaderOptions = {
-  pluginSource: PluginSource
-}
-
 /**
  * Reader that downloads given design from Figma API and provide them through `EventEmitter` calls.
  */
@@ -19,8 +15,8 @@ export class SourcePluginReader {
    * @constructor
    * @param {SourcePluginReaderOptions} options
    */
-  constructor(options: SourcePluginReaderOptions) {
-    this._pluginSource = options.pluginSource
+  constructor(pluginSource: PluginSource) {
+    this._pluginSource = pluginSource
   }
 
   /**
