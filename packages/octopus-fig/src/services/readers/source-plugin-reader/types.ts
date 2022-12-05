@@ -35,5 +35,5 @@ export type ResolvedFrame = {
 export type ResolvedFill = {
   designId: string
   ref: string
-  buffer: Buffer
+  buffer: Uint8Array
 }
