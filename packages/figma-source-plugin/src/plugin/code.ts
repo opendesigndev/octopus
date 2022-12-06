@@ -1,20 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import Clipboard from 'clipboard'
 import { Buffer } from 'buffer'
 
 // import { version } from '../../package.json'
 
-import { dispatch, handleEvent } from './code-message-handler'
+import { dispatch, handleEvent } from './message-handler'
 
 const version = '1.0.0' // TODO
 
 figma.showUI(__html__, { height: 360, width: 300 })
-
-// skip invisible nodes for faster performance
-figma.skipInvisibleInstanceChildren = true
-
-// console.log('THIS', this)
+figma.skipInvisibleInstanceChildren = true // skip invisible nodes for faster performance
 
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
@@ -23,14 +18,15 @@ let imageMap: ImageMap = {}
 const FULL_SCAN = true
 const QUICK_SCAN = false
 
-const stringify = (val: unknown) => JSON.stringify(val, null, 2)
+const getSelectedContent = async (isFullScan = false): Promise<any[]> => {
+  const selectedPromises = figma.currentPage.selection.map((node) => nodeToObject(node, isFullScan))
+  return Promise.all(selectedPromises)
+}
 
 const getSource = async (isFullScan = false) => {
   imageMap = {} // clear imageMap
 
-  const selectedPromises = figma.currentPage.selection.map((node) => nodeToObject(node, isFullScan))
-  const selectedContent = await Promise.all(selectedPromises)
-
+  const selectedContent = await getSelectedContent(isFullScan)
   if (!selectedContent.length) return null
 
   const document = { id: figma.root.id, name: figma.root.name }
@@ -40,6 +36,11 @@ const getSource = async (isFullScan = false) => {
   const context = { document, currentPage, selectedContent, assets }
 
   return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
+}
+
+const getSelectedObjectsCount = async (): Promise<number> => {
+  const selectedContent = await getSelectedContent(QUICK_SCAN)
+  return selectedContent.length
 }
 
 const nodeToObject = async (node: any, isFullScan = false) => {
@@ -89,14 +90,13 @@ const nodeToObject = async (node: any, isFullScan = false) => {
   return obj
 }
 
-const sendSelectionchange = async () => dispatch('SELECTION_CHANGE', await getSource(QUICK_SCAN))
+const sendSelectionchange = async () => dispatch('SELECTION_CHANGE', await getSelectedObjectsCount())
 figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
-  // console.info('HANDLE COPY_PRESSED') // TODO
   const source = await getSource(FULL_SCAN)
-  dispatch('COPY_RESPONSE', stringify(source))
+  dispatch('COPY_RESPONSE', JSON.stringify(source))
 })
 
 handleEvent('CLOSE', (data) => {
