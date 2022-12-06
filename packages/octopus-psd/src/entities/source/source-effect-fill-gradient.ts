@@ -1,4 +1,5 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color.js'
 import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity.js'
@@ -15,11 +16,13 @@ export class SourceEffectFillGradient extends SourceEntity {
 
   @firstCallMemo()
   get colors(): SourceEffectFillGradientColor[] | undefined {
-    return this._rawValue?.colors?.map((color) => new SourceEffectFillGradientColor(color))
+    const rawColors = asArray(this._rawValue?.Clrs)
+    return rawColors.map((color) => new SourceEffectFillGradientColor(color))
   }
 
   @firstCallMemo()
   get opacities(): SourceEffectFillGradientOpacity[] | undefined {
-    return this._rawValue?.transparency?.map((opacity) => new SourceEffectFillGradientOpacity(opacity))
+    const rawOpacities = asArray(this._rawValue?.Trns)
+    return rawOpacities.map((opacity) => new SourceEffectFillGradientOpacity(opacity))
   }
 }

@@ -1,19 +1,32 @@
+import { readFile } from 'fs/promises'
 import path from 'path'
 
-import { parsePsd } from '@avocode/psd-parser'
+import { scan } from '@jimp/utils'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
+import Psd, { AliKey } from '@webtoon/psd'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
+import Jimp from 'jimp'
 import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design.js'
-import { getFilesFromDir, parseJsonFromFile } from '../../utils/files.js'
+import { getFilesFromDir } from '../../utils/files.js'
+import { getRawData } from '../../utils/raw.js'
 import { logger } from '../instances/logger.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
-import type { RawComponent } from '../../typings/raw'
+import type { NodeChild, Layer } from '@webtoon/psd'
+
+type BuffImage = {
+  buff: Uint8ClampedArray | Uint8Array
+  width: number
+  height: number
+  name: string
+  dir: string
+}
 
 export type PSDFileReaderOptions = {
   /** Path to the .psd design file. */
@@ -35,6 +48,36 @@ export class PSDFileReader {
   static RENDER_IMG = 'preview.png'
   static SOURCE_FILE = 'source.json'
   static PATTERNS_DIR = path.join(PSDFileReader.IMAGES_DIR, 'patterns')
+  static SHAPE_LAYER_KEYS = [
+    AliKey.VectorStrokeData,
+    AliKey.VectorStrokeContentData,
+    AliKey.SolidColorSheetSetting,
+    AliKey.GradientFillSetting,
+    AliKey.PatternFillSetting,
+  ]
+  static ADJUSTMENT_LAYER_KEYS = [
+    AliKey.SolidColorSheetSetting,
+    AliKey.GradientFillSetting,
+    AliKey.PatternFillSetting,
+    AliKey.PatternFillSetting,
+    AliKey.BrightnessAndContrast,
+    AliKey.Levels,
+    AliKey.Curves,
+    AliKey.Exposure,
+    AliKey.Vibrance,
+    AliKey.HueSaturationOld,
+    AliKey.HueSaturation,
+    AliKey.ColorBalance,
+    AliKey.BlackAndWhite,
+    AliKey.PhotoFilter,
+    AliKey.ChannelMixer,
+    AliKey.ColorLookup,
+    AliKey.Invert,
+    AliKey.Posterize,
+    AliKey.Threshold,
+    AliKey.GradientMapSettings,
+    AliKey.SelectiveColor,
+  ]
 
   /**
    * Converts given PSD file into SourceDesign.
@@ -85,29 +128,154 @@ export class PSDFileReader {
     return path.join(PSDFileReader.OUTPUT_DIR, this.designId)
   }
 
-  private get _parsePsdOptions() {
-    return {
-      outDir: this._outDir,
-      imagesSubfolder: PSDFileReader.IMAGES_DIR,
-      previewPath: path.join(this._outDir, PSDFileReader.RENDER_IMG),
-      octopusFileName: 'version-2.json',
-    }
+  private async _exportImage({ width, height, buff, name, dir }: BuffImage): Promise<Jimp> {
+    const image = new Jimp(width, height)
+    const scanned = scan(image, 0, 0, image.bitmap.width, image.bitmap.height, function (x, y, index) {
+      this.bitmap.data[index + 0] = buff[index + 0]
+      this.bitmap.data[index + 1] = buff[index + 1]
+      this.bitmap.data[index + 2] = buff[index + 2]
+      this.bitmap.data[index + 3] = buff[index + 3]
+    })
+
+    const parsed = new Jimp(scanned)
+
+    return parsed.writeAsync(path.join(dir, name))
   }
 
-  private async _getSourceComponent(): Promise<RawComponent | null> {
-    const { time: timeParse } = await benchmarkAsync(() => parsePsd(this.path, this._parsePsdOptions))
-    logger.info(`Source file created in directory: ${chalk.yellow(this.designId)} ${displayPerf(timeParse)}`)
+  private async _exportMaskImage(layer: Layer, dir: string): Promise<void> {
+    if (!layer.userMask || !layer.realUserMask) {
+      return
+    }
 
-    const { time: timeRead, result } = await benchmarkAsync(() =>
-      parseJsonFromFile<RawComponent>(path.join(this._outDir, PSDFileReader.SOURCE_FILE))
+    const realUserMask = await layer.realUserMask()
+    const buff = realUserMask ?? (await layer.userMask())
+
+    if (!buff) {
+      return
+    }
+
+    const maskData = realUserMask ? layer.maskData.realData : layer.maskData
+
+    if (maskData?.flags.layerMaskDisabled === true || maskData?.flags.userMaskFromRenderingOtherData) {
+      return
+    }
+
+    const width = asNumber(maskData?.right, 0) - asNumber(maskData?.left, 0)
+    const height = asNumber(maskData?.bottom, 0) - asNumber(maskData?.top, 0)
+
+    const id = layer.additionalProperties?.[AliKey.LayerId]?.value ?? 'undefined'
+    const name = `${id}_user_mask.png`
+
+    await this._exportImage({ width, height, buff, name, dir })
+  }
+
+  private async _exportImages(layer: NodeChild, dir: string): Promise<void> {
+    if (layer.type === 'Group') {
+      await Promise.all(layer.children.map((layer) => this._exportImages(layer, dir)))
+      return
+    }
+
+    const id = layer.additionalProperties?.[AliKey.LayerId]?.value ?? 'undefined'
+    const { width, height } = layer
+
+    if (width === 1 && height === 1) {
+      return
+    }
+    const name = `${id}.png`
+
+    let buff
+
+    try {
+      buff = await layer.composite()
+    } catch (e) {
+      logger.error(`could not export image: ${name}`)
+      return
+    }
+
+    await this._exportImage({ width, height, buff, name, dir })
+    await this._exportMaskImage(layer, dir)
+  }
+
+  private async _exportPatterns(psd: Psd, dir: string): Promise<void> {
+    const patterns = psd.patterns
+
+    await Promise.all(
+      patterns.map(async (pattern) => {
+        const width = pattern.patternData.rectangle.right - pattern.patternData.rectangle.left
+        const height = pattern.patternData.rectangle.bottom - pattern.patternData.rectangle.top
+        const name = `${pattern.id}.png`
+        const buff = await psd.decodePattern(pattern)
+        await this._exportImage({ width, height, buff, name, dir })
+      })
     )
-    logger.info(`RawComponent prepared ${displayPerf(timeRead)}`)
+  }
 
-    return result
+  private async _exportAssets(
+    psd: Psd,
+    { patternsDir, imagesDir }: { patternsDir: string; imagesDir: string }
+  ): Promise<void> {
+    await Promise.all(psd.children.map((child) => this._exportImages(child, imagesDir)))
+    await this._exportPatterns(psd, patternsDir)
+  }
+
+  private async _getPsd(): Promise<Psd> {
+    const psd = Psd.parse((await readFile(this.path)).buffer)
+
+    if (psd.children.length > 0) {
+      await this._exportAssets(psd, { imagesDir: this._imagesDir, patternsDir: this._patternsDir })
+      return psd
+    }
+
+    const child = {
+      width: psd.width,
+      height: psd.height,
+      opacity: psd.opacity,
+      additionalProperties: {
+        lnsr: {
+          _isUnknown: true,
+          signature: '8B64',
+          key: 'lnsr',
+          data: Buffer.from('bgnd', 'utf8'),
+        },
+        lyid: {
+          key: 'lyid',
+          value: 1,
+        },
+      },
+      composite: psd.composite.bind(psd),
+    }
+
+    const psdCopy = Object.create(psd, {
+      children: {
+        value: [],
+      },
+    })
+
+    psdCopy.children.push(child as unknown as Layer)
+
+    await this._exportAssets(psdCopy, { imagesDir: this._imagesDir, patternsDir: this._patternsDir })
+
+    return psdCopy
+  }
+
+  private async _getSourceComponent(): Promise<{ raw: Psd | null }> {
+    const { time, result } = await benchmarkAsync(() => this._getPsd())
+
+    logger.info(`Assets saved in directory: ${chalk.yellow(this.designId)} ${displayPerf(time)}`)
+
+    return { raw: result }
+  }
+
+  private get _imagesDir(): string {
+    return path.join(this._outDir, PSDFileReader.IMAGES_DIR)
+  }
+
+  private get _patternsDir(): string {
+    return path.join(this._imagesDir, 'patterns')
   }
 
   private async _getImages(): Promise<SourceImage[]> {
-    const imagesPath = path.join(this._outDir, PSDFileReader.IMAGES_DIR)
+    const imagesPath = this._imagesDir
     const images: SourceImage[] = ((await getFilesFromDir(imagesPath)) ?? []).map((image) => {
       const name = image.name
       const relativePath = path.join(PSDFileReader.IMAGES_DIR, name)
@@ -116,13 +284,13 @@ export class PSDFileReader {
     })
 
     const patterns: SourceImage[] = []
-    const patternsPath = path.join(this._outDir, PSDFileReader.PATTERNS_DIR)
+    const patternsPath = this._patternsDir
     const patternsResults = (await getFilesFromDir(patternsPath)) ?? []
     for (const image of patternsResults) {
       const name = image.name
       const relativePath = path.join(PSDFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this._outDir, relativePath)
-      const { width, height } = await sizeOf(imgPath)
+      const { width, height } = sizeOf(imgPath)
       patterns.push({ name, path: imgPath, width, height })
     }
 
@@ -131,10 +299,13 @@ export class PSDFileReader {
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
-    const component = await this._getSourceComponent()
-    if (component == null) return null
+    const { raw } = await this._getSourceComponent()
+
+    if (!raw) return null
+
+    const parsedPsd = getRawData(raw)
     const images = await this._getImages()
-    const sourceDesign = new SourceDesign({ designId, component, images })
+    const sourceDesign = new SourceDesign({ designId, component: parsedPsd, images })
     return sourceDesign
   }
 }

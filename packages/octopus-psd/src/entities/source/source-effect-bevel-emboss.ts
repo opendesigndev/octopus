@@ -1,9 +1,11 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { getColorFor, getUnitRatioFor } from '../../utils/source.js'
+import { getUnitRatioFor, getColor } from '../../utils/source.js'
+import { OctopusEffectBevelEmboss } from '../octopus/octopus-effect-bevel-emboss.js'
 import { SourceEffectBase } from './source-effect-base.js'
 
-import type { RawBlendMode, RawEffectBevelEmboss } from '../../typings/raw'
+import type { RawEffectBevelEmboss } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 
 export class SourceEffectBevelEmboss extends SourceEffectBase {
@@ -14,11 +16,11 @@ export class SourceEffectBevelEmboss extends SourceEffectBase {
   }
 
   get style(): string | undefined {
-    return this._rawValue?.bevelStyle
+    return getMapped(this._rawValue?.bvlS, OctopusEffectBevelEmboss.BEVEL_EMBOSS_TYPE_MAP, undefined)
   }
 
   get depth(): number | undefined {
-    return getUnitRatioFor(this._rawValue?.strengthRatio?.value)
+    return getUnitRatioFor(this._rawValue?.srgR)
   }
 
   get blur(): number {
@@ -26,38 +28,38 @@ export class SourceEffectBevelEmboss extends SourceEffectBase {
   }
 
   get softness(): number {
-    return asFiniteNumber(this._rawValue?.softness, 0)
+    return asFiniteNumber(this._rawValue?.Sftn, 0)
   }
 
   get localLightingAngle(): number {
-    return asFiniteNumber(this._rawValue?.localLightingAngle?.value, 0)
+    return asFiniteNumber(this._rawValue?.lagl)
   }
 
   get localLightingAltitude(): number {
-    return asFiniteNumber(this._rawValue?.localLightingAltitude?.value, 0)
+    return asFiniteNumber(this._rawValue?.Lald, 0)
   }
 
-  get highlightMode(): RawBlendMode | undefined {
-    return this._rawValue?.highlightMode
+  get highlightMode(): string | undefined {
+    return this._rawValue?.hglM
   }
 
   get highlightColor(): SourceColor | null {
-    return getColorFor(this._rawValue?.highlightColor)
+    return getColor(this._rawValue?.hglC)
   }
 
   get highlightOpacity(): number {
-    return getUnitRatioFor(this._rawValue?.highlightOpacity?.value)
+    return getUnitRatioFor(this._rawValue?.hglO)
   }
 
-  get shadowMode(): RawBlendMode | undefined {
-    return this._rawValue?.shadowMode
+  get shadowMode(): string | undefined {
+    return this._rawValue?.sdwM
   }
 
   get shadowColor(): SourceColor | null {
-    return getColorFor(this._rawValue?.shadowColor)
+    return getColor(this._rawValue?.sdwC)
   }
 
   get shadowOpacity(): number {
-    return getUnitRatioFor(this._rawValue?.shadowOpacity?.value)
+    return getUnitRatioFor(this._rawValue?.sdwO)
   }
 }

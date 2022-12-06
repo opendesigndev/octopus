@@ -8,7 +8,7 @@
   "components": [
     {
       "id": "pasteboard-1",
-      "name": "Pasteboard",
+      "name": "ROOT",
       "role": "PASTEBOARD",
       "bounds": {
         "x": 0,

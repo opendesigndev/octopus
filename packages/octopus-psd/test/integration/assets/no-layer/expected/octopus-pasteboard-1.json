@@ -7,12 +7,12 @@
     "height": 500
   },
   "content": {
-    "id": "1-Background",
+    "id": "c03113f2-8d9f-4f41-aa15-4d04f65af1a2-Background",
     "type": "MASK_GROUP",
     "visible": true,
     "maskBasis": "BODY",
     "mask": {
-      "id": "1-BackgroundMask",
+      "id": "c03113f2-8d9f-4f41-aa15-4d04f65af1a2-BackgroundMask",
       "type": "SHAPE",
       "visible": false,
       "shape": {

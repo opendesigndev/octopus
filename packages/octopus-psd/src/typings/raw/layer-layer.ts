@@ -1,9 +1,3 @@
-import type { RawLayerCommon } from './layer'
-import type { RawBounds } from './shared'
-import type { RawSmartObject } from './smart-object'
+import type { AddedType, ParsedLayerLayer } from './layer'
 
-export type RawLayerLayer = RawLayerCommon & {
-  type?: 'layer'
-  bitmapBounds?: RawBounds
-  smartObject?: RawSmartObject
-}
+export type RawLayerLayer = ParsedLayerLayer & AddedType<'layer'>

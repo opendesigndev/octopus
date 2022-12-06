@@ -79,7 +79,7 @@ async function convertDir(dirPath: string) {
   }
 }
 
-async function convert(locations: string[]) {
+export async function convert(locations: string[]) {
   for (const location of locations) {
     if (await isDirectory(location)) {
       await convertDir(location)

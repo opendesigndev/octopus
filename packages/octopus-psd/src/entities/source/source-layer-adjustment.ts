@@ -20,6 +20,7 @@ export class SourceLayerAdjustment extends SourceLayerCommon {
 
   @firstCallMemo()
   get fill(): SourceEffectFill {
-    return new SourceEffectFill(this._rawValue.fill)
+    const fill = this._rawValue.parsedProperties?.SoCo ?? this._rawValue.parsedProperties?.GdFl
+    return new SourceEffectFill(fill)
   }
 }
