@@ -1,10 +1,12 @@
 import path from 'path'
 
-import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
-import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
+import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+
+import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
+import type { EngineData, NodeChildWithProps, ParsedPsd } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
@@ -106,22 +108,46 @@ export class OctopusManifest {
     }
   }
 
-  private _getComponentAssetsFonts(raw: Record<string, unknown>): string[] {
-    const entries = traverseAndFind(raw, (obj: unknown) => Object(obj)?.fontPostScriptName)
-    return [...new Set(entries)] as string[]
+  private _getFontNames(engineData: EngineData | undefined): string[] {
+    const { ResourceDict } = engineData ?? {}
+    const { FontSet } = ResourceDict ?? {}
+    const { RunArray } = engineData?.EngineDict?.StyleRun ?? {}
+    const fontSet = asArray(FontSet)
+    const runArray = asArray(RunArray)
+
+    return runArray.map(({ StyleSheet }) => {
+      return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontName
+    })
+  }
+
+  private _getComponentAssetsFonts(
+    raw: ParsedPsd | NodeChildWithProps,
+    fontsSet: Set<string> = new Set()
+  ): Set<string> {
+    if ('textProperties' in raw) {
+      const fonts = this._getFontNames(raw.textProperties)
+      fonts.forEach((fontName) => fontsSet.add(fontName))
+    }
+
+    if ('children' in raw) {
+      raw.children?.forEach((child) => this._getComponentAssetsFonts(child, fontsSet))
+    }
+
+    return fontsSet
   }
 
   private _getComponentAssets(targetComponent: SourceComponent): Manifest['Assets'] | null {
     const raw = targetComponent?.raw
     if (!raw) return null
-
     const images: Manifest['AssetImage'][] = this._sourceDesign.images.map((image) => {
       const path = this.getExportedRelativeImageByName(image.name) ?? ''
       const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
       return { location, refId: image.name }
     })
 
-    const fonts: Manifest['AssetFont'][] = this._getComponentAssetsFonts(raw).map((font) => ({ name: font }))
+    const fonts: Manifest['AssetFont'][] = Array.from(this._getComponentAssetsFonts(raw as ParsedPsd)).map((font) => ({
+      name: font,
+    }))
 
     return {
       ...(images.length ? { images } : null),

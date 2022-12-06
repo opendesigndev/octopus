@@ -6,7 +6,7 @@ import { SourcePath } from './source-path.js'
 import { SourceStroke } from './source-stroke.js'
 
 import type { RawLayerShape } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
+import type { DocumentDimensions, SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourcePathComponent } from './source-path-component'
 
@@ -24,11 +24,19 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   @firstCallMemo()
   get path(): SourcePath {
-    return new SourcePath(this._rawValue.path)
+    return new SourcePath({
+      vectorOriginationData: this._rawValue.parsedProperties?.vogk,
+      vectorMaskSetting: this._rawValue.parsedProperties?.vmsk ?? this._rawValue?.parsedProperties?.vsms,
+      documentDimensions: this.documentDimensions,
+    })
   }
 
   get pathComponents(): SourcePathComponent[] {
     return this.path.pathComponents
+  }
+
+  get documentDimensions(): DocumentDimensions {
+    return { width: this._parent.documentWidth, height: this._parent.documentHeight }
   }
 
   get firstPathComponent(): SourcePathComponent | undefined {
@@ -41,11 +49,14 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   @firstCallMemo()
   get fill(): SourceEffectFill {
-    return new SourceEffectFill(this._rawValue.fill, this._rawValue.strokeStyle?.fillEnabled)
+    const { SoCo, GdFl, vscg } = this._rawValue.parsedProperties ?? {}
+    const fill = SoCo ?? GdFl ?? vscg
+
+    return new SourceEffectFill(fill, this._rawValue.parsedProperties?.vstk?.fillEnabled)
   }
 
   @firstCallMemo()
   get stroke(): SourceStroke {
-    return new SourceStroke(this._rawValue.strokeStyle)
+    return new SourceStroke(this._rawValue?.parsedProperties?.vstk)
   }
 }

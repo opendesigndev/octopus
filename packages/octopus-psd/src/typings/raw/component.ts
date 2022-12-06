@@ -1,28 +1,6 @@
-import type { RawLayer } from './layer'
-import type { RawBounds } from './shared'
+import type { LayerProperties, NodeChildWithProps } from './layer'
+import type Psd from '@webtoon/psd'
 
-type RawGuides = {
-  x?: number[]
-  y?: number[]
-}
-
-type RawLight = {
-  altitude?: number
-  angle?: number
-}
-
-export type RawComponent = {
-  bounds?: RawBounds
-  depth?: number
-  exporterVersion?: string
-  globalLight?: RawLight
-  guides?: RawGuides
-  layers?: RawLayer[]
-  mode?: string
-  profile?: string | null
-  resolution?: number
-  selection?: []
-  subdocuments?: Record<string, unknown>
-  timeStamp?: number
-  version?: string
+export type ParsedPsd = Psd & { children: NodeChildWithProps[] } & {
+  parsedProperties: LayerProperties
 }

@@ -37,7 +37,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
   }
 
   private get _imageName(): string {
-    return `${this._fill?.pattern?.ID}.png`
+    return `${this._fill?.pattern?.Idnt}.png`
   }
 
   private get _imagePath(): string | undefined {
@@ -63,7 +63,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logger.warn('Unknown image', { image, id: this._fill?.pattern?.ID })
+      logger.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)

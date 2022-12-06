@@ -1,19 +1,19 @@
 import { SourceEntity } from './source-entity.js'
 
-import type { RawBlendMode, RawEffectShadow } from '../../typings/raw'
+import type { RawEffectShadow } from '../../typings/raw'
 
 export class SourceEffectBase extends SourceEntity {
   protected _rawValue: RawEffectShadow | undefined
 
-  constructor(raw: RawEffectShadow | undefined) {
-    super(raw)
+  constructor(rawValue: RawEffectShadow | undefined) {
+    super(rawValue)
   }
 
-  get blendMode(): RawBlendMode | undefined {
-    return this._rawValue?.mode
+  get blendMode(): string | undefined {
+    return this._rawValue?.Md
   }
 
   get enabled(): boolean {
-    return this._rawValue?.enabled ?? true
+    return this._rawValue?.enab ?? true
   }
 }

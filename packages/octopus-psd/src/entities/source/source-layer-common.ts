@@ -1,39 +1,53 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { isArtboard, getBoundsFor, getUnitRatioFor, getArtboardColor } from '../../utils/source.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 import { SourceLayerEffects } from './source-effects-layer.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePath } from './source-path.js'
 
-import type { RawBlendMode, RawLayer } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { LayerProperties, NodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
+import type { DocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
 
 export type SourceLayerParent = SourceComponent | SourceLayerSection
 
-type SourceLayerType = 'backgroundLayer' | 'layerSection' | 'shapeLayer' | 'textLayer' | 'layer' | 'adjustmentLayer'
+export type SourceLayerType =
+  | 'backgroundLayer'
+  | 'layerSection'
+  | 'shapeLayer'
+  | 'textLayer'
+  | 'layer'
+  | 'adjustmentLayer'
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
-  rawValue: RawLayer
+  rawValue: NodeChildWithType
 }
 
 export class SourceLayerCommon extends SourceEntity {
-  protected _rawValue: RawLayer
   protected _parent: SourceLayerParent
+  protected _rawValue: NodeChildWithType
+
+  static OPACITY_DEFAULT_VALUE = 1
 
   constructor(options: SourceLayerOptions) {
     super(options.rawValue)
     this._parent = options.parent
   }
 
+  private get _layerProperties(): LayerProperties | undefined {
+    return this._rawValue.parsedProperties
+  }
+
   get type(): SourceLayerType | undefined {
-    return this._rawValue.type
+    return this._rawValue?.addedType
   }
 
   get id(): string | undefined {
-    return this._rawValue.id ? this._rawValue.id.toString() : undefined
+    const id = this._layerProperties?.lyid
+    return id ? String(id) : undefined
   }
 
   get name(): string | undefined {
@@ -50,56 +64,110 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get artboardColor(): SourceColor | null {
-    return getArtboardColor(this._rawValue)
+    return getArtboardColor(this.artboardBackgroundType, this.rawArtboardColor)
+  }
+
+  get artboardBackgroundType(): number | undefined {
+    return this._layerProperties?.artb?.artboardBackgroundType
+  }
+
+  get rawArtboardColor(): RawColor | undefined {
+    return this._layerProperties?.artb?.Clr
   }
 
   get isArtboard(): boolean {
-    return isArtboard(this._rawValue)
+    return Boolean(this._rawValue.parsedProperties?.artb)
   }
 
   get visible(): boolean {
-    return this._rawValue.visible ?? true
+    return !this._rawValue.isHidden ?? true
   }
 
   get bounds(): SourceBounds {
-    return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : getBoundsFor(this._rawValue.bounds)
+    return this._rawArtboardBounds ? getBoundsFor(this._rawArtboardBounds) : getLayerBounds(this._rawValue)
+  }
+
+  private get _rawArtboardBounds(): RawBounds | undefined {
+    return this._layerProperties?.artb?.artboardRect
   }
 
   get opacity(): number {
-    return getUnitRatioFor(this._rawValue.blendOptions?.opacity?.value)
+    return this._rawValue.opacity
+      ? this._rawValue.opacity / DEFAULTS.RGB_COLOR_MAX_VALUE
+      : SourceLayerCommon.OPACITY_DEFAULT_VALUE
   }
 
   get fillOpacity(): number {
-    return getUnitRatioFor(this._rawValue.blendOptions?.fillOpacity?.value)
+    const rawOpacity = this._layerProperties?.iOpa?.fillOpacity
+    return rawOpacity ? rawOpacity / DEFAULTS.RGB_COLOR_MAX_VALUE : DEFAULTS.OPACITY
   }
 
-  get blendMode(): RawBlendMode | undefined {
-    return this._rawValue.blendOptions?.mode
+  get blendMode(): string | undefined {
+    return (
+      this._rawValue.parsedProperties?.lsct?.blendMode ??
+      this._rawValue.parsedProperties?.lsdk?.blendMode ??
+      this._rawValue.blendMode
+    )
   }
 
   get clipped(): boolean {
-    return this._rawValue.clipped ?? false
-  }
-
-  get imageEffectsApplied(): boolean | undefined {
-    return this._rawValue.imageEffectsApplied
+    return Boolean(this._rawValue.clipping)
   }
 
   get imageName(): string | undefined {
-    return this._rawValue.imageName
+    return `${this.id}.png`
   }
 
   @firstCallMemo()
   get layerEffects(): SourceLayerEffects {
-    return new SourceLayerEffects(this._rawValue.layerEffects)
+    return new SourceLayerEffects(this._rawValue)
   }
 
   get bitmapMask(): string | undefined {
-    return this._rawValue.mask?.imageName
+    if (!('maskData' in this._rawValue)) {
+      return
+    }
+
+    const { maskData } = this._rawValue
+
+    if (!maskData) {
+      return
+    }
+
+    const { top, left, bottom, right } = maskData
+    const height = bottom - top
+    const width = right - left
+
+    if (width <= 0 || height <= 0) {
+      return
+    }
+
+    return `${this.id}_user_mask.png`
+  }
+
+  get documentWidth(): number {
+    return this._parent.documentWidth
+  }
+
+  get documentHeight(): number {
+    return this._parent.documentHeight
+  }
+
+  get documentDimensions(): DocumentDimensions {
+    return {
+      width: this.documentWidth,
+      height: this.documentHeight,
+    }
   }
 
   @firstCallMemo()
   get path(): SourcePath | undefined {
-    if (this._rawValue.path) return new SourcePath(this._rawValue.path)
+    const vectorMaskSetting = this._rawValue?.parsedProperties?.vmsk ?? this._rawValue?.parsedProperties?.vsms
+    if (vectorMaskSetting)
+      return new SourcePath({
+        vectorOriginationData: this._rawValue.parsedProperties?.vogk,
+        vectorMaskSetting,
+        documentDimensions: this.documentDimensions,
+      })
   }
 }

@@ -2,41 +2,48 @@ import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/a
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
-import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source.js'
+import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawComponent, RawLayer } from '../../typings/raw'
+import type { NodeChildWithProps, ParsedPsd, RawColor } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceDesign } from './source-design.js'
 
 export type SourceComponentOptions = {
-  raw: RawComponent & RawLayer
   isPasteboard?: boolean
+  raw: ParsedPsd | NodeChildWithProps
+  parent: SourceDesign
 }
 
 export class SourceComponent extends SourceEntity {
-  protected _rawValue: RawComponent & RawLayer
+  protected _rawValue: NodeChildWithProps | ParsedPsd
   private _layers: SourceLayer[]
   private _isPasteboard: boolean
+  private _parent: SourceDesign
 
   static DEFAULT_ID = 'pasteboard-1'
   static DEFAULT_NAME = 'Pasteboard'
 
-  constructor({ raw, isPasteboard }: SourceComponentOptions) {
+  constructor({ isPasteboard, raw, parent }: SourceComponentOptions) {
     super(raw)
     this._layers = this._initLayers()
     this._isPasteboard = isPasteboard ?? false
+    this._parent = parent
   }
 
   private _initLayers() {
-    const layers = asArray(this._rawValue?.layers).reduce((layers: SourceLayer[], layer: RawLayer) => {
-      const sourceLayer = createSourceLayer({ layer, parent: this })
+    const layers = asArray(this._rawValue?.children).reduce((layers: SourceLayer[], layer) => {
+      const sourceLayer = createSourceLayer({
+        layer: layer as unknown as NodeChildWithProps,
+        parent: this,
+      })
       return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
     return layers
   }
 
-  get raw(): RawComponent & RawLayer {
+  get raw(): NodeChildWithProps | ParsedPsd {
     return this._rawValue
   }
 
@@ -45,12 +52,19 @@ export class SourceComponent extends SourceEntity {
   }
 
   get bounds(): SourceBounds {
-    const artboardRect = this._rawValue.artboard?.artboardRect
-    return artboardRect ? getBoundsFor(artboardRect) : getBoundsFor(this._rawValue.bounds)
+    const artboardRect = this._rawValue.parsedProperties?.artb?.artboardRect
+
+    return artboardRect
+      ? getBoundsFor(artboardRect)
+      : this._rawValue?.type === 'Psd'
+      ? getBoundsFor({ Rght: this._rawValue?.width, Btom: this._rawValue?.height })
+      : getLayerBounds(this._rawValue)
   }
 
   get id(): string {
-    return this._rawValue.id !== undefined ? String(this._rawValue.id) : SourceComponent.DEFAULT_ID
+    return this._rawValue?.parsedProperties?.lyid !== undefined
+      ? String(this._rawValue.parsedProperties?.lyid)
+      : SourceComponent.DEFAULT_ID
   }
 
   get name(): string {
@@ -62,18 +76,34 @@ export class SourceComponent extends SourceEntity {
   }
 
   get isArtboard(): boolean {
-    return isArtboard(this._rawValue)
+    return Boolean(this._rawValue?.parsedProperties?.artb)
   }
 
   get artboardColor(): SourceColor | null {
-    return getArtboardColor(this._rawValue)
+    return getArtboardColor(this.artboardBackgroundType, this.rawArtboardColor)
   }
 
-  get resolution(): number | undefined {
-    return this._rawValue.resolution
+  get artboardBackgroundType(): number | undefined {
+    return this._rawValue?.parsedProperties?.artb?.artboardBackgroundType
+  }
+
+  get rawArtboardColor(): RawColor | undefined {
+    return this._rawValue?.parsedProperties?.artb?.Clr
   }
 
   get globalLightAngle(): number {
-    return asFiniteNumber(this._rawValue.globalLight?.angle, 0)
+    if ('globalLightAngle' in this._rawValue) {
+      return asFiniteNumber(this._rawValue.globalLightAngle, 0)
+    }
+
+    return 0
+  }
+
+  get documentWidth(): number {
+    return this._parent.documentWidth
+  }
+
+  get documentHeight(): number {
+    return this._parent.documentHeight
   }
 }

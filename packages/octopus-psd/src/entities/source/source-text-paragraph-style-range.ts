@@ -12,14 +12,6 @@ export class SourceTextParagraphStyleRange extends SourceEntity {
     super(raw)
   }
 
-  get from(): number {
-    return this._rawValue?.from ?? 0
-  }
-
-  get to(): number {
-    return this._rawValue?.to ?? 0
-  }
-
   @firstCallMemo()
   get paragraphStyle(): SourceTextParagraphStyle {
     return new SourceTextParagraphStyle(this._rawValue?.paragraphStyle)

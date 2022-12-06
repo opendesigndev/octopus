@@ -22,6 +22,7 @@ export class OctopusComponent {
   constructor(options: OctopusComponentOptions) {
     this._sourceComponent = options.sourceComponent
     this._designConverter = options.designConverter
+
     this._layers = createOctopusLayers(this.sourceComponent.layers, this)
   }
 

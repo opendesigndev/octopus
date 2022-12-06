@@ -37,11 +37,11 @@ export class OctopusEffectFillGradient {
   private _isStroke: boolean
 
   static GRADIENT_TYPE_MAP = {
-    linear: 'LINEAR',
-    radial: 'RADIAL',
+    Lnr: 'LINEAR',
+    Rdl: 'RADIAL',
     Angl: 'ANGULAR',
     Dmnd: 'DIAMOND',
-    reflected: 'REFLECTED',
+    Rflc: 'REFLECTED',
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
