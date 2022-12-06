@@ -1,11 +1,4 @@
-import type { RawBounds, RawCombineOperation, RawMatrix, RawPointHV, RawPointXY } from './shared'
-
-type RawBoxCorners = {
-  rectangleCornerA?: RawPointHV
-  rectangleCornerB?: RawPointHV
-  rectangleCornerC?: RawPointHV
-  rectangleCornerD?: RawPointHV
-}
+import type { RawBounds, RawMatrix, RawPointXY } from './shared'
 
 export type RawRadiiCorners = {
   bottomLeft?: number
@@ -14,43 +7,21 @@ export type RawRadiiCorners = {
   topRight?: number
 }
 
-type RawOriginType = 'rect' | 'roundedRect' | 'line' | 'ellipse' | number
-
-export type RawOrigin = {
-  Trnf?: RawMatrix
-  bounds?: RawBounds & { unitValueQuadVersion?: number }
-  keyOriginBoxCorners?: RawBoxCorners
-  keyOriginLineArrConc?: number
-  keyOriginLineArrLngth?: number
-  keyOriginLineArrWdth?: number
-  keyOriginLineArrowEnd?: boolean
-  keyOriginLineArrowSt?: boolean
-  keyOriginLineEnd?: RawPointHV
-  keyOriginLineStart?: RawPointHV
-  keyOriginLineWeight?: number
-  keyOriginResolution?: number
-  keyOriginPolyPixelHSF?: number
-  keyOriginPolyPreviousTightBoxCorners?: RawBoxCorners
-  keyOriginPolySides?: number
-  keyOriginPolyTrueRectCorners?: RawBoxCorners
-  radii?: RawRadiiCorners
-  type?: RawOriginType
-}
-
 export type RawSubpathPoint = {
   anchor?: RawPointXY
   backward?: RawPointXY
   forward?: RawPointXY
 }
 
-export type RawSubpath = {
-  closedSubpath?: boolean
-  points?: RawSubpathPoint[]
-  subpathType?: 'NORMAL' | 'POLYGON_TOOL' | 'ZERO'
-}
+export type VectorOriginationData = Partial<{
+  keyDescriptorList: VectorOriginationDatakeyDescriptor[]
+}>
 
-export type RawPathComponent = {
-  origin?: RawOrigin
-  shapeOperation?: RawCombineOperation
-  subpathListKey?: RawSubpath[]
-}
+export type VectorOriginationDatakeyDescriptor = Partial<{
+  keyOriginType: number
+  keyOriginResolution: number
+  keyOriginShapeBBox: RawBounds & { unitValueQuadVersion?: number }
+  Trnf: RawMatrix
+  keyOriginIndex: number
+  keyOriginRRectRadii: RawRadiiCorners
+}>

@@ -1,7 +1,3 @@
-import type { RawLayerCommon } from './layer'
-import type { RawBounds } from './shared'
+import type { AddedType, ParsedLayerLayer } from './layer'
 
-export type RawLayerBackground = RawLayerCommon & {
-  type?: 'backgroundLayer'
-  bitmapBounds?: RawBounds
-}
+export type RawLayerBackground = ParsedLayerLayer & AddedType<'backgroundLayer'>

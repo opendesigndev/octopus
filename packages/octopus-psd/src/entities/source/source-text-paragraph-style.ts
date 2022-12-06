@@ -1,16 +1,26 @@
 import { SourceEntity } from './source-entity.js'
 
-import type { RawParagraphStyle } from '../../typings/raw'
+import type { ParagraphRunDataParagraphSheetProperties } from '../../typings/raw'
 import type { SourceAlign } from '../../typings/source'
 
 export class SourceTextParagraphStyle extends SourceEntity {
-  protected _rawValue: RawParagraphStyle | undefined
+  protected _rawValue: ParagraphRunDataParagraphSheetProperties | undefined
 
-  constructor(raw: RawParagraphStyle | undefined) {
+  static JUSTIFICATION_VALUES = [
+    'left',
+    'right',
+    'center',
+    'justifyLeft',
+    'justifyRight',
+    'justifyCenter',
+    'justifyAll',
+  ] as const
+
+  constructor(raw: ParagraphRunDataParagraphSheetProperties | undefined) {
     super(raw)
   }
 
   get align(): SourceAlign {
-    return this._rawValue?.align ?? 'left'
+    return SourceTextParagraphStyle.JUSTIFICATION_VALUES[this._rawValue?.Justification ?? 0]
   }
 }

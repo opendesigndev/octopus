@@ -1,144 +1,132 @@
-import type { RawBlendMode, RawColor, RawPointHV, RawUnitAngle, RawUnitPercent } from './shared'
+import type { RawColor as RawColor } from './shared'
+import type { UnitFloatDescriptorValue } from '@webtoon/psd/dist/interfaces'
 
 export type RawShapeTransparency = {
-  location?: number
-  midpoint?: number
-  opacity?: RawUnitPercent
+  Opct: number
+  Lctn: number
+  Mdpn: number
 }
 
 export type RawShapeGradientColor = {
-  color?: RawColor
-  location?: number
-  midpoint?: number
-  type?: 'userStop'
+  Clr: RawColor
+  Type: string
+  Lctn: number
+  Mdpn: number
 }
 
 export type RawFillGradient = {
-  colors?: RawShapeGradientColor[]
-  gradientForm?: 'customStops'
-  interfaceIconFrameDimmed?: number
-  name?: string
-  transparency?: RawShapeTransparency[]
+  Clrs: RawShapeGradientColor[]
+  GrdF: string
+  Intr: number
+  Nm: string
+  Trns: RawShapeTransparency[]
 }
 
-export type RawFillPattern = {
-  ID?: string
-  name?: string
-}
+export type RawFillPattern = Partial<{
+  Nm: string
+  Idnt: string
+}>
 
-export type RawGradientType = 'linear' | 'radial' | 'reflected' | 'Angl' | 'Dmnd'
+export type RawGradientType = 'Lnr ' | 'Rdl ' | 'Rflc' | 'Angl' | 'Dmnd'
 
 export type RawGradientsInterpolationMethod = 'Perc' | 'Lnr ' | 'Gcls'
 
-export type RawShapeStrokeOffset = {
-  horizontal?: RawUnitPercent
-  vertical?: RawUnitPercent
-}
-
 export type RawEffectCommon = {
-  enabled?: boolean
+  enab?: boolean
   present?: boolean
   showInDialog?: boolean
 }
 
-export type RawFill = RawEffectCommon & {
-  align?: boolean
-  angle?: RawUnitAngle
-  Angl?: RawUnitAngle
-  class?: 'solidColorLayer' | 'gradientLayer' | 'patternLayer'
-  color?: RawColor
-  dither?: boolean
-  gradient?: RawFillGradient
-  gradientsInterpolationMethod?: RawGradientsInterpolationMethod
-  offset?: RawShapeStrokeOffset
-  pattern?: RawFillPattern
-  reverse?: boolean
-  scale?: RawUnitPercent
-  type?: RawGradientType
-  mode?: RawBlendMode
-  opacity?: RawUnitPercent
-  phase?: RawPointHV | RawShapeStrokeOffset
-}
-
-export type RawTransferSpec = {
-  curve?: RawPointHV[]
-  name?: 'Linear'
-}
-
-export type RawEffectShadow = RawEffectCommon & {
-  antiAlias?: boolean
-  blur?: number
-  chokeMatte?: number
-  color?: RawColor
-  distance?: number
-  localLightingAngle?: RawUnitAngle
-  mode?: RawBlendMode
-  noise?: RawUnitPercent
-  opacity?: RawUnitPercent
-  transferSpec?: RawTransferSpec
-  useGlobalAngle?: boolean
-}
-
-export type RawEffectGlow = RawEffectShadow & {
-  glowTechnique?: 'softMatte'
-  innerGlowSource?: 'edgeGlow'
-}
+export type RawEffectShadow = RawEffectCommon &
+  Partial<{
+    Ckmt: number
+    Md: string
+    Clr: RawColor
+    Opct: number
+    uglg: boolean
+    lagl: number
+    Dstn: number
+    blur: number
+    TrnS: { Nm: string }
+    layerConceals: boolean
+  }>
 
 export type RawEffectStrokeLineAlignment = 'outsetFrame' | 'insetFrame' | 'centeredFrame'
 
-export type RawEffectStroke = RawFill & {
-  paintType?: 'solidColor' | 'gradientFill' | 'pattern'
-  overprint?: boolean
-  size?: number
-  style?: RawEffectStrokeLineAlignment
-}
-
-export type RawEffectBevelEmboss = RawEffectCommon & {
-  antialiasGloss?: boolean
-  bevelDirection?: 'stampIn'
-  bevelStyle?: 'innerBevel'
-  bevelTechnique?: 'softMatte'
-  blur?: number
-  highlightColor?: RawColor
-  highlightMode?: RawBlendMode
-  highlightOpacity?: RawUnitPercent
-  localLightingAltitude?: RawUnitAngle
-  localLightingAngle?: RawUnitAngle
-  shadowColor?: RawColor
-  shadowMode?: RawBlendMode
-  shadowOpacity?: RawUnitPercent
-  softness?: number
-  strengthRatio?: RawUnitPercent
-  transferSpec?: RawTransferSpec
-  useGlobalAngle?: boolean
-  useShape?: boolean
-  useTexture?: boolean
-}
+export type BevelEmbossStyle = 'OtrB' | 'InrB' | 'Embs' | 'PlEb' | 'strokeEmboss'
+export type RawEffectBevelEmboss = RawEffectCommon &
+  Partial<{
+    bvlS: BevelEmbossStyle
+    srgR: number
+    blur: number
+    Sftn: number
+    lagl: number
+    Lald: number
+    hglM: string
+    hglC: RawColor
+    hglO: number
+    sdwM: string
+    sdwC: RawColor
+    sdwO: number
+  }>
 
 export type RawEffectSatin = RawEffectCommon & {
-  antiAlias?: boolean
-  blur?: number
-  color?: RawColor
-  distance?: number
-  invert?: boolean
-  localLightingAngle?: RawUnitAngle
-  mappingShape?: RawTransferSpec
-  mode?: RawBlendMode
-  opacity?: RawUnitPercent
+  Clr: RawColor
+  Invr: boolean
+  Opct: number
+  lagl: number
+  Dstn: number
+  blur: number
 }
 
-export type RawLayerEffects = {
-  masterFXSwitch?: boolean
-  numModifyingFX?: number
-  solidFill?: RawFill
-  gradientFill?: RawFill
-  patternFill?: RawFill
-  frameFX?: RawEffectStroke
-  innerShadow?: RawEffectShadow
-  dropShadow?: RawEffectShadow
-  innerGlow?: RawEffectGlow
-  outerGlow?: RawEffectGlow
-  bevelEmboss?: RawEffectBevelEmboss
-  chromeFX?: RawEffectSatin
-  scale?: RawUnitPercent
+export type RawOffset = { Hrzn: UnitFloatDescriptorValue; Vrtc: UnitFloatDescriptorValue }
+
+export type RawFill = RawEffectCommon &
+  Partial<{
+    Md: string
+    Clr: RawColor
+    Opct: number
+    Grad: RawFillGradient
+    Angl: number
+    Type: RawGradientType
+    Rvrs: boolean
+    Dthr: boolean
+    gs99: string
+    Algn: boolean
+    Scl: number
+    Ofst: RawOffset
+    Ptrn: RawFillPattern
+    phase: RawOffset
+  }>
+
+export type RawEffectStroke = {
+  enab: boolean
+  present: boolean
+  showInDialog: boolean
+  Styl: string
+  PntT: string
+  Md: string
+  Opct: number
+  Sz: number
+  Clr: RawColor
+  Ptrn: RawFillPattern
+  Scl: number
+  Lnkd: boolean
+  Angl: number
+  phase: RawOffset
+  overprint: boolean
 }
+
+export type RawlayerEffects = Partial<{
+  masterFXSwitch: true
+  DrSh: RawEffectShadow
+  SoFi: RawFill
+  GrFl: RawFill
+  IrSh: RawEffectShadow
+  IrGl: RawEffectShadow
+  OrGl: RawEffectShadow
+  patternFill: RawFill
+  FrFX: RawEffectStroke
+  ChFX: RawEffectSatin
+  ebbl: RawEffectBevelEmboss
+}>

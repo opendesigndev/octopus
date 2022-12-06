@@ -96,6 +96,7 @@ export class OctopusLayerShapeShapePath {
   private _getPathRectangle(pathComponents: SourcePathComponent[]): Octopus['PathRectangle'] {
     const rect = pathComponents[0]
     const { bottom, left, right, top } = rect.origin.bounds
+
     const [layerTx, layerTy] = this._parentLayer.layerTranslation
     const tx = left - layerTx
     const ty = top - layerTy

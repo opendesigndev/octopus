@@ -1,51 +1,70 @@
-import type { RawLayerEffects } from './effects'
-import type { RawLayerAdjustment } from './layer-adjustment'
-import type { RawLayerBackground } from './layer-background'
-import type { RawLayerLayer } from './layer-layer'
-import type { RawLayerSection } from './layer-section'
-import type { RawLayerShape } from './layer-shape'
-import type { RawLayerText } from './layer-text'
-import type { RawPathComponent } from './path-component'
-import type { RawBlendOptions, RawBounds, RawColor } from './shared'
-
-export type RawShapeMask = {
-  bounds?: RawBounds
-  extendWithWhite?: boolean
-  imageName?: string
-}
-
-export type RawPath = {
-  bounds?: RawBounds
-  defaultFill?: boolean
-  pathComponents?: RawPathComponent[]
-}
-
-export type RawLayerArtboard = {
-  artboardBackgroundType?: number
-  artboardPresetName?: string
-  artboardRect?: RawBounds
-  color?: RawColor
-}
+import type { SourceLayerType } from '../../entities/source/source-layer-common'
+import type { RawlayerEffects, RawFill } from './effects'
+import type { RawShapeStrokeStyle, VectorMaskSetting } from './layer-shape'
+import type { RawTextProperties } from './layer-text'
+import type { VectorOriginationData } from './path-component'
+import type { RawColor, RawBounds } from './shared'
+import type { Group, Layer } from '@webtoon/psd'
 
 export type RawLayerCommon = {
-  artboard?: RawLayerArtboard
-  bounds?: RawBounds
-  blendOptions?: RawBlendOptions
-  clipped?: boolean
-  id?: number
-  imageEffectsApplied?: boolean
-  imageName?: string
-  mask?: RawShapeMask
-  path?: RawPath
-  name?: string
-  visible?: boolean
-  layerEffects?: RawLayerEffects
+  isArtboard: boolean
+  id: string
+  name: string
+  artboardBackgroundType: number
+  isHidden: boolean
 }
 
-export type RawLayer =
-  | RawLayerAdjustment
-  | RawLayerBackground
-  | RawLayerLayer
-  | RawLayerSection
-  | RawLayerShape
-  | RawLayerText
+export type LayerPropertiesArtboard = Partial<{
+  artboardBackgroundType: number
+  Clr: RawColor
+  artboardPresentName: string
+  artboardRect: RawBounds
+}>
+
+export type FillOpacity = Partial<{
+  fillOpacity: number
+}>
+
+export type RawLayerBlendProps = Partial<{
+  signature: string
+  key: string
+  dividerType: number
+  dividerSignature: string
+  blendMode: string
+  subType: number
+}>
+
+//todo could not invoke smartObject (SoLd and SolE)
+export type LayerProperties = Partial<{
+  lyid: number | string
+  artb: LayerPropertiesArtboard
+  iOpa: FillOpacity
+  lfx2: RawlayerEffects
+  SoCo: RawFill
+  GdFl: RawFill
+  vscg: RawFill
+  vstk: RawShapeStrokeStyle
+  TySh: RawTextProperties
+  vmsk: VectorMaskSetting
+  vsms: VectorMaskSetting
+  vogk: VectorOriginationData
+  lsct: RawLayerBlendProps
+  lsdk: RawLayerBlendProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SoLd: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SoLe: any
+}>
+
+export type AddedType<T extends SourceLayerType> = { addedType: T }
+export type NodeChildWithType = (ParsedLayerGroup | ParsedLayerLayer) & AddedType<SourceLayerType>
+export type NodeChildWithProps = ParsedLayerGroup | ParsedLayerLayer
+
+export type ParsedLayerLayer = Partial<Layer> & {
+  parsedProperties?: LayerProperties
+}
+
+export type ParsedLayerGroup = Partial<Exclude<Group, 'children'>> & {
+  children: NodeChildWithProps[]
+  parsedProperties?: LayerProperties
+}

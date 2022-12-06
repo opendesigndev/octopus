@@ -1,7 +1,7 @@
 import { isArtboard } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 
-import type { RawComponent } from '../../typings/raw'
+import type { ParsedPsd } from '../../typings/raw/component.js'
 
 export type SourceImage = {
   name: string
@@ -11,7 +11,7 @@ export type SourceImage = {
 }
 
 type SourceDesignOptions = {
-  component: RawComponent
+  component: ParsedPsd
   images: SourceImage[]
   designId: string
 }
@@ -20,19 +20,32 @@ export class SourceDesign {
   private _designId: string
   private _components: SourceComponent[]
   private _images: SourceImage[]
+  private _raw: ParsedPsd
 
   constructor(options: SourceDesignOptions) {
     this._components = this._initComponents(options.component)
     this._images = options.images
     this._designId = options.designId
+    this._raw = options.component
   }
 
-  private _initComponents(raw: RawComponent): SourceComponent[] {
-    if (raw.layers?.length === 1 && isArtboard(raw.layers[0]))
-      return [new SourceComponent({ raw: { ...raw, ...raw.layers[0] } })] // no pasteboard for 1 artboard
-    const components = [new SourceComponent({ raw, isPasteboard: true })]
-    const artboards = raw.layers?.filter((layer) => isArtboard(layer)) ?? []
-    artboards.forEach((artboard) => components.push(new SourceComponent({ raw: { ...raw, ...artboard } })))
+  private _initComponents(raw: ParsedPsd): SourceComponent[] {
+    if (raw.children?.length === 1 && isArtboard(raw.children[0])) {
+      return [new SourceComponent({ raw: raw.children[0], parent: this })] // no pasteboard for 1 artboard
+    }
+
+    const components = [new SourceComponent({ raw, isPasteboard: true, parent: this })]
+    const artboards = raw.children.filter((psdNode) => isArtboard(psdNode))
+
+    artboards.forEach((artboard) =>
+      components.push(
+        new SourceComponent({
+          parent: this,
+          raw: artboard,
+        })
+      )
+    )
+
     return components
   }
 
@@ -58,5 +71,13 @@ export class SourceDesign {
 
   getImageByName(name: string): SourceImage | undefined {
     return this.images.find((image) => image.name === name)
+  }
+
+  get documentWidth(): number {
+    return this._raw.width
+  }
+
+  get documentHeight(): number {
+    return this._raw.height
   }
 }
