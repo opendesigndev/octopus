@@ -1,19 +1,3 @@
-/* :root {
-  --color-bg: var(--figma-color-bg);
-  --color-bg-hover: var(--figma-color-bg-hover);
-  --color-bg-active: var(--figma-color-bg-pressed);
-  --color-border: var(--figma-color-border);
-  --color-border-focus: var(--figma-color-border-selected);
-  --color-icon: var(--figma-color-icon);
-  --color-text: var(--figma-color-text);
-  --color-bg-brand: var(--figma-color-bg-brand);
-  --color-bg-brand-hover: var(--figma-color-bg-brand-hover);
-  --color-bg-brand-active: var(--figma-color-bg-brand-pressed);
-  --color-border-brand: var(--figma-color-border-brand);
-  --color-border-brand-focus: var(--figma-color-border-selected-strong);
-  --color-text-brand: var(--figma-color-text-onbrand);
-} */
-
 html,
 body,
 main {
@@ -23,64 +7,63 @@ main {
 body,
 input,
 button {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif, 'Avenir Next';
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Open Sans', sans-serif, 'Avenir Next';
   font-size: 12px;
   text-align: center;
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: white;
+  color: black;
   margin: 0;
 }
 
+main {
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 24px;
+}
+
+header {
+  height: 140px;
+}
+
+img {
+  height: 140px;
+  width: 300px;
+}
+
 button {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
+  border: none;
   background-color: rgba(27, 0, 251, 1);
   font-size: 14px;
   color: white;
   cursor: pointer;
-  padding: 4px 16px;
+  padding: 2px 16px 4px;
   margin-top: 16px;
 }
 button:hover {
   background-color: rgba(9, 18, 197, 1);
 }
-button:active {
-  background-color: rgba(9, 18, 197, 1);
-}
 button:disabled {
   background-color: rgba(151, 154, 155, 1);
 }
-
-/* button:focus-visible {
-  border: none;
-  outline-color: var(--color-border-focus);
-} */
-/* button.brand {
-  --color-bg: var(--color-bg-brand);
-  --color-text: var(--color-text-brand);
-  --color-bg-hover: var(--color-bg-brand-hover);
-  --color-bg-active: var(--color-bg-brand-active);
-  --color-border: transparent;
-  --color-border-focus: var(--color-border-brand-focus);
-} */
-
-/* input {
-  background: 1px solid var(--color-bg);
-  border: 1px solid var(--color-border);
-  color: 1px solid var(--color-text);
-  padding: 0.5rem;
+button.copyPressed {
+  background-color: rgba(9, 18, 197, 1);
+  opacity: 0.2;
 }
-
-input:focus-visible {
-  border-color: var(--color-border-focus);
-  outline-color: var(--color-border-focus);
-}
-
-svg {
-  stroke: var(--color-icon, rgba(0, 0, 0, 0.9));
-} */
 
 #selectionSection {
   background-color: rgba(245, 246, 247, 1);
@@ -96,31 +79,4 @@ svg {
 }
 #selectionSection strong {
 color:rgba(27, 0, 251, 1)
-}
-
-main {
-  align-items: center;
-  /* display: flex;
-  flex-direction: column; */
-  justify-content: center;
-}
-
-section {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 16px 24px;
-}
-/* section > * + * {
-  margin-top: 0.5rem;
-} */
-
-header {
-  height: 140px;
-}
-
-img {
-  height: 140px;
-  width: 300px;
 }

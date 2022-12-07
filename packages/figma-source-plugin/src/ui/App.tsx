@@ -56,8 +56,10 @@ function App() {
     }
   }, [])
 
-  const isCopyDisabled = copyCount !== 0 || selectedObjects === 0
+  const isCopyPressed = copyCount !== 0
+  const isCopyDisabled = isCopyPressed || selectedObjects === 0
   const buttonText = copyCount === 0 ? 'Copy to clipboard' : `Copying...`
+  const buttonClass = isCopyPressed ? 'copyPressed' : undefined
 
   return (
     <main>
@@ -69,7 +71,7 @@ function App() {
         <div id='textSection'>
           <p>Click the button bellow to copy selected artboards. To paste open a project in Squid and press ⌘V.</p>
         </div>
-        <button onClick={onCopy} disabled={isCopyDisabled}>
+        <button onClick={onCopy} disabled={isCopyDisabled} className={buttonClass}>
           {buttonText}
         </button>
         <CopyToClipboard onCopy={onCopied} text={copyText} ref={clipboardRef}>
