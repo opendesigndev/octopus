@@ -5,15 +5,15 @@ import type { PluginSource } from '../../../typings/pluginSource'
 import type EventEmitter from 'eventemitter3'
 
 /**
- * Reader that downloads given design from Figma API and provide them through `EventEmitter` calls.
+ * Reader that receives Design Source from Squid Plugin and provide them through `EventEmitter` calls.
  */
 export class SourcePluginReader {
   private _pluginSource: PluginSource
 
   /**
-   * Downloads given Figma design and provide them through `EventEmitter` calls.
+   * Creates SourcePluginReader that can parse given Source from Squid Plugin and provide them through `EventEmitter` calls.
    * @constructor
-   * @param {SourcePluginReaderOptions} options
+   * @param {PluginSource} pluginSource Source generated from Squid Plugin
    */
   constructor(pluginSource: PluginSource) {
     this._pluginSource = pluginSource

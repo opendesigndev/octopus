@@ -35,7 +35,7 @@ export class SourceApiReader {
   private _parser: ReturnType<typeof createParser>
 
   /**
-   * Downloads given Figma design and provide them through `EventEmitter` calls.
+   * Creates SourceApiReader that downloads given Figma designs from Figma API.
    * @constructor
    * @param {SourceApiReaderOptions} options
    */
