@@ -6,6 +6,21 @@ import logoPng from './logo.png'
 import './App.css'
 import { sleep } from './sleep'
 
+const getSelectionText = (selectedObjects: number): JSX.Element => {
+  if (selectedObjects === 0) return <p className='disabled'>no object selected</p>
+  if (selectedObjects === 1)
+    return (
+      <p>
+        <strong>1 object</strong> selected
+      </p>
+    )
+  return (
+    <p>
+      <strong>{selectedObjects} objects</strong> selected
+    </p>
+  )
+}
+
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const clipboardRef = useRef<any>(null)
@@ -50,16 +65,17 @@ function App() {
         <img src={logoPng} />
       </header>
       <section>
-        <label htmlFor='input'>Rectangle Count: {selectedObjects}</label>
-      </section>
-      <footer>
-        <button className='brand' onClick={onCopy} disabled={isCopyDisabled}>
+        <div id='selectionSection'>{getSelectionText(selectedObjects)}</div>
+        <div id='textSection'>
+          <p>Click the button bellow to copy selected artboards. To paste open a project in Squid and press ⌘V.</p>
+        </div>
+        <button onClick={onCopy} disabled={isCopyDisabled}>
           {buttonText}
         </button>
         <CopyToClipboard onCopy={onCopied} text={copyText} ref={clipboardRef}>
           <p hidden={true}>HIDDEN</p>
         </CopyToClipboard>
-      </footer>
+      </section>
     </main>
   )
 }
