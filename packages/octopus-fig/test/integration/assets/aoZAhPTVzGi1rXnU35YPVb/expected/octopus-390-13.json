@@ -1865,7 +1865,13 @@
       }
     ],
     "meta": {
-      "isArtboard": true
+      "isArtboard": true,
+      "transform": {
+        "origin": {
+          "x": 4510,
+          "y": 0
+        }
+      }
     }
   }
 }

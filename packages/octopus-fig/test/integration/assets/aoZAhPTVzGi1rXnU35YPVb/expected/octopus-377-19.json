@@ -1,7 +1,7 @@
 {
   "id": "377-19",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.22",
   "dimensions": {
     "width": 741,
     "height": 380
@@ -570,7 +570,13 @@
       }
     ],
     "meta": {
-      "isArtboard": true
+      "isArtboard": true,
+      "transform": {
+        "origin": {
+          "x": 1200,
+          "y": 0
+        }
+      }
     }
   }
 }
