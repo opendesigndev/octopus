@@ -75,8 +75,8 @@ button.copyPressed {
   border-radius: 8px;
 }
 #selectionSection p.disabled {
-  opacity: 0.3 
+  opacity: 0.3;
 }
 #selectionSection strong {
-color:rgba(27, 0, 251, 1)
+  color: rgba(27, 0, 251, 1);
 }
