@@ -5,7 +5,7 @@ import type {
   AdditionalLayerInfo,
   AliKey,
   TypeToolObjectSettingAliBlock,
-} from '@webtoon/psd/dist/interfaces/'
+} from '@opendesign/psd-ts/dist/interfaces/'
 
 export type DescriptorValuePropertyClass = {
   name: string

@@ -1,6 +1,6 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
-import { UnitFloatType } from '@webtoon/psd'
+import { UnitFloatType } from '@opendesign/psd-ts'
 
 import { DEFAULTS } from './defaults.js'
 

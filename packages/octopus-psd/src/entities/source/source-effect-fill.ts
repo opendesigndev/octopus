@@ -1,5 +1,5 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
-import { DescriptorValueType, UnitFloatType } from '@webtoon/psd'
+import { DescriptorValueType, UnitFloatType } from '@opendesign/psd-ts'
 
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
