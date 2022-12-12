@@ -11,6 +11,7 @@ import { OctopusComponent } from './octopus-component'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { RawBlendMode, RawLayerShape } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
 import type { SourceLayerFrame } from '../source/source-layer-frame'
 import type { OctopusLayerParent } from './octopus-layer-base'
 
@@ -27,6 +28,7 @@ type OctopusLayerMaskGroupOptions = {
   opacity?: number
   blendMode?: RawBlendMode
   isTopComponent?: boolean
+  boundingBox?: SourceBounds
 }
 
 type CreateBackgroundMaskGroupOptions = {
@@ -53,6 +55,7 @@ export class OctopusLayerMaskGroup {
   private _transform?: number[]
   private _opacity?: number
   private _blendMode?: RawBlendMode
+  private _boundingBox?: SourceBounds
   private _isTopComponent: boolean
 
   static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
@@ -84,6 +87,7 @@ export class OctopusLayerMaskGroup {
     const blendMode = sourceLayer.blendMode
     const opacity = sourceLayer.opacity
     const name = sourceLayer.name
+    const boundingBox = sourceLayer.boundingBox ?? undefined
     return new OctopusLayerMaskGroup({
       id,
       name,
@@ -96,6 +100,7 @@ export class OctopusLayerMaskGroup {
       opacity,
       visible,
       isTopComponent,
+      boundingBox,
     })
   }
 
@@ -124,6 +129,7 @@ export class OctopusLayerMaskGroup {
     this._transform = options.transform
     this._opacity = options.opacity
     this._blendMode = options.blendMode
+    this._boundingBox = options.boundingBox
     this._isTopComponent = options.isTopComponent ?? false
   }
 
@@ -182,7 +188,9 @@ export class OctopusLayerMaskGroup {
 
   get meta(): Octopus['LayerMeta'] | undefined {
     const isArtboard = this._isTopComponent
-    return isArtboard ? { isArtboard } : undefined
+    const { x, y } = this._boundingBox ?? {}
+    const transform = x !== undefined && y !== undefined ? { origin: { x, y } } : undefined
+    return isArtboard ? { isArtboard, transform } : undefined
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {
