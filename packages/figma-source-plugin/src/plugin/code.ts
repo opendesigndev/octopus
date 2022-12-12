@@ -44,49 +44,54 @@ const getSelectedObjectsCount = async (): Promise<number> => {
 }
 
 const nodeToObject = async (node: any, isFullScan = false) => {
-  const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
-  const blacklist = ['parent', 'children', 'removed']
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: any = { id: node.id, type: node.type }
-  if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
-  if (isFullScan && node.children)
-    obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child, isFullScan)))
-  for (const [name, prop] of props) {
-    if (prop.get && blacklist.indexOf(name) < 0) {
-      obj[name] = prop.get.call(node)
-      if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
+
+  try {
+    if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
+    if (isFullScan && node.children)
+      obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child, isFullScan)))
+    const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
+    const blacklist = ['parent', 'children', 'removed']
+    for (const [name, prop] of props) {
+      if (prop.get && blacklist.indexOf(name) < 0) {
+        obj[name] = prop.get.call(node)
+        if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
+      }
     }
-  }
-  if (isFullScan && node.fills?.length > 0) {
-    for (const paint of node.fills) {
-      if (paint.type === 'IMAGE') {
-        const image = figma.getImageByHash(paint.imageHash)
-        if (image?.hash && !imageMap[image.hash]) {
-          const bytes = await image.getBytesAsync()
-          imageMap[image.hash] = Buffer.from(bytes).toString('base64')
+    if (isFullScan && node.fills?.length > 0) {
+      for (const paint of node.fills) {
+        if (paint.type === 'IMAGE') {
+          const image = figma.getImageByHash(paint.imageHash)
+          if (image?.hash && !imageMap[image.hash]) {
+            const bytes = await image.getBytesAsync()
+            imageMap[image.hash] = Buffer.from(bytes).toString('base64')
+          }
         }
       }
     }
+    if (node.type === 'TEXT') {
+      obj.styledTextSegments = node.getStyledTextSegments([
+        'fontSize',
+        'fontName',
+        'fontWeight',
+        'textDecoration',
+        'textCase',
+        'lineHeight',
+        'letterSpacing',
+        'fills',
+        'textStyleId',
+        'fillStyleId',
+        'listOptions',
+        'indentation',
+        'hyperlink',
+      ])
+    }
+    if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent, isFullScan)
+  } catch (error) {
+    obj.ERROR = error
   }
-  if (node.type === 'TEXT') {
-    obj.styledTextSegments = node.getStyledTextSegments([
-      'fontSize',
-      'fontName',
-      'fontWeight',
-      'textDecoration',
-      'textCase',
-      'lineHeight',
-      'letterSpacing',
-      'fills',
-      'textStyleId',
-      'fillStyleId',
-      'listOptions',
-      'indentation',
-      'hyperlink',
-    ])
-  }
-  if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent, isFullScan)
+
   return obj
 }
 
