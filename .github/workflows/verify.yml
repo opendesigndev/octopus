@@ -16,6 +16,8 @@ jobs:
       - run: yarn -v 
       - name: install
         run: yarn
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: prettier
         run: yarn lint:prettier
       - name: eslint
