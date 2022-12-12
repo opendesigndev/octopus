@@ -1,4 +1,4 @@
-import type { StyledTextSegment } from '../figma-plugin-api'
+import type { StyledTextSegment } from './plugin-api'
 
 export { StyledTextSegment }
 

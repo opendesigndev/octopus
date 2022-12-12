@@ -9,7 +9,7 @@ import { createConverter, DebugExporter, SourcePluginReader } from '../../src/in
 import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files'
 import { renderOctopus } from './utils/render'
 
-import type { PluginSource } from '../../src/typings/pluginSource'
+import type { PluginSource } from '../../src/typings/plugin-source'
 
 type ConvertDesignOptions = {
   sourcePath: string

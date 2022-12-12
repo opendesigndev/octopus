@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import isArray from 'lodash/isArray'
-import isNumber from 'lodash/isNumber'
 import max from 'lodash/max'
 
-import type { StyledTextSegment, TextNode } from '../../../figma-plugin-api'
+import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api'
 import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
 
 const DEFAULT_TRANSFORM = [
@@ -11,8 +9,11 @@ const DEFAULT_TRANSFORM = [
   [0, 1, 0],
 ]
 
+const isArray = Array.isArray
+const isNumber = (value?: any): value is number => typeof value === 'number'
+
 export class SourceNormalizer {
-  private _raw: any
+  private _raw: any // TODO fix any
 
   constructor(raw: any) {
     this._raw = raw
@@ -129,15 +130,15 @@ export class SourceNormalizer {
       const characterStyleOverrides: number[] = []
       const styleOverrideTable: { [key: string]: RawTextStyle | undefined } = {}
 
-      styledTextSegments.forEach((segment: StyledTextSegment, key: number) => {
-        const nextCharacterStyleOverrides = getNextCharacterStyleOverrides(key, segment.end - segment.start)
+      styledTextSegments.forEach((segment: StyledTextSegment, index: number) => {
+        const nextCharacterStyleOverrides = getNextCharacterStyleOverrides(index, segment.end - segment.start)
         characterStyleOverrides.push(...nextCharacterStyleOverrides)
 
         const rawTextStyle = this._normalizeTextStyle(raw, segment)
-        if (key === 0) {
+        if (index === 0) {
           raw.style = rawTextStyle
         } else {
-          styleOverrideTable[key] = rawTextStyle
+          styleOverrideTable[index] = rawTextStyle
         }
       })
 

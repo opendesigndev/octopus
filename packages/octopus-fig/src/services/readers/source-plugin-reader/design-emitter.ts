@@ -3,7 +3,7 @@ import { EventEmitter } from 'eventemitter3'
 
 import { convertToEvents } from './event-convertor'
 
-import type { PluginSource } from '../../../typings/pluginSource'
+import type { PluginSource } from '../../../typings/plugin-source'
 import type { ResolvedContent } from './types'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 

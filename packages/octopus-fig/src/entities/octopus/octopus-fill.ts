@@ -143,7 +143,7 @@ export class OctopusFill {
       // console.info()
       // console.info()
 
-      // return [a, b, c, d, tx, ty + height / 2]
+      // return [a, b, c, d, tx, ty + height / 2] // TODO fix this for radial gradient
       return matrix.values
     }
 

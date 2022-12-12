@@ -1,10 +1,10 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { dispatch } from './dispatcher'
-import logoPng from './logo.png'
 import './App.css'
-import { sleep } from './sleep'
+import logoPng from './logo.png'
+import { dispatch } from './utils/dispatcher'
+import { sleep } from './utils/sleep'
 
 const getSelectionText = (selectedObjects: number): JSX.Element => {
   if (selectedObjects === 0) return <p className='disabled'>no object selected</p>
@@ -45,13 +45,13 @@ function App() {
     window.onmessage = async (event) => {
       const { action, data } = event.data.pluginMessage
       if (action === 'SELECTION_CHANGE') {
-        if (typeof data === 'number') setSelectedObjects(data)
+        if (typeof data !== 'number') return
+        setSelectedObjects(data)
       }
       if (action === 'COPY_RESPONSE') {
-        if (typeof data === 'string') {
-          setCopyText(data)
-          clipboardRef.current?.onClick()
-        }
+        if (typeof data !== 'string') return
+        setCopyText(data)
+        clipboardRef.current?.onClick()
       }
     }
   }, [])

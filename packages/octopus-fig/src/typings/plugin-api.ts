@@ -1,5 +1,5 @@
 // @figma/plugin-typings
-// plugin-api.d.ts
+// plugin-api.ts
 // Typings for the Figma Plugin API
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -387,7 +387,7 @@ type BlendMode =
   | 'COLOR'
   | 'LUMINOSITY'
 
-interface Font {
+export interface Font {
   fontName: FontName
 }
 
@@ -960,7 +960,7 @@ interface VectorNode extends DefaultShapeMixin, ConstraintMixin, CornerMixin, Ve
   clone(): VectorNode
 }
 
-interface TextNode extends DefaultShapeMixin, ConstraintMixin, TextSublayerNode {
+export interface TextNode extends DefaultShapeMixin, ConstraintMixin, TextSublayerNode {
   readonly type: 'TEXT'
   clone(): TextNode
 
@@ -1186,7 +1186,7 @@ interface SectionNode extends ChildrenMixin, MinimalFillsMixin, OpaqueNodeMixin 
   resizeWithoutConstraints(width: number, height: number): void
 }
 
-type BaseNode = DocumentNode | PageNode | SceneNode
+export type BaseNode = DocumentNode | PageNode | SceneNode
 
 type SceneNode =
   | SliceNode
@@ -1216,25 +1216,25 @@ type SceneNode =
   | HighlightNode
   | WashiTapeNode
 
-type NodeType = BaseNode['type']
+export type NodeType = BaseNode['type']
 
 ////////////////////////////////////////////////////////////////////////////////
 // Styles
-type StyleType = 'PAINT' | 'TEXT' | 'EFFECT' | 'GRID'
+export type StyleType = 'PAINT' | 'TEXT' | 'EFFECT' | 'GRID'
 
-interface BaseStyle extends PublishableMixin, PluginDataMixin {
+export interface BaseStyle extends PublishableMixin, PluginDataMixin {
   readonly id: string
   readonly type: StyleType
   name: string
   remove(): void
 }
 
-interface PaintStyle extends BaseStyle {
+export interface PaintStyle extends BaseStyle {
   type: 'PAINT'
   paints: ReadonlyArray<Paint>
 }
 
-interface TextStyle extends BaseStyle {
+export interface TextStyle extends BaseStyle {
   type: 'TEXT'
   fontSize: number
   textDecoration: TextDecoration
@@ -1246,12 +1246,12 @@ interface TextStyle extends BaseStyle {
   textCase: TextCase
 }
 
-interface EffectStyle extends BaseStyle {
+export interface EffectStyle extends BaseStyle {
   type: 'EFFECT'
   effects: ReadonlyArray<Effect>
 }
 
-interface GridStyle extends BaseStyle {
+export interface GridStyle extends BaseStyle {
   type: 'GRID'
   layoutGrids: ReadonlyArray<LayoutGrid>
 }
@@ -1259,25 +1259,25 @@ interface GridStyle extends BaseStyle {
 ////////////////////////////////////////////////////////////////////////////////
 // Other
 
-interface Image {
+export interface Image {
   readonly hash: string
   getBytesAsync(): Promise<Uint8Array>
 }
 
-interface BaseUser {
+export interface BaseUser {
   readonly id: string | null
   readonly name: string
   readonly photoUrl: string | null
 }
 
-interface User extends BaseUser {
+export interface User extends BaseUser {
   // The current user's multiplayer color. This will match the color of their
   // dot stamps and cursor.
   readonly color: string
   readonly sessionId: number
 }
 
-interface ActiveUser extends User {
+export interface ActiveUser extends User {
   readonly position: Vector | null
   readonly viewport: Rect
   readonly selection: string[]

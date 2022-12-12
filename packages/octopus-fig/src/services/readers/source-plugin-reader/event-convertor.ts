@@ -4,7 +4,7 @@ import { logger } from '../..'
 import { SourceNormalizer } from './source-normalizer'
 import { isBase64 } from './utils'
 
-import type { PluginSource } from '../../../typings/pluginSource'
+import type { PluginSource } from '../../../typings/plugin-source'
 import type { Event, EventDesign } from './types'
 
 export function convertToEvents(source: PluginSource): Event[] {
