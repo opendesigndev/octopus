@@ -1,0 +1,26 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: node -v 
+      - run: yarn -v 
+      - name: install
+        run: yarn
+      - name: prettier
+        run: yarn lint:prettier
+      - name: eslint
+        run: yarn lint:eslint
+      - name: build
+        run: yarn build
+      - name: test
+        run: yarn test
