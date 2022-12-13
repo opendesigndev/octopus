@@ -33,7 +33,7 @@ export class SourceNormalizer {
       [a, c, tx - subTx],
       [b, d, ty - subTy],
     ]
-    if (isArray(layer.children)) {
+    if (layer.type === 'GROUP' && isArray(layer.children)) {
       layer.children.forEach((child: unknown) => this._normalizeChildTransform(child, subTx, subTy))
     }
     return layer
