@@ -216,7 +216,7 @@ export class DesignConverter {
   }
 
   private async _convertFill(fill: ResolvedFill) {
-    if (typeof fill.buffer === 'string') fill.buffer = Buffer.from(fill.buffer, 'base64')
+    if (typeof fill.buffer === 'string') fill.buffer = Buffer.from(fill.buffer, 'base64') // @TODO investigate Buffer.buffer safety
 
     const fillName = fill.ref
     const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)

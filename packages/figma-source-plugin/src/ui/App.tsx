@@ -7,7 +7,7 @@ import { dispatch } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
 
 const getSelectionText = (selectedObjects: number): JSX.Element => {
-  if (selectedObjects === 0) return <p className='disabled'>no object selected</p>
+  if (selectedObjects === 0) return <p className='disabled'>no objects selected</p>
   if (selectedObjects === 1)
     return (
       <p>
