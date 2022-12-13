@@ -16,6 +16,10 @@ export { SourcePluginReader } from './services/readers/source-plugin-reader'
 
 export type { SourceDesign }
 
+const buffer = {
+  base64ToBuffer: (base64: string) => Buffer.from(base64, 'base64'),
+}
+
 export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({
     ...options,
@@ -24,6 +28,7 @@ export function createConverter(options?: Omit<OctopusConverterOptions, 'platfor
       createLoggerFactory: createLoggerNode,
       createBenchmarkService: () => ({ benchmarkAsync }),
       createImageSizeService: () => imageSize,
+      createBufferService: () => buffer,
     } as NodeFactories,
   })
 }

@@ -10,6 +10,7 @@ type DefaultOptions = {
 
 export let logger: Logger | null = null
 export let env: Env
+export let base64ToBuffer: (base64: string) => Buffer | Uint8Array
 
 export function setLogger(instance: Logger): void {
   logger = instance
@@ -18,4 +19,5 @@ export function setLogger(instance: Logger): void {
 export function setDefaults(options: DefaultOptions): void {
   env = getPlatformFactories().createEnvironment?.() ?? {}
   logger = getPlatformFactories().createLoggerFactory(options.logger)
+  base64ToBuffer = getPlatformFactories().createBufferService().base64ToBuffer
 }

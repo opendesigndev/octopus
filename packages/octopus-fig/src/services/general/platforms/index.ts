@@ -21,11 +21,19 @@ type WebBenchmarkFactory = () => {
 type NodeImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
 type WebImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
 
+type NodeBufferFactory = () => {
+  base64ToBuffer: (base64: string) => Buffer
+}
+type WebBufferFactory = () => {
+  base64ToBuffer: (base64: string) => Uint8Array
+}
+
 // Node stack
 export type NodeFactories = {
   createLoggerFactory: NodeLoggerFactory
   createBenchmarkService: NodeBenchmarkFactory
   createImageSizeService: NodeImageSizeFactory
+  createBufferService: NodeBufferFactory
   createEnvironment: NodeEnvironmentFactory
 }
 
@@ -34,6 +42,7 @@ export type WebFactories = {
   createLoggerFactory: WebLoggerFactory
   createBenchmarkService: WebBenchmarkFactory
   createImageSizeService: WebImageSizeFactory
+  createBufferService: WebBufferFactory
   createEnvironment: null
 }
 
