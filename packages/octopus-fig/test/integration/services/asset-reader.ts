@@ -84,9 +84,9 @@ export class AssetReader {
 
     return testDirectoryTrees.map((testDirectoryTree): TestComponents => {
       const manifest = testDirectoryTree.expectedPaths.find((filePath) => path.basename(filePath) === MANIFEST_NAME)
-      const components = testDirectoryTree.expectedPaths.filter((filePath) =>
-        /[0-9]+-octopus\.json$/.test(path.basename(filePath))
-      )
+      const components = testDirectoryTree.expectedPaths
+        .filter((filePath) => /octopus/.test(path.basename(filePath)))
+        .filter((filePath) => path.basename(filePath) !== 'octopus-manifest.json')
 
       if (!components?.length) {
         console.error(`missing components in: ${testDirectoryTree.testName}/${AssetReader.EXPECTED_DIR_NAME}`)

@@ -4,10 +4,9 @@ import S3 from './services/s3'
 
 import type { Logger, S3Service } from './types'
 import type { IPathLocator } from './types/path-locator'
-
 import type AWS from 'aws-sdk'
 
-type S3CacherWithInstanceOptions = {
+export type S3CacherOptions = {
   logger?: Logger
   verbose?: boolean
   pathLocator: IPathLocator
@@ -22,9 +21,6 @@ type S3CacherWithInstanceOptions = {
   acl?: string
   s3: AWS.S3
 }
-export type S3CacherOptions = S3CacherWithInstanceOptions | S3CacherWithCredentialsOptions
-
-export type { IPathLocator }
 
 export type { IPathLocator }
 
@@ -60,7 +56,7 @@ export class S3Plugin {
     return createLogger()
   }
 
-  private _createS3(options: S3CacherWithCredentialsOptions) {
+  private _createS3(options: S3CacherOptions) {
     return new S3({
       verbose: options.verbose,
       s3Plugin: this,
