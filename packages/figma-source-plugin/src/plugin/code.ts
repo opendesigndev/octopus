@@ -13,6 +13,7 @@ let imageMap: ImageMap = {}
 
 const getSelectedNodes = (selection = figma.currentPage.selection): SceneNode[] => {
   return selection.reduce((nodes: SceneNode[], node: SceneNode) => {
+    if (node.visible === false) return nodes
     if (['COMPONENT_SET', 'SECTION'].includes(node.type)) {
       const childNodes = getSelectedNodes((node as ChildrenMixin).children)
       return [...nodes, ...childNodes]
@@ -42,7 +43,12 @@ const nodeToObject = async (node: any) => {
   const obj: any = { id: node.id, type: node.type }
   try {
     if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
-    if (node.children) obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child)))
+    if (node.children) {
+      const childrenPromises = node.children
+        .filter((child: any) => child.visible !== false)
+        .map((child: any) => nodeToObject(child))
+      obj.children = await Promise.all(childrenPromises)
+    }
     const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
     const blacklist = ['parent', 'children', 'removed']
     for (const [name, prop] of props) {
