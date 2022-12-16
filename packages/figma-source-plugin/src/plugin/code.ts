@@ -14,19 +14,22 @@ figma.skipInvisibleInstanceChildren = true // skip invisible nodes for faster pe
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
 
-// CONSTANTS
-const FULL_SCAN = true
-const QUICK_SCAN = false
-
-const getSelectedContent = async (isFullScan = false): Promise<any[]> => {
-  const selectedPromises = figma.currentPage.selection.map((node) => nodeToObject(node, isFullScan))
-  return Promise.all(selectedPromises)
+const getSelectedNodes = (selection = figma.currentPage.selection): SceneNode[] => {
+  return selection.reduce((nodes: SceneNode[], node: SceneNode) => {
+    if (['COMPONENT_SET', 'SECTION'].includes(node.type)) {
+      const childNodes = getSelectedNodes((node as ChildrenMixin).children)
+      return [...nodes, ...childNodes]
+    }
+    if (['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE'].includes(node.type)) return [...nodes, node]
+    return nodes
+  }, [])
 }
 
-const getSource = async (isFullScan = false) => {
+const getSourceData = async () => {
   imageMap = {} // clear imageMap
 
-  const selectedContent = await getSelectedContent(isFullScan)
+  const selectedPromises = getSelectedNodes().map((node) => nodeToObject(node))
+  const selectedContent = await Promise.all(selectedPromises)
   if (!selectedContent.length) return null
 
   const document = { id: figma.root.id, name: figma.root.name }
@@ -38,19 +41,11 @@ const getSource = async (isFullScan = false) => {
   return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
 }
 
-const getSelectedObjectsCount = async (): Promise<number> => {
-  const selectedContent = await getSelectedContent(QUICK_SCAN)
-  return selectedContent.length
-}
-
-const nodeToObject = async (node: any, isFullScan = false) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const nodeToObject = async (node: any) => {
   const obj: any = { id: node.id, type: node.type }
-
   try {
     if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
-    if (isFullScan && node.children)
-      obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child, isFullScan)))
+    if (node.children) obj.children = await Promise.all(node.children.map((child: any) => nodeToObject(child)))
     const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
     const blacklist = ['parent', 'children', 'removed']
     for (const [name, prop] of props) {
@@ -59,7 +54,7 @@ const nodeToObject = async (node: any, isFullScan = false) => {
         if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
       }
     }
-    if (isFullScan && node.fills?.length > 0) {
+    if (node.fills?.length > 0) {
       for (const paint of node.fills) {
         if (paint.type === 'IMAGE') {
           const image = figma.getImageByHash(paint.imageHash)
@@ -87,7 +82,7 @@ const nodeToObject = async (node: any, isFullScan = false) => {
         'hyperlink',
       ])
     }
-    if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent, isFullScan)
+    if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent)
   } catch (error) {
     obj.ERROR = error
   }
@@ -95,12 +90,12 @@ const nodeToObject = async (node: any, isFullScan = false) => {
   return obj
 }
 
-const sendSelectionchange = async () => dispatch('SELECTION_CHANGE', await getSelectedObjectsCount())
+const sendSelectionchange = () => dispatch('SELECTION_CHANGE', getSelectedNodes().length)
 figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
-  const source = await getSource(FULL_SCAN)
+  const source = await getSourceData()
   dispatch('COPY_RESPONSE', JSON.stringify(source))
 })
 
