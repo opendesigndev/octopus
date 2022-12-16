@@ -81,6 +81,7 @@ const nodeToObject = async (node: any) => {
     }
     if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent)
   } catch (error) {
+    console.info('ERROR', error)
     obj.ERROR = error
   }
 

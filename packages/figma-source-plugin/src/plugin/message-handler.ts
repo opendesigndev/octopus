@@ -8,8 +8,9 @@ export const handleEvent = (type: string, callback: (data: unknown) => void) => 
   eventListeners.push({ type, callback })
 }
 
-figma.ui.onmessage = (message) => {
+figma.ui.onmessage = ({ action, data }) => {
+  console.info('figma.ui.onmessage', { action, data })
   for (const eventListener of eventListeners) {
-    if (message.action === eventListener.type) eventListener.callback(message.data)
+    if (action === eventListener.type) eventListener.callback(data)
   }
 }
