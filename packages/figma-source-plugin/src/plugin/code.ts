@@ -18,7 +18,8 @@ const getSelectedNodes = (selection = figma.currentPage.selection): SceneNode[] 
       const childNodes = getSelectedNodes((node as ChildrenMixin).children)
       return [...nodes, ...childNodes]
     }
-    if (['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE'].includes(node.type)) return [...nodes, node]
+    const ShapeTypes = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON', 'STAR', 'BOOLEAN_OPERATION']
+    if (['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE', 'TEXT', ...ShapeTypes].includes(node.type)) return [...nodes, node]
     return nodes
   }, [])
 }

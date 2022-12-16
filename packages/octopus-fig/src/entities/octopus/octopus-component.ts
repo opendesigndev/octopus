@@ -1,10 +1,11 @@
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
+import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { convertId } from '../../utils/convert'
+import { SourceLayerFrame } from '../source/source-layer-frame'
 import { OctopusLayerGroup } from './octopus-layer-group'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceComponent } from '../source/source-component'
 
@@ -14,49 +15,54 @@ type OctopusComponentOptions = {
 }
 
 export class OctopusComponent {
-  private _source: SourceComponent
+  private _sourceComponent: SourceComponent
   private _version: string
-  private _layers: OctopusLayer[]
 
   constructor(options: OctopusComponentOptions) {
-    this._source = options.source
+    this._sourceComponent = options.source
     this._version = options.version
-    this._layers = createOctopusLayers(this.source.layers, this)
   }
 
   get parentComponent(): OctopusComponent {
     return this
   }
 
-  get source(): SourceComponent {
-    return this._source
+  get sourceComponent(): SourceComponent {
+    return this._sourceComponent
+  }
+
+  get sourceLayer(): SourceLayer {
+    return this.sourceComponent.sourceLayer
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    const bounds = env.NODE_ENV === 'debug' ? this.source.bounds : this.source.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const bounds = env.NODE_ENV === 'debug' ? this.sourceComponent.bounds : this.sourceComponent.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     if (!bounds) return undefined
     const { width, height } = bounds
     return { width, height }
   }
 
   get id(): string {
-    return convertId(this.source.id)
+    return convertId(this.sourceComponent.id)
   }
 
   get version(): string {
     return this._version
   }
 
-  get layers(): OctopusLayer[] {
-    return this._layers
-  }
+  private get _content(): Octopus['Layer'] | undefined {
+    const sourceLayer = this.sourceLayer
 
-  private get _content(): Octopus['MaskGroupLayer'] | Octopus['GroupLayer'] | undefined {
-    const sourceLayer = this.source.sourceFrame
-    const maskGroup = sourceLayer.hasBackgroundMask
-      ? OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent: this, sourceLayer, isTopComponent: true })
-      : new OctopusLayerGroup({ parent: this, sourceLayer, isTopComponent: true })
-    return maskGroup?.convert() ?? undefined
+    if (sourceLayer instanceof SourceLayerFrame) {
+      const options = { parent: this, sourceLayer, isTopComponent: true }
+      const maskGroup = sourceLayer.hasBackgroundMask
+        ? OctopusLayerMaskGroup.createBackgroundMaskGroup(options)
+        : new OctopusLayerGroup(options)
+      return maskGroup?.convert() ?? undefined
+    }
+
+    const layer = createOctopusLayer({ parent: this, layer: sourceLayer })
+    return layer?.convert() ?? undefined
   }
 
   async convert(): Promise<Octopus['OctopusComponent']> {

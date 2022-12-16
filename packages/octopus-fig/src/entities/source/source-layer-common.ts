@@ -72,6 +72,10 @@ export class SourceLayerCommon extends SourceEntity {
     return getTransformFor(this._rawValue.relativeTransform)
   }
 
+  get hasBackgroundMask(): boolean {
+    return false
+  }
+
   @firstCallMemo()
   get fills(): SourcePaint[] {
     return this._rawValue.fills?.map((paint) => new SourcePaint({ rawValue: paint })) ?? []

@@ -32,7 +32,10 @@ export class SourceLayerFrame extends SourceLayerCommon {
   }
 
   get hasBackgroundMask(): boolean {
-    return this.fills.length > 0 || this.strokes.length > 0
+    const isFrameLike = ['FRAME', 'COMPONENT_SET', 'COMPONENT', 'INSTANCE'].includes(this.type)
+    const hasFills = this.fills.length > 0
+    const hasStrokes = this.strokes.length > 0
+    return isFrameLike && (hasFills || hasStrokes)
   }
 
   get type(): FrameTypes {
