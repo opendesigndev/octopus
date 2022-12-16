@@ -2,11 +2,8 @@
 
 import { Buffer } from 'buffer'
 
-// import { version } from '../../package.json'
-
+import { version } from '../../package.json'
 import { dispatch, handleEvent } from './message-handler'
-
-const version = '1.0.0' // TODO
 
 figma.showUI(__html__, { height: 360, width: 300 })
 figma.skipInvisibleInstanceChildren = true // skip invisible nodes for faster performance
