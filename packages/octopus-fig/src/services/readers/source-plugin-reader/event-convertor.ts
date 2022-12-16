@@ -1,4 +1,4 @@
-import { logger, base64ToBuffer } from '../..'
+import { logger, base64ToUint8Array } from '../..'
 import { SourceNormalizer } from './source-normalizer'
 import { isBase64 } from './utils'
 
@@ -19,7 +19,7 @@ export function convertToEvents(source: PluginSource): Event[] {
         logger?.error('Invalid image asset', { ref, data })
         continue
       }
-      const buffer = new Uint8Array(base64ToBuffer(data))
+      const buffer = base64ToUint8Array(data)
       events.push({ event: 'ready:fill', data: { designId, ref, buffer } })
     }
   }

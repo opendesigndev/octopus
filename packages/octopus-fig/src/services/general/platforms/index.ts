@@ -21,12 +21,9 @@ type WebBenchmarkFactory = () => {
 type NodeImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
 type WebImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
 
-type NodeBufferFactory = () => {
-  base64ToBuffer: (base64: string) => Buffer
-}
-type WebBufferFactory = () => {
-  base64ToBuffer: (base64: string) => Uint8Array
-}
+// Buffer service
+type NodeBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Array }
+type WebBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Array }
 
 // Node stack
 export type NodeFactories = {

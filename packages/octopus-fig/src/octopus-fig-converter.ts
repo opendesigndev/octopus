@@ -34,10 +34,6 @@ export type DesignConverterOptions = {
   skipReturn?: boolean
 }
 
-export type CustomBuffer = {
-  base64ToBuffer: (base64: string) => Buffer | Uint8Array
-}
-
 /**
  * Octopus Figma Converter
  * Main class for converting Figma designs into Octopus3.
@@ -59,7 +55,9 @@ export class OctopusFigConverter {
       benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
     }
     imageSize: (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
-    buffer: CustomBuffer
+    buffer: {
+      base64ToUint8Array: (base64: string) => Uint8Array
+    }
   }
 
   constructor(options: OctopusConverterOptions) {
@@ -76,8 +74,8 @@ export class OctopusFigConverter {
     return this._services.imageSize
   }
 
-  get base64ToBuffer() {
-    return this._services.buffer.base64ToBuffer
+  get base64ToUint8Array() {
+    return this._services.buffer.base64ToUint8Array
   }
 
   private _initServices() {

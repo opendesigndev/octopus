@@ -14,7 +14,7 @@ export { SourceApiReader } from './services/readers/source-api-reader'
 export { SourcePluginReader } from './services/readers/source-plugin-reader'
 
 const buffer = {
-  base64ToBuffer: (base64: string) => Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)),
+  base64ToUint8Array: (base64: string) => Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)),
 }
 
 export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
