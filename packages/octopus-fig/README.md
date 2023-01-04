@@ -24,10 +24,13 @@ If missing `.env` file, make a copy of `.env.example` and rename it to `.env` an
 There are three main processing steps:
 
 - reading source data (using _readers_)
-- conversion (using _converter_ with `EventEmitter` instance produced by reader)
+- conversion (using _converter_ with `EventEmitter` instance produced by a reader)
 - exporting (using _exporters_)
 
-Readers used in other Octopus converters return `SourceDesign` instance, which, actually, is object with static values inside. In case of Figma, we have slightly different approach because of it's asynchronous origin (requesting values using HTTP). So, to provide source data as fast as possible to the converter we use `EventEmitter` inside of Figma Reader's `SourceDesign` instance. This makes it possible to process data almost as fast as it's downloaded from Figma's API.
+Readers used in other Octopus converters return `SourceDesign` instance, which is an object with static values inside.
+In case of Figma, we have slightly different approach because of it's asynchronous origin (requesting values using HTTP).
+So, to provide source data as fast as possible to the converter we use `EventEmitter` inside of Figma Reader's `SourceDesign` instance.
+This makes it possible to process data almost as fast as it's downloaded from Figma's API.
 
 Although you can define the way of reading assets or exporting results yourself (create your own reader/exporter class), you can also choose between existing ones:
 
@@ -35,7 +38,7 @@ Check [`examples/node/convert-api-local.ts`](./examples/node/convert-api-local.t
 
 Check [`examples/node/convert-api-debug.ts`](./examples/node/convert-api-debug.ts) for example usage in custom manual runs.
 
-Check [`examples/web/`](./examples/web/) for more details about usage in web browser.
+Check [`examples/web/`](./examples/web/) for more details about usage in web browsers.
 
 Check [`src/services/exporters/`](./src/services/exporters/) for more details about exporters.
 
@@ -52,7 +55,7 @@ You can find it in the URL of the design: `https://www.figma.com/file/__HERE__/.
 
 #### .env demo variables
 
-ENV variables for our demo scripts located in `/examples/node/*`
+ENV variables for our demo scripts which are located in `/`examples/node/\*`
 
 | Variable              | Type    | Description                                                    |
 | --------------------- | ------- | -------------------------------------------------------------- |

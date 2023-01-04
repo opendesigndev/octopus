@@ -1,5 +1,6 @@
 import { createParser } from '@opendesign/figma-parser'
 
+import type { AbstractReader } from './abstract-reader'
 import type { Logger } from '@opendesign/figma-parser/lib/src/services/logger/logger'
 import type { ICacher } from '@opendesign/figma-parser/lib/src/types/cacher'
 // eslint-disable-next-line import/no-named-as-default
@@ -30,7 +31,7 @@ export type SourceApiReaderOptions = {
 /**
  * Reader that downloads given design from Figma API and provide them through `EventEmitter` calls.
  */
-export class SourceApiReader {
+export class SourceApiReader implements AbstractReader {
   private _options: SourceApiReaderOptions
   private _parser: ReturnType<typeof createParser>
 

@@ -1,13 +1,14 @@
 import { DesignEmitter } from './design-emitter'
 
 import type { PluginSource } from '../../../typings/plugin-source'
+import type { AbstractReader } from '../abstract-reader'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
 /**
  * Reader that receives Design Source from Squid Plugin and provide them through `EventEmitter` calls.
  */
-export class SourcePluginReader {
+export class SourcePluginReader implements AbstractReader {
   private _pluginSource: PluginSource
 
   /**
