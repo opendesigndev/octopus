@@ -1,4 +1,5 @@
 import type { RawLayer } from '../../../typings/raw'
+import type { ImageSize } from '../../general/image-size/image-size'
 
 export type EventDesign = {
   event: 'ready:design'
@@ -36,4 +37,5 @@ export type ResolvedFill = {
   designId: string
   ref: string
   buffer: Uint8Array
+  size?: ImageSize | undefined
 }

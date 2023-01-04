@@ -215,14 +215,14 @@ export class DesignConverter {
     this.octopusManifest?.setExportedChunk(style, chunkPath)
   }
 
-  private async _convertFill(fill: ResolvedFill) {
+  private async _convertFill(fill: ResolvedFill & { size?: ImageSize }) {
     if (typeof fill.buffer === 'string') fill.buffer = this._octopusConverter.base64ToUint8Array(fill.buffer) // @TODO investigate Buffer.buffer safety
 
     const fillName = fill.ref
-    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
-
-    const imageSize = await this._octopusConverter.imageSize(fill.buffer)
+    const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
     if (imageSize) this._imageSizeMap[fillName] = imageSize
+
+    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
 
     this.octopusManifest?.setExportedImagePath(fillName, fillPath)
     if (this._shouldReturn) this._conversionResult.images.push({ name: fillName, data: fill.buffer })

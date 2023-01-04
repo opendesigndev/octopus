@@ -18,8 +18,8 @@ type WebBenchmarkFactory = () => {
 }
 
 // ImageSize service
-type NodeImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
-type WebImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
+export type ImageSizeService = (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
+type ImageSizeFactory = () => ImageSizeService
 
 // Buffer service
 type NodeBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Array }
@@ -29,7 +29,7 @@ type WebBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Arr
 export type NodeFactories = {
   createLoggerFactory: NodeLoggerFactory
   createBenchmarkService: NodeBenchmarkFactory
-  createImageSizeService: NodeImageSizeFactory
+  createImageSizeService: ImageSizeFactory
   createBufferService: NodeBufferFactory
   createEnvironment: NodeEnvironmentFactory
 }
@@ -38,7 +38,7 @@ export type NodeFactories = {
 export type WebFactories = {
   createLoggerFactory: WebLoggerFactory
   createBenchmarkService: WebBenchmarkFactory
-  createImageSizeService: WebImageSizeFactory
+  createImageSizeService: ImageSizeFactory
   createBufferService: WebBufferFactory
   createEnvironment: null
 }

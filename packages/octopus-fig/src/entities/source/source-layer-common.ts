@@ -132,7 +132,7 @@ export class SourceLayerCommon extends SourceEntity {
 
   get cornerRadius(): number | undefined {
     const radius = this._rawValue.cornerRadius
-    return typeof radius === 'number' ? radius : undefined
+    return typeof radius === 'number' && radius ? radius : undefined
   }
 
   get cornerRadii(): number[] | undefined {
