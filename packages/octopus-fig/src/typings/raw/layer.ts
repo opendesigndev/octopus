@@ -28,6 +28,11 @@ export type RawSlice = {
   size?: RawVector
 }
 
+export type RawParent = {
+  id?: string
+  type?: RawLayerFrame['type'] | 'PAGE'
+}
+
 export type RawLayerBase = {
   id?: string
   name?: string
@@ -50,6 +55,7 @@ export type RawLayerBase = {
   strokeWeight?: number | null
   strokeAlign?: RawAlign
   effects?: RawEffect[]
+  parent?: RawParent
 }
 
 export type RawStrokeCap = 'NONE' | 'ROUND' | 'SQUARE' | 'LINE_ARROW' | 'TRIANGLE_ARROW'
@@ -66,7 +72,7 @@ export type RawLayerVector = RawLayerBase & {
 }
 
 export type RawLayerFrame = RawLayerVector & {
-  type?: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
+  type?: 'FRAME' | 'GROUP' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
   componentId?: string

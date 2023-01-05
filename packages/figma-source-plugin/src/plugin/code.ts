@@ -42,7 +42,7 @@ const getSourceData = async () => {
 const nodeToObject = async (node: any) => {
   const obj: any = { id: node.id, type: node.type }
   try {
-    if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
+    if (node.parent) obj.parent = { id: node.parent.id, type: node.parent.type }
     if (node.children) {
       const childrenPromises = node.children.map((child: any) => nodeToObject(child))
       obj.children = await Promise.all(childrenPromises)

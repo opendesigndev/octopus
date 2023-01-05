@@ -28,6 +28,7 @@ type OctopusLayerMaskGroupOptions = {
   opacity?: number
   blendMode?: RawBlendMode
   isTopComponent?: boolean
+  isArtboard?: boolean
   boundingBox?: SourceBounds
 }
 
@@ -57,6 +58,7 @@ export class OctopusLayerMaskGroup {
   private _blendMode?: RawBlendMode
   private _boundingBox?: SourceBounds
   private _isTopComponent: boolean
+  private _isArtboard: boolean
 
   static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
     const rawLayer = { ...(frame.raw as RawLayerShape) }
@@ -83,10 +85,7 @@ export class OctopusLayerMaskGroup {
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
     const layers = createOctopusLayers(sourceLayer.layers, parent)
-    const visible = sourceLayer.visible
-    const blendMode = sourceLayer.blendMode
-    const opacity = sourceLayer.opacity
-    const name = sourceLayer.name
+    const { visible, blendMode, opacity, name, isArtboard } = sourceLayer
     const boundingBox = sourceLayer.boundingBox ?? undefined
     return new OctopusLayerMaskGroup({
       id,
@@ -100,6 +99,7 @@ export class OctopusLayerMaskGroup {
       opacity,
       visible,
       isTopComponent,
+      isArtboard,
       boundingBox,
     })
   }
@@ -131,6 +131,7 @@ export class OctopusLayerMaskGroup {
     this._blendMode = options.blendMode
     this._boundingBox = options.boundingBox
     this._isTopComponent = options.isTopComponent ?? false
+    this._isArtboard = options.isArtboard ?? false
   }
 
   get id(): string {
@@ -187,10 +188,10 @@ export class OctopusLayerMaskGroup {
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._isTopComponent
+    const isArtboard = this._isArtboard
     const { x, y } = this._boundingBox ?? {}
     const transform = x !== undefined && y !== undefined ? { origin: { x, y } } : undefined
-    return isArtboard ? { isArtboard, transform } : undefined
+    return this._isTopComponent ? { isArtboard, transform } : undefined
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {

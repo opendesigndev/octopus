@@ -146,4 +146,9 @@ export class SourceLayerCommon extends SourceEntity {
   get isMaskOutline(): boolean {
     return this._rawValue.isMaskOutline ?? false
   }
+
+  get isArtboard(): boolean | undefined {
+    if (this._rawValue.parent?.type) return this._rawValue.parent?.type === 'PAGE'
+    return this.parent instanceof SourceComponent
+  }
 }

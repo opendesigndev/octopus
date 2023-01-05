@@ -42,10 +42,10 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._isTopComponent
+    const isArtboard = this._sourceLayer.isArtboard
     const { x, y } = this._sourceLayer.boundingBox ?? {}
     const transform = x !== undefined && y !== undefined ? { origin: { x, y } } : undefined
-    return isArtboard ? { isArtboard, transform } : undefined
+    return this._isTopComponent ? { isArtboard, transform } : undefined
   }
 
   get layers(): OctopusLayer[] {
