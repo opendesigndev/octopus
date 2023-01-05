@@ -6,7 +6,6 @@ import { version } from '../../package.json'
 import { dispatch, handleEvent } from './message-handler'
 
 figma.showUI(__html__, { height: 360, width: 300 })
-figma.skipInvisibleInstanceChildren = true // skip invisible nodes for faster performance
 
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
@@ -45,9 +44,7 @@ const nodeToObject = async (node: any) => {
   try {
     if (node.parent) obj.parent = { id: node.parent.id, type: node.type }
     if (node.children) {
-      const childrenPromises = node.children
-        .filter((child: any) => child.visible !== false)
-        .map((child: any) => nodeToObject(child))
+      const childrenPromises = node.children.map((child: any) => nodeToObject(child))
       obj.children = await Promise.all(childrenPromises)
     }
     const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
