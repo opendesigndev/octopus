@@ -1,0 +1,74 @@
+{
+  "id": "pasteboard-1",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.7",
+  "dimensions": {
+    "width": 914,
+    "height": 914
+  },
+  "content": {
+    "id": "2-ShapeMask-Background",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "maskBasis": "BODY",
+    "mask": {
+      "id": "2-ShapeMask-BackgroundMask",
+      "type": "SHAPE",
+      "visible": false,
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "rectangle": {
+            "x0": 0,
+            "x1": 914,
+            "y0": 0,
+            "y1": 914
+          }
+        },
+        "fills": []
+      }
+    },
+    "layers": [
+      {
+        "id": "2-ShapeMask",
+        "type": "MASK_GROUP",
+        "maskBasis": "BODY",
+        "mask": {
+          "id": "7c0da4b4-cf34-4d58-9a28-7b2493b657bb",
+          "name": "Layer",
+          "type": "SHAPE",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "visible": false,
+          "blendMode": "NORMAL",
+          "opacity": 1,
+          "effects": [],
+          "shape": {
+            "fillRule": "EVEN_ODD",
+            "path": {
+              "type": "PATH",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "geometry": "M457,0c252.39406,0 457,204.60594 457,457c0,252.39406 -204.60594,457 -457,457c-252.39406,0 -457,-204.60594 -457,-457c0,-252.39406 204.60594,-457 457,-457z"
+            },
+            "fills": [],
+            "strokes": []
+          }
+        },
+        "layers": []
+      }
+    ]
+  }
+}

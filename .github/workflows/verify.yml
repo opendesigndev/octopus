@@ -1,0 +1,36 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: node -v
+      - run: yarn -v
+      - name: install
+        run: yarn
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: build
+        run: yarn build
+      - name: prettier
+        run: yarn lint:prettier
+      - name: eslint
+        run: yarn lint:eslint
+      - name: test
+        run: yarn test
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: reports
+          path: ${{ github.workspace }}/packages/**/report/*.html

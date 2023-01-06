@@ -138,7 +138,11 @@ export class Tester {
   private async _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
     const differ = jsondiffpatch.create({
       propertyFilter: (name: string) => {
-        return name === 'version' ? false : true // ignore version
+        if (name === 'version' || name === 'id') {
+          return false
+        }
+
+        return true
       },
     })
 

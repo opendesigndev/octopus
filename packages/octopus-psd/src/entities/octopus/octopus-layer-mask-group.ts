@@ -93,7 +93,6 @@ export class OctopusLayerMaskGroup {
   }: CreateWrapMaskOptions<T>): OctopusLayerMaskGroup | T {
     const bitmapMask = sourceLayer.bitmapMask
     if (!bitmapMask) return octopusLayer
-
     const { width, height } = octopusLayer.parentComponent.dimensions
     const bounds = { left: 0, right: width, top: 0, bottom: height }
     const raw: RawLayerLayer = { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName: bitmapMask }
@@ -117,7 +116,6 @@ export class OctopusLayerMaskGroup {
   }: CreateWrapMaskOptions<T>): OctopusLayerMaskGroup | T {
     const path = sourceLayer.path
     if (!path) return octopusLayer
-
     const raw: RawLayerShape = { type: 'shapeLayer', visible: false, path: path.raw as RawPath }
     const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
     const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })

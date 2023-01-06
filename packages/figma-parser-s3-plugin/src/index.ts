@@ -6,7 +6,7 @@ import type { Logger, S3Service } from './types'
 import type { IPathLocator } from './types/path-locator'
 import type AWS from 'aws-sdk'
 
-type S3CacherWithInstanceOptions = {
+export type S3CacherOptions = {
   logger?: Logger
   verbose?: boolean
   pathLocator: IPathLocator
@@ -21,7 +21,6 @@ type S3CacherWithInstanceOptions = {
   acl?: string
   s3: AWS.S3
 }
-export type S3CacherOptions = S3CacherWithInstanceOptions
 
 export type { IPathLocator }
 
