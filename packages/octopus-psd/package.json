@@ -21,6 +21,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
+    "@webtoon/psd": "npm:@opendesign/psd-ts@0.0.0-experimental-f5dd88b-20230109",
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
     "@opendesign/octopus-common": "3.0.0-rc.27",
     "@opendesign/octopus-ts": "3.0.0-alpha.38",
