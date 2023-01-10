@@ -1,3 +1,4 @@
+import type { BufferFactory } from '../buffer/buffer-factory'
 import type { Env } from '../environment'
 import type { ImageSize } from '../image-size/image-size'
 import type { LoggerFactory } from '../logger/logger-factory'
@@ -22,8 +23,8 @@ export type ImageSizeService = (buffer: ArrayBuffer) => Promise<ImageSize | unde
 type ImageSizeFactory = () => ImageSizeService
 
 // Buffer service
-type NodeBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Array }
-type WebBufferFactory = () => { base64ToUint8Array: (base64: string) => Uint8Array }
+type NodeBufferFactory = BufferFactory
+type WebBufferFactory = BufferFactory
 
 // Node stack
 export type NodeFactories = {

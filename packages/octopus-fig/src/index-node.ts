@@ -1,6 +1,7 @@
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
 
 import { OctopusFigConverter } from './octopus-fig-converter'
+import { base64ToUint8Array } from './services/general/buffer/buffer-node'
 import { createEnvironmentNode } from './services/general/environment/node/env-node'
 import { imageSize } from './services/general/image-size/image-size-node'
 import { createLoggerNode } from './services/general/logger/node/logger-node'
@@ -16,10 +17,6 @@ export { SourcePluginReader } from './services/readers/source-plugin-reader'
 
 export type { SourceDesign }
 
-const buffer = {
-  base64ToUint8Array: (base64: string) => new Uint8Array(Buffer.from(base64, 'base64')),
-}
-
 export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({
     ...options,
@@ -28,7 +25,7 @@ export function createConverter(options?: Omit<OctopusConverterOptions, 'platfor
       createLoggerFactory: createLoggerNode,
       createBenchmarkService: () => ({ benchmarkAsync }),
       createImageSizeService: () => imageSize,
-      createBufferService: () => buffer,
+      createBufferService: () => ({ base64ToUint8Array }),
     } as NodeFactories,
   })
 }

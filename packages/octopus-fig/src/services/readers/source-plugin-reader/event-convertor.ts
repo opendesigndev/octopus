@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import { logger, base64ToUint8Array } from '../..'
 import { SourceNormalizer } from './source-normalizer'
 import { isBase64 } from './utils'
@@ -8,7 +10,8 @@ import type { Event, EventDesign } from './types'
 export function convertToEvents(source: PluginSource): Event[] {
   const { document, selectedContent, assets } = source.context ?? {}
 
-  const designId = document?.id ?? 'unknown'
+  if (!document?.id) logger?.warn('Unknown document id', { source })
+  const designId = document?.id ?? uuidv4()
   const designEvent: EventDesign = { event: 'ready:design', data: { designId } }
   const events: Event[] = [designEvent]
 

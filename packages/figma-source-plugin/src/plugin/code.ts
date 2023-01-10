@@ -50,7 +50,7 @@ const nodeToObject = async (node: any) => {
     const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
     const blacklist = ['parent', 'children', 'removed']
     for (const [name, prop] of props) {
-      if (prop.get && blacklist.indexOf(name) < 0) {
+      if (prop.get && !blacklist.includes(name)) {
         obj[name] = prop.get.call(node)
         if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
       }
@@ -61,7 +61,7 @@ const nodeToObject = async (node: any) => {
           const image = figma.getImageByHash(paint.imageHash)
           if (image?.hash && !imageMap[image.hash]) {
             const bytes = await image.getBytesAsync()
-            imageMap[image.hash] = Buffer.from(bytes).toString('base64')
+            imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
           }
         }
       }
@@ -89,7 +89,7 @@ const nodeToObject = async (node: any) => {
     obj.ERROR = error
   }
 
-  return obj
+  return obj // TODO add return type which is not any
 }
 
 const sendSelectionchange = () => dispatch('SELECTION_CHANGE', getSelectedNodes().length)

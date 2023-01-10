@@ -39,5 +39,5 @@
   "files": [
     "dist"
   ],
-  "main": "code.js"
+  "main": "dist/code.js"
 }
