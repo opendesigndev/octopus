@@ -100,7 +100,7 @@ describe('src/utils/raw', () => {
         },
       }
 
-      expect(parseNodeChild(input as any).parsedProperties).toEqual(expected.parsedProperties)
+      expect(parseNodeChild(input as any).layerProperties).toEqual(expected.parsedProperties)
     })
   })
 })

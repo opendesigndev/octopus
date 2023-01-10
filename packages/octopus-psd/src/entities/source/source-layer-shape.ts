@@ -25,8 +25,8 @@ export class SourceLayerShape extends SourceLayerCommon {
   @firstCallMemo()
   get path(): SourcePath {
     return new SourcePath({
-      vectorOriginationData: this._rawValue.parsedProperties?.vogk,
-      vectorMaskSetting: this._rawValue.parsedProperties?.vmsk ?? this._rawValue?.parsedProperties?.vsms,
+      vectorOriginationData: this._rawValue.layerProperties?.vogk,
+      vectorMaskSetting: this._rawValue.layerProperties?.vmsk ?? this._rawValue?.layerProperties?.vsms,
       documentDimensions: this.documentDimensions,
     })
   }
@@ -49,14 +49,14 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   @firstCallMemo()
   get fill(): SourceEffectFill {
-    const { SoCo, GdFl, vscg } = this._rawValue.parsedProperties ?? {}
+    const { SoCo, GdFl, vscg } = this._rawValue.layerProperties ?? {}
     const fill = SoCo ?? GdFl ?? vscg
 
-    return new SourceEffectFill(fill, this._rawValue.parsedProperties?.vstk?.fillEnabled)
+    return new SourceEffectFill(fill, this._rawValue.layerProperties?.vstk?.fillEnabled)
   }
 
   @firstCallMemo()
   get stroke(): SourceStroke {
-    return new SourceStroke(this._rawValue?.parsedProperties?.vstk)
+    return new SourceStroke(this._rawValue?.layerProperties?.vstk)
   }
 }

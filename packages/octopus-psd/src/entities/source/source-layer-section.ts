@@ -36,7 +36,7 @@ export class SourceLayerSection extends SourceLayerCommon {
   }
 
   get bounds(): SourceBounds {
-    const artboardRect = this._rawValue?.parsedProperties?.artb?.artboardRect
+    const artboardRect = this._rawValue?.layerProperties?.artb?.artboardRect
 
     return artboardRect ? getBoundsFor(artboardRect) : this._parent.bounds
   }

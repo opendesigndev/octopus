@@ -52,7 +52,7 @@ export class SourceComponent extends SourceEntity {
   }
 
   get bounds(): SourceBounds {
-    const artboardRect = this._rawValue.parsedProperties?.artb?.artboardRect
+    const artboardRect = this._rawValue.layerProperties?.artb?.artboardRect
 
     return artboardRect
       ? getBoundsFor(artboardRect)
@@ -62,8 +62,8 @@ export class SourceComponent extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue?.parsedProperties?.lyid !== undefined
-      ? String(this._rawValue.parsedProperties?.lyid)
+    return this._rawValue?.layerProperties?.lyid !== undefined
+      ? String(this._rawValue.layerProperties?.lyid)
       : SourceComponent.DEFAULT_ID
   }
 
@@ -76,7 +76,7 @@ export class SourceComponent extends SourceEntity {
   }
 
   get isArtboard(): boolean {
-    return Boolean(this._rawValue?.parsedProperties?.artb)
+    return Boolean(this._rawValue?.layerProperties?.artb)
   }
 
   get artboardColor(): SourceColor | null {
@@ -84,11 +84,11 @@ export class SourceComponent extends SourceEntity {
   }
 
   get artboardBackgroundType(): number | undefined {
-    return this._rawValue?.parsedProperties?.artb?.artboardBackgroundType
+    return this._rawValue?.layerProperties?.artb?.artboardBackgroundType
   }
 
   get rawArtboardColor(): RawColor | undefined {
-    return this._rawValue?.parsedProperties?.artb?.Clr
+    return this._rawValue?.layerProperties?.artb?.Clr
   }
 
   get globalLightAngle(): number {

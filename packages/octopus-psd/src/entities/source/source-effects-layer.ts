@@ -18,7 +18,7 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   private get _lfx2(): RawlayerEffects | undefined {
-    return this._rawValue?.parsedProperties?.lfx2
+    return this._rawValue?.layerProperties?.lfx2
   }
 
   get enabledAll(): boolean {

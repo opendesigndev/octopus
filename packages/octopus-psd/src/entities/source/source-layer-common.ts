@@ -39,7 +39,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   private get _layerProperties(): LayerProperties | undefined {
-    return this._rawValue.parsedProperties
+    return this._rawValue.layerProperties
   }
 
   get type(): SourceLayerType | undefined {
@@ -77,7 +77,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get isArtboard(): boolean {
-    return Boolean(this._rawValue.parsedProperties?.artb)
+    return Boolean(this._rawValue.layerProperties?.artb)
   }
 
   get visible(): boolean {
@@ -105,8 +105,8 @@ export class SourceLayerCommon extends SourceEntity {
 
   get blendMode(): string | undefined {
     return (
-      this._rawValue.parsedProperties?.lsct?.blendMode ??
-      this._rawValue.parsedProperties?.lsdk?.blendMode ??
+      this._rawValue.layerProperties?.lsct?.blendMode ??
+      this._rawValue.layerProperties?.lsdk?.blendMode ??
       this._rawValue.blendMode
     )
   }
@@ -170,10 +170,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   @firstCallMemo()
   get path(): SourcePath | undefined {
-    const vectorMaskSetting = this._rawValue?.parsedProperties?.vmsk ?? this._rawValue?.parsedProperties?.vsms
+    const vectorMaskSetting = this._rawValue?.layerProperties?.vmsk ?? this._rawValue?.layerProperties?.vsms
     if (vectorMaskSetting)
       return new SourcePath({
-        vectorOriginationData: this._rawValue.parsedProperties?.vogk,
+        vectorOriginationData: this._rawValue.layerProperties?.vogk,
         vectorMaskSetting,
         documentDimensions: this.documentDimensions,
       })

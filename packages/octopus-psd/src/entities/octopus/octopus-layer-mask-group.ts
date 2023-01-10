@@ -103,7 +103,7 @@ export class OctopusLayerMaskGroup {
       top: bounds.top,
       left: bounds.left,
       isHidden: true,
-      parsedProperties: {
+      layerProperties: {
         lyid: bitmapMask.replace('.png', ''),
       },
     }
@@ -135,7 +135,7 @@ export class OctopusLayerMaskGroup {
     const raw: RawLayerShape = {
       addedType: 'shapeLayer',
       isHidden: true,
-      parsedProperties: { vmsk: path.vectorMaskSetting, vogk: path.vectorOriginationData },
+      layerProperties: { vmsk: path.vectorMaskSetting, vogk: path.vectorOriginationData },
     }
 
     const maskSourceLayer = createSourceLayer({

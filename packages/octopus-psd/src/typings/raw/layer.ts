@@ -62,10 +62,10 @@ export type NodeChildWithType = (ParsedLayerGroup | ParsedLayerLayer) & AddedTyp
 export type NodeChildWithProps = ParsedLayerGroup | ParsedLayerLayer
 
 export type ParsedLayerLayer = Partial<Layer> & {
-  parsedProperties?: LayerProperties
+  layerProperties?: LayerProperties
 }
 
 export type ParsedLayerGroup = Partial<Exclude<Group, 'children'>> & {
   children: NodeChildWithProps[]
-  parsedProperties?: LayerProperties
+  layerProperties?: LayerProperties
 }

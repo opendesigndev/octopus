@@ -7,7 +7,7 @@ describe('src/factories/create-source-layer.ts', () => {
   describe(getRawLayerWithType.name, () => {
     it('returns backgroundLayer when typeKey is bgnd', () => {
       const layer = getRawLayerWithType({
-        parsedProperties: {
+        layerProperties: {
           [AliKey.LayerNameSourceSetting]: Buffer.from('bgnd'),
         },
       } as any)
@@ -35,7 +35,7 @@ describe('src/factories/create-source-layer.ts', () => {
     it('returns shapeLayer when there is vmsk and there is one of PSDFileReader.SHAPE_LAYER_KEYS', () => {
       const layer = getRawLayerWithType({
         type: 'Layer',
-        parsedProperties: {
+        layerProperties: {
           vmsk: {
             pathRecords: [],
           },
@@ -49,7 +49,7 @@ describe('src/factories/create-source-layer.ts', () => {
     it('returns shapeLayer when there is vsms or vsmk and there is one of PSDFileReader.SHAPE_LAYER_KEYS', () => {
       const layer = getRawLayerWithType({
         type: 'Layer',
-        parsedProperties: {
+        layerProperties: {
           vsms: {
             pathRecords: [],
           },
@@ -63,7 +63,7 @@ describe('src/factories/create-source-layer.ts', () => {
     it('does not return shapeLayer when there is vsms or vmsk and there is one of PSDFileReader.SHAPE_LAYER_KEYS but vsms is disable', () => {
       const layer = getRawLayerWithType({
         type: 'Layer',
-        parsedProperties: {
+        layerProperties: {
           vsms: {
             pathRecords: [],
             disable: true,
@@ -78,7 +78,7 @@ describe('src/factories/create-source-layer.ts', () => {
     it('returns adjustmentLayer when one of the keys is in PSDFileReader.ADJUSTMENT_LAYER_KEYS', () => {
       const layer = getRawLayerWithType({
         type: 'Layer',
-        parsedProperties: {
+        layerProperties: {
           [AliKey.SolidColorSheetSetting]: {},
         },
       })

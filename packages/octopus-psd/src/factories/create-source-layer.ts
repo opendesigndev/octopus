@@ -98,7 +98,7 @@ export function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWith
     return rawLayer
   }
 
-  const typeKey = getLayerTypeKey(rawLayer.parsedProperties)
+  const typeKey = getLayerTypeKey(rawLayer.layerProperties)
 
   if (typeKey === 'bgnd') {
     return Object.create(rawLayer, { addedType: { value: 'backgroundLayer' } }) as NodeChildWithType
@@ -112,11 +112,11 @@ export function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWith
     return Object.create(rawLayer, { addedType: { value: 'textLayer' } })
   }
 
-  if (isShapeLayer(rawLayer.parsedProperties)) {
+  if (isShapeLayer(rawLayer.layerProperties)) {
     return Object.create(rawLayer, { addedType: { value: 'shapeLayer' } })
   }
 
-  if (isAdjustmentLayer(rawLayer.parsedProperties)) {
+  if (isAdjustmentLayer(rawLayer.layerProperties)) {
     return Object.create(rawLayer, { addedType: { value: 'adjustmentLayer' } })
   }
 

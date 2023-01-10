@@ -80,8 +80,8 @@ export function getAdditionalProperty(
   return additionalProperties[aliKey]
 }
 
-export function getLayerTypeKey(parsedProperties: LayerProperties | undefined): string | undefined {
-  const layerTypeProp = parsedProperties?.lnsr
+export function getLayerTypeKey(layerProperties: LayerProperties | undefined): string | undefined {
+  const layerTypeProp = layerProperties?.lnsr
 
   if (!layerTypeProp) {
     return
@@ -90,13 +90,13 @@ export function getLayerTypeKey(parsedProperties: LayerProperties | undefined): 
   return Buffer.from(layerTypeProp).toString()
 }
 
-export function isShapeLayer(parsedProperties: LayerProperties | undefined): boolean {
-  if (!parsedProperties) {
+export function isShapeLayer(layerProperties: LayerProperties | undefined): boolean {
+  if (!layerProperties) {
     return false
   }
-  const vectorMaskSetting1 = parsedProperties[AliKey.VectorMaskSetting1]
+  const vectorMaskSetting1 = layerProperties[AliKey.VectorMaskSetting1]
 
-  const validVectorMaskSetting = vectorMaskSetting1 ? vectorMaskSetting1 : parsedProperties[AliKey.VectorMaskSetting2]
+  const validVectorMaskSetting = vectorMaskSetting1 ? vectorMaskSetting1 : layerProperties[AliKey.VectorMaskSetting2]
 
   if (
     !validVectorMaskSetting ||
@@ -106,7 +106,7 @@ export function isShapeLayer(parsedProperties: LayerProperties | undefined): boo
     return false
   }
 
-  return Boolean(intersection(Object.keys(parsedProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
+  return Boolean(intersection(Object.keys(layerProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
 }
 
 export function isAdjustmentLayer(layerProperties: LayerProperties | undefined): boolean {

@@ -29,7 +29,7 @@ export class SourceText extends SourceEntity {
 
     this._rawValue = rawValue
     this._engineData = rawValue.textProperties
-    this._textProps = rawValue.parsedProperties?.TySh
+    this._textProps = rawValue.layerProperties?.TySh
   }
 
   get textKey(): string {

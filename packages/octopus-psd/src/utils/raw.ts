@@ -186,7 +186,7 @@ export function parseAdditionalProperty(additionalProperty: AdditionalLayerInfo)
 
 export function parseNodeChild(nodeChild: NodeChild): NodeChildWithProps {
   return Object.create(nodeChild, {
-    parsedProperties: {
+    layerProperties: {
       value: Object.values(nodeChild.additionalProperties ?? {}).reduce<DescriptorValueTree>(
         (properties, additionalProperty: AdditionalLayerInfo) => {
           return { ...properties, ...parseAdditionalProperty(additionalProperty) }
