@@ -34,9 +34,4 @@ export const DEFAULTS = {
   LAYER: {
     NAME: 'Layer',
   },
-  READER: {
-    // some keys from reader can return percentage or integer values. we need to keep track
-    // of such keys and return their unit type together with values
-    KEYS_WITH_AMBIGUOUS_VALUES: ['Hrzn', 'Vrtc'] as string[],
-  },
 } as const

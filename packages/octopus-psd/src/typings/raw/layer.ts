@@ -50,6 +50,7 @@ export type LayerProperties = Partial<{
   vogk: VectorOriginationData
   lsct: RawLayerBlendProps
   lsdk: RawLayerBlendProps
+  lnsr: Uint8Array
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   SoLd: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

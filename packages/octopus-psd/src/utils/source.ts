@@ -1,5 +1,5 @@
 import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
-import { AliKey, Layer } from '@webtoon/psd'
+import { AliKey } from '@webtoon/psd'
 import intersection from 'lodash/intersection.js'
 
 import { PSDFileReader } from '../services/readers/psd-file-reader.js'
@@ -12,9 +12,10 @@ import type {
   RawColor,
   RawBounds,
   NodeChildWithProps,
+  LayerProperties,
 } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
-import type { AdditionalLayerInfo, NodeChild } from '@webtoon/psd'
+import type { AdditionalLayerInfo, NodeChild, Layer } from '@webtoon/psd'
 import type { AdditionalLayerProperties } from '@webtoon/psd/dist/sections'
 
 export function isArtboard(raw: NodeChild) {
@@ -79,31 +80,23 @@ export function getAdditionalProperty(
   return additionalProperties[aliKey]
 }
 
-export function getLayerTypeKey(additionalLayerProperties: AdditionalLayerProperties | undefined): string | undefined {
-  const layerTypeProp = getAdditionalProperty(AliKey.LayerNameSourceSetting, additionalLayerProperties)
-  if (!layerTypeProp || !('data' in layerTypeProp)) {
+export function getLayerTypeKey(parsedProperties: LayerProperties | undefined): string | undefined {
+  const layerTypeProp = parsedProperties?.lnsr
+
+  if (!layerTypeProp) {
     return
   }
 
-  const { data } = layerTypeProp
-
-  if (!ArrayBuffer.isView(data)) {
-    return
-  }
-
-  return Buffer.from(data).toString()
+  return Buffer.from(layerTypeProp).toString()
 }
 
-export function isShapeLayer(additionalProperties: AdditionalLayerProperties | undefined): boolean {
-  if (!additionalProperties) {
+export function isShapeLayer(parsedProperties: LayerProperties | undefined): boolean {
+  if (!parsedProperties) {
     return false
   }
+  const vectorMaskSetting1 = parsedProperties[AliKey.VectorMaskSetting1]
 
-  const vectorMaskSettingK = additionalProperties[AliKey.VectorMaskSetting1]
-
-  const validVectorMaskSetting = vectorMaskSettingK
-    ? vectorMaskSettingK
-    : additionalProperties[AliKey.VectorMaskSetting2]
+  const validVectorMaskSetting = vectorMaskSetting1 ? vectorMaskSetting1 : parsedProperties[AliKey.VectorMaskSetting2]
 
   if (
     !validVectorMaskSetting ||
@@ -113,15 +106,15 @@ export function isShapeLayer(additionalProperties: AdditionalLayerProperties | u
     return false
   }
 
-  return Boolean(intersection(Object.keys(additionalProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
+  return Boolean(intersection(Object.keys(parsedProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
 }
 
-export function isAdjustmentLayer(additionalProperties: AdditionalLayerProperties | undefined): boolean {
-  if (!additionalProperties) {
+export function isAdjustmentLayer(layerProperties: LayerProperties | undefined): boolean {
+  if (!layerProperties) {
     return false
   }
 
-  return Boolean(intersection(PSDFileReader.ADJUSTMENT_LAYER_KEYS, Object.keys(additionalProperties)).length)
+  return Boolean(intersection(PSDFileReader.ADJUSTMENT_LAYER_KEYS, Object.keys(layerProperties)).length)
 }
 
 export function getColor(rawColor: RawColor | undefined): null | SourceColor {

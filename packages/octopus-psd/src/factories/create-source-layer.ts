@@ -93,12 +93,12 @@ function createLayerAdjustment({ layer, parent }: CreateLayerOptions): SourceLay
   })
 }
 
-function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWithType): NodeChildWithType {
+export function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWithType): NodeChildWithType {
   if ('addedType' in rawLayer) {
     return rawLayer
   }
 
-  const typeKey = getLayerTypeKey(rawLayer.additionalProperties)
+  const typeKey = getLayerTypeKey(rawLayer.parsedProperties)
 
   if (typeKey === 'bgnd') {
     return Object.create(rawLayer, { addedType: { value: 'backgroundLayer' } }) as NodeChildWithType
@@ -112,11 +112,11 @@ function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWithType): 
     return Object.create(rawLayer, { addedType: { value: 'textLayer' } })
   }
 
-  if (isShapeLayer(rawLayer.additionalProperties)) {
+  if (isShapeLayer(rawLayer.parsedProperties)) {
     return Object.create(rawLayer, { addedType: { value: 'shapeLayer' } })
   }
 
-  if (isAdjustmentLayer(rawLayer.additionalProperties)) {
+  if (isAdjustmentLayer(rawLayer.parsedProperties)) {
     return Object.create(rawLayer, { addedType: { value: 'adjustmentLayer' } })
   }
 

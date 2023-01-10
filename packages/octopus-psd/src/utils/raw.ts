@@ -1,8 +1,6 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { DescriptorValueType, AliKey } from '@webtoon/psd'
 
-import { DEFAULTS } from './defaults.js'
-
 import type { DescriptorValueTreeNode, DescriptorValueTree, NodeChildWithProps, ParsedPsd } from '../typings/raw'
 import type Psd from '@webtoon/psd'
 import type { NodeChild, AdditionalLayerInfo } from '@webtoon/psd'
@@ -32,7 +30,6 @@ export function parseDescriptorItems(items?: Map<string, DescriptorValue>): Desc
       if (typeof descriptorValue === 'undefined') {
         return
       }
-
       const value = parseDescriptorValue(descriptorValue, key)
 
       if (typeof value === 'undefined') {
@@ -55,7 +52,9 @@ export function parseDescriptorItems(items?: Map<string, DescriptorValue>): Desc
 }
 
 function parseUnitTypeDescriptor(descriptor: UnitFloatDescriptorValue, key: string) {
-  if (DEFAULTS.READER.KEYS_WITH_AMBIGUOUS_VALUES.includes(key)) {
+  // these keys can have percentage or integer values. we need to keep track
+  // of such keys and return their unit type together with values
+  if (['Hrzn', 'Vrtc'].includes(key)) {
     return { ...descriptor }
   }
 
@@ -80,6 +79,7 @@ export function parseDescriptorValue(descriptorValue: DescriptorValue, key: stri
 
     case DescriptorValueType.GlobalClass:
     case DescriptorValueType.Class:
+    case DescriptorValueType.Reference:
       return { ...descriptorValue }
 
     case DescriptorValueType.Integer:
@@ -93,14 +93,12 @@ export function parseDescriptorValue(descriptorValue: DescriptorValue, key: stri
     case DescriptorValueType.UnitFloats:
       return descriptorValue.values
 
-    case DescriptorValueType.Reference:
-      return { ...descriptorValue }
-
     case DescriptorValueType.Enumerated:
       return descriptorValue.enumValue.trim()
 
     case DescriptorValueType.List:
       return parseListDescriptorValue(descriptorValue, key)
+
     case DescriptorValueType.ObjectArray:
       return parseObjectArrayDescriptorValue(descriptorValue)
   }
@@ -111,7 +109,7 @@ export function parseListDescriptorValue(
   key: string
 ): DescriptorValueTreeNode {
   const values = listDescriptorValue.values.map((item) => {
-    return parseDescriptorValue(item, `${key}/list`)
+    return parseDescriptorValue(item, `${key}-list`)
   })
   return values
 }
