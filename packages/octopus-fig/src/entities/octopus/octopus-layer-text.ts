@@ -173,7 +173,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     const horizontalAlign = this.sourceLayer.defaultStyle?.textAlignHorizontal
     const result = getMapped(horizontalAlign, OctopusLayerText.HORIZONTAL_ALIGN_MAP, undefined)
     if (!result) {
-      logger?.warn('Unknown Stroke Cap', { horizontalAlign })
+      logger?.warn('Unknown horizontal Align', { horizontalAlign })
       return 'LEFT'
     }
     return result

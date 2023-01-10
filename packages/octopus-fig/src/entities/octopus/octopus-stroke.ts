@@ -2,6 +2,7 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
+import { DEFAULTS } from '../../utils/defaults'
 import { OctopusFill } from './octopus-fill'
 import { OctopusPath } from './octopus-path'
 
@@ -55,12 +56,12 @@ export class OctopusStroke {
     return strokeAlign
   }
 
-  get lineCap(): 'BUTT' | 'ROUND' | 'SQUARE' | null {
+  get lineCap(): 'BUTT' | 'ROUND' | 'SQUARE' {
     const strokeCap = this._sourceLayer.strokeCap
     const result = getMapped(strokeCap, OctopusStroke.STROKE_CAP_MAP, undefined)
     if (!result) {
       logger?.warn('Unknown Stroke Cap', { strokeCap })
-      return null
+      return DEFAULTS.STROKE_LINE_CAP
     }
     return result
   }
@@ -117,7 +118,6 @@ export class OctopusStroke {
     if (fill === null) return null
     if (position === null) return null
     if (lineJoin === null) return null
-    if (lineCap === null) return null
 
     const style = this.style
     const dashing = this.dashing
