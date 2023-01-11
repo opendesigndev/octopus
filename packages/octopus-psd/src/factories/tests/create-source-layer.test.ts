@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AliKey } from '@webtoon/psd'
+import { AliKey } from '@opendesign/psd-ts'
 
 import { getRawLayerWithType } from '../create-source-layer'
 

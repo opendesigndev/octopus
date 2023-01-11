@@ -5,7 +5,7 @@ import { scan } from '@jimp/utils'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import Psd, { AliKey } from '@webtoon/psd'
+import Psd, { AliKey } from '@opendesign/psd-ts'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
 import Jimp from 'jimp'
@@ -18,7 +18,7 @@ import { getRawData } from '../../utils/raw.js'
 import { logger } from '../instances/logger.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
-import type { NodeChild, Layer } from '@webtoon/psd'
+import type { NodeChild, Layer } from '@opendesign/psd-ts'
 
 type BuffImage = {
   buff: Uint8ClampedArray | Uint8Array

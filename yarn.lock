@@ -911,6 +911,11 @@
   resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.0-alpha.40.tgz#2b30012c52b0213e9f4712f627aa4c36352a202a"
   integrity sha512-CR+0JcJ0UKbojj2jHy1LYDVX3oL1INaN/8rsdVZb4UiULkMN0+fmz6ArTEcjDhcsbtU1jDmvs4xTyb/O+w1Itg==
 
+"@opendesign/psd-ts@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.4.0.tgz#216290f242fda4ae2ea8c5e071740b3c897107e1"
+  integrity sha512-0ue/PRJkAMoBS4iwLesleAYKXLanVT3KcueODH3rfWYPHlOpeA8m47LPbTW3vl8TEkNP5zuIjDiHYqvrr0tQyw==
+
 "@rollup/plugin-node-resolve@^13.1.3":
   version "13.3.0"
   resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.3.0.tgz"

@@ -10,7 +10,7 @@ import { SourcePath } from './source-path.js'
 import type { LayerProperties, NodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
 import type { DocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
-import type { MaskData, RealMaskData } from '@webtoon/psd/dist/sections/index.js'
+import type { MaskData, RealMaskData } from '@opendesign/psd-ts/dist/sections/index.js'
 
 export type SourceLayerParent = SourceComponent | SourceLayerSection
 

@@ -24,6 +24,7 @@
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
     "@opendesign/octopus-common": "3.0.0-rc.27",
     "@opendesign/octopus-ts": "3.0.0-alpha.38",
+    "@opendesign/psd-ts": "^0.4.0",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/rimraf": "^3.0.2",
@@ -41,10 +42,10 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/pino-pretty": "4.7.5",
-    "@types/pino-std-serializers": "2.4.1",
     "@types/jest": "^27.4.0",
     "@types/node": "*",
+    "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
