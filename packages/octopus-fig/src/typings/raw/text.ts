@@ -15,6 +15,7 @@ export type RawLineHeightUnit = 'PIXELS' | 'FONT_SIZE_%' | 'INTRINSIC_%'
 export type RawTextStyle = {
   fontFamily?: string
   fontPostScriptName?: string | null
+  syntheticPostScriptName?: boolean
   fontWeight?: number
   fontSize?: number
   textAlignHorizontal?: RawTextAlignHorizontal

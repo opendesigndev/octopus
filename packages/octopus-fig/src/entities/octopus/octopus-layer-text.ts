@@ -82,8 +82,10 @@ export class OctopusLayerText extends OctopusLayerBase {
 
   private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | undefined {
     const postScriptName = this._parsePostScriptName(textStyle)
+    const syntheticPostScriptName =
+      textStyle.syntheticPostScriptName || !textStyle.fontPostScriptName ? true : undefined
     if (!postScriptName) return undefined
-    return { postScriptName, family: textStyle.fontFamily }
+    return { postScriptName, family: textStyle.fontFamily, syntheticPostScriptName }
   }
 
   private _getLineHeight(textStyle: SourceTextStyle): number | undefined {

@@ -101,6 +101,7 @@ export class SourceNormalizer {
     const fontStyle = fontName.style
     const italic = fontName.style.includes('Italic')
     const fontPostScriptName = inferPostScriptName({ fontFamily, fontStyle, fontWeight, italic })
+    const syntheticPostScriptName = true
     const letterSpacing = textStyle.letterSpacing.value
     const fills = textStyle.fills as RawPaint[]
     const lineHeightPx = lineHeight.unit === 'PIXELS' ? lineHeight.value : undefined
@@ -108,6 +109,7 @@ export class SourceNormalizer {
     return {
       fontFamily,
       fontPostScriptName,
+      syntheticPostScriptName,
       fontWeight,
       fontSize,
       textAlignHorizontal,
