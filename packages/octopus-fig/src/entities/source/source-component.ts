@@ -9,7 +9,7 @@ import { SourceLayerFrame } from './source-layer-frame'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { ImageSizeMap } from '../../services/conversion/design-converter'
-import type { RawBlendMode, RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { RawBlendMode, RawLayer, RawLayerContainer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 type SourceComponentOptions = {
@@ -44,7 +44,7 @@ export class SourceComponent extends SourceEntity {
     ]
     return (
       createSourceLayer({ parent: this, layer: rawValue }) ??
-      new SourceLayerFrame({ rawValue: rawValue as RawLayerFrame, parent: this })
+      new SourceLayerFrame({ rawValue: rawValue as RawLayerContainer, parent: this })
     )
   }
 
@@ -103,6 +103,6 @@ export class SourceComponent extends SourceEntity {
   }
 
   get clipsContent(): boolean {
-    return (this._rawValue as RawLayerFrame).clipsContent ?? true
+    return (this._rawValue as RawLayerContainer).clipsContent ?? true
   }
 }

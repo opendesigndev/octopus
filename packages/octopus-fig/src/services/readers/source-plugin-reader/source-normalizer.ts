@@ -128,17 +128,19 @@ export class SourceNormalizer {
     }
   }
 
+  private _getNextCharacterStyleOverrides(value: number, length: number): number[] {
+    return Array(length).fill(value)
+  }
+
   private _normalizeText(raw: any): RawLayer {
     const { styledTextSegments } = raw
     if (styledTextSegments?.length > 0) {
-      const getNextCharacterStyleOverrides = (value: number, length: number): number[] => Array(length).fill(value)
-
       // initialize
       const characterStyleOverrides: number[] = []
       const styleOverrideTable: { [key: string]: RawTextStyle | undefined } = {}
 
       styledTextSegments.forEach((segment: StyledTextSegment, index: number) => {
-        const nextCharacterStyleOverrides = getNextCharacterStyleOverrides(index, segment.end - segment.start)
+        const nextCharacterStyleOverrides = this._getNextCharacterStyleOverrides(index, segment.end - segment.start)
         characterStyleOverrides.push(...nextCharacterStyleOverrides)
 
         const rawTextStyle = this._normalizeTextStyle(raw, segment)

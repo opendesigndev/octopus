@@ -6,17 +6,17 @@ import { getBoundsFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { RawLayer, RawLayerContainer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { FrameTypes, SourceLayerParent } from './source-layer-common'
 
 type SourceLayerFrameOptions = {
   parent: SourceLayerParent
-  rawValue: RawLayerFrame
+  rawValue: RawLayerContainer
 }
 
 export class SourceLayerFrame extends SourceLayerCommon {
-  protected _rawValue: RawLayerFrame
+  protected _rawValue: RawLayerContainer
   private _layers: SourceLayer[]
 
   constructor(options: SourceLayerFrameOptions) {

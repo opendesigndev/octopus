@@ -3,6 +3,10 @@ import { Buffer } from 'buffer'
 
 import { version } from '../../package.json'
 
+const SECTION_TYPES = ['SECTION', 'COMPONENT_SET']
+const CONTAINER_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE']
+const SHAPE_TYPES = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON', 'STAR', 'BOOLEAN_OPERATION']
+
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
 
@@ -62,12 +66,11 @@ async function nodeToObject(node: any) {
 export function getSelectedNodes(selection = figma.currentPage.selection): SceneNode[] {
   return selection.reduce((nodes: SceneNode[], node: SceneNode) => {
     if (node.visible === false) return nodes
-    if (['COMPONENT_SET', 'SECTION'].includes(node.type)) {
+    if (SECTION_TYPES.includes(node.type)) {
       const childNodes = getSelectedNodes((node as ChildrenMixin).children)
       return [...nodes, ...childNodes]
     }
-    const ShapeTypes = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON', 'STAR', 'BOOLEAN_OPERATION']
-    if (['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE', 'TEXT', ...ShapeTypes].includes(node.type)) return [...nodes, node]
+    if ([...CONTAINER_TYPES, ...SHAPE_TYPES, 'TEXT'].includes(node.type)) return [...nodes, node]
     return nodes
   }, [])
 }

@@ -14,7 +14,7 @@ import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { RawDesign } from '../../typings/raw/design'
-import type { RawLayerFrame } from '../../typings/raw/layer'
+import type { RawLayerContainer } from '../../typings/raw/layer'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { ImageSize } from '../general/image-size/image-size'
 import type {
@@ -195,7 +195,7 @@ export class DesignConverter {
     const { libraryMeta, nodeId, node, fills } = frame
     if (isLibrary && libraryMeta) this.octopusManifest?.setExportedLibrary(libraryMeta)
 
-    const rawFrame = node.document as RawLayerFrame
+    const rawFrame = node.document as RawLayerContainer
     const sourcePathPromise = this._exporter?.exportRawComponent?.(rawFrame, nodeId)
 
     const fillIds = Object.keys(fills ?? {})

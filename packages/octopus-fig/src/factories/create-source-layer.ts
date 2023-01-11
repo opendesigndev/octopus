@@ -6,7 +6,7 @@ import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logger } from '../services'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { RawLayer, RawLayerShape, RawLayerFrame, RawLayerText, RawSlice } from '../typings/raw'
+import type { RawLayer, RawLayerShape, RawLayerContainer, RawLayerText, RawSlice } from '../typings/raw'
 
 export type SourceLayer = SourceLayerFrame | SourceLayerShape | SourceLayerText
 
@@ -39,7 +39,7 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
 } as const
 
 function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerFrame {
-  return new SourceLayerFrame({ parent, rawValue: layer as RawLayerFrame })
+  return new SourceLayerFrame({ parent, rawValue: layer as RawLayerContainer })
 }
 
 function createLayerShape({ layer, parent }: CreateLayerOptions): SourceLayerShape {
