@@ -10,51 +10,65 @@ const SHAPE_TYPES = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON'
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
 
+async function traverseProps(node: any, obj: any) {
+  if (node.parent) obj.parent = { id: node.parent.id, type: node.parent.type }
+  if (node.children) {
+    const childrenPromises = node.children.map((child: any) => nodeToObject(child))
+    obj.children = await Promise.all(childrenPromises)
+  }
+  const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
+  const blacklist = ['parent', 'children', 'removed']
+  for (const [name, prop] of props) {
+    if (prop.get && !blacklist.includes(name)) {
+      obj[name] = prop.get.call(node)
+      if (typeof obj[name] === 'symbol') obj[name] = undefined
+    }
+  }
+  return obj
+}
+
+async function setImages(node: any) {
+  if (!node.fills?.length) return
+  for (const paint of node.fills) {
+    if (paint.type !== 'IMAGE') continue
+    const image = figma.getImageByHash(paint.imageHash)
+    if (image?.hash && !imageMap[image.hash]) {
+      const bytes = await image.getBytesAsync()
+      imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
+    }
+  }
+}
+
+function setTextProps(node: any, obj: any) {
+  if (node.type !== 'TEXT') return
+  obj.styledTextSegments = node.getStyledTextSegments([
+    'fontSize',
+    'fontName',
+    'fontWeight',
+    'textDecoration',
+    'textCase',
+    'lineHeight',
+    'letterSpacing',
+    'fills',
+    'textStyleId',
+    'fillStyleId',
+    'listOptions',
+    'indentation',
+    'hyperlink',
+  ])
+}
+
+async function setMasterComponent(node: any, obj: any) {
+  if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent)
+}
+
 async function nodeToObject(node: any) {
   const obj: any = { id: node.id, type: node.type }
   try {
-    if (node.parent) obj.parent = { id: node.parent.id, type: node.parent.type }
-    if (node.children) {
-      const childrenPromises = node.children.map((child: any) => nodeToObject(child))
-      obj.children = await Promise.all(childrenPromises)
-    }
-    const props = Object.entries(Object.getOwnPropertyDescriptors(node.__proto__))
-    const blacklist = ['parent', 'children', 'removed']
-    for (const [name, prop] of props) {
-      if (prop.get && !blacklist.includes(name)) {
-        obj[name] = prop.get.call(node)
-        if (typeof obj[name] === 'symbol') obj[name] = 'Mixed'
-      }
-    }
-    if (node.fills?.length > 0) {
-      for (const paint of node.fills) {
-        if (paint.type === 'IMAGE') {
-          const image = figma.getImageByHash(paint.imageHash)
-          if (image?.hash && !imageMap[image.hash]) {
-            const bytes = await image.getBytesAsync()
-            imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
-          }
-        }
-      }
-    }
-    if (node.type === 'TEXT') {
-      obj.styledTextSegments = node.getStyledTextSegments([
-        'fontSize',
-        'fontName',
-        'fontWeight',
-        'textDecoration',
-        'textCase',
-        'lineHeight',
-        'letterSpacing',
-        'fills',
-        'textStyleId',
-        'fillStyleId',
-        'listOptions',
-        'indentation',
-        'hyperlink',
-      ])
-    }
-    if (node.masterComponent) obj.masterComponent = await nodeToObject(node.masterComponent)
+    await traverseProps(node, obj)
+    await setImages(node)
+    await setTextProps(node, obj)
+    await setMasterComponent(node, obj)
   } catch (error) {
     console.info('ERROR', error)
     obj.ERROR = error

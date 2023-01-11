@@ -38,14 +38,14 @@ export async function convertDesign({
   const { id: documentId, name: documentName } = pluginSource?.context?.document ?? {}
   if (!pluginSource || !documentId || !documentName) return // TODO log error
 
-  const designId = kebabCase(`${documentId}-${documentName}`)
+  const designId = kebabCase(`${documentId}-${documentName}-${path.basename(sourcePath, '.json')}`)
   const outputDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
   console.info(`Converting design: ${designId}\n`)
 
   exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
-    if (result.dependencies.images) await Promise.all(result.dependencies.images)
+    if (result.dependencies?.images) await Promise.all(result.dependencies.images)
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =

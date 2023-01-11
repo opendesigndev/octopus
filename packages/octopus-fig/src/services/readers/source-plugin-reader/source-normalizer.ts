@@ -60,7 +60,7 @@ export class SourceNormalizer {
   private _normalizeCornerRadius(raw: any): RawLayer {
     const { cornerRadius, rectangleCornerRadii, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius } =
       raw
-    if (cornerRadius === 'Mixed') {
+    if (!cornerRadius) {
       if (!rectangleCornerRadii) {
         raw.rectangleCornerRadii = [
           topLeftRadius ?? 0,
@@ -73,7 +73,6 @@ export class SourceNormalizer {
         delete raw.bottomLeftRadius
         delete raw.bottomRightRadius
       }
-      delete raw.cornerRadius
     }
     return raw
   }
@@ -81,9 +80,9 @@ export class SourceNormalizer {
   private _normalizeStroke(raw: any): RawLayer {
     const { strokeCap, strokeWeight } = raw
 
-    if (strokeCap === 'Mixed') raw.strokeCap = 'NONE'
+    if (!strokeCap) raw.strokeCap = 'NONE'
 
-    if (strokeWeight === 'Mixed') {
+    if (!strokeWeight) {
       const { strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight } = raw
       raw.strokeWeight = max([strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight, 1])
     }
