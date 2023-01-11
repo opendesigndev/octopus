@@ -1,5 +1,5 @@
 import type { RawColor as RawColor } from './shared'
-import type { UnitFloatDescriptorValue } from '@opendesign/psd-ts/dist/interfaces'
+import type { UnitFloatDescriptorValue } from '@webtoon/psd-ts/dist/interfaces'
 
 export type RawShapeTransparency = {
   Opct: number

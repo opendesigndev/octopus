@@ -23,7 +23,7 @@
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
     "@opendesign/octopus-common": "3.0.0-rc.27",
     "@opendesign/octopus-ts": "3.0.0-alpha.38",
-    "@opendesign/psd-ts": "^0.4.0",
+    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.0",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/rimraf": "^3.0.2",

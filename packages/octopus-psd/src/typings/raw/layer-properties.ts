@@ -3,7 +3,7 @@ import type {
   Reference,
   AdditionalLayerInfo,
   TypeToolObjectSettingAliBlock,
-} from '@opendesign/psd-ts/dist/interfaces/'
+} from '@webtoon/psd-ts/dist/interfaces/'
 
 export type DescriptorValueUnitFloats = {
   unitType: UnitFloatType

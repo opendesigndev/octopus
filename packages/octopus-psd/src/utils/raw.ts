@@ -1,9 +1,9 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
-import { DescriptorValueType, AliKey } from '@opendesign/psd-ts'
+import { DescriptorValueType, AliKey } from '@webtoon/psd-ts'
 
 import type { DescriptorValueTreeNode, DescriptorValueTree, NodeChildWithProps, ParsedPsd } from '../typings/raw'
-import type Psd from '@opendesign/psd-ts'
-import type { NodeChild, AdditionalLayerInfo } from '@opendesign/psd-ts'
+import type Psd from '@webtoon/psd-ts'
+import type { NodeChild, AdditionalLayerInfo } from '@webtoon/psd-ts'
 import type {
   AliasDescriptorValue,
   DescriptorDescriptorValue,
@@ -15,7 +15,7 @@ import type {
   ObjectArrayDescriptorValue,
   ListDescriptorValue,
   UnitFloatDescriptorValue,
-} from '@opendesign/psd-ts/dist/interfaces/'
+} from '@webtoon/psd-ts/dist/interfaces/'
 
 export function parseDescriptorItems(items?: Map<string, DescriptorValue>): DescriptorValueTree {
   if (!items) {

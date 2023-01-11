@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DescriptorValueType } from '@opendesign/psd-ts'
+import { DescriptorValueType } from '@webtoon/psd-ts'
 
 import { parseNodeChild } from '../raw'
 

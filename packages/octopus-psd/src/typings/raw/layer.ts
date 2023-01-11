@@ -4,7 +4,7 @@ import type { RawShapeStrokeStyle, VectorMaskSetting } from './layer-shape'
 import type { RawTextProperties } from './layer-text'
 import type { VectorOriginationData } from './path-component'
 import type { RawColor, RawBounds } from './shared'
-import type { Group, Layer } from '@opendesign/psd-ts'
+import type { Group, Layer } from '@webtoon/psd-ts'
 
 export type RawLayerCommon = {
   isArtboard: boolean

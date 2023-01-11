@@ -1,5 +1,5 @@
 import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
-import { AliKey } from '@opendesign/psd-ts'
+import { AliKey } from '@webtoon/psd-ts'
 import intersection from 'lodash/intersection.js'
 
 import { PSDFileReader } from '../services/readers/psd-file-reader.js'
@@ -15,8 +15,8 @@ import type {
   LayerProperties,
 } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
-import type { AdditionalLayerInfo, NodeChild, Layer } from '@opendesign/psd-ts'
-import type { AdditionalLayerProperties } from '@opendesign/psd-ts/dist/sections'
+import type { AdditionalLayerInfo, NodeChild, Layer } from '@webtoon/psd-ts'
+import type { AdditionalLayerProperties } from '@webtoon/psd-ts/dist/sections'
 
 export function isArtboard(raw: NodeChild) {
   return Boolean(raw?.additionalProperties?.[AliKey.ArtboardData])
