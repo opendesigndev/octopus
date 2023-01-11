@@ -5,7 +5,7 @@ import { env } from '../services'
 import { DEFAULTS } from './defaults'
 
 import type { SourceComponent } from '../entities/source/source-component'
-import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import type { SourceLayerContainer } from '../entities/source/source-layer-container'
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule, RawColor } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source'
@@ -59,7 +59,7 @@ export function getColorFor(color: RawColor | undefined): SourceColor | undefine
   return { r, g, b, a }
 }
 
-export function getTopComponentTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
+export function getTopComponentTransform(sourceLayer: SourceLayerContainer): number[] | undefined {
   if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
   const bounds = sourceLayer.bounds
   const boundingBox = sourceLayer.boundingBox

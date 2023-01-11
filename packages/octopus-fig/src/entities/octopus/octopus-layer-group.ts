@@ -8,18 +8,18 @@ import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
+import type { SourceLayerContainer } from '../source/source-layer-container'
 import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
-  sourceLayer: SourceLayerFrame
+  sourceLayer: SourceLayerContainer
   isTopComponent?: boolean
 }
 
 export class OctopusLayerGroup extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
-  protected _sourceLayer: SourceLayerFrame
+  protected _sourceLayer: SourceLayerContainer
   private _layers: OctopusLayer[]
   private _isTopComponent: boolean
 

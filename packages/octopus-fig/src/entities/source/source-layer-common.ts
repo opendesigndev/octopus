@@ -13,10 +13,10 @@ import { SourcePaint } from './source-paint'
 import type { Octopus } from '../../typings/octopus'
 import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
 import type { SourceGeometry, SourceTransform } from '../../typings/source'
-import type { SourceLayerFrame } from './source-layer-frame'
+import type { SourceLayerContainer } from './source-layer-container'
 import type { SourceLayerShape } from './source-layer-shape'
 
-export type SourceLayerParent = SourceComponent | SourceLayerFrame | SourceLayerShape
+export type SourceLayerParent = SourceComponent | SourceLayerContainer | SourceLayerShape
 
 type SourceLayerOptions = {
   parent: SourceLayerParent

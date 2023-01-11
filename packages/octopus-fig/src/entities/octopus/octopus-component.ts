@@ -1,7 +1,7 @@
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { convertId } from '../../utils/convert'
-import { SourceLayerFrame } from '../source/source-layer-frame'
+import { SourceLayerContainer } from '../source/source-layer-container'
 import { OctopusLayerGroup } from './octopus-layer-group'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
@@ -53,7 +53,7 @@ export class OctopusComponent {
   private get _content(): Octopus['Layer'] | undefined {
     const sourceLayer = this.sourceLayer
 
-    if (sourceLayer instanceof SourceLayerFrame) {
+    if (sourceLayer instanceof SourceLayerContainer) {
       const options = { parent: this, sourceLayer, isTopComponent: true }
       const maskGroup = sourceLayer.hasBackgroundMask
         ? OctopusLayerMaskGroup.createBackgroundMaskGroup(options)

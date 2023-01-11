@@ -7,12 +7,12 @@ import { OctopusFill } from './octopus-fill'
 import { OctopusPath } from './octopus-path'
 
 import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
+import type { SourceLayerContainer } from '../source/source-layer-container'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourcePaint } from '../source/source-paint'
 
-type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
+type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerContainer
 
 type OctopusStrokeOptions = {
   sourceLayer: SourceLayer

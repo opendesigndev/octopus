@@ -1,6 +1,6 @@
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
-import { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import { SourceLayerContainer } from '../entities/source/source-layer-container'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'
 import { SourceLayerText } from '../entities/source/source-layer-text'
 import { logger } from '../services'
@@ -8,7 +8,7 @@ import { logger } from '../services'
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type { RawLayer, RawLayerShape, RawLayerContainer, RawLayerText, RawSlice } from '../typings/raw'
 
-export type SourceLayer = SourceLayerFrame | SourceLayerShape | SourceLayerText
+export type SourceLayer = SourceLayerContainer | SourceLayerShape | SourceLayerText
 
 type SourceLayerBuilders =
   | typeof createLayerFrame
@@ -38,8 +38,8 @@ const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders | undefined } = {
   SLICE: createLayerSlice,
 } as const
 
-function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerFrame {
-  return new SourceLayerFrame({ parent, rawValue: layer as RawLayerContainer })
+function createLayerFrame({ layer, parent }: CreateLayerOptions): SourceLayerContainer {
+  return new SourceLayerContainer({ parent, rawValue: layer as RawLayerContainer })
 }
 
 function createLayerShape({ layer, parent }: CreateLayerOptions): SourceLayerShape {

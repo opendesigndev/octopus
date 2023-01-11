@@ -10,16 +10,16 @@ import type { RawLayer, RawLayerContainer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { FrameTypes, SourceLayerParent } from './source-layer-common'
 
-type SourceLayerFrameOptions = {
+type SourceLayerContainerOptions = {
   parent: SourceLayerParent
   rawValue: RawLayerContainer
 }
 
-export class SourceLayerFrame extends SourceLayerCommon {
+export class SourceLayerContainer extends SourceLayerCommon {
   protected _rawValue: RawLayerContainer
   private _layers: SourceLayer[]
 
-  constructor(options: SourceLayerFrameOptions) {
+  constructor(options: SourceLayerContainerOptions) {
     super(options)
     this._layers = this._initLayers()
   }

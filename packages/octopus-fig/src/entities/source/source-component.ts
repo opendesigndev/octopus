@@ -5,7 +5,7 @@ import { round } from '@opendesign/octopus-common/dist/utils/math'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
-import { SourceLayerFrame } from './source-layer-frame'
+import { SourceLayerContainer } from './source-layer-container'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { ImageSizeMap } from '../../services/conversion/design-converter'
@@ -44,7 +44,7 @@ export class SourceComponent extends SourceEntity {
     ]
     return (
       createSourceLayer({ parent: this, layer: rawValue }) ??
-      new SourceLayerFrame({ rawValue: rawValue as RawLayerContainer, parent: this })
+      new SourceLayerContainer({ rawValue: rawValue as RawLayerContainer, parent: this })
     )
   }
 

@@ -12,7 +12,7 @@ import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { RawBlendMode, RawLayerShape } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
+import type { SourceLayerContainer } from '../source/source-layer-container'
 import type { OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerMaskGroupOptions = {
@@ -33,7 +33,7 @@ type OctopusLayerMaskGroupOptions = {
 }
 
 type CreateBackgroundMaskGroupOptions = {
-  sourceLayer: SourceLayerFrame
+  sourceLayer: SourceLayerContainer
   parent: OctopusLayerParent
   isTopComponent?: boolean
 }
@@ -60,7 +60,7 @@ export class OctopusLayerMaskGroup {
   private _isTopComponent: boolean
   private _isArtboard: boolean
 
-  static createBackgroundLayer(frame: SourceLayerFrame, parent: OctopusLayerParent): OctopusLayer | null {
+  static createBackgroundLayer(frame: SourceLayerContainer, parent: OctopusLayerParent): OctopusLayer | null {
     const rawLayer = { ...(frame.raw as RawLayerShape) }
     rawLayer.id = `${rawLayer.id}-BackgroundMask`
     rawLayer.type = 'RECTANGLE' as const
