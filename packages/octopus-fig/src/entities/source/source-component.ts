@@ -35,13 +35,6 @@ export class SourceComponent extends SourceEntity {
   }
 
   private _initializeSourceLayer(rawValue: RawLayer): SourceLayer {
-    // fix relativeTransform
-    const [[a = 0, b = 0, tx = 0], [c = 0, d = 0, ty = 0]] = rawValue.relativeTransform ?? [[], []]
-    const { x = 0, y = 0 } = rawValue.absoluteRenderBounds ?? {}
-    rawValue.relativeTransform = [
-      [a, b, tx - x],
-      [c, d, ty - y],
-    ]
     return (
       createSourceLayer({ parent: this, layer: rawValue }) ??
       new SourceLayerContainer({ rawValue: rawValue as RawLayerContainer, parent: this })
