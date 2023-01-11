@@ -143,7 +143,6 @@ export class OctopusLayerMaskGroup {
       parent: sourceLayer?.parent,
     }) as SourceLayerShape
     const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })
-
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
     const id = `${octopusLayer.id}-ShapeMask`
     return new OctopusLayerMaskGroup({ id, parent, mask, maskBasis: 'BODY', layers: [octopusLayer] })

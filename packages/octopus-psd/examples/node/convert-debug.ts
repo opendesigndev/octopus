@@ -29,7 +29,7 @@ dotenv.config()
 
 const converter = new OctopusPSDConverter()
 
-export async function convertDesign({
+async function convertDesign({
   filePath,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {

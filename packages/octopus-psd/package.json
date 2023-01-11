@@ -10,7 +10,6 @@
     "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report ./jsdoc",
     "convert:debug": "yarn build && node ./lib/examples/node/convert-debug.js",
     "convert:local": "yarn build && node ./lib/examples/node/convert-local.js",
-    "convert:bulk": "yarn clean:workdir && yarn build && node ./lib/examples/node/convert-bulk.js",
     "prepack": "rimraf ./lib && yarn run build",
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "yarn build && yarn node --experimental-vm-modules $(yarn bin jest)",

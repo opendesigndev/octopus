@@ -28,59 +28,55 @@ export class SourceLayerEffects extends SourceEntity {
   @firstCallMemo()
   get solidFill(): SourceEffectFill | undefined {
     const fill = this._lfx2?.SoFi
-    return fill !== undefined && fill.present !== false ? new SourceEffectFill(this._lfx2?.SoFi) : undefined
+    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.SoFi) : undefined
   }
 
   @firstCallMemo()
   get gradientFill(): SourceEffectFill | undefined {
     const fill = this._lfx2?.GrFl
-    return fill !== undefined && fill.present !== false ? new SourceEffectFill(this._lfx2?.GrFl) : undefined
+    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.GrFl) : undefined
   }
 
   @firstCallMemo()
   get patternFill(): SourceEffectFill | undefined {
     const fill = this._lfx2?.patternFill
-
-    return fill !== undefined && fill.present !== false ? new SourceEffectFill(this._lfx2?.patternFill) : undefined
+    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.patternFill) : undefined
   }
 
   @firstCallMemo()
   get stroke(): SourceEffectStroke | undefined {
     const fill = this._lfx2?.FrFX
-
-    return fill !== undefined && fill.present !== false ? new SourceEffectStroke(fill) : undefined
+    return fill && fill.present !== false ? new SourceEffectStroke(fill) : undefined
   }
 
   @firstCallMemo()
   get innerGlow(): SourceEffectShadow | undefined {
     const shadow = this._lfx2?.IrGl
-
-    return shadow !== undefined && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
+    return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get innerShadow(): SourceEffectShadow | undefined {
     const shadow = this._lfx2?.IrSh
-    return shadow !== undefined && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
+    return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get outerGlow(): SourceEffectShadow | undefined {
     const shadow = this._lfx2?.OrGl
-    return shadow !== undefined && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
+    return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get dropShadow(): SourceEffectShadow | undefined {
     const shadow = this._lfx2?.DrSh
-
-    return shadow !== undefined && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
+    return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get satin(): SourceEffectSatin | undefined {
     const satin = this._lfx2?.ChFX
-    return satin !== undefined && satin.present !== false ? new SourceEffectSatin(this._lfx2?.ChFX) : undefined
+    return satin && satin.present !== false ? new SourceEffectSatin(this._lfx2?.ChFX) : undefined
   }
 
   @firstCallMemo()

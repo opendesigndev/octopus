@@ -81,7 +81,6 @@ export function convertColor(color: SourceColor | null | undefined, opacity?: nu
 
 export function convertOffset(offset: RawOffset, width: number, height: number): SourceVectorXY {
   const { Hrzn: horizontal, Vrtc: vertical } = offset
-
   const { value: horizontalValue, unitType: horizontalType } = horizontal
   const { value: verticalValue, unitType: verticalType } = vertical
 

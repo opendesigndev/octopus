@@ -150,6 +150,7 @@ export class SourceLayerCommon extends SourceEntity {
     if (width <= 0 || height <= 0) {
       return
     }
+
     return `${this.id}_user_mask.png`
   }
 

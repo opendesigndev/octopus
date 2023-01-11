@@ -55,7 +55,6 @@ export class SourceEffectFill extends SourceEffectBase {
     return getUnitRatioFor(this._rawValue?.Opct)
   }
 
-  //test with ./sample/text-06.psd and bug-pattern-overlay-opcity.psd
   get offset(): RawOffset {
     return (
       this._rawValue?.Ofst ??

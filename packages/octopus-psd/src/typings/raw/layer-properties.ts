@@ -1,16 +1,9 @@
 import type {
   UnitFloatType,
   Reference,
-  Descriptor,
   AdditionalLayerInfo,
-  AliKey,
   TypeToolObjectSettingAliBlock,
 } from '@opendesign/psd-ts/dist/interfaces/'
-
-export type DescriptorValuePropertyClass = {
-  name: string
-  classId: string
-}
 
 export type DescriptorValueUnitFloats = {
   unitType: UnitFloatType
@@ -43,7 +36,6 @@ export type DescriptorValueTreeNode =
   | number[]
   | boolean
   | string
-  | DescriptorValuePropertyClass
   | DescriptorValueUnitFloats
   | DescriptorValueReference
   | DescriptorValueEnumerated
@@ -54,5 +46,3 @@ export type DescriptorValueTreeNode =
   | ParsedTypeToolObjectSettingAliBlock
 
 export type DescriptorValueTree = { [key: string]: DescriptorValueTreeNode }
-export type AdditionalProperty = (Descriptor & { values: DescriptorValueTree }) | AdditionalLayerInfo
-export type AdditionalPropertyTree = { [key in AliKey]: AdditionalProperty }

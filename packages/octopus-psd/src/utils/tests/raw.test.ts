@@ -5,7 +5,7 @@ import { parseNodeChild } from '../raw'
 
 describe('src/utils/raw', () => {
   describe('parseNodeChild', () => {
-    it('parses childs additional properties', () => {
+    it('parses childs layer properties', () => {
       const input = {
         type: 'Layer',
         additionalProperties: [
