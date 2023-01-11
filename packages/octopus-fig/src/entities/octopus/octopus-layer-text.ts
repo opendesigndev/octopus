@@ -76,14 +76,13 @@ export class OctopusLayerText extends OctopusLayerBase {
   private _parsePostScriptName(textStyle: SourceTextStyle): string | null {
     const originalPostScriptName = textStyle.fontPostScriptName
     if (originalPostScriptName) return originalPostScriptName
-    const { fontFamily, fontWeight, italic } = textStyle
-    return inferPostScriptName({ fontFamily, fontWeight, italic })
+    const { fontFamily, fontStyle, fontWeight, italic } = textStyle
+    return inferPostScriptName({ fontFamily, fontStyle, fontWeight, italic })
   }
 
   private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | undefined {
     const postScriptName = this._parsePostScriptName(textStyle)
-    const syntheticPostScriptName =
-      textStyle.syntheticPostScriptName || !textStyle.fontPostScriptName ? true : undefined
+    const syntheticPostScriptName = !textStyle.fontPostScriptName ? true : undefined
     if (!postScriptName) return undefined
     return { postScriptName, family: textStyle.fontFamily, syntheticPostScriptName }
   }

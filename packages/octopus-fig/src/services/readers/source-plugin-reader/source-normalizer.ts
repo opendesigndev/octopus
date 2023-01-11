@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import max from 'lodash/max'
 
-import { inferPostScriptName } from '../../../utils/text'
-
 import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api'
 import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
 
@@ -97,19 +95,15 @@ export class SourceNormalizer {
     const { fontName, fontWeight, fontSize, textCase, textDecoration, lineHeight } = textStyle
     const { textAlignHorizontal, textAlignVertical, listSpacing, textAutoResize, paragraphSpacing, paragraphIndent } =
       textNode
-    const fontFamily = fontName.family
-    const fontStyle = fontName.style
+    const { family: fontFamily, style: fontStyle } = fontName
     const italic = fontName.style.includes('Italic')
-    const fontPostScriptName = inferPostScriptName({ fontFamily, fontStyle, fontWeight, italic })
-    const syntheticPostScriptName = true
     const letterSpacing = textStyle.letterSpacing.value
     const fills = textStyle.fills as RawPaint[]
     const lineHeightPx = lineHeight.unit === 'PIXELS' ? lineHeight.value : undefined
     const lineHeightPercent = lineHeight.unit === 'PERCENT' ? lineHeight.value : undefined
     return {
       fontFamily,
-      fontPostScriptName,
-      syntheticPostScriptName,
+      fontStyle,
       fontWeight,
       fontSize,
       textAlignHorizontal,
