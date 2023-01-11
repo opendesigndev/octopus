@@ -6,7 +6,7 @@ import { version } from '../../package.json'
 type ImageMap = { [key: string]: string | undefined }
 let imageMap: ImageMap = {}
 
-const nodeToObject = async (node: any) => {
+async function nodeToObject(node: any) {
   const obj: any = { id: node.id, type: node.type }
   try {
     if (node.parent) obj.parent = { id: node.parent.id, type: node.parent.type }

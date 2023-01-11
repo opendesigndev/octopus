@@ -3,9 +3,9 @@ import { _inferPostScriptType, inferPostScriptName } from '../text'
 import type { InferPostScriptNameOptions } from '../text'
 
 describe('_inferPostScriptType', () => {
-  function testExample(weight: number | undefined, result: string): void {
-    test(`_inferPostScriptType(${weight}) to be ${result}`, () => {
-      expect(_inferPostScriptType(weight)).toBe(result)
+  function testExample(fontWeight: number | undefined, result: string): void {
+    test(`_inferPostScriptType(${fontWeight}) to be ${result}`, () => {
+      expect(_inferPostScriptType(fontWeight)).toBe(result)
     })
   }
 
@@ -56,12 +56,18 @@ describe('inferPostScriptName', () => {
   const examples: Example[] = [
     [{}, null],
     [{ fontFamily: 'Arial' }, 'Arial'],
-    [{ weight: 700, italic: true }, null],
-    [{ fontFamily: 'Arial', weight: 700 }, 'Arial-Bold'],
+    [{ fontWeight: 700, italic: true }, null],
+    [{ fontFamily: 'Arial', fontWeight: 700 }, 'Arial-Bold'],
+    [{ fontFamily: 'Arial', fontWeight: 100 }, 'Arial-Thin'],
     [{ fontFamily: 'Arial', italic: true }, 'Arial-Italic'],
-    [{ fontFamily: 'Arial', weight: 700, italic: true }, 'Arial-Bold-Italic'],
-    [{ fontFamily: 'Arial', weight: 700, italic: false }, 'Arial-Bold'],
-    [{ fontFamily: 'Arial', weight: 400, italic: true }, 'Arial-Italic'],
+    [{ fontFamily: 'Arial', fontWeight: 700, italic: true }, 'Arial-BoldItalic'],
+    [{ fontFamily: 'Arial', fontWeight: 100, italic: true }, 'Arial-ThinItalic'],
+    [{ fontFamily: 'Arial', fontWeight: 700, italic: false }, 'Arial-Bold'],
+    [{ fontFamily: 'Arial', fontWeight: 400, italic: true }, 'Arial-Italic'],
+    [{ fontFamily: 'Avenir', fontStyle: 'Black', fontWeight: 400 }, 'Avenir-Black'],
+    [{ fontFamily: 'Avenir', fontStyle: 'Black', fontWeight: 700, italic: true }, 'Avenir-Black'],
+    [{ fontFamily: 'Avenir', fontStyle: 'Black', fontWeight: 200, italic: true }, 'Avenir-Black'],
+    [{ fontFamily: 'Avenir', fontWeight: 700, italic: true }, 'Avenir-BoldItalic'],
   ]
 
   examples.forEach((example) => testExample(...example))
