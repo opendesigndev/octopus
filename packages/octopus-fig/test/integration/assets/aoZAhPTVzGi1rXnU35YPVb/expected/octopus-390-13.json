@@ -1,7 +1,7 @@
 {
   "id": "390-13",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.22",
   "dimensions": {
     "width": 2000,
     "height": 2000
@@ -333,7 +333,41 @@
             }
           },
           "fillRule": "NON_ZERO",
-          "fills": [],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                }
+              },
+              "positioning": {
+                "layout": "TILE",
+                "origin": "LAYER",
+                "transform": [
+                  182.8,
+                  0,
+                  0,
+                  182.8,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
           "strokes": []
         }
       },
@@ -595,7 +629,41 @@
             }
           },
           "fillRule": "NON_ZERO",
-          "fills": [],
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "PATH",
+                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                }
+              },
+              "positioning": {
+                "layout": "TILE",
+                "origin": "LAYER",
+                "transform": [
+                  137.1,
+                  0,
+                  0,
+                  137.1,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
           "strokes": []
         }
       },

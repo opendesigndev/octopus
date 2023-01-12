@@ -76,16 +76,15 @@ export class OctopusLayerText extends OctopusLayerBase {
   private _parsePostScriptName(textStyle: SourceTextStyle): string | null {
     const originalPostScriptName = textStyle.fontPostScriptName
     if (originalPostScriptName) return originalPostScriptName
-    const fontFamily = textStyle.fontFamily
-    const weight = textStyle.fontWeight
-    const italic = textStyle.italic
-    return inferPostScriptName({ fontFamily, weight, italic })
+    const { fontFamily, fontStyle, fontWeight, italic } = textStyle
+    return inferPostScriptName({ fontFamily, fontStyle, fontWeight, italic })
   }
 
   private _getFont(textStyle: SourceTextStyle): Octopus['TextStyle']['font'] | undefined {
     const postScriptName = this._parsePostScriptName(textStyle)
+    const syntheticPostScriptName = !textStyle.fontPostScriptName ? true : undefined
     if (!postScriptName) return undefined
-    return { postScriptName, family: textStyle.fontFamily }
+    return { postScriptName, family: textStyle.fontFamily, syntheticPostScriptName }
   }
 
   private _getLineHeight(textStyle: SourceTextStyle): number | undefined {
@@ -173,7 +172,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     const horizontalAlign = this.sourceLayer.defaultStyle?.textAlignHorizontal
     const result = getMapped(horizontalAlign, OctopusLayerText.HORIZONTAL_ALIGN_MAP, undefined)
     if (!result) {
-      logger?.warn('Unknown Stroke Cap', { horizontalAlign })
+      logger?.warn('Unknown horizontal Align', { horizontalAlign })
       return 'LEFT'
     }
     return result

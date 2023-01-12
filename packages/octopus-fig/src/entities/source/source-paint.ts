@@ -1,19 +1,11 @@
 import { round } from '@opendesign/octopus-common/dist/utils/math'
 
-import { getTransformFor } from '../../utils/source'
+import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { Octopus } from '../../typings/octopus'
-import type {
-  RawBlendMode,
-  RawColor,
-  RawGradientType,
-  RawImageFilters,
-  RawPaint,
-  RawScaleMode,
-  RawStop,
-} from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
+import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
+import type { SourceColor, SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
   rawValue: RawPaint
@@ -38,8 +30,8 @@ export class SourcePaint extends SourceEntity {
     return round(this._rawValue.opacity ?? 1)
   }
 
-  get color(): RawColor | undefined {
-    return this._rawValue.color
+  get color(): SourceColor | undefined {
+    return getColorFor(this._rawValue.color)
   }
 
   get blendMode(): RawBlendMode | undefined {
@@ -66,6 +58,10 @@ export class SourcePaint extends SourceEntity {
     const [p1, p2, p3] = this._rawValue.gradientHandlePositions ?? []
     if ([p1?.x, p1?.y, p2?.x, p2?.y, p3?.x, p3?.y].includes(undefined)) return null
     return [p1, p2, p3] as [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']]
+  }
+
+  get gradientTransform(): SourceTransform | null {
+    return getTransformFor(this._rawValue.gradientTransform)
   }
 
   get imageRef(): string | undefined {

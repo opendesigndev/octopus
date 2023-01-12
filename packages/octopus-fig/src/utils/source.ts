@@ -5,10 +5,10 @@ import { env } from '../services'
 import { DEFAULTS } from './defaults'
 
 import type { SourceComponent } from '../entities/source/source-component'
-import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import type { SourceLayerContainer } from '../entities/source/source-layer-container'
 import type { Octopus } from '../typings/octopus'
-import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule } from '../typings/raw'
-import type { SourceBounds, SourceGeometry, SourceTransform } from '../typings/source'
+import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule, RawColor } from '../typings/raw'
+import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)
@@ -48,11 +48,18 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
 
 export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
   if (source.isPasteboard) return 'PASTEBOARD'
-  if (source.sourceFrame.type === 'COMPONENT') return 'COMPONENT'
+  if (source.sourceLayer.type === 'COMPONENT') return 'COMPONENT'
   return 'ARTBOARD'
 }
 
-export function getTopComponentTransform(sourceLayer: SourceLayerFrame): number[] | undefined {
+export function getColorFor(color: RawColor | undefined): SourceColor | undefined {
+  const { r, g, b, a: rawA } = color ?? {}
+  if (r === undefined || g === undefined || b === undefined) return undefined
+  const a = rawA === undefined ? 1 : rawA
+  return { r, g, b, a }
+}
+
+export function getTopComponentTransform(sourceLayer: SourceLayerContainer): number[] | undefined {
   if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
   const bounds = sourceLayer.bounds
   const boundingBox = sourceLayer.boundingBox

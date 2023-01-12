@@ -7,9 +7,9 @@ import dotenv from 'dotenv'
 import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node'
 import { renderOctopus } from './utils/render'
 
-type ConvertAllOptions = {
-  shouldRender?: boolean
+type ConvertDesignOptions = {
   designId: string
+  shouldRender?: boolean
 }
 
 type ConvertedDocumentResult = {
@@ -17,6 +17,9 @@ type ConvertedDocumentResult = {
   time: number
   error: Error | null
   octopusPath: string
+  dependencies?: {
+    images: Promise<string>[]
+  }
 }
 
 dotenv.config()
@@ -26,7 +29,7 @@ const converter = createConverter()
 export async function convertDesign({
   designId,
   shouldRender = process.env.SHOULD_RENDER === 'true',
-}: ConvertAllOptions): Promise<void> {
+}: ConvertDesignOptions): Promise<void> {
   const outputDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
@@ -35,6 +38,7 @@ export async function convertDesign({
   // exporter.on('source:preview', (imagePath: string) => console.info(`${chalk.yellow(`Preview:`)} file://${imagePath}`))
 
   exporter.on('octopus:component', async (result: ConvertedDocumentResult, role: string) => {
+    if (result.dependencies?.images) await Promise.all(result.dependencies.images)
     const status = result.error ? `❌ ${result.error}` : '✅'
     const render = shouldRender && !result.error ? await renderOctopus(result.id, result.octopusPath) : null
     const renderPath =

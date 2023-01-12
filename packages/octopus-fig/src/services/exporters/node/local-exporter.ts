@@ -10,7 +10,7 @@ import { makeDir, saveFile } from '../../../utils/files'
 import { stringify } from '../../../utils/misc'
 
 import type { Manifest } from '../../../typings/manifest'
-import type { RawDesign, RawLayerFrame } from '../../../typings/raw'
+import type { RawDesign, RawLayerContainer } from '../../../typings/raw'
 import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
 import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
@@ -99,11 +99,11 @@ export class LocalExporter implements AbstractExporter {
 
   /**
    * Exports raw data of given Component.
-   * @param {RawLayerFrame} raw Component raw data
+   * @param {RawLayerContainer} raw Component raw data
    * @param {string} name Name of given Component
    * @returns {Promise<string>} returns path to the exported RawComponent
    */
-  async exportRawComponent(raw: RawLayerFrame, name: string): Promise<string> {
+  async exportRawComponent(raw: RawLayerContainer, name: string): Promise<string> {
     const rawPath = LocalExporter.getSourceFileName(name)
     await this._save(rawPath, stringify(raw))
     return rawPath

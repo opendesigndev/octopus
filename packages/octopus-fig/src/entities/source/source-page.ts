@@ -1,7 +1,7 @@
 import { SourceComponent } from './source-component'
 import { SourceEntity } from './source-entity'
 
-import type { RawPage, RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { RawPage, RawLayer, RawLayerContainer } from '../../typings/raw'
 
 export class SourcePage extends SourceEntity {
   protected _rawValue: RawPage
@@ -30,7 +30,7 @@ export class SourcePage extends SourceEntity {
   }
 
   private _initComponents(): { components: SourceComponent[]; pasteboard: SourceComponent | null } {
-    const frames: RawLayerFrame[] = []
+    const frames: RawLayerContainer[] = []
     const rest: RawLayer[] = []
     this._rawValue?.children?.forEach((element) => {
       if (element.type === 'FRAME' || element.type === 'COMPONENT' || element.type === 'COMPONENT_SET') {

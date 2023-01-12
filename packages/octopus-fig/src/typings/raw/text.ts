@@ -4,7 +4,7 @@ export type RawTextAlignHorizontal = 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED'
 
 export type RawTextAlignVertical = 'TOP' | 'CENTER' | 'BOTTOM'
 
-export type RawTextAutoResize = 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT'
+export type RawTextAutoResize = 'NONE' | 'HEIGHT' | 'WIDTH_AND_HEIGHT' | 'TRUNCATE'
 
 export type RawTextCase = 'ORIGINAL' | 'UPPER' | 'LOWER' | 'TITLE' | 'SMALL_CAPS' | 'SMALL_CAPS_FORCED'
 
@@ -15,6 +15,7 @@ export type RawLineHeightUnit = 'PIXELS' | 'FONT_SIZE_%' | 'INTRINSIC_%'
 export type RawTextStyle = {
   fontFamily?: string
   fontPostScriptName?: string | null
+  fontStyle?: string
   fontWeight?: number
   fontSize?: number
   textAlignHorizontal?: RawTextAlignHorizontal

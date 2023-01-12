@@ -6,6 +6,7 @@ export const DEFAULTS = {
   STROKE_ALIGN: 'CENTER' as const,
   STROKE_CAP: 'NONE' as const,
   STROKE_JOIN: 'MITER' as const,
+  STROKE_LINE_CAP: 'BUTT' as const,
   STROKE_MITER_ANGLE: 28.96,
   TEXT: {
     FONT_SIZE: 12,

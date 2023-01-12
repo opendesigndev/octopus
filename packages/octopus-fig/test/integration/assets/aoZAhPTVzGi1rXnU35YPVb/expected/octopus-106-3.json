@@ -1,7 +1,7 @@
 {
   "id": "106-3",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.22",
   "dimensions": {
     "width": 4374,
     "height": 2475
@@ -144,7 +144,10 @@
           -200,
           1350
         ],
-        "layers": []
+        "layers": [],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "270-48-Background",
@@ -479,7 +482,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-52-ClippingMask",
@@ -753,7 +759,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-54-ClippingMask",
@@ -965,7 +974,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-56-ClippingMask",
@@ -1239,9 +1251,15 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "270-58-Background",
@@ -1451,7 +1469,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "168-207",
@@ -1684,7 +1705,10 @@
                   "strokes": []
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
         ]
       },
@@ -1873,7 +1897,10 @@
                   "strokes": []
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
         ]
       },
@@ -2149,7 +2176,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "108-15-ClippingMask",
@@ -2373,7 +2403,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "107-10-ClippingMask",
@@ -2577,7 +2610,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "106-8-ClippingMask",
@@ -2733,7 +2769,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "254-3-ClippingMask",
@@ -2929,7 +2968,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "254-6-ClippingMask",
@@ -3024,7 +3066,10 @@
           0,
           0
         ],
-        "layers": []
+        "layers": [],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "254-7",
@@ -3341,7 +3386,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "313-8-ClippingMask",
@@ -3537,7 +3585,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "313-11-ClippingMask",
@@ -3733,7 +3784,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "313-14-ClippingMask",
@@ -3950,7 +4004,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "329-8-ClippingMask",
@@ -4117,7 +4174,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "329-14-Background",
@@ -4228,7 +4288,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "329-10",
@@ -4571,7 +4634,10 @@
                       "strokes": []
                     }
                   }
-                ]
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
               }
             ]
           },
@@ -4625,7 +4691,10 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "270-27-Background",
@@ -4960,7 +5029,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-31-ClippingMask",
@@ -5234,7 +5306,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-33-ClippingMask",
@@ -5446,7 +5521,10 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "270-35-ClippingMask",
@@ -5720,9 +5798,15 @@
                   ]
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "270-37-Background",
@@ -5932,7 +6016,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {

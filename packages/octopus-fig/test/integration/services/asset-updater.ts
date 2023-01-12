@@ -10,7 +10,6 @@ import type {
   ResolvedDesign,
   ResolvedFrame,
   ResolvedStyle,
-  ResolvedFill,
   ResolvedPreview,
 } from '@opendesign/figma-parser/lib/src/index-node'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
@@ -36,6 +35,12 @@ type EventFill = {
 type EventPreview = {
   event: 'ready:preview'
   data: ResolvedPreview
+}
+
+type ResolvedFill = {
+  designId: string
+  ref: string
+  buffer: ArrayBuffer | string
 }
 
 export type Event = EventDesign | EventFrame | EventStyle | EventFill | EventPreview
@@ -73,6 +78,7 @@ export class AssetUpdater {
   }
 
   private async _onFill(data: ResolvedFill) {
+    if (typeof data.buffer !== 'string') data.buffer = Buffer.from(data.buffer).toString('base64')
     this._eventQueue.push({ event: 'ready:fill', data })
   }
 

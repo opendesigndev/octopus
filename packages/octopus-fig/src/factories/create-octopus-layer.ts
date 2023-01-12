@@ -7,7 +7,7 @@ import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { logger } from '../services'
 
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
-import type { SourceLayerFrame } from '../entities/source/source-layer-frame'
+import type { SourceLayerContainer } from '../entities/source/source-layer-container'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape'
 import type { SourceLayerText } from '../entities/source/source-layer-text'
 import type { SourceLayer } from './create-source-layer'
@@ -40,7 +40,7 @@ function createOctopusLayerGroupLike({
   layer,
   parent,
 }: CreateOctopusLayerOptions): OctopusLayerGroup | OctopusLayerMaskGroup | null {
-  const sourceLayer = layer as SourceLayerFrame
+  const sourceLayer = layer as SourceLayerContainer
   if (sourceLayer.hasBackgroundMask || sourceLayer.clipsContent) {
     return OctopusLayerMaskGroup.createBackgroundMaskGroup({ parent, sourceLayer })
   }
