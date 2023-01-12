@@ -1,7 +1,7 @@
 {
-  "name": "@opendesign/figma-source-plugin",
+  "name": "@opendesign/figma-plugin-squid",
   "version": "3.0.0-rc.1",
-  "description": "Figma Source Plugin",
+  "description": "Figma Plugin Squid",
   "license": "Apache-2.0",
   "scripts": {
     "clean": "rimraf ./node_modules ./lib ./dist",

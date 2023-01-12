@@ -1,4 +1,4 @@
-# Squid - Figma Plugin
+# Figma Plugin - Squid
 
 This package contains source code for [Figma Plugin named Squid](https://www.figma.com/community/plugin/1194222285719958985/Squid)
 
