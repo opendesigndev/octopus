@@ -13,9 +13,7 @@ export class SourceLayerLayer extends SourceLayerCommon {
     super(options)
   }
 
-  //todo could not invoke smartObject
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  get smartObject(): any {
-    return this._rawValue.layerProperties?.SoLd ?? this._rawValue.layerProperties?.SoLe
+  get smartObject(): Record<string, unknown> | undefined {
+    return this._rawValue.layerProperties?.SoLd ?? this._rawValue.layerProperties?.SoLE
   }
 }

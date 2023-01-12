@@ -34,7 +34,6 @@ export type RawLayerBlendProps = Partial<{
   subType: number
 }>
 
-//todo could not invoke smartObject (SoLd and SolE)
 export type LayerProperties = Partial<{
   lyid: number | string
   artb: LayerPropertiesArtboard
@@ -51,10 +50,9 @@ export type LayerProperties = Partial<{
   lsct: RawLayerBlendProps
   lsdk: RawLayerBlendProps
   lnsr: Uint8Array
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  SoLd: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  SoLe: any
+  // we do not care for props of smart object, just for its existence
+  SoLd: Record<string, unknown>
+  SoLE: Record<string, unknown>
 }>
 
 export type AddedType<T extends SourceLayerType> = { addedType: T }
