@@ -853,7 +853,10 @@
           675,
           675
         ],
-        "layers": []
+        "layers": [],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "399-13-Background",
@@ -970,17 +973,14 @@
           1000,
           675
         ],
-        "layers": []
+        "layers": [],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 246,
-          "y": -65
-        }
-      }
+      "isArtboard": true
     }
   }
 }

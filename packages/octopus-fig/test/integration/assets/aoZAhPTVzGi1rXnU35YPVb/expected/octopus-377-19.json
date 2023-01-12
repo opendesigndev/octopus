@@ -355,7 +355,10 @@
               }
             ]
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "377-26",
@@ -570,13 +573,7 @@
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 1200,
-          "y": 0
-        }
-      }
+      "isArtboard": true
     }
   }
 }

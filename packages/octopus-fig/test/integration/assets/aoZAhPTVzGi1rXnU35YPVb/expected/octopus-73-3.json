@@ -4696,13 +4696,7 @@
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 0,
-          "y": 0
-        }
-      }
+      "isArtboard": true
     }
   }
 }

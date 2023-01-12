@@ -371,9 +371,15 @@
                   -28,
                   24
                 ],
-                "layers": []
+                "layers": [],
+                "meta": {
+                  "isArtboard": true
+                }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "168-206-Background",
@@ -466,7 +472,10 @@
               152,
               56
             ],
-            "layers": []
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "390-35",
@@ -559,7 +568,10 @@
               ]
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "523-13",
@@ -1240,7 +1252,10 @@
               5,
               5
             ],
-            "layers": []
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "161-12-Background",
@@ -1334,9 +1349,15 @@
               105,
               5
             ],
-            "layers": []
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "270-22-Background",
@@ -1637,7 +1658,10 @@
                   50,
                   50
                 ],
-                "layers": []
+                "layers": [],
+                "meta": {
+                  "isArtboard": true
+                }
               },
               {
                 "id": "270-25-Background",
@@ -1823,21 +1847,24 @@
                       ]
                     }
                   }
-                ]
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 0,
-          "y": 0
-        }
-      }
+      "isArtboard": true
     }
   }
 }

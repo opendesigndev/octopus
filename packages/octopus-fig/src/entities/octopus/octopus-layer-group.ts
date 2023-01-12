@@ -3,6 +3,7 @@ import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
+import { isEmptyObj } from '../../utils/misc'
 import { getTopComponentTransform } from '../../utils/source'
 import { OctopusLayerBase } from './octopus-layer-base'
 
@@ -14,18 +15,15 @@ import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
   sourceLayer: SourceLayerContainer
-  isTopComponent?: boolean
 }
 
 export class OctopusLayerGroup extends OctopusLayerBase {
   protected _parent: OctopusLayerParent
   protected _sourceLayer: SourceLayerContainer
   private _layers: OctopusLayer[]
-  private _isTopComponent: boolean
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)
-    this._isTopComponent = options.isTopComponent ?? false
     this._layers = createOctopusLayers(this._sourceLayer.layers, this)
   }
 
@@ -34,7 +32,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   }
 
   get transform(): number[] {
-    if (this._isTopComponent)
+    if (this.isTopLayer)
       return env.NODE_ENV === 'debug' // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
         ? getTopComponentTransform(this._sourceLayer) ?? DEFAULTS.TRANSFORM
         : DEFAULTS.TRANSFORM
@@ -42,10 +40,9 @@ export class OctopusLayerGroup extends OctopusLayerBase {
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._sourceLayer.isArtboard
-    const { x, y } = this._sourceLayer.boundingBox ?? {}
-    const transform = x !== undefined && y !== undefined ? { origin: { x, y } } : undefined
-    return this._isTopComponent ? { isArtboard, transform } : undefined
+    const isArtboard = ['FRAME', 'COMPONENT', 'INSTANCE'].includes(this.sourceLayer.type) ? true : undefined
+    const meta = { isArtboard }
+    return !isEmptyObj(meta) ? meta : undefined
   }
 
   get layers(): OctopusLayer[] {

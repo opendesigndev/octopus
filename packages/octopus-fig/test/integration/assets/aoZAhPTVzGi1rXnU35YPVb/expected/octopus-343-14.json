@@ -224,17 +224,14 @@
               "baselinePolicy": "OFFSET_ASCENDER"
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 50,
-          "y": -180
-        }
-      }
+      "isArtboard": true
     }
   }
 }

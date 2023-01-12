@@ -22,12 +22,10 @@ type OctopusLayerMaskGroupOptions = {
   mask: OctopusLayer
   maskBasis?: Octopus['MaskBasis']
   maskChannels?: number[]
-  layers: OctopusLayer[]
   visible?: boolean
   transform?: number[]
   opacity?: number
   blendMode?: RawBlendMode
-  isTopComponent?: boolean
   isArtboard?: boolean
   boundingBox?: SourceBounds
 }
@@ -35,7 +33,6 @@ type OctopusLayerMaskGroupOptions = {
 type CreateBackgroundMaskGroupOptions = {
   sourceLayer: SourceLayerContainer
   parent: OctopusLayerParent
-  isTopComponent?: boolean
 }
 
 type CreateMaskGroupOptions = {
@@ -57,7 +54,6 @@ export class OctopusLayerMaskGroup {
   private _opacity?: number
   private _blendMode?: RawBlendMode
   private _boundingBox?: SourceBounds
-  private _isTopComponent: boolean
   private _isArtboard: boolean
 
   static createBackgroundLayer(frame: SourceLayerContainer, parent: OctopusLayerParent): OctopusLayer | null {
@@ -75,63 +71,80 @@ export class OctopusLayerMaskGroup {
   static createBackgroundMaskGroup({
     sourceLayer,
     parent,
-    isTopComponent = false,
   }: CreateBackgroundMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${sourceLayer.id}-Background`
+    const isTopLayer = parent instanceof OctopusComponent
     const topComponentTransform =
-      isTopComponent && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
-    const transform = isTopComponent ? topComponentTransform : sourceLayer.transform ?? undefined
+      isTopLayer && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const transform = isTopLayer ? topComponentTransform : sourceLayer.transform ?? undefined
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'
-    const layers = createOctopusLayers(sourceLayer.layers, parent)
     const { visible, blendMode, opacity, name, isArtboard } = sourceLayer
     const boundingBox = sourceLayer.boundingBox ?? undefined
-    return new OctopusLayerMaskGroup({
+
+    const maskLayer = new OctopusLayerMaskGroup({
       id,
       name,
       mask,
       maskBasis,
-      layers,
       transform,
       parent,
       blendMode,
       opacity,
       visible,
-      isTopComponent,
       isArtboard,
       boundingBox,
     })
+    maskLayer.layers = createOctopusLayers(sourceLayer.layers, maskLayer)
+    return maskLayer
   }
 
   static createClippingMask({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
     const maskBasis = 'LAYER_AND_EFFECTS'
     mask.visible = false
-    return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
+    const maskLayer = new OctopusLayerMaskGroup({ id, parent, mask, maskBasis })
+    maskLayer.layers = layers
+    return maskLayer
   }
 
   static createClippingMaskOutline({ mask, layers, parent }: CreateMaskGroupOptions): OctopusLayerMaskGroup | null {
     const id = `${mask.id}-ClippingMask`
     const maskBasis = 'BODY'
     mask.visible = false
-    return new OctopusLayerMaskGroup({ id, parent, mask, layers, maskBasis })
+    const maskLayer = new OctopusLayerMaskGroup({ id, parent, mask, maskBasis })
+    maskLayer.layers = layers
+    return maskLayer
   }
 
   constructor(options: OctopusLayerMaskGroupOptions) {
-    this._id = options.id
-    this._name = options.name
-    this._mask = options.mask
-    this._maskBasis = options.maskBasis
-    this._maskChannels = options.maskChannels
-    this._layers = options.layers
-    this._visible = options.visible ?? true
-    this._transform = options.transform
-    this._opacity = options.opacity
-    this._blendMode = options.blendMode
-    this._boundingBox = options.boundingBox
-    this._isTopComponent = options.isTopComponent ?? false
-    this._isArtboard = options.isArtboard ?? false
+    const {
+      parent,
+      id,
+      name,
+      mask,
+      maskBasis,
+      maskChannels,
+      visible,
+      transform,
+      opacity,
+      blendMode,
+      isArtboard,
+      boundingBox,
+    } = options
+    this._id = id
+    this._name = name
+    this._mask = mask
+    this._maskBasis = maskBasis
+    this._maskChannels = maskChannels
+    this._parent = parent
+    this._visible = visible ?? true
+    this._transform = transform
+    this._opacity = opacity
+    this._blendMode = blendMode
+    this._boundingBox = boundingBox
+    this._isArtboard = isArtboard ?? false
   }
 
   get id(): string {
@@ -163,6 +176,10 @@ export class OctopusLayerMaskGroup {
     return parent instanceof OctopusComponent ? parent : parent.parentComponent
   }
 
+  get isTopLayer(): boolean {
+    return this._parent instanceof OctopusComponent
+  }
+
   get type(): 'MASK_GROUP' {
     return 'MASK_GROUP'
   }
@@ -179,6 +196,10 @@ export class OctopusLayerMaskGroup {
     return this._layers
   }
 
+  set layers(layers: OctopusLayer[]) {
+    this._layers = layers
+  }
+
   get opacity(): number | undefined {
     return this._opacity
   }
@@ -188,10 +209,7 @@ export class OctopusLayerMaskGroup {
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {
-    const isArtboard = this._isArtboard
-    const { x, y } = this._boundingBox ?? {}
-    const transform = x !== undefined && y !== undefined ? { origin: { x, y } } : undefined
-    return this._isTopComponent ? { isArtboard, transform } : undefined
+    return { isArtboard: true }
   }
 
   convert(): Octopus['MaskGroupLayer'] | null {

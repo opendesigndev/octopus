@@ -285,17 +285,14 @@
               "strokes": []
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {
-      "isArtboard": true,
-      "transform": {
-        "origin": {
-          "x": 4500,
-          "y": 0
-        }
-      }
+      "isArtboard": true
     }
   }
 }

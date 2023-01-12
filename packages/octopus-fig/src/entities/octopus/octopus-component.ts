@@ -53,9 +53,9 @@ export class OctopusComponent {
   private get _content(): Octopus['Layer'] | undefined {
     const sourceLayer = this.sourceLayer
 
-    // TODO examine if isTopComponent is still needed, and also if this section is needed
+    // TODO examine if isTopLayer is still needed, and also if this section is needed
     if (sourceLayer instanceof SourceLayerContainer) {
-      const options = { parent: this, sourceLayer, isTopComponent: true }
+      const options = { parent: this, sourceLayer }
       const maskGroup = sourceLayer.hasBackgroundMask
         ? OctopusLayerMaskGroup.createBackgroundMaskGroup(options)
         : new OctopusLayerGroup(options)
