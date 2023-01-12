@@ -1,9 +1,6 @@
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { convertId } from '../../utils/convert'
-import { SourceLayerContainer } from '../source/source-layer-container'
-import { OctopusLayerGroup } from './octopus-layer-group'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -52,16 +49,6 @@ export class OctopusComponent {
 
   private get _content(): Octopus['Layer'] | undefined {
     const sourceLayer = this.sourceLayer
-
-    // TODO examine if isTopLayer is still needed, and also if this section is needed
-    if (sourceLayer instanceof SourceLayerContainer) {
-      const options = { parent: this, sourceLayer }
-      const maskGroup = sourceLayer.hasBackgroundMask
-        ? OctopusLayerMaskGroup.createBackgroundMaskGroup(options)
-        : new OctopusLayerGroup(options)
-      return maskGroup?.convert() ?? undefined
-    }
-
     const layer = createOctopusLayer({ parent: this, layer: sourceLayer })
     return layer?.convert() ?? undefined
   }
