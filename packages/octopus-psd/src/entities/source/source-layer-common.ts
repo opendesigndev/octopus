@@ -31,7 +31,7 @@ export class SourceLayerCommon extends SourceEntity {
   protected _parent: SourceLayerParent
   protected _rawValue: NodeChildWithType
 
-  static OPACITY_DEFAULT_VALUE = 1
+  static OPACITY_DEFAULT_VALUE = 255
 
   constructor(options: SourceLayerOptions) {
     super(options.rawValue)
@@ -93,14 +93,12 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get opacity(): number {
-    return this._rawValue.opacity
-      ? this._rawValue.opacity / DEFAULTS.RGB_COLOR_MAX_VALUE
-      : SourceLayerCommon.OPACITY_DEFAULT_VALUE
+    return (this._rawValue.opacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE
   }
 
   get fillOpacity(): number {
     const rawOpacity = this._layerProperties?.iOpa?.fillOpacity
-    return rawOpacity ? rawOpacity / DEFAULTS.RGB_COLOR_MAX_VALUE : DEFAULTS.OPACITY
+    return (rawOpacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE
   }
 
   get blendMode(): string | undefined {
