@@ -2,6 +2,7 @@ export type RawTextStyleRange = {
   from?: number
   textStyle?: RawTextStyle
   to?: number
+  defaultStyleSheet?: StyleSheetData
 }
 
 export type StyleRun = Partial<{
@@ -15,7 +16,7 @@ export type StyleRunArray = {
 }
 
 export type StyleRunArrayStyleSheet = Partial<{
-  StyleSheetData: StyleRunArrayStyleSheetStyleSheetData
+  StyleSheetData: StyleSheetData
 }>
 
 export type TextColor = Partial<{
@@ -23,7 +24,7 @@ export type TextColor = Partial<{
   Type: number
 }>
 
-export type StyleRunArrayStyleSheetStyleSheetData = Partial<{
+export type StyleSheetData = Partial<{
   Kashida: number
   HindiNumbers: boolean
   YUnderline: number
@@ -55,7 +56,7 @@ export type StyleRunArrayStyleSheetStyleSheetData = Partial<{
   Altligature: boolean
 }>
 
-export type RawTextStyle = StyleRunArrayStyleSheetStyleSheetData & FontProperties
+export type RawTextStyle = StyleSheetData & FontProperties
 
 export type FontProperties = {
   fontName: string

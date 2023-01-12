@@ -4,16 +4,18 @@ import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawTextStyle } from '../../typings/raw'
+import type { RawTextStyle, StyleSheetData } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
+  private _defaultStyleSheet: StyleSheetData | undefined
 
   static FONT_CAPS_VALUES = [undefined, 'smallCaps', 'allCaps'] as const
 
-  constructor(raw: RawTextStyle | undefined) {
+  constructor(raw: RawTextStyle | undefined, defaultStyleSheet: StyleSheetData | undefined) {
     super(raw)
+    this._defaultStyleSheet = defaultStyleSheet
   }
 
   get fontPostScriptName(): string {
@@ -30,7 +32,7 @@ export class SourceTextTextStyle extends SourceEntity {
   }
 
   get size(): number {
-    return this._rawValue?.FontSize ?? 0
+    return this._rawValue?.FontSize ?? this._defaultStyleSheet?.FontSize ?? 0
   }
 
   get lineHeight(): number {

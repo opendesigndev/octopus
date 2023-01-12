@@ -1,7 +1,7 @@
 import type { AddedType, ParsedLayerLayer } from './layer'
 import type { RawBounds } from './shared'
 import type { ParagraphRun } from './style-paragraph'
-import type { StyleRun } from './style-text'
+import type { StyleRun, StyleSheetData } from './style-text'
 
 export type RawTextEngineDict = {
   Editor: { Text: string }
@@ -60,6 +60,11 @@ export type EngineData = Partial<{
 
 export type EngineDataResourceDict = Partial<{
   FontSet: EngineDataResourceDictFontSet[]
+  TheNormalStyleSheet: number
+  StyleSheetSet: {
+    Name: string
+    StyleSheetData: StyleSheetData
+  }[]
 }>
 
 export type EngineDataResourceDictFontSet = Partial<{

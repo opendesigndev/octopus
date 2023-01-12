@@ -1,14 +1,10 @@
 import { DEFAULTS } from './defaults.js'
 
-import type {
-  EngineDataResourceDictFontSet,
-  FontProperties,
-  StyleRunArrayStyleSheetStyleSheetData,
-} from '../typings/raw'
+import type { EngineDataResourceDictFontSet, FontProperties, StyleSheetData } from '../typings/raw'
 
 export function getFontProperties(
   fontSet: EngineDataResourceDictFontSet[],
-  styleSheetData?: StyleRunArrayStyleSheetStyleSheetData
+  styleSheetData?: StyleSheetData
 ): FontProperties {
   const fontIdx = styleSheetData?.Font ?? 0
   const fontPostScriptName = fontSet[fontIdx]?.Name ?? ''

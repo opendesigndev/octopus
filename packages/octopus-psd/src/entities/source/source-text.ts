@@ -16,6 +16,8 @@ import type {
 } from '../../typings/raw'
 import type { SourceBounds, SourceMatrix } from '../../typings/source'
 
+type TextStyleFromTo = { from: number; to: number; runArrayIndex: number }
+
 export class SourceText extends SourceEntity {
   protected _engineData: EngineData | undefined
   protected _textProps: RawTextProperties | undefined
@@ -51,20 +53,50 @@ export class SourceText extends SourceEntity {
     return getMatrixFor(matrix)
   }
 
-  private _getTextStyleRange(): RawTextStyleRange[] {
-    const { ResourceDict } = this._engineData ?? {}
-    const { FontSet } = ResourceDict ?? {}
-    const { RunArray, RunLengthArray } = this._engineData?.EngineDict?.StyleRun ?? {}
+  private _getTextStyleFromTo(): TextStyleFromTo[] {
+    const edges = this._getParagraphStyleRange().map(({ to }) => to)
 
+    let currentEdge = edges.shift() ?? Infinity
+    const parts: TextStyleFromTo[] = []
+
+    const { RunLengthArray } = this._engineData?.EngineDict?.StyleRun ?? {}
+
+    const runLengthArray = asArray(RunLengthArray)
+    let position = 0
+
+    runLengthArray.forEach((size, runArrayIndex) => {
+      let from = position
+      const to = position + size
+
+      if (currentEdge > to) {
+        parts.push({ from, to, runArrayIndex })
+      } else {
+        do {
+          parts.push({ from, to: Math.min(to, currentEdge), runArrayIndex })
+          from = currentEdge
+          if (currentEdge >= to) {
+            break
+          }
+          currentEdge = edges.shift() ?? Infinity
+        } while (currentEdge < Infinity)
+      }
+
+      position = position + size
+    })
+
+    return parts
+  }
+
+  private _getTextStyleRange(): RawTextStyleRange[] {
+    const textStyleFromTo = this._getTextStyleFromTo()
+    const { ResourceDict } = this._engineData ?? {}
+    const { FontSet, TheNormalStyleSheet } = ResourceDict ?? {}
+    const { RunArray } = this._engineData?.EngineDict?.StyleRun ?? {}
+    const resourceDictStyleSheet = ResourceDict?.StyleSheetSet?.[TheNormalStyleSheet ?? 0]
     const fontSet = asArray(FontSet)
     const runArray = asArray(RunArray)
-    const runLengthArray = asArray(RunLengthArray)
-
-    return runArray.map(({ StyleSheet }, idx) => {
-      const from = runLengthArray[idx - 1] ?? 0
-      const toOrAddition = runLengthArray[idx] ?? 0
-      const to = toOrAddition < from ? from + toOrAddition : toOrAddition
-
+    return textStyleFromTo.map(({ from, to, runArrayIndex }) => {
+      const { StyleSheet } = runArray[runArrayIndex]
       return {
         from,
         to,
@@ -72,6 +104,7 @@ export class SourceText extends SourceEntity {
           ...StyleSheet?.StyleSheetData,
           ...getFontProperties(fontSet, StyleSheet?.StyleSheetData),
         },
+        defaultStyleSheet: resourceDictStyleSheet?.StyleSheetData,
       }
     })
   }
@@ -89,15 +122,16 @@ export class SourceText extends SourceEntity {
     const runArray = asArray(RunArray)
     const runLengthArray = asArray(RunLengthArray)
 
-    return runArray.map(({ ParagraphSheet }, idx) => {
-      const from = runLengthArray[idx - 1] ?? 0
-      const toOrAddition = runLengthArray[idx] ?? 0
-      const to = toOrAddition < from ? from + toOrAddition : toOrAddition
+    let position = 0
+    return runLengthArray.map((size, idx) => {
+      const from = position
+      const to = from + size
+      position = position + size
 
       return {
         from,
         to,
-        paragraphStyle: { ...ParagraphSheet.Properties },
+        paragraphStyle: { ...runArray[idx].ParagraphSheet.Properties },
       }
     })
   }
