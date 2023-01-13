@@ -108,3 +108,13 @@ yarn test:integration
 
 Runs Integration tests using our custom framework.
 Tries to convert `octopus components` + `manifest` for saved designs and compares them using `jsondiffpatch` with saved expected output.
+
+## Dependencies
+
+#### @webtoon
+
+octopus-psd has a dependency on @webtoon project to which open-design team has been contributing. Changes proposed by the open-design team have been first applied to our own fork (npm: @opendesign/psd-ts) and then merged into webtoon if the webtoon team approved it. Currently, there is one merge request from opendesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from @webtoon, but in reality imports are done from @opendesign/psd-ts. This bridge is visible in package.json:
+
+```
+    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.0"
+```
