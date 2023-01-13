@@ -167,8 +167,9 @@ export class DesignConverter {
     const raw = design.design as unknown as RawDesign
     const sourceDesign = new SourceDesign({ designId, raw })
 
+    this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
+
     if (sourceDesign.raw) {
-      this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
       this._exporter?.exportRawDesign?.(sourceDesign.raw)
     } // skip this for partial converts (FigmaPlugin source)
 
