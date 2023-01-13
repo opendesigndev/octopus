@@ -6,20 +6,20 @@ import { getBoundsFor } from '../../utils/source'
 import { SourceLayerCommon } from './source-layer-common'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawLayer, RawLayerFrame } from '../../typings/raw'
+import type { RawLayer, RawLayerContainer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { FrameTypes, SourceLayerParent } from './source-layer-common'
 
-type SourceLayerFrameOptions = {
+type SourceLayerContainerOptions = {
   parent: SourceLayerParent
-  rawValue: RawLayerFrame
+  rawValue: RawLayerContainer
 }
 
-export class SourceLayerFrame extends SourceLayerCommon {
-  protected _rawValue: RawLayerFrame
+export class SourceLayerContainer extends SourceLayerCommon {
+  protected _rawValue: RawLayerContainer
   private _layers: SourceLayer[]
 
-  constructor(options: SourceLayerFrameOptions) {
+  constructor(options: SourceLayerContainerOptions) {
     super(options)
     this._layers = this._initLayers()
   }
@@ -32,7 +32,10 @@ export class SourceLayerFrame extends SourceLayerCommon {
   }
 
   get hasBackgroundMask(): boolean {
-    return this.fills.length > 0 || this.strokes.length > 0
+    const isFrameLike = ['FRAME', 'COMPONENT_SET', 'COMPONENT', 'INSTANCE'].includes(this.type)
+    const hasFills = this.fills.length > 0
+    const hasStrokes = this.strokes.length > 0
+    return isFrameLike && (hasFills || hasStrokes)
   }
 
   get type(): FrameTypes {

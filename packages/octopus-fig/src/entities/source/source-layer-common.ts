@@ -13,10 +13,10 @@ import { SourcePaint } from './source-paint'
 import type { Octopus } from '../../typings/octopus'
 import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
 import type { SourceGeometry, SourceTransform } from '../../typings/source'
-import type { SourceLayerFrame } from './source-layer-frame'
+import type { SourceLayerContainer } from './source-layer-container'
 import type { SourceLayerShape } from './source-layer-shape'
 
-export type SourceLayerParent = SourceComponent | SourceLayerFrame | SourceLayerShape
+export type SourceLayerParent = SourceComponent | SourceLayerContainer | SourceLayerShape
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
@@ -70,6 +70,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   get transform(): SourceTransform | null {
     return getTransformFor(this._rawValue.relativeTransform)
+  }
+
+  get hasBackgroundMask(): boolean {
+    return false
   }
 
   @firstCallMemo()
@@ -127,7 +131,8 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get cornerRadius(): number | undefined {
-    return this._rawValue.cornerRadius
+    const radius = this._rawValue.cornerRadius
+    return typeof radius === 'number' && radius ? radius : undefined
   }
 
   get cornerRadii(): number[] | undefined {
@@ -140,5 +145,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   get isMaskOutline(): boolean {
     return this._rawValue.isMaskOutline ?? false
+  }
+
+  get isArtboard(): boolean | undefined {
+    if (this._rawValue.parent?.type) return this._rawValue.parent?.type === 'PAGE'
+    return this.parent instanceof SourceComponent
   }
 }

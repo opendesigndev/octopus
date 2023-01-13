@@ -7,12 +7,12 @@
     "height": 914
   },
   "content": {
-    "id": "2-BitmapMask-ShapeMask-Background",
+    "id": "2-ShapeMask-Background",
     "type": "MASK_GROUP",
     "visible": true,
     "maskBasis": "BODY",
     "mask": {
-      "id": "2-BitmapMask-ShapeMask-BackgroundMask",
+      "id": "2-ShapeMask-BackgroundMask",
       "type": "SHAPE",
       "visible": false,
       "shape": {
@@ -30,11 +30,11 @@
     },
     "layers": [
       {
-        "id": "2-BitmapMask-ShapeMask",
+        "id": "2-ShapeMask",
         "type": "MASK_GROUP",
         "maskBasis": "BODY",
         "mask": {
-          "id": "2c46ec71-ae38-48ae-97b2-8b1af0a4881e",
+          "id": "be5b198c-11b9-4f7a-a7ad-8e053936c4b3",
           "name": "Layer",
           "type": "SHAPE",
           "transform": [

@@ -2,24 +2,25 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
 import { round } from '@opendesign/octopus-common/dist/utils/math'
 
+import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
-import { SourceLayerFrame } from './source-layer-frame'
+import { SourceLayerContainer } from './source-layer-container'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { ImageSizeMap } from '../../services/conversion/design-converter'
-import type { RawBlendMode, RawLayerFrame } from '../../typings/raw'
+import type { RawBlendMode, RawLayer, RawLayerContainer } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 type SourceComponentOptions = {
-  rawFrame: RawLayerFrame
+  rawFrame: RawLayer
   isPasteboard?: boolean
   imageSizeMap?: ImageSizeMap
 }
 
 export class SourceComponent extends SourceEntity {
-  protected _rawValue: RawLayerFrame
-  private _sourceFrame: SourceLayerFrame
+  protected _rawValue: RawLayer
+  private _sourceLayer: SourceLayer
   private _isPasteboard: boolean
   private _imageSizeMap: ImageSizeMap
 
@@ -30,7 +31,14 @@ export class SourceComponent extends SourceEntity {
     super(options.rawFrame)
     this._isPasteboard = options.isPasteboard ?? false
     this._imageSizeMap = options.imageSizeMap ?? {}
-    this._sourceFrame = new SourceLayerFrame({ rawValue: options.rawFrame, parent: this })
+    this._sourceLayer = this._initializeSourceLayer(options.rawFrame)
+  }
+
+  private _initializeSourceLayer(rawValue: RawLayer): SourceLayer {
+    return (
+      createSourceLayer({ parent: this, layer: rawValue }) ??
+      new SourceLayerContainer({ rawValue: rawValue as RawLayerContainer, parent: this })
+    )
   }
 
   getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
@@ -51,16 +59,12 @@ export class SourceComponent extends SourceEntity {
     return { fonts: this._getAssetFonts() }
   }
 
-  get raw(): RawLayerFrame {
+  get raw(): RawLayer {
     return this._rawValue
   }
 
-  get sourceFrame(): SourceLayerFrame {
-    return this._sourceFrame
-  }
-
-  get layers(): SourceLayer[] {
-    return this.sourceFrame.layers
+  get sourceLayer(): SourceLayer {
+    return this._sourceLayer
   }
 
   get bounds(): SourceBounds | null {
@@ -92,6 +96,6 @@ export class SourceComponent extends SourceEntity {
   }
 
   get clipsContent(): boolean {
-    return this._rawValue.clipsContent ?? true
+    return (this._rawValue as RawLayerContainer).clipsContent ?? true
   }
 }

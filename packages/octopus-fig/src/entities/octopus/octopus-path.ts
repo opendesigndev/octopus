@@ -7,11 +7,11 @@ import { simplifyPathData } from '../../utils/paper'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
-import type { SourceLayerFrame } from '../source/source-layer-frame'
+import type { SourceLayerContainer } from '../source/source-layer-container'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceLayerText } from '../source/source-layer-text'
 
-type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerFrame
+type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerContainer
 
 type OctopusPathOptions = { sourceLayer: SourceLayer; isStroke?: boolean }
 
@@ -94,10 +94,11 @@ export class OctopusPath {
     const op = sourceLayer.booleanOperation
     const visible = sourceLayer.visible
     const transform = this._transform({ sourceLayer, isTopLayer })
+    const geometry = this._geometry(sourceLayer) || undefined
     const paths = sourceLayer.children
       .filter((sourceLayer): sourceLayer is SourceLayerShape => sourceLayer.type === 'SHAPE') // https://gitlab.avcd.cz/opendesign/octopus-converters/-/issues/9
       .map((sourceLayer) => this._getPath({ sourceLayer, isTopLayer: false }))
-    return { type: 'COMPOUND', op, visible, transform, paths }
+    return { type: 'COMPOUND', op, visible, transform, paths, geometry }
   }
 
   private _getPath({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathLike'] {

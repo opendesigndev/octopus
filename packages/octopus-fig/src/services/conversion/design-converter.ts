@@ -14,7 +14,7 @@ import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { RawDesign } from '../../typings/raw/design'
-import type { RawLayerFrame } from '../../typings/raw/layer'
+import type { RawLayerContainer } from '../../typings/raw/layer'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { ImageSize } from '../general/image-size/image-size'
 import type {
@@ -167,9 +167,10 @@ export class DesignConverter {
     const raw = design.design as unknown as RawDesign
     const sourceDesign = new SourceDesign({ designId, raw })
 
-    this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
-
-    this._exporter?.exportRawDesign?.(sourceDesign.raw)
+    if (sourceDesign.raw) {
+      this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
+      this._exporter?.exportRawDesign?.(sourceDesign.raw)
+    } // skip this for partial converts (FigmaPlugin source)
 
     /** Init partial update */
     this._exportManifest()
@@ -194,11 +195,12 @@ export class DesignConverter {
     const { libraryMeta, nodeId, node, fills } = frame
     if (isLibrary && libraryMeta) this.octopusManifest?.setExportedLibrary(libraryMeta)
 
-    const rawFrame = node.document as RawLayerFrame
+    const rawFrame = node.document as RawLayerContainer
     const sourcePathPromise = this._exporter?.exportRawComponent?.(rawFrame, nodeId)
 
-    const fillIds = Object.keys(fills)
+    const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
+
     const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
@@ -213,12 +215,14 @@ export class DesignConverter {
     this.octopusManifest?.setExportedChunk(style, chunkPath)
   }
 
-  private async _convertFill(fill: ResolvedFill) {
-    const fillName = fill.ref
-    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
+  private async _convertFill(fill: ResolvedFill & { size?: ImageSize }) {
+    if (typeof fill.buffer === 'string') fill.buffer = this._octopusConverter.base64ToUint8Array(fill.buffer) // @TODO investigate Buffer.buffer safety
 
-    const imageSize = await this._octopusConverter.imageSize(fill.buffer)
+    const fillName = fill.ref
+    const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
     if (imageSize) this._imageSizeMap[fillName] = imageSize
+
+    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
 
     this.octopusManifest?.setExportedImagePath(fillName, fillPath)
     if (this._shouldReturn) this._conversionResult.images.push({ name: fillName, data: fill.buffer })

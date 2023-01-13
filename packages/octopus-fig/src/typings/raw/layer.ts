@@ -13,7 +13,7 @@ import type {
 } from './shared'
 import type { RawTextStyle } from './text'
 
-export type RawLayer = RawLayerFrame | RawLayerShape | RawLayerText
+export type RawLayer = RawLayerContainer | RawLayerShape | RawLayerText
 
 export type RawLayerType = RawLayer['type']
 
@@ -26,6 +26,11 @@ export type RawSlice = {
   constraints?: RawConstraints
   relativeTransform?: RawTransform
   size?: RawVector
+}
+
+export type RawParent = {
+  id?: string
+  type?: RawLayerContainer['type'] | 'PAGE'
 }
 
 export type RawLayerBase = {
@@ -50,6 +55,7 @@ export type RawLayerBase = {
   strokeWeight?: number | null
   strokeAlign?: RawAlign
   effects?: RawEffect[]
+  parent?: RawParent
 }
 
 export type RawStrokeCap = 'NONE' | 'ROUND' | 'SQUARE' | 'LINE_ARROW' | 'TRIANGLE_ARROW'
@@ -65,8 +71,8 @@ export type RawLayerVector = RawLayerBase & {
   arcData?: RawArcData
 }
 
-export type RawLayerFrame = RawLayerVector & {
-  type?: 'FRAME' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
+export type RawLayerContainer = RawLayerVector & {
+  type?: 'FRAME' | 'GROUP' | 'COMPONENT' | 'COMPONENT_SET' | 'INSTANCE'
   clipsContent?: boolean
   children?: (RawLayer | RawSlice)[]
   componentId?: string

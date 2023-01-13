@@ -31,12 +31,24 @@ export function _inferPostScriptType(weight: number | undefined): string {
   return weight - Number(pair[0]) > Number(pair[1]) - weight ? types[pair[1]] : types[pair[0]]
 }
 
-export type InferPostScriptNameOptions = { fontFamily?: string; weight?: number; italic?: boolean }
-export function inferPostScriptName({ fontFamily, weight, italic }: InferPostScriptNameOptions): string | null {
+function _inferPostScriptStyle({ fontStyle, fontWeight, italic }: InferPostScriptNameOptions): string {
+  if (typeof fontStyle === 'string') {
+    return fontStyle.replace(/\s/g, '').replace(/Regular/, '')
+  }
+  const type = _inferPostScriptType(fontWeight).replace(/Regular/, '')
+  return italic ? `${type}Italic` : type
+}
+
+export type InferPostScriptNameOptions = {
+  fontFamily?: string
+  fontStyle?: string
+  fontWeight?: number
+  italic?: boolean
+}
+export function inferPostScriptName(options: InferPostScriptNameOptions): string | null {
+  const { fontFamily } = options
   if (typeof fontFamily !== 'string') return null
   const font = fontFamily.replace(/\s/g, '')
-  const inferType = _inferPostScriptType(weight)
-  const type = inferType === 'Regular' ? '' : inferType
-  const _italic = italic ? 'Italic' : ''
-  return [font, type, _italic].filter((str) => str).join('-')
+  const style = _inferPostScriptStyle(options)
+  return style ? `${font}-${style}` : font
 }

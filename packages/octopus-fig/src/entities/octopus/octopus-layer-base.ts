@@ -49,9 +49,16 @@ export class OctopusLayerBase {
     return this._sourceLayer
   }
 
+  private _isTopLayer(parent: OctopusLayerParent): parent is OctopusComponent {
+    return parent instanceof OctopusComponent
+  }
+
   get parentComponent(): OctopusComponent {
-    const parent = this._parent as OctopusLayerParent
-    return parent instanceof OctopusComponent ? parent : parent.parentComponent
+    return this._isTopLayer(this._parent) ? this._parent : this._parent.parentComponent
+  }
+
+  get isTopLayer(): boolean {
+    return this._isTopLayer(this._parent)
   }
 
   get id(): string {

@@ -28,6 +28,10 @@ export class SourceTextStyle extends SourceEntity {
     return this._rawValue.fontPostScriptName ?? undefined
   }
 
+  get fontStyle(): string | undefined {
+    return this._rawValue.fontStyle
+  }
+
   get fontWeight(): number | undefined {
     return this._rawValue.fontWeight ?? undefined
   }

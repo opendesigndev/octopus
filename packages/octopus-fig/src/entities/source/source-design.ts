@@ -15,7 +15,7 @@ export class SourceDesign extends SourceEntity {
 
   constructor(options: SourceDesignOptions) {
     super(options.raw)
-    this._pages = options.raw.document?.children?.map((page) => new SourcePage(page)) ?? []
+    this._pages = options.raw?.document?.children?.map((page) => new SourcePage(page)) ?? []
     this._designId = options.designId
   }
 

@@ -1,7 +1,7 @@
 {
   "id": "318-5",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.22",
   "dimensions": {
     "width": 850,
     "height": 650
@@ -199,7 +199,10 @@
               "baselinePolicy": "OFFSET_ASCENDER"
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "318-8-Background",
@@ -325,7 +328,10 @@
               "baselinePolicy": "OFFSET_ASCENDER"
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "318-43-Background",
@@ -475,7 +481,10 @@
               "baselinePolicy": "OFFSET_ASCENDER"
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "318-45-Background",
@@ -625,7 +634,10 @@
               "baselinePolicy": "OFFSET_ASCENDER"
             }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "325-10-Background",
@@ -856,7 +868,10 @@
                   "baselinePolicy": "OFFSET_ASCENDER"
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           },
           {
             "id": "325-9-Background",
@@ -1075,11 +1090,20 @@
                       "baselinePolicy": "OFFSET_ASCENDER"
                     }
                   }
-                ]
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "343-17-Background",
@@ -1299,9 +1323,15 @@
                   "baselinePolicy": "OFFSET_ASCENDER"
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       },
       {
         "id": "343-48-Background",
@@ -1521,9 +1551,15 @@
                   "baselinePolicy": "OFFSET_ASCENDER"
                 }
               }
-            ]
+            ],
+            "meta": {
+              "isArtboard": true
+            }
           }
-        ]
+        ],
+        "meta": {
+          "isArtboard": true
+        }
       }
     ],
     "meta": {

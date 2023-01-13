@@ -1,3 +1,4 @@
+import type { BufferFactory } from '../buffer/buffer-factory'
 import type { Env } from '../environment'
 import type { ImageSize } from '../image-size/image-size'
 import type { LoggerFactory } from '../logger/logger-factory'
@@ -18,14 +19,19 @@ type WebBenchmarkFactory = () => {
 }
 
 // ImageSize service
-type NodeImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
-type WebImageSizeFactory = () => (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
+export type ImageSizeService = (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
+type ImageSizeFactory = () => ImageSizeService
+
+// Buffer service
+type NodeBufferFactory = BufferFactory
+type WebBufferFactory = BufferFactory
 
 // Node stack
 export type NodeFactories = {
   createLoggerFactory: NodeLoggerFactory
   createBenchmarkService: NodeBenchmarkFactory
-  createImageSizeService: NodeImageSizeFactory
+  createImageSizeService: ImageSizeFactory
+  createBufferService: NodeBufferFactory
   createEnvironment: NodeEnvironmentFactory
 }
 
@@ -33,7 +39,8 @@ export type NodeFactories = {
 export type WebFactories = {
   createLoggerFactory: WebLoggerFactory
   createBenchmarkService: WebBenchmarkFactory
-  createImageSizeService: WebImageSizeFactory
+  createImageSizeService: ImageSizeFactory
+  createBufferService: WebBufferFactory
   createEnvironment: null
 }
 

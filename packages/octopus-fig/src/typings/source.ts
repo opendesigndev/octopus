@@ -18,3 +18,10 @@ export type SourceGeometry = {
   path: string
   fillRule: Octopus['FillRule']
 }
+
+export type SourceColor = {
+  r: number
+  g: number
+  b: number
+  a: number
+}

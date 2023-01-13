@@ -33,6 +33,7 @@ export type RawPaint = {
   color?: RawColor
   blendMode?: RawBlendMode
   gradientHandlePositions?: RawVector[]
+  gradientTransform?: RawTransform
   gradientStops?: RawStop[]
   scaleMode?: RawScaleMode
   imageTransform?: RawTransform
