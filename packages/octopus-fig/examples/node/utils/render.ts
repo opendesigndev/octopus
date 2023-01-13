@@ -17,13 +17,9 @@ async function render(id: string, octopusPath: string) {
   const fontsDir = process.env.FONTS_PATH ?? path.join(__dirname, '../../../', 'fonts')
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   const ignoreValidation = process.env.ODE_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
+  const renderCmd = `${process.env.ODE_RENDERER_CMD} ${ignoreValidation} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`
   try {
-    execSync(
-      `${process.env.ODE_RENDERER_CMD} ${ignoreValidation} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`,
-      {
-        stdio: 'ignore',
-      }
-    )
+    execSync(renderCmd, { stdio: 'ignore' })
     return { value: renderPath, error: null }
   } catch (error) {
     console.error(chalk.red(`Rendering failed while processing ${octopusPath}`))
