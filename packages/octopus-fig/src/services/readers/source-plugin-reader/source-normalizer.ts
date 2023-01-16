@@ -159,7 +159,18 @@ export class SourceNormalizer {
     return raw
   }
 
-  private _normalizeLayer(raw: any): RawLayer {
+  private _normalizeTopLayerTransform(raw: any): RawLayer {
+    const transform = raw.type === 'BOOLEAN_OPERATION' ? DEFAULT_TRANSFORM : raw.absoluteTransform
+    const [[a, c, tx], [b, d, ty]] = transform
+    const { x, y } = raw.absoluteRenderBounds
+    raw.relativeTransform = [
+      [a, c, tx - x],
+      [b, d, ty - y],
+    ]
+    return raw
+  }
+
+  private _normalizeLayer(raw: any, isTopLayer = false): RawLayer {
     const { type } = raw
 
     this._normalizeSize(raw)
@@ -175,12 +186,14 @@ export class SourceNormalizer {
     if (type === 'POLYGON') raw.type = 'REGULAR_POLYGON'
     if (type === 'GROUP') this._normalizeGroup(raw)
     if (type === 'TEXT') this._normalizeText(raw)
+    if (isTopLayer) this._normalizeTopLayerTransform(raw)
 
     if (isArray(raw.children)) raw.children.forEach((child: unknown) => this._normalizeLayer(child))
     return raw
   }
 
   public normalize(): RawLayer {
-    return this._normalizeLayer(this._raw)
+    const IS_TOP_LAYER = true
+    return this._normalizeLayer(this._raw, IS_TOP_LAYER)
   }
 }
