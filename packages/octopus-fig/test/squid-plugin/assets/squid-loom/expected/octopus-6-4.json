@@ -1,0 +1,2473 @@
+{
+  "id": "6-4",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.23",
+  "dimensions": {
+    "width": 1460,
+    "height": 920
+  },
+  "content": {
+    "id": "6-4-Background",
+    "name": "Cover Page",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "6-4-BackgroundMask",
+      "name": "Cover Page",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 1460,
+            "y0": 0,
+            "y1": 920
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "6-5-Background",
+        "name": "Section 4 - Creativity Without Limits",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "6-5-BackgroundMask",
+          "name": "Section 4 - Creativity Without Limits",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 1253.22,
+                "y0": 0,
+                "y1": 1043
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          571,
+          -18
+        ],
+        "layers": [
+          {
+            "id": "6-6-Background",
+            "name": "Mask Group 2",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-6-BackgroundMask",
+              "name": "Mask Group 2",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 769.52,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              463.429443359375,
+              0
+            ],
+            "layers": [
+              {
+                "id": "6-7-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-7",
+                  "name": "Rectangle 585",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": false,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 769.52,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "6-8",
+                    "name": "Screen Shot 2022-04-05 at 4.36 1",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      -957.3785400390625,
+                      -372.7919921875
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h2249.73v813.986h-2249.73z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/8a7f16da6403a1699bc6afc1567e3150e647623e.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              2249.73,
+                              0,
+                              0,
+                              813.99,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "6-9-Background",
+            "name": "Group 2156",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-9-BackgroundMask",
+              "name": "Group 2156",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 222.31,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              -1,
+              8.742277657347586e-8,
+              -8.742277657347586e-8,
+              -1,
+              222.30715942382812,
+              1043
+            ],
+            "layers": [
+              {
+                "id": "6-10-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-10",
+                  "name": "Rectangle 586",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    -1,
+                    8.742277657347586e-8,
+                    -8.742277657347586e-8,
+                    -1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 222.31,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "6-11",
+                    "name": "Rectangle 604",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      -1,
+                      8.742277657347586e-8,
+                      -8.742277657347586e-8,
+                      -1,
+                      0,
+                      0
+                    ],
+                    "effects": [
+                      {
+                        "type": "DROP_SHADOW",
+                        "visible": false,
+                        "blendMode": "NORMAL",
+                        "basis": "BODY",
+                        "shadow": {
+                          "offset": {
+                            "x": 0,
+                            "y": 15.39
+                          },
+                          "blur": 41.04132080078125,
+                          "choke": 0,
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 0.15
+                          }
+                        }
+                      }
+                    ],
+                    "shape": {
+                      "path": {
+                        "type": "RECTANGLE",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 222.31,
+                          "y0": 0,
+                          "y1": 222.31
+                        },
+                        "cornerRadius": 111.15357208251953
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 1,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  },
+                  {
+                    "id": "6-12",
+                    "name": "Asset 7@2x 2",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      -1,
+                      8.742277657347584e-8,
+                      -8.742277657347584e-8,
+                      -1,
+                      229.147365487804,
+                      129.9641370717943
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h482.236v482.236h-482.236z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              482.24,
+                              0,
+                              0,
+                              482.24,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0.14406779408454895,
+                                "temperature": 0.6694915294647217,
+                                "tint": 1,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "6-13-Background",
+            "name": "Group 2150",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-13-BackgroundMask",
+              "name": "Group 2150",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 222.31,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              302.88043212890625,
+              548.7940673828125
+            ],
+            "layers": [
+              {
+                "id": "6-14-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-14",
+                  "name": "Rectangle 588",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": false,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 222.31,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "6-15",
+                    "name": "Rectangle 589",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "effects": [
+                      {
+                        "type": "DROP_SHADOW",
+                        "visible": false,
+                        "blendMode": "NORMAL",
+                        "basis": "BODY",
+                        "shadow": {
+                          "offset": {
+                            "x": 0,
+                            "y": 15.39
+                          },
+                          "blur": 41.04132080078125,
+                          "choke": 0,
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 0.15
+                          }
+                        }
+                      }
+                    ],
+                    "shape": {
+                      "path": {
+                        "type": "RECTANGLE",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 222.31,
+                          "y0": 0,
+                          "y1": 222.31
+                        },
+                        "cornerRadius": 111.15357208251953
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  },
+                  {
+                    "id": "6-16",
+                    "name": "Asset 7@2x 2",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      -812.2761840820312,
+                      -198.3662872314453
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h1210.72v1210.72h-1210.72z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              1210.72,
+                              0,
+                              0,
+                              1210.72,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "6-17-Background",
+            "name": "Mask Group 3",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-17-BackgroundMask",
+              "name": "Mask Group 3",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 581.42,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              671.8013305664062,
+              273.2751159667969
+            ],
+            "layers": [
+              {
+                "id": "6-18-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-18",
+                  "name": "Rectangle 584",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": false,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 581.42,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "6-19",
+                    "name": "Screen Shot 2022-04-05 at 4.38 1",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      -463.4248962402344,
+                      -121.41397094726562
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h1482.62v492.496h-1482.62z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/cbd14dc71ff0015b138082d857b517cff4aec1dd.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              1482.62,
+                              0,
+                              0,
+                              492.5,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "6-20-Background",
+            "name": "Mask Group 6",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-20-BackgroundMask",
+              "name": "Mask Group 6",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 873.84,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              291.38519287109375,
+              820.6928100585938
+            ],
+            "layers": [
+              {
+                "id": "6-21",
+                "name": "Rectangle 584",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "effects": [
+                  {
+                    "type": "DROP_SHADOW",
+                    "visible": false,
+                    "blendMode": "NORMAL",
+                    "basis": "BODY",
+                    "shadow": {
+                      "offset": {
+                        "x": 0,
+                        "y": 15.39
+                      },
+                      "blur": 41.04132080078125,
+                      "choke": 0,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0.15
+                      }
+                    }
+                  }
+                ],
+                "shape": {
+                  "path": {
+                    "type": "RECTANGLE",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "rectangle": {
+                      "x0": 0,
+                      "x1": 873.84,
+                      "y0": 0,
+                      "y1": 222.31
+                    },
+                    "cornerRadius": 111.15357208251953
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0.1059,
+                        "g": 0.1333,
+                        "b": 0.9804,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": []
+                }
+              },
+              {
+                "id": "6-22-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-22",
+                  "name": "Rectangle 585",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": false,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 873.84,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0.1059,
+                          "g": 0.1333,
+                          "b": 0.9804,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [],
+                "meta": {
+                  "isArtboard": true
+                }
+              },
+              {
+                "id": "6-23",
+                "name": "Screen Shot 2022-04-05 at 4.38 1",
+                "type": "SHAPE",
+                "visible": false,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  -1575.312744140625,
+                  -121.41380310058594
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": false,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0h3475.31v492.496h-3475.31z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "image": {
+                        "ref": {
+                          "type": "PATH",
+                          "value": "images/cbd14dc71ff0015b138082d857b517cff4aec1dd.png"
+                        }
+                      },
+                      "positioning": {
+                        "layout": "FILL",
+                        "origin": "LAYER",
+                        "transform": [
+                          3475.31,
+                          0,
+                          0,
+                          492.5,
+                          0,
+                          0
+                        ]
+                      },
+                      "filters": [
+                        {
+                          "type": "OPACITY_MULTIPLIER",
+                          "opacity": 1
+                        },
+                        {
+                          "type": "FIGMA_COLOR_ADJUSTMENT",
+                          "colorAdjustment": {
+                            "hue": 0,
+                            "contrast": 0,
+                            "saturation": 0,
+                            "temperature": 0,
+                            "tint": 0,
+                            "highlights": 0,
+                            "shadows": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "strokes": []
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "6-24-Background",
+            "name": "Group 2159",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-24-BackgroundMask",
+              "name": "Group 2159",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 461.71,
+                    "y0": 0,
+                    "y1": 222.31
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              578.198974609375,
+              547.0840454101562
+            ],
+            "layers": [
+              {
+                "id": "6-25-ClippingMask",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "maskBasis": "LAYER_AND_EFFECTS",
+                "mask": {
+                  "id": "6-25",
+                  "name": "Rectangle 587",
+                  "type": "SHAPE",
+                  "visible": false,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [
+                    {
+                      "type": "DROP_SHADOW",
+                      "visible": false,
+                      "blendMode": "NORMAL",
+                      "basis": "BODY",
+                      "shadow": {
+                        "offset": {
+                          "x": 0,
+                          "y": 15.39
+                        },
+                        "blur": 41.04132080078125,
+                        "choke": 0,
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 0.15
+                        }
+                      }
+                    }
+                  ],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 461.71,
+                        "y0": 0,
+                        "y1": 222.31
+                      },
+                      "cornerRadius": 111.15357208251953
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0.1059,
+                          "g": 0.1333,
+                          "b": 0.9804,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "6-26",
+                    "name": "Rectangle 614",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "effects": [
+                      {
+                        "type": "DROP_SHADOW",
+                        "visible": false,
+                        "blendMode": "NORMAL",
+                        "basis": "BODY",
+                        "shadow": {
+                          "offset": {
+                            "x": 0,
+                            "y": 15.39
+                          },
+                          "blur": 41.04132080078125,
+                          "choke": 0,
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 0.15
+                          }
+                        }
+                      }
+                    ],
+                    "shape": {
+                      "path": {
+                        "type": "RECTANGLE",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 461.71,
+                          "y0": 0,
+                          "y1": 222.31
+                        },
+                        "cornerRadius": 111.15357208251953
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0.1059,
+                            "g": 0.1333,
+                            "b": 0.9804,
+                            "a": 1
+                          }
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  },
+                  {
+                    "id": "6-27",
+                    "name": "Asset 7@2x 2",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      -0.7071067690849304,
+                      -0.7071067690849304,
+                      0.7071067690849304,
+                      -0.7071067690849304,
+                      63.61592102050781,
+                      568.4296875
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h747.769v747.769h-747.769z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              747.77,
+                              0,
+                              0,
+                              747.77,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  },
+                  {
+                    "id": "6-28",
+                    "name": "circles@2x 1",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "COLOR_DODGE",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      -254.79833984375,
+                      -312.94000244140625
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h1186.78v1085.88h-1186.78z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/395a6365129fda2a5588997b673af40a39106f44.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              1186.78,
+                              0,
+                              0,
+                              1085.88,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  },
+                  {
+                    "id": "6-29",
+                    "name": "Asset 7@2x 1",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      -167.5854949951172,
+                      3844.203125
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h1225.25v1225.25h-1225.25z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "IMAGE",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "image": {
+                            "ref": {
+                              "type": "PATH",
+                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                            }
+                          },
+                          "positioning": {
+                            "layout": "FILL",
+                            "origin": "LAYER",
+                            "transform": [
+                              1225.25,
+                              0,
+                              0,
+                              1225.25,
+                              0,
+                              0
+                            ]
+                          },
+                          "filters": [
+                            {
+                              "type": "OPACITY_MULTIPLIER",
+                              "opacity": 1
+                            },
+                            {
+                              "type": "FIGMA_COLOR_ADJUSTMENT",
+                              "colorAdjustment": {
+                                "hue": 0,
+                                "contrast": 0,
+                                "saturation": 0,
+                                "temperature": 0,
+                                "tint": 0,
+                                "highlights": 0,
+                                "shadows": 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "strokes": []
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "6-30-Background",
+        "name": "Group",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "6-30-BackgroundMask",
+          "name": "Group",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 737,
+                "y0": 0,
+                "y1": 634
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          185,
+          117
+        ],
+        "layers": [
+          {
+            "id": "6-37-Background",
+            "name": "Frame",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "6-37-BackgroundMask",
+              "name": "Frame",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 737,
+                    "y0": 0,
+                    "y1": 634
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": false,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "layers": [
+              {
+                "id": "7-11",
+                "name": "Squid",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  141
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Squid",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Avenir-Black",
+                      "family": "Avenir",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 200,
+                    "lineHeight": 0,
+                    "letterSpacing": 1,
+                    "letterCase": "NONE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "LEFT",
+                  "verticalAlign": "TOP",
+                  "frame": {
+                    "mode": "AUTO_WIDTH",
+                    "size": {
+                      "width": 542,
+                      "height": 200
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              },
+              {
+                "id": "7-12",
+                "name": "Create. Animate. Export.",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  387
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Create. Animate. Export.",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Avenir-Black",
+                      "family": "Avenir",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 55,
+                    "lineHeight": 0,
+                    "letterSpacing": 1,
+                    "letterCase": "NONE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "LEFT",
+                  "verticalAlign": "TOP",
+                  "frame": {
+                    "mode": "AUTO_WIDTH",
+                    "size": {
+                      "width": 665,
+                      "height": 55
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              },
+              {
+                "id": "7-30",
+                "name": "Create. Animate. Export.",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  387
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Create. Animate. Export.",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Avenir-Black",
+                      "family": "Avenir",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 55,
+                    "lineHeight": 0,
+                    "letterSpacing": 1,
+                    "letterCase": "NONE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "LEFT",
+                  "verticalAlign": "TOP",
+                  "frame": {
+                    "mode": "AUTO_WIDTH",
+                    "size": {
+                      "width": 665,
+                      "height": 55
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              },
+              {
+                "id": "7-10",
+                "name": "Frame (2) 1",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0h100v108.36h-100z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "image": {
+                        "ref": {
+                          "type": "PATH",
+                          "value": "images/e247ede751d424b0a8aa1a5e5937fe075ba27106.png"
+                        }
+                      },
+                      "positioning": {
+                        "layout": "FILL",
+                        "origin": "LAYER",
+                        "transform": [
+                          100,
+                          0,
+                          0,
+                          108.36,
+                          0,
+                          0
+                        ]
+                      },
+                      "filters": [
+                        {
+                          "type": "OPACITY_MULTIPLIER",
+                          "opacity": 1
+                        },
+                        {
+                          "type": "FIGMA_COLOR_ADJUSTMENT",
+                          "colorAdjustment": {
+                            "hue": 0,
+                            "contrast": 0,
+                            "saturation": 0,
+                            "temperature": 0,
+                            "tint": 0,
+                            "highlights": 0,
+                            "shadows": 0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "strokes": []
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "6-38-Background",
+        "name": "squid",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "6-38-BackgroundMask",
+          "name": "squid",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 607.93,
+                "y0": 0,
+                "y1": 629.72
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          810,
+          158
+        ],
+        "layers": [],
+        "meta": {
+          "isArtboard": true
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

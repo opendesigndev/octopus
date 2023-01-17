@@ -1,0 +1,98 @@
+{
+  "id": "713-14",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.23",
+  "dimensions": {
+    "width": 319.37,
+    "height": 302.17
+  },
+  "content": {
+    "id": "713-14",
+    "name": "Hello World! Hello World! Hello World! Hello World!",
+    "type": "TEXT",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "NORMAL",
+    "transform": [
+      0.8660253882408142,
+      -0.5,
+      0.5,
+      0.8660253882408142,
+      -7.5263671875,
+      114.6175308227539
+    ],
+    "effects": [],
+    "text": {
+      "value": "Hello World! Hello World! Hello World! Hello World!",
+      "defaultStyle": {
+        "font": {
+          "postScriptName": "Inter-Bold",
+          "family": "Inter",
+          "syntheticPostScriptName": true
+        },
+        "fontSize": 42,
+        "letterSpacing": 0,
+        "letterCase": "NONE",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      },
+      "styles": [
+        {
+          "style": {
+            "font": {
+              "postScriptName": "Inter",
+              "family": "Inter",
+              "syntheticPostScriptName": true
+            },
+            "fontSize": 42,
+            "letterSpacing": 0,
+            "underline": "NONE",
+            "linethrough": false,
+            "letterCase": "NONE",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ]
+          },
+          "ranges": [
+            {
+              "from": 13,
+              "to": 51
+            }
+          ]
+        }
+      ],
+      "horizontalAlign": "LEFT",
+      "verticalAlign": "TOP",
+      "frame": {
+        "mode": "AUTO_WIDTH",
+        "size": {
+          "width": 251,
+          "height": 204
+        }
+      },
+      "baselinePolicy": "OFFSET_ASCENDER"
+    }
+  }
+}

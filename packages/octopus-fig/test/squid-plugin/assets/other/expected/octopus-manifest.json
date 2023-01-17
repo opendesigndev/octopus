@@ -1,0 +1,61 @@
+{
+  "version": "3.0.0-rc.23",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "161-3",
+      "name": "groups-01",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "161:3"
+      },
+      "bounds": {
+        "x": -37,
+        "y": -29,
+        "width": 1120,
+        "height": 890
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "387-13",
+      "name": "blend-mode-passThrough",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "387:13"
+      },
+      "bounds": {
+        "x": 1100,
+        "y": 0,
+        "width": 425,
+        "height": 635
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

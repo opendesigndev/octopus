@@ -7,5 +7,5 @@ workdir/
 example-web/
 temp/
 **/examples/web
-**/test/integration/assets/
-**/test/integration/report/
+**/test/**/assets/
+**/test/**/report/

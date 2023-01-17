@@ -1,0 +1,64 @@
+{
+  "id": "713-15",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.23",
+  "dimensions": {
+    "width": 267.12,
+    "height": 183.67
+  },
+  "content": {
+    "id": "713-15",
+    "name": "Lorem Ipsum!",
+    "type": "TEXT",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "NORMAL",
+    "transform": [
+      0.8660253882408142,
+      0.5,
+      -0.5,
+      0.8660253882408142,
+      22.496337890625,
+      -10.381317138671875
+    ],
+    "effects": [],
+    "text": {
+      "value": "Lorem Ipsum!",
+      "defaultStyle": {
+        "font": {
+          "postScriptName": "Inter-Bold",
+          "family": "Inter",
+          "syntheticPostScriptName": true
+        },
+        "fontSize": 42,
+        "letterSpacing": 0,
+        "letterCase": "NONE",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      },
+      "styles": [],
+      "horizontalAlign": "LEFT",
+      "verticalAlign": "TOP",
+      "frame": {
+        "mode": "AUTO_WIDTH",
+        "size": {
+          "width": 279,
+          "height": 51
+        }
+      },
+      "baselinePolicy": "OFFSET_ASCENDER"
+    }
+  }
+}
