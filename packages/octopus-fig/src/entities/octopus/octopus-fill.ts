@@ -236,7 +236,11 @@ export class OctopusFill {
   private get _fillImage(): Octopus['FillImage'] | null {
     const imageRef = this._fill.imageRef
     if (!imageRef) return null
-    const image: Octopus['Image'] = { ref: { type: 'PATH', value: `images/${imageRef}.png` } }
+
+    const exportedPath = this._parentLayer.parentComponent.getImageExportedPath(imageRef)
+    const image: Octopus['Image'] = exportedPath
+      ? { ref: { type: 'PATH', value: exportedPath } }
+      : { ref: { type: 'RESOURCE_REF', value: imageRef } }
     const visible = this.visible
     const blendMode = this.blendMode
     const positioning = this._imagePositioning

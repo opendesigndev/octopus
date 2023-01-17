@@ -427,8 +427,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {

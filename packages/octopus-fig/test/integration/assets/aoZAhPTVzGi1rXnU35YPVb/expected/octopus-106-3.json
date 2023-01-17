@@ -1,7 +1,7 @@
 {
   "id": "106-3",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.22",
+  "version": "3.0.0-rc.23",
   "dimensions": {
     "width": 4374,
     "height": 2475
@@ -1593,8 +1593,8 @@
                     "blendMode": "NORMAL",
                     "image": {
                       "ref": {
-                        "type": "PATH",
-                        "value": "images/891bbf6705621050b98cd567ca0b1601b5809bf9.png"
+                        "type": "RESOURCE_REF",
+                        "value": "891bbf6705621050b98cd567ca0b1601b5809bf9"
                       }
                     },
                     "positioning": {
@@ -1674,8 +1674,8 @@
                       "blendMode": "NORMAL",
                       "image": {
                         "ref": {
-                          "type": "PATH",
-                          "value": "images/c7f3503450cd3f959c25ad8d41f02efe69c8cd8e.png"
+                          "type": "RESOURCE_REF",
+                          "value": "c7f3503450cd3f959c25ad8d41f02efe69c8cd8e"
                         }
                       },
                       "positioning": {
@@ -1866,8 +1866,8 @@
                       "blendMode": "NORMAL",
                       "image": {
                         "ref": {
-                          "type": "PATH",
-                          "value": "images/39528832ab1a5d464806e5a5c13fbbfea93bc90b.png"
+                          "type": "RESOURCE_REF",
+                          "value": "39528832ab1a5d464806e5a5c13fbbfea93bc90b"
                         }
                       },
                       "positioning": {

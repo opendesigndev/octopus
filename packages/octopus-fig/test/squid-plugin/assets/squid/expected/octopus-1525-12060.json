@@ -973,8 +973,8 @@
                       "blendMode": "NORMAL",
                       "image": {
                         "ref": {
-                          "type": "PATH",
-                          "value": "images/eae313a48883a46e7a2a60ee806e73a8052191be.png"
+                          "type": "RESOURCE_REF",
+                          "value": "eae313a48883a46e7a2a60ee806e73a8052191be"
                         }
                       },
                       "positioning": {
@@ -2343,8 +2343,8 @@
                               "blendMode": "NORMAL",
                               "image": {
                                 "ref": {
-                                  "type": "PATH",
-                                  "value": "images/eae313a48883a46e7a2a60ee806e73a8052191be.png"
+                                  "type": "RESOURCE_REF",
+                                  "value": "eae313a48883a46e7a2a60ee806e73a8052191be"
                                 }
                               },
                               "positioning": {

@@ -1,7 +1,7 @@
 {
   "id": "390-13",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.22",
+  "version": "3.0.0-rc.23",
   "dimensions": {
     "width": 2000,
     "height": 2000
@@ -118,8 +118,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -192,8 +192,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -266,8 +266,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -340,8 +340,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -414,8 +414,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/765f7d8454f8058d34df9e3eb5a776f9c61ee48e.png"
+                  "type": "RESOURCE_REF",
+                  "value": "765f7d8454f8058d34df9e3eb5a776f9c61ee48e"
                 }
               },
               "positioning": {
@@ -488,8 +488,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/765f7d8454f8058d34df9e3eb5a776f9c61ee48e.png"
+                  "type": "RESOURCE_REF",
+                  "value": "765f7d8454f8058d34df9e3eb5a776f9c61ee48e"
                 }
               },
               "positioning": {
@@ -562,8 +562,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/765f7d8454f8058d34df9e3eb5a776f9c61ee48e.png"
+                  "type": "RESOURCE_REF",
+                  "value": "765f7d8454f8058d34df9e3eb5a776f9c61ee48e"
                 }
               },
               "positioning": {
@@ -636,8 +636,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -710,8 +710,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -784,8 +784,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -858,8 +858,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -932,8 +932,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -1006,8 +1006,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -1080,8 +1080,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -1154,8 +1154,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -1228,8 +1228,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -1341,8 +1341,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -1454,8 +1454,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -1567,8 +1567,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/f0890718ee8b114c23368579f5d832c263672e43.png"
+                  "type": "RESOURCE_REF",
+                  "value": "f0890718ee8b114c23368579f5d832c263672e43"
                 }
               },
               "positioning": {
@@ -1680,8 +1680,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {
@@ -1793,8 +1793,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/9e999f191ada92a64df50e96c8bb749e0104de49.png"
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
                 }
               },
               "positioning": {

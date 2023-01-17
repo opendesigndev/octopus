@@ -319,8 +319,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/8a7f16da6403a1699bc6afc1567e3150e647623e.png"
+                              "type": "RESOURCE_REF",
+                              "value": "8a7f16da6403a1699bc6afc1567e3150e647623e"
                             }
                           },
                           "positioning": {
@@ -629,8 +629,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                              "type": "RESOURCE_REF",
+                              "value": "b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8"
                             }
                           },
                           "positioning": {
@@ -939,8 +939,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                              "type": "RESOURCE_REF",
+                              "value": "b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8"
                             }
                           },
                           "positioning": {
@@ -1175,8 +1175,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/cbd14dc71ff0015b138082d857b517cff4aec1dd.png"
+                              "type": "RESOURCE_REF",
+                              "value": "cbd14dc71ff0015b138082d857b517cff4aec1dd"
                             }
                           },
                           "positioning": {
@@ -1489,8 +1489,8 @@
                       "blendMode": "NORMAL",
                       "image": {
                         "ref": {
-                          "type": "PATH",
-                          "value": "images/cbd14dc71ff0015b138082d857b517cff4aec1dd.png"
+                          "type": "RESOURCE_REF",
+                          "value": "cbd14dc71ff0015b138082d857b517cff4aec1dd"
                         }
                       },
                       "positioning": {
@@ -1794,8 +1794,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                              "type": "RESOURCE_REF",
+                              "value": "b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8"
                             }
                           },
                           "positioning": {
@@ -1874,8 +1874,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/395a6365129fda2a5588997b673af40a39106f44.png"
+                              "type": "RESOURCE_REF",
+                              "value": "395a6365129fda2a5588997b673af40a39106f44"
                             }
                           },
                           "positioning": {
@@ -1954,8 +1954,8 @@
                           "blendMode": "NORMAL",
                           "image": {
                             "ref": {
-                              "type": "PATH",
-                              "value": "images/b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8.png"
+                              "type": "RESOURCE_REF",
+                              "value": "b9d314a1a34ab70edf3dc9b960bd066cb4b34cf8"
                             }
                           },
                           "positioning": {
@@ -2343,8 +2343,8 @@
                       "blendMode": "NORMAL",
                       "image": {
                         "ref": {
-                          "type": "PATH",
-                          "value": "images/e247ede751d424b0a8aa1a5e5937fe075ba27106.png"
+                          "type": "RESOURCE_REF",
+                          "value": "e247ede751d424b0a8aa1a5e5937fe075ba27106"
                         }
                       },
                       "positioning": {

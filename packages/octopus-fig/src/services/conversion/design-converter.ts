@@ -29,7 +29,7 @@ import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
-export type ImageSizeMap = { [key: string]: ImageSize }
+export type ImageMap = { [key: string]: { imageSize?: ImageSize; exportedPath?: string } }
 
 export type ComponentConversionResult = {
   id: string
@@ -55,7 +55,7 @@ export class DesignConverter {
   private _exporter: AbstractExporter | null
   private _partialUpdateInterval: number
   private _shouldReturn: boolean
-  private _imageSizeMap: ImageSizeMap = {}
+  private _imageMap: ImageMap = {}
   private _queue: Queue<SourceComponent, ComponentConversionResult>
   private _awaitingComponents: Promise<ComponentConversionResult>[] = []
   private _conversionResult: DesignConversionResult = { manifest: undefined, components: [], images: [], previews: [] }
@@ -202,7 +202,7 @@ export class DesignConverter {
     const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
 
-    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
+    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageMap })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
 
@@ -221,7 +221,8 @@ export class DesignConverter {
 
     const fillName = fill.ref
     const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
-    if (imageSize) this._imageSizeMap[fillName] = imageSize
+    const exportedPath = this._exporter?.getImagePath(fillName)
+    this._imageMap[fillName] = { imageSize, exportedPath }
 
     const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
 

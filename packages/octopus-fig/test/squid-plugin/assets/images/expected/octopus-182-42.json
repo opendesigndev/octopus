@@ -116,8 +116,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -196,8 +196,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -276,8 +276,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -356,8 +356,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -436,8 +436,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -516,8 +516,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -596,8 +596,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -676,8 +676,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -756,8 +756,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -836,8 +836,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -916,8 +916,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -996,8 +996,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1076,8 +1076,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1156,8 +1156,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1236,8 +1236,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {

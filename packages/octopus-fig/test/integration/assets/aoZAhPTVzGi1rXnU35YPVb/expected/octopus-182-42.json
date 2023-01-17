@@ -1,7 +1,7 @@
 {
   "id": "182-42",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.22",
+  "version": "3.0.0-rc.23",
   "dimensions": {
     "width": 4382,
     "height": 3719
@@ -118,8 +118,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -192,8 +192,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -266,8 +266,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -340,8 +340,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -414,8 +414,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -488,8 +488,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -562,8 +562,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -636,8 +636,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -710,8 +710,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -784,8 +784,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -858,8 +858,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -932,8 +932,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1006,8 +1006,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1080,8 +1080,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
@@ -1154,8 +1154,8 @@
               "blendMode": "NORMAL",
               "image": {
                 "ref": {
-                  "type": "PATH",
-                  "value": "images/66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5.png"
+                  "type": "RESOURCE_REF",
+                  "value": "66a83d5b84e162650b6a24b1ee0cb5d4827dbdf5"
                 }
               },
               "positioning": {
