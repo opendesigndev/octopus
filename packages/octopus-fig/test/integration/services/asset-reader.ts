@@ -36,7 +36,7 @@ export class AssetReader {
   private _assetsDirPath: string
   private _selectedAsset?: string
 
-  static EVENT_DATA_NAME = 'eventData.json'
+  static EVENT_DATA_NAME = 'event-data.json'
   static ASSETS_DIR_RELATIVE_PATH = '../assets'
   static EXPECTED_DIR_NAME = 'expected'
 
