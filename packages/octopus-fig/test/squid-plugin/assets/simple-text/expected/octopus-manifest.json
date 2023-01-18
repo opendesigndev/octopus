@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.23",
+  "version": "3.0.0-rc.24",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -10,7 +10,7 @@
     {
       "id": "114-4",
       "name": "Hello World!",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "114:4"
       },
@@ -34,7 +34,7 @@
     {
       "id": "713-14",
       "name": "Hello World! Hello World! Hello World! Hello World!",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "713:14"
       },
@@ -58,7 +58,7 @@
     {
       "id": "713-15",
       "name": "Lorem Ipsum!",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "713:15"
       },

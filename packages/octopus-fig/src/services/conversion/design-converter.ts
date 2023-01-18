@@ -122,7 +122,7 @@ export class DesignConverter {
 
   private async _exportComponentSafe(
     converted: ComponentConversionResult,
-    role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD'
+    role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL'
   ): Promise<{ path: string | null; error: Error | null }> {
     try {
       const path = await this._exporter?.exportComponent?.(converted, role)

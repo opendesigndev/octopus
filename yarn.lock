@@ -878,20 +878,20 @@
   resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.38.tgz#0f48900006242fb67d213dd53b127fee1386e176"
   integrity sha512-ASZviNybmJfnMLkr9oJ9u1dRXiT4brmzRzLjfKSD2T8ZJd16vBOnSsw4amftPdHvnA+1oUy7YhNHeY1sW7IQ4Q==
 
-"@opendesign/manifest-ts@3.0.0-alpha.40":
-  version "3.0.0-alpha.40"
-  resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.40.tgz#064596e61d0e0d632d7fa00512d80c2eda951591"
-  integrity sha512-ZS3DhI5pbiYrt1smQvX1WtjSfW13LPZl7D/0v/VGrQlGiYmQXcKBls+XwT73iqc+CcjOd5RfltT1JT79u3E+QA==
+"@opendesign/manifest-ts@3.0.0-alpha.41":
+  version "3.0.0-alpha.41"
+  resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.41.tgz#bf7dfc561ab6da8f86cba4d2b90531282374ed32"
+  integrity sha512-/H0NrF8HDXci32J6Y5XxQnF8jCVFsOSn/uOaHZ3TBQCcGFjGVhzGCKrE7Ct90MUhJz41VSjPaYKi74fV1czdYQ==
 
 "@opendesign/octopus-ts@3.0.0-alpha.38":
   version "3.0.0-alpha.38"
   resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.0-alpha.38.tgz#51e7acd8e5fd894aeee1de4e183c930fda457242"
   integrity sha512-9vTutQl5QJbIDQHDS4Qrl40qYTZGVu0RrHn3+1UDcDi/9R0S8hsCu7EEqA2TZkdpBdqoWmTr4p1LtJHbZBg2xw==
 
-"@opendesign/octopus-ts@3.0.0-alpha.40":
-  version "3.0.0-alpha.40"
-  resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.0-alpha.40.tgz#2b30012c52b0213e9f4712f627aa4c36352a202a"
-  integrity sha512-CR+0JcJ0UKbojj2jHy1LYDVX3oL1INaN/8rsdVZb4UiULkMN0+fmz6ArTEcjDhcsbtU1jDmvs4xTyb/O+w1Itg==
+"@opendesign/octopus-ts@3.0.0-alpha.41":
+  version "3.0.0-alpha.41"
+  resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.0-alpha.41.tgz#d2c0391dd766bd6ffbcaee24416a3b05190c7163"
+  integrity sha512-0r6rsQyjmEakYYNDzgkL4X7pBe1DRVnzlt1bsvJtSkTu4bVFKiy3J+D8WZIlhsUTD6X2XBPygKXT/jNmEj+qYA==
 
 "@rollup/plugin-node-resolve@^11.2.0":
   version "11.2.1"

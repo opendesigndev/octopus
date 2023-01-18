@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.23",
+  "version": "3.0.0-rc.24",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -10,7 +10,7 @@
     {
       "id": "41-9",
       "name": "PikachuUA 1",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "41:9"
       },
@@ -34,7 +34,7 @@
     {
       "id": "41-11",
       "name": "Vector 2",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "41:11"
       },
@@ -58,7 +58,7 @@
     {
       "id": "87-2",
       "name": "Intersect",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "87:2"
       },
@@ -82,7 +82,7 @@
     {
       "id": "269-19",
       "name": "Subtract",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "269:19"
       },

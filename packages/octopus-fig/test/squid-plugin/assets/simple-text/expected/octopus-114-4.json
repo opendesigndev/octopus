@@ -1,7 +1,7 @@
 {
   "id": "114-4",
-  "type": "ARTBOARD",
-  "version": "3.0.0-rc.23",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
   "dimensions": {
     "width": 849,
     "height": 172
