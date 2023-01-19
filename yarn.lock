@@ -1704,10 +1704,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-zip-error-throw-20230118":
-  version "0.5.1-zip-error-throw-20230118"
-  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-zip-error-throw-20230118.tgz#b473990c77493f4e2312876d33abb832d01bd343"
-  integrity sha512-RbOhcQIcDl5tGlt3Vi4z5L0EK5CF8Ru5aHmhgcY+PQ5kgaNhPpM91pysOnEUBPMD6/brnHwpRSdywjYpm5f8Mg==
+"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-experimental-release-20230119":
+  version "0.5.1-experimental-release-20230119"
+  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-experimental-release-20230119.tgz#5d8fbdefdad4bd66ac71e9780f2d672e99e6cfd7"
+  integrity sha512-ZcxWjAEXDnoJMXtb051bDoeMuEfuwSWacmFovd/NGqklm3lRJ2++CbSg3JmpDofSa3qo2oRGhIpoK2CP07yh5A==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
