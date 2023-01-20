@@ -179,6 +179,8 @@ export class DesignConverter {
 
     /** Wait till all components + dependencies are processed */
     await design.content
+    this.octopusManifest?.finalize()
+
     await Promise.all(this._awaitingComponents)
 
     /** At this moment all components + dependencies should be converted and exported */
