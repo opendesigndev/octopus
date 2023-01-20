@@ -5,7 +5,7 @@ import { scan } from '@jimp/utils'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import Psd, { AliKey } from '@webtoon/psd-ts'
+import Psd, { AliKey, Group } from '@webtoon/psd-ts'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
 import Jimp from 'jimp'
@@ -142,7 +142,7 @@ export class PSDFileReader {
     return parsed.writeAsync(path.join(dir, name))
   }
 
-  private async _exportMaskImage(layer: Layer, dir: string): Promise<void> {
+  private async _exportMaskImage(layer: Layer | Group, dir: string): Promise<void> {
     if (!layer.userMask || !layer.realUserMask) {
       return
     }
@@ -154,7 +154,7 @@ export class PSDFileReader {
       return
     }
 
-    const maskData = realUserMask ? layer.maskData.realData : layer.maskData
+    const maskData = realUserMask ? layer?.maskData?.realData : layer.maskData
 
     if (maskData?.flags.layerMaskDisabled === true || maskData?.flags.userMaskFromRenderingOtherData) {
       return
@@ -171,6 +171,7 @@ export class PSDFileReader {
 
   private async _exportImages(layer: NodeChild, dir: string): Promise<void> {
     if (layer.type === 'Group') {
+      await this._exportMaskImage(layer, dir)
       await Promise.all(layer.children.map((layer) => this._exportImages(layer, dir)))
       return
     }
