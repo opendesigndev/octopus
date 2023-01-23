@@ -118,6 +118,8 @@ export function isAdjustmentLayer(layerProperties: LayerProperties | undefined):
 }
 
 export function getColor(rawColor: RawColor | undefined): null | SourceColor {
+  const { Rd, Grn, Bl } = rawColor ?? {}
+  if (Bl === undefined && Grn === undefined && Rd === undefined) return null
   return rawColor ? { r: asNumber(rawColor.Rd, 0), g: asNumber(rawColor.Grn, 0), b: asNumber(rawColor.Bl, 0) } : null
 }
 
