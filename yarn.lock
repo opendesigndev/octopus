@@ -1141,7 +1141,7 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-17.0.35.tgz"
   integrity sha512-vu1SrqBjbbZ3J6vwY17jBs8Sr/BKA+/a/WtjRG+whKg1iuLFOosq872EXS0eXWILdO36DHQQeku/ZcL6hz2fpg==
 
-"@types/pino-pretty@*":
+"@types/pino-pretty@*", "@types/pino-pretty@4.7.5":
   version "4.7.5"
   resolved "https://registry.npmjs.org/@types/pino-pretty/-/pino-pretty-4.7.5.tgz"
   integrity sha512-rfHe6VIknk14DymxGqc9maGsRe8/HQSvM2u46EAz2XrS92qsAJnW16dpdFejBuZKD8cRJX6Aw6uVZqIQctMpAg==
@@ -1149,7 +1149,7 @@
     "@types/node" "*"
     "@types/pino" "6.3"
 
-"@types/pino-std-serializers@*":
+"@types/pino-std-serializers@*", "@types/pino-std-serializers@2.4.1":
   version "2.4.1"
   resolved "https://registry.npmjs.org/@types/pino-std-serializers/-/pino-std-serializers-2.4.1.tgz"
   integrity sha512-17XcksO47M24IVTVKPeAByWUd3Oez7EbIjXpSbzMPhXVzgjGtrOa49gKBwxH9hb8dKv58OelsWQ+A1G1l9S3wQ==
