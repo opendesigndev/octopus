@@ -26,7 +26,6 @@
     "@opendesign/octopus-ts": "3.0.0-alpha.38",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
-    "@types/pino": "^6.3.3",
     "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
