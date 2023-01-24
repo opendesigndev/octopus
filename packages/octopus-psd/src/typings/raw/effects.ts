@@ -79,7 +79,9 @@ export type RawEffectSatin = RawEffectCommon & {
   blur: number
 }
 
-export type RawOffset = { Hrzn: UnitFloatDescriptorValue; Vrtc: UnitFloatDescriptorValue }
+export type RawOffset =
+  | { Hrzn: UnitFloatDescriptorValue; Vrtc: UnitFloatDescriptorValue }
+  | { Hrzn: number; Vrtc: number }
 
 export type RawFill = RawEffectCommon &
   Partial<{
