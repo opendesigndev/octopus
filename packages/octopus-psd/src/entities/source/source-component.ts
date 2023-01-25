@@ -24,6 +24,7 @@ export class SourceComponent extends SourceEntity {
 
   static DEFAULT_ID = 'pasteboard-1'
   static DEFAULT_NAME = 'Pasteboard'
+  static RAW_SOURCE_DEFAULT_NAME = 'ROOT'
 
   constructor({ isPasteboard, raw, parent }: SourceComponentOptions) {
     super(raw)
@@ -68,7 +69,10 @@ export class SourceComponent extends SourceEntity {
   }
 
   get name(): string {
-    return this._rawValue.name !== undefined ? String(this._rawValue.name) : SourceComponent.DEFAULT_NAME
+    const rawName = this._rawValue.name
+    return rawName !== undefined && rawName !== SourceComponent.RAW_SOURCE_DEFAULT_NAME
+      ? String(this._rawValue.name)
+      : SourceComponent.DEFAULT_NAME
   }
 
   get isPasteboard(): boolean {
