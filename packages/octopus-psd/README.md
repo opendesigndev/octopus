@@ -113,8 +113,17 @@ Tries to convert `octopus components` + `manifest` for saved designs and compare
 
 #### @webtoon
 
-octopus-psd has a dependency on @webtoon project to which open-design team has been contributing. Changes proposed by the open-design team have been first applied to our own fork (npm: @opendesign/psd-ts) and then merged into webtoon if the webtoon team approved it. Currently, there is one merge request from opendesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from @webtoon, but in reality imports are done from @opendesign/psd-ts. This bridge is visible in package.json:
+octopus-psd has a dependency on @webtoon project to which open-design team has been contributing. Changes proposed by the open-design team have been first applied to our own fork (npm: @opendesign/psd-ts) and then merged into webtoon if the webtoon team approved it. Currently, there is one merge request from opendesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from @webtoon, but in reality imports are done from @opendesign/psd-ts. This bridge (or proxy) is visible in package.json:
 
 ```
     "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.0"
 ```
+
+How to make changes in @webtoon dependency:
+
+1. pull https://github.com/opendesigndev/psd-ts
+2. make sure your local origin is opendesigndev/psd-ts (google how to add origin)
+3. make a pull request to opendesigndev/psd-ts (when doing merge request on github, make sure branch you are pulling to is main from opendesign)
+4. when everything is merged create a pull request from opendesign github page to merge main into webtoon
+5. if you are proxying dependency from webtoon with opendesign/psd-ts, switch to branch experimental-release on opendesign/psd-ts and read about "release process" and apply.
+6. update your package.json in octopus-psd accordingly
