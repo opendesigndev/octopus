@@ -1704,10 +1704,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-add-padding-pattern-20230124":
-  version "0.5.1-add-padding-pattern-20230124"
-  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-add-padding-pattern-20230124.tgz#00e5a9e1947bdb5022c2667d5e1527a26066030d"
-  integrity sha512-VQZMFu4Pr0YWqY85WtcXPZNnOZTDNPTVZ3eJYYbY9mtilgXIwPHbqeQqkcKCogys1bYe+sbPheCUIZi/1jSD3Q==
+"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-invalid-signature-20230125":
+  version "0.5.1-invalid-signature-20230125"
+  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-invalid-signature-20230125.tgz#7acf711f7c134805f462578a35a965f868e19129"
+  integrity sha512-ol/3iiW6WFk1tbS44i0+usKcbw3hEh8LoAKSM11U7QZ2rkpPeA9o9kZ7uVhKtSIZnHCBaTOgOXMJ4jZrMZ4S8A==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
