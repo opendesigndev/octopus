@@ -35,8 +35,12 @@ export async function convertDesign({
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertDesignOptions): Promise<void> {
   const pluginSource: PluginSource | null = await parseJsonFromFile(sourcePath)
-  const { id: documentId, name: documentName } = pluginSource?.context?.document ?? {}
-  if (!pluginSource || !documentId || !documentName) return // TODO log error
+  const context = pluginSource?.context
+  const { id: documentId, name: documentName } = context?.document ?? {}
+  if (!pluginSource || !documentId || !documentName) {
+    console.error(`Design conversion failed`, { documentId, documentName, pluginSource, context })
+    return
+  }
 
   const designId = kebabCase(`${documentId}-${documentName}-${path.basename(sourcePath, '.json')}`)
   const outputDir = path.join(__dirname, '../../', 'workdir')
