@@ -163,7 +163,7 @@
         "styles": {},
         "name": "Simple Text",
         "lastModified": "2022-09-21T14:07:06Z",
-        "thumbnailUrl": "https://s3-alpha-sig.figma.com/thumbnails/702003f9-e243-41e0-b487-e3be2f2bb1b7?Expires=1670198400&Signature=H-Qi9ZQaIQ4Tuq0FTh23dv-yF17qLH2CAxhhNdnBNTtURN6093lnxnKbPLhCtZqO6vb4Kv2JnALglkupFS~kRk9gqrAy3NFkwjoaZqHBnihWoOgZzp90Senj-QW6kXjHHVT98ckQMncc6SF0wX5JNDR2n7HDjfuS1Tc2JXMw6Bs2tgTbmW7rJm5UTJ4jWZDfSMQ6TjBtrp24uwN71hvxB0SGVJgY3tzsPc4tuDm7YgnqsnQr7wwBNyUTPriGAS5VJeV-ishnY5~IeYpyMYMSZOMTw8Abn5IBjUv9nu4E-H5tx4o525bZlhFKgZOXPeFtuLnFHuSO1JvfJyKvQBki2g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+        "thumbnailUrl": "https://s3-alpha.figma.com/thumbnails/702003f9-e243-41e0-b487-e3be2f2bb1b7?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC4PWXTIHA%2F20230129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230129T120000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1296f0404289c9aad7a6e01347273a25ae9818cce35652026079aff12be95b",
         "version": "2369660652",
         "role": "owner",
         "editorType": "figma",
@@ -351,7 +351,7 @@
         "_fromDocument": {
           "name": "Simple Text",
           "lastModified": "2022-09-21T14:07:06Z",
-          "thumbnailUrl": "https://s3-alpha-sig.figma.com/thumbnails/702003f9-e243-41e0-b487-e3be2f2bb1b7?Expires=1670198400&Signature=H-Qi9ZQaIQ4Tuq0FTh23dv-yF17qLH2CAxhhNdnBNTtURN6093lnxnKbPLhCtZqO6vb4Kv2JnALglkupFS~kRk9gqrAy3NFkwjoaZqHBnihWoOgZzp90Senj-QW6kXjHHVT98ckQMncc6SF0wX5JNDR2n7HDjfuS1Tc2JXMw6Bs2tgTbmW7rJm5UTJ4jWZDfSMQ6TjBtrp24uwN71hvxB0SGVJgY3tzsPc4tuDm7YgnqsnQr7wwBNyUTPriGAS5VJeV-ishnY5~IeYpyMYMSZOMTw8Abn5IBjUv9nu4E-H5tx4o525bZlhFKgZOXPeFtuLnFHuSO1JvfJyKvQBki2g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+          "thumbnailUrl": "https://s3-alpha.figma.com/thumbnails/702003f9-e243-41e0-b487-e3be2f2bb1b7?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWC4PWXTIHA%2F20230129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230129T120000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1296f0404289c9aad7a6e01347273a25ae9818cce35652026079aff12be95b",
           "version": "2369660652",
           "role": "owner",
           "editorType": "figma",

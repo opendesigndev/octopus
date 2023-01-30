@@ -1988,6 +1988,188 @@
             }
           ]
         }
+      },
+      {
+        "id": "724-35",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1614,
+          30
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "RECTANGLE"
+            },
+            "geometry": "M0,0h159v300h-159z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.8,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              }
+            },
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
+                }
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  159,
+                  0,
+                  0,
+                  300,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 0.8
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {
+                    "hue": 0,
+                    "contrast": 0,
+                    "saturation": 0,
+                    "temperature": 0,
+                    "tint": 0,
+                    "highlights": 0,
+                    "shadows": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "725-36",
+        "name": "Rectangle 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1787,
+          30
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "RECTANGLE"
+            },
+            "geometry": "M0,0h159v300h-159z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.8,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              }
+            },
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
+                }
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -2.920782615966437e-14,
+                  300,
+                  -159,
+                  -5.510910596163089e-14,
+                  159,
+                  2.1802415222876193e-14
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 0.8
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {
+                    "hue": 0,
+                    "contrast": 0,
+                    "saturation": 0,
+                    "temperature": 0,
+                    "tint": 0,
+                    "highlights": 0,
+                    "shadows": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
       }
     ],
     "meta": {

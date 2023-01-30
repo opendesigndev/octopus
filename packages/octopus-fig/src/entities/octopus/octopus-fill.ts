@@ -197,7 +197,14 @@ export class OctopusFill {
       const transform = createMatrix(this._fill.imageTransform)
         .invert()
         .prepend(createMatrix([x, 0, 0, y, 0, 0])).values
+      return { layout, origin, transform }
+    }
 
+    if (this._fill.rotation) {
+      const transform = createMatrix([1, 0, 0, 1, 0, 0])
+        .rotate(this._fill.rotation, 0.5, 0.5)
+        .invert()
+        .prepend(createMatrix([x, 0, 0, y, 0, 0])).values
       return { layout, origin, transform }
     }
 

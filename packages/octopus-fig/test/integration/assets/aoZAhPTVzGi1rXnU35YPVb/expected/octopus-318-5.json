@@ -4,11 +4,11 @@
   "version": "3.0.0-rc.24",
   "dimensions": {
     "width": 850,
-    "height": 650
+    "height": 502
   },
   "content": {
     "id": "318-5-Background",
-    "name": "Frame 1",
+    "name": "Components",
     "type": "MASK_GROUP",
     "visible": true,
     "opacity": 1,
@@ -16,7 +16,7 @@
     "maskBasis": "BODY_EMBED",
     "mask": {
       "id": "318-5-BackgroundMask",
-      "name": "Frame 1",
+      "name": "Components",
       "type": "SHAPE",
       "visible": true,
       "opacity": 1,
@@ -46,7 +46,7 @@
             "x0": 0,
             "x1": 850,
             "y0": 0,
-            "y1": 650
+            "y1": 502
           }
         },
         "fillRule": "NON_ZERO",
@@ -75,264 +75,6 @@
       0
     ],
     "layers": [
-      {
-        "id": "318-7-Background",
-        "name": "BUTTON COMP",
-        "type": "MASK_GROUP",
-        "visible": true,
-        "opacity": 1,
-        "blendMode": "PASS_THROUGH",
-        "maskBasis": "BODY_EMBED",
-        "mask": {
-          "id": "318-7-BackgroundMask",
-          "name": "BUTTON COMP",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 300,
-                "y0": 0,
-                "y1": 100
-              },
-              "cornerRadius": 30
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [
-              {
-                "type": "COLOR",
-                "visible": true,
-                "blendMode": "NORMAL",
-                "color": {
-                  "r": 1,
-                  "g": 0.3375,
-                  "b": 0.3375,
-                  "a": 1
-                }
-              }
-            ],
-            "strokes": []
-          }
-        },
-        "transform": [
-          1,
-          0,
-          0,
-          1,
-          50,
-          200
-        ],
-        "layers": [
-          {
-            "id": "I318-7_2-4",
-            "name": "Hello",
-            "type": "TEXT",
-            "visible": true,
-            "opacity": 1,
-            "blendMode": "NORMAL",
-            "transform": [
-              1,
-              0,
-              0,
-              1,
-              25,
-              25
-            ],
-            "effects": [],
-            "text": {
-              "value": "Button",
-              "defaultStyle": {
-                "font": {
-                  "postScriptName": "ArialMT",
-                  "family": "Arial"
-                },
-                "fontSize": 36,
-                "lineHeight": 0,
-                "letterSpacing": 0,
-                "fills": [
-                  {
-                    "type": "COLOR",
-                    "visible": true,
-                    "blendMode": "NORMAL",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    }
-                  }
-                ],
-                "strokes": []
-              },
-              "styles": [],
-              "horizontalAlign": "CENTER",
-              "verticalAlign": "CENTER",
-              "frame": {
-                "mode": "FIXED",
-                "size": {
-                  "width": 250,
-                  "height": 50
-                }
-              },
-              "baselinePolicy": "OFFSET_ASCENDER"
-            }
-          }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
-      },
-      {
-        "id": "318-8-Background",
-        "name": "BUTTON COMP",
-        "type": "MASK_GROUP",
-        "visible": true,
-        "opacity": 1,
-        "blendMode": "PASS_THROUGH",
-        "maskBasis": "BODY_EMBED",
-        "mask": {
-          "id": "318-8-BackgroundMask",
-          "name": "BUTTON COMP",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 300,
-                "y0": 0,
-                "y1": 100
-              },
-              "cornerRadius": 30
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [
-              {
-                "type": "COLOR",
-                "visible": true,
-                "blendMode": "NORMAL",
-                "color": {
-                  "r": 0.3958,
-                  "g": 0.565,
-                  "b": 1,
-                  "a": 1
-                }
-              }
-            ],
-            "strokes": []
-          }
-        },
-        "transform": [
-          1,
-          0,
-          0,
-          1,
-          50,
-          350
-        ],
-        "layers": [
-          {
-            "id": "I318-8_2-4",
-            "name": "Hello",
-            "type": "TEXT",
-            "visible": true,
-            "opacity": 1,
-            "blendMode": "NORMAL",
-            "transform": [
-              1,
-              0,
-              0,
-              1,
-              25,
-              25
-            ],
-            "effects": [],
-            "text": {
-              "value": "Button 3",
-              "defaultStyle": {
-                "font": {
-                  "postScriptName": "ArialMT",
-                  "family": "Arial"
-                },
-                "fontSize": 36,
-                "lineHeight": 0,
-                "letterSpacing": 0,
-                "fills": [
-                  {
-                    "type": "COLOR",
-                    "visible": true,
-                    "blendMode": "NORMAL",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    }
-                  }
-                ],
-                "strokes": []
-              },
-              "styles": [],
-              "horizontalAlign": "CENTER",
-              "verticalAlign": "CENTER",
-              "frame": {
-                "mode": "FIXED",
-                "size": {
-                  "width": 250,
-                  "height": 50
-                }
-              },
-              "baselinePolicy": "OFFSET_ASCENDER"
-            }
-          }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
-      },
       {
         "id": "318-43-Background",
         "name": "Button",
@@ -422,8 +164,8 @@
           0,
           0,
           1,
-          450,
-          200
+          70,
+          371
         ],
         "layers": [
           {
@@ -575,8 +317,8 @@
           0,
           0,
           1,
-          450,
-          350
+          75,
+          208
         ],
         "layers": [
           {
@@ -1171,8 +913,8 @@
           0,
           0,
           1,
-          50,
-          500
+          450,
+          214
         ],
         "layers": [
           {
@@ -1304,234 +1046,6 @@
                           "r": 0,
                           "g": 0,
                           "b": 0,
-                          "a": 1
-                        }
-                      }
-                    ],
-                    "strokes": []
-                  },
-                  "styles": [],
-                  "horizontalAlign": "CENTER",
-                  "verticalAlign": "CENTER",
-                  "frame": {
-                    "mode": "FIXED",
-                    "size": {
-                      "width": 250,
-                      "height": 50
-                    }
-                  },
-                  "baselinePolicy": "OFFSET_ASCENDER"
-                }
-              }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
-          }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
-      },
-      {
-        "id": "343-48-Background",
-        "name": "Button",
-        "type": "MASK_GROUP",
-        "visible": true,
-        "opacity": 1,
-        "blendMode": "PASS_THROUGH",
-        "maskBasis": "SOLID",
-        "mask": {
-          "id": "343-48-BackgroundMask",
-          "name": "Button",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 300,
-                "y0": 0,
-                "y1": 100
-              },
-              "cornerRadius": 10
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [
-              {
-                "type": "COLOR",
-                "visible": false,
-                "blendMode": "NORMAL",
-                "color": {
-                  "r": 1,
-                  "g": 1,
-                  "b": 1,
-                  "a": 1
-                }
-              }
-            ],
-            "strokes": []
-          }
-        },
-        "transform": [
-          1,
-          0,
-          0,
-          1,
-          450,
-          500
-        ],
-        "layers": [
-          {
-            "id": "I343-48_343-42-Background",
-            "name": "Button",
-            "type": "MASK_GROUP",
-            "visible": true,
-            "opacity": 1,
-            "blendMode": "PASS_THROUGH",
-            "maskBasis": "SOLID",
-            "mask": {
-              "id": "I343-48_343-42-BackgroundMask",
-              "name": "Button",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 300,
-                    "y0": 0,
-                    "y1": 100
-                  },
-                  "cornerRadius": 10
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [
-                  {
-                    "type": "COLOR",
-                    "visible": true,
-                    "blendMode": "NORMAL",
-                    "color": {
-                      "r": 0.1301,
-                      "g": 0.3855,
-                      "b": 0.5292,
-                      "a": 1
-                    }
-                  }
-                ],
-                "strokes": [
-                  {
-                    "style": "SOLID",
-                    "dashing": [],
-                    "visible": true,
-                    "fill": {
-                      "type": "COLOR",
-                      "visible": true,
-                      "blendMode": "NORMAL",
-                      "color": {
-                        "r": 0,
-                        "g": 0,
-                        "b": 0,
-                        "a": 1
-                      }
-                    },
-                    "thickness": 6,
-                    "position": "CENTER",
-                    "lineJoin": "MITER",
-                    "lineCap": "BUTT",
-                    "miterLimit": 28.96,
-                    "fillRule": "NON_ZERO"
-                  }
-                ]
-              }
-            },
-            "transform": [
-              1,
-              0,
-              0,
-              1,
-              0,
-              0
-            ],
-            "layers": [
-              {
-                "id": "I343-48_343-42_318-15",
-                "name": "Hello",
-                "type": "TEXT",
-                "visible": true,
-                "opacity": 1,
-                "blendMode": "NORMAL",
-                "transform": [
-                  1,
-                  0,
-                  0,
-                  1,
-                  25,
-                  25
-                ],
-                "effects": [],
-                "text": {
-                  "value": "Button",
-                  "defaultStyle": {
-                    "font": {
-                      "postScriptName": "Arial-BoldMT",
-                      "family": "Arial"
-                    },
-                    "fontSize": 36,
-                    "lineHeight": 0,
-                    "letterSpacing": 0,
-                    "letterCase": "UPPERCASE",
-                    "fills": [
-                      {
-                        "type": "COLOR",
-                        "visible": true,
-                        "blendMode": "NORMAL",
-                        "color": {
-                          "r": 1,
-                          "g": 1,
-                          "b": 1,
                           "a": 1
                         }
                       }

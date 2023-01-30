@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.22",
+  "version": "3.0.0-rc.24",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -15,6 +15,10 @@
       "children": [
         {
           "id": "41-3",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "41-2-pasteboard",
           "type": "COMPONENT"
         }
       ]
@@ -58,6 +62,10 @@
       "children": [
         {
           "id": "114-3",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "713-13",
           "type": "COMPONENT"
         }
       ]
@@ -199,6 +207,37 @@
       }
     },
     {
+      "id": "713-13",
+      "name": "Frame 1",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "713:13"
+      },
+      "bounds": {
+        "x": 1059,
+        "y": 16,
+        "width": 717,
+        "height": 632
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Inter"
+          },
+          {
+            "name": "Inter-Bold"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
       "id": "312-5",
       "name": "Frame in Frame NoCLIP",
       "role": "ARTBOARD",
@@ -248,7 +287,7 @@
     },
     {
       "id": "318-5",
-      "name": "Frame 1",
+      "name": "Components",
       "role": "ARTBOARD",
       "meta": {
         "originalId": "318:5"
@@ -257,15 +296,12 @@
         "x": 0,
         "y": 0,
         "width": 850,
-        "height": 650
+        "height": 502
       },
       "dependencies": [],
       "assets": {
         "images": [],
         "fonts": [
-          {
-            "name": "ArialMT"
-          },
           {
             "name": "Arial-BoldMT"
           }
@@ -610,48 +646,6 @@
       }
     },
     {
-      "id": "343-41",
-      "name": "Hover=Active",
-      "role": "COMPONENT",
-      "meta": {
-        "originalId": "343:41"
-      },
-      "bounds": {
-        "x": 377,
-        "y": -183,
-        "width": 306,
-        "height": 106
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
-          {
-            "name": "Arial-BoldMT"
-          }
-        ]
-      },
-      "artifacts": [],
-      "variant": {
-        "of": {
-          "id": "343-40",
-          "name": "Button",
-          "meta": {
-            "originalId": "343:40"
-          },
-          "description": ""
-        },
-        "properties": {
-          "Hover": "Active"
-        },
-        "description": ""
-      },
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
       "id": "41-3",
       "name": "shapes",
       "role": "ARTBOARD",
@@ -842,50 +836,8 @@
         "type": "RELATIVE",
         "path": ""
       }
-    },
-    {
-      "id": "1-3",
-      "name": "BUTTON COMP",
-      "role": "COMPONENT",
-      "meta": {
-        "originalId": "1:3"
-      },
-      "bounds": {
-        "x": 0,
-        "y": 0,
-        "width": 300,
-        "height": 100
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
-          {
-            "name": "ArialMT"
-          }
-        ]
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
     }
   ],
   "chunks": [],
-  "libraries": [
-    {
-      "id": "bfYRb6sa5T1PZfsXMmMhMO",
-      "name": "SHARED Components - Dont DELETE",
-      "meta": {
-        "originalId": "bfYRb6sa5T1PZfsXMmMhMO"
-      },
-      "children": [
-        {
-          "id": "1-3",
-          "type": "COMPONENT"
-        }
-      ]
-    }
-  ]
+  "libraries": []
 }

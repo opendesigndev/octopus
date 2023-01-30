@@ -47,6 +47,9 @@ export class SourceNormalizer {
     if (fill.scaleMode === 'CROP') {
       fill.scaleMode = 'STRETCH'
     }
+    if (fill.type === 'IMAGE' && fill.scaleMode === 'FILL') {
+      fill.imageTransform = undefined
+    }
   }
 
   private _normalizeSize(raw: any): RawLayer {

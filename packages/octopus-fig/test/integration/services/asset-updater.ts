@@ -52,7 +52,7 @@ export class AssetUpdater {
   private _eventQueue: Event[]
 
   static ASSETS_DIR_RELATIVE_PATH = '../assets'
-  static ASSET_EVENT_DATA = 'eventData.json'
+  static ASSET_EVENT_DATA = 'event-data.json'
 
   constructor({ selectedAsset }: AssetUpdaterOptions) {
     this._assetsDirPath = this._getFullPath()
