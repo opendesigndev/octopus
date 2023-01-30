@@ -55,11 +55,15 @@ export class SourceComponent extends SourceEntity {
   get bounds(): SourceBounds {
     const artboardRect = this._rawValue.layerProperties?.artb?.artboardRect
 
-    return artboardRect
-      ? getBoundsFor(artboardRect)
-      : this._rawValue?.type === 'Psd'
-      ? getBoundsFor({ Rght: this._rawValue?.width, Btom: this._rawValue?.height })
-      : getLayerBounds(this._rawValue)
+    if (artboardRect) {
+      return getBoundsFor(artboardRect)
+    }
+
+    if (this._rawValue?.type === 'Psd') {
+      return getBoundsFor({ Rght: this._rawValue?.width, Btom: this._rawValue?.height })
+    }
+
+    return getLayerBounds(this._rawValue)
   }
 
   get id(): string {

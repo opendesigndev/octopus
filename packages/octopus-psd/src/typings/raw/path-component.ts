@@ -18,7 +18,7 @@ export type VectorOriginationData = Partial<{
 }>
 
 export type VectorOriginationDatakeyDescriptor = Partial<{
-  keyOriginType: number
+  keyOriginType: 1 | 2 | 4 | 5
   keyOriginResolution: number
   keyOriginShapeBBox: RawBounds & { unitValueQuadVersion?: number }
   Trnf: RawMatrix

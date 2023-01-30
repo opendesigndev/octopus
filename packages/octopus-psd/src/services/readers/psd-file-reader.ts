@@ -5,7 +5,7 @@ import { scan } from '@jimp/utils'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import Psd, { AliKey, Group } from '@webtoon/psd-ts'
+import Psd, { AliKey } from '@webtoon/psd-ts'
 import chalk from 'chalk'
 import sizeOf from 'image-size'
 import Jimp from 'jimp'
@@ -18,7 +18,7 @@ import { getRawData } from '../../utils/raw.js'
 import { logger } from '../instances/logger.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
-import type { NodeChild, Layer } from '@webtoon/psd-ts'
+import type { NodeChild, Layer, Group } from '@webtoon/psd-ts'
 
 type BuffImage = {
   buff: Uint8ClampedArray | Uint8Array
@@ -130,7 +130,7 @@ export class PSDFileReader {
 
   private async _exportImage({ width, height, buff, name, dir }: BuffImage): Promise<Jimp> {
     const image = new Jimp(width, height)
-    const scanned = scan(image, 0, 0, image.bitmap.width, image.bitmap.height, function (x, y, index) {
+    const scanned = scan(image, 0, 0, image.bitmap.width, image.bitmap.height, function (_x, _y, index) {
       this.bitmap.data[index + 0] = buff[index + 0]
       this.bitmap.data[index + 1] = buff[index + 1]
       this.bitmap.data[index + 2] = buff[index + 2]
@@ -163,8 +163,7 @@ export class PSDFileReader {
     const width = asNumber(maskData?.right, 0) - asNumber(maskData?.left, 0)
     const height = asNumber(maskData?.bottom, 0) - asNumber(maskData?.top, 0)
 
-    const id = layer.additionalProperties?.[AliKey.LayerId]?.value ?? 'undefined'
-    const name = `${id}_user_mask.png`
+    const name = `${String(layer.additionalProperties?.[AliKey.LayerId]?.value)}_user_mask.png`
 
     await this._exportImage({ width, height, buff, name, dir })
   }

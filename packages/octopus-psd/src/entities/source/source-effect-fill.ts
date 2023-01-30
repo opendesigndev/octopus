@@ -40,7 +40,7 @@ export class SourceEffectFill extends SourceEffectBase {
   }
 
   get angle(): number {
-    return this._rawValue?.Angl ?? this._rawValue?.Angl ?? 0
+    return this._rawValue?.Angl ?? 0
   }
 
   get type(): SourceGradientType | undefined {

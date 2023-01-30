@@ -104,7 +104,7 @@ export class OctopusLayerMaskGroup {
       left: bounds.left,
       isHidden: true,
       layerProperties: {
-        lyid: bitmapMask.replace('.png', ''),
+        lyid: bitmapMask.replace(/\.png$/i, ''),
       },
     }
     const maskSourceLayer = createSourceLayer({

@@ -1,7 +1,6 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { DEFAULTS } from '../../utils/defaults.js'
+import { getTextColor } from '../../utils/text.js'
 import { SourceEntity } from './source-entity.js'
 
 import type { RawTextStyle, StyleSheetData } from '../../typings/raw'
@@ -11,7 +10,7 @@ export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
   private _defaultStyleSheet: StyleSheetData | undefined
 
-  static FONT_CAPS_VALUES = [undefined, 'smallCaps', 'allCaps'] as const
+  static FONT_CAPS_VALUES = ['smallCaps', 'allCaps'] as const
 
   constructor(raw: RawTextStyle | undefined, defaultStyleSheet: StyleSheetData | undefined) {
     super(raw)
@@ -70,16 +69,11 @@ export class SourceTextTextStyle extends SourceEntity {
   }
 
   get letterCase(): 'allCaps' | 'smallCaps' | undefined {
-    return SourceTextTextStyle.FONT_CAPS_VALUES[this._rawValue?.FontCaps ?? 0]
+    const fontCaps = this._rawValue?.FontCaps
+    return !fontCaps ? undefined : SourceTextTextStyle.FONT_CAPS_VALUES[fontCaps]
   }
 
   get color(): SourceColor | null {
-    const colorArr = asArray(this._rawValue?.FillColor?.Values)
-    const color = {
-      r: (colorArr[1] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
-      g: (colorArr[2] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
-      b: (colorArr[3] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
-    }
-    return color
+    return getTextColor(this._rawValue?.FillColor?.Values)
   }
 }

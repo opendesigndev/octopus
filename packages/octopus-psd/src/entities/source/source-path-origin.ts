@@ -23,9 +23,7 @@ export class SourcePathOrigin extends SourceEntity {
 
   get type(): string | undefined {
     const typeKey = this._rawValue?.keyOriginType
-    return typeKey
-      ? SourcePathOrigin.TYPE_MAP[typeKey as keyof typeof SourcePathOrigin.TYPE_MAP] ?? String(typeKey)
-      : undefined
+    return typeKey ? SourcePathOrigin.TYPE_MAP[typeKey] ?? String(typeKey) : undefined
   }
 
   @firstCallMemo()

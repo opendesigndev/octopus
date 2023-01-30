@@ -1,6 +1,9 @@
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+
 import { DEFAULTS } from './defaults.js'
 
 import type { EngineDataResourceDictFontSet, FontProperties, StyleSheetData } from '../typings/raw'
+import type { SourceColor } from '../typings/source.js'
 
 export function getFontProperties(
   fontSet: EngineDataResourceDictFontSet[],
@@ -21,4 +24,16 @@ export function getFontProperties(
     fontName,
     fontStyleName,
   }
+}
+
+export function getTextColor(sourceColor: number[] | undefined): SourceColor {
+  const colorArr = asArray(sourceColor)
+
+  const color = {
+    r: (colorArr[1] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
+    g: (colorArr[2] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
+    b: (colorArr[3] ?? 0) * DEFAULTS.RGB_COLOR_MAX_VALUE,
+  }
+
+  return color
 }
