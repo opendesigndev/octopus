@@ -26,35 +26,35 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return this._sourceLayer
   }
 
-  private get _fills(): Octopus['Fill'][] {
-    return OctopusFill.convertFills(this.sourceLayer.fills, this.sourceLayer)
+  private async _fills(): Promise<Octopus['Fill'][]> {
+    return OctopusFill.convertFills(this.sourceLayer.fills, this)
   }
 
-  private get _strokes(): Octopus['VectorStroke'][] {
-    return OctopusStroke.convertStrokes(this.sourceLayer.strokes, this.sourceLayer)
+  private async _strokes(): Promise<Octopus['VectorStroke'][]> {
+    return OctopusStroke.convertStrokes(this.sourceLayer.strokes, this)
   }
 
-  private get _shape(): Octopus['Shape'] {
+  private async _shape(): Promise<Octopus['Shape']> {
     return {
       path: this._path.convert(),
       fillRule: this._path.fillRule,
-      fills: this._fills,
-      strokes: this._strokes,
+      fills: await this._fills(),
+      strokes: await this._strokes(),
     }
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['ShapeLayer']> {
+  private async _convertTypeSpecific(): Promise<LayerSpecifics<Octopus['ShapeLayer']>> {
     return {
       type: 'SHAPE',
-      shape: this._shape,
+      shape: await this._shape(),
     }
   }
 
-  convert(): Octopus['ShapeLayer'] | null {
+  async convert(): Promise<Octopus['ShapeLayer'] | null> {
     const common = this.convertBase()
     if (!common) return null
 
-    const specific = this._convertTypeSpecific()
+    const specific = await this._convertTypeSpecific()
     if (!specific) return null
 
     return { ...common, ...specific }

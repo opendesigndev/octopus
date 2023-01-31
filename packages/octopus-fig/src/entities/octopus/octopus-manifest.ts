@@ -1,5 +1,6 @@
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import sortBy from 'lodash/sortBy'
 
 import { logger } from '../../services'
 import { convertId } from '../../utils/convert'
@@ -76,11 +77,11 @@ export class OctopusManifest {
     })
   }
 
-  setExportedImagePath(name: string, path?: string): void {
+  async setExportedImagePath(name: string, pathPromise?: Promise<string>): Promise<void> {
     if (!this._exports.images.has(name)) {
       this._exports.images.set(name, detachPromiseControls<string>())
     }
-    this._exports.images.get(name)?.resolve(path)
+    this._exports.images.get(name)?.resolve(pathPromise)
   }
 
   getExportedImagePath(name: string): Promise<string | undefined> | undefined {
@@ -172,12 +173,13 @@ export class OctopusManifest {
   }
 
   get pages(): Manifest['Page'][] {
-    return this._sourceDesign.pages.map((page) => ({
+    const converted: Manifest['Page'][] = this._sourceDesign.pages.map((page) => ({
       id: convertId(page.id),
       name: page.name,
       meta: { originalId: page.id },
       children: page.children.map((elem) => ({ id: convertId(elem.id), type: 'COMPONENT' })),
     }))
+    return sortBy(converted, (c) => c.id)
   }
 
   private _getStatus(source: SourceComponent): Manifest['Status'] {
@@ -315,8 +317,8 @@ export class OctopusManifest {
 
   async components(): Promise<Manifest['Component'][]> {
     const componentSources = Array.from(this._exports.components.values())
-    const componentPromises = componentSources.map((component) => this._getComponent(component.source))
-    return Promise.all(componentPromises)
+    const converted = await Promise.all(componentSources.map((component) => this._getComponent(component.source)))
+    return sortBy(converted, (c) => c.id)
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {

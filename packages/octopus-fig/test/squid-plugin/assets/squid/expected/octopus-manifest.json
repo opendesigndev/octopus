@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.23",
+  "version": "3.0.0-rc.24",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -7,30 +7,6 @@
   "name": "Untitled",
   "pages": [],
   "components": [
-    {
-      "id": "1525-9683",
-      "name": "Frame 1046",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "1525:9683"
-      },
-      "bounds": {
-        "x": -4241.81,
-        "y": 1763,
-        "width": 240,
-        "height": 300
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
     {
       "id": "1525-11497",
       "name": "Properties",
@@ -67,6 +43,30 @@
         "y": 2618.92,
         "width": 232,
         "height": 464.91
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "1525-9683",
+      "name": "Frame 1046",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "1525:9683"
+      },
+      "bounds": {
+        "x": -4241.81,
+        "y": 1763,
+        "width": 240,
+        "height": 300
       },
       "dependencies": [],
       "assets": {

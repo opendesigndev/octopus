@@ -5,26 +5,24 @@ import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math'
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
 import { createMatrix, createPoint } from '../../utils/paper'
 
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { RawStop } from '../../typings/raw'
 import type { SourceTransform } from '../../typings/source'
-import type { SourceLayerCommon } from '../source/source-layer-common'
 import type { SourcePaint } from '../source/source-paint'
 
 type OctopusFillOptions = {
   fill: SourcePaint
-  parentLayer: SourceLayerCommon
+  parentLayer: OctopusLayer
 }
 
 export class OctopusFill {
   private _fill: SourcePaint
-  private _parentLayer: SourceLayerCommon
+  private _parentLayer: OctopusLayer
 
-  static convertFills(fills: SourcePaint[], parentLayer: SourceLayerCommon): Octopus['Fill'][] {
-    return fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
-      const newFill = new OctopusFill({ fill, parentLayer }).convert()
-      return newFill ? push(fills, newFill) : fills
-    }, [])
+  static async convertFills(fills: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['Fill'][]> {
+    const converted = await Promise.all(fills.map((fill) => new OctopusFill({ fill, parentLayer }).convert()))
+    return converted.filter((fill): fill is Octopus['Fill'] => Boolean(fill))
   }
 
   constructor(options: OctopusFillOptions) {
@@ -113,7 +111,7 @@ export class OctopusFill {
   }
 
   private get _transform(): Octopus['Transform'] | null {
-    const size = this._parentLayer.size
+    const size = this._parentLayer.sourceLayer.size
     if (size === null) return null
     const { x: width, y: height } = size
 
@@ -179,7 +177,7 @@ export class OctopusFill {
     if (layout === 'TILE') {
       const imageRef = this._fill.imageRef
       if (!imageRef) return null
-      const imageSize = this._parentLayer.parentComponent.getImageSize(imageRef)
+      const imageSize = this._parentLayer.sourceLayer.parentComponent.getImageSize(imageRef)
       if (!imageSize) return null
 
       const scalingFactor = this._fill.scalingFactor
@@ -189,7 +187,7 @@ export class OctopusFill {
       return { layout, origin, transform }
     }
 
-    const size = this._parentLayer.size
+    const size = this._parentLayer.sourceLayer.size
     if (!size) return null
     const { x, y } = size
 
@@ -240,11 +238,11 @@ export class OctopusFill {
     return { type: 'FIGMA_COLOR_ADJUSTMENT', colorAdjustment }
   }
 
-  private get _fillImage(): Octopus['FillImage'] | null {
+  private async _fillImage(): Promise<Octopus['FillImage'] | null> {
     const imageRef = this._fill.imageRef
     if (!imageRef) return null
 
-    const exportedPath = this._parentLayer.parentComponent.getImageExportedPath(imageRef)
+    const exportedPath = await this._parentLayer.parentComponent.octopusManifest.getExportedImagePath(imageRef)
     const image: Octopus['Image'] = exportedPath
       ? { ref: { type: 'PATH', value: exportedPath } }
       : { ref: { type: 'RESOURCE_REF', value: imageRef } }
@@ -256,14 +254,14 @@ export class OctopusFill {
     return { type: 'IMAGE', visible, blendMode, image, positioning, filters }
   }
 
-  convert(): Octopus['Fill'] | null {
+  async convert(): Promise<Octopus['Fill'] | null> {
     switch (this.fillType) {
       case 'COLOR':
         return this._fillColor
       case 'GRADIENT':
         return this._fillGradient
       case 'IMAGE':
-        return this._fillImage
+        return await this._fillImage()
       default:
         return null
     }

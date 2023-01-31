@@ -8,17 +8,17 @@
   "pages": [],
   "components": [
     {
-      "id": "41-9",
-      "name": "PikachuUA 1",
+      "id": "269-19",
+      "name": "Subtract",
       "role": "PARTIAL",
       "meta": {
-        "originalId": "41:9"
+        "originalId": "269:19"
       },
       "bounds": {
-        "x": 271.83,
-        "y": 96.83,
-        "width": 106.35,
-        "height": 106.35
+        "x": 403.52,
+        "y": 16.45,
+        "width": 56.62,
+        "height": 81.17
       },
       "dependencies": [],
       "assets": {
@@ -56,17 +56,17 @@
       }
     },
     {
-      "id": "87-2",
-      "name": "Intersect",
+      "id": "41-9",
+      "name": "PikachuUA 1",
       "role": "PARTIAL",
       "meta": {
-        "originalId": "87:2"
+        "originalId": "41:9"
       },
       "bounds": {
-        "x": 17.03,
-        "y": 310.75,
-        "width": 327.72,
-        "height": 182.53
+        "x": 271.83,
+        "y": 96.83,
+        "width": 106.35,
+        "height": 106.35
       },
       "dependencies": [],
       "assets": {
@@ -80,17 +80,17 @@
       }
     },
     {
-      "id": "269-19",
-      "name": "Subtract",
+      "id": "87-2",
+      "name": "Intersect",
       "role": "PARTIAL",
       "meta": {
-        "originalId": "269:19"
+        "originalId": "87:2"
       },
       "bounds": {
-        "x": 403.52,
-        "y": 16.45,
-        "width": 56.62,
-        "height": 81.17
+        "x": 17.03,
+        "y": 310.75,
+        "width": 327.72,
+        "height": 182.53
       },
       "dependencies": [],
       "assets": {

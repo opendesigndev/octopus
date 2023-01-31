@@ -29,7 +29,7 @@ import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
-export type ImageMap = { [key: string]: { imageSize?: ImageSize; exportedPath?: string } }
+export type ImageSizeMap = { [key: string]: ImageSize }
 
 export type ComponentConversionResult = {
   id: string
@@ -50,12 +50,12 @@ const IS_LIBRARY = true
 export class DesignConverter {
   private _designEmitter: EventEmitter | null
   private _designId: string
-  private _octopusManifest: OctopusManifest | undefined
+  private _octopusManifest: OctopusManifest
   private _octopusConverter: OctopusFigConverter
   private _exporter: AbstractExporter | null
   private _partialUpdateInterval: number
   private _shouldReturn: boolean
-  private _imageMap: ImageMap = {}
+  private _imageSizeMap: ImageSizeMap = {}
   private _queue: Queue<SourceComponent, ComponentConversionResult>
   private _awaitingComponents: Promise<ComponentConversionResult>[] = []
   private _conversionResult: DesignConversionResult = { manifest: undefined, components: [], images: [], previews: [] }
@@ -82,7 +82,7 @@ export class DesignConverter {
     return this._designId
   }
 
-  get octopusManifest(): OctopusManifest | undefined {
+  get octopusManifest(): OctopusManifest {
     return this._octopusManifest
   }
 
@@ -90,8 +90,9 @@ export class DesignConverter {
     source: SourceComponent
   ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
+      const manifest = this.octopusManifest
       const version = this._octopusConverter.pkg.version
-      const value = await new ComponentConverter({ source, version }).convert()
+      const value = await new ComponentConverter({ manifest, source, version }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
@@ -204,7 +205,7 @@ export class DesignConverter {
     const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
 
-    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageMap })
+    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
 
@@ -223,12 +224,10 @@ export class DesignConverter {
 
     const fillName = fill.ref
     const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
-    const exportedPath = this._exporter?.getImagePath(fillName)
-    this._imageMap[fillName] = { imageSize, exportedPath }
+    if (imageSize) this._imageSizeMap[fillName] = imageSize
 
-    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
-
-    this.octopusManifest?.setExportedImagePath(fillName, fillPath)
+    const fillPathPromise = this._exporter?.exportImage?.(fillName, fill.buffer)
+    this.octopusManifest?.setExportedImagePath(fillName, fillPathPromise)
     if (this._shouldReturn) this._conversionResult.images.push({ name: fillName, data: fill.buffer })
   }
 

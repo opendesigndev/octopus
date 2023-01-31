@@ -18,10 +18,6 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
   }
 
-  getImagePath(_name: string): string {
-    throw new Error('Subclass of "Exporter" has no "getImagePath" method implemented!')
-  }
-
   exportImage?(_name: string, _data: ArrayBuffer): Promise<string> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
