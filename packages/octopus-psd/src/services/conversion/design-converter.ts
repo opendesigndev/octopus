@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
