@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
   "type": "ARTBOARD",
-  "version": "3.0.0-rc.7",
+  "version": "3.0.0-webtoon-20230125",
   "dimensions": {
     "width": 914,
     "height": 914
@@ -34,7 +34,7 @@
         "type": "MASK_GROUP",
         "maskBasis": "BODY",
         "mask": {
-          "id": "0f96d5ad-0c14-4d42-8ee3-dcf550b52bf4",
+          "id": "79fd7c34-ce1c-4413-be95-c98adfa6b190",
           "name": "Layer",
           "type": "SHAPE",
           "transform": [

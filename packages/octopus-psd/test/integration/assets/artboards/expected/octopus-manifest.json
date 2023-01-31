@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.7",
+  "version": "3.0.0-webtoon-20230125",
   "origin": {
     "name": "PHOTOSHOP",
     "version": "0"
@@ -24,13 +24,6 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "10.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
             "refId": "11.png"
           },
           {
@@ -38,42 +31,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "22.png"
+            "refId": "10.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "23.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "24.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "25.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "26.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "27.png"
+            "refId": "8.png"
           },
           {
             "location": {
@@ -87,7 +52,42 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "8.png"
+            "refId": "27.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "26.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "25.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "24.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "23.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "22.png"
           }
         ],
         "fonts": [
@@ -119,13 +119,6 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "10.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
             "refId": "11.png"
           },
           {
@@ -133,42 +126,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "22.png"
+            "refId": "10.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "23.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "24.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "25.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "26.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "27.png"
+            "refId": "8.png"
           },
           {
             "location": {
@@ -182,7 +147,42 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "8.png"
+            "refId": "27.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "26.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "25.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "24.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "23.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "22.png"
           }
         ]
       },
@@ -209,13 +209,6 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "10.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
             "refId": "11.png"
           },
           {
@@ -223,42 +216,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "22.png"
+            "refId": "10.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "23.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "24.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "25.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "26.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "27.png"
+            "refId": "8.png"
           },
           {
             "location": {
@@ -272,7 +237,42 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "8.png"
+            "refId": "27.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "26.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "25.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "24.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "23.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "22.png"
           }
         ]
       },
@@ -299,13 +299,6 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "10.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
             "refId": "11.png"
           },
           {
@@ -313,42 +306,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "22.png"
+            "refId": "10.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "23.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "24.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "25.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "26.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "27.png"
+            "refId": "8.png"
           },
           {
             "location": {
@@ -362,7 +327,42 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "8.png"
+            "refId": "27.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "26.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "25.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "24.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "23.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "22.png"
           }
         ]
       },

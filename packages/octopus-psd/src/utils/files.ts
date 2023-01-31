@@ -65,12 +65,3 @@ export async function rmDir(path: string): Promise<string> {
   }
   return path
 }
-
-export async function copyFile(src: string, dest: string): Promise<string> {
-  try {
-    await cp(src, dest)
-  } catch (e) {
-    logger.warn(`Copying file from '${src}' to '${dest}' failed`)
-  }
-  return dest
-}

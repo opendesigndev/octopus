@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.7",
+  "version": "3.0.0-webtoon-20230125",
   "origin": {
     "name": "PHOTOSHOP",
     "version": "0"
@@ -24,14 +24,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "1.png"
+            "refId": "2.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "2.png"
+            "refId": "1.png"
           }
         ]
       },

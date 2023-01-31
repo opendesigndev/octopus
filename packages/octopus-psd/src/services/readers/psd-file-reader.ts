@@ -7,25 +7,29 @@ import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import Psd, { AliKey } from '@webtoon/psd-ts'
 import chalk from 'chalk'
-import sizeOf from 'image-size'
 import Jimp from 'jimp'
 import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design.js'
-import { getFilesFromDir } from '../../utils/files.js'
 import { getRawData } from '../../utils/raw.js'
 import { logger } from '../instances/logger.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
 import type { NodeChild, Layer, Group } from '@webtoon/psd-ts'
 
-type BuffImage = {
+type UnprocessedImage = {
   buff: Uint8ClampedArray | Uint8Array
   width: number
   height: number
   name: string
-  dir: string
+}
+
+type ProcessedImage = {
+  name: string
+  promiseBuffer: Promise<Buffer>
+  width: number
+  height: number
 }
 
 export type PSDFileReaderOptions = {
@@ -42,12 +46,11 @@ export class PSDFileReader {
   private _path: string
   private _designId: string
   private _sourceDesign: Promise<SourceDesign | null>
+  private _images: ProcessedImage[] = []
 
   static OUTPUT_DIR = 'workdir'
-  static IMAGES_DIR = 'pictures'
   static RENDER_IMG = 'preview.png'
   static SOURCE_FILE = 'source.json'
-  static PATTERNS_DIR = path.join(PSDFileReader.IMAGES_DIR, 'patterns')
   static SHAPE_LAYER_KEYS = [
     AliKey.VectorStrokeData,
     AliKey.VectorStrokeContentData,
@@ -128,7 +131,7 @@ export class PSDFileReader {
     return path.join(PSDFileReader.OUTPUT_DIR, this.designId)
   }
 
-  private async _exportImage({ width, height, buff, name, dir }: BuffImage): Promise<Jimp> {
+  private async _convertImage({ width, height, buff, name }: UnprocessedImage): Promise<void> {
     const image = new Jimp(width, height)
     const scanned = scan(image, 0, 0, image.bitmap.width, image.bitmap.height, function (_x, _y, index) {
       this.bitmap.data[index + 0] = buff[index + 0]
@@ -138,11 +141,11 @@ export class PSDFileReader {
     })
 
     const parsed = new Jimp(scanned)
-
-    return parsed.writeAsync(path.join(dir, name))
+    this._images.push({ width, height, name, promiseBuffer: parsed.getBufferAsync(Jimp.MIME_PNG) })
+    return
   }
 
-  private async _exportMaskImage(layer: Layer | Group, dir: string): Promise<void> {
+  private async _setMaskImage(layer: Layer | Group): Promise<void> {
     if (!layer.userMask || !layer.realUserMask) {
       return
     }
@@ -165,13 +168,13 @@ export class PSDFileReader {
 
     const name = `${String(layer.additionalProperties?.[AliKey.LayerId]?.value)}_user_mask.png`
 
-    await this._exportImage({ width, height, buff, name, dir })
+    await this._convertImage({ width, height, buff, name })
   }
 
-  private async _exportImages(layer: NodeChild, dir: string): Promise<void> {
+  private async _convertImages(layer: NodeChild): Promise<void> {
     if (layer.type === 'Group') {
-      await this._exportMaskImage(layer, dir)
-      await Promise.all(layer.children.map((layer) => this._exportImages(layer, dir)))
+      await this._setMaskImage(layer)
+      await Promise.all(layer.children.map((layer) => this._convertImages(layer)))
       return
     }
 
@@ -192,11 +195,11 @@ export class PSDFileReader {
       return
     }
 
-    await this._exportImage({ width, height, buff, name, dir })
-    await this._exportMaskImage(layer, dir)
+    await this._convertImage({ width, height, buff, name })
+    await this._setMaskImage(layer)
   }
 
-  private async _exportPatterns(psd: Psd, dir: string): Promise<void> {
+  private async _convertPatterns(psd: Psd): Promise<void> {
     const patterns = psd.patterns
 
     await Promise.all(
@@ -205,24 +208,21 @@ export class PSDFileReader {
         const height = pattern.patternData.rectangle.bottom - pattern.patternData.rectangle.top
         const name = `${pattern.id}.png`
         const buff = await psd.decodePattern(pattern)
-        await this._exportImage({ width, height, buff, name, dir })
+        await this._convertImage({ width, height, buff, name })
       })
     )
   }
 
-  private async _exportAssets(
-    psd: Psd,
-    { patternsDir, imagesDir }: { patternsDir: string; imagesDir: string }
-  ): Promise<void> {
-    await Promise.all(psd.children.map((child) => this._exportImages(child, imagesDir)))
-    await this._exportPatterns(psd, patternsDir)
+  private async _convertAssets(psd: Psd): Promise<void> {
+    await Promise.all(psd.children.map((child) => this._convertImages(child)))
+    await this._convertPatterns(psd)
   }
 
   private async _getPsd(): Promise<Psd> {
     const psd = Psd.parse((await readFile(this.path)).buffer)
 
     if (psd.children.length > 0) {
-      await this._exportAssets(psd, { imagesDir: this._imagesDir, patternsDir: this._patternsDir })
+      await this._convertAssets(psd)
       return psd
     }
 
@@ -253,7 +253,7 @@ export class PSDFileReader {
 
     psdCopy.children.push(child as unknown as Layer)
 
-    await this._exportAssets(psdCopy, { imagesDir: this._imagesDir, patternsDir: this._patternsDir })
+    await this._convertAssets(psdCopy)
 
     return psdCopy
   }
@@ -266,35 +266,19 @@ export class PSDFileReader {
     return { raw: result }
   }
 
-  private get _imagesDir(): string {
-    return path.join(this._outDir, PSDFileReader.IMAGES_DIR)
-  }
-
-  private get _patternsDir(): string {
-    return path.join(this._imagesDir, 'patterns')
-  }
-
   private async _getImages(): Promise<SourceImage[]> {
-    const imagesPath = this._imagesDir
-    const images: SourceImage[] = ((await getFilesFromDir(imagesPath)) ?? []).map((image) => {
-      const name = image.name
-      const relativePath = path.join(PSDFileReader.IMAGES_DIR, name)
-      const imgPath = path.join(this._outDir, relativePath)
-      return { name, path: imgPath }
-    })
+    const images = await Promise.all(
+      this._images.map(async ({ promiseBuffer, ...rest }) => {
+        const buffer = await promiseBuffer
 
-    const patterns: SourceImage[] = []
-    const patternsPath = this._patternsDir
-    const patternsResults = (await getFilesFromDir(patternsPath)) ?? []
-    for (const image of patternsResults) {
-      const name = image.name
-      const relativePath = path.join(PSDFileReader.PATTERNS_DIR, name)
-      const imgPath = path.join(this._outDir, relativePath)
-      const { width, height } = sizeOf(imgPath)
-      patterns.push({ name, path: imgPath, width, height })
-    }
+        return {
+          ...rest,
+          data: buffer,
+        }
+      })
+    )
 
-    return [...images, ...patterns]
+    return images
   }
 
   private async _initSourceDesign(): Promise<SourceDesign | null> {

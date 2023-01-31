@@ -5,7 +5,7 @@ import type { ParsedPsd } from '../../typings/raw/component.js'
 
 export type SourceImage = {
   name: string
-  path: string
+  data: Buffer
   width?: number
   height?: number
 }
