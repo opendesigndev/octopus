@@ -2,6 +2,8 @@ import util from 'util'
 
 import isObjectLike from 'lodash/isObjectLike'
 
+import type { GetPromiseValue } from './utility-types'
+
 export function JSONFromTypedArray(typedArray: Uint8Array): unknown {
   return JSON.parse(Buffer.from(typedArray).toString())
 }
@@ -30,13 +32,22 @@ export function getPresentProps<T, U>(obj: T, skipValues: U[] = []): Partial<T> 
 export function getConverted<T extends { convert: () => unknown }>(
   entities: T[]
 ): Exclude<ReturnType<T['convert']>, null>[] {
-  return entities
-    .map((entity) => {
-      return entity.convert()
-    })
-    .filter((converted) => {
-      return converted
-    }) as Exclude<ReturnType<T['convert']>, null>[]
+  return entities.map((entity) => entity.convert()).filter((converted) => Boolean(converted)) as Exclude<
+    ReturnType<T['convert']>,
+    null
+  >[]
+}
+
+type ConvertedLayer<T, U extends { convert: () => Promise<T> }> = Exclude<
+  GetPromiseValue<ReturnType<U['convert']>>,
+  null
+>
+
+export async function getConvertedAsync<T, U extends { convert: () => Promise<T> }>(
+  entities: U[]
+): Promise<ConvertedLayer<T, U>[]> {
+  const converted = await Promise.all(entities.map((entity) => entity.convert()))
+  return converted.filter((converted) => Boolean(converted)) as ConvertedLayer<T, U>[]
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types

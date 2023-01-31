@@ -1,3 +1,5 @@
+import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+
 import { createOctopusLayers } from '../../factories/create-octopus-layer'
 import { env } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
@@ -47,15 +49,10 @@ export class OctopusLayerGroup extends OctopusLayerBase {
     return this._layers
   }
 
-  async convertedLayers(): Promise<Octopus['Layer'][]> {
-    const converted: Array<Octopus['Layer'] | null> = await Promise.all(this._layers.map((layer) => layer.convert()))
-    return converted.filter((layer): layer is Octopus['Layer'] => Boolean(layer))
-  }
-
   private async _convertTypeSpecific(): Promise<LayerSpecifics<Octopus['GroupLayer']>> {
     return {
       type: 'GROUP',
-      layers: await this.convertedLayers(),
+      layers: await getConvertedAsync(this.layers),
       meta: this.meta,
     } as const
   }

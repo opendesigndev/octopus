@@ -1,3 +1,5 @@
+import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { env } from '../../services'
@@ -215,11 +217,6 @@ export class OctopusLayerMaskGroup {
     return this._parent.sourceLayer
   }
 
-  async convertedLayers(): Promise<Octopus['Layer'][]> {
-    const converted: Array<Octopus['Layer'] | null> = await Promise.all(this._layers.map((layer) => layer.convert()))
-    return converted.filter((layer): layer is Octopus['Layer'] => Boolean(layer))
-  }
-
   async convert(): Promise<Octopus['MaskGroupLayer'] | null> {
     const convertedMask = await this.mask.convert()
     if (!convertedMask) return null
@@ -235,7 +232,7 @@ export class OctopusLayerMaskGroup {
       maskChannels: this.maskChannels,
       mask: convertedMask,
       transform: this.transform,
-      layers: await this.convertedLayers(),
+      layers: await getConvertedAsync(this.layers),
       meta: this.meta,
     } as const
   }
