@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/figma-parser",
-  "version": "3.0.0-rc.16",
+  "version": "3.0.0-rc.17",
   "description": "Figma parser, downloads assets from Figma APIs",
   "license": "Apache-2.0",
   "scripts": {
@@ -15,8 +15,6 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.178",
-    "@types/pino-std-serializers": "2.4.1",
-    "@types/pino-pretty": "4.7.5",
     "@types/uuid": "^8.3.1",
     "dotenv": "16.0.0",
     "eventemitter3": "^4.0.7",
@@ -31,6 +29,8 @@
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@types/chalk": "^2.2.0",
     "@types/node": "*",
+    "@types/pino-std-serializers": "2.4.1",
+    "@types/pino-pretty": "4.7.5",
     "chalk": "^4.1.2",
     "jest": "^27.3.1",
     "ts-node": "10.5.0",
