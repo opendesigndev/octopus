@@ -1,4 +1,5 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
@@ -30,7 +31,7 @@ export class SourceEffectSatin extends SourceEffectBase {
   }
 
   get opacity(): number {
-    return getUnitRatioFor(this._rawValue?.Opct)
+    return round(getUnitRatioFor(this._rawValue?.Opct))
   }
 
   get invert(): boolean {

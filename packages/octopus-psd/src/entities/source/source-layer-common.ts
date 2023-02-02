@@ -1,4 +1,5 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import { DEFAULTS } from '../../utils/defaults.js'
 import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
@@ -93,12 +94,12 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get opacity(): number {
-    return (this._rawValue.opacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE
+    return round((this._rawValue.opacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE)
   }
 
   get fillOpacity(): number {
     const rawOpacity = this._layerProperties?.iOpa?.fillOpacity
-    return (rawOpacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE
+    return round((rawOpacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE)
   }
 
   get blendMode(): string | undefined {

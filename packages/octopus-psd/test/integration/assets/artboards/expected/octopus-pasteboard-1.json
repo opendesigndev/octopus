@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
   "type": "ARTBOARD",
-  "version": "3.0.0-webtoon-20230125",
+  "version": "3.0.0-webtoon-20230131",
   "dimensions": {
     "width": 927,
     "height": 930
@@ -336,7 +336,7 @@
             ],
             "visible": true,
             "blendMode": "DARKEN",
-            "opacity": 0.3803921568627451,
+            "opacity": 0.38,
             "effects": [],
             "shape": {
               "fillRule": "EVEN_ODD",
