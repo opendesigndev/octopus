@@ -26,11 +26,11 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return this._sourceLayer
   }
 
-  private async _fills(): Promise<Octopus['Fill'][]> {
+  private get _fills(): Promise<Octopus['Fill'][]> {
     return OctopusFill.convertFills(this.sourceLayer.fills, this)
   }
 
-  private async _strokes(): Promise<Octopus['VectorStroke'][]> {
+  private get _strokes(): Promise<Octopus['VectorStroke'][]> {
     return OctopusStroke.convertStrokes(this.sourceLayer.strokes, this)
   }
 
@@ -38,8 +38,8 @@ export class OctopusLayerShape extends OctopusLayerBase {
     return {
       path: this._path.convert(),
       fillRule: this._path.fillRule,
-      fills: await this._fills(),
-      strokes: await this._strokes(),
+      fills: await this._fills,
+      strokes: await this._strokes,
     }
   }
 

@@ -1,5 +1,5 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
@@ -31,9 +31,9 @@ export class OctopusStroke {
     SQUARE: 'SQUARE',
   } as const
 
-  static async convertStrokes(strokes: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['VectorStroke'][]> {
-    const converted = await Promise.all(strokes.map((fill) => new OctopusStroke({ fill, parentLayer }).convert()))
-    return converted.filter((stroke): stroke is Octopus['VectorStroke'] => Boolean(stroke))
+  static convertStrokes(strokes: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['VectorStroke'][]> {
+    const octopusStrokes = strokes.map((fill) => new OctopusStroke({ fill, parentLayer }))
+    return getConvertedAsync(octopusStrokes)
   }
 
   constructor(options: OctopusStrokeOptions) {

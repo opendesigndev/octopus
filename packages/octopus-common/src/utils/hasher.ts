@@ -1,17 +1,12 @@
 import crc32 from 'crc-32'
 
-import { isObject } from './common'
+import { compare, isObject } from './common'
 
 export function hashOf(value: unknown): string {
   const hash = crc32.str(JSON.stringify(value))
   const beautified = (hash - (1 << 31)).toString(16)
   return beautified
 }
-
-const compare = (() => {
-  const collator = new Intl.Collator('en-US')
-  return (a: string, b: string) => collator.compare(a, b)
-})()
 
 export function hashOfObjectSeed(seed: Array<[string, unknown]>): string {
   return hashOf(seed.slice().sort((a, b) => compare(String(a[0]), String(b[0]))))

@@ -48,7 +48,7 @@ export class SourceNormalizer {
       fill.scaleMode = 'STRETCH'
     }
     if (fill.type === 'IMAGE' && fill.scaleMode === 'FILL') {
-      fill.imageTransform = undefined
+      fill.imageTransform = undefined // Image with FILL scale mode don't need imageTransform and the one that we receive from plugin api is not correct
     }
   }
 

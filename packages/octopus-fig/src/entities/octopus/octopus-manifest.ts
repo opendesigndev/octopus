@@ -1,6 +1,5 @@
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
-import sortBy from 'lodash/sortBy'
+import { compare, getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { convertId } from '../../utils/convert'
@@ -179,7 +178,7 @@ export class OctopusManifest {
       meta: { originalId: page.id },
       children: page.children.map((elem) => ({ id: convertId(elem.id), type: 'COMPONENT' })),
     }))
-    return sortBy(converted, (c) => c.id)
+    return [...converted].sort((a, b) => compare(a.id, b.id))
   }
 
   private _getStatus(source: SourceComponent): Manifest['Status'] {
@@ -318,7 +317,7 @@ export class OctopusManifest {
   async components(): Promise<Manifest['Component'][]> {
     const componentSources = Array.from(this._exports.components.values())
     const converted = await Promise.all(componentSources.map((component) => this._getComponent(component.source)))
-    return sortBy(converted, (c) => c.id)
+    return [...converted].sort((a, b) => compare(a.id, b.id))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {

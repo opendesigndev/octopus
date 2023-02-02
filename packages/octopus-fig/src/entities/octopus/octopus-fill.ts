@@ -1,5 +1,5 @@
 import { lerpColor } from '@opendesign/octopus-common/dist/utils/color'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { push, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
 import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
@@ -20,9 +20,9 @@ export class OctopusFill {
   private _fill: SourcePaint
   private _parentLayer: OctopusLayer
 
-  static async convertFills(fills: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['Fill'][]> {
-    const converted = await Promise.all(fills.map((fill) => new OctopusFill({ fill, parentLayer }).convert()))
-    return converted.filter((fill): fill is Octopus['Fill'] => Boolean(fill))
+  static convertFills(fills: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['Fill'][]> {
+    const octopusFills = fills.map((fill) => new OctopusFill({ fill, parentLayer }))
+    return getConvertedAsync(octopusFills)
   }
 
   constructor(options: OctopusFillOptions) {
@@ -261,7 +261,7 @@ export class OctopusFill {
       case 'GRADIENT':
         return this._fillGradient
       case 'IMAGE':
-        return await this._fillImage()
+        return this._fillImage()
       default:
         return null
     }
