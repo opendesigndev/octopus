@@ -158,7 +158,7 @@ export class OctopusArtboard {
     }
 
     return {
-      type: 'ARTBOARD',
+      type: 'OCTOPUS_COMPONENT',
       version: await this._getVersion(),
       id: this._sourceArtboard.meta.id,
       ...dimensionsEntry,

@@ -873,20 +873,10 @@
     immutable "^4.1.0"
     marky "^1.2.4"
 
-"@opendesign/manifest-ts@3.0.0-alpha.38":
-  version "3.0.0-alpha.38"
-  resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.38.tgz#0f48900006242fb67d213dd53b127fee1386e176"
-  integrity sha512-ASZviNybmJfnMLkr9oJ9u1dRXiT4brmzRzLjfKSD2T8ZJd16vBOnSsw4amftPdHvnA+1oUy7YhNHeY1sW7IQ4Q==
-
 "@opendesign/manifest-ts@3.0.0-alpha.41":
   version "3.0.0-alpha.41"
   resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.41.tgz#bf7dfc561ab6da8f86cba4d2b90531282374ed32"
   integrity sha512-/H0NrF8HDXci32J6Y5XxQnF8jCVFsOSn/uOaHZ3TBQCcGFjGVhzGCKrE7Ct90MUhJz41VSjPaYKi74fV1czdYQ==
-
-"@opendesign/octopus-ts@3.0.0-alpha.38":
-  version "3.0.0-alpha.38"
-  resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.0-alpha.38.tgz#51e7acd8e5fd894aeee1de4e183c930fda457242"
-  integrity sha512-9vTutQl5QJbIDQHDS4Qrl40qYTZGVu0RrHn3+1UDcDi/9R0S8hsCu7EEqA2TZkdpBdqoWmTr4p1LtJHbZBg2xw==
 
 "@opendesign/octopus-ts@3.0.0-alpha.41":
   version "3.0.0-alpha.41"
