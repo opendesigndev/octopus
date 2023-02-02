@@ -1136,6 +1136,11 @@
     immutable "^4.1.0"
     marky "^1.2.4"
 
+"@opendesign/image-icc-profile-converter@^0.0.0-experimental":
+  version "0.0.0-experimental"
+  resolved "https://registry.yarnpkg.com/@opendesign/image-icc-profile-converter/-/image-icc-profile-converter-0.0.0-experimental.tgz#b204d52a58d9e45d36a4f5b52f097d83c310325d"
+  integrity sha512-VK9GhUMkdEWOX2uoGhWM7nRwzXT85oCyVZf/pcWaUOHHYAQhIaht/odfgLpDpVY/sOqDsF1zD4IUD4CKxjFL5A==
+
 "@opendesign/manifest-ts@3.0.0-alpha.38":
   version "3.0.0-alpha.38"
   resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.0.0-alpha.38.tgz#0f48900006242fb67d213dd53b127fee1386e176"
@@ -1417,7 +1422,7 @@
     "@types/node" "*"
     "@types/pino" "6.3"
 
-"@types/pino-std-serializers@*":
+"@types/pino-std-serializers@*", "@types/pino-std-serializers@2.4.1":
   version "2.4.1"
   resolved "https://registry.npmjs.org/@types/pino-std-serializers/-/pino-std-serializers-2.4.1.tgz"
   integrity sha512-17XcksO47M24IVTVKPeAByWUd3Oez7EbIjXpSbzMPhXVzgjGtrOa49gKBwxH9hb8dKv58OelsWQ+A1G1l9S3wQ==

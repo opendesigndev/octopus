@@ -57,7 +57,7 @@ async function convertDesign({
     console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
-  const reader = new PSDFileReader({ path: filePath, designId })
+  const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
   const sourceDesign = await reader.sourceDesign
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')

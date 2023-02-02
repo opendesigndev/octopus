@@ -20,6 +20,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
+    "@opendesign/image-icc-profile-converter": "^0.0.0-experimental",
     "@opendesign/manifest-ts": "3.0.0-alpha.38",
     "@opendesign/octopus-common": "3.0.0-rc.27",
     "@opendesign/octopus-ts": "3.0.0-alpha.38",

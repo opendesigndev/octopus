@@ -37,6 +37,8 @@ Check [`src/services/exporters/`](./src/services/exporters/) for more details ab
 
 Check [`src/services/readers/`](./src/services/readers/) for more details about readers
 
+When instan
+
 ---
 
 ## Demo: Node Examples
@@ -77,6 +79,10 @@ yarn convert:psd:local sample/some-file.psd
 ```
 
 ---
+
+#### instantiating psd-file-reader
+
+You can instantiate PSDFileReader with static method withRenderer which will include image enhancing library @opendesign/image-icc-profile-converter. This library will process enhance which are CMYK or GreyScale
 
 ## TypeDoc
 
