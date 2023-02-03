@@ -82,7 +82,9 @@ yarn convert:psd:local sample/some-file.psd
 
 #### instantiating psd-file-reader
 
-You can instantiate PSDFileReader with static method withRenderer which will include image enhancing library @opendesign/image-icc-profile-converter. This library will process enhance which are CMYK or GreyScale
+You can instantiate PSDFileReader with optional flag withRenderer.
+This will include library @opendesign/image-icc-profile-converter in the image processing pipeline.
+The process will convert all output images to `sRGB` if PSD file was saved with embedded colour profile. This might make a difference especially for images composed in CMYK colour space.
 
 ## TypeDoc
 
