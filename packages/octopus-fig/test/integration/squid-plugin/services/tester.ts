@@ -6,14 +6,14 @@ import { createConverter, SourcePluginReader } from '../../../../src/index-node'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
 import { MANIFEST_NAME } from '../../../../src/utils/const'
 import { parseJsonFromFile } from '../../../../src/utils/files'
-import { cleanManifest } from '../utils/asset-cleaner'
-import { stringify } from '../utils/stringify'
+import { cleanManifest } from '../../shared/utils/asset-cleaner'
+import { stringify } from '../../shared/utils/stringify'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../../src/typings/manifest'
 import type { Octopus } from '../../../../src/typings/octopus'
 import type { PluginSource } from '../../../../src/typings/plugin-source'
-import type { TestComponents, Component } from './asset-reader'
+import type { TestComponents, Component } from '../../shared/services/asset-reader'
 
 type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null
@@ -64,10 +64,10 @@ export class Tester {
   private async _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign[]> {
     return await Promise.all(
       testComponentsArray.map(
-        async ({ components: componentExpected, manifest: manifestExpected, pluginDataPath, assetId }) => {
-          const sourceData: PluginSource | null = await parseJsonFromFile(pluginDataPath)
+        async ({ components: componentExpected, manifest: manifestExpected, sourceDataPath, assetId }) => {
+          const sourceData: PluginSource | null = await parseJsonFromFile(sourceDataPath)
           if (sourceData === null)
-            throw new Error(`Wrong SourceData for assetId: '${assetId}' and pluginDataPath: '${pluginDataPath}'`)
+            throw new Error(`Wrong SourceData for assetId: '${assetId}' and sourceDataPath: '${sourceDataPath}'`)
           const reader = new SourcePluginReader(sourceData)
 
           const result = await this._octopusConverter.convertDesign({ designEmitter: reader.parse() })

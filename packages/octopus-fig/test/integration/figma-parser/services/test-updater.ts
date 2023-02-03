@@ -4,15 +4,15 @@ import { createConverter } from '../../../../src/index-node'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
 import { MANIFEST_NAME } from '../../../../src/utils/const'
 import { makeDir, saveFile, rmDir } from '../../../../src/utils/files'
-import { cleanManifest } from '../utils/asset-cleaner'
-import { stringify } from '../utils/stringify'
-import { AssetReader } from './asset-reader'
+import { AssetReader } from '../../shared/services/asset-reader'
+import { cleanManifest } from '../../shared/utils/asset-cleaner'
+import { stringify } from '../../shared/utils/stringify'
 import { DesignEmitterMock } from './design-emitter-mock'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../../src/typings/manifest'
 import type { Octopus } from '../../../../src/typings/octopus'
-import type { TestDirectoryData } from './asset-reader'
+import type { TestDirectoryData } from '../../shared/services/asset-reader'
 
 type TestAssets = {
   components: Octopus['OctopusComponent'][]
@@ -33,8 +33,8 @@ export class TestUpdater {
 
   private async _getTestsAssets(): Promise<TestAssets[]> {
     return Promise.all(
-      this._testsDirectoryData.map(async ({ eventDataPath, expectedDirPath, testName, testPath }) => {
-        const designEmitter = new DesignEmitterMock(eventDataPath)
+      this._testsDirectoryData.map(async ({ sourceDataPath, expectedDirPath, testName, testPath }) => {
+        const designEmitter = new DesignEmitterMock(sourceDataPath)
 
         const result = await this._octopusConverter.convertDesign({ designEmitter })
         const { components, manifest } = result ?? {}

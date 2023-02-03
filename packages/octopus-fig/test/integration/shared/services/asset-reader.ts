@@ -14,7 +14,7 @@ export type Component<T> = {
 
 export type TestComponents = {
   assetId: string
-  eventDataPath: string
+  sourceDataPath: string
   components: Component<Octopus['OctopusComponent']>[]
   manifest: Component<Manifest['OctopusManifest']>
 }
@@ -22,7 +22,7 @@ export type TestComponents = {
 export type TestDirectoryData = {
   testName: string
   testPath: string
-  eventDataPath: string
+  sourceDataPath: string
   expectedDirPath: string | null
 }
 
@@ -30,18 +30,22 @@ type TestDirectoryFullData = TestDirectoryData & {
   expectedPaths: string[]
 }
 
-export type AssetReaderOptions = Partial<{ selectedAsset: string }>
+export type AssetReaderOptions = {
+  sourceFileName: string
+  selectedAsset?: string
+}
 
 export class AssetReader {
   private _assetsDirPath: string
+  private _sourceFileName: string
   private _selectedAsset?: string
 
-  static EVENT_DATA_NAME = 'event-data.json'
   static ASSETS_DIR_RELATIVE_PATH = '../assets'
   static EXPECTED_DIR_NAME = 'expected'
 
-  constructor({ selectedAsset }: AssetReaderOptions) {
+  constructor({ selectedAsset, sourceFileName }: AssetReaderOptions) {
     this._assetsDirPath = this._getFullPath()
+    this._sourceFileName = sourceFileName
     this._selectedAsset = selectedAsset
   }
 
@@ -75,7 +79,7 @@ export class AssetReader {
       testName,
       testPath: this._getFullPath(testName),
       expectedDirPath: this._getFullPath(testName, AssetReader.EXPECTED_DIR_NAME),
-      eventDataPath: this._getFullPath(testName, AssetReader.EVENT_DATA_NAME),
+      sourceDataPath: this._getFullPath(testName, this._sourceFileName),
     }))
   }
 
@@ -98,7 +102,7 @@ export class AssetReader {
 
       return {
         assetId: testDirectoryTree.testName,
-        eventDataPath: testDirectoryTree.eventDataPath,
+        sourceDataPath: testDirectoryTree.sourceDataPath,
         manifest: { path: manifest, read: lazyRead(manifest) },
         components: components.map((component) => ({ path: component, read: lazyRead(component) })),
       }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8' />
     <style>
       body { font-family: sans-serif;  }
       body>div { margin: 10px; background: #fff; border-radius: 5px;}
@@ -171,19 +171,20 @@ ul.jsondiffpatch-textdiff {
   <body>
     {{#each failed}}
       <div>
-        <h1 onclick="toggleVisibility(this)">{{name}}</h1>
-        <div class="diff">
-          <div class="explanation">
-            <span class="box green"></span> Present, but not expected <span class="box red"></span> Expected, but missing
+        <h1 onclick='toggleVisibility(this)'>{{name}}</h1>
+        <div class='diff'>
+          <div class='explanation'>
+            <span class='box green'></span>
+            Present, but not expected
+            <span class='box red'></span>
+            Expected, but missing
           </div>
           {{{diff}}}
         </div>
       </div>
     {{/each}}
     <script>
-      function toggleVisibility(obj) {
-        obj.parentNode.className = obj.parentNode.className === 'open' ? '' : 'open'
-      }
+      function toggleVisibility(obj) { obj.parentNode.className = obj.parentNode.className === 'open' ? '' : 'open' }
     </script>
   </body>
 </html>

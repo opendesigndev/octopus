@@ -5,16 +5,18 @@ import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
 import handlebars from 'handlebars'
 
 import { makeDir, saveFile } from '../../../src/utils/files'
-import { AssetReader } from './services/asset-reader'
+import { AssetReader } from '../shared/services/asset-reader'
+import { getCommandLineArgs } from '../shared/utils/argv'
 import { Tester } from './services/tester'
-import { getCommandLineArgs } from './utils/argv'
 
 import type { Fail } from './services/tester'
+
+export const SOURCE_FILE_NAME = 'plugin-data.json'
 
 const REPORT_FOLDER = 'report'
 
 function createReport(failed: Fail[]): string {
-  const source = fs.readFileSync(path.join(__dirname, '/assets/report-template.hbs')).toString()
+  const source = fs.readFileSync(path.join(__dirname, '../shared/report-template.hbs')).toString()
   const template = handlebars.compile(source)
   return template({ failed })
 }
@@ -22,7 +24,7 @@ function createReport(failed: Fail[]): string {
 async function test() {
   const { selectedAsset } = getCommandLineArgs()
 
-  const assetsReader = new AssetReader({ selectedAsset })
+  const assetsReader = new AssetReader({ selectedAsset, sourceFileName: SOURCE_FILE_NAME })
   const testComponents = await assetsReader.getTestsComponents()
   const tester = new Tester(testComponents)
 
@@ -35,12 +37,12 @@ async function test() {
     const reportPath = path.join(__dirname, REPORT_FOLDER, `test-report-${timestamp()}.html`)
 
     await saveFile(reportPath, html)
-    console.error('FAILURE: Some tests failed!\n')
+    console.error('❌ FAILURE: Some tests failed!\n')
     console.error(`file:///${reportPath}\n`)
     process.exit(1)
   }
 
-  console.info('SUCCESS: All tests passed!\n')
+  console.info('✅ SUCCESS: All tests passed!\n')
   process.exit(0)
 }
 

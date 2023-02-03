@@ -5,14 +5,14 @@ import * as jsondiffpatch from 'jsondiffpatch'
 import { createConverter } from '../../../../src/index-node'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
 import { MANIFEST_NAME } from '../../../../src/utils/const'
-import { cleanManifest } from '../utils/asset-cleaner'
-import { stringify } from '../utils/stringify'
+import { cleanManifest } from '../../shared/utils/asset-cleaner'
+import { stringify } from '../../shared/utils/stringify'
 import { DesignEmitterMock } from './design-emitter-mock'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../../src/typings/manifest'
 import type { Octopus } from '../../../../src/typings/octopus'
-import type { TestComponents, Component } from './asset-reader'
+import type { TestComponents, Component } from '../../shared/services/asset-reader'
 
 type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null
@@ -63,8 +63,8 @@ export class Tester {
   private async _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign[]> {
     return await Promise.all(
       testComponentsArray.map(
-        async ({ components: componentExpected, manifest: manifestExpected, eventDataPath, assetId }) => {
-          const designEmitter = new DesignEmitterMock(eventDataPath)
+        async ({ components: componentExpected, manifest: manifestExpected, sourceDataPath, assetId }) => {
+          const designEmitter = new DesignEmitterMock(sourceDataPath)
 
           const result = await this._octopusConverter.convertDesign({ designEmitter })
           const { components: componentsGenerated, manifest: manifestGenerated } = result ?? {}
