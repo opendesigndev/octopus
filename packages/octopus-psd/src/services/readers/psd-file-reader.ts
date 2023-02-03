@@ -1,7 +1,6 @@
 import { readFile } from 'fs/promises'
 import path from 'path'
 
-import { scan } from '@jimp/utils'
 import { getRenderer } from '@opendesign/image-icc-profile-converter'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
@@ -152,7 +151,7 @@ export class PSDFileReader {
     const processedBuff = this._renderer ? await this._renderer.render(buff, iccProfile) : buff
 
     const image = new Jimp(width, height)
-    const scanned = scan(image, 0, 0, image.bitmap.width, image.bitmap.height, function (_x, _y, index) {
+    const scanned = image.scan(0, 0, image.bitmap.width, image.bitmap.height, function (_x, _y, index) {
       this.bitmap.data[index + 0] = processedBuff[index + 0]
       this.bitmap.data[index + 1] = processedBuff[index + 1]
       this.bitmap.data[index + 2] = processedBuff[index + 2]
