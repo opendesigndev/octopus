@@ -1,17 +1,17 @@
 import path from 'path'
 
-import { createConverter } from '../../../src/index-node'
-import { getOctopusFileName } from '../../../src/services/exporters/node/local-exporter'
-import { MANIFEST_NAME } from '../../../src/utils/const'
-import { makeDir, saveFile, rmDir } from '../../../src/utils/files'
+import { createConverter } from '../../../../src/index-node'
+import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
+import { MANIFEST_NAME } from '../../../../src/utils/const'
+import { makeDir, saveFile, rmDir } from '../../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 import { AssetReader } from './asset-reader'
 import { DesignEmitterMock } from './design-emitter-mock'
 
-import type { OctopusFigConverter } from '../../../src/octopus-fig-converter'
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
+import type { Manifest } from '../../../../src/typings/manifest'
+import type { Octopus } from '../../../../src/typings/octopus'
 import type { TestDirectoryData } from './asset-reader'
 
 type TestAssets = {

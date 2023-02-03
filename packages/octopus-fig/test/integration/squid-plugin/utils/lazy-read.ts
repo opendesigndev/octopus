@@ -1,4 +1,4 @@
-import { parseJsonFromFile } from '../../../src/utils/files'
+import { parseJsonFromFile } from '../../../../src/utils/files'
 
 export function lazyRead<T>(path: string) {
   let data: T | null

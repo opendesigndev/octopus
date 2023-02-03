@@ -2,16 +2,16 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { createConverter } from '../../../src/index-node'
-import { getOctopusFileName } from '../../../src/services/exporters/node/local-exporter'
-import { MANIFEST_NAME } from '../../../src/utils/const'
+import { createConverter } from '../../../../src/index-node'
+import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
+import { MANIFEST_NAME } from '../../../../src/utils/const'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 import { DesignEmitterMock } from './design-emitter-mock'
 
-import type { OctopusFigConverter } from '../../../src/octopus-fig-converter'
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
+import type { Manifest } from '../../../../src/typings/manifest'
+import type { Octopus } from '../../../../src/typings/octopus'
 import type { TestComponents, Component } from './asset-reader'
 
 type ComponentGroup = {

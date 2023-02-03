@@ -1,11 +1,11 @@
 import path from 'path'
 
-import { MANIFEST_NAME } from '../../../src/utils/const'
-import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
+import { MANIFEST_NAME } from '../../../../src/utils/const'
+import { getDirsFromDir, getFilesFromDir } from '../../../../src/utils/files'
 import { lazyRead } from '../utils/lazy-read'
 
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
+import type { Manifest } from '../../../../src/typings/manifest'
+import type { Octopus } from '../../../../src/typings/octopus'
 
 export type Component<T> = {
   path: string

@@ -2,17 +2,17 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { createConverter, SourcePluginReader } from '../../../src/index-node'
-import { getOctopusFileName } from '../../../src/services/exporters/node/local-exporter'
-import { MANIFEST_NAME } from '../../../src/utils/const'
-import { parseJsonFromFile } from '../../../src/utils/files'
+import { createConverter, SourcePluginReader } from '../../../../src/index-node'
+import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
+import { MANIFEST_NAME } from '../../../../src/utils/const'
+import { parseJsonFromFile } from '../../../../src/utils/files'
 import { cleanManifest } from '../utils/asset-cleaner'
 import { stringify } from '../utils/stringify'
 
-import type { OctopusFigConverter } from '../../../src/octopus-fig-converter'
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
-import type { PluginSource } from '../../../src/typings/plugin-source'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
+import type { Manifest } from '../../../../src/typings/manifest'
+import type { Octopus } from '../../../../src/typings/octopus'
+import type { PluginSource } from '../../../../src/typings/plugin-source'
 import type { TestComponents, Component } from './asset-reader'
 
 type ComponentGroup = {

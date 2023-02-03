@@ -4,7 +4,7 @@ import path from 'path'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
 import handlebars from 'handlebars'
 
-import { makeDir, saveFile } from '../../src/utils/files'
+import { makeDir, saveFile } from '../../../src/utils/files'
 import { AssetReader } from './services/asset-reader'
 import { Tester } from './services/tester'
 import { getCommandLineArgs } from './utils/argv'
