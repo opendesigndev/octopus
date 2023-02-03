@@ -1,4 +1,5 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { DEFAULTS } from './defaults.js'
 
@@ -12,12 +13,9 @@ export function getFontProperties(
   const fontIdx = styleSheetData?.Font ?? 0
   const fontPostScriptName = fontSet[fontIdx]?.Name ?? ''
   const fontStyleNameKey =
-    Object.keys(DEFAULTS.TEXT.FONT_STYLES).find((fontStyleName) => fontPostScriptName.endsWith(fontStyleName)) ??
-    DEFAULTS.TEXT.FONT_STYLE
-
+    keys(DEFAULTS.TEXT.FONT_STYLES).find((fontStyleName) => fontPostScriptName.endsWith(fontStyleName)) ?? `-Regular`
   const fontName = fontPostScriptName.replace(fontStyleNameKey, '')
-  const fontStyleName =
-    DEFAULTS.TEXT.FONT_STYLES[fontStyleNameKey as keyof typeof DEFAULTS.TEXT.FONT_STYLES] ?? DEFAULTS.TEXT.FONT_STYLE
+  const fontStyleName = DEFAULTS.TEXT.FONT_STYLES[fontStyleNameKey] ?? DEFAULTS.TEXT.FONT_STYLE
 
   return {
     fontPostScriptName,
