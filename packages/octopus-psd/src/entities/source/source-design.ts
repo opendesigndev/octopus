@@ -1,7 +1,7 @@
 import { isArtboard } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 
-import type { ParsedPsd } from '../../typings/raw/component.js'
+import type { RawParsedPsd } from '../../typings/raw/component.js'
 
 export type SourceImage = {
   name: string
@@ -11,7 +11,7 @@ export type SourceImage = {
 }
 
 type SourceDesignOptions = {
-  component: ParsedPsd
+  component: RawParsedPsd
   images: SourceImage[]
   designId: string
 }
@@ -20,7 +20,7 @@ export class SourceDesign {
   private _designId: string
   private _components: SourceComponent[]
   private _images: SourceImage[]
-  private _raw: ParsedPsd
+  private _raw: RawParsedPsd
 
   constructor(options: SourceDesignOptions) {
     this._components = this._initComponents(options.component)
@@ -29,7 +29,7 @@ export class SourceDesign {
     this._raw = options.component
   }
 
-  private _initComponents(raw: ParsedPsd): SourceComponent[] {
+  private _initComponents(raw: RawParsedPsd): SourceComponent[] {
     if (raw.children?.length === 1 && isArtboard(raw.children[0])) {
       return [new SourceComponent({ raw: raw.children[0], parent: this })] // no pasteboard for 1 artboard
     }

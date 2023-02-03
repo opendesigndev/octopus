@@ -1,6 +1,6 @@
-import type { LayerProperties, NodeChildWithProps } from './layer'
+import type { RawLayerProperties, RawNodeChildWithProps } from './layer'
 import type Psd from '@webtoon/psd-ts'
 
-export type ParsedPsd = Psd & { children: NodeChildWithProps[] } & {
-  layerProperties: LayerProperties
+export type RawParsedPsd = Psd & { children: RawNodeChildWithProps[] } & {
+  layerProperties: RawLayerProperties
 }

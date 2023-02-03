@@ -9,7 +9,7 @@ import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-ran
 import { SourceTextTextStyleRange } from './source-text-text-style-range.js'
 
 import type {
-  EngineData,
+  RawEngineData,
   RawLayerText,
   RawParagraphStyleRange,
   RawTextProperties,
@@ -20,7 +20,7 @@ import type { SourceBounds, SourceMatrix } from '../../typings/source'
 type TextStyleFromTo = { from: number; to: number; runArrayIndex: number }
 
 export class SourceText extends SourceEntity {
-  protected _engineData: EngineData | undefined
+  protected _engineData: RawEngineData | undefined
   protected _textProps: RawTextProperties | undefined
 
   protected _rawValue: RawLayerText

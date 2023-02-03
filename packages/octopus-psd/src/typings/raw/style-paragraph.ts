@@ -1,4 +1,4 @@
-export type ParagraphRun = Partial<{
+export type RawParagraphRun = Partial<{
   IsJoinable: number
   RunLengthArray: number[]
   RunArray: ParagraphRunData[]
@@ -6,15 +6,15 @@ export type ParagraphRun = Partial<{
 }>
 
 export type ParagraphRunData = {
-  Adjustments: ParagraphRunDataAdjustments
-  ParagraphSheet: ParagraphRunDataParagraphSheet
+  Adjustments: RawParagraphRunDataAdjustments
+  ParagraphSheet: RawParagraphRunDataParagraphSheet
 }
 
-export type ParagraphRunDataParagraphSheet = {
-  Properties: ParagraphRunDataParagraphSheetProperties
-}
+export type RawParagraphRunDataParagraphSheet = Partial<{
+  Properties: RawParagraphRunDataParagraphSheetProperties
+}>
 
-export type ParagraphRunDataParagraphSheetProperties = {
+export type RawParagraphRunDataParagraphSheetProperties = Partial<{
   EveryLineComposer: boolean
   KinsokuOrder: number
   Burasagari: boolean
@@ -36,15 +36,15 @@ export type ParagraphRunDataParagraphSheetProperties = {
   StartIndent: number
   FirstLineIndent: number
   Justification: number
-}
+}>
 
-export type ParagraphRunDataAdjustments = {
+export type RawParagraphRunDataAdjustments = Partial<{
   XY: number[]
   Axis: number[]
-}
+}>
 
 export type RawParagraphStyleRange = {
   from: number
-  paragraphStyle?: ParagraphRunDataParagraphSheetProperties
+  paragraphStyle?: RawParagraphRunDataParagraphSheetProperties
   to: number
 }

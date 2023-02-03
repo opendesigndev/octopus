@@ -1,3 +1,3 @@
-import type { AddedType, ParsedLayerLayer } from './layer'
+import type { AddedType, RawParsedLayerLayer } from './layer'
 
-export type RawLayerBackground = ParsedLayerLayer & AddedType<'backgroundLayer'>
+export type RawLayerBackground = RawParsedLayerLayer & AddedType<'backgroundLayer'>

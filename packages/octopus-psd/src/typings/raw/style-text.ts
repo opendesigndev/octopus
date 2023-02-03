@@ -1,35 +1,35 @@
-export type RawTextStyleRange = {
-  from?: number
-  textStyle?: RawTextStyle
-  to?: number
-  defaultStyleSheet?: StyleSheetData
-}
+export type RawTextStyleRange = Partial<{
+  from: number
+  textStyle: RawTextStyle
+  to: number
+  defaultStyleSheet: RawStyleSheetData
+}>
 
-export type StyleRun = Partial<{
+export type RawStyleRun = Partial<{
   IsJoinable: number
   RunLengthArray: number[]
-  RunArray: StyleRunArray[]
+  RunArray: RawStyleRunArray[]
 }>
 
-export type StyleRunArray = {
-  StyleSheet?: StyleRunArrayStyleSheet
+export type RawStyleRunArray = {
+  StyleSheet?: RawStyleRunArrayStyleSheet
 }
 
-export type StyleRunArrayStyleSheet = Partial<{
-  StyleSheetData: StyleSheetData
+export type RawStyleRunArrayStyleSheet = Partial<{
+  StyleSheetData: RawStyleSheetData
 }>
 
-export type TextColor = Partial<{
+export type RawTextColor = Partial<{
   Values: number[]
   Type: number
 }>
 
-export type StyleSheetData = Partial<{
+export type RawStyleSheetData = Partial<{
   Kashida: number
   HindiNumbers: boolean
   YUnderline: number
-  StrokeColor: TextColor
-  FillColor: TextColor
+  StrokeColor: RawTextColor
+  FillColor: RawTextColor
   NoBreak: boolean
   Language: number
   StyleRunAlignment: number
@@ -56,10 +56,10 @@ export type StyleSheetData = Partial<{
   Altligature: boolean
 }>
 
-export type RawTextStyle = StyleSheetData & FontProperties
+export type RawTextStyle = RawStyleSheetData & RawFontProperties
 
-export type FontProperties = {
+export type RawFontProperties = Partial<{
   fontName: string
   fontPostScriptName: string
   fontStyleName: string
-}
+}>

@@ -5,44 +5,44 @@ import type {
   TypeToolObjectSettingAliBlock,
 } from '@webtoon/psd-ts/dist/interfaces/'
 
-export type DescriptorValueUnitFloats = {
+export type RawDescriptorValueUnitFloats = Partial<{
   unitType: UnitFloatType
   values: number[]
-}
+}>
 
-export type DescriptorValueReference = {
+export type RawDescriptorValueReference = Partial<{
   references: Reference[]
-}
+}>
 
-export type DescriptorValueEnumerated = {
+export type RawDescriptorValueEnumerated = Partial<{
   enumType: string
   enumValue: string
+}>
+
+type RawExcludedTextData<T> = Omit<T, 'textData'>
+type RawExcludedWarpData<T> = Omit<T, 'warpData'>
+
+interface RawParsedTypeToolObjectSettingAliBlockTextData extends RawExcludedTextData<TypeToolObjectSettingAliBlock> {
+  textData?: RawDescriptorValueTree
 }
 
-type ExcludedTextData<T> = Omit<T, 'textData'>
-type ExcludedWarpData<T> = Omit<T, 'warpData'>
-
-interface ParsedTypeToolObjectSettingAliBlockTextData extends ExcludedTextData<TypeToolObjectSettingAliBlock> {
-  textData: DescriptorValueTree
+export interface RawParsedTypeToolObjectSettingAliBlock
+  extends RawExcludedWarpData<RawParsedTypeToolObjectSettingAliBlockTextData> {
+  warpData?: RawDescriptorValueTree
 }
 
-export interface ParsedTypeToolObjectSettingAliBlock
-  extends ExcludedWarpData<ParsedTypeToolObjectSettingAliBlockTextData> {
-  warpData: DescriptorValueTree
-}
-
-export type DescriptorValueTreeNode =
+export type RawDescriptorValueTreeNode =
   | number
   | number[]
   | boolean
   | string
-  | DescriptorValueUnitFloats
-  | DescriptorValueReference
-  | DescriptorValueEnumerated
+  | RawDescriptorValueUnitFloats
+  | RawDescriptorValueReference
+  | RawDescriptorValueEnumerated
   | AdditionalLayerInfo
   | Uint8Array
-  | DescriptorValueTree
-  | DescriptorValueTreeNode[]
-  | ParsedTypeToolObjectSettingAliBlock
+  | RawDescriptorValueTree
+  | RawDescriptorValueTreeNode[]
+  | RawParsedTypeToolObjectSettingAliBlock
 
-export type DescriptorValueTree = { [key: string]: DescriptorValueTreeNode }
+export type RawDescriptorValueTree = { [key: string]: RawDescriptorValueTreeNode }

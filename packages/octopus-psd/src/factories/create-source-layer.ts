@@ -11,8 +11,8 @@ import { getLayerTypeKey, isAdjustmentLayer, isShapeLayer } from '../utils/sourc
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common'
 import type {
-  NodeChildWithProps,
-  NodeChildWithType,
+  RawNodeChildWithProps,
+  RawNodeChildWithType,
   RawLayerAdjustment,
   RawLayerBackground,
   RawLayerLayer,
@@ -39,7 +39,7 @@ type SourceLayerBuilders =
 
 type CreateLayerOptions = {
   parent: SourceLayerParent
-  layer: NodeChildWithProps | NodeChildWithType
+  layer: RawNodeChildWithProps | RawNodeChildWithType
 }
 
 const SOURCE_BUILDER_MAP: { [key: string]: SourceLayerBuilders } = {
@@ -93,7 +93,7 @@ function createLayerAdjustment({ layer, parent }: CreateLayerOptions): SourceLay
   })
 }
 
-export function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWithType): NodeChildWithType {
+export function getRawLayerWithType(rawLayer: RawNodeChildWithProps | RawNodeChildWithType): RawNodeChildWithType {
   if ('addedType' in rawLayer) {
     return rawLayer
   }
@@ -101,7 +101,7 @@ export function getRawLayerWithType(rawLayer: NodeChildWithProps | NodeChildWith
   const typeKey = getLayerTypeKey(rawLayer.layerProperties)
 
   if (typeKey === 'bgnd') {
-    return Object.create(rawLayer, { addedType: { value: 'backgroundLayer' } }) as NodeChildWithType
+    return Object.create(rawLayer, { addedType: { value: 'backgroundLayer' } }) as RawNodeChildWithType
   }
 
   if ('type' in rawLayer && rawLayer.type === 'Group') {

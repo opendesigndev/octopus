@@ -1,4 +1,9 @@
-import type { RawCombineOperation, RawGradientType, RawSubpathPoint, VectorOriginationDatakeyDescriptor } from './raw'
+import type {
+  RawCombineOperation,
+  RawGradientType,
+  RawSubpathPoint,
+  RawVectorOriginationDatakeyDescriptor,
+} from './raw'
 
 export type SourceCombineOperation = RawCombineOperation
 
@@ -41,7 +46,7 @@ export type SourceMatrix = {
 export type SourceAlign = 'left' | 'right' | 'center' | 'justifyLeft' | 'justifyRight' | 'justifyCenter' | 'justifyAll'
 
 export type RawSourcePathComponent = Partial<{
-  origin: VectorOriginationDatakeyDescriptor
+  origin: RawVectorOriginationDatakeyDescriptor
   shapeOperation: number
   subpathListKey: RawSourceSubpath[]
 }>

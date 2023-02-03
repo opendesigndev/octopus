@@ -1,8 +1,8 @@
 import type { SourceLayerType } from '../../entities/source/source-layer-common'
 import type { RawlayerEffects, RawFill } from './effects'
-import type { RawShapeStrokeStyle, VectorMaskSetting } from './layer-shape'
+import type { RawShapeStrokeStyle, RawVectorMaskSetting } from './layer-shape'
 import type { RawTextProperties } from './layer-text'
-import type { VectorOriginationData } from './path-component'
+import type { RawVectorOriginationData } from './path-component'
 import type { RawColor, RawBounds } from './shared'
 import type { Group, Layer } from '@webtoon/psd-ts'
 
@@ -34,7 +34,7 @@ export type RawLayerBlendProps = Partial<{
   subType: number
 }>
 
-export type LayerProperties = Partial<{
+export type RawLayerProperties = Partial<{
   lyid: number | string
   artb: LayerPropertiesArtboard
   iOpa: FillOpacity
@@ -44,9 +44,9 @@ export type LayerProperties = Partial<{
   vscg: RawFill
   vstk: RawShapeStrokeStyle
   TySh: RawTextProperties
-  vmsk: VectorMaskSetting
-  vsms: VectorMaskSetting
-  vogk: VectorOriginationData
+  vmsk: RawVectorMaskSetting
+  vsms: RawVectorMaskSetting
+  vogk: RawVectorOriginationData
   lsct: RawLayerBlendProps
   lsdk: RawLayerBlendProps
   lnsr: Uint8Array
@@ -56,14 +56,14 @@ export type LayerProperties = Partial<{
 }>
 
 export type AddedType<T extends SourceLayerType> = { addedType: T }
-export type NodeChildWithType = (ParsedLayerGroup | ParsedLayerLayer) & AddedType<SourceLayerType>
-export type NodeChildWithProps = ParsedLayerGroup | ParsedLayerLayer
+export type RawNodeChildWithType = (RawParsedLayerGroup | RawParsedLayerLayer) & AddedType<SourceLayerType>
+export type RawNodeChildWithProps = RawParsedLayerGroup | RawParsedLayerLayer
 
-export type ParsedLayerLayer = Partial<Layer> & {
-  layerProperties?: LayerProperties
+export type RawParsedLayerLayer = Partial<Layer> & {
+  layerProperties?: RawLayerProperties
 }
 
-export type ParsedLayerGroup = Partial<Exclude<Group, 'children'>> & {
-  children: NodeChildWithProps[]
-  layerProperties?: LayerProperties
+export type RawParsedLayerGroup = Partial<Exclude<Group, 'children'>> & {
+  children: RawNodeChildWithProps[]
+  layerProperties?: RawLayerProperties
 }

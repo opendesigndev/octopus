@@ -13,11 +13,11 @@ export type RawSubpathPoint = {
   forward?: RawPointXY
 }
 
-export type VectorOriginationData = Partial<{
-  keyDescriptorList: VectorOriginationDatakeyDescriptor[]
+export type RawVectorOriginationData = Partial<{
+  keyDescriptorList: RawVectorOriginationDatakeyDescriptor[]
 }>
 
-export type VectorOriginationDatakeyDescriptor = Partial<{
+export type RawVectorOriginationDatakeyDescriptor = Partial<{
   keyOriginType: 1 | 2 | 4 | 5
   keyOriginResolution: number
   keyOriginShapeBBox: RawBounds & { unitValueQuadVersion?: number }

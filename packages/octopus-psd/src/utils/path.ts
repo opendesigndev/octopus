@@ -2,8 +2,8 @@ import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import { DEFAULTS } from './defaults.js'
 
-import type { PathData, BezierKnot, PathRecord, PointCoordinate } from '../typings/raw/layer-shape.js'
-import type { RawSubpathPoint, VectorOriginationDatakeyDescriptor } from '../typings/raw/path-component.js'
+import type { RawPathData, RawBezierKnot, RawPathRecord, RawPointCoordinate } from '../typings/raw/layer-shape.js'
+import type { RawSubpathPoint, RawVectorOriginationDatakeyDescriptor } from '../typings/raw/path-component.js'
 import type { RawBounds } from '../typings/raw/shared.js'
 import type { RawSourcePathComponent, RawSourceSubpath, DocumentDimensions } from '../typings/source.js'
 
@@ -61,14 +61,14 @@ export function mergeBounds(boundsArr: RawBounds[]): RawBounds {
   )
 }
 
-export function parsePointCoordinate({ vert, horiz }: PointCoordinate, { width, height }: DocumentDimensions) {
+export function parsePointCoordinate({ vert, horiz }: RawPointCoordinate, { width, height }: DocumentDimensions) {
   return {
     x: (horiz ?? 0) * width,
     y: (vert ?? 0) * height,
   }
 }
 
-export function parseBezierKnot(knot: BezierKnot, documentDimensions: DocumentDimensions): RawSubpathPoint {
+export function parseBezierKnot(knot: RawBezierKnot, documentDimensions: DocumentDimensions): RawSubpathPoint {
   return {
     ...(knot.anchor ? { anchor: parsePointCoordinate(knot.anchor, documentDimensions) } : null),
     ...(knot.preceding ? { backward: parsePointCoordinate(knot.preceding, documentDimensions) } : null),
@@ -80,7 +80,7 @@ type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends read
   ? ElementType
   : never
 
-function isBezierKnot(path: PathData): path is BezierKnot {
+function isBezierKnot(path: RawPathData): path is RawBezierKnot {
   const { type } = path
 
   if (!type) {
@@ -90,7 +90,7 @@ function isBezierKnot(path: PathData): path is BezierKnot {
   return DEFAULTS.BEZIER_KNOT_TYPE.includes(type as ArrayElement<typeof DEFAULTS.BEZIER_KNOT_TYPE>)
 }
 
-function isPathRecord(path: PathData): path is PathRecord {
+function isPathRecord(path: RawPathData): path is RawPathRecord {
   const { type } = path
 
   if (!Number.isInteger(type)) {
@@ -100,7 +100,7 @@ function isPathRecord(path: PathData): path is PathRecord {
   return DEFAULTS.PATH_RECORD_TYPE.includes(type as ArrayElement<typeof DEFAULTS.PATH_RECORD_TYPE>)
 }
 
-function pushToComponentChunk(componentChunk: PathData[] | undefined, pathData: PathData) {
+function pushToComponentChunk(componentChunk: RawPathData[] | undefined, pathData: RawPathData) {
   if (!componentChunk) {
     throw new Error('Invalid pathData type in vmss or vmsk pathRecords')
   }
@@ -108,8 +108,8 @@ function pushToComponentChunk(componentChunk: PathData[] | undefined, pathData: 
   componentChunk.push(pathData)
 }
 
-function distributePathRecordsToComponentChunks(pathData: PathData[]): PathData[][] {
-  return pathData.reduce<PathData[][]>((componentChunks, pointOrRecord) => {
+function distributePathRecordsToComponentChunks(pathData: RawPathData[]): RawPathData[][] {
+  return pathData.reduce<RawPathData[][]>((componentChunks, pointOrRecord) => {
     const lastComponentChunk = componentChunks[componentChunks.length - 1]
     if (isBezierKnot(pointOrRecord)) {
       pushToComponentChunk(lastComponentChunk, pointOrRecord)
@@ -127,7 +127,7 @@ function distributePathRecordsToComponentChunks(pathData: PathData[]): PathData[
   }, [])
 }
 
-function createSubpathListKey(pathData: PathData[], bounds: DocumentDimensions): RawSourceSubpath[] {
+function createSubpathListKey(pathData: RawPathData[], bounds: DocumentDimensions): RawSourceSubpath[] {
   return pathData.reduce<RawSourceSubpath[]>((subpathArr, pathOrRecord) => {
     const lastSubpath = subpathArr[subpathArr.length - 1]
 
@@ -148,15 +148,15 @@ function createSubpathListKey(pathData: PathData[], bounds: DocumentDimensions):
 }
 
 export function createSourcePathComponents(
-  pathData: PathData[],
-  originationArray: VectorOriginationDatakeyDescriptor[],
+  pathData: RawPathData[],
+  originationArray: RawVectorOriginationDatakeyDescriptor[],
   bounds: DocumentDimensions
 ): RawSourcePathComponent[] {
   const componentChunks = distributePathRecordsToComponentChunks(pathData)
   return componentChunks.map((componentChunk, idx) => {
     return {
       origin: originationArray[idx],
-      shapeOperation: (componentChunk[0] as PathRecord).operation,
+      shapeOperation: (componentChunk[0] as RawPathRecord).operation,
       subpathListKey: createSubpathListKey(componentChunk, bounds),
     }
   })

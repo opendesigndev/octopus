@@ -6,7 +6,7 @@ import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../..'
 import type { Manifest } from '../../typings/manifest'
-import type { EngineData, NodeChildWithProps, ParsedPsd } from '../../typings/raw'
+import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
@@ -108,20 +108,22 @@ export class OctopusManifest {
     }
   }
 
-  private _getFontNames(engineData: EngineData | undefined): string[] {
+  private _getFontNames(engineData: RawEngineData | undefined): string[] {
     const { ResourceDict } = engineData ?? {}
     const { FontSet } = ResourceDict ?? {}
     const { RunArray } = engineData?.EngineDict?.StyleRun ?? {}
     const fontSet = asArray(FontSet)
     const runArray = asArray(RunArray)
 
-    return runArray.map(({ StyleSheet }) => {
-      return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontName
-    })
+    return runArray
+      .map(({ StyleSheet }) => {
+        return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontName
+      })
+      .filter((fontName): fontName is string => Boolean(fontName))
   }
 
   private _getComponentAssetsFonts(
-    raw: ParsedPsd | NodeChildWithProps,
+    raw: RawParsedPsd | RawNodeChildWithProps,
     fontsSet: Set<string> = new Set()
   ): Set<string> {
     if ('textProperties' in raw) {
@@ -146,9 +148,11 @@ export class OctopusManifest {
       return { location, refId: image.name }
     })
 
-    const fonts: Manifest['AssetFont'][] = Array.from(this._getComponentAssetsFonts(raw as ParsedPsd)).map((font) => ({
-      name: font,
-    }))
+    const fonts: Manifest['AssetFont'][] = Array.from(this._getComponentAssetsFonts(raw as RawParsedPsd)).map(
+      (font) => ({
+        name: font,
+      })
+    )
 
     return {
       ...(images.length ? { images } : null),

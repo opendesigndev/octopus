@@ -3,13 +3,13 @@ import { keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { DEFAULTS } from './defaults.js'
 
-import type { EngineDataResourceDictFontSet, FontProperties, StyleSheetData } from '../typings/raw'
+import type { RawEngineDataResourceDictFontSet, RawFontProperties, RawStyleSheetData } from '../typings/raw'
 import type { SourceColor } from '../typings/source.js'
 
 export function getFontProperties(
-  fontSet: EngineDataResourceDictFontSet[],
-  styleSheetData?: StyleSheetData
-): FontProperties {
+  fontSet: RawEngineDataResourceDictFontSet[],
+  styleSheetData?: RawStyleSheetData
+): RawFontProperties {
   const fontIdx = styleSheetData?.Font ?? 0
   const fontPostScriptName = fontSet[fontIdx]?.Name ?? ''
   const fontStyleNameKey =

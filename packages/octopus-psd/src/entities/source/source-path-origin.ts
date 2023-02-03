@@ -3,11 +3,11 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { VectorOriginationDatakeyDescriptor } from '../../typings/raw'
+import type { RawVectorOriginationDatakeyDescriptor } from '../../typings/raw'
 import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source'
 
 export class SourcePathOrigin extends SourceEntity {
-  protected _rawValue: VectorOriginationDatakeyDescriptor | undefined
+  protected _rawValue: RawVectorOriginationDatakeyDescriptor | undefined
 
   static TYPE_MAP = {
     1: 'rect',
@@ -16,7 +16,7 @@ export class SourcePathOrigin extends SourceEntity {
     5: 'ellipse',
   }
 
-  constructor(raw: VectorOriginationDatakeyDescriptor | undefined) {
+  constructor(raw: RawVectorOriginationDatakeyDescriptor | undefined) {
     super(raw)
     this._rawValue = raw
   }

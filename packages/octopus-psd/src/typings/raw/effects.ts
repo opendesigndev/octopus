@@ -1,26 +1,26 @@
 import type { RawColor as RawColor } from './shared'
 import type { UnitFloatDescriptorValue } from '@webtoon/psd-ts/dist/interfaces'
 
-export type RawShapeTransparency = {
+export type RawShapeTransparency = Partial<{
   Opct: number
   Lctn: number
   Mdpn: number
-}
+}>
 
-export type RawShapeGradientColor = {
+export type RawShapeGradientColor = Partial<{
   Clr: RawColor
   Type: string
   Lctn: number
   Mdpn: number
-}
+}>
 
-export type RawFillGradient = {
+export type RawFillGradient = Partial<{
   Clrs: RawShapeGradientColor[]
   GrdF: string
   Intr: number
   Nm: string
   Trns: RawShapeTransparency[]
-}
+}>
 
 export type RawFillPattern = Partial<{
   Nm: string
@@ -31,11 +31,11 @@ export type RawGradientType = 'Lnr ' | 'Rdl ' | 'Rflc' | 'Angl' | 'Dmnd'
 
 export type RawGradientsInterpolationMethod = 'Perc' | 'Lnr ' | 'Gcls'
 
-export type RawEffectCommon = {
-  enab?: boolean
-  present?: boolean
-  showInDialog?: boolean
-}
+export type RawEffectCommon = Partial<{
+  enab: boolean
+  present: boolean
+  showInDialog: boolean
+}>
 
 export type RawEffectShadow = RawEffectCommon &
   Partial<{
@@ -53,10 +53,11 @@ export type RawEffectShadow = RawEffectCommon &
 
 export type RawEffectStrokeLineAlignment = 'outsetFrame' | 'insetFrame' | 'centeredFrame'
 
-export type BevelEmbossStyle = 'OtrB' | 'InrB' | 'Embs' | 'PlEb' | 'strokeEmboss'
+export type RawBevelEmbossStyle = 'OtrB' | 'InrB' | 'Embs' | 'PlEb' | 'strokeEmboss'
+
 export type RawEffectBevelEmboss = RawEffectCommon &
   Partial<{
-    bvlS: BevelEmbossStyle
+    bvlS: RawBevelEmbossStyle
     srgR: number
     blur: number
     Sftn: number
@@ -70,14 +71,15 @@ export type RawEffectBevelEmboss = RawEffectCommon &
     sdwO: number
   }>
 
-export type RawEffectSatin = RawEffectCommon & {
-  Clr: RawColor
-  Invr: boolean
-  Opct: number
-  lagl: number
-  Dstn: number
-  blur: number
-}
+export type RawEffectSatin = RawEffectCommon &
+  Partial<{
+    Clr: RawColor
+    Invr: boolean
+    Opct: number
+    lagl: number
+    Dstn: number
+    blur: number
+  }>
 
 export type RawOffset =
   | { Hrzn: UnitFloatDescriptorValue; Vrtc: UnitFloatDescriptorValue }
@@ -101,7 +103,7 @@ export type RawFill = RawEffectCommon &
     phase: RawOffset
   }>
 
-export type RawEffectStroke = {
+export type RawEffectStroke = Partial<{
   enab: boolean
   present: boolean
   showInDialog: boolean
@@ -117,7 +119,7 @@ export type RawEffectStroke = {
   Angl: number
   phase: RawOffset
   overprint: boolean
-}
+}>
 
 export type RawlayerEffects = Partial<{
   masterFXSwitch: true

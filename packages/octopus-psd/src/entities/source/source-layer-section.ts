@@ -7,7 +7,7 @@ import { getBoundsFor } from '../../utils/source.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { NodeChildWithType, RawLayerSection } from '../../typings/raw'
+import type { RawNodeChildWithType, RawLayerSection } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 
@@ -30,7 +30,7 @@ export class SourceLayerSection extends SourceLayerCommon {
     return psdLayers.reduce((layers: SourceLayer[], layer) => {
       const sourceLayer = createSourceLayer({
         parent: this,
-        layer: layer as unknown as NodeChildWithType,
+        layer: layer as unknown as RawNodeChildWithType,
       })
       return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])

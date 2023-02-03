@@ -6,17 +6,17 @@ import { getBoundsFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePathComponent } from './source-path-component.js'
 
-import type { RawBounds, VectorMaskSetting, VectorOriginationData } from '../../typings/raw'
+import type { RawBounds, RawVectorMaskSetting, RawVectorOriginationData } from '../../typings/raw'
 import type { DocumentDimensions, SourceBounds } from '../../typings/source'
 
 type SourcePathOptions = {
-  vectorOriginationData: VectorOriginationData | undefined
-  vectorMaskSetting: VectorMaskSetting | undefined
+  vectorOriginationData: RawVectorOriginationData | undefined
+  vectorMaskSetting: RawVectorMaskSetting | undefined
   documentDimensions: DocumentDimensions
 }
 export class SourcePath extends SourceEntity {
-  private _vectorOriginationData: VectorOriginationData | undefined
-  private _vectorMaskSetting: VectorMaskSetting | undefined
+  private _vectorOriginationData: RawVectorOriginationData | undefined
+  private _vectorMaskSetting: RawVectorMaskSetting | undefined
   private _documentDimensions: DocumentDimensions
 
   constructor(options: SourcePathOptions) {
@@ -50,11 +50,11 @@ export class SourcePath extends SourceEntity {
     return this._documentDimensions
   }
 
-  get vectorMaskSetting(): VectorMaskSetting | undefined {
+  get vectorMaskSetting(): RawVectorMaskSetting | undefined {
     return this._vectorMaskSetting
   }
 
-  get vectorOriginationData(): VectorOriginationData | undefined {
+  get vectorOriginationData(): RawVectorOriginationData | undefined {
     return this._vectorOriginationData
   }
 }

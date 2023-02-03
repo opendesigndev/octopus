@@ -9,11 +9,11 @@ import type {
   RawMatrix,
   RawPointXY,
   RawRadiiCorners,
-  NodeChildWithType,
+  RawNodeChildWithType,
   RawColor,
   RawBounds,
-  NodeChildWithProps,
-  LayerProperties,
+  RawNodeChildWithProps,
+  RawLayerProperties,
 } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
 import type { AdditionalLayerInfo, NodeChild, Layer } from '@webtoon/psd-ts'
@@ -81,7 +81,7 @@ export function getAdditionalProperty(
   return additionalProperties[aliKey]
 }
 
-export function getLayerTypeKey(layerProperties: LayerProperties | undefined): string | undefined {
+export function getLayerTypeKey(layerProperties: RawLayerProperties | undefined): string | undefined {
   const layerTypeProp = layerProperties?.[PROPS.LAYER_NAME_SOURCE_SETTING]
 
   if (!layerTypeProp) {
@@ -91,7 +91,7 @@ export function getLayerTypeKey(layerProperties: LayerProperties | undefined): s
   return Buffer.from(layerTypeProp).toString()
 }
 
-export function isShapeLayer(layerProperties: LayerProperties | undefined): boolean {
+export function isShapeLayer(layerProperties: RawLayerProperties | undefined): boolean {
   if (!layerProperties) {
     return false
   }
@@ -110,7 +110,7 @@ export function isShapeLayer(layerProperties: LayerProperties | undefined): bool
   return Boolean(intersection(Object.keys(layerProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
 }
 
-export function isAdjustmentLayer(layerProperties: LayerProperties | undefined): boolean {
+export function isAdjustmentLayer(layerProperties: RawLayerProperties | undefined): boolean {
   if (!layerProperties) {
     return false
   }
@@ -136,7 +136,7 @@ export function getBoundsFor(rawArtboardBounds: RawBounds | undefined): SourceBo
   return { right, left, bottom, top, width, height }
 }
 
-export function getLayerBounds(layer: NodeChildWithType | NodeChildWithProps): SourceBounds {
+export function getLayerBounds(layer: RawNodeChildWithType | RawNodeChildWithProps): SourceBounds {
   if (layer.type === 'Group') {
     return getBoundsFor({})
   }

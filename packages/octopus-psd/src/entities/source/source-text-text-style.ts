@@ -3,16 +3,16 @@ import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { getTextColor } from '../../utils/text.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawTextStyle, StyleSheetData } from '../../typings/raw'
+import type { RawTextStyle, RawStyleSheetData } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
 
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined
-  private _defaultStyleSheet: StyleSheetData | undefined
+  private _defaultStyleSheet: RawStyleSheetData | undefined
 
   static FONT_CAPS_VALUES = ['smallCaps', 'allCaps'] as const
 
-  constructor(raw: RawTextStyle | undefined, defaultStyleSheet: StyleSheetData | undefined) {
+  constructor(raw: RawTextStyle | undefined, defaultStyleSheet: RawStyleSheetData | undefined) {
     super(raw)
     this._defaultStyleSheet = defaultStyleSheet
   }

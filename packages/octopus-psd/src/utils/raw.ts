@@ -1,7 +1,12 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { DescriptorValueType, AliKey } from '@webtoon/psd-ts'
 
-import type { DescriptorValueTreeNode, DescriptorValueTree, NodeChildWithProps, ParsedPsd } from '../typings/raw'
+import type {
+  RawDescriptorValueTreeNode,
+  RawDescriptorValueTree,
+  RawNodeChildWithProps,
+  RawParsedPsd,
+} from '../typings/raw'
 import type Psd from '@webtoon/psd-ts'
 import type { NodeChild, AdditionalLayerInfo } from '@webtoon/psd-ts'
 import type {
@@ -17,14 +22,14 @@ import type {
   UnitFloatDescriptorValue,
 } from '@webtoon/psd-ts/dist/interfaces/'
 
-export function parseDescriptorItems(items?: Map<string, DescriptorValue>): DescriptorValueTree {
+export function parseDescriptorItems(items?: Map<string, DescriptorValue>): RawDescriptorValueTree {
   if (!items) {
     return {}
   }
 
   const keys = Array.from(items.keys())
   const intemsEntries = keys
-    .map((key): [string, DescriptorValueTreeNode] | undefined => {
+    .map((key): [string, RawDescriptorValueTreeNode] | undefined => {
       const descriptorValue = items.get(key)
 
       if (typeof descriptorValue === 'undefined') {
@@ -38,7 +43,7 @@ export function parseDescriptorItems(items?: Map<string, DescriptorValue>): Desc
 
       return [key, value]
     })
-    .filter((valueEntry): valueEntry is [string, DescriptorValueTreeNode] => {
+    .filter((valueEntry): valueEntry is [string, RawDescriptorValueTreeNode] => {
       if (!valueEntry) {
         return false
       }
@@ -61,7 +66,7 @@ function parseUnitTypeDescriptor(descriptor: UnitFloatDescriptorValue, key: stri
   return descriptor.value
 }
 
-export function parseDescriptorValue(descriptorValue: DescriptorValue, key: string): DescriptorValueTreeNode {
+export function parseDescriptorValue(descriptorValue: DescriptorValue, key: string): RawDescriptorValueTreeNode {
   switch (descriptorValue.type) {
     case DescriptorValueType.String:
       return descriptorValue.value.trim()
@@ -107,7 +112,7 @@ export function parseDescriptorValue(descriptorValue: DescriptorValue, key: stri
 export function parseListDescriptorValue(
   listDescriptorValue: ListDescriptorValue,
   key: string
-): DescriptorValueTreeNode {
+): RawDescriptorValueTreeNode {
   const values = listDescriptorValue.values.map((item) => {
     return parseDescriptorValue(item, `${key}-list`)
   })
@@ -117,13 +122,13 @@ export function parseListDescriptorValue(
 export function parseUint8DescriptorValue(uintDescriptor: AliasDescriptorValue | RawDataDescriptorValue): string {
   return Buffer.from(uintDescriptor.data).toString()
 }
-export function parseDescriptorDescriptorValue(objc: DescriptorDescriptorValue): DescriptorValueTree {
+export function parseDescriptorDescriptorValue(objc: DescriptorDescriptorValue): RawDescriptorValueTree {
   return parseDescriptorItems(objc.descriptor.items)
 }
 
 export function parseObjectArrayDescriptorValue(
   objectArrayDescriptorValue: ObjectArrayDescriptorValue
-): DescriptorValueTree {
+): RawDescriptorValueTree {
   return objectArrayDescriptorValue.items.reduce((tree, item) => {
     const key = item.key.trim()
     return { ...tree, [key]: parseDescriptorValue(item.value, key) }
@@ -140,7 +145,7 @@ export function extractValueFromAdditionalProperty(additionalLayerInfo: Addition
   return 'value' in additionalLayerInfo ? additionalLayerInfo.value : undefined
 }
 
-export function parseAdditionalProperty(additionalProperty: AdditionalLayerInfo): DescriptorValueTree {
+export function parseAdditionalProperty(additionalProperty: AdditionalLayerInfo): RawDescriptorValueTree {
   const { key } = additionalProperty
   const trimmedKey = key.trim()
 
@@ -184,10 +189,10 @@ export function parseAdditionalProperty(additionalProperty: AdditionalLayerInfo)
   return { [key]: additionalProperty }
 }
 
-export function parseNodeChild(nodeChild: NodeChild): NodeChildWithProps {
+export function parseNodeChild(nodeChild: NodeChild): RawNodeChildWithProps {
   return Object.create(nodeChild, {
     layerProperties: {
-      value: Object.values(nodeChild.additionalProperties ?? {}).reduce<DescriptorValueTree>(
+      value: Object.values(nodeChild.additionalProperties ?? {}).reduce<RawDescriptorValueTree>(
         (properties, additionalProperty: AdditionalLayerInfo) => {
           return { ...properties, ...parseAdditionalProperty(additionalProperty) }
         },
@@ -203,7 +208,7 @@ export function parseNodeChild(nodeChild: NodeChild): NodeChildWithProps {
   })
 }
 
-export function getRawData(psd: Psd): ParsedPsd {
+export function getRawData(psd: Psd): RawParsedPsd {
   return Object.create(psd, {
     children: {
       value: asArray(psd.children).map(parseNodeChild),

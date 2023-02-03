@@ -7,18 +7,18 @@ import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/sour
 import { SourceEntity } from './source-entity.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { NodeChildWithProps, ParsedPsd, RawColor } from '../../typings/raw'
+import type { RawNodeChildWithProps, RawParsedPsd, RawColor } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceDesign } from './source-design.js'
 
 export type SourceComponentOptions = {
   isPasteboard?: boolean
-  raw: ParsedPsd | NodeChildWithProps
+  raw: RawParsedPsd | RawNodeChildWithProps
   parent: SourceDesign
 }
 
 export class SourceComponent extends SourceEntity {
-  protected _rawValue: NodeChildWithProps | ParsedPsd
+  protected _rawValue: RawNodeChildWithProps | RawParsedPsd
   private _layers: SourceLayer[]
   private _isPasteboard: boolean
   private _parent: SourceDesign
@@ -37,7 +37,7 @@ export class SourceComponent extends SourceEntity {
   private _initLayers() {
     const layers = asArray(this._rawValue?.children).reduce((layers: SourceLayer[], layer) => {
       const sourceLayer = createSourceLayer({
-        layer: layer as unknown as NodeChildWithProps,
+        layer: layer as unknown as RawNodeChildWithProps,
         parent: this,
       })
       return sourceLayer ? push(layers, sourceLayer) : layers
@@ -45,7 +45,7 @@ export class SourceComponent extends SourceEntity {
     return layers
   }
 
-  get raw(): NodeChildWithProps | ParsedPsd {
+  get raw(): RawNodeChildWithProps | RawParsedPsd {
     return this._rawValue
   }
 

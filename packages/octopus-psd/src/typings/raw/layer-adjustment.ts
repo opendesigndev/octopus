@@ -1,3 +1,3 @@
-import type { AddedType, ParsedLayerLayer } from './layer'
+import type { AddedType, RawParsedLayerLayer } from './layer'
 
-export type RawLayerAdjustment = ParsedLayerLayer & AddedType<'adjustmentLayer'>
+export type RawLayerAdjustment = RawParsedLayerLayer & AddedType<'adjustmentLayer'>

@@ -9,7 +9,7 @@ import { SourceLayerEffects } from './source-effects-layer.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePath } from './source-path.js'
 
-import type { LayerProperties, NodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
+import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
 import type { DocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
 import type { MaskData, RealMaskData } from '@webtoon/psd-ts/dist/sections/index.js'
@@ -26,12 +26,12 @@ export type SourceLayerType =
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
-  rawValue: NodeChildWithType
+  rawValue: RawNodeChildWithType
 }
 
 export class SourceLayerCommon extends SourceEntity {
   protected _parent: SourceLayerParent
-  protected _rawValue: NodeChildWithType
+  protected _rawValue: RawNodeChildWithType
 
   static OPACITY_DEFAULT_VALUE = 255
 
@@ -40,7 +40,7 @@ export class SourceLayerCommon extends SourceEntity {
     this._parent = options.parent
   }
 
-  private get _layerProperties(): LayerProperties | undefined {
+  private get _layerProperties(): RawLayerProperties | undefined {
     return this._rawValue.layerProperties
   }
 

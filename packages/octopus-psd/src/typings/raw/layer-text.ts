@@ -1,7 +1,7 @@
-import type { AddedType, ParsedLayerLayer } from './layer'
+import type { AddedType, RawParsedLayerLayer } from './layer'
 import type { RawBounds } from './shared'
-import type { ParagraphRun } from './style-paragraph'
-import type { StyleRun, StyleSheetData } from './style-text'
+import type { RawParagraphRun } from './style-paragraph'
+import type { RawStyleRun, RawStyleSheetData } from './style-text'
 
 export type RawTextEngineDict = {
   Editor: { Text: string }
@@ -10,7 +10,7 @@ export type RawText = {
   EngineDict: RawTextEngineDict
 }
 
-export type RawLayerText = ParsedLayerLayer & AddedType<'textLayer'>
+export type RawLayerText = RawParsedLayerLayer & AddedType<'textLayer'>
 
 export type RawTextPropertiesTextData = Partial<{
   Txt: string
@@ -52,29 +52,29 @@ export type RawTextProperties = Partial<{
   bottom: number
 }>
 
-export type EngineData = Partial<{
+export type RawEngineData = Partial<{
   DocumentResources: Readonly<Record<string, unknown>>
-  EngineDict: EngineDataEngineDict
-  ResourceDict: EngineDataResourceDict
+  EngineDict: RawEngineDataEngineDict
+  ResourceDict: RawEngineDataResourceDict
 }>
 
-export type EngineDataResourceDict = Partial<{
-  FontSet: EngineDataResourceDictFontSet[]
+export type RawEngineDataResourceDict = Partial<{
+  FontSet: RawEngineDataResourceDictFontSet[]
   TheNormalStyleSheet: number
   StyleSheetSet: {
     Name: string
-    StyleSheetData: StyleSheetData
+    StyleSheetData: RawStyleSheetData
   }[]
 }>
 
-export type EngineDataResourceDictFontSet = Partial<{
+export type RawEngineDataResourceDictFontSet = Partial<{
   Synthetic: number
   FontType: number
   Script: number
   Name: string
 }>
 
-export type EngineDataEngineDict = Partial<{
-  StyleRun: StyleRun
-  ParagraphRun: ParagraphRun
+export type RawEngineDataEngineDict = Partial<{
+  StyleRun: RawStyleRun
+  ParagraphRun: RawParagraphRun
 }>
