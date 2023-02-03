@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-rc.24",
+  "version": "3.0.0-rc.28",
   "origin": {
     "name": "FIGMA",
     "version": "0"
@@ -10,7 +10,7 @@
     {
       "id": "1525-11497",
       "name": "Properties",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "1525:11497"
       },
@@ -34,7 +34,7 @@
     {
       "id": "1525-12060",
       "name": "color-picker",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "1525:12060"
       },
@@ -58,7 +58,7 @@
     {
       "id": "1525-9683",
       "name": "Frame 1046",
-      "role": "ARTBOARD",
+      "role": "PARTIAL",
       "meta": {
         "originalId": "1525:9683"
       },

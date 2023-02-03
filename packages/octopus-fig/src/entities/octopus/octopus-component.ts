@@ -3,25 +3,23 @@ import { env } from '../../services'
 import { convertId } from '../../utils/convert'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
+import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'
 import type { SourceComponent } from '../source/source-component'
 import type { OctopusManifest } from './octopus-manifest'
 
 type OctopusComponentOptions = {
-  manifest: OctopusManifest
+  designConverter: DesignConverter
   source: SourceComponent
-  version: string
 }
 
 export class OctopusComponent {
-  private _octopusManifest: OctopusManifest
+  private _designConverter: DesignConverter
   private _sourceComponent: SourceComponent
-  private _version: string
 
   constructor(options: OctopusComponentOptions) {
-    this._octopusManifest = options.manifest
+    this._designConverter = options.designConverter
     this._sourceComponent = options.source
-    this._version = options.version
   }
 
   get parentComponent(): OctopusComponent {
@@ -36,8 +34,12 @@ export class OctopusComponent {
     return this.sourceComponent.sourceLayer
   }
 
+  get designConverter(): DesignConverter {
+    return this._designConverter
+  }
+
   get octopusManifest(): OctopusManifest {
-    return this._octopusManifest
+    return this.designConverter.octopusManifest
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
@@ -52,7 +54,7 @@ export class OctopusComponent {
   }
 
   get version(): string {
-    return this._version
+    return this._designConverter.version
   }
 
   private async _content(): Promise<Octopus['Layer'] | undefined> {

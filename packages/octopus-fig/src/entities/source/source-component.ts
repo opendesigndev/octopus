@@ -8,21 +8,18 @@ import { SourceEntity } from './source-entity'
 import { SourceLayerContainer } from './source-layer-container'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { ImageSizeMap } from '../../services/conversion/design-converter'
-import type { RawBlendMode, RawLayer, RawLayerContainer } from '../../typings/raw'
+import type { RawBlendMode, RawLayer, RawLayerContainer, RawParentType } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 
 type SourceComponentOptions = {
   rawFrame: RawLayer
   isPasteboard?: boolean
-  imageSizeMap?: ImageSizeMap
 }
 
 export class SourceComponent extends SourceEntity {
   protected _rawValue: RawLayer
   private _sourceLayer: SourceLayer
   private _isPasteboard: boolean
-  private _imageSizeMap: ImageSizeMap
 
   static DEFAULT_ID = 'component-1'
   static DEFAULT_NAME = 'Component'
@@ -30,7 +27,6 @@ export class SourceComponent extends SourceEntity {
   constructor(options: SourceComponentOptions) {
     super(options.rawFrame)
     this._isPasteboard = options.isPasteboard ?? false
-    this._imageSizeMap = options.imageSizeMap ?? {}
     this._sourceLayer = this._initializeSourceLayer(options.rawFrame)
   }
 
@@ -39,14 +35,6 @@ export class SourceComponent extends SourceEntity {
       createSourceLayer({ parent: this, layer: rawValue }) ??
       new SourceLayerContainer({ rawValue: rawValue as RawLayerContainer, parent: this })
     )
-  }
-
-  get imageSizeMap(): ImageSizeMap {
-    return this._imageSizeMap
-  }
-
-  getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
-    return ref ? this._imageSizeMap[ref] : undefined
   }
 
   private _getAssetFonts(): string[] {
@@ -101,5 +89,9 @@ export class SourceComponent extends SourceEntity {
 
   get clipsContent(): boolean {
     return (this._rawValue as RawLayerContainer).clipsContent ?? true
+  }
+
+  get parentType(): RawParentType | undefined {
+    return this._rawValue.parent?.type
   }
 }

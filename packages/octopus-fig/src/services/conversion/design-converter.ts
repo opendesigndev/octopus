@@ -86,13 +86,23 @@ export class DesignConverter {
     return this._octopusManifest
   }
 
+  get imageSizeMap(): ImageSizeMap {
+    return this._imageSizeMap
+  }
+
+  getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
+    return ref ? this._imageSizeMap[ref] : undefined
+  }
+
+  get version(): string {
+    return this._octopusConverter.pkg.version
+  }
+
   private async _convertSourceComponentSafe(
     source: SourceComponent
   ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
-      const manifest = this.octopusManifest
-      const version = this._octopusConverter.pkg.version
-      const value = await new ComponentConverter({ manifest, source, version }).convert()
+      const value = await new ComponentConverter({ source, designConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
@@ -205,7 +215,7 @@ export class DesignConverter {
     const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
 
-    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
+    const sourceComponent = new SourceComponent({ rawFrame })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
 

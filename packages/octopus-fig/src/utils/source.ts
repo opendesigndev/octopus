@@ -49,7 +49,7 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
 export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceLayer.type === 'COMPONENT') return 'COMPONENT'
-  if (['SHAPE', 'TEXT'].includes(source.sourceLayer.type)) return 'PARTIAL'
+  if (source.parentType && source.parentType !== 'PAGE') return 'PARTIAL'
   return 'ARTBOARD'
 }
 

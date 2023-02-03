@@ -177,7 +177,7 @@ export class OctopusFill {
     if (layout === 'TILE') {
       const imageRef = this._fill.imageRef
       if (!imageRef) return null
-      const imageSize = this._parentLayer.sourceLayer.parentComponent.getImageSize(imageRef)
+      const imageSize = this._parentLayer.parentComponent.designConverter.getImageSize(imageRef)
       if (!imageSize) return null
 
       const scalingFactor = this._fill.scalingFactor
