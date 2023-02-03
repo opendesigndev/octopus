@@ -1,0 +1,33 @@
+{
+  "id": "pasteboard-1",
+  "type": "ARTBOARD",
+  "version": "3.0.0-rc.7",
+  "dimensions": {
+    "width": 500,
+    "height": 500
+  },
+  "content": {
+    "id": "1-Background",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "maskBasis": "BODY",
+    "mask": {
+      "id": "1-BackgroundMask",
+      "type": "SHAPE",
+      "visible": false,
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "rectangle": {
+            "x0": 0,
+            "x1": 500,
+            "y0": 0,
+            "y1": 500
+          }
+        },
+        "fills": []
+      }
+    },
+    "layers": []
+  }
+}
