@@ -6,9 +6,9 @@ import { AssetUpdater } from './services/asset-updater'
 async function updateTests() {
   const { selectedAsset } = getCommandLineArgs()
   const assetUpdater = new AssetUpdater({ selectedAsset })
-  await assetUpdater.update()
+  const N = await assetUpdater.update()
 
-  console.info('✅ SUCCESS: Assets updated!\n')
+  console.info(`✅ SUCCESS: ${N} assets updated!\n`)
 }
 
 updateTests()

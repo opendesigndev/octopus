@@ -32,6 +32,7 @@ type TestDirectoryFullData = TestDirectoryData & {
 
 export type AssetReaderOptions = {
   sourceFileName: string
+  testDirPath: string
   selectedAsset?: string
 }
 
@@ -40,17 +41,17 @@ export class AssetReader {
   private _sourceFileName: string
   private _selectedAsset?: string
 
-  static ASSETS_DIR_RELATIVE_PATH = '../assets'
+  static ASSETS_DIR_RELATIVE_PATH = './assets'
   static EXPECTED_DIR_NAME = 'expected'
 
-  constructor({ selectedAsset, sourceFileName }: AssetReaderOptions) {
-    this._assetsDirPath = this._getFullPath()
+  constructor({ selectedAsset, testDirPath, sourceFileName }: AssetReaderOptions) {
+    this._assetsDirPath = path.join(testDirPath, AssetReader.ASSETS_DIR_RELATIVE_PATH)
     this._sourceFileName = sourceFileName
     this._selectedAsset = selectedAsset
   }
 
   private _getFullPath(...subpaths: string[]) {
-    return path.join(__dirname, AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    return path.join(this._assetsDirPath, ...subpaths)
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {

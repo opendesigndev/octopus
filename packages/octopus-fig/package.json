@@ -18,7 +18,7 @@
     "test:unit": "yarn jest",
     "test:integration": "yarn test:integration:parser && yarn test:integration:squid",
     "test:integration:parser": "ts-node test/integration/figma-parser",
-    "test:integration:parser:update": "yarn test:integration:update:assets && yarn test:integration:update:tests",
+    "test:integration:parser:update": "yarn test:integration:parser:update:assets && yarn test:integration:parser:update:tests",
     "test:integration:parser:update:assets": "ts-node test/integration/figma-parser/update-assets.ts",
     "test:integration:parser:update:tests": "ts-node test/integration/figma-parser/update-tests.ts",
     "test:integration:squid": "ts-node test/integration/squid-plugin",

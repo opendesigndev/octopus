@@ -2,24 +2,21 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { createConverter } from '../../../../src/index-node'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
 import { MANIFEST_NAME } from '../../../../src/utils/const'
-import { cleanManifest } from '../../shared/utils/asset-cleaner'
-import { stringify } from '../../shared/utils/stringify'
-import { DesignEmitterMock } from './design-emitter-mock'
+import { stringify } from '../utils/stringify'
 
-import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../../src/typings/manifest'
 import type { Octopus } from '../../../../src/typings/octopus'
-import type { TestComponents, Component } from '../../shared/services/asset-reader'
+import type { Component, TestComponents } from './asset-reader'
+import type { Fail } from './test-runner'
 
-type ComponentGroup = {
+export type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null
   generated: Octopus['OctopusComponent']
 }
 
-type ConvertedDesign = {
+export type ConvertedDesign = {
   assetId: string
   components: ComponentGroup[]
   manifest: { expected: Component<Manifest['OctopusManifest']> | null; generated?: Manifest['OctopusManifest'] }
@@ -36,18 +33,12 @@ type MapComponentsOptions = {
   generated: Octopus['OctopusComponent'][]
 }
 
-export type Fail = { name: string; json: string; diff: string }
-
-export class Tester {
-  private _testComponents: TestComponents[]
-  private _octopusConverter: OctopusFigConverter
-
-  constructor(testComponents: TestComponents[]) {
-    this._testComponents = testComponents
-    this._octopusConverter = createConverter()
+export class BaseTestComparer {
+  protected async _getDesigns(_testComponents: TestComponents[]): Promise<ConvertedDesign[]> {
+    return await Promise.all([]) // TODO NEED TO BE fixed in non base classes
   }
 
-  private _mapComponents({ expected, generated }: MapComponentsOptions): ComponentGroup[] {
+  protected _mapComponents({ expected, generated }: MapComponentsOptions): ComponentGroup[] {
     return generated.map((generatedComponent) => {
       return {
         generated: generatedComponent,
@@ -60,35 +51,7 @@ export class Tester {
     })
   }
 
-  private async _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign[]> {
-    return await Promise.all(
-      testComponentsArray.map(
-        async ({ components: componentExpected, manifest: manifestExpected, sourceDataPath, assetId }) => {
-          const designEmitter = new DesignEmitterMock(sourceDataPath)
-
-          const result = await this._octopusConverter.convertDesign({ designEmitter })
-          const { components: componentsGenerated, manifest: manifestGenerated } = result ?? {}
-
-          const componentsGenValues = (componentsGenerated ?? [])
-            .map((conversionResult) => conversionResult.value)
-            .filter((component): component is Octopus['OctopusComponent'] => Boolean(component))
-
-          const components: ConvertedDesign['components'] = this._mapComponents({
-            expected: componentExpected,
-            generated: componentsGenValues,
-          })
-          const manifest: ConvertedDesign['manifest'] = {
-            expected: manifestExpected,
-            generated: cleanManifest(manifestGenerated),
-          }
-
-          return { assetId, components, manifest }
-        }
-      )
-    )
-  }
-
-  private _compareComponents({ components, differ, assetId }: CompareComponentsOptions): Promise<Fail[]> {
+  protected _compareComponents({ components, differ, assetId }: CompareComponentsOptions): Promise<Fail[]> {
     const failedComponents = components.reduce<Promise<Fail[]>>(async (failedComponents, componentGroup) => {
       const { generated, expected } = componentGroup
       const expectedComponent = await expected?.read()
@@ -112,7 +75,7 @@ export class Tester {
     return failedComponents
   }
 
-  private _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
+  protected _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
     const differ = jsondiffpatch.create({
       propertyFilter: (name: string) => {
         return name === 'version' ? false : true // ignore version
@@ -145,8 +108,9 @@ export class Tester {
     return failed
   }
 
-  async test(): Promise<Fail[]> {
-    const designs = await this._getDesigns(this._testComponents)
+  async test(_testComponents: TestComponents[]): Promise<Fail[]> {
+    // TODO HERE
+    const designs = await this._getDesigns([])
     return this._compare(designs)
   }
 }

@@ -133,10 +133,11 @@ export class AssetUpdater {
     console.info(`Asset '${selectedAsset}' updated: ${eventDataPath}\n`)
   }
 
-  async update() {
+  async update(): Promise<number> {
     // if specified update only that asset
     if (this._selectedAsset) {
-      return this._updateAsset(this._selectedAsset)
+      await this._updateAsset(this._selectedAsset)
+      return 1
     }
 
     // otherwise update all assets
@@ -144,5 +145,7 @@ export class AssetUpdater {
     for (const asset of assets) {
       await this._updateAsset(asset.name)
     }
+
+    return assets.length
   }
 }
