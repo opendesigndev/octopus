@@ -2,6 +2,7 @@ import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/a
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
+import PROPS from '../../utils/prop-names.js'
 import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
@@ -53,7 +54,7 @@ export class SourceComponent extends SourceEntity {
   }
 
   get bounds(): SourceBounds {
-    const artboardRect = this._rawValue.layerProperties?.artb?.artboardRect
+    const artboardRect = this._rawValue.layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardRect
 
     if (artboardRect) {
       return getBoundsFor(artboardRect)
@@ -84,7 +85,7 @@ export class SourceComponent extends SourceEntity {
   }
 
   get isArtboard(): boolean {
-    return Boolean(this._rawValue?.layerProperties?.artb)
+    return Boolean(this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA])
   }
 
   get artboardColor(): SourceColor | null {
@@ -92,11 +93,11 @@ export class SourceComponent extends SourceEntity {
   }
 
   get artboardBackgroundType(): number | undefined {
-    return this._rawValue?.layerProperties?.artb?.artboardBackgroundType
+    return this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardBackgroundType
   }
 
   get rawArtboardColor(): RawColor | undefined {
-    return this._rawValue?.layerProperties?.artb?.Clr
+    return this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.Clr
   }
 
   get globalLightAngle(): number {

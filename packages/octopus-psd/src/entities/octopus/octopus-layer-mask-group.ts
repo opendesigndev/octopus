@@ -2,6 +2,7 @@ import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 import { convertColor, convertRectangle } from '../../utils/convert.js'
+import PROPS from '../../utils/prop-names.js'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter.js'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
@@ -135,7 +136,10 @@ export class OctopusLayerMaskGroup {
     const raw: RawLayerShape = {
       addedType: 'shapeLayer',
       isHidden: true,
-      layerProperties: { vmsk: path.vectorMaskSetting, vogk: path.vectorOriginationData },
+      layerProperties: {
+        [PROPS.VECTOR_MASK_SETTING1]: path.vectorMaskSetting,
+        [PROPS.VECTOR_ORIGINATION_DATA]: path.vectorOriginationData,
+      },
     }
 
     const maskSourceLayer = createSourceLayer({

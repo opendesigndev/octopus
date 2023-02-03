@@ -2,6 +2,7 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import { DEFAULTS } from '../../utils/defaults.js'
+import PROPS from '../../utils/prop-names.js'
 import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 import { SourceLayerEffects } from './source-effects-layer.js'
@@ -70,15 +71,15 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get artboardBackgroundType(): number | undefined {
-    return this._layerProperties?.artb?.artboardBackgroundType
+    return this._layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardBackgroundType
   }
 
   get rawArtboardColor(): RawColor | undefined {
-    return this._layerProperties?.artb?.Clr
+    return this._layerProperties?.[PROPS.ARTBOARD_DATA]?.Clr
   }
 
   get isArtboard(): boolean {
-    return Boolean(this._rawValue.layerProperties?.artb)
+    return Boolean(this._rawValue.layerProperties?.[PROPS.ARTBOARD_DATA])
   }
 
   get visible(): boolean {
@@ -90,7 +91,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   private get _rawArtboardBounds(): RawBounds | undefined {
-    return this._layerProperties?.artb?.artboardRect
+    return this._layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardRect
   }
 
   get opacity(): number {
@@ -104,8 +105,8 @@ export class SourceLayerCommon extends SourceEntity {
 
   get blendMode(): string | undefined {
     return (
-      this._rawValue.layerProperties?.lsct?.blendMode ??
-      this._rawValue.layerProperties?.lsdk?.blendMode ??
+      this._rawValue.layerProperties?.[PROPS.SECTION_DIVIDER_SETTING]?.blendMode ??
+      this._rawValue.layerProperties?.[PROPS.NESTED_SECTION_DIVIDER_SETTING]?.blendMode ??
       this._rawValue.blendMode
     )
   }
@@ -170,7 +171,10 @@ export class SourceLayerCommon extends SourceEntity {
 
   @firstCallMemo()
   get path(): SourcePath | undefined {
-    const vectorMaskSetting = this._rawValue?.layerProperties?.vmsk ?? this._rawValue?.layerProperties?.vsms
+    const vectorMaskSetting =
+      this._rawValue?.layerProperties?.[PROPS.VECTOR_MASK_SETTING1] ??
+      this._rawValue?.layerProperties?.[PROPS.VECTOR_MASK_SETTING2]
+
     if (vectorMaskSetting)
       return new SourcePath({
         vectorOriginationData: this._rawValue.layerProperties?.vogk,

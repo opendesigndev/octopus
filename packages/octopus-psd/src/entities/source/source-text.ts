@@ -1,6 +1,7 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
 import { getFontProperties } from '../../utils/text.js'
 import { SourceEntity } from './source-entity.js'
@@ -31,7 +32,7 @@ export class SourceText extends SourceEntity {
 
     this._rawValue = rawValue
     this._engineData = rawValue.textProperties
-    this._textProps = rawValue.layerProperties?.TySh
+    this._textProps = rawValue.layerProperties?.[PROPS.TYPE_TOOL_OBJECT_SETTING]
   }
 
   get textKey(): string {

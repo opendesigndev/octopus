@@ -1,3 +1,4 @@
+import PROPS from '../../utils/prop-names.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
 import type { RawLayerLayer } from '../../typings/raw'
@@ -14,6 +15,9 @@ export class SourceLayerLayer extends SourceLayerCommon {
   }
 
   get smartObject(): Record<string, unknown> | undefined {
-    return this._rawValue.layerProperties?.SoLd ?? this._rawValue.layerProperties?.SoLE
+    return (
+      this._rawValue.layerProperties?.[PROPS.PLACED_LAYER_DATA] ??
+      this._rawValue.layerProperties?.[PROPS.SMART_OBJECT_PLACED_LAYER_DATA]
+    )
   }
 }

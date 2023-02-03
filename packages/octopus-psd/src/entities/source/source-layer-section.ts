@@ -2,6 +2,7 @@ import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
+import PROPS from '../../utils/prop-names.js'
 import { getBoundsFor } from '../../utils/source.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
@@ -36,7 +37,7 @@ export class SourceLayerSection extends SourceLayerCommon {
   }
 
   get bounds(): SourceBounds {
-    const artboardRect = this._rawValue?.layerProperties?.artb?.artboardRect
+    const artboardRect = this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardRect
 
     return artboardRect ? getBoundsFor(artboardRect) : this._parent.bounds
   }

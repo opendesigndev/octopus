@@ -3,6 +3,7 @@ import { AliKey } from '@webtoon/psd-ts'
 import intersection from 'lodash/intersection.js'
 
 import { PSDFileReader } from '../services/readers/psd-file-reader.js'
+import PROPS from './prop-names.js'
 
 import type {
   RawMatrix,
@@ -81,7 +82,7 @@ export function getAdditionalProperty(
 }
 
 export function getLayerTypeKey(layerProperties: LayerProperties | undefined): string | undefined {
-  const layerTypeProp = layerProperties?.lnsr
+  const layerTypeProp = layerProperties?.[PROPS.LAYER_NAME_SOURCE_SETTING]
 
   if (!layerTypeProp) {
     return
