@@ -1,10 +1,6 @@
 {
   "name": "@opendesign/octopus-psd",
-<<<<<<< HEAD
   "version": "3.0.0-webtoon-20230202",
-=======
-  "version": "3.0.0-rc.9",
->>>>>>> main
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "type": "module",
@@ -25,9 +21,9 @@
   },
   "dependencies": {
     "@opendesign/image-icc-profile-converter": "^0.0.0-experimental",
-    "@opendesign/manifest-ts": "3.0.0-alpha.38",
+    "@opendesign/manifest-ts": "3.0.1",
     "@opendesign/octopus-common": "3.0.0-rc.28",
-    "@opendesign/octopus-ts": "3.0.0-alpha.38",
+    "@opendesign/octopus-ts": "3.0.1",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/rimraf": "^3.0.2",

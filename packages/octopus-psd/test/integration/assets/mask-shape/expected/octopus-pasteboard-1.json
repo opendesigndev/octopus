@@ -1,12 +1,7 @@
 {
   "id": "pasteboard-1",
-<<<<<<< HEAD
-  "type": "ARTBOARD",
-  "version": "3.0.0-webtoon-20230131",
-=======
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.9",
->>>>>>> main
+  "version": "3.0.0-webtoon-20230202",
   "dimensions": {
     "width": 914,
     "height": 914
@@ -39,11 +34,7 @@
         "type": "MASK_GROUP",
         "maskBasis": "BODY",
         "mask": {
-<<<<<<< HEAD
-          "id": "0a43afb2-8094-44da-af7b-9cd6685c5ac1",
-=======
-          "id": "bfc4c5cc-667e-4285-aaff-f89bc2da960d",
->>>>>>> main
+          "id": "42672b62-331f-4ff9-a73b-28e6859eebd5",
           "name": "Layer",
           "type": "SHAPE",
           "transform": [
