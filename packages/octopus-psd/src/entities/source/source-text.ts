@@ -54,6 +54,7 @@ export class SourceText extends SourceEntity {
     return getMatrixFor(matrix)
   }
 
+  // @TODO: remove infinity in future as such code can introduce infinite loops
   private _getTextStyleFromTo(): TextStyleFromTo[] {
     const edges = this._getParagraphStyleRange().map(({ to }) => to)
 
