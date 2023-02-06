@@ -11,6 +11,7 @@ import { SourcePath } from './source-path.js'
 
 import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
 import type { SourceDocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
+import type BLEND_MODES from '../../utils/blend-modes.js'
 import type { SourceLayerSection } from './source-layer-section'
 import type { MaskData, RealMaskData } from '@webtoon/psd-ts/dist/sections/index.js'
 
@@ -103,7 +104,7 @@ export class SourceLayerCommon extends SourceEntity {
     return round((rawOpacity ?? SourceLayerCommon.OPACITY_DEFAULT_VALUE) / DEFAULTS.RGB_COLOR_MAX_VALUE)
   }
 
-  get blendMode(): string | undefined {
+  get blendMode(): keyof typeof BLEND_MODES | undefined {
     return (
       this._rawValue.layerProperties?.[PROPS.SECTION_DIVIDER_SETTING]?.blendMode ??
       this._rawValue.layerProperties?.[PROPS.NESTED_SECTION_DIVIDER_SETTING]?.blendMode ??

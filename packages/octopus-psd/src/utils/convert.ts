@@ -2,6 +2,7 @@ import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { UnitFloatType } from '@webtoon/psd-ts'
 
+import BLEND_MODES from './blend-modes.js'
 import { DEFAULTS } from './defaults.js'
 
 import type { Octopus } from '../typings/octopus'
@@ -9,7 +10,6 @@ import type { RawOffset } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceVectorXY } from '../typings/source'
 
 export function convertBlendMode(blendMode?: string): Octopus['BlendMode'] {
-  const BLEND_MODES = DEFAULTS.BLEND_MODES
   return typeof blendMode === 'string' && blendMode in BLEND_MODES
     ? BLEND_MODES[blendMode as keyof typeof BLEND_MODES]
     : DEFAULTS.BLEND_MODE
