@@ -80,8 +80,13 @@ export class OctopusManifest {
     this._exports.artboards.set(id, artboard)
   }
 
-  get manifestVersion(): string {
-    return this._octopusXdConverter.pkg.version
+  get version(): string {
+    return this._octopusXdConverter.pkg.manifestSpecVersion
+  }
+
+  get meta(): Manifest['OctopusManifestMeta'] {
+    const converterVersion = this._octopusXdConverter.pkg.version
+    return { converterVersion }
   }
 
   get xdVersion(): string {
@@ -215,12 +220,13 @@ export class OctopusManifest {
   /** @TODO guard with official types */
   async convert(): Promise<Manifest['OctopusManifest']> {
     return {
-      version: await this.manifestVersion,
+      version: this.version,
       origin: {
         name: 'XD',
         version: this.xdVersion,
       },
       name: this.name,
+      meta: this.meta,
       pages: [],
       components: this.components,
       chunks: [],
