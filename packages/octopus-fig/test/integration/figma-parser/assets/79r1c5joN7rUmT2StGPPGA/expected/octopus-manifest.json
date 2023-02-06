@@ -1,10 +1,13 @@
 {
-  "version": "3.0.0-rc.22",
+  "version": "3.0.1",
   "origin": {
     "name": "FIGMA",
     "version": "0"
   },
   "name": "Simple Shapes",
+  "meta": {
+    "converterVersion": "3.0.0-rc.28"
+  },
   "pages": [
     {
       "id": "0-1",
