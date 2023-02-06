@@ -117,7 +117,7 @@ export class OctopusManifest {
 
     return runArray
       .map(({ StyleSheet }) => {
-        return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontName
+        return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontPostScriptName
       })
       .filter((fontName): fontName is string => typeof fontName === 'string')
   }
