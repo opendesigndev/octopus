@@ -5,8 +5,8 @@ import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient.js'
 
-import type { RawFillPattern, RawFill, RawOffset } from '../../typings/raw'
-import type { SourceColor, SourceGradientType } from '../../typings/source'
+import type { RawFillPattern, RawFill, RawOffset, RawGradientType } from '../../typings/raw'
+import type { SourceColor } from '../../typings/source'
 
 export class SourceEffectFill extends SourceEffectBase {
   protected _enabled: boolean | undefined
@@ -43,8 +43,8 @@ export class SourceEffectFill extends SourceEffectBase {
     return this._rawValue?.Angl ?? 0
   }
 
-  get type(): SourceGradientType | undefined {
-    return this._rawValue?.Type?.trim() as SourceGradientType | undefined
+  get type(): RawGradientType | undefined {
+    return this._rawValue?.Type?.trim() as RawGradientType | undefined
   }
 
   get pattern(): RawFillPattern | undefined {

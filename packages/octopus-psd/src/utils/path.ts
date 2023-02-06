@@ -3,9 +3,13 @@ import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { DEFAULTS } from './defaults.js'
 
 import type { RawPathData, RawBezierKnot, RawPathRecord, RawPointCoordinate } from '../typings/raw/layer-shape.js'
-import type { RawSubpathPoint, RawVectorOriginationDatakeyDescriptor } from '../typings/raw/path-component.js'
+import type {
+  RawSourceSubpath,
+  RawSubpathPoint,
+  RawVectorOriginationDatakeyDescriptor,
+} from '../typings/raw/path-component.js'
 import type { RawBounds } from '../typings/raw/shared.js'
-import type { RawSourcePathComponent, RawSourceSubpath, DocumentDimensions } from '../typings/source.js'
+import type { SourceSourcePathComponent, SourceDocumentDimensions } from '../typings/source.js'
 
 type Point = { x?: number; y?: number }
 
@@ -61,14 +65,14 @@ export function mergeBounds(boundsArr: RawBounds[]): RawBounds {
   )
 }
 
-export function parsePointCoordinate({ vert, horiz }: RawPointCoordinate, { width, height }: DocumentDimensions) {
+export function parsePointCoordinate({ vert, horiz }: RawPointCoordinate, { width, height }: SourceDocumentDimensions) {
   return {
     x: (horiz ?? 0) * width,
     y: (vert ?? 0) * height,
   }
 }
 
-export function parseBezierKnot(knot: RawBezierKnot, documentDimensions: DocumentDimensions): RawSubpathPoint {
+export function parseBezierKnot(knot: RawBezierKnot, documentDimensions: SourceDocumentDimensions): RawSubpathPoint {
   return {
     ...(knot.anchor ? { anchor: parsePointCoordinate(knot.anchor, documentDimensions) } : null),
     ...(knot.preceding ? { backward: parsePointCoordinate(knot.preceding, documentDimensions) } : null),
@@ -127,7 +131,7 @@ function distributePathRecordsToComponentChunks(pathData: RawPathData[]): RawPat
   }, [])
 }
 
-function createSubpathListKey(pathData: RawPathData[], bounds: DocumentDimensions): RawSourceSubpath[] {
+function createSubpathListKey(pathData: RawPathData[], bounds: SourceDocumentDimensions): RawSourceSubpath[] {
   return pathData.reduce<RawSourceSubpath[]>((subpathArr, pathOrRecord) => {
     const lastSubpath = subpathArr[subpathArr.length - 1]
 
@@ -150,8 +154,8 @@ function createSubpathListKey(pathData: RawPathData[], bounds: DocumentDimension
 export function createSourcePathComponents(
   pathData: RawPathData[],
   originationArray: RawVectorOriginationDatakeyDescriptor[],
-  bounds: DocumentDimensions
-): RawSourcePathComponent[] {
+  bounds: SourceDocumentDimensions
+): SourceSourcePathComponent[] {
   const componentChunks = distributePathRecordsToComponentChunks(pathData)
   return componentChunks.map((componentChunk, idx) => {
     return {

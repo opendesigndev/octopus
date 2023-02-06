@@ -7,7 +7,7 @@ import { SourcePath } from './source-path.js'
 import { SourceStroke } from './source-stroke.js'
 
 import type { RawLayerShape } from '../../typings/raw'
-import type { DocumentDimensions, SourceBounds } from '../../typings/source'
+import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourcePathComponent } from './source-path-component'
 
@@ -38,7 +38,7 @@ export class SourceLayerShape extends SourceLayerCommon {
     return this.path.pathComponents
   }
 
-  get documentDimensions(): DocumentDimensions {
+  get documentDimensions(): SourceDocumentDimensions {
     return { width: this._parent.documentWidth, height: this._parent.documentHeight }
   }
 

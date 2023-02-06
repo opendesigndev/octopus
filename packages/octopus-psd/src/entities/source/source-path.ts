@@ -7,17 +7,17 @@ import { SourceEntity } from './source-entity.js'
 import { SourcePathComponent } from './source-path-component.js'
 
 import type { RawBounds, RawVectorMaskSetting, RawVectorOriginationData } from '../../typings/raw'
-import type { DocumentDimensions, SourceBounds } from '../../typings/source'
+import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source'
 
 type SourcePathOptions = {
   vectorOriginationData: RawVectorOriginationData | undefined
   vectorMaskSetting: RawVectorMaskSetting | undefined
-  documentDimensions: DocumentDimensions
+  documentDimensions: SourceDocumentDimensions
 }
 export class SourcePath extends SourceEntity {
   private _vectorOriginationData: RawVectorOriginationData | undefined
   private _vectorMaskSetting: RawVectorMaskSetting | undefined
-  private _documentDimensions: DocumentDimensions
+  private _documentDimensions: SourceDocumentDimensions
 
   constructor(options: SourcePathOptions) {
     super(options.vectorMaskSetting)
@@ -46,7 +46,7 @@ export class SourcePath extends SourceEntity {
     return componentsPsd.map((component) => new SourcePathComponent(component))
   }
 
-  get documentDimensions(): DocumentDimensions {
+  get documentDimensions(): SourceDocumentDimensions {
     return this._documentDimensions
   }
 

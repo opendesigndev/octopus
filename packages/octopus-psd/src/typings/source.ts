@@ -1,13 +1,4 @@
-import type {
-  RawCombineOperation,
-  RawGradientType,
-  RawSubpathPoint,
-  RawVectorOriginationDatakeyDescriptor,
-} from './raw'
-
-export type SourceCombineOperation = RawCombineOperation
-
-export type SourceGradientType = RawGradientType
+import type { RawSourceSubpath, RawVectorOriginationDatakeyDescriptor } from './raw'
 
 export type SourcePointXY = { x: number; y: number }
 export type SourceVectorXY = { x: number; y: number }
@@ -45,18 +36,13 @@ export type SourceMatrix = {
 
 export type SourceAlign = 'left' | 'right' | 'center' | 'justifyLeft' | 'justifyRight' | 'justifyCenter' | 'justifyAll'
 
-export type RawSourcePathComponent = Partial<{
+export type SourceSourcePathComponent = Partial<{
   origin: RawVectorOriginationDatakeyDescriptor
   shapeOperation: number
   subpathListKey: RawSourceSubpath[]
 }>
 
-export type RawSourceSubpath = {
-  points: RawSubpathPoint[]
-  closedSubpath: number | undefined
-}
-
-export type DocumentDimensions = {
+export type SourceDocumentDimensions = {
   width: number
   height: number
 }

@@ -25,3 +25,8 @@ export type RawVectorOriginationDatakeyDescriptor = Partial<{
   keyOriginIndex: number
   keyOriginRRectRadii: RawRadiiCorners
 }>
+
+export type RawSourceSubpath = {
+  points: RawSubpathPoint[]
+  closedSubpath: number | undefined
+}

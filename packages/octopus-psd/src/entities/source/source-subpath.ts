@@ -4,7 +4,7 @@ import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { SourceEntity } from './source-entity.js'
 import { SourceSubpathPoint } from './source-subpath-point.js'
 
-import type { RawSourceSubpath } from '../../typings/source.js'
+import type { RawSourceSubpath } from '../../typings/raw/path-component.js'
 
 export class SourceSubpath extends SourceEntity {
   protected _rawValue: RawSourceSubpath

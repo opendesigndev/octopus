@@ -10,7 +10,7 @@ import { SourceEntity } from './source-entity.js'
 import { SourcePath } from './source-path.js'
 
 import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
-import type { DocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceDocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerSection } from './source-layer-section'
 import type { MaskData, RealMaskData } from '@webtoon/psd-ts/dist/sections/index.js'
 
@@ -162,7 +162,7 @@ export class SourceLayerCommon extends SourceEntity {
     return this._parent.documentHeight
   }
 
-  get documentDimensions(): DocumentDimensions {
+  get documentDimensions(): SourceDocumentDimensions {
     return {
       width: this.documentWidth,
       height: this.documentHeight,
