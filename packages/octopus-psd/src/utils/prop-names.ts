@@ -13,6 +13,16 @@ const PROP_NAMES = {
   SMART_OBJECT_PLACED_LAYER_DATA: 'SoLE',
   VECTOR_STROKE_DATA: 'vstk',
   ARTBOARD_DATA: 'artb',
+  SOLID_FILL: 'SoFi',
+  OBJECT_BASED_EFFECTS_LAYER_INFO: 'lfx2',
+  GRADIENT_FILL: 'GrFl',
+  INNER_SHADOW: 'IrSh',
+  INNER_GLOW: 'IrGl',
+  OUTER_GLOW: 'OrGl',
+  FRAME_FX: 'FrFX',
+  CHROME_FX: 'ChFX',
+  BEVEL_EMBOSS: 'ebbl',
+  DROP_SHADOW: 'DrSh',
 } as const
 
 export default PROP_NAMES

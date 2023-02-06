@@ -105,11 +105,13 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get blendMode(): keyof typeof BLEND_MODES | undefined {
-    return (
+    const layerPropBlendMode =
       this._rawValue.layerProperties?.[PROPS.SECTION_DIVIDER_SETTING]?.blendMode ??
-      this._rawValue.layerProperties?.[PROPS.NESTED_SECTION_DIVIDER_SETTING]?.blendMode ??
-      this._rawValue.blendMode
-    )
+      this._rawValue.layerProperties?.[PROPS.NESTED_SECTION_DIVIDER_SETTING]?.blendMode
+
+    const layerBlendMode = this._rawValue.blendMode
+
+    return (layerPropBlendMode ?? layerBlendMode) as keyof typeof BLEND_MODES | undefined
   }
 
   get clipped(): boolean {

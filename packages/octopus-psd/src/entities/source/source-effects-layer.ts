@@ -1,5 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 import { SourceEffectSatin } from './source-effect-satin.js'
@@ -17,71 +18,77 @@ export class SourceLayerEffects extends SourceEntity {
     this._rawValue = raw
   }
 
-  private get _lfx2(): RawlayerEffects | undefined {
-    return this._rawValue?.layerProperties?.lfx2
+  private get objectBasedEffectsLayerInfo(): RawlayerEffects | undefined {
+    return this._rawValue?.layerProperties?.[PROPS.OBJECT_BASED_EFFECTS_LAYER_INFO]
   }
 
   get enabledAll(): boolean {
-    return this._lfx2?.masterFXSwitch ?? false
+    return this.objectBasedEffectsLayerInfo?.masterFXSwitch ?? false
   }
 
   @firstCallMemo()
   get solidFill(): SourceEffectFill | undefined {
-    const fill = this._lfx2?.SoFi
-    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.SoFi) : undefined
+    const fill = this.objectBasedEffectsLayerInfo?.SoFi
+    return fill && fill.present !== false
+      ? new SourceEffectFill(this.objectBasedEffectsLayerInfo?.[PROPS.SOLID_FILL])
+      : undefined
   }
 
   @firstCallMemo()
   get gradientFill(): SourceEffectFill | undefined {
-    const fill = this._lfx2?.GrFl
-    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.GrFl) : undefined
+    const fill = this.objectBasedEffectsLayerInfo?.GrFl
+    return fill && fill.present !== false
+      ? new SourceEffectFill(this.objectBasedEffectsLayerInfo?.[PROPS.GRADIENT_FILL])
+      : undefined
   }
 
   @firstCallMemo()
   get patternFill(): SourceEffectFill | undefined {
-    const fill = this._lfx2?.patternFill
-    return fill && fill.present !== false ? new SourceEffectFill(this._lfx2?.patternFill) : undefined
+    const fill = this.objectBasedEffectsLayerInfo?.patternFill
+    return fill && fill.present !== false
+      ? new SourceEffectFill(this.objectBasedEffectsLayerInfo?.patternFill)
+      : undefined
   }
 
   @firstCallMemo()
   get stroke(): SourceEffectStroke | undefined {
-    const fill = this._lfx2?.FrFX
+    const fill = this.objectBasedEffectsLayerInfo?.[PROPS.FRAME_FX]
     return fill && fill.present !== false ? new SourceEffectStroke(fill) : undefined
   }
 
   @firstCallMemo()
   get innerGlow(): SourceEffectShadow | undefined {
-    const shadow = this._lfx2?.IrGl
+    const shadow = this.objectBasedEffectsLayerInfo?.[PROPS.INNER_GLOW]
     return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get innerShadow(): SourceEffectShadow | undefined {
-    const shadow = this._lfx2?.IrSh
+    const shadow = this.objectBasedEffectsLayerInfo?.[PROPS.INNER_SHADOW]
     return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get outerGlow(): SourceEffectShadow | undefined {
-    const shadow = this._lfx2?.OrGl
+    const shadow = this.objectBasedEffectsLayerInfo?.[PROPS.OUTER_GLOW]
     return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get dropShadow(): SourceEffectShadow | undefined {
-    const shadow = this._lfx2?.DrSh
+    const shadow = this.objectBasedEffectsLayerInfo?.[PROPS.DROP_SHADOW]
     return shadow && shadow.present !== false ? new SourceEffectShadow(shadow) : undefined
   }
 
   @firstCallMemo()
   get satin(): SourceEffectSatin | undefined {
-    const satin = this._lfx2?.ChFX
-    return satin && satin.present !== false ? new SourceEffectSatin(this._lfx2?.ChFX) : undefined
+    const satin = this.objectBasedEffectsLayerInfo?.[PROPS.CHROME_FX]
+    return satin && satin.present !== false ? new SourceEffectSatin(satin) : undefined
   }
 
   @firstCallMemo()
   get bevelEmboss(): SourceEffectBevelEmboss | undefined {
-    const bevelEmboss = this._lfx2?.ebbl
+    const bevelEmboss = this.objectBasedEffectsLayerInfo?.[PROPS.BEVEL_EMBOSS]
 
     return bevelEmboss !== undefined && bevelEmboss.present != false
       ? new SourceEffectBevelEmboss(bevelEmboss)
