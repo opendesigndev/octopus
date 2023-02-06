@@ -119,7 +119,7 @@ export class OctopusManifest {
       .map(({ StyleSheet }) => {
         return getFontProperties(fontSet, StyleSheet?.StyleSheetData).fontName
       })
-      .filter((fontName): fontName is string => Boolean(fontName))
+      .filter((fontName): fontName is string => typeof fontName === 'string')
   }
 
   private _getComponentAssetsFonts(
