@@ -1,0 +1,4702 @@
+{
+  "id": "73-3",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 5000,
+    "height": 5000
+  },
+  "content": {
+    "id": "73-3-Background",
+    "name": "gradients",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "73-3-BackgroundMask",
+      "name": "gradients",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 5000,
+            "y0": 0,
+            "y1": 5000
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.5292,
+              "g": 0.5292,
+              "b": 0.5292,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "73-4",
+        "name": "Linear 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  9.034894787873782e-8,
+                  139.00000654518638,
+                  -69.50000327259318,
+                  4.5174658680480206e-8,
+                  200.00000009099895,
+                  139.99999489897337
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-5",
+        "name": "Linear 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          550,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  91.49999103094075,
+                  89.99999679121544,
+                  -50.6245750178027,
+                  51.46830624504088,
+                  200.00001996002834,
+                  200.00000152558533
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-6",
+        "name": "Linear 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1050,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  199.9999761581442,
+                  99.99999552965228,
+                  50.000005215406276,
+                  -100.00000298023244,
+                  200.0000029802319,
+                  100.00000149011605
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-7",
+        "name": "Linear 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1550,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -29.99999031820289,
+                  -80.50000437315964,
+                  45.280869546395024,
+                  -16.87484856434827,
+                  321.50001643306035,
+                  370.5000264446646
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-8",
+        "name": "Linear 5",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2050,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "position": 0.6690397262573242
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  91.49999103094075,
+                  89.99999679121544,
+                  -50.6245750178027,
+                  51.46830624504088,
+                  200.00001996002834,
+                  200.00000152558533
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-9",
+        "name": "Linear 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2550,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  245.99998745313235,
+                  218.50001002845545,
+                  -122.90523367889094,
+                  138.3738246616116,
+                  -198.50002103136214,
+                  613.5000065868077
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-10",
+        "name": "Linear 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3050,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  1.3322676295501878e-13,
+                  -400,
+                  224.9981124112414,
+                  0.000025735368978985207,
+                  -8.881784197001252e-14,
+                  399.99999999999994
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-11",
+        "name": "Linear 8",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3550,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 200,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -140.99997435146543,
+                  99.50007229413768,
+                  -185.32450130650068,
+                  -262.62042023513334,
+                  641.4999569600162,
+                  874.4999381613102
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-12",
+        "name": "Linear 9",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          4050,
+          50
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  199.9999687076766,
+                  199.99999552953574,
+                  -112.49905788211102,
+                  112.49902435478708,
+                  200.00001937139632,
+                  199.9999925495356
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "73-13",
+        "name": "Linear 10",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.9848077297210693,
+          -0.1736481785774231,
+          0.1736481785774231,
+          0.9848077297210693,
+          4518.30859375,
+          87.76808166503906
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.3504323959350586
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.421875
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.4861266613006592
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  812.0000202895274,
+                  813.0000021199724,
+                  -457.3087004923973,
+                  456.7461000463452,
+                  -122.00003311754686,
+                  -123.49997097661225
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "75-14",
+        "name": "Radial 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000002836839570363736,
+                  199.99999999999994,
+                  -199.99999999999994,
+                  0.000002836839570363736,
+                  200.00000283683943,
+                  199.99999234361474
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-2",
+        "name": "Radial 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          550,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 200,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000001418419785181868,
+                  199.99999999999994,
+                  -99.99999999999997,
+                  0.000002836839570363736,
+                  100.00000141841971,
+                  199.99999234361474
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-3",
+        "name": "Radial 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1050,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            },
+            "cornerRadius": 200
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000002836839570363736,
+                  199.99999999999994,
+                  -199.99999999999994,
+                  0.000002836839570363736,
+                  200.00000283683943,
+                  199.99999234361474
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-4",
+        "name": "Radial 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1550,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.000017881390590446244,
+                  399.99995231628907,
+                  -399.99995231628907,
+                  -0.000017881390590446244,
+                  399.99995231628907,
+                  0.000017881390590446244
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-5",
+        "name": "Radial 5",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2050,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.49598929286003113
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.7997127771377563
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  531.0000131342362,
+                  566.4999674299961,
+                  -76.01248461609717,
+                  71.24913518802154,
+                  -191.49999102234315,
+                  -212.999979117075
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-6",
+        "name": "Radial 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2550,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5004716515541077
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.6152688264846802
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  2.5579538487363607e-13,
+                  640.500024146811,
+                  -391.17974136117004,
+                  -8.526512829121202e-14,
+                  200.0000233161296,
+                  75.49999646864825
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-7",
+        "name": "Radial 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.8660253882408142,
+          -0.5,
+          0.5,
+          0.8660253882408142,
+          2976.794921875,
+          676.794921875
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -188.499988135156,
+                  195.4999908595909,
+                  -390.99998171918173,
+                  -94.24999406757799,
+                  388.4999736735798,
+                  4.5000092447172735
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-8",
+        "name": "Radial 8",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          6.123233601181349e-17,
+          1,
+          -1,
+          6.123233601181349e-17,
+          3950,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.6041666865348816
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.9997999668121338
+                  },
+                  {
+                    "color": {
+                      "r": 0.3061,
+                      "g": 0.8901,
+                      "b": 0.3996,
+                      "a": 1
+                    },
+                    "position": 0.9998999834060669
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -199.99999999999966,
+                  -0.000007656386173948704,
+                  0.000015312736991290876,
+                  -400.0000238418589,
+                  400.0000323709783,
+                  400.00003915463304
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-9",
+        "name": "Radial 9",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          4050,
+          550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 900,
+              "y0": 0,
+              "y1": 300
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000006382889012002124,
+                  149.99999999999997,
+                  -449.9999999999999,
+                  0.0000021276296706673747,
+                  450.0000063828887,
+                  149.99999425771105
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-11",
+        "name": "Angular 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            },
+            "cornerRadius": 200
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000002836839570363736,
+                  199.99999999999994,
+                  -199.99999999999994,
+                  0.000002836839570363736,
+                  200.00000283683943,
+                  199.99999234361474
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-13",
+        "name": "Angular 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          550,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.2645342857142857,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.375
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.6302083134651184
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.828125
+                  },
+                  {
+                    "color": {
+                      "r": 0.2645342857142857,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.0000028368392577249324,
+                  194.4999998840689,
+                  -194.49999988406893,
+                  -0.0000028368392577249324,
+                  199.9999970829419,
+                  199.99998444054975
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "92-17",
+        "name": "Angular 8",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          150,
+          2443
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 800,
+              "y0": 0,
+              "y1": 800
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.5
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.000005673678515449865,
+                  388.9999997681378,
+                  -388.99999976813785,
+                  -0.000005673678515449865,
+                  399.9999941658838,
+                  399.9999688810995
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "92-19",
+        "name": "Angular 10",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          150,
+          4125
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 800,
+              "y0": 0,
+              "y1": 800
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.2474226755472031,
+                      "g": 0.2474226755472031,
+                      "b": 0.2474226755472031,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.3802083432674408
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.875
+                  },
+                  {
+                    "color": {
+                      "r": 0.2474226755472031,
+                      "g": 0.2474226755472031,
+                      "b": 0.2474226755472031,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.000005673678515449865,
+                  388.9999997681378,
+                  -388.99999976813785,
+                  -0.000005673678515449865,
+                  399.9999941658838,
+                  399.9999688810995
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "93-2",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1050,
+          2491
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 486
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "MULTIPLY",
+              "color": {
+                "r": 0.1248,
+                "g": 0,
+                "b": 0.8917,
+                "a": 0.5
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "93-3",
+        "name": "Rectangle 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1045,
+          3057
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 405,
+              "y0": 0,
+              "y1": 513
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0.9
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0,
+                  512.9999999999999,
+                  -202.5,
+                  1.5706095884404778e-14,
+                  202.5,
+                  -1.5706095884404778e-14
+                ]
+              }
+            },
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 1,
+                      "b": 0.1,
+                      "a": 0.6
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0,
+                  256.49999999999994,
+                  -202.5,
+                  5.684341886080802e-14,
+                  202.5,
+                  256.49999999999994
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "93-4",
+        "name": "Rectangle 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1045,
+          3620
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 405,
+              "y0": 0,
+              "y1": 505
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
+                }
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  405,
+                  0,
+                  0,
+                  505,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 0.7
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "93-5",
+        "name": "Rectangle 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1045,
+          4186
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 405,
+              "y0": 0,
+              "y1": 491
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 1,
+                "g": 0.96,
+                "b": 0,
+                "a": 1
+              }
+            },
+            {
+              "type": "COLOR",
+              "visible": false,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 1,
+                "g": 0,
+                "b": 0,
+                "a": 0.99
+              }
+            },
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0.9
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0,
+                  490.99999999999994,
+                  -202.5,
+                  1.5032540115482935e-14,
+                  202.5,
+                  -1.5032540115482935e-14
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "92-18",
+        "name": "Angular 9",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          150,
+          3284
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 800,
+              "y0": 0,
+              "y1": 800
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.4947916567325592
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.000005673678515449865,
+                  388.9999997681378,
+                  -388.99999976813785,
+                  -0.000005673678515449865,
+                  399.9999941658838,
+                  399.9999688810995
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-3",
+        "name": "Angular 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1050,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 856
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.9208499878687533,
+                      "g": 0.49999992336546584,
+                      "b": 0.49999992336546584,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.0729166641831398
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.4947916567325592
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.16,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.75
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.9270833134651184
+                  },
+                  {
+                    "color": {
+                      "r": 0.9208499878687533,
+                      "g": 0.49999992336546584,
+                      "b": 0.49999992336546584,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -199.99999999999963,
+                  428.0000255107887,
+                  -200.0000119209293,
+                  -427.99999999999926,
+                  200.0000119209293,
+                  427.99999999999926
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "92-13",
+        "name": "angular one stop",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1550,
+          2072
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 716,
+              "y0": 0,
+              "y1": 1286
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 0.3541666567325592
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -357.9999999999994,
+                  643.0000383257877,
+                  -358.00002133846345,
+                  -642.9999999999989,
+                  358.00002133846345,
+                  642.9999999999989
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "SOLID",
+              "dashing": [],
+              "visible": true,
+              "fill": {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "LINEAR",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0.98,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0
+                    },
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 1
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    -211.50000232054995,
+                    419.0000052021999,
+                    -116.64230315893275,
+                    -58.87791190931625,
+                    390.4999968050764,
+                    589.5000340004209
+                  ]
+                }
+              },
+              "thickness": 100,
+              "position": "INSIDE",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "miterLimit": 28.96,
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0v-100h-100v100zM716,0h100v-100h-100zM716,1286v100h100v-100zM0,1286h-100v100h100zM0,100h716v-200h-716zM616,0v1286h200v-1286zM716,1186h-716v200h716zM100,1286v-1286h-200v1286z"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "92-14",
+        "name": "radial one stop",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          2445,
+          2072
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 716,
+              "y0": 0,
+              "y1": 1286
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "RADIAL",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 0.3541666567325592
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -357.9999999999994,
+                  643.0000383257877,
+                  -358.00002133846345,
+                  -642.9999999999989,
+                  358.00002133846345,
+                  642.9999999999989
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "SOLID",
+              "dashing": [],
+              "visible": true,
+              "fill": {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "RADIAL",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0
+                    },
+                    {
+                      "color": {
+                        "r": 0.92,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 1
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    -273.49996214227434,
+                    45.49996954761605,
+                    -22.207084300999213,
+                    -133.486609985604,
+                    631.4999352608434,
+                    1199.0000024595363
+                  ]
+                }
+              },
+              "thickness": 100,
+              "position": "INSIDE",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "miterLimit": 28.96,
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0v-100h-100v100zM716,0h100v-100h-100zM716,1286v100h100v-100zM0,1286h-100v100h100zM0,100h716v-200h-716zM616,0v1286h200v-1286zM716,1186h-716v200h716zM100,1286v-1286h-200v1286z"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "92-15",
+        "name": "linear one stop",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3339,
+          2072
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 716,
+              "y0": 0,
+              "y1": 1286
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 0.3541666567325592
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -715.9999999999987,
+                  1286.0000766515755,
+                  -358.00002133846345,
+                  -642.9999999999989,
+                  716.0000213384628,
+                  -0.00003832578887497107
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "SOLID",
+              "dashing": [],
+              "visible": true,
+              "fill": {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "ANGULAR",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0.8028169068001821,
+                        "g": 0.7225352161201639,
+                        "b": 0,
+                        "a": 0.8028169068001821
+                      },
+                      "position": 0
+                    },
+                    {
+                      "color": {
+                        "r": 1,
+                        "g": 0.9,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0.1458333283662796
+                    },
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0
+                      },
+                      "position": 0.40625
+                    },
+                    {
+                      "color": {
+                        "r": 0.8028169068001821,
+                        "g": 0.7225352161201639,
+                        "b": 0,
+                        "a": 0.8028169068001821
+                      },
+                      "position": 1
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    305.5000226312644,
+                    700.5000162749265,
+                    -390.0140059508923,
+                    170.0917655041194,
+                    52.500018824602165,
+                    585.500015339869
+                  ]
+                }
+              },
+              "thickness": 100,
+              "position": "INSIDE",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "miterLimit": 28.96,
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0v-100h-100v100zM716,0h100v-100h-100zM716,1286v100h100v-100zM0,1286h-100v100h100zM0,100h716v-200h-716zM616,0v1286h200v-1286zM716,1186h-716v200h716zM100,1286v-1286h-200v1286z"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "92-16",
+        "name": "diamond one stop",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          4234,
+          2072
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 716,
+              "y0": 0,
+              "y1": 1286
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0.0467,
+                      "b": 0.2917,
+                      "a": 1
+                    },
+                    "position": 0.3541666567325592
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -357.9999999999994,
+                  643.0000383257877,
+                  -358.00002133846345,
+                  -642.9999999999989,
+                  358.00002133846345,
+                  642.9999999999989
+                ]
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "SOLID",
+              "dashing": [],
+              "visible": true,
+              "fill": {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "DIAMOND",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0
+                    },
+                    {
+                      "color": {
+                        "r": 0.98,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0.4376767575740814
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    268.0000741676471,
+                    62.00006087537122,
+                    -18.350732906651203,
+                    79.32246759491272,
+                    90.00000417602556,
+                    1224.0000369453785
+                  ]
+                }
+              },
+              "thickness": 100,
+              "position": "INSIDE",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "miterLimit": 28.96,
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0v-100h-100v100zM716,0h100v-100h-100zM716,1286v100h100v-100zM0,1286h-100v100h100zM0,100h716v-200h-716zM616,0v1286h200v-1286zM716,1186h-716v200h716zM100,1286v-1286h-200v1286z"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "81-4",
+        "name": "Angular 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1550,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  147.5000025294019,
+                  -151.49999736148425,
+                  -165.70310207582145,
+                  -161.32810681739943,
+                  87.9999881284104,
+                  322.4999773163881
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-5",
+        "name": "Angular 5",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          6.123234262925839e-17,
+          -1,
+          1,
+          6.123234262925839e-17,
+          2050,
+          1450
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 900
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.7513143420219421
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -199.9999931422978,
+                  450.0000191080079,
+                  -107.52657433159644,
+                  -47.789583368505646,
+                  200.0000444149639,
+                  450.00000367984126
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-6",
+        "name": "Angular 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3050,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 900,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  22.000045493446464,
+                  44.49999083993899,
+                  -236.05556592242954,
+                  116.70189897895168,
+                  572.4999681882233,
+                  222.4999826285888
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-7",
+        "name": "Angular 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          4050,
+          1050
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 900,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "ANGULAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.9891004034201062,
+                      "g": 0.9891004034201062,
+                      "b": 0.9891004034201062,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.8924058675765991
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.9611419439315796
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.9901659488677979
+                  },
+                  {
+                    "color": {
+                      "r": 0.9891004034201062,
+                      "g": 0.9891004034201062,
+                      "b": 0.9891004034201062,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  450.00000000000006,
+                  -0.000007656385605514515,
+                  -0.000008703621823258345,
+                  1012.4999924562875,
+                  -0.0000034384678604393315,
+                  400.0000000000001
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-12",
+        "name": "Diamond 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            },
+            "cornerRadius": 200
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000002836839570363736,
+                  199.99999999999994,
+                  -199.99999999999994,
+                  0.000002836839570363736,
+                  200.00000283683943,
+                  199.99999234361474
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "79-14",
+        "name": "Diamond 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          550,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 841
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  0.000005673679140727472,
+                  840.9999999999998,
+                  -199.99999999999994,
+                  0.000005964392063795287,
+                  199.99999999999994,
+                  -0.000005964392063795287
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-8",
+        "name": "Diamond 3",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1050,
+          1991
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.2826961576938629
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.45688438415527344
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  512.4999605942278,
+                  767.0000591052126,
+                  -767.0000591052128,
+                  512.4999605942278,
+                  293.00001308476595,
+                  117.49999873766761
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-9",
+        "name": "Diamond 4",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1550,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.6710460186004639
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  1891.9999949843857,
+                  1774.4999975433984,
+                  -209.0546213110702,
+                  222.8973275334294,
+                  95.50003062861272,
+                  88.00001399269526
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-10",
+        "name": "Diamond 5",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          6.123234262925839e-17,
+          1,
+          -1,
+          6.123234262925839e-17,
+          2850,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 800
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5089089870452881
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  289.9999948143946,
+                  0.00002014637257019558,
+                  -0.00010778188263316224,
+                  1551.4826897861692,
+                  199.99999999999903,
+                  0.000013894049999407798
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-11",
+        "name": "Diamond 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3050,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 900,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5530604720115662
+                  },
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.6725775003433228
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.7966564893722534
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -763.4998430330102,
+                  -619.499980224665,
+                  2853.651541380062,
+                  -3516.9690087105787,
+                  -1176.0002270245986,
+                  2123.999905889703
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "81-12",
+        "name": "Diamond 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          4050,
+          1550
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 900,
+              "y0": 0,
+              "y1": 400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "DIAMOND",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5090090036392212
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.6223147511482239
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 0.7201747298240662
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -0.000016017001712498313,
+                  -1055.4999975228125,
+                  2374.874994426328,
+                  0.00002478315707321599,
+                  449.9999756892094,
+                  729.9999976183238
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "160-4",
+        "name": "Rectangle 5",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.9659258127212524,
+          -0.258819043636322,
+          0.258819043636322,
+          0.9659258127212524,
+          1500,
+          3700
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 1400,
+              "y0": 0,
+              "y1": 1400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.8,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "DASHED",
+              "dashing": [
+                15,
+                50
+              ],
+              "visible": true,
+              "fill": {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0.96,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "thickness": 8,
+              "position": "CENTER",
+              "lineJoin": "ROUND",
+              "lineCap": "ROUND",
+              "miterLimit": 30,
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M-10.6066,-10.6066c2.71446,-2.7145 6.46446,-4.3934 10.6066,-4.3934h7.34279c8.28431,0 15.00001,6.71573 15.00001,15c0,6.04112 -3.5713,11.2481 -8.7178,13.625c0,0.0001 0,0.0001 0,0.0001M-15,7.34266c0,8.28424 6.71573,15.00004 15,15.00004c6.04106,0 11.248,-3.5712 13.625,-8.7176M56.2938,-15c-8.2842,0 -15,6.71573 -15,15c0,8.28427 6.7158,15 15,15h14.6853c8.2843,0 15,-6.71573 15,-15c0,-8.28427 -6.7157,-15 -15,-15zM119.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM183.567,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM247.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM310.839,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM374.476,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM438.112,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM501.748,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM565.385,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM629.021,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM692.657,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM756.294,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM819.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM883.566,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM947.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM1010.84,-15c-8.29,0 -15.001,6.71573 -15.001,15c0,8.28427 6.711,15 15.001,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1074.48,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1138.11,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1201.75,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1265.38,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1329.02,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1392.66,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h7.34v-15v-15zM15,56.2937c0,-8.2843 -6.71573,-15 -15,-15c-8.28427,0 -15,6.7157 -15,15v14.6853c0,8.2843 6.71573,15 15,15c8.28427,0 15,-6.7157 15,-15zM15,119.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,183.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,247.203c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,310.839c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,374.476c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,438.112c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,501.748c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,565.385c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,629.021c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,692.657c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,756.294c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,819.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,883.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,947.203c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,1010.84c0,-8.29 -6.71573,-15.001 -15,-15.001c-8.28427,0 -15,6.711 -15,15.001v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1074.48c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1138.11c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1201.75c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1265.38c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1329.02c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM56.2937,1385c-8.2843,0 -15,6.72 -15,15c0,8.28 6.7157,15 15,15h14.6853c8.2843,0 15,-6.72 15,-15c0,-8.28 -6.7157,-15 -15,-15zM119.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM183.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM247.203,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM310.839,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM374.476,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM438.112,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM501.748,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM565.385,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM629.021,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM692.657,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM756.294,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM819.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM883.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM947.203,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM1010.84,1385c-8.29,0 -15.001,6.72 -15.001,15c0,8.28 6.711,15 15.001,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1074.48,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1138.11,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1201.75,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1265.38,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1329.02,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1392.66,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h7.34v-15v-15zM7.34266,1415c8.28424,0 15.00004,-6.72 15.00004,-15c0,-6.04 -3.5712,-11.25 -8.7176,-13.62c-2.3769,-5.15 -7.58395,-8.72 -13.6251,-8.72c-8.28427,0 -15,6.71 -15,15v7.34c0,4.14 1.6789,7.89 4.3934,10.61c2.71446,2.71 6.46446,4.39 10.6066,4.39zM-15,7.34266v-7.34266c0,-4.14214 1.6789,-7.89214 4.3934,-10.6066"
+              }
+            },
+            {
+              "style": "DASHED",
+              "dashing": [
+                15,
+                50
+              ],
+              "visible": false,
+              "fill": {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "thickness": 8,
+              "position": "CENTER",
+              "lineJoin": "ROUND",
+              "lineCap": "ROUND",
+              "miterLimit": 30,
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M-10.6066,-10.6066c2.71446,-2.7145 6.46446,-4.3934 10.6066,-4.3934h7.34279c8.28431,0 15.00001,6.71573 15.00001,15c0,6.04112 -3.5713,11.2481 -8.7178,13.625c0,0.0001 0,0.0001 0,0.0001M-15,7.34266c0,8.28424 6.71573,15.00004 15,15.00004c6.04106,0 11.248,-3.5712 13.625,-8.7176M56.2938,-15c-8.2842,0 -15,6.71573 -15,15c0,8.28427 6.7158,15 15,15h14.6853c8.2843,0 15,-6.71573 15,-15c0,-8.28427 -6.7157,-15 -15,-15zM119.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM183.567,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM247.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM310.839,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM374.476,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM438.112,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM501.748,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM565.385,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM629.021,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM692.657,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM756.294,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM819.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM883.566,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM947.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM1010.84,-15c-8.29,0 -15.001,6.71573 -15.001,15c0,8.28427 6.711,15 15.001,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1074.48,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1138.11,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1201.75,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1265.38,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1329.02,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1392.66,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h7.34v-15v-15zM15,56.2937c0,-8.2843 -6.71573,-15 -15,-15c-8.28427,0 -15,6.7157 -15,15v14.6853c0,8.2843 6.71573,15 15,15c8.28427,0 15,-6.7157 15,-15zM15,119.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,183.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,247.203c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,310.839c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,374.476c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,438.112c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,501.748c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,565.385c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,629.021c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,692.657c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,756.294c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,819.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,883.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,947.203c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,1010.84c0,-8.29 -6.71573,-15.001 -15,-15.001c-8.28427,0 -15,6.711 -15,15.001v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1074.48c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1138.11c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1201.75c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1265.38c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1329.02c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM56.2937,1385c-8.2843,0 -15,6.72 -15,15c0,8.28 6.7157,15 15,15h14.6853c8.2843,0 15,-6.72 15,-15c0,-8.28 -6.7157,-15 -15,-15zM119.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM183.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM247.203,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM310.839,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM374.476,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM438.112,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM501.748,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM565.385,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM629.021,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM692.657,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM756.294,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM819.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM883.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM947.203,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM1010.84,1385c-8.29,0 -15.001,6.72 -15.001,15c0,8.28 6.711,15 15.001,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1074.48,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1138.11,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1201.75,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1265.38,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1329.02,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1392.66,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h7.34v-15v-15zM7.34266,1415c8.28424,0 15.00004,-6.72 15.00004,-15c0,-6.04 -3.5712,-11.25 -8.7176,-13.62c-2.3769,-5.15 -7.58395,-8.72 -13.6251,-8.72c-8.28427,0 -15,6.71 -15,15v7.34c0,4.14 1.6789,7.89 4.3934,10.61c2.71446,2.71 6.46446,4.39 10.6066,4.39zM-15,7.34266v-7.34266c0,-4.14214 1.6789,-7.89214 4.3934,-10.6066"
+              }
+            },
+            {
+              "style": "DASHED",
+              "dashing": [
+                15,
+                50
+              ],
+              "visible": true,
+              "fill": {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "LINEAR",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0.82,
+                        "b": 1,
+                        "a": 0.65
+                      },
+                      "position": 0.5259416699409485
+                    },
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0.65
+                      },
+                      "position": 0.5260416865348816
+                    },
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0.82,
+                        "b": 1,
+                        "a": 0
+                      },
+                      "position": 0.578125
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    0,
+                    1399.9999999999998,
+                    -700,
+                    4.2862639840480875e-14,
+                    700,
+                    -4.2862639840480875e-14
+                  ]
+                }
+              },
+              "thickness": 8,
+              "position": "CENTER",
+              "lineJoin": "ROUND",
+              "lineCap": "ROUND",
+              "miterLimit": 30,
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M-10.6066,-10.6066c2.71446,-2.7145 6.46446,-4.3934 10.6066,-4.3934h7.34279c8.28431,0 15.00001,6.71573 15.00001,15c0,6.04112 -3.5713,11.2481 -8.7178,13.625c0,0.0001 0,0.0001 0,0.0001M-15,7.34266c0,8.28424 6.71573,15.00004 15,15.00004c6.04106,0 11.248,-3.5712 13.625,-8.7176M56.2938,-15c-8.2842,0 -15,6.71573 -15,15c0,8.28427 6.7158,15 15,15h14.6853c8.2843,0 15,-6.71573 15,-15c0,-8.28427 -6.7157,-15 -15,-15zM119.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM183.567,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM247.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM310.839,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM374.476,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM438.112,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM501.748,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM565.385,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM629.021,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM692.657,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM756.294,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM819.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM883.566,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM947.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM1010.84,-15c-8.29,0 -15.001,6.71573 -15.001,15c0,8.28427 6.711,15 15.001,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1074.48,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1138.11,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1201.75,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1265.38,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1329.02,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1392.66,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h7.34v-15v-15zM15,56.2937c0,-8.2843 -6.71573,-15 -15,-15c-8.28427,0 -15,6.7157 -15,15v14.6853c0,8.2843 6.71573,15 15,15c8.28427,0 15,-6.7157 15,-15zM15,119.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,183.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,247.203c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,310.839c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,374.476c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,438.112c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,501.748c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,565.385c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,629.021c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,692.657c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,756.294c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,819.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,883.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,947.203c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,1010.84c0,-8.29 -6.71573,-15.001 -15,-15.001c-8.28427,0 -15,6.711 -15,15.001v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1074.48c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1138.11c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1201.75c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1265.38c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1329.02c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM56.2937,1385c-8.2843,0 -15,6.72 -15,15c0,8.28 6.7157,15 15,15h14.6853c8.2843,0 15,-6.72 15,-15c0,-8.28 -6.7157,-15 -15,-15zM119.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM183.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM247.203,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM310.839,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM374.476,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM438.112,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM501.748,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM565.385,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM629.021,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM692.657,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM756.294,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM819.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM883.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM947.203,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM1010.84,1385c-8.29,0 -15.001,6.72 -15.001,15c0,8.28 6.711,15 15.001,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1074.48,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1138.11,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1201.75,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1265.38,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1329.02,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1392.66,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h7.34v-15v-15zM7.34266,1415c8.28424,0 15.00004,-6.72 15.00004,-15c0,-6.04 -3.5712,-11.25 -8.7176,-13.62c-2.3769,-5.15 -7.58395,-8.72 -13.6251,-8.72c-8.28427,0 -15,6.71 -15,15v7.34c0,4.14 1.6789,7.89 4.3934,10.61c2.71446,2.71 6.46446,4.39 10.6066,4.39zM-15,7.34266v-7.34266c0,-4.14214 1.6789,-7.89214 4.3934,-10.6066"
+              }
+            },
+            {
+              "style": "DASHED",
+              "dashing": [
+                15,
+                50
+              ],
+              "visible": false,
+              "fill": {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "thickness": 8,
+              "position": "CENTER",
+              "lineJoin": "ROUND",
+              "lineCap": "ROUND",
+              "miterLimit": 30,
+              "fillRule": "EVEN_ODD",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M-10.6066,-10.6066c2.71446,-2.7145 6.46446,-4.3934 10.6066,-4.3934h7.34279c8.28431,0 15.00001,6.71573 15.00001,15c0,6.04112 -3.5713,11.2481 -8.7178,13.625c0,0.0001 0,0.0001 0,0.0001M-15,7.34266c0,8.28424 6.71573,15.00004 15,15.00004c6.04106,0 11.248,-3.5712 13.625,-8.7176M56.2938,-15c-8.2842,0 -15,6.71573 -15,15c0,8.28427 6.7158,15 15,15h14.6853c8.2843,0 15,-6.71573 15,-15c0,-8.28427 -6.7157,-15 -15,-15zM119.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM183.567,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM247.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM310.839,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM374.476,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM438.112,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM501.748,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM565.385,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM629.021,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM692.657,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM756.294,-15c-8.285,0 -15,6.71573 -15,15c0,8.28427 6.715,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM819.93,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.285,0 15,-6.71573 15,-15c0,-8.28427 -6.715,-15 -15,-15zM883.566,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.686c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM947.203,-15c-8.284,0 -15,6.71573 -15,15c0,8.28427 6.716,15 15,15h14.685c8.284,0 15,-6.71573 15,-15c0,-8.28427 -6.716,-15 -15,-15zM1010.84,-15c-8.29,0 -15.001,6.71573 -15.001,15c0,8.28427 6.711,15 15.001,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1074.48,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1138.11,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1201.75,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h14.68c8.29,0 15,-6.71573 15,-15c0,-8.28427 -6.71,-15 -15,-15zM1265.38,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1329.02,-15c-8.28,0 -15,6.71573 -15,15c0,8.28427 6.72,15 15,15h14.69c8.28,0 15,-6.71573 15,-15c0,-8.28427 -6.72,-15 -15,-15zM1392.66,-15c-8.29,0 -15,6.71573 -15,15c0,8.28427 6.71,15 15,15h7.34v-15v-15zM15,56.2937c0,-8.2843 -6.71573,-15 -15,-15c-8.28427,0 -15,6.7157 -15,15v14.6853c0,8.2843 6.71573,15 15,15c8.28427,0 15,-6.7157 15,-15zM15,119.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,183.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,247.203c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,310.839c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,374.476c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,438.112c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,501.748c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,565.385c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,629.021c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,692.657c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,756.294c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,819.93c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.685c0,8.285 6.71573,15 15,15c8.28427,0 15,-6.715 15,-15zM15,883.566c0,-8.284 -6.71573,-15 -15,-15c-8.28427,0 -15,6.716 -15,15v14.686c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,947.203c0,-8.285 -6.71573,-15 -15,-15c-8.28427,0 -15,6.715 -15,15v14.685c0,8.284 6.71573,15 15,15c8.28427,0 15,-6.716 15,-15zM15,1010.84c0,-8.29 -6.71573,-15.001 -15,-15.001c-8.28427,0 -15,6.711 -15,15.001v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1074.48c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1138.11c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1201.75c0,-8.29 -6.71573,-15 -15,-15c-8.28427,0 -15,6.71 -15,15v14.68c0,8.29 6.71573,15 15,15c8.28427,0 15,-6.71 15,-15zM15,1265.38c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM15,1329.02c0,-8.28 -6.71573,-15 -15,-15c-8.28427,0 -15,6.72 -15,15v14.69c0,8.28 6.71573,15 15,15c8.28427,0 15,-6.72 15,-15zM56.2937,1385c-8.2843,0 -15,6.72 -15,15c0,8.28 6.7157,15 15,15h14.6853c8.2843,0 15,-6.72 15,-15c0,-8.28 -6.7157,-15 -15,-15zM119.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM183.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM247.203,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM310.839,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM374.476,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM438.112,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM501.748,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM565.385,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM629.021,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM692.657,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM756.294,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM819.93,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.685c8.285,0 15,-6.72 15,-15c0,-8.28 -6.715,-15 -15,-15zM883.566,1385c-8.284,0 -15,6.72 -15,15c0,8.28 6.716,15 15,15h14.686c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM947.203,1385c-8.285,0 -15,6.72 -15,15c0,8.28 6.715,15 15,15h14.685c8.284,0 15,-6.72 15,-15c0,-8.28 -6.716,-15 -15,-15zM1010.84,1385c-8.29,0 -15.001,6.72 -15.001,15c0,8.28 6.711,15 15.001,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1074.48,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1138.11,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1201.75,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h14.68c8.29,0 15,-6.72 15,-15c0,-8.28 -6.71,-15 -15,-15zM1265.38,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1329.02,1385c-8.28,0 -15,6.72 -15,15c0,8.28 6.72,15 15,15h14.69c8.28,0 15,-6.72 15,-15c0,-8.28 -6.72,-15 -15,-15zM1392.66,1385c-8.29,0 -15,6.72 -15,15c0,8.28 6.71,15 15,15h7.34v-15v-15zM7.34266,1415c8.28424,0 15.00004,-6.72 15.00004,-15c0,-6.04 -3.5712,-11.25 -8.7176,-13.62c-2.3769,-5.15 -7.58395,-8.72 -13.6251,-8.72c-8.28427,0 -15,6.71 -15,15v7.34c0,4.14 1.6789,7.89 4.3934,10.61c2.71446,2.71 6.46446,4.39 10.6066,4.39zM-15,7.34266v-7.34266c0,-4.14214 1.6789,-7.89214 4.3934,-10.6066"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "160-5",
+        "name": "Rectangle 6",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          3339,
+          3436
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 716,
+              "y0": 0,
+              "y1": 1400
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.8,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              }
+            },
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "9e999f191ada92a64df50e96c8bb749e0104de49"
+                }
+              },
+              "positioning": {
+                "layout": "FIT",
+                "origin": "LAYER",
+                "transform": [
+                  716,
+                  0,
+                  0,
+                  1400,
+                  0,
+                  0
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 0.8
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

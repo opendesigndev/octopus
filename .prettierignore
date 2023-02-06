@@ -6,6 +6,7 @@ sample/
 workdir/
 example-web/
 temp/
+*template.hbs
 **/examples/web
-**/test/integration/assets/
-**/test/integration/report/
+**/test/**/assets/
+**/test/**/report/

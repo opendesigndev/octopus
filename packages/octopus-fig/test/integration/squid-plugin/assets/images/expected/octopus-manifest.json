@@ -1,0 +1,61 @@
+{
+  "version": "3.0.0-rc.23",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "182-42",
+      "name": "Sooma",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "182:42"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 4382,
+        "height": 3719
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "390-13",
+      "name": "Pikachu",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "390:13"
+      },
+      "bounds": {
+        "x": 4510,
+        "y": 0,
+        "width": 2000,
+        "height": 2000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

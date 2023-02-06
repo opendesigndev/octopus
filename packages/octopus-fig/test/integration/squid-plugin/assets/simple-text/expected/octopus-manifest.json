@@ -1,0 +1,85 @@
+{
+  "version": "3.0.0-rc.24",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "114-4",
+      "name": "Hello World!",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "114:4"
+      },
+      "bounds": {
+        "x": 61.01,
+        "y": 80.63,
+        "width": 839.94,
+        "height": 109.2
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "713-14",
+      "name": "Hello World! Hello World! Hello World! Hello World!",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "713:14"
+      },
+      "bounds": {
+        "x": 1106.53,
+        "y": 57.88,
+        "width": 303.92,
+        "height": 281.71
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "713-15",
+      "name": "Lorem Ipsum!",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "713:15"
+      },
+      "bounds": {
+        "x": 1458,
+        "y": 57.38,
+        "width": 255.95,
+        "height": 170.37
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

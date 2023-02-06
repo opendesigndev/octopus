@@ -1,0 +1,304 @@
+{
+  "id": "391-36",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 250,
+    "height": 500
+  },
+  "content": {
+    "id": "391-36-Background",
+    "name": "bug-effect-on-group",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "SOLID",
+    "mask": {
+      "id": "391-36-BackgroundMask",
+      "name": "bug-effect-on-group",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 250,
+            "y0": 0,
+            "y1": 500
+          },
+          "cornerRadius": 30
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "391-45",
+        "name": "Group With Shadow",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          52,
+          46
+        ],
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "basis": "BODY",
+            "shadow": {
+              "offset": {
+                "x": 20,
+                "y": 10
+              },
+              "blur": 4,
+              "choke": 0,
+              "color": {
+                "r": 0.4667,
+                "g": 0,
+                "b": 0,
+                "a": 0.4
+              }
+            }
+          }
+        ],
+        "layers": [
+          {
+            "id": "391-46",
+            "name": "Rectangle 2",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 150,
+                  "y0": 0,
+                  "y1": 150
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 5,
+                  "position": "INSIDE",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0v-5h-5v5zM150,0h5v-5h-5zM150,150v5h5v-5zM0,150h-5v5h5zM0,5h150v-10h-150zM145,0v150h10v-150zM150,145h-150v10h150zM5,150v-150h-10v150z"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "391-47",
+            "name": "Ellipse 2",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              150
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M150,75c0,41.421 -33.579,75 -75,75c-41.4214,0 -75,-33.579 -75,-75c0,-41.4214 33.5786,-75 75,-75c41.421,0 75,33.5786 75,75z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0.16,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 5,
+                  "position": "INSIDE",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "ELLIPSE"
+                    },
+                    "geometry": "M145,75c0,38.66 -31.34,70 -70,70v10c44.183,0 80,-35.817 80,-80zM75,145c-38.6599,0 -70,-31.34 -70,-70h-10c0,44.183 35.8172,80 80,80zM5,75c0,-38.6599 31.3401,-70 70,-70v-10c-44.1828,0 -80,35.8172 -80,80zM75,5c38.66,0 70,31.3401 70,70h10c0,-44.1828 -35.817,-80 -80,-80z"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
-  "type": "ARTBOARD",
-  "version": "3.0.0-rc.7",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.9",
   "dimensions": {
     "width": 914,
     "height": 914
@@ -34,7 +34,7 @@
         "type": "MASK_GROUP",
         "maskBasis": "BODY",
         "mask": {
-          "id": "17af390b-4820-4100-9648-c00ab20d9741",
+          "id": "bfc4c5cc-667e-4285-aaff-f89bc2da960d",
           "name": "Layer",
           "type": "SHAPE",
           "transform": [

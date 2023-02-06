@@ -101,7 +101,7 @@ export class OctopusComponent {
   async convert(): Promise<Octopus['OctopusComponent']> {
     return {
       id: this.id,
-      type: 'ARTBOARD',
+      type: 'OCTOPUS_COMPONENT',
       version: this.version,
       dimensions: this.dimensions,
       content: this.content,

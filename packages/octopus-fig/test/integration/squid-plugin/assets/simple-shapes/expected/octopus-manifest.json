@@ -1,0 +1,109 @@
+{
+  "version": "3.0.0-rc.24",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "269-19",
+      "name": "Subtract",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "269:19"
+      },
+      "bounds": {
+        "x": 403.52,
+        "y": 16.45,
+        "width": 56.62,
+        "height": 81.17
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "41-11",
+      "name": "Vector 2",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "41:11"
+      },
+      "bounds": {
+        "x": 102.95,
+        "y": 213.83,
+        "width": 82.95,
+        "height": 95.83
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "41-9",
+      "name": "PikachuUA 1",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "41:9"
+      },
+      "bounds": {
+        "x": 271.83,
+        "y": 96.83,
+        "width": 106.35,
+        "height": 106.35
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "87-2",
+      "name": "Intersect",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "87:2"
+      },
+      "bounds": {
+        "x": 17.03,
+        "y": 310.75,
+        "width": 327.72,
+        "height": 182.53
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

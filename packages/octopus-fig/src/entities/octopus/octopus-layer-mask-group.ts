@@ -1,4 +1,4 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
 
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
@@ -9,6 +9,7 @@ import { getTopComponentTransform } from '../../utils/source'
 import { OctopusComponent } from './octopus-component'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
 import type { RawBlendMode, RawLayerShape } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
@@ -212,9 +213,13 @@ export class OctopusLayerMaskGroup {
     return { isArtboard: true }
   }
 
-  convert(): Octopus['MaskGroupLayer'] | null {
-    const mask = this.mask.convert()
-    if (!mask) return null
+  get sourceLayer(): SourceLayer {
+    return this._parent.sourceLayer
+  }
+
+  async convert(): Promise<Octopus['MaskGroupLayer'] | null> {
+    const convertedMask = await this.mask.convert()
+    if (!convertedMask) return null
 
     return {
       id: this.id,
@@ -225,9 +230,9 @@ export class OctopusLayerMaskGroup {
       blendMode: this.blendMode,
       maskBasis: this.maskBasis,
       maskChannels: this.maskChannels,
-      mask,
+      mask: convertedMask,
       transform: this.transform,
-      layers: getConverted(this._layers),
+      layers: await getConvertedAsync(this.layers),
       meta: this.meta,
     } as const
   }

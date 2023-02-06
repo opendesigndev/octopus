@@ -1,0 +1,2117 @@
+{
+  "id": "161-3",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 1000,
+    "height": 753
+  },
+  "content": {
+    "id": "161-3-Background",
+    "name": "groups-01",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "SOLID",
+    "mask": {
+      "id": "161-3-BackgroundMask",
+      "name": "groups-01",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 1000,
+            "y0": 0,
+            "y1": 753
+          },
+          "cornerRadius": 30
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "168-203-Background",
+        "name": "Frame 2",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "168-203-BackgroundMask",
+          "name": "Frame 2",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 200,
+                "y0": 0,
+                "y1": 200
+              },
+              "cornerRadius": 40
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.9375,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              {
+                "type": "GRADIENT",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "gradient": {
+                  "type": "RADIAL",
+                  "stops": [
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      },
+                      "position": 0
+                    },
+                    {
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0
+                      },
+                      "position": 1
+                    }
+                  ]
+                },
+                "positioning": {
+                  "layout": "FILL",
+                  "origin": "LAYER",
+                  "transform": [
+                    -122.99999011397375,
+                    -78.99998298406865,
+                    78.99998298406865,
+                    -122.99999011397375,
+                    94.99999111682143,
+                    180.4999773111972
+                  ]
+                }
+              }
+            ],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                "thickness": 5,
+                "position": "CENTER",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "meta": {
+                    "sourceShape": "RECTANGLE"
+                  },
+                  "geometry": "M40,2.5h120v-5h-120zM197.5,40v120h5v-120zM160,197.5h-120v5h120zM2.5,160v-120h-5v120zM40,197.5c-20.7107,0 -37.5,-16.789 -37.5,-37.5h-5c0,23.472 19.0279,42.5 42.5,42.5zM197.5,160c0,20.711 -16.789,37.5 -37.5,37.5v5c23.472,0 42.5,-19.028 42.5,-42.5zM160,2.5c20.711,0 37.5,16.7893 37.5,37.5h5c0,-23.4721 -19.028,-42.5 -42.5,-42.5zM40,-2.5c-23.4721,0 -42.5,19.0279 -42.5,42.5h5c0,-20.7107 16.7893,-37.5 37.5,-37.5z"
+                }
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          516
+        ],
+        "layers": [
+          {
+            "id": "168-204-Background",
+            "name": "Frame 3",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "168-204-BackgroundMask",
+              "name": "Frame 3",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 143,
+                    "y0": 0,
+                    "y1": 77
+                  },
+                  "cornerRadius": 5
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0.7794,
+                      "b": 0.8292,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              -87,
+              51
+            ],
+            "layers": [
+              {
+                "id": "168-205-Background",
+                "name": "Frame 5",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "PASS_THROUGH",
+                "maskBasis": "BODY_EMBED",
+                "mask": {
+                  "id": "168-205-BackgroundMask",
+                  "name": "Frame 5",
+                  "type": "SHAPE",
+                  "visible": true,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 148,
+                        "y0": 0,
+                        "y1": 32
+                      },
+                      "cornerRadius": 20
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0.9055,
+                          "g": 1,
+                          "b": 0.325,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "style": "SOLID",
+                        "dashing": [],
+                        "visible": true,
+                        "fill": {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        },
+                        "thickness": 1,
+                        "position": "INSIDE",
+                        "lineJoin": "MITER",
+                        "lineCap": "BUTT",
+                        "miterLimit": 28.96,
+                        "fillRule": "NON_ZERO",
+                        "path": {
+                          "type": "PATH",
+                          "visible": true,
+                          "transform": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            0
+                          ],
+                          "meta": {
+                            "sourceShape": "RECTANGLE"
+                          },
+                          "geometry": "M16,1h116v-2h-116zM132,31h-116v2h116zM16,31c-8.28427,0 -15,-6.7157 -15,-15h-2c0,9.3888 7.61116,17 17,17zM147,16c0,8.2843 -6.716,15 -15,15v2c9.389,0 17,-7.6112 17,-17zM132,1c8.284,0 15,6.71573 15,15h2c0,-9.38884 -7.611,-17 -17,-17zM16,-1c-9.38884,0 -17,7.61116 -17,17h2c0,-8.28427 6.71573,-15 15,-15z"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  -28,
+                  24
+                ],
+                "layers": [],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "168-206-Background",
+            "name": "Frame 4",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "168-206-BackgroundMask",
+              "name": "Frame 4",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 881,
+                    "y0": 0,
+                    "y1": 72
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.9024,
+                      "g": 0,
+                      "b": 0.9208,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 1,
+                    "position": "INSIDE",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M0,0v-1h-1v1zM881,0h1v-1h-1zM881,72v1h1v-1zM0,72h-1v1h1zM0,1h881v-2h-881zM880,0v72h2v-72zM881,71h-881v2h881zM1,72v-72h-2v72z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              152,
+              56
+            ],
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "390-35",
+            "name": "Rectangle 13",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              87,
+              -545
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0h15v890h-15z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.851,
+                    "g": 0.851,
+                    "b": 0.851,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 1,
+                  "position": "INSIDE",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0v-1h-1v1zM15,0h1v-1h-1zM15,890v1h1v-1zM0,890h-1v1h1zM0,1h15v-2h-15zM14,0v890h2v-890zM15,889h-15v2h15zM1,890v-890h-2v890z"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "523-13-Background",
+        "name": "Group 2",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "523-13-BackgroundMask",
+          "name": "Group 2",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 310.5,
+                "y0": 0,
+                "y1": 480
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          50
+        ],
+        "layers": [
+          {
+            "id": "523-14",
+            "name": "Rectangle 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0h200v200h-200z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "523-15",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              200
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M200,100c0,55.228 -44.772,100 -100,100c-55.2285,0 -100,-44.772 -100,-100c0,-55.2285 44.7715,-100 100,-100c55.228,0 100,44.7715 100,100z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0.16,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "161-6-Background",
+            "name": "Group Inner",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "161-6-BackgroundMask",
+              "name": "Group Inner",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 70.5,
+                    "y0": 0,
+                    "y1": 141
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              240,
+              339
+            ],
+            "layers": [
+              {
+                "id": "161-4",
+                "name": "Rectangle 1",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0h70.5v70.5h-70.5z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": [
+                    {
+                      "style": "SOLID",
+                      "dashing": [],
+                      "visible": true,
+                      "fill": {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      },
+                      "thickness": 0.5340909361839294,
+                      "position": "INSIDE",
+                      "lineJoin": "MITER",
+                      "lineCap": "BUTT",
+                      "miterLimit": 28.96,
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0v-0.53409h-0.53409v0.53409zM70.5,0h0.5341v-0.53409h-0.5341zM70.5,70.5v0.5341h0.5341v-0.5341zM0,70.5h-0.53409v0.5341h0.53409zM0,0.53409h70.5v-1.06818h-70.5zM69.9659,0v70.5h1.0682v-70.5zM70.5,69.9659h-70.5v1.0682h70.5zM0.53409,70.5v-70.5h-1.06818v70.5z"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "161-5",
+                "name": "Ellipse 1",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  70.5
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "ELLIPSE"
+                    },
+                    "geometry": "M70.5,35.25c0,19.468 -15.782,35.25 -35.25,35.25c-19.468,0 -35.25,-15.782 -35.25,-35.25c0,-19.468 15.782,-35.25 35.25,-35.25c19.468,0 35.25,15.782 35.25,35.25z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0.16,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": [
+                    {
+                      "style": "SOLID",
+                      "dashing": [],
+                      "visible": true,
+                      "fill": {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      },
+                      "thickness": 0.5340909361839294,
+                      "position": "INSIDE",
+                      "lineJoin": "MITER",
+                      "lineCap": "BUTT",
+                      "miterLimit": 28.96,
+                      "fillRule": "NON_ZERO",
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "ELLIPSE"
+                        },
+                        "geometry": "M69.9659,35.25c0,19.1731 -15.5428,34.7159 -34.7159,34.7159v1.0682c19.763,0 35.7841,-16.0211 35.7841,-35.7841zM35.25,69.9659c-19.1731,0 -34.71591,-15.5428 -34.71591,-34.7159h-1.06818c0,19.763 16.02109,35.7841 35.78409,35.7841zM0.53409,35.25c0,-19.1731 15.54281,-34.71591 34.71591,-34.71591v-1.06818c-19.763,0 -35.78409,16.02109 -35.78409,35.78409zM35.25,0.53409c19.1731,0 34.7159,15.54281 34.7159,34.71591h1.0682c0,-19.763 -16.0211,-35.78409 -35.7841,-35.78409z"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "161-7-Background",
+        "name": "Group With Shadow",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "161-7-BackgroundMask",
+          "name": "Group With Shadow",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "basis": "BODY",
+              "shadow": {
+                "offset": {
+                  "x": 2,
+                  "y": 5
+                },
+                "blur": 4,
+                "choke": 0,
+                "color": {
+                  "r": 0.4667,
+                  "g": 0,
+                  "b": 0,
+                  "a": 0.4
+                }
+              }
+            }
+          ],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 150,
+                "y0": 0,
+                "y1": 300
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          300,
+          50
+        ],
+        "layers": [
+          {
+            "id": "161-8",
+            "name": "Rectangle 2",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0h150v150h-150z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 5,
+                  "position": "INSIDE",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "RECTANGLE"
+                    },
+                    "geometry": "M0,0v-5h-5v5zM150,0h5v-5h-5zM150,150v5h5v-5zM0,150h-5v5h5zM0,5h150v-10h-150zM145,0v150h10v-150zM150,145h-150v10h150zM5,150v-150h-10v150z"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "161-9",
+            "name": "Ellipse 2",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              150
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M150,75c0,41.421 -33.579,75 -75,75c-41.4214,0 -75,-33.579 -75,-75c0,-41.4214 33.5786,-75 75,-75c41.421,0 75,33.5786 75,75z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0.16,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 5,
+                  "position": "INSIDE",
+                  "lineJoin": "MITER",
+                  "lineCap": "BUTT",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "ELLIPSE"
+                    },
+                    "geometry": "M145,75c0,38.66 -31.34,70 -70,70v10c44.183,0 80,-35.817 80,-80zM75,145c-38.6599,0 -70,-31.34 -70,-70h-10c0,44.183 35.8172,80 80,80zM5,75c0,-38.6599 31.3401,-70 70,-70v-10c-44.1828,0 -80,35.8172 -80,80zM75,5c38.66,0 70,31.3401 70,70h10c0,-44.1828 -35.817,-80 -80,-80z"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "161-10-Background",
+        "name": "Frame 1",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "161-10-BackgroundMask",
+          "name": "Frame 1",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 150,
+                "y0": 0,
+                "y1": 50
+              },
+              "cornerRadius": 20
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0.1824,
+                  "b": 0.8292,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          300,
+          400
+        ],
+        "layers": [
+          {
+            "id": "161-11-Background",
+            "name": "Frame 2",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "161-11-BackgroundMask",
+              "name": "Frame 2",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 40,
+                    "y0": 0,
+                    "y1": 40
+                  },
+                  "cornerRadius": 20
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              5,
+              5
+            ],
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "161-12-Background",
+            "name": "Frame 3",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "161-12-BackgroundMask",
+              "name": "Frame 3",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 40,
+                    "y0": 0,
+                    "y1": 40
+                  },
+                  "cornerRadius": 20
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 1,
+                    "position": "INSIDE",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M20,39c-10.49341,0 -19,-8.5066 -19,-19h-2c0,11.598 9.40202,21 21,21zM39,20c0,10.4934 -8.5066,19 -19,19v2c11.598,0 21,-9.402 21,-21zM20,1c10.4934,0 19,8.50659 19,19h2c0,-11.59798 -9.402,-21 -21,-21zM20,-1c-11.59798,0 -21,9.40202 -21,21h2c0,-10.49341 8.50659,-19 19,-19z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              105,
+              5
+            ],
+            "layers": [],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "270-22-Background",
+        "name": "WHITE",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "270-22-BackgroundMask",
+          "name": "WHITE",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [
+            {
+              "type": "DROP_SHADOW",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "basis": "BODY",
+              "shadow": {
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 4,
+                "choke": 0,
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 0.25
+                }
+              }
+            }
+          ],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 400,
+                "y0": 0,
+                "y1": 400
+              },
+              "cornerRadius": 40
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                "thickness": 10,
+                "position": "CENTER",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "meta": {
+                    "sourceShape": "RECTANGLE"
+                  },
+                  "geometry": "M40,5h320v-10h-320zM395,40v320h10v-320zM360,395h-320v10h320zM5,360v-320h-10v320zM40,395c-19.33,0 -35,-15.67 -35,-35h-10c0,24.853 20.1472,45 45,45zM395,360c0,19.33 -15.67,35 -35,35v10c24.853,0 45,-20.147 45,-45zM360,5c19.33,0 35,15.67 35,35h10c0,-24.8528 -20.147,-45 -45,-45zM40,-5c-24.8528,0 -45,20.1472 -45,45h10c0,-19.33 15.67,-35 35,-35z"
+                }
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          550,
+          50
+        ],
+        "layers": [
+          {
+            "id": "270-23-Background",
+            "name": "RED",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "BODY_EMBED",
+            "mask": {
+              "id": "270-23-BackgroundMask",
+              "name": "RED",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 300,
+                    "y0": 0,
+                    "y1": 300
+                  },
+                  "cornerRadius": 40
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 10,
+                    "position": "CENTER",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M40,5h220v-10h-220zM295,40v220h10v-220zM260,295h-220v10h220zM5,260v-220h-10v220zM40,295c-19.33,0 -35,-15.67 -35,-35h-10c0,24.853 20.1472,45 45,45zM295,260c0,19.33 -15.67,35 -35,35v10c24.853,0 45,-20.147 45,-45zM260,5c19.33,0 35,15.67 35,35h10c0,-24.8528 -20.147,-45 -45,-45zM40,-5c-24.8528,0 -45,20.1472 -45,45h10c0,-19.33 15.67,-35 35,-35z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              50,
+              50
+            ],
+            "layers": [
+              {
+                "id": "270-24-Background",
+                "name": "BLUE",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "PASS_THROUGH",
+                "maskBasis": "BODY_EMBED",
+                "mask": {
+                  "id": "270-24-BackgroundMask",
+                  "name": "BLUE",
+                  "type": "SHAPE",
+                  "visible": true,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 200,
+                        "y0": 0,
+                        "y1": 200
+                      },
+                      "cornerRadius": 20
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0.1126,
+                          "g": 0,
+                          "b": 0.8042,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "style": "SOLID",
+                        "dashing": [],
+                        "visible": true,
+                        "fill": {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        },
+                        "thickness": 10,
+                        "position": "CENTER",
+                        "lineJoin": "MITER",
+                        "lineCap": "BUTT",
+                        "miterLimit": 28.96,
+                        "fillRule": "NON_ZERO",
+                        "path": {
+                          "type": "PATH",
+                          "visible": true,
+                          "transform": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            0
+                          ],
+                          "meta": {
+                            "sourceShape": "RECTANGLE"
+                          },
+                          "geometry": "M20,5h160v-10h-160zM195,20v160h10v-160zM180,195h-160v10h160zM5,180v-160h-10v160zM20,195c-8.2843,0 -15,-6.716 -15,-15h-10c0,13.807 11.19289,25 25,25zM195,180c0,8.284 -6.716,15 -15,15v10c13.807,0 25,-11.193 25,-25zM180,5c8.284,0 15,6.7157 15,15h10c0,-13.80712 -11.193,-25 -25,-25zM20,-5c-13.80712,0 -25,11.19289 -25,25h10c0,-8.2843 6.7157,-15 15,-15z"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  50,
+                  50
+                ],
+                "layers": [],
+                "meta": {
+                  "isArtboard": true
+                }
+              },
+              {
+                "id": "270-25-Background",
+                "name": "YELLOW",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "PASS_THROUGH",
+                "maskBasis": "BODY_EMBED",
+                "mask": {
+                  "id": "270-25-BackgroundMask",
+                  "name": "YELLOW",
+                  "type": "SHAPE",
+                  "visible": true,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 111,
+                        "y0": 0,
+                        "y1": 109
+                      },
+                      "cornerRadius": 20
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 1,
+                          "g": 0.96,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "style": "SOLID",
+                        "dashing": [],
+                        "visible": true,
+                        "fill": {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        },
+                        "thickness": 10,
+                        "position": "CENTER",
+                        "lineJoin": "MITER",
+                        "lineCap": "BUTT",
+                        "miterLimit": 28.96,
+                        "fillRule": "NON_ZERO",
+                        "path": {
+                          "type": "PATH",
+                          "visible": true,
+                          "transform": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            0
+                          ],
+                          "meta": {
+                            "sourceShape": "RECTANGLE"
+                          },
+                          "geometry": "M20,5h71v-10h-71zM106,20v69h10v-69zM91,104h-71v10h71zM5,89v-69h-10v69zM20,104c-8.2843,0 -15,-6.7157 -15,-15h-10c0,13.807 11.19288,25 25,25zM106,89c0,8.2843 -6.7157,15 -15,15v10c13.807,0 25,-11.193 25,-25zM91,5c8.2843,0 15,6.7157 15,15h10c0,-13.80712 -11.193,-25 -25,-25zM20,-5c-13.80712,0 -25,11.19288 -25,25h10c0,-8.2843 6.7157,-15 15,-15z"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  100,
+                  100
+                ],
+                "layers": [
+                  {
+                    "id": "270-26",
+                    "name": "REC SHADOW",
+                    "type": "SHAPE",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      30,
+                      30
+                    ],
+                    "effects": [],
+                    "shape": {
+                      "path": {
+                        "type": "PATH",
+                        "visible": true,
+                        "transform": [
+                          1,
+                          0,
+                          0,
+                          1,
+                          0,
+                          0
+                        ],
+                        "meta": {
+                          "sourceShape": "RECTANGLE"
+                        },
+                        "geometry": "M0,0h50v50h-50z"
+                      },
+                      "fillRule": "NON_ZERO",
+                      "fills": [
+                        {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0.851,
+                            "g": 0.851,
+                            "b": 0.851,
+                            "a": 1
+                          }
+                        }
+                      ],
+                      "strokes": [
+                        {
+                          "style": "SOLID",
+                          "dashing": [],
+                          "visible": true,
+                          "fill": {
+                            "type": "COLOR",
+                            "visible": true,
+                            "blendMode": "NORMAL",
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0,
+                              "a": 1
+                            }
+                          },
+                          "thickness": 5,
+                          "position": "CENTER",
+                          "lineJoin": "MITER",
+                          "lineCap": "BUTT",
+                          "miterLimit": 28.96,
+                          "fillRule": "NON_ZERO",
+                          "path": {
+                            "type": "PATH",
+                            "visible": true,
+                            "transform": [
+                              1,
+                              0,
+                              0,
+                              1,
+                              0,
+                              0
+                            ],
+                            "meta": {
+                              "sourceShape": "RECTANGLE"
+                            },
+                            "geometry": "M0,0v-2.5h-2.5v2.5zM50,0h2.5v-2.5h-2.5zM50,50v2.5h2.5v-2.5zM0,50h-2.5v2.5h2.5zM0,2.5h50v-5h-50zM47.5,0v50h5v-50zM50,47.5h-50v5h50zM2.5,50v-50h-5v50z"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

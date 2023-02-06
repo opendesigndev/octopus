@@ -1,4 +1,4 @@
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { mod, round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
@@ -44,6 +44,12 @@ export class SourcePaint extends SourceEntity {
 
   get imageTransform(): SourceTransform | null {
     return getTransformFor(this._rawValue.imageTransform)
+  }
+
+  get rotation(): number | undefined {
+    const rotation = this._rawValue.rotation ?? 0
+    const result = mod(-rotation, 360)
+    return result ? result : undefined
   }
 
   get scalingFactor(): number {

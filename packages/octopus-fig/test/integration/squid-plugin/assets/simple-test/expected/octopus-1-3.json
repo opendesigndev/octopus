@@ -1,0 +1,277 @@
+{
+  "id": "1-3",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 445,
+    "height": 342
+  },
+  "content": {
+    "id": "1-3-Background",
+    "name": "Frame 1",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "1-3-BackgroundMask",
+      "name": "Frame 1",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 445,
+            "y0": 0,
+            "y1": 342
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "1-2",
+        "name": "Rectangle 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          82,
+          66
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "RECTANGLE"
+            },
+            "geometry": "M0,0h131v95h-131z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.851,
+                "g": 0.851,
+                "b": 0.851,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "style": "SOLID",
+              "dashing": [],
+              "visible": true,
+              "fill": {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              },
+              "thickness": 1,
+              "position": "INSIDE",
+              "lineJoin": "MITER",
+              "lineCap": "BUTT",
+              "miterLimit": 28.96,
+              "fillRule": "NON_ZERO",
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "RECTANGLE"
+                },
+                "geometry": "M0,0v-1h-1v1zM131,0h1v-1h-1zM131,95v1h1v-1zM0,95h-1v1h1zM0,1h131v-2h-131zM130,0v95h2v-95zM131,94h-131v2h131zM1,95v-95h-2v95z"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "1-4",
+        "name": "Rectangle 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          247,
+          68
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "RECTANGLE"
+            },
+            "geometry": "M0,0h155v93h-155z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.0734,
+                "g": 0.1865,
+                "b": 0.5875,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "1-5",
+        "name": "Creativity matters",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          90,
+          204
+        ],
+        "effects": [],
+        "text": {
+          "value": "Creativity matters",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Inter",
+              "family": "Inter",
+              "syntheticPostScriptName": true
+            },
+            "fontSize": 29,
+            "letterSpacing": 0,
+            "letterCase": "NONE",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [],
+          "horizontalAlign": "LEFT",
+          "verticalAlign": "TOP",
+          "frame": {
+            "mode": "AUTO_WIDTH",
+            "size": {
+              "width": 246,
+              "height": 35
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
@@ -55,22 +55,19 @@ export class OctopusLayerText extends OctopusLayerBase {
     return this._sourceLayer
   }
 
-  private _getFills(fills: SourcePaint[]): Octopus['Fill'][] {
-    return fills.reduce((fills: Octopus['Fill'][], fill: SourcePaint) => {
-      const newFill = new OctopusFill({ fill, parentLayer: this.sourceLayer }).convert()
-      return newFill ? push(fills, newFill) : fills
-    }, [])
+  private async _getFills(fills: SourcePaint[]): Promise<Octopus['Fill'][]> {
+    const converted = await Promise.all(fills.map((fill) => new OctopusFill({ fill, parentLayer: this }).convert()))
+    return converted.filter((fill): fill is Octopus['Fill'] => Boolean(fill))
   }
 
-  private get _fills(): Octopus['Fill'][] {
+  private async _fills(): Promise<Octopus['Fill'][]> {
     return this._getFills(this.sourceLayer.fills)
   }
 
-  private get _strokes(): Octopus['VectorStroke'][] {
-    return this.sourceLayer.strokes.reduce((strokes: Octopus['VectorStroke'][], fill: SourcePaint) => {
-      const stroke = new OctopusStroke({ fill, sourceLayer: this.sourceLayer }).convert()
-      return stroke ? push(strokes, stroke) : strokes
-    }, [])
+  private async _strokes(): Promise<Octopus['VectorStroke'][]> {
+    const strokes = this.sourceLayer.strokes
+    const converted = await Promise.all(strokes.map((fill) => new OctopusStroke({ fill, parentLayer: this }).convert()))
+    return converted.filter((stroke): stroke is Octopus['VectorStroke'] => Boolean(stroke))
   }
 
   private _parsePostScriptName(textStyle: SourceTextStyle): string | null {
@@ -94,7 +91,7 @@ export class OctopusLayerText extends OctopusLayerBase {
     return lhPercent === 100 ? 0 : notZero(lhPx ?? 0)
   }
 
-  private _getStyle(textStyle: SourceTextStyle): Octopus['TextStyle'] | null {
+  private async _getStyle(textStyle: SourceTextStyle): Promise<Octopus['TextStyle'] | null> {
     const font = this._getFont(textStyle)
     const fontSize = textStyle.fontSize
     const lineHeight = this._getLineHeight(textStyle)
@@ -107,13 +104,13 @@ export class OctopusLayerText extends OctopusLayerBase {
     const underline = textDecoration === undefined ? undefined : textDecoration === 'UNDERLINE' ? 'SINGLE' : 'NONE'
     const linethrough = textDecoration === undefined ? undefined : textDecoration === 'STRIKETHROUGH'
 
-    const fills = textStyle.textFills && this._getFills(textStyle.textFills)
+    const fills = textStyle.textFills && (await this._getFills(textStyle.textFills))
 
     return { font, fontSize, lineHeight, kerning, letterSpacing, underline, linethrough, letterCase, fills }
   }
 
   @firstCallMemo()
-  private get _defaultStyle(): Octopus['TextStyle'] | null {
+  private async _defaultStyle(): Promise<Octopus['TextStyle'] | null> {
     const textStyle = this.sourceLayer.defaultStyle
     if (!textStyle) return null
     const font = this._getFont(textStyle)
@@ -133,14 +130,14 @@ export class OctopusLayerText extends OctopusLayerBase {
     const underline = textDecoration === 'UNDERLINE' ? 'SINGLE' : undefined
     const linethrough = textDecoration === 'STRIKETHROUGH' ? true : undefined
 
-    const fills = textStyle.textFills?.length ? this._getFills(textStyle.textFills) : this._fills
-    const strokes = this._strokes
+    const fills = textStyle.textFills?.length ? await this._getFills(textStyle.textFills) : await this._fills()
+    const strokes = await this._strokes()
 
     return { font, fontSize, lineHeight, kerning, letterSpacing, underline, linethrough, letterCase, fills, strokes }
   }
 
   @firstCallMemo()
-  private get _styles(): Octopus['StyleRange'][] {
+  private async _styles(): Promise<Octopus['StyleRange'][]> {
     const overrideMap = this.sourceLayer.characterStyleOverrides.reduce((overrideMap, key, index) => {
       const arr = overrideMap[key]
       if (arr) {
@@ -153,19 +150,22 @@ export class OctopusLayerText extends OctopusLayerBase {
 
     const overrideTable = this.sourceLayer.styleOverrideTable
 
-    return Object.keys(overrideMap).reduce((styleRanges, key) => {
-      const sourceStyle = overrideTable[key]
-      if (!sourceStyle) return styleRanges
+    const styles = await Promise.all(
+      Object.keys(overrideMap).map(async (key) => {
+        const sourceStyle = overrideTable[key]
+        if (!sourceStyle) return null
 
-      const style = this._getStyle(sourceStyle)
-      if (!style) return styleRanges
+        const style = await this._getStyle(sourceStyle)
+        if (!style) return null
 
-      const positions = overrideMap[key]
-      if (!positions) return styleRanges
-      const ranges = positions.map((from) => ({ from, to: from + 1 }))
+        const positions = overrideMap[key]
+        if (!positions) return null
+        const ranges = positions.map((from) => ({ from, to: from + 1 }))
 
-      return push(styleRanges, { style, ranges })
-    }, [])
+        return { style, ranges }
+      })
+    )
+    return styles.filter((style): style is Octopus['StyleRange'] => Boolean(style))
   }
 
   get horizontalAlign(): Octopus['Text']['horizontalAlign'] {
@@ -187,11 +187,11 @@ export class OctopusLayerText extends OctopusLayerBase {
     return { mode, size }
   }
 
-  private get _text(): Octopus['Text'] | null {
+  private async _text(): Promise<Octopus['Text'] | null> {
     const value = this.sourceLayer.characters
-    const defaultStyle = this._defaultStyle
+    const defaultStyle = await this._defaultStyle()
     if (!defaultStyle) return null
-    const styles = this._styles
+    const styles = await this._styles()
     const horizontalAlign = this.horizontalAlign
     const verticalAlign = this.sourceLayer.defaultStyle?.textAlignVertical
     const frame = this._frame
@@ -202,18 +202,18 @@ export class OctopusLayerText extends OctopusLayerBase {
     return normalizeText(text)
   }
 
-  private _convertTypeSpecific(): LayerSpecifics<Octopus['TextLayer']> | null {
-    const text = this._text
+  private async _convertTypeSpecific(): Promise<LayerSpecifics<Octopus['TextLayer']> | null> {
+    const text = await this._text()
     if (!text) return null
 
     return { type: 'TEXT', text }
   }
 
-  convert(): Octopus['TextLayer'] | null {
+  async convert(): Promise<Octopus['TextLayer'] | null> {
     const common = this.convertBase()
     if (!common) return null
 
-    const specific = this._convertTypeSpecific()
+    const specific = await this._convertTypeSpecific()
     if (!specific) return null
 
     return { ...common, ...specific }
