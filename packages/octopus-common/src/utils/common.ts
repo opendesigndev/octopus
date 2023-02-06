@@ -76,7 +76,7 @@ export function push<T, U>(arr: (T | U)[], ...values: U[]): (T | U)[] {
 }
 
 /** language-sensitive string compare function for array sort */
-export const compare = (() => {
+export const compareStrings = (() => {
   const collator = new Intl.Collator('en-US')
   return (a: string, b: string) => collator.compare(a, b)
 })()

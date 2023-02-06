@@ -1,6 +1,6 @@
 import crc32 from 'crc-32'
 
-import { compare, isObject } from './common'
+import { compareStrings, isObject } from './common'
 
 export function hashOf(value: unknown): string {
   const hash = crc32.str(JSON.stringify(value))
@@ -9,7 +9,7 @@ export function hashOf(value: unknown): string {
 }
 
 export function hashOfObjectSeed(seed: Array<[string, unknown]>): string {
-  return hashOf(seed.slice().sort((a, b) => compare(String(a[0]), String(b[0]))))
+  return hashOf(seed.slice().sort((a, b) => compareStrings(String(a[0]), String(b[0]))))
 }
 
 export function hashOfArraySeed(seed: Array<unknown>): string {
