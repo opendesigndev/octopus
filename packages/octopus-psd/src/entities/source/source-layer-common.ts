@@ -1,6 +1,7 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
+import { isBlendMode } from '../../utils/blend-modes.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import PROPS from '../../utils/prop-names.js'
 import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
@@ -111,7 +112,9 @@ export class SourceLayerCommon extends SourceEntity {
 
     const layerBlendMode = this._rawValue.blendMode
 
-    return (layerPropBlendMode ?? layerBlendMode) as keyof typeof BLEND_MODES | undefined
+    const blendMode = layerPropBlendMode ?? layerBlendMode
+
+    return isBlendMode(blendMode) ? blendMode : undefined
   }
 
   get clipped(): boolean {

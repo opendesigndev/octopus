@@ -56,3 +56,7 @@ const BLEND_MODES = {
 } as const
 
 export default BLEND_MODES
+
+export function isBlendMode(rawBlendMode: string | undefined): rawBlendMode is keyof typeof BLEND_MODES {
+  return rawBlendMode ? rawBlendMode in BLEND_MODES : false
+}

@@ -1,12 +1,14 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { isBlendMode } from '../../utils/blend-modes.js'
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { OctopusEffectBevelEmboss } from '../octopus/octopus-effect-bevel-emboss.js'
 import { SourceEffectBase } from './source-effect-base.js'
 
 import type { RawEffectBevelEmboss } from '../../typings/raw'
 import type { SourceColor } from '../../typings/source'
+import type BLEND_MODES from '../../utils/blend-modes.js'
 
 export class SourceEffectBevelEmboss extends SourceEffectBase {
   protected _rawValue: RawEffectBevelEmboss | undefined
@@ -39,8 +41,8 @@ export class SourceEffectBevelEmboss extends SourceEffectBase {
     return asFiniteNumber(this._rawValue?.Lald, 0)
   }
 
-  get highlightMode(): string | undefined {
-    return this._rawValue?.hglM
+  get highlightMode(): keyof typeof BLEND_MODES | undefined {
+    return isBlendMode(this._rawValue?.hglM) ? this._rawValue?.hglM : undefined
   }
 
   get highlightColor(): SourceColor | null {
@@ -51,8 +53,8 @@ export class SourceEffectBevelEmboss extends SourceEffectBase {
     return getUnitRatioFor(this._rawValue?.hglO)
   }
 
-  get shadowMode(): string | undefined {
-    return this._rawValue?.sdwM
+  get shadowMode(): keyof typeof BLEND_MODES | undefined {
+    return isBlendMode(this._rawValue?.sdwM) ? this._rawValue?.sdwM : undefined
   }
 
   get shadowColor(): SourceColor | null {
