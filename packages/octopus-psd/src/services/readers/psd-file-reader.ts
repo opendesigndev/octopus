@@ -199,7 +199,12 @@ export class PSDFileReader {
       return
     }
 
-    const id = layer.additionalProperties?.[AliKey.LayerId]?.value ?? 'undefined'
+    const id = layer.additionalProperties?.[AliKey.LayerId]?.value
+
+    if (!id) {
+      throw new Error('_convertImages: layer id is undefined')
+    }
+
     const { width, height } = layer
 
     if (width === 1 && height === 1) {
