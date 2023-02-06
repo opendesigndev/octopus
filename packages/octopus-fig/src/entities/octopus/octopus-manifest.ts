@@ -150,7 +150,12 @@ export class OctopusManifest {
   }
 
   get manifestVersion(): string {
-    return this._octopusConverter.pkg.version
+    return this._octopusConverter.pkg.manifestSpecVersion
+  }
+
+  get meta(): Manifest['OctopusManifestMeta'] {
+    const converterVersion = this._octopusConverter.pkg.version
+    return { converterVersion }
   }
 
   get figVersion(): string {
@@ -328,6 +333,7 @@ export class OctopusManifest {
         version: this.figVersion,
       },
       name: this.name,
+      meta: this.meta,
       pages: this.pages,
       components: await this.components(),
       chunks: this.chunks,
