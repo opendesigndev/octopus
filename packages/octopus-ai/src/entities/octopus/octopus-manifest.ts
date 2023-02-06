@@ -69,7 +69,7 @@ export class OctopusManifest {
     this._exports.artboards.set(id, path)
   }
 
-  get manifestVersion(): string {
+  get version(): string {
     return this._designConverter.octopusAIConverter.pkg.manifestSpecVersion
   }
 
@@ -169,7 +169,7 @@ export class OctopusManifest {
 
   convert(): Manifest['OctopusManifest'] {
     return {
-      version: this.manifestVersion,
+      version: this.version,
       origin: {
         name: 'illustrator',
         version: this.AIVersion,

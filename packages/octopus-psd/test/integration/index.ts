@@ -30,9 +30,7 @@ async function test() {
   const tester = new Tester(assetsReader)
 
   const failed = (await tester.test()) ?? []
-  const success = !failed.length
-
-  if (!success) {
+  if (failed.length) {
     const html = createReport(failed)
     await makeDir(path.join(fileURLToPath(new URL(import.meta.url)), '../', REPORT_FOLDER))
 
@@ -44,12 +42,12 @@ async function test() {
 
     await saveFile(reportPath, html)
 
-    console.error('FAILURE: Some tests failed!\n')
+    console.error(`❌ FAILURE: ${failed.length} tests failed!\n`)
     console.error(`file:///${reportPath}\n`)
     process.exit(1)
   }
 
-  console.info('SUCCESS: All tests passed!\n')
+  console.info(`✅ SUCCESS: All tests passed!\n`)
   process.exit(0)
 }
 

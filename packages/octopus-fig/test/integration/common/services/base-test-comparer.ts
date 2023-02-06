@@ -33,6 +33,8 @@ type MapComponentsOptions = {
   generated: Octopus['OctopusComponent'][]
 }
 
+const IGNORE_FIELDS = ['version', 'converterVersion']
+
 export abstract class BaseTestComparer {
   protected _mapComponents({ expected, generated }: MapComponentsOptions): ComponentGroup[] {
     return generated.map((generatedComponent) => {
@@ -73,9 +75,7 @@ export abstract class BaseTestComparer {
 
   protected _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
     const differ = jsondiffpatch.create({
-      propertyFilter: (name: string) => {
-        return name === 'version' ? false : true // ignore version
-      },
+      propertyFilter: (name: string) => !IGNORE_FIELDS.includes(name),
     })
 
     const failed = designs.reduce<Promise<Fail[]>>(async (failedDesign, { components, manifest, assetId }) => {
