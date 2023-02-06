@@ -1,11 +1,11 @@
 export type RawParagraphRun = Partial<{
   IsJoinable: number
   RunLengthArray: number[]
-  RunArray: ParagraphRunData[]
-  DefaultRunData: ParagraphRunData
+  RunArray: RawParagraphRunData[]
+  DefaultRunData: RawParagraphRunData
 }>
 
-export type ParagraphRunData = {
+export type RawParagraphRunData = {
   Adjustments: RawParagraphRunDataAdjustments
   ParagraphSheet: RawParagraphRunDataParagraphSheet
 }

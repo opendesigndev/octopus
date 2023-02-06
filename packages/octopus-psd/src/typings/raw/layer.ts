@@ -14,14 +14,14 @@ export type RawLayerCommon = {
   isHidden: boolean
 }
 
-export type LayerPropertiesArtboard = Partial<{
+export type RawLayerPropertiesArtboard = Partial<{
   artboardBackgroundType: number
   Clr: RawColor
   artboardPresentName: string
   artboardRect: RawBounds
 }>
 
-export type FillOpacity = Partial<{
+export type RawFillOpacity = Partial<{
   fillOpacity: number
 }>
 
@@ -36,8 +36,8 @@ export type RawLayerBlendProps = Partial<{
 
 export type RawLayerProperties = Partial<{
   lyid: number | string
-  artb: LayerPropertiesArtboard
-  iOpa: FillOpacity
+  artb: RawLayerPropertiesArtboard
+  iOpa: RawFillOpacity
   lfx2: RawlayerEffects
   SoCo: RawFill
   GdFl: RawFill
