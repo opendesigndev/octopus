@@ -1,26 +1,23 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusFill } from './octopus-fill'
 import { OctopusPath } from './octopus-path'
 
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerContainer } from '../source/source-layer-container'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerText } from '../source/source-layer-text'
 import type { SourcePaint } from '../source/source-paint'
 
-type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerContainer
-
 type OctopusStrokeOptions = {
-  sourceLayer: SourceLayer
+  parentLayer: OctopusLayer
   fill: SourcePaint
 }
 
 export class OctopusStroke {
-  protected _sourceLayer: SourceLayer
+  protected _parentLayer: OctopusLayer
   private _fill: SourcePaint
   protected _path: OctopusPath
 
@@ -34,21 +31,23 @@ export class OctopusStroke {
     SQUARE: 'SQUARE',
   } as const
 
-  static convertStrokes(strokes: SourcePaint[], sourceLayer: SourceLayer): Octopus['VectorStroke'][] {
-    return strokes.reduce((strokes: Octopus['VectorStroke'][], fill: SourcePaint) => {
-      const stroke = new OctopusStroke({ fill, sourceLayer }).convert()
-      return stroke ? push(strokes, stroke) : strokes
-    }, [])
+  static convertStrokes(strokes: SourcePaint[], parentLayer: OctopusLayer): Promise<Octopus['VectorStroke'][]> {
+    const octopusStrokes = strokes.map((fill) => new OctopusStroke({ fill, parentLayer }))
+    return getConvertedAsync(octopusStrokes)
   }
 
   constructor(options: OctopusStrokeOptions) {
-    this._sourceLayer = options.sourceLayer
+    this._parentLayer = options.parentLayer
     this._fill = options.fill
-    this._path = new OctopusPath({ sourceLayer: options.sourceLayer, isStroke: true })
+    this._path = new OctopusPath({ sourceLayer: options.parentLayer.sourceLayer, isStroke: true })
+  }
+
+  get sourceLayer(): SourceLayer {
+    return this._parentLayer.sourceLayer
   }
 
   get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
-    const strokeAlign = this._sourceLayer.strokeAlign
+    const strokeAlign = this.sourceLayer.strokeAlign
     if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
       logger?.warn('Unknown Stroke Align', { strokeAlign })
       return null
@@ -57,7 +56,7 @@ export class OctopusStroke {
   }
 
   get lineCap(): 'BUTT' | 'ROUND' | 'SQUARE' {
-    const strokeCap = this._sourceLayer.strokeCap
+    const strokeCap = this.sourceLayer.strokeCap
     const result = getMapped(strokeCap, OctopusStroke.STROKE_CAP_MAP, undefined)
     if (!result) {
       logger?.warn('Unknown Stroke Cap', { strokeCap })
@@ -67,7 +66,7 @@ export class OctopusStroke {
   }
 
   get lineJoin(): 'ROUND' | 'MITER' | 'BEVEL' | null {
-    const strokeJoin = this._sourceLayer.strokeJoin
+    const strokeJoin = this.sourceLayer.strokeJoin
     if (!OctopusStroke.STROKE_JOINS.includes(strokeJoin)) {
       logger?.warn('Unknown Stroke join', { strokeJoin })
       return null
@@ -76,8 +75,8 @@ export class OctopusStroke {
   }
 
   @firstCallMemo()
-  get fill(): Octopus['Fill'] | null {
-    return new OctopusFill({ fill: this._fill, parentLayer: this._sourceLayer }).convert()
+  async fill(): Promise<Octopus['Fill'] | null> {
+    return new OctopusFill({ fill: this._fill, parentLayer: this._parentLayer }).convert()
   }
 
   get style(): Octopus['VectorStroke']['style'] {
@@ -85,7 +84,7 @@ export class OctopusStroke {
   }
 
   get dashing(): number[] {
-    return this._sourceLayer.strokeDashes ?? []
+    return this.sourceLayer.strokeDashes ?? []
   }
 
   get visible(): boolean {
@@ -93,11 +92,11 @@ export class OctopusStroke {
   }
 
   get thickness(): number {
-    return this._sourceLayer.strokeWeight
+    return this.sourceLayer.strokeWeight
   }
 
   get miterLimit(): number {
-    return this._sourceLayer.strokeMiterAngle
+    return this.sourceLayer.strokeMiterAngle
   }
 
   get path(): Octopus['PathLike'] | undefined {
@@ -109,8 +108,8 @@ export class OctopusStroke {
     return this._path.fillRule
   }
 
-  convert(): Octopus['VectorStroke'] | null {
-    const fill = this.fill
+  async convert(): Promise<Octopus['VectorStroke'] | null> {
+    const fill = await this.fill()
     const position = this.position
     const lineJoin = this.lineJoin
     const lineCap = this.lineCap

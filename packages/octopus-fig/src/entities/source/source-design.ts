@@ -4,7 +4,7 @@ import { SourcePage } from './source-page'
 import type { RawComponent, RawComponents, RawComponentSets, RawDesign, RawStyles } from '../../typings/raw'
 
 type SourceDesignOptions = {
-  raw: RawDesign
+  raw?: RawDesign
   designId: string
 }
 
@@ -14,7 +14,7 @@ export class SourceDesign extends SourceEntity {
   private _pages: SourcePage[]
 
   constructor(options: SourceDesignOptions) {
-    super(options.raw)
+    super(options.raw ?? {})
     this._pages = options.raw?.document?.children?.map((page) => new SourcePage(page)) ?? []
     this._designId = options.designId
   }

@@ -1,0 +1,579 @@
+{
+  "id": "377-19",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 741,
+    "height": 380
+  },
+  "content": {
+    "id": "377-19-Background",
+    "name": "bug-opacity",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "NORMAL",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "377-19-BackgroundMask",
+      "name": "bug-opacity",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 741,
+            "y0": 0,
+            "y1": 380
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.9529,
+              "g": 0.9529,
+              "b": 0.9529,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "377-20-Background",
+        "name": "car BUG",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "377-20-BackgroundMask",
+          "name": "car BUG",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 361,
+                "y0": 0,
+                "y1": 361
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          361,
+          0
+        ],
+        "layers": [
+          {
+            "id": "377-21",
+            "name": "car",
+            "type": "GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              18.77911376953125,
+              31.28692626953125
+            ],
+            "effects": [],
+            "layers": [
+              {
+                "id": "377-22",
+                "name": "bottom",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 0.4,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  122.89016723632812
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {},
+                    "geometry": "M314.845,51.2921c-2.256,-24.8188 -8.874,-51.2921 -57.158,-51.2921h-191.9316c-48.2837,0 -54.7517,26.4733 -57.15832,51.2921l-8.42334,91.6039c-1.05292,11.432 2.7075,22.863 10.52916,31.437c7.9721,8.724 19.2533,13.688 31.2867,13.688h28.2783c24.3675,0 29.0304,-13.989 32.0391,-23.164l3.008,-9.025c3.46,-10.379 4.362,-12.936 17.9,-12.936h77.013c13.537,0 13.989,1.504 17.9,12.936l3.008,9.025c3.008,9.175 7.671,23.164 32.039,23.164h28.278c11.883,0 23.315,-4.964 31.287,-13.688c7.821,-8.574 11.582,-20.005 10.529,-31.437z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0.0902,
+                        "g": 0.1686,
+                        "b": 0.5294,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": []
+                }
+              },
+              {
+                "id": "377-23",
+                "name": "top",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 0.8,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  15.064620971679688,
+                  0
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {},
+                    "geometry": "M282.031,77.7654h-15.041c-0.151,0 -0.151,0 -0.301,0l-5.716,-27.2254c-5.415,-26.3229 -16.696,-50.54 -61.52,-50.54h-41.515h-22.563h-41.515c-44.8242,0 -56.1054,24.2171 -61.5204,50.54l-5.7158,27.2254c-0.1505,0 -0.1505,0 -0.3009,0h-15.0416c-6.16713,0 -11.2813,5.1142 -11.2813,11.2813c0,6.1671 5.11417,11.2813 11.2813,11.2813h10.6795l-6.3175,30.083c8.1225,-4.663 19.4038,-7.521 35.0471,-7.521h191.9316c15.643,0 26.925,2.858 35.047,7.521l-6.317,-30.083h10.679c6.167,0 11.282,-5.1142 11.282,-11.2813c0,-6.1671 -5.115,-11.2813 -11.282,-11.2813z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0.0902,
+                        "g": 0.1686,
+                        "b": 0.5294,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": []
+                }
+              },
+              {
+                "id": "377-24",
+                "name": "left",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 0.8,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  60.18962478637695,
+                  183.0568389892578
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {},
+                    "geometry": "M56.4063,22.5625h-45.125c-6.16713,0 -11.2813,-5.1142 -11.2813,-11.2812c0,-6.16713 5.11417,-11.2813 11.2813,-11.2813h45.125c6.167,0 11.2812,5.11417 11.2812,11.2813c0,6.167 -5.1142,11.2812 -11.2812,11.2812z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0.0902,
+                        "g": 0.1686,
+                        "b": 0.5294,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "strokes": []
+                }
+              },
+              {
+                "id": "377-25",
+                "name": "right",
+                "type": "SHAPE",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  195.56463623046875,
+                  183.0568389892578
+                ],
+                "effects": [],
+                "shape": {
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {},
+                    "geometry": "M56.4063,22.5625h-45.125c-6.16713,0 -11.2813,-5.1142 -11.2813,-11.2812c0,-6.16713 5.11417,-11.2813 11.2813,-11.2813h45.125c6.167,0 11.2812,5.11417 11.2812,11.2813c0,6.167 -5.1142,11.2812 -11.2812,11.2812z"
+                  },
+                  "fillRule": "NON_ZERO",
+                  "fills": [
+                    {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0.0902,
+                        "g": 0.1686,
+                        "b": 0.5294,
+                        "a": 0.8
+                      }
+                    }
+                  ],
+                  "strokes": []
+                }
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "377-26",
+        "name": "car OK",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          18.778215408325195,
+          31.28692626953125
+        ],
+        "effects": [],
+        "layers": [
+          {
+            "id": "377-27",
+            "name": "Vector",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.4,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              122.89016723632812
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M314.845,51.2921c-2.256,-24.8188 -8.874,-51.2921 -57.158,-51.2921h-191.9316c-48.2837,0 -54.7517,26.4733 -57.15832,51.2921l-8.42334,91.6039c-1.05292,11.432 2.7075,22.863 10.52916,31.437c7.9721,8.724 19.2533,13.688 31.2867,13.688h28.2783c24.3675,0 29.0304,-13.989 32.0391,-23.164l3.008,-9.025c3.46,-10.379 4.362,-12.936 17.9,-12.936h77.013c13.537,0 13.989,1.504 17.9,12.936l3.008,9.025c3.008,9.175 7.671,23.164 32.039,23.164h28.278c11.883,0 23.315,-4.964 31.287,-13.688c7.821,-8.574 11.582,-20.005 10.529,-31.437z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.0902,
+                    "g": 0.1686,
+                    "b": 0.5294,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "377-28",
+            "name": "Vector",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              15.06553840637207,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M282.031,77.7654h-15.041c-0.151,0 -0.151,0 -0.301,0l-5.716,-27.2254c-5.415,-26.3229 -16.696,-50.54 -61.52,-50.54h-41.515h-22.563h-41.515c-44.8242,0 -56.1054,24.2171 -61.5204,50.54l-5.7158,27.2254c-0.1505,0 -0.1505,0 -0.3009,0h-15.0416c-6.16713,0 -11.2813,5.1142 -11.2813,11.2813c0,6.1671 5.11417,11.2813 11.2813,11.2813h10.6795l-6.3175,30.083c8.1225,-4.663 19.4038,-7.521 35.0471,-7.521h191.9316c15.643,0 26.925,2.858 35.047,7.521l-6.317,-30.083h10.679c6.167,0 11.282,-5.1142 11.282,-11.2813c0,-6.1671 -5.115,-11.2813 -11.282,-11.2813z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.0902,
+                    "g": 0.1686,
+                    "b": 0.5294,
+                    "a": 0.8
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "377-29",
+            "name": "Vector",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              60.19054412841797,
+              183.0568389892578
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M56.4063,22.5625h-45.125c-6.16713,0 -11.2813,-5.1142 -11.2813,-11.2812c0,-6.16713 5.11417,-11.2813 11.2813,-11.2813h45.125c6.167,0 11.2812,5.11417 11.2812,11.2813c0,6.167 -5.1142,11.2812 -11.2812,11.2812z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.0902,
+                    "g": 0.1686,
+                    "b": 0.5294,
+                    "a": 0.8
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "377-30",
+            "name": "Vector",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              195.5655517578125,
+              183.0568389892578
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M56.4063,22.5625h-45.125c-6.16713,0 -11.2813,-5.1142 -11.2813,-11.2812c0,-6.16713 5.11417,-11.2813 11.2813,-11.2813h45.125c6.167,0 11.2812,5.11417 11.2812,11.2813c0,6.167 -5.1142,11.2812 -11.2812,11.2812z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.0902,
+                    "g": 0.1686,
+                    "b": 0.5294,
+                    "a": 0.8
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

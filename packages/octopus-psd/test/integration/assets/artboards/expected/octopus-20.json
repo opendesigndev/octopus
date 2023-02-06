@@ -1,7 +1,12 @@
 {
   "id": "20",
+<<<<<<< HEAD
   "type": "ARTBOARD",
   "version": "3.0.0-webtoon-20230131",
+=======
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.9",
+>>>>>>> main
   "dimensions": {
     "width": 390,
     "height": 312

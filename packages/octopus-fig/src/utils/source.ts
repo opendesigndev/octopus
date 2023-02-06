@@ -46,9 +46,10 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   }))
 }
 
-export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' {
+export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceLayer.type === 'COMPONENT') return 'COMPONENT'
+  if (source.parentType && source.parentType !== 'PAGE') return 'PARTIAL'
   return 'ARTBOARD'
 }
 

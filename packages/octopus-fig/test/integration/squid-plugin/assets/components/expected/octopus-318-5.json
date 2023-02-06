@@ -1,0 +1,1683 @@
+{
+  "id": "318-5",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 850,
+    "height": 650
+  },
+  "content": {
+    "id": "318-5-Background",
+    "name": "Frame 1",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "318-5-BackgroundMask",
+      "name": "Frame 1",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 850,
+            "y0": 0,
+            "y1": 650
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 0.5
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "318-7-Background",
+        "name": "BUTTON COMP",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "318-7-BackgroundMask",
+          "name": "BUTTON COMP",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 30
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 0.3375,
+                  "b": 0.3375,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          200
+        ],
+        "layers": [
+          {
+            "id": "I318-7_2-4",
+            "name": "Hello",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              25,
+              25
+            ],
+            "effects": [],
+            "text": {
+              "value": "Button",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Arial",
+                  "family": "Arial",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 36,
+                "letterSpacing": 0,
+                "letterCase": "NONE",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "CENTER",
+              "verticalAlign": "CENTER",
+              "frame": {
+                "mode": "FIXED",
+                "size": {
+                  "width": 250,
+                  "height": 50
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "318-8-Background",
+        "name": "BUTTON COMP",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "318-8-BackgroundMask",
+          "name": "BUTTON COMP",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 30
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.3958,
+                  "g": 0.565,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          350
+        ],
+        "layers": [
+          {
+            "id": "I318-8_2-4",
+            "name": "Hello",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              25,
+              25
+            ],
+            "effects": [],
+            "text": {
+              "value": "Button 3",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Arial",
+                  "family": "Arial",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 36,
+                "letterSpacing": 0,
+                "letterCase": "NONE",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "CENTER",
+              "verticalAlign": "CENTER",
+              "frame": {
+                "mode": "FIXED",
+                "size": {
+                  "width": 250,
+                  "height": 50
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "318-43-Background",
+        "name": "Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "318-43-BackgroundMask",
+          "name": "Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 40
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.5375,
+                  "g": 0.3516,
+                  "b": 0.625,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                "thickness": 6,
+                "position": "CENTER",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "meta": {
+                    "sourceShape": "RECTANGLE"
+                  },
+                  "geometry": "M40,3h220v-6h-220zM297,40v20h6v-20zM260,97h-220v6h220zM3,60v-20h-6v20zM40,97c-20.4345,0 -37,-16.5655 -37,-37h-6c0,23.7482 19.2518,43 43,43zM297,60c0,20.4345 -16.565,37 -37,37v6c23.748,0 43,-19.2518 43,-43zM260,3c20.435,0 37,16.5655 37,37h6c0,-23.7482 -19.252,-43 -43,-43zM40,-3c-23.7482,0 -43,19.2518 -43,43h6c0,-20.4345 16.5655,-37 37,-37z"
+                }
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          450,
+          200
+        ],
+        "layers": [
+          {
+            "id": "I318-43_318-15",
+            "name": "Hello",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              25,
+              25
+            ],
+            "effects": [],
+            "text": {
+              "value": "Button",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Arial-Bold",
+                  "family": "Arial",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 36,
+                "letterSpacing": 0,
+                "letterCase": "UPPERCASE",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "CENTER",
+              "verticalAlign": "CENTER",
+              "frame": {
+                "mode": "FIXED",
+                "size": {
+                  "width": 250,
+                  "height": 50
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "318-45-Background",
+        "name": "Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "318-45-BackgroundMask",
+          "name": "Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 40
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.4062,
+                  "g": 0.625,
+                  "b": 0.3516,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                "thickness": 6,
+                "position": "CENTER",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "meta": {
+                    "sourceShape": "RECTANGLE"
+                  },
+                  "geometry": "M40,3h220v-6h-220zM297,40v20h6v-20zM260,97h-220v6h220zM3,60v-20h-6v20zM40,97c-20.4345,0 -37,-16.5655 -37,-37h-6c0,23.7482 19.2518,43 43,43zM297,60c0,20.4345 -16.565,37 -37,37v6c23.748,0 43,-19.2518 43,-43zM260,3c20.435,0 37,16.5655 37,37h6c0,-23.7482 -19.252,-43 -43,-43zM40,-3c-23.7482,0 -43,19.2518 -43,43h6c0,-20.4345 16.5655,-37 37,-37z"
+                }
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          450,
+          350
+        ],
+        "layers": [
+          {
+            "id": "I318-45_318-15",
+            "name": "Hello",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              25,
+              25
+            ],
+            "effects": [],
+            "text": {
+              "value": "Button 3",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Arial-Bold",
+                  "family": "Arial",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 36,
+                "letterSpacing": 0,
+                "letterCase": "UPPERCASE",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "CENTER",
+              "verticalAlign": "CENTER",
+              "frame": {
+                "mode": "FIXED",
+                "size": {
+                  "width": 250,
+                  "height": 50
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "325-10-Background",
+        "name": "Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "BODY_EMBED",
+        "mask": {
+          "id": "325-10-BackgroundMask",
+          "name": "Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 750,
+                "y0": 0,
+                "y1": 148
+              },
+              "cornerRadius": 5
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [],
+            "strokes": [
+              {
+                "style": "SOLID",
+                "dashing": [],
+                "visible": true,
+                "fill": {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.5922,
+                    "g": 0.2784,
+                    "b": 1,
+                    "a": 1
+                  }
+                },
+                "thickness": 2,
+                "position": "INSIDE",
+                "lineJoin": "MITER",
+                "lineCap": "BUTT",
+                "miterLimit": 28.96,
+                "fillRule": "NON_ZERO",
+                "path": {
+                  "type": "PATH",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "meta": {
+                    "sourceShape": "RECTANGLE"
+                  },
+                  "geometry": "M5,147c-0.54421,0 -1.06065,-0.108 -1.53089,-0.303l-0.76611,1.847c0.70884,0.294 1.48529,0.456 2.297,0.456zM1.30313,144.531c-0.195,-0.47 -0.30313,-0.987 -0.30313,-1.531h-2c0,0.812 0.16173,1.588 0.45568,2.297zM1,143v-2.029h-2v2.029zM1,136.912v-4.059h-2v4.059zM1,128.794v-4.059h-2v4.059zM1,120.676v-4.058h-2v4.058zM1,112.559v-4.059h-2v4.059zM1,104.441v-4.059h-2v4.059zM1,96.3235v-4.0588h-2v4.0588zM1,88.2059v-4.0588h-2v4.0588zM1,80.0882v-4.0588h-2v4.0588zM1,71.9706v-4.0588h-2v4.0588zM1,63.8529v-4.0588h-2v4.0588zM1,55.7353v-4.0588h-2v4.0588zM1,47.6177v-4.0589h-2v4.0589zM1,39.5v-4.0588h-2v4.0588zM1,31.3824v-4.0588h-2v4.0588zM1,23.2647v-4.0588h-2v4.0588zM1,15.1471v-4.0588h-2v4.0588zM1,7.02943v-2.02943h-2v2.02943zM1,5c0,-0.54421 0.10813,-1.06064 0.30313,-1.53088l-1.84745,-0.76611c-0.29394,0.70883 -0.45568,1.48528 -0.45568,2.29699zM3.46912,1.30313c0.47024,-0.195 0.98667,-0.30313 1.53088,-0.30313v-2c-0.81171,0 -1.58816,0.16173 -2.29699,0.45568zM5,1h1.98925v-2h-1.98925zM10.9677,1h3.9785v-2h-3.9785zM18.9247,1h3.9785v-2h-3.9785zM26.8817,1h3.9785v-2h-3.9785zM34.8387,1h3.9785v-2h-3.9785zM42.7957,1h3.9785v-2h-3.9785zM50.7527,1h3.9785v-2h-3.9785zM58.7097,1h3.9785v-2h-3.9785zM66.6667,1h3.9784v-2h-3.9784zM74.6236,1h3.9785v-2h-3.9785zM82.5806,1h3.9785v-2h-3.9785zM90.5376,1h3.9785v-2h-3.9785zM98.4946,1h3.9784v-2h-3.9784zM106.452,1h3.978v-2h-3.978zM114.409,1h3.978v-2h-3.978zM122.366,1h3.978v-2h-3.978zM130.323,1h3.978v-2h-3.978zM138.28,1h3.978v-2h-3.978zM146.237,1h3.978v-2h-3.978zM154.194,1h3.978v-2h-3.978zM162.151,1h3.978v-2h-3.978zM170.108,1h3.978v-2h-3.978zM178.065,1h3.978v-2h-3.978zM186.022,1h3.978v-2h-3.978zM193.979,1h3.978v-2h-3.978zM201.936,1h3.978v-2h-3.978zM209.893,1h3.978v-2h-3.978zM217.85,1h3.978v-2h-3.978zM225.807,1h3.978v-2h-3.978zM233.764,1h3.978v-2h-3.978zM241.721,1h3.978v-2h-3.978zM249.678,1h3.978v-2h-3.978zM257.635,1h3.978v-2h-3.978zM265.592,1h3.978v-2h-3.978zM273.548,1h3.979v-2h-3.979zM281.505,1h3.979v-2h-3.979zM289.462,1h3.979v-2h-3.979zM297.419,1h3.979v-2h-3.979zM305.376,1h3.979v-2h-3.979zM313.333,1h3.979v-2h-3.979zM321.29,1h3.979v-2h-3.979zM329.247,1h3.979v-2h-3.979zM337.204,1h3.979v-2h-3.979zM345.161,1h3.979v-2h-3.979zM353.118,1h3.979v-2h-3.979zM361.075,1h3.979v-2h-3.979zM369.032,1h3.979v-2h-3.979zM376.989,1h3.979v-2h-3.979zM384.946,1h3.979v-2h-3.979zM392.903,1h3.979v-2h-3.979zM400.86,1h3.979v-2h-3.979zM408.817,1h3.979v-2h-3.979zM416.774,1h3.978v-2h-3.978zM424.731,1h3.978v-2h-3.978zM432.688,1h3.978v-2h-3.978zM440.645,1h3.978v-2h-3.978zM448.602,1h3.978v-2h-3.978zM456.559,1h3.978v-2h-3.978zM464.516,1h3.978v-2h-3.978zM472.473,1h3.978v-2h-3.978zM480.43,1h3.978v-2h-3.978zM488.387,1h3.978v-2h-3.978zM496.344,1h3.978v-2h-3.978zM504.301,1h3.978v-2h-3.978zM512.258,1h3.978v-2h-3.978zM520.215,1h3.978v-2h-3.978zM528.172,1h3.978v-2h-3.978zM536.129,1h3.978v-2h-3.978zM544.086,1h3.978v-2h-3.978zM552.043,1h3.978v-2h-3.978zM560,1h3.978v-2h-3.978zM567.957,1h3.978v-2h-3.978zM575.914,1h3.978v-2h-3.978zM583.871,1h3.978v-2h-3.978zM591.828,1h3.978v-2h-3.978zM599.785,1h3.978v-2h-3.978zM607.742,1h3.978v-2h-3.978zM615.699,1h3.978v-2h-3.978zM623.656,1h3.979v-2h-3.979zM631.613,1h3.979v-2h-3.979zM639.57,1h3.979v-2h-3.979zM647.527,1h3.979v-2h-3.979zM655.484,1h3.979v-2h-3.979zM663.441,1h3.979v-2h-3.979zM671.398,1h3.979v-2h-3.979zM679.355,1h3.979v-2h-3.979zM687.312,1h3.979v-2h-3.979zM695.269,1h3.979v-2h-3.979zM703.226,1h3.979v-2h-3.979zM711.183,1h3.979v-2h-3.979zM719.14,1h3.979v-2h-3.979zM727.097,1h3.979v-2h-3.979zM735.054,1h3.979v-2h-3.979zM743.011,1h1.989v-2h-1.989zM745,1c0.544,0 1.061,0.10813 1.531,0.30313l0.766,-1.84745c-0.709,-0.29394 -1.485,-0.45568 -2.297,-0.45568zM748.697,3.46911c0.195,0.47025 0.303,0.98668 0.303,1.53089h2c0,-0.81171 -0.162,-1.58816 -0.456,-2.29699zM749,5v2.02941h2v-2.02941zM749,11.0882v4.0589h2v-4.0589zM749,19.2059v4.0588h2v-4.0588zM749,27.3235v4.0589h2v-4.0589zM749,35.4412v4.0588h2v-4.0588zM749,43.5588v4.0588h2v-4.0588zM749,51.6765v4.0588h2v-4.0588zM749,59.7941v4.0588h2v-4.0588zM749,67.9118v4.0588h2v-4.0588zM749,76.0294v4.0588h2v-4.0588zM749,84.147v4.0589h2v-4.0589zM749,92.2647v4.0588h2v-4.0588zM749,100.382v4.059h2v-4.059zM749,108.5v4.059h2v-4.059zM749,116.618v4.058h2v-4.058zM749,124.735v4.059h2v-4.059zM749,132.853v4.059h2v-4.059zM749,140.971v2.029h2v-2.029zM749,143c0,0.544 -0.108,1.061 -0.303,1.531l1.847,0.766c0.294,-0.709 0.456,-1.485 0.456,-2.297zM746.531,146.697c-0.47,0.195 -0.987,0.303 -1.531,0.303v2c0.812,0 1.588,-0.162 2.297,-0.456zM745,147h-1.989v2h1.989zM739.032,147h-3.978v2h3.978zM731.075,147h-3.978v2h3.978zM723.118,147h-3.978v2h3.978zM715.161,147h-3.978v2h3.978zM707.204,147h-3.978v2h3.978zM699.247,147h-3.978v2h3.978zM691.29,147h-3.978v2h3.978zM683.333,147h-3.978v2h3.978zM675.376,147h-3.978v2h3.978zM667.419,147h-3.978v2h3.978zM659.462,147h-3.978v2h3.978zM651.505,147h-3.978v2h3.978zM643.548,147h-3.978v2h3.978zM635.591,147h-3.978v2h3.978zM627.634,147h-3.978v2h3.978zM619.677,147h-3.978v2h3.978zM611.72,147h-3.978v2h3.978zM603.763,147h-3.978v2h3.978zM595.806,147h-3.978v2h3.978zM587.849,147h-3.978v2h3.978zM579.892,147h-3.978v2h3.978zM571.935,147h-3.978v2h3.978zM563.978,147h-3.978v2h3.978zM556.021,147h-3.978v2h3.978zM548.064,147h-3.978v2h3.978zM540.107,147h-3.978v2h3.978zM532.15,147h-3.978v2h3.978zM524.193,147h-3.978v2h3.978zM516.236,147h-3.978v2h3.978zM508.279,147h-3.978v2h3.978zM500.322,147h-3.978v2h3.978zM492.365,147h-3.978v2h3.978zM484.408,147h-3.978v2h3.978zM476.452,147h-3.979v2h3.979zM468.495,147h-3.979v2h3.979zM460.538,147h-3.979v2h3.979zM452.581,147h-3.979v2h3.979zM444.624,147h-3.979v2h3.979zM436.667,147h-3.979v2h3.979zM428.71,147h-3.979v2h3.979zM420.753,147h-3.979v2h3.979zM412.796,147h-3.979v2h3.979zM404.839,147h-3.979v2h3.979zM396.882,147h-3.979v2h3.979zM388.925,147h-3.979v2h3.979zM380.968,147h-3.979v2h3.979zM373.011,147h-3.979v2h3.979zM365.054,147h-3.979v2h3.979zM357.097,147h-3.979v2h3.979zM349.14,147h-3.979v2h3.979zM341.183,147h-3.979v2h3.979zM333.226,147h-3.978v2h3.978zM325.269,147h-3.978v2h3.978zM317.312,147h-3.978v2h3.978zM309.355,147h-3.978v2h3.978zM301.398,147h-3.978v2h3.978zM293.441,147h-3.978v2h3.978zM285.484,147h-3.978v2h3.978zM277.527,147h-3.978v2h3.978zM269.57,147h-3.978v2h3.978zM261.613,147h-3.978v2h3.978zM253.656,147h-3.978v2h3.978zM245.699,147h-3.978v2h3.978zM237.742,147h-3.978v2h3.978zM229.785,147h-3.978v2h3.978zM221.828,147h-3.978v2h3.978zM213.871,147h-3.978v2h3.978zM205.914,147h-3.978v2h3.978zM197.957,147h-3.978v2h3.978zM190,147h-3.978v2h3.978zM182.043,147h-3.978v2h3.978zM174.086,147h-3.978v2h3.978zM166.129,147h-3.978v2h3.978zM158.172,147h-3.978v2h3.978zM150.215,147h-3.978v2h3.978zM142.258,147h-3.978v2h3.978zM134.301,147h-3.979v2h3.979zM126.344,147h-3.979v2h3.979zM118.387,147h-3.979v2h3.979zM110.43,147h-3.979v2h3.979zM102.473,147h-3.9786v2h3.9786zM94.5159,147h-3.9786v2h3.9786zM86.5588,147h-3.9785v2h3.9785zM78.6018,147h-3.9785v2h3.9785zM70.6448,147h-3.9785v2h3.9785zM62.6878,147h-3.9786v2h3.9786zM54.7307,147h-3.9785v2h3.9785zM46.7737,147h-3.9785v2h3.9785zM38.8166,147h-3.9785v2h3.9785zM30.8596,147h-3.9785v2h3.9785zM22.9026,147h-3.9785v2h3.9785zM14.9456,147h-3.9786v2h3.9786zM6.98853,147h-1.98853v2h1.98853zM5,146c-0.41047,0 -0.79689,-0.081 -1.14784,-0.227l-1.53221,3.695c0.82813,0.343 1.73459,0.532 2.68005,0.532zM2.22685,144.148c-0.14553,-0.351 -0.22685,-0.738 -0.22685,-1.148h-4c0,0.945 0.18854,1.852 0.53195,2.68zM2,143v-2.029h-4v2.029zM2,136.912v-4.059h-4v4.059zM2,128.794v-4.059h-4v4.059zM2,120.676v-4.058h-4v4.058zM2,112.559v-4.059h-4v4.059zM2,104.441v-4.059h-4v4.059zM2,96.3235v-4.0588h-4v4.0588zM2,88.2059v-4.0588h-4v4.0588zM2,80.0882v-4.0588h-4v4.0588zM2,71.9706v-4.0588h-4v4.0588zM2,63.8529v-4.0588h-4v4.0588zM2,55.7353v-4.0588h-4v4.0588zM2,47.6177v-4.0589h-4v4.0589zM2,39.5v-4.0588h-4v4.0588zM2,31.3824v-4.0588h-4v4.0588zM2,23.2647v-4.0588h-4v4.0588zM2,15.1471v-4.0588h-4v4.0588zM2,7.02943v-2.02943h-4v2.02943zM2,5c0,-0.41046 0.08132,-0.79688 0.22685,-1.14783l-3.6949,-1.53222c-0.34341,0.82813 -0.53195,1.7346 -0.53195,2.68005zM3.85217,2.22685c0.35095,-0.14553 0.73737,-0.22685 1.14783,-0.22685v-4c-0.94546,0 -1.85192,0.18854 -2.68005,0.53195zM5,2h1.98925v-4h-1.98925zM10.9677,2h3.9785v-4h-3.9785zM18.9247,2h3.9785v-4h-3.9785zM26.8817,2h3.9785v-4h-3.9785zM34.8387,2h3.9785v-4h-3.9785zM42.7957,2h3.9785v-4h-3.9785zM50.7527,2h3.9785v-4h-3.9785zM58.7097,2h3.9785v-4h-3.9785zM66.6667,2h3.9784v-4h-3.9784zM74.6236,2h3.9785v-4h-3.9785zM82.5806,2h3.9785v-4h-3.9785zM90.5376,2h3.9785v-4h-3.9785zM98.4946,2h3.9784v-4h-3.9784zM106.452,2h3.978v-4h-3.978zM114.409,2h3.978v-4h-3.978zM122.366,2h3.978v-4h-3.978zM130.323,2h3.978v-4h-3.978zM138.28,2h3.978v-4h-3.978zM146.237,2h3.978v-4h-3.978zM154.194,2h3.978v-4h-3.978zM162.151,2h3.978v-4h-3.978zM170.108,2h3.978v-4h-3.978zM178.065,2h3.978v-4h-3.978zM186.022,2h3.978v-4h-3.978zM193.979,2h3.978v-4h-3.978zM201.936,2h3.978v-4h-3.978zM209.893,2h3.978v-4h-3.978zM217.85,2h3.978v-4h-3.978zM225.807,2h3.978v-4h-3.978zM233.764,2h3.978v-4h-3.978zM241.721,2h3.978v-4h-3.978zM249.678,2h3.978v-4h-3.978zM257.635,2h3.978v-4h-3.978zM265.592,2h3.978v-4h-3.978zM273.548,2h3.979v-4h-3.979zM281.505,2h3.979v-4h-3.979zM289.462,2h3.979v-4h-3.979zM297.419,2h3.979v-4h-3.979zM305.376,2h3.979v-4h-3.979zM313.333,2h3.979v-4h-3.979zM321.29,2h3.979v-4h-3.979zM329.247,2h3.979v-4h-3.979zM337.204,2h3.979v-4h-3.979zM345.161,2h3.979v-4h-3.979zM353.118,2h3.979v-4h-3.979zM361.075,2h3.979v-4h-3.979zM369.032,2h3.979v-4h-3.979zM376.989,2h3.979v-4h-3.979zM384.946,2h3.979v-4h-3.979zM392.903,2h3.979v-4h-3.979zM400.86,2h3.979v-4h-3.979zM408.817,2h3.979v-4h-3.979zM416.774,2h3.978v-4h-3.978zM424.731,2h3.978v-4h-3.978zM432.688,2h3.978v-4h-3.978zM440.645,2h3.978v-4h-3.978zM448.602,2h3.978v-4h-3.978zM456.559,2h3.978v-4h-3.978zM464.516,2h3.978v-4h-3.978zM472.473,2h3.978v-4h-3.978zM480.43,2h3.978v-4h-3.978zM488.387,2h3.978v-4h-3.978zM496.344,2h3.978v-4h-3.978zM504.301,2h3.978v-4h-3.978zM512.258,2h3.978v-4h-3.978zM520.215,2h3.978v-4h-3.978zM528.172,2h3.978v-4h-3.978zM536.129,2h3.978v-4h-3.978zM544.086,2h3.978v-4h-3.978zM552.043,2h3.978v-4h-3.978zM560,2h3.978v-4h-3.978zM567.957,2h3.978v-4h-3.978zM575.914,2h3.978v-4h-3.978zM583.871,2h3.978v-4h-3.978zM591.828,2h3.978v-4h-3.978zM599.785,2h3.978v-4h-3.978zM607.742,2h3.978v-4h-3.978zM615.699,2h3.978v-4h-3.978zM623.656,2h3.979v-4h-3.979zM631.613,2h3.979v-4h-3.979zM639.57,2h3.979v-4h-3.979zM647.527,2h3.979v-4h-3.979zM655.484,2h3.979v-4h-3.979zM663.441,2h3.979v-4h-3.979zM671.398,2h3.979v-4h-3.979zM679.355,2h3.979v-4h-3.979zM687.312,2h3.979v-4h-3.979zM695.269,2h3.979v-4h-3.979zM703.226,2h3.979v-4h-3.979zM711.183,2h3.979v-4h-3.979zM719.14,2h3.979v-4h-3.979zM727.097,2h3.979v-4h-3.979zM735.054,2h3.979v-4h-3.979zM743.011,2h1.989v-4h-1.989zM745,2c0.41,0 0.797,0.08132 1.148,0.22685l1.532,-3.6949c-0.828,-0.34341 -1.735,-0.53195 -2.68,-0.53195zM747.773,3.85217c0.146,0.35095 0.227,0.73737 0.227,1.14783h4c0,-0.94545 -0.189,-1.85192 -0.532,-2.68004zM748,5v2.02941h4v-2.02941zM748,11.0882v4.0589h4v-4.0589zM748,19.2059v4.0588h4v-4.0588zM748,27.3235v4.0589h4v-4.0589zM748,35.4412v4.0588h4v-4.0588zM748,43.5588v4.0588h4v-4.0588zM748,51.6765v4.0588h4v-4.0588zM748,59.7941v4.0588h4v-4.0588zM748,67.9118v4.0588h4v-4.0588zM748,76.0294v4.0588h4v-4.0588zM748,84.147v4.0589h4v-4.0589zM748,92.2647v4.0588h4v-4.0588zM748,100.382v4.059h4v-4.059zM748,108.5v4.059h4v-4.059zM748,116.618v4.058h4v-4.058zM748,124.735v4.059h4v-4.059zM748,132.853v4.059h4v-4.059zM748,140.971v2.029h4v-2.029zM748,143c0,0.41 -0.081,0.797 -0.227,1.148l3.695,1.532c0.343,-0.828 0.532,-1.735 0.532,-2.68zM746.148,145.773c-0.351,0.146 -0.738,0.227 -1.148,0.227v4c0.945,0 1.852,-0.189 2.68,-0.532zM745,146h-1.989v4h1.989zM739.032,146h-3.978v4h3.978zM731.075,146h-3.978v4h3.978zM723.118,146h-3.978v4h3.978zM715.161,146h-3.978v4h3.978zM707.204,146h-3.978v4h3.978zM699.247,146h-3.978v4h3.978zM691.29,146h-3.978v4h3.978zM683.333,146h-3.978v4h3.978zM675.376,146h-3.978v4h3.978zM667.419,146h-3.978v4h3.978zM659.462,146h-3.978v4h3.978zM651.505,146h-3.978v4h3.978zM643.548,146h-3.978v4h3.978zM635.591,146h-3.978v4h3.978zM627.634,146h-3.978v4h3.978zM619.677,146h-3.978v4h3.978zM611.72,146h-3.978v4h3.978zM603.763,146h-3.978v4h3.978zM595.806,146h-3.978v4h3.978zM587.849,146h-3.978v4h3.978zM579.892,146h-3.978v4h3.978zM571.935,146h-3.978v4h3.978zM563.978,146h-3.978v4h3.978zM556.021,146h-3.978v4h3.978zM548.064,146h-3.978v4h3.978zM540.107,146h-3.978v4h3.978zM532.15,146h-3.978v4h3.978zM524.193,146h-3.978v4h3.978zM516.236,146h-3.978v4h3.978zM508.279,146h-3.978v4h3.978zM500.322,146h-3.978v4h3.978zM492.365,146h-3.978v4h3.978zM484.408,146h-3.978v4h3.978zM476.452,146h-3.979v4h3.979zM468.495,146h-3.979v4h3.979zM460.538,146h-3.979v4h3.979zM452.581,146h-3.979v4h3.979zM444.624,146h-3.979v4h3.979zM436.667,146h-3.979v4h3.979zM428.71,146h-3.979v4h3.979zM420.753,146h-3.979v4h3.979zM412.796,146h-3.979v4h3.979zM404.839,146h-3.979v4h3.979zM396.882,146h-3.979v4h3.979zM388.925,146h-3.979v4h3.979zM380.968,146h-3.979v4h3.979zM373.011,146h-3.979v4h3.979zM365.054,146h-3.979v4h3.979zM357.097,146h-3.979v4h3.979zM349.14,146h-3.979v4h3.979zM341.183,146h-3.979v4h3.979zM333.226,146h-3.978v4h3.978zM325.269,146h-3.978v4h3.978zM317.312,146h-3.978v4h3.978zM309.355,146h-3.978v4h3.978zM301.398,146h-3.978v4h3.978zM293.441,146h-3.978v4h3.978zM285.484,146h-3.978v4h3.978zM277.527,146h-3.978v4h3.978zM269.57,146h-3.978v4h3.978zM261.613,146h-3.978v4h3.978zM253.656,146h-3.978v4h3.978zM245.699,146h-3.978v4h3.978zM237.742,146h-3.978v4h3.978zM229.785,146h-3.978v4h3.978zM221.828,146h-3.978v4h3.978zM213.871,146h-3.978v4h3.978zM205.914,146h-3.978v4h3.978zM197.957,146h-3.978v4h3.978zM190,146h-3.978v4h3.978zM182.043,146h-3.978v4h3.978zM174.086,146h-3.978v4h3.978zM166.129,146h-3.978v4h3.978zM158.172,146h-3.978v4h3.978zM150.215,146h-3.978v4h3.978zM142.258,146h-3.978v4h3.978zM134.301,146h-3.979v4h3.979zM126.344,146h-3.979v4h3.979zM118.387,146h-3.979v4h3.979zM110.43,146h-3.979v4h3.979zM102.473,146h-3.9786v4h3.9786zM94.5159,146h-3.9786v4h3.9786zM86.5588,146h-3.9785v4h3.9785zM78.6018,146h-3.9785v4h3.9785zM70.6448,146h-3.9785v4h3.9785zM62.6878,146h-3.9786v4h3.9786zM54.7307,146h-3.9785v4h3.9785zM46.7737,146h-3.9785v4h3.9785zM38.8166,146h-3.9785v4h3.9785zM30.8596,146h-3.9785v4h3.9785zM22.9026,146h-3.9785v4h3.9785zM14.9456,146h-3.9786v4h3.9786zM6.98853,146h-1.98853v4h1.98853z"
+                }
+              }
+            ]
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          25
+        ],
+        "layers": [
+          {
+            "id": "318-13-Background",
+            "name": "Property 1=Default",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "SOLID",
+            "mask": {
+              "id": "318-13-BackgroundMask",
+              "name": "Property 1=Default",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 300,
+                    "y0": 0,
+                    "y1": 100
+                  },
+                  "cornerRadius": 40
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.4062,
+                      "g": 0.625,
+                      "b": 0.3516,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 6,
+                    "position": "CENTER",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M40,3h220v-6h-220zM297,40v20h6v-20zM260,97h-220v6h220zM3,60v-20h-6v20zM40,97c-20.4345,0 -37,-16.5655 -37,-37h-6c0,23.7482 19.2518,43 43,43zM297,60c0,20.4345 -16.565,37 -37,37v6c23.748,0 43,-19.2518 43,-43zM260,3c20.435,0 37,16.5655 37,37h6c0,-23.7482 -19.252,-43 -43,-43zM40,-3c-23.7482,0 -43,19.2518 -43,43h6c0,-20.4345 16.5655,-37 37,-37z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              20,
+              28
+            ],
+            "layers": [
+              {
+                "id": "318-15",
+                "name": "Hello",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  25,
+                  25
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Button",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Arial-Bold",
+                      "family": "Arial",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 36,
+                    "letterSpacing": 0,
+                    "letterCase": "UPPERCASE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "CENTER",
+                  "verticalAlign": "CENTER",
+                  "frame": {
+                    "mode": "FIXED",
+                    "size": {
+                      "width": 250,
+                      "height": 50
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          },
+          {
+            "id": "325-9-Background",
+            "name": "Property 1=Red",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "SOLID",
+            "mask": {
+              "id": "325-9-BackgroundMask",
+              "name": "Property 1=Red",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 300,
+                    "y0": 0,
+                    "y1": 100
+                  }
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": false,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              400,
+              20
+            ],
+            "layers": [
+              {
+                "id": "325-7-Background",
+                "name": "Button",
+                "type": "MASK_GROUP",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "PASS_THROUGH",
+                "maskBasis": "SOLID",
+                "mask": {
+                  "id": "325-7-BackgroundMask",
+                  "name": "Button",
+                  "type": "SHAPE",
+                  "visible": true,
+                  "opacity": 1,
+                  "blendMode": "NORMAL",
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "effects": [],
+                  "shape": {
+                    "path": {
+                      "type": "RECTANGLE",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 300,
+                        "y0": 0,
+                        "y1": 100
+                      },
+                      "cornerRadius": 40
+                    },
+                    "fillRule": "NON_ZERO",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0.7125,
+                          "g": 0.2345,
+                          "b": 0.2345,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": [
+                      {
+                        "style": "SOLID",
+                        "dashing": [],
+                        "visible": true,
+                        "fill": {
+                          "type": "COLOR",
+                          "visible": true,
+                          "blendMode": "NORMAL",
+                          "color": {
+                            "r": 0,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        },
+                        "thickness": 6,
+                        "position": "CENTER",
+                        "lineJoin": "MITER",
+                        "lineCap": "BUTT",
+                        "miterLimit": 28.96,
+                        "fillRule": "NON_ZERO",
+                        "path": {
+                          "type": "PATH",
+                          "visible": true,
+                          "transform": [
+                            1,
+                            0,
+                            0,
+                            1,
+                            0,
+                            0
+                          ],
+                          "meta": {
+                            "sourceShape": "RECTANGLE"
+                          },
+                          "geometry": "M40,3h220v-6h-220zM297,40v20h6v-20zM260,97h-220v6h220zM3,60v-20h-6v20zM40,97c-20.4345,0 -37,-16.5655 -37,-37h-6c0,23.7482 19.2518,43 43,43zM297,60c0,20.4345 -16.565,37 -37,37v6c23.748,0 43,-19.2518 43,-43zM260,3c20.435,0 37,16.5655 37,37h6c0,-23.7482 -19.252,-43 -43,-43zM40,-3c-23.7482,0 -43,19.2518 -43,43h6c0,-20.4345 16.5655,-37 37,-37z"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "layers": [
+                  {
+                    "id": "I325-7_318-15",
+                    "name": "Hello",
+                    "type": "TEXT",
+                    "visible": true,
+                    "opacity": 1,
+                    "blendMode": "NORMAL",
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      25,
+                      25
+                    ],
+                    "effects": [],
+                    "text": {
+                      "value": "Button",
+                      "defaultStyle": {
+                        "font": {
+                          "postScriptName": "Arial-Bold",
+                          "family": "Arial",
+                          "syntheticPostScriptName": true
+                        },
+                        "fontSize": 36,
+                        "letterSpacing": 0,
+                        "letterCase": "UPPERCASE",
+                        "fills": [
+                          {
+                            "type": "COLOR",
+                            "visible": true,
+                            "blendMode": "NORMAL",
+                            "color": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            }
+                          }
+                        ],
+                        "strokes": []
+                      },
+                      "styles": [],
+                      "horizontalAlign": "CENTER",
+                      "verticalAlign": "CENTER",
+                      "frame": {
+                        "mode": "FIXED",
+                        "size": {
+                          "width": 250,
+                          "height": 50
+                        }
+                      },
+                      "baselinePolicy": "OFFSET_ASCENDER"
+                    }
+                  }
+                ],
+                "meta": {
+                  "isArtboard": true
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "343-17-Background",
+        "name": "Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "343-17-BackgroundMask",
+          "name": "Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 10
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          50,
+          500
+        ],
+        "layers": [
+          {
+            "id": "I343-17_343-15-Background",
+            "name": "Button",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "SOLID",
+            "mask": {
+              "id": "I343-17_343-15-BackgroundMask",
+              "name": "Button",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 300,
+                    "y0": 0,
+                    "y1": 100
+                  },
+                  "cornerRadius": 10
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.4292,
+                      "g": 0.7945,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 6,
+                    "position": "CENTER",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M10,3h280v-6h-280zM297,10v80h6v-80zM290,97h-280v6h280zM3,90v-80h-6v80zM10,97c-3.86599,0 -7,-3.134 -7,-7h-6c0,7.1797 5.82031,13 13,13zM297,90c0,3.866 -3.134,7 -7,7v6c7.18,0 13,-5.8203 13,-13zM290,3c3.866,0 7,3.13401 7,7h6c0,-7.1797 -5.82,-13 -13,-13zM10,-3c-7.1797,0 -13,5.8203 -13,13h6c0,-3.86599 3.13401,-7 7,-7z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "layers": [
+              {
+                "id": "I343-17_343-15_318-15",
+                "name": "Hello",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  25,
+                  25
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Button",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Arial-Bold",
+                      "family": "Arial",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 36,
+                    "letterSpacing": 0,
+                    "letterCase": "UPPERCASE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "CENTER",
+                  "verticalAlign": "CENTER",
+                  "frame": {
+                    "mode": "FIXED",
+                    "size": {
+                      "width": 250,
+                      "height": 50
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      },
+      {
+        "id": "343-48-Background",
+        "name": "Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "343-48-BackgroundMask",
+          "name": "Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 300,
+                "y0": 0,
+                "y1": 100
+              },
+              "cornerRadius": 10
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          450,
+          500
+        ],
+        "layers": [
+          {
+            "id": "I343-48_343-42-Background",
+            "name": "Button",
+            "type": "MASK_GROUP",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "PASS_THROUGH",
+            "maskBasis": "SOLID",
+            "mask": {
+              "id": "I343-48_343-42-BackgroundMask",
+              "name": "Button",
+              "type": "SHAPE",
+              "visible": true,
+              "opacity": 1,
+              "blendMode": "NORMAL",
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "effects": [],
+              "shape": {
+                "path": {
+                  "type": "RECTANGLE",
+                  "visible": true,
+                  "transform": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 300,
+                    "y0": 0,
+                    "y1": 100
+                  },
+                  "cornerRadius": 10
+                },
+                "fillRule": "NON_ZERO",
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.1301,
+                      "g": 0.3855,
+                      "b": 0.5292,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [
+                  {
+                    "style": "SOLID",
+                    "dashing": [],
+                    "visible": true,
+                    "fill": {
+                      "type": "COLOR",
+                      "visible": true,
+                      "blendMode": "NORMAL",
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    "thickness": 6,
+                    "position": "CENTER",
+                    "lineJoin": "MITER",
+                    "lineCap": "BUTT",
+                    "miterLimit": 28.96,
+                    "fillRule": "NON_ZERO",
+                    "path": {
+                      "type": "PATH",
+                      "visible": true,
+                      "transform": [
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0
+                      ],
+                      "meta": {
+                        "sourceShape": "RECTANGLE"
+                      },
+                      "geometry": "M10,3h280v-6h-280zM297,10v80h6v-80zM290,97h-280v6h280zM3,90v-80h-6v80zM10,97c-3.86599,0 -7,-3.134 -7,-7h-6c0,7.1797 5.82031,13 13,13zM297,90c0,3.866 -3.134,7 -7,7v6c7.18,0 13,-5.8203 13,-13zM290,3c3.866,0 7,3.13401 7,7h6c0,-7.1797 -5.82,-13 -13,-13zM10,-3c-7.1797,0 -13,5.8203 -13,13h6c0,-3.86599 3.13401,-7 7,-7z"
+                    }
+                  }
+                ]
+              }
+            },
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "layers": [
+              {
+                "id": "I343-48_343-42_318-15",
+                "name": "Hello",
+                "type": "TEXT",
+                "visible": true,
+                "opacity": 1,
+                "blendMode": "NORMAL",
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  25,
+                  25
+                ],
+                "effects": [],
+                "text": {
+                  "value": "Button",
+                  "defaultStyle": {
+                    "font": {
+                      "postScriptName": "Arial-Bold",
+                      "family": "Arial",
+                      "syntheticPostScriptName": true
+                    },
+                    "fontSize": 36,
+                    "letterSpacing": 0,
+                    "letterCase": "UPPERCASE",
+                    "fills": [
+                      {
+                        "type": "COLOR",
+                        "visible": true,
+                        "blendMode": "NORMAL",
+                        "color": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        }
+                      }
+                    ],
+                    "strokes": []
+                  },
+                  "styles": [],
+                  "horizontalAlign": "CENTER",
+                  "verticalAlign": "CENTER",
+                  "frame": {
+                    "mode": "FIXED",
+                    "size": {
+                      "width": 250,
+                      "height": 50
+                    }
+                  },
+                  "baselinePolicy": "OFFSET_ASCENDER"
+                }
+              }
+            ],
+            "meta": {
+              "isArtboard": true
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

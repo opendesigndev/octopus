@@ -1,4 +1,5 @@
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { compareStrings, getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 
 import { logger } from '../../services'
 import { convertId } from '../../utils/convert'
@@ -9,6 +10,7 @@ import type { Manifest } from '../../typings/manifest'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
 import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign
@@ -34,7 +36,7 @@ export class OctopusManifest {
   private _sourceDesign: SourceDesign
   private _octopusConverter: OctopusFigConverter
   private _exports: {
-    images: Map<string, string | undefined>
+    images: Map<string, DetachedPromiseControls<string> | undefined>
     previews: Map<string, string | undefined>
     components: Map<string, ComponentSourceWithDescriptor>
     componentImageMap: Map<string, string[]>
@@ -67,12 +69,25 @@ export class OctopusManifest {
     }
   }
 
-  setExportedImagePath(name: string, path: string | undefined): void {
-    this._exports.images.set(name, path)
+  finalize() {
+    const imageNames: string[] = [...this._exports.images.keys()] // let's finish all the pending stuff with rejection
+    imageNames.forEach((name) => {
+      this._exports.images.get(name)?.reject(new Error(`Image with name '${name}' is missing`))
+    })
   }
 
-  getExportedImagePath(name: string): string | undefined {
-    return this._exports.images.get(name)
+  async setExportedImagePath(name: string, pathPromise?: Promise<string>): Promise<void> {
+    if (!this._exports.images.has(name)) {
+      this._exports.images.set(name, detachPromiseControls<string>())
+    }
+    this._exports.images.get(name)?.resolve(pathPromise)
+  }
+
+  getExportedImagePath(name: string): Promise<string | undefined> | undefined {
+    if (!this._exports.images.has(name)) {
+      this._exports.images.set(name, detachPromiseControls<string>())
+    }
+    return this._exports.images.get(name)?.promise
   }
 
   setExportedPreviewPath(componentId: string, path: string | undefined): void {
@@ -157,12 +172,13 @@ export class OctopusManifest {
   }
 
   get pages(): Manifest['Page'][] {
-    return this._sourceDesign.pages.map((page) => ({
+    const converted: Manifest['Page'][] = this._sourceDesign.pages.map((page) => ({
       id: convertId(page.id),
       name: page.name,
       meta: { originalId: page.id },
       children: page.children.map((elem) => ({ id: convertId(elem.id), type: 'COMPONENT' })),
     }))
+    return [...converted].sort((a, b) => compareStrings(a.id, b.id))
   }
 
   private _getStatus(source: SourceComponent): Manifest['Status'] {
@@ -176,26 +192,28 @@ export class OctopusManifest {
     }
   }
 
-  private _getAssetImage(imageName: string): Manifest['AssetImage'] | null {
-    const path = this.getExportedImagePath(imageName) ?? ''
+  private async _getAssetImage(imageName: string): Promise<Manifest['AssetImage'] | null> {
+    const path = (await this.getExportedImagePath(imageName)) ?? ''
     const location = { type: 'RELATIVE' as const, path }
     return { location, refId: imageName }
   }
 
-  private _getAssetImages(imageNames: string[]): Manifest['AssetImage'][] {
-    return imageNames.reduce((assetImages, imageName) => {
-      const assetImage = this._getAssetImage(imageName)
-      return assetImage ? push(assetImages, assetImage) : assetImages
-    }, [])
+  private async _getAssetImages(imageNames: string[]): Promise<Manifest['AssetImage'][]> {
+    const assetImages: Manifest['AssetImage'][] = []
+    for (const imageName of imageNames) {
+      const assetImage = await this._getAssetImage(imageName)
+      if (assetImage) assetImages.push(assetImage)
+    }
+    return assetImages
   }
 
   private _getAssetFonts(fonts: string[]): Manifest['AssetFont'][] {
     return fonts.map((font) => ({ name: font }))
   }
 
-  private _getAssets(source: SourceComponent): Manifest['Assets'] {
+  private async _getAssets(source: SourceComponent): Promise<Manifest['Assets']> {
     const imageIds = this.getExportedComponentImageMap(source.id) ?? []
-    const images = this._getAssetImages(imageIds)
+    const images = await this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
     return { images, fonts }
   }
@@ -266,14 +284,14 @@ export class OctopusManifest {
     return Array.from(this._exports.libraries.values())
   }
 
-  private _getComponent(source: SourceComponent): Manifest['Component'] {
+  private async _getComponent(source: SourceComponent): Promise<Manifest['Component']> {
     const id = convertId(source.id)
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
 
     const path = this.getExportedComponentPathById(source.id) ?? ''
     const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
-    const assets = this._getAssets(source)
+    const assets = await this._getAssets(source)
     const artifacts = this._getArtifacts(source)
     const role = getRole(source)
     const preview = this._getPreview(source.id)
@@ -296,8 +314,10 @@ export class OctopusManifest {
     }
   }
 
-  get components(): Manifest['Component'][] {
-    return Array.from(this._exports.components.values()).map((component) => this._getComponent(component.source))
+  async components(): Promise<Manifest['Component'][]> {
+    const componentSources = Array.from(this._exports.components.values())
+    const converted = await Promise.all(componentSources.map((component) => this._getComponent(component.source)))
+    return [...converted].sort((a, b) => compareStrings(a.id, b.id))
   }
 
   async convert(): Promise<Manifest['OctopusManifest']> {
@@ -309,7 +329,7 @@ export class OctopusManifest {
       },
       name: this.name,
       pages: this.pages,
-      components: this.components,
+      components: await this.components(),
       chunks: this.chunks,
       libraries: this.libraries,
     }

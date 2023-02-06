@@ -1,0 +1,1745 @@
+{
+  "id": "387-13",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 425,
+    "height": 635
+  },
+  "content": {
+    "id": "387-13-Background",
+    "name": "blend-mode-passThrough",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "387-13-BackgroundMask",
+      "name": "blend-mode-passThrough",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 425,
+            "y0": 0,
+            "y1": 635
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 0.6875,
+              "g": 0.6418,
+              "b": 0.5242,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "387-14",
+        "name": "Black Ellipse left",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          111,
+          56
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "ELLIPSE"
+            },
+            "geometry": "M200,22c0,12.1503 -44.772,22 -100,22c-55.2285,0 -100,-9.8497 -100,-22c0,-12.15026 44.7715,-22 100,-22c55.228,0 100,9.84974 100,22z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "387-15",
+        "name": "01 PassThrough Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          25,
+          25
+        ],
+        "effects": [],
+        "layers": [
+          {
+            "id": "387-16",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "387-17",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-63",
+            "name": "1.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "1.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 9,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "387-18",
+        "name": "02 Normal Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          221,
+          25
+        ],
+        "effects": [],
+        "layers": [
+          {
+            "id": "387-19",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "387-20",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-64",
+            "name": "2.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "2.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-13",
+        "name": "Black Ellipse left",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          111,
+          209
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "ELLIPSE"
+            },
+            "geometry": "M200,22c0,12.1503 -44.772,22 -100,22c-55.2285,0 -100,-9.8497 -100,-22c0,-12.15026 44.7715,-22 100,-22c55.228,0 100,9.84974 100,22z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "405-14",
+        "name": "03 PassThrough Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          25,
+          178
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 2
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-15",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-16",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-65",
+            "name": "3.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "3.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-17",
+        "name": "04 Normal Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          221,
+          178
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 2
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-18",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-19",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-66",
+            "name": "4.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "4.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-20",
+        "name": "Black Ellipse left",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          111,
+          362
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "ELLIPSE"
+            },
+            "geometry": "M200,22c0,12.1503 -44.772,22 -100,22c-55.2285,0 -100,-9.8497 -100,-22c0,-12.15026 44.7715,-22 100,-22c55.228,0 100,9.84974 100,22z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "405-21",
+        "name": "05 PassThrough Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          25,
+          331
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "BACKGROUND",
+            "blur": 10
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-22",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-23",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-67",
+            "name": "5.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "5.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-24",
+        "name": "06 Normal Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          221,
+          331
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "BACKGROUND",
+            "blur": 10
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-25",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-26",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-68",
+            "name": "6.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "6.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-27",
+        "name": "Black Ellipse left",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          111,
+          515
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "ELLIPSE"
+            },
+            "geometry": "M200,22c0,12.1503 -44.772,22 -100,22c-55.2285,0 -100,-9.8497 -100,-22c0,-12.15026 44.7715,-22 100,-22c55.228,0 100,9.84974 100,22z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "405-28",
+        "name": "07 PassThrough Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          25,
+          484
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "BACKGROUND",
+            "blur": 10
+          },
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 2
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-29",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-30",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-69",
+            "name": "7.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "7.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 9,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      },
+      {
+        "id": "405-31",
+        "name": "08 Normal Group",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          221,
+          484
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "BACKGROUND",
+            "blur": 10
+          },
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 2
+          }
+        ],
+        "layers": [
+          {
+            "id": "405-32",
+            "name": "Rectangle 12",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 0.7,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              50
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "RECTANGLE",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 180,
+                  "y0": 0,
+                  "y1": 80
+                }
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8208,
+                    "g": 0.065,
+                    "b": 0.065,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "405-33",
+            "name": "Ellipse 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "MULTIPLY",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "ELLIPSE"
+                },
+                "geometry": "M100,50c0,27.6142 -22.3858,50 -50,50c-27.6142,0 -50,-22.3858 -50,-50c0,-27.6142 22.3858,-50 50,-50c27.6142,0 50,22.3858 50,50z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.315,
+                    "g": 0.675,
+                    "b": 0.351,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "408-70",
+            "name": "8.",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              16,
+              16
+            ],
+            "effects": [],
+            "text": {
+              "value": "8.",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "Inter",
+                  "family": "Inter",
+                  "syntheticPostScriptName": true
+                },
+                "fontSize": 12,
+                "lineHeight": 0,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "LEFT",
+              "verticalAlign": "TOP",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 11,
+                  "height": 15
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

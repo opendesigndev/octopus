@@ -105,7 +105,7 @@ export class OctopusArtboard {
     const dimensions = this._sourceArtboard.dimensions
 
     return {
-      type: 'ARTBOARD',
+      type: 'OCTOPUS_COMPONENT',
       version: this._getVersion(),
       id: this.id,
       dimensions,

@@ -1,0 +1,37 @@
+{
+  "version": "3.0.0-rc.23",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "55-3",
+      "name": "effects",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "55:3"
+      },
+      "bounds": {
+        "x": 246,
+        "y": -65,
+        "width": 1325,
+        "height": 1000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

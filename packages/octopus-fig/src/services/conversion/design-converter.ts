@@ -50,7 +50,7 @@ const IS_LIBRARY = true
 export class DesignConverter {
   private _designEmitter: EventEmitter | null
   private _designId: string
-  private _octopusManifest: OctopusManifest | undefined
+  private _octopusManifest: OctopusManifest
   private _octopusConverter: OctopusFigConverter
   private _exporter: AbstractExporter | null
   private _partialUpdateInterval: number
@@ -82,16 +82,27 @@ export class DesignConverter {
     return this._designId
   }
 
-  get octopusManifest(): OctopusManifest | undefined {
+  get octopusManifest(): OctopusManifest {
     return this._octopusManifest
+  }
+
+  get imageSizeMap(): ImageSizeMap {
+    return this._imageSizeMap
+  }
+
+  getImageSize(ref: string | undefined): { width: number; height: number } | undefined {
+    return ref ? this._imageSizeMap[ref] : undefined
+  }
+
+  get version(): string {
+    return this._octopusConverter.pkg.version
   }
 
   private async _convertSourceComponentSafe(
     source: SourceComponent
   ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
-      const version = this._octopusConverter.pkg.version
-      const value = await new ComponentConverter({ source, version }).convert()
+      const value = await new ComponentConverter({ source, designConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
       return { value: null, error }
@@ -122,7 +133,7 @@ export class DesignConverter {
 
   private async _exportComponentSafe(
     converted: ComponentConversionResult,
-    role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD'
+    role: 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL'
   ): Promise<{ path: string | null; error: Error | null }> {
     try {
       const path = await this._exporter?.exportComponent?.(converted, role)
@@ -167,8 +178,9 @@ export class DesignConverter {
     const raw = design.design as unknown as RawDesign
     const sourceDesign = new SourceDesign({ designId, raw })
 
+    this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
+
     if (sourceDesign.raw) {
-      this._octopusManifest = new OctopusManifest({ sourceDesign, octopusConverter: this._octopusConverter })
       this._exporter?.exportRawDesign?.(sourceDesign.raw)
     } // skip this for partial converts (FigmaPlugin source)
 
@@ -178,6 +190,8 @@ export class DesignConverter {
 
     /** Wait till all components + dependencies are processed */
     await design.content
+    this.octopusManifest?.finalize()
+
     await Promise.all(this._awaitingComponents)
 
     /** At this moment all components + dependencies should be converted and exported */
@@ -201,7 +215,7 @@ export class DesignConverter {
     const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
 
-    const sourceComponent = new SourceComponent({ rawFrame, imageSizeMap: this._imageSizeMap })
+    const sourceComponent = new SourceComponent({ rawFrame })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
 
@@ -222,9 +236,8 @@ export class DesignConverter {
     const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
     if (imageSize) this._imageSizeMap[fillName] = imageSize
 
-    const fillPath = await this._exporter?.exportImage?.(fillName, fill.buffer)
-
-    this.octopusManifest?.setExportedImagePath(fillName, fillPath)
+    const fillPathPromise = this._exporter?.exportImage?.(fillName, fill.buffer)
+    this.octopusManifest?.setExportedImagePath(fillName, fillPathPromise)
     if (this._shouldReturn) this._conversionResult.images.push({ name: fillName, data: fill.buffer })
   }
 

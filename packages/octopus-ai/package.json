@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-ai",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
   "main": "lib/src/index.js",
@@ -25,9 +25,9 @@
     "prepack": "rimraf ./lib && yarn run build"
   },
   "dependencies": {
-    "@opendesign/manifest-ts": "3.0.0-alpha.38",
-    "@opendesign/octopus-common": "3.0.0-rc.27",
-    "@opendesign/octopus-ts": "3.0.0-alpha.38",
+    "@opendesign/manifest-ts": "3.0.0-alpha.41",
+    "@opendesign/octopus-common": "3.0.0-rc.28",
+    "@opendesign/octopus-ts": "3.0.0-alpha.41",
     "@opendesign/illustrator-parser-pdfcpu": "^1.0.4-0",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",

@@ -1,0 +1,85 @@
+{
+  "version": "3.0.0-rc.28",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "1525-11497",
+      "name": "Properties",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "1525:11497"
+      },
+      "bounds": {
+        "x": -5330.9,
+        "y": 1883.63,
+        "width": 240,
+        "height": 168
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "1525-12060",
+      "name": "color-picker",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "1525:12060"
+      },
+      "bounds": {
+        "x": -3999,
+        "y": 2618.92,
+        "width": 232,
+        "height": 464.91
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "1525-9683",
+      "name": "Frame 1046",
+      "role": "PARTIAL",
+      "meta": {
+        "originalId": "1525:9683"
+      },
+      "bounds": {
+        "x": -4241.81,
+        "y": 1763,
+        "width": 240,
+        "height": 300
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

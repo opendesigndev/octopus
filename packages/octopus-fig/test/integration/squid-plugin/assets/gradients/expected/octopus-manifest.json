@@ -1,0 +1,37 @@
+{
+  "version": "3.0.0-rc.23",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "73-3",
+      "name": "gradients",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "73:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 5000,
+        "height": 5000
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

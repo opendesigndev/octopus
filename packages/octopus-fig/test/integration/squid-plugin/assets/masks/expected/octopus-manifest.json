@@ -1,0 +1,61 @@
+{
+  "version": "3.0.0-rc.23",
+  "origin": {
+    "name": "FIGMA",
+    "version": "0"
+  },
+  "name": "Untitled",
+  "pages": [],
+  "components": [
+    {
+      "id": "106-3",
+      "name": "masks-01",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "106:3"
+      },
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 4374,
+        "height": 2475
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "312-5",
+      "name": "Frame in Frame NoCLIP",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "312:5"
+      },
+      "bounds": {
+        "x": 4450,
+        "y": -15,
+        "width": 400,
+        "height": 360
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    }
+  ],
+  "chunks": [],
+  "libraries": []
+}

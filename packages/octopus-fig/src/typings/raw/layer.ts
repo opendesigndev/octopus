@@ -17,6 +17,8 @@ export type RawLayer = RawLayerContainer | RawLayerShape | RawLayerText
 
 export type RawLayerType = RawLayer['type']
 
+export type RawParentType = RawLayerContainer['type'] | 'PAGE'
+
 export type RawSlice = {
   id?: string
   name?: string
@@ -30,7 +32,7 @@ export type RawSlice = {
 
 export type RawParent = {
   id?: string
-  type?: RawLayerContainer['type'] | 'PAGE'
+  type?: RawParentType
 }
 
 export type RawLayerBase = {

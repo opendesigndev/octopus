@@ -1,0 +1,557 @@
+{
+  "id": "4-11",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.0-rc.24",
+  "dimensions": {
+    "width": 624.53,
+    "height": 634.14
+  },
+  "content": {
+    "id": "4-11-Background",
+    "name": "Frame",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "4-11-BackgroundMask",
+      "name": "Frame",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 624.53,
+            "y0": 0,
+            "y1": 634.14
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": false,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "4-12-Background",
+        "name": "squid",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "4-12-BackgroundMask",
+          "name": "squid",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 607.93,
+                "y0": 0,
+                "y1": 629.72
+              }
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": false,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          0.3639623522758484,
+          0.8217982053756714
+        ],
+        "layers": [
+          {
+            "id": "4-13",
+            "name": "Path 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              121.26615905761719,
+              222.24818420410156
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M39.0797,0c30.6883,0 53.1448,35.4837 28.6101,67.7703c-31.9669,24.5347 -67.6898,2.0776 -67.6898,-28.6906c0,-5.132 1.01053,-10.2139 2.97447,-14.9552c1.96393,-4.7414 4.84283,-9.0494 8.47173,-12.6783c3.6289,-3.6289 7.9369,-6.50731 12.6783,-8.47125c4.7413,-1.96393 9.8232,-2.97495 14.9552,-2.97495"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "4-14",
+            "name": "Path 2",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              224.13441467285156,
+              131.09597778320312
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M39.0797,0c30.6883,0 53.1448,35.4837 28.6101,67.7703c-31.9669,24.5347 -67.6898,2.0776 -67.6898,-28.6906c0,-5.132 1.01053,-10.2139 2.97447,-14.9552c1.96393,-4.7414 4.84283,-9.0494 8.47173,-12.6783c3.6289,-3.6289 7.9369,-6.50731 12.6783,-8.47125c4.7413,-1.96393 9.8232,-2.97495 14.9552,-2.97495"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          },
+          {
+            "id": "4-15",
+            "name": "Line 32",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              0.7071067690849304,
+              0.7071067690849304,
+              -0.7071067690849304,
+              0.7071067690849304,
+              124.62100982666016,
+              435.70855712890625
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "LINE"
+                },
+                "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 0.6039,
+                      "b": 0.6039,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 69.41605377197266,
+                  "position": "CENTER",
+                  "lineJoin": "ROUND",
+                  "lineCap": "ROUND",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "LINE"
+                    },
+                    "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "4-16",
+            "name": "Line 34",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              0.7071067690849304,
+              0.7071067690849304,
+              -0.7071067690849304,
+              0.7071067690849304,
+              315.7872619628906,
+              374.5745849609375
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "LINE"
+                },
+                "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 0.6039,
+                      "b": 0.6039,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 69.41605377197266,
+                  "position": "CENTER",
+                  "lineJoin": "ROUND",
+                  "lineCap": "ROUND",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "LINE"
+                    },
+                    "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "4-17",
+            "name": "Line 33",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              0.7071067690849304,
+              0.7071067690849304,
+              -0.7071067690849304,
+              0.7071067690849304,
+              377.2459411621094,
+              189.86753845214844
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "LINE"
+                },
+                "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 0.6039,
+                      "b": 0.6039,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 69.41605377197266,
+                  "position": "CENTER",
+                  "lineJoin": "ROUND",
+                  "lineCap": "ROUND",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {
+                      "sourceShape": "LINE"
+                    },
+                    "geometry": "M34.708,-69.4161c-19.1687,0 -34.708,15.5394 -34.708,34.7081c0,19.1687 15.5393,34.708 34.708,34.708zM264.294,0c19.168,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.54,-34.7081 -34.708,-34.7081zM34.708,0h229.586v-69.4161h-229.586z"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "4-18",
+            "name": "Vector 1",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              40.379852294921875,
+              41.375431060791016
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {},
+                "geometry": "M-34.708,355.167c-0.0001,19.169 15.5392,34.708 34.7079,34.708c19.1687,0 34.7081,-15.539 34.7081,-34.708zM0.00106,0v-34.708c-19.16866,0 -34.70796,15.5392 -34.70806,34.7079zM344.524,34.708c19.169,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.539,-34.708 -34.708,-34.708zM34.708,355.167l0.0011,-355.1669l-69.4161,-0.00021l-0.001,355.1671zM0.00106,34.708h344.52294v-69.416h-344.52294z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [],
+              "strokes": [
+                {
+                  "style": "SOLID",
+                  "dashing": [],
+                  "visible": true,
+                  "fill": {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 0.1059,
+                      "g": 0.1333,
+                      "b": 0.9804,
+                      "a": 1
+                    }
+                  },
+                  "thickness": 69.41605377197266,
+                  "position": "CENTER",
+                  "lineJoin": "ROUND",
+                  "lineCap": "ROUND",
+                  "miterLimit": 28.96,
+                  "fillRule": "NON_ZERO",
+                  "path": {
+                    "type": "PATH",
+                    "visible": true,
+                    "transform": [
+                      1,
+                      0,
+                      0,
+                      1,
+                      0,
+                      0
+                    ],
+                    "meta": {},
+                    "geometry": "M-34.708,355.167c-0.0001,19.169 15.5392,34.708 34.7079,34.708c19.1687,0 34.7081,-15.539 34.7081,-34.708zM0.00106,0v-34.708c-19.16866,0 -34.70796,15.5392 -34.70806,34.7079zM344.524,34.708c19.169,0 34.708,-15.5393 34.708,-34.708c0,-19.1687 -15.539,-34.708 -34.708,-34.708zM34.708,355.167l0.0011,-355.1669l-69.4161,-0.00021l-0.001,355.1671zM0.00106,34.708h344.52294v-69.416h-344.52294z"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}
