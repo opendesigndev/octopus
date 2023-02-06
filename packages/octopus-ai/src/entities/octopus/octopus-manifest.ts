@@ -70,7 +70,12 @@ export class OctopusManifest {
   }
 
   get manifestVersion(): string {
-    return this._designConverter.octopusAIConverter.pkgVersion
+    return this._designConverter.octopusAIConverter.pkg.manifestSpecVersion
+  }
+
+  get meta(): Manifest['OctopusManifestMeta'] {
+    const converterVersion = this._designConverter.octopusAIConverter.pkg.version
+    return { converterVersion }
   }
 
   get AIVersion(): string {
@@ -170,6 +175,7 @@ export class OctopusManifest {
         version: this.AIVersion,
       },
       name: this.name,
+      meta: this.meta,
       pages: [],
       components: this.components,
       chunks: [],

@@ -81,8 +81,8 @@ export class OctopusArtboard {
     return this._id
   }
 
-  private _getVersion(): string {
-    return this._designConverter.octopusAIConverter.pkgVersion
+  get version(): string {
+    return this._designConverter.octopusAIConverter.pkg.octopusSpecVersion
   }
 
   get manifest(): OctopusManifest {
@@ -106,7 +106,7 @@ export class OctopusArtboard {
 
     return {
       type: 'OCTOPUS_COMPONENT',
-      version: this._getVersion(),
+      version: this.version,
       id: this.id,
       dimensions,
       content: this._createParentMaskGroup(),
