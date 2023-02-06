@@ -23,6 +23,17 @@ const PROP_NAMES = {
   CHROME_FX: 'ChFX',
   BEVEL_EMBOSS: 'ebbl',
   DROP_SHADOW: 'DrSh',
+  HIGHLIGHT_MODE: 'hglM',
+  HIGHLIGHT_COLOR: 'hglC',
+  HIGHLIGHT_OPACITY: 'hglO',
+  STRENGTH_RATIO: 'srgR',
+  SOFTNESS: 'Sftn',
+  LOCAL_LIGHT_ANGLE: 'lagl',
+  LOCAL_LIGHTING_ALTITUDE: 'Lald',
+  SHADOW_MODE: 'sdwM',
+  SHADOW_COLOR: 'sdwC',
+  SHADOW_OPACITY: 'sdwO',
+  TRANSPARENCY: 'Trns',
 } as const
 
 export default PROP_NAMES

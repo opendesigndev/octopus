@@ -6,6 +6,7 @@ import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-o
 import { SourceEntity } from './source-entity.js'
 
 import type { RawFillGradient } from '../../typings/raw'
+import PROP_NAMES from '../../utils/prop-names.js'
 
 export class SourceEffectFillGradient extends SourceEntity {
   protected _rawValue: RawFillGradient | undefined
@@ -22,7 +23,7 @@ export class SourceEffectFillGradient extends SourceEntity {
 
   @firstCallMemo()
   get opacities(): SourceEffectFillGradientOpacity[] | undefined {
-    const rawOpacities = asArray(this._rawValue?.Trns)
+    const rawOpacities = asArray(this._rawValue?.[PROP_NAMES.TRANSPARENCY])
     return rawOpacities.map((opacity) => new SourceEffectFillGradientOpacity(opacity))
   }
 }
