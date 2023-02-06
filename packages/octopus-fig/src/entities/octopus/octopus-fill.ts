@@ -112,8 +112,8 @@ export class OctopusFill {
 
   private get _transform(): Octopus['Transform'] | null {
     const size = this._parentLayer.sourceLayer.size
-    if (size === null) return null
-    const { x: width, y: height } = size
+    const { x: width, y: height } = size ?? {}
+    if (!width || !height) return null
 
     const gradientTransform = this._fill.gradientTransform
     if (gradientTransform) {
