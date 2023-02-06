@@ -37,8 +37,6 @@ Check [`src/services/exporters/`](./src/services/exporters/) for more details ab
 
 Check [`src/services/readers/`](./src/services/readers/) for more details about readers
 
-When instan
-
 ---
 
 ## Demo: Node Examples
@@ -80,7 +78,7 @@ yarn convert:psd:local sample/some-file.psd
 
 ---
 
-#### instantiating psd-file-reader
+#### Instantiation of PSDFileReader
 
 You can instantiate PSDFileReader with optional flag withRenderer.
 This will include library @opendesign/image-icc-profile-converter in the image processing pipeline.
@@ -121,7 +119,9 @@ Tries to convert `octopus components` + `manifest` for saved designs and compare
 
 #### @webtoon
 
-octopus-psd has a dependency on @webtoon project to which open-design team has been contributing. Changes proposed by the open-design team have been first applied to our own fork (npm: @opendesign/psd-ts) and then merged into webtoon if the webtoon team approved it. Currently, there is one merge request from opendesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from @webtoon, but in reality imports are done from @opendesign/psd-ts. This bridge (or proxy) is visible in package.json:
+octopus-psd has a dependency on @webtoon project to which OpenDesign team has been contributing. Changes proposed by the OpenDesign team have been first applied to our own fork (npm: @opendesign/psd-ts) and partially merged into webtoon's repository.
+
+Currently, there is one merge request from OpenDesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from @webtoon/psd, but in reality imports are done from @opendesign/psd-ts. This bridge (or proxy) is visible in package.json
 
 ```
     "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.0"
