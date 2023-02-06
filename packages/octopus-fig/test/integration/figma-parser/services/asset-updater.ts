@@ -4,7 +4,7 @@ import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/asy
 
 import { SourceApiReader } from '../../../../src/services/readers/source-api-reader'
 import { getDirsFromDir, makeDir, saveFile } from '../../../../src/utils/files'
-import { stringify } from '../../shared/utils/stringify'
+import { stringify } from '../../common/utils/stringify'
 
 import type {
   ResolvedDesign,

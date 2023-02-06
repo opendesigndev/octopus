@@ -1,5 +1,5 @@
-import { AssetReader } from '../shared/services/asset-reader'
-import { getCommandLineArgs } from '../shared/utils/argv'
+import { AssetReader } from '../common/services/asset-reader'
+import { getCommandLineArgs } from '../common/utils/argv'
 import { SOURCE_FILE_NAME } from './const'
 import { TestUpdater } from './services/test-updater'
 

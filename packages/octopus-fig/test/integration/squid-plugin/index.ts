@@ -1,4 +1,4 @@
-import { TestRunner } from '../shared/services/test-runner'
+import { TestRunner } from '../common/services/test-runner'
 import { SOURCE_FILE_NAME } from './const'
 import { TestComparer } from './services/test-comparer'
 

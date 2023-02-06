@@ -33,11 +33,7 @@ type MapComponentsOptions = {
   generated: Octopus['OctopusComponent'][]
 }
 
-export class BaseTestComparer {
-  protected async _getDesigns(_testComponents: TestComponents[]): Promise<ConvertedDesign[]> {
-    return await Promise.all([]) // TODO NEED TO BE fixed in non base classes
-  }
-
+export abstract class BaseTestComparer {
   protected _mapComponents({ expected, generated }: MapComponentsOptions): ComponentGroup[] {
     return generated.map((generatedComponent) => {
       return {
@@ -108,9 +104,7 @@ export class BaseTestComparer {
     return failed
   }
 
-  async test(_testComponents: TestComponents[]): Promise<Fail[]> {
-    // TODO HERE
-    const designs = await this._getDesigns([])
-    return this._compare(designs)
+  test(_testComponents: TestComponents[]): Promise<Fail[]> {
+    throw new Error('Subclass of "TestComparer" has no "test" method implemented!')
   }
 }

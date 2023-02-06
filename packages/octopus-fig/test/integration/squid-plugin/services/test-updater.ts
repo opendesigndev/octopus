@@ -4,15 +4,15 @@ import { createConverter, SourcePluginReader } from '../../../../src/index-node'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
 import { MANIFEST_NAME } from '../../../../src/utils/const'
 import { makeDir, saveFile, rmDir, parseJsonFromFile } from '../../../../src/utils/files'
-import { AssetReader } from '../../shared/services/asset-reader'
-import { cleanManifest } from '../../shared/utils/asset-cleaner'
-import { stringify } from '../../shared/utils/stringify'
+import { AssetReader } from '../../common/services/asset-reader'
+import { cleanManifest } from '../../common/utils/asset-cleaner'
+import { stringify } from '../../common/utils/stringify'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Manifest } from '../../../../src/typings/manifest'
 import type { Octopus } from '../../../../src/typings/octopus'
 import type { PluginSource } from '../../../../src/typings/plugin-source'
-import type { TestDirectoryData } from '../../shared/services/asset-reader'
+import type { TestDirectoryData } from '../../common/services/asset-reader'
 
 type TestAssets = {
   components: Octopus['OctopusComponent'][]

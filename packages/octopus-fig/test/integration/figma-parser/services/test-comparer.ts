@@ -1,13 +1,13 @@
 import { createConverter } from '../../../../src/index-node'
-import { BaseTestComparer } from '../../shared/services/base-test-comparer'
-import { cleanManifest } from '../../shared/utils/asset-cleaner'
+import { BaseTestComparer } from '../../common/services/base-test-comparer'
+import { cleanManifest } from '../../common/utils/asset-cleaner'
 import { DesignEmitterMock } from './design-emitter-mock'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
 import type { Octopus } from '../../../../src/typings/octopus'
-import type { TestComponents } from '../../shared/services/asset-reader'
-import type { ConvertedDesign } from '../../shared/services/base-test-comparer'
-import type { Fail } from '../../shared/services/test-runner'
+import type { TestComponents } from '../../common/services/asset-reader'
+import type { ConvertedDesign } from '../../common/services/base-test-comparer'
+import type { Fail } from '../../common/services/test-runner'
 
 export class TestComparer extends BaseTestComparer {
   private _octopusConverter: OctopusFigConverter
