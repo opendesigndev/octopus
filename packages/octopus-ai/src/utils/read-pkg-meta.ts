@@ -1,13 +1,15 @@
-import * as pkg from '../../package.json'
+import { version as manifestSpecVersion } from '@opendesign/manifest-ts/package.json'
+import { version as octopusSpecVersion } from '@opendesign/octopus-ts/package.json'
 
-export type ProjectPackage = {
+import { name, version } from '../../package.json'
+
+export type PackageMeta = {
   name: string
   version: string
+  manifestSpecVersion: string
+  octopusSpecVersion: string
 }
 
-export function readPackageMeta(): ProjectPackage {
-  return {
-    name: pkg.name,
-    version: pkg.version,
-  }
+export function readPackageMeta(): PackageMeta {
+  return { name, version, manifestSpecVersion, octopusSpecVersion }
 }

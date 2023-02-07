@@ -16,6 +16,7 @@ import type { NodeFactories, WebFactories } from './services/general/platforms'
 import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
+import type { PackageMeta } from './utils/read-pkg-meta'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
 
 export type ConvertDesignOptions = {
@@ -58,7 +59,7 @@ export type ArtboardConversionWithAssetsResult = ArtboardConversionResult & {
 }
 
 export class OctopusXDConverter {
-  private _pkg: { version: string; name: string }
+  private _pkg: PackageMeta
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _services: {
@@ -110,7 +111,7 @@ export class OctopusXDConverter {
     if (isObject(options.logger)) setLogger(options.logger)
   }
 
-  get pkg(): { name: string; version: string } {
+  get pkg(): PackageMeta {
     return this._pkg
   }
 

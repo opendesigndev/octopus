@@ -7,7 +7,7 @@ async function updateTests() {
   const assetsReader = new AssetReader({ selectedTest })
   const testUpdater = new TestUpdater(assetsReader)
   await testUpdater.update()
-  console.info('SUCCESS: Tests updated!\n')
+  console.info(`✅ SUCCESS: All tests updated!\n`)
 }
 
 updateTests()

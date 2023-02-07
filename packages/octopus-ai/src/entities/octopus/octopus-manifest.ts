@@ -69,8 +69,13 @@ export class OctopusManifest {
     this._exports.artboards.set(id, path)
   }
 
-  get manifestVersion(): string {
-    return this._designConverter.octopusAIConverter.pkgVersion
+  get version(): string {
+    return this._designConverter.octopusAIConverter.pkg.manifestSpecVersion
+  }
+
+  get meta(): Manifest['OctopusManifestMeta'] {
+    const converterVersion = this._designConverter.octopusAIConverter.pkg.version
+    return { converterVersion }
   }
 
   get AIVersion(): string {
@@ -164,12 +169,13 @@ export class OctopusManifest {
 
   convert(): Manifest['OctopusManifest'] {
     return {
-      version: this.manifestVersion,
+      version: this.version,
       origin: {
         name: 'illustrator',
         version: this.AIVersion,
       },
       name: this.name,
+      meta: this.meta,
       pages: [],
       components: this.components,
       chunks: [],

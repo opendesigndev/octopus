@@ -81,8 +81,13 @@ export class OctopusManifest {
     this._exports.components.set(id, component)
   }
 
-  get manifestVersion(): string {
-    return this._octopusConverter.pkgVersion
+  get version(): string {
+    return this._octopusConverter.pkg.manifestSpecVersion
+  }
+
+  get meta(): Manifest['OctopusManifestMeta'] {
+    const converterVersion = this._octopusConverter.pkg.version
+    return { converterVersion }
   }
 
   get psdVersion(): string {
@@ -188,9 +193,10 @@ export class OctopusManifest {
 
   async convert(): Promise<Manifest['OctopusManifest']> {
     return {
-      version: this.manifestVersion,
+      version: this.version,
       origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
+      meta: this.meta,
       pages: [],
       components: this._components,
       chunks: [],

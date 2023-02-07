@@ -57,9 +57,8 @@ export class OctopusArtboard {
     })
   }
 
-  private async _getVersion() {
-    const pkg = await this._octopusXdConverter.pkg
-    return pkg.version
+  get version() {
+    return this._octopusXdConverter.pkg.octopusSpecVersion
   }
 
   private _getArtificialMaskGroupMaskLayer() {
@@ -159,7 +158,7 @@ export class OctopusArtboard {
 
     return {
       type: 'OCTOPUS_COMPONENT',
-      version: await this._getVersion(),
+      version: this.version,
       id: this._sourceArtboard.meta.id,
       ...dimensionsEntry,
       content,

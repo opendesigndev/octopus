@@ -1,10 +1,13 @@
 {
-  "version": "3.0.0-rc.24",
+  "version": "3.0.1",
   "origin": {
     "name": "FIGMA",
     "version": "0"
   },
   "name": "Complex",
+  "meta": {
+    "converterVersion": "3.0.0-rc.28"
+  },
   "pages": [
     {
       "id": "106-2",

@@ -8,6 +8,7 @@ import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { ImageSize } from './services/general/image-size/image-size'
 import type { NodeFactories, WebFactories } from './services/general/platforms'
 import type { Logger } from './typings'
+import type { PackageMeta } from './utils/read-pkg-meta'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 
@@ -49,7 +50,7 @@ export type DesignConverterOptions = {
  * This makes it possible to process data almost as fast as it's downloaded from Figma's API.
  */
 export class OctopusFigConverter {
-  private _pkg: { version: string; name: string }
+  private _pkg: PackageMeta
   private _services: {
     benchmark: {
       benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
@@ -94,7 +95,7 @@ export class OctopusFigConverter {
     if (options.logger) setLogger(options.logger)
   }
 
-  get pkg(): { name: string; version: string } {
+  get pkg(): PackageMeta {
     return this._pkg
   }
 

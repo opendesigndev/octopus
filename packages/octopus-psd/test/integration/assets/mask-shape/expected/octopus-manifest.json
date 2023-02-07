@@ -4,6 +4,9 @@
     "name": "PHOTOSHOP",
     "version": "0"
   },
+  "meta": {
+    "converterVersion": "3.0.0-rc.9"
+  },
   "pages": [],
   "components": [
     {
