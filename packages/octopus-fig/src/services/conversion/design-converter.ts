@@ -15,6 +15,7 @@ import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { RawDesign } from '../../typings/raw/design'
 import type { RawLayerContainer } from '../../typings/raw/layer'
+import type { PackageMeta } from '../../utils/read-pkg-meta'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
 import type { ImageSize } from '../general/image-size/image-size'
 import type {
@@ -94,8 +95,8 @@ export class DesignConverter {
     return ref ? this._imageSizeMap[ref] : undefined
   }
 
-  get version(): string {
-    return this._octopusConverter.pkg.version
+  get pkgMeta(): PackageMeta {
+    return this._octopusConverter.pkg
   }
 
   private async _convertSourceComponentSafe(

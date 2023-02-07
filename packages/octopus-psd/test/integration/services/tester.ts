@@ -33,6 +33,8 @@ interface TesterAssetReader {
   getTestsComponents: () => Promise<TestComponents[]>
 }
 
+const IGNORE_FIELDS = ['id', 'version', 'converterVersion']
+
 export class Tester {
   private _assetsReader: TesterAssetReader
   private _octopusConverter: OctopusPSDConverter
@@ -137,13 +139,7 @@ export class Tester {
 
   private async _compare(designs: ConvertedDesign[]): Promise<Fail[]> {
     const differ = jsondiffpatch.create({
-      propertyFilter: (name: string) => {
-        if (name === 'version' || name === 'id') {
-          return false
-        }
-
-        return true
-      },
+      propertyFilter: (name: string) => !IGNORE_FIELDS.includes(name),
     })
 
     const failed = await designs.reduce<Promise<Fail[]>>(async (failedDesign, { components, manifest, designId }) => {

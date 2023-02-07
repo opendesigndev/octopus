@@ -55,7 +55,7 @@ export class OctopusComponent {
   }
 
   get version(): string {
-    return this._designConverter.octopusConverter.pkgVersion
+    return this._designConverter.octopusConverter.pkg.octopusSpecVersion
   }
 
   private _getArtboardFromLayer(layer: OctopusLayer, parentBounds?: SourceBounds): Octopus['MaskGroupLayer'] {

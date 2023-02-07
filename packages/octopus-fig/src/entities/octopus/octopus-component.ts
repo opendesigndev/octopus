@@ -54,7 +54,7 @@ export class OctopusComponent {
   }
 
   get version(): string {
-    return this._designConverter.version
+    return this._designConverter.pkgMeta.octopusSpecVersion
   }
 
   private async _content(): Promise<Octopus['Layer'] | undefined> {

@@ -10,6 +10,7 @@ import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
 import type { Logger } from './typings'
+import type { PackageMeta } from './utils/read-pkg-meta.js'
 
 export { LocalExporter, DebugExporter, PSDFileReader }
 
@@ -56,11 +57,11 @@ export class OctopusPSDConverter {
   }
 
   /**
-   * Returns version from package.json
-   * @returns {string} version
+   * Returns package.json meta information
+   * @returns {PackageMeta} package meta information
    */
-  get pkgVersion(): string {
-    return readPackageMeta().version
+  get pkg(): PackageMeta {
+    return readPackageMeta()
   }
 
   /**

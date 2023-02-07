@@ -6,7 +6,7 @@ import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
 import type { Exporter } from './services/conversion/exporters'
 import type { Logger } from './typings'
-import type { ProjectPackage } from './utils/read-pkg-meta'
+import type { PackageMeta } from './utils/read-pkg-meta'
 
 type OctopusAIConverteOptions = {
   /** Optional custom Logger. If not passed, default logger will be used. */
@@ -38,7 +38,7 @@ export type ConvertDesignOptions = {
  * - exporting (using _exporter)
  */
 export class OctopusAIConverter {
-  private _pkg: ProjectPackage
+  private _pkg: PackageMeta
 
   constructor(options: OctopusAIConverteOptions) {
     this._setupLogger(options?.logger)
@@ -50,10 +50,10 @@ export class OctopusAIConverter {
   }
 
   /**
-   * @returns {string} version
+   * @returns {PackageMeta} Project's package meta information
    */
-  get pkgVersion(): string {
-    return this._pkg.version
+  get pkg(): PackageMeta {
+    return this._pkg
   }
 
   /**

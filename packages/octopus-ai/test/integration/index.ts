@@ -28,22 +28,19 @@ async function test() {
   const tester = new Tester(assetsReader)
 
   const failed = (await tester.test()) ?? []
-  const success = !failed.length
-
-  if (!success) {
+  if (failed.length) {
     const html = createReport(failed)
-    const pathToReport = path.join(__dirname, 'report/test-report.html')
+    const reportPath = path.join(__dirname, 'report/test-report.html')
 
     /**@TODO maybe in future change template to jsondiff.com template */
-    fs.writeFileSync(pathToReport, html)
-    console.error('Tests failed')
+    fs.writeFileSync(reportPath, html)
 
-    console.error(`file:///${pathToReport}`)
-
+    console.error(`❌ FAILURE: ${failed.length} tests failed!\n`)
+    console.error(`file:///${reportPath}\n`)
     process.exit(1)
   }
 
-  console.info('All tests passed')
+  console.info(`✅ SUCCESS: All tests passed!\n`)
   process.exit(0)
 }
 

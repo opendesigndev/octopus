@@ -1,10 +1,13 @@
 {
-  "version": "3.0.0-rc.28",
+  "version": "3.0.1",
   "origin": {
     "name": "FIGMA",
     "version": "0"
   },
   "name": "Untitled",
+  "meta": {
+    "converterVersion": "3.0.0-rc.28"
+  },
   "pages": [],
   "components": [
     {
