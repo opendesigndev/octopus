@@ -132,5 +132,5 @@ How to make changes in @webtoon dependency:
 1. Pull [https://github.com/opendesigndev/psd-ts](https://github.com/opendesigndev/psd-ts).
 2. Make a pull request to `opendesigndev/psd-ts` (when doing pull request on GitHub, make sure branch you are pushing to is `main` from OpenDesign).
 3. When everything is merged, create a pull request from OpenDesign GitHub page to merge `main` branch into webtoon's repository.
-4. If you are proxying dependency from webtoon with `opendesign/psd-ts`, switch to branch `experimental-release`  and read about "release process" in README and apply.
+4. If you are proxying dependency from webtoon with `opendesign/psd-ts`, switch to branch `experimental-release` and read about "release process" in README and apply.
 5. Update your `package.json` in octopus-psd accordingly.
