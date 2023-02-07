@@ -70,7 +70,12 @@ export class SourceTextTextStyle extends SourceEntity {
 
   get letterCase(): 'allCaps' | 'smallCaps' | undefined {
     const fontCaps = this._rawValue?.FontCaps
-    return !fontCaps ? undefined : SourceTextTextStyle.FONT_CAPS_VALUES[fontCaps]
+
+    if (!fontCaps) {
+      return undefined
+    }
+
+    return SourceTextTextStyle.FONT_CAPS_VALUES[fontCaps - 1]
   }
 
   get color(): SourceColor | null {
