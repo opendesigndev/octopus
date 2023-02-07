@@ -129,9 +129,8 @@ Currently, there is one merge request from OpenDesign into webtoon and without w
 
 How to make changes in @webtoon dependency:
 
-1. pull https://github.com/opendesigndev/psd-ts
-2. make sure your local origin is opendesigndev/psd-ts (google how to add origin)
-3. make a pull request to opendesigndev/psd-ts (when doing merge request on github, make sure branch you are pushing to is main from opendesign)
-4. when everything is merged create a pull request from opendesign github page to merge main into webtoon
-5. if you are proxying dependency from webtoon with opendesign/psd-ts, switch to branch experimental-release on opendesign/psd-ts and read about "release process" and apply.
-6. update your package.json in octopus-psd accordingly
+1. Pull [https://github.com/opendesigndev/psd-ts](https://github.com/opendesigndev/psd-ts).
+2. Make a pull request to `opendesigndev/psd-ts` (when doing pull request on GitHub, make sure branch you are pushing to is `main` from OpenDesign).
+3. When everything is merged, create a pull request from OpenDesign GitHub page to merge `main` branch into webtoon's repository.
+4. If you are proxying dependency from webtoon with `opendesign/psd-ts`, switch to branch `experimental-release`  and read about "release process" in README and apply.
+5. Update your `package.json` in octopus-psd accordingly.
