@@ -12,6 +12,7 @@ import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../entities/source/source-design.js'
+import PROPS from '../../utils/prop-names.js'
 import { getRawData } from '../../utils/raw.js'
 import { logger } from '../instances/logger.js'
 
@@ -263,8 +264,8 @@ export class PSDFileReader {
           key: 'lnsr',
           data: Buffer.from('bgnd', 'utf8'),
         },
-        lyid: {
-          key: 'lyid',
+        [PROPS.LAYER_ID]: {
+          key: PROPS.LAYER_ID,
           value: 1,
         },
       },

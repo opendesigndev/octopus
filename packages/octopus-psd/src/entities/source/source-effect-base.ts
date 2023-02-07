@@ -1,4 +1,5 @@
 import { isBlendMode } from '../../utils/blend-modes.js'
+import PROPS from '../../utils/prop-names.js'
 import { SourceEntity } from './source-entity.js'
 
 import type { RawEffectShadow } from '../../typings/raw'
@@ -12,12 +13,12 @@ export class SourceEffectBase extends SourceEntity {
   }
 
   get blendMode(): keyof typeof BLEND_MODES | undefined {
-    const md = this._rawValue?.Md
+    const mode = this._rawValue?.[PROPS.MODE]
 
-    return isBlendMode(md) ? md : undefined
+    return isBlendMode(mode) ? mode : undefined
   }
 
   get enabled(): boolean {
-    return this._rawValue?.enab ?? true
+    return this._rawValue?.[PROPS.ENABLED] ?? true
   }
 }

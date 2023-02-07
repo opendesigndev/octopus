@@ -1,5 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { SourceEffectBase } from './source-effect-base.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 
@@ -30,7 +31,7 @@ export class SourceEffectStroke extends SourceEffectBase {
   }
 
   get lineAlignment(): RawEffectStrokeLineAlignment {
-    const styleKey = this._rawValue?.Styl
+    const styleKey = this._rawValue?.[PROPS.STYLE]
     return styleKey
       ? SourceEffectStroke.LINE_ALIGNMENT_MAP[styleKey as keyof typeof SourceEffectStroke.LINE_ALIGNMENT_MAP] ??
           SourceEffectStroke.DEFAULT_LINE_ALIGNMENT

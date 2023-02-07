@@ -1,3 +1,4 @@
+import PROPS from '../../utils/prop-names.js'
 import { getUnitRatioFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
@@ -11,10 +12,10 @@ export class SourceEffectFillGradientOpacity extends SourceEntity {
   }
 
   get opacity(): number {
-    return getUnitRatioFor(this._rawValue?.Opct)
+    return getUnitRatioFor(this._rawValue?.[PROPS.OPACITY])
   }
 
   get location(): number {
-    return this._rawValue?.Lctn || 0
+    return this._rawValue?.[PROPS.LOCATION] || 0
   }
 }

@@ -1,5 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
@@ -38,6 +39,6 @@ export class SourcePathOrigin extends SourceEntity {
 
   @firstCallMemo()
   get Trnf(): SourceMatrix {
-    return getMatrixFor(this._rawValue?.Trnf)
+    return getMatrixFor(this._rawValue?.[PROPS.TRANSFORM])
   }
 }

@@ -1,6 +1,7 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
 
@@ -15,7 +16,7 @@ export class SourceEffectSatin extends SourceEffectBase {
   }
 
   get color(): SourceColor | null {
-    return getColor(this._rawValue?.Clr)
+    return getColor(this._rawValue?.[PROPS.COLOR])
   }
 
   get blur(): number {
@@ -23,15 +24,15 @@ export class SourceEffectSatin extends SourceEffectBase {
   }
 
   get distance(): number {
-    return asFiniteNumber(this._rawValue?.Dstn, 0)
+    return asFiniteNumber(this._rawValue?.[PROPS.DISTANCE], 0)
   }
 
   get localLightingAngle(): number {
-    return asFiniteNumber(this._rawValue?.lagl, 0)
+    return asFiniteNumber(this._rawValue?.[PROPS.LOCAL_LIGHT_ANGLE], 0)
   }
 
   get opacity(): number {
-    return round(getUnitRatioFor(this._rawValue?.Opct))
+    return round(getUnitRatioFor(this._rawValue?.[PROPS.OPACITY]))
   }
 
   get invert(): boolean {

@@ -51,7 +51,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get id(): string | undefined {
-    const id = this._layerProperties?.lyid
+    const id = this._layerProperties?.[PROPS.LAYER_ID]
     return id ? String(id) : undefined
   }
 
@@ -77,7 +77,7 @@ export class SourceLayerCommon extends SourceEntity {
   }
 
   get rawArtboardColor(): RawColor | undefined {
-    return this._layerProperties?.[PROPS.ARTBOARD_DATA]?.Clr
+    return this._layerProperties?.[PROPS.ARTBOARD_DATA]?.[PROPS.COLOR]
   }
 
   get isArtboard(): boolean {

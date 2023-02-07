@@ -1,3 +1,4 @@
+import PROPS from '../../utils/prop-names.js'
 import { getColor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
@@ -14,10 +15,10 @@ export class SourceEffectFillGradientColor extends SourceEntity {
   }
 
   get color(): SourceColor {
-    return getColor(this._rawValue?.Clr) ?? SourceEffectFillGradientColor.DEFAULT_COLOR
+    return getColor(this._rawValue?.[PROPS.COLOR]) ?? SourceEffectFillGradientColor.DEFAULT_COLOR
   }
 
   get location(): number {
-    return this._rawValue?.Lctn || 0
+    return this._rawValue?.[PROPS.LOCATION] || 0
   }
 }

@@ -1,5 +1,6 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
 
@@ -15,11 +16,11 @@ export class SourceEffectShadow extends SourceEffectBase {
   }
 
   get distance(): number {
-    return asFiniteNumber(this._rawValue?.Dstn, 0)
+    return asFiniteNumber(this._rawValue?.[PROPS.DISTANCE], 0)
   }
 
   get localLightingAngle(): number {
-    return asFiniteNumber(this._rawValue?.lagl, 0)
+    return asFiniteNumber(this._rawValue?.[PROPS.LOCAL_LIGHT_ANGLE], 0)
   }
 
   get useGlobalAngle(): boolean {
@@ -31,14 +32,14 @@ export class SourceEffectShadow extends SourceEffectBase {
   }
 
   get choke(): number {
-    return asFiniteNumber(this._rawValue?.Ckmt, 0)
+    return asFiniteNumber(this._rawValue?.[PROPS.CHOKE_MATTE], 0)
   }
 
   get color(): SourceColor | null {
-    return getColor(this._rawValue?.Clr)
+    return getColor(this._rawValue?.[PROPS.COLOR])
   }
 
   get opacity(): number | undefined {
-    return getUnitRatioFor(this._rawValue?.Opct, 0)
+    return getUnitRatioFor(this._rawValue?.[PROPS.OPACITY], 0)
   }
 }

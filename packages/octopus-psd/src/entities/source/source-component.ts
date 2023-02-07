@@ -68,8 +68,8 @@ export class SourceComponent extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue?.layerProperties?.lyid !== undefined
-      ? String(this._rawValue.layerProperties?.lyid)
+    return this._rawValue?.layerProperties?.[PROPS.LAYER_ID] !== undefined
+      ? String(this._rawValue.layerProperties?.[PROPS.LAYER_ID])
       : SourceComponent.DEFAULT_ID
   }
 
@@ -97,7 +97,7 @@ export class SourceComponent extends SourceEntity {
   }
 
   get rawArtboardColor(): RawColor | undefined {
-    return this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.Clr
+    return this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.[PROPS.COLOR]
   }
 
   get globalLightAngle(): number {
