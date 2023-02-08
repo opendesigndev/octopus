@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-fig",
-  "version": "3.0.0-rc.30",
+  "version": "3.0.0-rc.31",
   "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "scripts": {
@@ -47,8 +47,8 @@
     "@types/chalk": "^2.2.0",
     "@types/jest": "^27.4.0",
     "@types/node": "*",
-    "@types/pino-std-serializers": "2.4.1",
     "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1",
     "@types/rimraf": "^3.0.2",
     "chalk": "^4.1.2",
     "handlebars": "^4.7.7",

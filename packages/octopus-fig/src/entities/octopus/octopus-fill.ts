@@ -3,7 +3,7 @@ import { push, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/c
 import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
-import { createMatrix, createPoint } from '../../utils/paper'
+import { createMatrix } from '../../utils/paper'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { Octopus } from '../../typings/octopus'
@@ -122,27 +122,11 @@ export class OctopusFill {
           .scale(1 / width, 1 / height)
           .invert().values
       }
-
-      const center = createPoint(0, 0)
-      // const center = createPoint(-1, 1)
-      const matrix = createMatrix(gradientTransform)
-        .scale(2 / width, 2 / height, center)
+      return createMatrix(gradientTransform)
         .invert()
-      // .prepend(createMatrix([2, 0, 0, 2, 0, 0]))
-      // .scale(width / 2, height / 2, center).values
-      // .translate(0, -height / 2)
-
-      // console.info()
-      // console.info('width', width)
-      // console.info('height', height)
-      // console.info('before', matrix)
-      // console.info('after', matrix.translate(0, height / 2))
-      // console.info('after', matrix.translate(0, -height / 2))
-      // console.info()
-      // console.info()
-
-      // return [a, b, c, d, tx, ty + height / 2] // TODO fix this for radial gradient
-      return matrix.values
+        .translate(1 / 2, 1 / 2)
+        .prepend(createMatrix([width, 0, 0, height, 0, 0]))
+        .scale(1 / 2).values
     }
 
     const positions = this._fill.gradientHandlePositions
