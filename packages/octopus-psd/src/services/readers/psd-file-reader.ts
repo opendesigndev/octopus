@@ -149,7 +149,7 @@ export class PSDFileReader {
   }
 
   private async _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void> {
-    const processedBuff = this._renderer ? await this._renderer.render(buff, iccProfile) : buff
+    const processedBuff = this._renderer && iccProfile ? this._renderer.render(buff, iccProfile) : buff
 
     const image = new Jimp(width, height)
     const scanned = image.scan(0, 0, image.bitmap.width, image.bitmap.height, function (_x, _y, index) {
