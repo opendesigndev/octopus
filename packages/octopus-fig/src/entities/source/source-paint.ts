@@ -3,9 +3,8 @@ import { mod, round } from '@opendesign/octopus-common/dist/utils/math'
 import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
-import type { Octopus } from '../../typings/octopus'
 import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
-import type { SourceColor, SourceTransform } from '../../typings/source'
+import type { GradientPositions, SourceColor, SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
   rawValue: RawPaint
@@ -60,10 +59,10 @@ export class SourcePaint extends SourceEntity {
     return this._rawValue.gradientStops ?? []
   }
 
-  get gradientHandlePositions(): [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']] | null {
+  get gradientHandlePositions(): GradientPositions | null {
     const [p1, p2, p3] = this._rawValue.gradientHandlePositions ?? []
     if ([p1?.x, p1?.y, p2?.x, p2?.y, p3?.x, p3?.y].includes(undefined)) return null
-    return [p1, p2, p3] as [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']]
+    return [p1, p2, p3] as GradientPositions
   }
 
   get gradientTransform(): SourceTransform | null {

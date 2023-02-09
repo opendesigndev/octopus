@@ -25,3 +25,5 @@ export type SourceColor = {
   b: number
   a: number
 }
+
+export type GradientPositions = [Octopus['Vec2'], Octopus['Vec2'], Octopus['Vec2']]
