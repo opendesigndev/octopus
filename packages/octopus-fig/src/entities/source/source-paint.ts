@@ -4,7 +4,7 @@ import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'
 
 import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
-import type { GradientPositions, SourceColor, SourceTransform } from '../../typings/source'
+import type { SourceGradientPositions, SourceColor, SourceTransform } from '../../typings/source'
 
 type SourcePaintOptions = {
   rawValue: RawPaint
@@ -59,10 +59,10 @@ export class SourcePaint extends SourceEntity {
     return this._rawValue.gradientStops ?? []
   }
 
-  get gradientHandlePositions(): GradientPositions | null {
+  get gradientHandlePositions(): SourceGradientPositions | null {
     const [p1, p2, p3] = this._rawValue.gradientHandlePositions ?? []
     if ([p1?.x, p1?.y, p2?.x, p2?.y, p3?.x, p3?.y].includes(undefined)) return null
-    return [p1, p2, p3] as GradientPositions
+    return [p1, p2, p3] as SourceGradientPositions
   }
 
   get gradientTransform(): SourceTransform | null {

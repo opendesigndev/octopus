@@ -6,7 +6,7 @@ import { createMatrix } from './paper'
 
 import type { Octopus } from '../typings/octopus'
 import type { RawBlendMode, RawColor, RawStop } from '../typings/raw'
-import type { SourceTransform, SourceVector, GradientPositions } from '../typings/source'
+import type { SourceTransform, SourceVector, SourceGradientPositions } from '../typings/source'
 
 const BLEND_MODES: Octopus['BlendMode'][] = [
   'COLOR',
@@ -93,7 +93,7 @@ export function convertRadialGradientTransform(
 }
 
 export function convertGradientPositions(
-  positions: GradientPositions | null,
+  positions: SourceGradientPositions | null,
   width: number,
   height: number
 ): number[] | null {

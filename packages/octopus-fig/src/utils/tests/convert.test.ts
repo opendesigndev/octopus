@@ -5,7 +5,7 @@ import {
   convertRadialGradientTransform,
 } from '../convert'
 
-import type { GradientPositions, SourceTransform } from '../../typings/source'
+import type { SourceGradientPositions, SourceTransform } from '../../typings/source'
 
 describe('convertId', () => {
   function testExample(id: string, result: string): void {
@@ -87,7 +87,7 @@ describe('convertRadialGradientTransform', () => {
 })
 
 type GradientPositionsOptions = {
-  positions: GradientPositions | null
+  positions: SourceGradientPositions | null
   width: number
   height: number
   result: SourceTransform | null
@@ -100,7 +100,7 @@ describe('convertGradientPositions', () => {
     })
   }
 
-  type Example = [GradientPositions, number, number, SourceTransform]
+  type Example = [SourceGradientPositions, number, number, SourceTransform]
   const examples: Example[] = [
     [
       [
