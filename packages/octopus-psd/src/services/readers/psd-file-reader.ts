@@ -5,6 +5,7 @@ import { getRenderer } from '@opendesign/image-icc-profile-converter'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import Psd, { AliKey } from '@webtoon/psd-ts'
 import chalk from 'chalk'
 import Jimp from 'jimp'
@@ -200,12 +201,13 @@ export class PSDFileReader {
       return
     }
 
-    const id = layer.additionalProperties?.[AliKey.LayerId]?.value
+    const { additionalProperties } = layer
 
-    if (!id) {
-      throw new Error('_convertImages: layer id is undefined')
+    if (typeof additionalProperties === 'undefined') {
+      throw new Error('Layer is missing additional properties')
     }
 
+    const id = additionalProperties[AliKey.LayerId]?.value
     const { width, height } = layer
 
     if (width === 1 && height === 1) {
@@ -245,8 +247,40 @@ export class PSDFileReader {
     await this._convertPatterns(psd, iccProfile)
   }
 
+  private _assignMissingLayerId(child: NodeChild): void {
+    const { additionalProperties } = child
+    if (!additionalProperties) {
+      throw new Error('Layer is missing additional properties')
+    }
+
+    if (!additionalProperties.lyid) {
+      additionalProperties.lyid = {
+        /**this should not be a problem as only case where I found layer with undefined was when there
+        was only 1 existing layer, but just in case we create a big random number
+        value is typeof number in @webtoon
+        */
+        value: round(Math.random() * 1000 + 100000, 0),
+        key: AliKey.LayerId,
+        signature: '8B64',
+      }
+    }
+
+    if (child.children) {
+      child.children.forEach((child) => {
+        this._assignMissingLayerId(child)
+      })
+    }
+  }
+
+  private _assignMissingLayerIds(psd: Psd): void {
+    psd.children.forEach((child) => {
+      this._assignMissingLayerId(child)
+    })
+  }
+
   private async _getPsd(): Promise<Psd> {
     const psd = Psd.parse((await readFile(this.path)).buffer)
+    this._assignMissingLayerIds(psd)
 
     if (psd.children.length > 0) {
       await this._convertAssets(psd)
