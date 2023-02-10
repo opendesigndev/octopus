@@ -1,14 +1,14 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { SourceEffectFill } from './source-effect-fill.js'
-import { SourceEntity } from './source-entity.js'
+import { SourceEffectFill } from './source-effect-fill'
+import { SourceEntity } from './source-entity'
 
 import type {
   RawShapeStrokeStyle,
   RawStrokeStyleLineAlignment,
   RawStrokeStyleLineCapType,
   RawStrokeStyleLineJoinType,
-} from '../../typings/raw'
+} from '../../typings/raw/index'
 
 export class SourceStroke extends SourceEntity {
   protected _rawValue: RawShapeStrokeStyle | undefined

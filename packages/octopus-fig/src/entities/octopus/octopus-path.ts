@@ -1,4 +1,4 @@
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { push } from '@opendesign/octopus-common/utils/common'
 import first from 'lodash/first'
 
 import { convertRectangle } from '../../utils/convert'

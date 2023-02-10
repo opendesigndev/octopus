@@ -1,9 +1,9 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
 
-import { createDefaultTranslationMatrix } from '../../utils/path.js'
-import { OctopusEffectFill } from './octopus-effect-fill.js'
-import { OctopusLayerBase } from './octopus-layer-base.js'
+import { createDefaultTranslationMatrix } from '../../utils/path'
+import { OctopusEffectFill } from './octopus-effect-fill'
+import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerAdjustment } from '../source/source-layer-adjustment'

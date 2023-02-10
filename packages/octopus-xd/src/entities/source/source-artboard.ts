@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push, traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { asArray } from '@opendesign/octopus-common/utils/as'
+import { push, traverseAndFind } from '@opendesign/octopus-common/utils/common'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 

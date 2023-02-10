@@ -1,4 +1,4 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/utils/as'
 
 import { buildOctopusLayer, createOctopusLayer } from '../factories/create-octopus-layer'
 import { createSourceLayer } from '../factories/create-source-layer'
@@ -11,7 +11,7 @@ import type { SourceLayer } from '../factories/create-source-layer'
 import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
 import type { OctopusLayerParent } from '../typings/octopus-entities'
 import type { RawLayer } from '../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type InitSourceLayerChildrenOptions = {
   layers: Nullish<RawLayer[]>

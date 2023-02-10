@@ -1,10 +1,10 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { getBoundsFor } from '../../utils/source.js'
-import { SourceLayerCommon } from './source-layer-common.js'
-import { SourceText } from './source-text.js'
+import { getBoundsFor } from '../../utils/source'
+import { SourceLayerCommon } from './source-layer-common'
+import { SourceText } from './source-text'
 
-import type { RawLayerText } from '../../typings/raw'
+import type { RawLayerText } from '../../typings/raw/index'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceLayerParent } from './source-layer-common'
 

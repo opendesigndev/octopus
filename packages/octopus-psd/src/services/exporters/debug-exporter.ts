@@ -1,16 +1,16 @@
 import EventEmitter from 'events'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
-import { copyFile, makeDir, saveFile } from '../../utils/files.js'
-import { stringify } from '../../utils/stringify.js'
+import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter'
+import { copyFile, makeDir, saveFile } from '../../utils/files'
+import { stringify } from '../../utils/stringify'
 
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 import type { AbstractExporter } from './abstract-exporter'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
 
 export type DebugExporterOptions = {
   /** Path to directory, where designs outputs should be exported. */

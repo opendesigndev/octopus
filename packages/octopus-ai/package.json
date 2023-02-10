@@ -3,7 +3,6 @@
   "version": "3.0.0-rc.5",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
-  "main": "lib/src/index.js",
   "keywords": [
     "Octopus 3+",
     "Node.js",
@@ -13,8 +12,8 @@
   "scripts": {
     "convert:debug": "ts-node ./examples/node/convert-debug.ts",
     "convert:local": "ts-node ./examples/node/convert-local.ts",
-    "build": "tsc --build ./tsconfig.json",
-    "clean": "rimraf ./node_modules ./lib ./workdir ./docs",
+    "build": "rimraf ./dist && node build.js ./tsconfig.json",
+    "clean": "rimraf ./node_modules ./dist ./workdir ./docs",
     "types:check": "tsc --noEmit",
     "watch": "tsc -w",
     "test": "yarn test:unit && yarn test:integration",
@@ -22,13 +21,13 @@
     "test:integration": "ts-node test/integration",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "typedoc": "typedoc --excludePrivate src/index.ts",
-    "prepack": "rimraf ./lib && yarn run build"
+    "prepack": "yarn run build"
   },
   "dependencies": {
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.28",
     "@opendesign/octopus-ts": "3.0.1",
-    "@opendesign/illustrator-parser-pdfcpu": "^1.0.4-0",
+    "@opendesign/octopus-common": "3.0.0-rc.29",
+    "@opendesign/illustrator-parser-pdfcpu": "1.1.2",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",
     "paper": "^0.12.15",
@@ -52,11 +51,21 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.3",
     "ts-node": "10.4.0",
-    "typescript": "4.6.4",
+    "typescript": "4.7.4",
     "typedoc": "^0.23.18"
   },
   "files": [
-    "lib/src",
-    "lib/package.json"
-  ]
+    "dist/src",
+    "dist/package.json"
+  ],
+  "module": "./dist/src/index.mjs",
+  "main": "./dist/src/index.js",
+  "exports": {
+    ".": {
+      "default": {
+        "require": "./dist/src/index.js",
+        "import": "./dist/src/index.mjs"
+      }
+    }
+  }
 }

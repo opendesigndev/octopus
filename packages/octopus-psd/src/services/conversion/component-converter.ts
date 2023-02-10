@@ -1,7 +1,7 @@
-import { OctopusComponent } from '../../entities/octopus/octopus-component.js'
+import { OctopusComponent } from '../../entities/octopus/octopus-component'
 
-import type { Octopus } from '../../typings/octopus.js'
-import type { DesignConverter } from './design-converter.js'
+import type { Octopus } from '../../typings/octopus'
+import type { DesignConverter } from './design-converter'
 
 export type ComponentConverterOptions = {
   componentId: string

@@ -1,5 +1,5 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import { compareStrings, getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
+import { compareStrings, getMapped, push } from '@opendesign/octopus-common/utils/common'
 
 import { logger } from '../../services'
 import { convertId } from '../../utils/convert'
@@ -9,8 +9,8 @@ import type { OctopusFigConverter } from '../../octopus-fig-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceComponent } from '../source/source-component'
 import type { SourceDesign } from '../source/source-design'
-import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

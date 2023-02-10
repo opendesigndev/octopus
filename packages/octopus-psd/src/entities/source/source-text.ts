@@ -1,11 +1,11 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
-import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range.js'
-import { SourceTextTextStyleRange } from './source-text-text-style-range.js'
+import { getMatrixFor, getBoundsFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
+import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
+import { SourceTextTextStyleRange } from './source-text-text-style-range'
 
-import type { RawText } from '../../typings/raw'
+import type { RawText } from '../../typings/raw/index'
 import type { SourceBounds, SourceMatrix } from '../../typings/source'
 
 export class SourceText extends SourceEntity {

@@ -1,6 +1,6 @@
-import { createDefaultLogger } from '../general/default-logger.js'
+import { createDefaultLogger } from '../general/default-logger'
 
-import type { Logger } from '../../typings'
+import type { Logger } from '../../typings/index'
 
 /**
  * Module-based singleton

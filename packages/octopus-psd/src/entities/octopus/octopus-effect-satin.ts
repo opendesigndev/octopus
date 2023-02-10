@@ -1,5 +1,5 @@
-import { convertColor } from '../../utils/convert.js'
-import { OctopusEffectBase } from './octopus-effect-base.js'
+import { convertColor } from '../../utils/convert'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectSatin } from '../source/source-effect-satin'

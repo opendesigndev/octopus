@@ -1,4 +1,4 @@
-import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+import { getConvertedAsync } from '@opendesign/octopus-common/utils/common'
 
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'

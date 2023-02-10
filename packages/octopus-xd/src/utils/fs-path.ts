@@ -71,7 +71,7 @@ export function pathRelative(from: string, to: string) {
     }
   }
 
-  let outputParts = []
+  let outputParts: string[] = []
   for (let i = samePartsLength; i < fromParts.length; i++) {
     outputParts.push('..')
   }

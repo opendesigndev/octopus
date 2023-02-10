@@ -1,9 +1,8 @@
 {
   "name": "@opendesign/octopus-common",
-  "version": "3.0.0-rc.28",
+  "version": "3.0.0-rc.29",
   "description": "General utility functions for Octopus 3 common cases.",
   "license": "Apache-2.0",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build ./tsconfig.json",
     "prepack": "yarn clean-build",
@@ -28,9 +27,27 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.3",
     "ts-node": "10.4.0",
-    "typescript": "4.6.4"
+    "typescript": "4.7.4"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "exports": {
+    "./decorators/first-call-memo": "./dist/decorators/first-call-memo.js",
+    "./postprocessors/normalize-text": "./dist/postprocessors/normalize-text/index.js",
+    "./utils/as": "./dist/utils/as.js",
+    "./utils/async": "./dist/utils/async.js",
+    "./utils/benchmark": {
+      "node": "./dist/utils/benchmark-node.js",
+      "default": "./dist/utils/benchmark-web.js"
+    },
+    "./utils/color": "./dist/utils/color.js",
+    "./utils/common": "./dist/utils/common.js",
+    "./utils/console": "./dist/utils/console.js",
+    "./utils/hasher": "./dist/utils/hasher.js",
+    "./utils/math": "./dist/utils/math.js",
+    "./utils/queue": "./dist/utils/queue.js",
+    "./utils/timestamp": "./dist/utils/timestamp.js",
+    "./utility-types": "./dist/utils/utility-types.js"
+  }
 }

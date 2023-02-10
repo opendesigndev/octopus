@@ -1,5 +1,5 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { clamp } from '@opendesign/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/utils/as'
+import { clamp } from '@opendesign/octopus-common/utils/math'
 
 import { logger } from '../services/instances/logger'
 

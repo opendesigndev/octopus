@@ -1,9 +1,9 @@
 import path from 'path'
 
-import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
-import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
+import { asString } from '@opendesign/octopus-common/utils/as'
+import { traverseAndFind } from '@opendesign/octopus-common/utils/common'
 
-import type { OctopusPSDConverter } from '../..'
+import type { OctopusPSDConverter } from '../../index'
 import type { Manifest } from '../../typings/manifest'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceComponent } from '../source/source-component'

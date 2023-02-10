@@ -1,4 +1,4 @@
-import kebabCase from 'lodash/kebabCase.js'
+import kebabCase from 'lodash/kebabCase'
 
 export const IMAGES_DIR_NAME = 'images'
 export const IMAGE_EXTNAME = '.png'

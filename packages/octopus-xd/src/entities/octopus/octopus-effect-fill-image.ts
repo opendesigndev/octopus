@@ -1,4 +1,4 @@
-import { asBoolean, asNumber, asString } from '@opendesign/octopus-common/dist/utils/as'
+import { asBoolean, asNumber, asString } from '@opendesign/octopus-common/utils/as'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { createPathRectangle, createPoint, createSize } from '../../utils/paper'

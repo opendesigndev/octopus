@@ -1,5 +1,5 @@
-import { asArray, asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray, asNumber } from '@opendesign/octopus-common/utils/as'
+import { getMapped, push } from '@opendesign/octopus-common/utils/common'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { DEFAULTS } from '../../utils/defaults'

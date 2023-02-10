@@ -4,7 +4,7 @@ import { SourceArtboard } from './source-artboard'
 import type { Metadata } from '../../services/conversion/ai-file-reader'
 import type { SourceImage, SourceTree } from '../../typings'
 import type { AdditionalTextData } from '../../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 export class SourceDesign {
   private _artboards: SourceArtboard[]

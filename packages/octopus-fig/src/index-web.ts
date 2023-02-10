@@ -1,4 +1,4 @@
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-web'
+import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
 
 import { OctopusFigConverter } from './octopus-fig-converter'
 import { base64ToUint8Array } from './services/general/buffer/buffer-web'

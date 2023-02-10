@@ -12,7 +12,7 @@ import type {
 import type { SourceLayerGroup } from './source-layer-group'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceResources } from './source-resources'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
 

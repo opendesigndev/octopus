@@ -1,7 +1,7 @@
 import path from 'path'
 
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asString } from '@opendesign/octopus-common/dist/utils/as'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { asString } from '@opendesign/octopus-common/utils/as'
 
 import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Manifest } from '../../typings/manifest'

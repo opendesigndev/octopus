@@ -1,4 +1,4 @@
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
 
 import { SourceLayerContainer } from '../entities/source/source-layer-container'
 import { SourceLayerShape } from '../entities/source/source-layer-shape'

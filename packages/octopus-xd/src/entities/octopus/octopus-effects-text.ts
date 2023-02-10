@@ -1,4 +1,4 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/utils/common'
 
 import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 import { OctopusEffectStroke } from './octopus-effect-stroke'

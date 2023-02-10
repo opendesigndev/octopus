@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
 
-import { PSDFileReader } from '../../../src/services/readers/psd-file-reader.js'
+import { PSDFileReader } from '../../../src/services/readers/psd-file-reader'
 
-import type { SourceDesign } from '../../../src/entities/source/source-design.js'
+import type { SourceDesign } from '../../../src/entities/source/source-design'
 
 dotenv.config()
 

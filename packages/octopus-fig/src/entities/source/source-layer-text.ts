@@ -1,4 +1,4 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
 import { SourceLayerCommon } from './source-layer-common'
 import { SourceTextStyle } from './source-text-style'

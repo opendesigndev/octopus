@@ -1,4 +1,4 @@
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { round } from '@opendesign/octopus-common/utils/math'
 
 import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill'
 

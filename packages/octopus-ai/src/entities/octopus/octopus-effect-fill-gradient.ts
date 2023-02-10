@@ -1,4 +1,4 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/utils/as'
 import chunk from 'lodash/chunk'
 import zipWith from 'lodash/zipWith'
 
@@ -10,7 +10,7 @@ import type { Octopus } from '../../typings/octopus'
 import type { RawResourcesColorSpace, RawResourcesShadingKeyFunctionFunction } from '../../typings/raw/resources'
 import type { SourceLayerShape } from '../source/source-layer-shape'
 import type { SourceResources } from '../source/source-resources'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type OctopusEffectGradientFillOptions = {
   sourceLayer: SourceLayerShape

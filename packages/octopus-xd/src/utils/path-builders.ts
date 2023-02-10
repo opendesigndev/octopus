@@ -1,4 +1,4 @@
-import { asNumber, asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asNumber, asArray } from '@opendesign/octopus-common/utils/as'
 
 import { convertObjectToPaperMatrix } from './matrix'
 import {

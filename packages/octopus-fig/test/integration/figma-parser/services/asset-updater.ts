@@ -1,18 +1,13 @@
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
 
 import { SourceApiReader } from '../../../../src/services/readers/source-api-reader'
 import { getDirsFromDir, makeDir, saveFile } from '../../../../src/utils/files'
 import { stringify } from '../../common/utils/stringify'
 
-import type {
-  ResolvedDesign,
-  ResolvedFrame,
-  ResolvedStyle,
-  ResolvedPreview,
-} from '@opendesign/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { ResolvedDesign, ResolvedFrame, ResolvedStyle, ResolvedPreview } from '@opendesign/figma-parser'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
 
 export type AssetUpdaterOptions = Partial<{ selectedAsset: string }>
 

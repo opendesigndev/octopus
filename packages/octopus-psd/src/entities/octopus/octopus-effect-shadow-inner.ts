@@ -1,4 +1,4 @@
-import { OctopusEffectShadowCommon } from './octopus-effect-shadow-common.js'
+import { OctopusEffectShadowCommon } from './octopus-effect-shadow-common'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectShadow } from '../source/source-effect-shadow'

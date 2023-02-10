@@ -1,8 +1,7 @@
 import { createParser } from '@opendesign/figma-parser'
 
 import type { AbstractReader } from './abstract-reader'
-import type { Logger } from '@opendesign/figma-parser/lib/src/services/logger/logger'
-import type { ICacher } from '@opendesign/figma-parser/lib/src/types/cacher'
+import type { Logger, ICacher } from '@opendesign/figma-parser'
 // eslint-disable-next-line import/no-named-as-default
 import type EventEmitter from 'eventemitter3'
 

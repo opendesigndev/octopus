@@ -10,7 +10,7 @@ import type {
   RawResourcesShadingKeyFunctionFunction,
   RawResourcesXObject,
 } from '../../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources

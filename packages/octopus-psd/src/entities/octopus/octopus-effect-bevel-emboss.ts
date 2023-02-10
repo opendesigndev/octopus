@@ -1,5 +1,5 @@
-import { convertBlendMode } from '../../utils/convert.js'
-import { OctopusEffectBase } from './octopus-effect-base.js'
+import { convertBlendMode } from '../../utils/convert'
+import { OctopusEffectBase } from './octopus-effect-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceEffectBevelEmboss } from '../source/source-effect-bevel-emboss'

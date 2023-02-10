@@ -1,4 +1,4 @@
-import { mod, round } from '@opendesign/octopus-common/dist/utils/math'
+import { round, mod } from '@opendesign/octopus-common/utils/math'
 
 import { getColorFor, getTransformFor } from '../../utils/source'
 import { SourceEntity } from './source-entity'

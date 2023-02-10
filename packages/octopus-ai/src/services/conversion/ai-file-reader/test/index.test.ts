@@ -3,8 +3,8 @@
 import { mkdir, readFile } from 'fs/promises'
 
 import { jest } from '@jest/globals'
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
-import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { mocked } from 'jest-mock'
 
 import { AIFileReader } from '..'

@@ -8,7 +8,7 @@ import type { RawGraphicsState, RawResourcesExtGState, RawResourcesXObject } fro
 import type { RawXObjectLayer } from '../../typings/raw/x-object'
 import type { SourceLayerParent, XObjectSubtype } from './source-layer-common'
 import type { SourceLayerShape } from './source-layer-shape'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 export type SourceLayerXObjectFormOptions = {
   rawValue: RawResourcesXObject

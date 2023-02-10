@@ -1,4 +1,4 @@
-import type { RawCombineOperation, RawGradientType, RawPointHV, RawShapeStrokeOffset } from './raw'
+import type { RawCombineOperation, RawGradientType, RawPointHV, RawShapeStrokeOffset } from './raw/index'
 
 export type SourceCombineOperation = RawCombineOperation
 

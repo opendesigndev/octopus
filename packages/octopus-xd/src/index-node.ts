@@ -1,4 +1,4 @@
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
+import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
 
 import { OctopusXDConverter } from './octopus-xd-converter'
 import { createEnvironmentNode } from './services/general/environment'

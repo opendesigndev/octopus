@@ -1,9 +1,9 @@
 import EventEmitter from 'events'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
-import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
+import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
+import { traverseAndFind } from '@opendesign/octopus-common/utils/common'
+import { timestamp } from '@opendesign/octopus-common/utils/timestamp'
 import kebabCase from 'lodash/kebabCase'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -15,8 +15,8 @@ import type { Manifest } from '../../../typings/manifest'
 import type { RawDesign, RawLayerContainer } from '../../../typings/raw'
 import type { ComponentConversionResult } from '../../conversion/design-converter'
 import type { AbstractExporter } from '../abstract-exporter'
-import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
 
 type DebugExporterOptions = {
   /** Path to directory, where designs outputs should be exported. */

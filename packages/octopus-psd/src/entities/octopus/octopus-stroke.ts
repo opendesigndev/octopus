@@ -1,8 +1,8 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
 
-import { logger } from '../../services/instances/logger.js'
-import { OctopusEffectFill } from './octopus-effect-fill.js'
+import { logger } from '../../services/instances/logger'
+import { OctopusEffectFill } from './octopus-effect-fill'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceStroke } from '../source/source-stroke'

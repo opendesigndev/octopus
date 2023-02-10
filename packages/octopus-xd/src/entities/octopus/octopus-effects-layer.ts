@@ -1,5 +1,5 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/utils/as'
+import { getConverted } from '@opendesign/octopus-common/utils/common'
 
 import { OctopusEffectBlur } from './octopus-effect-blur'
 import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow'

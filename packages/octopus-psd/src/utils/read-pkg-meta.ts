@@ -1,7 +1,7 @@
-import manifestPkg from '@opendesign/manifest-ts/package.json' assert { type: 'json' }
-import octopusPkg from '@opendesign/octopus-ts/package.json' assert { type: 'json' }
+import manifestPkg from '@opendesign/manifest-ts/package.json'
+import octopusPkg from '@opendesign/octopus-ts/package.json'
 
-import pkg from '../../package.json' assert { type: 'json' }
+import pkg from '../../package.json'
 
 export type PackageMeta = {
   name: string

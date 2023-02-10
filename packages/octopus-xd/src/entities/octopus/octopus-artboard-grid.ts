@@ -1,5 +1,5 @@
-import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { asBoolean, asNumber } from '@opendesign/octopus-common/utils/as'
+import { round } from '@opendesign/octopus-common/utils/math'
 
 import { parseXDColor } from '../../utils/color'
 import { OctopusBounds } from './octopus-bounds'

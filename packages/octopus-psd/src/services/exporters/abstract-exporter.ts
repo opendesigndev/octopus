@@ -1,4 +1,4 @@
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
 
 export abstract class AbstractExporter {
   static IMAGES_DIR_NAME: string

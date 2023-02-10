@@ -1,9 +1,9 @@
-import { round } from '@opendesign/octopus-common/dist/utils/math.js'
+import { round } from '@opendesign/octopus-common/utils/math'
 
-import { getColorFor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
+import { getColorFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-import type { RawTextStyle } from '../../typings/raw'
+import type { RawTextStyle } from '../../typings/raw/index'
 import type { SourceColor } from '../../typings/source'
 
 export class SourceTextTextStyle extends SourceEntity {

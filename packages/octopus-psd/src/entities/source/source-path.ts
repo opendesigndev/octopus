@@ -1,10 +1,10 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { getBoundsFor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
-import { SourcePathComponent } from './source-path-component.js'
+import { getBoundsFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
+import { SourcePathComponent } from './source-path-component'
 
-import type { RawPath } from '../../typings/raw'
+import type { RawPath } from '../../typings/raw/index'
 import type { SourceBounds } from '../../typings/source'
 
 export class SourcePath extends SourceEntity {

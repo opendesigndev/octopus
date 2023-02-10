@@ -1,4 +1,4 @@
-import { isObject } from '@opendesign/octopus-common/dist/utils/common'
+import { isObject } from '@opendesign/octopus-common/utils/common'
 
 import { parseXDColor } from '../../utils/color'
 import { DEFAULTS } from '../../utils/defaults'

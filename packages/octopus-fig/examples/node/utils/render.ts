@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import path from 'path'
 
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node'
+import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
 import chalk from 'chalk'
 import kebabCase from 'lodash/kebabCase'
 

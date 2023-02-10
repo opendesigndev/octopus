@@ -1,9 +1,9 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { asFiniteNumber } from '@opendesign/octopus-common/utils/as'
 
-import { getColorFor, getUnitRatioFor } from '../../utils/source.js'
-import { SourceEffectBase } from './source-effect-base.js'
+import { getColorFor, getUnitRatioFor } from '../../utils/source'
+import { SourceEffectBase } from './source-effect-base'
 
-import type { RawEffectSatin } from '../../typings/raw'
+import type { RawEffectSatin } from '../../typings/raw/index'
 import type { SourceColor } from '../../typings/source'
 
 export class SourceEffectSatin extends SourceEffectBase {

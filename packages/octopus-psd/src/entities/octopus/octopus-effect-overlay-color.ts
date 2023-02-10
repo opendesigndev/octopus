@@ -1,6 +1,6 @@
-import { logger } from '../../services/instances/logger.js'
-import { OctopusEffectBase } from './octopus-effect-base.js'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { logger } from '../../services/instances/logger'
+import { OctopusEffectBase } from './octopus-effect-base'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceColor } from '../../typings/source'

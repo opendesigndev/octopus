@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { traverseAndFind } from '@opendesign/octopus-common/utils/common'
+import { round } from '@opendesign/octopus-common/utils/math'
 
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { getBoundsFor } from '../../utils/source'

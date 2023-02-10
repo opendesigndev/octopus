@@ -1,4 +1,4 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/utils/common'
 
 import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer'
 import { OctopusLayerCommon } from './octopus-layer-common'

@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { push } from '@opendesign/octopus-common/utils/common'
+import { round } from '@opendesign/octopus-common/utils/math'
 import { v4 as uuid } from 'uuid'
 
 import { DEFAULTS } from '../../utils/defaults'

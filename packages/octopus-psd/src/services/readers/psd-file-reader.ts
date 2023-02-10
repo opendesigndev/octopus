@@ -1,19 +1,19 @@
 import path from 'path'
 
 import { parsePsd } from '@avocode/psd-parser'
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
+import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
+import { displayPerf } from '@opendesign/octopus-common/utils/console'
 import chalk from 'chalk'
-import sizeOf from 'image-size'
+import { imageSize as sizeOf } from 'image-size'
 import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../entities/source/source-design.js'
-import { getFilesFromDir, parseJsonFromFile } from '../../utils/files.js'
-import { logger } from '../instances/logger.js'
+import { SourceDesign } from '../../entities/source/source-design'
+import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
+import { logger } from '../instances/logger'
 
-import type { SourceImage } from '../../entities/source/source-design.js'
-import type { RawComponent } from '../../typings/raw'
+import type { SourceImage } from '../../entities/source/source-design'
+import type { RawComponent } from '../../typings/raw/index'
 
 export type PSDFileReaderOptions = {
   /** Path to the .psd design file. */
@@ -122,7 +122,7 @@ export class PSDFileReader {
       const name = image.name
       const relativePath = path.join(PSDFileReader.PATTERNS_DIR, name)
       const imgPath = path.join(this._outDir, relativePath)
-      const { width, height } = await sizeOf(imgPath)
+      const { width, height } = sizeOf(imgPath)
       patterns.push({ name, path: imgPath, width, height })
     }
 

@@ -1,9 +1,9 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { OctopusEffectFill } from './octopus-effect-fill.js'
-import { OctopusLayerBase } from './octopus-layer-base.js'
-import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path.js'
-import { OctopusStroke } from './octopus-stroke.js'
+import { OctopusEffectFill } from './octopus-effect-fill'
+import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusLayerShapeShapePath } from './octopus-layer-shape-shape-path'
+import { OctopusStroke } from './octopus-stroke'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerShape } from '../source/source-layer-shape'

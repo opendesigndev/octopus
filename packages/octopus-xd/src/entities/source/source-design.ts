@@ -1,4 +1,4 @@
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { push } from '@opendesign/octopus-common/utils/common'
 
 import { Expander } from '../../services/conversion/expander'
 import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer'
@@ -63,7 +63,7 @@ export class SourceDesign {
 
     const expander = new Expander({ resources: this._resources })
 
-    this._artboards = options.artboards.reduce((artboards, entry) => {
+    this._artboards = options.artboards.reduce<SourceArtboard[]>((artboards, entry) => {
       const rawValue = /pasteboard/.test(entry.path)
         ? new PasteboardNormalizer({
             manifest: this._manifest,

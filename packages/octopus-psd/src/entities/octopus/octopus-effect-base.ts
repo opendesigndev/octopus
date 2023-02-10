@@ -1,4 +1,4 @@
-import { convertBlendMode } from '../../utils/convert.js'
+import { convertBlendMode } from '../../utils/convert'
 
 import type { DesignConverter } from '../../services/conversion/design-converter'
 import type { Octopus } from '../../typings/octopus'

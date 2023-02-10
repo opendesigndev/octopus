@@ -1,6 +1,6 @@
-import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
-import { isObject, push } from '@opendesign/octopus-common/dist/utils/common'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/utils/async'
+import { isObject, push } from '@opendesign/octopus-common/utils/common'
+import { Queue } from '@opendesign/octopus-common/utils/queue'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest'
 import { setDefaults, setLogger } from './services'
@@ -17,7 +17,7 @@ import type { Logger } from './typings'
 import type { Manifest } from './typings/manifest'
 import type { Octopus } from './typings/octopus'
 import type { PackageMeta } from './utils/read-pkg-meta'
-import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
+import type { SafeResult } from '@opendesign/octopus-common/utils/queue'
 
 export type ConvertDesignOptions = {
   exporter?: Exporter

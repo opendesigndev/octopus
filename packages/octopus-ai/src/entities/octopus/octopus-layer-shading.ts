@@ -1,4 +1,4 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/utils/as'
 
 import { parseRect } from '../../utils/rectangle'
 import { OctopusEffectsShape } from './octopus-effects-shape'

@@ -7,7 +7,7 @@ import type { SourceLayer } from '../../factories/create-source-layer'
 import type { RawGroupLayer } from '../../typings/raw'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent

@@ -1,16 +1,16 @@
-import { DesignConverter } from './services/conversion/design-converter.js'
-import { DebugExporter } from './services/exporters/debug-exporter.js'
-import { LocalExporter } from './services/exporters/local-exporter.js'
-import { createEnvironment } from './services/general/environment.js'
-import { set as setLogger } from './services/instances/logger.js'
-import { PSDFileReader } from './services/readers/psd-file-reader.js'
-import { readPackageMeta } from './utils/read-pkg-meta.js'
+import { DesignConverter } from './services/conversion/design-converter'
+import { DebugExporter } from './services/exporters/debug-exporter'
+import { LocalExporter } from './services/exporters/local-exporter'
+import { createEnvironment } from './services/general/environment'
+import { set as setLogger } from './services/instances/logger'
+import { PSDFileReader } from './services/readers/psd-file-reader'
+import { readPackageMeta } from './utils/read-pkg-meta'
 
 import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
-import type { Logger } from './typings'
-import type { PackageMeta } from './utils/read-pkg-meta.js'
+import type { Logger } from './typings/index'
+import type { PackageMeta } from './utils/read-pkg-meta'
 
 export { LocalExporter, DebugExporter, PSDFileReader }
 

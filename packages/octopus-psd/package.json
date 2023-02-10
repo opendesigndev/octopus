@@ -1,20 +1,19 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.0.0-rc.9",
+  "version": "3.0.0-rc.10",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
-  "type": "module",
   "scripts": {
-    "build": "tsc --build ./tsconfig.json",
+    "build": "rimraf ./dist && node build.js ./tsconfig.json",
     "clean:workdir": "rimraf ./workdir/*",
-    "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report ./jsdoc",
-    "convert:debug": "yarn build && node ./lib/examples/node/convert-debug.js",
-    "convert:local": "yarn build && node ./lib/examples/node/convert-local.js",
-    "prepack": "rimraf ./lib && yarn run build",
+    "clean": "rimraf ./node_modules ./dist ./dist ./workdir ./test/integration/report ./jsdoc",
+    "convert:debug": "yarn build && node ./dist/examples/node/convert-debug.js",
+    "convert:local": "yarn build && node ./dist/examples/node/convert-local.js",
+    "prepack": "yarn run build",
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "yarn build && yarn node --experimental-vm-modules $(yarn bin jest)",
-    "test:integration": "yarn build && node lib/test/integration/index.js",
-    "test:integration:update": "yarn build && node lib/test/integration/update-tests.js",
+    "test:integration": "yarn build && node dist/test/integration/index.js",
+    "test:integration:update": "yarn build && node dist/test/integration/update-tests.js",
     "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index.ts",
     "watch": "tsc -w"
@@ -22,7 +21,7 @@
   "dependencies": {
     "@avocode/psd-parser": "0.8.4",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.28",
+    "@opendesign/octopus-common": "3.0.0-rc.29",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
@@ -42,8 +41,9 @@
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/node": "*",
-    "@types/pino-std-serializers": "2.4.1",
     "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1",
+    "enhanced-resolve": "^5.12.0",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
@@ -51,9 +51,18 @@
     "typescript": "4.7.4"
   },
   "files": [
-    "lib/src",
-    "lib/package.json"
+    "dist/src",
+    "dist/package.json"
   ],
-  "main": "./lib/src/index.js",
-  "types": "./lib/src/index.d.ts"
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "module": "./dist/src/index.mjs",
+  "exports": {
+    ".": {
+      "default": {
+        "require": "./dist/src/index.js",
+        "import": "./dist/src/index.mjs"
+      }
+    }
+  }
 }

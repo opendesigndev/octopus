@@ -1,4 +1,4 @@
-import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/utils/as'
 
 import { DEFAULTS } from '../../utils/defaults'
 import { uuidv4FromSeed } from '../../utils/id'

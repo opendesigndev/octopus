@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
+import { displayPerf } from '@opendesign/octopus-common/utils/console'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase'

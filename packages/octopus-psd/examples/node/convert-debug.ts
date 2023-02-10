@@ -1,15 +1,14 @@
 import path from 'path'
-import { fileURLToPath } from 'url'
 
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
+import { displayPerf } from '@opendesign/octopus-common/utils/console'
+import { timestamp } from '@opendesign/octopus-common/utils/timestamp'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
-import kebabCase from 'lodash/kebabCase.js'
+import kebabCase from 'lodash/kebabCase'
 
-import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index.js'
-import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
-import { renderOctopus } from './utils/render.js'
+import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index'
+import { getFilesFromDir, isDirectory } from '../../src/utils/files'
+import { renderOctopus } from './utils/render'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
@@ -34,7 +33,7 @@ export async function convertDesign({
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const tempDir = path.join(fileURLToPath(new URL(import.meta.url)), '../../../../', 'workdir')
+  const tempDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {

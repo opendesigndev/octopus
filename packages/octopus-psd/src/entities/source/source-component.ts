@@ -1,12 +1,12 @@
-import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
-import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/utils/as'
+import { push } from '@opendesign/octopus-common/utils/common'
 
-import { createSourceLayer } from '../../factories/create-source-layer.js'
-import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
+import { createSourceLayer } from '../../factories/create-source-layer'
+import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
 import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawComponent, RawLayer } from '../../typings/raw'
+import type { RawComponent, RawLayer } from '../../typings/raw/index'
 import type { SourceBounds, SourceColor } from '../../typings/source'
 
 export type SourceComponentOptions = {

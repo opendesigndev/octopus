@@ -1,4 +1,4 @@
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'

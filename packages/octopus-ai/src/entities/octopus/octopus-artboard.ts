@@ -1,4 +1,4 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/utils/common'
 
 import { initOctopusLayerChildren } from '../../utils/layer'
 import { parseRect } from '../../utils/rectangle'

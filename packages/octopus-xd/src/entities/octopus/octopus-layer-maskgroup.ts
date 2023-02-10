@@ -1,5 +1,5 @@
-import { asNumber, asString } from '@opendesign/octopus-common/dist/utils/as'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { asNumber, asString } from '@opendesign/octopus-common/utils/as'
+import { push } from '@opendesign/octopus-common/utils/common'
 
 import { createOctopusLayer } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'

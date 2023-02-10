@@ -2,8 +2,8 @@ import fsp from 'fs/promises'
 import os from 'os'
 import path from 'path'
 
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
-import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceDesign } from '../../../entities/source/source-design'

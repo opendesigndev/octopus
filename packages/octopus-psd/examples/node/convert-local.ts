@@ -3,7 +3,7 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusPSDConverter, LocalExporter, PSDFileReader } from '../../src/index.js'
+import { OctopusPSDConverter, LocalExporter, PSDFileReader } from '../../src/index'
 
 const converter = new OctopusPSDConverter()
 

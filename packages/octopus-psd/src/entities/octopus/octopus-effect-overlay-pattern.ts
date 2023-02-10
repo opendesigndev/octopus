@@ -1,10 +1,10 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
 
-import { logger } from '../../services/instances/logger.js'
-import { convertOffset } from '../../utils/convert.js'
-import { createMatrix } from '../../utils/paper-factories.js'
-import { OctopusEffectBase } from './octopus-effect-base.js'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
+import { logger } from '../../services/instances/logger'
+import { convertOffset } from '../../utils/convert'
+import { createMatrix } from '../../utils/paper-factories'
+import { OctopusEffectBase } from './octopus-effect-base'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds } from '../../typings/source'

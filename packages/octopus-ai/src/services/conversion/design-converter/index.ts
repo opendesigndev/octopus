@@ -1,9 +1,9 @@
 import path from 'path'
 
-import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
-import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-node'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
+import { rejectTo } from '@opendesign/octopus-common/utils/async'
+import { benchmark } from '@opendesign/octopus-common/utils/benchmark'
+import { push } from '@opendesign/octopus-common/utils/common'
+import { Queue } from '@opendesign/octopus-common/utils/queue'
 
 import { OctopusManifest } from '../../../entities/octopus/octopus-manifest'
 import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service'
@@ -18,7 +18,7 @@ import type { Manifest } from '../../../typings/manifest'
 import type { Octopus } from '../../../typings/octopus'
 import type { AdditionalTextData } from '../../../typings/raw'
 import type { Exporter } from '../exporters'
-import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
+import type { SafeResult } from '@opendesign/octopus-common/utils/queue'
 
 type DesignConverterGeneralOptions = {
   octopusAIconverter: OctopusAIConverter

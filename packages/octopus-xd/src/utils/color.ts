@@ -1,4 +1,4 @@
-import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { asNumber } from '@opendesign/octopus-common/utils/as'
 
 import type { RawColor } from '../typings/source'
 

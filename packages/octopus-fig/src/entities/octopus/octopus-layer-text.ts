@@ -1,6 +1,6 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { normalizeText } from '@opendesign/octopus-common/postprocessors/normalize-text'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
 
 import { logger } from '../../services'
 import { DEFAULTS } from '../../utils/defaults'

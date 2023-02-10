@@ -1,21 +1,21 @@
-import { lerpColor, multiplyAlpha } from '@opendesign/octopus-common/dist/utils/color.js'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
-import { invLerp, lerp } from '@opendesign/octopus-common/dist/utils/math.js'
-import uniq from 'lodash/uniq.js'
+import { lerpColor, multiplyAlpha } from '@opendesign/octopus-common/utils/color'
+import { getMapped } from '@opendesign/octopus-common/utils/common'
+import { invLerp, lerp } from '@opendesign/octopus-common/utils/math'
+import uniq from 'lodash/uniq'
 
-import { logger } from '../../services/instances/logger.js'
-import { convertColor, convertOffset } from '../../utils/convert.js'
-import { angleToPoints, scaleLineSegment } from '../../utils/gradient.js'
-import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories.js'
+import { logger } from '../../services/instances/logger'
+import { convertColor, convertOffset } from '../../utils/convert'
+import { angleToPoints, scaleLineSegment } from '../../utils/gradient'
+import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds, SourceGradientType } from '../../typings/source'
-import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
+import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
-import type { ElementOf } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { ElementOf } from '@opendesign/octopus-common/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 

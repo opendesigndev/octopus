@@ -1,7 +1,7 @@
-import { getPointFor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
+import { getPointFor } from '../../utils/source'
+import { SourceEntity } from './source-entity'
 
-import type { RawSubpathPoint } from '../../typings/raw'
+import type { RawSubpathPoint } from '../../typings/raw/index'
 import type { SourcePointXY } from '../../typings/source'
 
 export class SourceSubpathPoint extends SourceEntity {

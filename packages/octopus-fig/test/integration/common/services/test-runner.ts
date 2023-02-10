@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
+import { timestamp } from '@opendesign/octopus-common/utils/timestamp'
 import handlebars from 'handlebars'
 
 import { makeDir, saveFile } from '../../../../src/utils/files'

@@ -1,4 +1,4 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
 import { EventEmitter } from 'eventemitter3'
 
 import { imageSize } from '../../../services'
@@ -6,7 +6,7 @@ import { convertToEvents } from './event-convertor'
 
 import type { PluginSource } from '../../../typings/plugin-source'
 import type { ResolvedContent, Event } from './types'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
 export class DesignEmitter extends EventEmitter {
   private _sourceData: PluginSource
   private _finalizeDesign: DetachedPromiseControls<ResolvedContent>

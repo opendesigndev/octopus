@@ -1,4 +1,4 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/utils/as'
 
 import { initSourceLayerChildren } from '../../utils/layer'
 import { createSoftMask, initClippingMask } from '../../utils/mask'
@@ -9,7 +9,7 @@ import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../t
 import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

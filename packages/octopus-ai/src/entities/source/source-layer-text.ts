@@ -1,4 +1,4 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/utils/as'
 import isEqual from 'lodash/isEqual'
 
 import { logger } from '../../services/instances/logger'
@@ -12,7 +12,7 @@ import type { RawGraphicsState } from '../../typings/raw/graphics-state'
 import type { SourceLayerParent } from './source-layer-common'
 import type { SourceLayerShape } from './source-layer-shape'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/utility-types'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
