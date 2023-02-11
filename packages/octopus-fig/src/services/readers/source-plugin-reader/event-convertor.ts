@@ -27,6 +27,18 @@ export function convertToEvents(source: PluginSource): Event[] {
     }
   }
 
+  if (assets?.previews) {
+    for (const nodeId in assets.previews) {
+      const data = assets.previews[nodeId]
+      if (!data || !isBase64(data)) {
+        logger?.error('Invalid image asset', { nodeId, data })
+        continue
+      }
+      const buffer = base64ToUint8Array(data)
+      events.push({ event: 'ready:preview', data: { designId, nodeId, buffer } })
+    }
+  }
+
   for (const content of selectedContent ?? []) {
     const nodeId = content.id
     if (!nodeId) continue

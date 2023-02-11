@@ -1,6 +1,6 @@
 {
   "name": "Preview Exporter",
-  "id": "",
+  "id": "1206274224746282691",
   "api": "1.0.0",
   "editorType": ["figma"],
   "main": "dist/code.js",

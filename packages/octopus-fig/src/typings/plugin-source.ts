@@ -14,6 +14,7 @@ export type StyledTextSegmentsMap = { [key: string]: StyledTextSegment[] | undef
 
 export type SourceAssets = {
   images?: ImageMap
+  previews?: ImageMap
   styledTextSegments?: StyledTextSegmentsMap
 }
 
