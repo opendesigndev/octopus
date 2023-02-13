@@ -2,9 +2,9 @@ import path from 'path'
 
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
 import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
+import { traverseAndFind, uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
 
-import { initSourceLayerChildren, uniqueIdFactory } from '../../utils/layer'
+import { initSourceLayerChildren } from '../../utils/layer'
 import { SourceResources } from './source-resources'
 
 import type { SourceLayer } from '../../factories/create-source-layer'

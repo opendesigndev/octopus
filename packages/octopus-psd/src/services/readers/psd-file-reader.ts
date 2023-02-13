@@ -4,8 +4,8 @@ import path from 'path'
 import { getRenderer } from '@opendesign/image-icc-profile-converter'
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import Psd, { AliKey } from '@webtoon/psd-ts'
 import chalk from 'chalk'
 import Jimp from 'jimp'
@@ -58,6 +58,7 @@ export class PSDFileReader {
   private _sourceDesign: Promise<SourceDesign | null>
   private _images: ProcessedImage[] = []
   private _renderer?: Renderer
+  private _uniqueId: () => string
 
   static OUTPUT_DIR = 'workdir'
   static RENDER_IMG = 'preview.png'
@@ -105,6 +106,7 @@ export class PSDFileReader {
    * @param {PSDFileReaderOptions} options
    */
   constructor(options: PSDFileReaderOptions) {
+    this._uniqueId = uniqueIdFactory(1000000)
     this._path = options.path
     this._renderer = options.renderer
     this._designId = options.designId || uuidv4()
@@ -255,11 +257,7 @@ export class PSDFileReader {
 
     if (!additionalProperties.lyid) {
       additionalProperties.lyid = {
-        /**this should not be a problem as only case where I found layer with undefined was when there
-        was only 1 existing layer, but just in case we create a big random number
-        value is typeof number in @webtoon
-        */
-        value: round(Math.random() * 1000 + 100000, 0),
+        value: Number.parseInt(this._uniqueId()),
         key: AliKey.LayerId,
         signature: '8B64',
       }
