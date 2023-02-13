@@ -2,10 +2,10 @@ import { getMapped } from '@opendesign/octopus-common/utils/common'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerShapeAdjustmentAdapter } from '../entities/octopus/octopus-layer-shape-adjustment-adapter'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter'
-import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
 import { logger } from '../services/instances/logger'
 

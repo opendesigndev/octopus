@@ -10,7 +10,7 @@
     "convert:all": "ts-node ./examples/node/convert-design.ts",
     "convert:all:debug": "ts-node ./examples/node/convert-design-debug.ts",
     "clean:workdir": "rimraf ./workdir/*",
-    "build": "rimraf ./dist && node build.js ./tsconfig.json",
+    "build": "rimraf ./dist && tsc --build tsconfig.json && node esm.js ./tsconfig.json",
     "prepack": "yarn run build",
     "watch": "tsc -w",
     "test": "echo 'Tests are not implemented yet'",

@@ -10,9 +10,9 @@ import { createLine, createPathEllipse, createPoint, createSize } from '../../ut
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceBounds, SourceGradientType } from '../../typings/source'
+import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
-import type { SourceEffectFill } from '../source/source-effect-fill'
 import type { OctopusComponent } from './octopus-component'
 import type { OctopusLayerBase } from './octopus-layer-base'
 import type { ElementOf } from '@opendesign/octopus-common/utility-types'

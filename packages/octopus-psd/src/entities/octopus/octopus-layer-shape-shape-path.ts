@@ -1,8 +1,8 @@
 import { getMapped } from '@opendesign/octopus-common/utils/common'
 
 import { logger } from '../../services/instances/logger'
-import { createPathData } from '../../utils/path-data'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
+import { createPathData } from '../../utils/path-data'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceCombineOperation } from '../../typings/source'

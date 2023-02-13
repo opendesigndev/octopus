@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { execSync } = require('child_process')
 const { promises: fs } = require('fs')
 const path = require('path')
 
@@ -7,10 +6,6 @@ const [TS_CONFIG_LOCATION] = process.argv.slice(2)
 
 async function getTSConfig() {
   return JSON.parse((await fs.readFile(TS_CONFIG_LOCATION)).toString())
-}
-
-function compile() {
-  execSync(`tsc --build ${TS_CONFIG_LOCATION}`)
 }
 
 async function createESMReexport(dir, file) {
@@ -49,10 +44,6 @@ async function createESMEntryPoints(subDir) {
 }
 
 async function build(subDir = 'src') {
-  const conf = await getTSConfig()
-  console.info(`Compiling as ${conf.compilerOptions.module} to ${conf.compilerOptions.outDir}...`)
-  compile()
-
   await createESMEntryPoints(subDir)
 }
 

@@ -12,9 +12,9 @@ import { OctopusLayerBase } from './octopus-layer-base'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceLayerText } from '../source/source-layer-text'
-import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
-import type { SourceTextTextStyle } from '../source/source-text-text-style'
 import type { SourceText } from '../source/source-text'
+import type { SourceTextTextStyle } from '../source/source-text-text-style'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
 import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
 
 type OctopusLayerTextOptions = {

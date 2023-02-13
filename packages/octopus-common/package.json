@@ -48,6 +48,6 @@
     "./utils/math": "./dist/utils/math.js",
     "./utils/queue": "./dist/utils/queue.js",
     "./utils/timestamp": "./dist/utils/timestamp.js",
-    "./utility-types": "./dist/utils/utility-types.js"
+    "./utility-types": "./dist/utility-types.js"
   }
 }
