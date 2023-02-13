@@ -10,7 +10,7 @@ async function getTSConfig() {
 }
 
 function compile() {
-  execSync(`tsc --build ${TS_CONFIG_LOCATION}`)
+  execSync(`tsc --build ${TS_CONFIG_LOCATION}`, { stdio: 'inherit' })
 }
 
 async function createESMReexport(dir, file) {

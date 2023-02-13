@@ -29,7 +29,7 @@ describe('AIFileReader', () => {
       mocked(FSContext).mockResolvedValueOnce(ctxMock)
       mocked(ArtBoardRefs).mockReturnValueOnce([{ idx: 1 }, { idx: 2 }] as any)
       mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
-      mocked(PrivateData).mockResolvedValueOnce(privateDataMock)
+      mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
 
       const result = await AIFileReader.prototype['_getSourceData']('root/path')
 
