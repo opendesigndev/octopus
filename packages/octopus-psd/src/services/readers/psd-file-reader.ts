@@ -257,7 +257,7 @@ export class PSDFileReader {
 
     if (!additionalProperties.lyid) {
       additionalProperties.lyid = {
-        value: Number.parseInt(this._uniqueId()),
+        value: Number(this._uniqueId()),
         key: AliKey.LayerId,
         signature: '8B64',
       }
