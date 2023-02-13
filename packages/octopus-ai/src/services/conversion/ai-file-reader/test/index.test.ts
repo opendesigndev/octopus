@@ -10,8 +10,8 @@ import { mocked } from 'jest-mock'
 import { AIFileReader } from '..'
 import { logger } from '../../../instances/logger'
 
-jest.mock('@opendesign/illustrator-parser-pdfcpu/dist/fs_context')
-jest.mock('@opendesign/illustrator-parser-pdfcpu/dist/index')
+jest.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
+jest.mock('@opendesign/illustrator-parser-pdfcpu/index')
 jest.mock('fs/promises')
 jest.mock('../../../instances/logger')
 
