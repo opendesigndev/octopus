@@ -1,6 +1,3 @@
-import type { RawLayer, RawLayerCommon } from './layer'
+import type { AddedType, RawParsedLayerGroup } from './layer'
 
-export type RawLayerSection = RawLayerCommon & {
-  type?: 'layerSection'
-  layers?: RawLayer[]
-}
+export type RawLayerSection = RawParsedLayerGroup & AddedType<'layerSection'>

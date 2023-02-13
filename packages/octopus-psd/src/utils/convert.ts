@@ -1,44 +1,18 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
+import { UnitFloatType } from '@webtoon/psd-ts'
 
+import BLEND_MODES from './blend-modes.js'
 import { DEFAULTS } from './defaults.js'
 
 import type { Octopus } from '../typings/octopus'
-import type { RawBlendMode } from '../typings/raw'
-import type { SourceBounds, SourceColor, SourceOffset, SourceVectorXY } from '../typings/source'
+import type { RawOffset } from '../typings/raw'
+import type { SourceBounds, SourceColor, SourceVectorXY } from '../typings/source'
 
-const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
-  blendDivide: 'DIVIDE',
-  blendSubtraction: 'SUBTRACT',
-  color: 'COLOR',
-  colorBurn: 'COLOR_BURN',
-  colorDodge: 'COLOR_DODGE',
-  darken: 'DARKEN',
-  darkerColor: 'DARKER_COLOR',
-  difference: 'DIFFERENCE',
-  exclusion: 'EXCLUSION',
-  hardLight: 'HARD_LIGHT',
-  hardMix: 'HARD_MIX',
-  hue: 'HUE',
-  lighten: 'LIGHTEN',
-  lighterColor: 'LIGHTER_COLOR',
-  linearBurn: 'LINEAR_BURN',
-  linearDodge: 'LINEAR_DODGE',
-  linearLight: 'LINEAR_LIGHT',
-  luminosity: 'LUMINOSITY',
-  multiply: 'MULTIPLY',
-  normal: 'NORMAL',
-  overlay: 'OVERLAY',
-  passThrough: 'PASS_THROUGH',
-  pinLight: 'PIN_LIGHT',
-  saturation: 'SATURATION',
-  screen: 'SCREEN',
-  softLight: 'SOFT_LIGHT',
-  vividLight: 'VIVID_LIGHT',
-}
-
-export function convertBlendMode(blendMode?: RawBlendMode): Octopus['BlendMode'] {
-  return typeof blendMode === 'string' && blendMode in BLEND_MODES ? BLEND_MODES[blendMode] : DEFAULTS.BLEND_MODE
+export function convertBlendMode(blendMode: keyof typeof BLEND_MODES | undefined): Octopus['BlendMode'] {
+  return typeof blendMode === 'string' && blendMode in BLEND_MODES
+    ? BLEND_MODES[blendMode as keyof typeof BLEND_MODES]
+    : DEFAULTS.BLEND_MODE
 }
 
 export function convertColor(color: SourceColor | null | undefined, opacity?: number): Octopus['Color'] {
@@ -50,16 +24,35 @@ export function convertColor(color: SourceColor | null | undefined, opacity?: nu
   }
 }
 
-export function convertOffset(offset: SourceOffset, width: number, height: number): SourceVectorXY {
-  const { horizontal: h, vertical: v } = offset
-  if (typeof h === 'number' && typeof v === 'number') return { x: h, y: v }
-  if (typeof h === 'number' || typeof v === 'number') return { x: 0, y: 0 }
-  if (h?.value !== undefined && v?.value !== undefined) {
-    const x = (h.value * width) / 100
-    const y = (v.value * height) / 100
-    return { x, y }
+export function convertOffset(offset: RawOffset, width: number, height: number): SourceVectorXY {
+  const { Hrzn: horizontal, Vrtc: vertical } = offset
+
+  if (typeof horizontal === 'number' || typeof vertical === 'number') {
+    return {
+      x: typeof vertical === 'number' ? 0 : vertical.value,
+      y: typeof horizontal === 'number' ? 0 : horizontal.value,
+    }
   }
-  return { x: 0, y: 0 }
+
+  const { value: horizontalValue, unitType: horizontalType } = horizontal
+  const { value: verticalValue, unitType: verticalType } = vertical
+
+  if (horizontalType !== UnitFloatType.Percent && verticalType !== UnitFloatType.Percent) {
+    return { x: horizontalValue, y: verticalValue }
+  }
+
+  if (horizontalType !== UnitFloatType.Percent || verticalType !== UnitFloatType.Percent) {
+    return { x: 0, y: 0 }
+  }
+
+  if (typeof horizontalValue === 'undefined' || typeof verticalValue === 'undefined') {
+    return { x: 0, y: 0 }
+  }
+
+  const x = (horizontalValue * width) / 100
+  const y = (verticalValue * height) / 100
+
+  return { x, y }
 }
 
 export function convertRectangle(bounds: SourceBounds | undefined): Octopus['Rectangle'] {

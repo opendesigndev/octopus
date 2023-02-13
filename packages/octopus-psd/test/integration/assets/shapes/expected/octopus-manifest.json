@@ -1,5 +1,5 @@
 {
-  "version": "3.0.1",
+  "version": "3.0.0-webtoon-20230202",
   "origin": {
     "name": "PHOTOSHOP",
     "version": "0"
@@ -27,21 +27,14 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "1.png"
+            "refId": "9.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "2.png"
-          },
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "3.png"
+            "refId": "8.png"
           },
           {
             "location": {
@@ -62,14 +55,21 @@
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "8.png"
+            "refId": "3.png"
           },
           {
             "location": {
               "type": "RELATIVE",
               "path": ""
             },
-            "refId": "9.png"
+            "refId": "2.png"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "1.png"
           }
         ]
       },

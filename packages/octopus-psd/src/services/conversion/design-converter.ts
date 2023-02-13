@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
 import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
@@ -133,8 +131,8 @@ export class DesignConverter {
     /** Images */
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
-        const imageId = path.basename(image.path)
-        const imagePath = await rejectTo(this._exporter?.exportImage?.(image.name, image.path))
+        const imageId = image.name
+        const imagePath = await rejectTo(this._exporter?.exportImage?.(image.name, image.data))
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }

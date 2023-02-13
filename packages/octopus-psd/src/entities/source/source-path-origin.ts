@@ -1,34 +1,44 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawOrigin } from '../../typings/raw'
+import type { RawVectorOriginationDatakeyDescriptor } from '../../typings/raw'
 import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source'
 
 export class SourcePathOrigin extends SourceEntity {
-  protected _rawValue: RawOrigin | undefined
+  protected _rawValue: RawVectorOriginationDatakeyDescriptor | undefined
 
-  constructor(raw: RawOrigin | undefined) {
+  static TYPE_MAP = {
+    1: 'rect',
+    2: 'roundedRect',
+    4: 'line',
+    5: 'ellipse',
+  }
+
+  constructor(raw: RawVectorOriginationDatakeyDescriptor | undefined) {
     super(raw)
+    this._rawValue = raw
   }
 
   get type(): string | undefined {
-    return this._rawValue?.type ? String(this._rawValue.type) : undefined
+    const typeKey = this._rawValue?.keyOriginType
+    return typeKey ? SourcePathOrigin.TYPE_MAP[typeKey] ?? String(typeKey) : undefined
   }
 
   @firstCallMemo()
   get bounds(): SourceBounds {
-    return { ...this._rawValue?.bounds, ...getBoundsFor(this._rawValue?.bounds) }
+    return getBoundsFor(this._rawValue?.keyOriginShapeBBox)
   }
 
   @firstCallMemo()
   get radii(): SourceRadiiCorners {
-    return { ...this._rawValue?.radii, ...getRadiiCornersFor(this._rawValue?.radii) }
+    return { ...this._rawValue?.keyOriginRRectRadii, ...getRadiiCornersFor(this._rawValue?.keyOriginRRectRadii) }
   }
 
   @firstCallMemo()
   get Trnf(): SourceMatrix {
-    return getMatrixFor(this._rawValue?.Trnf)
+    return getMatrixFor(this._rawValue?.[PROPS.TRANSFORM])
   }
 }

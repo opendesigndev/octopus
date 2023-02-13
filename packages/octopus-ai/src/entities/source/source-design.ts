@@ -1,4 +1,5 @@
-import { uniqueIdFactory } from '../../utils/layer'
+import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
+
 import { SourceArtboard } from './source-artboard'
 
 import type { Metadata } from '../../services/conversion/ai-file-reader'

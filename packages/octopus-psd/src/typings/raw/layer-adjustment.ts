@@ -1,7 +1,3 @@
-import type { RawFill } from './effects'
-import type { RawLayerCommon } from './layer'
+import type { AddedType, RawParsedLayerLayer } from './layer'
 
-export type RawLayerAdjustment = RawLayerCommon & {
-  type?: 'adjustmentLayer'
-  fill?: RawFill
-}
+export type RawLayerAdjustment = RawParsedLayerLayer & AddedType<'adjustmentLayer'>

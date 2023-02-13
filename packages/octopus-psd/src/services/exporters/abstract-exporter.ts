@@ -11,7 +11,7 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
   }
 
-  exportImage(_name: string, _path: string): Promise<unknown> {
+  exportImage(_name: string, _data: Buffer): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
 

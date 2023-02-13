@@ -22,6 +22,6 @@ export class SourceTextTextStyleRange extends SourceEntity {
 
   @firstCallMemo()
   get textStyle(): SourceTextTextStyle {
-    return new SourceTextTextStyle(this._rawValue?.textStyle)
+    return new SourceTextTextStyle(this._rawValue?.textStyle, this._rawValue?.defaultStyleSheet)
   }
 }
