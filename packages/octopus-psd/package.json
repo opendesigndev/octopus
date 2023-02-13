@@ -22,7 +22,7 @@
   "dependencies": {
     "@opendesign/image-icc-profile-converter": "^0.0.0-experimental",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.28",
+    "@opendesign/octopus-common": "3.0.0-rc.30",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
