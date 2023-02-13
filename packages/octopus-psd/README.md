@@ -54,26 +54,26 @@ ENV variables for our demo scripts located in `/examples/node/*`
 
 ### Convert .PSD file
 
-#### yarn convert:psd:debug
+#### yarn convert:debug
 
 Designed for manual runs.
 
 ```
-yarn convert:psd:debug sample/some-file.psd
+yarn convert:debug sample/some-file.psd
 ```
 
 When it receives directory as parameter, it will convert all photoshop files located there.
 
 ```
-yarn convert:psd:debug sample
+yarn convert:debug sample
 ```
 
-#### yarn convert:psd:local
+#### yarn convert:local
 
 Designed for running in automated runs.
 
 ```
-yarn convert:psd:local sample/some-file.psd
+yarn convert:local sample/some-file.psd
 ```
 
 ---

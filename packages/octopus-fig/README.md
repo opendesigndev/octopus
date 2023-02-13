@@ -65,22 +65,40 @@ ENV variables for our demo scripts which are located in `/`examples/node/\*`
 | ODE_IGNORE_VALIDATION | boolean | ignores the ODE rendering validation                           |
 | FONTS_PATH            | string  | path to directory with fonts                                   |
 
-### yarn convert:debug
+### yarn convert:api:debug
 
-Designed for manual runs.
-
-```
-yarn
-yarn convert:debug FIGMA_DESIGN_HASH
-```
-
-### yarn convert:local
-
-Designed for running in automated runs.
+Designed for manual runs using figma-parser.
 
 ```
 yarn
-yarn convert:local FIGMA_DESIGN_HASH
+yarn convert:api:debug FIGMA_DESIGN_HASH
+```
+
+### yarn convert:api:local
+
+Designed for running in automated runs using figma-parser.
+
+```
+yarn
+yarn convert:api:local FIGMA_DESIGN_HASH
+```
+
+### yarn convert:squid:debug
+
+Designed for manual runs using Squid Figma plugin data.
+
+```
+yarn
+yarn convert:squid:debug PATH_TO/SQUID_PLUGIN_DATA.json
+```
+
+### yarn convert:squid:local
+
+Designed for running in automated runs using Squid Figma plugin data.
+
+```
+yarn
+yarn convert:squid:local PATH_TO/SQUID_PLUGIN_DATA.json
 ```
 
 ---
