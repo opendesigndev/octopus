@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.0.0-webtoon-20230210-dashing-fix",
+  "version": "3.1.0-rc.1",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "type": "module",
