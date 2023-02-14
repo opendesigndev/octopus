@@ -23,6 +23,15 @@ main {
   justify-content: center;
 }
 
+header {
+  height: 140px;
+}
+
+img {
+  height: 140px;
+  width: 300px;
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -31,13 +40,8 @@ section {
   margin: 16px 24px;
 }
 
-header {
-  height: 140px;
-}
-
-img {
-  height: 140px;
-  width: 300px;
+footer {
+  color: rgba(200, 200, 200, 1);
 }
 
 button {

@@ -6,9 +6,10 @@
     "packages": [
       "packages/figma-parser",
       "packages/figma-parser-s3-plugin",
-      "packages/figma-plugin-preview",
-      "packages/figma-plugin-squid",
       "packages/octopus-common",
+      "packages/figma-plugins/common",
+      "packages/figma-plugins/preview-exporter",
+      "packages/figma-plugins/squid",
       "packages/octopus-ai",
       "packages/octopus-fig",
       "packages/octopus-psd",

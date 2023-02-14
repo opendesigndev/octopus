@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
+import { version } from '../../package.json'
 import logoPng from './logo.png'
 import { dispatch } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
@@ -90,6 +91,9 @@ function App() {
           {buttonText}
         </button>
       </section>
+      <footer>
+        <p>v{version}</p>
+      </footer>
     </main>
   )
 }
