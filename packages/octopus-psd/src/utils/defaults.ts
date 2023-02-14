@@ -1,6 +1,12 @@
 export const DEFAULTS = {
+  BEZIER_KNOT_TYPE: [1, 2, 4, 5],
+  PATH_RECORD_TYPE: [0, 3],
+  OPEN_SUBPATH_TYPE: 0,
+  CLOSED_SUBPATH_TYPE: 3,
+  SUBPATH_OPERATION_NONE: -1,
   LAYER_TRANSFORM: [1, 0, 0, 1, 0, 0],
   BLEND_MODE: 'NORMAL',
+  RGB_COLOR_MAX_VALUE: 255,
   EFFECTS: {
     SHADOW_CHOKE: 0,
     IMAGE_FILL_TYPE: 'FILL',
@@ -14,6 +20,15 @@ export const DEFAULTS = {
     STYLE_SMALLCAPS: false,
     STYLE_KERNING: true,
     LAYER_FONT_SIZE: 10,
+    FONT_STYLE: 'Regular',
+    FONT_STYLES: {
+      '-Bold': 'Bold',
+      '-BoldItalic': 'Bold Italic',
+      '-Italic': 'Italic',
+      '-Light': 'Light',
+      '-Medium': 'Medium',
+      '-Regular': 'Regular',
+    },
   },
   LAYER: {
     NAME: 'Layer',

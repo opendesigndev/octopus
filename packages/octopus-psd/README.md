@@ -78,6 +78,12 @@ yarn convert:local sample/some-file.psd
 
 ---
 
+#### Instantiation of PSDFileReader
+
+You can instantiate PSDFileReader with optional flag withRenderer.
+This will include library @opendesign/image-icc-profile-converter in the image processing pipeline.
+The process will convert all output images to `sRGB` if PSD file was saved with embedded colour profile. This might make a difference especially for images composed in CMYK colour space.
+
 ## TypeDoc
 
 Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
@@ -108,3 +114,23 @@ yarn test:integration
 
 Runs Integration tests using our custom framework.
 Tries to convert `octopus components` + `manifest` for saved designs and compares them using `jsondiffpatch` with saved expected output.
+
+## Dependencies
+
+#### @webtoon
+
+`octopus-psd` has a dependency on `@webtoon` [project](https://github.com/webtoon/psd) to which OpenDesign team has been contributing. Changes proposed by the OpenDesign team have been first applied to our own fork (npm: [`@opendesign/psd-ts`](https://www.npmjs.com/package/@opendesign/psd-ts)) and partially merged into webtoon's repository.
+
+Currently, there is one merge request from OpenDesign into webtoon and without which octopus-psd would not work. Therefore, octopus-psd is seemingly importing from `@webtoon/psd`, but in reality imports are done from `@opendesign/psd-ts`. This bridge (or proxy) is visible in `package.json`
+
+```
+    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.0"
+```
+
+How to make changes in @webtoon dependency:
+
+1. Pull [https://github.com/opendesigndev/psd-ts](https://github.com/opendesigndev/psd-ts).
+2. Make a pull request to `opendesigndev/psd-ts` (when doing pull request on GitHub, make sure branch you are pushing to is `main` from OpenDesign).
+3. When everything is merged, create a pull request from OpenDesign GitHub page to merge `main` branch into webtoon's repository.
+4. If you are proxying dependency from webtoon with `opendesign/psd-ts`, switch to branch `experimental-release` and read about "release process" in README and apply.
+5. Update your `package.json` in octopus-psd accordingly.

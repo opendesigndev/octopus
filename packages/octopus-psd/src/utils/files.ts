@@ -1,4 +1,4 @@
-import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile, rm } from 'fs/promises'
+import { mkdir, readdir, readFile, stat, writeFile, rm } from 'fs/promises'
 
 import { logger } from '../services/instances/logger.js'
 
@@ -64,13 +64,4 @@ export async function rmDir(path: string): Promise<string> {
     logger.warn(`Removing directory '${path}' was not successful`)
   }
   return path
-}
-
-export async function copyFile(src: string, dest: string): Promise<string> {
-  try {
-    await cp(src, dest)
-  } catch (e) {
-    logger.warn(`Copying file from '${src}' to '${dest}' failed`)
-  }
-  return dest
 }

@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.9",
+  "version": "3.0.0-webtoon-20230202",
   "dimensions": {
     "width": 300,
     "height": 300

@@ -2,6 +2,7 @@ import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 import { convertColor, convertRectangle } from '../../utils/convert.js'
+import PROPS from '../../utils/prop-names.js'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter.js'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
@@ -10,7 +11,7 @@ import { OctopusLayerShape } from './octopus-layer-shape.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer'
 import type { SourceLayer } from '../../factories/create-source-layer'
 import type { Octopus } from '../../typings/octopus'
-import type { RawLayerLayer, RawLayerShape, RawPath } from '../../typings/raw'
+import type { RawLayerLayer, RawLayerShape } from '../../typings/raw'
 import type { SourceBounds, SourceColor } from '../../typings/source'
 import type { SourceLayerLayer } from '../source/source-layer-layer'
 import type { SourceLayerShape } from '../source/source-layer-shape'
@@ -95,9 +96,24 @@ export class OctopusLayerMaskGroup {
     if (!bitmapMask) return octopusLayer
     const { width, height } = octopusLayer.parentComponent.dimensions
     const bounds = { left: 0, right: width, top: 0, bottom: height }
-    const raw: RawLayerLayer = { type: 'layer', bitmapBounds: bounds, bounds, visible: false, imageName: bitmapMask }
-    const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerLayer
+
+    const raw: RawLayerLayer = {
+      addedType: 'layer',
+      width: bounds.right - bounds.left,
+      height: bounds.bottom - bounds.top,
+      top: bounds.top,
+      left: bounds.left,
+      isHidden: true,
+      layerProperties: {
+        [PROPS.LAYER_ID]: bitmapMask.replace(/\.png$/i, ''),
+      },
+    }
+    const maskSourceLayer = createSourceLayer({
+      layer: raw,
+      parent: sourceLayer?.parent,
+    }) as SourceLayerLayer
     const maskAdapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer: maskSourceLayer })
+
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
     return new OctopusLayerMaskGroup({
       parent,
@@ -115,9 +131,21 @@ export class OctopusLayerMaskGroup {
     parent,
   }: CreateWrapMaskOptions<T>): OctopusLayerMaskGroup | T {
     const path = sourceLayer.path
+
     if (!path) return octopusLayer
-    const raw: RawLayerShape = { type: 'shapeLayer', visible: false, path: path.raw as RawPath }
-    const maskSourceLayer = createSourceLayer({ layer: raw, parent: sourceLayer?.parent }) as SourceLayerShape
+    const raw: RawLayerShape = {
+      addedType: 'shapeLayer',
+      isHidden: true,
+      layerProperties: {
+        [PROPS.VECTOR_MASK_SETTING1]: path.vectorMaskSetting,
+        [PROPS.VECTOR_ORIGINATION_DATA]: path.vectorOriginationData,
+      },
+    }
+
+    const maskSourceLayer = createSourceLayer({
+      layer: raw,
+      parent: sourceLayer?.parent,
+    }) as SourceLayerShape
     const maskAdapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer: maskSourceLayer })
     const mask = new OctopusLayerShape({ parent, sourceLayer, adapter: maskAdapter })
     const id = `${octopusLayer.id}-ShapeMask`

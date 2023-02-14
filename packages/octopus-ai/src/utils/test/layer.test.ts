@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
 import { mocked } from 'jest-mock'
 
 import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { LayerGroupingService } from '../../services/conversion/layer-grouping-service'
-import {
-  createOctopusLayersFromLayerSequences,
-  initOctopusLayerChildren,
-  initSourceLayerChildren,
-  uniqueIdFactory,
-} from '../layer'
+import { createOctopusLayersFromLayerSequences, initOctopusLayerChildren, initSourceLayerChildren } from '../layer'
 
 jest.mock('../../services/instances/text-layer-grouping-service', () => ({
   __esModule: true,
