@@ -18,7 +18,10 @@ import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/ut
 
 type LocalExporterOptions = {
   /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */
-  path: string
+  path?: string
+
+  /** Path to directory, where previews will be exported. If not provided will use `LocalExporterOptions.path`. */
+  previewPath?: string
 }
 
 export const IMAGES_DIR_NAME = 'images'
@@ -41,6 +44,7 @@ export function getSourceFileName(id: string): string {
  */
 export class LocalExporter implements AbstractExporter {
   private _outputDir: Promise<string>
+  private _outputPreviewDir: Promise<string>
   private _assetsSaves: Promise<unknown>[]
   private _completed: DetachedPromiseControls<void>
 
@@ -57,6 +61,7 @@ export class LocalExporter implements AbstractExporter {
    */
   constructor(options: LocalExporterOptions) {
     this._outputDir = this._initTempDir(options)
+    this._outputPreviewDir = this._initPreviewTempDir(options)
     this._assetsSaves = []
     this._completed = detachPromiseControls<void>()
   }
@@ -68,13 +73,29 @@ export class LocalExporter implements AbstractExporter {
     return dir
   }
 
-  private async _save(name: string | null, body: string | Buffer) {
-    const dir = await this._outputDir
+  private async _initPreviewTempDir(options: LocalExporterOptions) {
+    if (typeof options.previewPath !== 'string') return this._outputDir
+    const dir = options.previewPath
+    await makeDir(dir)
+    return dir
+  }
+
+  private async _saveCommon(dir: string, name: string | null, body: string | Buffer) {
     const fullPath = path.join(dir, typeof name === 'string' ? name : uuidv4())
     const write = saveFile(fullPath, body)
     this._assetsSaves.push(write)
     await write
     return fullPath
+  }
+
+  private async _save(name: string | null, body: string | Buffer) {
+    const dir = await this._outputDir
+    return this._saveCommon(dir, name, body)
+  }
+
+  private async _savePreview(name: string | null, body: string | Buffer) {
+    const dir = await this._outputPreviewDir
+    return this._saveCommon(dir, name, body)
   }
 
   async completed(): Promise<void> {
@@ -157,7 +178,7 @@ export class LocalExporter implements AbstractExporter {
    */
   async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
     const previewPath = LocalExporter.getPreviewFileName(id)
-    await this._save(previewPath, Buffer.from(data))
+    await this._savePreview(previewPath, Buffer.from(data))
     return previewPath
   }
 
