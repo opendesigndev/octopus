@@ -1,4 +1,5 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { isFiniteNumber } from '@opendesign/octopus-common/dist/utils/common'
 import { round } from '@opendesign/octopus-common/dist/utils/math'
 
 import { env } from '../services'
@@ -21,7 +22,7 @@ export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | 
 }
 
 export function getSizeFor(value: RawVector | undefined): Octopus['Vec2'] | null {
-  if (value?.x === undefined && value?.y === undefined) return null
+  if (!isFiniteNumber(value?.x) || !isFiniteNumber(value?.y)) return null
   const x = round(asFiniteNumber(value?.x, 0))
   const y = round(asFiniteNumber(value?.y, 0))
   return { x, y }
@@ -32,7 +33,9 @@ export function getTransformFor(value: RawTransform | undefined): SourceTransfor
   if (!Array.isArray(m1) || !Array.isArray(m2)) return null
   const [a, c, tx] = m1
   const [b, d, ty] = m2
-  return [a, b, c, d, tx, ty]
+  const result: SourceTransform = [a, b, c, d, tx, ty]
+  if (result.some((item) => !isFiniteNumber(item))) return null
+  return result
 }
 
 function getFillRule(rule: RawWindingRule | undefined): Octopus['FillRule'] {
