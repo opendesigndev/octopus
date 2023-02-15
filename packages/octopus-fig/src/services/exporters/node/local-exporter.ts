@@ -32,7 +32,7 @@ export function getOctopusFileName(id: string): string {
 }
 
 export function getPreviewFileName(id: string): string {
-  return `preview-${kebabCase(id)}${IMAGE_EXTNAME}`
+  return `${kebabCase(id)}${IMAGE_EXTNAME}`
 }
 
 export function getSourceFileName(id: string): string {
@@ -48,11 +48,12 @@ export class LocalExporter implements AbstractExporter {
   private _assetsSaves: Promise<unknown>[]
   private _completed: DetachedPromiseControls<void>
 
-  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
-  static MANIFEST_NAME = MANIFEST_NAME
-  static getSourceFileName = getSourceFileName
-  static getOctopusFileName = getOctopusFileName
-  static getPreviewFileName = getPreviewFileName
+  IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  IMAGE_EXTNAME = IMAGE_EXTNAME
+  MANIFEST_NAME = MANIFEST_NAME
+  getSourceFileName = getSourceFileName
+  getOctopusFileName = getOctopusFileName
+  getPreviewFileName = getPreviewFileName
 
   /**
    * Exports octopus assets into given or system TempDir
@@ -69,7 +70,7 @@ export class LocalExporter implements AbstractExporter {
   private async _initTempDir(options: LocalExporterOptions) {
     const tempFallback = path.join(os.tmpdir(), uuidv4())
     const dir = typeof options.path === 'string' ? options.path : tempFallback
-    await makeDir(path.join(dir, LocalExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(dir, this.IMAGES_DIR_NAME))
     return dir
   }
 
@@ -102,7 +103,7 @@ export class LocalExporter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawDesign
    */
   async exportRawDesign(raw: RawDesign): Promise<string> {
-    const fileName = LocalExporter.getSourceFileName('design')
+    const fileName = this.getSourceFileName('design')
     const fullPath = path.join(await this._outputDir, fileName)
     await this._save(fullPath, stringify(raw))
     return fileName
@@ -115,7 +116,7 @@ export class LocalExporter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawComponent
    */
   async exportRawComponent(raw: RawLayerContainer, name: string): Promise<string> {
-    const fileName = LocalExporter.getSourceFileName(name)
+    const fileName = this.getSourceFileName(name)
     const fullPath = path.join(await this._outputDir, fileName)
     await this._save(fullPath, stringify(raw))
     return fileName
@@ -128,7 +129,7 @@ export class LocalExporter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawChunk
    */
   async exportRawChunk(raw: ResolvedStyle, name: string): Promise<string> {
-    const fileName = LocalExporter.getSourceFileName(name)
+    const fileName = this.getSourceFileName(name)
     const fullPath = path.join(await this._outputDir, fileName)
     await this._save(fullPath, stringify(raw))
     return fileName
@@ -141,18 +142,18 @@ export class LocalExporter implements AbstractExporter {
    */
   async exportComponent(result: ComponentConversionResult): Promise<string | null> {
     if (!result.value) return null
-    const fileName = LocalExporter.getOctopusFileName(result.id)
+    const fileName = this.getOctopusFileName(result.id)
     const fullPath = path.join(await this._outputDir, fileName)
     await this._save(fullPath, stringify(result.value))
     return fileName
   }
 
   getImagePath(name: string): string {
-    return path.join(LocalExporter.IMAGES_DIR_NAME, `${name}${IMAGE_EXTNAME}`)
+    return path.join(this.IMAGES_DIR_NAME, `${name}${this.IMAGE_EXTNAME}`)
   }
 
   /**
-   * Exports given Image into folder specified in `LocalExporter.IMAGES_DIR_NAME`
+   * Exports given Image into folder specified in `this.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image
@@ -165,13 +166,13 @@ export class LocalExporter implements AbstractExporter {
   }
 
   /**
-   * Exports given Image Preview into folder specified in `LocalExporter.getPreviewFileName()`
+   * Exports given Image Preview into folder specified in `this.getPreviewFileName()`
    * @param {string} id ID of the exported Image
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image Preview
    */
   async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
-    const fileName = LocalExporter.getPreviewFileName(id)
+    const fileName = this.getPreviewFileName(id)
     const fullPath = path.join(await this._outputPreviewDir, fileName)
     await this._save(fullPath, Buffer.from(data))
     return fileName
@@ -183,7 +184,7 @@ export class LocalExporter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the OctopusManifest
    */
   async exportManifest(manifest: Manifest['OctopusManifest']): Promise<string> {
-    const fullPath = path.join(await this._outputDir, LocalExporter.MANIFEST_NAME)
+    const fullPath = path.join(await this._outputDir, this.MANIFEST_NAME)
     return this._save(fullPath, stringify(manifest))
   }
 }
