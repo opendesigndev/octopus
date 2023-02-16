@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from '../../services'
 import { convertLayerBlendMode, convertId, convertTransform } from '../../utils/convert'
-import { DEFAULTS } from '../../utils/defaults'
 import { OctopusComponent } from './octopus-component'
 import { OctopusEffect } from './octopus-effect'
 
