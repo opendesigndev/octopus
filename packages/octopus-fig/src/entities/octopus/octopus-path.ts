@@ -1,7 +1,7 @@
 import { push } from '@opendesign/octopus-common/dist/utils/common'
 import first from 'lodash/first'
 
-import { convertRectangle } from '../../utils/convert'
+import { convertRectangle, convertTransform } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { simplifyPathData } from '../../utils/paper'
 
@@ -49,12 +49,14 @@ export class OctopusPath {
   }
 
   private _transform({ sourceLayer, isTopLayer }: SourceLayerOptions): number[] {
-    return isTopLayer ? DEFAULTS.TRANSFORM : sourceLayer.transform ?? DEFAULTS.TRANSFORM
+    if (isTopLayer) return DEFAULTS.TRANSFORM
+    return convertTransform(sourceLayer.transform)
   }
 
   private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
     if (this._isStroke) return sourceLayer.strokeGeometry
-    return sourceLayer.fillGeometry.length ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
+    const isFillGeometry = sourceLayer.fills.length && sourceLayer.fillGeometry.length
+    return isFillGeometry ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
   }
 
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
@@ -70,6 +72,7 @@ export class OctopusPath {
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
+    if (sourceLayer.parent.type === 'SHAPE' && sourceLayer.parent.shapeType === 'BOOLEAN_OPERATION') return false // issue with rectangles inside boolean operations, act as they are just Path
     return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadii
   }
 

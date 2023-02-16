@@ -68,6 +68,11 @@ export function convertRectangle({ x, y }: SourceVector): Octopus['Rectangle'] {
   return { x0: 0, x1: x, y0: 0, y1: y }
 }
 
+export function convertTransform(transform: number[] | null): number[] {
+  if (!transform) return DEFAULTS.TRANSFORM
+  return transform.map((value) => round(value, 4))
+}
+
 export function convertLinearGradientTransform(
   gradientTransform: SourceTransform,
   width: number,

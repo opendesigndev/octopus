@@ -3,7 +3,7 @@ import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { env } from '../../services'
-import { convertId, convertLayerBlendMode } from '../../utils/convert'
+import { convertId, convertLayerBlendMode, convertTransform } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { getTopComponentTransform } from '../../utils/source'
 import { OctopusComponent } from './octopus-component'
@@ -77,7 +77,7 @@ export class OctopusLayerMaskGroup {
     const isTopLayer = parent instanceof OctopusComponent
     const topComponentTransform =
       isTopLayer && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
-    const transform = isTopLayer ? topComponentTransform : sourceLayer.transform ?? undefined
+    const transform = isTopLayer ? topComponentTransform : convertTransform(sourceLayer.transform)
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null
     const maskBasis = sourceLayer.clipsContent ? 'BODY_EMBED' : 'SOLID'

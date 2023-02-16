@@ -4,7 +4,7 @@ import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
 import { v4 as uuidv4 } from 'uuid'
 
 import { logger } from '../../services'
-import { convertLayerBlendMode, convertId } from '../../utils/convert'
+import { convertLayerBlendMode, convertId, convertTransform } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { OctopusComponent } from './octopus-component'
 import { OctopusEffect } from './octopus-effect'
@@ -83,7 +83,7 @@ export class OctopusLayerBase {
   }
 
   get transform(): number[] {
-    return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
+    return convertTransform(this.sourceLayer.transform)
   }
 
   get opacity(): number {
