@@ -7,7 +7,7 @@ import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter.js'
 import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
-import { logger } from '../services/instances/logger.js'
+import { logger } from '../services/index.js'
 
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
 import type { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
@@ -93,7 +93,7 @@ export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusL
   const type = options?.layer?.type
   const result = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (!result) {
-    logger.warn('createOctopusLayer: Unknown layer type', { type })
+    logger?.warn('createOctopusLayer: Unknown layer type', { type })
     return null
   }
   const { builder, shouldCheckShapeMask } = result

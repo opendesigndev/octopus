@@ -1,7 +1,7 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
 import { OctopusEffectFill } from './octopus-effect-fill.js'
 
@@ -34,7 +34,7 @@ export class OctopusEffectStroke extends OctopusEffectBase {
     const lineAlignment = this._stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusEffectStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
+      logger?.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
       return null
     }
     return result

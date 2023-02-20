@@ -2,21 +2,25 @@ import { DesignConverter } from './services/conversion/design-converter.js'
 import { DebugExporter } from './services/exporters/debug-exporter.js'
 import { LocalExporter } from './services/exporters/local-exporter.js'
 import { createEnvironment } from './services/general/environment.js'
-import { set as setLogger } from './services/instances/logger.js'
+import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
+import { setDefaults, setLogger } from './services/index.js'
 import { PSDFileReader } from './services/readers/psd-file-reader.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
+import type { NodeFactories, WebFactories } from './services/general/platforms/index'
 import type { Logger } from './typings'
-import type { PackageMeta } from './utils/read-pkg-meta.js'
+import type { PackageMeta } from './utils/read-pkg-meta'
 
 export { LocalExporter, DebugExporter, PSDFileReader }
 
 export type OctopusPSDConverterOptions = {
+  platformFactories: WebFactories | NodeFactories
   /** Optional custom Logger. If not passed, default logger will be used. */
   logger?: Logger
+  loggerEnabled?: boolean
 }
 
 export type DesignConverterOptions = {
@@ -43,17 +47,42 @@ createEnvironment()
  * - exporting (using _exporter_)
  */
 export class OctopusPSDConverter {
+  private _pkg: PackageMeta
+  private _services: {
+    benchmark: {
+      benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
+    }
+    // imageSize: (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
+    // buffer: {
+    //   base64ToUint8Array: (base64: string) => Uint8Array
+    // }
+  }
+
   /**
    * Octopus PSD converter.
    * @constructor
    * @param {OctopusPSDConverterOptions} [options]
    */
-  constructor(options?: OctopusPSDConverterOptions) {
-    this._setupLogger(options?.logger)
+  constructor(options: OctopusPSDConverterOptions) {
+    this._setGlobals(options)
+    this._pkg = readPackageMeta()
+    this._services = this._initServices()
   }
 
-  private _setupLogger(logger?: Logger) {
-    if (logger) setLogger(logger)
+  private _initServices() {
+    return {
+      benchmark: getPlatformFactories().createBenchmarkService(),
+      // imageSize: getPlatformFactories().createImageSizeService(),
+      // buffer: getPlatformFactories().createBufferService(),
+    }
+  }
+
+  private _setGlobals(options: OctopusPSDConverterOptions): void {
+    setPlatformFactories(options.platformFactories)
+    setDefaults({
+      logger: { enabled: options.loggerEnabled ?? true },
+    })
+    if (options.logger) setLogger(options.logger)
   }
 
   /**
@@ -61,7 +90,11 @@ export class OctopusPSDConverter {
    * @returns {PackageMeta} package meta information
    */
   get pkg(): PackageMeta {
-    return readPackageMeta()
+    return this._pkg
+  }
+
+  get benchmarkAsync() {
+    return this._services.benchmark.benchmarkAsync
   }
 
   /**

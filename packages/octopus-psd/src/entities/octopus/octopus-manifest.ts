@@ -4,7 +4,7 @@ import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import { getFontProperties } from '../../utils/text.js'
 
-import type { OctopusPSDConverter } from '../..'
+import type { OctopusPSDConverter } from '../../octopus-psd-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'

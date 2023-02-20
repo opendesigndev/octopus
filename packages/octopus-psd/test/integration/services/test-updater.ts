@@ -1,6 +1,6 @@
 import path from 'path'
 
-import { OctopusPSDConverter } from '../../../src/index.js'
+import { createConverter } from '../../../src/index-node.js'
 import { MANIFEST_NAME, getOctopusFileName } from '../../../src/utils/exporter.js'
 import { saveFile, rmDir, makeDir } from '../../../src/utils/files.js'
 import { cleanManifest } from '../utils/asset-cleaner.js'
@@ -8,6 +8,7 @@ import { getSourceDesign } from '../utils/source.js'
 import { stringify } from '../utils/stringify.js'
 import { AssetReader } from './asset-reader.js'
 
+import type { OctopusPSDConverter } from '../../../src/octopus-psd-converter.js'
 import type { Manifest } from '../../../src/typings/manifest'
 import type { Octopus } from '../../../src/typings/octopus'
 import type { TestDirectoryData } from './asset-reader'
@@ -30,7 +31,7 @@ export class TestUpdater {
 
   constructor(assetsReader: TestUpdaterAssetReader) {
     this._assetsReader = assetsReader
-    this._octopusConverter = new OctopusPSDConverter({})
+    this._octopusConverter = createConverter()
   }
 
   private async _getTestsAssets(): Promise<TestAssets[]> {

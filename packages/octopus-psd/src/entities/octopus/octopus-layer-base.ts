@@ -3,7 +3,7 @@ import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { convertBlendMode } from '../../utils/convert.js'
 import { createDefaultTranslationMatrix } from '../../utils/path.js'
 import { OctopusComponent } from './octopus-component.js'
@@ -96,7 +96,7 @@ export class OctopusLayerBase {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Layer type', { type })
+      logger?.warn('Unknown Layer type', { type })
       return null
     }
     return result

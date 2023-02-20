@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { SourceDesign } from '../../entities/source/source-design.js'
 import PROPS from '../../utils/prop-names.js'
 import { getRawData } from '../../utils/raw.js'
-import { logger } from '../instances/logger.js'
+import { logger } from '../index.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
@@ -222,7 +222,7 @@ export class PSDFileReader {
     try {
       buff = await layer.composite()
     } catch (e) {
-      logger.error(`could not export image: ${name}`)
+      logger?.error(`could not export image: ${name}`)
       return
     }
 
@@ -320,7 +320,7 @@ export class PSDFileReader {
   private async _getSourceComponent(): Promise<{ raw: Psd | null }> {
     const { time, result } = await benchmarkAsync(() => this._getPsd())
 
-    logger.info(`Assets saved in directory: ${chalk.yellow(this.designId)} ${displayPerf(time)}`)
+    logger?.info(`Assets saved in directory: ${chalk.yellow(this.designId)} ${displayPerf(time)}`)
 
     return { raw: result }
   }

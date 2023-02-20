@@ -5,12 +5,12 @@ import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web.js'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
-import { logger } from '../instances/logger.js'
+import { logger } from '../index.js'
 import { ComponentConverter } from './component-converter.js'
 
-import type { DesignConverterOptions, OctopusPSDConverter } from '../..'
 import type { SourceComponent } from '../../entities/source/source-component'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design'
+import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter'
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus'
 import type { AbstractExporter } from '../exporters/abstract-exporter'
@@ -75,7 +75,7 @@ export class DesignConverter {
       const value = await new ComponentConverter({ componentId, designConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
-      logger.error('Converting Component failed', { componentId, error })
+      logger?.error('Converting Component failed', { componentId, error })
       return { value: null, error }
     }
   }
@@ -113,7 +113,7 @@ export class DesignConverter {
   }
 
   private async _exportManifest(): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+    const { time, result: manifest } = await this._octopusConverter.benchmarkAsync(() => this.octopusManifest.convert())
     await this._exporter?.exportManifest?.({ manifest, time })
     return manifest
   }

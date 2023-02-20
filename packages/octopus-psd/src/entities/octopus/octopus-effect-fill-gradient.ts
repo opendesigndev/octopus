@@ -3,7 +3,7 @@ import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import { invLerp, lerp } from '@opendesign/octopus-common/dist/utils/math.js'
 import uniq from 'lodash/uniq.js'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { convertColor, convertOffset } from '../../utils/convert.js'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient.js'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories.js'
@@ -67,7 +67,7 @@ export class OctopusEffectFillGradient {
     const type: RawGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Fill Gradient type', { type })
+      logger?.warn('Unknown Fill Gradient type', { type })
       return null
     }
     return result

@@ -1,6 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { convertOffset } from '../../utils/convert.js'
 import { createMatrix } from '../../utils/paper-factories.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
@@ -63,7 +63,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logger.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
+      logger?.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)
