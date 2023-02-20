@@ -11,7 +11,7 @@ sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
   const source = await getSourceData({ version, exportPreviews: true })
-  dispatch('COPY_RESPONSE', JSON.stringify(source))
+  dispatch('COPY_RESPONSE', source)
 })
 
 handleEvent('CLOSE', (data) => {

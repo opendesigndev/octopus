@@ -4,5 +4,6 @@
   "api": "1.0.0",
   "editorType": ["figma"],
   "main": "dist/main.js",
-  "ui": "dist/index.html"
+  "ui": "dist/index.html",
+  "enablePrivatePluginApi": true
 }

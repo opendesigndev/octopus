@@ -29,6 +29,7 @@ export type PluginSourceContext = {
 export type PluginSourceDocument = {
   id?: string
   name?: string
+  fileKey?: string
 }
 
 export type PluginSourceCurrentPage = {

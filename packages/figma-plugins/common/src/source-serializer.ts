@@ -113,7 +113,7 @@ export async function getSourceData({ version, exportPreviews = false }: SourceD
   const selectedContent = await Promise.all(selectedPromises)
   if (!selectedContent.length) return null
 
-  const document = { id: figma.root.id, name: figma.root.name }
+  const document = { id: figma.root.id, name: figma.root.name, fileKey: figma.fileKey }
   const currentPage = { id: figma.currentPage.id, name: figma.currentPage.name }
   const timestamp = new Date().toISOString()
   const assets = { images: imageMap, previews: previewMap }
