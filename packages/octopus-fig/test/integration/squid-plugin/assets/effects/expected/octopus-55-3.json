@@ -431,53 +431,12 @@
         }
       },
       {
-        "id": "384-13-Background",
+        "id": "384-13",
         "name": "BG Blur 6",
-        "type": "MASK_GROUP",
+        "type": "GROUP",
         "visible": true,
         "opacity": 1,
         "blendMode": "PASS_THROUGH",
-        "maskBasis": "BODY_EMBED",
-        "mask": {
-          "id": "384-13-BackgroundMask",
-          "name": "BG Blur 6",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 300,
-                "y0": 0,
-                "y1": 300
-              }
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [],
-            "strokes": []
-          }
-        },
         "transform": [
           1,
           0,
@@ -486,6 +445,7 @@
           675,
           350
         ],
+        "effects": [],
         "layers": [
           {
             "id": "93-10",
@@ -656,10 +616,7 @@
               ]
             }
           }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
+        ]
       },
       {
         "id": "93-12",

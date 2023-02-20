@@ -1300,53 +1300,12 @@
         "effects": [],
         "layers": [
           {
-            "id": "1525-12072-Background",
+            "id": "1525-12072",
             "name": "color wheel",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "1525-12072-BackgroundMask",
-              "name": "color wheel",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 200,
-                    "y0": 0,
-                    "y1": 174
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
@@ -1355,6 +1314,7 @@
               -2,
               0
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "1525-12073-ClippingMask",
@@ -1591,10 +1551,7 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
             "id": "1525-12077",
