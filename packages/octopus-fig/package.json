@@ -1,14 +1,18 @@
 {
   "name": "@opendesign/octopus-fig",
-  "version": "3.0.0-rc.28-tarpub4",
+  "version": "3.0.0-rc.28-tarpub5",
   "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "scripts": {
     "bundle": "yarn run bundle:web",
     "bundle:web": "vite build -c vite.web.js && vite build -c vite.web.worker.js",
     "build": "rimraf ./dist && yarn build:node && yarn build:web",
-    "build:node": "rollup -c rollup.config.node.mjs",
-    "build:web": "rollup -c rollup.config.web.mjs",
+    "release:bundle:node": "rollup -c rollup.config.node.mjs",
+    "release:bundle:web": "rollup -c rollup.config.web.mjs",
+    "release:bundle": "yarn release:bundle:node && yarn release:bundle:web",
+    "release:cleanup": "rimraf ./release ./release.tgz",
+    "release:publish": "yarn publish release.tgz --verbose --ignore-scripts",
+    "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
     "clean:workdir": "rimraf ./workdir/*",
     "convert:squid:debug": "ts-node ./examples/node/convert-plugin-squid-debug.ts",
     "convert:squid:local": "ts-node ./examples/node/convert-plugin-squid-local.ts",
@@ -27,8 +31,7 @@
     "test:integration:squid:update": "ts-node test/integration/squid-plugin/update-tests.ts",
     "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index-node.ts src/index-web.ts",
-    "watch": "rimraf ./dist && tsc -w",
-    "release": "yarn build:node && yarn build:web && node ./prepare-release.mjs && yarn publish release.tgz"
+    "watch": "rimraf ./dist && tsc -w"
   },
   "dependencies": {
     "@opendesign/figma-parser": "3.0.0-rc.17",
