@@ -316,10 +316,10 @@
                   "opacity": 1,
                   "blendMode": "NORMAL",
                   "transform": [
-                    -1,
+                    1,
                     0,
                     0,
-                    -1,
+                    1,
                     0,
                     0
                   ],
@@ -399,10 +399,10 @@
                     "opacity": 1,
                     "blendMode": "NORMAL",
                     "transform": [
-                      -1,
+                      1,
                       0,
                       0,
-                      -1,
+                      1,
                       0,
                       0
                     ],
@@ -473,12 +473,12 @@
                     "opacity": 1,
                     "blendMode": "NORMAL",
                     "transform": [
-                      -1,
+                      1,
                       0,
                       0,
-                      -1,
-                      229.1474,
-                      129.9641
+                      1,
+                      -229.1474,
+                      -129.9642
                     ],
                     "effects": [],
                     "shape": {
