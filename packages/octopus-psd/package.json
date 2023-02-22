@@ -28,7 +28,7 @@
     "@types/lodash": "^4.14.178",
     "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
-    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.1-experimental-release-20230217",
+    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.1-experimental-release-20230222",
     "chalk": "^4.1.2",
     "dotenv": "16.0.0",
     "image-size": "^1.0.1",
