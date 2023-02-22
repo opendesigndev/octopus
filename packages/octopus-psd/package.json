@@ -5,6 +5,8 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
+    "bundle": "yarn run bundle:web",
+    "bundle:web": "vite build -c vite.web.js",
     "build": "tsc --build ./tsconfig.json",
     "clean:workdir": "rimraf ./workdir/*",
     "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/integration/report ./jsdoc",
@@ -50,7 +52,8 @@
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
     "typedoc": "^0.23.18",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "vite": "^4.1.3"
   },
   "files": [
     "lib/src",

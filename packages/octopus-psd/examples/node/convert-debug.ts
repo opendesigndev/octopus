@@ -8,7 +8,7 @@ import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
 import { createConverter } from '../../src/index-node.js'
-import { DebugExporter, PSDFileReader } from '../../src/octopus-psd-converter.js'
+import { DebugExporter, PSDFileReaderNode } from '../../src/octopus-psd-converter.js'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 import { renderOctopus } from './utils/render.js'
 
@@ -27,8 +27,6 @@ type ConvertedComponent = {
 }
 
 dotenv.config()
-
-const converter = createConverter()
 
 async function convertDesign({
   filePath,
@@ -58,12 +56,13 @@ async function convertDesign({
     console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
-  const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
-  const sourceDesign = await reader.sourceDesign
+  const reader = await PSDFileReaderNode.withRenderer({ path: filePath, designId })
+  const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
     return
   }
+  const converter = createConverter()
   converter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
 }

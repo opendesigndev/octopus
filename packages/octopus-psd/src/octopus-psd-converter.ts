@@ -4,7 +4,7 @@ import { LocalExporter } from './services/exporters/local-exporter.js'
 import { createEnvironment } from './services/general/environment.js'
 import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
 import { setDefaults, setLogger } from './services/index.js'
-import { PSDFileReader } from './services/readers/psd-file-reader.js'
+import { PSDFileReaderNode } from './services/readers/psd-file-reader-node.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceDesign } from './entities/source/source-design'
@@ -14,7 +14,7 @@ import type { NodeFactories, WebFactories } from './services/general/platforms/i
 import type { Logger } from './typings'
 import type { PackageMeta } from './utils/read-pkg-meta'
 
-export { LocalExporter, DebugExporter, PSDFileReader }
+export { LocalExporter, DebugExporter, PSDFileReaderNode }
 
 export type OctopusPSDConverterOptions = {
   platformFactories: WebFactories | NodeFactories
@@ -52,10 +52,6 @@ export class OctopusPSDConverter {
     benchmark: {
       benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
     }
-    // imageSize: (buffer: ArrayBuffer) => Promise<ImageSize | undefined>
-    // buffer: {
-    //   base64ToUint8Array: (base64: string) => Uint8Array
-    // }
   }
 
   /**
@@ -72,8 +68,6 @@ export class OctopusPSDConverter {
   private _initServices() {
     return {
       benchmark: getPlatformFactories().createBenchmarkService(),
-      // imageSize: getPlatformFactories().createImageSizeService(),
-      // buffer: getPlatformFactories().createBufferService(),
     }
   }
 

@@ -14,6 +14,7 @@ type SourceDesignOptions = {
   component: RawParsedPsd
   images: SourceImage[]
   designId: string
+  componentIds?: number[]
 }
 
 export class SourceDesign {
@@ -23,19 +24,24 @@ export class SourceDesign {
   private _raw: RawParsedPsd
 
   constructor(options: SourceDesignOptions) {
-    this._components = this._initComponents(options.component)
+    this._components = this._initComponents(options.component, options.componentIds)
     this._images = options.images
     this._designId = options.designId
     this._raw = options.component
   }
 
-  private _initComponents(raw: RawParsedPsd): SourceComponent[] {
-    if (raw.children?.length === 1 && isArtboard(raw.children[0])) {
+  private _initComponents(raw: RawParsedPsd, componentIds?: number[]): SourceComponent[] {
+    if (raw.children?.length === 1 && isArtboard(raw.children[0]) && !componentIds) {
       return [new SourceComponent({ raw: raw.children[0], parent: this })] // no pasteboard for 1 artboard
     }
 
-    const components = [new SourceComponent({ raw, isPasteboard: true, parent: this })]
-    const artboards = raw.children.filter((psdNode) => isArtboard(psdNode))
+    const components = componentIds ? [] : [new SourceComponent({ raw, isPasteboard: true, parent: this })]
+    const artboards = raw.children.filter((psdNode) => {
+      const componentId = psdNode.additionalProperties?.lyid?.value
+      const isInComponentIds = componentIds ? componentId && componentIds.includes(componentId) : true
+
+      return isArtboard(psdNode) && isInComponentIds
+    })
 
     artboards.forEach((artboard) =>
       components.push(

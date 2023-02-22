@@ -1,5 +1,4 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -81,7 +80,9 @@ export class DesignConverter {
   }
 
   private async _convertSourceComponent(componentId: string): Promise<ComponentConversionResult> {
-    const { time, result } = await benchmarkAsync(() => this._convertSourceComponentSafe(componentId))
+    const { time, result } = await this._octopusConverter.benchmarkAsync(() =>
+      this._convertSourceComponentSafe(componentId)
+    )
     const { value, error } = result
     return { id: componentId, value, error, time }
   }

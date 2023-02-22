@@ -20,8 +20,6 @@ type WebBenchmarkFactory = () => {
 export type NodeFactories = {
   createLoggerFactory: NodeLoggerFactory
   createBenchmarkService: NodeBenchmarkFactory
-  //   createImageSizeService: ImageSizeFactory
-  //   createBufferService: NodeBufferFactory
   createEnvironment: NodeEnvironmentFactory
 }
 
@@ -29,9 +27,7 @@ export type NodeFactories = {
 export type WebFactories = {
   createLoggerFactory: WebLoggerFactory
   createBenchmarkService: WebBenchmarkFactory
-  //   createImageSizeService: ImageSizeFactory
-  //   createBufferService: WebBufferFactory
-  createEnvironment: null
+  createEnvironment: undefined
 }
 
 let factories: NodeFactories | WebFactories
