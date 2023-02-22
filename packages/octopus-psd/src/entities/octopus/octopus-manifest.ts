@@ -86,8 +86,9 @@ export class OctopusManifest {
   }
 
   get meta(): Manifest['OctopusManifestMeta'] {
+    const photoshopICCProfile = this._sourceDesign.iccProfileName
     const converterVersion = this._octopusConverter.pkg.version
-    return { converterVersion }
+    return { converterVersion, ...(photoshopICCProfile ? { photoshopICCProfile } : null) }
   }
 
   get psdVersion(): string {
