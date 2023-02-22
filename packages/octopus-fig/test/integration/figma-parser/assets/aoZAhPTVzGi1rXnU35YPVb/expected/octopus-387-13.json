@@ -1,7 +1,7 @@
 {
   "id": "387-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.24",
+  "version": "3.0.1",
   "dimensions": {
     "width": 425,
     "height": 635
@@ -533,7 +533,7 @@
         "type": "GROUP",
         "visible": true,
         "opacity": 1,
-        "blendMode": "PASS_THROUGH",
+        "blendMode": "NORMAL",
         "transform": [
           1,
           0,
@@ -1365,7 +1365,7 @@
         "type": "GROUP",
         "visible": true,
         "opacity": 1,
-        "blendMode": "PASS_THROUGH",
+        "blendMode": "NORMAL",
         "transform": [
           1,
           0,

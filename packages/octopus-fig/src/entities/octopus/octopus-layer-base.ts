@@ -78,7 +78,14 @@ export class OctopusLayerBase {
 
   get blendMode(): Octopus['BlendMode'] {
     const { isFrameLike } = this._sourceLayer
-    return convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
+    const blendMode = convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
+
+    if (blendMode === 'PASS_THROUGH') {
+      const hasBlur = this._sourceLayer.effects.some((effect) => effect.type === 'LAYER_BLUR')
+      if (hasBlur) return 'NORMAL' // https://github.com/opendesigndev/open-design-engine/issues/11
+    }
+
+    return blendMode
   }
 
   get transform(): number[] {

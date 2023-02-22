@@ -529,7 +529,7 @@
         "type": "GROUP",
         "visible": true,
         "opacity": 1,
-        "blendMode": "PASS_THROUGH",
+        "blendMode": "NORMAL",
         "transform": [
           1,
           0,
@@ -1353,7 +1353,7 @@
         "type": "GROUP",
         "visible": true,
         "opacity": 1,
-        "blendMode": "PASS_THROUGH",
+        "blendMode": "NORMAL",
         "transform": [
           1,
           0,
