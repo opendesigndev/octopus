@@ -1301,6 +1301,54 @@
           ],
           "strokes": []
         }
+      },
+      {
+        "id": "805-11",
+        "name": "Union",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "COMPOUND",
+            "op": "UNION",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "paths": []
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.851,
+                "g": 0.851,
+                "b": 0.851,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": []
+        }
       }
     ],
     "meta": {

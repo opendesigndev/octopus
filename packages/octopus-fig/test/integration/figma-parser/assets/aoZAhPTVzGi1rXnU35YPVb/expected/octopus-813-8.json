@@ -1,0 +1,202 @@
+{
+  "id": "813-8",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.1",
+  "dimensions": {
+    "width": 100,
+    "height": 100
+  },
+  "content": {
+    "id": "813-8-Background",
+    "name": "bug-group-transform",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "813-8-BackgroundMask",
+      "name": "bug-group-transform",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 100,
+            "y0": 0,
+            "y1": 100
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "813-9",
+        "name": "RED",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.172,
+          0.9851,
+          -0.9851,
+          0.172,
+          80,
+          -10
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "POLYGON"
+            },
+            "geometry": "M40.4467,16.5469c4.2459,-7.35419 14.8607,-7.35419 19.1066,0l24.1946,41.9062c4.246,7.3542 -1.0615,16.5469 -9.5533,16.5469h-48.3892c-8.4918,0 -13.7993,-9.1927 -9.5533,-16.5469z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "COLOR",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "color": {
+                "r": 0.9417,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
+        "id": "813-10",
+        "name": "GroupR",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "transform": [
+          0.9851,
+          -0.172,
+          0.172,
+          0.9851,
+          -18.5097,
+          7.2002
+        ],
+        "effects": [],
+        "layers": [
+          {
+            "id": "813-11",
+            "name": "BLUE",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              0,
+              1,
+              -1,
+              0,
+              100,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "POLYGON"
+                },
+                "geometry": "M40.4467,16.5469c4.2459,-7.35419 14.8607,-7.35419 19.1066,0l24.1946,41.9062c4.246,7.3542 -1.0615,16.5469 -9.5533,16.5469h-48.3892c-8.4918,0 -13.7993,-9.1927 -9.5533,-16.5469z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0,
+                    "g": 0.16,
+                    "b": 1,
+                    "a": 0.6
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

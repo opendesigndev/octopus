@@ -4,9 +4,9 @@
     "name": "FIGMA",
     "version": "0"
   },
-  "name": "Complex",
+  "name": "Vaiwa Regress",
   "meta": {
-    "converterVersion": "3.0.0-rc.28"
+    "converterVersion": "3.0.0-rc.37"
   },
   "pages": [
     {
@@ -36,10 +36,6 @@
         {
           "id": "114-3",
           "type": "COMPONENT"
-        },
-        {
-          "id": "713-13",
-          "type": "COMPONENT"
         }
       ]
     },
@@ -52,10 +48,6 @@
       "children": [
         {
           "id": "161-3",
-          "type": "COMPONENT"
-        },
-        {
-          "id": "387-13",
           "type": "COMPONENT"
         }
       ]
@@ -132,10 +124,6 @@
       },
       "children": [
         {
-          "id": "66-3",
-          "type": "COMPONENT"
-        },
-        {
           "id": "369-13",
           "type": "COMPONENT"
         },
@@ -153,6 +141,30 @@
         },
         {
           "id": "391-36",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "807-9",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "811-15",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "812-25",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "813-8",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "819-8",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "825-20",
           "type": "COMPONENT"
         }
       ]
@@ -250,6 +262,12 @@
           },
           {
             "name": "Urbanist-SemiBold"
+          },
+          {
+            "name": "Inter"
+          },
+          {
+            "name": "Inter-Bold"
           }
         ]
       },
@@ -600,34 +618,6 @@
       }
     },
     {
-      "id": "387-13",
-      "name": "blend-mode-passThrough",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "387:13"
-      },
-      "bounds": {
-        "x": 1100,
-        "y": 0,
-        "width": 425,
-        "height": 635
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
-          {
-            "name": "Inter"
-          }
-        ]
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
       "id": "390-13",
       "name": "Pikachu",
       "role": "ARTBOARD",
@@ -754,61 +744,6 @@
       }
     },
     {
-      "id": "66-3",
-      "name": "bug-linear-gradient",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "66:3"
-      },
-      "bounds": {
-        "x": 0,
-        "y": 0,
-        "width": 300,
-        "height": 500
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "713-13",
-      "name": "Frame 1",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "713:13"
-      },
-      "bounds": {
-        "x": 1059,
-        "y": 16,
-        "width": 717,
-        "height": 632
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
-          {
-            "name": "Inter"
-          },
-          {
-            "name": "Inter-Bold"
-          }
-        ]
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
       "id": "73-3",
       "name": "gradients",
       "role": "ARTBOARD",
@@ -833,6 +768,166 @@
           }
         ],
         "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "807-9",
+      "name": "bug-group-blur",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "807:9"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 850,
+        "width": 105,
+        "height": 117
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "811-15",
+      "name": "bug-geometry-circles",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "811:15"
+      },
+      "bounds": {
+        "x": 760,
+        "y": 998,
+        "width": 288,
+        "height": 137
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "812-25",
+      "name": "bug-rectangle-inside-boolean",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "812:25"
+      },
+      "bounds": {
+        "x": 847,
+        "y": 850,
+        "width": 149,
+        "height": 117.45
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "67e53421e50ddb3f8dc0e77350c1a193d12b8ab2"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "813-8",
+      "name": "bug-group-transform",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "813:8"
+      },
+      "bounds": {
+        "x": 726,
+        "y": 850,
+        "width": 100,
+        "height": 100
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "819-8",
+      "name": "blend-mode-passThrough",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "819:8"
+      },
+      "bounds": {
+        "x": 1255,
+        "y": 412,
+        "width": 425,
+        "height": 635
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Inter"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "825-20",
+      "name": "Bug - Component Font",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "825:20"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 1009,
+        "width": 140,
+        "height": 76
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "AvenirNext-Regular"
+          }
+        ]
       },
       "artifacts": [],
       "location": {

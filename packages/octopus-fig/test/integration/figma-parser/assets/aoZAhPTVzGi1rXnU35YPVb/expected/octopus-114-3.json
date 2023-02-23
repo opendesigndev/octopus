@@ -687,6 +687,130 @@
           },
           "baselinePolicy": "OFFSET_ASCENDER"
         }
+      },
+      {
+        "id": "713-14",
+        "name": "Hello World! Hello World! Hello World! Hello World!",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.866,
+          -0.5,
+          0.5,
+          0.866,
+          492,
+          778.5
+        ],
+        "effects": [],
+        "text": {
+          "value": "Hello World! Hello World! Hello World! Hello World!",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Inter",
+              "family": "Inter",
+              "syntheticPostScriptName": true
+            },
+            "fontSize": 42,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [
+            {
+              "style": {
+                "font": {
+                  "postScriptName": "Inter-Bold",
+                  "family": "Inter"
+                }
+              },
+              "ranges": [
+                {
+                  "from": 0,
+                  "to": 13
+                }
+              ]
+            }
+          ],
+          "horizontalAlign": "LEFT",
+          "verticalAlign": "TOP",
+          "frame": {
+            "mode": "AUTO_WIDTH",
+            "size": {
+              "width": 251,
+              "height": 204
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
+      },
+      {
+        "id": "713-15",
+        "name": "Lorem Ipsum!",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.866,
+          0.5,
+          -0.5,
+          0.866,
+          768.5,
+          721
+        ],
+        "effects": [],
+        "text": {
+          "value": "Lorem Ipsum!",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Inter-Bold",
+              "family": "Inter"
+            },
+            "fontSize": 42,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [],
+          "horizontalAlign": "LEFT",
+          "verticalAlign": "TOP",
+          "frame": {
+            "mode": "AUTO_WIDTH",
+            "size": {
+              "width": 279,
+              "height": 51
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
       }
     ],
     "meta": {

@@ -4610,6 +4610,96 @@
         }
       },
       {
+        "id": "819-45",
+        "name": "Rectangle 7",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0,
+          -1,
+          1,
+          0,
+          3050,
+          3836
+        ],
+        "effects": [],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "GRADIENT",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "gradient": {
+                "type": "LINEAR",
+                "stops": [
+                  {
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.4976148307323456
+                  },
+                  {
+                    "color": {
+                      "r": 0.8417,
+                      "g": 0,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "position": 0.5013185143470764
+                  },
+                  {
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "position": 1
+                  }
+                ]
+              },
+              "positioning": {
+                "layout": "FILL",
+                "origin": "LAYER",
+                "transform": [
+                  -400,
+                  200,
+                  -200,
+                  -100,
+                  400,
+                  0
+                ]
+              }
+            }
+          ],
+          "strokes": []
+        }
+      },
+      {
         "id": "160-5",
         "name": "Rectangle 6",
         "type": "SHAPE",
