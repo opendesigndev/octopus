@@ -1809,10 +1809,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-experimental-release-20230217":
-  version "0.5.1-experimental-release-20230217"
-  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-experimental-release-20230217.tgz#9a1332a98dcf22ba342474edc44f2912f35dde2c"
-  integrity sha512-XwOy/iAs2gAlqkWC0ix+bShQlV1ibyDQaQc3YlUwbRUe3XCEUHufT15f+IYySRIx6XUXD/pv33506fdtY7tvrA==
+"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-experimental-release-20230222":
+  version "0.5.1-experimental-release-20230222"
+  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-experimental-release-20230222.tgz#7dc7b33d7ec2db0486e6efa62b6740c513ea44a6"
+  integrity sha512-4sGrb+OfuBEMi+uKFYlPCVGEHl2Y+jGo9u4r59Ds5YPXwv+/3XUR9svuafPTMsq3RfsRiSmA7ALL8rBB+J/TJw==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
