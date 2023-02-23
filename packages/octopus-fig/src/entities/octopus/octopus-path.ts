@@ -3,7 +3,7 @@ import first from 'lodash/first'
 
 import { convertRectangle, convertTransform } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
-import { simplifyPathData } from '../../utils/paper'
+import { createCompoundPath, simplifyPathData } from '../../utils/paper'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
@@ -55,8 +55,22 @@ export class OctopusPath {
 
   private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
     if (this._isStroke) return sourceLayer.strokeGeometry
-    const isFillGeometry = sourceLayer.fills.length && sourceLayer.fillGeometry.length
-    return isFillGeometry ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
+    if (sourceLayer.fills.length && sourceLayer.fillGeometry.length) return sourceLayer.fillGeometry
+
+    if (sourceLayer.fillGeometry.length === 1 && sourceLayer.strokeGeometry.length === 1) {
+      const fillPath = createCompoundPath(sourceLayer.fillGeometry[0].path)
+      const strokePath = createCompoundPath(sourceLayer.strokeGeometry[0].path)
+      if (sourceLayer.strokeAlign === 'INSIDE') {
+        const path = strokePath.intersect(fillPath).pathData
+        return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
+      }
+      if (sourceLayer.strokeAlign === 'OUTSIDE') {
+        const path = strokePath.subtract(fillPath).pathData
+        return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
+      }
+    }
+
+    return sourceLayer.strokeGeometry
   }
 
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
