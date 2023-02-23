@@ -19,7 +19,13 @@ export class SourceLayerEffects extends SourceEntity {
   }
 
   private get objectBasedEffectsLayerInfo(): RawlayerEffects | undefined {
-    return this._rawValue?.layerProperties?.[PROPS.OBJECT_BASED_EFFECTS_LAYER_INFO]
+    const { layerProperties } = this._rawValue
+
+    return (
+      layerProperties?.[PROPS.OBJECT_BASED_EFFECTS_LAYER_INFO] ??
+      layerProperties?.[PROPS.MULTIPLE_OBJECT_BASED_EFFECTS] ??
+      layerProperties?.[PROPS.OBJECT_BASED_UNDOCUMENTED]
+    )
   }
 
   get enabledAll(): boolean {

@@ -39,6 +39,8 @@ export type RawLayerProperties = Partial<{
   artb: RawLayerPropertiesArtboard
   iOpa: RawFillOpacity
   lfx2: RawlayerEffects
+  lfxs: RawlayerEffects
+  lmfx: RawlayerEffects
   SoCo: RawFill
   GdFl: RawFill
   vscg: RawFill
