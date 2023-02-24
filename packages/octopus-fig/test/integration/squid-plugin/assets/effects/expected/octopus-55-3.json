@@ -3,7 +3,7 @@
   "type": "OCTOPUS_COMPONENT",
   "version": "3.0.1",
   "dimensions": {
-    "width": 1325,
+    "width": 1515,
     "height": 1000
   },
   "content": {
@@ -44,7 +44,7 @@
           ],
           "rectangle": {
             "x0": 0,
-            "x1": 1325,
+            "x1": 1515,
             "y0": 0,
             "y1": 1000
           }
@@ -935,7 +935,7 @@
                 "x0": 0,
                 "x1": 300,
                 "y0": 0,
-                "y1": 300
+                "y1": 188
               }
             },
             "fillRule": "NON_ZERO",
@@ -961,11 +961,174 @@
           0,
           1,
           1000,
-          675
+          787
         ],
         "layers": [],
         "meta": {
           "isArtboard": true
+        }
+      },
+      {
+        "id": "838-26",
+        "name": "BLUR",
+        "type": "GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.9851,
+          -0.172,
+          0.172,
+          0.9851,
+          1338,
+          772.7756
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 5
+          }
+        ],
+        "layers": [
+          {
+            "id": "838-27",
+            "name": "Polygon 4",
+            "type": "SHAPE",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              0,
+              1,
+              -1,
+              0,
+              114.9728,
+              0
+            ],
+            "effects": [],
+            "shape": {
+              "path": {
+                "type": "PATH",
+                "visible": true,
+                "transform": [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "meta": {
+                  "sourceShape": "POLYGON"
+                },
+                "geometry": "M36.7912,21.2534c3.9717,-8.4544 15.9971,-8.4544 19.9688,0l23.1387,49.2546c3.4368,7.3158 -1.9015,15.7217 -9.9844,15.7217h-46.2774c-8.0829,0 -13.4213,-8.4059 -9.9844,-15.7217z"
+              },
+              "fillRule": "NON_ZERO",
+              "fills": [
+                {
+                  "type": "COLOR",
+                  "visible": true,
+                  "blendMode": "NORMAL",
+                  "color": {
+                    "r": 0.8083,
+                    "g": 0.0135,
+                    "b": 0.0135,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "838-28",
+        "name": "basis 1",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          1015,
+          11
+        ],
+        "effects": [
+          {
+            "type": "BLUR",
+            "visible": true,
+            "basis": "LAYER_AND_EFFECTS",
+            "blur": 8
+          }
+        ],
+        "shape": {
+          "path": {
+            "type": "PATH",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "meta": {
+              "sourceShape": "RECTANGLE"
+            },
+            "geometry": "M0,0h488.542v350h-488.542z"
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  477.6025109705323,
+                  0,
+                  0,
+                  358.2031238323907,
+                  0,
+                  -5.46875
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {
+                    "hue": 0,
+                    "contrast": 0,
+                    "saturation": 0,
+                    "temperature": 0,
+                    "tint": 0,
+                    "highlights": 0,
+                    "shadows": 0
+                  }
+                }
+              ]
+            }
+          ],
+          "strokes": []
         }
       }
     ],

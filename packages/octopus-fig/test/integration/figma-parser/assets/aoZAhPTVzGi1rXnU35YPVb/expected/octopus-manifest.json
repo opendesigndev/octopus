@@ -144,27 +144,19 @@
           "type": "COMPONENT"
         },
         {
-          "id": "807-9",
-          "type": "COMPONENT"
-        },
-        {
-          "id": "811-15",
-          "type": "COMPONENT"
-        },
-        {
-          "id": "812-25",
-          "type": "COMPONENT"
-        },
-        {
-          "id": "813-8",
-          "type": "COMPONENT"
-        },
-        {
           "id": "819-8",
           "type": "COMPONENT"
         },
         {
           "id": "825-20",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "838-31",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "838-33",
           "type": "COMPONENT"
         }
       ]
@@ -709,6 +701,13 @@
               "path": ""
             },
             "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "67e53421e50ddb3f8dc0e77350c1a193d12b8ab2"
           }
         ],
         "fonts": []
@@ -729,12 +728,20 @@
       "bounds": {
         "x": 246,
         "y": -65,
-        "width": 1325,
+        "width": 1515,
         "height": 1000
       },
       "dependencies": [],
       "assets": {
-        "images": [],
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
+          }
+        ],
         "fonts": []
       },
       "artifacts": [],
@@ -767,110 +774,6 @@
             "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
           }
         ],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "807-9",
-      "name": "bug-group-blur",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "807:9"
-      },
-      "bounds": {
-        "x": 600,
-        "y": 850,
-        "width": 105,
-        "height": 117
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "811-15",
-      "name": "bug-geometry-circles",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "811:15"
-      },
-      "bounds": {
-        "x": 760,
-        "y": 998,
-        "width": 288,
-        "height": 137
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "812-25",
-      "name": "bug-rectangle-inside-boolean",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "812:25"
-      },
-      "bounds": {
-        "x": 847,
-        "y": 850,
-        "width": 149,
-        "height": 117.45
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [
-          {
-            "location": {
-              "type": "RELATIVE",
-              "path": ""
-            },
-            "refId": "67e53421e50ddb3f8dc0e77350c1a193d12b8ab2"
-          }
-        ],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "813-8",
-      "name": "bug-group-transform",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "813:8"
-      },
-      "bounds": {
-        "x": 726,
-        "y": 850,
-        "width": 100,
-        "height": 100
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
         "fonts": []
       },
       "artifacts": [],
@@ -916,7 +819,7 @@
       },
       "bounds": {
         "x": 600,
-        "y": 1009,
+        "y": 841,
         "width": 140,
         "height": 76
       },
@@ -928,6 +831,62 @@
             "name": "AvenirNext-Regular"
           }
         ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "838-31",
+      "name": "bug-shadow-on-image",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "838:31"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 958,
+        "width": 550,
+        "height": 407
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "838-33",
+      "name": "bug-compound-path",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "838:33"
+      },
+      "bounds": {
+        "x": 772,
+        "y": 825,
+        "width": 112,
+        "height": 121
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": []
       },
       "artifacts": [],
       "location": {
