@@ -7,6 +7,7 @@ import { DEFAULTS } from './defaults'
 
 import type { SourceComponent } from '../entities/source/source-component'
 import type { SourceLayerContainer } from '../entities/source/source-layer-container'
+import type { SourceLayer } from '../factories/create-source-layer'
 import type { Octopus } from '../typings/octopus'
 import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule, RawColor } from '../typings/raw'
 import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source'
@@ -61,6 +62,10 @@ export function getColorFor(color: RawColor | undefined): SourceColor | undefine
   if (r === undefined || g === undefined || b === undefined) return undefined
   const a = rawA === undefined ? 1 : rawA
   return { r, g, b, a }
+}
+
+export function isParentBoolOperation(sourceLayer: SourceLayer): boolean {
+  return sourceLayer.parent.type === 'SHAPE' && sourceLayer.parent.shapeType === 'BOOLEAN_OPERATION'
 }
 
 export function getTopComponentTransform(sourceLayer: SourceLayerContainer): number[] | undefined {

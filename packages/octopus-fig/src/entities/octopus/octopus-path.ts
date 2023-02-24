@@ -4,6 +4,7 @@ import first from 'lodash/first'
 import { convertRectangle, convertTransform } from '../../utils/convert'
 import { DEFAULTS } from '../../utils/defaults'
 import { createCompoundPath, simplifyPathData } from '../../utils/paper'
+import { isParentBoolOperation } from '../../utils/source'
 
 import type { Octopus } from '../../typings/octopus'
 import type { SourceGeometry } from '../../typings/source'
@@ -55,22 +56,26 @@ export class OctopusPath {
 
   private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
     if (this._isStroke) return sourceLayer.strokeGeometry
-    if (sourceLayer.fills.length && sourceLayer.fillGeometry.length) return sourceLayer.fillGeometry
 
-    if (sourceLayer.fillGeometry.length === 1 && sourceLayer.strokeGeometry.length === 1) {
-      const fillPath = createCompoundPath(sourceLayer.fillGeometry[0].path)
-      const strokePath = createCompoundPath(sourceLayer.strokeGeometry[0].path)
-      if (sourceLayer.strokeAlign === 'INSIDE') {
-        const path = strokePath.intersect(fillPath).pathData
-        return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
+    // https://github.com/opendesigndev/octopus/issues/63
+    if (isParentBoolOperation(sourceLayer)) {
+      if (sourceLayer.fills.length && sourceLayer.fillGeometry.length) return sourceLayer.fillGeometry
+      if (sourceLayer.fillGeometry.length === 1 && sourceLayer.strokeGeometry.length === 1) {
+        const fillPath = createCompoundPath(sourceLayer.fillGeometry[0].path)
+        const strokePath = createCompoundPath(sourceLayer.strokeGeometry[0].path)
+        if (sourceLayer.strokeAlign === 'INSIDE') {
+          const path = strokePath.intersect(fillPath).pathData
+          return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
+        }
+        if (sourceLayer.strokeAlign === 'OUTSIDE') {
+          const path = strokePath.subtract(fillPath).pathData
+          return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
+        }
       }
-      if (sourceLayer.strokeAlign === 'OUTSIDE') {
-        const path = strokePath.subtract(fillPath).pathData
-        return [{ path, fillRule: sourceLayer.fillGeometry[0].fillRule }]
-      }
+      return sourceLayer.strokeGeometry
     }
 
-    return sourceLayer.strokeGeometry
+    return sourceLayer.fillGeometry.length ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
   }
 
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
@@ -86,7 +91,7 @@ export class OctopusPath {
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
-    if (sourceLayer.parent.type === 'SHAPE' && sourceLayer.parent.shapeType === 'BOOLEAN_OPERATION') return false // issue with rectangles inside boolean operations, act as they are just Path
+    if (isParentBoolOperation(sourceLayer)) return false // issue with rectangles inside boolean operations, act as they are just Path
     return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadii
   }
 
