@@ -86,8 +86,11 @@ export class OctopusManifest {
   }
 
   get meta(): Manifest['OctopusManifestMeta'] {
+    const photoshopICCProfile = this._sourceDesign.iccProfileName
     const converterVersion = this._octopusConverter.pkg.version
-    return { converterVersion }
+    // by default typescript does not check for excess types
+    // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
+    return { converterVersion, ...(photoshopICCProfile ? { photoshopICCProfile } : null) }
   }
 
   get psdVersion(): string {
