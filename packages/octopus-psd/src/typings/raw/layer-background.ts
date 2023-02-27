@@ -1,7 +1,3 @@
-import type { RawLayerCommon } from './layer.js'
-import type { RawBounds } from './shared.js'
+import type { AddedType, RawParsedLayerLayer } from './layer'
 
-export type RawLayerBackground = RawLayerCommon & {
-  type?: 'backgroundLayer'
-  bitmapBounds?: RawBounds
-}
+export type RawLayerBackground = RawParsedLayerLayer & AddedType<'backgroundLayer'>

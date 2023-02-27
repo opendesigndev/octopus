@@ -27,9 +27,7 @@ export class SourceStroke extends SourceEntity {
   }
 
   get lineWidth(): number {
-    const lineWidth = this._rawValue?.strokeStyleLineWidth
-    if (typeof lineWidth === 'number') return lineWidth
-    return lineWidth?.value ?? 0
+    return this._rawValue?.strokeStyleLineWidth ?? 0
   }
 
   get lineAlignment(): RawStrokeStyleLineAlignment {
@@ -45,7 +43,8 @@ export class SourceStroke extends SourceEntity {
   }
 
   get lineDashSet(): number[] | undefined {
-    return this._rawValue?.strokeStyleLineDashSet
+    const strokeStyleLineDashSet = this._rawValue?.strokeStyleLineDashSet
+    return strokeStyleLineDashSet && strokeStyleLineDashSet.length ? strokeStyleLineDashSet : undefined
   }
 
   get enabled(): boolean {

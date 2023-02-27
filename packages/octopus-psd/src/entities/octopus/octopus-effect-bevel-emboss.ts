@@ -14,6 +14,14 @@ export class OctopusEffectBevelEmboss extends OctopusEffectBase {
   protected _parentLayer: OctopusLayerBase
   private _bevelEmboss: SourceEffectBevelEmboss
 
+  static BEVEL_EMBOSS_TYPE_MAP = {
+    OtrB: 'outerBevel',
+    InrB: 'innerBevel',
+    Embs: 'emboss',
+    PlEb: 'pillowEmboss',
+    strokeEmboss: 'strokeEmboss',
+  } as const
+
   constructor(options: OctopusEffectBevelEmbossOptions) {
     super(options)
     this._parentLayer = options.parentLayer

@@ -8,14 +8,15 @@ import { convertColor, convertOffset } from '../../utils/convert.js'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient.js'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories.js'
 
-import type { Octopus } from '../../typings/octopus.js'
-import type { SourceBounds, SourceGradientType } from '../../typings/source.js'
-import type { SourceEffectFill } from '../source/source-effect-fill.js'
-import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color.js'
-import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity.js'
-import type { OctopusComponent } from './octopus-component.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
-import type { ElementOf } from '@opendesign/octopus-common/dist/utility-types.js'
+import type { Octopus } from '../../typings/octopus'
+import type { RawGradientType } from '../../typings/raw/effects.js'
+import type { SourceBounds } from '../../typings/source'
+import type { SourceEffectFill } from '../source/source-effect-fill'
+import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
+import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
+import type { OctopusComponent } from './octopus-component'
+import type { OctopusLayerBase } from './octopus-layer-base'
+import type { ElementOf } from '@opendesign/octopus-common/dist/utils/utility-types'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 
@@ -37,11 +38,11 @@ export class OctopusEffectFillGradient {
   private _isStroke: boolean
 
   static GRADIENT_TYPE_MAP = {
-    linear: 'LINEAR',
-    radial: 'RADIAL',
+    Lnr: 'LINEAR',
+    Rdl: 'RADIAL',
     Angl: 'ANGULAR',
     Dmnd: 'DIAMOND',
-    reflected: 'REFLECTED',
+    Rflc: 'REFLECTED',
   } as const
 
   constructor(options: OctopusFillGradientOptions) {
@@ -63,7 +64,7 @@ export class OctopusEffectFillGradient {
   }
 
   get type(): GradientType | null {
-    const type: SourceGradientType | undefined = this.fill.type
+    const type: RawGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
       logger.warn('Unknown Fill Gradient type', { type })

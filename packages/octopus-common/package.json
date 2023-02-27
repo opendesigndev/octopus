@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-common",
-  "version": "3.0.0-rc.29",
+  "version": "3.0.0-rc.30",
   "description": "General utility functions for Octopus 3 common cases.",
   "license": "Apache-2.0",
   "scripts": {

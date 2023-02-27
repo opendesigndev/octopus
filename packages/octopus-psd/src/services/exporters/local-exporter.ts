@@ -5,7 +5,7 @@ import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/asy
 import { v4 as uuidv4 } from 'uuid'
 
 import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
-import { copyFile, makeDir, saveFile } from '../../utils/files.js'
+import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
@@ -82,15 +82,11 @@ export class LocalExporter implements AbstractExporter {
   /**
    * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
-   * @param {string} location Location of the given Image
+   * @param {Buffer} buffer image data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, location: string): Promise<string> {
-    const dir = await this._outputDir
-    const fullPath = path.join(dir, IMAGES_DIR_NAME, name)
-    const save = copyFile(location, fullPath)
-    this._assetsSaves.push(save)
-    return save
+  async exportImage(name: string, buffer: Buffer): Promise<string> {
+    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), buffer)
   }
 
   /**

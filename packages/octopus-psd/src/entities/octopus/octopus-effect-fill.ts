@@ -45,7 +45,7 @@ export class OctopusEffectFill {
   }
 
   private get _imageName(): string {
-    return `${this._fill?.pattern?.ID}.png`
+    return `${this._fill?.pattern?.Idnt}.png`
   }
 
   private get _imagePath(): string | undefined {
@@ -66,7 +66,7 @@ export class OctopusEffectFill {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logger.warn('Unknown image', { image, id: this._fill?.pattern?.ID })
+      logger.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)
@@ -77,7 +77,7 @@ export class OctopusEffectFill {
 
   convert(): Octopus['Fill'] | null {
     const fill = this._fill
-    if (!fill.enabled) return null
+    if (!fill?.enabled) return null
     switch (this.fillType) {
       case 'GRADIENT': {
         const parentLayer = this._parentLayer

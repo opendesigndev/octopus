@@ -80,3 +80,11 @@ export const compareStrings = (() => {
   const collator = new Intl.Collator('en-US')
   return (a: string, b: string) => collator.compare(a, b)
 })()
+
+/** factory for function which creates unique id */
+export function uniqueIdFactory(startingCounter: number, prefix?: string): () => string {
+  return () => {
+    startingCounter = startingCounter + 1
+    return prefix ? `${prefix}-${String(startingCounter)}` : String(startingCounter)
+  }
+}

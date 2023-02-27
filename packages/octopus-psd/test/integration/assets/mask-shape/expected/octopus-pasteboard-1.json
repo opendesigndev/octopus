@@ -1,7 +1,7 @@
 {
   "id": "pasteboard-1",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.9",
+  "version": "3.0.0-webtoon-20230202",
   "dimensions": {
     "width": 914,
     "height": 914
@@ -34,7 +34,7 @@
         "type": "MASK_GROUP",
         "maskBasis": "BODY",
         "mask": {
-          "id": "bfc4c5cc-667e-4285-aaff-f89bc2da960d",
+          "id": "42672b62-331f-4ff9-a73b-28e6859eebd5",
           "name": "Layer",
           "type": "SHAPE",
           "transform": [

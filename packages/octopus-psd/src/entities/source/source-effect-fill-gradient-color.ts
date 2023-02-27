@@ -1,4 +1,5 @@
-import { getColorFor } from '../../utils/source.js'
+import PROPS from '../../utils/prop-names.js'
+import { getColor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
 import type { RawShapeGradientColor } from '../../typings/raw/index.js'
@@ -14,10 +15,10 @@ export class SourceEffectFillGradientColor extends SourceEntity {
   }
 
   get color(): SourceColor {
-    return getColorFor(this._rawValue?.color) ?? SourceEffectFillGradientColor.DEFAULT_COLOR
+    return getColor(this._rawValue?.[PROPS.COLOR]) ?? SourceEffectFillGradientColor.DEFAULT_COLOR
   }
 
   get location(): number {
-    return this._rawValue?.location || 0
+    return this._rawValue?.[PROPS.LOCATION] || 0
   }
 }

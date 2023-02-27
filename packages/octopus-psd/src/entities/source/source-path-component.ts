@@ -1,17 +1,21 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import { SourceEntity } from './source-entity.js'
 import { SourcePathOrigin } from './source-path-origin.js'
 import { SourceSubpath } from './source-subpath.js'
 
-import type { RawPathComponent } from '../../typings/raw/index.js'
-import type { SourceCombineOperation } from '../../typings/source.js'
+import type { RawCombineOperation } from '../../typings/raw'
+import type { SourceSourcePathComponent } from '../../typings/source'
 
 export class SourcePathComponent extends SourceEntity {
-  declare _rawValue: RawPathComponent
+  protected _rawValue: SourceSourcePathComponent
 
-  constructor(raw: RawPathComponent) {
+  static SHAPE_OPERATION = ['xor', 'add', 'subtract', 'interfaceIconFrameDimmed'] as RawCombineOperation[]
+
+  constructor(raw: SourceSourcePathComponent) {
     super(raw)
+    this._rawValue = raw
   }
 
   @firstCallMemo()
@@ -21,10 +25,10 @@ export class SourcePathComponent extends SourceEntity {
 
   @firstCallMemo()
   get subpathListKey(): SourceSubpath[] {
-    return (this._rawValue.subpathListKey ?? []).map((subpath) => new SourceSubpath(subpath))
+    return asArray(this._rawValue?.subpathListKey).map((subpath) => new SourceSubpath(subpath))
   }
 
-  get shapeOperation(): SourceCombineOperation | undefined {
-    return this._rawValue.shapeOperation
+  get shapeOperation(): RawCombineOperation | undefined {
+    return SourcePathComponent.SHAPE_OPERATION[this._rawValue.shapeOperation ?? -1]
   }
 }

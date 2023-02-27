@@ -66,18 +66,21 @@ function createOctopusLayerGroup({ layer, parent }: CreateOctopusLayerOptions): 
 function createOctopusLayerShapeFromShapeAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerShape
   const adapter = new OctopusLayerShapeShapeAdapter({ parent, sourceLayer })
+
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
 function createOctopusLayerShapeFromLayerAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerLayer
   const adapter = new OctopusLayerShapeLayerAdapter({ parent, sourceLayer })
+
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
 function createOctopusLayerShapeFromAdjustmentAdapter({ layer, parent }: CreateOctopusLayerOptions): OctopusLayerShape {
   const sourceLayer = layer as SourceLayerAdjustment
   const adapter = new OctopusLayerShapeAdjustmentAdapter({ parent, sourceLayer })
+
   return new OctopusLayerShape({ parent, sourceLayer, adapter })
 }
 
@@ -87,7 +90,7 @@ function createOctopusLayerText({ layer, parent }: CreateOctopusLayerOptions): O
 }
 
 export function createOctopusLayer(options: CreateOctopusLayerOptions): OctopusLayer | null {
-  const type = options.layer.type
+  const type = options?.layer?.type
   const result = getMapped(type, OCTOPUS_BUILDER_MAP, undefined)
   if (!result) {
     logger.warn('createOctopusLayer: Unknown layer type', { type })

@@ -4,11 +4,11 @@ import { logger } from '../../services/instances/logger.js'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path.js'
 import { createPathData } from '../../utils/path-data.js'
 
-import type { Octopus } from '../../typings/octopus.js'
-import type { SourceCombineOperation } from '../../typings/source.js'
-import type { SourceLayerShape } from '../source/source-layer-shape.js'
-import type { SourcePathComponent } from '../source/source-path-component.js'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
+import type { Octopus } from '../../typings/octopus'
+import type { RawCombineOperation } from '../../typings/raw/shared.js'
+import type { SourceLayerShape } from '../source/source-layer-shape'
+import type { SourcePathComponent } from '../source/source-path-component'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter
@@ -62,7 +62,7 @@ export class OctopusLayerShapeShapePath {
     }
   }
 
-  private _getCompoundOperation(operation: SourceCombineOperation | undefined): Octopus['BooleanOp'] {
+  private _getCompoundOperation(operation: RawCombineOperation | undefined): Octopus['BooleanOp'] {
     const result = getMapped(operation, OctopusLayerShapeShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
       logger.warn('Unknown Compound operation', { operation })

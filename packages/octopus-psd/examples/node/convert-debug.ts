@@ -28,7 +28,7 @@ dotenv.config()
 
 const converter = new OctopusPSDConverter()
 
-export async function convertDesign({
+async function convertDesign({
   filePath,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
@@ -56,7 +56,7 @@ export async function convertDesign({
     console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
-  const reader = new PSDFileReader({ path: filePath, designId })
+  const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
   const sourceDesign = await reader.sourceDesign
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
@@ -78,7 +78,7 @@ async function convertDir(dirPath: string) {
   }
 }
 
-async function convert(locations: string[]) {
+export async function convert(locations: string[]) {
   for (const location of locations) {
     if (await isDirectory(location)) {
       await convertDir(location)

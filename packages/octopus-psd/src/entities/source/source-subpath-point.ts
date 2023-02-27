@@ -14,6 +14,7 @@ export class SourceSubpathPoint extends SourceEntity {
   get anchor(): SourcePointXY {
     return getPointFor(this._rawValue?.anchor)
   }
+
   get backward(): SourcePointXY | undefined {
     return this._rawValue.backward ? getPointFor(this._rawValue?.backward) : undefined
   }

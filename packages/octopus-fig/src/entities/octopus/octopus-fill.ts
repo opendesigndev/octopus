@@ -1,15 +1,22 @@
-import { lerpColor } from '@opendesign/octopus-common/dist/utils/color.js'
-import { push, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
-import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math.js'
+import { lerpColor } from '@opendesign/octopus-common/dist/utils/color'
+import { push, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math'
 
-import { convertBlendMode, convertColor, convertStop } from '../../utils/convert.js'
-import { createMatrix, createPoint } from '../../utils/paper.js'
+import {
+  convertBlendMode,
+  convertColor,
+  convertGradientPositions,
+  convertLinearGradientTransform,
+  convertRadialGradientTransform,
+  convertStop,
+} from '../../utils/convert'
+import { createMatrix } from '../../utils/paper'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
-import type { Octopus } from '../../typings/octopus.js'
-import type { RawStop } from '../../typings/raw/index.js'
-import type { SourceTransform } from '../../typings/source.js'
-import type { SourcePaint } from '../source/source-paint.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer'
+import type { Octopus } from '../../typings/octopus'
+import type { RawStop } from '../../typings/raw'
+import type { SourceTransform } from '../../typings/source'
+import type { SourcePaint } from '../source/source-paint'
 
 type OctopusFillOptions = {
   fill: SourcePaint
@@ -117,49 +124,11 @@ export class OctopusFill {
 
     const gradientTransform = this._fill.gradientTransform
     if (gradientTransform) {
-      if (this._gradientType === 'LINEAR') {
-        return createMatrix(gradientTransform)
-          .scale(1 / width, 1 / height)
-          .invert().values
-      }
-
-      const center = createPoint(0, 0)
-      // const center = createPoint(-1, 1)
-      const matrix = createMatrix(gradientTransform)
-        .scale(2 / width, 2 / height, center)
-        .invert()
-      // .prepend(createMatrix([2, 0, 0, 2, 0, 0]))
-      // .scale(width / 2, height / 2, center).values
-      // .translate(0, -height / 2)
-
-      // console.info()
-      // console.info('width', width)
-      // console.info('height', height)
-      // console.info('before', matrix)
-      // console.info('after', matrix.translate(0, height / 2))
-      // console.info('after', matrix.translate(0, -height / 2))
-      // console.info()
-      // console.info()
-
-      // return [a, b, c, d, tx, ty + height / 2] // TODO fix this for radial gradient
-      return matrix.values
+      return this._gradientType === 'LINEAR'
+        ? convertLinearGradientTransform(gradientTransform, width, height)
+        : convertRadialGradientTransform(gradientTransform, width, height)
     }
-
-    const positions = this._fill.gradientHandlePositions
-    if (positions === null) return null
-    const [P1, P2, P3] = positions
-
-    const p1 = { x: P1.x * width, y: P1.y * height }
-    const p2 = { x: P2.x * width, y: P2.y * height }
-    const p3 = { x: P3.x * width, y: P3.y * height }
-
-    const scaleX = p2.x - p1.x
-    const skewY = p2.y - p1.y
-    const skewX = p3.x - p1.x
-    const scaleY = p3.y - p1.y
-    const tx = p1.x
-    const ty = p1.y
-    return [scaleX, skewY, skewX, scaleY, tx, ty]
+    return convertGradientPositions(this._fill.gradientHandlePositions, width, height)
   }
 
   private get _gradientPositioning(): Octopus['FillPositioning'] | null {

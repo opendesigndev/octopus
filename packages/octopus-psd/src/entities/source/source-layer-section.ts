@@ -2,13 +2,14 @@ import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
+import PROPS from '../../utils/prop-names.js'
 import { getBoundsFor } from '../../utils/source.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer.js'
-import type { RawLayer, RawLayerSection } from '../../typings/raw/index.js'
-import type { SourceBounds } from '../../typings/source.js'
-import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayer } from '../../factories/create-source-layer'
+import type { RawNodeChildWithType, RawLayerSection } from '../../typings/raw'
+import type { SourceBounds } from '../../typings/source'
+import type { SourceLayerParent } from './source-layer-common'
 
 type SourceLayerSectionOptions = {
   parent: SourceLayerParent
@@ -25,18 +26,20 @@ export class SourceLayerSection extends SourceLayerCommon {
   }
 
   private _initLayers() {
-    const layers = asArray(this._rawValue?.layers)
-    return layers.reduce((layers: SourceLayer[], layer: RawLayer) => {
+    const psdLayers = asArray(this._rawValue?.children)
+    return psdLayers.reduce((layers: SourceLayer[], layer) => {
       const sourceLayer = createSourceLayer({
-        layer,
         parent: this,
+        layer: layer as unknown as RawNodeChildWithType,
       })
       return sourceLayer ? push(layers, sourceLayer) : layers
     }, [])
   }
 
   get bounds(): SourceBounds {
-    return this.isArtboard ? getBoundsFor(this._rawValue.artboard?.artboardRect) : this._parent.bounds
+    const artboardRect = this._rawValue?.layerProperties?.[PROPS.ARTBOARD_DATA]?.artboardRect
+
+    return artboardRect ? getBoundsFor(artboardRect) : this._parent.bounds
   }
 
   get layers(): SourceLayer[] {

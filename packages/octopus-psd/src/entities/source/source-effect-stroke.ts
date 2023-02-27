@@ -1,5 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
+import PROPS from '../../utils/prop-names.js'
 import { SourceEffectBase } from './source-effect-base.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 
@@ -9,9 +10,15 @@ export class SourceEffectStroke extends SourceEffectBase {
   declare _rawValue: RawEffectStroke | undefined
 
   static DEFAULT_LINE_ALIGNMENT = 'centeredFrame' as const
+  static LINE_ALIGNMENT_MAP = {
+    OutF: 'outsetFrame',
+    InsF: 'insetFrame',
+    CtrF: 'centeredFrame',
+  } as const
 
   constructor(raw: RawEffectStroke | undefined) {
     super(raw)
+    this._rawValue = raw
   }
 
   @firstCallMemo()
@@ -20,10 +27,14 @@ export class SourceEffectStroke extends SourceEffectBase {
   }
 
   get lineWidth(): number {
-    return this._rawValue?.size ?? 0
+    return this._rawValue?.Sz ?? 0
   }
 
   get lineAlignment(): RawEffectStrokeLineAlignment {
-    return this._rawValue?.style ?? SourceEffectStroke.DEFAULT_LINE_ALIGNMENT
+    const styleKey = this._rawValue?.[PROPS.STYLE]
+    return styleKey
+      ? SourceEffectStroke.LINE_ALIGNMENT_MAP[styleKey as keyof typeof SourceEffectStroke.LINE_ALIGNMENT_MAP] ??
+          SourceEffectStroke.DEFAULT_LINE_ALIGNMENT
+      : SourceEffectStroke.DEFAULT_LINE_ALIGNMENT
   }
 }

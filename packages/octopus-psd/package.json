@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.0.0-rc.10-tarpub2",
+  "version": "3.1.0-rc.6",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "scripts": {
@@ -27,15 +27,17 @@
     "watch": "rimraf ./dist && tsc -w"
   },
   "dependencies": {
-    "@avocode/psd-parser": "0.8.4",
+    "@opendesign/image-icc-profile-converter": "^0.0.2-experimental",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.29",
+    "@opendesign/octopus-common": "3.0.0-rc.30",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.1",
+    "@webtoon/psd-ts": "npm:@opendesign/psd-ts@0.5.1-experimental-release-20230222",
     "chalk": "^4.1.2",
     "dotenv": "16.0.0",
     "image-size": "^1.0.1",
+    "jimp": "^0.16.2",
     "lodash": "^4.17.21",
     "paper": "0.12.15",
     "pino": "^6.7.0",
@@ -50,8 +52,6 @@
     "@types/node": "*",
     "@types/pino-pretty": "4.7.5",
     "@types/pino-std-serializers": "2.4.1",
-    "@types/rimraf": "^3.0.2",
-    "enhanced-resolve": "^5.12.0",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",

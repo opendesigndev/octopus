@@ -1,5 +1,6 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
+import chunk from 'lodash/chunk.js'
 
 import { logger } from '../../services/instances/logger.js'
 import { OctopusEffectFill } from './octopus-effect-fill.js'
@@ -40,6 +41,8 @@ export class OctopusStroke {
     strokeStyleRoundJoin: 'ROUND',
     strokeStyleBevelJoin: 'BEVEL',
   } as const
+
+  static MIN_DASH_INPUT = 0.001
 
   constructor(options: OctopusStrokeOptions) {
     this._parentLayer = options.parentLayer
@@ -83,6 +86,14 @@ export class OctopusStroke {
     return new OctopusEffectFill({ parentLayer, fill, isStroke: true }).convert()
   }
 
+  private _parseDashing(dashing: number[]): number[] {
+    return chunk(dashing, 2)
+      .map(([dash, offset]) => {
+        return [Math.max(dash, OctopusStroke.MIN_DASH_INPUT), Math.max(offset ?? 0, OctopusStroke.MIN_DASH_INPUT)]
+      })
+      .flat()
+  }
+
   get style(): Style {
     const thickness = this._stroke.lineWidth
     const dashing = this._stroke.lineDashSet
@@ -90,7 +101,7 @@ export class OctopusStroke {
     return {
       style: 'DASHED' as const,
       thickness,
-      dashing: dashing.map((dash) => dash * thickness),
+      dashing: this._parseDashing(dashing.map((dash) => dash * thickness)),
     }
   }
 

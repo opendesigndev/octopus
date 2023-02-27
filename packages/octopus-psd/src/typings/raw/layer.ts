@@ -1,51 +1,71 @@
-import type { RawLayerEffects } from './effects.js'
-import type { RawLayerAdjustment } from './layer-adjustment.js'
-import type { RawLayerBackground } from './layer-background.js'
-import type { RawLayerLayer } from './layer-layer.js'
-import type { RawLayerSection } from './layer-section.js'
-import type { RawLayerShape } from './layer-shape.js'
-import type { RawLayerText } from './layer-text.js'
-import type { RawPathComponent } from './path-component.js'
-import type { RawBlendOptions, RawBounds, RawColor } from './shared.js'
-
-export type RawShapeMask = {
-  bounds?: RawBounds
-  extendWithWhite?: boolean
-  imageName?: string
-}
-
-export type RawPath = {
-  bounds?: RawBounds
-  defaultFill?: boolean
-  pathComponents?: RawPathComponent[]
-}
-
-export type RawLayerArtboard = {
-  artboardBackgroundType?: number
-  artboardPresetName?: string
-  artboardRect?: RawBounds
-  color?: RawColor
-}
+import type { SourceLayerType } from '../../entities/source/source-layer-common'
+import type { RawlayerEffects, RawFill } from './effects'
+import type { RawShapeStrokeStyle, RawVectorMaskSetting } from './layer-shape'
+import type { RawTextProperties } from './layer-text'
+import type { RawVectorOriginationData } from './path-component'
+import type { RawColor, RawBounds } from './shared'
+import type { Group, Layer } from '@webtoon/psd-ts'
 
 export type RawLayerCommon = {
-  artboard?: RawLayerArtboard
-  bounds?: RawBounds
-  blendOptions?: RawBlendOptions
-  clipped?: boolean
-  id?: number
-  imageEffectsApplied?: boolean
-  imageName?: string
-  mask?: RawShapeMask
-  path?: RawPath
-  name?: string
-  visible?: boolean
-  layerEffects?: RawLayerEffects
+  isArtboard: boolean
+  id: string
+  name: string
+  artboardBackgroundType: number
+  isHidden: boolean
 }
 
-export type RawLayer =
-  | RawLayerAdjustment
-  | RawLayerBackground
-  | RawLayerLayer
-  | RawLayerSection
-  | RawLayerShape
-  | RawLayerText
+export type RawLayerPropertiesArtboard = Partial<{
+  artboardBackgroundType: number
+  Clr: RawColor
+  artboardPresentName: string
+  artboardRect: RawBounds
+}>
+
+export type RawFillOpacity = Partial<{
+  fillOpacity: number
+}>
+
+export type RawLayerBlendProps = Partial<{
+  signature: string
+  key: string
+  dividerType: number
+  dividerSignature: string
+  blendMode: string
+  subType: number
+}>
+
+export type RawLayerProperties = Partial<{
+  lyid: number | string
+  artb: RawLayerPropertiesArtboard
+  iOpa: RawFillOpacity
+  lfx2: RawlayerEffects
+  lfxs: RawlayerEffects
+  lmfx: RawlayerEffects
+  SoCo: RawFill
+  GdFl: RawFill
+  vscg: RawFill
+  vstk: RawShapeStrokeStyle
+  TySh: RawTextProperties
+  vmsk: RawVectorMaskSetting
+  vsms: RawVectorMaskSetting
+  vogk: RawVectorOriginationData
+  lsct: RawLayerBlendProps
+  lsdk: RawLayerBlendProps
+  lnsr: Uint8Array
+  // we do not care for props of smart object, just for its existence
+  SoLd: Record<string, unknown>
+  SoLE: Record<string, unknown>
+}>
+
+export type AddedType<T extends SourceLayerType> = { addedType: T }
+export type RawNodeChildWithType = (RawParsedLayerGroup | RawParsedLayerLayer) & AddedType<SourceLayerType>
+export type RawNodeChildWithProps = RawParsedLayerGroup | RawParsedLayerLayer
+
+export type RawParsedLayerLayer = Partial<Layer> & {
+  layerProperties?: RawLayerProperties
+}
+
+export type RawParsedLayerGroup = Partial<Exclude<Group, 'children'>> & {
+  children: RawNodeChildWithProps[]
+  layerProperties?: RawLayerProperties
+}

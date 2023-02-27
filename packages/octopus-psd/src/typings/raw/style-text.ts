@@ -1,50 +1,65 @@
-import type { RawColor } from './shared.js'
+export type RawTextStyleRange = Partial<{
+  from: number
+  textStyle: RawTextStyle
+  to: number
+  defaultStyleSheet: RawStyleSheetData
+}>
 
-export type RawTextStyle = {
-  autoKerning?: boolean
-  autoLeading?: boolean
-  baselineDirection?: number
-  baselineShift?: number
-  characterDirection?: number
-  color?: RawColor
-  dLigatures?: boolean
-  diacriticPos?: number
-  fauxBold?: boolean
-  fauxItalic?: boolean
-  fillFirst?: boolean
-  fillFlag?: boolean
-  fontBaseline?: number
-  fontName?: string
-  fontPostScriptName?: string
-  fontStyleName?: string
-  hindiNumbers?: boolean
-  horizontalScale?: number
-  kashida?: number
-  kerning?: number
-  language?: number
-  leading?: number
-  ligatures?: boolean
-  altligature?: boolean
-  noBreak?: boolean
-  outlineWidth?: number
-  size?: number
-  strikethrough?: boolean
-  strokeColor?: {
-    Type?: number
-    Values?: number[]
-  }
-  strokeFlag?: boolean
-  styleRunAlignment?: number
-  tracking?: number
-  tsume?: number
-  underline?: boolean
-  verticalScale?: number
-  yUnderline?: number
-  fontCaps?: 'allCaps' | 'smallCaps'
+export type RawStyleRun = Partial<{
+  IsJoinable: number
+  RunLengthArray: number[]
+  RunArray: RawStyleRunArray[]
+}>
+
+export type RawStyleRunArray = {
+  StyleSheet?: RawStyleRunArrayStyleSheet
 }
 
-export type RawTextStyleRange = {
-  from?: number
-  textStyle?: RawTextStyle
-  to?: number
-}
+export type RawStyleRunArrayStyleSheet = Partial<{
+  StyleSheetData: RawStyleSheetData
+}>
+
+export type RawTextColor = Partial<{
+  Values: number[]
+  Type: number
+}>
+
+export type RawStyleSheetData = Partial<{
+  Kashida: number
+  HindiNumbers: boolean
+  YUnderline: number
+  StrokeColor: RawTextColor
+  FillColor: RawTextColor
+  NoBreak: boolean
+  Language: number
+  StyleRunAlignment: number
+  Tsume: number
+  BaselineDirection: number
+  DLigatures: boolean
+  Ligatures: boolean
+  Strikethrough: boolean
+  Underline: boolean
+  FontBaseline: number
+  FontCaps: number
+  BaselineShift: number
+  Kerning: number
+  AutoKerning: boolean
+  Tracking: number
+  VerticalScale: number
+  HorizontalScale: number
+  Leading: number
+  AutoLeading: boolean
+  FauxItalic: boolean
+  FauxBold: boolean
+  FontSize: number
+  Font: number
+  Altligature: boolean
+}>
+
+export type RawTextStyle = RawStyleSheetData & RawFontProperties
+
+export type RawFontProperties = Partial<{
+  fontName: string
+  fontPostScriptName: string
+  fontStyleName: string
+}>
