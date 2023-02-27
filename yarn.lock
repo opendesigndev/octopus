@@ -1246,10 +1246,10 @@
     immutable "^4.1.0"
     marky "^1.2.4"
 
-"@opendesign/image-icc-profile-converter@^0.0.0-experimental":
-  version "0.0.0-experimental"
-  resolved "https://registry.yarnpkg.com/@opendesign/image-icc-profile-converter/-/image-icc-profile-converter-0.0.0-experimental.tgz#b204d52a58d9e45d36a4f5b52f097d83c310325d"
-  integrity sha512-VK9GhUMkdEWOX2uoGhWM7nRwzXT85oCyVZf/pcWaUOHHYAQhIaht/odfgLpDpVY/sOqDsF1zD4IUD4CKxjFL5A==
+"@opendesign/image-icc-profile-converter@^0.0.2-experimental":
+  version "0.0.2-experimental"
+  resolved "https://registry.yarnpkg.com/@opendesign/image-icc-profile-converter/-/image-icc-profile-converter-0.0.2-experimental.tgz#8eef0964cdf5f02c6f96339b6b2cbb09cd90bc94"
+  integrity sha512-jsGqXrviXzEbS+R25oecQD8q/fTFjR+QkXKQfY3FiQDV30hpMCkSXreIn/eCzODKooDUCITYpNbLuKT1jgcD4A==
 
 "@opendesign/manifest-ts@3.0.1":
   version "3.0.1"

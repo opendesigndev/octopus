@@ -15,6 +15,7 @@ type SourceDesignOptions = {
   images: SourceImage[]
   designId: string
   componentIds?: number[]
+  iccProfileName?: string
 }
 
 export class SourceDesign {
@@ -22,12 +23,14 @@ export class SourceDesign {
   private _components: SourceComponent[]
   private _images: SourceImage[]
   private _raw: RawParsedPsd
+  private _iccProfileName: string | undefined
 
   constructor(options: SourceDesignOptions) {
     this._components = this._initComponents(options.component, options.componentIds)
     this._images = options.images
     this._designId = options.designId
     this._raw = options.component
+    this._iccProfileName = options.iccProfileName
   }
 
   private _initComponents(raw: RawParsedPsd, componentIds?: number[]): SourceComponent[] {
@@ -85,5 +88,9 @@ export class SourceDesign {
 
   get documentHeight(): number {
     return this._raw.height
+  }
+
+  get iccProfileName(): string | undefined {
+    return this._iccProfileName
   }
 }

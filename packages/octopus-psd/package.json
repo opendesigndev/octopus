@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.1.0-rc.2",
+  "version": "3.1.0-rc.6",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "type": "module",
@@ -22,7 +22,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "@opendesign/image-icc-profile-converter": "^0.0.0-experimental",
+    "@opendesign/image-icc-profile-converter": "^0.0.2-experimental",
     "@opendesign/manifest-ts": "3.0.1",
     "@opendesign/octopus-common": "3.0.0-rc.30",
     "@opendesign/octopus-ts": "3.0.1",
