@@ -220,7 +220,7 @@ export class PSDFileReader {
     let buff
 
     try {
-      buff = await layer.composite()
+      buff = await layer.composite(false)
     } catch (e) {
       logger.error(`could not export image: ${name}`)
       return
