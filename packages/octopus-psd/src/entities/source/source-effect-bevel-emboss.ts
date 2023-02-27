@@ -7,8 +7,8 @@ import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { OctopusEffectBevelEmboss } from '../octopus/octopus-effect-bevel-emboss.js'
 import { SourceEffectBase } from './source-effect-base.js'
 
-import type { RawEffectBevelEmboss } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
+import type { RawEffectBevelEmboss } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 import type BLEND_MODES from '../../utils/blend-modes.js'
 
 export class SourceEffectBevelEmboss extends SourceEffectBase {

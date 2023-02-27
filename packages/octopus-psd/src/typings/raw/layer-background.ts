@@ -1,3 +1,3 @@
-import type { AddedType, RawParsedLayerLayer } from './layer'
+import type { AddedType, RawParsedLayerLayer } from './layer.js'
 
 export type RawLayerBackground = RawParsedLayerLayer & AddedType<'backgroundLayer'>

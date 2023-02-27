@@ -1,9 +1,9 @@
-import type { SourceLayerType } from '../../entities/source/source-layer-common'
-import type { RawlayerEffects, RawFill } from './effects'
-import type { RawShapeStrokeStyle, RawVectorMaskSetting } from './layer-shape'
-import type { RawTextProperties } from './layer-text'
-import type { RawVectorOriginationData } from './path-component'
-import type { RawColor, RawBounds } from './shared'
+import type { SourceLayerType } from '../../entities/source/source-layer-common.js'
+import type { RawlayerEffects, RawFill } from './effects.js'
+import type { RawShapeStrokeStyle, RawVectorMaskSetting } from './layer-shape.js'
+import type { RawTextProperties } from './layer-text.js'
+import type { RawVectorOriginationData } from './path-component.js'
+import type { RawColor, RawBounds } from './shared.js'
 import type { Group, Layer } from '@webtoon/psd-ts'
 
 export type RawLayerCommon = {

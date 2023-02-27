@@ -8,15 +8,15 @@ import { convertColor, convertOffset } from '../../utils/convert.js'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient.js'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories.js'
 
-import type { Octopus } from '../../typings/octopus'
+import type { Octopus } from '../../typings/octopus.js'
 import type { RawGradientType } from '../../typings/raw/effects.js'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color'
-import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity'
-import type { OctopusComponent } from './octopus-component'
-import type { OctopusLayerBase } from './octopus-layer-base'
-import type { ElementOf } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color.js'
+import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity.js'
+import type { SourceEffectFill } from '../source/source-effect-fill.js'
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
+import type { ElementOf } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
 

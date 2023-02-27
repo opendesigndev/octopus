@@ -14,8 +14,8 @@ import type {
   RawParagraphStyleRange,
   RawTextProperties,
   RawTextStyleRange,
-} from '../../typings/raw'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
+} from '../../typings/raw/index.js'
+import type { SourceBounds, SourceMatrix } from '../../typings/source.js'
 
 type TextStyleFromTo = { from: number; to: number; runArrayIndex: number }
 

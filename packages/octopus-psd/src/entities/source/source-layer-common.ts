@@ -10,10 +10,10 @@ import { SourceLayerEffects } from './source-effects-layer.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePath } from './source-path.js'
 
-import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw'
-import type { SourceDocumentDimensions, SourceBounds, SourceColor } from '../../typings/source'
+import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw/index.js'
+import type { SourceDocumentDimensions, SourceBounds, SourceColor } from '../../typings/source.js'
 import type BLEND_MODES from '../../utils/blend-modes.js'
-import type { SourceLayerSection } from './source-layer-section'
+import type { SourceLayerSection } from './source-layer-section.js'
 import type { MaskData, RealMaskData } from '@webtoon/psd-ts/dist/sections/index.js'
 
 export type SourceLayerParent = SourceComponent | SourceLayerSection

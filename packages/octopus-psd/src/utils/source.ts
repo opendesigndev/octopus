@@ -14,7 +14,7 @@ import type {
   RawBounds,
   RawNodeChildWithProps,
   RawLayerProperties,
-} from '../typings/raw'
+} from '../typings/raw/index.js'
 import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
 import type { AdditionalLayerInfo, NodeChild, Layer } from '@webtoon/psd-ts'
 import type { AdditionalLayerProperties } from '@webtoon/psd-ts/dist/sections'

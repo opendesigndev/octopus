@@ -1,8 +1,8 @@
 import PROPS from '../../utils/prop-names.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { RawLayerLayer } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawLayerLayer } from '../../typings/raw/index.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerLayerOptions = {
   parent: SourceLayerParent

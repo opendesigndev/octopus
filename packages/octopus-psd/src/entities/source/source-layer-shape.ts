@@ -6,10 +6,10 @@ import { SourceLayerCommon } from './source-layer-common.js'
 import { SourcePath } from './source-path.js'
 import { SourceStroke } from './source-stroke.js'
 
-import type { RawLayerShape } from '../../typings/raw'
-import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourcePathComponent } from './source-path-component'
+import type { RawLayerShape } from '../../typings/raw/index.js'
+import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source.js'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourcePathComponent } from './source-path-component.js'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

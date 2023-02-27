@@ -3,8 +3,8 @@ import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { getTextColor } from '../../utils/text.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawTextStyle, RawStyleSheetData } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
+import type { RawTextStyle, RawStyleSheetData } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 
 export class SourceTextTextStyle extends SourceEntity {
   protected _rawValue: RawTextStyle | undefined

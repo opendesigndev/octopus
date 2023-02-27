@@ -1,7 +1,7 @@
-import type { AddedType, RawParsedLayerLayer } from './layer'
-import type { RawBounds } from './shared'
-import type { RawParagraphRun } from './style-paragraph'
-import type { RawStyleRun, RawStyleSheetData } from './style-text'
+import type { AddedType, RawParsedLayerLayer } from './layer.js'
+import type { RawBounds } from './shared.js'
+import type { RawParagraphRun } from './style-paragraph.js'
+import type { RawStyleRun, RawStyleSheetData } from './style-text.js'
 
 export type RawTextEngineDict = {
   Editor: { Text: string }

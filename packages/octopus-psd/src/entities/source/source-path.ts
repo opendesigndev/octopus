@@ -6,8 +6,8 @@ import { getBoundsFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePathComponent } from './source-path-component.js'
 
-import type { RawBounds, RawVectorMaskSetting, RawVectorOriginationData } from '../../typings/raw'
-import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source'
+import type { RawBounds, RawVectorMaskSetting, RawVectorOriginationData } from '../../typings/raw/index.js'
+import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source.js'
 
 type SourcePathOptions = {
   vectorOriginationData: RawVectorOriginationData | undefined

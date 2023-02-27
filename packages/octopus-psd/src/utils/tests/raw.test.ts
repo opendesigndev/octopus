@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DescriptorValueType } from '@webtoon/psd-ts'
 
-import { parseNodeChild } from '../raw'
+import { parseNodeChild } from '../raw.js'
 
 describe('src/utils/raw', () => {
   describe('parseNodeChild', () => {
