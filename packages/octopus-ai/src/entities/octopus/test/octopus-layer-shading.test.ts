@@ -2,8 +2,8 @@
 
 import { mocked } from 'jest-mock'
 
-import { OctopusLayerShading } from '../octopus-layer-shading'
-import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
+import { OctopusLayerShading } from '../octopus-layer-shading.js'
+import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter.js'
 
 jest.mock('../octopus-layer-shape-shape-adapter')
 jest.mock('../octopus-layer-common', () => {

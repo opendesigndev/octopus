@@ -1,4 +1,4 @@
-import { asNumber } from '@opendesign/octopus-common/utils/as'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
 type OctopusBoundsOptions = {
   x: number

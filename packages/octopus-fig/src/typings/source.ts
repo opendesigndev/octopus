@@ -1,4 +1,4 @@
-import type { Octopus } from './octopus'
+import type { Octopus } from './octopus.js'
 
 export type SourceBounds = {
   x: number

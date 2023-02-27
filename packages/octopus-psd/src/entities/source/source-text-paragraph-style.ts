@@ -1,10 +1,10 @@
-import { SourceEntity } from './source-entity'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawParagraphStyle } from '../../typings/raw/index'
-import type { SourceAlign } from '../../typings/source'
+import type { RawParagraphStyle } from '../../typings/raw/index.js'
+import type { SourceAlign } from '../../typings/source.js'
 
 export class SourceTextParagraphStyle extends SourceEntity {
-  protected _rawValue: RawParagraphStyle | undefined
+  declare _rawValue: RawParagraphStyle | undefined
 
   constructor(raw: RawParagraphStyle | undefined) {
     super(raw)

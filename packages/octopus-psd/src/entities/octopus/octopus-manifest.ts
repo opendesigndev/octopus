@@ -1,13 +1,13 @@
 import path from 'path'
 
-import { asString } from '@opendesign/octopus-common/utils/as'
-import { traverseAndFind } from '@opendesign/octopus-common/utils/common'
+import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import type { OctopusPSDConverter } from '../../index'
-import type { Manifest } from '../../typings/manifest'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceComponent } from '../source/source-component'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusPSDConverter } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceComponent } from '../source/source-component.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

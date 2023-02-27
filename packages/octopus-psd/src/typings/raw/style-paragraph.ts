@@ -1,4 +1,4 @@
-import type { RawAlign } from './shared'
+import type { RawAlign } from './shared.js'
 
 export type RawParagraphStyle = {
   AutoHyphenate?: boolean

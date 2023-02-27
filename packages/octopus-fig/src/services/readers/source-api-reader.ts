@@ -1,9 +1,8 @@
 import { createParser } from '@opendesign/figma-parser'
 
-import type { AbstractReader } from './abstract-reader'
+import type { AbstractReader } from './abstract-reader.js'
 import type { Logger, ICacher } from '@opendesign/figma-parser'
-// eslint-disable-next-line import/no-named-as-default
-import type EventEmitter from 'eventemitter3'
+import type { EventEmitter } from 'eventemitter3'
 
 export type SourceApiReaderOptions = {
   /** Figma design HASH ID */

@@ -1,7 +1,7 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEntity } from './source-entity'
-import { SourcePaint } from './source-paint'
+import { SourceEntity } from './source-entity.js'
+import { SourcePaint } from './source-paint.js'
 
 import type {
   RawTextStyle,
@@ -11,10 +11,10 @@ import type {
   RawTextAutoResize,
   RawTextCase,
   RawTextDecoration,
-} from '../../typings/raw'
+} from '../../typings/raw/index.js'
 
 export class SourceTextStyle extends SourceEntity {
-  protected _rawValue: RawTextStyle
+  declare _rawValue: RawTextStyle
 
   constructor(rawValue: RawTextStyle) {
     super(rawValue)

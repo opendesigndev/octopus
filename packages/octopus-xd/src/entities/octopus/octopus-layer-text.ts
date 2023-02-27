@@ -1,18 +1,18 @@
-import { normalizeText } from '@opendesign/octopus-common/postprocessors/normalize-text'
-import { asArray, asNumber, asString } from '@opendesign/octopus-common/utils/as'
-import { getPresentProps, push } from '@opendesign/octopus-common/utils/common'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/normalize-text/index.js'
+import { asArray, asNumber, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getPresentProps, push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { DEFAULTS } from '../../utils/defaults'
-import { convertObjectMatrixToArray } from '../../utils/matrix'
-import { createMatrix } from '../../utils/paper'
-import { OctopusEffectsText } from './octopus-effects-text'
-import { OctopusLayerCommon } from './octopus-layer-common'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { convertObjectMatrixToArray } from '../../utils/matrix.js'
+import { createMatrix } from '../../utils/paper.js'
+import { OctopusEffectsText } from './octopus-effects-text.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RawRangedStyle, RawTextLayer, RawTextParagraphRange } from '../../typings/source'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { LayerSpecifics } from './octopus-layer-common'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawRangedStyle, RawTextLayer, RawTextParagraphRange } from '../../typings/source/index.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { LayerSpecifics } from './octopus-layer-common.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

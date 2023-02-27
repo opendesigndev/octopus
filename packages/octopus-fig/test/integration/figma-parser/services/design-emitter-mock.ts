@@ -1,11 +1,11 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { EventEmitter } from 'eventemitter3'
 
-import { parseJsonFromFile } from '../../../../src/utils/files'
+import { parseJsonFromFile } from '../../../../src/utils/files.js'
 
-import type { Event } from './asset-updater'
+import type { Event } from './asset-updater.js'
 import type { ResolvedFrame } from '@opendesign/figma-parser'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type ResolvedContent = {
   artboards: ResolvedFrame[]

@@ -1,12 +1,20 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.0.0-rc.10",
+  "version": "3.0.0-rc.10-tarpub2",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "rimraf ./dist && tsc --build tsconfig.json && node esm.js ./tsconfig.json",
+    "bundle": "yarn run bundle:web",
+    "bundle:web": "vite build -c vite.web-test.js",
+    "build": "rimraf ./dist && tsc --build tsconfig.json",
+    "release:bundle:web": "vite build -c vite.web.js",
+    "release:bundle:node": "vite build -c vite.node.js",
+    "release:bundle": "yarn release:bundle:node && yarn release:bundle:web",
+    "release:cleanup": "rimraf ./release ./release.tgz",
+    "release:publish": "yarn publish release.tgz --non-interactive --ignore-scripts",
+    "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
     "clean:workdir": "rimraf ./workdir/*",
-    "clean": "rimraf ./node_modules ./dist ./dist ./workdir ./test/integration/report ./jsdoc",
+    "clean": "rimraf ./node_modules ./dist ./workdir ./test/integration/report ./jsdoc",
     "convert:debug": "yarn build && node ./dist/examples/node/convert-debug.js",
     "convert:local": "yarn build && node ./dist/examples/node/convert-local.js",
     "prepack": "yarn run build",
@@ -16,16 +24,14 @@
     "test:integration:update": "yarn build && node dist/test/integration/update-tests.js",
     "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index.ts",
-    "watch": "tsc -w"
+    "watch": "rimraf ./dist && tsc -w"
   },
   "dependencies": {
     "@avocode/psd-parser": "0.8.4",
     "@opendesign/manifest-ts": "3.0.1",
     "@opendesign/octopus-common": "3.0.0-rc.29",
     "@opendesign/octopus-ts": "3.0.1",
-    "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
-    "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
     "dotenv": "16.0.0",
@@ -39,30 +45,31 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
     "@types/jest": "^27.4.0",
     "@types/node": "*",
     "@types/pino-pretty": "4.7.5",
     "@types/pino-std-serializers": "2.4.1",
+    "@types/rimraf": "^3.0.2",
     "enhanced-resolve": "^5.12.0",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
+    "tar": "^6.1.13",
+    "ts-jest-resolver": "^2.0.0",
     "typedoc": "^0.23.18",
-    "typescript": "4.7.4"
+    "typescript": "4.9.5",
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.0.2"
   },
   "files": [
-    "dist/src",
-    "dist/package.json"
+    "dist"
   ],
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
-  "module": "./dist/src/index.mjs",
+  "type": "module",
+  "module": "./dist/src/index.js",
   "exports": {
     ".": {
-      "default": {
-        "require": "./dist/src/index.js",
-        "import": "./dist/src/index.mjs"
-      }
+      "default": "./dist/src/index.js"
     }
   }
 }

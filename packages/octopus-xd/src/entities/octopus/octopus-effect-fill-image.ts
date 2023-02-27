@@ -1,13 +1,13 @@
-import { asBoolean, asNumber, asString } from '@opendesign/octopus-common/utils/as'
+import { asBoolean, asNumber, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { DEFAULTS } from '../../utils/defaults'
-import { createPathRectangle, createPoint, createSize } from '../../utils/paper'
-import { SourceEffectFillImage } from '../source/source-effect-image-fill'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { createPathRectangle, createPoint, createSize } from '../../utils/paper.js'
+import { SourceEffectFillImage } from '../source/source-effect-image-fill.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawFillImage } from '../../typings/source'
-import type { OctopusBounds } from './octopus-bounds'
-import type { OctopusLayerShape } from './octopus-layer-shape'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawFillImage } from '../../typings/source/index.js'
+import type { OctopusBounds } from './octopus-bounds.js'
+import type { OctopusLayerShape } from './octopus-layer-shape.js'
 
 type OctopusEffectFillImageOptions = {
   source: SourceEffectFillImage

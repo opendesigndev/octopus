@@ -1,4 +1,4 @@
-import type { RawBlendMode, RawColor, RawPointHV, RawUnitAngle, RawUnitPercent } from './shared'
+import type { RawBlendMode, RawColor, RawPointHV, RawUnitAngle, RawUnitPercent } from './shared.js'
 
 export type RawShapeTransparency = {
   location?: number

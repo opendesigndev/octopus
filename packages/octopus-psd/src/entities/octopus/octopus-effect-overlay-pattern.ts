@@ -1,17 +1,17 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { logger } from '../../services/instances/logger'
-import { convertOffset } from '../../utils/convert'
-import { createMatrix } from '../../utils/paper-factories'
-import { OctopusEffectBase } from './octopus-effect-base'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
+import { logger } from '../../services/instances/logger.js'
+import { convertOffset } from '../../utils/convert.js'
+import { createMatrix } from '../../utils/paper-factories.js'
+import { OctopusEffectBase } from './octopus-effect-base.js'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceImage } from '../source/source-design'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { OctopusComponent } from './octopus-component'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceImage } from '../source/source-design.js'
+import type { SourceEffectFill } from '../source/source-effect-fill.js'
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -48,7 +48,7 @@ export class OctopusEffectOverlayPattern extends OctopusEffectBase {
     return this._parentComponent.sourceDesign.getImageByName(this._imageName)
   }
 
-  private get _offset(): [x: number, y: number] {
+  private get _offset(): [number, number] {
     const { width, height } = this._sourceLayerBounds
     const { x, y } = convertOffset(this._fill?.offset, width, height)
     return [x, y]

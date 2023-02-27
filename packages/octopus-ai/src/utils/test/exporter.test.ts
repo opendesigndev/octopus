@@ -1,4 +1,4 @@
-import { createOctopusArtboardFileName } from '../exporter'
+import { createOctopusArtboardFileName } from '../exporter.js'
 
 describe('utils/exporter', () => {
   describe('createOctopusArtboardFileName', () => {

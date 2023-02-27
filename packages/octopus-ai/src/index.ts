@@ -1,12 +1,14 @@
-import { DesignConverter } from './services/conversion/design-converter'
-import { set as setLogger } from './services/instances/logger'
-import { readPackageMeta } from './utils/read-pkg-meta'
+import { DesignConverter } from './services/conversion/design-converter/index.js'
+import { set as setLogger } from './services/instances/logger.js'
+import { readPackageMeta } from './utils/read-pkg-meta.js'
 
-import type { SourceDesign } from './entities/source/source-design'
-import type { ConvertDesignResult } from './services/conversion/design-converter'
-import type { Exporter } from './services/conversion/exporters'
-import type { Logger } from './typings'
-import type { PackageMeta } from './utils/read-pkg-meta'
+import type { SourceDesign } from './entities/source/source-design.js'
+import type { ConvertDesignResult } from './services/conversion/design-converter/index.js'
+import type { Exporter } from './services/conversion/exporters/index.js'
+import type { Logger } from './typings/index.js'
+import type { PackageMeta } from './utils/read-pkg-meta.js'
+
+export { AIFileReader } from './services/conversion/ai-file-reader/index.js'
 
 type OctopusAIConverteOptions = {
   /** Optional custom Logger. If not passed, default logger will be used. */

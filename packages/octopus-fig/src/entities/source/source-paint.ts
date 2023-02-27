@@ -1,18 +1,25 @@
-import { round, mod } from '@opendesign/octopus-common/utils/math'
+import { round, mod } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { getColorFor, getTransformFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getColorFor, getTransformFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
-import type { SourceColor, SourceTransform } from '../../typings/source'
+import type { Octopus } from '../../typings/octopus.js'
+import type {
+  RawBlendMode,
+  RawGradientType,
+  RawImageFilters,
+  RawPaint,
+  RawScaleMode,
+  RawStop,
+} from '../../typings/raw/index.js'
+import type { SourceColor, SourceTransform } from '../../typings/source.js'
 
 type SourcePaintOptions = {
   rawValue: RawPaint
 }
 
 export class SourcePaint extends SourceEntity {
-  protected _rawValue: RawPaint
+  declare _rawValue: RawPaint
 
   constructor(options: SourcePaintOptions) {
     super(options.rawValue)

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { mocked } from 'jest-mock'
 
-import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer'
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { LayerGroupingService } from '../../services/conversion/layer-grouping-service'
+import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { LayerGroupingService } from '../../services/conversion/layer-grouping-service/index.js'
 import {
   createOctopusLayersFromLayerSequences,
   initOctopusLayerChildren,
   initSourceLayerChildren,
   uniqueIdFactory,
-} from '../layer'
+} from '../layer.js'
 
 jest.mock('../../services/instances/text-layer-grouping-service', () => ({
   __esModule: true,

@@ -1,11 +1,12 @@
 import { basename, join as pathJoin } from 'path'
+import * as url from 'url'
 
-import { MANIFEST_NAME } from '../../../src/utils/exporter'
-import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files'
-import { lazyRead } from '../utils/lazy-read'
+import { MANIFEST_NAME } from '../../../src/utils/exporter.js'
+import { getDirsFromDir, getFilesFromDir } from '../../../src/utils/files.js'
+import { lazyRead } from '../utils/lazy-read.js'
 
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
+import type { Manifest } from '../../../src/typings/manifest.js'
+import type { Octopus } from '../../../src/typings/octopus.js'
 
 export type Component<T> = {
   path: string
@@ -46,7 +47,7 @@ export class AssetReader {
   }
 
   private _getFullPath(...subpaths: string[]) {
-    return pathJoin(__dirname, AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    return pathJoin(url.fileURLToPath(new URL('.', import.meta.url)), AssetReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {

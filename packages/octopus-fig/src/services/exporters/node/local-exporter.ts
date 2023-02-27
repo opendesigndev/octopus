@@ -1,20 +1,20 @@
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
-import kebabCase from 'lodash/kebabCase'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import kebabCase from 'lodash/kebabCase.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { MANIFEST_NAME } from '../../../utils/const'
-import { makeDir, saveFile } from '../../../utils/files'
-import { stringify } from '../../../utils/misc'
+import { MANIFEST_NAME } from '../../../utils/const.js'
+import { makeDir, saveFile } from '../../../utils/files.js'
+import { stringify } from '../../../utils/misc.js'
 
-import type { Manifest } from '../../../typings/manifest'
-import type { RawDesign, RawLayerContainer } from '../../../typings/raw'
-import type { ComponentConversionResult } from '../../conversion/design-converter'
-import type { AbstractExporter } from '../abstract-exporter'
+import type { Manifest } from '../../../typings/manifest.js'
+import type { RawDesign, RawLayerContainer } from '../../../typings/raw/index.js'
+import type { ComponentConversionResult } from '../../conversion/design-converter.js'
+import type { AbstractExporter } from '../abstract-exporter.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type LocalExporterOptions = {
   /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */

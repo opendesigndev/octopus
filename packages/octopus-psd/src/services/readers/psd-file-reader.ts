@@ -1,19 +1,19 @@
 import path from 'path'
 
 import { parsePsd } from '@avocode/psd-parser'
-import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
-import { displayPerf } from '@opendesign/octopus-common/utils/console'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import { imageSize as sizeOf } from 'image-size'
 import rimraf from 'rimraf'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../entities/source/source-design'
-import { getFilesFromDir, parseJsonFromFile } from '../../utils/files'
-import { logger } from '../instances/logger'
+import { SourceDesign } from '../../entities/source/source-design.js'
+import { getFilesFromDir, parseJsonFromFile } from '../../utils/files.js'
+import { logger } from '../instances/logger.js'
 
-import type { SourceImage } from '../../entities/source/source-design'
-import type { RawComponent } from '../../typings/raw/index'
+import type { SourceImage } from '../../entities/source/source-design.js'
+import type { RawComponent } from '../../typings/raw/index.js'
 
 export type PSDFileReaderOptions = {
   /** Path to the .psd design file. */

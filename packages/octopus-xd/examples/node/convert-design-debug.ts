@@ -1,13 +1,13 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-import { displayPerf } from '@opendesign/octopus-common/utils/console'
-import { timestamp } from '@opendesign/octopus-common/utils/timestamp'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
+import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, TempExporter, XDFileReader } from '../../src/index-node'
-import { renderOctopus } from './utils/render'
+import { createConverter, TempExporter, XDFileReader } from '../../src/index-node.js'
+import { renderOctopus } from './utils/render.js'
 
 type ConvertAllOptions = {
   render?: boolean

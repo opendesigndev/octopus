@@ -1,4 +1,4 @@
-import { removeTrailingHyphen } from '../text'
+import { removeTrailingHyphen } from '../text.js'
 
 describe('utils/text', () => {
   describe('removeTrailingHyphen', () => {

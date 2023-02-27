@@ -1,13 +1,13 @@
-import { asArray, asFiniteNumber } from '@opendesign/octopus-common/utils/as'
-import { push } from '@opendesign/octopus-common/utils/common'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { getArtboardColor, getBoundsFor, isArtboard } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawComponent, RawLayer } from '../../typings/raw/index'
-import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawComponent, RawLayer } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceColor } from '../../typings/source.js'
 
 export type SourceComponentOptions = {
   raw: RawComponent & RawLayer
@@ -15,7 +15,7 @@ export type SourceComponentOptions = {
 }
 
 export class SourceComponent extends SourceEntity {
-  protected _rawValue: RawComponent & RawLayer
+  declare _rawValue: RawComponent & RawLayer
   private _layers: SourceLayer[]
   private _isPasteboard: boolean
 

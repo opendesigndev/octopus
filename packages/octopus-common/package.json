@@ -31,23 +31,5 @@
   },
   "files": [
     "dist"
-  ],
-  "exports": {
-    "./decorators/first-call-memo": "./dist/decorators/first-call-memo.js",
-    "./postprocessors/normalize-text": "./dist/postprocessors/normalize-text/index.js",
-    "./utils/as": "./dist/utils/as.js",
-    "./utils/async": "./dist/utils/async.js",
-    "./utils/benchmark": {
-      "node": "./dist/utils/benchmark-node.js",
-      "default": "./dist/utils/benchmark-web.js"
-    },
-    "./utils/color": "./dist/utils/color.js",
-    "./utils/common": "./dist/utils/common.js",
-    "./utils/console": "./dist/utils/console.js",
-    "./utils/hasher": "./dist/utils/hasher.js",
-    "./utils/math": "./dist/utils/math.js",
-    "./utils/queue": "./dist/utils/queue.js",
-    "./utils/timestamp": "./dist/utils/timestamp.js",
-    "./utility-types": "./dist/utility-types.js"
-  }
+  ]
 }

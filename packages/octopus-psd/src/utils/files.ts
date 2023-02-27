@@ -1,6 +1,6 @@
 import { copyFile as cp, mkdir, readdir, readFile, stat, writeFile, rm } from 'fs/promises'
 
-import { logger } from '../services/instances/logger'
+import { logger } from '../services/instances/logger.js'
 
 import type { Dirent } from 'fs'
 
@@ -70,7 +70,7 @@ export async function copyFile(src: string, dest: string): Promise<string> {
   try {
     await cp(src, dest)
   } catch (e) {
-    logger.warn(`Copying file from '${src}' to '${dest}' failed`)
+    logger.warn(`Copying file from '.{src}.js' to '${dest}' failed`)
   }
   return dest
 }

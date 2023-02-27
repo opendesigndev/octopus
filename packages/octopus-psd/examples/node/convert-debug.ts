@@ -1,14 +1,14 @@
 import path from 'path'
 
-import { displayPerf } from '@opendesign/octopus-common/utils/console'
-import { timestamp } from '@opendesign/octopus-common/utils/timestamp'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
+import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from 'lodash/kebabCase.js'
 
-import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index'
-import { getFilesFromDir, isDirectory } from '../../src/utils/files'
-import { renderOctopus } from './utils/render'
+import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index.js'
+import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
+import { renderOctopus } from './utils/render.js'
 
 type ConvertAllOptions = {
   shouldRender?: boolean

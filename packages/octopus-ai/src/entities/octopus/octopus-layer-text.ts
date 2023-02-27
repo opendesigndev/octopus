@@ -1,19 +1,19 @@
-import { normalizeText } from '@opendesign/octopus-common/postprocessors/normalize-text'
-import { asArray } from '@opendesign/octopus-common/utils/as'
-import flatten from 'lodash/flatten'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/normalize-text/index.js'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import flatten from 'lodash/flatten.js'
 
-import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service'
-import { removeTrailingHyphen } from '../../utils/text'
-import { OctopusLayerCommon } from './octopus-layer-common'
-import OctopusSubText from './octopus-subtext'
+import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service/index.js'
+import { removeTrailingHyphen } from '../../utils/text.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
+import OctopusSubText from './octopus-subtext.js'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { AdditionalTextDataText } from '../../typings/raw'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { AdditionalTextDataText } from '../../typings/raw/index.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent
@@ -25,7 +25,7 @@ export class OctopusLayerText extends OctopusLayerCommon {
   static MIN_LINE_HEIGHT = 1
   static DEFAULT_TEXT_LAYER_NAME = '<TextLayer>'
 
-  protected _sourceLayers: SourceLayerText[]
+  declare _sourceLayers: SourceLayerText[]
   private _octopusSubTexts: Octopus['Text'][]
   private _octopusTextValue: Nullish<string>
   private _additionalTextDataText: Nullish<AdditionalTextDataText>

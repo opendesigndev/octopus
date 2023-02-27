@@ -2,10 +2,10 @@
 
 import { mocked } from 'jest-mock'
 
-import { ColorSpace, OctopusEffectColorFill } from '../octopus-effect-color-fill'
-import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient'
-import { OctopusEffectImageFill } from '../octopus-effect-fill-image'
-import { OctopusEffectsShape } from '../octopus-effects-shape'
+import { ColorSpace, OctopusEffectColorFill } from '../octopus-effect-color-fill.js'
+import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient.js'
+import { OctopusEffectImageFill } from '../octopus-effect-fill-image.js'
+import { OctopusEffectsShape } from '../octopus-effects-shape.js'
 
 jest.mock('../octopus-effect-color-fill')
 jest.mock('../octopus-effect-fill-gradient')

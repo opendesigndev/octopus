@@ -1,22 +1,22 @@
 import path from 'path'
 
-import { rejectTo } from '@opendesign/octopus-common/utils/async'
-import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
-import { isObject } from '@opendesign/octopus-common/utils/common'
-import { Queue } from '@opendesign/octopus-common/utils/queue'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
-import { logger } from '../instances/logger'
-import { ComponentConverter } from './component-converter'
+import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
+import { logger } from '../instances/logger.js'
+import { ComponentConverter } from './component-converter.js'
 
-import type { SourceComponent } from '../../entities/source/source-component'
-import type { SourceDesign, SourceImage } from '../../entities/source/source-design'
-import type { DesignConverterOptions, OctopusPSDConverter } from '../../index'
-import type { Manifest } from '../../typings/manifest'
-import type { Octopus } from '../../typings/octopus'
-import type { AbstractExporter } from '../exporters/abstract-exporter'
-import type { SafeResult } from '@opendesign/octopus-common/utils/queue'
+import type { SourceComponent } from '../../entities/source/source-component.js'
+import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
+import type { DesignConverterOptions, OctopusPSDConverter } from '../../index.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']

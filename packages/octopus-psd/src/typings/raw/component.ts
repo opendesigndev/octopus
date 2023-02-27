@@ -1,5 +1,5 @@
-import type { RawLayer } from './layer'
-import type { RawBounds } from './shared'
+import type { RawLayer } from './layer.js'
+import type { RawBounds } from './shared.js'
 
 type RawGuides = {
   x?: number[]

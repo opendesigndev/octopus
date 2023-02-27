@@ -1,16 +1,16 @@
 import path from 'path'
 
-import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
-import { displayPerf } from '@opendesign/octopus-common/utils/console'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import { imageSize as sizeOf } from 'image-size'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../entities/source/source-design'
-import { parseJsonFromFile, getFilesFromDir } from '../../utils/files'
-import { logger } from '../instances/logger'
+import { SourceDesign } from '../../entities/source/source-design.js'
+import { parseJsonFromFile, getFilesFromDir } from '../../utils/files.js'
+import { logger } from '../instances/logger.js'
 
-import type { SourceImage } from '../../entities/source/source-design'
-import type { RawComponent } from '../../typings/raw/index'
+import type { SourceImage } from '../../entities/source/source-design.js'
+import type { RawComponent } from '../../typings/raw/index.js'
 
 type SourceFileReaderOptions = {
   path: string

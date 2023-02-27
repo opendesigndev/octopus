@@ -1,11 +1,11 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/utils/as'
-import { round } from '@opendesign/octopus-common/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { RawBlendMode, RawColor, RawStop } from '../typings/raw'
-import type { SourceVector } from '../typings/source'
+import type { Octopus } from '../typings/octopus.js'
+import type { RawBlendMode, RawColor, RawStop } from '../typings/raw/index.js'
+import type { SourceVector } from '../typings/source.js'
 
 const BLEND_MODES: Octopus['BlendMode'][] = [
   'COLOR',

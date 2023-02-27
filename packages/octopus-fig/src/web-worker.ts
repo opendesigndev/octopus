@@ -1,5 +1,5 @@
-import type { OctopusFigConverter } from './octopus-fig-converter'
-import type { SourceApiReader as SrcApiReader, SourceApiReaderOptions } from './services/readers/source-api-reader'
+import type { OctopusFigConverter } from './octopus-fig-converter.js'
+import type { SourceApiReader as SrcApiReader, SourceApiReaderOptions } from './services/readers/source-api-reader.js'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

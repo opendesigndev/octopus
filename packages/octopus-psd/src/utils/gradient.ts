@@ -1,6 +1,6 @@
-import { mod, tan } from '@opendesign/octopus-common/utils/math'
+import { mod, tan } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { createPath, createPoint } from './paper-factories'
+import { createPath, createPoint } from './paper-factories.js'
 
 type Point = { x: number; y: number }
 

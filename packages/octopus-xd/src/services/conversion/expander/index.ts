@@ -1,14 +1,14 @@
-import { asArray, asString } from '@opendesign/octopus-common/utils/as'
-import { push } from '@opendesign/octopus-common/utils/common'
-import cloneDeep from 'lodash/cloneDeep'
-import mergeWith from 'lodash/mergeWith'
-import pick from 'lodash/pick'
-import without from 'lodash/without'
+import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import cloneDeep from 'lodash/cloneDeep.js'
+import mergeWith from 'lodash/mergeWith.js'
+import pick from 'lodash/pick.js'
+import without from 'lodash/without.js'
 
-import { flattenLayers, childrenOf } from '../../../utils/expander-utils'
+import { flattenLayers, childrenOf } from '../../../utils/expander-utils.js'
 
-import type { SourceResources } from '../../../entities/source/source-resources'
-import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source'
+import type { SourceResources } from '../../../entities/source/source-resources.js'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../../typings/source/index.js'
 
 type ExpanderOptions = {
   resources: SourceResources

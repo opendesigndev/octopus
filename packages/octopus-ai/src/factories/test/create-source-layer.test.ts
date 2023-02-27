@@ -2,12 +2,12 @@
 
 import { mocked } from 'jest-mock'
 
-import { SourceLayerGroup } from '../../entities/source/source-layer-group'
-import { SourceLayerShape } from '../../entities/source/source-layer-shape'
-import { SourceLayerText } from '../../entities/source/source-layer-text'
-import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form'
-import { SourceLayerXObjectImage } from '../../entities/source/source-layer-x-object-image'
-import { createSourceLayer } from '../create-source-layer'
+import { SourceLayerGroup } from '../../entities/source/source-layer-group.js'
+import { SourceLayerShape } from '../../entities/source/source-layer-shape.js'
+import { SourceLayerText } from '../../entities/source/source-layer-text.js'
+import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form.js'
+import { SourceLayerXObjectImage } from '../../entities/source/source-layer-x-object-image.js'
+import { createSourceLayer } from '../create-source-layer.js'
 
 jest.mock('../../entities/source/source-layer-shape')
 jest.mock('../../entities/source/source-layer-text')

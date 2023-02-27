@@ -1,9 +1,9 @@
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash/isEqual.js'
 
-import type { SourceLayerShape } from '../../../entities/source/source-layer-shape'
-import type { SourceLayer } from '../../../factories/create-source-layer'
-import type { LayerSequence } from '../text-layer-grouping-service'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+import type { SourceLayerShape } from '../../../entities/source/source-layer-shape.js'
+import type { SourceLayer } from '../../../factories/create-source-layer.js'
+import type { LayerSequence } from '../text-layer-grouping-service/index.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerMasked = SourceLayer & {
   mask: SourceLayerShape

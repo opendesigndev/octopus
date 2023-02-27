@@ -1,4 +1,4 @@
-import type { RawBlendMode, RawColor, RawVector } from './shared'
+import type { RawBlendMode, RawColor, RawVector } from './shared.js'
 
 export type RawEffectType = 'INNER_SHADOW' | 'DROP_SHADOW' | 'LAYER_BLUR' | 'BACKGROUND_BLUR'
 

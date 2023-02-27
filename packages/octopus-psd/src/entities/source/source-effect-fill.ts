@@ -1,14 +1,14 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { getColorFor, getUnitRatioFor } from '../../utils/source'
-import { SourceEffectBase } from './source-effect-base'
-import { SourceEffectFillGradient } from './source-effect-fill-gradient'
+import { getColorFor, getUnitRatioFor } from '../../utils/source.js'
+import { SourceEffectBase } from './source-effect-base.js'
+import { SourceEffectFillGradient } from './source-effect-fill-gradient.js'
 
-import type { RawFill, RawFillPattern } from '../../typings/raw/index'
-import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source'
+import type { RawFill, RawFillPattern } from '../../typings/raw/index.js'
+import type { SourceColor, SourceGradientType, SourceOffset } from '../../typings/source.js'
 
 export class SourceEffectFill extends SourceEffectBase {
-  protected _rawValue: RawFill | undefined
+  declare _rawValue: RawFill | undefined
   protected _enabled: boolean | undefined
 
   constructor(raw: RawFill | undefined, enabled?: boolean) {

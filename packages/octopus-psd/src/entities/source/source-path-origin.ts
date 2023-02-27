@@ -1,13 +1,13 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getBoundsFor, getMatrixFor, getRadiiCornersFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawOrigin } from '../../typings/raw/index'
-import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source'
+import type { RawOrigin } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceMatrix, SourceRadiiCorners } from '../../typings/source.js'
 
 export class SourcePathOrigin extends SourceEntity {
-  protected _rawValue: RawOrigin | undefined
+  declare _rawValue: RawOrigin | undefined
 
   constructor(raw: RawOrigin | undefined) {
     super(raw)

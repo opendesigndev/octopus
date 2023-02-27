@@ -1,12 +1,12 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEffectBase } from './source-effect-base'
-import { SourceEffectFill } from './source-effect-fill'
+import { SourceEffectBase } from './source-effect-base.js'
+import { SourceEffectFill } from './source-effect-fill.js'
 
-import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw/index'
+import type { RawEffectStroke, RawEffectStrokeLineAlignment } from '../../typings/raw/index.js'
 
 export class SourceEffectStroke extends SourceEffectBase {
-  protected _rawValue: RawEffectStroke | undefined
+  declare _rawValue: RawEffectStroke | undefined
 
   static DEFAULT_LINE_ALIGNMENT = 'centeredFrame' as const
 

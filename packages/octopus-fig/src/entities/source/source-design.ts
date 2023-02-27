@@ -1,7 +1,7 @@
-import { SourceEntity } from './source-entity'
-import { SourcePage } from './source-page'
+import { SourceEntity } from './source-entity.js'
+import { SourcePage } from './source-page.js'
 
-import type { RawComponent, RawComponents, RawComponentSets, RawDesign, RawStyles } from '../../typings/raw'
+import type { RawComponent, RawComponents, RawComponentSets, RawDesign, RawStyles } from '../../typings/raw/index.js'
 
 type SourceDesignOptions = {
   raw?: RawDesign
@@ -9,7 +9,7 @@ type SourceDesignOptions = {
 }
 
 export class SourceDesign extends SourceEntity {
-  protected _rawValue: RawDesign
+  declare _rawValue: RawDesign
   private _designId: string
   private _pages: SourcePage[]
 

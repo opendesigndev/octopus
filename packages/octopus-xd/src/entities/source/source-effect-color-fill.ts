@@ -1,4 +1,4 @@
-import type { RawFillColor } from '../../typings/source'
+import type { RawFillColor } from '../../typings/source/index.js'
 
 export type SourceEffectFillColorOptions = {
   effect: RawFillColor

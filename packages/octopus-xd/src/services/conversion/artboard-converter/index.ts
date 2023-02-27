@@ -1,7 +1,7 @@
-import { OctopusArtboard } from '../../../entities/octopus/octopus-artboard'
+import { OctopusArtboard } from '../../../entities/octopus/octopus-artboard.js'
 
-import type { OctopusXDConverter } from '../../../octopus-xd-converter'
-import type { Octopus } from '../../../typings/octopus'
+import type { OctopusXDConverter } from '../../../octopus-xd-converter.js'
+import type { Octopus } from '../../../typings/octopus/index.js'
 
 export type ArtboardConversionOptions = {
   targetArtboardId: string

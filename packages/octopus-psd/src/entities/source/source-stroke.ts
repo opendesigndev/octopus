@@ -1,17 +1,17 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEffectFill } from './source-effect-fill'
-import { SourceEntity } from './source-entity'
+import { SourceEffectFill } from './source-effect-fill.js'
+import { SourceEntity } from './source-entity.js'
 
 import type {
   RawShapeStrokeStyle,
   RawStrokeStyleLineAlignment,
   RawStrokeStyleLineCapType,
   RawStrokeStyleLineJoinType,
-} from '../../typings/raw/index'
+} from '../../typings/raw/index.js'
 
 export class SourceStroke extends SourceEntity {
-  protected _rawValue: RawShapeStrokeStyle | undefined
+  declare _rawValue: RawShapeStrokeStyle | undefined
 
   static DEFAULT_LINE_ALIGNMENT = 'strokeStyleAlignCenter' as const
   static DEFAULT_LINE_CAP = 'strokeStyleButtCap' as const

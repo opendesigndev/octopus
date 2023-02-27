@@ -1,7 +1,7 @@
-import { MaskGroupingService } from '../mask-grouping-service'
+import { MaskGroupingService } from '../mask-grouping-service/index.js'
 
-import type { SourceLayer } from '../../../factories/create-source-layer'
-import type { LayerSequence, TextLayerGroupingservice } from '../text-layer-grouping-service'
+import type { SourceLayer } from '../../../factories/create-source-layer.js'
+import type { LayerSequence, TextLayerGroupingservice } from '../text-layer-grouping-service/index.js'
 
 export class LayerGroupingService {
   private _textLayerGroupingService: TextLayerGroupingservice

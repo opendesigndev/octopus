@@ -7,8 +7,8 @@ import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-par
 import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { mocked } from 'jest-mock'
 
-import { AIFileReader } from '..'
-import { logger } from '../../../instances/logger'
+import { AIFileReader } from '../index.js'
+import { logger } from '../../../instances/logger.js'
 
 jest.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
 jest.mock('@opendesign/illustrator-parser-pdfcpu/index')

@@ -1,21 +1,22 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
-import { normalizeText } from '@opendesign/octopus-common/postprocessors/normalize-text'
-import { asArray, asFiniteNumber } from '@opendesign/octopus-common/utils/as'
-import { getMapped, keys } from '@opendesign/octopus-common/utils/common'
-import { round } from '@opendesign/octopus-common/utils/math'
-import isEmpty from 'lodash/isEmpty'
-import isEqual from 'lodash/isEqual'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/normalize-text/index.js'
+import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getMapped, keys } from '@opendesign/octopus-common/dist/utils/common.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
+import isEmpty from 'lodash/isEmpty.js'
+import isEqual from 'lodash/isEqual.js'
 
-import { createMatrix } from '../../utils/paper-factories'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { OctopusLayerBase } from './octopus-layer-base'
+import { createMatrix } from '../../utils/paper-factories.js'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { OctopusLayerBase } from './octopus-layer-base.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { SourceText } from '../source/source-text'
-import type { SourceTextTextStyle } from '../source/source-text-text-style'
-import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range.js'
+import type { SourceTextTextStyle } from '../source/source-text-text-style.js'
+import type { SourceText } from '../source/source-text.js'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

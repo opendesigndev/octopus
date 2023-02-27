@@ -9,15 +9,15 @@ import type {
   RawResourcesShadingKeyFunction,
   RawResourcesShadingKeyFunctionFunction,
   RawResourcesXObject,
-} from '../../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+} from '../../typings/raw/index.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceResourcesOptions = {
   rawValue?: RawResources
 }
 
 export class SourceResources {
-  protected _rawValue?: RawResources
+  declare _rawValue?: RawResources
 
   constructor(options: SourceResourcesOptions) {
     this._rawValue = options.rawValue

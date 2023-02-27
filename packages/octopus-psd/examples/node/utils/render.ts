@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import path from 'path'
 
-import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import chalk from 'chalk'
 
 export type RenderResult = {

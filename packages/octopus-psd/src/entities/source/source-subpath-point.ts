@@ -1,11 +1,11 @@
-import { getPointFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getPointFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawSubpathPoint } from '../../typings/raw/index'
-import type { SourcePointXY } from '../../typings/source'
+import type { RawSubpathPoint } from '../../typings/raw/index.js'
+import type { SourcePointXY } from '../../typings/source.js'
 
 export class SourceSubpathPoint extends SourceEntity {
-  protected _rawValue: RawSubpathPoint
+  declare _rawValue: RawSubpathPoint
 
   constructor(raw: RawSubpathPoint) {
     super(raw)

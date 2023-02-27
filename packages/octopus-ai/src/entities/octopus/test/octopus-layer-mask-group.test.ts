@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusLayerMaskGroup } from '../octopus-layer-mask-group'
+import { OctopusLayerMaskGroup } from '../octopus-layer-mask-group.js'
 
 function getTestingMaskGroup() {
   const options: any = {

@@ -1,6 +1,6 @@
-import type { SourceArtboard } from '../../../entities/source/source-artboard'
-import type { SourceDesign } from '../../../entities/source/source-design'
-import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter'
+import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
+import type { SourceDesign } from '../../../entities/source/source-design.js'
+import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
 
 export type AuxiliaryData = { metadata: string; additionalTextData: string | null }
 

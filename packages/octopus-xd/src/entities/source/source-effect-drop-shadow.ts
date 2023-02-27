@@ -1,5 +1,5 @@
-import type { RawEffectDropShadow } from '../../typings/source'
-import type { ElementOf } from '@opendesign/octopus-common/utility-types'
+import type { RawEffectDropShadow } from '../../typings/source/index.js'
+import type { ElementOf } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type SourceEffectDropShadowOptions = {
   effect: RawEffectDropShadow

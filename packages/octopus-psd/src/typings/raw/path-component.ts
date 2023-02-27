@@ -1,4 +1,4 @@
-import type { RawBounds, RawCombineOperation, RawMatrix, RawPointHV, RawPointXY } from './shared'
+import type { RawBounds, RawCombineOperation, RawMatrix, RawPointHV, RawPointXY } from './shared.js'
 
 type RawBoxCorners = {
   rectangleCornerA?: RawPointHV

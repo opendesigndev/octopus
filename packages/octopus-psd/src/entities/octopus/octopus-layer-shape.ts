@@ -1,11 +1,11 @@
-import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusLayerBase } from './octopus-layer-base.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from './octopus-layer-base'
-import type { OctopusLayerShapeAdjustmentAdapter } from './octopus-layer-shape-adjustment-adapter'
-import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { OctopusLayerParent } from './octopus-layer-base.js'
+import type { OctopusLayerShapeAdjustmentAdapter } from './octopus-layer-shape-adjustment-adapter.js'
+import type { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter.js'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

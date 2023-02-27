@@ -1,7 +1,7 @@
-import type { RawLayerCommon } from './layer'
-import type { RawBounds, RawMatrix, RawTextBounds } from './shared'
-import type { RawParagraphStyleRange } from './style-paragraph'
-import type { RawTextStyleRange } from './style-text'
+import type { RawLayerCommon } from './layer.js'
+import type { RawBounds, RawMatrix, RawTextBounds } from './shared.js'
+import type { RawParagraphStyleRange } from './style-paragraph.js'
+import type { RawTextStyleRange } from './style-text.js'
 
 export type RawText = {
   TextIndex?: number

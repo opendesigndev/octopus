@@ -1,4 +1,4 @@
-import type { Octopus } from '../typings/octopus'
+import type { Octopus } from '../typings/octopus/index.js'
 
 export const BLEND_MODES: { [key: string]: Octopus['BlendMode'] } = {
   // could not find passThrough in illustrator. keeping it just in case

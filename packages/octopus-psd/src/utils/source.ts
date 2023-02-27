@@ -1,4 +1,4 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/utils/as'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import type {
   RawLayer,
@@ -9,8 +9,8 @@ import type {
   RawRadiiCorners,
   RawTextBounds,
   RawUnitPoint,
-} from '../typings/raw/index'
-import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source'
+} from '../typings/raw/index.js'
+import type { SourceBounds, SourceColor, SourceMatrix, SourcePointXY, SourceRadiiCorners } from '../typings/source.js'
 
 export function isArtboard(raw: RawLayer) {
   return Boolean(raw.artboard)

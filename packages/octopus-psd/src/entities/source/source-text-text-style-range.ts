@@ -1,12 +1,12 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEntity } from './source-entity'
-import { SourceTextTextStyle } from './source-text-text-style'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextTextStyle } from './source-text-text-style.js'
 
-import type { RawTextStyleRange } from '../../typings/raw/index'
+import type { RawTextStyleRange } from '../../typings/raw/index.js'
 
 export class SourceTextTextStyleRange extends SourceEntity {
-  protected _rawValue: RawTextStyleRange | undefined
+  declare _rawValue: RawTextStyleRange | undefined
 
   constructor(raw: RawTextStyleRange | undefined) {
     super(raw)

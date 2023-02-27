@@ -1,4 +1,4 @@
-import { convertId } from '../convert'
+import { convertId } from '../convert.js'
 
 describe('convertId', () => {
   function testExample(id: string, result: string): void {

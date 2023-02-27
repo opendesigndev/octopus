@@ -1,19 +1,19 @@
-import { benchmarkAsync } from '@opendesign/octopus-common/utils/benchmark'
+import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 
-import { OctopusFigConverter } from './octopus-fig-converter'
-import { base64ToUint8Array } from './services/general/buffer/buffer-node'
-import { createEnvironmentNode } from './services/general/environment/node/env-node'
-import { imageSize } from './services/general/image-size/image-size-node'
-import { createLoggerNode } from './services/general/logger/node/logger-node'
+import { OctopusFigConverter } from './octopus-fig-converter.js'
+import { base64ToUint8Array } from './services/general/buffer/buffer-node.js'
+import { createEnvironmentNode } from './services/general/environment/node/env-node.js'
+import { imageSize } from './services/general/image-size/image-size-node.js'
+import { createLoggerNode } from './services/general/logger/node/logger-node.js'
 
-import type { SourceDesign } from './entities/source/source-design'
-import type { OctopusConverterOptions } from './octopus-fig-converter'
-import type { NodeFactories } from './services/general/platforms'
+import type { SourceDesign } from './entities/source/source-design.js'
+import type { OctopusConverterOptions } from './octopus-fig-converter.js'
+import type { NodeFactories } from './services/general/platforms/index.js'
 
-export { LocalExporter } from './services/exporters/node/local-exporter'
-export { DebugExporter } from './services/exporters/node/debug-exporter'
-export { SourceApiReader } from './services/readers/source-api-reader'
-export { SourcePluginReader } from './services/readers/source-plugin-reader'
+export { LocalExporter } from './services/exporters/node/local-exporter.js'
+export { DebugExporter } from './services/exporters/node/debug-exporter.js'
+export { SourceApiReader } from './services/readers/source-api-reader.js'
+export { SourcePluginReader } from './services/readers/source-plugin-reader/index.js'
 
 export type { SourceDesign }
 

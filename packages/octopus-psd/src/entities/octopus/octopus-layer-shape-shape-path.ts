@@ -1,14 +1,14 @@
-import { getMapped } from '@opendesign/octopus-common/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services/instances/logger'
-import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path'
-import { createPathData } from '../../utils/path-data'
+import { logger } from '../../services/instances/logger.js'
+import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path.js'
+import { createPathData } from '../../utils/path-data.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceCombineOperation } from '../../typings/source'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourcePathComponent } from '../source/source-path-component'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceCombineOperation } from '../../typings/source.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourcePathComponent } from '../source/source-path-component.js'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter

@@ -1,16 +1,16 @@
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter'
-import { copyFile, makeDir, saveFile } from '../../utils/files'
-import { stringify } from '../../utils/stringify'
+import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
+import { copyFile, makeDir, saveFile } from '../../utils/files.js'
+import { stringify } from '../../utils/stringify.js'
 
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
-import type { AbstractExporter } from './abstract-exporter'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/utils/async'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type { AbstractExporter } from './abstract-exporter.js'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type LocalExporterOptions = {
   /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */

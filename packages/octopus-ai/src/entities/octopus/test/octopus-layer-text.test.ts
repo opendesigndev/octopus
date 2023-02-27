@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { mocked } from 'jest-mock'
 
-import { TextLayerGroupingservice } from '../../../services/conversion/text-layer-grouping-service'
-import { OctopusLayerText } from '../octopus-layer-text'
+import { TextLayerGroupingservice } from '../../../services/conversion/text-layer-grouping-service/index.js'
+import { OctopusLayerText } from '../octopus-layer-text.js'
 
 jest.mock('../octopus-layer-common', () => {
   return {

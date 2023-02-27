@@ -1,15 +1,15 @@
-import { lerpColor } from '@opendesign/octopus-common/utils/color'
-import { push, getConvertedAsync } from '@opendesign/octopus-common/utils/common'
-import { invLerp, round } from '@opendesign/octopus-common/utils/math'
+import { lerpColor } from '@opendesign/octopus-common/dist/utils/color.js'
+import { push, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
+import { invLerp, round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { convertBlendMode, convertColor, convertStop } from '../../utils/convert'
-import { createMatrix, createPoint } from '../../utils/paper'
+import { convertBlendMode, convertColor, convertStop } from '../../utils/convert.js'
+import { createMatrix, createPoint } from '../../utils/paper.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { RawStop } from '../../typings/raw'
-import type { SourceTransform } from '../../typings/source'
-import type { SourcePaint } from '../source/source-paint'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawStop } from '../../typings/raw/index.js'
+import type { SourceTransform } from '../../typings/source.js'
+import type { SourcePaint } from '../source/source-paint.js'
 
 type OctopusFillOptions = {
   fill: SourcePaint

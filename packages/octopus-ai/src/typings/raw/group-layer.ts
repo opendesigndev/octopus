@@ -1,4 +1,4 @@
-import type { RawLayer } from '.'
+import type { RawLayer } from './index.js'
 
 export type RawGroupLayer = {
   Type?: 'MarkedContext'

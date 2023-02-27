@@ -1,6 +1,6 @@
 import paper from 'paper'
 
-import type { SourceTransform } from '../typings/source'
+import type { SourceTransform } from '../typings/source.js'
 
 paper.setup(new paper.Size(100, 100))
 

@@ -1,15 +1,15 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
-import { traverseAndFind } from '@opendesign/octopus-common/utils/common'
-import { round } from '@opendesign/octopus-common/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { getBoundsFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
-import { SourceLayerContainer } from './source-layer-container'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { getBoundsFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
+import { SourceLayerContainer } from './source-layer-container.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawBlendMode, RawLayer, RawLayerContainer, RawParentType } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawBlendMode, RawLayer, RawLayerContainer, RawParentType } from '../../typings/raw/index.js'
+import type { SourceBounds } from '../../typings/source.js'
 
 type SourceComponentOptions = {
   rawFrame: RawLayer
@@ -17,7 +17,7 @@ type SourceComponentOptions = {
 }
 
 export class SourceComponent extends SourceEntity {
-  protected _rawValue: RawLayer
+  declare _rawValue: RawLayer
   private _sourceLayer: SourceLayer
   private _isPasteboard: boolean
 

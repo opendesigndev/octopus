@@ -1,5 +1,5 @@
-import type { RawEffect } from './effect'
-import type { RawPaint } from './paint'
+import type { RawEffect } from './effect.js'
+import type { RawPaint } from './paint.js'
 import type {
   RawAlign,
   RawArcData,
@@ -10,8 +10,8 @@ import type {
   RawGeometry,
   RawVector,
   RawTransform,
-} from './shared'
-import type { RawTextStyle } from './text'
+} from './shared.js'
+import type { RawTextStyle } from './text.js'
 
 export type RawLayer = RawLayerContainer | RawLayerShape | RawLayerText
 

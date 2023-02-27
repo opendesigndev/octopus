@@ -1,10 +1,10 @@
-import { getUnitRatioFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getUnitRatioFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawShapeTransparency } from '../../typings/raw/index'
+import type { RawShapeTransparency } from '../../typings/raw/index.js'
 
 export class SourceEffectFillGradientOpacity extends SourceEntity {
-  protected _rawValue: RawShapeTransparency | undefined
+  declare _rawValue: RawShapeTransparency | undefined
 
   constructor(raw: RawShapeTransparency | undefined) {
     super(raw)

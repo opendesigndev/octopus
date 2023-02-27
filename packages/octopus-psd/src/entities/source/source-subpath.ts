@@ -1,12 +1,12 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { SourceEntity } from './source-entity'
-import { SourceSubpathPoint } from './source-subpath-point'
+import { SourceEntity } from './source-entity.js'
+import { SourceSubpathPoint } from './source-subpath-point.js'
 
-import type { RawSubpath } from '../../typings/raw/index'
+import type { RawSubpath } from '../../typings/raw/index.js'
 
 export class SourceSubpath extends SourceEntity {
-  protected _rawValue: RawSubpath
+  declare _rawValue: RawSubpath
 
   constructor(raw: RawSubpath) {
     super(raw)

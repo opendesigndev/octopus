@@ -1,4 +1,4 @@
-import type { SourceDesign } from './source-design'
+import type { SourceDesign } from './source-design.js'
 
 export type RawGeneralEntry = {
   id: string

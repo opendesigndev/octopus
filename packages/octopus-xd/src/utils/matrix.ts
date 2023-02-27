@@ -1,10 +1,10 @@
-import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/utils/as'
-import { isObject } from '@opendesign/octopus-common/utils/common'
+import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createMatrix } from './paper'
+import { createMatrix } from './paper.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { Raw2DMatrix } from '../typings/source'
+import type { Octopus } from '../typings/octopus/index.js'
+import type { Raw2DMatrix } from '../typings/source/index.js'
 
 export function convertObjectMatrixToArray(matrix: unknown): Octopus['Transform'] | null {
   if (typeof (matrix as Raw2DMatrix)?.a === 'number') {

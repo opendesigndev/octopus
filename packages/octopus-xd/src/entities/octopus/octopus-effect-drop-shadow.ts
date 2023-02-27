@@ -1,13 +1,13 @@
-import { asBoolean, asNumber } from '@opendesign/octopus-common/utils/as'
-import { isObject } from '@opendesign/octopus-common/utils/common'
+import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { parseXDColor } from '../../utils/color'
-import { DEFAULTS } from '../../utils/defaults'
-import { SourceEffectDropShadow } from '../source/source-effect-drop-shadow'
+import { parseXDColor } from '../../utils/color.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { SourceEffectDropShadow } from '../source/source-effect-drop-shadow.js'
 
-import type { Defined } from '../../typings/helpers'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectDropShadowOptions } from '../source/source-effect-drop-shadow'
+import type { Defined } from '../../typings/helpers.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { SourceEffectDropShadowOptions } from '../source/source-effect-drop-shadow.js'
 
 type OctopusEffectDropShadowOptions = {
   source: SourceEffectDropShadow

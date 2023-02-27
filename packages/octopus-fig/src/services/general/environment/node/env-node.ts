@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-import type { Env } from '..'
+import type { Env } from '../index.js'
 
 export function createEnvironmentNode(): Env {
   dotenv.config()

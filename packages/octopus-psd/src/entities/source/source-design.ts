@@ -1,7 +1,7 @@
-import { isArtboard } from '../../utils/source'
-import { SourceComponent } from './source-component'
+import { isArtboard } from '../../utils/source.js'
+import { SourceComponent } from './source-component.js'
 
-import type { RawComponent } from '../../typings/raw/index'
+import type { RawComponent } from '../../typings/raw/index.js'
 
 export type SourceImage = {
   name: string

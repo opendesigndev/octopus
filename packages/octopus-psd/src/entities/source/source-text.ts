@@ -1,15 +1,15 @@
-import { firstCallMemo } from '@opendesign/octopus-common/decorators/first-call-memo'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import { getMatrixFor, getBoundsFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
-import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range'
-import { SourceTextTextStyleRange } from './source-text-text-style-range'
+import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
+import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range.js'
+import { SourceTextTextStyleRange } from './source-text-text-style-range.js'
 
-import type { RawText } from '../../typings/raw/index'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
+import type { RawText } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceMatrix } from '../../typings/source.js'
 
 export class SourceText extends SourceEntity {
-  protected _rawValue: RawText | undefined
+  declare _rawValue: RawText | undefined
 
   static DEFAULT_ORIENTATION = 'horizontal' as const
 

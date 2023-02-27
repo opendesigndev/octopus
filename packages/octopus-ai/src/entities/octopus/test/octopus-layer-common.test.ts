@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusLayerCommon } from '../../../../src/entities/octopus/octopus-layer-common'
-import { BLEND_MODES } from '../../../../src/utils/blend-modes'
+import { OctopusLayerCommon } from '../../../../src/entities/octopus/octopus-layer-common.js'
+import { BLEND_MODES } from '../../../../src/utils/blend-modes.js'
 
-import type { OctopusLayerCommonOptions } from '../octopus-layer-common'
+import type { OctopusLayerCommonOptions } from '../octopus-layer-common.js'
 
 jest.mock('../octopus-layer-mask-group')
 jest.mock('../octopus-layer-soft-mask-group')

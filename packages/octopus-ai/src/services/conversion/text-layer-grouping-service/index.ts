@@ -1,9 +1,9 @@
-import { removeTrailingHyphen } from '../../../utils/text'
+import { removeTrailingHyphen } from '../../../utils/text.js'
 
-import type { SourceLayerText } from '../../../entities/source/source-layer-text'
-import type { SourceLayer } from '../../../factories/create-source-layer'
-import type { AdditionalTextData, AdditionalTextDataText } from '../../../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+import type { SourceLayerText } from '../../../entities/source/source-layer-text.js'
+import type { SourceLayer } from '../../../factories/create-source-layer.js'
+import type { AdditionalTextData, AdditionalTextDataText } from '../../../typings/raw/index.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type CurrentMatch = AdditionalTextDataText & {
   remainder: string

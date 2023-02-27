@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { TextLayerGroupingservice } from '..'
+import { TextLayerGroupingservice } from '../index.js'
 
 describe('TextLayerGroupingservice', () => {
   it('groups text layers and selects shortests matching additionalTextData', () => {

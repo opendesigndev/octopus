@@ -1,7 +1,7 @@
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusEffectParent } from '../../typings/octopus-entities'
-import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusEffectParent } from '../../typings/octopus-entities.js'
+import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 /** @TODO check images as mask when rendering is ready */
 type OctopusEffectImageFillOptions = {

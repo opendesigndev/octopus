@@ -5,9 +5,9 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusAIConverter } from '../../src'
-import { AIFileReader } from '../../src/services/conversion/ai-file-reader'
-import { LocalExporter } from '../../src/services/conversion/exporters/local-exporter'
+import { OctopusAIConverter } from '../../src/index.js'
+import { AIFileReader } from '../../src/services/conversion/ai-file-reader/index.js'
+import { LocalExporter } from '../../src/services/conversion/exporters/local-exporter.js'
 
 dotenv.config()
 ;(async () => {

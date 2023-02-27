@@ -1,18 +1,18 @@
-import { asArray } from '@opendesign/octopus-common/utils/as'
-import isEqual from 'lodash/isEqual'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import isEqual from 'lodash/isEqual.js'
 
-import { logger } from '../../services/instances/logger'
-import { initSourceLayerChildren } from '../../utils/layer'
-import { createSoftMask, initClippingMask } from '../../utils/mask'
-import { SourceLayerCommon } from './source-layer-common'
-import { SourceLayerSubText } from './source-layer-sub-text'
+import { logger } from '../../services/instances/logger.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask, initClippingMask } from '../../utils/mask.js'
+import { SourceLayerCommon } from './source-layer-common.js'
+import { SourceLayerSubText } from './source-layer-sub-text.js'
 
-import type { RawTextLayer } from '../../typings/raw'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourceLayerShape } from './source-layer-shape'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/utility-types'
+import type { RawTextLayer } from '../../typings/raw/index.js'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -20,7 +20,7 @@ type SourceLayerTextOptions = {
 }
 
 export class SourceLayerText extends SourceLayerCommon {
-  protected _rawValue: RawTextLayer
+  declare _rawValue: RawTextLayer
   private _normalizedTexts: SourceLayerSubText[]
   private _clippingPaths: SourceLayerShape[] | null
   private _mask: Nullish<SourceLayerShape>

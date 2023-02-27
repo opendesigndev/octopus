@@ -1,13 +1,13 @@
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { OctopusLayerGroup } from './octopus-layer-group'
-import { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
+import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
+import { OctopusLayerGroup } from './octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { DesignConverter } from '../../services/conversion/design-converter'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceComponent } from '../source/source-component'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { DesignConverter } from '../../services/conversion/design-converter.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceComponent } from '../source/source-component.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusComponentOptions = {
   sourceComponent: SourceComponent

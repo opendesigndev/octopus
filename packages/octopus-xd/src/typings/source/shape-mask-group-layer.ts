@@ -1,6 +1,6 @@
-import type { RawLayerCommon, RawShapeLayer } from '.'
-import type { RawLayer } from './layer'
-import type { RawTransform } from './transform'
+import type { RawLayerCommon, RawShapeLayer } from './index.js'
+import type { RawLayer } from './layer.js'
+import type { RawTransform } from './transform.js'
 
 export type RawClipPathResources = {
   children?: RawShapeLayer[]

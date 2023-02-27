@@ -1,11 +1,11 @@
-import { logger } from '../../services/instances/logger'
-import { OctopusEffectBase } from './octopus-effect-base'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+import { logger } from '../../services/instances/logger.js'
+import { OctopusEffectBase } from './octopus-effect-base.js'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceColor } from '../../typings/source'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceColor } from '../../typings/source.js'
+import type { SourceEffectFill } from '../source/source-effect-fill.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase

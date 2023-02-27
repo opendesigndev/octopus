@@ -1,11 +1,11 @@
-import { getColorFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { getColorFor } from '../../utils/source.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawShapeGradientColor } from '../../typings/raw/index'
-import type { SourceColor } from '../../typings/source'
+import type { RawShapeGradientColor } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 
 export class SourceEffectFillGradientColor extends SourceEntity {
-  protected _rawValue: RawShapeGradientColor | undefined
+  declare _rawValue: RawShapeGradientColor | undefined
 
   static DEFAULT_COLOR: SourceColor = { r: 0, g: 0, b: 0 }
 

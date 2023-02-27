@@ -1,12 +1,12 @@
-import { getConverted } from '@opendesign/octopus-common/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusFill } from '../../typings/octopus-entities'
-import type { RawStyle } from '../../typings/source'
-import type { OctopusLayerText } from './octopus-layer-text'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusFill } from '../../typings/octopus-entities.js'
+import type { RawStyle } from '../../typings/source/index.js'
+import type { OctopusLayerText } from './octopus-layer-text.js'
 
 type OctopusEffectsTextOptions = {
   effectSource?: RawStyle

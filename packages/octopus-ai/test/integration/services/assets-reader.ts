@@ -1,11 +1,11 @@
 import fsp from 'fs/promises'
 import path from 'path'
 
-import { LocalExporter } from '../../../src/services/conversion/exporters/local-exporter'
-import { lazyRead } from '../utils'
+import { LocalExporter } from '../../../src/services/conversion/exporters/local-exporter.js'
+import { lazyRead } from '../utils.js'
 
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
+import type { Manifest } from '../../../src/typings/manifest/index.js'
+import type { Octopus } from '../../../src/typings/octopus/index.js'
 
 export type Component<T> = {
   path: string
