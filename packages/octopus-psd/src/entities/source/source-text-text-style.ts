@@ -79,6 +79,8 @@ export class SourceTextTextStyle extends SourceEntity {
   }
 
   get color(): SourceColor | null {
+    if (this._rawValue?.FillColor?.Type !== 1) return null
+
     return getTextColor(this._rawValue?.FillColor?.Values)
   }
 }
