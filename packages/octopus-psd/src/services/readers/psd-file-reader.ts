@@ -220,7 +220,7 @@ export class PSDFileReader {
     let buff
 
     try {
-      buff = await layer.composite()
+      buff = await layer.composite(false)
     } catch (e) {
       logger.error(`could not export image: ${name}`)
       return
@@ -245,6 +245,7 @@ export class PSDFileReader {
 
   private async _convertAssets(psd: Psd): Promise<void> {
     const iccProfile = psd.icc_profile
+
     await Promise.all(psd.children.map((child) => this._convertImages(child, iccProfile)))
     await this._convertPatterns(psd, iccProfile)
   }
@@ -340,6 +341,15 @@ export class PSDFileReader {
     return images
   }
 
+  private _iccProfileName(psd: Psd): string | undefined {
+    const { icc_profile } = psd
+    if (!this._renderer || !icc_profile) {
+      return
+    }
+
+    return this._renderer.iccProfileName(icc_profile) ?? undefined
+  }
+
   private async _initSourceDesign(): Promise<SourceDesign | null> {
     const designId = this.designId
     const { raw } = await this._getSourceComponent()
@@ -348,7 +358,13 @@ export class PSDFileReader {
 
     const parsedPsd = getRawData(raw)
     const images = await this._getImages()
-    const sourceDesign = new SourceDesign({ designId, component: parsedPsd, images })
+    const sourceDesign = new SourceDesign({
+      designId,
+      component: parsedPsd,
+      images,
+      iccProfileName: this._iccProfileName(raw),
+    })
+
     return sourceDesign
   }
 }

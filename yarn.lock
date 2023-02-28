@@ -1136,10 +1136,10 @@
     immutable "^4.1.0"
     marky "^1.2.4"
 
-"@opendesign/image-icc-profile-converter@^0.0.0-experimental":
-  version "0.0.0-experimental"
-  resolved "https://registry.yarnpkg.com/@opendesign/image-icc-profile-converter/-/image-icc-profile-converter-0.0.0-experimental.tgz#b204d52a58d9e45d36a4f5b52f097d83c310325d"
-  integrity sha512-VK9GhUMkdEWOX2uoGhWM7nRwzXT85oCyVZf/pcWaUOHHYAQhIaht/odfgLpDpVY/sOqDsF1zD4IUD4CKxjFL5A==
+"@opendesign/image-icc-profile-converter@^0.0.2-experimental":
+  version "0.0.2-experimental"
+  resolved "https://registry.yarnpkg.com/@opendesign/image-icc-profile-converter/-/image-icc-profile-converter-0.0.2-experimental.tgz#8eef0964cdf5f02c6f96339b6b2cbb09cd90bc94"
+  integrity sha512-jsGqXrviXzEbS+R25oecQD8q/fTFjR+QkXKQfY3FiQDV30hpMCkSXreIn/eCzODKooDUCITYpNbLuKT1jgcD4A==
 
 "@opendesign/manifest-ts@3.0.1":
   version "3.0.1"
@@ -1711,10 +1711,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-experimental-release-20230211":
-  version "0.5.1-experimental-release-20230211"
-  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-experimental-release-20230211.tgz#870aae6c4c5d5ab645713c252acad4294d8f655f"
-  integrity sha512-K6r2ZZpRpWB8JZ3RwHwzQKGTSKQw2LGaKl0uHFwonPUlSM4n50S1NKko49DqLDVpwi/TymV1uWkB2veDENm4sQ==
+"@webtoon/psd-ts@npm:@opendesign/psd-ts@0.5.1-experimental-release-20230222":
+  version "0.5.1-experimental-release-20230222"
+  resolved "https://registry.yarnpkg.com/@opendesign/psd-ts/-/psd-ts-0.5.1-experimental-release-20230222.tgz#7dc7b33d7ec2db0486e6efa62b6740c513ea44a6"
+  integrity sha512-4sGrb+OfuBEMi+uKFYlPCVGEHl2Y+jGo9u4r59Ds5YPXwv+/3XUR9svuafPTMsq3RfsRiSmA7ALL8rBB+J/TJw==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
