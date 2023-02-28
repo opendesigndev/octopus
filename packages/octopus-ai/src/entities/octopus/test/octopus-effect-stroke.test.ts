@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusEffectStroke } from '../octopus-effect-stroke'
+import { OctopusEffectStroke } from '../octopus-effect-stroke.js'
 
 describe('OctopusEffectStroke', () => {
   describe('parseDashing', () => {

@@ -1,4 +1,4 @@
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import paper from 'paper'
 
 const { CompoundPath, Curve, Path, Point, Segment, Size, Rectangle, Matrix, Group } = paper

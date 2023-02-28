@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { MaskGroupingService } from '..'
+import { MaskGroupingService } from '../index.js'
 
 describe('MaskGroupingService', () => {
   it('creates layerSequenceGroups according to mask existence and their sequantiality', () => {

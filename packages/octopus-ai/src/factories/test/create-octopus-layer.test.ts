@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { mocked } from 'jest-mock'
 
-import { OctopusLayerGroup } from '../../entities/octopus/octopus-layer-group'
-import { OctopusLayerMaskGroup } from '../../entities/octopus/octopus-layer-mask-group'
-import { OctopusLayerShading } from '../../entities/octopus/octopus-layer-shading'
-import { OctopusLayerShape } from '../../entities/octopus/octopus-layer-shape'
-import { OctopusLayerShapeShapeAdapter } from '../../entities/octopus/octopus-layer-shape-shape-adapter'
-import { OctopusLayerShapeXObjectImageAdapter } from '../../entities/octopus/octopus-layer-shape-x-object-image-adapter'
-import { OctopusLayerSoftMaskGroup } from '../../entities/octopus/octopus-layer-soft-mask-group'
-import { OctopusLayerText } from '../../entities/octopus/octopus-layer-text'
-import { createOctopusLayer } from '../create-octopus-layer'
+import { OctopusLayerGroup } from '../../entities/octopus/octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from '../../entities/octopus/octopus-layer-mask-group.js'
+import { OctopusLayerShading } from '../../entities/octopus/octopus-layer-shading.js'
+import { OctopusLayerShape } from '../../entities/octopus/octopus-layer-shape.js'
+import { OctopusLayerShapeShapeAdapter } from '../../entities/octopus/octopus-layer-shape-shape-adapter.js'
+import { OctopusLayerShapeXObjectImageAdapter } from '../../entities/octopus/octopus-layer-shape-x-object-image-adapter.js'
+import { OctopusLayerSoftMaskGroup } from '../../entities/octopus/octopus-layer-soft-mask-group.js'
+import { OctopusLayerText } from '../../entities/octopus/octopus-layer-text.js'
+import { createOctopusLayer } from '../create-octopus-layer.js'
 
 jest.mock('../../entities/octopus/octopus-layer-soft-mask-group')
 jest.mock('../../entities/octopus/octopus-layer-mask-group')

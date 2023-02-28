@@ -1,15 +1,15 @@
 import path from 'path'
 
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
-import kebabCase from 'lodash/kebabCase'
+import kebabCase from 'lodash/kebabCase.js'
 
-import { createConverter, DebugExporter, SourcePluginReader } from '../../src/index-node'
-import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files'
-import { renderOctopus } from './utils/render'
+import { createConverter, DebugExporter, SourcePluginReader } from '../../src/index-node.js'
+import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files.js'
+import { renderOctopus } from './utils/render.js'
 
-import type { PluginSource } from '../../src/typings/plugin-source'
+import type { PluginSource } from '../../src/typings/plugin-source.js'
 
 type ConvertDesignOptions = {
   sourcePath: string

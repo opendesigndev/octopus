@@ -1,4 +1,4 @@
-import type { RawGraphicsState, RawGraphicsStateMatrix } from './graphics-state'
+import type { RawGraphicsState, RawGraphicsStateMatrix } from './graphics-state.js'
 
 export type RawTextLayerText = {
   GraphicsState?: RawGraphicsState

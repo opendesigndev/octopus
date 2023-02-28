@@ -2,15 +2,15 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { OctopusAIConverter } from '../../../src'
-import { AIFileReader } from '../../../src/services/conversion/ai-file-reader'
-import { createOctopusArtboardFileName } from '../../../src/utils/exporter'
-import { getSourceDesign } from '../utils'
+import { OctopusAIConverter } from '../../../src/index.js'
+import { AIFileReader } from '../../../src/services/conversion/ai-file-reader/index.js'
+import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
+import { getSourceDesign } from '../utils.js'
 
-import type { SourceDesign } from '../../../src/entities/source/source-design'
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
-import type { AssetsReader, TestComponents, Component } from './assets-reader'
+import type { SourceDesign } from '../../../src/entities/source/source-design.js'
+import type { Manifest } from '../../../src/typings/manifest/index.js'
+import type { Octopus } from '../../../src/typings/octopus/index.js'
+import type { AssetsReader, TestComponents, Component } from './assets-reader.js'
 
 type ArtboardGroup = { expected: Component<Octopus['OctopusComponent']> | null; generated: Octopus['OctopusComponent'] }
 

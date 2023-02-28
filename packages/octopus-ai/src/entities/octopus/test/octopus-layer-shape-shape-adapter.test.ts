@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
+import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter.js'
 
 jest.mock('../octopus-layer-common', () => {
   return {

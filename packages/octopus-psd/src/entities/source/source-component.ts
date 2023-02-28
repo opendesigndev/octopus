@@ -6,9 +6,9 @@ import PROPS from '../../utils/prop-names.js'
 import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawNodeChildWithProps, RawParsedPsd, RawColor } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawNodeChildWithProps, RawParsedPsd, RawColor } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceColor } from '../../typings/source.js'
 import type { SourceDesign } from './source-design.js'
 
 export type SourceComponentOptions = {

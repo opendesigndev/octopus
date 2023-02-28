@@ -4,12 +4,12 @@ import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 
 import { getFontProperties } from '../../utils/text.js'
 
-import type { OctopusPSDConverter } from '../../octopus-psd-converter'
-import type { Manifest } from '../../typings/manifest'
-import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceComponent } from '../source/source-component'
-import type { SourceDesign } from '../source/source-design'
+import type { OctopusPSDConverter } from '../../octopus-psd-converter.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw/index.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceComponent } from '../source/source-component.js'
+import type { SourceDesign } from '../source/source-design.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

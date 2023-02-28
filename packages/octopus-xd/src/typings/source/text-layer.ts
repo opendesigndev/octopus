@@ -1,5 +1,5 @@
-import type { RawStyle, RawTransform } from '.'
-import type { RawLayerCommon } from './layer'
+import type { RawStyle, RawTransform } from './index.js'
+import type { RawLayerCommon } from './layer.js'
 
 export type RawRangedStyle = {
   length?: number

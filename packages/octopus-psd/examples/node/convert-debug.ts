@@ -1,5 +1,4 @@
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
@@ -33,7 +32,7 @@ async function convertDesign({
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const tempDir = path.join(fileURLToPath(new URL(import.meta.url)), '../../../../', 'workdir')
+  const tempDir = path.join(__dirname, '../../', 'workdir')
   const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {

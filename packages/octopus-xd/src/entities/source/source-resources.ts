@@ -1,7 +1,7 @@
-import type { Defined } from '../../typings/helpers'
-import type { RawShapeLayer } from '../../typings/source'
-import type { RawResources } from '../../typings/source/resources'
-import type { SourceDesign } from './source-design'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawShapeLayer } from '../../typings/source/index.js'
+import type { RawResources } from '../../typings/source/resources.js'
+import type { SourceDesign } from './source-design.js'
 
 type SourceResourcesOptions = {
   rawValue: RawResources

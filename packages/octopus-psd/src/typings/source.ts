@@ -1,4 +1,4 @@
-import type { RawSourceSubpath, RawVectorOriginationDatakeyDescriptor } from './raw'
+import type { RawSourceSubpath, RawVectorOriginationDatakeyDescriptor } from './raw/index.js'
 
 export type SourcePointXY = { x: number; y: number }
 export type SourceVectorXY = { x: number; y: number }

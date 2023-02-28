@@ -1,8 +1,8 @@
-import path from 'path/posix'
+import path from 'path'
 
-import { initSourceLayerChildren } from '../../utils/layer'
-import { createSoftMask, initClippingMask } from '../../utils/mask'
-import { SourceLayerCommon } from './source-layer-common'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask, initClippingMask } from '../../utils/mask.js'
+import { SourceLayerCommon } from './source-layer-common.js'
 
 import type {
   RawGraphicsState,
@@ -10,12 +10,12 @@ import type {
   RawResourcesXObject,
   RawResourcesXObjectImage,
   XObjectSubtype,
-} from '../../typings/raw'
-import type { RawXObjectLayer } from '../../typings/raw/x-object'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourceLayerShape } from './source-layer-shape'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+} from '../../typings/raw/index.js'
+import type { RawXObjectLayer } from '../../typings/raw/x-object.js'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerXObjectImageOptions = {
   parent: SourceLayerParent
@@ -24,7 +24,7 @@ type SourceLayerXObjectImageOptions = {
 }
 
 export class SourceLayerXObjectImage extends SourceLayerCommon {
-  protected _rawValue: RawResourcesXObject
+  declare _rawValue: RawResourcesXObject
   private _xObject: Nullish<RawXObjectLayer>
   private _softMask: Nullish<SourceLayerXObjectForm>
   private _mask: Nullish<SourceLayerShape>

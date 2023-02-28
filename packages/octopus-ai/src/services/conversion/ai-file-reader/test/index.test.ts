@@ -3,15 +3,15 @@
 import { mkdir, readFile } from 'fs/promises'
 
 import { jest } from '@jest/globals'
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
-import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { mocked } from 'jest-mock'
 
-import { AIFileReader } from '..'
-import { logger } from '../../../instances/logger'
+import { AIFileReader } from '../index.js'
+import { logger } from '../../../instances/logger.js'
 
-jest.mock('@opendesign/illustrator-parser-pdfcpu/dist/fs_context')
-jest.mock('@opendesign/illustrator-parser-pdfcpu/dist/index')
+jest.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
+jest.mock('@opendesign/illustrator-parser-pdfcpu/index')
 jest.mock('fs/promises')
 jest.mock('../../../instances/logger')
 
@@ -29,7 +29,7 @@ describe('AIFileReader', () => {
       mocked(FSContext).mockResolvedValueOnce(ctxMock)
       mocked(ArtBoardRefs).mockReturnValueOnce([{ idx: 1 }, { idx: 2 }] as any)
       mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
-      mocked(PrivateData).mockResolvedValueOnce(privateDataMock)
+      mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
 
       const result = await AIFileReader.prototype['_getSourceData']('root/path')
 

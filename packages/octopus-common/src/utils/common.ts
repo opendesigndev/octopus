@@ -2,7 +2,7 @@ import util from 'util'
 
 import isObjectLike from 'lodash/isObjectLike'
 
-import type { GetPromiseValue } from './utility-types'
+import type { GetPromiseValue } from '../utility-types'
 
 export function JSONFromTypedArray(typedArray: Uint8Array): unknown {
   return JSON.parse(Buffer.from(typedArray).toString())

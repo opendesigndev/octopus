@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import type { Metadata } from '../services/conversion/ai-file-reader'
-import type { AdditionalTextData, RawArtboardEntry } from './raw'
+import type { Metadata } from '../services/conversion/ai-file-reader/index.js'
+import type { AdditionalTextData, RawArtboardEntry } from './raw/index.js'
 
 // Services
 export interface Logger {

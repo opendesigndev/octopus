@@ -1,22 +1,37 @@
 // vite.config.js
-import path from 'path'
+import fs from 'fs/promises'
+import { builtinModules } from 'module'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
 import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+
+const pkg = JSON.parse((await fs.readFile('./package.json')).toString())
+const deps = Object.keys(pkg.dependencies)
 
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index-web.ts'),
+      entry: path.resolve(dirname(fileURLToPath(new URL(import.meta.url))), 'src/index-web.ts'),
       name: 'OctopusPSD',
-      fileName: (format) => `octopus-psd-web.${format}.js`,
-      formats: ['umd'],
+      fileName: () => `index-web.mjs`,
+      formats: ['es'],
     },
-    commonjsOptions: { include: [] },
-    outDir: 'examples/web',
+    commonjsOptions: { include: [/node_modules/, /@opendesign\/octopus-common/] },
+    outDir: 'release',
     emptyOutDir: false,
-    // minify: 'none',
+    rollupOptions: {
+      external: [...deps, ...builtinModules],
+    },
+    // minify: 'none'
   },
   resolve: {
-    mainFields: ['module'],
+    preserveSymlinks: true,
   },
+  plugins: [
+    dts({
+      insertTypesEntry: true,
+    }),
+  ],
 })

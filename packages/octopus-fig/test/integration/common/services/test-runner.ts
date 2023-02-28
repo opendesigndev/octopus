@@ -1,14 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 
-import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp'
+import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import handlebars from 'handlebars'
 
-import { makeDir, saveFile } from '../../../../src/utils/files'
-import { getCommandLineArgs } from '../utils/argv'
-import { AssetReader } from './asset-reader'
+import { makeDir, saveFile } from '../../../../src/utils/files.js'
+import { getCommandLineArgs } from '../utils/argv.js'
+import { AssetReader } from './asset-reader.js'
 
-import type { BaseTestComparer } from './base-test-comparer'
+import type { BaseTestComparer } from './base-test-comparer.js'
 
 export type Fail = { name: string; json: string; diff: string }
 

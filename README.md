@@ -12,38 +12,29 @@ TBD
 
 # Scripts
 
-### `yarn build`
+- **`yarn build`**  
+  Runs `build` script on each separate package.
 
-Runs `build` script on each separate package.
+- **`yarn clean`**  
+  Removes `node_modules` and runs `clean` script on each separate package.
 
-### `yarn clean`
+- **`yarn clean-init`**  
+  Cleans, installs and builds every package.
 
-Removes `node_modules` and runs `clean` script on each separate package.
+- **`yarn test`**  
+  Runs unit and integration tests on each package.
 
-### `clean-init`
+- **`yarn lint`**  
+  Runs Prettier and eslint on each package.
 
-Cleans, installs and builds every package.
+- **`yarn lint:eslint`**  
+  Runs only eslint on each package.
 
-### `yarn test`
+- **`yarn lint:prettier`**  
+  Runs only Prettier on each package.
 
-Runs unit and integration tests on each package.
+- **`yarn types:check`**  
+  Validates TS types.
 
-### `yarn lint`
-
-Runs Prettier and eslint on each package.
-
-### `lint:eslint`,
-
-Runs only eslint on each package.
-
-### `lint:prettier`
-
-Runs only Prettier on each package.
-
-### `types:check`
-
-Validates TS types.
-
-### `yarn verify`
-
-Lints and tests all packages.
+- **`yarn verify`**  
+  Lints and tests all packages.

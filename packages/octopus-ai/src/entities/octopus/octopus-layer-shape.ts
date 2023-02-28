@@ -1,4 +1,4 @@
-import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
+import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
 
 type OctopusLayerShapeOptions = {
   adapter: OctopusLayerShapeAdapter

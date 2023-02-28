@@ -2,8 +2,8 @@
 
 import { mocked } from 'jest-mock'
 
-import { LayerGroupingService } from '..'
-import { MaskGroupingService } from '../../mask-grouping-service'
+import { LayerGroupingService } from '../index.js'
+import { MaskGroupingService } from '../../mask-grouping-service/index.js'
 
 jest.mock('../../text-layer-grouping-service')
 jest.mock('../../mask-grouping-service')

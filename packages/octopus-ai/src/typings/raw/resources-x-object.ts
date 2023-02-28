@@ -1,5 +1,5 @@
-import type { RawLayer } from './layer'
-import type { RawResources } from './resources'
+import type { RawLayer } from './layer.js'
+import type { RawResources } from './resources.js'
 
 export type RawSourceXObjectColorSpaceObject = Partial<{
   Filter: string

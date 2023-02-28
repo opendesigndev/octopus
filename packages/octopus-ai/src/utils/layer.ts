@@ -1,17 +1,17 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { buildOctopusLayer, createOctopusLayer } from '../factories/create-octopus-layer'
-import { createSourceLayer } from '../factories/create-source-layer'
-import { LayerGroupingService } from '../services/conversion/layer-grouping-service'
-import { textLayerGroupingService } from '../services/instances/text-layer-grouping-service'
+import { buildOctopusLayer, createOctopusLayer } from '../factories/create-octopus-layer.js'
+import { createSourceLayer } from '../factories/create-source-layer.js'
+import { LayerGroupingService } from '../services/conversion/layer-grouping-service/index.js'
+import { textLayerGroupingService } from '../services/instances/text-layer-grouping-service.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { OctopusLayer } from '../factories/create-octopus-layer'
-import type { SourceLayer } from '../factories/create-source-layer'
-import type { LayerSequence } from '../services/conversion/text-layer-grouping-service'
-import type { OctopusLayerParent } from '../typings/octopus-entities'
-import type { RawLayer } from '../typings/raw'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
+import type { OctopusLayer } from '../factories/create-octopus-layer.js'
+import type { SourceLayer } from '../factories/create-source-layer.js'
+import type { LayerSequence } from '../services/conversion/text-layer-grouping-service/index.js'
+import type { OctopusLayerParent } from '../typings/octopus-entities.js'
+import type { RawLayer } from '../typings/raw/index.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type InitSourceLayerChildrenOptions = {
   layers: Nullish<RawLayer[]>

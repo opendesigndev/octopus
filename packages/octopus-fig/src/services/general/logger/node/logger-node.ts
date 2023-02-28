@@ -1,9 +1,9 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-import { env } from '../../..'
+import { env } from '../../../index.js'
 
-import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory'
+import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory.js'
 
 const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enabled: true }): ReturnType<typeof pino> => {
   return pino({

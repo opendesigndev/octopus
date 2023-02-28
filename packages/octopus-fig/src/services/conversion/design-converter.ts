@@ -1,34 +1,33 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import { isObject } from '@opendesign/octopus-common/dist/utils/common'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusManifest } from '../../entities/octopus/octopus-manifest'
-import { SourceComponent } from '../../entities/source/source-component'
-import { SourceDesign } from '../../entities/source/source-design'
-import { logger } from '../../services'
-import { getRole } from '../../utils/source'
-import { ComponentConverter } from './component-converter'
+import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
+import { SourceComponent } from '../../entities/source/source-component.js'
+import { SourceDesign } from '../../entities/source/source-design.js'
+import { logger } from '../../services/index.js'
+import { getRole } from '../../utils/source.js'
+import { ComponentConverter } from './component-converter.js'
 
-import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter'
-import type { Manifest } from '../../typings/manifest'
-import type { Octopus } from '../../typings/octopus'
-import type { RawDesign } from '../../typings/raw/design'
-import type { RawLayerContainer } from '../../typings/raw/layer'
-import type { PackageMeta } from '../../utils/read-pkg-meta'
-import type { AbstractExporter } from '../exporters/abstract-exporter'
-import type { ImageSize } from '../general/image-size/image-size'
+import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawDesign } from '../../typings/raw/design.js'
+import type { RawLayerContainer } from '../../typings/raw/layer.js'
+import type { PackageMeta } from '../../utils/read-pkg-meta.js'
+import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { ImageSize } from '../general/image-size/image-size.js'
 import type {
   ResolvedDesign,
   ResolvedFrame,
   ResolvedStyle,
   ResolvedFill,
   ResolvedPreview,
-} from '@opendesign/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
-// eslint-disable-next-line import/no-named-as-default
-import type EventEmitter from 'eventemitter3'
+} from '@opendesign/figma-parser'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
+import type { EventEmitter } from 'eventemitter3'
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 

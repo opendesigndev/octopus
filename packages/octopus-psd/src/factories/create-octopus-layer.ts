@@ -2,20 +2,20 @@ import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group.js'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group.js'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerShapeAdjustmentAdapter } from '../entities/octopus/octopus-layer-shape-adjustment-adapter.js'
 import { OctopusLayerShapeLayerAdapter } from '../entities/octopus/octopus-layer-shape-layer-adapter.js'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter.js'
-import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
 import { logger } from '../services/index.js'
 
-import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
-import type { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment'
-import type { SourceLayerLayer } from '../entities/source/source-layer-layer'
-import type { SourceLayerSection } from '../entities/source/source-layer-section'
-import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { SourceLayerText } from '../entities/source/source-layer-text'
-import type { SourceLayer } from './create-source-layer'
+import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base.js'
+import type { SourceLayerAdjustment } from '../entities/source/source-layer-adjustment.js'
+import type { SourceLayerLayer } from '../entities/source/source-layer-layer.js'
+import type { SourceLayerSection } from '../entities/source/source-layer-section.js'
+import type { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import type { SourceLayerText } from '../entities/source/source-layer-text.js'
+import type { SourceLayer } from './create-source-layer.js'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerText | OctopusLayerShape
 

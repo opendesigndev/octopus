@@ -2,15 +2,15 @@ import fsp from 'fs/promises'
 import os from 'os'
 import path from 'path'
 
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
-import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu/dist/index'
+import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../../entities/source/source-design'
-import { logger } from '../../../services/instances/logger'
+import { SourceDesign } from '../../../entities/source/source-design.js'
+import { logger } from '../../../services/instances/logger.js'
 
-import type { SourceImage, SourceTree } from '../../../typings'
-import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw'
+import type { SourceImage, SourceTree } from '../../../typings/index.js'
+import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 
 type AIFileReaderOptions = {
   /** Path to the .ai file. */

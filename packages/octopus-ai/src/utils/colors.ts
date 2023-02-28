@@ -1,9 +1,9 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { clamp } from '@opendesign/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { clamp } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { logger } from '../services/instances/logger'
+import { logger } from '../services/instances/logger.js'
 
-import type { RawResourcesColorSpace } from '../typings/raw'
+import type { RawResourcesColorSpace } from '../typings/raw/index.js'
 
 export type RgbColorComponents = [number, number, number]
 

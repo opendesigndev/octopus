@@ -4,8 +4,8 @@ import PROPS from '../../utils/prop-names.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { RawLayerAdjustment } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
+import type { RawLayerAdjustment } from '../../typings/raw/index.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerLayerOptions = {
   parent: SourceLayerParent
@@ -13,7 +13,7 @@ type SourceLayerLayerOptions = {
 }
 
 export class SourceLayerAdjustment extends SourceLayerCommon {
-  protected _rawValue: RawLayerAdjustment
+  declare _rawValue: RawLayerAdjustment
 
   constructor(options: SourceLayerLayerOptions) {
     super(options)

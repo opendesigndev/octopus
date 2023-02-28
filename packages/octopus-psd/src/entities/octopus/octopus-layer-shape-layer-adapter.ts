@@ -5,9 +5,9 @@ import { createDefaultTranslationMatrix } from '../../utils/path.js'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
 import { OctopusLayerBase } from './octopus-layer-base.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerLayer } from '../source/source-layer-layer.js'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerShapeLayerAdapterOptions = {
   parent: OctopusLayerParent

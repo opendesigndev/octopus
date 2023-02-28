@@ -9,9 +9,9 @@ import { getSourceDesign } from '../utils/source.js'
 import { stringify } from '../utils/stringify.js'
 
 import type { OctopusPSDConverter } from '../../../src/octopus-psd-converter.js'
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
-import type { AssetReader, TestComponents, Component } from './asset-reader'
+import type { Manifest } from '../../../src/typings/manifest.js'
+import type { Octopus } from '../../../src/typings/octopus.js'
+import type { AssetReader, TestComponents, Component } from './asset-reader.js'
 
 type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null

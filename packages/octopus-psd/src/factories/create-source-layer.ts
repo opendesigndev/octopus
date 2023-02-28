@@ -9,7 +9,7 @@ import { SourceLayerText } from '../entities/source/source-layer-text.js'
 import { logger } from '../services/index.js'
 import { getLayerTypeKey, isAdjustmentLayer, isShapeLayer } from '../utils/source.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
 import type {
   RawNodeChildWithProps,
   RawNodeChildWithType,
@@ -19,7 +19,7 @@ import type {
   RawLayerSection,
   RawLayerShape,
   RawLayerText,
-} from '../typings/raw'
+} from '../typings/raw/index.js'
 
 export type SourceLayer =
   | SourceLayerSection

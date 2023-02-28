@@ -1,5 +1,5 @@
-import { SourceArtboard } from './source-artboard'
-import { SourceLayerXObjectForm } from './source-layer-x-object-form'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 
 import type {
   RawLayer,
@@ -8,11 +8,11 @@ import type {
   RawGraphicsStateMatrix,
   RawResourcesShadingKeyFunction,
   RawResourcesExtGStateSmask,
-} from '../../typings/raw'
-import type { SourceLayerGroup } from './source-layer-group'
-import type { SourceLayerShape } from './source-layer-shape'
-import type { SourceResources } from './source-resources'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+} from '../../typings/raw/index.js'
+import type { SourceLayerGroup } from './source-layer-group.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { SourceResources } from './source-resources.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
 

@@ -1,12 +1,12 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { SourceLayerCommon } from './source-layer-common'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawBooleanOperation, RawLayerShape } from '../../typings/raw/index.js'
+import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -16,7 +16,7 @@ type SourceLayerShapeOptions = {
 type SourceShapeType = 'RECTANGLE' | 'LINE' | 'VECTOR' | 'ELLIPSE' | 'REGULAR_POLYGON' | 'STAR' | 'BOOLEAN_OPERATION'
 
 export class SourceLayerShape extends SourceLayerCommon {
-  protected _rawValue: RawLayerShape
+  declare _rawValue: RawLayerShape
   private _children: SourceLayer[]
 
   constructor(options: SourceLayerShapeOptions) {

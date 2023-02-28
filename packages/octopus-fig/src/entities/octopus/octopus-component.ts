@@ -1,12 +1,12 @@
-import { createOctopusLayer } from '../../factories/create-octopus-layer'
-import { env } from '../../services'
-import { convertId } from '../../utils/convert'
+import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
+import { env } from '../../services/index.js'
+import { convertId } from '../../utils/convert.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { DesignConverter } from '../../services/conversion/design-converter'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceComponent } from '../source/source-component'
-import type { OctopusManifest } from './octopus-manifest'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { DesignConverter } from '../../services/conversion/design-converter.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceComponent } from '../source/source-component.js'
+import type { OctopusManifest } from './octopus-manifest.js'
 
 type OctopusComponentOptions = {
   designConverter: DesignConverter

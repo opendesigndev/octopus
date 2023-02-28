@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { logger } from '../../services/instances/logger'
-import { getColorSpaceName, guessColorSpaceByComponents, convertColor } from '../colors'
+import { logger } from '../../services/instances/logger.js'
+import { getColorSpaceName, guessColorSpaceByComponents, convertColor } from '../colors.js'
 
 jest.mock('../../services/instances/logger')
 

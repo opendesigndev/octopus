@@ -1,10 +1,10 @@
-import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { parseXDColor } from '../../utils/color'
-import { OctopusBounds } from './octopus-bounds'
+import { parseXDColor } from '../../utils/color.js'
+import { OctopusBounds } from './octopus-bounds.js'
 
-import type { OctopusArtboard } from './octopus-artboard'
+import type { OctopusArtboard } from './octopus-artboard.js'
 
 type OctopusArtboardGridOptions = {
   octopusArtboard: OctopusArtboard

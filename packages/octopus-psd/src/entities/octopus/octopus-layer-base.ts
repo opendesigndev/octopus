@@ -9,12 +9,12 @@ import { createDefaultTranslationMatrix } from '../../utils/path.js'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusEffectsLayer } from './octopus-effects-layer.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { DesignConverter } from '../../services/conversion/design-converter'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerGroup } from './octopus-layer-group'
-import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import type { NotNull } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { DesignConverter } from '../../services/conversion/design-converter.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { OctopusLayerGroup } from './octopus-layer-group.js'
+import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
+import type { NotNull } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 

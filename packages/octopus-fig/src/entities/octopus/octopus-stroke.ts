@@ -1,15 +1,16 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { getMapped, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { getMapped, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services'
-import { DEFAULTS } from '../../utils/defaults'
-import { OctopusFill } from './octopus-fill'
-import { OctopusPath } from './octopus-path'
+import { logger } from '../../services/index.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { OctopusFill } from './octopus-fill.js'
+import { OctopusPath } from './octopus-path.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { SourcePaint } from '../source/source-paint'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourcePaint } from '../source/source-paint.js'
 
 type OctopusStrokeOptions = {
   parentLayer: OctopusLayer

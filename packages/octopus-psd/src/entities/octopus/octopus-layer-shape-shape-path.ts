@@ -4,11 +4,11 @@ import { logger } from '../../services/index.js'
 import { createPathData } from '../../utils/path-data.js'
 import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path.js'
 
-import type { Octopus } from '../../typings/octopus'
+import type { Octopus } from '../../typings/octopus.js'
 import type { RawCombineOperation } from '../../typings/raw/shared.js'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourcePathComponent } from '../source/source-path-component'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourcePathComponent } from '../source/source-path-component.js'
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter

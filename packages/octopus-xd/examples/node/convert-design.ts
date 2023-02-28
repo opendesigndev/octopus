@@ -4,7 +4,7 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter, LocalExporter, XDFileReader } from '../../src/index-node'
+import { createConverter, LocalExporter, XDFileReader } from '../../src/index-node.js'
 
 async function convert() {
   const [filename] = process.argv.slice(2)

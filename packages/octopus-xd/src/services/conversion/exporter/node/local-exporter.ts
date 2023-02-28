@@ -2,13 +2,13 @@ import { promises as fsp } from 'fs'
 import os from 'os'
 import path from 'path'
 
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { Exporter } from '..'
-import type { SourceArtboard } from '../../../../entities/source/source-artboard'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
+import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { Exporter } from '../index.js'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type LocalExporterOptions = {
   path: string

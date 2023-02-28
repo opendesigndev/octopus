@@ -11,7 +11,7 @@ type SourcePaintOptions = {
 }
 
 export class SourcePaint extends SourceEntity {
-  protected _rawValue: RawPaint
+  declare _rawValue: RawPaint
 
   constructor(options: SourcePaintOptions) {
     super(options.rawValue)

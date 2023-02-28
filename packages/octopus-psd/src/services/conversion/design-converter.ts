@@ -1,19 +1,19 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
 import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web.js'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { logger } from '../index.js'
 import { ComponentConverter } from './component-converter.js'
 
-import type { SourceComponent } from '../../entities/source/source-component'
-import type { SourceDesign, SourceImage } from '../../entities/source/source-design'
-import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter'
-import type { Manifest } from '../../typings/manifest'
-import type { Octopus } from '../../typings/octopus'
-import type { AbstractExporter } from '../exporters/abstract-exporter'
-import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
+import type { SourceComponent } from '../../entities/source/source-component.js'
+import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
+import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']

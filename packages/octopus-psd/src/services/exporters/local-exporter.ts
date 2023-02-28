@@ -8,9 +8,9 @@ import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/
 import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter'
-import type { AbstractExporter } from './abstract-exporter'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type { AbstractExporter } from './abstract-exporter.js'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type LocalExporterOptions = {
   /** Path to directory, where results will be exported. If not provided will use `os.tmpdir()`. */

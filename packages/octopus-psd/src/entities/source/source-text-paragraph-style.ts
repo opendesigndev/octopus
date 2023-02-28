@@ -1,7 +1,7 @@
 import { SourceEntity } from './source-entity.js'
 
-import type { RawParagraphRunDataParagraphSheetProperties } from '../../typings/raw'
-import type { SourceAlign } from '../../typings/source'
+import type { RawParagraphRunDataParagraphSheetProperties } from '../../typings/raw/index.js'
+import type { SourceAlign } from '../../typings/source.js'
 
 export class SourceTextParagraphStyle extends SourceEntity {
   protected _rawValue: RawParagraphRunDataParagraphSheetProperties | undefined

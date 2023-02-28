@@ -1,16 +1,16 @@
-import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
-import { compareStrings, getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import { compareStrings, getMapped, push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services'
-import { convertId } from '../../utils/convert'
-import { getRole } from '../../utils/source'
+import { logger } from '../../services/index.js'
+import { convertId } from '../../utils/convert.js'
+import { getRole } from '../../utils/source.js'
 
-import type { OctopusFigConverter } from '../../octopus-fig-converter'
-import type { Manifest } from '../../typings/manifest'
-import type { SourceComponent } from '../source/source-component'
-import type { SourceDesign } from '../source/source-design'
-import type { ResolvedStyle } from '@opendesign/figma-parser/lib/src/index-node'
-import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async'
+import type { OctopusFigConverter } from '../../octopus-fig-converter.js'
+import type { Manifest } from '../../typings/manifest.js'
+import type { SourceComponent } from '../source/source-component.js'
+import type { SourceDesign } from '../source/source-design.js'
+import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

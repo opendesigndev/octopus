@@ -1,7 +1,7 @@
-import { getPlatformFactories } from './general/platforms'
+import { getPlatformFactories } from './general/platforms/index.js'
 
-import type { Logger } from './general/logger/logger'
-import type { CreateLoggerOptions } from './general/logger/logger-factory.iface'
+import type { Logger } from './general/logger/logger.js'
+import type { CreateLoggerOptions } from './general/logger/logger-factory.iface.js'
 
 type DefaultOptions = {
   logger: CreateLoggerOptions

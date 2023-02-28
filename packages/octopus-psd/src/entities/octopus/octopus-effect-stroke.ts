@@ -5,9 +5,9 @@ import { logger } from '../../services/index.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
 import { OctopusEffectFill } from './octopus-effect-fill.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectStroke } from '../source/source-effect-stroke'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceEffectStroke } from '../source/source-effect-stroke.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusEffectStrokeOptions = {
   parentLayer: OctopusLayerBase

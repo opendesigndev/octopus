@@ -1,11 +1,13 @@
 import path from 'path'
 
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asString } from '@opendesign/octopus-common/dist/utils/as'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import * as x from '@opendesign/octopus-common/dist/utils/as.js'
 
-import type { DesignConverter } from '../../services/conversion/design-converter'
-import type { Manifest } from '../../typings/manifest'
-import type { RawArtboardMediaBox } from '../../typings/raw'
+console.log(x)
+
+import type { DesignConverter } from '../../services/conversion/design-converter/index.js'
+import type { Manifest } from '../../typings/manifest/index.js'
+import type { RawArtboardMediaBox } from '../../typings/raw/index.js'
 
 type OctopusManifestOptions = {
   designConverter: DesignConverter
@@ -79,7 +81,7 @@ export class OctopusManifest {
   }
 
   get AIVersion(): string {
-    return asString(this._designConverter.sourceDesign.metadaData.version, OctopusManifest.DEFAULT_AI_VERSION)
+    return x.asString(this._designConverter.sourceDesign.metadaData.version, OctopusManifest.DEFAULT_AI_VERSION)
   }
 
   get name(): string {

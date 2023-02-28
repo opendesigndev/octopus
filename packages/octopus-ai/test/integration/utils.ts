@@ -2,8 +2,8 @@ import fsp from 'fs/promises'
 
 import dotenv from 'dotenv'
 
-import type { SourceDesign } from '../../src/entities/source/source-design'
-import type { AIFileReader } from '../../src/services/conversion/ai-file-reader'
+import type { SourceDesign } from '../../src/entities/source/source-design.js'
+import type { AIFileReader } from '../../src/services/conversion/ai-file-reader/index.js'
 
 dotenv.config()
 

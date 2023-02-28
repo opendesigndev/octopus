@@ -1,4 +1,4 @@
-import { getArtboardColor, getLayerBounds } from '../source'
+import { getArtboardColor, getLayerBounds } from '../source.js'
 
 describe('src/utils/source', () => {
   describe(getArtboardColor.name, () => {

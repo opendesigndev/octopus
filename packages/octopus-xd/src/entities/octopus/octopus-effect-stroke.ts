@@ -1,13 +1,13 @@
-import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { DEFAULTS } from '../../utils/defaults'
-import { SourceEffectStroke } from '../source/source-effect-stroke'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { SourceEffectStroke } from '../source/source-effect-stroke.js'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawStroke } from '../../typings/source'
-import type { SourceEffectStrokeOptions } from '../source/source-effect-stroke'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawStroke } from '../../typings/source/index.js'
+import type { SourceEffectStrokeOptions } from '../source/source-effect-stroke.js'
 
 type OctopusEffectStrokeOptions = {
   source: SourceEffectStroke

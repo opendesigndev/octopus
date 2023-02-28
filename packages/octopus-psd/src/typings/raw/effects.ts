@@ -1,4 +1,4 @@
-import type { RawColor as RawColor } from './shared'
+import type { RawColor as RawColor } from './shared.js'
 import type { UnitFloatDescriptorValue } from '@webtoon/psd-ts/dist/interfaces'
 
 export type RawShapeTransparency = Partial<{

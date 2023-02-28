@@ -1,20 +1,21 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/text'
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/normalize-text/index.js'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services'
-import { DEFAULTS } from '../../utils/defaults'
-import { notZero } from '../../utils/misc'
-import { inferPostScriptName } from '../../utils/text'
-import { OctopusFill } from './octopus-fill'
-import { OctopusLayerBase } from './octopus-layer-base'
-import { OctopusStroke } from './octopus-stroke'
+import { logger } from '../../services/index.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { notZero } from '../../utils/misc.js'
+import { inferPostScriptName } from '../../utils/text.js'
+import { OctopusFill } from './octopus-fill.js'
+import { OctopusLayerBase } from './octopus-layer-base.js'
+import { OctopusStroke } from './octopus-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerText } from '../source/source-layer-text'
-import type { SourcePaint } from '../source/source-paint'
-import type { SourceTextStyle } from '../source/source-text-style'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
+import type { SourcePaint } from '../source/source-paint.js'
+import type { SourceTextStyle } from '../source/source-text-style.js'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

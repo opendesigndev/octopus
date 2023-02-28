@@ -1,5 +1,5 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import { DEFAULTS } from './defaults'
 import { createMatrix } from './paper'

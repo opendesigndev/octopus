@@ -6,10 +6,10 @@ import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-col
 import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawFillGradient } from '../../typings/raw'
+import type { RawFillGradient } from '../../typings/raw/index.js'
 
 export class SourceEffectFillGradient extends SourceEntity {
-  protected _rawValue: RawFillGradient | undefined
+  declare _rawValue: RawFillGradient | undefined
 
   constructor(raw: RawFillGradient | undefined) {
     super(raw)

@@ -2,8 +2,8 @@
 
 import { mocked } from 'jest-mock'
 
-import { createOctopusLayerGroup } from '../../../factories/create-octopus-layer'
-import { OctopusLayerSoftMaskGroup } from '../octopus-layer-soft-mask-group'
+import { createOctopusLayerGroup } from '../../../factories/create-octopus-layer.js'
+import { OctopusLayerSoftMaskGroup } from '../octopus-layer-soft-mask-group.js'
 
 jest.mock('../../../factories/create-octopus-layer')
 

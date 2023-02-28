@@ -6,10 +6,10 @@
 import { logger } from '../services/index.js'
 import { createPath, createPoint, createSegment, createTranslationMatrix } from './paper-factories.js'
 
-import type { SourcePathComponent } from '../entities/source/source-path-component'
-import type { SourceSubpath } from '../entities/source/source-subpath'
-import type { SourceSubpathPoint } from '../entities/source/source-subpath-point'
-import type { SourcePointXY } from '../typings/source'
+import type { SourcePathComponent } from '../entities/source/source-path-component.js'
+import type { SourceSubpath } from '../entities/source/source-subpath.js'
+import type { SourceSubpathPoint } from '../entities/source/source-subpath-point.js'
+import type { SourcePointXY } from '../typings/source.js'
 
 const createPointSegment = ({ x, y }: SourcePointXY): paper.Segment => {
   return createSegment(createPoint(x, y))

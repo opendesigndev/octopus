@@ -1,9 +1,9 @@
-import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { SourceEffectBlur } from '../source/source-effect-blur'
+import { SourceEffectBlur } from '../source/source-effect-blur.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectBlurOptions } from '../source/source-effect-blur'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { SourceEffectBlurOptions } from '../source/source-effect-blur.js'
 
 type OctopusEffectBlurOptions = {
   source: SourceEffectBlur

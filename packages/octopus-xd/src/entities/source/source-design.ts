@@ -1,16 +1,16 @@
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { Expander } from '../../services/conversion/expander'
-import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer'
-import { SourceArtboard } from './source-artboard'
-import { SourceInteractions } from './source-interactions'
-import { SourceManifest } from './source-manifest'
-import { SourceResources } from './source-resources'
+import { Expander } from '../../services/conversion/expander/index.js'
+import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer/index.js'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceInteractions } from './source-interactions.js'
+import { SourceManifest } from './source-manifest.js'
+import { SourceResources } from './source-resources.js'
 
-import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source'
-import type { RawResources } from '../../typings/source/resources'
-import type { RawSourceInteractions } from './source-interactions'
-import type { RawSourceManifest } from './source-manifest'
+import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source/index.js'
+import type { RawResources } from '../../typings/source/resources.js'
+import type { RawSourceInteractions } from './source-interactions.js'
+import type { RawSourceManifest } from './source-manifest.js'
 
 type SourceDesignOptions = {
   manifest: {
@@ -63,7 +63,7 @@ export class SourceDesign {
 
     const expander = new Expander({ resources: this._resources })
 
-    this._artboards = options.artboards.reduce((artboards, entry) => {
+    this._artboards = options.artboards.reduce<SourceArtboard[]>((artboards, entry) => {
       const rawValue = /pasteboard/.test(entry.path)
         ? new PasteboardNormalizer({
             manifest: this._manifest,

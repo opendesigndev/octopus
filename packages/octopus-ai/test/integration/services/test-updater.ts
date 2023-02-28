@@ -1,16 +1,16 @@
 import fsp from 'fs/promises'
 import path from 'path'
 
-import { OctopusAIConverter } from '../../../src'
-import { AIFileReader } from '../../../src/services/conversion/ai-file-reader'
-import { TempExporter } from '../../../src/services/conversion/exporters/temp-exporter'
-import { createOctopusArtboardFileName } from '../../../src/utils/exporter'
-import { getSourceDesign } from '../utils'
-import { AssetsReader } from './assets-reader'
+import { OctopusAIConverter } from '../../../src/index.js'
+import { AIFileReader } from '../../../src/services/conversion/ai-file-reader/index.js'
+import { TempExporter } from '../../../src/services/conversion/exporters/temp-exporter.js'
+import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
+import { getSourceDesign } from '../utils.js'
+import { AssetsReader } from './assets-reader.js'
 
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
-import type { TestDirectoryData } from './assets-reader'
+import type { Manifest } from '../../../src/typings/manifest/index.js'
+import type { Octopus } from '../../../src/typings/octopus/index.js'
+import type { TestDirectoryData } from './assets-reader.js'
 
 interface TestUpdaterAssetsReader {
   getTestsDirectoryData: () => Promise<TestDirectoryData[]>

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { DescriptorValueType, UnitFloatType } from '@webtoon/psd-ts'
 
@@ -6,12 +7,12 @@ import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { SourceEffectBase } from './source-effect-base.js'
 import { SourceEffectFillGradient } from './source-effect-fill-gradient.js'
 
-import type { RawFillPattern, RawFill, RawOffset, RawGradientType } from '../../typings/raw'
-import type { SourceColor } from '../../typings/source'
+import type { RawFillPattern, RawFill, RawOffset, RawGradientType } from '../../typings/raw/index.js'
+import type { SourceColor } from '../../typings/source.js'
 
 export class SourceEffectFill extends SourceEffectBase {
   protected _enabled: boolean | undefined
-  protected _rawValue: RawFill | undefined
+  declare _rawValue: RawFill | undefined
 
   constructor(raw: RawFill | undefined, enabled?: boolean) {
     super(raw)

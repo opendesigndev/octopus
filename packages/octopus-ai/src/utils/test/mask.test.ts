@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { mocked } from 'jest-mock'
 
-import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form'
-import { createSoftMask, initClippingMask } from '../mask'
+import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form.js'
+import { createSoftMask, initClippingMask } from '../mask.js'
 
 jest.mock('../../entities/source/source-layer-x-object-form')
 

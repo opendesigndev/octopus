@@ -8,7 +8,7 @@ import { SourceEffectShadow } from './source-effect-shadow.js'
 import { SourceEffectStroke } from './source-effect-stroke.js'
 import { SourceEntity } from './source-entity.js'
 
-import type { RawlayerEffects, RawNodeChildWithType } from '../../typings/raw'
+import type { RawlayerEffects, RawNodeChildWithType } from '../../typings/raw/index.js'
 
 export class SourceLayerEffects extends SourceEntity {
   protected _rawValue: RawNodeChildWithType

@@ -1,14 +1,14 @@
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import type {
   RawGraphicsStateMatrix,
   RawResourcesFontTextFont,
   RawResourcesFontTextFontFontDescriptor,
   RawTextLayerText,
-} from '../../typings/raw'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state'
-import type { SourceLayerText } from './source-layer-text'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+} from '../../typings/raw/index.js'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
+import type { SourceLayerText } from './source-layer-text.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerTextNormalizedOptions = {
   parent: SourceLayerText

@@ -1,13 +1,13 @@
-import { initSourceLayerChildren } from '../../utils/layer'
-import { createSoftMask } from '../../utils/mask'
-import { SourceArtboard } from './source-artboard'
-import { SourceLayerCommon } from './source-layer-common'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask } from '../../utils/mask.js'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawGroupLayer } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawGroupLayer } from '../../typings/raw/index.js'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerGroupOptions = {
   parent: SourceLayerParent
@@ -15,7 +15,7 @@ type SourceLayerGroupOptions = {
 }
 
 export class SourceLayerGroup extends SourceLayerCommon {
-  protected _rawValue: RawGroupLayer
+  declare _rawValue: RawGroupLayer
   private _children: SourceLayer[]
   private _softMask: Nullish<SourceLayerXObjectForm>
 

@@ -2,9 +2,9 @@
 
 import { mocked } from 'jest-mock'
 
-import { DesignConverter } from '..'
-import { OctopusManifest } from '../../../../entities/octopus/octopus-manifest'
-import { ArtboardConverter } from '../../artboard-converter'
+import { OctopusManifest } from '../../../../entities/octopus/octopus-manifest.js'
+import { ArtboardConverter } from '../../artboard-converter/index.js'
+import { DesignConverter } from '../index.js'
 
 jest.mock('../../artboard-converter')
 jest.mock('../../../../entities/octopus/octopus-manifest')

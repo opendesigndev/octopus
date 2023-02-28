@@ -1,15 +1,15 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusBounds } from './octopus-bounds'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color'
-import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient'
-import { OctopusEffectFillImage } from './octopus-effect-fill-image'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusBounds } from './octopus-bounds.js'
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
+import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
+import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusFill } from '../../typings/octopus-entities'
-import type { SourceResources } from '../source/source-resources'
-import type { OctopusLayerShape } from './octopus-layer-shape'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusFill } from '../../typings/octopus-entities.js'
+import type { SourceResources } from '../source/source-resources.js'
+import type { OctopusLayerShape } from './octopus-layer-shape.js'
 
 type OctopusEffectsShapeOptions = {
   octopusLayer: OctopusLayerShape

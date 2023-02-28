@@ -1,14 +1,14 @@
 import path from 'path'
 
-import { displayPerf } from '@opendesign/octopus-common/dist/utils/console'
+import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusAIConverter } from '../../src'
-import { AIFileReader } from '../../src/services/conversion/ai-file-reader'
-import { TempExporter } from '../../src/services/conversion/exporters/temp-exporter'
-import { renderOctopus } from './utils/render-octopus'
-import { timestamp } from './utils/timestamp'
+import { OctopusAIConverter } from '../../src/index.js'
+import { AIFileReader } from '../../src/services/conversion/ai-file-reader/index.js'
+import { TempExporter } from '../../src/services/conversion/exporters/temp-exporter.js'
+import { renderOctopus } from './utils/render-octopus.js'
+import { timestamp } from './utils/timestamp.js'
 
 dotenv.config()
 

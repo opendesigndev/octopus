@@ -5,7 +5,7 @@ import { S3Plugin } from '@opendesign/figma-parser-s3-plugin'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { LocalExporter, createConverter, SourceApiReader } from '../../src/index-node'
+import { LocalExporter, createConverter, SourceApiReader } from '../../src/index-node.js'
 
 import type { IPathLocator } from '@opendesign/figma-parser-s3-plugin'
 

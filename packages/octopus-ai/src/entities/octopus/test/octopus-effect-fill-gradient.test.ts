@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient'
+import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient.js'
 
-import type { Coord } from '../../../typings'
+import type { Coord } from '../../../typings/index.js'
 
 describe('OctopusEffectGradientFill', () => {
   describe('_parseType2Function', () => {
