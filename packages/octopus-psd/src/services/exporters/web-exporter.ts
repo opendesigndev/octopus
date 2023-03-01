@@ -1,6 +1,9 @@
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 
-export abstract class AbstractExporter {
+/**
+ * Minimalistic exporter used for web build
+ */
+export class WebExporter {
   static IMAGES_DIR_NAME: string
   static MANIFEST_NAME: string
   static getOctopusFileName(_id: string): string {
@@ -8,20 +11,22 @@ export abstract class AbstractExporter {
   }
 
   exportComponent(_component: ComponentConversionResult): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
+    return Promise.resolve()
   }
 
-  exportImage(_name: string, _data: Uint8Array): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
+  exportImage(name: string, _data: Uint8Array): Promise<unknown> {
+    return Promise.resolve(name)
   }
 
   exportManifest(_manifest: DesignConversionResult): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
+    return Promise.resolve()
   }
 
   finalizeExport(): void {
-    throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
+    return
   }
 
-  abstract getBasePath(): Promise<string>
+  getBasePath(): Promise<string> {
+    return Promise.resolve('hello')
+  }
 }

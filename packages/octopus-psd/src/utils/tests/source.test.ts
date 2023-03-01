@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest'
+
 import { getArtboardColor, getLayerBounds } from '../source.js'
 
 describe('src/utils/source', () => {

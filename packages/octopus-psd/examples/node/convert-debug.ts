@@ -7,7 +7,8 @@ import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
 import { createConverter } from '../../src/index-node.js'
-import { DebugExporter, PSDFileReaderNode } from '../../src/octopus-psd-converter.js'
+import { DebugExporter } from '../../src/services/exporters/debug-exporter.js'
+import { PSDFileReaderNode } from '../../src/services/readers/psd-file-reader-node.js'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 import { renderOctopus } from './utils/render.js'
 
@@ -32,7 +33,7 @@ async function convertDesign({
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const tempDir = path.join(__dirname, '../../', 'workdir')
+  const tempDir = new URL('../../../workdir', import.meta.url).pathname
   const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {

@@ -39,8 +39,8 @@ export class PSDFileReaderNode extends PSDFileReader {
    * @param {PSDFileReaderNodeOptions} options
    */
   constructor(options: PSDFileReaderNodeOptions) {
-    const promiseBuffer = readFile(options.path)
-    super({ ...options, promiseBuffer })
+    const promisedData = readFile(options.path)
+    super({ ...options, promisedData })
   }
 
   protected async _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void> {
@@ -55,7 +55,7 @@ export class PSDFileReaderNode extends PSDFileReader {
     })
 
     const parsed = new Jimp(scanned)
-    this._images.push({ width, height, name, promiseBuffer: parsed.getBufferAsync(Jimp.MIME_PNG) })
+    this._images.push({ width, height, name, promisedData: parsed.getBufferAsync(Jimp.MIME_PNG) })
 
     return
   }

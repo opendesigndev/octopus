@@ -19,6 +19,4 @@ export function setLogger(instance: Logger): void {
 export function setDefaults(options: DefaultOptions): void {
   env = getPlatformFactories().createEnvironment?.() ?? {}
   logger = getPlatformFactories().createLoggerFactory(options.logger)
-  //   base64ToUint8Array = getPlatformFactories().createBufferService().base64ToUint8Array
-  //   imageSize = getPlatformFactories().createImageSizeService()
 }

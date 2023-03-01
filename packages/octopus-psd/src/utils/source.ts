@@ -88,7 +88,7 @@ export function getLayerTypeKey(layerProperties: RawLayerProperties | undefined)
     return
   }
 
-  return Buffer.from(layerTypeProp).toString()
+  return String.fromCharCode.apply(null, layerTypeProp)
 }
 
 export function isShapeLayer(layerProperties: RawLayerProperties | undefined): boolean {

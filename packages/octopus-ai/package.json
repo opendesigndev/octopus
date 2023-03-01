@@ -13,7 +13,7 @@
     "convert:debug": "ts-node ./examples/node/convert-debug.ts",
     "convert:local": "ts-node ./examples/node/convert-local.ts",
     "bundle": "yarn run bundle:web",
-    "bundle:web": "vite build -c vite.web-test.js",
+    "bundle:web": "build -c vite.web-test.js",
     "build": "rimraf ./dist && tsc --build tsconfig.json",
     "release:bundle:node": "vite build -c vite.node.js",
     "release:bundle:web": "vite build -c vite.web.js",

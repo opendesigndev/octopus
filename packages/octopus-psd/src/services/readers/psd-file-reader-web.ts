@@ -19,11 +19,11 @@ export type WithRendererOptions = {
 }
 
 export class PSDFileReaderWeb extends PSDFileReader {
-  static async readFile(filePath: string): Promise<ArrayBuffer> {
+  static async readFile(filePath: string): Promise<Uint8Array> {
     const response = await fetch(filePath)
     const buffer = await response.arrayBuffer()
 
-    return buffer
+    return new Uint8Array(buffer)
   }
 
   static async withRenderer(options: WithRendererOptions): Promise<PSDFileReaderWeb> {
@@ -40,9 +40,9 @@ export class PSDFileReaderWeb extends PSDFileReader {
    * @param {PSDFileReaderWebOptions} options
    */
   constructor(options: PSDFileReaderWebOptions) {
-    const promiseBuffer = PSDFileReaderWeb.readFile(options.path)
+    const promisedData = PSDFileReaderWeb.readFile(options.path)
 
-    super({ ...options, promiseBuffer })
+    super({ ...options, promisedData })
   }
 
   protected async _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void> {
@@ -62,7 +62,7 @@ export class PSDFileReaderWeb extends PSDFileReader {
     const pixelData = new Uint8ClampedArray(processedBuff)
     imageData.data.set(pixelData)
 
-    const promiseBuffer = new Promise<Buffer>((resolve, reject) => {
+    const promisedData = new Promise<Uint8Array>((resolve, reject) => {
       canvas.toBlob((blob) => {
         const fileReader = new FileReader()
         fileReader.onload = () => {
@@ -70,8 +70,9 @@ export class PSDFileReaderWeb extends PSDFileReader {
             reject('could not read image data')
             return
           }
-          const buffer = Buffer.from(fileReader.result as ArrayBuffer)
-          resolve(buffer)
+          const result = new Uint8Array(fileReader.result as ArrayBuffer)
+
+          resolve(result)
         }
 
         if (!blob) {
@@ -82,8 +83,7 @@ export class PSDFileReaderWeb extends PSDFileReader {
         fileReader.readAsArrayBuffer(blob)
       }, 'image/png')
     })
-
-    this._images.push({ width, height, name, promiseBuffer })
+    this._images.push({ width, height, name, promisedData })
 
     return
   }

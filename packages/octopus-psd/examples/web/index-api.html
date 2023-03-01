@@ -11,12 +11,15 @@
     <script src="./octopus-psd-web.umd.js"></script>
     <script>
       window.addEventListener('DOMContentLoaded', async () => {
-        const { createConverter, PSDFileReaderWeb } = OctopusPSD
+        const { createConverter, PSDFileReaderWeb, WebExporter } = OctopusPSD
+
         const readerOptions = {
-          path: 'xxxxxx',
+          path: './smiley.psd',
         }
+
         try {
           const converter = createConverter()
+
           const reader = new PSDFileReaderWeb(readerOptions)
           const sourceDesign = await reader.getSourceDesign()
 
@@ -24,8 +27,8 @@
             console.error('Creating SourceDesign Failed')
             return
           }
-
-          const result = await converter.convertDesign({ exporter, sourceDesign })
+          const exporter = new WebExporter()
+          const result = await converter.convertDesign({ sourceDesign, exporter })
 
           console.info('Result:', result)
         } catch (err) {

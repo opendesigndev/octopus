@@ -82,11 +82,11 @@ export class LocalExporter implements AbstractExporter {
   /**
    * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
-   * @param {Buffer} buffer image data
+   * @param {Uint8Array} data image data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, buffer: Buffer): Promise<string> {
-    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), buffer)
+  async exportImage(name: string, data: Uint8Array): Promise<string> {
+    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), Buffer.from(data))
   }
 
   /**

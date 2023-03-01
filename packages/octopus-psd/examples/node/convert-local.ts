@@ -4,7 +4,8 @@ import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 
 import { createConverter } from '../../src/index-node.js'
-import { LocalExporter, PSDFileReaderNode } from '../../src/octopus-psd-converter.js'
+import { LocalExporter } from '../../src/services/exporters/local-exporter.js'
+import { PSDFileReaderNode } from '../../src/services/readers/psd-file-reader-node.js'
 
 async function convert() {
   const [filePath] = process.argv.slice(2)

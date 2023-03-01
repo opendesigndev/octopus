@@ -1,7 +1,6 @@
-import path from 'path'
-
 import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 
+import { pathRelative } from '../../utils/fs-path.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../../octopus-psd-converter.js'
@@ -59,7 +58,7 @@ export class OctopusManifest {
     const imagePath = this._exports.images.get(name)
     if (imagePath === undefined) return undefined
     if (this._basePath === null) return imagePath
-    return path.relative(this._basePath, imagePath)
+    return pathRelative(this._basePath, imagePath)
   }
 
   setExportedImage(name: string, path: string): void {
@@ -74,7 +73,7 @@ export class OctopusManifest {
     const componentResult = this._exports.components.get(id)
     if (typeof componentResult?.path !== 'string') return undefined
     if (this._basePath === null) return componentResult.path
-    return path.relative(this._basePath, componentResult.path)
+    return pathRelative(this._basePath, componentResult.path)
   }
 
   setExportedComponent(id: string, component: ComponentDescriptor): void {

@@ -1,3 +1,5 @@
+import { describe, test, expect } from 'vitest'
+
 import { isRectangle } from '../path.js'
 
 import type { Points } from '../path.js'

@@ -15,7 +15,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(dirname(fileURLToPath(new URL(import.meta.url))), 'src/index-node.ts'),
       name: 'OctopusPSD',
-      fileName: (format) => (format === 'es' ? `index-node.mjs` : 'index-node.js'),
+      fileName: (format) => (format === 'es' ? `index.mjs` : 'index.js'),
       formats: ['es', 'cjs'],
     },
     commonjsOptions: { include: [/node_modules/, /@opendesign\/octopus-common/] },
