@@ -2,22 +2,21 @@
 
 import { mkdir, readFile } from 'fs/promises'
 
-import { jest } from '@jest/globals'
 import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu'
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
-import { mocked } from 'jest-mock'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
+import { describe, expect, it, vi } from 'vitest'
 
-import { AIFileReader } from '../index.js'
 import { logger } from '../../../instances/logger.js'
+import { AIFileReader } from '../index.js'
 
-jest.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
-jest.mock('@opendesign/illustrator-parser-pdfcpu/index')
-jest.mock('fs/promises')
-jest.mock('../../../instances/logger')
+vi.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
+vi.mock('@opendesign/illustrator-parser-pdfcpu/index')
+vi.mock('fs/promises')
+vi.mock('../../../instances/logger')
 
 describe('AIFileReader', () => {
   describe('_getSourceData', () => {
-    afterEach(() => jest.resetAllMocks())
+    afterEach(() => vi.resetAllMocks())
     it('returns source data and sets class properties', async () => {
       AIFileReader.prototype['_resourcesDir'] = 'root/path'
 
@@ -26,10 +25,10 @@ describe('AIFileReader', () => {
         aiFile: { Version: '1.0.1' },
       }
       const privateDataMock = Promise.resolve({ Textlayers: [], LayerNames: [] })
-      mocked(FSContext).mockResolvedValueOnce(ctxMock)
-      mocked(ArtBoardRefs).mockReturnValueOnce([{ idx: 1 }, { idx: 2 }] as any)
-      mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
-      mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
+      vi.mocked(FSContext).mockResolvedValueOnce(ctxMock)
+      vi.mocked(ArtBoardRefs).mockReturnValueOnce([{ idx: 1 }, { idx: 2 }] as any)
+      vi.mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
+      vi.mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
 
       const result = await AIFileReader.prototype['_getSourceData']('root/path')
 
@@ -78,8 +77,8 @@ describe('AIFileReader', () => {
       const image1Value = 'base64;image-1.jpg'
       const image2Value = 'base64;image-2.jpg'
 
-      mocked(readFile).mockResolvedValueOnce(image1Value)
-      mocked(readFile).mockResolvedValueOnce(image2Value)
+      vi.mocked(readFile).mockResolvedValueOnce(image1Value)
+      vi.mocked(readFile).mockResolvedValueOnce(image2Value)
 
       const images = AIFileReader.prototype['_loadImages']()
 
@@ -94,8 +93,8 @@ describe('AIFileReader', () => {
         img2: 'image-2.jpg',
       }
 
-      mocked(readFile).mockRejectedValueOnce('could not read image 1')
-      mocked(readFile).mockRejectedValueOnce('could not read image 2')
+      vi.mocked(readFile).mockRejectedValueOnce('could not read image 1')
+      vi.mocked(readFile).mockRejectedValueOnce('could not read image 2')
 
       const images = AIFileReader.prototype['_loadImages']()
 
@@ -118,13 +117,13 @@ describe('AIFileReader', () => {
   describe('_createSourceTree', () => {
     it('returns sourceTree', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = jest.fn().mockReturnValueOnce(images) as any
+      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = (jest.fn() as any).mockResolvedValueOnce({
+      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -142,13 +141,13 @@ describe('AIFileReader', () => {
 
     it('throws when metadata is unavailable', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = jest.fn().mockReturnValueOnce(images) as any
+      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = undefined
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = (jest.fn() as any).mockResolvedValueOnce({
+      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -165,13 +164,13 @@ describe('AIFileReader', () => {
 
     it('throws when artboards have 0 length', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = jest.fn().mockReturnValueOnce(images) as any
+      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = []
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = (jest.fn() as any).mockResolvedValueOnce({
+      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -189,13 +188,13 @@ describe('AIFileReader', () => {
 
     it('throws when artboards have 0 length', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = jest.fn().mockReturnValueOnce(images) as any
+      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = []
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = (jest.fn() as any).mockResolvedValueOnce({
+      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -213,13 +212,13 @@ describe('AIFileReader', () => {
 
     it('throws when additionalTextData are not present', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = jest.fn().mockReturnValueOnce(images) as any
+      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = { version: 10 }
       const additionalTextData = undefined
 
-      AIFileReader.prototype['_getSourceData'] = (jest.fn() as any).mockResolvedValueOnce({
+      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,

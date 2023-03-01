@@ -1,36 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { mocked } from 'jest-mock'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { OctopusLayerGroup } from '../../entities/octopus/octopus-layer-group.js'
 import { OctopusLayerMaskGroup } from '../../entities/octopus/octopus-layer-mask-group.js'
 import { OctopusLayerShading } from '../../entities/octopus/octopus-layer-shading.js'
-import { OctopusLayerShape } from '../../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerShapeShapeAdapter } from '../../entities/octopus/octopus-layer-shape-shape-adapter.js'
 import { OctopusLayerShapeXObjectImageAdapter } from '../../entities/octopus/octopus-layer-shape-x-object-image-adapter.js'
+import { OctopusLayerShape } from '../../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerSoftMaskGroup } from '../../entities/octopus/octopus-layer-soft-mask-group.js'
 import { OctopusLayerText } from '../../entities/octopus/octopus-layer-text.js'
 import { createOctopusLayer } from '../create-octopus-layer.js'
 
-jest.mock('../../entities/octopus/octopus-layer-soft-mask-group')
-jest.mock('../../entities/octopus/octopus-layer-mask-group')
-jest.mock('../../entities/octopus/octopus-layer-group')
-jest.mock('../../entities/octopus/octopus-layer-shape-shape-adapter')
-jest.mock('../../entities/octopus/octopus-layer-shape')
-jest.mock('../../entities/octopus/octopus-layer-shading')
-jest.mock('../../entities/octopus/octopus-layer-shape-x-object-image-adapter')
-jest.mock('../../entities/octopus/octopus-layer-text')
-jest.mock('../../entities/octopus/octopus-layer-text')
+vi.mock('../../entities/octopus/octopus-layer-soft-mask-group')
+vi.mock('../../entities/octopus/octopus-layer-mask-group')
+vi.mock('../../entities/octopus/octopus-layer-group')
+vi.mock('../../entities/octopus/octopus-layer-shape-shape-adapter')
+vi.mock('../../entities/octopus/octopus-layer-shape')
+vi.mock('../../entities/octopus/octopus-layer-shading')
+vi.mock('../../entities/octopus/octopus-layer-shape-x-object-image-adapter')
+vi.mock('../../entities/octopus/octopus-layer-text')
+vi.mock('../../entities/octopus/octopus-layer-text')
 
 describe('createOctopusLayer', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('creates OctopusLayerSoftMaskGroup when first sourceLayer has  softMask', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ softMask: {} }] }, { sourceLayers: [{ mask: {} }] }]
     const instance = {}
-    mocked(OctopusLayerSoftMaskGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerSoftMaskGroup).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerSoftMaskGroup).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
   })
@@ -39,7 +39,7 @@ describe('createOctopusLayer', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ mask: {} }] }, { sourceLayers: [{ softMask: {} }] }]
     const instance = {}
-    mocked(OctopusLayerMaskGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerMaskGroup).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerMaskGroup).toHaveBeenCalledWith({ parent, layerSequences })
   })
@@ -48,7 +48,7 @@ describe('createOctopusLayer', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ type: 'MarkedContext' }] }, { sourceLayers: [{}] }]
     const instance = {}
-    mocked(OctopusLayerGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerGroup).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerGroup).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
   })
@@ -57,7 +57,7 @@ describe('createOctopusLayer', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ type: 'Form' }] }, { sourceLayers: [{}] }]
     const instance = {}
-    mocked(OctopusLayerGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerGroup).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerGroup).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
   })
@@ -67,8 +67,8 @@ describe('createOctopusLayer', () => {
     const layerSequences = [{ sourceLayers: [{ type: 'Path' }] }, { sourceLayers: [{}] }]
     const instance: any = {}
     const adapter: any = {}
-    mocked(OctopusLayerShapeShapeAdapter).mockReturnValueOnce(adapter)
-    mocked(OctopusLayerShape).mockReturnValueOnce(instance)
+    vi.mocked(OctopusLayerShapeShapeAdapter).mockReturnValueOnce(adapter)
+    vi.mocked(OctopusLayerShape).mockReturnValueOnce(instance)
 
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerShapeShapeAdapter).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
@@ -79,7 +79,7 @@ describe('createOctopusLayer', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ type: 'TextGroup' }] }, { sourceLayers: [{}] }]
     const instance = {}
-    mocked(OctopusLayerText).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerText).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerText).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
   })
@@ -90,8 +90,8 @@ describe('createOctopusLayer', () => {
     const instance: any = {}
     const adapter: any = {}
 
-    mocked(OctopusLayerShapeXObjectImageAdapter).mockReturnValueOnce(adapter)
-    mocked(OctopusLayerShape).mockReturnValueOnce(instance)
+    vi.mocked(OctopusLayerShapeXObjectImageAdapter).mockReturnValueOnce(adapter)
+    vi.mocked(OctopusLayerShape).mockReturnValueOnce(instance)
 
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerShapeXObjectImageAdapter).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
@@ -102,7 +102,7 @@ describe('createOctopusLayer', () => {
     const parent = {}
     const layerSequences = [{ sourceLayers: [{ type: 'Shading' }] }, { sourceLayers: [{}] }]
     const instance = {}
-    mocked(OctopusLayerShading).mockReturnValueOnce(instance as any)
+    vi.mocked(OctopusLayerShading).mockReturnValueOnce(instance as any)
     expect(createOctopusLayer({ parent, layerSequences } as any)).toBe(instance)
     expect(OctopusLayerShading).toHaveBeenCalledWith({ parent, layerSequence: layerSequences[0] })
   })

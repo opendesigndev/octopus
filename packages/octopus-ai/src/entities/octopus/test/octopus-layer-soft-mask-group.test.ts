@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
 import { createOctopusLayerGroup } from '../../../factories/create-octopus-layer.js'
 import { OctopusLayerSoftMaskGroup } from '../octopus-layer-soft-mask-group.js'
 
-jest.mock('../../../factories/create-octopus-layer')
+vi.mock('../../../factories/create-octopus-layer')
 
 function getTestingSoftMaskGroup(sourceLayerProps?: Record<string, any>) {
   const options: any = {
@@ -46,13 +45,13 @@ describe('OctopusLayerSoftMaskGroup', () => {
     })
 
     it('returns null when mask.convert() returns falsy', () => {
-      mocked(createOctopusLayerGroup).mockReturnValue({ convert: () => null } as any)
+      vi.mocked(createOctopusLayerGroup).mockReturnValue({ convert: () => null } as any)
       const octopusLayerSoftMaskGroup = getTestingSoftMaskGroup()
       expect(octopusLayerSoftMaskGroup['_createMask']()).toEqual(null)
     })
 
     it('returns converted mask and sets it to not visible ', () => {
-      mocked(createOctopusLayerGroup).mockReturnValue({ convert: () => ({}) } as any)
+      vi.mocked(createOctopusLayerGroup).mockReturnValue({ convert: () => ({}) } as any)
       const octopusLayerSoftMaskGroup = getTestingSoftMaskGroup()
       expect(octopusLayerSoftMaskGroup['_createMask']()).toEqual({ visible: false })
     })

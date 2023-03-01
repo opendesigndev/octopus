@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
 import { OctopusLayerShading } from '../octopus-layer-shading.js'
 import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter.js'
 
-jest.mock('../octopus-layer-shape-shape-adapter')
-jest.mock('../octopus-layer-common', () => {
+vi.mock('../octopus-layer-shape-shape-adapter')
+vi.mock('../octopus-layer-common', () => {
   return {
     __esModule: true,
-    OctopusLayerCommon: jest.fn(),
+    OctopusLayerCommon: vi.fn(),
   }
 })
 
@@ -35,9 +35,10 @@ describe('OctopusLayerShading', () => {
           { transformMatrix: [3, 0, 0, 1, 0, 0] },
         ],
       })
-      mocked(OctopusLayerShapeShapeAdapter).mockReturnValueOnce({ getPath: () => ({ type: 'PATH' }) } as any)
-      mocked(OctopusLayerShapeShapeAdapter).mockReturnValueOnce({ getPath: () => ({ type: 'RECT' }) } as any)
-      mocked(OctopusLayerShapeShapeAdapter).mockReturnValueOnce({ getPath: () => ({ type: 'COMPOUND' }) } as any)
+
+      vi.mocked(OctopusLayerShapeShapeAdapter.prototype.getPath).mockReturnValueOnce({ type: 'PATH' } as any)
+      vi.mocked(OctopusLayerShapeShapeAdapter.prototype.getPath).mockReturnValueOnce({ type: 'RECT' } as any)
+      vi.mocked(OctopusLayerShapeShapeAdapter.prototype.getPath).mockReturnValueOnce({ type: 'COMPOUND' } as any)
 
       expect(instance['_createClippingPaths']()).toEqual([
         {

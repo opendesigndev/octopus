@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 
 import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer'
 import { createSourceLayer } from '../../factories/create-source-layer'
 import { LayerGroupingService } from '../../services/conversion/layer-grouping-service'
 import { createOctopusLayersFromLayerSequences, initOctopusLayerChildren, initSourceLayerChildren } from '../layer'
 
-jest.mock('../../services/instances/text-layer-grouping-service', () => ({
+vi.mock('../../services/instances/text-layer-grouping-service', () => ({
   __esModule: true,
-  textLayerGroupingService: jest.fn(),
+  textLayerGroupingService: vi.fn(),
 }))
 
-jest.mock('../../factories/create-source-layer')
-jest.mock('../../services/conversion/layer-grouping-service')
-jest.mock('../../factories/create-octopus-layer')
+vi.mock('../../factories/create-source-layer')
+vi.mock('../../services/conversion/layer-grouping-service')
+vi.mock('../../factories/create-octopus-layer')
 
 describe('utils/layer', () => {
   describe('initSourceLayerChildren', () => {
@@ -25,9 +25,9 @@ describe('utils/layer', () => {
 
       const returnValue1 = { id: 1 }
       const returnValue2 = { id: 2 }
-      mocked(createSourceLayer).mockReturnValueOnce(returnValue1 as any)
-      mocked(createSourceLayer).mockReturnValueOnce(returnValue2 as any)
-      mocked(createSourceLayer).mockReturnValueOnce(null)
+      vi.mocked(createSourceLayer).mockReturnValueOnce(returnValue1 as any)
+      vi.mocked(createSourceLayer).mockReturnValueOnce(returnValue2 as any)
+      vi.mocked(createSourceLayer).mockReturnValueOnce(null)
 
       expect(initSourceLayerChildren({ layers, parent } as any)).toEqual([returnValue1, returnValue2])
 
@@ -49,9 +49,9 @@ describe('utils/layer', () => {
 
       const returnValue1 = { id: 1 }
       const returnValue2 = { id: 2 }
-      mocked(buildOctopusLayer).mockReturnValueOnce(returnValue1 as any)
-      mocked(buildOctopusLayer).mockReturnValueOnce(returnValue2 as any)
-      mocked(buildOctopusLayer).mockReturnValueOnce(null)
+      vi.mocked(buildOctopusLayer).mockReturnValueOnce(returnValue1 as any)
+      vi.mocked(buildOctopusLayer).mockReturnValueOnce(returnValue2 as any)
+      vi.mocked(buildOctopusLayer).mockReturnValueOnce(null)
 
       expect(createOctopusLayersFromLayerSequences({ layerSequences, parent } as any)).toEqual([
         returnValue1,
@@ -66,7 +66,7 @@ describe('utils/layer', () => {
 
   describe('initOctopusLayerChildren', () => {
     afterEach(() => {
-      jest.clearAllMocks()
+      vi.clearAllMocks()
     })
 
     it('creates array of truthy values returned from createOctopusLayer', () => {
@@ -74,10 +74,10 @@ describe('utils/layer', () => {
       const parent = { id: 3, type: 'GROUP' }
       const expectedValue = [layer]
 
-      mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
-      mocked(createOctopusLayer).mockReturnValueOnce(null)
-      const getLayerSequences = mocked(jest.fn()).mockReturnValueOnce([[layer], [layer]])
-      mocked(LayerGroupingService).mockReturnValueOnce({ getLayerSequences } as any)
+      vi.mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
+      vi.mocked(createOctopusLayer).mockReturnValueOnce(null)
+      const getLayerSequences = vi.mocked(vi.fn()).mockReturnValueOnce([[layer], [layer]])
+      vi.mocked(LayerGroupingService).mockReturnValueOnce({ getLayerSequences } as any)
 
       expect(initOctopusLayerChildren({ layers: [layer, layer], parent } as any)).toEqual(expectedValue)
       expect(createOctopusLayer).toHaveBeenCalledTimes(2)
@@ -87,10 +87,10 @@ describe('utils/layer', () => {
       const layer = { id: 1, type: 'SHAPE' }
       const parent = { id: 3, type: 'GROUP' }
 
-      mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
-      mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
-      const getLayerSequences = mocked(jest.fn()).mockReturnValueOnce(null)
-      mocked(LayerGroupingService).mockReturnValueOnce({ getLayerSequences } as any)
+      vi.mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
+      vi.mocked(createOctopusLayer).mockReturnValueOnce(layer as any)
+      const getLayerSequences = vi.mocked(vi.fn()).mockReturnValueOnce(null)
+      vi.mocked(LayerGroupingService).mockReturnValueOnce({ getLayerSequences } as any)
 
       expect(initOctopusLayerChildren({ layers: [layer, layer], parent } as any)).toEqual([])
       expect(createOctopusLayer).not.toHaveBeenCalled()

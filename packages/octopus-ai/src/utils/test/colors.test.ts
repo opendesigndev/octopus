@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it, vi, afterEach } from 'vitest'
+
 import { logger } from '../../services/instances/logger.js'
 import { getColorSpaceName, guessColorSpaceByComponents, convertColor } from '../colors.js'
 
-jest.mock('../../services/instances/logger')
+vi.mock('../../services/instances/logger')
 
 describe('utils/colors', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe('getColorSpaceName', () => {
@@ -57,7 +59,7 @@ describe('utils/colors', () => {
 
   describe('convertColor', () => {
     afterEach(() => {
-      jest.clearAllMocks()
+      vi.clearAllMocks()
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is DeviceRGB', () => {

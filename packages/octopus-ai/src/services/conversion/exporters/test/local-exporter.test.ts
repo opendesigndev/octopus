@@ -1,36 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import fs from 'fs'
+import { promises as fsp } from 'fs'
 import os from 'os'
 import path from 'path'
 
-import { mocked } from 'jest-mock'
 import { v4 as uuidv4 } from 'uuid'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 
 import { LocalExporter } from '../local-exporter.js'
 
-jest.mock('os')
-jest.mock('uuid')
+vi.mock('os')
+// vi.mock('uuid')
 
-jest.mock('fs', () => ({
-  promises: {
-    mkdir: jest.fn(),
-    writeFile: jest.fn(),
-  },
+vi.mock('fs', () => {
+  const promises = {
+    mkdir: vi.fn(),
+    writeFile: vi.fn(),
+  }
+
+  return { promises }
+})
+
+vi.mock('uuid', () => ({
+  v4: vi.fn(),
 }))
 
-mocked(os.tmpdir).mockReturnValue('tmpdir')
-mocked(uuidv4).mockReturnValue('randomdirname')
+vi.mock('os', () => ({
+  tmpdir: vi.fn(),
+}))
+
+vi.mocked(os.tmpdir).mockReturnValue('tmpdir')
+vi.mocked(uuidv4).mockReturnValue('randomdirname')
 
 describe('LocalExporter', () => {
   describe('_outputDir', () => {
-    afterEach(jest.clearAllMocks)
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
 
     it('sets up outputDir', async () => {
       const mockPath = 'some/path'
       const instance = new LocalExporter({ path: mockPath })
       expect(await instance['_outputDir']).toEqual(mockPath)
-      expect(fs.promises.mkdir).toHaveBeenCalledWith(path.join(mockPath, LocalExporter.IMAGES_DIR_NAME), {
+      expect(fsp.mkdir).toHaveBeenCalledWith(path.join(mockPath, LocalExporter.IMAGES_DIR_NAME), {
         recursive: true,
       })
     })
@@ -38,7 +50,7 @@ describe('LocalExporter', () => {
     it('creates path for tempDir when not provided', async () => {
       const instance = new LocalExporter({})
       expect(await instance['_outputDir']).toEqual('tmpdir/octopusAI/randomdirname')
-      expect(fs.promises.mkdir).toHaveBeenCalledWith(
+      expect(fsp.mkdir).toHaveBeenCalledWith(
         path.join('tmpdir/octopusAI/randomdirname', LocalExporter.IMAGES_DIR_NAME),
         {
           recursive: true,
@@ -48,33 +60,37 @@ describe('LocalExporter', () => {
   })
 
   describe('_save', () => {
-    afterEach(jest.clearAllMocks)
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
 
     it('saves to file and pushes to _assetsSaves and resolves', async () => {
       const instance = new LocalExporter({})
-      mocked(fs.promises.writeFile).mockReturnValueOnce(Promise.resolve())
+      vi.mocked(fsp.writeFile).mockReturnValueOnce(Promise.resolve())
 
       const assetPath = await instance['_save']('someImage.jpg', 'base64')
 
       expect(instance['_assetsSaves']).toEqual([Promise.resolve()])
-      expect(fs.promises.writeFile).toHaveBeenCalledWith('tmpdir/octopusAI/randomdirname/someImage.jpg', 'base64')
+      expect(fsp.writeFile).toHaveBeenCalledWith('tmpdir/octopusAI/randomdirname/someImage.jpg', 'base64')
       expect(assetPath).toEqual('tmpdir/octopusAI/randomdirname/someImage.jpg')
     })
 
     it('saves to path provided in constructor', async () => {
       const instance = new LocalExporter({ path: 'some/path' })
-      mocked(fs.promises.writeFile).mockReturnValueOnce(Promise.resolve())
+      vi.mocked(fsp.writeFile).mockReturnValueOnce(Promise.resolve())
 
       const assetPath = await instance['_save']('someImage.jpg', 'base64')
 
       expect(instance['_assetsSaves']).toEqual([Promise.resolve()])
-      expect(fs.promises.writeFile).toHaveBeenCalledWith('some/path/someImage.jpg', 'base64')
+      expect(fsp.writeFile).toHaveBeenCalledWith('some/path/someImage.jpg', 'base64')
       expect(assetPath).toEqual('some/path/someImage.jpg')
     })
   })
 
   describe('exportAuxiliaryData', () => {
-    afterEach(jest.clearAllMocks)
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
 
     const design: any = {
       metaData: { version: 'ai-3' },

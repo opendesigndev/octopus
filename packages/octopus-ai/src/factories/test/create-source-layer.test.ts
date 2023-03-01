@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
 import { SourceLayerGroup } from '../../entities/source/source-layer-group.js'
 import { SourceLayerShape } from '../../entities/source/source-layer-shape.js'
@@ -9,11 +8,11 @@ import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-obj
 import { SourceLayerXObjectImage } from '../../entities/source/source-layer-x-object-image.js'
 import { createSourceLayer } from '../create-source-layer.js'
 
-jest.mock('../../entities/source/source-layer-shape')
-jest.mock('../../entities/source/source-layer-text')
-jest.mock('../../entities/source/source-layer-group')
-jest.mock('../../entities/source/source-layer-x-object-image')
-jest.mock('../../entities/source/source-layer-x-object-form')
+vi.mock('../../entities/source/source-layer-shape')
+vi.mock('../../entities/source/source-layer-text')
+vi.mock('../../entities/source/source-layer-group')
+vi.mock('../../entities/source/source-layer-x-object-image')
+vi.mock('../../entities/source/source-layer-x-object-form')
 
 describe('createSourcLayer', () => {
   it('returns null when rawLayer has no corresponding Type', () => {
@@ -27,7 +26,7 @@ describe('createSourcLayer', () => {
     const rawLayer = { Type: 'Path' }
     const parent = {}
     const instance = {}
-    mocked(SourceLayerShape).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerShape).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
   })
@@ -36,7 +35,7 @@ describe('createSourcLayer', () => {
     const rawLayer = { Type: 'TextGroup' }
     const parent = {}
     const instance = {}
-    mocked(SourceLayerText).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerText).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
   })
@@ -45,7 +44,7 @@ describe('createSourcLayer', () => {
     const rawLayer = { Type: 'MarkedContext' }
     const parent = {}
     const instance = {}
-    mocked(SourceLayerGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerGroup).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
   })
@@ -54,7 +53,7 @@ describe('createSourcLayer', () => {
     const rawLayer = { Type: 'MarkedContext' }
     const parent = {}
     const instance = {}
-    mocked(SourceLayerGroup).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerGroup).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
   })
@@ -82,7 +81,7 @@ describe('createSourcLayer', () => {
 
     const instance = {}
 
-    mocked(SourceLayerXObjectImage).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerXObjectImage).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
     expect(SourceLayerXObjectImage).toHaveBeenCalledWith({
@@ -108,7 +107,7 @@ describe('createSourcLayer', () => {
 
     const instance = {}
 
-    mocked(SourceLayerXObjectForm).mockReturnValueOnce(instance as any)
+    vi.mocked(SourceLayerXObjectForm).mockReturnValueOnce(instance as any)
 
     expect(createSourceLayer({ layer: rawLayer, parent } as any)).toBe(instance)
     expect(SourceLayerXObjectForm).toHaveBeenCalledWith({

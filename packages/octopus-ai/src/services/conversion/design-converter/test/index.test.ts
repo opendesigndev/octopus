@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 
 import { OctopusManifest } from '../../../../entities/octopus/octopus-manifest.js'
 import { ArtboardConverter } from '../../artboard-converter/index.js'
 import { DesignConverter } from '../index.js'
 
-jest.mock('../../artboard-converter')
-jest.mock('../../../../entities/octopus/octopus-manifest')
+vi.mock('../../artboard-converter')
+vi.mock('../../../../entities/octopus/octopus-manifest')
 
 function getDesignConverterTestInstance({
   sourceDesignOption,
@@ -27,19 +27,21 @@ function getDesignConverterTestInstance({
 }
 
 const manifestInstanceMock: any = {
-  setExportedImage: jest.fn(),
-  convert: jest.fn(),
-  setExportedArtboard: jest.fn(),
-  registerBasePath: jest.fn(),
+  setExportedImage: vi.fn(),
+  convert: vi.fn(),
+  setExportedArtboard: vi.fn(),
+  registerBasePath: vi.fn(),
 }
-mocked(OctopusManifest).mockReturnValue(manifestInstanceMock)
+vi.mocked(OctopusManifest).mockReturnValue(manifestInstanceMock)
 
 describe('DesignConverter', () => {
   describe('_convertArtboardByIdSafe', () => {
-    afterEach(jest.clearAllMocks)
+    afterEach(() => {
+      vi.clearAllMocks()
+    })
     it('returns value with no error when ArtboardConverter returns', () => {
       const testInstance = getDesignConverterTestInstance({})
-      mocked(ArtboardConverter).mockReturnValueOnce({ convert: () => ({ id: '1' }) } as any)
+      vi.mocked(ArtboardConverter).mockReturnValueOnce({ convert: () => ({ id: '1' }) } as any)
       const artboardId = '1'
       const result = testInstance['_convertArtboardByIdSafe']('1')
 
@@ -55,7 +57,7 @@ describe('DesignConverter', () => {
         throw error
       }
 
-      mocked(ArtboardConverter).mockReturnValueOnce({
+      vi.mocked(ArtboardConverter).mockReturnValueOnce({
         convert,
       } as any)
 
@@ -70,7 +72,7 @@ describe('DesignConverter', () => {
   describe('convertArtboardById', () => {
     it('returns result from benchmark', () => {
       const testInstance = getDesignConverterTestInstance({})
-      const _convertArtboardByIdSafeMock = jest.fn().mockReturnValueOnce({ value: { id: '1' }, error: null })
+      const _convertArtboardByIdSafeMock = vi.fn().mockReturnValueOnce({ value: { id: '1' }, error: null })
       testInstance['_convertArtboardByIdSafe'] = _convertArtboardByIdSafeMock
 
       expect(testInstance.convertArtboardById('1')).toEqual({
@@ -85,12 +87,12 @@ describe('DesignConverter', () => {
   describe('_exportArtboard', () => {
     it('exports,returns and sets to manifest artboard and images', async () => {
       const manifestInstanceMock: any = {
-        setExportedImage: jest.fn(),
-        convert: jest.fn(),
-        setExportedArtboard: jest.fn(),
-        registerBasePath: jest.fn(),
+        setExportedImage: vi.fn(),
+        convert: vi.fn(),
+        setExportedArtboard: vi.fn(),
+        registerBasePath: vi.fn(),
       }
-      mocked(OctopusManifest).mockReturnValueOnce(manifestInstanceMock)
+      vi.mocked(OctopusManifest).mockReturnValueOnce(manifestInstanceMock)
 
       const sourceDesign = {
         images: [
@@ -100,12 +102,12 @@ describe('DesignConverter', () => {
         ],
       }
       const testInstance = getDesignConverterTestInstance({ sourceDesignOption: sourceDesign })
-      testInstance.convertArtboardById = jest
+      testInstance.convertArtboardById = vi
         .fn()
         .mockReturnValueOnce({ id: 1, value: { id: '1' }, error: null, time: 5 })
       const exporter: any = {
-        exportImage: jest.fn().mockImplementation(async (imagePath) => 'root/' + imagePath),
-        exportArtboard: jest.fn().mockImplementation(async (artboard) => 'root/' + artboard.value.id),
+        exportImage: vi.fn().mockImplementation(async (imagePath) => 'root/' + imagePath),
+        exportArtboard: vi.fn().mockImplementation(async (artboard) => 'root/' + artboard.value.id),
       }
       const artboard: any = {
         id: '1',
@@ -139,12 +141,12 @@ describe('DesignConverter', () => {
   describe('convert', () => {
     it('returns manifest, artboard  and images', async () => {
       const manifestInstanceMock: any = {
-        setExportedImage: jest.fn(),
-        convert: jest.fn(),
-        setExportedArtboard: jest.fn(),
-        registerBasePath: jest.fn(),
+        setExportedImage: vi.fn(),
+        convert: vi.fn(),
+        setExportedArtboard: vi.fn(),
+        registerBasePath: vi.fn(),
       }
-      mocked(OctopusManifest).mockReturnValueOnce(manifestInstanceMock)
+      vi.mocked(OctopusManifest).mockReturnValueOnce(manifestInstanceMock)
 
       const sourceDesign = {
         artboards: [
@@ -154,8 +156,8 @@ describe('DesignConverter', () => {
       }
 
       const exporter: any = {
-        exportAuxiliaryData: jest.fn(),
-        finalizeExport: jest.fn(),
+        exportAuxiliaryData: vi.fn(),
+        finalizeExport: vi.fn(),
       }
 
       const testInstance = getDesignConverterTestInstance({
@@ -169,8 +171,8 @@ describe('DesignConverter', () => {
           artboard: val,
         }),
       }
-      testInstance['_initArtboardQueue'] = jest.fn().mockReturnValueOnce(queueMock)
-      testInstance['_exportManifest'] = jest.fn().mockReturnValue(manifestInstanceMock)
+      testInstance['_initArtboardQueue'] = vi.fn().mockReturnValueOnce(queueMock)
+      testInstance['_exportManifest'] = vi.fn().mockReturnValue(manifestInstanceMock)
 
       const value = await testInstance.convert()
 

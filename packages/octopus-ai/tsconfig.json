@@ -10,11 +10,14 @@
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": false,
+    "skipLibCheck": true,
     "lib": ["es2019", "ES2015.Proxy", "dom"],
-    "skipLibCheck": true
   },
-  "include": ["src/**/*", "test/**/*", "examples"]
+  "ts-node": {
+    "esm": true
+},
+  "include": ["src", "test", "examples"]
 }

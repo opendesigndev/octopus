@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it, vi } from 'vitest'
 
 import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient.js'
 
@@ -31,7 +32,7 @@ describe('OctopusEffectGradientFill', () => {
           ],
         },
       } as any)
-      octopusEffectGradientFill['_readEncode'] = jest.fn().mockReturnValue([
+      octopusEffectGradientFill['_readEncode'] = vi.fn().mockReturnValue([
         [1, 1],
         [2, 2],
       ])
@@ -62,7 +63,7 @@ describe('OctopusEffectGradientFill', () => {
       } as any)
 
       const _parseLinearGradientMockReturnValue = {}
-      octopusEffectGradientFill['_parseLinearGradient'] = jest
+      octopusEffectGradientFill['_parseLinearGradient'] = vi
         .fn()
         .mockReturnValueOnce(_parseLinearGradientMockReturnValue)
 
@@ -78,7 +79,7 @@ describe('OctopusEffectGradientFill', () => {
       } as any)
 
       const _parseRadialGradientMockValue = {}
-      octopusEffectGradientFill['_parseRadialGradient'] = jest.fn().mockReturnValueOnce(_parseRadialGradientMockValue)
+      octopusEffectGradientFill['_parseRadialGradient'] = vi.fn().mockReturnValueOnce(_parseRadialGradientMockValue)
 
       expect(octopusEffectGradientFill['_parseGradient']()).toBe(_parseRadialGradientMockValue)
     })
