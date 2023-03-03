@@ -28,7 +28,6 @@
     "types:check": "yarn workspaces run types:check",
     "verify": "yarn lint && yarn build && yarn test"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
@@ -42,5 +41,6 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "typescript": "4.9.5"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }

@@ -6,7 +6,7 @@ export type AuxiliaryData = { metadata: string; additionalTextData: string | nul
 
 export interface Exporter {
   exportAuxiliaryData?(_design: SourceDesign): Promise<AuxiliaryData>
-  exportImage?(_path: string, _data: Buffer): Promise<unknown>
+  exportImage?(_path: string, _data: Uint8Array): Promise<unknown>
   exportArtboard?(_source: SourceArtboard, _artboard: ArtboardConversionResult): Promise<unknown>
   exportManifest?(_manifest: DesignConversionResult): Promise<unknown>
   getBasePath(): Promise<string>

@@ -3,22 +3,19 @@
 import { mkdir, readFile } from 'fs/promises'
 
 import { ArtBoard, ArtBoardRefs, PrivateData } from '@opendesign/illustrator-parser-pdfcpu'
-import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/dist/fs_context'
+import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { describe, expect, it, vi } from 'vitest'
 
-import { logger } from '../../../instances/logger.js'
-import { AIFileReader } from '../index.js'
+import { AIFileReaderNode } from '../ai-file-reader-node.js'
 
 vi.mock('@opendesign/illustrator-parser-pdfcpu/fs_context')
-vi.mock('@opendesign/illustrator-parser-pdfcpu/index')
+vi.mock('@opendesign/illustrator-parser-pdfcpu')
 vi.mock('fs/promises')
-vi.mock('../../../instances/logger')
 
 describe('AIFileReader', () => {
   describe('_getSourceData', () => {
-    afterEach(() => vi.resetAllMocks())
     it('returns source data and sets class properties', async () => {
-      AIFileReader.prototype['_resourcesDir'] = 'root/path'
+      AIFileReaderNode.prototype['_resourcesDir'] = 'root/path'
 
       const ctxMock: any = {
         Bitmaps: { img1: 'image-1.jpg' },
@@ -30,7 +27,7 @@ describe('AIFileReader', () => {
       vi.mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
       vi.mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
 
-      const result = await AIFileReader.prototype['_getSourceData']('root/path')
+      const result = await AIFileReaderNode.prototype['_getSourceData']()
 
       expect(mkdir).toHaveBeenCalledWith('root/path', { recursive: true })
       expect(result).toEqual({
@@ -38,7 +35,7 @@ describe('AIFileReader', () => {
         artboards: [{ id: '1' }, { id: '2' }],
         metadata: { version: '1.0.1' },
       })
-      expect(AIFileReader.prototype['_images']).toEqual(ctxMock.Bitmaps)
+      expect(AIFileReaderNode.prototype['_images']).toEqual(ctxMock.Bitmaps)
       expect(ArtBoardRefs).toHaveBeenCalledWith(ctxMock)
       expect(ArtBoard).toHaveBeenNthCalledWith(1, ctxMock, { idx: 1 })
       expect(ArtBoard).toHaveBeenNthCalledWith(2, ctxMock, { idx: 2 })
@@ -47,13 +44,13 @@ describe('AIFileReader', () => {
 
   describe('_loadImages', () => {
     it('creates objects with image properties and get getImageData', () => {
-      AIFileReader.prototype['_instanceResourcesDir'] = 'root/tempdir'
-      AIFileReader.prototype['_images'] = {
+      AIFileReaderNode.prototype['_instanceResourcesDir'] = 'root/tempdir'
+      AIFileReaderNode.prototype['_images'] = {
         img1: 'image-1.jpg',
         img2: 'image-2.jpg',
       }
 
-      expect(AIFileReader.prototype['_loadImages']()).toEqual([
+      expect(AIFileReaderNode.prototype['_loadImages']()).toEqual([
         {
           getImageData: expect.any(Function),
           id: 'image-1.jpg',
@@ -68,8 +65,8 @@ describe('AIFileReader', () => {
     })
 
     it('returns value from  getImageData when it gets called', async () => {
-      AIFileReader.prototype['_instanceResourcesDir'] = 'root/tempdir'
-      AIFileReader.prototype['_images'] = {
+      AIFileReaderNode.prototype['_instanceResourcesDir'] = 'root/tempdir'
+      AIFileReaderNode.prototype['_images'] = {
         img1: 'image-1.jpg',
         img2: 'image-2.jpg',
       }
@@ -80,15 +77,15 @@ describe('AIFileReader', () => {
       vi.mocked(readFile).mockResolvedValueOnce(image1Value)
       vi.mocked(readFile).mockResolvedValueOnce(image2Value)
 
-      const images = AIFileReader.prototype['_loadImages']()
+      const images = AIFileReaderNode.prototype['_loadImages']()
 
       expect(await images[0].getImageData()).toEqual(image1Value)
       expect(await images[1].getImageData()).toEqual(image2Value)
     })
 
     it('it logs error before throwing', async () => {
-      AIFileReader.prototype['_instanceResourcesDir'] = 'root/tempdir'
-      AIFileReader.prototype['_images'] = {
+      AIFileReaderNode.prototype['_instanceResourcesDir'] = 'root/tempdir'
+      AIFileReaderNode.prototype['_images'] = {
         img1: 'image-1.jpg',
         img2: 'image-2.jpg',
       }
@@ -96,19 +93,17 @@ describe('AIFileReader', () => {
       vi.mocked(readFile).mockRejectedValueOnce('could not read image 1')
       vi.mocked(readFile).mockRejectedValueOnce('could not read image 2')
 
-      const images = AIFileReader.prototype['_loadImages']()
+      const images = AIFileReaderNode.prototype['_loadImages']()
 
       try {
         await images[0].getImageData()
       } catch (err) {
-        expect(logger.error).toHaveBeenCalledWith('Failed to read image', 'root/tempdir/bitmaps/image-1.jpg')
         expect(err).toEqual('could not read image 1')
       }
 
       try {
         await images[1].getImageData()
       } catch (err) {
-        expect(logger.error).toHaveBeenCalledWith('Failed to read image', 'root/tempdir/bitmaps/image-2.jpg')
         expect(err).toEqual('could not read image 2')
       }
     })
@@ -117,37 +112,35 @@ describe('AIFileReader', () => {
   describe('_createSourceTree', () => {
     it('returns sourceTree', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
+      AIFileReaderNode.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
+      AIFileReaderNode.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
       } as any) as any
 
-      expect(await AIFileReader.prototype['_createSourceTree']('root/path')).toEqual({
+      expect(await AIFileReaderNode.prototype['_createSourceTree']()).toEqual({
         additionalTextData: { Texts: [] },
         artboards: [{ id: 1 }],
         images: [{ id: 'img1.jpg' }],
         metadata: { version: 10 },
       })
-
-      expect(AIFileReader.prototype['_getSourceData']).toHaveBeenCalledWith('root/path')
     })
 
     it('throws when metadata is unavailable', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
+      AIFileReaderNode.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = undefined
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
+      AIFileReaderNode.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -155,7 +148,7 @@ describe('AIFileReader', () => {
 
       let error
       try {
-        await AIFileReader.prototype['_createSourceTree']('root/path')
+        await AIFileReaderNode.prototype['_createSourceTree']()
       } catch (err) {
         error = err
       }
@@ -164,13 +157,13 @@ describe('AIFileReader', () => {
 
     it('throws when artboards have 0 length', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
+      AIFileReaderNode.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = []
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
+      AIFileReaderNode.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -178,7 +171,7 @@ describe('AIFileReader', () => {
 
       let error
       try {
-        await AIFileReader.prototype['_createSourceTree']('root/path')
+        await AIFileReaderNode.prototype['_createSourceTree']()
       } catch (err) {
         error = err
       }
@@ -188,13 +181,13 @@ describe('AIFileReader', () => {
 
     it('throws when artboards have 0 length', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
+      AIFileReaderNode.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = []
       const metadata = { version: 10 }
       const additionalTextData = { Texts: [] }
 
-      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
+      AIFileReaderNode.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -202,7 +195,7 @@ describe('AIFileReader', () => {
 
       let error
       try {
-        await AIFileReader.prototype['_createSourceTree']('root/path')
+        await AIFileReaderNode.prototype['_createSourceTree']()
       } catch (err) {
         error = err
       }
@@ -212,13 +205,13 @@ describe('AIFileReader', () => {
 
     it('throws when additionalTextData are not present', async () => {
       const images: any = [{ id: 'img1.jpg' }]
-      AIFileReader.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
+      AIFileReaderNode.prototype['_loadImages'] = vi.fn().mockReturnValueOnce(images) as any
 
       const artboards: any = [{ id: 1 }]
       const metadata = { version: 10 }
       const additionalTextData = undefined
 
-      AIFileReader.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
+      AIFileReaderNode.prototype['_getSourceData'] = vi.fn().mockResolvedValueOnce({
         artboards,
         metadata,
         additionalTextData,
@@ -226,7 +219,7 @@ describe('AIFileReader', () => {
 
       let error
       try {
-        await AIFileReader.prototype['_createSourceTree']('root/path')
+        await AIFileReaderNode.prototype['_createSourceTree']()
       } catch (err) {
         error = err
       }

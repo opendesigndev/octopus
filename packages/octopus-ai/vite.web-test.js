@@ -3,6 +3,8 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 import { defineConfig } from 'vite'
+import topLevelAwait from 'vite-plugin-top-level-await'
+import wasm from 'vite-plugin-wasm'
 
 export default defineConfig({
   build: {
@@ -15,9 +17,10 @@ export default defineConfig({
     commonjsOptions: { include: [/node_modules/, /@opendesign\/octopus-common/] },
     outDir: 'examples/web',
     emptyOutDir: false,
-    // minify: 'none'
+    minify: 'none',
   },
   resolve: {
     preserveSymlinks: true,
   },
+  plugins: [wasm(), topLevelAwait()],
 })

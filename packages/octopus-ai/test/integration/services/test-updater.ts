@@ -1,16 +1,17 @@
 import fsp from 'fs/promises'
 import path from 'path'
 
-import { OctopusAIConverter } from '../../../src/index.js'
-import { AIFileReader } from '../../../src/services/conversion/ai-file-reader/index.js'
+import { AssetsReader } from './assets-reader.js'
+import { createConverter } from '../../../src/index-node.js'
 import { TempExporter } from '../../../src/services/conversion/exporters/temp-exporter.js'
+import { AIFileReaderNode } from '../../../src/services/readers/ai-file-reader-node.js'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
 import { getSourceDesign } from '../utils.js'
-import { AssetsReader } from './assets-reader.js'
 
+import type { TestDirectoryData } from './assets-reader.js'
+import type { OctopusAIConverter } from '../../../src/octopus-ai-converter.js'
 import type { Manifest } from '../../../src/typings/manifest/index.js'
 import type { Octopus } from '../../../src/typings/octopus/index.js'
-import type { TestDirectoryData } from './assets-reader.js'
 
 interface TestUpdaterAssetsReader {
   getTestsDirectoryData: () => Promise<TestDirectoryData[]>
@@ -30,14 +31,14 @@ export class TestUpdater {
 
   constructor(assetsReader: TestUpdaterAssetsReader) {
     this._assetsReader = assetsReader
-    this._octopusAIConverter = new OctopusAIConverter({})
+    this._octopusAIConverter = createConverter()
   }
 
   private async _getTestsAssets(): Promise<TestAssets[]> {
     const testsDirectoryData = await this._assetsReader.getTestsDirectoryData()
     return Promise.all(
       testsDirectoryData.map(async ({ designPath, expectedDirPath, testName, testPath }) => {
-        const fileReader = new AIFileReader({ path: designPath })
+        const fileReader = new AIFileReaderNode({ path: designPath })
 
         const sourceDesign = await getSourceDesign(fileReader)
 

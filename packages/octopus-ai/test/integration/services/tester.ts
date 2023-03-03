@@ -2,15 +2,16 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { OctopusAIConverter } from '../../../src/index.js'
-import { AIFileReader } from '../../../src/services/conversion/ai-file-reader/index.js'
+import { createConverter } from '../../../src/index-node.js'
+import { AIFileReaderNode } from '../../../src/services/readers/ai-file-reader-node.js'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
 import { getSourceDesign } from '../utils.js'
 
+import type { AssetsReader, TestComponents, Component } from './assets-reader.js'
 import type { SourceDesign } from '../../../src/entities/source/source-design.js'
+import type { OctopusAIConverter } from '../../../src/octopus-ai-converter.js'
 import type { Manifest } from '../../../src/typings/manifest/index.js'
 import type { Octopus } from '../../../src/typings/octopus/index.js'
-import type { AssetsReader, TestComponents, Component } from './assets-reader.js'
 
 type ArtboardGroup = { expected: Component<Octopus['OctopusComponent']> | null; generated: Octopus['OctopusComponent'] }
 
@@ -38,7 +39,7 @@ export class Tester {
 
   constructor(assetsReader: AssetsReader) {
     this._assetsReader = assetsReader
-    this._octopusAIConverter = new OctopusAIConverter({})
+    this._octopusAIConverter = createConverter()
   }
 
   private _mapArtboards({
@@ -63,7 +64,7 @@ export class Tester {
   private _getDesigns(testComponentsArray: TestComponents[]): Promise<ConvertedDesign>[] {
     const convertedDesigns = testComponentsArray.map(
       async ({ artboards: artboardComponents, manifest: manifestComponent, designPath }) => {
-        const fileReader = new AIFileReader({ path: designPath })
+        const fileReader = new AIFileReaderNode({ path: designPath })
         const sourceDesign: SourceDesign = await getSourceDesign(fileReader)
 
         const { artboards: artboardConversionResults, manifest } = await this._octopusAIConverter.convertDesign({

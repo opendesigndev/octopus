@@ -1,8 +1,8 @@
-import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
+import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { SourceArtboard } from './source-artboard'
+import { SourceArtboard } from './source-artboard.js'
 
-import type { Metadata } from '../../services/conversion/ai-file-reader/index.js'
+import type { Metadata } from '../../services/readers/ai-file-reader.js'
 import type { SourceImage, SourceTree } from '../../typings/index.js'
 import type { AdditionalTextData } from '../../typings/raw/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'

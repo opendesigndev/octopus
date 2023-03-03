@@ -1,17 +1,17 @@
 import path from 'path'
 
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { traverseAndFind, uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { traverseAndFind, uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { initSourceLayerChildren } from '../../utils/layer'
-import { SourceResources } from './source-resources'
+import { SourceResources } from './source-resources.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawObjectId } from '../../typings/raw'
-import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard'
-import type { SourceDesign } from './source-design'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceDesign } from './source-design.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard.js'
+import type { RawObjectId } from '../../typings/raw/index.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types.js'
 
 type SourceArtboardOptions = { artboard: RawArtboardEntry; sourceDesign: SourceDesign }
 export class SourceArtboard {

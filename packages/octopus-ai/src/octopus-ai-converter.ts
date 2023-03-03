@@ -1,18 +1,20 @@
 import { DesignConverter } from './services/conversion/design-converter/index.js'
-import { set as setLogger } from './services/instances/logger.js'
+import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
+import { setDefaults, setLogger } from './services/index.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceDesign } from './entities/source/source-design.js'
 import type { ConvertDesignResult } from './services/conversion/design-converter/index.js'
 import type { Exporter } from './services/conversion/exporters/index.js'
+import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
 import type { Logger } from './typings/index.js'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
 
-export { AIFileReader } from './services/conversion/ai-file-reader/index.js'
-
-type OctopusAIConverteOptions = {
+export type OctopusAIConverteOptions = {
+  platformFactories: WebFactories | NodeFactories
   /** Optional custom Logger. If not passed, default logger will be used. */
   logger?: Logger
+  loggerEnabled?: boolean
 }
 
 export type ConvertDesignOptions = {
@@ -41,14 +43,30 @@ export type ConvertDesignOptions = {
  */
 export class OctopusAIConverter {
   private _pkg: PackageMeta
-
-  constructor(options: OctopusAIConverteOptions) {
-    this._setupLogger(options?.logger)
-    this._pkg = readPackageMeta()
+  private _services: {
+    benchmark: {
+      benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
+    }
   }
 
-  private _setupLogger(logger?: Logger) {
-    if (logger) setLogger(logger)
+  constructor(options: OctopusAIConverteOptions) {
+    this._setGlobals(options)
+    this._pkg = readPackageMeta()
+    this._services = this._initServices()
+  }
+
+  private _initServices() {
+    return {
+      benchmark: getPlatformFactories().createBenchmarkService(),
+    }
+  }
+
+  private _setGlobals(options: OctopusAIConverteOptions): void {
+    setPlatformFactories(options.platformFactories)
+    setDefaults({
+      logger: { enabled: options.loggerEnabled ?? true },
+    })
+    if (options.logger) setLogger(options.logger)
   }
 
   /**

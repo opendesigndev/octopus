@@ -4,11 +4,11 @@ import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { OctopusAIConverter } from '../../src/index.js'
-import { AIFileReader } from '../../src/services/conversion/ai-file-reader/index.js'
-import { TempExporter } from '../../src/services/conversion/exporters/temp-exporter.js'
 import { renderOctopus } from './utils/render-octopus.js'
 import { timestamp } from './utils/timestamp.js'
+import { createConverter } from '../../src/index-node.js'
+import { TempExporter } from '../../src/services/conversion/exporters/temp-exporter.js'
+import { AIFileReaderNode } from '../../src/services/readers/ai-file-reader-node.js'
 
 dotenv.config()
 
@@ -20,7 +20,6 @@ type ConvertAllOptions = {
 
 export async function convertAll({ render, filePath, outputDir }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${path.basename(filePath, '.ai')}`
-
   const exporter = new TempExporter({ tempDir: outputDir, id: designId })
 
   exporter.on('octopus:manifest', (manifest) => {
@@ -69,16 +68,16 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
     file://${octopusPath}`)
   })
 
-  const reader = new AIFileReader({ path: filePath })
+  const reader = new AIFileReaderNode({ path: filePath })
 
-  const sourceDesign = await reader.sourceDesign
+  const sourceDesign = await reader.getSourceDesign()
 
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
     return
   }
 
-  const octopusAIConverter = new OctopusAIConverter({})
+  const octopusAIConverter = createConverter()
   await octopusAIConverter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
   await reader.cleanup()
@@ -89,7 +88,7 @@ async function convert() {
   await convertAll({
     filePath,
     render: process.env.SHOULD_RENDER === 'true',
-    outputDir: path.join(__dirname, '../../', process.env.OUTPUT_DIR ?? 'workdir'),
+    outputDir: new URL(`../../${process.env.OUTPUT_DIR ?? 'workdir'}`, import.meta.url).pathname,
   })
 }
 

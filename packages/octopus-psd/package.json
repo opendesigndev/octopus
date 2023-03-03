@@ -18,11 +18,11 @@
     "convert:debug": "yarn build && node ./dist/examples/node/convert-debug.js",
     "convert:local": "yarn build && node ./dist/examples/node/convert-local.js",
     "prepack": "yarn run build",
+    "types:check": "tsc --noEmit",
     "test": "yarn test:unit && yarn test:integration",
     "test:unit": "vitest run",
     "test:integration": "yarn build && node dist/test/integration/index.js",
     "test:integration:update": "yarn build && node dist/test/integration/update-tests.js",
-    "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index.ts",
     "watch": "rimraf ./dist && tsc -w"
   },

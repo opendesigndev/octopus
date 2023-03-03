@@ -1,17 +1,17 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import isEqual from 'lodash/isEqual.js'
 
-import { logger } from '../../services/instances/logger.js'
-import { initSourceLayerChildren } from '../../utils/layer.js'
-import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceLayerSubText } from './source-layer-sub-text.js'
+import { logger } from '../../services/index.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 
-import type { RawTextLayer } from '../../typings/raw/index.js'
-import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
 import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayerShape } from './source-layer-shape.js'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
+import type { RawTextLayer } from '../../typings/raw/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerTextOptions = {
@@ -52,7 +52,7 @@ export class SourceLayerText extends SourceLayerCommon {
     })
 
     if (!equalDescendantMatrices) {
-      logger.error('Different transform matrix in the same text group')
+      logger?.error('Different transform matrix in the same text group')
     }
 
     return textSubLayers

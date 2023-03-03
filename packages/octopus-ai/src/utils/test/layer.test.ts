@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common'
+import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer'
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { LayerGroupingService } from '../../services/conversion/layer-grouping-service'
-import { createOctopusLayersFromLayerSequences, initOctopusLayerChildren, initSourceLayerChildren } from '../layer'
+import { buildOctopusLayer, createOctopusLayer } from '../../factories/create-octopus-layer.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { LayerGroupingService } from '../../services/conversion/layer-grouping-service/index.js'
+import { createOctopusLayersFromLayerSequences, initOctopusLayerChildren, initSourceLayerChildren } from '../layer.js'
 
 vi.mock('../../services/instances/text-layer-grouping-service', () => ({
   __esModule: true,

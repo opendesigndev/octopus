@@ -1,8 +1,13 @@
 import pino from 'pino'
 import pinoPretty from 'pino-pretty'
 
-export function createDefaultLogger(): ReturnType<typeof pino> {
+import { env } from '../../../index.js'
+
+import type { LoggerFactory, CreateLoggerOptions } from '../logger-factory.js'
+
+const createLoggerNode: LoggerFactory = (options: CreateLoggerOptions = { enabled: true }): ReturnType<typeof pino> => {
   return pino({
+    enabled: options.enabled,
     formatters: {
       bindings: ({ pid }) => {
         return {
@@ -16,9 +21,9 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
       },
     },
     messageKey: 'message',
-    level: process.env.LOG_LEVEL || 'debug',
+    level: env.LOG_LEVEL || 'debug',
     prettyPrint:
-      process.env.NODE_ENV === 'debug'
+      env.NODE_ENV === 'debug'
         ? {
             levelFirst: true,
           }
@@ -34,3 +39,5 @@ export function createDefaultLogger(): ReturnType<typeof pino> {
     },
   })
 }
+
+export { createLoggerNode }

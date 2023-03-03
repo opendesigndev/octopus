@@ -3,8 +3,6 @@ import path from 'path'
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import * as x from '@opendesign/octopus-common/dist/utils/as.js'
 
-console.log(x)
-
 import type { DesignConverter } from '../../services/conversion/design-converter/index.js'
 import type { Manifest } from '../../typings/manifest/index.js'
 import type { RawArtboardMediaBox } from '../../typings/raw/index.js'
