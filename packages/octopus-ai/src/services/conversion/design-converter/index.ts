@@ -1,5 +1,5 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
-import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
+import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-web.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 
