@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   const { createConverter, AIFileReaderWeb, WebExporter } = OctopusAI
   console.log('OctopusAI:', OctopusAI)
   const readerOptions = {
-    path: './simple.ai',
+    path: './assets/inside-photo.ai',
   }
 
   try {
