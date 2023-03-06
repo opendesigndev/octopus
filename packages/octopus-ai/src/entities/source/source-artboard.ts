@@ -1,10 +1,9 @@
-import path from 'path'
-
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { traverseAndFind, uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { SourceResources } from './source-resources.js'
+import { pathBasename } from '../../utils/fs-path.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 
 import type { SourceDesign } from './source-design.js'
@@ -98,8 +97,9 @@ export class SourceArtboard {
   private _getArtboardAssetsImages(): string[] {
     const entries = traverseAndFind(this._rawArtboard, (obj: unknown) => {
       const image = Object(obj)?.Data?.Image
+
       if (image) {
-        return path.basename(image)
+        return pathBasename(image)
       }
       return undefined
     })

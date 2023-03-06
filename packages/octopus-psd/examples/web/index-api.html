@@ -20,7 +20,7 @@
         try {
           const converter = createConverter()
 
-          const reader = new PSDFileReaderWeb(readerOptions)
+          const reader = await PSDFileReaderWeb.withRenderer(readerOptions)
           const sourceDesign = await reader.getSourceDesign()
 
           if (sourceDesign === null) {

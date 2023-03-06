@@ -8,8 +8,8 @@ import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from 
 import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 import type { AbstractExporter } from './abstract-exporter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type DebugExporterOptions = {

@@ -22,9 +22,11 @@ Check [`examples/node/convert-local.ts`](./examples/node/convert-local.ts) for e
 
 Check [`examples/node/convert-debug.ts`](./examples/node/convert-debug.ts) for example usage in custom manual runs.
 
+Check [`examples/web/`](./examples/web/) for more details about usage in web browsers.
+
 Check [`src/services/conversion/exporters/`](./src/services/conversion/exporters/index.ts) for more details about exporters.
 
-Check [`src/services/conversion/ai-file-reader/`](./src/services/conversion/ai-file-reader/index.ts) for more details about AIFileReader
+Check [`src/services/conversion/readers/`](./src/services/conversion/readers) for more details about AIFileReaderNode and AIFileReaderWeb
 
 ## TypeDoc
 
@@ -51,6 +53,11 @@ Designed for running in automated runs.
 yarn convert:local PATH_TO_AI_FILE
 ```
 
+## Demo: Example Web
+
+Run `yarn bundle` and then open `examples/web/dist/index.html` in [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+Make sure that links in generated `index.html` are correctly setup by configuring your live server or placing generated `.js`  and `.wasm` files in corresponding folder (`/assets`).
+Look for `Result:` in console output.
 ### .env variables
 
 If missing `.env` file, make a copy of `.env.example` and rename it to `.env` and fill correct info.

@@ -1,9 +1,11 @@
-import path from 'path'
-
+import { SourceLayerCommon } from './source-layer-common.js'
+import { pathBasename } from '../../utils/fs-path.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 import { createSoftMask, initClippingMask } from '../../utils/mask.js'
-import { SourceLayerCommon } from './source-layer-common.js'
 
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type {
   RawGraphicsState,
   RawResourcesExtGState,
@@ -12,9 +14,6 @@ import type {
   XObjectSubtype,
 } from '../../typings/raw/index.js'
 import type { RawXObjectLayer } from '../../typings/raw/x-object.js'
-import type { SourceLayerParent } from './source-layer-common.js'
-import type { SourceLayerShape } from './source-layer-shape.js'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerXObjectImageOptions = {
@@ -83,8 +82,7 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     const { subtype } = this
     if (!subtype || subtype !== 'Image') return null
     const data = this._rawValue?.Data as RawResourcesXObjectImage
-
-    return data?.[subtype] ? path.basename(data[subtype]) : null
+    return data?.[subtype] ? pathBasename(data[subtype]) : null
   }
 
   private get _clippingPath(): Nullish<RawGraphicsState['ClippingPath']> {
