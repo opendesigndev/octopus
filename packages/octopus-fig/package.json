@@ -29,9 +29,9 @@
   },
   "dependencies": {
     "@opendesign/figma-parser": "3.0.0-rc.17",
-    "@opendesign/manifest-ts": "3.0.1",
+    "@opendesign/manifest-ts": "3.0.2",
     "@opendesign/octopus-common": "3.0.0-rc.31",
-    "@opendesign/octopus-ts": "3.0.1",
+    "@opendesign/octopus-ts": "3.0.2",
     "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.1",
     "dotenv": "16.0.0",
