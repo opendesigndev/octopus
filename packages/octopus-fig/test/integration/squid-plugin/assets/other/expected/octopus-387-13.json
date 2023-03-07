@@ -1,7 +1,7 @@
 {
   "id": "387-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 425,
     "height": 635
@@ -540,10 +540,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 2
+            "blur": 4
           }
         ],
         "layers": [
@@ -721,10 +721,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 2
+            "blur": 4
           }
         ],
         "layers": [
@@ -952,7 +952,7 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "BACKGROUND",
             "blur": 10
@@ -1133,7 +1133,7 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "BACKGROUND",
             "blur": 10
@@ -1364,16 +1364,16 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "BACKGROUND",
             "blur": 10
           },
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 2
+            "blur": 4
           }
         ],
         "layers": [
@@ -1551,16 +1551,16 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "BACKGROUND",
             "blur": 10
           },
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 2
+            "blur": 4
           }
         ],
         "layers": [

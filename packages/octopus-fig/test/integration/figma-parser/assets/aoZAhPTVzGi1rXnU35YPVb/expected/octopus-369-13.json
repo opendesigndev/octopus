@@ -1,7 +1,7 @@
 {
   "id": "369-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.24",
+  "version": "3.0.2",
   "dimensions": {
     "width": 500,
     "height": 500
@@ -142,7 +142,7 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "BACKGROUND",
             "blur": 200

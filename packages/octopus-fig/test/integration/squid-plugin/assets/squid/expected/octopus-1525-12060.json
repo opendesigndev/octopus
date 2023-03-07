@@ -1,7 +1,7 @@
 {
   "id": "1525-12060",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 200,
     "height": 432.91
@@ -1398,10 +1398,10 @@
                     ],
                     "effects": [
                       {
-                        "type": "BLUR",
+                        "type": "BOUNDED_BLUR",
                         "visible": true,
                         "basis": "LAYER_AND_EFFECTS",
-                        "blur": 50
+                        "blur": 100
                       }
                     ],
                     "shape": {
@@ -1453,10 +1453,10 @@
                     ],
                     "effects": [
                       {
-                        "type": "BLUR",
+                        "type": "BOUNDED_BLUR",
                         "visible": true,
                         "basis": "LAYER_AND_EFFECTS",
-                        "blur": 35
+                        "blur": 70
                       }
                     ],
                     "shape": {
@@ -1508,10 +1508,10 @@
                     ],
                     "effects": [
                       {
-                        "type": "BLUR",
+                        "type": "BOUNDED_BLUR",
                         "visible": true,
                         "basis": "LAYER_AND_EFFECTS",
-                        "blur": 35
+                        "blur": 70
                       }
                     ],
                     "shape": {

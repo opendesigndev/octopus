@@ -1,7 +1,7 @@
 {
   "id": "55-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 1515,
     "height": 1000
@@ -541,7 +541,7 @@
             ],
             "effects": [
               {
-                "type": "BLUR",
+                "type": "BOUNDED_BLUR",
                 "visible": true,
                 "basis": "BACKGROUND",
                 "blur": 20
@@ -635,10 +635,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 5
+            "blur": 10
           }
         ],
         "shape": {
@@ -690,10 +690,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 15
+            "blur": 30
           }
         ],
         "shape": {
@@ -793,10 +793,10 @@
               }
             },
             {
-              "type": "BLUR",
+              "type": "BOUNDED_BLUR",
               "visible": true,
               "basis": "LAYER_AND_EFFECTS",
-              "blur": 5
+              "blur": 10
             }
           ],
           "shape": {
@@ -913,10 +913,10 @@
               }
             },
             {
-              "type": "BLUR",
+              "type": "BOUNDED_BLUR",
               "visible": true,
               "basis": "LAYER_AND_EFFECTS",
-              "blur": 5
+              "blur": 10
             }
           ],
           "shape": {
@@ -985,10 +985,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 5
+            "blur": 10
           }
         ],
         "layers": [
@@ -1061,10 +1061,10 @@
         ],
         "effects": [
           {
-            "type": "BLUR",
+            "type": "BOUNDED_BLUR",
             "visible": true,
             "basis": "LAYER_AND_EFFECTS",
-            "blur": 8
+            "blur": 16
           }
         ],
         "shape": {
