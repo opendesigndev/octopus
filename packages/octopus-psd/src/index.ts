@@ -9,6 +9,7 @@ import { readPackageMeta } from './utils/read-pkg-meta.js'
 import type { SourceDesign } from './entities/source/source-design'
 import type { ConvertDesignResult } from './services/conversion/design-converter'
 import type { AbstractExporter } from './services/exporters/abstract-exporter'
+import type { TrackingService } from './services/tracking/tracking-service.js'
 import type { Logger } from './typings'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
 
@@ -26,6 +27,8 @@ export type DesignConverterOptions = {
   designId?: string
   /** Optional Exporter. */
   exporter?: AbstractExporter
+  /**Optional tracking service for tracking features in OctopusManifest */
+  trackingService?: TrackingService
 }
 
 /**

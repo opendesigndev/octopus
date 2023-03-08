@@ -7,9 +7,10 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
+import { renderOctopus } from './utils/render.js'
 import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index.js'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
-import { renderOctopus } from './utils/render.js'
+import { TrackingService } from '../../src/services/tracking/tracking-service.js'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
@@ -63,7 +64,7 @@ async function convertDesign({
     console.error('Creating SourceDesign Failed')
     return
   }
-  converter.convertDesign({ exporter, sourceDesign })
+  converter.convertDesign({ exporter, sourceDesign, trackingService: TrackingService.withDefaultPathKeys() })
   await exporter.completed()
 }
 

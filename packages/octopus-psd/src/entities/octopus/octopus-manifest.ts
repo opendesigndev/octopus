@@ -85,12 +85,17 @@ export class OctopusManifest {
     return this._octopusConverter.pkg.manifestSpecVersion
   }
 
-  get meta(): Manifest['OctopusManifestMeta'] {
+  getMeta(statistics?: Record<string, number>): Manifest['OctopusManifestMeta'] {
     const photoshopICCProfile = this._sourceDesign.iccProfileName
     const converterVersion = this._octopusConverter.pkg.version
     // by default typescript does not check for excess types
     // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
-    return { converterVersion, ...(photoshopICCProfile ? { photoshopICCProfile } : null) }
+
+    return {
+      converterVersion,
+      ...(photoshopICCProfile ? { photoshopSpecifics: { photoshopICCProfile } } : null),
+      ...(statistics ? { statistics } : null),
+    }
   }
 
   get psdVersion(): string {
@@ -194,12 +199,12 @@ export class OctopusManifest {
     return this._sourceDesign.components.map((component) => this._convertComponent(component))
   }
 
-  async convert(): Promise<Manifest['OctopusManifest']> {
+  async convert(statistics?: Record<string, number>): Promise<Manifest['OctopusManifest']> {
     return {
       version: this.version,
       origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
-      meta: this.meta,
+      meta: this.getMeta(statistics),
       pages: [],
       components: this._components,
       chunks: [],
