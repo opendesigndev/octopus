@@ -4,9 +4,9 @@ import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { ComponentConverter } from './component-converter.js'
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { logger } from '../instances/logger.js'
+import { ComponentConverter } from './component-converter.js'
 
 import type { DesignConverterOptions, OctopusPSDConverter } from '../..'
 import type { SourceComponent } from '../../entities/source/source-component'
@@ -116,8 +116,8 @@ export class DesignConverter {
     })
   }
 
-  private async _exportManifest(statictics?: Record<string, number>): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert(statictics))
+  private async _exportManifest(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
+    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert(trackingService))
     await this._exporter?.exportManifest?.({ manifest, time })
     return manifest
   }
@@ -151,8 +151,11 @@ export class DesignConverter {
 
     /** Final trigger of manifest save */
     clearInterval(manifestInterval)
-    const statictics = this._trackingService ? this._trackingService.collectFeatures(components) : undefined
-    const manifest = await this._exportManifest(statictics)
+    if (this._trackingService) {
+      this._trackingService.collectLayerFeatures(components)
+    }
+
+    const manifest = await this._exportManifest(this._trackingService)
 
     /** Trigger finalizer */
     this._exporter?.finalizeExport?.()

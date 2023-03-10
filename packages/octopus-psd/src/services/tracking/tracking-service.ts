@@ -1,32 +1,41 @@
 import { keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import type { Manifest } from '../../typings/manifest'
 import type { ComponentConversionResult } from '../conversion/design-converter.js'
 import type { components } from '@opendesign/octopus-ts/dist/octopus.js'
 
-type PathKey = {
-  path: string
-  byValue: boolean
-}
-
 export class TrackingService {
-  private _pathKeys: PathKey[]
+  private _excludedPaths: RegExp[]
+  private _onlyCountByKeys: RegExp[] = []
   private _featuresSummary: Record<string, number> = {}
 
-  static DEFAULT_PATH_KEYS: PathKey[] = [
-    { path: 'opacity', byValue: false },
-    { path: 'visible', byValue: true },
-    { path: 'shape.fills.type', byValue: true },
-    { path: 'shape.path.type', byValue: true },
-    { path: 'blendMode', byValue: true },
-    { path: 'text.defaultStyle.fills.type', byValue: true },
+  static LAYER_KEY_PREFIX = 'layer'
+  static MANIFEST_KEY_PREFIX = 'manifest'
+  static SPECIFICS_KEY_PREFIX = 'specifics'
+
+  static DEFAULT_EXCLUDED_PATHS: RegExp[] = [
+    new RegExp(/transform\.\[\]/),
+    new RegExp('offset.'),
+    new RegExp(/\bid\b/),
+    new RegExp('geometry'),
+    new RegExp('color.'),
+    new RegExp('.png'),
+    new RegExp(/\bmask\b/),
+    new RegExp('image.ref.value'),
+    new RegExp('name'),
+    new RegExp('refId'),
+    new RegExp('location.path'),
   ]
 
+  static DEFAULT_ONLY_COUNT_BY_KEYS: RegExp[] = [new RegExp('text.value')]
+
   static withDefaultPathKeys(): TrackingService {
-    return new TrackingService(TrackingService.DEFAULT_PATH_KEYS)
+    return new TrackingService(TrackingService.DEFAULT_EXCLUDED_PATHS, TrackingService.DEFAULT_ONLY_COUNT_BY_KEYS)
   }
 
-  constructor(pathKeys: PathKey[]) {
-    this._pathKeys = pathKeys
+  constructor(excludedPaths: RegExp[], onlyCountByKeys: RegExp[]) {
+    this._excludedPaths = excludedPaths
+    this._onlyCountByKeys = onlyCountByKeys
   }
 
   private extractSubpathsFromObject(obj: object): string[][] {
@@ -40,6 +49,7 @@ export class TrackingService {
   private _addKey(key: string) {
     if (!this._featuresSummary[key]) {
       this._featuresSummary[key] = 1
+      return
     }
 
     this._featuresSummary[key] += 1
@@ -84,10 +94,35 @@ export class TrackingService {
     return [...basePaths, ...subPaths]
   }
 
-  private _getPathKey(path: string[]): PathKey | null {
-    const mergedPath = path.filter((pathStr) => isNaN(Number(pathStr))).join('.')
+  private _getKey(object: object, path: string[]): string | null {
+    const mergedPath = path.reduce((mergedPath, pathStr) => {
+      if (isNaN(Number(pathStr))) {
+        return mergedPath ? mergedPath + '.' + pathStr : pathStr
+      }
+      return mergedPath + '.[]'
+    }, '')
 
-    return this._pathKeys.find((pathKey) => pathKey.path === mergedPath) ?? null
+    const isPathExcluded = this._excludedPaths.some((pathKey) => {
+      return pathKey.test(mergedPath)
+    })
+
+    if (isPathExcluded) {
+      return null
+    }
+
+    const value = this._getCurrentValue(object, path)
+    const isByValue =
+      typeof value === 'string' && !this._onlyCountByKeys.some((countByKeyPath) => countByKeyPath.test(mergedPath))
+
+    if (typeof value === 'undefined' || (Array.isArray(value) && !value.length)) {
+      return null
+    }
+
+    if (!isByValue) {
+      return mergedPath
+    }
+
+    return `${mergedPath}.${value}`
   }
 
   private _getCurrentValue(obj: object, path: string[]): object | string {
@@ -104,20 +139,6 @@ export class TrackingService {
     }, obj)
   }
 
-  private _getKey(path: string[], pathKey: PathKey, layer: components['schemas']['Layer']): string | null {
-    const value = this._getCurrentValue(layer, path)
-
-    if (typeof value === 'undefined' || (Array.isArray(value) && !value.length)) {
-      return null
-    }
-
-    if (!pathKey.byValue) {
-      return pathKey.path
-    }
-
-    return `${pathKey.path}.${this._getCurrentValue(layer, path)}`
-  }
-
   private _collectLayerFeatures(layer: components['schemas']['Layer']) {
     const { type: layerType } = layer
 
@@ -125,33 +146,53 @@ export class TrackingService {
       layer.layers.forEach((layer) => this._collectLayerFeatures(layer))
     }
 
-    this._addKey('layers')
+    this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.layers`)
 
     if ('mask' in layer) {
-      this._addKey('masks')
+      this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.masks`)
       this._collectLayerFeatures(layer.mask)
     }
 
     const paths = this._extractPathsFromObject(layer)
 
     paths.forEach((path) => {
-      const pathKey = this._getPathKey(path)
-      if (!pathKey) {
+      const key = this._getKey(layer, path)
+
+      if (!key) {
         return
       }
 
-      const key = this._getKey(path, pathKey, layer)
-      if (key) this._addKey(key)
+      this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.${key}`)
     })
   }
 
-  collectFeatures(components: ComponentConversionResult[]): Record<string, number> {
+  collectLayerFeatures(components: ComponentConversionResult[]) {
     components.forEach((component) => {
       if (component.value?.content) {
         this._collectLayerFeatures(component.value.content)
       }
     })
+  }
 
+  collectManifestFeatures(manifest: Manifest['OctopusManifest']) {
+    const paths = this._extractPathsFromObject(manifest)
+
+    paths.forEach((path) => {
+      const key = this._getKey(manifest, path)
+
+      if (!key) {
+        return
+      }
+
+      this._addKey(`${TrackingService.MANIFEST_KEY_PREFIX}.${key}`)
+    })
+  }
+
+  registerSpecificFeatures(key: string) {
+    this._addKey(`${TrackingService.SPECIFICS_KEY_PREFIX}.${key}`)
+  }
+
+  get statistics(): Record<string, number> {
     return Object.keys(this._featuresSummary)
       .sort()
       .reduce<Record<string, number>>((acc, key) => {

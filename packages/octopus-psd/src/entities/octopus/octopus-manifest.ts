@@ -5,6 +5,7 @@ import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../..'
+import type { TrackingService } from '../../services/tracking/tracking-service.js'
 import type { Manifest } from '../../typings/manifest'
 import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
@@ -86,14 +87,12 @@ export class OctopusManifest {
   }
 
   getMeta(statistics?: Record<string, number>): Manifest['OctopusManifestMeta'] {
-    const photoshopICCProfile = this._sourceDesign.iccProfileName
     const converterVersion = this._octopusConverter.pkg.version
     // by default typescript does not check for excess types
     // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
 
     return {
       converterVersion,
-      ...(photoshopICCProfile ? { photoshopSpecifics: { photoshopICCProfile } } : null),
       ...(statistics ? { statistics } : null),
     }
   }
@@ -199,16 +198,26 @@ export class OctopusManifest {
     return this._sourceDesign.components.map((component) => this._convertComponent(component))
   }
 
-  async convert(statistics?: Record<string, number>): Promise<Manifest['OctopusManifest']> {
-    return {
+  async convert(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
+    const manifest = {
       version: this.version,
       origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
-      meta: this.getMeta(statistics),
+      meta: this.getMeta(),
       pages: [],
       components: this._components,
       chunks: [],
       libraries: [],
     }
+
+    if (!trackingService) return manifest
+
+    trackingService.collectManifestFeatures(manifest)
+
+    if (this._sourceDesign.iccProfileName) {
+      trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
+    }
+
+    return { ...manifest, meta: this.getMeta(trackingService.statistics) }
   }
 }
