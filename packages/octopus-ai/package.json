@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-ai",
-  "version": "3.0.0-rc.5-tarball-02",
+  "version": "3.0.0-rc.5-tarball-03",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
   "scripts": {
