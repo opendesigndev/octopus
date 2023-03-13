@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import type { AdditionalTextData, RawArtboardEntry } from './raw/index.js'
 import type { Metadata } from '../services/readers/ai-file-reader-common.js'
+import type { AdditionalTextData, RawArtboardEntry } from './raw/index.js'
 
-/* eslint-disable @typescript-eslint/ban-types */
 export interface Logger {
   fatal: Function
   error: Function

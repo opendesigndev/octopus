@@ -1,5 +1,5 @@
 import { DesignConverter } from './services/conversion/design-converter/index.js'
-import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
+import { setPlatformFactories } from './services/general/platforms/index.js'
 import { setDefaults, setLogger } from './services/index.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
@@ -43,22 +43,10 @@ export type ConvertDesignOptions = {
  */
 export class OctopusAIConverter {
   private _pkg: PackageMeta
-  private _services: {
-    benchmark: {
-      benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
-    }
-  }
 
   constructor(options: OctopusAIConverteOptions) {
     this._setGlobals(options)
     this._pkg = readPackageMeta()
-    this._services = this._initServices()
-  }
-
-  private _initServices() {
-    return {
-      benchmark: getPlatformFactories().createBenchmarkService(),
-    }
   }
 
   private _setGlobals(options: OctopusAIConverteOptions): void {

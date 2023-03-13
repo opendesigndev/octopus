@@ -87,7 +87,7 @@ Look for `Result:` in console output.
 
 #### Instantiation of PSDFileReader
 
-You can instantiate both [PSDFileReaderWeb](./src/services/readers/psd-file-reader-web.ts) and [PSDFileReaderNode](./src/services/readers/psd-file-reader-node.ts) with static method `withRenderer`.
+You can instantiate both [PSDFileReaders](./src/services/readers/) with static method `withRenderer`.
 This will include library @opendesign/image-icc-profile-converter in the image processing pipeline.
 The process will convert all output images to `sRGB` if PSD file was saved with embedded colour profile. This might make a difference especially for images composed in CMYK colour space.
 

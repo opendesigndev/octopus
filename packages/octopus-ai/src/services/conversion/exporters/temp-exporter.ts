@@ -7,10 +7,10 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 
-import type { Exporter, AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { Exporter, AuxiliaryData } from './index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type TempExporterOptions = {

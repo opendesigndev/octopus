@@ -6,11 +6,9 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
-import { createConverter } from '../../src/index-node.js'
-import { DebugExporter } from '../../src/services/exporters/debug-exporter.js'
-import { PSDFileReaderNode } from '../../src/services/readers/psd-file-reader-node.js'
-import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 import { renderOctopus } from './utils/render.js'
+import { createConverter, DebugExporter, PSDFileReaderNode } from '../../src/index-node.js'
+import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 
 type ConvertAllOptions = {
   shouldRender?: boolean

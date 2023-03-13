@@ -19,8 +19,6 @@ export type RawSourceData = {
 export abstract class AIFileReaderCommon {
   protected _sourceDesign: Promise<SourceDesign>
 
-  static BITMAPS_FOLDER_NAME = 'bitmaps'
-
   protected async _initSourceDesign(): Promise<SourceDesign> {
     return this._fromSourceTree(await this._createSourceTree())
   }

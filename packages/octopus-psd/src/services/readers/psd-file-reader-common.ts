@@ -54,7 +54,7 @@ export type PSDFileReaderOptions = {
 /**
  * Reader that converts Adobe Photoshop .psd file into `SourceDesign` object.
  */
-export abstract class PSDFileReader {
+export abstract class PSDFileReaderCommon {
   private _promisedData: Promise<Uint8Array>
   protected _path: string
   private _designId: string
@@ -260,6 +260,7 @@ export abstract class PSDFileReader {
           _isUnknown: true,
           signature: '8B64',
           key: 'lnsr',
+          // 'bgnd' in utf-8
           data: new Uint8Array([0x62, 0x67, 0x6e, 0x64]),
         },
         [PROPS.LAYER_ID]: {

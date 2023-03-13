@@ -11,8 +11,7 @@
     <script src="./octopus-psd-web.umd.js"></script>
     <script>
       window.addEventListener('DOMContentLoaded', async () => {
-        const { createConverter, PSDFileReaderWeb, WebExporter } = OctopusPSD
-
+        const { createConverter, PSDFileReader, WebExporter } = OctopusPSD
         const readerOptions = {
           path: './smiley.psd',
         }
@@ -20,7 +19,7 @@
         try {
           const converter = createConverter()
 
-          const reader = await PSDFileReaderWeb.withRenderer(readerOptions)
+          const reader = await PSDFileReader.withRenderer(readerOptions)
           const sourceDesign = await reader.getSourceDesign()
 
           if (sourceDesign === null) {

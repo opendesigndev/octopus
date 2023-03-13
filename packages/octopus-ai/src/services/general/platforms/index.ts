@@ -1,3 +1,4 @@
+import type { BenchmarkServiceFactory } from '../benchmark-service/benchmark-service-factory.js'
 import type { Env } from '../environment/index.js'
 import type { LoggerFactory } from '../logger/logger-factory.js'
 
@@ -9,12 +10,8 @@ type WebLoggerFactory = LoggerFactory
 type NodeEnvironmentFactory = () => Env
 
 // Benchmark service
-type NodeBenchmarkFactory = () => {
-  benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
-}
-type WebBenchmarkFactory = () => {
-  benchmarkAsync: <T>(cb: (...args: unknown[]) => Promise<T>) => Promise<{ result: T; time: number }>
-}
+type NodeBenchmarkFactory = BenchmarkServiceFactory
+type WebBenchmarkFactory = BenchmarkServiceFactory
 
 // Node stack
 export type NodeFactories = {

@@ -1,8 +1,8 @@
 import { getRenderer } from '@opendesign/image-icc-profile-converter'
 
-import { PSDFileReader } from './psd-file-reader'
+import { PSDFileReaderCommon } from '../psd-file-reader-common'
 
-import type { ConvertImageOptions } from './psd-file-reader'
+import type { ConvertImageOptions } from '../psd-file-reader-common'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
 
 export type PSDFileReaderWebOptions = WithRendererOptions & {
@@ -18,7 +18,7 @@ export type WithRendererOptions = {
   designId?: string
 }
 
-export class PSDFileReaderWeb extends PSDFileReader {
+export class PSDFileReader extends PSDFileReaderCommon {
   static async readFile(filePath: string): Promise<Uint8Array> {
     const response = await fetch(filePath)
     const buffer = await response.arrayBuffer()
@@ -26,12 +26,12 @@ export class PSDFileReaderWeb extends PSDFileReader {
     return new Uint8Array(buffer)
   }
 
-  static async withRenderer(options: WithRendererOptions): Promise<PSDFileReaderWeb> {
-    if (!PSDFileReader._renderer) {
-      PSDFileReader._renderer = await getRenderer()
+  static async withRenderer(options: WithRendererOptions): Promise<PSDFileReaderCommon> {
+    if (!PSDFileReaderCommon._renderer) {
+      PSDFileReaderCommon._renderer = await getRenderer()
     }
 
-    return new PSDFileReaderWeb({ ...options, renderer: PSDFileReader._renderer })
+    return new PSDFileReader({ ...options, renderer: PSDFileReaderCommon._renderer })
   }
 
   /**
@@ -40,7 +40,7 @@ export class PSDFileReaderWeb extends PSDFileReader {
    * @param {PSDFileReaderWebOptions} options
    */
   constructor(options: PSDFileReaderWebOptions) {
-    const promisedData = PSDFileReaderWeb.readFile(options.path)
+    const promisedData = PSDFileReader.readFile(options.path)
 
     super({ ...options, promisedData })
   }

@@ -81,7 +81,7 @@ export class AIFileReader extends AIFileReaderCommon {
 
     return Object.values(this._images).map((imagePath) => {
       const imageId = path.basename(imagePath)
-      const fullPath = path.join(resourcesDirPath, AIFileReaderCommon.BITMAPS_FOLDER_NAME, imageId)
+      const fullPath = path.join(resourcesDirPath, AIFileReader.BITMAPS_FOLDER_NAME, imageId)
 
       return {
         id: imageId,

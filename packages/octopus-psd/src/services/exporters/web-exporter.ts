@@ -4,29 +4,28 @@ import type { ComponentConversionResult, DesignConversionResult } from '../conve
  * Minimalistic exporter used for web build
  */
 export class WebExporter {
-  static IMAGES_DIR_NAME: string
-  static MANIFEST_NAME: string
-  static getOctopusFileName(_id: string): string {
-    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
-  }
-
   exportComponent(_component: ComponentConversionResult): Promise<unknown> {
+    console.log('exportComponent')
     return Promise.resolve()
   }
 
   exportImage(name: string, _data: Uint8Array): Promise<unknown> {
+    console.log('exportImage', name)
     return Promise.resolve(name)
   }
 
   exportManifest(_manifest: DesignConversionResult): Promise<unknown> {
+    console.log('exportManifest')
     return Promise.resolve()
   }
 
   finalizeExport(): void {
+    console.log('finalizeExport')
     return
   }
 
   getBasePath(): Promise<string> {
-    return Promise.resolve('hello')
+    console.log('getBasePath')
+    return Promise.resolve('')
   }
 }

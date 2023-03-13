@@ -5,9 +5,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter } from '../../src/index-node.js'
-import { LocalExporter } from '../../src/services/conversion/exporters/local-exporter.js'
-import { AIFileReader } from '../../src/services/readers/node/index.js'
+import { createConverter, LocalExporter, AIFileReader } from '../../src/index-node.js'
 
 dotenv.config()
 ;(async () => {

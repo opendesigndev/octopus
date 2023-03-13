@@ -1,12 +1,12 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { DEFAULTS } from './defaults'
-import { createMatrix } from './paper'
+import { DEFAULTS } from './defaults.js'
+import { createMatrix } from './paper.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { RawBlendMode, RawColor, RawStop } from '../typings/raw'
-import type { SourceTransform, SourceVector, SourceGradientPositions } from '../typings/source'
+import type { Octopus } from '../typings/octopus.js'
+import type { RawBlendMode, RawColor, RawStop } from '../typings/raw/index.js'
+import type { SourceTransform, SourceVector, SourceGradientPositions } from '../typings/source.js'
 
 const BLEND_MODES: Octopus['BlendMode'][] = [
   'COLOR',

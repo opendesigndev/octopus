@@ -28,6 +28,7 @@
     "types:check": "yarn workspaces run types:check",
     "verify": "yarn lint && yarn build && yarn test"
   },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "*",
     "@typescript-eslint/eslint-plugin": "^5.26.0",

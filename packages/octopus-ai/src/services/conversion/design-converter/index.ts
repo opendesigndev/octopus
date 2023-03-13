@@ -1,9 +1,9 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
-import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-web.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 import { OctopusManifest } from '../../../entities/octopus/octopus-manifest.js'
+import { getBenchmarkService } from '../../index.js'
 import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service.js'
 import { ArtboardConverter } from '../artboard-converter/index.js'
 import { TextLayerGroupingservice } from '../text-layer-grouping-service/index.js'
@@ -116,13 +116,13 @@ export class DesignConverter {
     const {
       result: { value, error },
       time,
-    } = benchmark(() => this._convertArtboardByIdSafe(targetArtboardId))
+    } = getBenchmarkService()(() => this._convertArtboardByIdSafe(targetArtboardId))
 
     return { id: targetArtboardId, value, error, time }
   }
 
   private async _exportManifest(exporter: Exporter | null): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = benchmark(() => this.manifest.convert())
+    const { time, result: manifest } = getBenchmarkService()(() => this.manifest.convert()) ?? {}
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
   }

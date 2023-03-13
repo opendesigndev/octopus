@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { describe, expect, it, vi, afterEach } from 'vitest'
 
 import { OctopusManifest } from '../../../../entities/octopus/octopus-manifest.js'
+import { getBenchmarkService } from '../../../index.js'
 import { ArtboardConverter } from '../../artboard-converter/index.js'
 import { DesignConverter } from '../index.js'
 
 vi.mock('../../artboard-converter')
 vi.mock('../../../../entities/octopus/octopus-manifest')
+vi.mock('../../../index.js')
 
 function getDesignConverterTestInstance({
   sourceDesignOption,
@@ -71,8 +74,10 @@ describe('DesignConverter', () => {
 
   describe('convertArtboardById', () => {
     it('returns result from benchmark', () => {
+      getBenchmarkService
       const testInstance = getDesignConverterTestInstance({})
       const _convertArtboardByIdSafeMock = vi.fn().mockReturnValueOnce({ value: { id: '1' }, error: null })
+      vi.mocked(getBenchmarkService).mockReturnValueOnce(benchmark) as any
       testInstance['_convertArtboardByIdSafe'] = _convertArtboardByIdSafeMock
 
       expect(testInstance.convertArtboardById('1')).toEqual({

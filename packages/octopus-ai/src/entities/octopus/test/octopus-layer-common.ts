@@ -49,11 +49,3 @@
 //     })
 //   })
 // })
-
-import { describe, expect, it } from 'vitest'
-
-describe('empty test so that vitest does not complain', () => {
-  it('should be ok', () => {
-    expect(true).toBe(true)
-  })
-})

@@ -10,8 +10,6 @@ import type { BitmapReader } from '@opendesign/illustrator-parser-pdfcpu/wasm_co
 type AIFileReaderWebOptions = {
   /** Path to the .ai file. */
   path: string
-  /** Path to directory where output is temporarily saved */
-  resourcesDir?: string
 }
 
 export type Metadata = {
@@ -37,8 +35,6 @@ export class AIFileReader extends AIFileReaderCommon {
 
   private _promisedData: Promise<Uint8Array>
   protected _images: Record<number, BitmapReader>
-
-  static BITMAPS_FOLDER_NAME = 'bitmaps'
 
   /**
    * Converts given AI file into SourceDesign.

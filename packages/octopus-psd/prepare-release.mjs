@@ -61,7 +61,7 @@ async function packFiles() {
 }
 
 function copyDMTStoDTS() {
-  return Promise.all([fs.copyFile(path.join(RELEASE_DIR, 'index.d.mts'), path.join(RELEASE_DIR, 'index.d.ts'))])
+  return fs.copyFile(path.join(RELEASE_DIR, 'index.d.mts'), path.join(RELEASE_DIR, 'index.d.ts'))
 }
 
 async function release() {

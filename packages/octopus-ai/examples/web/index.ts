@@ -16,8 +16,6 @@ window.addEventListener('DOMContentLoaded', async () => {
       return
     }
     const exporter = new WebExporter()
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const result = await converter.convertDesign({ sourceDesign, exporter })
 
     console.info('Result:', result)

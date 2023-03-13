@@ -1,7 +1,6 @@
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-web.js'
-
 import { OctopusAIConverter } from './octopus-ai-converter.js'
 import { WebExporter } from './services/conversion/exporters/web-exporter.js'
+import { createBenchmarkServiceWeb } from './services/general/benchmark-service/web/benchmark-service-web.js'
 import { createLoggerWeb } from './services/general/logger/web/logger-web.js'
 import { AIFileReader } from './services/readers/web/index.js'
 
@@ -15,7 +14,7 @@ export function createConverter(options?: Omit<OctopusAIConverteOptions, 'platfo
     ...options,
     platformFactories: {
       createLoggerFactory: createLoggerWeb,
-      createBenchmarkService: () => ({ benchmarkAsync }),
+      createBenchmarkService: createBenchmarkServiceWeb,
     } as WebFactories,
   })
 }

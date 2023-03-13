@@ -17,5 +17,8 @@
     "skipLibCheck": true,
     "paths": {}
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": ["src", "test", "examples/node"]
 }
