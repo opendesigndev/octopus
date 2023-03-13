@@ -1,10 +1,10 @@
 import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-parser-pdfcpu'
 import { WASMContext } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
-import { AIFileReader } from './ai-file-reader.js'
+import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
-import type { SourceImage } from '../../typings/index.js'
-import type { AdditionalTextData, RawArtboardEntry } from '../../typings/raw/index.js'
+import type { SourceImage } from '../../../typings/index.js'
+import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 import type { BitmapReader } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
 type AIFileReaderWebOptions = {
@@ -27,7 +27,7 @@ export type RawSourceData = {
 /**
  * Reader that converts Adobe Illustrator file into `SourceDesign` object.
  */
-export class AIFileReaderWeb extends AIFileReader {
+export class AIFileReader extends AIFileReaderCommon {
   static async readFile(filePath: string): Promise<Uint8Array> {
     const response = await fetch(filePath)
     const buffer = await response.arrayBuffer()
@@ -47,7 +47,7 @@ export class AIFileReaderWeb extends AIFileReader {
    */
   constructor(options: AIFileReaderWebOptions) {
     super()
-    const promisedData = AIFileReaderWeb.readFile(options.path)
+    const promisedData = AIFileReader.readFile(options.path)
 
     this._promisedData = promisedData
   }

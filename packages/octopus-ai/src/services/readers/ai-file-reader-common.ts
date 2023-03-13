@@ -16,7 +16,7 @@ export type RawSourceData = {
 /**
  * Reader that converts Adobe Illustrator file into `SourceDesign` object.
  */
-export abstract class AIFileReader {
+export abstract class AIFileReaderCommon {
   protected _sourceDesign: Promise<SourceDesign>
 
   static BITMAPS_FOLDER_NAME = 'bitmaps'

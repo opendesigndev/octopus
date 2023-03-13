@@ -96,24 +96,27 @@ describe('DesignConverter', () => {
 
       const sourceDesign = {
         images: [
-          { path: 'path/image-1.jpg', getImageData: async () => 'base64;image-1' },
-          { path: 'path/image-2.jpg', getImageData: async () => 'base64;image-2' },
-          { path: 'path/image-3.jpg', getImageData: async () => 'base64;image-3' },
+          { id: 'image-1.jpg', path: 'path/image-1.jpg', getImageData: async () => 'base64;image-1' },
+          { id: 'image-2.jpg', path: 'path/image-1.jpg', getImageData: async () => 'base64;image-2' },
+          { id: 'image-3.jpg', path: 'path/image-3.jpg', getImageData: async () => 'base64;image-3' },
         ],
       }
+
       const testInstance = getDesignConverterTestInstance({ sourceDesignOption: sourceDesign })
       testInstance.convertArtboardById = vi
         .fn()
         .mockReturnValueOnce({ id: 1, value: { id: '1' }, error: null, time: 5 })
+
       const exporter: any = {
         exportImage: vi.fn().mockImplementation(async (imagePath) => 'root/' + imagePath),
         exportArtboard: vi.fn().mockImplementation(async (artboard) => 'root/' + artboard.value.id),
       }
+
       const artboard: any = {
         id: '1',
         value: { id: '1' },
         dependencies: {
-          images: ['path/image-1.jpg', 'path/image-3.jpg'],
+          images: ['image-1.jpg', 'image-3.jpg'],
         },
       }
 
@@ -124,16 +127,17 @@ describe('DesignConverter', () => {
         images: [sourceDesign.images[0], sourceDesign.images[2]],
       })
 
-      expect(exporter.exportImage).toHaveBeenCalledWith('path/image-1.jpg', 'base64;image-1')
-      expect(exporter.exportImage).toHaveBeenCalledWith('path/image-3.jpg', 'base64;image-3')
+      expect(exporter.exportImage).toHaveBeenCalledWith('image-1.jpg', 'base64;image-1')
+      expect(exporter.exportImage).toHaveBeenCalledWith('image-3.jpg', 'base64;image-3')
 
-      expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-1.jpg', 'root/path/image-1.jpg')
-      expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-3.jpg', 'root/path/image-3.jpg')
+      expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-1.jpg', 'root/image-1.jpg')
+      expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-3.jpg', 'root/image-3.jpg')
 
       expect(exporter.exportArtboard).toHaveBeenCalledWith(
-        { dependencies: { images: ['path/image-1.jpg', 'path/image-3.jpg'] }, id: '1', value: { id: '1' } },
+        { dependencies: { images: ['image-1.jpg', 'image-3.jpg'] }, id: '1', value: { id: '1' } },
         { error: null, id: 1, time: 5, value: { id: '1' } }
       )
+
       expect(manifestInstanceMock.setExportedArtboard).toHaveBeenCalledWith('1', 'root/1')
     })
   })

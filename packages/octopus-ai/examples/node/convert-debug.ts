@@ -8,7 +8,7 @@ import { renderOctopus } from './utils/render-octopus.js'
 import { timestamp } from './utils/timestamp.js'
 import { createConverter } from '../../src/index-node.js'
 import { TempExporter } from '../../src/services/conversion/exporters/temp-exporter.js'
-import { AIFileReaderNode } from '../../src/services/readers/ai-file-reader-node.js'
+import { AIFileReader } from '../../src/services/readers/node/index.js'
 
 dotenv.config()
 
@@ -68,7 +68,7 @@ export async function convertAll({ render, filePath, outputDir }: ConvertAllOpti
     file://${octopusPath}`)
   })
 
-  const reader = new AIFileReaderNode({ path: filePath })
+  const reader = new AIFileReader({ path: filePath })
 
   const sourceDesign = await reader.getSourceDesign()
 

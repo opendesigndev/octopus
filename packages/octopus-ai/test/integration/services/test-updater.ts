@@ -4,7 +4,7 @@ import path from 'path'
 import { AssetsReader } from './assets-reader.js'
 import { createConverter } from '../../../src/index-node.js'
 import { TempExporter } from '../../../src/services/conversion/exporters/temp-exporter.js'
-import { AIFileReaderNode } from '../../../src/services/readers/ai-file-reader-node.js'
+import { AIFileReader } from '../../../src/services/readers/node/index.js'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
 import { getSourceDesign } from '../utils.js'
 
@@ -38,7 +38,7 @@ export class TestUpdater {
     const testsDirectoryData = await this._assetsReader.getTestsDirectoryData()
     return Promise.all(
       testsDirectoryData.map(async ({ designPath, expectedDirPath, testName, testPath }) => {
-        const fileReader = new AIFileReaderNode({ path: designPath })
+        const fileReader = new AIFileReader({ path: designPath })
 
         const sourceDesign = await getSourceDesign(fileReader)
 

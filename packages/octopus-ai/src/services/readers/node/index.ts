@@ -6,10 +6,10 @@ import { PrivateData, ArtBoardRefs, ArtBoard } from '@opendesign/illustrator-par
 import { FSContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 import { v4 as uuidv4 } from 'uuid'
 
-import { AIFileReader } from './ai-file-reader.js'
+import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
-import type { SourceImage } from '../../typings/index.js'
-import type { AdditionalTextData, RawArtboardEntry } from '../../typings/raw/index.js'
+import type { SourceImage } from '../../../typings/index.js'
+import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 
 type AIFileReaderNodeOptions = {
   /** Path to the .ai file. */
@@ -31,7 +31,7 @@ export type RawSourceData = {
 /**
  * Reader that converts Adobe Illustrator file into `SourceDesign` object.
  */
-export class AIFileReaderNode extends AIFileReader {
+export class AIFileReader extends AIFileReaderCommon {
   protected _instanceResourcesDir: string
   private _resourcesDir: string
   private _path: string
@@ -81,7 +81,7 @@ export class AIFileReaderNode extends AIFileReader {
 
     return Object.values(this._images).map((imagePath) => {
       const imageId = path.basename(imagePath)
-      const fullPath = path.join(resourcesDirPath, AIFileReader.BITMAPS_FOLDER_NAME, imageId)
+      const fullPath = path.join(resourcesDirPath, AIFileReaderCommon.BITMAPS_FOLDER_NAME, imageId)
 
       return {
         id: imageId,

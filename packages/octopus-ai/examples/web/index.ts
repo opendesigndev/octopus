@@ -1,7 +1,7 @@
 import * as OctopusAI from '../../src/index-web.js'
 
 window.addEventListener('DOMContentLoaded', async () => {
-  const { createConverter, AIFileReaderWeb, WebExporter } = OctopusAI
+  const { createConverter, AIFileReader, WebExporter } = OctopusAI
   console.log('OctopusAI:', OctopusAI)
   const readerOptions = {
     path: './assets/inside-photo.ai',
@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const converter = createConverter()
-    const reader = new AIFileReaderWeb(readerOptions)
+    const reader = new AIFileReader(readerOptions)
     const sourceDesign = await reader.getSourceDesign()
     if (sourceDesign === null) {
       console.error('Creating SourceDesign Failed')

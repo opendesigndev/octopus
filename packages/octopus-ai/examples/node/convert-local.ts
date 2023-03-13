@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createConverter } from '../../src/index-node.js'
 import { LocalExporter } from '../../src/services/conversion/exporters/local-exporter.js'
-import { AIFileReaderNode } from '../../src/services/readers/ai-file-reader-node.js'
+import { AIFileReader } from '../../src/services/readers/node/index.js'
 
 dotenv.config()
 ;(async () => {
@@ -18,7 +18,7 @@ dotenv.config()
     return
   }
 
-  const reader = new AIFileReaderNode({ path: filePath })
+  const reader = new AIFileReader({ path: filePath })
 
   const sourceDesign = await reader.getSourceDesign()
 
