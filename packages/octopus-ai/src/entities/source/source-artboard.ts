@@ -10,7 +10,6 @@ import type { SourceDesign } from './source-design.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawArtboardEntry, RawArtboardMediaBox } from '../../typings/raw/artboard.js'
 import type { RawObjectId } from '../../typings/raw/index.js'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types.js'
 
 type SourceArtboardOptions = { artboard: RawArtboardEntry; sourceDesign: SourceDesign }
 export class SourceArtboard {
@@ -49,11 +48,11 @@ export class SourceArtboard {
     return this._id
   }
 
-  get name(): Nullish<string> {
+  get name(): string | undefined {
     return this._rawArtboard.Name
   }
 
-  get children(): Nullish<SourceLayer[]> {
+  get children(): SourceLayer[] | undefined {
     return this._children
   }
 
