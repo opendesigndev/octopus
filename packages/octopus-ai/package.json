@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-ai",
-  "version": "3.0.0-rc.5-tarball-01",
+  "version": "3.0.0-rc.5-tarball-02",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
   "scripts": {
@@ -25,7 +25,8 @@
     "test:integration": "ts-node test/integration/index.ts",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "typedoc": "typedoc --excludePrivate src/index.ts",
-    "watch": "rimraf ./dist && tsc -w"
+    "watch": "rimraf ./dist && tsc -w",
+    "prepublish": "yarn release:bundle && node ./prepare-release.mjs"
   },
   "dependencies": {
     "@opendesign/illustrator-parser-pdfcpu": "1.1.2",
@@ -42,11 +43,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.26.0",
-    "@typescript-eslint/parser": "^5.26.0",
     "@types/chalk": "^2.2.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
@@ -54,8 +50,13 @@
     "@types/pino-std-serializers": "2.4.1",
     "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "chalk": "^4.1.2",
     "enhanced-resolve": "^5.12.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "handlebars": "^4.7.7",
     "jsondiffpatch": "^0.4.1",
     "rimraf": "^3.0.2",
@@ -75,5 +76,8 @@
     ".": {
       "default": "./dist/src/index-web.js"
     }
+  },
+  "publishConfig": {
+    "directory": "./release"
   }
 }
