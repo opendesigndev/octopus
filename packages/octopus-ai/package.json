@@ -13,7 +13,6 @@
     "release:cleanup": "rimraf ./release ./release.tgz",
     "release:publish": "yarn publish release.tgz --non-interactive --ignore-scripts",
     "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
-    "release:test": "yarn release:bundle && node ./prepare-release.mjs",
     "clean:workdir": "rimraf ./workdir/*",
     "clean": "rimraf ./node_modules ./dist ./workdir ./docs",
     "convert:debug": "ts-node ./examples/node/convert-debug.ts",
@@ -77,8 +76,5 @@
     ".": {
       "default": "./dist/src/index-web.js"
     }
-  },
-  "publishConfig": {
-    "directory": "release"
   }
 }

@@ -24,7 +24,8 @@
     "test:integration": "yarn build && node dist/test/integration/index.js",
     "test:integration:update": "yarn build && node dist/test/integration/update-tests.js",
     "typedoc": "typedoc --excludePrivate src/index.ts",
-    "watch": "rimraf ./dist && tsc -w"
+    "watch": "rimraf ./dist && tsc -w",
+    "prepublishOnly": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/image-icc-profile-converter": "^0.0.4-experimental",

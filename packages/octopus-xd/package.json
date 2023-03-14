@@ -21,7 +21,8 @@
     "watch": "tsc -w",
     "test": "echo 'Tests are not implemented yet'",
     "typedoc": "typedoc --excludePrivate src/index-node.ts src/index-web.ts",
-    "types:check": "tsc --noEmit"
+    "types:check": "tsc --noEmit",
+    "prepublishOnly": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/manifest-ts": "3.0.1",

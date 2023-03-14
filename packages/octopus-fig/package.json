@@ -31,7 +31,8 @@
     "test:integration:squid:update": "ts-node test/integration/squid-plugin/update-tests.ts",
     "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index-node.ts src/index-web.ts",
-    "watch": "rimraf ./dist && tsc -w"
+    "watch": "rimraf ./dist && tsc -w",
+    "prepublishOnly": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/figma-parser": "3.0.0-rc.17",
