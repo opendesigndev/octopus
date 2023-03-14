@@ -43,7 +43,10 @@
     "rimraf": "^3.0.2",
     "typescript": "4.6.4"
   },
-  "repository": "https://github.com/opendesigndev/octopus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opendesigndev/octopus.git"
+  },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   }

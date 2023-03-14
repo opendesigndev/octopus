@@ -32,6 +32,8 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://npm.pkg.github.com'
+          scope: opendesigndev
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: install
         run: |
           yarn workspace @opendesign/octopus-common install --frozen-lockfile
@@ -45,4 +47,4 @@ jobs:
           sed -i 's/@opendesign/@opendesigndev/g' packages/octopus-ai/package.json  
           yarn workspace @opendesigndev/octopus-ai publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
