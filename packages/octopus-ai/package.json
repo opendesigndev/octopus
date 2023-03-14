@@ -26,7 +26,7 @@
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "typedoc": "typedoc --excludePrivate src/index.ts",
     "watch": "rimraf ./dist && tsc -w",
-    "prepublish": "yarn release:bundle && node ./prepare-release.mjs"
+    "prepublish": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/illustrator-parser-pdfcpu": "1.1.2",

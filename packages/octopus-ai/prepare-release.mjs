@@ -1,6 +1,8 @@
 import fs from 'fs/promises'
 import path from 'path'
 
+import tar from 'tar'
+
 import { default as pkg } from './package.json' assert { type: 'json' }
 
 const RELEASE_DIR = './release'
@@ -45,6 +47,19 @@ function preparePublicPackageJSON() {
   return fs.writeFile(path.join(RELEASE_DIR, 'package.json'), JSON.stringify({ ...pkg, ...RELEASE_PROPS }, null, 2))
 }
 
+async function packFiles() {
+  const content = await fs.readdir(RELEASE_DIR)
+  return tar.c(
+    {
+      gzip: true,
+      file: 'release.tgz',
+      cwd: RELEASE_DIR,
+      prefix: 'package',
+    },
+    content.map((file) => `./${file}`)
+  )
+}
+
 function copyDMTStoDTS() {
   return fs.copyFile(path.join(RELEASE_DIR, 'index.d.mts'), path.join(RELEASE_DIR, 'index.d.ts'))
 }
@@ -53,6 +68,7 @@ async function release() {
   await prepareReleaseDir()
   await preparePublicPackageJSON()
   await copyDMTStoDTS()
+  await packFiles()
 }
 
 release()
