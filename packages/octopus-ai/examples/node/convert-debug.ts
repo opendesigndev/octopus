@@ -4,9 +4,9 @@ import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, TempExporter, AIFileReader } from '../../src/index-node.js'
 import { renderOctopus } from './utils/render-octopus.js'
 import { timestamp } from './utils/timestamp.js'
+import { createConverter, TempExporter, AIFileReader } from '../../src/index-node.js'
 
 dotenv.config()
 
