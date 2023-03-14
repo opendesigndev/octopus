@@ -58,5 +58,9 @@
   "files": [
     "lib/src",
     "lib/package.json"
-  ]
+  ],
+  "repository": "https://github.com/opendesigndev/octopus",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
