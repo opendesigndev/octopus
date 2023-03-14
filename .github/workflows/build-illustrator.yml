@@ -45,6 +45,7 @@ jobs:
       - name: publish
         run: |
           sed -i 's/@opendesign/@opendesigndev/g' packages/octopus-ai/package.json  
+          yarn workspace @opendesigndev/octopus-ai version --no-git-tag-version --new-version "3.0.0-experimental-${{ github.sha }}"
           yarn workspace @opendesigndev/octopus-ai publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
