@@ -4,16 +4,16 @@ import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { v4 as uuidv4 } from 'uuid'
 
+import { OctopusComponent } from './octopus-component.js'
+import { OctopusEffect } from './octopus-effect.js'
 import { logger } from '../../services/index.js'
 import { convertLayerBlendMode, convertId } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
-import { OctopusComponent } from './octopus-component.js'
-import { OctopusEffect } from './octopus-effect.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer.js'
-import type { Octopus } from '../../typings/octopus.js'
 import type { OctopusLayerGroup } from './octopus-layer-group.js'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
 import type { NotNull } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent

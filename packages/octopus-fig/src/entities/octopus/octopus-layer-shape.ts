@@ -3,9 +3,9 @@ import { OctopusLayerBase } from './octopus-layer-base.js'
 import { OctopusPath } from './octopus-path.js'
 import { OctopusStroke } from './octopus-stroke.js'
 
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceLayerShape } from '../source/source-layer-shape.js'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

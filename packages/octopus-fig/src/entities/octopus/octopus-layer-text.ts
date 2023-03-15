@@ -3,19 +3,19 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/normalize-text/index.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { OctopusFill } from './octopus-fill.js'
+import { OctopusLayerBase } from './octopus-layer-base.js'
+import { OctopusStroke } from './octopus-stroke.js'
 import { logger } from '../../services/index.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { notZero } from '../../utils/misc.js'
 import { inferPostScriptName } from '../../utils/text.js'
-import { OctopusFill } from './octopus-fill.js'
-import { OctopusLayerBase } from './octopus-layer-base.js'
-import { OctopusStroke } from './octopus-stroke.js'
 
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceLayerText } from '../source/source-layer-text.js'
 import type { SourcePaint } from '../source/source-paint.js'
 import type { SourceTextStyle } from '../source/source-text-style.js'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

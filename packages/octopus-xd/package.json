@@ -49,6 +49,8 @@
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
     "@types/pino": "^6.3.3",
+    "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1",
     "@types/uuid": "^8.3.1",
     "chalk": "^4.1.2",
     "jest": "^27.3.1",
