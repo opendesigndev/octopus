@@ -30,8 +30,6 @@ Check [`src/services/readers/`](./src/services/readers) for more details about A
 
 When using `@opendesign/octopus-ai` as external package in `NodeJS`, all dependencies can be imported from root folder, when using in `Browser` environment, dependencies should be imported from `@opendesign/octopus-ai/web.mjs`.
 
-
-
 ## TypeDoc
 
 Command `yarn typedoc` will generate TypeDoc documentation for public Classes into `./docs` folder
@@ -60,8 +58,9 @@ yarn convert:local PATH_TO_AI_FILE
 ## Demo: Example Web
 
 Run `yarn bundle` and then open `examples/web/dist/index.html` in [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-Make sure that links in generated `index.html` are correctly setup by configuring your live server or placing generated `.js`  and `.wasm` files in corresponding folder (`/assets`).
+Make sure that links in generated `index.html` are correctly setup by configuring your live server or placing generated `.js` and `.wasm` files in corresponding folder (`/assets`).
 Look for `Result:` in console output.
+
 ### .env variables
 
 If missing `.env` file, make a copy of `.env.example` and rename it to `.env` and fill correct info.

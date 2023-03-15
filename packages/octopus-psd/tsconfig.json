@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "lib": ["es2019", "ES2015.Proxy", "dom"],
+    "lib": ["es2019", "ES2015.Proxy", "dom"]
   },
   "include": ["src", "test", "examples/node"]
 }
