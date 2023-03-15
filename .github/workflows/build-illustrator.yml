@@ -33,8 +33,9 @@ jobs:
         run: |
           yarn workspace @opendesign/octopus-common build
           yarn workspace @opendesign/octopus-ai build
-      - name: publish
+      - name: publish in PR
+        if: github.event_name == 'pull_request'
         run: |
           SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`
-          yarn workspace @opendesign/octopus-ai version --no-git-tag-version --new-version "3.0.0-experimental-${{ github.ref_name }}-$SHORT_SHA"
+          yarn workspace @opendesign/octopus-ai version --no-git-tag-version --new-version "3.0.0-experimental-$GITHUB_HEAD_REF-$SHORT_SHA"
           yarn workspace @opendesign/octopus-ai publish
