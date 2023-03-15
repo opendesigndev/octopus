@@ -38,4 +38,4 @@ jobs:
         run: |
           SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`
           yarn workspace @opendesign/octopus-ai version --no-git-tag-version --new-version "3.0.0-experimental-$GITHUB_HEAD_REF-$SHORT_SHA"
-          yarn workspace @opendesign/octopus-ai publish
+          yarn workspace @opendesign/octopus-ai publish --tag experimental
