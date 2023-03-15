@@ -4,11 +4,6 @@ on:
   pull_request:
     paths:
       - 'packages/octopus-ai/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/octopus-ai/**'
 
 jobs:
   build-octopus-ai:

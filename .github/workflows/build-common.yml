@@ -4,11 +4,6 @@ on:
   pull_request:
     paths:
       - 'packages/octopus-common/**'
-  push:
-    branches:
-      - mcommonn
-    paths:
-      - 'packages/octopus-common/**'
 
 jobs:
   build-octopus-common:

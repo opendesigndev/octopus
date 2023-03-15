@@ -4,11 +4,6 @@ on:
   pull_request:
     paths:
       - 'packages/octopus-psd/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/octopus-psd/**'
 
 jobs:
   build-octopus-psd:
