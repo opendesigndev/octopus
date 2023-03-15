@@ -12,10 +12,7 @@ on:
 
 jobs:
   build-octopus-ai:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/build.yml
-      with: 
-        package-name: '@opendesign/octopus-ai'
-      secrets: inherit
+    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@npmjs-ci
+    with: 
+      package-name: '@opendesign/octopus-ai'
+    secrets: inherit
