@@ -11,7 +11,7 @@ on:
       - 'packages/octopus-ai/**'
 
 jobs:
-  build:
+  build-octopus-ai:
     uses: ./.github/actions/build.yml
     with: 
       package-name: '@opendesign/octopus-ai'
