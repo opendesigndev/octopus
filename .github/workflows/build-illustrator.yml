@@ -18,5 +18,4 @@ jobs:
     - uses: ./.github/actions/build.yml
       with: 
         package-name: '@opendesign/octopus-ai'
-      secrets:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      secrets: inherit
