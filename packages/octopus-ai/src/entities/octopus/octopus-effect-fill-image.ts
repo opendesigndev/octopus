@@ -33,8 +33,8 @@ export class OctopusEffectImageFill {
     }
 
     return {
-      type: 'PATH',
-      value: imagePath,
+      type: imagePath ? 'PATH' : 'RESOURCE_REF',
+      value: imagePath ?? imageId,
     }
   }
 

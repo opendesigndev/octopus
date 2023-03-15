@@ -14,8 +14,6 @@ import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/
 type AIFileReaderNodeOptions = {
   /** Path to the .ai file. */
   path: string
-  /** Path to directory where output is temporarily saved */
-  resourcesDir?: string
 }
 
 export type Metadata = {

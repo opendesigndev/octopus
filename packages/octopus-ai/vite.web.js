@@ -22,7 +22,7 @@ export default defineConfig({
     outDir: 'release',
     emptyOutDir: false,
     rollupOptions: {
-      external: [...deps, ...builtinModules],
+      external: [...deps, ...builtinModules, '@opendesign/illustrator-parser-pdfcpu/wasm_context'],
     },
     // minify: 'none'
   },
