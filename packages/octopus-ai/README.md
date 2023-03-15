@@ -26,7 +26,11 @@ Check [`examples/web/`](./examples/web/) for more details about usage in web bro
 
 Check [`src/services/conversion/exporters/`](./src/services/conversion/exporters/index.ts) for more details about exporters.
 
-Check [`src/services/conversion/readers/`](./src/services/conversion/readers) for more details about AIFileReaderNode and AIFileReaderWeb
+Check [`src/services/readers/`](./src/services/readers) for more details about AIFileReaderNode and AIFileReaderWeb
+
+When using `@opendesign/octopus-ai` as external package, all dependencies can be imported from root folder. 
+
+
 
 ## TypeDoc
 
