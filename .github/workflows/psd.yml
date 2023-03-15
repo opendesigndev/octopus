@@ -1,6 +1,6 @@
-name: PSD build & publish
+name: Manual PSD build & publish
 
-on: workflow_dispatch
+on: push
 
 jobs:
   build-octopus-psd:
