@@ -15,7 +15,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(dirname(fileURLToPath(new URL(import.meta.url))), 'src/index-web.ts'),
       name: 'OctopusAI',
-      fileName: () => `index-web.mjs`,
+      fileName: () => `web.mjs`,
       formats: ['es'],
     },
     commonjsOptions: { include: [/node_modules/, /@opendesign\/octopus-common/] },

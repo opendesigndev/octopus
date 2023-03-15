@@ -28,7 +28,7 @@ Check [`src/services/conversion/exporters/`](./src/services/conversion/exporters
 
 Check [`src/services/readers/`](./src/services/readers) for more details about AIFileReaderNode and AIFileReaderWeb
 
-When using `@opendesign/octopus-ai` as external package, all dependencies can be imported from root folder. 
+When using `@opendesign/octopus-ai` as external package in `NodeJS`, all dependencies can be imported from root folder, when using in `Browser` environment, dependencies should be imported from `'@opendesign/octopus-ai/web.mjs'`. 
 
 
 
