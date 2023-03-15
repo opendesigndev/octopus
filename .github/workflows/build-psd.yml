@@ -1,14 +1,7 @@
 name: PSD build & publish
 
 on:
-  pull_request:
-    paths:
-      - 'packages/octopus-psd/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/octopus-psd/**'
+  workflow_run:
 
 jobs:
   build-octopus-psd:
