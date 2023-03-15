@@ -7,16 +7,16 @@ import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import isEmpty from 'lodash/isEmpty.js'
 import isEqual from 'lodash/isEqual.js'
 
-import { createMatrix } from '../../utils/paper-factories.js'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 import { OctopusLayerBase } from './octopus-layer-base.js'
+import { createMatrix } from '../../utils/paper-factories.js'
 
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceLayerText } from '../source/source-layer-text.js'
 import type { SourceTextTextStyleRange } from '../source/source-text-text-style-range.js'
 import type { SourceTextTextStyle } from '../source/source-text-text-style.js'
 import type { SourceText } from '../source/source-text.js'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerTextOptions = {
   parent: OctopusLayerParent

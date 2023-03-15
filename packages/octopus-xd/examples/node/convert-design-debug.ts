@@ -6,8 +6,8 @@ import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, TempExporter, XDFileReader } from '../../src/index-node.js'
 import { renderOctopus } from './utils/render.js'
+import { createConverter, TempExporter, XDFileReader } from '../../src/index-node.js'
 
 type ConvertAllOptions = {
   render?: boolean

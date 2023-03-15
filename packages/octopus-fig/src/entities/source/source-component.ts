@@ -2,10 +2,10 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer.js'
-import { getBoundsFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 import { SourceLayerContainer } from './source-layer-container.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { getBoundsFor } from '../../utils/source.js'
 
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawBlendMode, RawLayer, RawLayerContainer, RawParentType } from '../../typings/raw/index.js'

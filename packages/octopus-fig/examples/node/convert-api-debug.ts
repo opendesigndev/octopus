@@ -4,8 +4,8 @@ import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
 
-import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node.js'
 import { renderOctopus } from './utils/render.js'
+import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node.js'
 
 type ConvertDesignOptions = {
   designId: string

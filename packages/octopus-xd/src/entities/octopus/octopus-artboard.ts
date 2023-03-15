@@ -1,5 +1,8 @@
 import { asArray, asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
+import { OctopusArtboardDimensions } from './octopus-artboard-dimensions.js'
+import { OctopusLayerGroup } from './octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from './octopus-layer-maskgroup.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { uuidv4FromSeed } from '../../utils/id.js'
 import {
@@ -9,9 +12,6 @@ import {
 } from '../../utils/matrix.js'
 import { createMatrix } from '../../utils/paper.js'
 import { SourceLayerGroup } from '../source/source-layer-group.js'
-import { OctopusArtboardDimensions } from './octopus-artboard-dimensions.js'
-import { OctopusLayerGroup } from './octopus-layer-group.js'
-import { OctopusLayerMaskGroup } from './octopus-layer-maskgroup.js'
 
 import type { OctopusXDConverter } from '../../octopus-xd-converter.js'
 import type { Octopus } from '../../typings/octopus/index.js'

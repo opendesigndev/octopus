@@ -1,12 +1,12 @@
-import { parseRect } from '../../utils/rectangle.js'
 import { OctopusEffectsShape } from './octopus-effects-shape.js'
 import { OctopusLayerCommon } from './octopus-layer-common.js'
+import { parseRect } from '../../utils/rectangle.js'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
-import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
-import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
-import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image.js'
 import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image.js'
 
 type OctopusLayerShapeXObjectImageAdapterOptions = {
   parent: OctopusLayerParent

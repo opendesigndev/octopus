@@ -1,5 +1,5 @@
-import { buildEndpoint } from '../../utils/request'
 import { EndpointBase } from './endpoint-base'
+import { buildEndpoint } from '../../utils/request'
 
 import type { RequestsManager } from '.'
 

@@ -6,11 +6,11 @@ import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
 import { logger } from '../services/index.js'
 
+import type { SourceLayer } from './create-source-layer.js'
 import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base.js'
 import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'
 import type { SourceLayerShape } from '../entities/source/source-layer-shape.js'
 import type { SourceLayerText } from '../entities/source/source-layer-text.js'
-import type { SourceLayer } from './create-source-layer.js'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText
 

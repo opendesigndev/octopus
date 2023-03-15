@@ -1,5 +1,5 @@
-import { isArtboard } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
+import { isArtboard } from '../../utils/source.js'
 
 import type { RawParsedPsd } from '../../typings/raw/component.js'
 

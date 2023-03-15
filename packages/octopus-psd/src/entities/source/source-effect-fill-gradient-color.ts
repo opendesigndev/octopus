@@ -1,6 +1,6 @@
+import { SourceEntity } from './source-entity.js'
 import PROPS from '../../utils/prop-names.js'
 import { getColor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
 
 import type { RawShapeGradientColor } from '../../typings/raw/index.js'
 import type { SourceColor } from '../../typings/source.js'

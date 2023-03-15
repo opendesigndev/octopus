@@ -1,16 +1,16 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { parseRect } from '../../utils/rectangle.js'
 import { OctopusEffectsShape } from './octopus-effects-shape.js'
 import { OctopusLayerCommon } from './octopus-layer-common.js'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
+import { parseRect } from '../../utils/rectangle.js'
 
+import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
 import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
 import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
 import type { RawGraphicsStateMatrix } from '../../typings/raw/index.js'
 import type { SourceLayerShape } from '../source/source-layer-shape.js'
-import type { LayerSpecifics } from './octopus-layer-common.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent

@@ -2,12 +2,12 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import chunk from 'lodash/chunk.js'
 
-import { logger } from '../../services/index.js'
 import { OctopusEffectFill } from './octopus-effect-fill.js'
+import { logger } from '../../services/index.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceStroke } from '../source/source-stroke.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusStrokeOptions = {
   parentLayer: OctopusLayerBase

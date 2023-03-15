@@ -1,15 +1,15 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { SourceLayerCommon } from './source-layer-common.js'
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 import PROPS from '../../utils/prop-names.js'
 import { getBoundsFor } from '../../utils/source.js'
-import { SourceLayerCommon } from './source-layer-common.js'
 
+import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawNodeChildWithType, RawLayerSection } from '../../typings/raw/index.js'
 import type { SourceBounds } from '../../typings/source.js'
-import type { SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerSectionOptions = {
   parent: SourceLayerParent

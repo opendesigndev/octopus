@@ -1,17 +1,17 @@
 import path from 'path'
 
+import { AssetReader } from './asset-reader.js'
 import { createConverter } from '../../../src/index-node.js'
 import { MANIFEST_NAME, getOctopusFileName } from '../../../src/utils/exporter.js'
 import { saveFile, rmDir, makeDir } from '../../../src/utils/files.js'
 import { cleanManifest } from '../utils/asset-cleaner.js'
 import { getSourceDesign } from '../utils/source.js'
 import { stringify } from '../utils/stringify.js'
-import { AssetReader } from './asset-reader.js'
 
+import type { TestDirectoryData } from './asset-reader.js'
 import type { OctopusPSDConverter } from '../../../src/octopus-psd-converter.js'
 import type { Manifest } from '../../../src/typings/manifest.js'
 import type { Octopus } from '../../../src/typings/octopus.js'
-import type { TestDirectoryData } from './asset-reader.js'
 
 interface TestUpdaterAssetReader {
   getTestsDirectoryData: () => Promise<TestDirectoryData[]>

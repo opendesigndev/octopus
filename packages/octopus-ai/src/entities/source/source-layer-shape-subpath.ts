@@ -1,7 +1,7 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw/index.js'
 import type { SourceLayerShape } from './source-layer-shape.js'
+import type { RawShapeLayerSubPath, RawShapeLayerSubPathPoint } from '../../typings/raw/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerShapeOptions = {

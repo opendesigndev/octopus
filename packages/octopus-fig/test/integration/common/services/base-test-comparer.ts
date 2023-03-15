@@ -6,10 +6,10 @@ import { getOctopusFileName } from '../../../../src/services/exporters/node/loca
 import { MANIFEST_NAME } from '../../../../src/utils/const.js'
 import { stringify } from '../utils/stringify.js'
 
-import type { Manifest } from '../../../../src/typings/manifest.js'
-import type { Octopus } from '../../../../src/typings/octopus.js'
 import type { Component, TestComponents } from './asset-reader.js'
 import type { Fail } from './test-runner.js'
+import type { Manifest } from '../../../../src/typings/manifest.js'
+import type { Octopus } from '../../../../src/typings/octopus.js'
 
 export type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null

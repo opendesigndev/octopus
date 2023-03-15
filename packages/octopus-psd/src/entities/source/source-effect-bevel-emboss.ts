@@ -1,11 +1,11 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { SourceEffectBase } from './source-effect-base.js'
 import { isBlendMode } from '../../utils/blend-modes.js'
 import PROP_NAMES from '../../utils/prop-names.js'
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
 import { OctopusEffectBevelEmboss } from '../octopus/octopus-effect-bevel-emboss.js'
-import { SourceEffectBase } from './source-effect-base.js'
 
 import type { RawEffectBevelEmboss } from '../../typings/raw/index.js'
 import type { SourceColor } from '../../typings/source.js'

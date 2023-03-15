@@ -1,12 +1,12 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import PROPS from '../../utils/prop-names.js'
 import { SourceEffectBevelEmboss } from './source-effect-bevel-emboss.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 import { SourceEffectSatin } from './source-effect-satin.js'
 import { SourceEffectShadow } from './source-effect-shadow.js'
 import { SourceEffectStroke } from './source-effect-stroke.js'
 import { SourceEntity } from './source-entity.js'
+import PROPS from '../../utils/prop-names.js'
 
 import type { RawlayerEffects, RawNodeChildWithType } from '../../typings/raw/index.js'
 

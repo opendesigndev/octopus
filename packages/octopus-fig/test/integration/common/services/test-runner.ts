@@ -4,9 +4,9 @@ import path from 'path'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import handlebars from 'handlebars'
 
+import { AssetReader } from './asset-reader.js'
 import { makeDir, saveFile } from '../../../../src/utils/files.js'
 import { getCommandLineArgs } from '../utils/argv.js'
-import { AssetReader } from './asset-reader.js'
 
 import type { BaseTestComparer } from './base-test-comparer.js'
 

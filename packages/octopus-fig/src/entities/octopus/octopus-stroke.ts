@@ -2,10 +2,10 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { getMapped, getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services/index.js'
-import { DEFAULTS } from '../../utils/defaults.js'
 import { OctopusFill } from './octopus-fill.js'
 import { OctopusPath } from './octopus-path.js'
+import { logger } from '../../services/index.js'
+import { DEFAULTS } from '../../utils/defaults.js'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'

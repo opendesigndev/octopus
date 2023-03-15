@@ -1,16 +1,16 @@
 import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group.js'
 import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group.js'
 import { OctopusLayerShading } from '../entities/octopus/octopus-layer-shading.js'
-import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerShapeShapeAdapter } from '../entities/octopus/octopus-layer-shape-shape-adapter.js'
 import { OctopusLayerShapeXObjectImageAdapter } from '../entities/octopus/octopus-layer-shape-x-object-image-adapter.js'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
 import { OctopusLayerSoftMaskGroup } from '../entities/octopus/octopus-layer-soft-mask-group.js'
 import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
 
+import type { SourceLayer } from './create-source-layer.js'
 import type { OctopusLayerMaskOptions } from '../entities/octopus/octopus-layer-mask-group.js'
 import type { LayerSequence } from '../services/conversion/text-layer-grouping-service/index.js'
 import type { OctopusLayerParent } from '../typings/octopus-entities.js'
-import type { SourceLayer } from './create-source-layer.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayer =

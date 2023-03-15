@@ -1,10 +1,10 @@
 import { convertBlendMode } from '../../utils/convert.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { DesignConverter } from '../../services/conversion/design-converter.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceEffectBase } from '../source/source-effect-base.js'
 import type { SourceLayerEffects } from '../source/source-effects-layer.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusEffectBaseOptions = {
   parentLayer: OctopusLayerBase

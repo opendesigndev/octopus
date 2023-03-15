@@ -1,7 +1,7 @@
+import { DesignEmitterMock } from './design-emitter-mock.js'
 import { createConverter } from '../../../../src/index-node.js'
 import { BaseTestComparer } from '../../common/services/base-test-comparer.js'
 import { cleanManifest } from '../../common/utils/asset-cleaner.js'
-import { DesignEmitterMock } from './design-emitter-mock.js'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
 import type { Octopus } from '../../../../src/typings/octopus.js'

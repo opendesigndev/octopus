@@ -1,5 +1,5 @@
-import { getSizeFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
+import { getSizeFor } from '../../utils/source.js'
 
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawBlendMode, RawColor, RawEffect, RawEffectType } from '../../typings/raw/index.js'

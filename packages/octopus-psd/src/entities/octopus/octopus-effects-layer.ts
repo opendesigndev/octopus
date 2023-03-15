@@ -11,9 +11,9 @@ import { OctopusEffectShadowDrop } from './octopus-effect-shadow-drop.js'
 import { OctopusEffectShadowInner } from './octopus-effect-shadow-inner.js'
 import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceLayerEffects } from '../source/source-effects-layer.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusEffectLayerOptions = {
   parentLayer: OctopusLayerBase

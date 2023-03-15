@@ -1,5 +1,6 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { clamp } from '@opendesign/octopus-common/dist/utils/math.js'
+
 import { logger } from '../services/index.js'
 
 import type { RawResourcesColorSpace } from '../typings/raw/index.js'

@@ -3,9 +3,9 @@ import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
+import { ComponentConverter } from './component-converter.js'
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { logger } from '../index.js'
-import { ComponentConverter } from './component-converter.js'
 
 import type { SourceComponent } from '../../entities/source/source-component.js'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'

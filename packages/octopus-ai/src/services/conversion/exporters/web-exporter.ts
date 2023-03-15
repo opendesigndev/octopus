@@ -1,7 +1,7 @@
+import type { AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../octopus-ai-converter.js'
 import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
-import type { AuxiliaryData, Exporter } from './index.js'
 
 /**
  * Minimalistic exporter used for web build

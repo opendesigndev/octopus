@@ -1,10 +1,10 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import PROPS from '../../utils/prop-names.js'
 import { SourceEffectFillGradientColor } from './source-effect-fill-gradient-color.js'
 import { SourceEffectFillGradientOpacity } from './source-effect-fill-gradient-opacity.js'
 import { SourceEntity } from './source-entity.js'
+import PROPS from '../../utils/prop-names.js'
 
 import type { RawFillGradient } from '../../typings/raw/index.js'
 

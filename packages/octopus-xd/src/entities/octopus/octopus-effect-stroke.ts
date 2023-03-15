@@ -1,9 +1,9 @@
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { SourceEffectStroke } from '../source/source-effect-stroke.js'
-import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { RawStroke } from '../../typings/source/index.js'

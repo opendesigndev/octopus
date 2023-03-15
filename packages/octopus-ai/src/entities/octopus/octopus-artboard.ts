@@ -3,12 +3,12 @@ import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 import { initOctopusLayerChildren } from '../../utils/layer.js'
 import { parseRect } from '../../utils/rectangle.js'
 
+import type { OctopusManifest } from './octopus-manifest.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { DesignConverter } from '../../services/conversion/design-converter/index.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { SourceArtboard } from '../source/source-artboard.js'
 import type { SourceResources } from '../source/source-resources.js'
-import type { OctopusManifest } from './octopus-manifest.js'
 
 type OctopusArtboardOptions = {
   targetArtboardId: string

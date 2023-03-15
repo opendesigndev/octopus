@@ -3,12 +3,12 @@
  * It's slightly modified to generate paper.PathItem from given SourcePathComponent and return it's pathData.
  */
 
-import { logger } from '../services/index.js'
 import { createPath, createPoint, createSegment, createTranslationMatrix } from './paper-factories.js'
+import { logger } from '../services/index.js'
 
 import type { SourcePathComponent } from '../entities/source/source-path-component.js'
-import type { SourceSubpath } from '../entities/source/source-subpath.js'
 import type { SourceSubpathPoint } from '../entities/source/source-subpath-point.js'
+import type { SourceSubpath } from '../entities/source/source-subpath.js'
 import type { SourcePointXY } from '../typings/source.js'
 
 const createPointSegment = ({ x, y }: SourcePointXY): paper.Segment => {

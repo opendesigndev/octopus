@@ -2,17 +2,17 @@ import { normalizeText } from '@opendesign/octopus-common/dist/postprocessors/no
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import flatten from 'lodash/flatten.js'
 
-import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service/index.js'
-import { removeTrailingHyphen } from '../../utils/text.js'
 import { OctopusLayerCommon } from './octopus-layer-common.js'
 import OctopusSubText from './octopus-subtext.js'
+import { TextLayerGroupingservice } from '../../services/conversion/text-layer-grouping-service/index.js'
+import { removeTrailingHyphen } from '../../utils/text.js'
 
+import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
 import type { AdditionalTextDataText } from '../../typings/raw/index.js'
 import type { SourceLayerText } from '../source/source-layer-text.js'
-import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type OctopusLayerTextOptions = {

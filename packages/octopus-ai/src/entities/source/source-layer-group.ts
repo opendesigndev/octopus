@@ -1,12 +1,12 @@
-import { initSourceLayerChildren } from '../../utils/layer.js'
-import { createSoftMask } from '../../utils/mask.js'
 import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask } from '../../utils/mask.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer.js'
-import type { RawGroupLayer } from '../../typings/raw/index.js'
 import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawGroupLayer } from '../../typings/raw/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerGroupOptions = {

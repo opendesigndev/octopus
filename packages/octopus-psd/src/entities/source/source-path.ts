@@ -1,10 +1,10 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { createSourcePathComponents, mergeBounds } from '../../utils/path.js'
-import { getBoundsFor } from '../../utils/source.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePathComponent } from './source-path-component.js'
+import { createSourcePathComponents, mergeBounds } from '../../utils/path.js'
+import { getBoundsFor } from '../../utils/source.js'
 
 import type { RawBounds, RawVectorMaskSetting, RawVectorOriginationData } from '../../typings/raw/index.js'
 import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source.js'

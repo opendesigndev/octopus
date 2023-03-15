@@ -1,7 +1,7 @@
 import got from 'got'
 
-import { logger } from '../..'
 import { ResponseNode } from './response-node'
+import { logger } from '../..'
 
 import type { Parser } from '../../../parser'
 import type { SafeResult } from '../../../utils/queue'

@@ -1,13 +1,15 @@
 import fromPairs from 'lodash/fromPairs'
 import pick from 'lodash/pick'
 
+import { Page } from './page'
 import { findArtboardUsedComponents } from '../../utils/artboard'
 import { asArray } from '../../utils/as'
 import { keys } from '../../utils/common'
 import { buildParentsMap, getChildren, getVariantPropsFromName } from '../../utils/common-design'
 import firstCallMemo from '../../utils/decorators'
-import { Page } from './page'
 
+import type { Artboard } from './artboard'
+import type { Node } from './node'
 import type {
   ComponentDescriptor,
   FigmaArtboard,
@@ -17,8 +19,6 @@ import type {
   SourceComponent,
   TargetIds,
 } from '../../types/figma'
-import type { Artboard } from './artboard'
-import type { Node } from './node'
 
 type Variant = { name: string; id: string }
 type ComponentSet = {

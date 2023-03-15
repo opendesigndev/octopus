@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { logger, base64ToUint8Array } from '../../index.js'
 import { SourceNormalizer } from './source-normalizer.js'
 import { isBase64 } from './utils.js'
+import { logger, base64ToUint8Array } from '../../index.js'
 
-import type { PluginSource } from '../../../typings/plugin-source.js'
 import type { Event, EventDesign } from './types.js'
+import type { PluginSource } from '../../../typings/plugin-source.js'
 
 export function convertToEvents(source: PluginSource): Event[] {
   const { document, selectedContent, assets } = source.context ?? {}

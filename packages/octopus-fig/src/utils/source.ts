@@ -1,8 +1,8 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { env } from '../services/index.js'
 import { DEFAULTS } from './defaults.js'
+import { env } from '../services/index.js'
 
 import type { SourceComponent } from '../entities/source/source-component.js'
 import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'

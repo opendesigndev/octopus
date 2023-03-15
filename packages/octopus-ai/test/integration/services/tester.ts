@@ -7,11 +7,11 @@ import { AIFileReader } from '../../../src/services/readers/node/index.js'
 import { createOctopusArtboardFileName } from '../../../src/utils/exporter.js'
 import { getSourceDesign } from '../utils.js'
 
+import type { AssetsReader, TestComponents, Component } from './assets-reader.js'
 import type { SourceDesign } from '../../../src/entities/source/source-design.js'
 import type { OctopusAIConverter } from '../../../src/octopus-ai-converter.js'
 import type { Manifest } from '../../../src/typings/manifest/index.js'
 import type { Octopus } from '../../../src/typings/octopus/index.js'
-import type { AssetsReader, TestComponents, Component } from './assets-reader.js'
 
 type ArtboardGroup = { expected: Component<Octopus['OctopusComponent']> | null; generated: Octopus['OctopusComponent'] }
 

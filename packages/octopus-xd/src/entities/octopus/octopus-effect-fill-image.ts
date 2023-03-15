@@ -4,10 +4,10 @@ import { DEFAULTS } from '../../utils/defaults.js'
 import { createPathRectangle, createPoint, createSize } from '../../utils/paper.js'
 import { SourceEffectFillImage } from '../source/source-effect-image-fill.js'
 
-import type { Octopus } from '../../typings/octopus/index.js'
-import type { RawFillImage } from '../../typings/source/index.js'
 import type { OctopusBounds } from './octopus-bounds.js'
 import type { OctopusLayerShape } from './octopus-layer-shape.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawFillImage } from '../../typings/source/index.js'
 
 type OctopusEffectFillImageOptions = {
   source: SourceEffectFillImage

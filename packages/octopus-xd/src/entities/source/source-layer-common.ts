@@ -1,8 +1,8 @@
-import type { Defined } from '../../typings/helpers.js'
-import type { RawLayer } from '../../typings/source/index.js'
 import type { SourceArtboard } from './source-artboard.js'
 import type { SourceLayerGroup } from './source-layer-group.js'
 import type { SourceLayerShape } from './source-layer-shape.js'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawLayer } from '../../typings/source/index.js'
 
 /** Just a helper types */
 type DefinedStyle = Defined<RawLayer['style']>
