@@ -33,8 +33,7 @@ jobs:
           yarn workspace ${{ inputs.package-name }} install --frozen-lockfile
       - name: build
         run: |
-          yarn workspace @opendesign/octopus-common build
-          yarn workspace ${{ inputs.package-name }} build
+          yarn build
       - name: publish in PR
         if: github.event_name == 'pull_request'
         run: |
