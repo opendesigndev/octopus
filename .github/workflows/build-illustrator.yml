@@ -12,8 +12,11 @@ on:
 
 jobs:
   build-octopus-ai:
-    uses: ./.github/actions/build.yml
-    with: 
-      package-name: '@opendesign/octopus-ai'
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/build.yml
+      with: 
+        package-name: '@opendesign/octopus-ai'
+      secrets:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
