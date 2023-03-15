@@ -1,0 +1,43 @@
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        required: true
+        type: string
+      base-version:
+        required: true
+        type: string
+        default: '3.0.0'
+    secrets:
+      NPM_TOKEN:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: whoami
+        run: |
+          npm whoami
+      - name: install
+        run: |
+          yarn workspace @opendesign/octopus-common install --frozen-lockfile
+          yarn workspace ${{ inputs.package-name }} install --frozen-lockfile
+      - name: build
+        run: |
+          yarn workspace @opendesign/octopus-common build
+          yarn workspace ${{ inputs.package-name }} build
+      - name: publish in PR
+        if: github.event_name == 'pull_request'
+        run: |
+          SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`
+          yarn workspace ${{ inputs.package-name }} version --no-git-tag-version --new-version "${{ inputs.base-version }}-experimental-$GITHUB_HEAD_REF-$SHORT_SHA"
+          yarn workspace ${{ inputs.package-name }} publish --tag experimental
