@@ -14,8 +14,8 @@ const RELEASE_PROPS = {
     'index.d.mts',
 
     // es, web
-    'index-web.mjs',
-    'index-web.d.mts',
+    'web.mjs',
+    'web.d.mts',
 
     // cjs
     'index.js',
