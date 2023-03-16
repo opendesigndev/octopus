@@ -14,8 +14,8 @@ const RELEASE_PROPS = {
     'index.d.mts',
 
     // es, web
-    'index-web.mjs',
-    'index-web.d.mts',
+    'web.mjs',
+    'web.d.mts',
 
     // cjs
     'index.js',
@@ -23,19 +23,7 @@ const RELEASE_PROPS = {
   ],
   module: './index.mjs',
   main: './index.js',
-  exports: {
-    '.': {
-      node: {
-        require: './index.js',
-        import: './index.mjs',
-        types: './index.d.ts',
-      },
-      default: {
-        import: './index-web.mjs',
-        types: './index-web.d.mts',
-      },
-    },
-  },
+  exports: undefined,
   type: undefined,
 }
 
