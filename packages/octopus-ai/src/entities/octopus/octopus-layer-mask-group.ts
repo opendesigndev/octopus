@@ -1,8 +1,9 @@
 import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusLayerCommon } from './octopus-layer-common.js'
 import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer.js'
+// eslint-disable-next-line import/order
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 import { createOctopusLayersFromLayerSequences } from '../../utils/layer.js'
 
 import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group.js'
