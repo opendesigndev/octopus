@@ -1,11 +1,12 @@
+import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import { pathBasename } from '../../utils/fs-path.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 
 import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayerShape } from './source-layer-shape.js'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type {
   RawGraphicsState,
   RawResourcesExtGState,
@@ -107,5 +108,13 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
 
   get type(): Nullish<XObjectSubtype> {
     return this.subtype
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }

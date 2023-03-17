@@ -1,15 +1,16 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import isEqual from 'lodash/isEqual.js'
 
+import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceLayerSubText } from './source-layer-sub-text.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import { logger } from '../../services/index.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 
 import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayerShape } from './source-layer-shape.js'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type { RawGraphicsState } from '../../typings/raw/graphics-state.js'
 import type { RawTextLayer } from '../../typings/raw/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
@@ -113,5 +114,13 @@ export class SourceLayerText extends SourceLayerCommon {
 
   get softMask(): Nullish<SourceLayerXObjectForm> {
     return this._softMask
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }

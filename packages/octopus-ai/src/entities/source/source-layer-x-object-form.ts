@@ -1,3 +1,4 @@
+import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceResources } from './source-resources.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
@@ -125,5 +126,13 @@ export class SourceLayerXObjectForm extends SourceLayerCommon {
 
   get clippingPaths(): SourceLayerShape[] | null {
     return this._clippingPaths
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }
