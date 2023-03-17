@@ -1,7 +1,8 @@
 import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusLayerCommon } from './octopus-layer-common.js'
 import { initOctopusLayerChildren } from '../../utils/layer.js'
+// eslint-disable-next-line import/order
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 
 import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
