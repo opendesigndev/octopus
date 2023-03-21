@@ -32,10 +32,15 @@ export class OctopusEffectImageFill {
       return null
     }
 
-    return {
-      type: imagePath ? 'PATH' : 'RESOURCE_REF',
-      value: imagePath ?? imageId,
-    }
+    return imagePath
+      ? {
+          type: 'PATH',
+          value: imagePath,
+        }
+      : {
+          type: 'RESOURCE_REF',
+          value: imageId,
+        }
   }
 
   _parseImage(): Nullish<Octopus['Image']> {
