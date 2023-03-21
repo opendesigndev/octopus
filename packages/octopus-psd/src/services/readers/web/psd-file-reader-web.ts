@@ -67,7 +67,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
         const fileReader = new FileReader()
         fileReader.onload = () => {
           if (!fileReader.result) {
-            reject('could not read image data')
+            reject(new Error('Could not read image data'))
             return
           }
           const result = new Uint8Array(fileReader.result as ArrayBuffer)
@@ -76,7 +76,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
         }
 
         if (!blob) {
-          reject('')
+          reject(new Error('Could not read image data'))
           return
         }
 

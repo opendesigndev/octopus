@@ -122,7 +122,7 @@ export class DesignConverter {
   }
 
   private async _exportManifest(exporter: Exporter | null): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = getBenchmarkService()(() => this.manifest.convert()) ?? {}
+    const { time, result: manifest } = getBenchmarkService()(() => this.manifest.convert())
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
   }
