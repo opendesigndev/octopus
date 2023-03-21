@@ -8,7 +8,7 @@ import { PSDFileReaderCommon } from '../psd-file-reader-common.js'
 import type { ConvertImageOptions } from '../psd-file-reader-common.js'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
 
-export type PSDFileReaderNodeOptions = WithRendererOptions & {
+export type PSDFileReaderOptions = WithRendererOptions & {
   /** wasm image processing tool */
   renderer?: Renderer
 }
@@ -24,21 +24,21 @@ export type WithRendererOptions = {
 /**
  * Reader that converts Adobe Photoshop .psd file into `SourceDesign` object.
  */
-export class PSDFileReaderNode extends PSDFileReaderCommon {
-  static async withRenderer(options: WithRendererOptions): Promise<PSDFileReaderNode> {
+export class PSDFileReader extends PSDFileReaderCommon {
+  static async withRenderer(options: WithRendererOptions): Promise<PSDFileReader> {
     if (!PSDFileReaderCommon._renderer) {
       PSDFileReaderCommon._renderer = await getRenderer()
     }
 
-    return new PSDFileReaderNode({ ...options, renderer: PSDFileReaderCommon._renderer })
+    return new PSDFileReader({ ...options, renderer: PSDFileReaderCommon._renderer })
   }
 
   /**
    * Converts given PSD file into SourceDesign.
    * @constructor
-   * @param {PSDFileReaderNodeOptions} options
+   * @param {PSDFileReaderOptions} options
    */
-  constructor(options: PSDFileReaderNodeOptions) {
+  constructor(options: PSDFileReaderOptions) {
     const promisedData = readFile(options.path)
     super({ ...options, promisedData })
   }

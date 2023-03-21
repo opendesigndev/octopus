@@ -3,13 +3,13 @@ import path from 'path'
 
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter, LocalExporter, PSDFileReaderNode } from '../../src/index-node.js'
+import { createConverter, LocalExporter, PSDFileReader } from '../../src/index-node.js'
 
 async function convert() {
   const [filePath] = process.argv.slice(2)
   const testDir = path.join(os.tmpdir(), uuidv4())
 
-  const reader = await PSDFileReaderNode.withRenderer({ path: filePath })
+  const reader = await PSDFileReader.withRenderer({ path: filePath })
 
   const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {

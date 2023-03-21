@@ -5,7 +5,7 @@ import { PSDFileReaderCommon } from '../psd-file-reader-common'
 import type { ConvertImageOptions } from '../psd-file-reader-common'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
 
-export type PSDFileReaderWebOptions = WithRendererOptions & {
+export type PSDFileReaderOptions = WithRendererOptions & {
   /** wasm image processing tool */
   renderer?: Renderer
 }
@@ -37,9 +37,9 @@ export class PSDFileReader extends PSDFileReaderCommon {
   /**
    * Converts given PSD file into SourceDesign.
    * @constructor
-   * @param {PSDFileReaderWebOptions} options
+   * @param {PSDFileReaderOptions} options
    */
-  constructor(options: PSDFileReaderWebOptions) {
+  constructor(options: PSDFileReaderOptions) {
     const promisedData = PSDFileReader.readFile(options.path)
 
     super({ ...options, promisedData })

@@ -11,7 +11,7 @@ import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 
-type AIFileReaderNodeOptions = {
+type AIFileReaderOptions = {
   /** Path to the .ai file. */
   path: string
 }
@@ -40,9 +40,9 @@ export class AIFileReader extends AIFileReaderCommon {
   /**
    * Converts given AI file into SourceDesign.
    * @constructor
-   * @param {AIFileReaderNodeOptions} options
+   * @param {AIFileReaderOptions} options
    */
-  constructor(options: AIFileReaderNodeOptions) {
+  constructor(options: AIFileReaderOptions) {
     super()
     this._resourcesDir = path.join(os.tmpdir(), uuidv4())
     this._path = options.path

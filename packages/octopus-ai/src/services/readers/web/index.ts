@@ -7,7 +7,7 @@ import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 import type { BitmapReader } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
-type AIFileReaderWebOptions = {
+type AIFileReaderOptions = {
   /** Path to the .ai file. */
   path: string
 }
@@ -39,9 +39,9 @@ export class AIFileReader extends AIFileReaderCommon {
   /**
    * Converts given AI file into SourceDesign.
    * @constructor
-   * @param {AIFileReaderWebOptions} options
+   * @param {AIFileReaderOptions} options
    */
-  constructor(options: AIFileReaderWebOptions) {
+  constructor(options: AIFileReaderOptions) {
     super()
     const promisedData = AIFileReader.readFile(options.path)
 
