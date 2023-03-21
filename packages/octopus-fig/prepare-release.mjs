@@ -15,6 +15,10 @@ const RELEASE_PROPS = {
     'web.mjs',
     'web.d.mts',
 
+    // umd, web
+    'web-umd.js',
+    'web-umd.d.ts',
+
     // cjs
     'index.js',
     'index.d.ts',
