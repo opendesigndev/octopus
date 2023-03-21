@@ -10,8 +10,8 @@
     "release:bundle:web": "vite build -c vite.web.js",
     "release:bundle:node": "vite build -c vite.node.js",
     "release:bundle": "yarn release:bundle:node && yarn release:bundle:web",
-    "release:cleanup": "rimraf ./release ./release.tgz",
-    "release:publish": "yarn publish release.tgz --non-interactive --ignore-scripts",
+    "release:cleanup": "rimraf ./release",
+    "release:publish": "yarn publish ./release --non-interactive --ignore-scripts",
     "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
     "clean:workdir": "rimraf ./workdir/*",
     "clean": "rimraf ./node_modules ./dist ./workdir ./docs",
@@ -38,7 +38,6 @@
     "paper": "^0.12.15",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
-    "tar": "^6.1.13",
     "time-stamp": "^2.2.0",
     "uuid": "^8.3.2"
   },
