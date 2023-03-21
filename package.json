@@ -10,6 +10,7 @@
       "packages/figma-plugins/common",
       "packages/figma-plugins/preview-exporter",
       "packages/figma-plugins/squid",
+      "packages/figma-plugins/studio",
       "packages/octopus-ai",
       "packages/octopus-fig",
       "packages/octopus-psd",
@@ -22,7 +23,7 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "rimraf ./node_modules && yarn workspaces run clean",
-    "clean-init": "yarn clean && yarn && yarn build",
+    "clean-init": "yarn clean && NODE_ENV=debug yarn && yarn build",
     "test": "yarn workspaces run test",
     "lint": "yarn run lint:prettier && yarn run lint:eslint",
     "lint:eslint": "eslint . --ext .ts --max-warnings=0",
