@@ -87,4 +87,8 @@ export class SourceDesign {
   get iccProfileName(): string | undefined {
     return this._iccProfileName
   }
+
+  get raw(): RawParsedPsd {
+    return this._raw
+  }
 }

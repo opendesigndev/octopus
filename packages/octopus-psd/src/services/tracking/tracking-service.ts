@@ -1,17 +1,24 @@
-import { keys } from '@opendesign/octopus-common/dist/utils/common.js'
+import { isObject, keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import type { Manifest } from '../../typings/manifest'
+import type { Octopus } from '../../typings/octopus.js'
 import type { ComponentConversionResult } from '../conversion/design-converter.js'
-import type { components } from '@opendesign/octopus-ts/dist/octopus.js'
 
+type TrackingServiceOptions = {
+  excludedPaths: RegExp[]
+  onlyCountByKeys: RegExp[]
+  sourceIncludedPaths?: RegExp[]
+}
 export class TrackingService {
   private _excludedPaths: RegExp[]
   private _onlyCountByKeys: RegExp[] = []
   private _featuresSummary: Record<string, number> = {}
+  private _sourceIncludedPaths: RegExp[]
 
   static LAYER_KEY_PREFIX = 'layer'
   static MANIFEST_KEY_PREFIX = 'manifest'
-  static SPECIFICS_KEY_PREFIX = 'specifics'
+  static CUSTOM_KEY_PREFIX = 'custom'
+  static SOURCE_KEY_PREFIX = 'source'
 
   static DEFAULT_EXCLUDED_PATHS: RegExp[] = [
     new RegExp(/transform\.\[\]/),
@@ -30,12 +37,17 @@ export class TrackingService {
   static DEFAULT_ONLY_COUNT_BY_KEYS: RegExp[] = [new RegExp('text.value')]
 
   static withDefaultPathKeys(): TrackingService {
-    return new TrackingService(TrackingService.DEFAULT_EXCLUDED_PATHS, TrackingService.DEFAULT_ONLY_COUNT_BY_KEYS)
+    return new TrackingService({
+      excludedPaths: TrackingService.DEFAULT_EXCLUDED_PATHS,
+      onlyCountByKeys: TrackingService.DEFAULT_ONLY_COUNT_BY_KEYS,
+      sourceIncludedPaths: [RegExp('Txt2')],
+    })
   }
 
-  constructor(excludedPaths: RegExp[], onlyCountByKeys: RegExp[]) {
+  constructor({ excludedPaths, onlyCountByKeys, sourceIncludedPaths }: TrackingServiceOptions) {
     this._excludedPaths = excludedPaths
     this._onlyCountByKeys = onlyCountByKeys
+    this._sourceIncludedPaths = sourceIncludedPaths ?? []
   }
 
   private extractSubpathsFromObject(obj: object): string[][] {
@@ -67,7 +79,7 @@ export class TrackingService {
 
       const subObject = currentObj[key as keyof typeof currentObj]
 
-      const returnVal = typeof subObject === 'object' ? subObject : null
+      const returnVal = isObject(subObject) ? subObject : null
 
       return returnVal
     }, obj)
@@ -94,15 +106,27 @@ export class TrackingService {
     return [...basePaths, ...subPaths]
   }
 
-  private _getKey(object: object, path: string[]): string | null {
-    const mergedPath = path.reduce((mergedPath, pathStr) => {
-      if (isNaN(Number(pathStr))) {
+  private _getMergedPath(path: string[]): string {
+    return path.reduce((mergedPath, pathStr) => {
+      if (!Number.isFinite(Number(pathStr))) {
         return mergedPath ? mergedPath + '.' + pathStr : pathStr
       }
       return mergedPath + '.[]'
     }, '')
+  }
 
-    const isPathExcluded = this._excludedPaths.some((pathKey) => {
+  private _getKey({
+    object,
+    path,
+    excludedPaths,
+  }: {
+    object: object
+    path: string[]
+    excludedPaths: RegExp[]
+  }): string | null {
+    const mergedPath = this._getMergedPath(path)
+
+    const isPathExcluded = excludedPaths.some((pathKey) => {
       return pathKey.test(mergedPath)
     })
 
@@ -139,7 +163,7 @@ export class TrackingService {
     }, obj)
   }
 
-  private _collectLayerFeatures(layer: components['schemas']['Layer']) {
+  private _collectLayerFeatures(layer: Octopus['Layer']) {
     const { type: layerType } = layer
 
     if (layerType === 'GROUP' || layerType === 'MASK_GROUP') {
@@ -156,13 +180,32 @@ export class TrackingService {
     const paths = this._extractPathsFromObject(layer)
 
     paths.forEach((path) => {
-      const key = this._getKey(layer, path)
+      const key = this._getKey({ object: layer, path, excludedPaths: this._excludedPaths })
 
       if (!key) {
         return
       }
 
       this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.${key}`)
+    })
+  }
+
+  collectSourceFeatures(source: object) {
+    const sourcePaths = this._extractPathsFromObject(source)
+
+    const excludedPaths = sourcePaths
+      .map((path) => this._getMergedPath(path))
+      .filter((path) => !this._sourceIncludedPaths.some((includedPath) => includedPath.test(path)))
+      .map((path) => new RegExp(`^${path}$`))
+
+    sourcePaths.forEach((path) => {
+      const key = this._getKey({ object: source, path, excludedPaths })
+
+      if (!key) {
+        return
+      }
+
+      this._addKey(`${TrackingService.SOURCE_KEY_PREFIX}.${key}`)
     })
   }
 
@@ -178,7 +221,7 @@ export class TrackingService {
     const paths = this._extractPathsFromObject(manifest)
 
     paths.forEach((path) => {
-      const key = this._getKey(manifest, path)
+      const key = this._getKey({ object: manifest, path, excludedPaths: this._excludedPaths })
 
       if (!key) {
         return
@@ -189,7 +232,7 @@ export class TrackingService {
   }
 
   registerSpecificFeatures(key: string) {
-    this._addKey(`${TrackingService.SPECIFICS_KEY_PREFIX}.${key}`)
+    this._addKey(`${TrackingService.CUSTOM_KEY_PREFIX}.${key}`)
   }
 
   get statistics(): Record<string, number> {

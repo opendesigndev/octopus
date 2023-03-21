@@ -116,10 +116,27 @@ export class DesignConverter {
     })
   }
 
+  private _exportTrackingService(trackingService?: TrackingService): Promise<string> | undefined {
+    return this._exporter?.exportStatistics?.(trackingService?.statistics)
+  }
+
   private async _exportManifest(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert(trackingService))
-    await this._exporter?.exportManifest?.({ manifest, time })
-    return manifest
+    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+    this._trackingService?.collectManifestFeatures(manifest)
+    const trackingServicePath = await this._exportTrackingService(trackingService)
+
+    if (!trackingServicePath) {
+      await this._exporter?.exportManifest?.({ manifest, time })
+      return manifest
+    }
+
+    // by default typescript does not check for excess types
+    // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
+    const manifestWithStatiscsReference = { ...manifest, statistics: trackingServicePath }
+
+    await this._exporter?.exportManifest?.({ manifest: manifestWithStatiscsReference, time })
+
+    return manifestWithStatiscsReference
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
@@ -153,6 +170,8 @@ export class DesignConverter {
     clearInterval(manifestInterval)
     if (this._trackingService) {
       this._trackingService.collectLayerFeatures(components)
+      this._trackingService.collectSourceFeatures(this._sourceDesign.raw)
+      this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
     }
 
     const manifest = await this._exportManifest(this._trackingService)

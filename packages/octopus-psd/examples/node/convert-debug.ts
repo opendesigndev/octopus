@@ -58,6 +58,10 @@ async function convertDesign({
     console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
+  exporter.on('octopus:statistics', (statistics) => {
+    console.log(`\n${chalk.yellow(`Statistics:`)} file://${statistics}\n\n`)
+  })
+
   const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
   const sourceDesign = await reader.sourceDesign
   if (sourceDesign === null) {

@@ -5,8 +5,7 @@ import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../..'
-import type { TrackingService } from '../../services/tracking/tracking-service.js'
-import type { Manifest } from '../../typings/manifest'
+import type { Manifest } from '../../typings/manifest.js'
 import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw'
 import type { SourceBounds } from '../../typings/source'
 import type { SourceComponent } from '../source/source-component'
@@ -88,8 +87,6 @@ export class OctopusManifest {
 
   getMeta(statistics?: Record<string, number>): Manifest['OctopusManifestMeta'] {
     const converterVersion = this._octopusConverter.pkg.version
-    // by default typescript does not check for excess types
-    // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
 
     return {
       converterVersion,
@@ -198,8 +195,8 @@ export class OctopusManifest {
     return this._sourceDesign.components.map((component) => this._convertComponent(component))
   }
 
-  async convert(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
-    const manifest = {
+  async convert(): Promise<Manifest['OctopusManifest']> {
+    return {
       version: this.version,
       origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
@@ -209,15 +206,5 @@ export class OctopusManifest {
       chunks: [],
       libraries: [],
     }
-
-    if (!trackingService) return manifest
-
-    trackingService.collectManifestFeatures(manifest)
-
-    if (this._sourceDesign.iccProfileName) {
-      trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
-    }
-
-    return { ...manifest, meta: this.getMeta(trackingService.statistics) }
   }
 }

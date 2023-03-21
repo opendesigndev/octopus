@@ -4,7 +4,7 @@ import path from 'path'
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
+import { getOctopusFileName, IMAGES_DIR_NAME, MANIFEST_NAME, STATISTICS_NAME } from '../../utils/exporter.js'
 import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
@@ -96,5 +96,9 @@ export class LocalExporter implements AbstractExporter {
    */
   async exportManifest(result: DesignConversionResult): Promise<string> {
     return this._save(MANIFEST_NAME, stringify(result.manifest))
+  }
+
+  async exportStatistics(statistics: object): Promise<string> {
+    return this._save(STATISTICS_NAME, stringify(statistics))
   }
 }
