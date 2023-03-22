@@ -18,3 +18,10 @@ handleEvent('CLOSE', (data) => {
   const message = typeof data === 'string' ? data : undefined
   figma.closePlugin(message)
 })
+
+handleEvent('NOTIFY', (data) => {
+  if (typeof data !== 'object') return
+  const { message, isError = false } = data
+  if (typeof message !== 'string') return
+  figma.notify(message, { error: isError })
+})
