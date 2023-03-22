@@ -122,7 +122,7 @@ export class DesignConverter {
 
   private async _exportManifest(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
-    this._trackingService?.collectManifestFeatures(manifest)
+    trackingService?.collectManifestFeatures(manifest)
     const trackingServicePath = await this._exportTrackingService(trackingService)
 
     if (!trackingServicePath) {

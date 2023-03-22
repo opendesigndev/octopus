@@ -17,6 +17,7 @@ export class TrackingService {
   private _onlyCountByKeys: RegExp[] = []
   private _featuresSummary: Record<string, number> = {}
   private _sourceIncludedPaths: RegExp[]
+  private _registeredObjects: WeakSet<object> = new WeakSet()
 
   static LAYER_KEY_PREFIX = 'layer'
   static MANIFEST_KEY_PREFIX = 'manifest'
@@ -103,6 +104,12 @@ export class TrackingService {
         return paths
       }
 
+      if (this._registeredObjects.has(currentObj)) {
+        return paths
+      }
+
+      this._registeredObjects.add(currentObj)
+
       const relativePaths = this.extractSubpathsFromObject(currentObj)
       return [...paths, ...relativePaths.map((relativePath) => [...path, ...relativePath])]
     }, [])
@@ -127,7 +134,6 @@ export class TrackingService {
     object: object
     path: string[]
     excludedPaths: RegExp[]
-    isSource?: boolean
   }): string | null {
     const mergedPath = this._getMergedPath(path)
     const isPathExcluded = excludedPaths.some((pathKey) => pathKey.test(mergedPath))
@@ -196,18 +202,11 @@ export class TrackingService {
     const sourcePaths = this._extractPathsFromObject(source)
     const excludedPaths = sourcePaths
       .map((path) => this._getMergedPath(path))
-      .filter(
-        (path) =>
-          !this._sourceIncludedPaths.some((includedPath) => {
-            const val = includedPath.test(path)
-            return val
-          })
-      )
+      .filter((path) => !this._sourceIncludedPaths.some((includedPath) => includedPath.test(path)))
       .map((path) => new RegExp('^' + escapeRegExp(path) + '$'))
 
     sourcePaths.forEach((path) => {
-      const key = this._getKey({ object: source, path, excludedPaths, isSource: true })
-
+      const key = this._getKey({ object: source, path, excludedPaths })
       if (!key) {
         return
       }
@@ -244,7 +243,7 @@ export class TrackingService {
   }
 
   get statistics(): Record<string, number> {
-    return Object.keys(this._featuresSummary)
+    return keys(this._featuresSummary)
       .sort()
       .reduce<Record<string, number>>((acc, key) => {
         acc[key] = this._featuresSummary[key]
