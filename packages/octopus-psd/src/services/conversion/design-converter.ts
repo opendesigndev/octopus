@@ -170,7 +170,9 @@ export class DesignConverter {
     clearInterval(manifestInterval)
     if (this._trackingService) {
       this._trackingService.collectLayerFeatures(components)
-      this._trackingService.collectSourceFeatures(this._sourceDesign.raw)
+      this._trackingService.collectSourceFeatures(
+        this._sourceDesign.raw.children.map((child) => child.additionalProperties)
+      )
       this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
     }
 

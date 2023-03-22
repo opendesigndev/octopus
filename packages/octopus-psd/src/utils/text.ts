@@ -35,3 +35,7 @@ export function getTextColor(sourceColor: number[] | undefined): SourceColor {
 
   return color
 }
+
+export function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}

@@ -1,5 +1,7 @@
 import { isObject, keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { escapeRegExp } from '../../utils/text.js'
+
 import type { Manifest } from '../../typings/manifest'
 import type { Octopus } from '../../typings/octopus.js'
 import type { ComponentConversionResult } from '../conversion/design-converter.js'
@@ -9,6 +11,7 @@ type TrackingServiceOptions = {
   onlyCountByKeys: RegExp[]
   sourceIncludedPaths?: RegExp[]
 }
+
 export class TrackingService {
   private _excludedPaths: RegExp[]
   private _onlyCountByKeys: RegExp[] = []
@@ -40,7 +43,8 @@ export class TrackingService {
     return new TrackingService({
       excludedPaths: TrackingService.DEFAULT_EXCLUDED_PATHS,
       onlyCountByKeys: TrackingService.DEFAULT_ONLY_COUNT_BY_KEYS,
-      sourceIncludedPaths: [RegExp('Txt2')],
+      //just an example, feel free to change this how you want
+      sourceIncludedPaths: [RegExp('lyid.value')],
     })
   }
 
@@ -123,12 +127,10 @@ export class TrackingService {
     object: object
     path: string[]
     excludedPaths: RegExp[]
+    isSource?: boolean
   }): string | null {
     const mergedPath = this._getMergedPath(path)
-
-    const isPathExcluded = excludedPaths.some((pathKey) => {
-      return pathKey.test(mergedPath)
-    })
+    const isPathExcluded = excludedPaths.some((pathKey) => pathKey.test(mergedPath))
 
     if (isPathExcluded) {
       return null
@@ -192,20 +194,26 @@ export class TrackingService {
 
   collectSourceFeatures(source: object) {
     const sourcePaths = this._extractPathsFromObject(source)
-
     const excludedPaths = sourcePaths
       .map((path) => this._getMergedPath(path))
-      .filter((path) => !this._sourceIncludedPaths.some((includedPath) => includedPath.test(path)))
-      .map((path) => new RegExp(`^${path}$`))
+      .filter(
+        (path) =>
+          !this._sourceIncludedPaths.some((includedPath) => {
+            const val = includedPath.test(path)
+            return val
+          })
+      )
+      .map((path) => new RegExp('^' + escapeRegExp(path) + '$'))
 
     sourcePaths.forEach((path) => {
-      const key = this._getKey({ object: source, path, excludedPaths })
+      const key = this._getKey({ object: source, path, excludedPaths, isSource: true })
 
       if (!key) {
         return
       }
 
-      this._addKey(`${TrackingService.SOURCE_KEY_PREFIX}.${key}`)
+      const keyPrefixGlue = key.startsWith('.') ? '' : '.'
+      this._addKey(`${TrackingService.SOURCE_KEY_PREFIX}${keyPrefixGlue}${key}`)
     })
   }
 
