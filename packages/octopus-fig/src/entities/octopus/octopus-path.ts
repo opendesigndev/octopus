@@ -1,16 +1,16 @@
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import first from 'lodash/first'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import first from 'lodash/first.js'
 
-import { convertRectangle, convertTransform } from '../../utils/convert'
-import { DEFAULTS } from '../../utils/defaults'
-import { createCompoundPath, simplifyPathData } from '../../utils/paper'
-import { isParentBoolOperation } from '../../utils/source'
+import { convertRectangle, convertTransform } from '../../utils/convert.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { createCompoundPath, simplifyPathData } from '../../utils/paper.js'
+import { isParentBoolOperation } from '../../utils/source.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceGeometry } from '../../typings/source'
-import type { SourceLayerContainer } from '../source/source-layer-container'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerText } from '../source/source-layer-text'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceGeometry } from '../../typings/source.js'
+import type { SourceLayerContainer } from '../source/source-layer-container.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourceLayerText } from '../source/source-layer-text.js'
 
 type SourceLayer = SourceLayerShape | SourceLayerText | SourceLayerContainer
 

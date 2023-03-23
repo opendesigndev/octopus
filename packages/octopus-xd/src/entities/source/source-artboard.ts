@@ -1,13 +1,13 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push, traverseAndFind } from '@opendesign/octopus-common/dist/utils/common'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push, traverseAndFind } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source'
-import type { SourceDesign } from './source-design'
-import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest'
+import type { SourceDesign } from './source-design.js'
+import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source/index.js'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

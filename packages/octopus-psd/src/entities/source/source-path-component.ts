@@ -5,8 +5,8 @@ import { SourceEntity } from './source-entity.js'
 import { SourcePathOrigin } from './source-path-origin.js'
 import { SourceSubpath } from './source-subpath.js'
 
-import type { RawCombineOperation } from '../../typings/raw'
-import type { SourceSourcePathComponent } from '../../typings/source'
+import type { RawCombineOperation } from '../../typings/raw/index.js'
+import type { SourceSourcePathComponent } from '../../typings/source.js'
 
 export class SourcePathComponent extends SourceEntity {
   protected _rawValue: SourceSourcePathComponent

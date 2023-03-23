@@ -1,7 +1,7 @@
-import type { Parser } from '../../parser'
-import type { ICacher } from '../../types/cacher'
 import type { Design } from './design'
 import type { FrameLike } from './frame-like'
+import type { Parser } from '../../parser'
+import type { ICacher } from '../../types/cacher'
 
 type FillsOptions = {
   frameLike: FrameLike

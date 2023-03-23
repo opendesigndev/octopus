@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 
-import { ColorSpace, OctopusEffectColorFill } from '../octopus-effect-color-fill'
-import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient'
-import { OctopusEffectImageFill } from '../octopus-effect-fill-image'
-import { OctopusEffectsShape } from '../octopus-effects-shape'
+import { ColorSpace, OctopusEffectColorFill } from '../octopus-effect-color-fill.js'
+import { OctopusEffectGradientFill } from '../octopus-effect-fill-gradient.js'
+import { OctopusEffectImageFill } from '../octopus-effect-fill-image.js'
+import { OctopusEffectsShape } from '../octopus-effects-shape.js'
 
-jest.mock('../octopus-effect-color-fill')
-jest.mock('../octopus-effect-fill-gradient')
-jest.mock('../octopus-effect-fill-image')
+vi.mock('../octopus-effect-color-fill')
+vi.mock('../octopus-effect-fill-gradient')
+vi.mock('../octopus-effect-fill-image')
 
 describe('OctopusEffectsShape', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe('convert', () => {
     afterEach(() => {
-      jest.resetAllMocks()
+      vi.resetAllMocks()
     })
 
     it('returns fill from OctopusEffectImageFill when sourceLayer type is Image ', () => {
@@ -28,7 +28,7 @@ describe('OctopusEffectsShape', () => {
       }
 
       const octopusImageFillConvert = {}
-      mocked(OctopusEffectImageFill).mockReturnValueOnce({
+      vi.mocked(OctopusEffectImageFill).mockReturnValueOnce({
         convert: () => octopusImageFillConvert,
       } as any)
 
@@ -50,16 +50,16 @@ describe('OctopusEffectsShape', () => {
         convert: () => octopusEffectColorFillConvert,
       }
 
-      mocked(OctopusEffectColorFill).mockReturnValueOnce(octopusEffectColorFillInstance)
+      vi.mocked(OctopusEffectColorFill).mockReturnValueOnce(octopusEffectColorFillInstance)
 
       const octopusEffectGradientFillConvert = {}
       const octopusEffectGradientFillInstance: any = {
         convert: () => octopusEffectGradientFillConvert,
       } as any
-      mocked(OctopusEffectGradientFill).mockReturnValueOnce(octopusEffectGradientFillInstance)
+      vi.mocked(OctopusEffectGradientFill).mockReturnValueOnce(octopusEffectGradientFillInstance)
 
       const instance = new OctopusEffectsShape(input)
-      instance['_parseSourceLayerShapeFills'] = jest
+      instance['_parseSourceLayerShapeFills'] = vi
         .fn()
         .mockReturnValueOnce([octopusEffectColorFillInstance, octopusEffectGradientFillInstance])
 
@@ -81,8 +81,8 @@ describe('OctopusEffectsShape', () => {
       const octopusEffectColorFillInstance: any = {}
       const octopusEffectGradientFillInstance: any = {}
 
-      mocked(OctopusEffectColorFill).mockReturnValueOnce(octopusEffectColorFillInstance)
-      mocked(OctopusEffectGradientFill).mockReturnValueOnce(octopusEffectGradientFillInstance)
+      vi.mocked(OctopusEffectColorFill).mockReturnValueOnce(octopusEffectColorFillInstance)
+      vi.mocked(OctopusEffectGradientFill).mockReturnValueOnce(octopusEffectGradientFillInstance)
 
       const expected = [octopusEffectColorFillInstance, octopusEffectGradientFillInstance]
       const result = instance['_parseSourceLayerShapeFills'](input.sourceLayer as any)

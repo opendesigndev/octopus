@@ -4,11 +4,17 @@
   "description": "Figma HTTP API format to Octopus 3+ converter.",
   "license": "Apache-2.0",
   "scripts": {
-    "bundle": "yarn run bundle:web",
-    "bundle:web": "npx vite build -c vite.web.js && npx vite build -c vite.web.worker.js",
-    "build": "tsc --build ./tsconfig.json",
+    "build": "rimraf ./dist && tsc --build tsconfig.json",
+    "bundle:node": "vite build -c vite.node.js",
+    "bundle:web": "vite build -c vite.web.js",
+    "bundle:web-umd": "vite build -c vite.web-umd.js",
+    "bundle": "yarn bundle:node && yarn bundle:web && yarn bundle:web-umd && yarn release:prepare",
+    "release:cleanup": "rimraf ./release",
+    "release:publish": "yarn publish ./release --non-interactive --ignore-scripts",
+    "release:prepare": "node ./prepare-release.mjs",
+    "release": "yarn bundle && yarn release:publish && yarn release:cleanup",
+    "clean": "rimraf ./node_modules ./dist ./workdir ./test/**/report ./release",
     "clean:workdir": "rimraf ./workdir/*",
-    "clean": "rimraf ./node_modules ./lib ./dist ./workdir ./test/**/report",
     "convert:api:debug": "ts-node ./examples/node/convert-api-debug.ts",
     "convert:api:local": "ts-node ./examples/node/convert-api-local.ts",
     "convert:plugin:debug": "ts-node ./examples/node/convert-plugin-debug.ts",
@@ -25,12 +31,13 @@
     "test:integration:plugin:update": "ts-node test/integration/squid-plugin/update-tests.ts",
     "types:check": "tsc --noEmit",
     "typedoc": "typedoc --excludePrivate src/index-node.ts src/index-web.ts",
-    "watch": "tsc -w"
+    "watch": "rimraf ./dist && tsc -w",
+    "prepublishOnly": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/figma-parser": "3.0.0-rc.17",
     "@opendesign/manifest-ts": "3.0.2",
-    "@opendesign/octopus-common": "3.0.0-rc.31",
+    "@opendesign/octopus-common": "3.0.0-rc.33",
     "@opendesign/octopus-ts": "3.0.2",
     "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.1",
@@ -51,18 +58,27 @@
     "@types/pino-std-serializers": "2.4.1",
     "@types/rimraf": "^3.0.2",
     "chalk": "^4.1.2",
+    "enhanced-resolve": "^5.12.0",
     "handlebars": "^4.7.7",
     "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.3",
+    "ts-jest-resolver": "^2.0.0",
     "ts-node": "10.8.0",
     "typedoc": "^0.23.18",
-    "typescript": "4.6.4"
+    "typescript": "4.9.5",
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.0.2"
   },
   "files": [
-    "lib/src",
-    "lib/package.json"
+    "dist"
   ],
-  "main": "./lib/src/index-web.js"
+  "type": "module",
+  "module": "./dist/src/index-node.js",
+  "exports": {
+    ".": {
+      "default": "./dist/src/index-node.js"
+    }
+  }
 }

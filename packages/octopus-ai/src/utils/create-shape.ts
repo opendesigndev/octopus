@@ -2,9 +2,9 @@
  * This file is taken from svg-exporter and slightly modified, the purpose of createShape() is
  * to generate  paper.Path based on Octopus shape.
  */
-import { createPath, createPoint, createSegment } from './paper-factories'
+import { createPath, createPoint, createSegment } from './paper-factories.js'
 
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type PointType = 'point' | 'bezier'
 export type OctopusPoint = {

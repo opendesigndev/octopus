@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import max from 'lodash/max'
+import max from 'lodash/max.js'
 
-import { createMatrix } from '../../../utils/paper'
-import { getTransformFor } from '../../../utils/source'
-import { convertToRawTransform } from './utils'
+import { convertToRawTransform } from './utils.js'
+import { createMatrix } from '../../../utils/paper.js'
+import { getTransformFor } from '../../../utils/source.js'
 
-import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api'
-import type { RawLayer, RawPaint, RawTextStyle, RawTransform } from '../../../typings/raw'
+import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api.js'
+import type { RawLayer, RawPaint, RawTextStyle, RawTransform } from '../../../typings/raw/index.js'
 
 const DEFAULT_TRANSFORM = [
   [1, 0, 0],

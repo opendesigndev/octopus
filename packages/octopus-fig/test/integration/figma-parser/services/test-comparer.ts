@@ -1,13 +1,13 @@
-import { createConverter } from '../../../../src/index-node'
-import { BaseTestComparer } from '../../common/services/base-test-comparer'
-import { cleanManifest } from '../../common/utils/asset-cleaner'
-import { DesignEmitterMock } from './design-emitter-mock'
+import { DesignEmitterMock } from './design-emitter-mock.js'
+import { createConverter } from '../../../../src/index-node.js'
+import { BaseTestComparer } from '../../common/services/base-test-comparer.js'
+import { cleanManifest } from '../../common/utils/asset-cleaner.js'
 
-import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
-import type { Octopus } from '../../../../src/typings/octopus'
-import type { TestComponents } from '../../common/services/asset-reader'
-import type { ConvertedDesign } from '../../common/services/base-test-comparer'
-import type { Fail } from '../../common/services/test-runner'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
+import type { Octopus } from '../../../../src/typings/octopus.js'
+import type { TestComponents } from '../../common/services/asset-reader.js'
+import type { ConvertedDesign } from '../../common/services/base-test-comparer.js'
+import type { Fail } from '../../common/services/test-runner.js'
 
 export class TestComparer extends BaseTestComparer {
   private _octopusConverter: OctopusFigConverter

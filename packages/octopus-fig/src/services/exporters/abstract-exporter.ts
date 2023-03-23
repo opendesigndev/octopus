@@ -1,5 +1,5 @@
-import type { Manifest } from '../../typings/manifest'
-import type { ComponentConversionResult } from '../conversion/design-converter'
+import type { Manifest } from '../../typings/manifest.js'
+import type { ComponentConversionResult } from '../conversion/design-converter.js'
 
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {

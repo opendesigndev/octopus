@@ -1,4 +1,4 @@
-import type { RawLayerCommon } from '.'
+import type { RawLayerCommon } from './index.js'
 
 export type RawShapeLayerMeta = {
   ux?: {

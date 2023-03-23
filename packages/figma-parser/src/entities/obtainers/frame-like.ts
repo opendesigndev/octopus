@@ -3,11 +3,11 @@ import { Preview } from './preview'
 import { Renditions } from './renditions'
 import Styles from './styles'
 
+import type { Design } from './design'
+import type { Style } from './styles'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { FigmaNode } from '../../types/figma'
 import type { Node } from '../structural/node'
-import type { Design } from './design'
-import type { Style } from './styles'
 
 type FrameLikeOptions = {
   design: Design

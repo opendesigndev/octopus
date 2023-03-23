@@ -1,18 +1,18 @@
 import path from 'path'
 
-import { createConverter, SourcePluginReader } from '../../../../src/index-node'
-import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
-import { MANIFEST_NAME } from '../../../../src/utils/const'
-import { makeDir, saveFile, rmDir, parseJsonFromFile } from '../../../../src/utils/files'
-import { AssetReader } from '../../common/services/asset-reader'
-import { cleanManifest } from '../../common/utils/asset-cleaner'
-import { stringify } from '../../common/utils/stringify'
+import { createConverter, SourcePluginReader } from '../../../../src/index-node.js'
+import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter.js'
+import { MANIFEST_NAME } from '../../../../src/utils/const.js'
+import { makeDir, saveFile, rmDir, parseJsonFromFile } from '../../../../src/utils/files.js'
+import { AssetReader } from '../../common/services/asset-reader.js'
+import { cleanManifest } from '../../common/utils/asset-cleaner.js'
+import { stringify } from '../../common/utils/stringify.js'
 
-import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
-import type { Manifest } from '../../../../src/typings/manifest'
-import type { Octopus } from '../../../../src/typings/octopus'
-import type { PluginSource } from '../../../../src/typings/plugin-source'
-import type { TestDirectoryData } from '../../common/services/asset-reader'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
+import type { Manifest } from '../../../../src/typings/manifest.js'
+import type { Octopus } from '../../../../src/typings/octopus.js'
+import type { PluginSource } from '../../../../src/typings/plugin-source.js'
+import type { TestDirectoryData } from '../../common/services/asset-reader.js'
 
 type TestAssets = {
   components: Octopus['OctopusComponent'][]

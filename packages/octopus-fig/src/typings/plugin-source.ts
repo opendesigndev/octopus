@@ -1,4 +1,4 @@
-import type { StyledTextSegment } from './plugin-api'
+import type { StyledTextSegment } from './plugin-api.js'
 
 export { StyledTextSegment }
 

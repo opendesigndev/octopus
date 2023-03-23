@@ -1,15 +1,16 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { initOctopusLayerChildren } from '../../utils/layer'
-import { OctopusLayerCommon } from './octopus-layer-common'
+import { initOctopusLayerChildren } from '../../utils/layer.js'
+// eslint-disable-next-line import/order
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { SourceLayerGroup } from '../source/source-layer-group'
-import type { SourceLayerXObjectForm } from '../source/source-layer-x-object-form'
-import type { LayerSpecifics } from './octopus-layer-common'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { SourceLayerGroup } from '../source/source-layer-group.js'
+import type { SourceLayerXObjectForm } from '../source/source-layer-x-object-form.js'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent
@@ -18,7 +19,7 @@ type OctopusLayerGroupOptions = {
 
 export class OctopusLayerGroup extends OctopusLayerCommon {
   private _layers: OctopusLayer[]
-  protected _sourceLayer: SourceLayerGroup | SourceLayerXObjectForm
+  declare _sourceLayer: SourceLayerGroup | SourceLayerXObjectForm
 
   constructor(options: OctopusLayerGroupOptions) {
     super(options)

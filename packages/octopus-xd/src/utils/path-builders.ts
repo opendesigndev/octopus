@@ -1,6 +1,6 @@
-import { asNumber, asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asNumber, asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { convertObjectToPaperMatrix } from './matrix'
+import { convertObjectToPaperMatrix } from './matrix.js'
 import {
   createPathCircle,
   createPathEllipse,
@@ -10,7 +10,7 @@ import {
   createPoint,
   createSize,
   createPath,
-} from './paper'
+} from './paper.js'
 
 import type {
   Raw2DMatrix,
@@ -23,7 +23,7 @@ import type {
   RawShapePath,
   RawShapePolygon,
   RawShapeRect,
-} from '../typings/source'
+} from '../typings/source/index.js'
 import type paper from 'paper'
 
 function buildShapeFromRect(shape: RawShapeRect): paper.Path {

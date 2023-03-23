@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
-import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form'
-import { createSoftMask, initClippingMask } from '../mask'
+import { SourceLayerXObjectForm } from '../../entities/source/source-layer-x-object-form.js'
+import { createSoftMask, initClippingMask } from '../mask.js'
 
-jest.mock('../../entities/source/source-layer-x-object-form')
+vi.mock('../../entities/source/source-layer-x-object-form')
 
 describe('utils/mask', () => {
   describe('initClippingMask', () => {
@@ -98,7 +98,7 @@ describe('utils/mask', () => {
 
       const instance = {}
 
-      mocked(SourceLayerXObjectForm).mockReturnValueOnce(instance as any)
+      vi.mocked(SourceLayerXObjectForm).mockReturnValueOnce(instance as any)
       expect(createSoftMask({ sMask, parent: parent } as any)).toBe(instance)
     })
   })

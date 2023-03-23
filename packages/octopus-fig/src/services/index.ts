@@ -1,9 +1,9 @@
-import { getPlatformFactories } from './general/platforms'
+import { getPlatformFactories } from './general/platforms/index.js'
 
-import type { Env } from './general/environment'
-import type { Logger } from './general/logger/logger'
-import type { CreateLoggerOptions } from './general/logger/logger-factory'
-import type { ImageSizeService } from './general/platforms'
+import type { Env } from './general/environment/index.js'
+import type { CreateLoggerOptions } from './general/logger/logger-factory.js'
+import type { Logger } from './general/logger/logger.js'
+import type { ImageSizeService } from './general/platforms/index.js'
 
 type DefaultOptions = {
   logger: CreateLoggerOptions

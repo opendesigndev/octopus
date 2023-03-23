@@ -1,4 +1,4 @@
-import type { RawBounds, RawMatrix, RawPointXY } from './shared'
+import type { RawBounds, RawMatrix, RawPointXY } from './shared.js'
 
 export type RawRadiiCorners = {
   bottomLeft?: number

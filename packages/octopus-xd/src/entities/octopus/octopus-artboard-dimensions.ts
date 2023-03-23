@@ -1,7 +1,7 @@
-import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceArtboard } from '../source/source-artboard'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
 
 type OctopusDimensionsOptions = {
   sourceArtboard: SourceArtboard

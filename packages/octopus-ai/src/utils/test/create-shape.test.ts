@@ -1,6 +1,8 @@
-import { createShape } from '../create-shape'
+import { describe, expect, it } from 'vitest'
 
-import type { OctopusPoint } from '../create-shape'
+import { createShape } from '../create-shape.js'
+
+import type { OctopusPoint } from '../create-shape.js'
 
 describe('utils/create-shape', () => {
   it('returns closed paper.Path when closed input is true', () => {

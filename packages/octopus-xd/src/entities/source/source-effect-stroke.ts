@@ -1,4 +1,4 @@
-import type { RawStroke } from '../../typings/source'
+import type { RawStroke } from '../../typings/source/index.js'
 
 export type SourceEffectStrokeOptions = {
   effect: RawStroke

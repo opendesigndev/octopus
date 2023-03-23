@@ -6,7 +6,7 @@ import type {
   RawDescriptorValueTree,
   RawNodeChildWithProps,
   RawParsedPsd,
-} from '../typings/raw'
+} from '../typings/raw/index.js'
 import type Psd from '@webtoon/psd-ts'
 import type { NodeChild, AdditionalLayerInfo } from '@webtoon/psd-ts'
 import type {
@@ -20,7 +20,7 @@ import type {
   ObjectArrayDescriptorValue,
   ListDescriptorValue,
   UnitFloatDescriptorValue,
-} from '@webtoon/psd-ts/dist/interfaces/'
+} from '@webtoon/psd-ts/dist/interfaces/index.js'
 
 export function parseDescriptorItems(items?: Map<string, DescriptorValue>): RawDescriptorValueTree {
   if (!items) {
@@ -120,7 +120,7 @@ export function parseListDescriptorValue(
 }
 
 export function parseUint8DescriptorValue(uintDescriptor: AliasDescriptorValue | RawDataDescriptorValue): string {
-  return Buffer.from(uintDescriptor.data).toString()
+  return String.fromCharCode.apply(null, uintDescriptor.data)
 }
 export function parseDescriptorDescriptorValue(objc: DescriptorDescriptorValue): RawDescriptorValueTree {
   return parseDescriptorItems(objc.descriptor.items)

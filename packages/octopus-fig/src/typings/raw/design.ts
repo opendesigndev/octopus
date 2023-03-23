@@ -1,5 +1,5 @@
-import type { RawLayer } from './layer'
-import type { RawColor } from './shared'
+import type { RawLayer } from './layer.js'
+import type { RawColor } from './shared.js'
 
 export type RawComponentSets = { [key: string]: RawComponentSet | undefined }
 export type RawComponentSet = {

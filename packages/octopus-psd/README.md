@@ -37,6 +37,8 @@ Check [`src/services/exporters/`](./src/services/exporters/) for more details ab
 
 Check [`src/services/readers/`](./src/services/readers/) for more details about readers
 
+Check [`examples/web/`](./examples/web/) for more details about usage in web browsers.
+
 ---
 
 ## Demo: Node Examples
@@ -78,9 +80,14 @@ yarn convert:local sample/some-file.psd
 
 ---
 
+## Demo: Example Web
+
+Run `yarn bundle` and then open `examples/web/index.html` in [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+Look for `Result:` in console output.
+
 #### Instantiation of PSDFileReader
 
-You can instantiate PSDFileReader with optional flag withRenderer.
+You can instantiate both [PSDFileReaders](./src/services/readers/) with static method `withRenderer`.
 This will include library @opendesign/image-icc-profile-converter in the image processing pipeline.
 The process will convert all output images to `sRGB` if PSD file was saved with embedded colour profile. This might make a difference especially for images composed in CMYK colour space.
 

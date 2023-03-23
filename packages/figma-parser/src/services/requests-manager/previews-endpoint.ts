@@ -1,13 +1,13 @@
 import chunk from 'lodash/chunk'
 
+import { EndpointBase } from './endpoint-base'
 import { isObject, keys } from '../../utils/common'
 import { buildEndpoint } from '../../utils/request'
-import { EndpointBase } from './endpoint-base'
 
 import type { RequestsManager } from '.'
+import type { DesignNodes } from './nodes-endpoint'
 import type { Node } from '../../entities/structural/node'
 import type { FigmaPreviewsResponse } from '../../types/figma'
-import type { DesignNodes } from './nodes-endpoint'
 
 type PreviewsEndpointOptions = {
   requestsManager: RequestsManager

@@ -1,17 +1,17 @@
-import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common'
+import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createOctopusLayers } from '../../factories/create-octopus-layer'
-import { env } from '../../services'
-import { convertTransform } from '../../utils/convert'
-import { DEFAULTS } from '../../utils/defaults'
-import { isEmptyObj } from '../../utils/misc'
-import { getTopComponentTransform } from '../../utils/source'
-import { OctopusLayerBase } from './octopus-layer-base'
+import { OctopusLayerBase } from './octopus-layer-base.js'
+import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
+import { env } from '../../services/index.js'
+import { convertTransform } from '../../utils/convert.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { isEmptyObj } from '../../utils/misc.js'
+import { getTopComponentTransform } from '../../utils/source.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { SourceLayerContainer } from '../source/source-layer-container'
-import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base'
+import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerContainer } from '../source/source-layer-container.js'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent

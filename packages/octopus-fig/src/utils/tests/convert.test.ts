@@ -3,9 +3,9 @@ import {
   convertId,
   convertLinearGradientTransform,
   convertRadialGradientTransform,
-} from '../convert'
+} from '../convert.js'
 
-import type { SourceGradientPositions, SourceTransform } from '../../typings/source'
+import type { SourceGradientPositions, SourceTransform } from '../../typings/source.js'
 
 describe('convertId', () => {
   function testExample(id: string, result: string): void {

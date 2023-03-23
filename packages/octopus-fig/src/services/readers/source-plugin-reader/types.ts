@@ -1,5 +1,5 @@
-import type { RawLayer } from '../../../typings/raw'
-import type { ImageSize } from '../../general/image-size/image-size'
+import type { RawLayer } from '../../../typings/raw/index.js'
+import type { ImageSize } from '../../general/image-size/image-size.js'
 
 export type EventDesign = {
   event: 'ready:design'

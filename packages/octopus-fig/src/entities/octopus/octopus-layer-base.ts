@@ -1,18 +1,19 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { asString } from '@opendesign/octopus-common/dist/utils/as'
-import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logger } from '../../services'
-import { convertLayerBlendMode, convertId, convertTransform } from '../../utils/convert'
-import { OctopusComponent } from './octopus-component'
-import { OctopusEffect } from './octopus-effect'
+import { OctopusComponent } from './octopus-component.js'
+import { OctopusEffect } from './octopus-effect.js'
+import { logger } from '../../services/index.js'
+import { convertLayerBlendMode, convertId, convertTransform } from '../../utils/convert.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerGroup } from './octopus-layer-group'
-import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import type { NotNull } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { OctopusLayerGroup } from './octopus-layer-group.js'
+import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { NotNull } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 
