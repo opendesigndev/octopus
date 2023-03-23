@@ -1,15 +1,15 @@
-import { SourceLayerGroup } from '../entities/source/source-layer-group'
-import { SourceLayerShape } from '../entities/source/source-layer-shape'
-import { SourceLayerText } from '../entities/source/source-layer-text'
-import { SourceLayerXObjectForm } from '../entities/source/source-layer-x-object-form'
-import { SourceLayerXObjectImage } from '../entities/source/source-layer-x-object-image'
+import { SourceLayerGroup } from '../entities/source/source-layer-group.js'
+import { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import { SourceLayerText } from '../entities/source/source-layer-text.js'
+import { SourceLayerXObjectForm } from '../entities/source/source-layer-x-object-form.js'
+import { SourceLayerXObjectImage } from '../entities/source/source-layer-x-object-image.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { RawGroupLayer, RawResourcesXObject, RawTextLayer } from '../typings/raw'
-import type { RawLayer } from '../typings/raw/layer'
-import type { RawShapeLayer } from '../typings/raw/shape-layer'
-import type { RawXObjectLayer } from '../typings/raw/x-object'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
+import type { RawGroupLayer, RawResourcesXObject, RawTextLayer } from '../typings/raw/index.js'
+import type { RawLayer } from '../typings/raw/layer.js'
+import type { RawShapeLayer } from '../typings/raw/shape-layer.js'
+import type { RawXObjectLayer } from '../typings/raw/x-object.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type SourceLayer =
   | SourceLayerGroup

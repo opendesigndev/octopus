@@ -1,16 +1,15 @@
-import { setDefaults, setLogger } from './services'
-import { DesignConverter } from './services/conversion/design-converter'
-import { getPlatformFactories, setPlatformFactories } from './services/general/platforms'
-import { readPackageMeta } from './utils/read-pkg-meta'
+import { DesignConverter } from './services/conversion/design-converter.js'
+import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
+import { setDefaults, setLogger } from './services/index.js'
+import { readPackageMeta } from './utils/read-pkg-meta.js'
 
-import type { DesignConversionResult } from './services/conversion/design-converter'
-import type { AbstractExporter } from './services/exporters/abstract-exporter'
-import type { ImageSize } from './services/general/image-size/image-size'
-import type { NodeFactories, WebFactories } from './services/general/platforms'
-import type { Logger } from './typings'
-import type { PackageMeta } from './utils/read-pkg-meta'
-// eslint-disable-next-line import/no-named-as-default
-import type EventEmitter from 'eventemitter3'
+import type { DesignConversionResult } from './services/conversion/design-converter.js'
+import type { AbstractExporter } from './services/exporters/abstract-exporter.js'
+import type { ImageSize } from './services/general/image-size/image-size.js'
+import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
+import type { Logger } from './typings/index.js'
+import type { PackageMeta } from './utils/read-pkg-meta.js'
+import type { EventEmitter } from 'eventemitter3'
 
 export type OctopusConverterOptions = {
   platformFactories: WebFactories | NodeFactories

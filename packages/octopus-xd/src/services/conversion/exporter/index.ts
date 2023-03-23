@@ -1,6 +1,6 @@
-import type { SourceArtboard } from '../../../entities/source/source-artboard'
-import type { SourceDesign } from '../../../entities/source/source-design'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../octopus-xd-converter'
+import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
+import type { SourceDesign } from '../../../entities/source/source-design.js'
+import type { ArtboardConversionResult, DesignConversionResult } from '../../../octopus-xd-converter.js'
 
 export abstract class Exporter {
   exportSourceDesign?(_design: SourceDesign): Promise<unknown> {

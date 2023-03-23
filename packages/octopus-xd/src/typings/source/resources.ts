@@ -1,4 +1,4 @@
-import type { RawClipPathResources, RawGradientResources, RawLayer } from '.'
+import type { RawClipPathResources, RawGradientResources, RawLayer } from './index.js'
 
 export type RawResources = {
   version?: string

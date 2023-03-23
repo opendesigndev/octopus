@@ -1,12 +1,12 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer'
-import { SourceLayerCommon } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
 
-import type { Defined } from '../../typings/helpers'
-import type { RawShapeCompound, RawShapeLayer } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawShapeCompound, RawShapeLayer } from '../../typings/source/index.js'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent

@@ -1,21 +1,21 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { isValid } from '../../utils/coords'
-import { createShape } from '../../utils/create-shape'
-import { parseRect } from '../../utils/rectangle'
-import { OctopusEffectsShape } from './octopus-effects-shape'
-import { OctopusLayerCommon } from './octopus-layer-common'
-import OctopusPoint from './octopus-point'
+import { OctopusEffectsShape } from './octopus-effects-shape.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
+import OctopusPoint from './octopus-point.js'
+import { isValid } from '../../utils/coords.js'
+import { createShape } from '../../utils/create-shape.js'
+import { parseRect } from '../../utils/rectangle.js'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Coord } from '../../typings'
-import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RawShapeLayerSubPathPoint } from '../../typings/raw'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerShapeSubPath } from '../source/source-layer-shape-subpath'
-import type { LayerSpecifics } from './octopus-layer-common'
-import type { NormalizedPoint } from './octopus-point'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { NormalizedPoint } from './octopus-point.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Coord } from '../../typings/index.js'
+import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { RawShapeLayerSubPathPoint } from '../../typings/raw/index.js'
+import type { SourceLayerShapeSubPath } from '../source/source-layer-shape-subpath.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
@@ -23,7 +23,7 @@ type OctopusLayerShapeOptions = {
 }
 
 export class OctopusLayerShapeShapeAdapter extends OctopusLayerCommon implements OctopusLayerShapeAdapter {
-  protected _sourceLayer: SourceLayerShape
+  declare _sourceLayer: SourceLayerShape
 
   static DEFAULT_RECT_COORDS = [0, 0, 0, 0]
   static DEFAULT_GEOMETRY = ''

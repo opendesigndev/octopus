@@ -1,16 +1,17 @@
-import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer'
-import { createOctopusLayersFromLayerSequences } from '../../utils/layer'
-import { OctopusLayerCommon } from './octopus-layer-common'
+import { createOctopusLayerShapeFromShapeAdapter } from '../../factories/create-octopus-layer.js'
+// eslint-disable-next-line import/order
+import { OctopusLayerCommon } from './octopus-layer-common.js'
+import { createOctopusLayersFromLayerSequences } from '../../utils/layer.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayerWithMask } from './octopus-layer-soft-mask-group.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayerMaskOptions = {
   parent: OctopusLayerParent

@@ -1,10 +1,10 @@
-import { SourceComponent } from './source-component'
-import { SourceEntity } from './source-entity'
+import { SourceComponent } from './source-component.js'
+import { SourceEntity } from './source-entity.js'
 
-import type { RawPage, RawLayer, RawLayerContainer } from '../../typings/raw'
+import type { RawPage, RawLayer, RawLayerContainer } from '../../typings/raw/index.js'
 
 export class SourcePage extends SourceEntity {
-  protected _rawValue: RawPage
+  declare _rawValue: RawPage
   private _components: SourceComponent[]
   private _pasteboard: SourceComponent | null
 

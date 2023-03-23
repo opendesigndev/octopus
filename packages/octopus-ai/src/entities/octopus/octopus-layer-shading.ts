@@ -1,16 +1,16 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { parseRect } from '../../utils/rectangle'
-import { OctopusEffectsShape } from './octopus-effects-shape'
-import { OctopusLayerCommon } from './octopus-layer-common'
-import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter'
+import { OctopusEffectsShape } from './octopus-effects-shape.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
+import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
+import { parseRect } from '../../utils/rectangle.js'
 
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { RawGraphicsStateMatrix } from '../../typings/raw'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { LayerSpecifics } from './octopus-layer-common'
+import type { LayerSpecifics } from './octopus-layer-common.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus, OctopusLayerShapeAdapter } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { RawGraphicsStateMatrix } from '../../typings/raw/index.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
 
 type OctopusLayerShapeOptions = {
   parent: OctopusLayerParent
@@ -18,7 +18,7 @@ type OctopusLayerShapeOptions = {
 }
 
 export class OctopusLayerShading extends OctopusLayerCommon implements OctopusLayerShapeAdapter {
-  protected _sourceLayer: SourceLayerShape
+  declare _sourceLayer: SourceLayerShape
 
   static DEFAULT_RECT_COORDS = [0, 0, 0, 0]
   static DEFAULT_GEOMETRY = ''

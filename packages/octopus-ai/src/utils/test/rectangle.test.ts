@@ -1,4 +1,6 @@
-import { parseRect } from '../rectangle'
+import { describe, expect, it } from 'vitest'
+
+import { parseRect } from '../rectangle.js'
 
 describe('utils/rectangle', () => {
   it('calculates rectangle coords where width>height', () => {

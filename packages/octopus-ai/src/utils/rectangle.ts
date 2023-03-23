@@ -1,8 +1,8 @@
-import { createRectPoints } from './coords'
+import { createRectPoints } from './coords.js'
 
-import type { SourceLayerShapeSubPath } from '../entities/source/source-layer-shape-subpath'
-import type { Coord } from '../typings'
-import type { Octopus } from '../typings/octopus'
+import type { SourceLayerShapeSubPath } from '../entities/source/source-layer-shape-subpath.js'
+import type { Coord } from '../typings/index.js'
+import type { Octopus } from '../typings/octopus/index.js'
 
 export type RectCoords = { x0: number; y0: number; x1: number; y1: number }
 

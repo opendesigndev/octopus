@@ -1,4 +1,4 @@
-import type { ImageSize } from './image-size'
+import type { ImageSize } from './image-size.js'
 
 export async function imageSize(buffer: ArrayBuffer): Promise<ImageSize> {
   return new Promise<ImageSize>((resolve, reject) => {

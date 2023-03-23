@@ -4,17 +4,21 @@
     "typeRoots": ["node_modules/@types"],
     "declaration": true,
     "rootDir": "./",
-    "outDir": "./lib/",
-    "module": "CommonJS",
+    "outDir": "./dist",
+    "module": "ESNext",
     "target": "ES2019",
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "allowJs": true,
     "lib": ["es2019", "ES2015.Proxy", "dom", "ES2021.String"],
+    "skipLibCheck": true,
     "paths": {}
+  },
+  "ts-node": {
+    "esm": true
   },
   "include": ["src", "test", "examples/node"]
 }

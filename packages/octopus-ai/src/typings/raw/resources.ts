@@ -1,4 +1,4 @@
-import type { RawResourcesXObject } from './resources-x-object'
+import type { RawResourcesXObject } from './resources-x-object.js'
 
 export type RawObjectId = { ObjID?: number }
 

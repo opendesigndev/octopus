@@ -1,11 +1,11 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { convertColor, parseColor } from '../../utils/colors'
+import { convertColor, parseColor } from '../../utils/colors.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawResourcesColorSpace } from '../../typings/raw/resources'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerSubText } from '../source/source-layer-sub-text'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawResourcesColorSpace } from '../../typings/raw/resources.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourceLayerSubText } from '../source/source-layer-sub-text.js'
 
 export enum ColorSpace {
   STROKING = 'ColorSpaceStroking',

@@ -1,4 +1,6 @@
-import { createRectPoints, isValid } from '../coords'
+import { describe, expect, it, test } from 'vitest'
+
+import { createRectPoints, isValid } from '../coords.js'
 
 describe('utils/coords.', () => {
   describe('createRectpoints', () => {

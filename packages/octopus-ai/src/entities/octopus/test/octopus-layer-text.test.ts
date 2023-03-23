@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
-import { TextLayerGroupingservice } from '../../../services/conversion/text-layer-grouping-service'
-import { OctopusLayerText } from '../octopus-layer-text'
+import { TextLayerGroupingservice } from '../../../services/conversion/text-layer-grouping-service/index.js'
+import { OctopusLayerText } from '../octopus-layer-text.js'
 
-jest.mock('../octopus-layer-common', () => {
+vi.mock('../octopus-layer-common', () => {
   return {
     __esModule: true,
-    OctopusLayerCommon: jest.fn(),
+    OctopusLayerCommon: vi.fn(),
   }
 })
 describe('OctopusLayerText', () => {
@@ -53,9 +53,9 @@ describe('OctopusLayerText', () => {
       const parent = {}
       const octopusLayerText = new OctopusLayerText({ layerSequence, parent } as any)
 
-      const _getLineHeightMock = jest.fn()
-      mocked(_getLineHeightMock).mockReturnValueOnce(null)
-      mocked(_getLineHeightMock).mockReturnValueOnce(10)
+      const _getLineHeightMock = vi.fn()
+      vi.mocked(_getLineHeightMock).mockReturnValueOnce(null)
+      vi.mocked(_getLineHeightMock).mockReturnValueOnce(10)
       octopusLayerText['_getLineHeight'] = _getLineHeightMock
 
       const subtext1: any = { id: 1, defaultStyle: {} }
@@ -141,9 +141,9 @@ describe('OctopusLayerText', () => {
       const octopusLayerText = new OctopusLayerText({ layerSequence, parent } as any)
       octopusLayerText['_octopusTextValue'] = 'somestring'
 
-      const _getOctopusTextSliceLengthMock = jest.fn()
+      const _getOctopusTextSliceLengthMock = vi.fn()
       octopusLayerText['_getOctopusTextSliceLength'] = _getOctopusTextSliceLengthMock
-      mocked(_getOctopusTextSliceLengthMock).mockReturnValueOnce(null)
+      vi.mocked(_getOctopusTextSliceLengthMock).mockReturnValueOnce(null)
 
       expect(octopusLayerText['_getOctopusTextSlice']('randomString', false)).toEqual(undefined)
       expect(_getOctopusTextSliceLengthMock).toHaveBeenCalledWith('randomString')
@@ -155,9 +155,9 @@ describe('OctopusLayerText', () => {
       const octopusLayerText = new OctopusLayerText({ layerSequence, parent } as any)
       octopusLayerText['_octopusTextValue'] = 'somestring'
 
-      const _getOctopusTextSliceLengthMock = jest.fn()
+      const _getOctopusTextSliceLengthMock = vi.fn()
       octopusLayerText['_getOctopusTextSliceLength'] = _getOctopusTextSliceLengthMock
-      mocked(_getOctopusTextSliceLengthMock).mockReturnValueOnce(4)
+      vi.mocked(_getOctopusTextSliceLengthMock).mockReturnValueOnce(4)
 
       expect(octopusLayerText['_getOctopusTextSlice']('some', false)).toEqual('some')
       expect(octopusLayerText['_octopusTextValue']).toEqual('string')
@@ -175,12 +175,12 @@ describe('OctopusLayerText', () => {
         { value: 'ghj', defaultStyle: { postScriptName: 'montserrat' } },
       ] as any
 
-      const _getOctopusTextSliceMock = jest.fn()
+      const _getOctopusTextSliceMock = vi.fn()
       octopusLayerText['_getOctopusTextSlice'] = _getOctopusTextSliceMock
 
-      mocked(_getOctopusTextSliceMock).mockReturnValueOnce('abc')
-      mocked(_getOctopusTextSliceMock).mockReturnValueOnce('def')
-      mocked(_getOctopusTextSliceMock).mockReturnValueOnce('ghj')
+      vi.mocked(_getOctopusTextSliceMock).mockReturnValueOnce('abc')
+      vi.mocked(_getOctopusTextSliceMock).mockReturnValueOnce('def')
+      vi.mocked(_getOctopusTextSliceMock).mockReturnValueOnce('ghj')
 
       expect(octopusLayerText['_parseText']()).toEqual({
         defaultStyle: { postScriptName: 'arial' },

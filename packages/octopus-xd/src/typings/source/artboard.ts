@@ -1,7 +1,7 @@
-import type { RawStyle } from '.'
-import type { RawGridStyle } from './grid'
-import type { RawGuidesModel } from './guides'
-import type { RawLayer } from './layer'
+import type { RawGridStyle } from './grid.js'
+import type { RawGuidesModel } from './guides.js'
+import type { RawStyle } from './index.js'
+import type { RawLayer } from './layer.js'
 
 export type RawPasteboard = {
   version?: string

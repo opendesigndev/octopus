@@ -1,16 +1,16 @@
-import { logger } from '../../services/instances/logger.js'
-import { convertOffset } from '../../utils/convert.js'
-import { createMatrix } from '../../utils/paper-factories.js'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
+import { logger } from '../../services/index.js'
+import { convertOffset } from '../../utils/convert.js'
+import { createMatrix } from '../../utils/paper-factories.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceBounds } from '../../typings/source'
-import type { SourceImage } from '../source/source-design'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { OctopusComponent } from './octopus-component'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceBounds } from '../../typings/source.js'
+import type { SourceImage } from '../source/source-design.js'
+import type { SourceEffectFill } from '../source/source-effect-fill.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -56,7 +56,7 @@ export class OctopusEffectFill {
     return this._parentComponent.sourceDesign.getImageByName(this._imageName)
   }
 
-  private get _offset(): [x: number, y: number] {
+  private get _offset(): [number, number] {
     const { width, height } = this._sourceLayerBounds
     const { x, y } = convertOffset(this._fill?.offset, width, height)
     return [x, y]
@@ -66,7 +66,7 @@ export class OctopusEffectFill {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logger.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
+      logger?.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)

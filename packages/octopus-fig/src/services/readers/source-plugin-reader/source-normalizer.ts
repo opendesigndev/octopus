@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import max from 'lodash/max'
+import max from 'lodash/max.js'
 
-import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api'
-import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw'
+import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api.js'
+import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw/index.js'
 
 const DEFAULT_TRANSFORM = [
   [1, 0, 0],

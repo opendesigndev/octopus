@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it, vi } from 'vitest'
 
-import { OctopusLayerMaskGroup } from '../octopus-layer-mask-group'
+import { OctopusLayerMaskGroup } from '../octopus-layer-mask-group.js'
 
 function getTestingMaskGroup() {
   const options: any = {
@@ -67,7 +68,7 @@ describe('OctopusLayerMaskGroup', () => {
     it('returns true when subpaths are not only rects', () => {
       const maskGroup = getTestingMaskGroup()
       const mask: any = { shape: { path: { type: 'COMPOUND' } } }
-      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = jest.fn().mockReturnValueOnce(false)
+      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = vi.fn().mockReturnValueOnce(false)
 
       expect(maskGroup['_isMaskValid'](mask)).toEqual(true)
     })
@@ -76,34 +77,34 @@ describe('OctopusLayerMaskGroup', () => {
       const maskGroup = getTestingMaskGroup()
       const mask: any = { shape: { path: { type: 'COMPOUND' } } }
 
-      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = jest.fn().mockReturnValueOnce(false)
+      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = vi.fn().mockReturnValueOnce(false)
       expect(maskGroup['_isMaskValid'](mask)).toEqual(true)
     })
 
     it('returns false when x0 > x1', () => {
       const maskGroup = getTestingMaskGroup()
       const mask: any = { shape: { path: { type: 'COMPOUND' } } }
-      maskGroup['_normalizeRectSubpaths'] = jest.fn()
-      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = jest.fn().mockReturnValueOnce(true)
-      maskGroup['_createIntersectionFromRectangles'] = jest.fn().mockReturnValueOnce({ x0: 11, x1: 10, y1: 11, y0: 10 })
+      maskGroup['_normalizeRectSubpaths'] = vi.fn()
+      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = vi.fn().mockReturnValueOnce(true)
+      maskGroup['_createIntersectionFromRectangles'] = vi.fn().mockReturnValueOnce({ x0: 11, x1: 10, y1: 11, y0: 10 })
       expect(maskGroup['_isMaskValid'](mask)).toEqual(false)
     })
 
     it('returns false when y0 > y1', () => {
       const maskGroup = getTestingMaskGroup()
       const mask: any = { shape: { path: { type: 'COMPOUND' } } }
-      maskGroup['_normalizeRectSubpaths'] = jest.fn()
-      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = jest.fn().mockReturnValueOnce(true)
-      maskGroup['_createIntersectionFromRectangles'] = jest.fn().mockReturnValueOnce({ x0: 10, x1: 11, y1: 10, y0: 11 })
+      maskGroup['_normalizeRectSubpaths'] = vi.fn()
+      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = vi.fn().mockReturnValueOnce(true)
+      maskGroup['_createIntersectionFromRectangles'] = vi.fn().mockReturnValueOnce({ x0: 10, x1: 11, y1: 10, y0: 11 })
       expect(maskGroup['_isMaskValid'](mask)).toEqual(false)
     })
 
     it('returns true when y0 < y1 && x0 < x1', () => {
       const maskGroup = getTestingMaskGroup()
       const mask: any = { shape: { path: { type: 'COMPOUND' } } }
-      maskGroup['_normalizeRectSubpaths'] = jest.fn()
-      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = jest.fn().mockReturnValueOnce(true)
-      maskGroup['_createIntersectionFromRectangles'] = jest.fn().mockReturnValueOnce({ x0: 10, x1: 11, y1: 11, y0: 10 })
+      maskGroup['_normalizeRectSubpaths'] = vi.fn()
+      maskGroup['_doesPathConsistsOnlyFromRectSubpaths'] = vi.fn().mockReturnValueOnce(true)
+      maskGroup['_createIntersectionFromRectangles'] = vi.fn().mockReturnValueOnce({ x0: 10, x1: 11, y1: 11, y0: 10 })
       expect(maskGroup['_isMaskValid'](mask)).toEqual(true)
     })
   })

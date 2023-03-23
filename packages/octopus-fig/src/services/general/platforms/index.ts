@@ -1,7 +1,7 @@
-import type { BufferFactory } from '../buffer/buffer-factory'
-import type { Env } from '../environment'
-import type { ImageSize } from '../image-size/image-size'
-import type { LoggerFactory } from '../logger/logger-factory'
+import type { BufferFactory } from '../buffer/buffer-factory.js'
+import type { Env } from '../environment/index.js'
+import type { ImageSize } from '../image-size/image-size.js'
+import type { LoggerFactory } from '../logger/logger-factory.js'
 
 // Logger
 type NodeLoggerFactory = LoggerFactory

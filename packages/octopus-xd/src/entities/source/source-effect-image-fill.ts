@@ -1,5 +1,5 @@
-import type { Defined } from '../../typings/helpers'
-import type { RawFillImage } from '../../typings/source'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawFillImage } from '../../typings/source/index.js'
 
 /** Just a helper type to shorten long types on methods */
 type DefinedPattern = Defined<RawFillImage['pattern']>

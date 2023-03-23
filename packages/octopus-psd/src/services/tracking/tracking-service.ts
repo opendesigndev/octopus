@@ -2,7 +2,7 @@ import { isObject, keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { escapeRegExp } from '../../utils/text.js'
 
-import type { Manifest } from '../../typings/manifest'
+import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { ComponentConversionResult } from '../conversion/design-converter.js'
 

@@ -1,15 +1,15 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import PROPS from '../../utils/prop-names.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourcePath } from './source-path.js'
 import { SourceStroke } from './source-stroke.js'
+import PROPS from '../../utils/prop-names.js'
 
-import type { RawLayerShape } from '../../typings/raw'
-import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourcePathComponent } from './source-path-component'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourcePathComponent } from './source-path-component.js'
+import type { RawLayerShape } from '../../typings/raw/index.js'
+import type { SourceDocumentDimensions, SourceBounds } from '../../typings/source.js'
 
 type SourceLayerShapeOptions = {
   parent: SourceLayerParent
@@ -17,7 +17,7 @@ type SourceLayerShapeOptions = {
 }
 
 export class SourceLayerShape extends SourceLayerCommon {
-  protected _rawValue: RawLayerShape
+  declare _rawValue: RawLayerShape
 
   constructor(options: SourceLayerShapeOptions) {
     super(options)

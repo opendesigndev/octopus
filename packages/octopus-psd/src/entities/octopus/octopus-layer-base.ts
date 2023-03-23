@@ -3,18 +3,18 @@ import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { logger } from '../../services/instances/logger.js'
-import { convertBlendMode } from '../../utils/convert.js'
-import { createDefaultTranslationMatrix } from '../../utils/path.js'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusEffectsLayer } from './octopus-effects-layer.js'
+import { logger } from '../../services/index.js'
+import { convertBlendMode } from '../../utils/convert.js'
+import { createDefaultTranslationMatrix } from '../../utils/path.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { DesignConverter } from '../../services/conversion/design-converter'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerGroup } from './octopus-layer-group'
-import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group'
-import type { NotNull } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { OctopusLayerGroup } from './octopus-layer-group.js'
+import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { DesignConverter } from '../../services/conversion/design-converter.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { NotNull } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type OctopusLayerParent = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusComponent
 
@@ -96,7 +96,7 @@ export class OctopusLayerBase {
     const type = String(this._sourceLayer.type)
     const result = getMapped(type, OctopusLayerBase.LAYER_TYPE_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Layer type', { type })
+      logger?.warn('Unknown Layer type', { type })
       return null
     }
     return result

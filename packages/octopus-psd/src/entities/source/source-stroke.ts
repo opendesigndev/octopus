@@ -8,10 +8,10 @@ import type {
   RawStrokeStyleLineAlignment,
   RawStrokeStyleLineCapType,
   RawStrokeStyleLineJoinType,
-} from '../../typings/raw'
+} from '../../typings/raw/index.js'
 
 export class SourceStroke extends SourceEntity {
-  protected _rawValue: RawShapeStrokeStyle | undefined
+  declare _rawValue: RawShapeStrokeStyle | undefined
 
   static DEFAULT_LINE_ALIGNMENT = 'strokeStyleAlignCenter' as const
   static DEFAULT_LINE_CAP = 'strokeStyleButtCap' as const

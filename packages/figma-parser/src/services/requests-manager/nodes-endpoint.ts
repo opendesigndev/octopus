@@ -1,8 +1,8 @@
 import chunk from 'lodash/chunk'
 
+import { EndpointBase } from './endpoint-base'
 import { isObject, keys, without } from '../../utils/common'
 import { buildEndpoint } from '../../utils/request'
-import { EndpointBase } from './endpoint-base'
 
 import type { RequestsManager } from '.'
 import type { FigmaNode, FigmaNodesResponse } from '../../types/figma'

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter'
+import { describe, expect, it, vi } from 'vitest'
 
-jest.mock('../octopus-layer-common', () => {
+import { OctopusLayerShapeShapeAdapter } from '../octopus-layer-shape-shape-adapter.js'
+
+vi.mock('../octopus-layer-common', () => {
   return {
     __esModule: true,
-    OctopusLayerCommon: jest.fn(),
+    OctopusLayerCommon: vi.fn(),
   }
 })
 

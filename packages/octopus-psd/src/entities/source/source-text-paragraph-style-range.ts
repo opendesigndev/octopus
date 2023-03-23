@@ -3,10 +3,10 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { SourceEntity } from './source-entity.js'
 import { SourceTextParagraphStyle } from './source-text-paragraph-style.js'
 
-import type { RawParagraphStyleRange } from '../../typings/raw'
+import type { RawParagraphStyleRange } from '../../typings/raw/index.js'
 
 export class SourceTextParagraphStyleRange extends SourceEntity {
-  protected _rawValue: RawParagraphStyleRange | undefined
+  declare _rawValue: RawParagraphStyleRange | undefined
 
   constructor(raw: RawParagraphStyleRange | undefined) {
     super(raw)

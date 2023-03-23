@@ -20,6 +20,8 @@ output/
 lib/
 sample
 
+packages/**/release
+
 **/examples/web/*.umd.js
 **/*/test-report*.html
 

@@ -1,14 +1,21 @@
-import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { env } from '../services'
-import { DEFAULTS } from './defaults'
+import { DEFAULTS } from './defaults.js'
+import { env } from '../services/index.js'
 
-import type { SourceComponent } from '../entities/source/source-component'
-import type { SourceLayerContainer } from '../entities/source/source-layer-container'
-import type { Octopus } from '../typings/octopus'
-import type { RawBoundingBox, RawGeometry, RawVector, RawTransform, RawWindingRule, RawColor } from '../typings/raw'
-import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source'
+import type { SourceComponent } from '../entities/source/source-component.js'
+import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'
+import type { Octopus } from '../typings/octopus.js'
+import type {
+  RawBoundingBox,
+  RawGeometry,
+  RawVector,
+  RawTransform,
+  RawWindingRule,
+  RawColor,
+} from '../typings/raw/index.js'
+import type { SourceBounds, SourceColor, SourceGeometry, SourceTransform } from '../typings/source.js'
 
 export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | null {
   if (value?.x === undefined && value?.y === undefined && value?.width === undefined && value?.height === undefined)

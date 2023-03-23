@@ -1,16 +1,16 @@
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group'
-import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group'
-import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape'
-import { OctopusLayerText } from '../entities/octopus/octopus-layer-text'
-import { logger } from '../services'
+import { OctopusLayerGroup } from '../entities/octopus/octopus-layer-group.js'
+import { OctopusLayerMaskGroup } from '../entities/octopus/octopus-layer-mask-group.js'
+import { OctopusLayerShape } from '../entities/octopus/octopus-layer-shape.js'
+import { OctopusLayerText } from '../entities/octopus/octopus-layer-text.js'
+import { logger } from '../services/index.js'
 
-import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base'
-import type { SourceLayerContainer } from '../entities/source/source-layer-container'
-import type { SourceLayerShape } from '../entities/source/source-layer-shape'
-import type { SourceLayerText } from '../entities/source/source-layer-text'
-import type { SourceLayer } from './create-source-layer'
+import type { SourceLayer } from './create-source-layer.js'
+import type { OctopusLayerParent } from '../entities/octopus/octopus-layer-base.js'
+import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'
+import type { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import type { SourceLayerText } from '../entities/source/source-layer-text.js'
 
 export type OctopusLayer = OctopusLayerGroup | OctopusLayerMaskGroup | OctopusLayerShape | OctopusLayerText
 

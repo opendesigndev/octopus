@@ -1,12 +1,12 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import PROPS from '../../utils/prop-names.js'
-import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
-import { getFontProperties } from '../../utils/text.js'
 import { SourceEntity } from './source-entity.js'
 import { SourceTextParagraphStyleRange } from './source-text-paragraph-style-range.js'
 import { SourceTextTextStyleRange } from './source-text-text-style-range.js'
+import PROPS from '../../utils/prop-names.js'
+import { getMatrixFor, getBoundsFor } from '../../utils/source.js'
+import { getFontProperties } from '../../utils/text.js'
 
 import type {
   RawEngineData,
@@ -14,8 +14,8 @@ import type {
   RawParagraphStyleRange,
   RawTextProperties,
   RawTextStyleRange,
-} from '../../typings/raw'
-import type { SourceBounds, SourceMatrix } from '../../typings/source'
+} from '../../typings/raw/index.js'
+import type { SourceBounds, SourceMatrix } from '../../typings/source.js'
 
 type TextStyleFromTo = { from: number; to: number; runArrayIndex: number }
 

@@ -2,15 +2,16 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { OctopusPSDConverter } from '../../../src/index.js'
+import { createConverter } from '../../../src/index-node.js'
 import { getOctopusFileName, MANIFEST_NAME } from '../../../src/utils/exporter.js'
 import { cleanManifest } from '../utils/asset-cleaner.js'
 import { getSourceDesign } from '../utils/source.js'
 import { stringify } from '../utils/stringify.js'
 
-import type { Manifest } from '../../../src/typings/manifest'
-import type { Octopus } from '../../../src/typings/octopus'
-import type { AssetReader, TestComponents, Component } from './asset-reader'
+import type { AssetReader, TestComponents, Component } from './asset-reader.js'
+import type { OctopusPSDConverter } from '../../../src/octopus-psd-converter.js'
+import type { Manifest } from '../../../src/typings/manifest.js'
+import type { Octopus } from '../../../src/typings/octopus.js'
 
 type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null
@@ -41,7 +42,7 @@ export class Tester {
 
   constructor(assetsReader: AssetReader) {
     this._assetsReader = assetsReader
-    this._octopusConverter = new OctopusPSDConverter({})
+    this._octopusConverter = createConverter()
   }
 
   private _mapComponents({

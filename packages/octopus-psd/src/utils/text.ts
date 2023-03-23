@@ -3,7 +3,7 @@ import { keys } from '@opendesign/octopus-common/dist/utils/common.js'
 
 import { DEFAULTS } from './defaults.js'
 
-import type { RawEngineDataResourceDictFontSet, RawFontProperties, RawStyleSheetData } from '../typings/raw'
+import type { RawEngineDataResourceDictFontSet, RawFontProperties, RawStyleSheetData } from '../typings/raw/index.js'
 import type { SourceColor } from '../typings/source.js'
 
 export function getFontProperties(

@@ -1,4 +1,6 @@
-import { createOctopusArtboardFileName } from '../exporter'
+import { describe, expect, it } from 'vitest'
+
+import { createOctopusArtboardFileName } from '../exporter.js'
 
 describe('utils/exporter', () => {
   describe('createOctopusArtboardFileName', () => {

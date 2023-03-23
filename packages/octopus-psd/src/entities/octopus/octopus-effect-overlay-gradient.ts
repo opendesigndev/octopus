@@ -1,9 +1,9 @@
 import { OctopusEffectBase } from './octopus-effect-base.js'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectFill } from '../source/source-effect-fill'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceEffectFill } from '../source/source-effect-fill.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase

@@ -1,8 +1,8 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import get from 'lodash/get'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import get from 'lodash/get.js'
 
-import type { RawArtboardEntry, RawLayer } from '../typings/source'
+import type { RawArtboardEntry, RawLayer } from '../typings/source/index.js'
 
 const GROUP_LIKE_TYPES = ['artboard', 'group']
 

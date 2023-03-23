@@ -4,10 +4,10 @@ import path from 'path'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter, LocalExporter, SourcePluginReader } from '../../src/index-node'
-import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files'
+import { createConverter, LocalExporter, SourcePluginReader } from '../../src/index-node.js'
+import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files.js'
 
-import type { PluginSource } from '../../src/typings/plugin-source'
+import type { PluginSource } from '../../src/typings/plugin-source.js'
 
 type ConvertDesignOptions = {
   sourcePath: string

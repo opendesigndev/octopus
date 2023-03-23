@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import type { Metadata } from '../services/conversion/ai-file-reader'
-import type { AdditionalTextData, RawArtboardEntry } from './raw'
+import type { AdditionalTextData, RawArtboardEntry } from './raw/index.js'
+import type { Metadata } from '../services/readers/ai-file-reader-common.js'
 
-// Services
 export interface Logger {
   fatal: Function
   error: Function
@@ -26,7 +25,7 @@ export type GradientStop = {
 
 export type Color = { r: number; g: number; b: number; a: number }
 
-export type SourceImage = { id: string; getImageData: () => Promise<Buffer>; path: string }
+export type SourceImage = { id: string; getImageData: () => Promise<Uint8Array> }
 
 export type SourceTree = {
   metadata: Metadata

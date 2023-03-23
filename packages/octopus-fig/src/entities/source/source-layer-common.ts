@@ -1,20 +1,20 @@
-import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import { round } from '@opendesign/octopus-common/dist/utils/math'
+import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { v4 as uuid } from 'uuid'
 
-import { DEFAULTS } from '../../utils/defaults'
-import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source'
-import { SourceComponent } from './source-component'
-import { SourceEffect } from './source-effect'
-import { SourceEntity } from './source-entity'
-import { SourcePaint } from './source-paint'
+import { SourceComponent } from './source-component.js'
+import { SourceEffect } from './source-effect.js'
+import { SourceEntity } from './source-entity.js'
+import { SourcePaint } from './source-paint.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw'
-import type { SourceGeometry, SourceTransform } from '../../typings/source'
-import type { SourceLayerContainer } from './source-layer-container'
-import type { SourceLayerShape } from './source-layer-shape'
+import type { SourceLayerContainer } from './source-layer-container.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw/index.js'
+import type { SourceGeometry, SourceTransform } from '../../typings/source.js'
 
 export type SourceLayerParent = SourceComponent | SourceLayerContainer | SourceLayerShape
 
@@ -27,7 +27,7 @@ export const FRAME_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'COMPONENT_SET', 'INS
 export type FrameTypes = typeof FRAME_TYPES[number]
 
 export class SourceLayerCommon extends SourceEntity {
-  protected _rawValue: RawLayer
+  declare _rawValue: RawLayer
   protected _parent: SourceLayerParent
 
   constructor(options: SourceLayerOptions) {

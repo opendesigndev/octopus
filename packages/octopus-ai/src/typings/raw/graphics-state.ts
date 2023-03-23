@@ -1,4 +1,4 @@
-import type { RawShapeLayer } from '.'
+import type { RawShapeLayer } from './index.js'
 
 export type RawGraphicsStateMatrix = [number, number, number, number, number, number]
 export type DashPattern = [number[], number]

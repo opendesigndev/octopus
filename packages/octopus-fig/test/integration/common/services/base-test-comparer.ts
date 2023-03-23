@@ -2,14 +2,14 @@ import path from 'path'
 
 import * as jsondiffpatch from 'jsondiffpatch'
 
-import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter'
-import { MANIFEST_NAME } from '../../../../src/utils/const'
-import { stringify } from '../utils/stringify'
+import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter.js'
+import { MANIFEST_NAME } from '../../../../src/utils/const.js'
+import { stringify } from '../utils/stringify.js'
 
-import type { Manifest } from '../../../../src/typings/manifest'
-import type { Octopus } from '../../../../src/typings/octopus'
-import type { Component, TestComponents } from './asset-reader'
-import type { Fail } from './test-runner'
+import type { Component, TestComponents } from './asset-reader.js'
+import type { Fail } from './test-runner.js'
+import type { Manifest } from '../../../../src/typings/manifest.js'
+import type { Octopus } from '../../../../src/typings/octopus.js'
 
 export type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null
