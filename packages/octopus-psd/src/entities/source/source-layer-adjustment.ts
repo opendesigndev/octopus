@@ -1,11 +1,11 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 
-import PROPS from '../../utils/prop-names.js'
 import { SourceEffectFill } from './source-effect-fill.js'
 import { SourceLayerCommon } from './source-layer-common.js'
+import PROPS from '../../utils/prop-names.js'
 
-import type { RawLayerAdjustment } from '../../typings/raw/index.js'
 import type { SourceLayerParent } from './source-layer-common.js'
+import type { RawLayerAdjustment } from '../../typings/raw/index.js'
 
 type SourceLayerLayerOptions = {
   parent: SourceLayerParent

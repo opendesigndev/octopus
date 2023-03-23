@@ -1,6 +1,6 @@
+import { SourceEntity } from './source-entity.js'
 import { isBlendMode } from '../../utils/blend-modes.js'
 import PROPS from '../../utils/prop-names.js'
-import { SourceEntity } from './source-entity.js'
 
 import type { RawEffectShadow } from '../../typings/raw/index.js'
 import type BLEND_MODES from '../../utils/blend-modes.js'

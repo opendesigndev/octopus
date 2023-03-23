@@ -1,8 +1,8 @@
 import { asBoolean, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { parseXDColor } from '../../utils/color.js'
 import { OctopusBounds } from './octopus-bounds.js'
+import { parseXDColor } from '../../utils/color.js'
 
 import type { OctopusArtboard } from './octopus-artboard.js'
 

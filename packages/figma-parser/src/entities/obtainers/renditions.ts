@@ -1,8 +1,8 @@
+import type { Design } from './design'
+import type { FrameLike } from './frame-like'
 import type { Parser } from '../../parser'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { ICacher } from '../../types/cacher'
-import type { Design } from './design'
-import type { FrameLike } from './frame-like'
 
 type RenditionsOptions = {
   frameLike: FrameLike

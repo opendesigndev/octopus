@@ -1,16 +1,16 @@
-import { logger } from '../../services/instances/logger.js'
-import { convertOffset } from '../../utils/convert.js'
-import { createMatrix } from '../../utils/paper-factories.js'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
 import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
+import { logger } from '../../services/index.js'
+import { convertOffset } from '../../utils/convert.js'
+import { createMatrix } from '../../utils/paper-factories.js'
 
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceBounds } from '../../typings/source.js'
 import type { SourceImage } from '../source/source-design.js'
 import type { SourceEffectFill } from '../source/source-effect-fill.js'
-import type { OctopusComponent } from './octopus-component.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -66,7 +66,7 @@ export class OctopusEffectFill {
     const image = this._image
     const { width, height } = image ?? {}
     if (width === undefined || height === undefined) {
-      logger.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
+      logger?.warn('Unknown image', { image, id: this._fill?.pattern?.Idnt })
       return null
     }
     const matrix = createMatrix(width, 0, 0, height, ...this._offset)

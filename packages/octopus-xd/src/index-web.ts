@@ -10,6 +10,7 @@ import type { WebFactories } from './services/general/platforms/index.js'
 export type { SourceDesign }
 
 export { XDFileReader } from './services/conversion/xd-file-reader/web/index.js'
+export { WebExporter } from './services/conversion/exporter/web/web-exporter.js'
 
 export function createConverter(options: Omit<OctopusXDConverterOptions, 'platformFactories'>): OctopusXDConverter {
   return new OctopusXDConverter({

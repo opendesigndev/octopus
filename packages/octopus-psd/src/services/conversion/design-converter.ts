@@ -1,16 +1,15 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
-import { benchmarkAsync } from '@opendesign/octopus-common/dist/utils/benchmark-node.js'
 import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
-import { logger } from '../instances/logger.js'
 import { ComponentConverter } from './component-converter.js'
+import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
+import { logger } from '../index.js'
 
 import type { SourceComponent } from '../../entities/source/source-component.js'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
-import type { DesignConverterOptions, OctopusPSDConverter } from '../../index.js'
+import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
@@ -75,13 +74,15 @@ export class DesignConverter {
       const value = await new ComponentConverter({ componentId, designConverter: this }).convert()
       return { value, error: null }
     } catch (error) {
-      logger.error('Converting Component failed', { componentId, error })
+      logger?.error('Converting Component failed', { componentId, error })
       return { value: null, error }
     }
   }
 
   private async _convertSourceComponent(componentId: string): Promise<ComponentConversionResult> {
-    const { time, result } = await benchmarkAsync(() => this._convertSourceComponentSafe(componentId))
+    const { time, result } = await this._octopusConverter.benchmarkAsync(() =>
+      this._convertSourceComponentSafe(componentId)
+    )
     const { value, error } = result
     return { id: componentId, value, error, time }
   }
@@ -113,7 +114,7 @@ export class DesignConverter {
   }
 
   private async _exportManifest(): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = await benchmarkAsync(() => this.octopusManifest.convert())
+    const { time, result: manifest } = await this._octopusConverter.benchmarkAsync(() => this.octopusManifest.convert())
     await this._exporter?.exportManifest?.({ manifest, time })
     return manifest
   }

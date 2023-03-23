@@ -1,7 +1,7 @@
 import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer.js'
 import { OctopusLayerCommon } from './octopus-layer-common.js'
+import { buildOctopusLayer, createOctopusLayerGroup } from '../../factories/create-octopus-layer.js'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'

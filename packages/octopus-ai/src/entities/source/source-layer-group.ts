@@ -1,12 +1,12 @@
-import { initSourceLayerChildren } from '../../utils/layer.js'
-import { createSoftMask } from '../../utils/mask.js'
 import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask } from '../../utils/mask.js'
 
+import type { SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawGroupLayer } from '../../typings/raw/index.js'
-import type { SourceLayerParent } from './source-layer-common.js'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerGroupOptions = {
@@ -81,5 +81,13 @@ export class SourceLayerGroup extends SourceLayerCommon {
     }
 
     return !this.hiddenContentIds.includes(this.objectId)
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }

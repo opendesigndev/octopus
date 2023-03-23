@@ -1,6 +1,9 @@
 import { SourceArtboard } from './source-artboard.js'
-import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 
+import type { SourceLayerGroup } from './source-layer-group.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
+import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import type { SourceResources } from './source-resources.js'
 import type {
   RawLayer,
   RawResourcesExtGState,
@@ -9,9 +12,6 @@ import type {
   RawResourcesShadingKeyFunction,
   RawResourcesExtGStateSmask,
 } from '../../typings/raw/index.js'
-import type { SourceLayerGroup } from './source-layer-group.js'
-import type { SourceLayerShape } from './source-layer-shape.js'
-import type { SourceResources } from './source-resources.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export type SourceLayerParent = SourceLayerGroup | SourceArtboard | SourceLayerXObjectForm | SourceLayerShape
@@ -23,7 +23,7 @@ type SourceLayerCommonOptions = {
 export type LayerType = 'TextGroup' | 'MarkedContext' | 'Path' | 'XObject' | 'Shading' | XObjectSubtype
 export type XObjectSubtype = 'Form' | 'Image'
 
-export class SourceLayerCommon {
+export abstract class SourceLayerCommon {
   protected _parent: SourceLayerParent
   protected _rawValue: RawLayer
   protected _id: string
@@ -51,16 +51,10 @@ export class SourceLayerCommon {
     return parent instanceof SourceArtboard ? parent : parent.parentArtboard
   }
 
-  get resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
-    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
-      return this._parent
-    }
-
-    return this._parent.resourcesTarget
-  }
+  abstract resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm>
 
   get resources(): Nullish<SourceResources> {
-    return this.resourcesTarget?.resources
+    return this.resourcesTarget()?.resources
   }
 
   get parentArtboardDimensions(): { width: number; height: number } {

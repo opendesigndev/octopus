@@ -1,6 +1,6 @@
+import type { IResponse, JSONValue } from './response.iface'
 import type { Parser } from '../../parser'
 import type { SafeResult } from '../../utils/queue'
-import type { IResponse, JSONValue } from './response.iface'
 import type { Got, Response as GotResponse } from 'got/dist/source'
 import type { KyInstance } from 'ky/distribution/types/ky'
 

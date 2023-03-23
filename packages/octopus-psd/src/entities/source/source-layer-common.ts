@@ -1,19 +1,19 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { isBlendMode } from '../../utils/blend-modes.js'
-import { DEFAULTS } from '../../utils/defaults.js'
-import PROPS from '../../utils/prop-names.js'
-import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 import { SourceLayerEffects } from './source-effects-layer.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePath } from './source-path.js'
+import { isBlendMode } from '../../utils/blend-modes.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import PROPS from '../../utils/prop-names.js'
+import { getArtboardColor, getBoundsFor, getLayerBounds } from '../../utils/source.js'
 
+import type { SourceLayerSection } from './source-layer-section.js'
 import type { RawLayerProperties, RawNodeChildWithType, RawBounds, RawColor } from '../../typings/raw/index.js'
 import type { SourceDocumentDimensions, SourceBounds, SourceColor } from '../../typings/source.js'
 import type BLEND_MODES from '../../utils/blend-modes.js'
-import type { SourceLayerSection } from './source-layer-section.js'
 import type { MaskData, RealMaskData } from '@webtoon/psd-ts/dist/sections/index.js'
 
 export type SourceLayerParent = SourceComponent | SourceLayerSection

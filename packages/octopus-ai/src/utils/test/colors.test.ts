@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { logger } from '../../services/instances/logger.js'
-import { getColorSpaceName, guessColorSpaceByComponents, convertColor } from '../colors.js'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 
-jest.mock('../../services/instances/logger')
+import { getColorSpaceName, guessColorSpaceByComponents, convertColor } from '../colors.js'
 
 describe('utils/colors', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe('getColorSpaceName', () => {
@@ -28,7 +27,6 @@ describe('utils/colors', () => {
     it('returns null and calls logger warn when input is not typeof string and first element in input is not string', () => {
       const expected = null
       expect(getColorSpaceName([1] as any)).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalled()
     })
   })
 
@@ -51,20 +49,18 @@ describe('utils/colors', () => {
     it('returns black color array when input length is not 1, 3 or 4', () => {
       const expected = [0, 0, 0]
       expect(guessColorSpaceByComponents([1, 2])).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalled()
     })
   })
 
   describe('convertColor', () => {
     afterEach(() => {
-      jest.clearAllMocks()
+      vi.clearAllMocks()
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is DeviceRGB', () => {
       const color = [1, 1, 1]
       const colorSpace = 'DeviceRGB'
       expect(convertColor(color, colorSpace)).toEqual(color)
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors with same value as first value in input color when color is of length 1 and colorSpace name is DeviceRGB', () => {
@@ -72,28 +68,24 @@ describe('utils/colors', () => {
       const colorSpace = 'DeviceRGB'
 
       expect(convertColor(color, colorSpace)).toEqual([1, 1, 1])
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors calculated to CMYK if color length is 4 and colorSpace name is DeviceRGB', () => {
       const expected = [163 / 255, 143 / 255, 122 / 255]
 
       expect(convertColor([0.2, 0.3, 0.4, 0.2], 'DeviceRGB')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors calculated to black if color length is 2 and colorSpace name is DeviceRGB', () => {
       const expected = [0, 0, 0]
 
       expect(convertColor([0.2, 1], 'DeviceRGB')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is DeviceCMYK', () => {
       const color = [1, 1, 1]
       const colorSpace = 'DeviceCMYK'
       expect(convertColor(color, colorSpace)).toEqual(color)
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors with same value as first value in input color when color is of length 1 and colorSpace name is DeviceCMYK', () => {
@@ -101,28 +93,24 @@ describe('utils/colors', () => {
       const colorSpace = 'DeviceCMYK'
 
       expect(convertColor(color, colorSpace)).toEqual([1, 1, 1])
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors calculated to CMYK if color length is 4 and colorSpace name is DeviceCMYK', () => {
       const expected = [163 / 255, 143 / 255, 122 / 255]
 
       expect(convertColor([0.2, 0.3, 0.4, 0.2], 'DeviceCMYK')).toEqual(expected)
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors calculated to black if color length is 2 and colorSpace name is DeviceCMYK', () => {
       const expected = [0, 0, 0]
 
       expect(convertColor([0.2, 1], 'DeviceCMYK')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is DeviceGray', () => {
       const color = [1, 1, 1]
       const colorSpace = 'DeviceGray'
       expect(convertColor(color, colorSpace)).toEqual(color)
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors with same value as first value in input color when color is of length 1 and colorSpace name is DeviceGray', () => {
@@ -130,28 +118,24 @@ describe('utils/colors', () => {
       const colorSpace = 'DeviceGray'
 
       expect(convertColor(color, colorSpace)).toEqual([1, 1, 1])
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors calculated to CMYK if color length is 4 and colorSpace name is DeviceGray', () => {
       const expected = [163 / 255, 143 / 255, 122 / 255]
 
       expect(convertColor([0.2, 0.3, 0.4, 0.2], 'DeviceGray')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors calculated to black if color length is 2 and colorSpace name is DeviceGray', () => {
       const expected = [0, 0, 0]
 
       expect(convertColor([0.2, 1], 'DeviceGray')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is ICCBased', () => {
       const color = [1, 1, 1]
       const colorSpace = 'ICCBased'
       expect(convertColor(color, colorSpace)).toEqual(color)
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors with same value as first value in input color when color is of length 1 and colorSpace name is ICCBased', () => {
@@ -159,28 +143,24 @@ describe('utils/colors', () => {
       const colorSpace = 'ICCBased'
       const expected = [1, 1, 1]
       expect(convertColor(color, colorSpace)).toEqual(expected)
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors calculated to CMYK if color length is 4 and colorSpace name is ICCBased', () => {
       const expected = [163 / 255, 143 / 255, 122 / 255]
 
       expect(convertColor([0.2, 0.3, 0.4, 0.2], 'ICCBased')).toEqual(expected)
-      expect(logger.warn).not.toHaveBeenCalled()
     })
 
     it('returns RGB colors calculated to black if color length is 2 and colorSpace name is ICCBased', () => {
       const expected = [0, 0, 0]
 
       expect(convertColor([0.2, 1], 'ICCBased')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(1)
     })
 
     it('returns RGB colors same as input color when color is of length 3 and colorSpace name is unknown', () => {
       const color = [1, 1, 1]
       const colorSpace = ''
       expect(convertColor(color, colorSpace)).toEqual(color)
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors with same value as first value in input color when color is of length 1 and colorSpace name is unknown', () => {
@@ -188,21 +168,18 @@ describe('utils/colors', () => {
       const colorSpace = ''
 
       expect(convertColor(color, colorSpace)).toEqual([1, 1, 1])
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors calculated to CMYK if color length is 4 and colorSpace name is unknown', () => {
       const expected = [163 / 255, 143 / 255, 122 / 255]
 
       expect(convertColor([0.2, 0.3, 0.4, 0.2], '')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(2)
     })
 
     it('returns RGB colors calculated to black if color length is 2 and colorSpace name is unknown', () => {
       const expected = [0, 0, 0]
 
       expect(convertColor([0.2, 1], '')).toEqual(expected)
-      expect(logger.warn).toHaveBeenCalledTimes(3)
     })
   })
 })

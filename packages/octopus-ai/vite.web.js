@@ -15,14 +15,14 @@ export default defineConfig({
     lib: {
       entry: path.resolve(dirname(fileURLToPath(new URL(import.meta.url))), 'src/index-web.ts'),
       name: 'OctopusAI',
-      fileName: () => `index-web.mjs`,
+      fileName: () => `web.mjs`,
       formats: ['es'],
     },
     commonjsOptions: { include: [/node_modules/, /@opendesign\/octopus-common/] },
     outDir: 'release',
     emptyOutDir: false,
     rollupOptions: {
-      external: [...deps, ...builtinModules],
+      external: [...deps, ...builtinModules, '@opendesign/illustrator-parser-pdfcpu/wasm_context'],
     },
     // minify: 'none'
   },

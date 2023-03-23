@@ -1,9 +1,9 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
+import { SourceEffectBase } from './source-effect-base.js'
 import PROPS from '../../utils/prop-names.js'
 import { getUnitRatioFor, getColor } from '../../utils/source.js'
-import { SourceEffectBase } from './source-effect-base.js'
 
 import type { RawEffectSatin } from '../../typings/raw/index.js'
 import type { SourceColor } from '../../typings/source.js'

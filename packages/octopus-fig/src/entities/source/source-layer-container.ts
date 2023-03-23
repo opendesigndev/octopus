@@ -1,14 +1,14 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { SourceLayerCommon } from './source-layer-common.js'
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 import { getBoundsFor } from '../../utils/source.js'
-import { SourceLayerCommon } from './source-layer-common.js'
 
+import type { FrameTypes, SourceLayerParent } from './source-layer-common.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawLayer, RawLayerContainer } from '../../typings/raw/index.js'
 import type { SourceBounds } from '../../typings/source.js'
-import type { FrameTypes, SourceLayerParent } from './source-layer-common.js'
 
 type SourceLayerContainerOptions = {
   parent: SourceLayerParent

@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { DesignEmitterMock } from './design-emitter-mock.js'
 import { createConverter } from '../../../../src/index-node.js'
 import { getOctopusFileName } from '../../../../src/services/exporters/node/local-exporter.js'
 import { MANIFEST_NAME } from '../../../../src/utils/const.js'
@@ -7,7 +8,6 @@ import { makeDir, saveFile, rmDir } from '../../../../src/utils/files.js'
 import { AssetReader } from '../../common/services/asset-reader.js'
 import { cleanManifest } from '../../common/utils/asset-cleaner.js'
 import { stringify } from '../../common/utils/stringify.js'
-import { DesignEmitterMock } from './design-emitter-mock.js'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
 import type { Manifest } from '../../../../src/typings/manifest.js'

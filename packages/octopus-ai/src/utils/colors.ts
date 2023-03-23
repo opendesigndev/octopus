@@ -1,7 +1,7 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { clamp } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { logger } from '../services/instances/logger.js'
+import { logger } from '../services/index.js'
 
 import type { RawResourcesColorSpace } from '../typings/raw/index.js'
 
@@ -16,7 +16,7 @@ export function getColorSpaceName(colorSpace: Record<string, unknown> | string |
     return colorSpace[0]
   }
 
-  logger.warn('getColorSpaceName', 'Unexpected ColorSpace format', { colorSpace })
+  logger?.warn('getColorSpaceName', 'Unexpected ColorSpace format', { colorSpace })
   return null
 }
 
@@ -31,13 +31,13 @@ export function guessColorSpaceByComponents(color: number[]): RgbColorComponents
         return cmykToRgb(color)
     }
   }
-  logger.warn('guessColorSpaceByComponents', 'Falling back to default color for', { color })
+  logger?.warn('guessColorSpaceByComponents', 'Falling back to default color for', { color })
   return [0, 0, 0]
 }
 
 export function convertDeviceRGB(color: number[]): RgbColorComponents {
   if (color.length !== 3) {
-    logger.warn('convertDeviceRGB', `Unexpected color component count ${color.length}`, { color })
+    logger?.warn('convertDeviceRGB', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return normalizeRgb(color)
@@ -45,7 +45,7 @@ export function convertDeviceRGB(color: number[]): RgbColorComponents {
 
 function convertDeviceCMYK(color: number[]): RgbColorComponents {
   if (color.length !== 4) {
-    logger.warn('convertDeviceCMYK', `Unexpected color component count ${color.length}`, { color })
+    logger?.warn('convertDeviceCMYK', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return cmykToRgb(color)
@@ -53,7 +53,7 @@ function convertDeviceCMYK(color: number[]): RgbColorComponents {
 
 function convertDeviceGray(color: number[]): RgbColorComponents {
   if (color.length !== 1) {
-    logger.warn('convertDeviceGray', `Unexpected color component count ${color.length}`, { color })
+    logger?.warn('convertDeviceGray', `Unexpected color component count ${color.length}`, { color })
     return guessColorSpaceByComponents(color)
   }
   return grayToRgb(color)
@@ -112,7 +112,7 @@ export function convertColor(
     case 'ICCBased':
       return convertRGBToRGBA(convertICCBased(color))
     default:
-      logger.warn('convertColor', 'Unknown ColorSpace', { colorSpaceName })
+      logger?.warn('convertColor', 'Unknown ColorSpace', { colorSpaceName })
       return convertRGBToRGBA(guessColorSpaceByComponents(color))
   }
 }

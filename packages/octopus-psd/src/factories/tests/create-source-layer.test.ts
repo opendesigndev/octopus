@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AliKey } from '@webtoon/psd-ts'
+import { describe, expect, it } from 'vitest'
 
 import { getRawLayerWithType } from '../create-source-layer.js'
 

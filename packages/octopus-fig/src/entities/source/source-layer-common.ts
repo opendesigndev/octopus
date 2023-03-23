@@ -3,18 +3,18 @@ import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { v4 as uuid } from 'uuid'
 
-import { DEFAULTS } from '../../utils/defaults.js'
-import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source.js'
 import { SourceComponent } from './source-component.js'
 import { SourceEffect } from './source-effect.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePaint } from './source-paint.js'
+import { DEFAULTS } from '../../utils/defaults.js'
+import { getGeometryFor, getSizeFor, getTransformFor } from '../../utils/source.js'
 
+import type { SourceLayerContainer } from './source-layer-container.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw/index.js'
 import type { SourceGeometry, SourceTransform } from '../../typings/source.js'
-import type { SourceLayerContainer } from './source-layer-container.js'
-import type { SourceLayerShape } from './source-layer-shape.js'
 
 export type SourceLayerParent = SourceComponent | SourceLayerContainer | SourceLayerShape
 

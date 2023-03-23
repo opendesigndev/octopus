@@ -3,19 +3,19 @@ import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import { invLerp, lerp } from '@opendesign/octopus-common/dist/utils/math.js'
 import uniq from 'lodash/uniq.js'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { convertColor, convertOffset } from '../../utils/convert.js'
 import { angleToPoints, scaleLineSegment } from '../../utils/gradient.js'
 import { createLine, createPathEllipse, createPoint, createSize } from '../../utils/paper-factories.js'
 
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawGradientType } from '../../typings/raw/effects.js'
 import type { SourceBounds } from '../../typings/source.js'
 import type { SourceEffectFillGradientColor } from '../source/source-effect-fill-gradient-color.js'
 import type { SourceEffectFillGradientOpacity } from '../source/source-effect-fill-gradient-opacity.js'
 import type { SourceEffectFill } from '../source/source-effect-fill.js'
-import type { OctopusComponent } from './octopus-component.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { ElementOf } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type FillGradientStop = ElementOf<Octopus['FillGradient']['gradient']['stops']>
@@ -67,7 +67,7 @@ export class OctopusEffectFillGradient {
     const type: RawGradientType | undefined = this.fill.type
     const result = getMapped(type, OctopusEffectFillGradient.GRADIENT_TYPE_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Fill Gradient type', { type })
+      logger?.warn('Unknown Fill Gradient type', { type })
       return null
     }
     return result

@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest'
+
 import { createShape } from '../create-shape.js'
 
 import type { OctopusPoint } from '../create-shape.js'

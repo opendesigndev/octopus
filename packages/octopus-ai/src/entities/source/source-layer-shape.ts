@@ -1,14 +1,15 @@
 import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import { initSourceLayerChildren } from '../../utils/layer.js'
-import { createSoftMask, initClippingMask } from '../../utils/mask.js'
+import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceLayerShapeSubPath } from './source-layer-shape-subpath.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 
+import type { SourceLayerParent } from './source-layer-common.js'
 import type { DashPattern, RawGraphicsState, RawArtboardMediaBox } from '../../typings/raw/index.js'
 import type { RawShapeLayer, RawShapeLayerFillRule } from '../../typings/raw/shape-layer.js'
-import type { SourceLayerParent } from './source-layer-common.js'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerShapeOptions = {
@@ -165,5 +166,13 @@ export class SourceLayerShape extends SourceLayerCommon {
 
   get parentArtboardMediaBox(): RawArtboardMediaBox {
     return this.parentArtboard?.mediaBox || [0, 0, 0, 0]
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }

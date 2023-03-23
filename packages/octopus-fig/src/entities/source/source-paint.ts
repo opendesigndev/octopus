@@ -1,10 +1,11 @@
-import { mod, round } from '@opendesign/octopus-common/dist/utils/math'
+import { mod, round } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { getColorFor, getTransformFor } from '../../utils/source'
-import { SourceEntity } from './source-entity'
+import { SourceEntity } from './source-entity.js'
+import { getColorFor, getTransformFor } from '../../utils/source.js'
 
-import type { RawBlendMode, RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw'
-import type { SourceGradientPositions, SourceColor, SourceTransform } from '../../typings/source'
+import type { RawGradientType, RawImageFilters, RawPaint, RawScaleMode, RawStop } from '../../typings/raw/paint.js'
+import type { RawBlendMode } from '../../typings/raw/shared.js'
+import type { SourceGradientPositions, SourceColor, SourceTransform } from '../../typings/source.js'
 
 type SourcePaintOptions = {
   rawValue: RawPaint

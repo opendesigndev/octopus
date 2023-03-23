@@ -1,6 +1,6 @@
+import { SourceEntity } from './source-entity.js'
 import PROPS from '../../utils/prop-names.js'
 import { getUnitRatioFor } from '../../utils/source.js'
-import { SourceEntity } from './source-entity.js'
 
 import type { RawShapeTransparency } from '../../typings/raw/index.js'
 

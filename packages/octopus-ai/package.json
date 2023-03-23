@@ -1,41 +1,38 @@
 {
   "name": "@opendesign/octopus-ai",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc-experimental-8",
   "description": "Adobe Illustrator to Octopus 3+ format converter.",
   "license": "Apache-2.0",
-  "keywords": [
-    "Octopus 3+",
-    "Node.js",
-    "Adobe Illustrator",
-    "Typescript"
-  ],
   "scripts": {
+    "bundle": "yarn run bundle:web",
+    "bundle:web": "vite build -c ./examples/web/vite.web-test.js",
+    "build": "rimraf ./dist && tsc --build tsconfig.json",
+    "release:bundle:web": "vite build -c vite.web.js",
+    "release:bundle:node": "vite build -c vite.node.js",
+    "release:bundle": "yarn release:bundle:node && yarn release:bundle:web",
+    "release:cleanup": "rimraf ./release",
+    "release:publish": "yarn publish ./release --non-interactive --ignore-scripts",
+    "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
+    "clean:workdir": "rimraf ./workdir/*",
+    "clean": "rimraf ./node_modules ./dist ./workdir ./docs",
     "convert:debug": "ts-node ./examples/node/convert-debug.ts",
     "convert:local": "ts-node ./examples/node/convert-local.ts",
-    "bundle": "yarn run bundle:web",
-    "bundle:web": "vite build -c vite.web-test.js",
-    "build": "rimraf ./dist && tsc --build tsconfig.json",
-    "release:bundle:node": "vite build -c vite.node.js",
-    "release:bundle:web": "vite build -c vite.web.js",
-    "release:bundle": "yarn release:bundle:node && yarn release:bundle:web",
-    "release:cleanup": "rimraf ./release ./release.tgz",
-    "release:publish": "yarn publish release.tgz --non-interactive --ignore-scripts",
-    "release": "yarn release:bundle && node ./prepare-release.mjs && yarn release:publish && yarn release:cleanup",
-    "clean": "rimraf ./node_modules ./dist ./workdir ./docs",
+    "prepack": "yarn run build",
     "types:check": "tsc --noEmit",
-    "watch": "rimraf ./dist && tsc -w",
     "test": "yarn test:unit && yarn test:integration",
-    "test:unit": "yarn jest",
+    "test:unit": "vitest run",
     "test:integration": "ts-node test/integration/index.ts",
     "test:integration:update": "ts-node test/integration/update-tests.ts",
     "typedoc": "typedoc --excludePrivate src/index.ts",
-    "prepack": "yarn run build"
+    "watch": "rimraf ./dist && tsc -w",
+    "prepublishOnly": "echo \"Please use 'yarn release' to publish new version\" && exit 1"
   },
   "dependencies": {
     "@opendesign/illustrator-parser-pdfcpu": "1.1.2",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.30",
+    "@opendesign/octopus-common": "3.0.0-rc.32",
     "@opendesign/octopus-ts": "3.0.1",
+    "@types/node": "*",
     "dotenv": "16.0.0",
     "lodash": "^4.17.21",
     "paper": "^0.12.15",
@@ -46,32 +43,37 @@
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
-    "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "*",
-    "@types/pino": "^6.3.3",
+    "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1",
     "@types/rimraf": "^3.0.2",
     "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "chalk": "^4.1.2",
     "enhanced-resolve": "^5.12.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "handlebars": "^4.7.7",
-    "jest": "^27.3.1",
     "jsondiffpatch": "^0.4.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "typedoc": "^0.23.18",
     "typescript": "4.9.5",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.0.2",
+    "vitest": "^0.29.1"
   },
   "files": [
     "dist"
   ],
   "type": "module",
-  "module": "./dist/src/index-node.js",
+  "module": "./dist/src/index-web.js",
   "exports": {
     ".": {
-      "default": "./dist/src/index-node.js"
+      "default": "./dist/src/index-web.js"
     }
   }
 }

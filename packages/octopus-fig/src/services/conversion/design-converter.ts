@@ -3,12 +3,12 @@ import { isObject } from '@opendesign/octopus-common/dist/utils/common.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 import { v4 as uuidv4 } from 'uuid'
 
+import { ComponentConverter } from './component-converter.js'
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { SourceComponent } from '../../entities/source/source-component.js'
 import { SourceDesign } from '../../entities/source/source-design.js'
 import { logger } from '../../services/index.js'
 import { getRole } from '../../utils/source.js'
-import { ComponentConverter } from './component-converter.js'
 
 import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter.js'
 import type { Manifest } from '../../typings/manifest.js'

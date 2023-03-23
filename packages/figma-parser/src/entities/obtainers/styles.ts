@@ -2,12 +2,12 @@ import fromPairs from 'lodash/fromPairs'
 
 import { keys, without } from '../../utils/common'
 
+import type { Design } from './design'
+import type { FrameLike } from './frame-like'
 import type { Parser } from '../../parser'
 import type { ICacher } from '../../types/cacher'
 import type { FigmaLayer } from '../../types/figma'
 import type { Node } from '../structural/node'
-import type { Design } from './design'
-import type { FrameLike } from './frame-like'
 
 type StylesOptions = {
   frameLike: FrameLike

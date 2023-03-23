@@ -6,7 +6,7 @@ import { SourceLayerLayer } from '../entities/source/source-layer-layer.js'
 import { SourceLayerSection } from '../entities/source/source-layer-section.js'
 import { SourceLayerShape } from '../entities/source/source-layer-shape.js'
 import { SourceLayerText } from '../entities/source/source-layer-text.js'
-import { logger } from '../services/instances/logger.js'
+import { logger } from '../services/index.js'
 import { getLayerTypeKey, isAdjustmentLayer, isShapeLayer } from '../utils/source.js'
 
 import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
@@ -134,7 +134,7 @@ export function createSourceLayer(options: CreateLayerOptions): SourceLayer | nu
   const builder = getMapped(type, SOURCE_BUILDER_MAP, undefined)
 
   if (typeof builder !== 'function') {
-    logger.warn('createSourceLayer: Unknown layer type', { type: layer.addedType })
+    logger?.warn('createSourceLayer: Unknown layer type', { type: layer.addedType })
     return null
   }
 

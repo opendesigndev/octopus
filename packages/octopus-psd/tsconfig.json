@@ -14,10 +14,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "lib": ["es2019", "ES2015.Proxy", "dom"],
-    "paths": {
-      "@avocode/psd-parser": ["./src/typings/@avocode/psd-parser"]
-    }
+    "lib": ["es2019", "ES2015.Proxy", "dom"]
   },
   "include": ["src", "test", "examples/node"]
 }

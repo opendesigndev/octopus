@@ -2,8 +2,8 @@ import { asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/
 import { AliKey } from '@webtoon/psd-ts'
 import intersection from 'lodash/intersection.js'
 
-import { PSDFileReader } from '../services/readers/psd-file-reader.js'
 import PROPS from './prop-names.js'
+import { PSDFileReaderCommon } from '../services/readers/psd-file-reader-common.js'
 
 import type {
   RawMatrix,
@@ -88,7 +88,7 @@ export function getLayerTypeKey(layerProperties: RawLayerProperties | undefined)
     return
   }
 
-  return Buffer.from(layerTypeProp).toString()
+  return String.fromCharCode.apply(null, layerTypeProp)
 }
 
 export function isShapeLayer(layerProperties: RawLayerProperties | undefined): boolean {
@@ -107,7 +107,7 @@ export function isShapeLayer(layerProperties: RawLayerProperties | undefined): b
     return false
   }
 
-  return Boolean(intersection(Object.keys(layerProperties), PSDFileReader.SHAPE_LAYER_KEYS).length)
+  return Boolean(intersection(Object.keys(layerProperties), PSDFileReaderCommon.SHAPE_LAYER_KEYS).length)
 }
 
 export function isAdjustmentLayer(layerProperties: RawLayerProperties | undefined): boolean {
@@ -115,7 +115,7 @@ export function isAdjustmentLayer(layerProperties: RawLayerProperties | undefine
     return false
   }
 
-  return Boolean(intersection(PSDFileReader.ADJUSTMENT_LAYER_KEYS, Object.keys(layerProperties)).length)
+  return Boolean(intersection(PSDFileReaderCommon.ADJUSTMENT_LAYER_KEYS, Object.keys(layerProperties)).length)
 }
 
 export function getColor(rawColor: RawColor | undefined): null | SourceColor {

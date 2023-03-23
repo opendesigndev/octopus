@@ -1,7 +1,7 @@
 import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { RawLayerBackground } from '../../typings/raw/index.js'
 import type { SourceLayerParent } from './source-layer-common.js'
+import type { RawLayerBackground } from '../../typings/raw/index.js'
 
 type SourceLayerBackgroundOptions = {
   parent: SourceLayerParent

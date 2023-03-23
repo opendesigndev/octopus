@@ -1,17 +1,17 @@
 import { EventEmitter } from 'eventemitter3'
 
+import { FrameLike } from './frame-like'
+import { Library } from './library'
 import { logger } from '../../services'
 import { File } from '../structural/file'
 import { FillsDescriptor } from '../structural/fills-descriptor'
 import { Node } from '../structural/node'
-import { FrameLike } from './frame-like'
-import { Library } from './library'
 
+import type { ResolvedFrame } from './frame-like'
 import type { Parser } from '../../parser'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { ICacher } from '../../types/cacher'
 import type { FigmaFile, FigmaFillsDescriptor, FigmaNode } from '../../types/figma'
-import type { ResolvedFrame } from './frame-like'
 
 type DesignOptions = {
   designId: string

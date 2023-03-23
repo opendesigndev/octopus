@@ -120,7 +120,7 @@ export function parseListDescriptorValue(
 }
 
 export function parseUint8DescriptorValue(uintDescriptor: AliasDescriptorValue | RawDataDescriptorValue): string {
-  return Buffer.from(uintDescriptor.data).toString()
+  return String.fromCharCode.apply(null, uintDescriptor.data)
 }
 export function parseDescriptorDescriptorValue(objc: DescriptorDescriptorValue): RawDescriptorValueTree {
   return parseDescriptorItems(objc.descriptor.items)

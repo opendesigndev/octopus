@@ -1,13 +1,13 @@
 import { getConverted, push } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
 import { OctopusLayerCommon } from './octopus-layer-common.js'
+import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
 
+import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
 import type { SourceLayerGroup } from '../source/source-layer-group.js'
-import type { LayerSpecifics } from './octopus-layer-common.js'
 
 type OctopusLayerGroupOptions = {
   parent: OctopusLayerParent

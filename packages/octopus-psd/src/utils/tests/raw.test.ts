@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DescriptorValueType } from '@webtoon/psd-ts'
+import { describe, it, expect } from 'vitest'
 
 import { parseNodeChild } from '../raw.js'
 

@@ -2,7 +2,7 @@ import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
 import chunk from 'lodash/chunk.js'
 import zipWith from 'lodash/zipWith.js'
 
-import { logger } from '../../services/instances/logger.js'
+import { logger } from '../../services/index.js'
 import { convertColor } from '../../utils/colors.js'
 
 import type { Coord, GradientStop, RgbColorComponents } from '../../typings/index.js'
@@ -165,7 +165,7 @@ export class OctopusEffectGradientFill {
       case 3:
         return this._parseRadialGradient()
       default:
-        logger.warn('parseShading', 'Unsupported shading type', { shadingType })
+        logger?.warn('parseShading', 'Unsupported shading type', { shadingType })
         return this._parseLinearGradient()
     }
   }

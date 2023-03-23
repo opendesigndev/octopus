@@ -4,10 +4,10 @@ import { push, traverseAndFind } from '@opendesign/octopus-common/dist/utils/com
 
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer.js'
-import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source/index.js'
 import type { SourceDesign } from './source-design.js'
 import type { RawArtboardSpecific, RawGeneralEntry } from './source-manifest.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { RawArtboard, RawArtboardEntry, RawLayer } from '../../typings/source/index.js'
 
 export type SourceArtboardOptions = {
   rawValue: RawArtboard

@@ -6,10 +6,10 @@ import { OctopusEffectFillGradient } from './octopus-effect-fill-gradient.js'
 import { OctopusEffectFillImage } from './octopus-effect-fill-image.js'
 import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
+import type { OctopusLayerShape } from './octopus-layer-shape.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { OctopusFill } from '../../typings/octopus-entities.js'
 import type { SourceResources } from '../source/source-resources.js'
-import type { OctopusLayerShape } from './octopus-layer-shape.js'
 
 type OctopusEffectsShapeOptions = {
   octopusLayer: OctopusLayerShape

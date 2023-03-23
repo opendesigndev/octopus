@@ -1,11 +1,11 @@
-import { Node } from '../structural/node'
 import { FrameLike } from './frame-like'
+import { Node } from '../structural/node'
 
+import type { Design } from './design'
+import type { ResolvedFrame } from './frame-like'
 import type { NodeAddress } from '../../services/requests-manager/nodes-endpoint'
 import type { ICacher } from '../../types/cacher'
 import type { ComponentDescriptor, FigmaNode } from '../../types/figma'
-import type { Design } from './design'
-import type { ResolvedFrame } from './frame-like'
 
 type LibraryOptions = {
   design: Design

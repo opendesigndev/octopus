@@ -1,11 +1,11 @@
-import { logger } from '../../services/instances/logger.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
 import { OctopusEffectFillColor } from './octopus-effect-fill-color.js'
+import { logger } from '../../services/index.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceColor } from '../../typings/source.js'
 import type { SourceEffectFill } from '../source/source-effect-fill.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusFillOptions = {
   parentLayer: OctopusLayerBase
@@ -29,7 +29,7 @@ export class OctopusEffectOverlayColor extends OctopusEffectBase {
   get overlay(): OctopusEffectFillColor | null {
     const color = this._color
     if (color === null) {
-      logger.warn('Unknown effect overlay color', { fill: this._fill })
+      logger?.warn('Unknown effect overlay color', { fill: this._fill })
       return null
     }
     const opacity = this._fill.opacity

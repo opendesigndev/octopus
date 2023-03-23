@@ -1,14 +1,14 @@
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { logger } from '../../services/instances/logger.js'
-import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path.js'
+import { logger } from '../../services/index.js'
 import { createPathData } from '../../utils/path-data.js'
+import { createDefaultTranslationMatrix, isRectangle } from '../../utils/path.js'
 
+import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawCombineOperation } from '../../typings/raw/shared.js'
 import type { SourceLayerShape } from '../source/source-layer-shape.js'
 import type { SourcePathComponent } from '../source/source-path-component.js'
-import type { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 
 type OctopusLayerShapeShapePathOptions = {
   parentLayer: OctopusLayerShapeShapeAdapter
@@ -65,7 +65,7 @@ export class OctopusLayerShapeShapePath {
   private _getCompoundOperation(operation: RawCombineOperation | undefined): Octopus['BooleanOp'] {
     const result = getMapped(operation, OctopusLayerShapeShapePath.COMPOUND_OPERATION_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Compound operation', { operation })
+      logger?.warn('Unknown Compound operation', { operation })
       return 'UNION'
     }
     return result
@@ -109,7 +109,7 @@ export class OctopusLayerShapeShapePath {
     const path = pathComponents[0]
     const layerTranslation = this._parentLayer.layerTranslation
     const geometry = createPathData(path, layerTranslation)
-    if (geometry === '') logger.warn('PathData generated empty')
+    if (geometry === '') logger?.warn('PathData generated empty')
     return {
       ...this._getPathBase(pathComponents),
       type: 'PATH',

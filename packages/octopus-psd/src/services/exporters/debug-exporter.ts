@@ -8,8 +8,8 @@ import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from 
 import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 import type { AbstractExporter } from './abstract-exporter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type DebugExporterOptions = {
@@ -100,11 +100,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   /**
    * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
-   * @param {Buffer} buffer image data
+   * @param {Uint8Array} data image data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, buffer: Buffer): Promise<string> {
-    return this._save(path.join(DebugExporter.IMAGES_DIR_NAME, path.basename(name)), buffer)
+  async exportImage(name: string, data: Uint8Array): Promise<string> {
+    return this._save(path.join(DebugExporter.IMAGES_DIR_NAME, path.basename(name)), Buffer.from(data))
   }
 
   /**

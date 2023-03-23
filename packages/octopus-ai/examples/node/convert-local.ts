@@ -5,9 +5,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { OctopusAIConverter } from '../../src/index.js'
-import { AIFileReader } from '../../src/services/conversion/ai-file-reader/index.js'
-import { LocalExporter } from '../../src/services/conversion/exporters/local-exporter.js'
+import { createConverter, LocalExporter, AIFileReader } from '../../src/index-node.js'
 
 dotenv.config()
 ;(async () => {
@@ -20,14 +18,14 @@ dotenv.config()
 
   const reader = new AIFileReader({ path: filePath })
 
-  const sourceDesign = await reader.sourceDesign
+  const sourceDesign = await reader.getSourceDesign()
 
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
     return
   }
 
-  const octopusAIConverter = new OctopusAIConverter({})
+  const octopusAIConverter = createConverter()
   const testDir = path.join(os.tmpdir(), LocalExporter.OCTOPUS_SUBFOLDER, uuidv4())
   const exporter = new LocalExporter({ path: testDir })
   await octopusAIConverter.convertDesign({ exporter, sourceDesign })

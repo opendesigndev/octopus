@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest'
+
 import { removeTrailingHyphen } from '../text.js'
 
 describe('utils/text', () => {

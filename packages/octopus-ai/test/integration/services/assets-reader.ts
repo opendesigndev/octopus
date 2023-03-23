@@ -1,5 +1,6 @@
 import fsp from 'fs/promises'
 import path from 'path'
+import * as url from 'url'
 
 import { LocalExporter } from '../../../src/services/conversion/exporters/local-exporter.js'
 import { lazyRead } from '../utils.js'
@@ -45,7 +46,11 @@ export class AssetsReader {
   }
 
   private _getFullPath(subpaths: string[]) {
-    return path.join(__dirname, AssetsReader.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    return path.join(
+      url.fileURLToPath(new URL('.', import.meta.url)),
+      AssetsReader.ASSETS_DIR_RELATIVE_PATH,
+      ...subpaths
+    )
   }
 
   private async _getTestDirectoryFullData(): Promise<TestDirectoryFullData[]> {

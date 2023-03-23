@@ -7,6 +7,7 @@ import { convertObjectMatrixToArray } from '../../utils/matrix.js'
 import { createMatrix, createPathEllipse, createPoint, createSize } from '../../utils/paper.js'
 import { SourceEffectFillGradient } from '../source/source-effect-gradient-fill.js'
 
+import type { OctopusBounds } from './octopus-bounds.js'
 import type { Defined } from '../../typings/helpers.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type {
@@ -16,7 +17,6 @@ import type {
   RawGradientResources,
 } from '../../typings/source/index.js'
 import type { SourceResources } from '../source/source-resources.js'
-import type { OctopusBounds } from './octopus-bounds.js'
 
 type OctopusEffectFillGradientOptions = {
   source: SourceEffectFillGradient

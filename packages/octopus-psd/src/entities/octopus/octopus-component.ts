@@ -1,6 +1,6 @@
-import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
 import { OctopusLayerGroup } from './octopus-layer-group.js'
 import { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
+import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
 
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { DesignConverter } from '../../services/conversion/design-converter.js'

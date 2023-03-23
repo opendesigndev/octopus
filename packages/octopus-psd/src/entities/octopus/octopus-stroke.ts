@@ -2,12 +2,12 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 import chunk from 'lodash/chunk.js'
 
-import { logger } from '../../services/instances/logger.js'
 import { OctopusEffectFill } from './octopus-effect-fill.js'
+import { logger } from '../../services/index.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceStroke } from '../source/source-stroke.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusStrokeOptions = {
   parentLayer: OctopusLayerBase
@@ -53,7 +53,7 @@ export class OctopusStroke {
     const lineAlignment = this._stroke.lineAlignment
     const result = getMapped(lineAlignment, OctopusStroke.STROKE_POSITION_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
+      logger?.warn('Unknown Stroke position', { lineAlignment, stroke: this._stroke })
       return null
     }
     return result
@@ -63,7 +63,7 @@ export class OctopusStroke {
     const lineCap = this._stroke.lineCap
     const result = getMapped(lineCap, OctopusStroke.STROKE_LINE_CAP_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Stroke line cap', { lineCap, stroke: this._stroke })
+      logger?.warn('Unknown Stroke line cap', { lineCap, stroke: this._stroke })
       return null
     }
     return result
@@ -73,7 +73,7 @@ export class OctopusStroke {
     const lineJoin = this._stroke.lineJoin
     const result = getMapped(lineJoin, OctopusStroke.STROKE_LINE_JOIN_MAP, undefined)
     if (!result) {
-      logger.warn('Unknown Stroke line join', { lineJoin, stroke: this._stroke })
+      logger?.warn('Unknown Stroke line join', { lineJoin, stroke: this._stroke })
       return null
     }
     return result

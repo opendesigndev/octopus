@@ -1,19 +1,19 @@
 import { asArray, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { getMapped, push } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { OctopusEffectsShape } from './octopus-effects-shape.js'
+import { OctopusLayerCommon } from './octopus-layer-common.js'
 import { createOctopusLayer } from '../../factories/create-octopus-layer.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { convertArrayToPaperMatrix, convertObjectToPaperMatrix } from '../../utils/matrix.js'
 import { createMatrix } from '../../utils/paper.js'
 import { buildShapePathSafe } from '../../utils/path-builders.js'
-import { OctopusEffectsShape } from './octopus-effects-shape.js'
-import { OctopusLayerCommon } from './octopus-layer-common.js'
 
+import type { LayerSpecifics } from './octopus-layer-common.js'
 import type { Octopus } from '../../typings/octopus/index.js'
 import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
 import type { Raw2DMatrix, RawShapeCompound, RawShapeRect } from '../../typings/source/index.js'
 import type { SourceLayerShape } from '../source/source-layer-shape.js'
-import type { LayerSpecifics } from './octopus-layer-common.js'
 import type paper from 'paper'
 
 type OctopusLayerShapeOptions = {

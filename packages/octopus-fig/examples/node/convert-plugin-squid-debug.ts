@@ -5,9 +5,9 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
+import { renderOctopus } from './utils/render.js'
 import { createConverter, DebugExporter, SourcePluginReader } from '../../src/index-node.js'
 import { getFilesFromDir, isDirectory, parseJsonFromFile } from '../../src/utils/files.js'
-import { renderOctopus } from './utils/render.js'
 
 import type { PluginSource } from '../../src/typings/plugin-source.js'
 

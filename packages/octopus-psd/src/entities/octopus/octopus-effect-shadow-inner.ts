@@ -1,8 +1,8 @@
 import { OctopusEffectShadowCommon } from './octopus-effect-shadow-common.js'
 
+import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceEffectShadow } from '../source/source-effect-shadow.js'
-import type { OctopusLayerBase } from './octopus-layer-base.js'
 
 type OctopusShadowOptions = {
   parentLayer: OctopusLayerBase

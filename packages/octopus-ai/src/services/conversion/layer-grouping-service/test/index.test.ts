@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { mocked } from 'jest-mock'
+import { describe, expect, it, vi } from 'vitest'
 
-import { LayerGroupingService } from '../index.js'
 import { MaskGroupingService } from '../../mask-grouping-service/index.js'
+import { LayerGroupingService } from '../index.js'
 
-jest.mock('../../text-layer-grouping-service')
-jest.mock('../../mask-grouping-service')
+vi.mock('../../text-layer-grouping-service')
+vi.mock('../../mask-grouping-service')
 
 describe('LayerGroupingService', () => {
   it('returns from passed in services', () => {
     const textLayerGroupingServiceGetLayerSequencesReturnVal: any = {}
-    const textLayerGroupingServiceGetLayerSequences = jest
+    const textLayerGroupingServiceGetLayerSequences = vi
       .fn()
       .mockReturnValueOnce(textLayerGroupingServiceGetLayerSequencesReturnVal)
 
@@ -19,14 +19,14 @@ describe('LayerGroupingService', () => {
       getLayerSequences: textLayerGroupingServiceGetLayerSequences,
     }
     const maskGroupingServiceGetLayerSequencesReturnVal: any = {}
-    const maskGroupingServiceGetLayerSequences = jest
+    const maskGroupingServiceGetLayerSequences = vi
       .fn()
       .mockReturnValueOnce(maskGroupingServiceGetLayerSequencesReturnVal)
 
     const maskGroupingServiceInstance: any = {
       groupLayerSequences: maskGroupingServiceGetLayerSequences,
     }
-    mocked(MaskGroupingService).mockReturnValueOnce(maskGroupingServiceInstance)
+    vi.mocked(MaskGroupingService).mockReturnValueOnce(maskGroupingServiceInstance)
 
     const layerGroupingService = new LayerGroupingService(textLayerGroupingServiceInstance)
 

@@ -1,20 +1,20 @@
 import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.js'
 
+import { OctopusComponent } from './octopus-component.js'
 import { createOctopusLayer, createOctopusLayers } from '../../factories/create-octopus-layer.js'
 import { createSourceLayer } from '../../factories/create-source-layer.js'
 import { env } from '../../services/index.js'
 import { convertId, convertLayerBlendMode } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { getTopComponentTransform } from '../../utils/source.js'
-import { OctopusComponent } from './octopus-component.js'
 
+import type { OctopusLayerParent } from './octopus-layer-base.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawBlendMode, RawLayerShape } from '../../typings/raw/index.js'
 import type { SourceBounds } from '../../typings/source.js'
 import type { SourceLayerContainer } from '../source/source-layer-container.js'
-import type { OctopusLayerParent } from './octopus-layer-base.js'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent
