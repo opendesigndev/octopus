@@ -55,7 +55,8 @@ export class AssetUpdater {
   }
 
   private _getFullPath(...subpaths: string[]) {
-    return path.join(__dirname, AssetUpdater.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
+    const dirname = new URL('.', import.meta.url).pathname
+    return path.join(dirname, AssetUpdater.ASSETS_DIR_RELATIVE_PATH, ...subpaths)
   }
 
   private async _onDesign(data: ResolvedDesign) {

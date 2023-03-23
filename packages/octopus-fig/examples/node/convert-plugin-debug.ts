@@ -43,7 +43,7 @@ export async function convertDesign({
   }
 
   const designId = kebabCase(`${documentId}-${documentName}-${path.basename(sourcePath, '.json')}`)
-  const outputDir = path.join(__dirname, '../../', 'workdir')
+  const outputDir = new URL('../../workdir', import.meta.url).pathname
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
   console.info(`Converting design: ${designId}\n`)
