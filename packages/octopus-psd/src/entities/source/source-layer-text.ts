@@ -3,8 +3,8 @@ import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceText } from './source-text.js'
 
-import type { RawLayerText } from '../../typings/raw'
-import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { RawLayerText } from '../../typings/raw/index.js'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent
@@ -12,7 +12,7 @@ type SourceLayerTextOptions = {
 }
 
 export class SourceLayerText extends SourceLayerCommon {
-  protected _rawValue: RawLayerText
+  declare _rawValue: RawLayerText
 
   constructor(options: SourceLayerTextOptions) {
     super(options)

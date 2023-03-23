@@ -1,14 +1,14 @@
-import { createConverter, SourcePluginReader } from '../../../../src/index-node'
-import { parseJsonFromFile } from '../../../../src/utils/files'
-import { BaseTestComparer } from '../../common/services/base-test-comparer'
-import { cleanManifest } from '../../common/utils/asset-cleaner'
+import { createConverter, SourcePluginReader } from '../../../../src/index-node.js'
+import { parseJsonFromFile } from '../../../../src/utils/files.js'
+import { BaseTestComparer } from '../../common/services/base-test-comparer.js'
+import { cleanManifest } from '../../common/utils/asset-cleaner.js'
 
-import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter'
-import type { Octopus } from '../../../../src/typings/octopus'
-import type { PluginSource } from '../../../../src/typings/plugin-source'
-import type { TestComponents } from '../../common/services/asset-reader'
-import type { ConvertedDesign } from '../../common/services/base-test-comparer'
-import type { Fail } from '../../common/services/test-runner'
+import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
+import type { Octopus } from '../../../../src/typings/octopus.js'
+import type { PluginSource } from '../../../../src/typings/plugin-source.js'
+import type { TestComponents } from '../../common/services/asset-reader.js'
+import type { ConvertedDesign } from '../../common/services/base-test-comparer.js'
+import type { Fail } from '../../common/services/test-runner.js'
 
 export class TestComparer extends BaseTestComparer {
   protected _octopusConverter: OctopusFigConverter

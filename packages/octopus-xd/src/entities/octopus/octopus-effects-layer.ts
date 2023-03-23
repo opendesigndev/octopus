@@ -1,12 +1,12 @@
-import { asArray } from '@opendesign/octopus-common/dist/utils/as'
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { asArray } from '@opendesign/octopus-common/dist/utils/as.js'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusEffectBlur } from './octopus-effect-blur'
-import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow'
+import { OctopusEffectBlur } from './octopus-effect-blur.js'
+import { OctopusEffectDropShadow } from './octopus-effect-drop-shadow.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { RawBlur, RawEffectDropShadow } from '../../typings/source'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { RawBlur, RawEffectDropShadow } from '../../typings/source/index.js'
 
 type OctopusEffectsLayerOptions = {
   sourceLayer: SourceLayer

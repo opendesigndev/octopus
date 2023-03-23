@@ -1,6 +1,6 @@
-import type { RawFill } from './effects'
-import type { AddedType, RawParsedLayerLayer } from './layer'
-import type { RawUnitPoint } from './shared'
+import type { RawFill } from './effects.js'
+import type { AddedType, RawParsedLayerLayer } from './layer.js'
+import type { RawUnitPoint } from './shared.js'
 
 export type RawStrokeStyleLineAlignment =
   | 'strokeStyleAlignInside'

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { describe, expect, it } from 'vitest'
 
-import { TextLayerGroupingservice } from '..'
+import { TextLayerGroupingservice } from '../index.js'
 
 describe('TextLayerGroupingservice', () => {
   it('groups text layers and selects shortests matching additionalTextData', () => {

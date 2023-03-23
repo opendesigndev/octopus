@@ -1,6 +1,6 @@
+import { Artboard } from './artboard'
 import { flattenLayers, getChildren } from '../../utils/common-design'
 import firstCallMemo from '../../utils/decorators'
-import { Artboard } from './artboard'
 
 import type { FigmaLayer, FigmaPage } from '../../types/figma'
 

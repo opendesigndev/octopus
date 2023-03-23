@@ -1,8 +1,8 @@
 import ky from 'ky'
 
+import { ResponseWeb } from './response-web'
 import { logger } from '../..'
 import { detachPromiseControls } from '../../../utils/async'
-import { ResponseWeb } from './response-web'
 
 import type { Parser } from '../../../parser'
 import type { DetachedPromiseControls } from '../../../utils/async'

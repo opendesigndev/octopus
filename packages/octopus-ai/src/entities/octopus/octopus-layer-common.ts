@@ -1,13 +1,13 @@
-import { logger } from '../../services/instances/logger'
-import { BLEND_MODES } from '../../utils/blend-modes'
-import { OctopusArtboard } from './octopus-artboard'
+import { OctopusArtboard } from './octopus-artboard.js'
+import { logger } from '../../services/index.js'
+import { BLEND_MODES } from '../../utils/blend-modes.js'
 
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service'
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusLayerParent } from '../../typings/octopus-entities'
-import type { SourceResources } from '../source/source-resources'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { LayerSequence } from '../../services/conversion/text-layer-grouping-service/index.js'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusLayerParent } from '../../typings/octopus-entities.js'
+import type { SourceResources } from '../source/source-resources.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 /** @TODO fix exclusion of `type` from return type after schema update */
 export type LayerSpecifics<T> = Omit<T, Exclude<keyof Octopus['LayerBase'], 'type'>>
@@ -28,7 +28,7 @@ export abstract class OctopusLayerCommon {
     const [sourceLayer] = options.layerSequence.sourceLayers
 
     if (options.layerSequence.sourceLayers.length > 1 && sourceLayer.type !== 'TextGroup') {
-      logger.error('Constructor (OctopusLayerCommon) recieved more layers than 1')
+      logger?.error('Constructor (OctopusLayerCommon) recieved more layers than 1')
     }
 
     this._parent = options.parent

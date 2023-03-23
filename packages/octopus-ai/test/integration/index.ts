@@ -3,11 +3,11 @@ import path from 'path'
 
 import handlebars from 'handlebars'
 
-import { AssetsReader } from './services/assets-reader'
-import { Tester } from './services/tester'
-import { getCommandLineArgs } from './utils'
+import { AssetsReader } from './services/assets-reader.js'
+import { Tester } from './services/tester.js'
+import { getCommandLineArgs } from './utils.js'
 
-import type { Fail } from './services/tester'
+import type { Fail } from './services/tester.js'
 
 function createReport(failed: Fail[]): string {
   const source = fs.readFileSync(path.join(__dirname, '/report/report-template.hbs')).toString()

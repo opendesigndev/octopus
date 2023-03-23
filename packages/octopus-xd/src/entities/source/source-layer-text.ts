@@ -1,8 +1,8 @@
-import { SourceLayerCommon } from './source-layer-common'
+import { SourceLayerCommon } from './source-layer-common.js'
 
-import type { Defined } from '../../typings/helpers'
-import type { RawTextLayer } from '../../typings/source'
-import type { SourceLayerParent } from './source-layer-common'
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawTextLayer } from '../../typings/source/index.js'
 
 type SourceLayerTextOptions = {
   parent: SourceLayerParent

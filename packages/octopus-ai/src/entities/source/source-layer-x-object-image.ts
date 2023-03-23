@@ -1,21 +1,21 @@
-import path from 'path/posix'
+import { SourceArtboard } from './source-artboard.js'
+import { SourceLayerCommon } from './source-layer-common.js'
+import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
+import { pathBasename } from '../../utils/fs-path.js'
+import { initSourceLayerChildren } from '../../utils/layer.js'
+import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 
-import { initSourceLayerChildren } from '../../utils/layer'
-import { createSoftMask, initClippingMask } from '../../utils/mask'
-import { SourceLayerCommon } from './source-layer-common'
-
+import type { SourceLayerParent } from './source-layer-common.js'
+import type { SourceLayerShape } from './source-layer-shape.js'
 import type {
   RawGraphicsState,
   RawResourcesExtGState,
   RawResourcesXObject,
   RawResourcesXObjectImage,
   XObjectSubtype,
-} from '../../typings/raw'
-import type { RawXObjectLayer } from '../../typings/raw/x-object'
-import type { SourceLayerParent } from './source-layer-common'
-import type { SourceLayerShape } from './source-layer-shape'
-import type { SourceLayerXObjectForm } from './source-layer-x-object-form'
-import type { Nullish } from '@opendesign/octopus-common/dist/utils/utility-types'
+} from '../../typings/raw/index.js'
+import type { RawXObjectLayer } from '../../typings/raw/x-object.js'
+import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 type SourceLayerXObjectImageOptions = {
   parent: SourceLayerParent
@@ -24,7 +24,7 @@ type SourceLayerXObjectImageOptions = {
 }
 
 export class SourceLayerXObjectImage extends SourceLayerCommon {
-  protected _rawValue: RawResourcesXObject
+  declare _rawValue: RawResourcesXObject
   private _xObject: Nullish<RawXObjectLayer>
   private _softMask: Nullish<SourceLayerXObjectForm>
   private _mask: Nullish<SourceLayerShape>
@@ -83,8 +83,7 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
     const { subtype } = this
     if (!subtype || subtype !== 'Image') return null
     const data = this._rawValue?.Data as RawResourcesXObjectImage
-
-    return data?.[subtype] ? path.basename(data[subtype]) : null
+    return data?.[subtype] ? pathBasename(data[subtype]) : null
   }
 
   private get _clippingPath(): Nullish<RawGraphicsState['ClippingPath']> {
@@ -109,5 +108,13 @@ export class SourceLayerXObjectImage extends SourceLayerCommon {
 
   get type(): Nullish<XObjectSubtype> {
     return this.subtype
+  }
+
+  resourcesTarget(): Nullish<SourceArtboard | SourceLayerXObjectForm> {
+    if (this._parent instanceof SourceArtboard || this._parent instanceof SourceLayerXObjectForm) {
+      return this._parent
+    }
+
+    return this._parent.resourcesTarget()
   }
 }

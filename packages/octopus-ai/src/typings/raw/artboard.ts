@@ -1,5 +1,5 @@
-import type { RawLayer } from './layer'
-import type { RawResources, RawObjectId } from './resources'
+import type { RawLayer } from './layer.js'
+import type { RawResources, RawObjectId } from './resources.js'
 
 export type RawArtboardEntryContents = {
   Filter?: string

@@ -1,8 +1,8 @@
-import { logger } from '../../services'
-import { convertBlendMode, convertColor } from '../../utils/convert'
+import { logger } from '../../services/index.js'
+import { convertBlendMode, convertColor } from '../../utils/convert.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffect } from '../source/source-effect'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceEffect } from '../source/source-effect.js'
 
 export class OctopusEffect {
   private _effect: SourceEffect

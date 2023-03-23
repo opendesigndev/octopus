@@ -1,21 +1,21 @@
 import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { createSourceLayer } from '../../factories/create-source-layer.js'
-import { convertColor, convertRectangle } from '../../utils/convert.js'
-import PROPS from '../../utils/prop-names.js'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusLayerShapeLayerAdapter } from './octopus-layer-shape-layer-adapter.js'
 import { OctopusLayerShapeShapeAdapter } from './octopus-layer-shape-shape-adapter.js'
 import { OctopusLayerShape } from './octopus-layer-shape.js'
+import { createSourceLayer } from '../../factories/create-source-layer.js'
+import { convertColor, convertRectangle } from '../../utils/convert.js'
+import PROPS from '../../utils/prop-names.js'
 
-import type { OctopusLayer } from '../../factories/create-octopus-layer'
-import type { SourceLayer } from '../../factories/create-source-layer'
-import type { Octopus } from '../../typings/octopus'
-import type { RawLayerLayer, RawLayerShape } from '../../typings/raw'
-import type { SourceBounds, SourceColor } from '../../typings/source'
-import type { SourceLayerLayer } from '../source/source-layer-layer'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { OctopusLayerParent } from './octopus-layer-base'
+import type { OctopusLayerParent } from './octopus-layer-base.js'
+import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
+import type { SourceLayer } from '../../factories/create-source-layer.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { RawLayerLayer, RawLayerShape } from '../../typings/raw/index.js'
+import type { SourceBounds, SourceColor } from '../../typings/source.js'
+import type { SourceLayerLayer } from '../source/source-layer-layer.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
 
 type OctopusLayerMaskGroupOptions = {
   parent: OctopusLayerParent

@@ -23,7 +23,9 @@
   "devDependencies": {
     "@types/node": "*",
     "ts-node": "10.5.0",
-    "typescript": "4.6.4"
+    "typescript": "4.6.4",
+    "@types/pino-pretty": "4.7.5",
+    "@types/pino-std-serializers": "2.4.1"
   },
   "files": [
     "lib/src"

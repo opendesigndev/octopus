@@ -1,24 +1,22 @@
-import path from 'path'
+import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
+import { push } from '@opendesign/octopus-common/dist/utils/common.js'
+import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 
-import { rejectTo } from '@opendesign/octopus-common/dist/utils/async'
-import { benchmark } from '@opendesign/octopus-common/dist/utils/benchmark-node'
-import { push } from '@opendesign/octopus-common/dist/utils/common'
-import { Queue } from '@opendesign/octopus-common/dist/utils/queue-web'
+import { OctopusManifest } from '../../../entities/octopus/octopus-manifest.js'
+import { getBenchmarkService } from '../../index.js'
+import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service.js'
+import { ArtboardConverter } from '../artboard-converter/index.js'
+import { TextLayerGroupingservice } from '../text-layer-grouping-service/index.js'
 
-import { OctopusManifest } from '../../../entities/octopus/octopus-manifest'
-import { set as setTextLayerGroupingService } from '../../instances/text-layer-grouping-service'
-import { ArtboardConverter } from '../artboard-converter'
-import { TextLayerGroupingservice } from '../text-layer-grouping-service'
-
-import type { OctopusAIConverter } from '../../..'
-import type { SourceArtboard } from '../../../entities/source/source-artboard'
-import type { SourceDesign } from '../../../entities/source/source-design'
-import type { SourceImage } from '../../../typings'
-import type { Manifest } from '../../../typings/manifest'
-import type { Octopus } from '../../../typings/octopus'
-import type { AdditionalTextData } from '../../../typings/raw'
-import type { Exporter } from '../exporters'
-import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue-web'
+import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
+import type { SourceDesign } from '../../../entities/source/source-design.js'
+import type { OctopusAIConverter } from '../../../octopus-ai-converter.js'
+import type { SourceImage } from '../../../typings/index.js'
+import type { Manifest } from '../../../typings/manifest/index.js'
+import type { Octopus } from '../../../typings/octopus/index.js'
+import type { AdditionalTextData } from '../../../typings/raw/index.js'
+import type { Exporter } from '../exporters/index.js'
+import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 type DesignConverterGeneralOptions = {
   octopusAIconverter: OctopusAIConverter
@@ -118,27 +116,25 @@ export class DesignConverter {
     const {
       result: { value, error },
       time,
-    } = benchmark(() => this._convertArtboardByIdSafe(targetArtboardId))
+    } = getBenchmarkService()(() => this._convertArtboardByIdSafe(targetArtboardId))
 
     return { id: targetArtboardId, value, error, time }
   }
 
   private async _exportManifest(exporter: Exporter | null): Promise<Manifest['OctopusManifest']> {
-    const { time, result: manifest } = benchmark(() => this.manifest.convert())
+    const { time, result: manifest } = getBenchmarkService()(() => this.manifest.convert())
     await exporter?.exportManifest?.({ manifest, time })
     return manifest
   }
 
   private async _exportArtboard(exporter: Exporter | null, artboard: SourceArtboard): Promise<ArtboardExport> {
     const { images: imagesDep } = artboard.dependencies
-    const artboardImages = this._sourceDesign.images.filter((image) =>
-      imagesDep.some((dep) => image.path.includes(dep))
-    )
+    const artboardImages = this._sourceDesign.images.filter((image) => imagesDep.some((dep) => image.id.includes(dep)))
     const images = await Promise.all(
       artboardImages.map(async (image) => {
-        const imageId = path.basename(image.path)
+        const imageId = image.id
         const rawData = await image.getImageData()
-        const imagePath = (await rejectTo(exporter?.exportImage?.(image.path, rawData) ?? Promise.reject(''))) as string
+        const imagePath = (await rejectTo(exporter?.exportImage?.(image.id, rawData) ?? Promise.reject(''))) as string
         this.manifest.setExportedImage(imageId, imagePath)
 
         return image

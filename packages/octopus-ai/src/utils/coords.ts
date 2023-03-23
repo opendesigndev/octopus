@@ -1,7 +1,7 @@
-import { asNumber } from '@opendesign/octopus-common/dist/utils/as'
+import { asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 
-import type { Coord } from '../typings/index'
-import type { RawShapeLayerSubPathPoint } from '../typings/raw'
+import type { Coord } from '../typings/index.js'
+import type { RawShapeLayerSubPathPoint } from '../typings/raw/index.js'
 
 export type TransformOptions = {
   matrix: [number, number, number, number, number, number]

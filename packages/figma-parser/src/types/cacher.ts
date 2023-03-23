@@ -1,5 +1,5 @@
-import type { NodeAddress } from '../services/requests-manager/nodes-endpoint'
 import type { FigmaFile, FigmaNode } from './figma'
+import type { NodeAddress } from '../services/requests-manager/nodes-endpoint'
 
 type CachedMeta<T> = {
   cached: T[]

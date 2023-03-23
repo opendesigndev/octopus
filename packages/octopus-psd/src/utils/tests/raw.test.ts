@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DescriptorValueType } from '@webtoon/psd-ts'
+import { describe, it, expect } from 'vitest'
 
-import { parseNodeChild } from '../raw'
+import { parseNodeChild } from '../raw.js'
 
 describe('src/utils/raw', () => {
   describe('parseNodeChild', () => {

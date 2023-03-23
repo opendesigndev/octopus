@@ -1,12 +1,12 @@
 import { clamp, cos, round, sin } from '@opendesign/octopus-common/dist/utils/math.js'
 
-import { convertColor } from '../../utils/convert.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
+import { convertColor } from '../../utils/convert.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectShadow } from '../source/source-effect-shadow'
-import type { OctopusComponent } from './octopus-component'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { OctopusComponent } from './octopus-component.js'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceEffectShadow } from '../source/source-effect-shadow.js'
 
 type OctopusShadowCommonOptions = {
   parentLayer: OctopusLayerBase

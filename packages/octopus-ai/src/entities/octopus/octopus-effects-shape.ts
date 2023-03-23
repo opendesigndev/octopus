@@ -1,15 +1,15 @@
-import { getConverted } from '@opendesign/octopus-common/dist/utils/common'
+import { getConverted } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill'
-import { OctopusEffectGradientFill } from './octopus-effect-fill-gradient'
-import { OctopusEffectImageFill } from './octopus-effect-fill-image'
-import { OctopusEffectStroke } from './octopus-effect-stroke'
+import { OctopusEffectColorFill, ColorSpace } from './octopus-effect-color-fill.js'
+import { OctopusEffectGradientFill } from './octopus-effect-fill-gradient.js'
+import { OctopusEffectImageFill } from './octopus-effect-fill-image.js'
+import { OctopusEffectStroke } from './octopus-effect-stroke.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { OctopusEffectParent } from '../../typings/octopus-entities'
-import type { SourceLayerShape } from '../source/source-layer-shape'
-import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image'
-import type { SourceResources } from '../source/source-resources'
+import type { Octopus } from '../../typings/octopus/index.js'
+import type { OctopusEffectParent } from '../../typings/octopus-entities.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
+import type { SourceLayerXObjectImage } from '../source/source-layer-x-object-image.js'
+import type { SourceResources } from '../source/source-resources.js'
 
 type OctopusEffectsShapeOptions = {
   sourceLayer: SourceLayerShape | SourceLayerXObjectImage

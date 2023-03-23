@@ -1,5 +1,5 @@
-import type { Defined } from '../../typings/helpers'
-import type { RawFillGradient } from '../../typings/source'
+import type { Defined } from '../../typings/helpers.js'
+import type { RawFillGradient } from '../../typings/source/index.js'
 
 export type SourceEffectFillGradientOptions = {
   effect: RawFillGradient

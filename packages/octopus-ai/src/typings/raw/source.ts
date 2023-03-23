@@ -1,4 +1,4 @@
-import type { RawArtboardEntry } from './artboard'
+import type { RawArtboardEntry } from './artboard.js'
 
 export type RawSourceRoot = {
   OCProperties?: RawSourceRootOcProperties | null

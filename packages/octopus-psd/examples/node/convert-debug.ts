@@ -1,5 +1,4 @@
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
@@ -7,9 +6,9 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import kebabCase from 'lodash/kebabCase.js'
 
-import { OctopusPSDConverter, DebugExporter, PSDFileReader } from '../../src/index.js'
-import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 import { renderOctopus } from './utils/render.js'
+import { createConverter, DebugExporter, PSDFileReader } from '../../src/index-node.js'
+import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 
 type ConvertAllOptions = {
   shouldRender?: boolean
@@ -27,14 +26,12 @@ type ConvertedComponent = {
 
 dotenv.config()
 
-const converter = new OctopusPSDConverter()
-
 async function convertDesign({
   filePath,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertAllOptions): Promise<void> {
   const designId = `${timestamp()}-${kebabCase(path.basename(filePath, '.psd'))}`
-  const tempDir = path.join(fileURLToPath(new URL(import.meta.url)), '../../../../', 'workdir')
+  const tempDir = new URL('../../../workdir', import.meta.url).pathname
   const exporter = new DebugExporter({ tempDir, id: designId })
 
   exporter.on('octopus:component', async (component: ConvertedComponent) => {
@@ -58,11 +55,12 @@ async function convertDesign({
   })
 
   const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
-  const sourceDesign = await reader.sourceDesign
+  const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
     return
   }
+  const converter = createConverter()
   converter.convertDesign({ exporter, sourceDesign })
   await exporter.completed()
 }

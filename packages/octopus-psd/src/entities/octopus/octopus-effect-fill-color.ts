@@ -1,7 +1,7 @@
 import { convertColor } from '../../utils/convert.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceColor } from '../../typings/source'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceColor } from '../../typings/source.js'
 
 type OctopusFillOptions = {
   color: SourceColor | null

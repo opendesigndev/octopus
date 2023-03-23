@@ -2,16 +2,16 @@ import fsp from 'fs/promises'
 import os from 'os'
 import path from 'path'
 
-import { JSONFromTypedArray } from '@opendesign/octopus-common/dist/utils/common'
+import { JSONFromTypedArray } from '@opendesign/octopus-common/dist/utils/common.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { SourceDesign } from '../../../../entities/source/source-design'
-import { unzipArray } from '../unzip'
+import { SourceDesign } from '../../../../entities/source/source-design.js'
+import { unzipArray } from '../unzip.js'
 
-import type { ArrayBuffersSourceTree } from '../../../../../src/typings'
-import type { RawSourceInteractions } from '../../../../entities/source/source-interactions'
-import type { RawSourceManifest } from '../../../../entities/source/source-manifest'
-import type { RawArtboardLike, RawResources } from '../../../../typings/source'
+import type { ArrayBuffersSourceTree } from '../../../../../src/typings/index.js'
+import type { RawSourceInteractions } from '../../../../entities/source/source-interactions.js'
+import type { RawSourceManifest } from '../../../../entities/source/source-manifest.js'
+import type { RawArtboardLike, RawResources } from '../../../../typings/source/index.js'
 import type { UnzipFileInfo } from 'fflate'
 
 type XDFileReaderOptions = {

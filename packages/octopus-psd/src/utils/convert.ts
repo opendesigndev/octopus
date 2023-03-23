@@ -5,9 +5,9 @@ import { UnitFloatType } from '@webtoon/psd-ts'
 import BLEND_MODES from './blend-modes.js'
 import { DEFAULTS } from './defaults.js'
 
-import type { Octopus } from '../typings/octopus'
-import type { RawOffset } from '../typings/raw'
-import type { SourceBounds, SourceColor, SourceVectorXY } from '../typings/source'
+import type { Octopus } from '../typings/octopus.js'
+import type { RawOffset } from '../typings/raw/index.js'
+import type { SourceBounds, SourceColor, SourceVectorXY } from '../typings/source.js'
 
 export function convertBlendMode(blendMode: keyof typeof BLEND_MODES | undefined): Octopus['BlendMode'] {
   return typeof blendMode === 'string' && blendMode in BLEND_MODES

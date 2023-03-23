@@ -1,12 +1,12 @@
-import { getMapped } from '@opendesign/octopus-common/dist/utils/common'
+import { getMapped } from '@opendesign/octopus-common/dist/utils/common.js'
 
-import { SourceLayerContainer } from '../entities/source/source-layer-container'
-import { SourceLayerShape } from '../entities/source/source-layer-shape'
-import { SourceLayerText } from '../entities/source/source-layer-text'
-import { logger } from '../services'
+import { SourceLayerContainer } from '../entities/source/source-layer-container.js'
+import { SourceLayerShape } from '../entities/source/source-layer-shape.js'
+import { SourceLayerText } from '../entities/source/source-layer-text.js'
+import { logger } from '../services/index.js'
 
-import type { SourceLayerParent } from '../entities/source/source-layer-common'
-import type { RawLayer, RawLayerShape, RawLayerContainer, RawLayerText, RawSlice } from '../typings/raw'
+import type { SourceLayerParent } from '../entities/source/source-layer-common.js'
+import type { RawLayer, RawLayerShape, RawLayerContainer, RawLayerText, RawSlice } from '../typings/raw/index.js'
 
 export type SourceLayer = SourceLayerContainer | SourceLayerShape | SourceLayerText
 

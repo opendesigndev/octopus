@@ -1,9 +1,9 @@
-import { convertColor } from '../../utils/convert.js'
 import { OctopusEffectBase } from './octopus-effect-base.js'
+import { convertColor } from '../../utils/convert.js'
 
-import type { Octopus } from '../../typings/octopus'
-import type { SourceEffectSatin } from '../source/source-effect-satin'
-import type { OctopusLayerBase } from './octopus-layer-base'
+import type { OctopusLayerBase } from './octopus-layer-base.js'
+import type { Octopus } from '../../typings/octopus.js'
+import type { SourceEffectSatin } from '../source/source-effect-satin.js'
 
 type OctopusEffectSatinOptions = {
   parentLayer: OctopusLayerBase

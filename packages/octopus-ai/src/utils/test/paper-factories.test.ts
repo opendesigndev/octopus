@@ -1,4 +1,6 @@
-import { createPath, createPoint, createSegment } from '../paper-factories'
+import { describe, expect, it } from 'vitest'
+
+import { createPath, createPoint, createSegment } from '../paper-factories.js'
 
 describe('utils/paper-factories', () => {
   describe('create-point', () => {
