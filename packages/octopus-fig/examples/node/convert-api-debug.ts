@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 
 import { renderOctopus } from './utils/render.js'
-import { createConverter, DebugExporter, SourceApiReader } from '../../src/index-node.js'
+import { createConverter, DebugExporter, SourceApiReader } from '../../release/index.js'
 
 type ConvertDesignOptions = {
   designId: string
