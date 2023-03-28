@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/octopus-psd",
-  "version": "3.1.0-rc.7",
+  "version": "3.1.0-rc.12",
   "description": "Octopus PSD converter, converts .psd files to Octopus 3+ format.",
   "license": "Apache-2.0",
   "scripts": {

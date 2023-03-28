@@ -7,6 +7,10 @@ const RELEASE_DIR = './release'
 
 const RELEASE_PROPS = {
   files: [
+    // types
+    'index-node.d.ts',
+    'index-web.d.ts',
+
     // es, node
     'index.mjs',
     'index.d.mts',
