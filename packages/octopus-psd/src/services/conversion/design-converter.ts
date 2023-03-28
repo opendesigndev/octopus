@@ -117,7 +117,7 @@ export class DesignConverter {
     })
   }
 
-  private _exportTrackingService(trackingService?: TrackingService): Promise<string> | undefined {
+  private _exportStatistics(trackingService?: TrackingService): Promise<string> | undefined {
     if (!trackingService) return
     return this._exporter?.exportStatistics?.(trackingService?.statistics)
   }
@@ -125,7 +125,7 @@ export class DesignConverter {
   private async _exportManifest(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await this._octopusConverter.benchmarkAsync(() => this.octopusManifest.convert())
     trackingService?.collectManifestFeatures(manifest)
-    const trackingServicePath = await this._exportTrackingService(trackingService)
+    const trackingServicePath = await this._exportStatistics(trackingService)
 
     if (!trackingServicePath) {
       await this._exporter?.exportManifest?.({ manifest, time })
@@ -134,11 +134,11 @@ export class DesignConverter {
 
     // by default typescript does not check for excess types
     // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
-    const manifestWithStatiscsReference = { ...manifest, statistics: trackingServicePath }
+    const manifestWithStaticsReference = { ...manifest, statistics: trackingServicePath }
 
-    await this._exporter?.exportManifest?.({ manifest: manifestWithStatiscsReference, time })
+    await this._exporter?.exportManifest?.({ manifest: manifestWithStaticsReference, time })
 
-    return manifestWithStatiscsReference
+    return manifestWithStaticsReference
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
@@ -172,9 +172,6 @@ export class DesignConverter {
     clearInterval(manifestInterval)
     if (this._trackingService) {
       this._trackingService.collectLayerFeatures(components)
-      this._trackingService.collectSourceFeatures(
-        this._sourceDesign.raw.children.map((child) => child.additionalProperties)
-      )
       this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
     }
 

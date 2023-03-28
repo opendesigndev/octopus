@@ -84,12 +84,11 @@ export class OctopusManifest {
     return this._octopusConverter.pkg.manifestSpecVersion
   }
 
-  getMeta(statistics?: Record<string, number>): Manifest['OctopusManifestMeta'] {
+  getMeta(): Manifest['OctopusManifestMeta'] {
     const converterVersion = this._octopusConverter.pkg.version
 
     return {
       converterVersion,
-      ...(statistics ? { statistics } : null),
     }
   }
 
