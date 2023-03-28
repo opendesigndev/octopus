@@ -117,28 +117,31 @@ export class DesignConverter {
     })
   }
 
-  private _exportStatistics(trackingService?: TrackingService): Promise<string> | undefined {
-    if (!trackingService) return
-    return this._exporter?.exportStatistics?.(trackingService?.statistics)
+  private _exportStatistics(): Promise<string> | undefined {
+    if (!this._trackingService) {
+      throw new Error('Tracking service is not initialized')
+    }
+    return this._exporter?.exportStatistics?.(this._trackingService.statistics)
   }
 
-  private async _exportManifest(trackingService?: TrackingService): Promise<Manifest['OctopusManifest']> {
+  private async _exportManifest({ isFinal = false } = {}): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await this._octopusConverter.benchmarkAsync(() => this.octopusManifest.convert())
-    trackingService?.collectManifestFeatures(manifest)
-    const trackingServicePath = await this._exportStatistics(trackingService)
 
-    if (!trackingServicePath) {
+    if (!isFinal || !this._trackingService) {
       await this._exporter?.exportManifest?.({ manifest, time })
       return manifest
     }
 
+    this._trackingService.collectManifestFeatures(manifest)
+    const statisticsPath = await this._exportStatistics()
+
     // by default typescript does not check for excess types
     // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
-    const manifestWithStaticsReference = { ...manifest, statistics: trackingServicePath }
+    const manifestWithStatisticsReference = { ...manifest, ...(statisticsPath ? { statistics: statisticsPath } : null) }
 
-    await this._exporter?.exportManifest?.({ manifest: manifestWithStaticsReference, time })
+    await this._exporter?.exportManifest?.({ manifest: manifestWithStatisticsReference, time })
 
-    return manifestWithStaticsReference
+    return manifestWithStatisticsReference
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
@@ -175,7 +178,7 @@ export class DesignConverter {
       this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
     }
 
-    const manifest = await this._exportManifest(this._trackingService)
+    const manifest = await this._exportManifest({ isFinal: true })
 
     /** Trigger finalizer */
     this._exporter?.finalizeExport?.()
