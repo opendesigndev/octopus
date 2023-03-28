@@ -1,7 +1,7 @@
 {
   "id": "41-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 500,
     "height": 500
@@ -1036,7 +1036,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1046,10 +1046,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h50v50h-50z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 50,
+              "y0": 0,
+              "y1": 50
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1493,7 +1495,7 @@
             "effects": [],
             "shape": {
               "path": {
-                "type": "PATH",
+                "type": "RECTANGLE",
                 "visible": false,
                 "transform": [
                   1,
@@ -1503,10 +1505,12 @@
                   0,
                   0
                 ],
-                "meta": {
-                  "sourceShape": "RECTANGLE"
-                },
-                "geometry": "M0,0h66.4088v54.2024h-66.4088z"
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 66.41,
+                  "y0": 0,
+                  "y1": 54.2
+                }
               },
               "fillRule": "NON_ZERO",
               "fills": [

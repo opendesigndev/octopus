@@ -1,7 +1,7 @@
 {
   "id": "106-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 4374,
     "height": 2475
@@ -1569,7 +1569,7 @@
               "effects": [],
               "shape": {
                 "path": {
-                  "type": "PATH",
+                  "type": "RECTANGLE",
                   "visible": true,
                   "transform": [
                     1,
@@ -1579,10 +1579,12 @@
                     0,
                     0
                   ],
-                  "meta": {
-                    "sourceShape": "RECTANGLE"
-                  },
-                  "geometry": "M0,0h249v323h-249z"
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 249,
+                    "y0": 0,
+                    "y1": 323
+                  }
                 },
                 "fillRule": "NON_ZERO",
                 "fills": [
@@ -1768,7 +1770,7 @@
               "effects": [],
               "shape": {
                 "path": {
-                  "type": "PATH",
+                  "type": "RECTANGLE",
                   "visible": true,
                   "transform": [
                     1,
@@ -1778,10 +1780,12 @@
                     0,
                     0
                   ],
-                  "meta": {
-                    "sourceShape": "RECTANGLE"
-                  },
-                  "geometry": "M0,0h413v300h-413z"
+                  "rectangle": {
+                    "x0": 0,
+                    "x1": 413,
+                    "y0": 0,
+                    "y1": 300
+                  }
                 },
                 "fillRule": "NON_ZERO",
                 "fills": [
@@ -4275,7 +4279,7 @@
             "effects": [],
             "shape": {
               "path": {
-                "type": "PATH",
+                "type": "RECTANGLE",
                 "visible": true,
                 "transform": [
                   1,
@@ -4285,10 +4289,12 @@
                   0,
                   0
                 ],
-                "meta": {
-                  "sourceShape": "RECTANGLE"
-                },
-                "geometry": "M0,0h555v329h-555z"
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 555,
+                  "y0": 0,
+                  "y1": 329
+                }
               },
               "fillRule": "NON_ZERO",
               "fills": [
@@ -4619,7 +4625,7 @@
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -4629,10 +4635,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h555v329h-555z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 555,
+                          "y0": 0,
+                          "y1": 329
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [

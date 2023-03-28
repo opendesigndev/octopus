@@ -92,7 +92,8 @@ export class OctopusPath {
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
     if (isParentBoolOperation(sourceLayer)) return false // issue with rectangles inside boolean operations, act as they are just Path
-    return sourceLayer.shapeType === 'RECTANGLE' && !sourceLayer.cornerRadii
+    const hasCornerRadii = sourceLayer.cornerRadii?.some((radii) => radii > 0)
+    return sourceLayer.shapeType === 'RECTANGLE' && !hasCornerRadii
   }
 
   private _getPathRectangle({ sourceLayer, isTopLayer }: SourceLayerOptions): Octopus['PathRectangle'] {

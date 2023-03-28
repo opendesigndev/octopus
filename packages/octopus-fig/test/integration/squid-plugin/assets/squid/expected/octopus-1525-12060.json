@@ -1340,7 +1340,7 @@
                   "effects": [],
                   "shape": {
                     "path": {
-                      "type": "PATH",
+                      "type": "RECTANGLE",
                       "visible": true,
                       "transform": [
                         1,
@@ -1350,10 +1350,12 @@
                         0,
                         0
                       ],
-                      "meta": {
-                        "sourceShape": "RECTANGLE"
-                      },
-                      "geometry": "M0,0h200v174h-200z"
+                      "rectangle": {
+                        "x0": 0,
+                        "x1": 200,
+                        "y0": 0,
+                        "y1": 174
+                      }
                     },
                     "fillRule": "NON_ZERO",
                     "fills": [

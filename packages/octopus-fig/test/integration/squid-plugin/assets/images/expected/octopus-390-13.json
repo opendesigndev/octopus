@@ -1,7 +1,7 @@
 {
   "id": "390-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 2000,
     "height": 2000
@@ -93,7 +93,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -103,10 +103,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -173,7 +175,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -183,10 +185,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -253,7 +257,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -263,10 +267,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -333,7 +339,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -343,10 +349,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -413,7 +421,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -423,10 +431,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v200h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -493,7 +503,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -503,10 +513,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v200h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -573,7 +585,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -583,10 +595,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v200h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 200
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -653,7 +667,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -663,10 +677,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -733,7 +749,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -743,10 +759,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v400h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -813,7 +831,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -823,10 +841,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v400h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -893,7 +913,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -903,10 +923,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v400h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -973,7 +995,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -983,10 +1005,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v400h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 400
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1053,7 +1077,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1063,10 +1087,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h628v171h-628z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 628,
+              "y0": 0,
+              "y1": 171
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1133,7 +1159,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1143,10 +1169,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v800h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 800
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1213,7 +1241,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1223,10 +1251,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v800h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 800
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1293,7 +1323,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1303,10 +1333,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1412,7 +1444,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1422,10 +1454,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h343v300h-343z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 343,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1531,7 +1565,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1541,10 +1575,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h300v497h-300z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 300,
+              "y0": 0,
+              "y1": 497
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1650,7 +1686,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1660,10 +1696,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h300v400h-300z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 300,
+              "y0": 0,
+              "y1": 400
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1769,7 +1807,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1779,10 +1817,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -1888,7 +1928,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -1898,10 +1938,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h400v300h-400z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 400,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -2007,7 +2049,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -2017,10 +2059,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h159v300h-159z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 159,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [
@@ -2098,7 +2142,7 @@
         "effects": [],
         "shape": {
           "path": {
-            "type": "PATH",
+            "type": "RECTANGLE",
             "visible": true,
             "transform": [
               1,
@@ -2108,10 +2152,12 @@
               0,
               0
             ],
-            "meta": {
-              "sourceShape": "RECTANGLE"
-            },
-            "geometry": "M0,0h159v300h-159z"
+            "rectangle": {
+              "x0": 0,
+              "x1": 159,
+              "y0": 0,
+              "y1": 300
+            }
           },
           "fillRule": "NON_ZERO",
           "fills": [

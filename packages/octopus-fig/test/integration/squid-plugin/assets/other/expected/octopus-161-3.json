@@ -1,7 +1,7 @@
 {
   "id": "161-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 1000,
     "height": 753
@@ -543,7 +543,7 @@
             "effects": [],
             "shape": {
               "path": {
-                "type": "PATH",
+                "type": "RECTANGLE",
                 "visible": true,
                 "transform": [
                   1,
@@ -553,10 +553,12 @@
                   0,
                   0
                 ],
-                "meta": {
-                  "sourceShape": "RECTANGLE"
-                },
-                "geometry": "M0,0h15v890h-15z"
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 15,
+                  "y0": 0,
+                  "y1": 890
+                }
               },
               "fillRule": "NON_ZERO",
               "fills": [
@@ -654,7 +656,7 @@
             "effects": [],
             "shape": {
               "path": {
-                "type": "PATH",
+                "type": "RECTANGLE",
                 "visible": true,
                 "transform": [
                   1,
@@ -664,10 +666,12 @@
                   0,
                   0
                 ],
-                "meta": {
-                  "sourceShape": "RECTANGLE"
-                },
-                "geometry": "M0,0h200v200h-200z"
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 200,
+                  "y0": 0,
+                  "y1": 200
+                }
               },
               "fillRule": "NON_ZERO",
               "fills": [
@@ -771,7 +775,7 @@
                 "effects": [],
                 "shape": {
                   "path": {
-                    "type": "PATH",
+                    "type": "RECTANGLE",
                     "visible": true,
                     "transform": [
                       1,
@@ -781,10 +785,12 @@
                       0,
                       0
                     ],
-                    "meta": {
-                      "sourceShape": "RECTANGLE"
-                    },
-                    "geometry": "M0,0h70.5v70.5h-70.5z"
+                    "rectangle": {
+                      "x0": 0,
+                      "x1": 70.5,
+                      "y0": 0,
+                      "y1": 70.5
+                    }
                   },
                   "fillRule": "NON_ZERO",
                   "fills": [
@@ -991,7 +997,7 @@
             "effects": [],
             "shape": {
               "path": {
-                "type": "PATH",
+                "type": "RECTANGLE",
                 "visible": true,
                 "transform": [
                   1,
@@ -1001,10 +1007,12 @@
                   0,
                   0
                 ],
-                "meta": {
-                  "sourceShape": "RECTANGLE"
-                },
-                "geometry": "M0,0h150v150h-150z"
+                "rectangle": {
+                  "x0": 0,
+                  "x1": 150,
+                  "y0": 0,
+                  "y1": 150
+                }
               },
               "fillRule": "NON_ZERO",
               "fills": [
@@ -1894,7 +1902,7 @@
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -1904,10 +1912,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h50v50h-50z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 50,
+                          "y0": 0,
+                          "y1": 50
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
