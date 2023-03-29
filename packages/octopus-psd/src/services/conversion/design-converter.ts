@@ -13,6 +13,7 @@ import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { TrackingService } from '../tracking/tracking-service.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ConvertDesignResult = {
@@ -38,6 +39,7 @@ export class DesignConverter {
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _exporter: AbstractExporter | null
+  private _trackingService?: TrackingService
 
   static COMPONENT_QUEUE_PARALLELS = 5
   static COMPONENT_QUEUE_NAME = 'Component queue'
@@ -49,6 +51,7 @@ export class DesignConverter {
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter })
     this._exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
+    this._trackingService = options.trackingService
   }
 
   get designId(): string {
@@ -84,6 +87,7 @@ export class DesignConverter {
       this._convertSourceComponentSafe(componentId)
     )
     const { value, error } = result
+
     return { id: componentId, value, error, time }
   }
 
@@ -113,10 +117,31 @@ export class DesignConverter {
     })
   }
 
-  private async _exportManifest(): Promise<Manifest['OctopusManifest']> {
+  private _exportStatistics(): Promise<string> | undefined {
+    if (!this._trackingService) {
+      throw new Error('Tracking service is not initialized')
+    }
+    return this._exporter?.exportStatistics?.(this._trackingService.statistics)
+  }
+
+  private async _exportManifest({ isFinal = false } = {}): Promise<Manifest['OctopusManifest']> {
     const { time, result: manifest } = await this._octopusConverter.benchmarkAsync(() => this.octopusManifest.convert())
-    await this._exporter?.exportManifest?.({ manifest, time })
-    return manifest
+
+    if (!isFinal || !this._trackingService) {
+      await this._exporter?.exportManifest?.({ manifest, time })
+      return manifest
+    }
+
+    this._trackingService.collectManifestFeatures(manifest)
+    const statisticsPath = await this._exportStatistics()
+
+    // by default typescript does not check for excess types
+    // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
+    const manifestWithStatisticsReference = { ...manifest, ...(statisticsPath ? { statistics: statisticsPath } : null) }
+
+    await this._exporter?.exportManifest?.({ manifest: manifestWithStatisticsReference, time })
+
+    return manifestWithStatisticsReference
   }
 
   async convert(): Promise<ConvertDesignResult | null> {
@@ -148,7 +173,12 @@ export class DesignConverter {
 
     /** Final trigger of manifest save */
     clearInterval(manifestInterval)
-    const manifest = await this._exportManifest()
+    if (this._trackingService) {
+      this._trackingService.collectLayerFeatures(components)
+      this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
+    }
+
+    const manifest = await this._exportManifest({ isFinal: true })
 
     /** Trigger finalizer */
     this._exporter?.finalizeExport?.()

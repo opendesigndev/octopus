@@ -23,5 +23,9 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
   }
 
+  exportStatistics(_statistics?: object): Promise<string> {
+    throw new Error('Subclass of "Exporter" has no "exportStatistics" method implemented!')
+  }
+
   abstract getBasePath(): Promise<string>
 }
