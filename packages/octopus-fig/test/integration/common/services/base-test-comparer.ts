@@ -8,8 +8,8 @@ import { stringify } from '../utils/stringify.js'
 
 import type { Component, TestComponents } from './asset-reader.js'
 import type { Fail } from './test-runner.js'
-import type { Manifest } from '../../../../src/typings/manifest.js'
 import type { Octopus } from '../../../../src/typings/octopus.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null

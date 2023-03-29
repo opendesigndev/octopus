@@ -12,10 +12,10 @@ import type { SourceArtboard } from '../../../entities/source/source-artboard.js
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { OctopusAIConverter } from '../../../octopus-ai-converter.js'
 import type { SourceImage } from '../../../typings/index.js'
-import type { Manifest } from '../../../typings/manifest/index.js'
 import type { Octopus } from '../../../typings/octopus/index.js'
 import type { AdditionalTextData } from '../../../typings/raw/index.js'
 import type { Exporter } from '../exporters/index.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 type DesignConverterGeneralOptions = {

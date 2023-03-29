@@ -5,8 +5,8 @@ import * as url from 'url'
 import { LocalExporter } from '../../../src/services/conversion/exporters/local-exporter.js'
 import { lazyRead } from '../utils.js'
 
-import type { Manifest } from '../../../src/typings/manifest/index.js'
 import type { Octopus } from '../../../src/typings/octopus/index.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type Component<T> = {
   path: string

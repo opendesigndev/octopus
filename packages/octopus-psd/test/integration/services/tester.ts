@@ -10,8 +10,8 @@ import { stringify } from '../utils/stringify.js'
 
 import type { AssetReader, TestComponents, Component } from './asset-reader.js'
 import type { OctopusPSDConverter } from '../../../src/octopus-psd-converter.js'
-import type { Manifest } from '../../../src/typings/manifest.js'
 import type { Octopus } from '../../../src/typings/octopus.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type ComponentGroup = {
   expected: Component<Octopus['OctopusComponent']> | null

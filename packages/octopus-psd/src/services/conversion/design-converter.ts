@@ -10,10 +10,13 @@ import { logger } from '../index.js'
 import type { SourceComponent } from '../../entities/source/source-component.js'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
 import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
-import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
-import type { TrackingService } from '../tracking/tracking-service.js'
+import type {
+  ComponentConversionResult,
+  Manifest,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type { FeaturesTracker } from '@opendesign/octopus-common/dist/utils/features-tracker.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ConvertDesignResult = {
@@ -22,24 +25,13 @@ export type ConvertDesignResult = {
   images: SourceImage[]
 }
 
-export type ComponentConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
-
-export type DesignConversionResult = {
-  manifest: Manifest['OctopusManifest']
-  time: number
-}
 export class DesignConverter {
   private _designId: string
   private _octopusConverter: OctopusPSDConverter
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _exporter: AbstractExporter | null
-  private _trackingService?: TrackingService
+  private _trackingService?: FeaturesTracker
 
   static COMPONENT_QUEUE_PARALLELS = 5
   static COMPONENT_QUEUE_NAME = 'Component queue'

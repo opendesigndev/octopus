@@ -1,5 +1,7 @@
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
-
+import type {
+  ComponentConversionResult,
+  DesignConversionResult,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 /**
  * Minimalistic exporter used for web build
  */

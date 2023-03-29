@@ -15,7 +15,10 @@ import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
 import type { AbstractExporter } from './abstract-exporter.js'
-import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type {
+  ComponentConversionResult,
+  DesignConversionResult,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type DebugExporterOptions = {

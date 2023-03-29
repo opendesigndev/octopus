@@ -13,6 +13,7 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
+    "@opendesign/manifest-ts": "3.0.1",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/lodash": "^4.14.178",
     "@types/uuid": "^8.3.1",

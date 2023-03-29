@@ -10,9 +10,9 @@ import { cleanManifest } from '../../common/utils/asset-cleaner.js'
 import { stringify } from '../../common/utils/stringify.js'
 
 import type { OctopusFigConverter } from '../../../../src/octopus-fig-converter.js'
-import type { Manifest } from '../../../../src/typings/manifest.js'
 import type { Octopus } from '../../../../src/typings/octopus.js'
 import type { TestDirectoryData } from '../../common/services/asset-reader.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type TestAssets = {
   components: Octopus['OctopusComponent'][]

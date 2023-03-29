@@ -1,18 +1,15 @@
-import { isObject, keys } from '@opendesign/octopus-common/dist/utils/common.js'
+import { isObject, keys } from './common.js'
+import { escapeRegExp } from './text.js'
 
-import { escapeRegExp } from '../../utils/text.js'
+import type { ComponentConversionResult, Manifest, Octopus } from '../typings/octopus-common/index.js'
 
-import type { Manifest } from '../../typings/manifest.js'
-import type { Octopus } from '../../typings/octopus.js'
-import type { ComponentConversionResult } from '../conversion/design-converter.js'
-
-type TrackingServiceOptions = {
+type FeaturesTrackerOptions = {
   excludedPaths: RegExp[]
   onlyCountByKeys: RegExp[]
   sourceIncludedPaths?: RegExp[]
 }
 
-export class TrackingService {
+export class FeaturesTracker {
   private _excludedPaths: RegExp[]
   private _onlyCountByKeys: RegExp[] = []
   private _featuresSummary: Record<string, number> = {}
@@ -40,16 +37,15 @@ export class TrackingService {
 
   static DEFAULT_ONLY_COUNT_BY_KEYS: RegExp[] = [new RegExp('text.value')]
 
-  static withDefaultPathKeys(): TrackingService {
-    return new TrackingService({
-      excludedPaths: TrackingService.DEFAULT_EXCLUDED_PATHS,
-      onlyCountByKeys: TrackingService.DEFAULT_ONLY_COUNT_BY_KEYS,
-      //just an example, feel free to change this how you want
-      sourceIncludedPaths: [RegExp('lyid.value')],
+  static withDefaultPathKeys(): FeaturesTracker {
+    return new FeaturesTracker({
+      excludedPaths: FeaturesTracker.DEFAULT_EXCLUDED_PATHS,
+      onlyCountByKeys: FeaturesTracker.DEFAULT_ONLY_COUNT_BY_KEYS,
+      sourceIncludedPaths: [],
     })
   }
 
-  constructor({ excludedPaths, onlyCountByKeys, sourceIncludedPaths }: TrackingServiceOptions) {
+  constructor({ excludedPaths, onlyCountByKeys, sourceIncludedPaths }: FeaturesTrackerOptions) {
     this._excludedPaths = excludedPaths
     this._onlyCountByKeys = onlyCountByKeys
     this._sourceIncludedPaths = sourceIncludedPaths ?? []
@@ -178,10 +174,10 @@ export class TrackingService {
       layer.layers.forEach((layer) => this._collectLayerFeatures(layer))
     }
 
-    this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.layers`)
+    this._addKey(`${FeaturesTracker.LAYER_KEY_PREFIX}.layers`)
 
     if ('mask' in layer) {
-      this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.masks`)
+      this._addKey(`${FeaturesTracker.LAYER_KEY_PREFIX}.masks`)
       this._collectLayerFeatures(layer.mask)
     }
 
@@ -194,7 +190,7 @@ export class TrackingService {
         return
       }
 
-      this._addKey(`${TrackingService.LAYER_KEY_PREFIX}.${key}`)
+      this._addKey(`${FeaturesTracker.LAYER_KEY_PREFIX}.${key}`)
     })
   }
 
@@ -212,7 +208,7 @@ export class TrackingService {
       }
 
       const keyPrefixGlue = key.startsWith('.') ? '' : '.'
-      this._addKey(`${TrackingService.SOURCE_KEY_PREFIX}${keyPrefixGlue}${key}`)
+      this._addKey(`${FeaturesTracker.SOURCE_KEY_PREFIX}${keyPrefixGlue}${key}`)
     })
   }
 
@@ -234,12 +230,12 @@ export class TrackingService {
         return
       }
 
-      this._addKey(`${TrackingService.MANIFEST_KEY_PREFIX}.${key}`)
+      this._addKey(`${FeaturesTracker.MANIFEST_KEY_PREFIX}.${key}`)
     })
   }
 
   registerSpecificFeatures(key: string) {
-    this._addKey(`${TrackingService.CUSTOM_KEY_PREFIX}.${key}`)
+    this._addKey(`${FeaturesTracker.CUSTOM_KEY_PREFIX}.${key}`)
   }
 
   get statistics(): Record<string, number> {

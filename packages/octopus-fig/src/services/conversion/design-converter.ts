@@ -11,7 +11,6 @@ import { logger } from '../../services/index.js'
 import { getRole } from '../../utils/source.js'
 
 import type { DesignConverterOptions, OctopusFigConverter } from '../../octopus-fig-converter.js'
-import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { RawDesign } from '../../typings/raw/design.js'
 import type { RawLayerContainer } from '../../typings/raw/layer.js'
@@ -25,18 +24,15 @@ import type {
   ResolvedFill,
   ResolvedPreview,
 } from '@opendesign/figma-parser'
+import type {
+  ComponentConversionResult,
+  Manifest,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 import type { EventEmitter } from 'eventemitter3'
 
 export type ImageSizeMap = { [key: string]: ImageSize }
-
-export type ComponentConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
 
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined

@@ -4,8 +4,8 @@ import { MANIFEST_NAME } from '../../../../src/utils/const.js'
 import { getDirsFromDir, getFilesFromDir } from '../../../../src/utils/files.js'
 import { lazyRead } from '../utils/lazy-read.js'
 
-import type { Manifest } from '../../../../src/typings/manifest.js'
 import type { Octopus } from '../../../../src/typings/octopus.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type Component<T> = {
   path: string

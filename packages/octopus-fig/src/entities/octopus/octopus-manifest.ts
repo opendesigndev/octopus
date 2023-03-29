@@ -6,10 +6,10 @@ import { convertId } from '../../utils/convert.js'
 import { getRole } from '../../utils/source.js'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter.js'
-import type { Manifest } from '../../typings/manifest.js'
 import type { SourceComponent } from '../source/source-component.js'
 import type { SourceDesign } from '../source/source-design.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type OctopusManifestOptions = {

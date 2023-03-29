@@ -1,5 +1,7 @@
-import type { Manifest } from '../../typings/manifest.js'
-import type { ComponentConversionResult } from '../conversion/design-converter.js'
+import type {
+  ComponentConversionResult,
+  Manifest,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {

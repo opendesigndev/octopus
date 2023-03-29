@@ -1,14 +1,14 @@
 import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { pathRelative } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
-import { pathRelative } from '../../utils/fs-path.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../../octopus-psd-converter.js'
-import type { Manifest } from '../../typings/manifest.js'
 import type { RawEngineData, RawNodeChildWithProps, RawParsedPsd } from '../../typings/raw/index.js'
 import type { SourceBounds } from '../../typings/source.js'
 import type { SourceComponent } from '../source/source-component.js'
 import type { SourceDesign } from '../source/source-design.js'
+import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type OctopusManifestOptions = {
   sourceDesign: SourceDesign

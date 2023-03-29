@@ -11,11 +11,13 @@ import { MANIFEST_NAME } from '../../../utils/const.js'
 import { makeDir, saveFile } from '../../../utils/files.js'
 import { stringify } from '../../../utils/misc.js'
 
-import type { Manifest } from '../../../typings/manifest.js'
 import type { RawDesign, RawLayerContainer } from '../../../typings/raw/index.js'
-import type { ComponentConversionResult } from '../../conversion/design-converter.js'
 import type { AbstractExporter } from '../abstract-exporter.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type {
+  ComponentConversionResult,
+  Manifest,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type DebugExporterOptions = {
