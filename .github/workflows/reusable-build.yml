@@ -39,4 +39,4 @@ jobs:
         run: |
           SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`
           yarn workspace ${{ inputs.package-name }} version --no-git-tag-version --new-version "${{ inputs.base-version }}-experimental-$GITHUB_HEAD_REF-$SHORT_SHA"
-          yarn workspace ${{ inputs.package-name }} publish --tag experimental
+          yarn workspace ${{ inputs.package-name }} release:experimental
