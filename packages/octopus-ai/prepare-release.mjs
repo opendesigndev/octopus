@@ -6,22 +6,9 @@ import { default as pkg } from './package.json' assert { type: 'json' }
 const RELEASE_DIR = './release'
 
 const RELEASE_PROPS = {
-  files: [
-    // types
-    'index-node.d.ts',
-    'index-web.d.ts',
-    // es, node
-    'index.mjs',
-    'index.d.mts',
-
-    // es, web
-    'web.mjs',
-    'web.d.mts',
-
-    // cjs
-    'index.js',
-    'index.d.ts',
-  ],
+  // As we have custom release process, we need to make sure that all the files from release dir are included in the package.
+  // Files property in package.json whitelists files that are included in the package. We want all the files from release dir.
+  files: undefined,
   module: './index.mjs',
   main: './index.js',
   exports: undefined,
