@@ -4,7 +4,7 @@ import path from 'path'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from 'uuid'
 
-import { createConverter, LocalExporter, SourceApiReader } from '../../release/index.js'
+import { createConverter, LocalExporter, SourceApiReader } from '../../src/index-node.js'
 
 dotenv.config()
 
