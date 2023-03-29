@@ -1,0 +1,14 @@
+name: XD build & publish
+
+on:
+  pull_request:
+    paths:
+      - 'packages/octopus-xd/**'
+
+jobs:
+  build-octopus-xd:
+    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@publish-npm
+    with:
+      package-name: '@opendesign/octopus-xd'
+      base-version: '3.0.0'
+    secrets: inherit

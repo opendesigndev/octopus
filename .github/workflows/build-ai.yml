@@ -1,0 +1,13 @@
+name: Illustrator build & publish
+
+on:
+  pull_request:
+    paths:
+      - 'packages/octopus-ai/**'
+
+jobs:
+  build-octopus-ai:
+    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@publish-npm
+    with:
+      package-name: '@opendesign/octopus-ai'
+    secrets: inherit
