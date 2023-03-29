@@ -10,7 +10,8 @@
     "clean-build": "rimraf ./dist && yarn run build",
     "watch": "tsc -w",
     "test": "yarn jest",
-    "types:check": "tsc --noEmit"
+    "types:check": "tsc --noEmit",
+    "release:experimental": "yarn publish --tag experimental"
   },
   "dependencies": {
     "@opendesign/octopus-ts": "3.0.1",
