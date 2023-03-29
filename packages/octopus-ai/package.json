@@ -30,7 +30,7 @@
   "dependencies": {
     "@opendesign/illustrator-parser-pdfcpu": "1.1.2",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.32",
+    "@opendesign/octopus-common": "3.0.0-rc.34",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/node": "*",
     "dotenv": "16.0.0",
