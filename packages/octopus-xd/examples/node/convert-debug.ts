@@ -90,7 +90,7 @@ async function convert() {
     await convertAll({
       filename,
       render: process.env.CONVERT_RENDER === 'true',
-      outputDir: path.join(__dirname, '../../', 'workdir'),
+      outputDir: new URL('../../../workdir', import.meta.url).pathname,
     })
   }
 }
