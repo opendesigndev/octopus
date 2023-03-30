@@ -8,8 +8,8 @@ import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/
 import type { BitmapReader } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
 type AIFileReaderOptions = {
-  /** Path to the .ai file. */
-  path: string
+  /** Uint8Array representation of converted .ai file */
+  file: Uint8Array
 }
 
 export type Metadata = {
@@ -33,7 +33,7 @@ export class AIFileReader extends AIFileReaderCommon {
     return new Uint8Array(buffer)
   }
 
-  private _promisedData: Promise<Uint8Array>
+  private _file: Uint8Array
   protected _images: Record<number, BitmapReader>
 
   /**
@@ -43,13 +43,12 @@ export class AIFileReader extends AIFileReaderCommon {
    */
   constructor(options: AIFileReaderOptions) {
     super()
-    const promisedData = AIFileReader.readFile(options.path)
 
-    this._promisedData = promisedData
+    this._file = options.file
   }
 
   protected async _getSourceData(): Promise<RawSourceData> {
-    const data = await this._promisedData
+    const data = this._file
     const ctx = await WASMContext(data)
     this._images = ctx.Bitmaps
     const version = ctx.aiFile.Version

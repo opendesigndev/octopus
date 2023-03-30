@@ -17,12 +17,6 @@ export type RawSourceData = {
  * Reader that converts Adobe Illustrator file into `SourceDesign` object.
  */
 export abstract class AIFileReaderCommon {
-  protected _sourceDesign: Promise<SourceDesign>
-
-  protected async _initSourceDesign(): Promise<SourceDesign> {
-    return this._fromSourceTree(await this._createSourceTree())
-  }
-
   protected abstract _getSourceData(file?: string): Promise<RawSourceData>
 
   /**
