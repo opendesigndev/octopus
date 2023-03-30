@@ -59,7 +59,7 @@ async function convertDesign({
     console.log(`\n${chalk.yellow(`Statistics:`)} file://${statistics}\n\n`)
   })
 
-  const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
+  const reader = await PSDFileReader.withRenderer({ path: filePath })
   const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')
