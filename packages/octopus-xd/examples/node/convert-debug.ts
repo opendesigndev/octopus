@@ -1,4 +1,3 @@
-import fs from 'fs/promises'
 import path from 'path'
 
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
@@ -74,9 +73,10 @@ ${images.map((image) => `    file://${image}`).join('\n')}`)
     file://${manifest}`)
   })
 
-  const file = await fs.readFile(options.filename)
-  const reader = new XDFileReader({ file, storeAssetsOnFs: true })
-  const sourceDesign = await reader.sourceDesign
+  const reader = new XDFileReader({ path: options.filename, storeAssetsOnFs: true })
+  const sourceDesign = await reader.getSourceDesign({
+    ids: ['43f6318e-2c94-4764-8849-f59b8e6b77a4', 'd7aff3d8-8d6d-462a-92dc-73edc53cbf20'],
+  })
   const converter = createConverter({ sourceDesign })
   converter.convertDesign({ exporter })
   await exporter.completed()

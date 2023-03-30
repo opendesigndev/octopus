@@ -60,6 +60,7 @@ async function convertDesign({
   })
 
   const reader = await PSDFileReader.withRenderer({ path: filePath })
+
   const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {
     console.error('Creating SourceDesign Failed')

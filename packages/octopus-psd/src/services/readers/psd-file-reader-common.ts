@@ -12,18 +12,22 @@ import type { SourceImage } from '../../entities/source/source-design.js'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
 import type { NodeChild, Layer, Group } from '@webtoon/psd-ts'
 
-type NamedArtboard = {
-  id: number
+type NamedPagedId = {
+  id: string
   name: string
 }
 
-type FileMeta = {
+export type DesignMeta = {
   designName: string
   content: {
-    topLevelArtboards: NamedArtboard[]
+    topLevelArtboards: NamedPagedId[]
+    localComponents: NamedPagedId[]
+    remoteComponents: {
+      name: string
+      id: string
+    }[]
   }
 }
-
 export type ConvertImageOptions = {
   buff: Uint8ClampedArray | Uint8Array
   width: number
@@ -296,9 +300,9 @@ export abstract class PSDFileReaderCommon {
   }
 
   /**
-   * Returns `FileMeta` with list of Artboards and designName
+   * Returns `DesignMeta` with list of Artboards and designName
    */
-  async readFileMeta(): Promise<FileMeta | null> {
+  async getDesignMeta(): Promise<DesignMeta | null> {
     const psd = await this._getPsd()
     if (!psd) {
       return null
@@ -307,14 +311,16 @@ export abstract class PSDFileReaderCommon {
     return {
       designName: psd.name,
       content: {
-        topLevelArtboards: psd.children.reduce<NamedArtboard[]>((namedArtboards, child) => {
+        topLevelArtboards: psd.children.reduce<NamedPagedId[]>((namedArtboards, child) => {
           if (isArtboard(child)) {
-            const namedArtboard = { name: child.name, id: child.additionalProperties?.lyid?.value as number }
+            const namedArtboard = { name: child.name, id: String(child.additionalProperties?.lyid?.value) }
             namedArtboards.push(namedArtboard)
           }
 
           return namedArtboards
         }, []),
+        localComponents: [],
+        remoteComponents: [],
       },
     }
   }
