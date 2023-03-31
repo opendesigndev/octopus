@@ -329,7 +329,8 @@ export abstract class PSDFileReaderCommon {
    * Returns `SourceDesign` instance built from given design path using `@avocode/psd-parser`. It encapsulates all the design assets required by converter as input.
    * @returns {SourceDesign | null} Returns `SourceDesign` instance or `null` if parsing was not successful.
    */
-  async getSourceDesign(componentIds?: number[]): Promise<SourceDesign | null> {
+  async getSourceDesign({ ids }: { ids?: number[] } = {}): Promise<SourceDesign | null> {
+    const componentIds = ids?.map((id) => Number(id))
     const designId = this.designId
     const psd = await this._getPsd()
 
