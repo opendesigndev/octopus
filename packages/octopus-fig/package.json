@@ -12,6 +12,8 @@
     "release": "yarn bundle && yarn release:publish",
     "release:prepare": "node ./prepare-release.mjs",
     "release:publish": "yarn publish ./release --non-interactive --ignore-scripts",
+    "release:publish:experimental": "yarn publish ./release --non-interactive --ignore-scripts --tag experimental",
+    "release:experimental": "yarn bundle && yarn release:publish:experimental",
     "clean": "rimraf ./node_modules ./dist ./workdir ./test/**/report ./release/*",
     "clean:workdir": "rimraf ./workdir/*",
     "convert:api:debug": "ts-node ./examples/node/convert-api-debug.ts",

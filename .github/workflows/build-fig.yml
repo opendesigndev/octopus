@@ -1,0 +1,14 @@
+name: Figma build & publish
+
+on:
+  pull_request:
+    paths:
+      - 'packages/octopus-fig/**'
+
+jobs:
+  build-octopus-fig:
+    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@publish-npm
+    with:
+      package-name: '@opendesign/octopus-fig'
+      base-version: '3.0.0'
+    secrets: inherit
