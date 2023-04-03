@@ -59,7 +59,7 @@ function App() {
         document.execCommand('copy')
         const copyResult = await copyPromise
         console.timeEnd('ClipboardData')
-        const isError = Boolean(!copyResult)
+        const isError = !copyResult
         const message = isError
           ? 'Copy was unsuccessful, try again in desktop app'
           : 'Copy was successful, paste into Ceros Studio'

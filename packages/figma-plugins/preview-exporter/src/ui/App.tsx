@@ -2,10 +2,10 @@ import kebabCase from 'lodash/kebabCase'
 import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
-import { version } from '../../package.json'
 import logoPng from './logo.png'
 import { dispatch } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
+import { version } from '../../package.json'
 
 const getSelectionText = (selectedObjects: number): JSX.Element => {
   if (selectedObjects === 0) return <p className='disabled'>no objects selected</p>
