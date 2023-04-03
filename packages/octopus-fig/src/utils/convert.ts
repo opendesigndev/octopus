@@ -70,7 +70,7 @@ export function convertRectangle({ x, y }: SourceVector): Octopus['Rectangle'] {
 
 export function normalizeTransform(transform: number[] | null): number[] {
   if (!transform) return DEFAULTS.TRANSFORM
-  return transform.map((value) => round(value, 4))
+  return transform.map((value) => round(value, 6))
 }
 
 export function convertLinearGradientTransform(
@@ -81,7 +81,7 @@ export function convertLinearGradientTransform(
   return createMatrix(gradientTransform)
     .scale(1 / width, 1 / height)
     .invert()
-    .values.map((value) => round(value, 4))
+    .values.map((value) => round(value, 6))
 }
 
 export function convertRadialGradientTransform(
@@ -94,7 +94,7 @@ export function convertRadialGradientTransform(
     .translate(1 / 2, 1 / 2)
     .prepend(createMatrix([width, 0, 0, height, 0, 0]))
     .scale(1 / 2)
-    .values.map((value) => round(value, 4))
+    .values.map((value) => round(value, 6))
 }
 
 export function convertGradientPositions(

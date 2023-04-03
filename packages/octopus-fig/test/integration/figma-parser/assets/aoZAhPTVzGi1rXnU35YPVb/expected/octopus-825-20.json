@@ -1,7 +1,7 @@
 {
   "id": "825-20",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 140,
     "height": 76
@@ -157,8 +157,8 @@
               0,
               0,
               1,
-              13.0377,
-              8.6918
+              13.037736,
+              8.691824
             ],
             "effects": [],
             "text": {

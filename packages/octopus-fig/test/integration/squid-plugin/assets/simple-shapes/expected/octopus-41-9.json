@@ -1,7 +1,7 @@
 {
   "id": "41-9",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 115.85,
     "height": 115.85
@@ -14,12 +14,12 @@
     "opacity": 1,
     "blendMode": "NORMAL",
     "transform": [
-      0.9848,
-      0.1736,
-      -0.1736,
-      0.9848,
-      12.6161,
-      -4.7487
+      0.984808,
+      0.173648,
+      -0.173648,
+      0.984808,
+      12.61615,
+      -4.748665
     ],
     "effects": [],
     "shape": {

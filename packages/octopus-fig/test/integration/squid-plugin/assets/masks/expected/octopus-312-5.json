@@ -1,7 +1,7 @@
 {
   "id": "312-5",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 300,
     "height": 200
@@ -304,12 +304,12 @@
                     "layout": "FILL",
                     "origin": "LAYER",
                     "transform": [
-                      -54.8571,
-                      25,
-                      -50,
-                      -84,
+                      -54.857141,
+                      25.000021,
+                      -50.000042,
+                      -83.999994,
                       312,
-                      137
+                      136.999986
                     ]
                   }
                 }

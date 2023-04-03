@@ -25,20 +25,20 @@ type DebugExporterOptions = {
   designId?: string
 }
 
-export type ComponentDependencies = { images: Promise<string>[] }
+type ComponentDependencies = { images: Promise<string>[] }
 
-export const IMAGES_DIR_NAME = 'images'
-export const IMAGE_EXTNAME = '.png'
+const IMAGES_DIR_NAME = 'images'
+const IMAGE_EXTNAME = '.png'
 
-export function getOctopusFileName(id: string): string {
+function getOctopusFileName(id: string): string {
   return `${kebabCase(id)}-octopus.json`
 }
 
-export function getPreviewFileName(id: string): string {
+function getPreviewFileName(id: string): string {
   return `${kebabCase(id)}-preview${IMAGE_EXTNAME}`
 }
 
-export function getSourceFileName(id: string): string {
+function getSourceFileName(id: string): string {
   return `${kebabCase(id)}-source.json`
 }
 
