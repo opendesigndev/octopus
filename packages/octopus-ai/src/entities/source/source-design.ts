@@ -13,12 +13,12 @@ export class SourceDesign {
   private _metaData: Metadata
   private _additionalTexData: AdditionalTextData
   private _uniqueId: () => string
+  private _ids?: string[]
 
-  constructor(sourceTree: SourceTree) {
+  constructor(sourceTree: SourceTree, ids?: string[]) {
     this._uniqueId = uniqueIdFactory(0)
-    this._artboards = sourceTree.artboards.map(
-      (artboardSource) => new SourceArtboard({ artboard: artboardSource, sourceDesign: this })
-    )
+    this._ids = ids
+    this._artboards = this._initArtboards(sourceTree)
     this._images = sourceTree.images
     this._additionalTexData = sourceTree.additionalTextData
     this._metaData = sourceTree.metadata
@@ -26,6 +26,15 @@ export class SourceDesign {
 
   get metadaData(): Metadata {
     return this._metaData
+  }
+
+  private _initArtboards(sourceTree: SourceTree): SourceArtboard[] {
+    const ids = this._ids
+    const rawArtboards = ids
+      ? sourceTree.artboards.filter((artboardSource) => ids.includes(String(artboardSource.Id)))
+      : sourceTree.artboards
+
+    return rawArtboards.map((artboardSource) => new SourceArtboard({ artboard: artboardSource, sourceDesign: this }))
   }
 
   get images(): SourceImage[] {

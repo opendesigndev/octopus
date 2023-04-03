@@ -7,21 +7,8 @@ import type { SourceEntry } from '../../../entities/source/source-entry.js'
 import type { RawSourceInteractions } from '../../../entities/source/source-interactions.js'
 import type { RawSourceManifest } from '../../../entities/source/source-manifest.js'
 import type { RawArtboardEntry, RawArtboardLike, RawResources } from '../../../typings/source/index.js'
+import type { ComponentMeta, DesignMeta } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { UnzipFileInfo } from 'fflate'
-
-type NamedArtboard = {
-  id: string
-  name: string
-}
-
-export type DesignMeta = {
-  designName: string
-  content: {
-    topLevelArtboards: NamedArtboard[]
-    localComponents: NamedArtboard[]
-    remoteComponents: NamedArtboard[]
-  }
-}
 
 export abstract class XDFileReaderCommon {
   private _sourceEntry: SourceEntry
@@ -33,7 +20,7 @@ export abstract class XDFileReaderCommon {
   static IMAGES = /resources\/[a-f0-9]{32}/
   static PASTEBOARD = /pasteboard/
 
-  protected abstract _getFile(): Promise<Uint8Array>
+  protected abstract _getBuffer(): Promise<Uint8Array>
 
   private _getArtboardMeta(
     artboardLike: {
@@ -41,12 +28,12 @@ export abstract class XDFileReaderCommon {
       rawValue: RawArtboardLike
     },
     manifest: SourceManifest
-  ) {
+  ): ComponentMeta {
     if (artboardLike.path.includes('pasteboard')) {
       const manifestEntry = manifest.getArtboardEntryByPartialPath('pasteboard')
       const id = manifestEntry?.id
       if (!id) throw new Error('Artboard id not found')
-      return { id, name: manifestEntry?.name ?? '' }
+      return { id, name: manifestEntry?.name ?? '', role: 'ARTBOARD' }
     }
     const manifestEntry = manifest.getArtboardEntryByPartialPath(artboardLike.path)
     const id =
@@ -55,7 +42,7 @@ export abstract class XDFileReaderCommon {
 
     if (!id) throw new Error('Artboard id not found')
 
-    return { id, name: manifestEntry?.name ?? '' }
+    return { id, name: manifestEntry?.name ?? '', role: 'ARTBOARD' }
   }
 
   private async _getSourceEntry(): Promise<SourceEntry> {
@@ -66,26 +53,25 @@ export abstract class XDFileReaderCommon {
     return this._sourceEntry
   }
 
-  private _getDesignMetaArtboards(sourceEntry: SourceEntry, manifest: SourceManifest): NamedArtboard[] {
+  private _getMetaArtboard(sourceEntry: SourceEntry, manifest: SourceManifest) {
     const artboardLikes = sourceEntry.artboards
     return artboardLikes.map((artboardLike) => this._getArtboardMeta(artboardLike, manifest))
   }
 
   /**
-   * Returns `DesignMeta` with list of Artboards and designName
+   * Returns @DesignMeta object.
    */
   async getDesignMeta(): Promise<DesignMeta> {
     const sourceEntry = await this._getSourceEntry()
     const manifest = new SourceManifest({ rawValue: sourceEntry.manifest.rawValue })
 
-    const topLevelArtboards = this._getDesignMetaArtboards(sourceEntry, manifest)
-
     return {
-      designName: manifest.name ?? '',
-      content: {
-        topLevelArtboards,
-        localComponents: [],
-        remoteComponents: [],
+      name: manifest.name ?? '',
+      components: this._getMetaArtboard(sourceEntry, manifest),
+      pages: [],
+      origin: {
+        name: 'XD',
+        version: manifest.xdVersion ?? '0',
       },
     }
   }
@@ -137,7 +123,7 @@ export abstract class XDFileReaderCommon {
   }
 
   private async _createSourceTree(): Promise<ArrayBuffersSourceTree> {
-    const file = await this._getFile()
+    const file = await this._getBuffer()
     const targetEntries = [
       XDFileReaderCommon.ARTBOARDS,
       XDFileReaderCommon.RESOURCES,

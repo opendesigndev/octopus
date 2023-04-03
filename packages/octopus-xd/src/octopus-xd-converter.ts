@@ -74,10 +74,10 @@ export class OctopusXDConverter {
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: OctopusXDConverterOptions) {
+    this._sourceDesign = options.sourceDesign
     this._setGlobals(options)
     this._pkg = readPackageMeta()
     this._services = this._initServices()
-    this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ octopusXdConverter: this })
   }
 

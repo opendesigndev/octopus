@@ -36,7 +36,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
     this._file = options.file
   }
 
-  protected async _getSourceData(): Promise<Uint8Array> {
+  protected async _getBuffer(): Promise<Uint8Array> {
     return Promise.resolve(this._file)
   }
 

@@ -20,7 +20,7 @@ export class XDFileReader extends XDFileReaderCommon {
     return JSON.parse(this._decoder.decode(buf))
   }
 
-  protected async _getFile(): Promise<Uint8Array> {
+  protected async _getBuffer(): Promise<Uint8Array> {
     return Promise.resolve(this._file)
   }
 

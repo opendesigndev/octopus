@@ -5,7 +5,7 @@ import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
 import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
-import type { BitmapReader } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
+import type { BitmapReader, WasmContext } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
 type AIFileReaderOptions = {
   /** Uint8Array representation of converted .ai file */
@@ -26,6 +26,7 @@ export type RawSourceData = {
  * Reader that converts Adobe Illustrator file into `SourceDesign` object.
  */
 export class AIFileReader extends AIFileReaderCommon {
+  private _context: WasmContext
   static async readFile(filePath: string): Promise<Uint8Array> {
     const response = await fetch(filePath)
     const buffer = await response.arrayBuffer()
@@ -47,16 +48,32 @@ export class AIFileReader extends AIFileReaderCommon {
     this._file = options.file
   }
 
-  protected async _getSourceData(): Promise<RawSourceData> {
+  private async _getContext(): Promise<WasmContext> {
     const data = this._file
-    const ctx = await WASMContext(data)
+
+    if (!this._context) {
+      this._context = await WASMContext(data)
+    }
+
+    return this._context
+  }
+
+  protected async _getFileMeta() {
+    const ctx = await this._getContext()
+    return { version: ctx.aiFile.Version, name: ctx.aiFile.XRefTable.Title }
+  }
+
+  protected async _getSourceData(): Promise<RawSourceData> {
+    const ctx = await this._getContext()
     this._images = ctx.Bitmaps
+
     const version = ctx.aiFile.Version
     const additionalTextData = (await PrivateData(ctx)) as unknown as AdditionalTextData
 
     const artboards = (await Promise.all(
-      ArtBoardRefs(ctx).map((ref) => {
-        return ArtBoard(ctx, ref)
+      ArtBoardRefs(ctx).map(async (ref) => {
+        const artboard = await ArtBoard(ctx, ref)
+        return { ...artboard, Id: ref.idx }
       })
     )) as unknown as RawArtboardEntry[]
 

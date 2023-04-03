@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div style="width: 100px; height: 100px; border: 1px solid red;" id="xxx"></div>
-  <script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="width: 100px; height: 100px; border: 1px solid red" id="xxx"></div>
+    <script>
+      const worker = new Worker('./octopus-xd-web-worker.umd.js')
 
-    const worker = new Worker('./octopus-xd-web-worker.umd.js')
+      class OctopusXDProcessor {
+        constructor(buffer) {
+          this._msgId = 0
+          this._designIndex = this._registerFile(buffer)
+        }
 
-    class OctopusXDProcessor {
-      constructor(buffer) {
-        this._msgId = 0
-        this._designIndex = this._registerFile(buffer)
-      }
-
-      _process(type, args, moveOwnership = null) {
-        return new Promise((resolve) => {
-          const msgId = this._msgId++
-          worker.postMessage({ type, args: [msgId, ...args]}, moveOwnership)
-          const handler = ({ data }) => {
-            const { msgId: responseId, response } = Object(data)
-            if (msgId === responseId) {
-              worker.removeEventListener('message', handler)
-              resolve(response)
+        _process(type, args, moveOwnership = null) {
+          return new Promise((resolve) => {
+            const msgId = this._msgId++
+            worker.postMessage({ type, args: [msgId, ...args] }, moveOwnership)
+            const handler = ({ data }) => {
+              const { msgId: responseId, response } = Object(data)
+              if (msgId === responseId) {
+                worker.removeEventListener('message', handler)
+                resolve(response)
+              }
             }
-          }
-          worker.addEventListener('message', handler)
-        })
+            worker.addEventListener('message', handler)
+          })
+        }
+
+        _registerFile(buffer) {
+          return this._process('register-file', [buffer], [buffer])
+        }
+
+        async getArtboardsList() {
+          const index = await this._designIndex
+          return this._process('get-artboards', [index])
+        }
+
+        async parseArtboard(artboardId) {
+          const index = await this._designIndex
+          return this._process('parse-artboard', [index, artboardId])
+        }
       }
 
-      _registerFile(buffer) {
-        return this._process('register-file', [buffer], [buffer])
-      }
+      window.addEventListener('DOMContentLoaded', async () => {
+        // Check main thread lags
+        let i = 0
+        setInterval(() => {
+          xxx.style.transform = `rotate(${(i += 5)}deg)`
+        }, 30)
 
-      async getArtboardsList() {
-        const index = await this._designIndex
-        return this._process('get-artboards', [index])
-      }
+        setInterval(async () => {
+          xxx.innerHTML = Number(xxx.innerHTML || 0) + 1
 
-      async parseArtboard(artboardId) {
-        const index = await this._designIndex
-        return this._process('parse-artboard', [index, artboardId])
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', async () => {
-      // Check main thread lags
-      let i = 0
-      setInterval(() => {
-        xxx.style.transform = `rotate(${ i += 5 }deg)`
-      }, 30)
-
-      setInterval(async () => {
-        xxx.innerHTML = Number(xxx.innerHTML || 0) + 1
-
-        const buffer = await (await fetch('./file.xd')).arrayBuffer()
-        const processor = new OctopusXDProcessor(buffer)
-        console.log(await processor.getArtboardsList())
-        console.log(await processor.parseArtboard('a62b640d-b785-49e2-b55f-74643228d67a'))
-      }, 500)
-    })
-  </script>
-</body>
+          const buffer = await (await fetch('./file.xd')).arrayBuffer()
+          const processor = new OctopusXDProcessor(buffer)
+          console.log(await processor.getArtboardsList())
+          console.log(await processor.parseArtboard('a62b640d-b785-49e2-b55f-74643228d67a'))
+        }, 500)
+      })
+    </script>
+  </body>
 </html>

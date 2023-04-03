@@ -6,28 +6,12 @@ import { v4 as uuidv4 } from 'uuid'
 import { SourceDesign } from '../../entities/source/source-design.js'
 import PROPS from '../../utils/prop-names.js'
 import { getRawData } from '../../utils/raw.js'
-import { isArtboard } from '../../utils/source.js'
 
 import type { SourceImage } from '../../entities/source/source-design.js'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
+import type { DesignMeta } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { NodeChild, Layer, Group } from '@webtoon/psd-ts'
 
-type NamedPagedId = {
-  id: string
-  name: string
-}
-
-export type DesignMeta = {
-  designName: string
-  content: {
-    topLevelArtboards: NamedPagedId[]
-    localComponents: NamedPagedId[]
-    remoteComponents: {
-      name: string
-      id: string
-    }[]
-  }
-}
 export type ConvertImageOptions = {
   buff: Uint8ClampedArray | Uint8Array
   width: number
@@ -236,14 +220,14 @@ export abstract class PSDFileReaderCommon {
     })
   }
 
-  protected abstract _getSourceData(): Promise<Uint8Array>
+  protected abstract _getBuffer(): Promise<Uint8Array>
 
   private async _getPsd(): Promise<Psd> {
     if (this._psd) {
       return this._psd
     }
 
-    const data = await this._getSourceData()
+    const data = await this._getBuffer()
 
     const psd = Psd.parse(data.buffer)
     this._assignMissingLayerIds(psd)
@@ -302,26 +286,23 @@ export abstract class PSDFileReaderCommon {
   /**
    * Returns `DesignMeta` with list of Artboards and designName
    */
-  async getDesignMeta(): Promise<DesignMeta | null> {
+  async getDesignMeta(): Promise<DesignMeta> {
     const psd = await this._getPsd()
-    if (!psd) {
-      return null
-    }
-
+    psd.name
     return {
-      designName: psd.name,
-      content: {
-        topLevelArtboards: psd.children.reduce<NamedPagedId[]>((namedArtboards, child) => {
-          if (isArtboard(child)) {
-            const namedArtboard = { name: child.name, id: String(child.additionalProperties?.lyid?.value) }
-            namedArtboards.push(namedArtboard)
-          }
-
-          return namedArtboards
-        }, []),
-        localComponents: [],
-        remoteComponents: [],
+      name: psd.name,
+      origin: {
+        name: 'PHOTOSHOP',
+        version: '0',
       },
+      pages: [],
+      components: psd.children.map((artboard) => {
+        return {
+          name: artboard.name,
+          id: String(artboard.additionalProperties?.lyid?.value),
+          role: 'ARTBOARD' as const,
+        }
+      }),
     }
   }
 

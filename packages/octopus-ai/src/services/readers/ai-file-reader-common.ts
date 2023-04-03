@@ -2,6 +2,7 @@ import { SourceDesign } from '../../entities/source/source-design.js'
 
 import type { SourceImage, SourceTree } from '../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../typings/raw/index.js'
+import type { DesignMeta } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type Metadata = {
   version: string
@@ -25,8 +26,35 @@ export abstract class AIFileReaderCommon {
   protected abstract cleanup(): Promise<void>
 
   protected abstract _loadImages(): SourceImage[]
+  private _sourceTree?: SourceTree
 
-  public async _createSourceTree(): Promise<SourceTree> {
+  private async _getSourceTree(): Promise<SourceTree> {
+    if (!this._sourceTree) {
+      this._sourceTree = await this._createSourceTree()
+    }
+    return this._sourceTree
+  }
+
+  protected abstract _getFileMeta(): Promise<{ name: string; version: string }>
+
+  async getDesignMeta(): Promise<DesignMeta> {
+    const { artboards } = await this._getSourceTree()
+
+    const components = artboards.map((artboard) => {
+      return { id: artboard.Id?.toString() ?? '', name: artboard.Name ?? '', role: 'ARTBOARD' as const }
+    })
+
+    const { name, version } = await this._getFileMeta()
+
+    return {
+      name,
+      origin: { name: 'ILLUSTRATOR', version },
+      pages: [],
+      components,
+    }
+  }
+
+  private async _createSourceTree(): Promise<SourceTree> {
     const { artboards, additionalTextData, metadata } = await this._getSourceData()
     const images = this._loadImages()
 
@@ -50,15 +78,11 @@ export abstract class AIFileReaderCommon {
     }
   }
 
-  protected _fromSourceTree(sourceTree: SourceTree): SourceDesign | never {
-    return new SourceDesign(sourceTree)
-  }
-
   /**
    * Returns `SourceDesign` instance built from given design path using `@opendesign/illustrator-parser-pdfcpu`.
    * @returns {SourceDesign }
    */
-  async getSourceDesign(): Promise<SourceDesign> {
-    return this._fromSourceTree(await this._createSourceTree())
+  async getSourceDesign({ ids }: { ids?: string[] } = {}): Promise<SourceDesign> {
+    return new SourceDesign(await this._getSourceTree(), ids)
   }
 }

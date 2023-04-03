@@ -10,6 +10,7 @@ import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
 import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
+import type { FsContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
 
 type AIFileReaderOptions = {
   /** Path to the .ai file. */
@@ -33,6 +34,7 @@ export class AIFileReader extends AIFileReaderCommon {
   protected _instanceResourcesDir: string
   private _resourcesDir: string
   private _path: string
+  private _context: FsContext
   protected _images: Record<string, string>
 
   static BITMAPS_FOLDER_NAME = 'bitmaps'
@@ -48,10 +50,24 @@ export class AIFileReader extends AIFileReaderCommon {
     this._path = options.path
   }
 
+  private async _getContext(): Promise<FsContext> {
+    if (!this._context) {
+      this._context = await FSContext({ file: this._path, workdir: this._resourcesDir })
+    }
+
+    return this._context
+  }
+
+  protected async _getFileMeta() {
+    const ctx = await this._getContext()
+    ctx.aiFile.XRefTable.Title = ctx.aiFile.XRefTable.Title || 'Untitled'
+    return { version: ctx.aiFile.Version, name: ctx.aiFile.XRefTable.Title }
+  }
+
   protected async _getSourceData(): Promise<RawSourceData> {
     await fsp.mkdir(this._resourcesDir, { recursive: true })
 
-    const ctx = await FSContext({ file: this._path, workdir: this._resourcesDir })
+    const ctx = await this._getContext()
 
     this._instanceResourcesDir = ctx.BaseDir
     this._images = ctx.Bitmaps
@@ -59,11 +75,11 @@ export class AIFileReader extends AIFileReaderCommon {
     const version = ctx.aiFile.Version
     const additionalTextData = (await PrivateData(ctx)) as unknown as AdditionalTextData
     const artboards = (await Promise.all(
-      ArtBoardRefs(ctx).map((ref) => {
-        return ArtBoard(ctx, ref)
+      ArtBoardRefs(ctx).map(async (ref) => {
+        const artboard = await ArtBoard(ctx, ref)
+        return { ...artboard, Id: ref.idx }
       })
     )) as unknown as RawArtboardEntry[]
-
     return { artboards, additionalTextData, metadata: { version } }
   }
 

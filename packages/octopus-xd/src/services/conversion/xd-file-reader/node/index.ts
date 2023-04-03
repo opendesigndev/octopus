@@ -42,7 +42,7 @@ export class XDFileReader extends XDFileReaderCommon {
     this._tempAssetsLocation = this._initTempAssetsLocation()
   }
 
-  protected async _getFile(): Promise<Uint8Array> {
+  protected async _getBuffer(): Promise<Uint8Array> {
     const buffer = await fsp.readFile(this._path)
 
     return new Uint8Array(buffer)
