@@ -23,7 +23,11 @@ export class SourcePluginReader implements AbstractReader {
    * Returns `EventEmitter` which is needed in OctopusFigConverter.
    * @returns {EventEmitter} returns `EventEmitter` providing source data to the OctopusFigConverter
    */
-  parse(): EventEmitter {
+  getSourceDesign(): EventEmitter {
     return new DesignEmitter(this._pluginSource)
+  }
+
+  getDesignMeta(): never {
+    throw new Error('SourcePluginReader does not support getDesignMeta()')
   }
 }

@@ -48,12 +48,14 @@ class OctopusFigWorker {
   }
 
   private async _getArtboards(msgId: number, index: number) {
-    postMessage({ msgId, response: await this._readers[index].getFileMeta })
+    postMessage({ msgId, response: await this._readers[index].getDesignMeta() })
   }
 
   private async _parseArtboard(msgId: number, index: number, artboardId: string) {
     const converter = createConverter() as OctopusFigConverter
-    const result = await converter.convertDesign({ designEmitter: this._readers[index].parse([artboardId]) })
+    const result = await converter.convertDesign({
+      designEmitter: this._readers[index].getSourceDesign({ ids: [artboardId] }),
+    })
     postMessage({ msgId, response: result })
   }
 }
