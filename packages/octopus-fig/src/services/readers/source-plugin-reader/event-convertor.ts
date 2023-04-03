@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
 import { SourceNormalizer } from './source-normalizer.js'
-import { isBase64 } from './utils.js'
 import { logger, base64ToUint8Array } from '../../index.js'
 
 import type { Event, EventDesign } from './types.js'
@@ -17,11 +16,7 @@ export function convertToEvents(source: PluginSource): Event[] {
 
   if (assets?.images) {
     for (const ref in assets.images) {
-      const data = assets.images[ref]
-      if (!data || !isBase64(data)) {
-        logger?.error('Invalid image asset', { ref, data })
-        continue
-      }
+      const data = assets.images[ref] as string
       const buffer = base64ToUint8Array(data)
       events.push({ event: 'ready:fill', data: { designId, ref, buffer } })
     }
@@ -29,11 +24,7 @@ export function convertToEvents(source: PluginSource): Event[] {
 
   if (assets?.previews) {
     for (const nodeId in assets.previews) {
-      const data = assets.previews[nodeId]
-      if (!data || !isBase64(data)) {
-        logger?.error('Invalid image asset', { nodeId, data })
-        continue
-      }
+      const data = assets.previews[nodeId] as string
       const buffer = base64ToUint8Array(data)
       events.push({ event: 'ready:preview', data: { designId, nodeId, buffer } })
     }

@@ -4,7 +4,7 @@ import first from 'lodash/first.js'
 import { convertRectangle, normalizeTransform } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { createCompoundPath, simplifyPathData } from '../../utils/paper.js'
-import { isParentBoolOperation } from '../../utils/source.js'
+import { hasParentBoolOp } from '../../utils/source.js'
 
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceGeometry } from '../../typings/source.js'
@@ -58,7 +58,7 @@ export class OctopusPath {
     if (this._isStroke) return sourceLayer.strokeGeometry
 
     // https://github.com/opendesigndev/octopus/issues/63
-    if (isParentBoolOperation(sourceLayer)) {
+    if (hasParentBoolOp(sourceLayer)) {
       if (sourceLayer.fills.length && sourceLayer.fillGeometry.length) return sourceLayer.fillGeometry
       if (sourceLayer.fillGeometry.length === 1 && sourceLayer.strokeGeometry.length === 1) {
         const fillPath = createCompoundPath(sourceLayer.fillGeometry[0].path)
@@ -91,7 +91,7 @@ export class OctopusPath {
   }
 
   private _isRectangle(sourceLayer: SourceLayerShape): boolean {
-    if (isParentBoolOperation(sourceLayer)) return false // issue with rectangles inside boolean operations, act as they are just Path
+    if (hasParentBoolOp(sourceLayer)) return false // issue with rectangles inside boolean operations, act as they are just Path
     const hasCornerRadii = sourceLayer.cornerRadii?.some((radii) => radii > 0)
     return sourceLayer.shapeType === 'RECTANGLE' && !hasCornerRadii
   }

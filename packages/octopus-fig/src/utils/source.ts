@@ -71,7 +71,7 @@ export function getColorFor(color: RawColor | undefined): SourceColor | undefine
   return { r, g, b, a }
 }
 
-export function isParentBoolOperation(sourceLayer: SourceLayer): boolean {
+export function hasParentBoolOp(sourceLayer: SourceLayer): boolean {
   return sourceLayer.parent.type === 'SHAPE' && sourceLayer.parent.shapeType === 'BOOLEAN_OPERATION'
 }
 
