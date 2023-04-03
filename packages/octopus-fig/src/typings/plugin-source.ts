@@ -12,7 +12,7 @@ export type PluginSource = {
 export type ImageMap = { [key: string]: string | undefined }
 export type StyledTextSegmentsMap = { [key: string]: StyledTextSegment[] | undefined }
 
-export type SourceAssets = {
+export type PluginSourceAssets = {
   images?: ImageMap
   previews?: ImageMap
   styledTextSegments?: StyledTextSegmentsMap
@@ -23,7 +23,7 @@ export type PluginSourceContext = {
   currentPage?: PluginSourceCurrentPage
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   selectedContent?: any[] // TODO
-  assets?: SourceAssets
+  assets?: PluginSourceAssets
 }
 
 export type PluginSourceDocument = {

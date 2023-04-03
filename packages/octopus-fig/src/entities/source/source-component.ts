@@ -75,8 +75,8 @@ export class SourceComponent extends SourceEntity {
     return this._rawValue.name ?? SourceComponent.DEFAULT_NAME
   }
 
-  get type(): 'SOURCE_COMPONENT' {
-    return 'SOURCE_COMPONENT'
+  get type(): 'ARTBOARD' {
+    return 'ARTBOARD'
   }
 
   get isPasteboard(): boolean {

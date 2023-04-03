@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusEffect } from './octopus-effect.js'
 import { logger } from '../../services/index.js'
-import { convertLayerBlendMode, convertId, convertTransform } from '../../utils/convert.js'
+import { convertLayerBlendMode, convertId, normalizeTransform } from '../../utils/convert.js'
 
 import type { OctopusLayerGroup } from './octopus-layer-group.js'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
@@ -90,7 +90,7 @@ export class OctopusLayerBase {
   }
 
   get transform(): number[] {
-    return convertTransform(this.sourceLayer.transform)
+    return normalizeTransform(this.sourceLayer.transform)
   }
 
   get opacity(): number {

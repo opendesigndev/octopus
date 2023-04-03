@@ -1,7 +1,7 @@
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import first from 'lodash/first.js'
 
-import { convertRectangle, convertTransform } from '../../utils/convert.js'
+import { convertRectangle, normalizeTransform } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { createCompoundPath, simplifyPathData } from '../../utils/paper.js'
 import { isParentBoolOperation } from '../../utils/source.js'
@@ -51,7 +51,7 @@ export class OctopusPath {
 
   private _transform({ sourceLayer, isTopLayer }: SourceLayerOptions): number[] {
     if (isTopLayer) return DEFAULTS.TRANSFORM
-    return convertTransform(sourceLayer.transform)
+    return normalizeTransform(sourceLayer.transform)
   }
 
   private _geometries(sourceLayer: SourceLayer): SourceGeometry[] | undefined {
