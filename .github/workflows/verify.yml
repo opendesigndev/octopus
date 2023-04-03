@@ -7,8 +7,6 @@ on:
 
 jobs:
   verify:
-    if: |
-      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'run-verify')) || github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-octopus-fig:
-    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@publish-npm
+    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@main
     with:
       package-name: '@opendesign/octopus-fig'
       base-version: '3.0.0'
