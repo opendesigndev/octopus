@@ -1,14 +1,14 @@
-name: Figma build & publish
+name: Figma Parser
 
 on:
   pull_request:
     paths:
-      - 'packages/octopus-fig/**'
+      - 'packages/figma-parser/**'
 
 jobs:
-  build-octopus-fig:
+  build-figma-parser:
     uses: ./.github/workflows/reusable-build.yml
     with:
-      package-name: '@opendesign/octopus-fig'
+      package-name: '@opendesign/figma-parser'
       base-version: '3.0.0'
     secrets: inherit

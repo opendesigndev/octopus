@@ -15,7 +15,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'publish-experimental')
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -36,6 +35,7 @@ jobs:
         run: |
           yarn build
       - name: publish in PR
+        if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'publish-experimental')
         run: |
           SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`
           yarn workspace ${{ inputs.package-name }} version --no-git-tag-version --new-version "${{ inputs.base-version }}-experimental-$GITHUB_HEAD_REF-$SHORT_SHA"

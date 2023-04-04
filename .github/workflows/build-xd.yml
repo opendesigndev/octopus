@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-octopus-xd:
-    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@publish-npm
+    uses: ./.github/workflows/reusable-build.yml
     with:
       package-name: '@opendesign/octopus-xd'
       base-version: '3.0.0'

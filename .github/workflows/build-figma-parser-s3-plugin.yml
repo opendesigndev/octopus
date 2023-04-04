@@ -1,0 +1,14 @@
+name: Figma Parser S3 Plugin
+
+on:
+  pull_request:
+    paths:
+      - 'packages/figma-parser-s3-plugin/**'
+
+jobs:
+  build-figma-parser-s3-plugin:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/figma-parser'
+      base-version: '3.0.0'
+    secrets: inherit
