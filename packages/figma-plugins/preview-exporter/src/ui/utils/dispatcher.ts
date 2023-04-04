@@ -1,3 +1,3 @@
-export function dispatch(action: string, data?: unknown) {
+export function dispatchToFigma(action: string, data?: unknown) {
   parent.postMessage({ pluginMessage: { action, data } }, '*')
 }

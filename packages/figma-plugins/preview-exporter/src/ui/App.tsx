@@ -3,7 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
 import logoPng from './logo.png'
-import { dispatch } from './utils/dispatcher'
+import { dispatchToFigma } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
 import { version } from '../../package.json'
 
@@ -30,7 +30,7 @@ function App() {
     setCopyCount(copyCount + 1)
     await sleep(20) // need to sleep a while to update the copy button
     console.time('ClipboardData')
-    dispatch('COPY_PRESSED')
+    dispatchToFigma('COPY_PRESSED')
   }, [copyCount])
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -56,7 +56,7 @@ function App() {
         if (!data) return
         exportData(data)
         await sleep(1000)
-        dispatch('CLOSE')
+        dispatchToFigma('CLOSE')
       }
     }
   }, [])

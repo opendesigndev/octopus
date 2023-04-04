@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
 import logoPng from './logo.png'
-import { dispatch } from './utils/dispatcher'
+import { dispatchToFigma } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
 
 const getSelectionText = (selectedObjects: number): JSX.Element => {
@@ -28,7 +28,7 @@ function App() {
     setCopyCount(copyCount + 1)
     await sleep(20) // need to sleep a while to update the copy button
     console.time('ClipboardData')
-    dispatch('COPY_PRESSED')
+    dispatchToFigma('COPY_PRESSED')
   }, [copyCount])
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function App() {
         const message = isError
           ? 'Copy was unsuccessful, try again in desktop app'
           : 'Copy was successful, paste into Ceros Studio'
-        dispatch('NOTIFY', { message, isError })
+        dispatchToFigma('NOTIFY', { message, isError })
         setCopyCount(0)
       }
     }
