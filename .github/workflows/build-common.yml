@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-octopus-common:
-    uses: opendesigndev/octopus/.github/workflows/reusable-build.yml@main
+    uses: ./.github/workflows/reusable-build.yml
     with:
       package-name: '@opendesign/octopus-common'
     secrets: inherit
