@@ -8,20 +8,12 @@ const TOP_NODE = true
 
 type ImageMap = { [key: string]: string | undefined }
 
-type FigmaNode<T> = {
+type MappedNode = {
   parent?: {
     id: string
     type: string
   }
-  children?: T[]
-}
-
-type MappedNode<T> = {
-  parent?: {
-    id: string
-    type: string
-  }
-  children?: T[]
+  children?: MappedNode[]
   [key: string]: unknown
 }
 
@@ -31,14 +23,34 @@ export type SourceDataOptions = {
 }
 
 export class SourceSerializer {
-  imageMap: ImageMap = {}
-  previewMap: ImageMap = {}
+  imageMap: ImageMap
+  previewMap: ImageMap
   exportPreviews = false
+  version: string
 
-  private async _traverseProps<T, U>(node: FigmaNode<T>, obj: MappedNode<U>): Promise<MappedNode<U>> {
+  static getSelectedNodes(selection = figma.currentPage.selection): SceneNode[] {
+    return selection.reduce((nodes: SceneNode[], node: SceneNode) => {
+      if (node.visible === false) return nodes
+      if (SECTION_TYPES.includes(node.type)) {
+        const childNodes = this.getSelectedNodes((node as ChildrenMixin).children)
+        return [...nodes, ...childNodes]
+      }
+      if ([...CONTAINER_TYPES, ...SHAPE_TYPES, 'TEXT'].includes(node.type)) return [...nodes, node]
+      return nodes
+    }, [])
+  }
+
+  constructor(options: SourceDataOptions) {
+    this.version = options.version
+    this.exportPreviews = options.exportPreviews ?? false
+    this.imageMap = {}
+    this.previewMap = {}
+  }
+
+  private async _traverseProps(node: SceneNode, obj: MappedNode): Promise<MappedNode> {
     if (node.parent) obj.parent = { id: node.parent.id, type: node.parent.type }
-    if (node.children) {
-      const childrenPromises = node.children.map((child) => this._nodeToObject<U>(child))
+    if ((node as FrameNode).children) {
+      const childrenPromises = (node as FrameNode).children.map((child) => this._nodeToObject(child))
       obj.children = await Promise.all(childrenPromises)
     }
     const props = Object.entries(Object.getOwnPropertyDescriptors(Object.getPrototypeOf(node))) as [
@@ -55,11 +67,14 @@ export class SourceSerializer {
     return obj
   }
 
-  private async _setImages(node: any) {
-    if (!node.fills?.length) return
-    for (const paint of node.fills) {
+  private async _setImages(node: SceneNode) {
+    const fills = ((node as GeometryMixin).fills as Paint[]) ?? []
+    if (!fills.length) return
+    for (const paint of fills) {
       if (paint.type !== 'IMAGE') continue
-      const image = figma.getImageByHash(paint.imageHash)
+      const imageHash = paint.imageHash
+      if (typeof imageHash !== 'string') continue
+      const image = figma.getImageByHash(imageHash)
       if (image?.hash && !this.imageMap[image.hash]) {
         const bytes = await image.getBytesAsync()
         this.imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
@@ -67,12 +82,12 @@ export class SourceSerializer {
     }
   }
 
-  private async _setPreview(node: any) {
+  private async _setPreview(node: SceneNode) {
     const bytes = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } })
     this.previewMap[node.id] = Buffer.from(bytes).toString('base64')
   }
 
-  private _setTextProps(node: any, obj: any) {
+  private _setTextProps(node: SceneNode, obj: MappedNode) {
     if (node.type !== 'TEXT') return
     obj.styledTextSegments = node.getStyledTextSegments([
       'fontSize',
@@ -91,43 +106,22 @@ export class SourceSerializer {
     ])
   }
 
-  private async _setMasterComponent(node: any, obj: any) {
-    if (node.masterComponent) obj.masterComponent = await this._nodeToObject(node.masterComponent)
-  }
-
-  private async _nodeToObject<T>(node: any, isTopNode = false): Promise<T> {
-    const obj: any = { id: node.id, type: node.type }
+  private async _nodeToObject(node: SceneNode, isTopNode = false): Promise<MappedNode> {
+    const obj: MappedNode = { id: node.id, type: node.type }
     try {
       await this._traverseProps(node, obj)
       await this._setImages(node)
       if (this.exportPreviews && isTopNode) await this._setPreview(node)
       await this._setTextProps(node, obj)
-      await this._setMasterComponent(node, obj)
     } catch (error) {
       console.info('ERROR', error)
       obj.ERROR = error
     }
-    return obj // TODO add return type which is not any
+    return obj
   }
 
-  getSelectedNodes(selection = figma.currentPage.selection): SceneNode[] {
-    return selection.reduce((nodes: SceneNode[], node: SceneNode) => {
-      if (node.visible === false) return nodes
-      if (SECTION_TYPES.includes(node.type)) {
-        const childNodes = this.getSelectedNodes((node as ChildrenMixin).children)
-        return [...nodes, ...childNodes]
-      }
-      if ([...CONTAINER_TYPES, ...SHAPE_TYPES, 'TEXT'].includes(node.type)) return [...nodes, node]
-      return nodes
-    }, [])
-  }
-
-  async getSourceData({ version, exportPreviews }: SourceDataOptions) {
-    this.imageMap = {} // clear imageMap
-    this.previewMap = {} // clear previewMap
-    this.exportPreviews = exportPreviews ?? false
-
-    const selectedPromises = this.getSelectedNodes().map((node) => this._nodeToObject(node, TOP_NODE))
+  async getSourceData() {
+    const selectedPromises = SourceSerializer.getSelectedNodes().map((node) => this._nodeToObject(node, TOP_NODE))
     const selectedContent = await Promise.all(selectedPromises)
     if (!selectedContent.length) return null
 
@@ -136,6 +130,7 @@ export class SourceSerializer {
     const timestamp = new Date().toISOString()
     const assets = { images: this.imageMap, previews: this.previewMap }
     const context = { document, currentPage, selectedContent, assets }
+    const version = this.version
 
     return { type: 'OPEN_DESIGN_FIGMA_PLUGIN_SOURCE', version, timestamp, context }
   }

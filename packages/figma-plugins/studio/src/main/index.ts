@@ -5,14 +5,12 @@ import { version } from '../../package.json'
 
 figma.showUI(__html__, { height: 337, width: 320 })
 
-const sourceSerializer = new SourceSerializer()
-
-const sendSelectionchange = () => dispatch('SELECTION_CHANGE', sourceSerializer.getSelectedNodes().length)
+const sendSelectionchange = () => dispatch('SELECTION_CHANGE', SourceSerializer.getSelectedNodes().length)
 figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
-  const source = await sourceSerializer.getSourceData({ version, exportPreviews: false })
+  const source = await new SourceSerializer({ version, exportPreviews: false }).getSourceData()
   dispatch('COPY_RESPONSE', JSON.stringify(source))
 })
 
