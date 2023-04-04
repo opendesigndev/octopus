@@ -112,10 +112,8 @@ export class SourceApiReader implements AbstractReader {
       pagesContainer
     )
 
-    const pages = Object.values(pagesContainer)
-
     return {
-      pages,
+      pages: Object.values(pagesContainer),
       components: [...artboards, ...localComponents, ...remoteComponents],
       name: fileMeta.designName,
       origin: {
