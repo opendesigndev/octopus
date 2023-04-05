@@ -9,6 +9,6 @@ jobs:
   build-figma-parser-s3-plugin:
     uses: ./.github/workflows/reusable-build.yml
     with:
-      package-name: '@opendesign/figma-parser'
+      package-name: '@opendesign/figma-parser-s3-plugin'
       base-version: '3.0.0'
     secrets: inherit

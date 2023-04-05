@@ -1,3 +1,5 @@
+import { isFiniteNumber } from './common'
+
 type AsArray<T> = T extends unknown[] ? T : never
 
 export function asArray<T, U>(value: T, defaultValue?: U): AsArray<T> | AsArray<U> {
@@ -41,10 +43,10 @@ export function asNumber(value: unknown, defaultValue?: number): number {
 }
 
 export function asFiniteNumber(value: unknown, defaultValue?: number): number {
-  if (typeof value === 'number' && Number.isFinite(value)) {
+  if (isFiniteNumber(value)) {
     return value
   }
-  if (typeof defaultValue === 'number' && Number.isFinite(defaultValue)) {
+  if (isFiniteNumber(defaultValue)) {
     return defaultValue
   }
   const conversionAttempt = Number(value)

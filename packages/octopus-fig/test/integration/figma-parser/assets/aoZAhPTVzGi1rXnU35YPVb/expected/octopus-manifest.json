@@ -4,9 +4,9 @@
     "name": "FIGMA",
     "version": "0"
   },
-  "name": "Complex",
+  "name": "Vaiwa Regress",
   "meta": {
-    "converterVersion": "3.0.0-rc.28"
+    "converterVersion": "3.0.0-rc.37"
   },
   "pages": [
     {
@@ -36,10 +36,6 @@
         {
           "id": "114-3",
           "type": "COMPONENT"
-        },
-        {
-          "id": "713-13",
-          "type": "COMPONENT"
         }
       ]
     },
@@ -52,10 +48,6 @@
       "children": [
         {
           "id": "161-3",
-          "type": "COMPONENT"
-        },
-        {
-          "id": "387-13",
           "type": "COMPONENT"
         }
       ]
@@ -132,10 +124,6 @@
       },
       "children": [
         {
-          "id": "66-3",
-          "type": "COMPONENT"
-        },
-        {
           "id": "369-13",
           "type": "COMPONENT"
         },
@@ -153,6 +141,22 @@
         },
         {
           "id": "391-36",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "819-8",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "825-20",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "838-31",
+          "type": "COMPONENT"
+        },
+        {
+          "id": "838-33",
           "type": "COMPONENT"
         }
       ]
@@ -250,6 +254,12 @@
           },
           {
             "name": "Urbanist-SemiBold"
+          },
+          {
+            "name": "Inter"
+          },
+          {
+            "name": "Inter-Bold"
           }
         ]
       },
@@ -600,34 +610,6 @@
       }
     },
     {
-      "id": "387-13",
-      "name": "blend-mode-passThrough",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "387:13"
-      },
-      "bounds": {
-        "x": 1100,
-        "y": 0,
-        "width": 425,
-        "height": 635
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
-          {
-            "name": "Inter"
-          }
-        ]
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
       "id": "390-13",
       "name": "Pikachu",
       "role": "ARTBOARD",
@@ -719,6 +701,13 @@
               "path": ""
             },
             "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
+          },
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "67e53421e50ddb3f8dc0e77350c1a193d12b8ab2"
           }
         ],
         "fonts": []
@@ -739,68 +728,21 @@
       "bounds": {
         "x": 246,
         "y": -65,
-        "width": 1325,
+        "width": 1515,
         "height": 1000
       },
       "dependencies": [],
       "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "66-3",
-      "name": "bug-linear-gradient",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "66:3"
-      },
-      "bounds": {
-        "x": 0,
-        "y": 0,
-        "width": 300,
-        "height": 500
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": []
-      },
-      "artifacts": [],
-      "location": {
-        "type": "RELATIVE",
-        "path": ""
-      }
-    },
-    {
-      "id": "713-13",
-      "name": "Frame 1",
-      "role": "ARTBOARD",
-      "meta": {
-        "originalId": "713:13"
-      },
-      "bounds": {
-        "x": 1059,
-        "y": 16,
-        "width": 717,
-        "height": 632
-      },
-      "dependencies": [],
-      "assets": {
-        "images": [],
-        "fonts": [
+        "images": [
           {
-            "name": "Inter"
-          },
-          {
-            "name": "Inter-Bold"
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
           }
-        ]
+        ],
+        "fonts": []
       },
       "artifacts": [],
       "location": {
@@ -832,6 +774,118 @@
             "refId": "9e999f191ada92a64df50e96c8bb749e0104de49"
           }
         ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "819-8",
+      "name": "blend-mode-passThrough",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "819:8"
+      },
+      "bounds": {
+        "x": 1255,
+        "y": 412,
+        "width": 425,
+        "height": 635
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "Inter"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "825-20",
+      "name": "Bug - Component Font",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "825:20"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 841,
+        "width": 140,
+        "height": 76
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
+        "fonts": [
+          {
+            "name": "AvenirNext-Regular"
+          }
+        ]
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "838-31",
+      "name": "bug-shadow-on-image",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "838:31"
+      },
+      "bounds": {
+        "x": 600,
+        "y": 958,
+        "width": 550,
+        "height": 407
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [
+          {
+            "location": {
+              "type": "RELATIVE",
+              "path": ""
+            },
+            "refId": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
+          }
+        ],
+        "fonts": []
+      },
+      "artifacts": [],
+      "location": {
+        "type": "RELATIVE",
+        "path": ""
+      }
+    },
+    {
+      "id": "838-33",
+      "name": "bug-compound-path",
+      "role": "ARTBOARD",
+      "meta": {
+        "originalId": "838:33"
+      },
+      "bounds": {
+        "x": 772,
+        "y": 825,
+        "width": 112,
+        "height": 121
+      },
+      "dependencies": [],
+      "assets": {
+        "images": [],
         "fonts": []
       },
       "artifacts": [],

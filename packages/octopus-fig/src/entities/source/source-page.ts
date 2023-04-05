@@ -1,12 +1,12 @@
-import { SourceComponent } from './source-component.js'
+import { SourceArtboard } from './source-artboard.js'
 import { SourceEntity } from './source-entity.js'
 
 import type { RawPage, RawLayer, RawLayerContainer } from '../../typings/raw/index.js'
 
 export class SourcePage extends SourceEntity {
   declare _rawValue: RawPage
-  private _components: SourceComponent[]
-  private _pasteboard: SourceComponent | null
+  private _components: SourceArtboard[]
+  private _pasteboard: SourceArtboard | null
 
   static DEFAULT_ID = 'page-1'
 
@@ -17,7 +17,7 @@ export class SourcePage extends SourceEntity {
     this._pasteboard = pasteboard
   }
 
-  private _initPasteboard(children: RawLayer[]): SourceComponent | null {
+  private _initPasteboard(children: RawLayer[]): SourceArtboard | null {
     if (children.length === 0) return null
     const rawFrame = {
       ...this._rawValue,
@@ -26,10 +26,10 @@ export class SourcePage extends SourceEntity {
       type: 'FRAME' as const,
       children,
     }
-    return new SourceComponent({ rawFrame, isPasteboard: true })
+    return new SourceArtboard({ rawFrame, isPasteboard: true })
   }
 
-  private _initComponents(): { components: SourceComponent[]; pasteboard: SourceComponent | null } {
+  private _initComponents(): { components: SourceArtboard[]; pasteboard: SourceArtboard | null } {
     const frames: RawLayerContainer[] = []
     const rest: RawLayer[] = []
     this._rawValue?.children?.forEach((element) => {
@@ -39,7 +39,7 @@ export class SourcePage extends SourceEntity {
         rest.push(element)
       }
     })
-    const components = frames.map((rawFrame) => new SourceComponent({ rawFrame }))
+    const components = frames.map((rawFrame) => new SourceArtboard({ rawFrame }))
     const pasteboard = this._initPasteboard(rest)
     return { components, pasteboard }
   }
@@ -48,15 +48,15 @@ export class SourcePage extends SourceEntity {
     return this._rawValue
   }
 
-  get components(): SourceComponent[] {
+  get components(): SourceArtboard[] {
     return this._components
   }
 
-  get pasteboard(): SourceComponent | null {
+  get pasteboard(): SourceArtboard | null {
     return this._pasteboard
   }
 
-  get children(): SourceComponent[] {
+  get children(): SourceArtboard[] {
     return this.pasteboard ? [...this.components, this.pasteboard] : this.components
   }
 

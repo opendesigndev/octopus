@@ -14,7 +14,7 @@ export type RenderResult = {
 async function render(id: string, octopusPath: string) {
   const octopusDir = path.dirname(octopusPath)
   const renderPath = path.join(octopusDir, `${kebabCase(id)}-render.png`)
-  const fontsDir = process.env.FONTS_PATH ?? path.join(__dirname, '../../../', 'fonts')
+  const fontsDir = process.env.FONTS_PATH ?? new URL('../../../fonts', import.meta.url).pathname
   const fontsOption = fontsDir ? `--fonts ${fontsDir}` : ''
   const ignoreValidation = process.env.ODE_IGNORE_VALIDATION === 'true' ? '--ignore-validation' : ''
   const renderCmd = `${process.env.ODE_RENDERER_CMD} ${ignoreValidation} ${fontsOption} --bitmaps ${octopusDir} ${octopusPath} ${renderPath}`

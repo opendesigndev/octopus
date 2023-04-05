@@ -1,11 +1,13 @@
 import { asFiniteNumber } from '@opendesign/octopus-common/dist/utils/as.js'
+import { isFiniteNumber } from '@opendesign/octopus-common/dist/utils/common.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 
 import { DEFAULTS } from './defaults.js'
 import { env } from '../services/index.js'
 
-import type { SourceComponent } from '../entities/source/source-component.js'
+import type { SourceArtboard } from '../entities/source/source-artboard.js'
 import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'
+import type { SourceLayer } from '../factories/create-source-layer.js'
 import type { Octopus } from '../typings/octopus.js'
 import type {
   RawBoundingBox,
@@ -28,7 +30,7 @@ export function getBoundsFor(value: RawBoundingBox | undefined): SourceBounds | 
 }
 
 export function getSizeFor(value: RawVector | undefined): Octopus['Vec2'] | null {
-  if (value?.x === undefined && value?.y === undefined) return null
+  if (!isFiniteNumber(value?.x) || !isFiniteNumber(value?.y)) return null
   const x = round(asFiniteNumber(value?.x, 0))
   const y = round(asFiniteNumber(value?.y, 0))
   return { x, y }
@@ -39,7 +41,9 @@ export function getTransformFor(value: RawTransform | undefined): SourceTransfor
   if (!Array.isArray(m1) || !Array.isArray(m2)) return null
   const [a, c, tx] = m1
   const [b, d, ty] = m2
-  return [a, b, c, d, tx, ty]
+  const result: SourceTransform = [a, b, c, d, tx, ty]
+  if (result.some((item) => !isFiniteNumber(item))) return null
+  return result
 }
 
 function getFillRule(rule: RawWindingRule | undefined): Octopus['FillRule'] {
@@ -53,7 +57,7 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   }))
 }
 
-export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
+export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceLayer.type === 'COMPONENT') return 'COMPONENT'
   if (source.parentType && source.parentType !== 'PAGE') return 'PARTIAL'
@@ -65,6 +69,10 @@ export function getColorFor(color: RawColor | undefined): SourceColor | undefine
   if (r === undefined || g === undefined || b === undefined) return undefined
   const a = rawA === undefined ? 1 : rawA
   return { r, g, b, a }
+}
+
+export function hasParentBoolOp(sourceLayer: SourceLayer): boolean {
+  return sourceLayer.parent.type === 'SHAPE' && sourceLayer.parent.shapeType === 'BOOLEAN_OPERATION'
 }
 
 export function getTopComponentTransform(sourceLayer: SourceLayerContainer): number[] | undefined {

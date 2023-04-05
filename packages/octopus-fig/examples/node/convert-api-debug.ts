@@ -1,5 +1,3 @@
-import path from 'path'
-
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
@@ -30,7 +28,7 @@ export async function convertDesign({
   designId,
   shouldRender = process.env.SHOULD_RENDER === 'true',
 }: ConvertDesignOptions): Promise<void> {
-  const outputDir = path.join(__dirname, '../../', 'workdir')
+  const outputDir = new URL('../../workdir', import.meta.url).pathname
   const exporter = new DebugExporter({ tempDir: outputDir, designId })
 
   // exporter.on('source:design', (sourcePath: string) => console.info(`${chalk.yellow('Source: ')} file://${sourcePath}`))
