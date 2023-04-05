@@ -5,7 +5,7 @@ import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { DEFAULTS } from './defaults.js'
 import { env } from '../services/index.js'
 
-import type { SourceComponent } from '../entities/source/source-component.js'
+import type { SourceArtboard } from '../entities/source/source-artboard.js'
 import type { SourceLayerContainer } from '../entities/source/source-layer-container.js'
 import type { SourceLayer } from '../factories/create-source-layer.js'
 import type { Octopus } from '../typings/octopus.js'
@@ -57,7 +57,7 @@ export function getGeometryFor(values: RawGeometry[] = []): SourceGeometry[] {
   }))
 }
 
-export function getRole(source: SourceComponent): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
+export function getRole(source: SourceArtboard): 'ARTBOARD' | 'COMPONENT' | 'PASTEBOARD' | 'PARTIAL' {
   if (source.isPasteboard) return 'PASTEBOARD'
   if (source.sourceLayer.type === 'COMPONENT') return 'COMPONENT'
   if (source.parentType && source.parentType !== 'PAGE') return 'PARTIAL'

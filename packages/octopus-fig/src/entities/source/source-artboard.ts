@@ -11,20 +11,20 @@ import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { RawBlendMode, RawLayer, RawLayerContainer, RawParentType } from '../../typings/raw/index.js'
 import type { SourceBounds } from '../../typings/source.js'
 
-type SourceComponentOptions = {
+type SourceArtboardOptions = {
   rawFrame: RawLayer
   isPasteboard?: boolean
 }
 
-export class SourceComponent extends SourceEntity {
+export class SourceArtboard extends SourceEntity {
   declare _rawValue: RawLayer
   private _sourceLayer: SourceLayer
   private _isPasteboard: boolean
 
-  static DEFAULT_ID = 'component-1'
-  static DEFAULT_NAME = 'Component'
+  static DEFAULT_ID = 'artboard-1'
+  static DEFAULT_NAME = 'Artboard'
 
-  constructor(options: SourceComponentOptions) {
+  constructor(options: SourceArtboardOptions) {
     super(options.rawFrame)
     this._isPasteboard = options.isPasteboard ?? false
     this._sourceLayer = this._initializeSourceLayer(options.rawFrame)
@@ -68,11 +68,11 @@ export class SourceComponent extends SourceEntity {
   }
 
   get id(): string {
-    return this._rawValue.id ?? SourceComponent.DEFAULT_ID
+    return this._rawValue.id ?? SourceArtboard.DEFAULT_ID
   }
 
   get name(): string {
-    return this._rawValue.name ?? SourceComponent.DEFAULT_NAME
+    return this._rawValue.name ?? SourceArtboard.DEFAULT_NAME
   }
 
   get type(): 'ARTBOARD' {

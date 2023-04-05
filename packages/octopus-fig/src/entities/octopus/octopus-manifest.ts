@@ -7,7 +7,7 @@ import { getRole } from '../../utils/source.js'
 
 import type { OctopusFigConverter } from '../../octopus-fig-converter.js'
 import type { Manifest } from '../../typings/manifest.js'
-import type { SourceComponent } from '../source/source-component.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
 import type { SourceDesign } from '../source/source-design.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
@@ -30,7 +30,7 @@ export type SetExportedLibraryOptions = {
   designNodeId: string
 }
 
-type ComponentSourceWithDescriptor = { source: SourceComponent; descriptor: ComponentDescriptor }
+type ComponentSourceWithDescriptor = { source: SourceArtboard; descriptor: ComponentDescriptor }
 
 export class OctopusManifest {
   private _sourceDesign: SourceDesign
@@ -145,7 +145,7 @@ export class OctopusManifest {
     return componentResult.descriptor.path
   }
 
-  setExportedComponent(source: SourceComponent, descriptor: ComponentDescriptor): void {
+  setExportedComponent(source: SourceArtboard, descriptor: ComponentDescriptor): void {
     this._exports.components.set(source.id, { source, descriptor })
   }
 
@@ -186,7 +186,7 @@ export class OctopusManifest {
     return [...converted].sort((a, b) => compareStrings(a.id, b.id))
   }
 
-  private _getStatus(source: SourceComponent): Manifest['Status'] {
+  private _getStatus(source: SourceArtboard): Manifest['Status'] {
     const id = source.id
     const status = this.getExportedComponentDescriptorById(id)
     const statusValue = status ? (status.error ? 'FAILED' : 'READY') : 'PROCESSING'
@@ -216,7 +216,7 @@ export class OctopusManifest {
     return fonts.map((font) => ({ name: font }))
   }
 
-  private async _getAssets(source: SourceComponent): Promise<Manifest['Assets']> {
+  private async _getAssets(source: SourceArtboard): Promise<Manifest['Assets']> {
     const imageIds = this.getExportedComponentImageMap(source.id) ?? []
     const images = await this._getAssetImages(imageIds)
     const fonts = this._getAssetFonts(source.dependencies.fonts)
@@ -227,7 +227,7 @@ export class OctopusManifest {
     return { type: 'SOURCE', location: { type: 'RELATIVE', path } }
   }
 
-  private _getArtifacts(source: SourceComponent): Manifest['Artifact'][] {
+  private _getArtifacts(source: SourceArtboard): Manifest['Artifact'][] {
     const artifacts: Manifest['Artifact'][] = []
     const sourcePath = this.getExportedSourcePath(source.id)
     if (sourcePath) artifacts.push(this._getSourceArtifact(sourcePath))
@@ -289,7 +289,7 @@ export class OctopusManifest {
     return Array.from(this._exports.libraries.values())
   }
 
-  private async _getComponent(source: SourceComponent): Promise<Manifest['Component']> {
+  private async _getComponent(source: SourceArtboard): Promise<Manifest['Component']> {
     const id = convertId(source.id)
     const bounds = source.bounds ?? undefined
     const status = this._getStatus(source)
