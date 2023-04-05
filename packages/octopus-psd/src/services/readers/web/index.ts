@@ -40,7 +40,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
     return Promise.resolve(this._file)
   }
 
-  protected async _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void> {
+  protected async _convertImage({ width, height, buff, id, iccProfile }: ConvertImageOptions): Promise<void> {
     const processedBuff = this._renderer && iccProfile ? this._renderer.render(buff, iccProfile) : buff
 
     const canvas = document.createElement('canvas')
@@ -78,7 +78,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
         fileReader.readAsArrayBuffer(blob)
       }, 'image/png')
     })
-    this._images.push({ width, height, name, promisedData })
+    this._images.push({ width, height, id, promisedData })
 
     return
   }

@@ -50,12 +50,12 @@ export class OctopusManifest {
     }
   }
 
-  getExportedImageByName(name: string): string | undefined {
-    return this._exports.images.get(name)
+  getExportedImageById(id: string): string | undefined {
+    return this._exports.images.get(id)
   }
 
-  getExportedRelativeImageByName(name: string): string | undefined {
-    const imagePath = this._exports.images.get(name)
+  getExportedRelativeImageById(id: string): string | undefined {
+    const imagePath = this._exports.images.get(id)
     if (imagePath === undefined) return undefined
     if (this._basePath === null) return imagePath
     return pathRelative(this._basePath, imagePath)
@@ -150,9 +150,9 @@ export class OctopusManifest {
     if (!raw) return null
 
     const images: Manifest['AssetImage'][] = this._sourceDesign.images.map((image) => {
-      const path = this.getExportedRelativeImageByName(image.name) ?? ''
+      const path = this.getExportedRelativeImageById(image.id) ?? ''
       const location: Manifest['ResourceLocation'] = { type: 'RELATIVE', path }
-      return { location, refId: image.name }
+      return { location, refId: image.id }
     })
 
     const fonts: Manifest['AssetFont'][] = Array.from(this._getComponentAssetsFonts(raw as RawParsedPsd)).map(

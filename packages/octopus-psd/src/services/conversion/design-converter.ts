@@ -8,7 +8,7 @@ import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { logger } from '../index.js'
 
 import type { SourceComponent } from '../../entities/source/source-component.js'
-import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
+import type { PsdSourceImage, SourceDesign } from '../../entities/source/source-design.js'
 import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
@@ -19,7 +19,7 @@ import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
   components: ComponentConversionResult[]
-  images: SourceImage[]
+  images: PsdSourceImage[]
 }
 
 export type ComponentConversionResult = {
@@ -157,8 +157,8 @@ export class DesignConverter {
     /** Images */
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
-        const imageId = image.name
-        const imagePath = await rejectTo(this._exporter?.exportImage?.(image.name, image.data))
+        const imageId = image.id
+        const imagePath = await rejectTo(this._exporter?.exportImage?.(image))
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }

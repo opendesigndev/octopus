@@ -47,7 +47,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
     return new Uint8Array(buffer)
   }
 
-  protected async _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void> {
+  protected async _convertImage({ width, height, buff, id, iccProfile }: ConvertImageOptions): Promise<void> {
     const processedBuff = this._renderer && iccProfile ? this._renderer.render(buff, iccProfile) : buff
 
     const image = new Jimp(width, height)
@@ -59,7 +59,7 @@ export class PSDFileReader extends PSDFileReaderCommon {
     })
 
     const parsed = new Jimp(scanned)
-    this._images.push({ width, height, name, promisedData: parsed.getBufferAsync(Jimp.MIME_PNG) })
+    this._images.push({ width, height, id, promisedData: parsed.getBufferAsync(Jimp.MIME_PNG) })
 
     return
   }

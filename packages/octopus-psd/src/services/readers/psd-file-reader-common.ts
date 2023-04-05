@@ -7,7 +7,7 @@ import { SourceDesign } from '../../entities/source/source-design.js'
 import PROPS from '../../utils/prop-names.js'
 import { getRawData } from '../../utils/raw.js'
 
-import type { SourceImage } from '../../entities/source/source-design.js'
+import type { PsdSourceImage } from '../../entities/source/source-design.js'
 import type { Renderer } from '@opendesign/image-icc-profile-converter'
 import type { DesignMeta } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { NodeChild, Layer, Group } from '@webtoon/psd-ts'
@@ -16,12 +16,12 @@ export type ConvertImageOptions = {
   buff: Uint8ClampedArray | Uint8Array
   width: number
   height: number
-  name: string
+  id: string
   iccProfile: Uint8Array | undefined
 }
 
 type ProcessedImage = {
-  name: string
+  id: string
   promisedData: Promise<Uint8Array>
   width: number
   height: number
@@ -96,7 +96,7 @@ export abstract class PSDFileReaderCommon {
     return this._designId
   }
 
-  protected abstract _convertImage({ width, height, buff, name, iccProfile }: ConvertImageOptions): Promise<void>
+  protected abstract _convertImage({ width, height, buff, id, iccProfile }: ConvertImageOptions): Promise<void>
 
   private async _convertMaskImage(layer: Layer | Group, iccProfile: Uint8Array | undefined): Promise<void> {
     if (!layer.userMask || !layer.realUserMask) {
@@ -119,9 +119,9 @@ export abstract class PSDFileReaderCommon {
     const width = asNumber(maskData?.right, 0) - asNumber(maskData?.left, 0)
     const height = asNumber(maskData?.bottom, 0) - asNumber(maskData?.top, 0)
 
-    const name = `${String(layer.additionalProperties?.[AliKey.LayerId]?.value)}_user_mask.png`
+    const id = `${String(layer.additionalProperties?.[AliKey.LayerId]?.value)}_user_mask.png`
 
-    await this._convertImage({ width, height, buff, name, iccProfile })
+    await this._convertImage({ width, height, buff, id, iccProfile })
   }
 
   private async _convertImages(layer: NodeChild, iccProfile: Uint8Array | undefined): Promise<void> {
@@ -140,25 +140,25 @@ export abstract class PSDFileReaderCommon {
       throw new Error('Layer is missing additional properties')
     }
 
-    const id = additionalProperties[AliKey.LayerId]?.value
+    const id = `${additionalProperties[AliKey.LayerId]?.value}.png`
+
     const { width, height } = layer
 
     if (width === 1 && height === 1) {
       return
     }
-    const name = `${id}.png`
 
     let buff
 
     try {
       buff = await layer.composite()
     } catch (e) {
-      console?.error(`could not export image: ${name}`)
+      console?.error(`could not export image: ${id}`)
       console.error(e)
       return
     }
 
-    await this._convertImage({ width, height, buff, name, iccProfile })
+    await this._convertImage({ width, height, buff, id, iccProfile })
     await this._convertMaskImage(layer, iccProfile)
   }
 
@@ -168,9 +168,9 @@ export abstract class PSDFileReaderCommon {
       patterns.map(async (pattern) => {
         const width = pattern.patternData.rectangle.right - pattern.patternData.rectangle.left
         const height = pattern.patternData.rectangle.bottom - pattern.patternData.rectangle.top
-        const name = `${pattern.id}.png`
+        const id = `${pattern.id}.png`
         const buff = await psd.decodePattern(pattern)
-        await this._convertImage({ width, height, buff, name, iccProfile })
+        await this._convertImage({ width, height, buff, id, iccProfile })
       })
     )
   }
@@ -269,13 +269,12 @@ export abstract class PSDFileReaderCommon {
     return psdCopy
   }
 
-  private async _getImages(): Promise<SourceImage[]> {
+  private async _getImages(): Promise<PsdSourceImage[]> {
     const images = await Promise.all(
       this._images.map(async ({ promisedData, ...rest }) => {
-        const data = await promisedData
         return {
           ...rest,
-          data,
+          getImageData: async () => await promisedData,
         }
       })
     )

@@ -16,6 +16,7 @@ import { stringify } from '../../utils/stringify.js'
 
 import type { AbstractExporter } from './abstract-exporter.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 export type DebugExporterOptions = {
@@ -111,8 +112,10 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @param {Uint8Array} data image data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, data: Uint8Array): Promise<string> {
-    return this._save(path.join(DebugExporter.IMAGES_DIR_NAME, path.basename(name)), Buffer.from(data))
+  async exportImage(image: SourceImage): Promise<string> {
+    const { id } = image
+    const data = await image.getImageData()
+    return this._save(path.join(DebugExporter.IMAGES_DIR_NAME, path.basename(id)), Buffer.from(data))
   }
 
   /**
