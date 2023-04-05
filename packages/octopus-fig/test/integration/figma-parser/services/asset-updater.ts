@@ -108,7 +108,7 @@ export class AssetUpdater {
     }
 
     const reader = new SourceApiReader(readerOptions)
-    const design = reader.parse()
+    const design = reader.getSourceDesign()
 
     design.on('ready:design', (design) => this._onDesign(design))
     design.on('ready:style', (chunk) => this._onStyle(chunk))

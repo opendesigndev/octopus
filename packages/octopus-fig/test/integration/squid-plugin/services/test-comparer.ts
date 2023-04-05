@@ -27,7 +27,7 @@ export class TestComparer extends BaseTestComparer {
             throw new Error(`Wrong SourceData for assetId: '${assetId}' and sourceDataPath: '${sourceDataPath}'`)
           const reader = new SourcePluginReader(sourceData)
 
-          const result = await this._octopusConverter.convertDesign({ designEmitter: reader.parse() })
+          const result = await this._octopusConverter.convertDesign({ designEmitter: reader.getSourceDesign() })
           const { components: componentsGenerated, manifest: manifestGenerated } = result ?? {}
 
           const componentsGenValues = (componentsGenerated ?? [])
