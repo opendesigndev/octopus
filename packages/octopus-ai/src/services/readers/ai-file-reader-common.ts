@@ -1,8 +1,8 @@
 import { SourceDesign } from '../../entities/source/source-design.js'
 
-import type { SourceImage, SourceTree } from '../../typings/index.js'
+import type { SourceTree } from '../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../typings/raw/index.js'
-import type { DesignMeta } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type { DesignMeta, SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type Metadata = {
   version: string

@@ -11,11 +11,11 @@ import { TextLayerGroupingservice } from '../text-layer-grouping-service/index.j
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { OctopusAIConverter } from '../../../octopus-ai-converter.js'
-import type { SourceImage } from '../../../typings/index.js'
 import type { Manifest } from '../../../typings/manifest/index.js'
 import type { Octopus } from '../../../typings/octopus/index.js'
 import type { AdditionalTextData } from '../../../typings/raw/index.js'
 import type { Exporter } from '../exporters/index.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 type DesignConverterGeneralOptions = {
@@ -133,8 +133,7 @@ export class DesignConverter {
     const images = await Promise.all(
       artboardImages.map(async (image) => {
         const imageId = image.id
-        const rawData = await image.getImageData()
-        const imagePath = (await rejectTo(exporter?.exportImage?.(image.id, rawData) ?? Promise.reject(''))) as string
+        const imagePath = (await rejectTo(exporter?.exportImage?.(image) ?? Promise.reject(''))) as string
         this.manifest.setExportedImage(imageId, imagePath)
 
         return image

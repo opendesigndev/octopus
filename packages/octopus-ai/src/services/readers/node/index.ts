@@ -8,9 +8,9 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
-import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 import type { FsContext } from '@opendesign/illustrator-parser-pdfcpu/fs_context'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type AIFileReaderOptions = {
   /** Path to the .ai file. */

@@ -3,8 +3,9 @@ import { uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js
 import { SourceArtboard } from './source-artboard.js'
 
 import type { Metadata } from '../../services/readers/ai-file-reader-common.js'
-import type { SourceImage, SourceTree } from '../../typings/index.js'
+import type { SourceTree } from '../../typings/index.js'
 import type { AdditionalTextData } from '../../typings/raw/index.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { Nullish } from '@opendesign/octopus-common/dist/utility-types.js'
 
 export class SourceDesign {

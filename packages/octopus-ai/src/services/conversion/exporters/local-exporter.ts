@@ -11,6 +11,7 @@ import type { Exporter, AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type LocalExporterOptions = {
@@ -103,12 +104,12 @@ export class LocalExporter implements Exporter {
 
   /**
    * Exports given Image into folder specified in `LocalExporter.IMAGES_DIR_NAME`
-   * @param {string} name Name of the exported Image
-   * @param {Buffer} data Data representation of given image
+   * @param {SourceImage} with signature {id:string, getImageData: () => Promise<Uint8Array>}
    * @returns {Promise<string>} which designates path to the exported Image
    */
-  exportImage(name: string, data: Buffer): Promise<string> {
-    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(name)), data)
+  async exportImage(image: SourceImage): Promise<string> {
+    const data = await image.getImageData()
+    return this._save(path.join(LocalExporter.IMAGES_DIR_NAME, path.basename(image.id)), Buffer.from(data))
   }
 
   finalizeExport(): void {

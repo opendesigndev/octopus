@@ -101,9 +101,9 @@ describe('DesignConverter', () => {
 
       const sourceDesign = {
         images: [
-          { id: 'image-1.jpg', path: 'path/image-1.jpg', getImageData: async () => 'base64;image-1' },
-          { id: 'image-2.jpg', path: 'path/image-1.jpg', getImageData: async () => 'base64;image-2' },
-          { id: 'image-3.jpg', path: 'path/image-3.jpg', getImageData: async () => 'base64;image-3' },
+          { id: 'image-1.jpg', getImageData: async () => 'base64;image-1' },
+          { id: 'image-2.jpg', getImageData: async () => 'base64;image-2' },
+          { id: 'image-3.jpg', getImageData: async () => 'base64;image-3' },
         ],
       }
 
@@ -113,7 +113,7 @@ describe('DesignConverter', () => {
         .mockReturnValueOnce({ id: 1, value: { id: '1' }, error: null, time: 5 })
 
       const exporter: any = {
-        exportImage: vi.fn().mockImplementation(async (imagePath) => 'root/' + imagePath),
+        exportImage: vi.fn().mockImplementation(async (image) => 'root/' + image.id),
         exportArtboard: vi.fn().mockImplementation(async (artboard) => 'root/' + artboard.value.id),
       }
 
@@ -132,8 +132,15 @@ describe('DesignConverter', () => {
         images: [sourceDesign.images[0], sourceDesign.images[2]],
       })
 
-      expect(exporter.exportImage).toHaveBeenCalledWith('image-1.jpg', 'base64;image-1')
-      expect(exporter.exportImage).toHaveBeenCalledWith('image-3.jpg', 'base64;image-3')
+      expect(exporter.exportImage).toHaveBeenCalledWith({
+        getImageData: expect.any(Function),
+        id: 'image-1.jpg',
+      })
+
+      expect(exporter.exportImage).toHaveBeenCalledWith({
+        getImageData: expect.any(Function),
+        id: 'image-3.jpg',
+      })
 
       expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-1.jpg', 'root/image-1.jpg')
       expect(manifestInstanceMock.setExportedImage).toHaveBeenCalledWith('image-3.jpg', 'root/image-3.jpg')

@@ -3,9 +3,9 @@ import { WASMContext } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
 
 import { AIFileReaderCommon } from '../ai-file-reader-common.js'
 
-import type { SourceImage } from '../../../typings/index.js'
 import type { AdditionalTextData, RawArtboardEntry } from '../../../typings/raw/index.js'
 import type { BitmapReader, WasmContext } from '@opendesign/illustrator-parser-pdfcpu/wasm_context'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type AIFileReaderOptions = {
   /** Uint8Array representation of converted .ai file */
