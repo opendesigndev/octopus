@@ -1,7 +1,7 @@
 {
   "id": "106-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "dimensions": {
     "width": 4374,
     "height": 2475
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 4374,
+          "height": 2475
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -99,6 +105,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 700,
+              "height": 100
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -146,6 +158,10 @@
         ],
         "layers": [],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -173,6 +189,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 701,
+              "height": 750
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -234,6 +256,12 @@
               348
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 552,
+                "height": 74
+              }
+            },
             "text": {
               "value": "USE SHAPE OUTLINES:",
               "defaultStyle": {
@@ -294,6 +322,12 @@
                 120
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -409,6 +443,12 @@
                   0
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -484,6 +524,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -530,6 +574,12 @@
                   }
                 }
               ],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -686,6 +736,12 @@
                   27
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -761,6 +817,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -786,6 +846,12 @@
                 486
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -901,6 +967,12 @@
                   366
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -976,6 +1048,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -1022,6 +1098,12 @@
                   }
                 }
               ],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -1178,6 +1260,12 @@
                   393
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -1253,11 +1341,19 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -1285,6 +1381,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 386,
+              "height": 747
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -1367,6 +1469,12 @@
                 }
               }
             ],
+            "meta": {
+              "dimensions": {
+                "width": 200,
+                "height": 200
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -1471,6 +1579,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -1490,6 +1602,12 @@
           1200
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 700,
+            "height": 100
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1543,6 +1661,12 @@
           548
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 249,
+            "height": 323
+          }
+        },
         "layers": [
           {
             "id": "108-20-ClippingMask",
@@ -1566,6 +1690,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 249,
+                  "height": 323
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -1649,6 +1779,12 @@
                   -48
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 400,
+                    "height": 400
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -1707,6 +1843,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 249,
+                "height": 323
+              },
               "isArtboard": true
             }
           }
@@ -1728,6 +1868,12 @@
           548
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 413,
+            "height": 300
+          }
+        },
         "layers": [
           {
             "id": "163-37-ClippingMask",
@@ -1751,6 +1897,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 413,
+                  "height": 300
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -1841,6 +1993,12 @@
                   -48
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 400,
+                    "height": 400
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -1899,6 +2057,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 413,
+                "height": 300
+              },
               "isArtboard": true
             }
           }
@@ -1947,6 +2109,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 300
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -2103,6 +2271,12 @@
               69
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 300,
+                "height": 300
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2178,6 +2352,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -2203,6 +2381,12 @@
             158
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 300
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -2330,6 +2514,12 @@
               58
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 300,
+                "height": 300
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2405,6 +2595,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -2451,6 +2645,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 300
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -2537,6 +2737,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 300,
+                "height": 300
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2612,6 +2818,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -2637,6 +2847,12 @@
             150
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 300
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -2696,6 +2912,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 300,
+                "height": 300
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2771,6 +2993,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -2796,6 +3022,12 @@
             1092
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -2884,6 +3116,12 @@
               992
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2934,6 +3172,12 @@
               1192
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -2970,6 +3214,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -2995,6 +3243,12 @@
             1050
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -3068,6 +3322,10 @@
         ],
         "layers": [],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -3087,6 +3345,12 @@
           1192
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -3137,6 +3401,12 @@
           992
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -3214,6 +3484,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -3302,6 +3578,12 @@
               1192
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3352,6 +3634,12 @@
               992
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3388,6 +3676,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -3413,6 +3705,12 @@
             1702
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -3501,6 +3799,12 @@
               1602
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3551,6 +3855,12 @@
               1802
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3587,6 +3897,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -3612,6 +3926,12 @@
             1702
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -3700,6 +4020,12 @@
               1802
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3750,6 +4076,12 @@
               1602
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3786,6 +4118,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -3832,6 +4168,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -3920,6 +4262,12 @@
               1802
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -3970,6 +4318,12 @@
               1602
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -4006,6 +4360,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -4052,6 +4410,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -4140,6 +4504,12 @@
               1192
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -4176,6 +4546,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -4203,6 +4577,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 455,
+              "height": 254
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -4252,6 +4632,12 @@
               -27
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 555,
+                "height": 329
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -4290,6 +4676,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -4309,6 +4699,12 @@
           992
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -4386,6 +4782,12 @@
               }
             }
           ],
+          "meta": {
+            "dimensions": {
+              "width": 500,
+              "height": 400
+            }
+          },
           "shape": {
             "path": {
               "type": "PATH",
@@ -4474,6 +4876,12 @@
               1802
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -4524,6 +4932,12 @@
               1671
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 455,
+                "height": 254
+              }
+            },
             "layers": [
               {
                 "id": "329-18-Background",
@@ -4549,6 +4963,12 @@
                     0
                   ],
                   "effects": [],
+                  "meta": {
+                    "dimensions": {
+                      "width": 455,
+                      "height": 254
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -4598,6 +5018,12 @@
                       -27
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 555,
+                        "height": 329
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -4636,6 +5062,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 455,
+                    "height": 254
+                  },
                   "isArtboard": true
                 }
               }
@@ -4657,6 +5087,12 @@
               1602
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 400,
+                "height": 400
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -4693,6 +5129,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -4720,6 +5160,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 701,
+              "height": 750
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -4781,6 +5227,12 @@
               348
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 552,
+                "height": 74
+              }
+            },
             "text": {
               "value": "USE SHAPE OUTLINES:",
               "defaultStyle": {
@@ -4841,6 +5293,12 @@
                 120
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -4956,6 +5414,12 @@
                   0
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -5031,6 +5495,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -5077,6 +5545,12 @@
                   }
                 }
               ],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -5233,6 +5707,12 @@
                   27
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -5308,6 +5788,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -5333,6 +5817,12 @@
                 486
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -5448,6 +5938,12 @@
                   366
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -5523,6 +6019,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           },
@@ -5569,6 +6069,12 @@
                   }
                 }
               ],
+              "meta": {
+                "dimensions": {
+                  "width": 150,
+                  "height": 150
+                }
+              },
               "shape": {
                 "path": {
                   "type": "PATH",
@@ -5725,6 +6231,12 @@
                   393
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 300,
+                    "height": 300
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -5800,11 +6312,19 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 4374,
+                "height": 2475
+              },
               "isArtboard": true
             }
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       },
@@ -5832,6 +6352,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 386,
+              "height": 747
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -5914,6 +6440,12 @@
                 }
               }
             ],
+            "meta": {
+              "dimensions": {
+                "width": 200,
+                "height": 200
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -6018,11 +6550,19 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 4374,
+            "height": 2475
+          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 4374,
+        "height": 2475
+      },
       "isArtboard": true
     }
   }

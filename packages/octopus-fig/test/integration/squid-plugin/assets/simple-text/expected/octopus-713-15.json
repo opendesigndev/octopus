@@ -1,7 +1,7 @@
 {
   "id": "713-15",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 267.12,
     "height": 183.67
@@ -22,6 +22,12 @@
       -10.38131714
     ],
     "effects": [],
+    "meta": {
+      "dimensions": {
+        "width": 279,
+        "height": 51
+      }
+    },
     "text": {
       "value": "Lorem Ipsum!",
       "defaultStyle": {

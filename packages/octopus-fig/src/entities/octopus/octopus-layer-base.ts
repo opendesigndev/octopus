@@ -111,6 +111,17 @@ export class OctopusLayerBase {
     return this.type !== null
   }
 
+  get dimensions(): Octopus['Dimensions'] | undefined {
+    const size = this.sourceLayer.size
+    if (size === null) return undefined
+    return { width: size.x, height: size.y }
+  }
+
+  get meta(): Octopus['LayerMeta'] | undefined {
+    const dimensions = this.dimensions
+    return { dimensions }
+  }
+
   @firstCallMemo()
   get effects(): Octopus['Effect'][] {
     return this.sourceLayer.effects.reduce((effects, sourceEffect) => {
@@ -133,6 +144,7 @@ export class OctopusLayerBase {
       blendMode: this.blendMode,
       transform: this.transform,
       effects: this.effects,
+      meta: this.meta,
     }
   }
 }

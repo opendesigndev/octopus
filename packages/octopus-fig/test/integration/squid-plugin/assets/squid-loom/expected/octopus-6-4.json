@@ -1,7 +1,7 @@
 {
   "id": "6-4",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 1460,
     "height": 920
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 1460,
+          "height": 920
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           -18
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 1253.22,
+            "height": 1043
+          }
+        },
         "layers": [
           {
             "id": "6-6",
@@ -108,6 +120,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 769.52,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-7-ClippingMask",
@@ -152,6 +170,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 769.52,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -214,6 +238,12 @@
                       -372.79199219
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 2249.73,
+                        "height": 813.99
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -282,6 +312,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 769.52,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               }
@@ -303,6 +337,12 @@
               1043
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 222.31,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-10-ClippingMask",
@@ -347,6 +387,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 222.31,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -430,6 +476,12 @@
                         }
                       }
                     ],
+                    "meta": {
+                      "dimensions": {
+                        "width": 222.31,
+                        "height": 222.31
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -483,6 +535,12 @@
                       -129.9641571
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 482.24,
+                        "height": 482.24
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -551,6 +609,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 222.31,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               }
@@ -572,6 +634,12 @@
               548.79406738
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 222.31,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-14-ClippingMask",
@@ -616,6 +684,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 222.31,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -699,6 +773,12 @@
                         }
                       }
                     ],
+                    "meta": {
+                      "dimensions": {
+                        "width": 222.31,
+                        "height": 222.31
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -752,6 +832,12 @@
                       -198.36628723
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 1210.72,
+                        "height": 1210.72
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -820,6 +906,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 222.31,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               }
@@ -841,6 +931,12 @@
               273.27511597
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 581.42,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-18-ClippingMask",
@@ -885,6 +981,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 581.42,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -947,6 +1049,12 @@
                       -121.41397095
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 1482.62,
+                        "height": 492.5
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -1015,6 +1123,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 581.42,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               }
@@ -1036,6 +1148,12 @@
               820.69281006
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 873.84,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-21",
@@ -1074,6 +1192,12 @@
                     }
                   }
                 ],
+                "meta": {
+                  "dimensions": {
+                    "width": 873.84,
+                    "height": 222.31
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "RECTANGLE",
@@ -1154,6 +1278,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 873.84,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -1201,6 +1331,10 @@
                 ],
                 "layers": [],
                 "meta": {
+                  "dimensions": {
+                    "width": 873.84,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               },
@@ -1220,6 +1354,12 @@
                   -121.4138031
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 3475.31,
+                    "height": 492.5
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "RECTANGLE",
@@ -1304,6 +1444,12 @@
               547.08404541
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 461.71,
+                "height": 222.31
+              }
+            },
             "layers": [
               {
                 "id": "6-25-ClippingMask",
@@ -1348,6 +1494,12 @@
                       }
                     }
                   ],
+                  "meta": {
+                    "dimensions": {
+                      "width": 461.71,
+                      "height": 222.31
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -1431,6 +1583,12 @@
                         }
                       }
                     ],
+                    "meta": {
+                      "dimensions": {
+                        "width": 461.71,
+                        "height": 222.31
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -1484,6 +1642,12 @@
                       568.4296875
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 747.77,
+                        "height": 747.77
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -1566,6 +1730,12 @@
                       -312.94000244
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 1186.78,
+                        "height": 1085.88
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -1648,6 +1818,12 @@
                       3844.203125
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 1225.25,
+                        "height": 1225.25
+                      }
+                    },
                     "shape": {
                       "path": {
                         "type": "RECTANGLE",
@@ -1716,6 +1892,10 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 461.71,
+                    "height": 222.31
+                  },
                   "isArtboard": true
                 }
               }
@@ -1739,6 +1919,12 @@
           117
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 737,
+            "height": 634
+          }
+        },
         "layers": [
           {
             "id": "6-37-Background",
@@ -1764,6 +1950,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 737,
+                  "height": 634
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -1825,6 +2017,12 @@
                   141
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 542,
+                    "height": 200
+                  }
+                },
                 "text": {
                   "value": "Squid",
                   "defaultStyle": {
@@ -1881,6 +2079,12 @@
                   387
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 665,
+                    "height": 55
+                  }
+                },
                 "text": {
                   "value": "Create. Animate. Export.",
                   "defaultStyle": {
@@ -1937,6 +2141,12 @@
                   387
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 665,
+                    "height": 55
+                  }
+                },
                 "text": {
                   "value": "Create. Animate. Export.",
                   "defaultStyle": {
@@ -1993,6 +2203,12 @@
                   0
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 100,
+                    "height": 108.36
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "RECTANGLE",
@@ -2061,6 +2277,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 737,
+                "height": 634
+              },
               "isArtboard": true
             }
           }
@@ -2090,6 +2310,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 607.93,
+              "height": 629.72
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -2136,11 +2362,19 @@
         ],
         "layers": [],
         "meta": {
+          "dimensions": {
+            "width": 1460,
+            "height": 920
+          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 1460,
+        "height": 920
+      },
       "isArtboard": true
     }
   }

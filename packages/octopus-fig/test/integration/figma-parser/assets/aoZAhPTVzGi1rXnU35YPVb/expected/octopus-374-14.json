@@ -1,7 +1,7 @@
 {
   "id": "374-14",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.24",
+  "version": "3.1.0",
   "dimensions": {
     "width": 500,
     "height": 500
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 500,
+          "height": 500
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -125,6 +137,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 500,
+        "height": 500
+      },
       "isArtboard": true
     }
   }

@@ -5,7 +5,6 @@ import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
 import { env } from '../../services/index.js'
 import { normalizeTransform } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
-import { isEmptyObj } from '../../utils/misc.js'
 import { getTopComponentTransform } from '../../utils/source.js'
 
 import type { LayerSpecifics, OctopusLayerParent } from './octopus-layer-base.js'
@@ -42,8 +41,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
 
   get meta(): Octopus['LayerMeta'] | undefined {
     const isArtboard = ['FRAME', 'COMPONENT', 'INSTANCE'].includes(this.sourceLayer.type) ? true : undefined
-    const meta = { isArtboard }
-    return !isEmptyObj(meta) ? meta : undefined
+    return { ...super.meta, isArtboard }
   }
 
   get layers(): OctopusLayer[] {

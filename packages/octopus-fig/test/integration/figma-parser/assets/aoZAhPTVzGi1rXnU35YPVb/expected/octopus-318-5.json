@@ -1,7 +1,7 @@
 {
   "id": "318-5",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.24",
+  "version": "3.1.0",
   "dimensions": {
     "width": 850,
     "height": 502
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 850,
+          "height": 502
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -99,6 +105,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 100
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -184,6 +196,12 @@
               25
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 250,
+                "height": 50
+              }
+            },
             "text": {
               "value": "Button",
               "defaultStyle": {
@@ -225,6 +243,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 850,
+            "height": 502
+          },
           "isArtboard": true
         }
       },
@@ -252,6 +274,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 100
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -337,6 +365,12 @@
               25
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 250,
+                "height": 50
+              }
+            },
             "text": {
               "value": "Button 3",
               "defaultStyle": {
@@ -378,6 +412,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 850,
+            "height": 502
+          },
           "isArtboard": true
         }
       },
@@ -405,6 +443,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 750,
+              "height": 148
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -486,6 +530,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 300,
+                  "height": 100
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -571,6 +621,12 @@
                   25
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 250,
+                    "height": 50
+                  }
+                },
                 "text": {
                   "value": "Button",
                   "defaultStyle": {
@@ -612,6 +668,10 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 850,
+                "height": 502
+              },
               "isArtboard": true
             }
           },
@@ -639,6 +699,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 300,
+                  "height": 100
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -708,6 +774,12 @@
                     0
                   ],
                   "effects": [],
+                  "meta": {
+                    "dimensions": {
+                      "width": 300,
+                      "height": 100
+                    }
+                  },
                   "shape": {
                     "path": {
                       "type": "RECTANGLE",
@@ -793,6 +865,12 @@
                       25
                     ],
                     "effects": [],
+                    "meta": {
+                      "dimensions": {
+                        "width": 250,
+                        "height": 50
+                      }
+                    },
                     "text": {
                       "value": "Button",
                       "defaultStyle": {
@@ -834,16 +912,28 @@
                   }
                 ],
                 "meta": {
+                  "dimensions": {
+                    "width": 850,
+                    "height": 502
+                  },
                   "isArtboard": true
                 }
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 850,
+                "height": 502
+              },
               "isArtboard": true
             }
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 850,
+            "height": 502
+          },
           "isArtboard": true
         }
       },
@@ -871,6 +961,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 300,
+              "height": 100
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -941,6 +1037,12 @@
                 0
               ],
               "effects": [],
+              "meta": {
+                "dimensions": {
+                  "width": 300,
+                  "height": 100
+                }
+              },
               "shape": {
                 "path": {
                   "type": "RECTANGLE",
@@ -1026,6 +1128,12 @@
                   25
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 250,
+                    "height": 50
+                  }
+                },
                 "text": {
                   "value": "Button",
                   "defaultStyle": {
@@ -1067,16 +1175,28 @@
               }
             ],
             "meta": {
+              "dimensions": {
+                "width": 850,
+                "height": 502
+              },
               "isArtboard": true
             }
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 850,
+            "height": 502
+          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 850,
+        "height": 502
+      },
       "isArtboard": true
     }
   }

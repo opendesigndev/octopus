@@ -1,7 +1,7 @@
 {
   "id": "4-11",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 624.53,
     "height": 634.14
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 624.53,
+          "height": 634.14
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -99,6 +105,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 607.93,
+              "height": 629.72
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -160,6 +172,12 @@
               222.2481842
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 78.13,
+                "height": 78.21
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -208,6 +226,12 @@
               131.09597778
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 78.13,
+                "height": 78.21
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -256,6 +280,12 @@
               435.70855713
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 299,
+                "height": 0
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -333,6 +363,12 @@
               374.57458496
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 299,
+                "height": 0
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -410,6 +446,12 @@
               189.86753845
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 299,
+                "height": 0
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -487,6 +529,12 @@
               41.37543106
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 344.52,
+                "height": 355.17
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -546,11 +594,19 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 624.53,
+            "height": 634.14
+          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 624.53,
+        "height": 634.14
+      },
       "isArtboard": true
     }
   }

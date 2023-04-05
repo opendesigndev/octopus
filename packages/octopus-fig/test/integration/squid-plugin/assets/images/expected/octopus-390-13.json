@@ -1,7 +1,7 @@
 {
   "id": "390-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 2000,
     "height": 2000
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 2000,
+          "height": 2000
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           0
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -173,6 +185,12 @@
           0
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -255,6 +273,12 @@
           0
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -337,6 +361,12 @@
           0
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -419,6 +449,12 @@
           400
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 200
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -501,6 +537,12 @@
           400
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 200
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -583,6 +625,12 @@
           400
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 200
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -665,6 +713,12 @@
           400
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -747,6 +801,12 @@
           800
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -829,6 +889,12 @@
           800
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -911,6 +977,12 @@
           800
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -993,6 +1065,12 @@
           700
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1075,6 +1153,12 @@
           700
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 628,
+            "height": 171
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1157,6 +1241,12 @@
           1200
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1239,6 +1329,12 @@
           1200
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1321,6 +1417,12 @@
           1239
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1442,6 +1544,12 @@
           1578
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 343,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1563,6 +1671,12 @@
           1042
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 300,
+            "height": 497
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1684,6 +1798,12 @@
           1559
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 300,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1805,6 +1925,12 @@
           1559
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1926,6 +2052,12 @@
           1239
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2047,6 +2179,12 @@
           30
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 159,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2140,6 +2278,12 @@
           30
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 159,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2219,6 +2363,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 2000,
+        "height": 2000
+      },
       "isArtboard": true
     }
   }

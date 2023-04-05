@@ -1,7 +1,7 @@
 {
   "id": "114-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 1000,
     "height": 1000
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 1000,
+          "height": 1000
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           75
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 15,
+            "height": 5
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -143,6 +155,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 849,
+            "height": 172
+          }
+        },
         "text": {
           "value": "Hello World!",
           "defaultStyle": {
@@ -372,6 +390,12 @@
           271.17980957
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 173,
+            "height": 228
+          }
+        },
         "text": {
           "value": "ABC  ABCD ABCDE",
           "defaultStyle": {
@@ -427,6 +451,12 @@
           200.62889099
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 298.23,
+            "height": 277.04
+          }
+        },
         "text": {
           "value": "ABC  ABCDE ABCD",
           "defaultStyle": {
@@ -482,6 +512,12 @@
           157
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 298.23,
+            "height": 277.04
+          }
+        },
         "text": {
           "value": "ABC  ABCDE ABCD",
           "defaultStyle": {
@@ -577,6 +613,12 @@
           543
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 305,
+            "height": 391
+          }
+        },
         "text": {
           "value": "AA A A AA A aaaa aa aaa AA BBBB B BBB B bbbb F F FFFFF ffff G",
           "defaultStyle": {
@@ -732,6 +774,12 @@
           554
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 531,
+            "height": 421
+          }
+        },
         "text": {
           "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer mattis mauris eu magna faucibus, at accumsan est venenatis. Quisque sem massa, molestie in lobortis sit amet, interdum sagittis risus. Pellentesque ac viverra tellus. Vivamus sit amet accumsan mi. Suspendisse ligula magna, bibendum ac arcu non, venenatis tincidunt eros. Cras faucibus magna risus, tincidunt tempus felis interdum a. Pellentesque magna enim, pulvinar sit amet facilisis ac, pharetra malesuada massa. Donec in diam a justo ultricies facilisis sed eget nibh. Aliquam in nulla varius, eleifend sem non, feugiat nulla.Cras auctor, urna vel elementum mollis, nisl enim euismod elit, sed tempus lorem massa sit amet justo. Etiam finibus diam sed massa convallis ornare. In vulputate diam lorem, id convallis enim sodales vitae. Maecenas sit amet eros mattis, viverra tellus a, efficitur tellus. Curabitur dapibus ante neque, et viverra urna tristique sed. Nullam malesuada volutpat placerat. Cras aliquet tempor lacus, varius pretium eros molestie vel. Pellentesque bibendum mi justo, in porta felis iaculis eget. In eu tellus quis urna semper eleifend non in risus. Duis venenatis laoreet placerat. Sed et ligula aliquet, aliquet massa id, euismod justo. Donec sit amet cursus justo. Etiam eget nibh sed velit pretium elementum nec non tortor. Aenean sit amet rutrum orci, vel interdum magna. Sed vestibulum nulla non justo consectetur, varius mattis nunc aliquet. Duis mattis ante ac laoreet congue. Curabitur at risus non diam viverra facilisis non eget nunc. Fusce ultrices sagittis ligula, ut condimentum felis varius at. Nunc aliquet feugiat blandit. Duis quis dolor neque. Duis sed semper felis, at bibendum diam. Sed varius, ante sed bibendum molestie, libero nibh efficitur lacus, posuere convallis eros justo et diam. In rhoncus pulvinar consequat. Proin dignissim, metus imperdiet auctor aliquet, velit est pellentesque nibh, ut tempor risus tellus id urna. Nullam non imperdiet quam. Morbi dignissim, ligula in fringilla venenatis, turpis nunc laoreet augue, ultricies pellentesque tellus dolor et risus. Nam in quam quis lacus ornare vulputate. Vestibulum non fermentum massa. Curabitur sit amet congue magna, a congue ipsum. Nullam a hendrerit lacus, non tempor tortor. Proin auctor tempor cursus. Sed finibus feugiat eleifend.",
           "defaultStyle": {
@@ -788,6 +836,12 @@
           14
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 271,
+            "height": 48
+          }
+        },
         "text": {
           "value": "👍 Small Button",
           "defaultStyle": {
@@ -830,6 +884,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 1000,
+        "height": 1000
+      },
       "isArtboard": true
     }
   }

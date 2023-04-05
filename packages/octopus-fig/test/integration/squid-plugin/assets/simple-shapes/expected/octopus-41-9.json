@@ -1,7 +1,7 @@
 {
   "id": "41-9",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 115.85,
     "height": 115.85
@@ -22,6 +22,12 @@
       -4.74866486
     ],
     "effects": [],
+    "meta": {
+      "dimensions": {
+        "width": 100,
+        "height": 100
+      }
+    },
     "shape": {
       "path": {
         "type": "RECTANGLE",
