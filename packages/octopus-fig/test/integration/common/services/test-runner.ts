@@ -32,7 +32,8 @@ export class TestRunner {
   }
 
   _createReport(failed: Fail[]): string {
-    const source = fs.readFileSync(path.join(__dirname, '../report-template.hbs')).toString()
+    const templatePath = new URL('../report-template.hbs', import.meta.url).pathname
+    const source = fs.readFileSync(templatePath).toString()
     const template = handlebars.compile(source)
     return template({ failed })
   }
@@ -50,9 +51,9 @@ export class TestRunner {
     if (failed.length) {
       const html = this._createReport(failed)
 
-      await makeDir(path.join(__dirname, TestRunner.REPORT_FOLDER))
+      await makeDir(path.join(testDirPath, TestRunner.REPORT_FOLDER))
 
-      const reportPath = path.join(__dirname, TestRunner.REPORT_FOLDER, `test-report-${timestamp()}.html`)
+      const reportPath = path.join(testDirPath, TestRunner.REPORT_FOLDER, `test-report-${timestamp()}.html`)
 
       await saveFile(reportPath, html)
       console.error(`❌ FAILURE: ${failed.length} tests failed!\n`)

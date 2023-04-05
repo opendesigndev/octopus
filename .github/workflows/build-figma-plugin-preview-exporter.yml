@@ -1,0 +1,14 @@
+name: Figma Plugin Preview Exporter
+
+on:
+  pull_request:
+    paths:
+      - 'packages/figma-plugins/preview-exporter/**'
+
+jobs:
+  build-figma-plugin-preview-exporter:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/figma-plugin-preview-exporter'
+      base-version: '3.0.0'
+    secrets: inherit

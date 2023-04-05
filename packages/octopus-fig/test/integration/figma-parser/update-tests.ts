@@ -5,7 +5,8 @@ import { getCommandLineArgs } from '../common/utils/argv.js'
 
 async function updateTests() {
   const { selectedAsset } = getCommandLineArgs()
-  const assetReader = new AssetReader({ selectedAsset, testDirPath: __dirname, sourceFileName: SOURCE_FILE_NAME })
+  const testDirPath = new URL('.', import.meta.url).pathname
+  const assetReader = new AssetReader({ selectedAsset, testDirPath, sourceFileName: SOURCE_FILE_NAME })
   const testDirectoryData = await assetReader.getTestsDirectoryData()
 
   const testUpdater = new TestUpdater(testDirectoryData)

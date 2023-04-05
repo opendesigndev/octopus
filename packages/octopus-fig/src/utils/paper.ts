@@ -30,3 +30,7 @@ export function createPoint(x: number, y: number): paper.Point {
 export function createMatrix([a, b, c, d, tx, ty]: SourceTransform): paper.Matrix {
   return new Matrix(a, b, c, d, tx, ty)
 }
+
+export function createCompoundPath(pathData: string): paper.CompoundPath {
+  return new paper.CompoundPath(pathData)
+}

@@ -3,7 +3,7 @@ import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
 import { v4 as uuid } from 'uuid'
 
-import { SourceComponent } from './source-component.js'
+import { SourceArtboard } from './source-artboard.js'
 import { SourceEffect } from './source-effect.js'
 import { SourceEntity } from './source-entity.js'
 import { SourcePaint } from './source-paint.js'
@@ -16,7 +16,7 @@ import type { Octopus } from '../../typings/octopus.js'
 import type { RawAlign, RawBlendMode, RawLayer, RawStrokeCap, RawStrokeJoin } from '../../typings/raw/index.js'
 import type { SourceGeometry, SourceTransform } from '../../typings/source.js'
 
-export type SourceLayerParent = SourceComponent | SourceLayerContainer | SourceLayerShape
+export type SourceLayerParent = SourceArtboard | SourceLayerContainer | SourceLayerShape
 
 type SourceLayerOptions = {
   parent: SourceLayerParent
@@ -47,9 +47,9 @@ export class SourceLayerCommon extends SourceEntity {
     return this._parent
   }
 
-  get parentComponent(): SourceComponent {
+  get parentComponent(): SourceArtboard {
     const parent = this._parent
-    return parent instanceof SourceComponent ? parent : parent.parentComponent
+    return parent instanceof SourceArtboard ? parent : parent.parentComponent
   }
 
   get visible(): boolean {
@@ -149,6 +149,6 @@ export class SourceLayerCommon extends SourceEntity {
 
   get isArtboard(): boolean | undefined {
     if (this._rawValue.parent?.type) return this._rawValue.parent?.type === 'PAGE'
-    return this.parent instanceof SourceComponent
+    return this.parent instanceof SourceArtboard
   }
 }

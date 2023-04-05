@@ -43,7 +43,7 @@ export class SourceLayerContainer extends SourceLayerCommon {
   }
 
   get clipsContent(): boolean {
-    return this._rawValue.clipsContent ?? true
+    return this._rawValue.clipsContent ?? false
   }
 
   get layers(): SourceLayer[] {

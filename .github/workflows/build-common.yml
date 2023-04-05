@@ -1,0 +1,13 @@
+name: Common build & publish
+
+on:
+  pull_request:
+    paths:
+      - 'packages/octopus-common/**'
+
+jobs:
+  build-octopus-common:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/octopus-common'
+    secrets: inherit

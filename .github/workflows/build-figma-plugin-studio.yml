@@ -1,0 +1,14 @@
+name: Figma Plugin Studio
+
+on:
+  pull_request:
+    paths:
+      - 'packages/figma-plugins/studio/**'
+
+jobs:
+  build-figma-plugin-studio:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/figma-plugin-studio'
+      base-version: '3.0.0'
+    secrets: inherit
