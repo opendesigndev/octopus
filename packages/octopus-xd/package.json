@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.32",
+    "@opendesign/octopus-common": "3.0.0-rc.35",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/blueimp-md5": "^2.18.0",
     "@types/lodash": "^4.14.178",

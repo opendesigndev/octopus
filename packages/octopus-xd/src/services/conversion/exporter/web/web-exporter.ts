@@ -1,11 +1,11 @@
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
 
 /**
  * Minimalistic exporter used for web build
  */
 export class WebExporter {
-  exportArtboard(_: SourceArtboard, _artboard: ArtboardConversionResult): Promise<unknown> {
+  exportArtboard(_: SourceArtboard, _artboard: ComponentConversionResult): Promise<unknown> {
     console.log('exportArtboard')
     return Promise.resolve()
   }

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../../entities/source/source-design.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
 import type { Exporter } from '../index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
@@ -95,7 +95,7 @@ export class TempExporter extends EventEmitter implements Exporter {
     return result
   }
 
-  async exportArtboard(source: SourceArtboard, artboard: ArtboardConversionResult): Promise<string> {
+  async exportArtboard(source: SourceArtboard, artboard: ComponentConversionResult): Promise<string> {
     const sourcePath = await this._save(`source-${artboard.id}.json`, this._stringify(source.raw))
     const octopusPath = await this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
     const result = {
