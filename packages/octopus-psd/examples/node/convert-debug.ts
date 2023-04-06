@@ -1,7 +1,7 @@
 import path from 'path'
 
+import { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
-import { FeaturesTracker } from '@opendesign/octopus-common/dist/utils/features-tracker.js'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
 import dotenv from 'dotenv'

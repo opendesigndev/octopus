@@ -1,5 +1,5 @@
-import { isObject, keys } from './common.js'
-import { escapeRegExp } from './text.js'
+import { isObject, keys } from '../utils/common.js'
+import { escapeRegExp } from '../utils/text.js'
 
 import type { GenericComponentConversionResult } from '../typings/octopus-common/index.js'
 

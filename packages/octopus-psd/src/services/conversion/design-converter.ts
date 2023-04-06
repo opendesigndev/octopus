@@ -13,11 +13,11 @@ import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 import type {
   GenericComponentConversionResult,
   GenericDesignConversionResult,
 } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
-import type { FeaturesTracker } from '@opendesign/octopus-common/dist/utils/features-tracker.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
