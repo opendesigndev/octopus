@@ -16,6 +16,14 @@ export function isObject(anyValue: unknown): anyValue is Record<string, unknown>
   return Boolean(anyValue && (typeof anyValue === 'object' || typeof anyValue === 'function'))
 }
 
+export function isFiniteNumber(value: unknown): value is number {
+  return Number.isFinite(value)
+}
+
+export function isString(value: unknown): value is string {
+  return typeof value === 'string'
+}
+
 export function getMapped<T, U>(value: unknown, map: { [key: string]: T }, defaultValue: U): T | U {
   if (typeof value !== 'string') return defaultValue
   return value && value in map ? map[value] : defaultValue

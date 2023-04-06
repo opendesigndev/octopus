@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import max from 'lodash/max.js'
 
+import { convertToRawTransform } from './utils.js'
+import { createMatrix } from '../../../utils/paper.js'
+import { getTransformFor } from '../../../utils/source.js'
+
 import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api.js'
-import type { RawLayer, RawPaint, RawTextStyle } from '../../../typings/raw/index.js'
+import type { RawLayer, RawPaint, RawTextStyle, RawTransform } from '../../../typings/raw/index.js'
 
 const DEFAULT_TRANSFORM = [
   [1, 0, 0],
@@ -10,7 +14,6 @@ const DEFAULT_TRANSFORM = [
 ]
 
 const isArray = Array.isArray
-const isNumber = (value?: any): value is number => typeof value === 'number'
 
 export class SourceNormalizer {
   private _raw: any // TODO fix any
@@ -26,15 +29,16 @@ export class SourceNormalizer {
     }
   }
 
-  private _normalizeChildTransform(layer: any, subTx: number, subTy: number): any {
-    const [[a, c, tx], [b, d, ty]] = layer.relativeTransform ?? [[], []]
-    if (!isNumber(tx) || !isNumber(ty)) return layer
-    layer.relativeTransform = [
-      [a, c, tx - subTx],
-      [b, d, ty - subTy],
-    ]
+  private _normalizeChildTransform(layer: any, parentTransform: RawTransform): any {
+    const relativeTransform = getTransformFor(layer.relativeTransform)
+    const parentSourceTransform = getTransformFor(parentTransform)
+    if (!relativeTransform || !parentSourceTransform) return layer
+
+    const resultTransform = createMatrix(parentSourceTransform).invert().append(createMatrix(relativeTransform)).values
+    layer.relativeTransform = convertToRawTransform(resultTransform)
+
     if (layer.type === 'GROUP' && isArray(layer.children)) {
-      layer.children.forEach((child: unknown) => this._normalizeChildTransform(child, subTx, subTy))
+      layer.children.forEach((child: unknown) => this._normalizeChildTransform(child, parentTransform))
     }
     return layer
   }
@@ -155,9 +159,8 @@ export class SourceNormalizer {
   }
 
   private _normalizeGroup(raw: any): RawLayer {
-    const [[_a, _c, tx], [_b, _d, ty]] = raw.relativeTransform
-    if (isArray(raw.children) && isNumber(tx) && isNumber(ty)) {
-      raw.children.forEach((child: unknown) => this._normalizeChildTransform(child, tx, ty))
+    if (isArray(raw.children) && isArray(raw.relativeTransform)) {
+      raw.children.forEach((child: unknown) => this._normalizeChildTransform(child, raw.relativeTransform))
     }
     return raw
   }

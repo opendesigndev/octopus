@@ -1,0 +1,14 @@
+name: Figma Plugin Common
+
+on:
+  pull_request:
+    paths:
+      - 'packages/figma-plugins/common/**'
+
+jobs:
+  build-figma-plugin-common:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/figma-plugin-common'
+      base-version: '3.0.0'
+    secrets: inherit

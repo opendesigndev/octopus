@@ -1,6 +1,6 @@
 import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { pathRelative } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
-import { pathRelative } from '../../utils/fs-path.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../../octopus-psd-converter.js'
@@ -84,12 +84,12 @@ export class OctopusManifest {
     return this._octopusConverter.pkg.manifestSpecVersion
   }
 
-  get meta(): Manifest['OctopusManifestMeta'] {
-    const photoshopICCProfile = this._sourceDesign.iccProfileName
+  getMeta(): Manifest['OctopusManifestMeta'] {
     const converterVersion = this._octopusConverter.pkg.version
-    // by default typescript does not check for excess types
-    // https://github.com/microsoft/TypeScript/issues/19775#issue-271567665
-    return { converterVersion, ...(photoshopICCProfile ? { photoshopICCProfile } : null) }
+
+    return {
+      converterVersion,
+    }
   }
 
   get psdVersion(): string {
@@ -198,7 +198,7 @@ export class OctopusManifest {
       version: this.version,
       origin: { name: 'PHOTOSHOP', version: this.psdVersion },
       name: this.name,
-      meta: this.meta,
+      meta: this.getMeta(),
       pages: [],
       components: this._components,
       chunks: [],

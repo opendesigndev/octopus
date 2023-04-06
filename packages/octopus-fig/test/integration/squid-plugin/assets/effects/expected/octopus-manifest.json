@@ -6,7 +6,7 @@
   },
   "name": "Untitled",
   "meta": {
-    "converterVersion": "3.0.0-rc.28"
+    "converterVersion": "3.0.0-rc.37"
   },
   "pages": [],
   "components": [
@@ -20,7 +20,7 @@
       "bounds": {
         "x": 246,
         "y": -65,
-        "width": 1325,
+        "width": 1515,
         "height": 1000
       },
       "dependencies": [],

@@ -6,32 +6,32 @@ import type { OctopusManifest } from './octopus-manifest.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { DesignConverter } from '../../services/conversion/design-converter.js'
 import type { Octopus } from '../../typings/octopus.js'
-import type { SourceComponent } from '../source/source-component.js'
+import type { SourceArtboard } from '../source/source-artboard.js'
 
 type OctopusComponentOptions = {
   designConverter: DesignConverter
-  source: SourceComponent
+  source: SourceArtboard
 }
 
 export class OctopusComponent {
   private _designConverter: DesignConverter
-  private _sourceComponent: SourceComponent
+  private _sourceArtboard: SourceArtboard
 
   constructor(options: OctopusComponentOptions) {
     this._designConverter = options.designConverter
-    this._sourceComponent = options.source
+    this._sourceArtboard = options.source
   }
 
   get parentComponent(): OctopusComponent {
     return this
   }
 
-  get sourceComponent(): SourceComponent {
-    return this._sourceComponent
+  get sourceArtboard(): SourceArtboard {
+    return this._sourceArtboard
   }
 
   get sourceLayer(): SourceLayer {
-    return this.sourceComponent.sourceLayer
+    return this.sourceArtboard.sourceLayer
   }
 
   get designConverter(): DesignConverter {
@@ -43,14 +43,14 @@ export class OctopusComponent {
   }
 
   get dimensions(): Octopus['Dimensions'] | undefined {
-    const bounds = env.NODE_ENV === 'debug' ? this.sourceComponent.bounds : this.sourceComponent.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+    const bounds = env.NODE_ENV === 'debug' ? this.sourceArtboard.bounds : this.sourceArtboard.boundingBox // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
     if (!bounds) return undefined
     const { width, height } = bounds
     return { width, height }
   }
 
   get id(): string {
-    return convertId(this.sourceComponent.id)
+    return convertId(this.sourceArtboard.id)
   }
 
   get version(): string {

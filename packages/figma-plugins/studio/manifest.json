@@ -1,0 +1,8 @@
+{
+  "name": "Ceros Studio",
+  "id": "1220032162657897733",
+  "api": "1.0.0",
+  "editorType": ["figma"],
+  "main": "dist/main.js",
+  "ui": "dist/index.html"
+}

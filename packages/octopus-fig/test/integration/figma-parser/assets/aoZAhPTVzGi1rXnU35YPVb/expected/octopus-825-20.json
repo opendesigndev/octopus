@@ -1,0 +1,212 @@
+{
+  "id": "825-20",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.2",
+  "dimensions": {
+    "width": 140,
+    "height": 76
+  },
+  "content": {
+    "id": "825-20-Background",
+    "name": "Bug - Component Font",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "825-20-BackgroundMask",
+      "name": "Bug - Component Font",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 140,
+            "y0": 0,
+            "y1": 76
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "825-21-Background",
+        "name": "Component/CTA-Button",
+        "type": "MASK_GROUP",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "maskBasis": "SOLID",
+        "mask": {
+          "id": "825-21-BackgroundMask",
+          "name": "Component/CTA-Button",
+          "type": "SHAPE",
+          "visible": true,
+          "opacity": 1,
+          "blendMode": "NORMAL",
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "effects": [],
+          "shape": {
+            "path": {
+              "type": "RECTANGLE",
+              "visible": true,
+              "transform": [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "rectangle": {
+                "x0": 0,
+                "x1": 101.08,
+                "y0": 0,
+                "y1": 31.38
+              },
+              "cornerRadius": 4.345911979675293
+            },
+            "fillRule": "NON_ZERO",
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0.1059,
+                  "g": 0,
+                  "b": 0.9843,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          }
+        },
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          17,
+          23
+        ],
+        "layers": [
+          {
+            "id": "I825-21_156-2399",
+            "name": "CTA Text",
+            "type": "TEXT",
+            "visible": true,
+            "opacity": 1,
+            "blendMode": "NORMAL",
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              13.03773594,
+              8.69182396
+            ],
+            "effects": [],
+            "text": {
+              "value": "Auto Layout Issue?",
+              "defaultStyle": {
+                "font": {
+                  "postScriptName": "AvenirNext-Regular",
+                  "family": "Avenir Next"
+                },
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "fills": [
+                  {
+                    "type": "COLOR",
+                    "visible": true,
+                    "blendMode": "NORMAL",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": []
+              },
+              "styles": [],
+              "horizontalAlign": "CENTER",
+              "verticalAlign": "CENTER",
+              "frame": {
+                "mode": "AUTO_WIDTH",
+                "size": {
+                  "width": 75,
+                  "height": 14
+                }
+              },
+              "baselinePolicy": "OFFSET_ASCENDER"
+            }
+          }
+        ],
+        "meta": {
+          "isArtboard": true
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

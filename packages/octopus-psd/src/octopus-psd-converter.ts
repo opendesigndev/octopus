@@ -9,6 +9,7 @@ import type { AbstractExporter } from './services/exporters/abstract-exporter.js
 import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
 import type { Logger } from './typings/index.js'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
+import type { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 
 export type OctopusPSDConverterOptions = {
   platformFactories: WebFactories | NodeFactories
@@ -24,6 +25,8 @@ export type DesignConverterOptions = {
   designId?: string
   /** Optional Exporter. */
   exporter?: AbstractExporter
+  /**Optional tracking service for tracking features in OctopusManifest */
+  trackingService?: FeaturesTracker
 }
 
 /**

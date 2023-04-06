@@ -13,31 +13,28 @@ import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
+import type {
+  GenericComponentConversionResult,
+  GenericDesignConversionResult,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
   components: ComponentConversionResult[]
   images: SourceImage[]
 }
+export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 
-export type ComponentConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
-
-export type DesignConversionResult = {
-  manifest: Manifest['OctopusManifest']
-  time: number
-}
 export class DesignConverter {
   private _designId: string
   private _octopusConverter: OctopusPSDConverter
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
   private _exporter: AbstractExporter | null
+  private _trackingService?: FeaturesTracker
 
   static COMPONENT_QUEUE_PARALLELS = 5
   static COMPONENT_QUEUE_NAME = 'Component queue'
@@ -49,6 +46,7 @@ export class DesignConverter {
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter })
     this._exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
+    this._trackingService = options.trackingService
   }
 
   get designId(): string {
@@ -84,6 +82,7 @@ export class DesignConverter {
       this._convertSourceComponentSafe(componentId)
     )
     const { value, error } = result
+
     return { id: componentId, value, error, time }
   }
 
@@ -148,6 +147,11 @@ export class DesignConverter {
 
     /** Final trigger of manifest save */
     clearInterval(manifestInterval)
+    if (this._trackingService) {
+      this._trackingService.collectLayerFeatures(components)
+      this._trackingService.registerSpecificFeatures(`iccProfileName.${this._sourceDesign.iccProfileName}`)
+    }
+
     const manifest = await this._exportManifest()
 
     /** Trigger finalizer */

@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
@@ -54,6 +55,10 @@ async function convertDesign({
     console.log(`\n${chalk.yellow(`Manifest:`)} file://${manifest}\n\n`)
   })
 
+  exporter.on('octopus:statistics', (statistics) => {
+    console.log(`\n${chalk.yellow(`Statistics:`)} file://${statistics}\n\n`)
+  })
+
   const reader = await PSDFileReader.withRenderer({ path: filePath, designId })
   const sourceDesign = await reader.getSourceDesign()
   if (sourceDesign === null) {
@@ -61,7 +66,7 @@ async function convertDesign({
     return
   }
   const converter = createConverter()
-  converter.convertDesign({ exporter, sourceDesign })
+  converter.convertDesign({ exporter, sourceDesign, trackingService: FeaturesTracker.withDefaultPathKeys() })
   await exporter.completed()
 }
 

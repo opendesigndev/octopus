@@ -3,6 +3,7 @@ import { getConvertedAsync } from '@opendesign/octopus-common/dist/utils/common.
 import { OctopusLayerBase } from './octopus-layer-base.js'
 import { createOctopusLayers } from '../../factories/create-octopus-layer.js'
 import { env } from '../../services/index.js'
+import { normalizeTransform } from '../../utils/convert.js'
 import { DEFAULTS } from '../../utils/defaults.js'
 import { isEmptyObj } from '../../utils/misc.js'
 import { getTopComponentTransform } from '../../utils/source.js'
@@ -36,7 +37,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
       return env.NODE_ENV === 'debug' // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
         ? getTopComponentTransform(this._sourceLayer) ?? DEFAULTS.TRANSFORM
         : DEFAULTS.TRANSFORM
-    return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
+    return normalizeTransform(this.sourceLayer.transform)
   }
 
   get meta(): Octopus['LayerMeta'] | undefined {

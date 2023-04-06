@@ -4,7 +4,13 @@ import path from 'path'
 import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import { v4 as uuidv4 } from 'uuid'
 
-import { getOctopusFileName, IMAGES_DIR_NAME, SOURCE_NAME, MANIFEST_NAME } from '../../utils/exporter.js'
+import {
+  getOctopusFileName,
+  IMAGES_DIR_NAME,
+  SOURCE_NAME,
+  MANIFEST_NAME,
+  STATISTICS_NAME,
+} from '../../utils/exporter.js'
 import { makeDir, saveFile } from '../../utils/files.js'
 import { stringify } from '../../utils/stringify.js'
 
@@ -28,6 +34,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   private _assetsSaves: Promise<unknown>[]
   private _completed: DetachedPromiseControls<void>
   private _manifestPath: string | undefined
+  private _statisticsPath: string | undefined
 
   static IMAGES_DIR_NAME = IMAGES_DIR_NAME
   static MANIFEST_NAME = MANIFEST_NAME
@@ -70,6 +77,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
 
   finalizeExport(): void {
     this.emit('octopus:manifest', this._manifestPath)
+    this.emit('octopus:statistics', this._statisticsPath)
     this._completed.resolve()
   }
 
@@ -115,5 +123,10 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   async exportManifest({ manifest }: DesignConversionResult): Promise<string> {
     this._manifestPath = await this._save(MANIFEST_NAME, stringify(manifest))
     return this._manifestPath
+  }
+
+  async exportStatistics(statistics: object): Promise<string> {
+    this._statisticsPath = await this._save(STATISTICS_NAME, stringify(statistics))
+    return this._statisticsPath
   }
 }

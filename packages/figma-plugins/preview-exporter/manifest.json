@@ -1,0 +1,9 @@
+{
+  "name": "Preview Exporter",
+  "id": "1206274224746282691",
+  "api": "1.0.0",
+  "editorType": ["figma"],
+  "main": "dist/main.js",
+  "ui": "dist/index.html",
+  "enablePrivatePluginApi": true
+}

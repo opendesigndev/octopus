@@ -10,7 +10,7 @@ import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 import type { Exporter, AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type LocalExporterOptions = {
@@ -93,10 +93,10 @@ export class LocalExporter implements Exporter {
 
   /**
    * Exports given Octopus Artboard
-   * @param {ArtboardConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
+   * @param {ComponentConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
    * @returns {Promise<string | null>} path to the exported OctopusArtboard
    */
-  exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
+  exportArtboard(_: SourceArtboard, artboard: ComponentConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
     return this._save(createOctopusArtboardFileName(artboard.value?.id ?? ''), this._stringify(artboard.value))
   }

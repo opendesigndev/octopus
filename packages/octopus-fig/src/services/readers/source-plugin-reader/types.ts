@@ -13,8 +13,12 @@ export type EventFill = {
   event: 'ready:fill'
   data: ResolvedFill
 }
+export type EventPreview = {
+  event: 'ready:preview'
+  data: ResolvedPreview
+}
 
-export type Event = EventDesign | EventFrame | EventFill
+export type Event = EventDesign | EventFrame | EventFill | EventPreview
 
 export type ResolvedContent = {
   artboards: ResolvedFrame[]
@@ -38,4 +42,10 @@ export type ResolvedFill = {
   ref: string
   buffer: Uint8Array
   size?: ImageSize | undefined
+}
+
+export type ResolvedPreview = {
+  designId: string
+  nodeId: string
+  buffer: Uint8Array
 }

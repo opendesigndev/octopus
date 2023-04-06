@@ -22,11 +22,9 @@ export class OctopusEffect {
   get shadow(): Octopus['ShadowConfig'] | null {
     const offset = this._effect.offset
     if (offset === null) return null
-
     const blur = this._effect.radius
     const choke = this._effect.spread
     const color = convertColor(this._effect.color)
-
     return { offset, blur, choke, color }
   }
 
@@ -36,7 +34,6 @@ export class OctopusEffect {
     const basis = 'BODY'
     const shadow = this.shadow
     if (shadow === null) return null
-
     return { type: 'INNER_SHADOW', visible, blendMode, basis, shadow }
   }
 
@@ -46,24 +43,21 @@ export class OctopusEffect {
     const basis = 'BODY'
     const shadow = this.shadow
     if (shadow === null) return null
-
     return { type: 'DROP_SHADOW', visible, blendMode, basis, shadow }
   }
 
-  private get _blur(): Octopus['EffectBlur'] {
+  private get _blur(): Octopus['EffectBoundedBlur'] {
     const visible = this.visible
     const basis = 'LAYER_AND_EFFECTS'
-    const blur = this._effect.radius / 2
-
-    return { type: 'BLUR', visible, basis, blur }
+    const blur = this._effect.radius
+    return { type: 'BOUNDED_BLUR', visible, basis, blur }
   }
 
-  private get _backgroundBlur(): Octopus['EffectBlur'] {
+  private get _backgroundBlur(): Octopus['EffectBoundedBlur'] {
     const visible = this.visible
     const basis = 'BACKGROUND'
     const blur = this._effect.radius
-
-    return { type: 'BLUR', visible, basis, blur }
+    return { type: 'BOUNDED_BLUR', visible, basis, blur }
   }
 
   convert(): Octopus['Effect'] | null {

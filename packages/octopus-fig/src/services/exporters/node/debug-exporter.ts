@@ -25,20 +25,20 @@ type DebugExporterOptions = {
   designId?: string
 }
 
-export type ComponentDependencies = { images: Promise<string>[] }
+type ComponentDependencies = { images: Promise<string>[] }
 
-export const IMAGES_DIR_NAME = 'images'
-export const IMAGE_EXTNAME = '.png'
+const IMAGES_DIR_NAME = 'images'
+const IMAGE_EXTNAME = '.png'
 
-export function getOctopusFileName(id: string): string {
+function getOctopusFileName(id: string): string {
   return `${kebabCase(id)}-octopus.json`
 }
 
-export function getPreviewFileName(id: string): string {
+function getPreviewFileName(id: string): string {
   return `${kebabCase(id)}-preview${IMAGE_EXTNAME}`
 }
 
-export function getSourceFileName(id: string): string {
+function getSourceFileName(id: string): string {
   return `${kebabCase(id)}-source.json`
 }
 
@@ -53,11 +53,12 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   private _imageMap: { [key: string]: DetachedPromiseControls<string> | undefined }
   private _manifestPath: string | undefined
 
-  static IMAGES_DIR_NAME = IMAGES_DIR_NAME
-  static MANIFEST_NAME = MANIFEST_NAME
-  static getSourceFileName = getSourceFileName
-  static getOctopusFileName = getOctopusFileName
-  static getPreviewFileName = getPreviewFileName
+  IMAGES_DIR_NAME = IMAGES_DIR_NAME
+  IMAGE_EXTNAME = IMAGE_EXTNAME
+  MANIFEST_NAME = MANIFEST_NAME
+  getSourceFileName = getSourceFileName
+  getOctopusFileName = getOctopusFileName
+  getPreviewFileName = getPreviewFileName
 
   /**
    * Exports octopus assets into given `tempDir`.
@@ -76,7 +77,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   private async _initOutputDir(options: DebugExporterOptions) {
     const dirName = typeof options.designId === 'string' ? `${timestamp()}-${options.designId}` : uuidv4()
     const tempPath = path.join(this._tempDir, dirName)
-    await makeDir(path.join(tempPath, DebugExporter.IMAGES_DIR_NAME))
+    await makeDir(path.join(tempPath, this.IMAGES_DIR_NAME))
     return tempPath
   }
 
@@ -105,7 +106,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawDesign
    */
   async exportRawDesign(raw: RawDesign): Promise<string> {
-    const rawPath = DebugExporter.getSourceFileName('design')
+    const rawPath = this.getSourceFileName('design')
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:design', savedPath)
     return rawPath
@@ -118,7 +119,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawComponent
    */
   async exportRawComponent(raw: RawLayerContainer, name: string): Promise<string> {
-    const rawPath = DebugExporter.getSourceFileName(name)
+    const rawPath = this.getSourceFileName(name)
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:component', savedPath)
     return rawPath
@@ -131,7 +132,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the exported RawChunk
    */
   async exportRawChunk(raw: ResolvedStyle, name: string): Promise<string> {
-    const rawPath = DebugExporter.getSourceFileName(name)
+    const rawPath = this.getSourceFileName(name)
     const savedPath = await this._save(rawPath, stringify(raw))
     this.emit('raw:chunk', savedPath)
     return rawPath
@@ -163,7 +164,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
       this.emit('octopus:component', { ...result }, role)
       return Promise.resolve(null)
     }
-    const path = DebugExporter.getOctopusFileName(result.id)
+    const path = this.getOctopusFileName(result.id)
     const octopusPath = await this._save(path, stringify(result.value))
     const dependencies = this.getComponentDependencies(result.value)
     this.emit('octopus:component', { ...result, octopusPath, dependencies }, role)
@@ -171,11 +172,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   getImagePath(name: string): string {
-    return path.join(DebugExporter.IMAGES_DIR_NAME, `${name}${IMAGE_EXTNAME}`)
+    return path.join(this.IMAGES_DIR_NAME, `${name}${this.IMAGE_EXTNAME}`)
   }
 
   /**
-   * Exports given Image into folder specified in `DebugExporter.IMAGES_DIR_NAME`
+   * Exports given Image into folder specified in `this.IMAGES_DIR_NAME`
    * @param {string} name Name of the exported Image
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image
@@ -190,13 +191,13 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   }
 
   /**
-   * Exports given Image Preview into folder specified in `DebugExporter.getPreviewFileName()`
+   * Exports given Image Preview into folder specified in `this.getPreviewFileName()`
    * @param {string} id ID of the exported Image
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image Preview
    */
   async exportPreview(id: string, data: ArrayBuffer): Promise<string> {
-    const previewPath = DebugExporter.getPreviewFileName(id)
+    const previewPath = this.getPreviewFileName(id)
     const savedPath = await this._save(previewPath, Buffer.from(data))
     this.emit('source:preview', savedPath)
     return previewPath
@@ -208,7 +209,7 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @returns {Promise<string>} returns path to the OctopusManifest
    */
   async exportManifest(manifest: Manifest['OctopusManifest']): Promise<string> {
-    this._manifestPath = await this._save(DebugExporter.MANIFEST_NAME, stringify(manifest))
+    this._manifestPath = await this._save(this.MANIFEST_NAME, stringify(manifest))
     return this._manifestPath
   }
 }

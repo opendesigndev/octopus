@@ -1,7 +1,7 @@
 import type { AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../octopus-ai-converter.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
 
 /**
  * Minimalistic exporter used for web build
@@ -18,7 +18,7 @@ export class WebExporter {
   finalizeExport(): void {
     Promise.resolve()
   }
-  exportArtboard(_source: SourceArtboard, _artboard: ArtboardConversionResult): Promise<unknown> {
+  exportArtboard(_source: SourceArtboard, _artboard: ComponentConversionResult): Promise<unknown> {
     console.log('Exporting artboard')
     return Promise.resolve()
   }
