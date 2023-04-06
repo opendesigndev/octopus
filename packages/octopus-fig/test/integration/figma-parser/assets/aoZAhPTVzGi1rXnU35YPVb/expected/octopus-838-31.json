@@ -1,0 +1,178 @@
+{
+  "id": "838-31",
+  "type": "OCTOPUS_COMPONENT",
+  "version": "3.0.1",
+  "dimensions": {
+    "width": 550,
+    "height": 407
+  },
+  "content": {
+    "id": "838-31-Background",
+    "name": "bug-shadow-on-image",
+    "type": "MASK_GROUP",
+    "visible": true,
+    "opacity": 1,
+    "blendMode": "PASS_THROUGH",
+    "maskBasis": "BODY_EMBED",
+    "mask": {
+      "id": "838-31-BackgroundMask",
+      "name": "bug-shadow-on-image",
+      "type": "SHAPE",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "transform": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "effects": [],
+      "shape": {
+        "path": {
+          "type": "RECTANGLE",
+          "visible": true,
+          "transform": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rectangle": {
+            "x0": 0,
+            "x1": 550,
+            "y0": 0,
+            "y1": 407
+          }
+        },
+        "fillRule": "NON_ZERO",
+        "fills": [
+          {
+            "type": "COLOR",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": []
+      }
+    },
+    "transform": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "838-32",
+        "name": "basis 2",
+        "type": "SHAPE",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          1,
+          0,
+          0,
+          1,
+          20,
+          20
+        ],
+        "effects": [
+          {
+            "type": "DROP_SHADOW",
+            "visible": true,
+            "blendMode": "NORMAL",
+            "basis": "BODY",
+            "shadow": {
+              "offset": {
+                "x": 0,
+                "y": 0
+              },
+              "blur": 16,
+              "choke": 0,
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          }
+        ],
+        "shape": {
+          "path": {
+            "type": "RECTANGLE",
+            "visible": true,
+            "transform": [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "rectangle": {
+              "x0": 0,
+              "x1": 500,
+              "y0": 0,
+              "y1": 358.21
+            }
+          },
+          "fillRule": "NON_ZERO",
+          "fills": [
+            {
+              "type": "IMAGE",
+              "visible": true,
+              "blendMode": "NORMAL",
+              "image": {
+                "ref": {
+                  "type": "RESOURCE_REF",
+                  "value": "4c0f61876f5852ef02d609262345ae2c6ed0eb29"
+                }
+              },
+              "positioning": {
+                "layout": "STRETCH",
+                "origin": "LAYER",
+                "transform": [
+                  488.80594318841065,
+                  0,
+                  0,
+                  366.6055456800019,
+                  0,
+                  -5.59703125
+                ]
+              },
+              "filters": [
+                {
+                  "type": "OPACITY_MULTIPLIER",
+                  "opacity": 1
+                },
+                {
+                  "type": "FIGMA_COLOR_ADJUSTMENT",
+                  "colorAdjustment": {}
+                }
+              ]
+            }
+          ],
+          "strokes": []
+        }
+      }
+    ],
+    "meta": {
+      "isArtboard": true
+    }
+  }
+}

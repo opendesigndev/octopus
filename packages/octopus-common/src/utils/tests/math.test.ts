@@ -1,7 +1,7 @@
 import { cos, invLerp, lerp, mod, sin, tan } from '../math'
 
 describe('mod', () => {
-  function testModulo(N: number, modulo: number, result: number): void {
+  function testExample(N: number, modulo: number, result: number): void {
     test(`mod(${N}, ${modulo}) to be ${result}`, () => {
       expect(mod(N, modulo)).toBe(result)
     })
@@ -20,11 +20,11 @@ describe('mod', () => {
     [-60, 360, 300],
   ]
 
-  examples.forEach((example) => testModulo(...example))
+  examples.forEach((example) => testExample(...example))
 })
 
 describe('sin', () => {
-  function testTan(N: number, result: number): void {
+  function testExample(N: number, result: number): void {
     test(`sin(${N}) to be ${result}`, () => {
       expect(sin(N)).toBe(result)
     })
@@ -42,11 +42,11 @@ describe('sin', () => {
     [-360, 2.4492935982947064e-16],
   ]
 
-  examples.forEach((example) => testTan(...example))
+  examples.forEach((example) => testExample(...example))
 })
 
 describe('cos', () => {
-  function testTan(N: number, result: number): void {
+  function testExample(N: number, result: number): void {
     test(`cos(${N}) to be ${result}`, () => {
       expect(cos(N)).toBe(result)
     })
@@ -65,11 +65,11 @@ describe('cos', () => {
     [-360, 1],
   ]
 
-  examples.forEach((example) => testTan(...example))
+  examples.forEach((example) => testExample(...example))
 })
 
 describe('tan', () => {
-  function testTan(N: number, result: number): void {
+  function testExample(N: number, result: number): void {
     test(`tan(${N}) to be ${result}`, () => {
       expect(tan(N)).toBe(result)
     })
@@ -87,11 +87,11 @@ describe('tan', () => {
     [-360, 2.4492935982947064e-16],
   ]
 
-  examples.forEach((example) => testTan(...example))
+  examples.forEach((example) => testExample(...example))
 })
 
 describe('lerp', () => {
-  function testTan(x: number, y: number, ratio: number, result: number): void {
+  function testExample(x: number, y: number, ratio: number, result: number): void {
     test(`lerp(${x}, ${y}, ${ratio}) to be ${result}`, () => {
       expect(lerp(x, y, ratio)).toBe(result)
     })
@@ -107,11 +107,11 @@ describe('lerp', () => {
     [1, 0, 2, -1],
   ]
 
-  examples.forEach((example) => testTan(...example))
+  examples.forEach((example) => testExample(...example))
 })
 
 describe('invLerp', () => {
-  function testTan(x: number, y: number, ratio: number, result: number): void {
+  function testExample(x: number, y: number, ratio: number, result: number): void {
     test(`invLerp(${x}, ${y}, ${ratio}) to be ${result}`, () => {
       expect(invLerp(x, y, ratio)).toBe(result)
     })
@@ -127,5 +127,5 @@ describe('invLerp', () => {
     [1, 0, -1, 2],
   ]
 
-  examples.forEach((example) => testTan(...example))
+  examples.forEach((example) => testExample(...example))
 })

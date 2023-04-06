@@ -15,7 +15,11 @@ import type { Manifest } from '../../../typings/manifest/index.js'
 import type { Octopus } from '../../../typings/octopus/index.js'
 import type { AdditionalTextData } from '../../../typings/raw/index.js'
 import type { Exporter } from '../exporters/index.js'
-import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type {
+  SourceImage,
+  GenericComponentConversionResult,
+  GenericDesignConversionResult,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 type DesignConverterGeneralOptions = {
@@ -35,26 +39,18 @@ type OctopusAIConverterOptions = DesignConverterGeneralOptions & {
 
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
-  artboards: ArtboardConversionResult[]
+  artboards: ComponentConversionResult[]
   images: SourceImage[]
 }
 
-export type ArtboardConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
 
 export type ArtboardExport = {
   images: SourceImage[]
-  artboard: ArtboardConversionResult
+  artboard: ComponentConversionResult
 }
 
-export type DesignConversionResult = {
-  manifest: Manifest['OctopusManifest']
-  time: number
-}
+export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 
 export class DesignConverter {
   private _sourceDesign: SourceDesign
@@ -112,7 +108,7 @@ export class DesignConverter {
     }
   }
 
-  convertArtboardById(targetArtboardId: string): ArtboardConversionResult {
+  convertArtboardById(targetArtboardId: string): ComponentConversionResult {
     const {
       result: { value, error },
       time,

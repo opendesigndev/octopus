@@ -1,6 +1,6 @@
 import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
+import { pathRelative } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
-import { pathRelative } from '../../utils/fs-path.js'
 import { getFontProperties } from '../../utils/text.js'
 
 import type { OctopusPSDConverter } from '../../octopus-psd-converter.js'

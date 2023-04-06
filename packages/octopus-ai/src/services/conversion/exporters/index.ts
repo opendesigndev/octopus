@@ -1,6 +1,6 @@
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
 import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export type AuxiliaryData = { metadata: string; additionalTextData: string | null }
@@ -17,7 +17,7 @@ export abstract class Exporter {
     Promise.resolve()
   }
 
-  exportArtboard(_source: SourceArtboard, _artboard: ArtboardConversionResult): Promise<unknown> {
+  exportArtboard(_source: SourceArtboard, _artboard: ComponentConversionResult): Promise<unknown> {
     console.log('calling default export method `exportArtboard()`')
     return Promise.resolve()
   }

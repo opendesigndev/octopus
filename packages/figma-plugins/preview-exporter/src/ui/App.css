@@ -1,0 +1,91 @@
+html,
+body,
+main {
+  height: 100%;
+}
+
+body,
+input,
+button {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Open Sans', sans-serif, 'Avenir Next';
+  font-size: 12px;
+  text-align: center;
+}
+
+body {
+  background: white;
+  color: black;
+  margin: 0;
+}
+
+main {
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  height: 140px;
+}
+
+img {
+  height: 140px;
+  width: 300px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 24px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(200, 200, 200, 1);
+}
+
+button {
+  height: 28px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(27, 0, 251, 1);
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  padding: 2px 16px 4px;
+  margin-top: 16px;
+}
+button:hover {
+  background-color: rgba(9, 18, 197, 1);
+}
+button:disabled {
+  background-color: rgba(151, 154, 155, 1);
+}
+button.copyPressed {
+  background-color: rgba(9, 18, 197, 1);
+  opacity: 0.2;
+}
+
+#selectionSection {
+  background-color: rgba(245, 246, 247, 1);
+  width: 100%;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 8px;
+}
+#selectionSection p.disabled {
+  opacity: 0.3;
+}
+#selectionSection strong {
+  color: rgba(27, 0, 251, 1);
+}

@@ -10,7 +10,7 @@ import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 import type { Exporter, AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
 import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
@@ -105,10 +105,10 @@ export class TempExporter extends EventEmitter implements Exporter {
 
   /**
    * Exports given Octopus Artboard
-   * @param {ArtboardConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
+   * @param {ComponentConversionResult} artboard contains converted OctopuosArtboard or Error if conversion failed
    * @returns {Promise<string | null>} path to the exported OctopusArtboard
    */
-  async exportArtboard(source: SourceArtboard, artboard: ArtboardConversionResult): Promise<string> {
+  async exportArtboard(source: SourceArtboard, artboard: ComponentConversionResult): Promise<string> {
     const sourcePath = await this._save(`source-${artboard.id}.json`, this._stringify(source.raw))
     const octopusPath = await this._save(
       createOctopusArtboardFileName(artboard.value?.id ?? ''),

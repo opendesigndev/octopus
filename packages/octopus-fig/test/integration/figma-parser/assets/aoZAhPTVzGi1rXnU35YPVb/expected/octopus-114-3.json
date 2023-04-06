@@ -1,7 +1,7 @@
 {
   "id": "114-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "dimensions": {
     "width": 1000,
     "height": 1000
@@ -285,12 +285,12 @@
         "opacity": 1,
         "blendMode": "NORMAL",
         "transform": [
-          0.9823503494262695,
-          -0.18705008924007416,
-          0.18705008924007416,
-          0.9823503494262695,
-          58.300045013427734,
-          271.1798095703125
+          0.98235035,
+          -0.18705009,
+          0.18705009,
+          0.98235035,
+          58.30004501,
+          271.17980957
         ],
         "effects": [],
         "text": {
@@ -339,12 +339,12 @@
         "opacity": 1,
         "blendMode": "NORMAL",
         "transform": [
-          0.9482470154762268,
-          0.3175335228443146,
-          -0.3175335228443146,
-          0.9482470154762268,
-          382.476806640625,
-          200.62889099121094
+          0.94824702,
+          0.31753352,
+          -0.31753352,
+          0.94824702,
+          382.47680664,
+          200.62889099
         ],
         "effects": [],
         "text": {
@@ -393,11 +393,11 @@
         "opacity": 1,
         "blendMode": "NORMAL",
         "transform": [
-          0.9482470154762268,
-          0.3175335228443146,
-          -0.3175335228443146,
-          0.9482470154762268,
-          485.9705810546875,
+          0.94824702,
+          0.31753352,
+          -0.31753352,
+          0.94824702,
+          485.97058105,
           157
         ],
         "effects": [],
@@ -683,6 +683,130 @@
             "size": {
               "width": 271,
               "height": 48
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
+      },
+      {
+        "id": "713-14",
+        "name": "Hello World! Hello World! Hello World! Hello World!",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.86602539,
+          -0.5,
+          0.5,
+          0.86602539,
+          492,
+          778.5
+        ],
+        "effects": [],
+        "text": {
+          "value": "Hello World! Hello World! Hello World! Hello World!",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Inter",
+              "family": "Inter",
+              "syntheticPostScriptName": true
+            },
+            "fontSize": 42,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [
+            {
+              "style": {
+                "font": {
+                  "postScriptName": "Inter-Bold",
+                  "family": "Inter"
+                }
+              },
+              "ranges": [
+                {
+                  "from": 0,
+                  "to": 13
+                }
+              ]
+            }
+          ],
+          "horizontalAlign": "LEFT",
+          "verticalAlign": "TOP",
+          "frame": {
+            "mode": "AUTO_WIDTH",
+            "size": {
+              "width": 251,
+              "height": 204
+            }
+          },
+          "baselinePolicy": "OFFSET_ASCENDER"
+        }
+      },
+      {
+        "id": "713-15",
+        "name": "Lorem Ipsum!",
+        "type": "TEXT",
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "NORMAL",
+        "transform": [
+          0.86602539,
+          0.5,
+          -0.5,
+          0.86602539,
+          768.5,
+          721
+        ],
+        "effects": [],
+        "text": {
+          "value": "Lorem Ipsum!",
+          "defaultStyle": {
+            "font": {
+              "postScriptName": "Inter-Bold",
+              "family": "Inter"
+            },
+            "fontSize": 42,
+            "lineHeight": 0,
+            "letterSpacing": 0,
+            "fills": [
+              {
+                "type": "COLOR",
+                "visible": true,
+                "blendMode": "NORMAL",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 1
+                }
+              }
+            ],
+            "strokes": []
+          },
+          "styles": [],
+          "horizontalAlign": "LEFT",
+          "verticalAlign": "TOP",
+          "frame": {
+            "mode": "AUTO_WIDTH",
+            "size": {
+              "width": 279,
+              "height": 51
             }
           },
           "baselinePolicy": "OFFSET_ASCENDER"

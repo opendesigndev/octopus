@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 import { displayPerf } from '@opendesign/octopus-common/dist/utils/console.js'
 import { timestamp } from '@opendesign/octopus-common/dist/utils/timestamp.js'
 import chalk from 'chalk'
@@ -8,7 +9,6 @@ import kebabCase from 'lodash/kebabCase.js'
 
 import { renderOctopus } from './utils/render.js'
 import { createConverter, DebugExporter, PSDFileReader } from '../../src/index-node.js'
-import { TrackingService } from '../../src/services/tracking/tracking-service.js'
 import { getFilesFromDir, isDirectory } from '../../src/utils/files.js'
 
 type ConvertAllOptions = {
@@ -67,7 +67,7 @@ async function convertDesign({
     return
   }
   const converter = createConverter()
-  converter.convertDesign({ exporter, sourceDesign, trackingService: TrackingService.withDefaultPathKeys() })
+  converter.convertDesign({ exporter, sourceDesign, trackingService: FeaturesTracker.withDefaultPathKeys() })
   await exporter.completed()
 }
 

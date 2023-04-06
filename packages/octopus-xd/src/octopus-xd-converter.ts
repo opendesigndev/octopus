@@ -1,12 +1,12 @@
 import { rejectTo } from '@opendesign/octopus-common/dist/utils/async.js'
 import { isObject, push } from '@opendesign/octopus-common/dist/utils/common.js'
+import { pathBasename } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 import { Queue } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 import { OctopusManifest } from './entities/octopus/octopus-manifest.js'
 import { ArtboardConverter } from './services/conversion/artboard-converter/index.js'
 import { getPlatformFactories, setPlatformFactories } from './services/general/platforms/index.js'
 import { setDefaults, setLogger } from './services/index.js'
-import { pathBasename } from './utils/fs-path.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceArtboard } from './entities/source/source-artboard.js'
@@ -18,6 +18,10 @@ import type { Logger } from './typings/index.js'
 import type { Manifest } from './typings/manifest/index.js'
 import type { Octopus } from './typings/octopus/index.js'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
+import type {
+  GenericComponentConversionResult,
+  GenericDesignConversionResult,
+} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
 export type ConvertDesignOptions = {
@@ -35,24 +39,14 @@ export type OctopusXDConverterOptions = OctopusXDConverterGeneralOptions & {
   sourceDesign: SourceDesign
 }
 
-export type ArtboardConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
-
-export type DesignConversionResult = {
-  manifest: Manifest['OctopusManifest']
-  time: number
-}
-
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
+export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 export type ArtboardExport = {
   images: { path: string; getImageData: GetImageData }[]
-  artboard: ArtboardConversionResult
+  artboard: ComponentConversionResult
 }
 
-export type ArtboardConversionWithAssetsResult = ArtboardConversionResult & {
+export type ArtboardConversionWithAssetsResult = ComponentConversionResult & {
   images: {
     id: string
     image: Uint8Array
@@ -137,7 +131,7 @@ export class OctopusXDConverter {
     }
   }
 
-  async convertArtboardById(targetArtboardId: string): Promise<ArtboardConversionResult> {
+  async convertArtboardById(targetArtboardId: string): Promise<ComponentConversionResult> {
     const { time, result } = await this._services.benchmark.benchmarkAsync(async () =>
       this._convertArtboardByIdSafe(targetArtboardId)
     )
@@ -221,7 +215,7 @@ export class OctopusXDConverter {
 
   async convertDesign(options?: ConvertDesignOptions): Promise<{
     manifest: Manifest['OctopusManifest']
-    artboards: ArtboardConversionResult[]
+    artboards: ComponentConversionResult[]
     images: { path: string; getImageData: GetImageData }[]
   }> {
     const exporter = isObject(options?.exporter) ? (options?.exporter as Exporter) : null

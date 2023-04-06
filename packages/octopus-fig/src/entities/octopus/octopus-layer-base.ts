@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { OctopusComponent } from './octopus-component.js'
 import { OctopusEffect } from './octopus-effect.js'
 import { logger } from '../../services/index.js'
-import { convertLayerBlendMode, convertId } from '../../utils/convert.js'
-import { DEFAULTS } from '../../utils/defaults.js'
+import { convertLayerBlendMode, convertId, normalizeTransform } from '../../utils/convert.js'
 
 import type { OctopusLayerGroup } from './octopus-layer-group.js'
 import type { OctopusLayerMaskGroup } from './octopus-layer-mask-group.js'
@@ -80,11 +79,18 @@ export class OctopusLayerBase {
 
   get blendMode(): Octopus['BlendMode'] {
     const { isFrameLike } = this._sourceLayer
-    return convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
+    const blendMode = convertLayerBlendMode(this._sourceLayer.blendMode, { isFrameLike })
+
+    if (blendMode === 'PASS_THROUGH') {
+      const hasBlur = this._sourceLayer.effects.some((effect) => effect.type === 'LAYER_BLUR')
+      if (hasBlur) return 'NORMAL' // https://github.com/opendesigndev/open-design-engine/issues/11
+    }
+
+    return blendMode
   }
 
   get transform(): number[] {
-    return this.sourceLayer.transform ?? DEFAULTS.TRANSFORM
+    return normalizeTransform(this.sourceLayer.transform)
   }
 
   get opacity(): number {

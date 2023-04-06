@@ -11,3 +11,15 @@ export type DesignMeta = {
   name: string
   origin: Origin
 }
+
+export type GenericComponentConversionResult<T extends object> = {
+  id: string
+  value: T | null
+  error: Error | null
+  time: number
+}
+
+export type GenericDesignConversionResult<T extends object> = {
+  manifest: T
+  time: number
+}

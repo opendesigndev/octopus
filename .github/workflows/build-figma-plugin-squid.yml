@@ -1,0 +1,14 @@
+name: Figma Plugin Squid
+
+on:
+  pull_request:
+    paths:
+      - 'packages/figma-plugins/squid/**'
+
+jobs:
+  build-figma-plugin-squid:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      package-name: '@opendesign/figma-plugin-squid'
+      base-version: '3.0.0'
+    secrets: inherit

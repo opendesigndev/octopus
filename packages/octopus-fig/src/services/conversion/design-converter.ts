@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { ComponentConverter } from './component-converter.js'
 import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
-import { SourceComponent } from '../../entities/source/source-component.js'
+import { SourceArtboard } from '../../entities/source/source-artboard.js'
 import { SourceDesign } from '../../entities/source/source-design.js'
 import { logger } from '../../services/index.js'
 import { getRole } from '../../utils/source.js'
@@ -25,19 +25,14 @@ import type {
   ResolvedFill,
   ResolvedPreview,
 } from '@opendesign/figma-parser'
+import type { GenericComponentConversionResult } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 import type { EventEmitter } from 'eventemitter3'
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 
-export type ComponentConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
-
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined
   components: ComponentConversionResult[]
@@ -56,7 +51,7 @@ export class DesignConverter {
   private _partialUpdateInterval: number
   private _shouldReturn: boolean
   private _imageSizeMap: ImageSizeMap = {}
-  private _queue: Queue<SourceComponent, ComponentConversionResult>
+  private _queue: Queue<SourceArtboard, ComponentConversionResult>
   private _awaitingComponents: Promise<ComponentConversionResult>[] = []
   private _conversionResult: DesignConversionResult = { manifest: undefined, components: [], images: [], previews: [] }
   private _finalizeConvert: DetachedPromiseControls<void>
@@ -98,8 +93,8 @@ export class DesignConverter {
     return this._octopusConverter.pkg
   }
 
-  private async _convertSourceComponentSafe(
-    source: SourceComponent
+  private async _convertSourceArtboardSafe(
+    source: SourceArtboard
   ): Promise<{ value: Octopus['OctopusComponent'] | null; error: Error | null }> {
     try {
       const value = await new ComponentConverter({ source, designConverter: this }).convert()
@@ -109,9 +104,9 @@ export class DesignConverter {
     }
   }
 
-  private async _convertSourceComponent(source: SourceComponent): Promise<ComponentConversionResult> {
+  private async _convertSourceArtboard(source: SourceArtboard): Promise<ComponentConversionResult> {
     const { time, result } = await this._octopusConverter.benchmarkAsync(async () =>
-      this._convertSourceComponentSafe(source)
+      this._convertSourceArtboardSafe(source)
     )
     const { value, error } = result
     return { id: source.id, value, error, time }
@@ -144,8 +139,8 @@ export class DesignConverter {
     }
   }
 
-  private async _exportComponent(source: SourceComponent): Promise<ComponentConversionResult> {
-    const converted = await this._convertSourceComponent(source)
+  private async _exportComponent(source: SourceArtboard): Promise<ComponentConversionResult> {
+    const converted = await this._convertSourceArtboard(source)
 
     const { path, error } = await this._exportComponentSafe(converted, getRole(source))
 
@@ -162,7 +157,7 @@ export class DesignConverter {
     return new Queue({
       name: DesignConverter.COMPONENT_QUEUE_NAME,
       parallels: DesignConverter.COMPONENT_QUEUE_PARALLELS,
-      factory: async (sources: SourceComponent[]): Promise<SafeResult<ComponentConversionResult>[]> => {
+      factory: async (sources: SourceArtboard[]): Promise<SafeResult<ComponentConversionResult>[]> => {
         return Promise.all(
           sources.map(async (source) => ({
             value: await this._exportComponent(source),
@@ -215,7 +210,7 @@ export class DesignConverter {
     const fillIds = Object.keys(fills ?? {})
     this.octopusManifest?.setExportedComponentImageMap(nodeId, fillIds)
 
-    const sourceComponent = new SourceComponent({ rawFrame })
+    const sourceComponent = new SourceArtboard({ rawFrame })
     const componentPromise = this._queue.exec(sourceComponent)
     this._awaitingComponents.push(componentPromise)
 

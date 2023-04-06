@@ -6,7 +6,7 @@ import { detachPromiseControls } from '@opendesign/octopus-common/dist/utils/asy
 import { v4 as uuidv4 } from 'uuid'
 
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
-import type { ArtboardConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
 import type { Exporter } from '../index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
@@ -61,7 +61,7 @@ export class LocalExporter implements Exporter {
     this._completed.resolve()
   }
 
-  exportArtboard(_: SourceArtboard, artboard: ArtboardConversionResult): Promise<string | null> {
+  exportArtboard(_: SourceArtboard, artboard: ComponentConversionResult): Promise<string | null> {
     if (!artboard.value) return Promise.resolve(null)
     return this._save(`octopus-${artboard.id}.json`, this._stringify(artboard.value))
   }

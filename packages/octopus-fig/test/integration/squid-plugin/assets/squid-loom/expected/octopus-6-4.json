@@ -1,7 +1,7 @@
 {
   "id": "6-4",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.0-rc.24",
+  "version": "3.0.2",
   "dimensions": {
     "width": 1460,
     "height": 920
@@ -76,53 +76,12 @@
     ],
     "layers": [
       {
-        "id": "6-5-Background",
+        "id": "6-5",
         "name": "Section 4 - Creativity Without Limits",
-        "type": "MASK_GROUP",
+        "type": "GROUP",
         "visible": true,
         "opacity": 1,
         "blendMode": "PASS_THROUGH",
-        "maskBasis": "BODY_EMBED",
-        "mask": {
-          "id": "6-5-BackgroundMask",
-          "name": "Section 4 - Creativity Without Limits",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 1253.22,
-                "y0": 0,
-                "y1": 1043
-              }
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [],
-            "strokes": []
-          }
-        },
         "transform": [
           1,
           0,
@@ -131,63 +90,24 @@
           571,
           -18
         ],
+        "effects": [],
         "layers": [
           {
-            "id": "6-6-Background",
+            "id": "6-6",
             "name": "Mask Group 2",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-6-BackgroundMask",
-              "name": "Mask Group 2",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 769.52,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
               0,
               1,
-              463.429443359375,
+              463.42944336,
               0
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-7-ClippingMask",
@@ -290,13 +210,13 @@
                       0,
                       0,
                       1,
-                      -957.3785400390625,
-                      -372.7919921875
+                      -957.37854004,
+                      -372.79199219
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -306,10 +226,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h2249.73v813.986h-2249.73z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 2249.73,
+                          "y0": 0,
+                          "y1": 813.99
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -363,67 +285,24 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
-            "id": "6-9-Background",
+            "id": "6-9",
             "name": "Group 2156",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-9-BackgroundMask",
-              "name": "Group 2156",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 222.31,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               -1,
-              8.742277657347586e-8,
-              -8.742277657347586e-8,
+              9e-8,
+              -9e-8,
               -1,
-              222.30715942382812,
+              222.30715942,
               1043
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-10-ClippingMask",
@@ -439,10 +318,10 @@
                   "opacity": 1,
                   "blendMode": "NORMAL",
                   "transform": [
-                    -1,
-                    8.742277657347586e-8,
-                    -8.742277657347586e-8,
-                    -1,
+                    1,
+                    0,
+                    0,
+                    1,
                     0,
                     0
                   ],
@@ -522,10 +401,10 @@
                     "opacity": 1,
                     "blendMode": "NORMAL",
                     "transform": [
-                      -1,
-                      8.742277657347586e-8,
-                      -8.742277657347586e-8,
-                      -1,
+                      1,
+                      0,
+                      0,
+                      1,
                       0,
                       0
                     ],
@@ -596,17 +475,17 @@
                     "opacity": 1,
                     "blendMode": "NORMAL",
                     "transform": [
-                      -1,
-                      8.742277657347584e-8,
-                      -8.742277657347584e-8,
-                      -1,
-                      229.147365487804,
-                      129.9641370717943
+                      1,
+                      0,
+                      0,
+                      1,
+                      -229.14735413,
+                      -129.9641571
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -616,10 +495,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h482.236v482.236h-482.236z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 482.24,
+                          "y0": 0,
+                          "y1": 482.24
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -673,67 +554,24 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
-            "id": "6-13-Background",
+            "id": "6-13",
             "name": "Group 2150",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-13-BackgroundMask",
-              "name": "Group 2150",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 222.31,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
               0,
               1,
-              302.88043212890625,
-              548.7940673828125
+              302.88043213,
+              548.79406738
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-14-ClippingMask",
@@ -910,13 +748,13 @@
                       0,
                       0,
                       1,
-                      -812.2761840820312,
-                      -198.3662872314453
+                      -812.27618408,
+                      -198.36628723
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -926,10 +764,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h1210.72v1210.72h-1210.72z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 1210.72,
+                          "y0": 0,
+                          "y1": 1210.72
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -983,67 +823,24 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
-            "id": "6-17-Background",
+            "id": "6-17",
             "name": "Mask Group 3",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-17-BackgroundMask",
-              "name": "Mask Group 3",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 581.42,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
               0,
               1,
-              671.8013305664062,
-              273.2751159667969
+              671.80133057,
+              273.27511597
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-18-ClippingMask",
@@ -1146,13 +943,13 @@
                       0,
                       0,
                       1,
-                      -463.4248962402344,
-                      -121.41397094726562
+                      -463.42489624,
+                      -121.41397095
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -1162,10 +959,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h1482.62v492.496h-1482.62z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 1482.62,
+                          "y0": 0,
+                          "y1": 492.5
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -1219,67 +1018,24 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
-            "id": "6-20-Background",
+            "id": "6-20",
             "name": "Mask Group 6",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-20-BackgroundMask",
-              "name": "Mask Group 6",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 873.84,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
               0,
               1,
-              291.38519287109375,
-              820.6928100585938
+              291.38519287,
+              820.69281006
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-21",
@@ -1460,13 +1216,13 @@
                   0,
                   0,
                   1,
-                  -1575.312744140625,
-                  -121.41380310058594
+                  -1575.31274414,
+                  -121.4138031
                 ],
                 "effects": [],
                 "shape": {
                   "path": {
-                    "type": "PATH",
+                    "type": "RECTANGLE",
                     "visible": false,
                     "transform": [
                       1,
@@ -1476,10 +1232,12 @@
                       0,
                       0
                     ],
-                    "meta": {
-                      "sourceShape": "RECTANGLE"
-                    },
-                    "geometry": "M0,0h3475.31v492.496h-3475.31z"
+                    "rectangle": {
+                      "x0": 0,
+                      "x1": 3475.31,
+                      "y0": 0,
+                      "y1": 492.5
+                    }
                   },
                   "fillRule": "NON_ZERO",
                   "fills": [
@@ -1528,67 +1286,24 @@
                   "strokes": []
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           },
           {
-            "id": "6-24-Background",
+            "id": "6-24",
             "name": "Group 2159",
-            "type": "MASK_GROUP",
+            "type": "GROUP",
             "visible": true,
             "opacity": 1,
             "blendMode": "PASS_THROUGH",
-            "maskBasis": "BODY_EMBED",
-            "mask": {
-              "id": "6-24-BackgroundMask",
-              "name": "Group 2159",
-              "type": "SHAPE",
-              "visible": true,
-              "opacity": 1,
-              "blendMode": "NORMAL",
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "effects": [],
-              "shape": {
-                "path": {
-                  "type": "RECTANGLE",
-                  "visible": true,
-                  "transform": [
-                    1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0
-                  ],
-                  "rectangle": {
-                    "x0": 0,
-                    "x1": 461.71,
-                    "y0": 0,
-                    "y1": 222.31
-                  }
-                },
-                "fillRule": "NON_ZERO",
-                "fills": [],
-                "strokes": []
-              }
-            },
             "transform": [
               1,
               0,
               0,
               1,
-              578.198974609375,
-              547.0840454101562
+              578.19897461,
+              547.08404541
             ],
+            "effects": [],
             "layers": [
               {
                 "id": "6-25-ClippingMask",
@@ -1761,17 +1476,17 @@
                     "opacity": 1,
                     "blendMode": "NORMAL",
                     "transform": [
-                      -0.7071067690849304,
-                      -0.7071067690849304,
-                      0.7071067690849304,
-                      -0.7071067690849304,
-                      63.61592102050781,
+                      -0.70710677,
+                      -0.70710677,
+                      0.70710677,
+                      -0.70710677,
+                      63.61592102,
                       568.4296875
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -1781,10 +1496,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h747.769v747.769h-747.769z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 747.77,
+                          "y0": 0,
+                          "y1": 747.77
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -1845,13 +1562,13 @@
                       0,
                       0,
                       1,
-                      -254.79833984375,
-                      -312.94000244140625
+                      -254.79833984,
+                      -312.94000244
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -1861,10 +1578,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h1186.78v1085.88h-1186.78z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 1186.78,
+                          "y0": 0,
+                          "y1": 1085.88
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -1925,13 +1644,13 @@
                       0,
                       0,
                       1,
-                      -167.5854949951172,
+                      -167.585495,
                       3844.203125
                     ],
                     "effects": [],
                     "shape": {
                       "path": {
-                        "type": "PATH",
+                        "type": "RECTANGLE",
                         "visible": true,
                         "transform": [
                           1,
@@ -1941,10 +1660,12 @@
                           0,
                           0
                         ],
-                        "meta": {
-                          "sourceShape": "RECTANGLE"
-                        },
-                        "geometry": "M0,0h1225.25v1225.25h-1225.25z"
+                        "rectangle": {
+                          "x0": 0,
+                          "x1": 1225.25,
+                          "y0": 0,
+                          "y1": 1225.25
+                        }
                       },
                       "fillRule": "NON_ZERO",
                       "fills": [
@@ -1998,64 +1719,17 @@
                   "isArtboard": true
                 }
               }
-            ],
-            "meta": {
-              "isArtboard": true
-            }
+            ]
           }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
+        ]
       },
       {
-        "id": "6-30-Background",
+        "id": "6-30",
         "name": "Group",
-        "type": "MASK_GROUP",
+        "type": "GROUP",
         "visible": true,
         "opacity": 1,
         "blendMode": "PASS_THROUGH",
-        "maskBasis": "BODY_EMBED",
-        "mask": {
-          "id": "6-30-BackgroundMask",
-          "name": "Group",
-          "type": "SHAPE",
-          "visible": true,
-          "opacity": 1,
-          "blendMode": "NORMAL",
-          "transform": [
-            1,
-            0,
-            0,
-            1,
-            0,
-            0
-          ],
-          "effects": [],
-          "shape": {
-            "path": {
-              "type": "RECTANGLE",
-              "visible": true,
-              "transform": [
-                1,
-                0,
-                0,
-                1,
-                0,
-                0
-              ],
-              "rectangle": {
-                "x0": 0,
-                "x1": 737,
-                "y0": 0,
-                "y1": 634
-              }
-            },
-            "fillRule": "NON_ZERO",
-            "fills": [],
-            "strokes": []
-          }
-        },
         "transform": [
           1,
           0,
@@ -2064,6 +1738,7 @@
           185,
           117
         ],
+        "effects": [],
         "layers": [
           {
             "id": "6-37-Background",
@@ -2320,7 +1995,7 @@
                 "effects": [],
                 "shape": {
                   "path": {
-                    "type": "PATH",
+                    "type": "RECTANGLE",
                     "visible": true,
                     "transform": [
                       1,
@@ -2330,10 +2005,12 @@
                       0,
                       0
                     ],
-                    "meta": {
-                      "sourceShape": "RECTANGLE"
-                    },
-                    "geometry": "M0,0h100v108.36h-100z"
+                    "rectangle": {
+                      "x0": 0,
+                      "x1": 100,
+                      "y0": 0,
+                      "y1": 108.36
+                    }
                   },
                   "fillRule": "NON_ZERO",
                   "fills": [
@@ -2387,10 +2064,7 @@
               "isArtboard": true
             }
           }
-        ],
-        "meta": {
-          "isArtboard": true
-        }
+        ]
       },
       {
         "id": "6-38-Background",
