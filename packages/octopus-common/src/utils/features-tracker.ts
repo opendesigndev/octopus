@@ -1,13 +1,17 @@
 import { isObject, keys } from './common.js'
 import { escapeRegExp } from './text.js'
 
-import type { ComponentConversionResult, Manifest, Octopus } from '../typings/octopus-common/index.js'
+import type { GenericComponentConversionResult } from '../typings/octopus-common/index.js'
 
 type FeaturesTrackerOptions = {
   excludedPaths: RegExp[]
   onlyCountByKeys: RegExp[]
   sourceIncludedPaths?: RegExp[]
 }
+
+type BaseLayer = { type: 'SHAPE' | 'TEXT' | 'COMPONENT_REFERENCE' }
+type GroupLayer = { type: 'GROUP' | 'MASK_GROUP'; layers: Layer[] }
+type Layer = (BaseLayer | GroupLayer) & { mask?: Layer }
 
 export class FeaturesTracker {
   private _excludedPaths: RegExp[]
@@ -167,7 +171,7 @@ export class FeaturesTracker {
     }, obj)
   }
 
-  private _collectLayerFeatures(layer: Octopus['Layer']) {
+  private _collectLayerFeatures(layer: Layer) {
     const { type: layerType } = layer
 
     if (layerType === 'GROUP' || layerType === 'MASK_GROUP') {
@@ -176,7 +180,7 @@ export class FeaturesTracker {
 
     this._addKey(`${FeaturesTracker.LAYER_KEY_PREFIX}.layers`)
 
-    if ('mask' in layer) {
+    if ('mask' in layer && layer.mask) {
       this._addKey(`${FeaturesTracker.LAYER_KEY_PREFIX}.masks`)
       this._collectLayerFeatures(layer.mask)
     }
@@ -212,7 +216,7 @@ export class FeaturesTracker {
     })
   }
 
-  collectLayerFeatures(components: ComponentConversionResult[]) {
+  collectLayerFeatures<T extends { content?: Layer }>(components: GenericComponentConversionResult<T>[]) {
     components.forEach((component) => {
       if (component.value?.content) {
         this._collectLayerFeatures(component.value.content)
@@ -220,7 +224,7 @@ export class FeaturesTracker {
     })
   }
 
-  collectManifestFeatures(manifest: Manifest['OctopusManifest']) {
+  collectManifestFeatures(manifest: object) {
     const paths = this._extractPathsFromObject(manifest)
 
     paths.forEach((path) => {

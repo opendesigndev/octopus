@@ -32,7 +32,7 @@
   "dependencies": {
     "@opendesign/image-icc-profile-converter": "^0.0.4-experimental",
     "@opendesign/manifest-ts": "3.0.1",
-    "@opendesign/octopus-common": "3.0.0-rc.34",
+    "@opendesign/octopus-common": "3.0.0-rc.35",
     "@opendesign/octopus-ts": "3.0.1",
     "@types/lodash": "^4.14.178",
     "@types/rimraf": "^3.0.2",

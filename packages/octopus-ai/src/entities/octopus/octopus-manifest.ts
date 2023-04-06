@@ -3,8 +3,8 @@ import { asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { pathRelative } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
 import type { DesignConverter } from '../../services/conversion/design-converter/index.js'
+import type { Manifest } from '../../typings/manifest/index.js'
 import type { RawArtboardMediaBox } from '../../typings/raw/index.js'
-import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 type OctopusManifestOptions = {
   designConverter: DesignConverter

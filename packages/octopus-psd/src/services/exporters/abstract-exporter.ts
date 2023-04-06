@@ -1,7 +1,4 @@
-import type {
-  ComponentConversionResult,
-  DesignConversionResult,
-} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 
 export abstract class AbstractExporter {
   static IMAGES_DIR_NAME: string

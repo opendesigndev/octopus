@@ -1,8 +1,6 @@
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
-import type {
-  ComponentConversionResult,
-  DesignConversionResult,
-} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+
 /**
  * Minimalistic exporter used for web build
  */

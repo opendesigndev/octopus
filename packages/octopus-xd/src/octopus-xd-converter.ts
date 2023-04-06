@@ -14,11 +14,12 @@ import type { GetImageData, SourceDesign } from './entities/source/source-design
 import type { Exporter } from './services/conversion/exporter/index.js'
 import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
 import type { Logger } from './typings/index.js'
+import type { Manifest } from './typings/manifest/index.js'
 import type { Octopus } from './typings/octopus/index.js'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
 import type {
-  ComponentConversionResult,
-  Manifest,
+  GenericComponentConversionResult,
+  GenericDesignConversionResult,
 } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
@@ -37,6 +38,8 @@ export type OctopusXDConverterOptions = OctopusXDConverterGeneralOptions & {
   sourceDesign: SourceDesign
 }
 
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
+export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 export type ArtboardExport = {
   images: { path: string; getImageData: GetImageData }[]
   artboard: ComponentConversionResult

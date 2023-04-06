@@ -2,7 +2,7 @@ import { asArray, asString } from '@opendesign/octopus-common/dist/utils/as.js'
 import { pathRelative } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
 import type { OctopusXDConverter } from '../../octopus-xd-converter.js'
-import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+import type { Manifest } from '../../typings/manifest/index.js'
 
 type ImageDescriptor = { path: unknown }
 

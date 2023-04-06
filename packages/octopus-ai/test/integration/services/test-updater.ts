@@ -10,8 +10,8 @@ import { getSourceDesign } from '../utils.js'
 
 import type { TestDirectoryData } from './assets-reader.js'
 import type { OctopusAIConverter } from '../../../src/octopus-ai-converter.js'
+import type { Manifest } from '../../../src/typings/manifest/index.js'
 import type { Octopus } from '../../../src/typings/octopus/index.js'
-import type { Manifest } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 interface TestUpdaterAssetsReader {
   getTestsDirectoryData: () => Promise<TestDirectoryData[]>

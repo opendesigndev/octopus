@@ -10,20 +10,23 @@ import { logger } from '../index.js'
 import type { SourceComponent } from '../../entities/source/source-component.js'
 import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
 import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
+import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { AbstractExporter } from '../exporters/abstract-exporter.js'
 import type {
-  ComponentConversionResult,
-  Manifest,
+  GenericComponentConversionResult,
+  GenericDesignConversionResult,
 } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { FeaturesTracker } from '@opendesign/octopus-common/dist/utils/features-tracker.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
   components: ComponentConversionResult[]
   images: SourceImage[]
 }
+export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 
 export class DesignConverter {
   private _designId: string

@@ -1,17 +1,15 @@
-import type { Manifest as ManifestRaw } from '@opendesign/manifest-ts'
 import type { Octopus as OctopusRaw } from '@opendesign/octopus-ts'
 
-export type Manifest = ManifestRaw['schemas']
 export type Octopus = OctopusRaw['schemas']
 
-export type ComponentConversionResult = {
+export type GenericComponentConversionResult<T extends object> = {
   id: string
-  value: Octopus['OctopusComponent'] | null
+  value: T | null
   error: Error | null
   time: number
 }
 
-export type DesignConversionResult = {
-  manifest: Manifest['OctopusManifest']
+export type GenericDesignConversionResult<T extends object> = {
+  manifest: T
   time: number
 }

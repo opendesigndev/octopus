@@ -7,11 +7,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../../entities/source/source-design.js'
+import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
 import type { Exporter } from '../index.js'
-import type {
-  ComponentConversionResult,
-  DesignConversionResult,
-} from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type TempExporterOptions = {
