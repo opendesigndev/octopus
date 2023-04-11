@@ -183,8 +183,7 @@ export class OctopusXDConverter {
     const images = await Promise.all(
       artboardImages.map(async (image) => {
         const imageId = pathBasename(image.path)
-        const rawData = await image.getImageData()
-        const imagePath = await rejectTo(exporter?.exportImage?.(image.path, rawData) ?? Promise.reject(null))
+        const imagePath = await rejectTo(exporter?.exportImage?.({ ...image, id: imageId }) ?? Promise.reject(null))
         this.octopusManifest.setExportedImage(imageId, { path: imagePath })
         return image
       })
