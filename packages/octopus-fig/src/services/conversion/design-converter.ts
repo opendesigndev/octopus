@@ -25,19 +25,14 @@ import type {
   ResolvedFill,
   ResolvedPreview,
 } from '@opendesign/figma-parser'
+import type { GenericComponentConversionResult } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 import type { SafeResult } from '@opendesign/octopus-common/dist/utils/queue.js'
 import type { EventEmitter } from 'eventemitter3'
 
 export type ImageSizeMap = { [key: string]: ImageSize }
 
-export type ComponentConversionResult = {
-  id: string
-  value: Octopus['OctopusComponent'] | null
-  error: Error | null
-  time: number
-}
-
+export type ComponentConversionResult = GenericComponentConversionResult<Octopus['OctopusComponent']>
 export type DesignConversionResult = {
   manifest: Manifest['OctopusManifest'] | undefined
   components: ComponentConversionResult[]

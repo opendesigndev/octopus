@@ -1,5 +1,4 @@
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
-
 /**
  * Minimalistic exporter used for web build
  */

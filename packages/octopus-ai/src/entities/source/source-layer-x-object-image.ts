@@ -1,7 +1,8 @@
+import { pathBasename } from '@opendesign/octopus-common/dist/utils/fs-path.js'
+
 import { SourceArtboard } from './source-artboard.js'
 import { SourceLayerCommon } from './source-layer-common.js'
 import { SourceLayerXObjectForm } from './source-layer-x-object-form.js'
-import { pathBasename } from '../../utils/fs-path.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 import { createSoftMask, initClippingMask } from '../../utils/mask.js'
 

@@ -1,9 +1,9 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { asArray, asFiniteNumber, asNumber } from '@opendesign/octopus-common/dist/utils/as.js'
 import { traverseAndFind, uniqueIdFactory } from '@opendesign/octopus-common/dist/utils/common.js'
+import { pathBasename } from '@opendesign/octopus-common/dist/utils/fs-path.js'
 
 import { SourceResources } from './source-resources.js'
-import { pathBasename } from '../../utils/fs-path.js'
 import { initSourceLayerChildren } from '../../utils/layer.js'
 
 import type { SourceDesign } from './source-design.js'
