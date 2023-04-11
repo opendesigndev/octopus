@@ -37,7 +37,7 @@ export class SourceNormalizer {
     const resultTransform = createMatrix(parentSourceTransform).invert().append(createMatrix(relativeTransform)).values
     layer.relativeTransform = convertToRawTransform(resultTransform)
 
-    if (layer.type === 'GROUP' && isArray(layer.children)) {
+    if (['GROUP', 'BOOLEAN_OPERATION'].includes(layer.type) && isArray(layer.children)) {
       layer.children.forEach((child: unknown) => this._normalizeChildTransform(child, parentTransform))
     }
     return layer

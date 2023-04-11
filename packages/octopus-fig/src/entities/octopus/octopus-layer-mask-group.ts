@@ -209,8 +209,15 @@ export class OctopusLayerMaskGroup {
     return convertLayerBlendMode(this._blendMode, { isFrameLike: true })
   }
 
+  get dimensions(): Octopus['Dimensions'] | undefined {
+    const size = this.sourceLayer.size
+    if (size === null) return undefined
+    return { width: size.x, height: size.y }
+  }
+
   get meta(): Octopus['LayerMeta'] | undefined {
-    return { isArtboard: true }
+    const dimensions = this.dimensions
+    return { dimensions, isArtboard: true }
   }
 
   get sourceLayer(): SourceLayer {

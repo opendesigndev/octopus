@@ -1,7 +1,7 @@
 {
   "id": "114-4",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 849,
     "height": 172
@@ -22,6 +22,12 @@
       -30.62695312
     ],
     "effects": [],
+    "meta": {
+      "dimensions": {
+        "width": 849,
+        "height": 172
+      }
+    },
     "text": {
       "value": "Hello World!",
       "defaultStyle": {

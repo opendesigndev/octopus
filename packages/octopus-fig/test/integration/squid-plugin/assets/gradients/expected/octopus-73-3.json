@@ -1,7 +1,7 @@
 {
   "id": "73-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 5000,
     "height": 5000
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 5000,
+          "height": 5000
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -181,6 +193,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -271,6 +289,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 200
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -361,6 +385,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -451,6 +481,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -541,6 +577,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -631,6 +673,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -721,6 +769,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -811,6 +865,12 @@
           50
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -901,6 +961,12 @@
           87.76808167
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -991,6 +1057,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1081,6 +1153,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1171,6 +1249,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1262,6 +1346,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1352,6 +1442,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1442,6 +1538,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1532,6 +1634,12 @@
           676.79492188
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 200
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1622,6 +1730,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1721,6 +1835,12 @@
           550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 900,
+            "height": 300
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1811,6 +1931,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -1902,6 +2028,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2010,6 +2142,12 @@
           2443
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 800,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2109,6 +2247,12 @@
           4125
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 800,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2208,6 +2352,12 @@
           2491
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 486
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2260,6 +2410,12 @@
           3057
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 405,
+            "height": 513
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2381,6 +2537,12 @@
           3620
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 405,
+            "height": 505
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2463,6 +2625,12 @@
           4186
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 405,
+            "height": 491
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2566,6 +2734,12 @@
           3284
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 800,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2656,6 +2830,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 856
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2773,6 +2953,12 @@
           2072
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 716,
+            "height": 1286
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -2931,6 +3117,12 @@
           2072
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 716,
+            "height": 1286
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3071,6 +3263,12 @@
           2072
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 716,
+            "height": 1286
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3229,6 +3427,12 @@
           2072
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 716,
+            "height": 1286
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3369,6 +3573,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3459,6 +3669,12 @@
           1450
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 900
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3549,6 +3765,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 900,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3639,6 +3861,12 @@
           1050
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 900,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3747,6 +3975,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3838,6 +4072,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 841
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -3928,6 +4168,12 @@
           1991
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4018,6 +4264,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4108,6 +4360,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 400,
+            "height": 800
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4198,6 +4456,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 900,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4288,6 +4552,12 @@
           1550
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 900,
+            "height": 400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4378,6 +4648,12 @@
           3700
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 1400,
+            "height": 1400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4621,6 +4897,12 @@
           3436
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 716,
+            "height": 1400
+          }
+        },
         "shape": {
           "path": {
             "type": "RECTANGLE",
@@ -4700,6 +4982,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 5000,
+        "height": 5000
+      },
       "isArtboard": true
     }
   }

@@ -1,7 +1,7 @@
 {
   "id": "825-20",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 140,
     "height": 76
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 140,
+          "height": 76
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -99,6 +105,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 101.08,
+              "height": 31.38
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -161,6 +173,12 @@
               8.69182396
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 75,
+                "height": 14
+              }
+            },
             "text": {
               "value": "Auto Layout Issue?",
               "defaultStyle": {
@@ -201,11 +219,19 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 140,
+            "height": 76
+          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 140,
+        "height": 76
+      },
       "isArtboard": true
     }
   }

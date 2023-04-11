@@ -1,7 +1,7 @@
 {
   "id": "819-8",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 425,
     "height": 635
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 425,
+          "height": 635
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -91,6 +97,12 @@
           56
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 44
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -141,6 +153,12 @@
           25
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-11",
@@ -158,6 +176,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -210,6 +234,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -260,6 +290,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 9,
+                "height": 15
+              }
+            },
             "text": {
               "value": "1.",
               "defaultStyle": {
@@ -317,6 +353,12 @@
           25
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-15",
@@ -334,6 +376,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -386,6 +434,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -436,6 +490,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "2.",
               "defaultStyle": {
@@ -493,6 +553,12 @@
           209
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 44
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -550,6 +616,12 @@
             "blur": 4
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-20",
@@ -567,6 +639,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -619,6 +697,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -669,6 +753,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "3.",
               "defaultStyle": {
@@ -733,6 +823,12 @@
             "blur": 4
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-24",
@@ -750,6 +846,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -802,6 +904,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -852,6 +960,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "4.",
               "defaultStyle": {
@@ -909,6 +1023,12 @@
           362
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 44
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -966,6 +1086,12 @@
             "blur": 10
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-29",
@@ -983,6 +1109,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -1035,6 +1167,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -1085,6 +1223,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "5.",
               "defaultStyle": {
@@ -1149,6 +1293,12 @@
             "blur": 10
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-33",
@@ -1166,6 +1316,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -1218,6 +1374,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -1268,6 +1430,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "6.",
               "defaultStyle": {
@@ -1325,6 +1493,12 @@
           515
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 200,
+            "height": 44
+          }
+        },
         "shape": {
           "path": {
             "type": "PATH",
@@ -1388,6 +1562,12 @@
             "blur": 4
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-38",
@@ -1405,6 +1585,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -1457,6 +1643,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -1507,6 +1699,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 9,
+                "height": 15
+              }
+            },
             "text": {
               "value": "7.",
               "defaultStyle": {
@@ -1577,6 +1775,12 @@
             "blur": 4
           }
         ],
+        "meta": {
+          "dimensions": {
+            "width": 180,
+            "height": 130
+          }
+        },
         "layers": [
           {
             "id": "819-42",
@@ -1594,6 +1798,12 @@
               50
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 180,
+                "height": 80
+              }
+            },
             "shape": {
               "path": {
                 "type": "RECTANGLE",
@@ -1646,6 +1856,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 100,
+                "height": 100
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -1696,6 +1912,12 @@
               16
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 11,
+                "height": 15
+              }
+            },
             "text": {
               "value": "8.",
               "defaultStyle": {
@@ -1739,6 +1961,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 425,
+        "height": 635
+      },
       "isArtboard": true
     }
   }

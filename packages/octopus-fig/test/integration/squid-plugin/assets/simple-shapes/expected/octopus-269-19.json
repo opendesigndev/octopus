@@ -1,7 +1,7 @@
 {
   "id": "269-19",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 79.49,
     "height": 81.17
@@ -22,6 +22,12 @@
       -16.454216
     ],
     "effects": [],
+    "meta": {
+      "dimensions": {
+        "width": 61.27,
+        "height": 64.08
+      }
+    },
     "shape": {
       "path": {
         "type": "COMPOUND",

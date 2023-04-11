@@ -1,7 +1,7 @@
 {
   "id": "377-19",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "dimensions": {
     "width": 741,
     "height": 380
@@ -30,6 +30,12 @@
         0
       ],
       "effects": [],
+      "meta": {
+        "dimensions": {
+          "width": 741,
+          "height": 380
+        }
+      },
       "shape": {
         "path": {
           "type": "RECTANGLE",
@@ -99,6 +105,12 @@
             0
           ],
           "effects": [],
+          "meta": {
+            "dimensions": {
+              "width": 361,
+              "height": 361
+            }
+          },
           "shape": {
             "path": {
               "type": "RECTANGLE",
@@ -160,6 +172,12 @@
               31.28692627
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 323.44,
+                "height": 310.91
+              }
+            },
             "layers": [
               {
                 "id": "377-22",
@@ -177,6 +195,12 @@
                   122.89016724
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 323.44,
+                    "height": 188.02
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -225,6 +249,12 @@
                   0
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 293.31,
+                    "height": 130.41
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -273,6 +303,12 @@
                   183.05683899
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 67.69,
+                    "height": 22.56
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -321,6 +357,12 @@
                   183.05683899
                 ],
                 "effects": [],
+                "meta": {
+                  "dimensions": {
+                    "width": 67.69,
+                    "height": 22.56
+                  }
+                },
                 "shape": {
                   "path": {
                     "type": "PATH",
@@ -357,6 +399,10 @@
           }
         ],
         "meta": {
+          "dimensions": {
+            "width": 741,
+            "height": 380
+          },
           "isArtboard": true
         }
       },
@@ -376,6 +422,12 @@
           31.28692627
         ],
         "effects": [],
+        "meta": {
+          "dimensions": {
+            "width": 323.44,
+            "height": 310.91
+          }
+        },
         "layers": [
           {
             "id": "377-27",
@@ -393,6 +445,12 @@
               122.89016724
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 323.44,
+                "height": 188.02
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -441,6 +499,12 @@
               0
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 293.31,
+                "height": 130.41
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -489,6 +553,12 @@
               183.05683899
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 67.69,
+                "height": 22.56
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -537,6 +607,12 @@
               183.05683899
             ],
             "effects": [],
+            "meta": {
+              "dimensions": {
+                "width": 67.69,
+                "height": 22.56
+              }
+            },
             "shape": {
               "path": {
                 "type": "PATH",
@@ -573,6 +649,10 @@
       }
     ],
     "meta": {
+      "dimensions": {
+        "width": 741,
+        "height": 380
+      },
       "isArtboard": true
     }
   }
