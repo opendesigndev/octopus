@@ -33,7 +33,7 @@ export class OctopusLayerGroup extends OctopusLayerBase {
 
   get transform(): number[] {
     if (this.isTopLayer)
-      return env.NODE_ENV === 'debug' // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+      return env.NODE_ENV === 'debug' // TODO remove when ISSUE is fixed https://github.com/opendesigndev/open-design-engine/issues/54
         ? getTopComponentTransform(this._sourceLayer) ?? DEFAULTS.TRANSFORM
         : DEFAULTS.TRANSFORM
     return normalizeTransform(this.sourceLayer.transform)

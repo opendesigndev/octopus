@@ -76,7 +76,7 @@ export function hasParentBoolOp(sourceLayer: SourceLayer): boolean {
 }
 
 export function getTopComponentTransform(sourceLayer: SourceLayerContainer): number[] | undefined {
-  if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+  if (env.NODE_ENV !== 'debug') return undefined // TODO remove whole method when ISSUE is fixed https://github.com/opendesigndev/open-design-engine/issues/54
   const bounds = sourceLayer.bounds
   const boundingBox = sourceLayer.boundingBox
   if (!bounds || !boundingBox) return undefined
