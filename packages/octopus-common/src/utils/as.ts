@@ -42,16 +42,17 @@ export function asNumber(value: unknown, defaultValue?: number): number {
   return Number(value)
 }
 
+function isWrongZero(value: unknown): boolean {
+  // Number(null) === 0
+  // Number('') === 0
+  // Number('   ') === 0
+  return value === null || (typeof value === 'string' && value.trim() === '')
+}
+
 export function asFiniteNumber(value: unknown, defaultValue?: number): number {
-  if (isFiniteNumber(value)) {
-    return value
-  }
-  if (isFiniteNumber(defaultValue)) {
-    return defaultValue
-  }
+  if (isFiniteNumber(value)) return value
   const conversionAttempt = Number(value)
-  if (!Number.isFinite(conversionAttempt)) {
-    throw new Error(`Failed when converting "${value}" to finite number`)
-  }
-  return conversionAttempt
+  if (isFiniteNumber(conversionAttempt) && !isWrongZero(value)) return conversionAttempt
+  if (isFiniteNumber(defaultValue)) return defaultValue
+  throw new Error(`Failed when converting "${value}" to finite number.`)
 }

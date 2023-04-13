@@ -1132,6 +1132,18 @@
   resolved "https://registry.yarnpkg.com/@opendesign/manifest-ts/-/manifest-ts-3.1.0.tgz#e973ce08210e89864d8651b7b59fbb61bd954f17"
   integrity sha512-d3QDzYjnqoiU2KDoSWjxIuzmpSPglfhO+dKWpqmaCxpRWWESQeaTBzl3UhOB6ocaBKtH0WHP9KlZ/cMqTri25A==
 
+"@opendesign/octopus-common@3.0.0-rc.35":
+  version "3.0.0-rc.35"
+  resolved "https://registry.yarnpkg.com/@opendesign/octopus-common/-/octopus-common-3.0.0-rc.35.tgz#83aea870777fb9aebbaaca37d3f093b27b7e3409"
+  integrity sha512-wWYrgx8G5C9dLmehNY63zbsOwZoYt+DxIPGz4dGrmRcB1tMhjudDExMYnJ+Hj0qgB2+t16DrmxqlNEks+7L4hA==
+  dependencies:
+    "@opendesign/octopus-ts" "3.0.2"
+    "@types/lodash" "^4.14.178"
+    "@types/uuid" "^8.3.1"
+    crc-32 "^1.2.2"
+    lodash "^4.17.21"
+    uuid "^8.3.2"
+
 "@opendesign/octopus-ts@3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@opendesign/octopus-ts/-/octopus-ts-3.0.1.tgz#821efcc76962033ac24f2749679049ea7255b76b"
