@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 
-import type { Exporter, AuxiliaryData } from './index.js'
+import type { AuxiliaryData, AIExporter } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
@@ -28,7 +28,7 @@ type TempExporterOptions = {
  * Exporter created to be used in manual runs.
  */
 
-export class TempExporter extends EventEmitter implements Exporter {
+export class TempExporter extends EventEmitter implements AIExporter {
   private _outputDir: Promise<string>
   private _tempDir: string
   private _completed: DetachedPromiseControls<void>

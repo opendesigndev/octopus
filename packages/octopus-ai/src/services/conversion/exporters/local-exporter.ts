@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 
-import type { Exporter, AuxiliaryData } from './index.js'
+import type { AIExporter, AuxiliaryData } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
@@ -21,7 +21,7 @@ type LocalExporterOptions = {
 /**
  * Exporter created to be used in automated runs.
  */
-export class LocalExporter implements Exporter {
+export class LocalExporter implements AIExporter {
   private _outputDir: Promise<string>
   private _assetsSaves: Promise<unknown>[]
   private _completed: DetachedPromiseControls<void>

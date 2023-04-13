@@ -18,6 +18,7 @@ import type { AbstractExporter } from './abstract-exporter.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
 import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
+import { PSDExporter } from './index.js'
 
 export type DebugExporterOptions = {
   /** Path to directory, where designs outputs should be exported. */
@@ -29,7 +30,7 @@ export type DebugExporterOptions = {
 /**
  * Exporter created to be used in manual runs.
  */
-export class DebugExporter extends EventEmitter implements AbstractExporter {
+export class DebugExporter extends EventEmitter implements PSDExporter {
   private _outputDir: Promise<string>
   private _tempDir: string
   private _assetsSaves: Promise<unknown>[]
@@ -94,13 +95,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
   async exportComponent(conversionResult: ComponentConversionResult): Promise<string | null> {
     if (!conversionResult.value) return Promise.resolve(null)
     const octopusPath = await this._save(getOctopusFileName(conversionResult.id), stringify(conversionResult.value))
-    const sourcePath = path.join(await this._outputDir, SOURCE_NAME)
     const result = {
       id: conversionResult.id,
       time: conversionResult.time,
       error: conversionResult.error,
       octopusPath,
-      sourcePath,
     }
     this.emit('octopus:component', result)
     return octopusPath

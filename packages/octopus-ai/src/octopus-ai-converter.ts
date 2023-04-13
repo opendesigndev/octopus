@@ -5,7 +5,7 @@ import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceDesign } from './entities/source/source-design.js'
 import type { ConvertDesignResult } from './services/conversion/design-converter/index.js'
-import type { Exporter } from './services/conversion/exporters/index.js'
+import type { AIExporter } from './services/conversion/exporters/index.js'
 import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
 import type { Logger } from './typings/index.js'
 import type { PackageMeta } from './utils/read-pkg-meta.js'
@@ -29,7 +29,7 @@ export type ConvertDesignOptions = {
    * file containing metadata (OctopusManifest) gets periodically updated
    */
   partialUpdateInterval?: number
-  exporter?: Exporter
+  exporter?: AIExporter
 }
 
 /**
@@ -81,4 +81,4 @@ export class OctopusAIConverter {
   }
 }
 
-export type { Exporter, SourceDesign }
+export type { AIExporter, SourceDesign }

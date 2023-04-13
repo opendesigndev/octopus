@@ -22,7 +22,6 @@ type ConvertedComponent = {
   time: number
   error: Error | null
   octopusPath: string
-  sourcePath: string
 }
 
 dotenv.config()
@@ -46,7 +45,6 @@ async function convertDesign({
         : `file://${render.value} ${displayPerf(render.time)}`
 
     console.log(`\n${chalk.yellow('Component')} ${filePath} ${status}`)
-    console.log(`  ${chalk.cyan(`Source:`)} file://${component.sourcePath}`)
     console.log(`  ${chalk.cyan(`Octopus:`)} file://${component.octopusPath} ${displayPerf(component.time)}`)
     console.log(`  ${chalk.cyan(`Render:`)} ${renderPath}`)
   })

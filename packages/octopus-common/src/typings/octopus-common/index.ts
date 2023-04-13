@@ -12,14 +12,24 @@ export type DesignMeta = {
   origin: Origin
 }
 
-export type GenericComponentConversionResult<T extends object> = {
+export type GenericComponentConversionResult<T> = {
   id: string
   value: T | null
   error: Error | null
   time: number
 }
 
-export type GenericDesignConversionResult<T extends object> = {
+export type GenericDesignConversionResult<T> = {
   manifest: T
   time: number
+}
+
+export interface Exporter {
+  exportStatistics?(statistics?: object): Promise<string>
+  getBasePath?(): Promise<string>
+  exportSourceArtboard?(artboard: unknown): Promise<string>
+  finalizeExport?(): void
+  exportManifest?(designConversionResult: GenericDesignConversionResult<unknown>): Promise<string | null>
+  exportComponent?(result: GenericComponentConversionResult<unknown>, role?: string): Promise<string | null>
+  exportImage?(image: SourceImage): Promise<string>
 }
