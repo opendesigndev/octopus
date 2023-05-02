@@ -484,6 +484,11 @@
   resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.54.1.tgz#5145fafbb67ba445da593320cbc00612b2e23bc6"
   integrity sha512-gvEmz/Ey5uX6HTH5t33m+UOvI8SBkd+aqT4/PnFPivgsagwY38HK51axdxQQavVWEXQY+Ga326BZnKj5MEUuPg==
 
+"@figma/plugin-typings@1.63.0":
+  version "1.63.0"
+  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.63.0.tgz#d6d4b0e1131bf6e5fcb45dd357ef2cc52e1cd8a6"
+  integrity sha512-bVayE0SHdBJL8VFf2CvfLIC9aW4f+6KBBNuBQ67Q5Vy0RI5MCymEppWBkJoSFfUu3XQskb6A1UMVDI7hurd0LA==
+
 "@hapi/bourne@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@hapi/bourne/-/bourne-2.1.0.tgz#66aff77094dc3080bd5df44ec63881f2676eb020"

@@ -1,3 +1,4 @@
+import { writeTextToClipboard } from '@opendesign/figma-plugin-common/dist/ui/clipboard'
 import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
@@ -34,36 +35,27 @@ function App() {
   useEffect(() => {
     window.onmessage = async (event) => {
       const { action, data } = event.data.pluginMessage
-      console.info('window.onmessage', { action })
+      console.info('window.onmessage', { action, data })
       if (action === 'SELECTION_CHANGE') {
         if (typeof data !== 'number') return
         setSelectedObjects(data)
       }
       if (action === 'COPY_RESPONSE') {
-        if (typeof data !== 'string') return
-        const copyPromise = new Promise((resolve) => {
-          document.addEventListener('copy', async (event) => {
-            if (!event.clipboardData) return resolve(false)
-            event.preventDefault()
-            event.clipboardData.setData('text/plain', `[FIGMA_PLUGIN_OBJECT]${data}`)
-            await sleep(1000) // need to sleep a while to make sure the clipboard is updated before closing
-            resolve(true)
-          })
-        })
-        const textarea = document.createElement('textarea')
-        textarea.setAttribute('hidden', 'true')
-        textarea.value = 'Copying failed, try again in desktop app'
-        document.body.appendChild(textarea)
-        textarea.focus()
-        textarea.select()
-        document.execCommand('copy')
-        const copyResult = await copyPromise
+        if (typeof data !== 'object') return
+        try {
+          const stringified = JSON.stringify(data)
+          const copyResult = await writeTextToClipboard(`[FIGMA_PLUGIN_OBJECT]${stringified}`)
+          await sleep(500) // need to sleep a while to make sure the clipboard is updated before closing
+          const isError = !copyResult
+          const message = isError
+            ? 'Copy was unsuccessful, try again in desktop app'
+            : 'Copy was successful, paste into Ceros Studio'
+          dispatchToFigma('NOTIFY', { message, isError })
+        } catch (error) {
+          console.warn('TextToClipboard Error:', error)
+          dispatchToFigma('NOTIFY', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+        }
         console.timeEnd('ClipboardData')
-        const isError = !copyResult
-        const message = isError
-          ? 'Copy was unsuccessful, try again in desktop app'
-          : 'Copy was successful, paste into Ceros Studio'
-        dispatchToFigma('NOTIFY', { message, isError })
         setCopyCount(0)
       }
     }

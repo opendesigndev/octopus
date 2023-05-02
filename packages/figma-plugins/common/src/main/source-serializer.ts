@@ -3,7 +3,16 @@ import { Buffer } from 'buffer'
 
 const SECTION_TYPES = ['SECTION', 'COMPONENT_SET']
 const CONTAINER_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE']
-const SHAPE_TYPES = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON', 'STAR', 'BOOLEAN_OPERATION']
+const SHAPE_TYPES = [
+  'RECTANGLE',
+  'LINE',
+  'VECTOR',
+  'ELLIPSE',
+  'REGULAR_POLYGON',
+  'STAR',
+  'POLYGON',
+  'BOOLEAN_OPERATION',
+]
 const TOP_NODE = true
 
 type ImageMap = { [key: string]: string | undefined }
@@ -77,7 +86,7 @@ export class SourceSerializer {
       const image = figma.getImageByHash(imageHash)
       if (image?.hash && !this.imageMap[image.hash]) {
         const bytes = await image.getBytesAsync()
-        this.imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
+        this.imageMap[image.hash] = Buffer.from(bytes).toString('base64')
       }
     }
   }

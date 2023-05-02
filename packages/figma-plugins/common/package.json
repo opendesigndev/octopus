@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/figma-plugin-common",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "description": "Figma Plugin Common Library",
   "license": "Apache-2.0",
   "scripts": {
@@ -9,7 +9,9 @@
     "test": "echo 'Tests are not implemented yet'",
     "tsc": "tsc --noEmit -p src/main",
     "tsc:watch": "yarn tsc:main -- --watch --preserveWatchOutput",
-    "build": "rimraf ./dist && esbuild src/* --outdir=dist"
+    "build": "rimraf ./dist && yarn build:ui && yarn build:main",
+    "build:main": "esbuild src/main/* --outdir=dist/main",
+    "build:ui": "esbuild src/ui/* --outdir=dist/ui"
   },
   "dependencies": {
     "buffer": "^6.0.3",
