@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Buffer } from 'buffer'
 
+import PQueue from 'p-queue'
+
+const imageQueue = new PQueue({ concurrency: 1 })
+
 const SECTION_TYPES = ['SECTION', 'COMPONENT_SET']
 const CONTAINER_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE']
 const SHAPE_TYPES = [
@@ -85,14 +89,16 @@ export class SourceSerializer {
       if (typeof imageHash !== 'string') continue
       const image = figma.getImageByHash(imageHash)
       if (image?.hash && !this.imageMap[image.hash]) {
-        const bytes = await image.getBytesAsync()
+        const bytes = await imageQueue.add(() => image.getBytesAsync())
         this.imageMap[image.hash] = Buffer.from(bytes).toString('base64')
       }
     }
   }
 
   private async _setPreview(node: SceneNode) {
-    const bytes = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } })
+    const bytes = await imageQueue.add(() =>
+      node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } })
+    )
     this.previewMap[node.id] = Buffer.from(bytes).toString('base64')
   }
 

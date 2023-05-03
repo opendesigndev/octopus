@@ -28,7 +28,7 @@ function App() {
   const onCopy = useCallback(async () => {
     setCopyCount(copyCount + 1)
     await sleep(20) // need to sleep a while to update the copy button
-    console.time('ClipboardData')
+    console.time('OnCopyPressed')
     dispatchToFigma('COPY_PRESSED')
   }, [copyCount])
 
@@ -42,6 +42,7 @@ function App() {
       }
       if (action === 'COPY_RESPONSE') {
         if (typeof data !== 'object') return
+        console.time('OnCopyResponse')
         try {
           const stringified = JSON.stringify(data)
           const copyResult = await writeTextToClipboard(`[FIGMA_PLUGIN_OBJECT]${stringified}`)
@@ -55,7 +56,8 @@ function App() {
           console.warn('TextToClipboard Error:', error)
           dispatchToFigma('NOTIFY', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
         }
-        console.timeEnd('ClipboardData')
+        console.timeEnd('OnCopyResponse')
+        console.timeEnd('OnCopyPressed')
         setCopyCount(0)
       }
     }

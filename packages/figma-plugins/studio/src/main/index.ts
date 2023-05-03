@@ -10,7 +10,9 @@ figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
+  const now = Date.now()
   const source = await new SourceSerializer({ version, exportPreviews: false }).getSourceData()
+  console.info(`SourceSerializer: ${Date.now() - now} ms`)
   dispatch('COPY_RESPONSE', source)
 })
 

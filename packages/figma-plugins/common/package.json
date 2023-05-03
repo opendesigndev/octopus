@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "p-queue": "^6.6.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "1.54.1",
+    "@figma/plugin-typings": "1.63.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "esbuild": "0.15.12",
