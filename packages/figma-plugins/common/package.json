@@ -1,6 +1,6 @@
 {
   "name": "@opendesign/figma-plugin-common",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.7",
   "description": "Figma Plugin Common Library",
   "license": "Apache-2.0",
   "scripts": {

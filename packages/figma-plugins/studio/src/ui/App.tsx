@@ -6,6 +6,9 @@ import logoPng from './logo.png'
 import { dispatchToFigma } from './utils/dispatcher'
 import { sleep } from './utils/sleep'
 
+const MESSAGE_SUCCESS = 'Copy was successful, paste into Ceros Studio.'
+const MESSAGE_FAILURE = 'Copying failed❗ Please try again in the desktop app.'
+
 const getSelectionText = (selectedObjects: number): JSX.Element => {
   if (selectedObjects === 0) return <p className='disabled'>no objects selected</p>
   if (selectedObjects === 1)
@@ -24,13 +27,35 @@ const getSelectionText = (selectedObjects: number): JSX.Element => {
 function App() {
   const [selectedObjects, setSelectedObjects] = useState(0)
   const [copyCount, setCopyCount] = useState(0)
+  const [figmaPluginString, setFigmaPluginString] = useState<string>()
 
-  const onCopy = useCallback(async () => {
+  const onCopyPressed = useCallback(async () => {
     setCopyCount(copyCount + 1)
     await sleep(20) // need to sleep a while to update the copy button
     console.time('OnCopyPressed')
-    dispatchToFigma('COPY_PRESSED')
-  }, [copyCount])
+    if (figmaPluginString) {
+      copyToClipboardAction(figmaPluginString)
+    } else {
+      dispatchToFigma('COPY_PRESSED')
+    }
+  }, [copyCount, figmaPluginString])
+
+  const copyToClipboardAction = useCallback(async (figmaPluginString: string) => {
+    console.time('CopyToClipboardAction')
+    try {
+      const copyResult = await writeTextToClipboard(figmaPluginString)
+      const isError = !copyResult
+      await sleep(100) // need to sleep a while to make sure the clipboard is updated
+      const message = isError ? MESSAGE_FAILURE : MESSAGE_SUCCESS
+      dispatchToFigma('NOTIFY', { message })
+    } catch (error) {
+      console.warn('TextToClipboard Error:', error)
+      dispatchToFigma('NOTIFY', { message: MESSAGE_FAILURE })
+    }
+    console.timeEnd('CopyToClipboardAction')
+    console.timeEnd('OnCopyPressed')
+    setCopyCount(0)
+  }, [])
 
   useEffect(() => {
     window.onmessage = async (event) => {
@@ -39,33 +64,30 @@ function App() {
       if (action === 'SELECTION_CHANGE') {
         if (typeof data !== 'number') return
         setSelectedObjects(data)
+        setFigmaPluginString(undefined)
       }
       if (action === 'COPY_RESPONSE') {
-        if (typeof data !== 'object') return
-        console.time('OnCopyResponse')
+        if (typeof data !== 'object') {
+          console.warn('Wrong COPY_RESPONSE:', data)
+          setCopyCount(0)
+          return
+        }
         try {
-          const stringified = JSON.stringify(data)
-          const copyResult = await writeTextToClipboard(`[FIGMA_PLUGIN_OBJECT]${stringified}`)
-          await sleep(500) // need to sleep a while to make sure the clipboard is updated before closing
-          const isError = !copyResult
-          const message = isError
-            ? 'Copy was unsuccessful, try again in desktop app'
-            : 'Copy was successful, paste into Ceros Studio'
-          dispatchToFigma('NOTIFY', { message, isError })
+          const figmaPluginString = `[FIGMA_PLUGIN_OBJECT]${JSON.stringify(data)}`
+          setFigmaPluginString(figmaPluginString)
+          copyToClipboardAction(figmaPluginString)
         } catch (error) {
           console.warn('TextToClipboard Error:', error)
-          dispatchToFigma('NOTIFY', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+          dispatchToFigma('NOTIFY', { message: MESSAGE_FAILURE })
+          setCopyCount(0)
         }
-        console.timeEnd('OnCopyResponse')
-        console.timeEnd('OnCopyPressed')
-        setCopyCount(0)
       }
     }
   }, [])
 
   const isCopyPressed = copyCount !== 0
   const isCopyDisabled = isCopyPressed || selectedObjects === 0
-  const buttonText = copyCount === 0 ? 'Copy to clipboard' : `Copying...`
+  const buttonText = isCopyPressed ? `Copying...` : 'Copy to clipboard'
   const buttonClass = isCopyPressed ? 'copyPressed' : undefined
 
   return (
@@ -78,7 +100,7 @@ function App() {
         <div id='textSection'>
           <p>Select the frame you wish to copy to Ceros Studio.</p>
         </div>
-        <button onClick={onCopy} disabled={isCopyDisabled} className={buttonClass}>
+        <button onClick={onCopyPressed} disabled={isCopyDisabled} className={buttonClass}>
           {buttonText}
         </button>
       </section>

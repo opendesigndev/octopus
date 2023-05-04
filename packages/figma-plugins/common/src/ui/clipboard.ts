@@ -1,6 +1,5 @@
 export async function writeTextToClipboard(str: string): Promise<boolean> {
   const copyPromise: Promise<boolean> = new Promise((resolve) => {
-    console.info('X addEventListener')
     document.addEventListener(
       'copy',
       async (event) => {
@@ -29,7 +28,6 @@ export async function writeTextToClipboard(str: string): Promise<boolean> {
     textArea.select()
 
     const execRes = document.execCommand('copy')
-    console.info('X execRes', execRes)
     if (!execRes) return false
     const copyRes = await copyPromise
     textArea.remove()
