@@ -657,7 +657,7 @@
                     }
                   },
                   "thickness": 1,
-                  "position": "INSIDE",
+                  "position": "CENTER",
                   "lineJoin": "MITER",
                   "lineCap": "BUTT",
                   "miterLimit": 28.96,

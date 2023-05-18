@@ -3,7 +3,7 @@ import { Buffer } from 'buffer'
 
 import PQueue from 'p-queue'
 
-const imageQueue = new PQueue({ concurrency: 1 })
+const imageQueue = new PQueue({ concurrency: 6 })
 
 const SECTION_TYPES = ['SECTION', 'COMPONENT_SET']
 const CONTAINER_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE']

@@ -75,7 +75,7 @@ export class OctopusPath {
       return sourceLayer.strokeGeometry
     }
 
-    return sourceLayer.fillGeometry.length ? sourceLayer.fillGeometry : sourceLayer.strokeGeometry
+    return sourceLayer.fillGeometry
   }
 
   private _firstGeometry(sourceLayer: SourceLayer): SourceGeometry | undefined {
