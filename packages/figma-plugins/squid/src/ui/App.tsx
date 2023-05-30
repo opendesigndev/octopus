@@ -42,7 +42,11 @@ function App() {
         setSelectedObjects(data)
       }
       if (action === 'COPY_RESPONSE') {
-        if (typeof data !== 'object') return
+        if (typeof data !== 'object') {
+          console.warn('Wrong COPY_RESPONSE:', data)
+          dispatchToFigma('CLOSE', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+          return
+        }
         try {
           const stringified = JSON.stringify(data)
           const copyResult = await writeTextToClipboard(stringified)

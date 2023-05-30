@@ -53,7 +53,11 @@ function App() {
         setSelectedObjects(data)
       }
       if (action === 'COPY_RESPONSE') {
-        if (!data) return
+        if (typeof data !== 'object') {
+          console.warn('Wrong COPY_RESPONSE:', data)
+          dispatchToFigma('CLOSE', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+          return
+        }
         exportData(data)
         await sleep(1000)
         dispatchToFigma('CLOSE')
