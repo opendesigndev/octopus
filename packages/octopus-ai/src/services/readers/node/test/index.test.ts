@@ -24,7 +24,7 @@ describe('AIFileReader', () => {
       const privateDataMock = Promise.resolve({ Textlayers: [], LayerNames: [] })
       vi.mocked(FSContext).mockResolvedValueOnce(ctxMock)
       vi.mocked(ArtBoardRefs).mockReturnValueOnce([{ idx: 1 }, { idx: 2 }] as any)
-      vi.mocked(ArtBoard).mockImplementation(async (_, ref) => ({ id: `${ref.idx}` } as any))
+      vi.mocked(ArtBoard).mockImplementation(async (_, ref) => ({ Id: ref.idx } as any))
       vi.mocked(PrivateData).mockResolvedValueOnce(await privateDataMock)
 
       const result = await AIFileReader.prototype['_getSourceData']()
@@ -32,7 +32,7 @@ describe('AIFileReader', () => {
       expect(mkdir).toHaveBeenCalledWith('root/path', { recursive: true })
       expect(result).toEqual({
         additionalTextData: { LayerNames: [], Textlayers: [] },
-        artboards: [{ id: '1' }, { id: '2' }],
+        artboards: [{ Id: 1 }, { Id: 2 }],
         metadata: { version: '1.0.1' },
       })
       expect(AIFileReader.prototype['_images']).toEqual(ctxMock.Bitmaps)

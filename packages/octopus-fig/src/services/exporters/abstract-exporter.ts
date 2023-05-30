@@ -1,5 +1,7 @@
 import type { Manifest } from '../../typings/manifest.js'
 import type { ComponentConversionResult } from '../conversion/design-converter.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
+
 export abstract class AbstractExporter {
   exportRawDesign?(_raw: unknown): Promise<unknown> {
     throw new Error('Subclass of "Exporter" has no "exportRawDesign" method implemented!')
@@ -17,7 +19,7 @@ export abstract class AbstractExporter {
     throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
   }
 
-  exportImage?(_name: string, _data: ArrayBuffer): Promise<string> {
+  exportImage?(_image: SourceImage): Promise<string> {
     throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
   }
 

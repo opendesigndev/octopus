@@ -2,17 +2,16 @@ import { SourceComponent } from './source-component.js'
 import { isArtboard } from '../../utils/source.js'
 
 import type { RawParsedPsd } from '../../typings/raw/component.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
-export type SourceImage = {
-  name: string
-  data: Uint8Array
+export type PsdSourceImage = SourceImage & {
   width?: number
   height?: number
 }
 
 type SourceDesignOptions = {
   component: RawParsedPsd
-  images: SourceImage[]
+  images: PsdSourceImage[]
   designId: string
   componentIds?: number[]
   iccProfileName?: string
@@ -21,7 +20,7 @@ type SourceDesignOptions = {
 export class SourceDesign {
   private _designId: string
   private _components: SourceComponent[]
-  private _images: SourceImage[]
+  private _images: PsdSourceImage[]
   private _raw: RawParsedPsd
   private _iccProfileName: string | undefined
 
@@ -70,7 +69,7 @@ export class SourceDesign {
     return this._components.map((comp) => comp.id)
   }
 
-  get images(): SourceImage[] {
+  get images(): PsdSourceImage[] {
     return this._images
   }
 
@@ -78,8 +77,8 @@ export class SourceDesign {
     return this.components.find((comp) => comp.id === id)
   }
 
-  getImageByName(name: string): SourceImage | undefined {
-    return this.images.find((image) => image.name === name)
+  getImageById(id: string): PsdSourceImage | undefined {
+    return this.images.find((image) => image.id === id)
   }
 
   get documentWidth(): number {

@@ -1,5 +1,3 @@
-import type { SourceDesign } from './source-design.js'
-
 export type RawGeneralEntry = {
   id: string
   name: string
@@ -23,19 +21,13 @@ export type RawSourceManifest = {
 
 type SourceManifestOptions = {
   rawValue: RawSourceManifest
-  path: string
-  design: SourceDesign
 }
 
 export class SourceManifest {
   protected _rawValue: RawSourceManifest
-  private _path: string
-  private _design: SourceDesign
 
   constructor(options: SourceManifestOptions) {
-    this._design = options.design
     this._rawValue = options.rawValue
-    this._path = options.path
   }
 
   get raw(): RawSourceManifest {

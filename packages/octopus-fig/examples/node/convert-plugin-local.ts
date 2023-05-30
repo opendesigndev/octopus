@@ -31,7 +31,7 @@ export async function convertDesign({ sourcePath }: ConvertDesignOptions): Promi
   const exporter = new LocalExporter({ path: testDir })
 
   const reader = new SourcePluginReader(pluginSource)
-  await converter.convertDesign({ designEmitter: reader.parse(), exporter })
+  await converter.convertDesign({ designEmitter: reader.getSourceDesign(), exporter })
   await exporter.completed()
 
   console.info()

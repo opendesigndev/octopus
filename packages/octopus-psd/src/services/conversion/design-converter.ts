@@ -8,11 +8,11 @@ import { OctopusManifest } from '../../entities/octopus/octopus-manifest.js'
 import { logger } from '../index.js'
 
 import type { SourceComponent } from '../../entities/source/source-component.js'
-import type { SourceDesign, SourceImage } from '../../entities/source/source-design.js'
+import type { PsdSourceImage, SourceDesign } from '../../entities/source/source-design.js'
 import type { DesignConverterOptions, OctopusPSDConverter } from '../../octopus-psd-converter.js'
 import type { Manifest } from '../../typings/manifest.js'
 import type { Octopus } from '../../typings/octopus.js'
-import type { AbstractExporter } from '../exporters/abstract-exporter.js'
+import type { PSDExporter } from '../exporters/index.js'
 import type { FeaturesTracker } from '@opendesign/octopus-common/dist/services/features-tracker.js'
 import type {
   GenericComponentConversionResult,
@@ -24,7 +24,7 @@ export type ComponentConversionResult = GenericComponentConversionResult<Octopus
 export type ConvertDesignResult = {
   manifest: Manifest['OctopusManifest']
   components: ComponentConversionResult[]
-  images: SourceImage[]
+  images: PsdSourceImage[]
 }
 export type DesignConversionResult = GenericDesignConversionResult<Manifest['OctopusManifest']>
 
@@ -33,7 +33,7 @@ export class DesignConverter {
   private _octopusConverter: OctopusPSDConverter
   private _sourceDesign: SourceDesign
   private _octopusManifest: OctopusManifest
-  private _exporter: AbstractExporter | null
+  private _exporter: PSDExporter | null
   private _trackingService?: FeaturesTracker
 
   static COMPONENT_QUEUE_PARALLELS = 5
@@ -45,7 +45,7 @@ export class DesignConverter {
     this._octopusConverter = octopusConverter
     this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ sourceDesign: options.sourceDesign, octopusConverter })
-    this._exporter = isObject(options?.exporter) ? (options?.exporter as AbstractExporter) : null
+    this._exporter = isObject(options?.exporter) ? (options?.exporter as PSDExporter) : null
     this._trackingService = options.trackingService
   }
 
@@ -152,8 +152,8 @@ export class DesignConverter {
     /** Images */
     const images = await Promise.all(
       this._sourceDesign.images.map(async (image) => {
-        const imageId = image.name
-        const imagePath = await rejectTo(this._exporter?.exportImage?.(image.name, image.data))
+        const imageId = image.id
+        const imagePath = await rejectTo(this._exporter?.exportImage?.(image))
         if (typeof imagePath === 'string') {
           this.octopusManifest.setExportedImage(imageId, imagePath)
         }
