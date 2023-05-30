@@ -1,9 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Buffer } from 'buffer'
 
+import PQueue from 'p-queue'
+
+const imageQueue = new PQueue({ concurrency: 6 })
+
 const SECTION_TYPES = ['SECTION', 'COMPONENT_SET']
 const CONTAINER_TYPES = ['FRAME', 'GROUP', 'COMPONENT', 'INSTANCE']
-const SHAPE_TYPES = ['RECTANGLE', 'LINE', 'VECTOR', 'ELLIPSE', 'REGULAR_POLYGON', 'STAR', 'BOOLEAN_OPERATION']
+const SHAPE_TYPES = [
+  'RECTANGLE',
+  'LINE',
+  'VECTOR',
+  'ELLIPSE',
+  'REGULAR_POLYGON',
+  'STAR',
+  'POLYGON',
+  'BOOLEAN_OPERATION',
+]
 const TOP_NODE = true
 
 type ImageMap = { [key: string]: string | undefined }
@@ -76,14 +89,16 @@ export class SourceSerializer {
       if (typeof imageHash !== 'string') continue
       const image = figma.getImageByHash(imageHash)
       if (image?.hash && !this.imageMap[image.hash]) {
-        const bytes = await image.getBytesAsync()
-        this.imageMap[image.hash] = Buffer.from(bytes).toString('base64') // TODO for better perf try array buffer content (numbers) without converting it to base64. try also gzip
+        const bytes = await imageQueue.add(() => image.getBytesAsync())
+        this.imageMap[image.hash] = Buffer.from(bytes).toString('base64')
       }
     }
   }
 
   private async _setPreview(node: SceneNode) {
-    const bytes = await node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } })
+    const bytes = await imageQueue.add(() =>
+      node.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 1 } })
+    )
     this.previewMap[node.id] = Buffer.from(bytes).toString('base64')
   }
 

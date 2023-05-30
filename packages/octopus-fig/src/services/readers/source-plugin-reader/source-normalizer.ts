@@ -97,6 +97,12 @@ export class SourceNormalizer {
     return raw
   }
 
+  private _normalizeVectorPaths(raw: any): RawLayer {
+    const { vectorPaths, fillGeometry } = raw
+    if (!fillGeometry?.length && vectorPaths?.length) raw.fillGeometry = vectorPaths
+    return raw
+  }
+
   private _normalizeTextStyle(textNode: TextNode, textStyle: StyledTextSegment): RawTextStyle {
     const { fontName, fontWeight, fontSize, textCase, textDecoration, lineHeight } = textStyle
     const { textAlignHorizontal, textAlignVertical, listSpacing, textAutoResize, paragraphSpacing, paragraphIndent } =
@@ -182,6 +188,7 @@ export class SourceNormalizer {
     this._normalizeSize(raw)
     this._normalizeCornerRadius(raw)
     this._normalizeStroke(raw)
+    this._normalizeVectorPaths(raw)
 
     const { fillGeometry, strokeGeometry, fills } = raw
     if (isArray(fillGeometry)) fillGeometry.forEach((geometry) => this._normalizeGeometry(geometry))

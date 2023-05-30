@@ -76,7 +76,7 @@ export class OctopusLayerMaskGroup {
     const id = `${sourceLayer.id}-Background`
     const isTopLayer = parent instanceof OctopusComponent
     const topComponentTransform =
-      isTopLayer && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://gitlab.avcd.cz/opendesign/open-design-engine/-/issues/21
+      isTopLayer && env.NODE_ENV === 'debug' ? getTopComponentTransform(sourceLayer) : undefined // TODO remove when ISSUE is fixed https://github.com/opendesigndev/open-design-engine/issues/54
     const transform = isTopLayer ? topComponentTransform : normalizeTransform(sourceLayer.transform)
     const mask = OctopusLayerMaskGroup.createBackgroundLayer(sourceLayer, parent)
     if (!mask) return null

@@ -1,5 +1,5 @@
-import { dispatch, handleEvent } from '@opendesign/figma-plugin-common/dist/message-handler'
-import { SourceSerializer } from '@opendesign/figma-plugin-common/dist/source-serializer'
+import { dispatch, handleEvent } from '@opendesign/figma-plugin-common/dist/main/message-handler'
+import { SourceSerializer } from '@opendesign/figma-plugin-common/dist/main/source-serializer'
 
 import { version } from '../../package.json'
 
@@ -10,8 +10,10 @@ figma.on('selectionchange', () => sendSelectionchange())
 sendSelectionchange() // initial send
 
 handleEvent('COPY_PRESSED', async () => {
+  const now = Date.now()
   const source = await new SourceSerializer({ version, exportPreviews: false }).getSourceData()
-  dispatch('COPY_RESPONSE', JSON.stringify(source))
+  console.info(`SourceSerializer: ${Date.now() - now} ms`)
+  dispatch('COPY_RESPONSE', source)
 })
 
 handleEvent('CLOSE', (data: unknown) => {

@@ -10,6 +10,7 @@ import { DEFAULTS } from '../../utils/defaults.js'
 import type { OctopusLayer } from '../../factories/create-octopus-layer.js'
 import type { SourceLayer } from '../../factories/create-source-layer.js'
 import type { Octopus } from '../../typings/octopus.js'
+import type { SourceLayerShape } from '../source/source-layer-shape.js'
 import type { SourcePaint } from '../source/source-paint.js'
 
 type OctopusStrokeOptions = {
@@ -48,6 +49,9 @@ export class OctopusStroke {
   }
 
   get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+    const sourceShapeType = (this.sourceLayer as SourceLayerShape).shapeType
+    if (sourceShapeType === 'LINE' || sourceShapeType === 'VECTOR') return 'CENTER' // https://github.com/opendesigndev/octopus/issues/113
+
     const strokeAlign = this.sourceLayer.strokeAlign
     if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
       logger?.warn('Unknown Stroke Align', { strokeAlign })

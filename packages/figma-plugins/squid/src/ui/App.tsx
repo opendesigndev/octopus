@@ -1,3 +1,4 @@
+import { writeTextToClipboard } from '@opendesign/figma-plugin-common/dist/ui/clipboard'
 import React, { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
@@ -41,29 +42,25 @@ function App() {
         setSelectedObjects(data)
       }
       if (action === 'COPY_RESPONSE') {
-        if (typeof data !== 'string') return
-        const copyPromise = new Promise((resolve) => {
-          document.addEventListener('copy', async (event) => {
-            if (!event.clipboardData) return resolve(false)
-            event.preventDefault()
-            event.clipboardData.setData('text/plain', data)
-            await sleep(1000) // need to sleep a while to make sure the clipboard is updated before closing
-            resolve(true)
-          })
-        })
-        const textarea = document.createElement('textarea')
-        textarea.setAttribute('hidden', 'true')
-        textarea.value = 'Copying failed, try again in desktop app'
-        document.body.appendChild(textarea)
-        textarea.focus()
-        textarea.select()
-        document.execCommand('copy')
-        const copyResult = await copyPromise
+        if (typeof data !== 'object') {
+          console.warn('Wrong COPY_RESPONSE:', data)
+          dispatchToFigma('CLOSE', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+          return
+        }
+        try {
+          const stringified = JSON.stringify(data)
+          const copyResult = await writeTextToClipboard(stringified)
+          await sleep(500) // need to sleep a while to make sure the clipboard is updated before closing
+          const isError = !copyResult
+          const message = isError
+            ? 'Copy was unsuccessful, try again in desktop app'
+            : 'Copy was successful, paste into Ceros Studio'
+          dispatchToFigma('CLOSE', { message, isError })
+        } catch (error) {
+          console.warn('TextToClipboard Error:', error)
+          dispatchToFigma('CLOSE', { message: 'Copy was unsuccessful, try again in desktop app', isError: true })
+        }
         console.timeEnd('ClipboardData')
-        const message = copyResult
-          ? 'Copy was successful, paste into Squid'
-          : 'Copy was unsuccessful, try again in desktop app'
-        dispatchToFigma('CLOSE', message)
       }
     }
   }, [])
