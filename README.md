@@ -1,14 +1,15 @@
 # Octopus Converters
 
-Monorepository for Octopus 3+ converters and related tools.
+Monorepository for Octopus 3+ converters and related tools. For detailed description of each separate subpackage, please visit `/packages` directory.
 
 # Packages
 
-Packages are available at `/packages` directory.
-
-# How converters work?
-
-TBD
+- `@opendesign/figma-parser` - Figma REST API assets/files downloader. Used mainly as part of `@opendesign/octopus-fig`
+- `@opendesign/octopus-ai` - Adobe Illustrator to Octopus isomorphic converter
+- `@opendesign/octopus-common` - package representing general internal utility functions or modules used in most of converters
+- `@opendesign/octopus-fig` - Figma to Octopus isomorphic converter
+- `@opendesign/octopus-psd` - Adobe Photoshop to Octopus isomorphic converter
+- `@opendesign/octopus-xd` - Adobe XD to Octopus isomorphic converter
 
 # Scripts
 
