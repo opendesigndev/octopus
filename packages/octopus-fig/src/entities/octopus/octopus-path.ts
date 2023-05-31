@@ -38,6 +38,7 @@ export class OctopusPath {
       case 'RECTANGLE':
         return 'RECTANGLE'
       case 'LINE':
+      case 'VECTOR':
         return 'LINE'
       case 'ELLIPSE':
         return 'ELLIPSE'

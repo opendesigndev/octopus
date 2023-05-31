@@ -98,8 +98,8 @@ export class SourceNormalizer {
   }
 
   private _normalizeVectorPaths(raw: any): RawLayer {
-    const { vectorPaths, fillGeometry } = raw
-    if (!fillGeometry?.length && vectorPaths?.length) raw.fillGeometry = vectorPaths
+    const { vectorPaths } = raw
+    if (vectorPaths?.length) raw.fillGeometry = vectorPaths
     return raw
   }
 
