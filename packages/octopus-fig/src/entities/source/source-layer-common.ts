@@ -151,4 +151,16 @@ export class SourceLayerCommon extends SourceEntity {
     if (this._rawValue.parent?.type) return this._rawValue.parent?.type === 'PAGE'
     return this.parent instanceof SourceArtboard
   }
+
+  get absoluteBoundingBox(): Octopus['Bounds'] | undefined {
+    const { x, y, width, height } = this._rawValue.absoluteBoundingBox ?? {}
+    if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
+    return { x, y, width, height }
+  }
+
+  get absoluteRenderBounds(): Octopus['Bounds'] | undefined {
+    const { x, y, width, height } = this._rawValue.absoluteRenderBounds ?? {}
+    if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
+    return { x, y, width, height }
+  }
 }

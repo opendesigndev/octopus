@@ -119,7 +119,9 @@ export class OctopusLayerBase {
 
   get meta(): Octopus['LayerMeta'] | undefined {
     const dimensions = this.dimensions
-    return { dimensions }
+    const absoluteBoundingBox = this.sourceLayer.absoluteBoundingBox
+    const absoluteRenderBounds = this.sourceLayer.absoluteRenderBounds
+    return { dimensions, absoluteBoundingBox, absoluteRenderBounds }
   }
 
   @firstCallMemo()
