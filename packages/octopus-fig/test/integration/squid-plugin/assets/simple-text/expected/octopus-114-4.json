@@ -1,7 +1,7 @@
 {
   "id": "114-4",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dimensions": {
     "width": 849,
     "height": 172
@@ -26,6 +26,18 @@
       "dimensions": {
         "width": 849,
         "height": 172
+      },
+      "absoluteBoundingBox": {
+        "x": 49,
+        "y": 50,
+        "width": 849,
+        "height": 172
+      },
+      "absoluteRenderBounds": {
+        "x": 61.01171875,
+        "y": 80.626953125,
+        "width": 839.94140625,
+        "height": 109.2041015625
       }
     },
     "text": {

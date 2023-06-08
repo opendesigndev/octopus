@@ -1,7 +1,7 @@
 {
   "id": "1525-9683",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dimensions": {
     "width": 240,
     "height": 300
@@ -53,6 +53,18 @@
       ],
       "meta": {
         "dimensions": {
+          "width": 240,
+          "height": 300
+        },
+        "absoluteBoundingBox": {
+          "x": -4241.8076171875,
+          "y": 1763,
+          "width": 240,
+          "height": 300
+        },
+        "absoluteRenderBounds": {
+          "x": -4241.8076171875,
+          "y": 1763,
           "width": 240,
           "height": 300
         }
@@ -123,6 +135,18 @@
             "width": 200,
             "height": 28
           },
+          "absoluteBoundingBox": {
+            "x": -4221.8076171875,
+            "y": 1779,
+            "width": 200,
+            "height": 28
+          },
+          "absoluteRenderBounds": {
+            "x": -4221.8076171875,
+            "y": 1779,
+            "width": 200,
+            "height": 28
+          },
           "isArtboard": true
         },
         "layers": [
@@ -146,6 +170,18 @@
               "dimensions": {
                 "width": 38,
                 "height": 18
+              },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1784,
+                "width": 38,
+                "height": 18
+              },
+              "absoluteRenderBounds": {
+                "x": -4220.775390625,
+                "y": 1788.5040283203125,
+                "width": 35.32470703125,
+                "height": 11.3759765625
               }
             },
             "text": {
@@ -214,6 +250,18 @@
               "effects": [],
               "meta": {
                 "dimensions": {
+                  "width": 80,
+                  "height": 28
+                },
+                "absoluteBoundingBox": {
+                  "x": -4101.8076171875,
+                  "y": 1779,
+                  "width": 80,
+                  "height": 28
+                },
+                "absoluteRenderBounds": {
+                  "x": -4101.8076171875,
+                  "y": 1779,
                   "width": 80,
                   "height": 28
                 }
@@ -289,6 +337,18 @@
                   "effects": [],
                   "meta": {
                     "dimensions": {
+                      "width": 80,
+                      "height": 28
+                    },
+                    "absoluteBoundingBox": {
+                      "x": -4101.8076171875,
+                      "y": 1779,
+                      "width": 80,
+                      "height": 28
+                    },
+                    "absoluteRenderBounds": {
+                      "x": -4101.8076171875,
+                      "y": 1779,
                       "width": 80,
                       "height": 28
                     }
@@ -406,6 +466,12 @@
                         "dimensions": {
                           "width": 16,
                           "height": 16
+                        },
+                        "absoluteBoundingBox": {
+                          "x": -4093.8076171875,
+                          "y": 1785,
+                          "width": 16,
+                          "height": 16
                         }
                       },
                       "shape": {
@@ -461,6 +527,12 @@
                           "dimensions": {
                             "width": 7.91,
                             "height": 3.96
+                          },
+                          "absoluteBoundingBox": {
+                            "x": -4088.906982421875,
+                            "y": 1794.709716796875,
+                            "width": 7.9130859375,
+                            "height": 3.95654296875
                           }
                         },
                         "shape": {
@@ -516,6 +588,12 @@
                         "meta": {
                           "dimensions": {
                             "width": 8.63,
+                            "height": 12
+                          },
+                          "absoluteBoundingBox": {
+                            "x": -4089.264404296875,
+                            "y": 1787.1005859375,
+                            "width": 8.628173828125,
                             "height": 12
                           }
                         },
@@ -586,6 +664,18 @@
                         "width": 200,
                         "height": 28
                       },
+                      "absoluteBoundingBox": {
+                        "x": -4221.8076171875,
+                        "y": 1779,
+                        "width": 200,
+                        "height": 28
+                      },
+                      "absoluteRenderBounds": {
+                        "x": -4221.8076171875,
+                        "y": 1779,
+                        "width": 200,
+                        "height": 28
+                      },
                       "isArtboard": true
                     }
                   },
@@ -609,6 +699,18 @@
                       "dimensions": {
                         "width": 42,
                         "height": 16
+                      },
+                      "absoluteBoundingBox": {
+                        "x": -4093.8076171875,
+                        "y": 1785,
+                        "width": 42,
+                        "height": 16
+                      },
+                      "absoluteRenderBounds": {
+                        "x": -4092.775634765625,
+                        "y": 1787.927978515625,
+                        "width": 39.10107421875,
+                        "height": 9.22802734375
                       }
                     },
                     "text": {
@@ -679,6 +781,18 @@
                         "dimensions": {
                           "width": 16,
                           "height": 16
+                        },
+                        "absoluteBoundingBox": {
+                          "x": -4043.8076171875,
+                          "y": 1785,
+                          "width": 16,
+                          "height": 16
+                        },
+                        "absoluteRenderBounds": {
+                          "x": -4043.8076171875,
+                          "y": 1785,
+                          "width": 16,
+                          "height": 16
                         }
                       },
                       "shape": {
@@ -734,6 +848,18 @@
                           "dimensions": {
                             "width": 8,
                             "height": 3.88
+                          },
+                          "absoluteBoundingBox": {
+                            "x": -4039.8076171875,
+                            "y": 1791.06103515625,
+                            "width": 8,
+                            "height": 3.8778076171875
+                          },
+                          "absoluteRenderBounds": {
+                            "x": -4040.40771484375,
+                            "y": 1790.4610595703125,
+                            "width": 9.2001953125,
+                            "height": 5.077880859375
                           }
                         },
                         "shape": {
@@ -803,6 +929,18 @@
                         "width": 200,
                         "height": 28
                       },
+                      "absoluteBoundingBox": {
+                        "x": -4221.8076171875,
+                        "y": 1779,
+                        "width": 200,
+                        "height": 28
+                      },
+                      "absoluteRenderBounds": {
+                        "x": -4221.8076171875,
+                        "y": 1779,
+                        "width": 200,
+                        "height": 28
+                      },
                       "isArtboard": true
                     }
                   }
@@ -812,12 +950,36 @@
                     "width": 200,
                     "height": 28
                   },
+                  "absoluteBoundingBox": {
+                    "x": -4221.8076171875,
+                    "y": 1779,
+                    "width": 200,
+                    "height": 28
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4221.8076171875,
+                    "y": 1779,
+                    "width": 200,
+                    "height": 28
+                  },
                   "isArtboard": true
                 }
               }
             ],
             "meta": {
               "dimensions": {
+                "width": 200,
+                "height": 28
+              },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1779,
+                "width": 200,
+                "height": 28
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.8076171875,
+                "y": 1779,
                 "width": 200,
                 "height": 28
               },
@@ -844,6 +1006,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 200,
+            "height": 24
+          },
+          "absoluteBoundingBox": {
+            "x": -4221.8076171875,
+            "y": 1815,
+            "width": 200,
+            "height": 24
+          },
+          "absoluteRenderBounds": {
+            "x": -4221.8076171875,
+            "y": 1815,
             "width": 200,
             "height": 24
           },
@@ -876,6 +1050,18 @@
               "effects": [],
               "meta": {
                 "dimensions": {
+                  "width": 56,
+                  "height": 24
+                },
+                "absoluteBoundingBox": {
+                  "x": -4221.8076171875,
+                  "y": 1815,
+                  "width": 56,
+                  "height": 24
+                },
+                "absoluteRenderBounds": {
+                  "x": -4221.8076171875,
+                  "y": 1815,
                   "width": 56,
                   "height": 24
                 }
@@ -946,6 +1132,18 @@
                   "dimensions": {
                     "width": 40,
                     "height": 20
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4213.8076171875,
+                    "y": 1817,
+                    "width": 40,
+                    "height": 20
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4212.775390625,
+                    "y": 1822.5040283203125,
+                    "width": 37.04296875,
+                    "height": 8.6519775390625
                   }
                 },
                 "text": {
@@ -994,6 +1192,18 @@
                 "width": 200,
                 "height": 24
               },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
               "isArtboard": true
             }
           },
@@ -1023,6 +1233,18 @@
               "effects": [],
               "meta": {
                 "dimensions": {
+                  "width": 64,
+                  "height": 24
+                },
+                "absoluteBoundingBox": {
+                  "x": -4161.3076171875,
+                  "y": 1815,
+                  "width": 64,
+                  "height": 24
+                },
+                "absoluteRenderBounds": {
+                  "x": -4161.3076171875,
+                  "y": 1815,
                   "width": 64,
                   "height": 24
                 }
@@ -1093,6 +1315,18 @@
                   "dimensions": {
                     "width": 48,
                     "height": 20
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4153.3076171875,
+                    "y": 1817,
+                    "width": 48,
+                    "height": 20
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4152.275390625,
+                    "y": 1822.5040283203125,
+                    "width": 45.9541015625,
+                    "height": 8.6519775390625
                   }
                 },
                 "text": {
@@ -1141,6 +1375,18 @@
                 "width": 200,
                 "height": 24
               },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
               "isArtboard": true
             }
           },
@@ -1170,6 +1416,18 @@
               "effects": [],
               "meta": {
                 "dimensions": {
+                  "width": 71,
+                  "height": 24
+                },
+                "absoluteBoundingBox": {
+                  "x": -4092.8076171875,
+                  "y": 1815,
+                  "width": 71,
+                  "height": 24
+                },
+                "absoluteRenderBounds": {
+                  "x": -4092.8076171875,
+                  "y": 1815,
                   "width": 71,
                   "height": 24
                 }
@@ -1240,6 +1498,18 @@
                   "dimensions": {
                     "width": 55,
                     "height": 20
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4084.8076171875,
+                    "y": 1817,
+                    "width": 55,
+                    "height": 20
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4083.775634765625,
+                    "y": 1821.927978515625,
+                    "width": 52.8642578125,
+                    "height": 9.22802734375
                   }
                 },
                 "text": {
@@ -1288,6 +1558,18 @@
                 "width": 200,
                 "height": 24
               },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.8076171875,
+                "y": 1815,
+                "width": 200,
+                "height": 24
+              },
               "isArtboard": true
             }
           }
@@ -1313,6 +1595,18 @@
           "dimensions": {
             "width": 200,
             "height": 200
+          },
+          "absoluteBoundingBox": {
+            "x": -4221.8076171875,
+            "y": 1847,
+            "width": 200,
+            "height": 200
+          },
+          "absoluteRenderBounds": {
+            "x": -4221.8076171875,
+            "y": 1847,
+            "width": 200.797607421875,
+            "height": 200
           }
         },
         "layers": [
@@ -1335,6 +1629,18 @@
             "meta": {
               "dimensions": {
                 "width": 199.98,
+                "height": 200
+              },
+              "absoluteBoundingBox": {
+                "x": -4221.7861328125,
+                "y": 1847,
+                "width": 199.978515625,
+                "height": 200
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.7861328125,
+                "y": 1847,
+                "width": 199.978515625,
                 "height": 200
               }
             },
@@ -1434,6 +1740,18 @@
               "dimensions": {
                 "width": 200,
                 "height": 200
+              },
+              "absoluteBoundingBox": {
+                "x": -4221.8076171875,
+                "y": 1847,
+                "width": 200,
+                "height": 200
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.8076171875,
+                "y": 1847,
+                "width": 200,
+                "height": 200
               }
             },
             "layers": [
@@ -1457,6 +1775,18 @@
                   "dimensions": {
                     "width": 200,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4121.8076171875,
+                    "y": 1847,
+                    "width": 0,
+                    "height": 200
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4121.8076171875,
+                    "y": 1847,
+                    "width": 1,
+                    "height": 200
                   }
                 },
                 "shape": {
@@ -1552,6 +1882,18 @@
                   "dimensions": {
                     "width": 200,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4072.322509765625,
+                    "y": 1847,
+                    "width": 0,
+                    "height": 200
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4072.322509765625,
+                    "y": 1847,
+                    "width": 1,
+                    "height": 200
                   }
                 },
                 "shape": {
@@ -1647,6 +1989,18 @@
                   "dimensions": {
                     "width": 200,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4170.8076171875,
+                    "y": 1847,
+                    "width": 0,
+                    "height": 200
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4170.8076171875,
+                    "y": 1847,
+                    "width": 1,
+                    "height": 200
                   }
                 },
                 "shape": {
@@ -1742,6 +2096,18 @@
                   "dimensions": {
                     "width": 199.98,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4221.8076171875,
+                    "y": 1947,
+                    "width": 199.978515625,
+                    "height": 0
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4221.8076171875,
+                    "y": 1946,
+                    "width": 199.978515625,
+                    "height": 1
                   }
                 },
                 "shape": {
@@ -1837,6 +2203,18 @@
                   "dimensions": {
                     "width": 199.98,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4221.7861328125,
+                    "y": 1897,
+                    "width": 199.978515625,
+                    "height": 0
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4221.7861328125,
+                    "y": 1896,
+                    "width": 199.978515625,
+                    "height": 1
                   }
                 },
                 "shape": {
@@ -1932,6 +2310,18 @@
                   "dimensions": {
                     "width": 199.98,
                     "height": 0
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4221.7861328125,
+                    "y": 1997,
+                    "width": 199.978515625,
+                    "height": 0
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4221.7861328125,
+                    "y": 1996,
+                    "width": 199.978515625,
+                    "height": 1
                   }
                 },
                 "shape": {
@@ -2029,6 +2419,18 @@
               "dimensions": {
                 "width": 189.1,
                 "height": 187.76
+              },
+              "absoluteBoundingBox": {
+                "x": -4215.88525390625,
+                "y": 1852.974609375,
+                "width": 189.101806640625,
+                "height": 187.760009765625
+              },
+              "absoluteRenderBounds": {
+                "x": -4221.65869140625,
+                "y": 1847.201171875,
+                "width": 200.648681640625,
+                "height": 199.306884765625
               }
             },
             "layers": [
@@ -2052,6 +2454,18 @@
                   "dimensions": {
                     "width": 189.1,
                     "height": 187.76
+                  },
+                  "absoluteBoundingBox": {
+                    "x": -4215.88525390625,
+                    "y": 1852.974609375,
+                    "width": 189.101806640625,
+                    "height": 187.760009765625
+                  },
+                  "absoluteRenderBounds": {
+                    "x": -4221.65869140625,
+                    "y": 1847.201171875,
+                    "width": 200.648681640625,
+                    "height": 199.306884765625
                   }
                 },
                 "shape": {
@@ -2134,6 +2548,18 @@
     ],
     "meta": {
       "dimensions": {
+        "width": 240,
+        "height": 300
+      },
+      "absoluteBoundingBox": {
+        "x": -4241.8076171875,
+        "y": 1763,
+        "width": 240,
+        "height": 300
+      },
+      "absoluteRenderBounds": {
+        "x": -4241.8076171875,
+        "y": 1763,
         "width": 240,
         "height": 300
       },

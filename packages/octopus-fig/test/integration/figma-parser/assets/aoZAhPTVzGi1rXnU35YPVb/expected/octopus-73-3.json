@@ -1,7 +1,7 @@
 {
   "id": "73-3",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dimensions": {
     "width": 5000,
     "height": 5000
@@ -32,6 +32,18 @@
       "effects": [],
       "meta": {
         "dimensions": {
+          "width": 5000,
+          "height": 5000
+        },
+        "absoluteBoundingBox": {
+          "x": 0,
+          "y": 0,
+          "width": 5000,
+          "height": 5000
+        },
+        "absoluteRenderBounds": {
+          "x": 0,
+          "y": 0,
           "width": 5000,
           "height": 5000
         }
@@ -99,6 +111,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 50,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 50,
+            "y": 50,
             "width": 400,
             "height": 400
           }
@@ -197,6 +221,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 550,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 550,
+            "y": 50,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -291,6 +327,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 200
+          },
+          "absoluteBoundingBox": {
+            "x": 1050,
+            "y": 50,
+            "width": 400,
+            "height": 200
+          },
+          "absoluteRenderBounds": {
+            "x": 1050,
+            "y": 50,
             "width": 400,
             "height": 200
           }
@@ -389,6 +437,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1550,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1550,
+            "y": 50,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -483,6 +543,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 2050,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2050,
+            "y": 50,
             "width": 400,
             "height": 400
           }
@@ -581,6 +653,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 2550,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2550,
+            "y": 50,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -675,6 +759,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 3050,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3050,
+            "y": 50,
             "width": 400,
             "height": 400
           }
@@ -773,6 +869,18 @@
           "dimensions": {
             "width": 200,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 3550,
+            "y": 50,
+            "width": 200,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3550,
+            "y": 50,
+            "width": 200,
+            "height": 400
           }
         },
         "shape": {
@@ -867,6 +975,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 4050,
+            "y": 50,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 4050,
+            "y": 50,
             "width": 400,
             "height": 400
           }
@@ -965,6 +1085,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 4518.30859375,
+            "y": 18.30881118774414,
+            "width": 463.38232421875,
+            "height": 463.3823547363281
+          },
+          "absoluteRenderBounds": {
+            "x": 4518.30859375,
+            "y": 18.30881118774414,
+            "width": 463.38232421875,
+            "height": 463.3823547363281
           }
         },
         "shape": {
@@ -1059,6 +1191,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 50,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 50,
+            "y": 550,
             "width": 400,
             "height": 400
           }
@@ -1157,6 +1301,18 @@
           "dimensions": {
             "width": 200,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 550,
+            "y": 550,
+            "width": 200,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 550,
+            "y": 550,
+            "width": 200,
+            "height": 400
           }
         },
         "shape": {
@@ -1251,6 +1407,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1050,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1050,
+            "y": 550,
             "width": 400,
             "height": 400
           }
@@ -1350,6 +1518,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1550,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1550,
+            "y": 550,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -1444,6 +1624,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 2050,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2050,
+            "y": 550,
             "width": 400,
             "height": 400
           }
@@ -1542,6 +1734,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 2550,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2550,
+            "y": 550,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -1638,6 +1842,18 @@
           "dimensions": {
             "width": 400,
             "height": 200
+          },
+          "absoluteBoundingBox": {
+            "x": 2976.794921875,
+            "y": 476.794921875,
+            "width": 446.41015625,
+            "height": 373.205078125
+          },
+          "absoluteRenderBounds": {
+            "x": 2976.794921875,
+            "y": 476.794921875,
+            "width": 446.41015625,
+            "height": 373.205078125
           }
         },
         "shape": {
@@ -1732,6 +1948,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 3550,
+            "y": 550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3550,
+            "y": 550,
             "width": 400,
             "height": 400
           }
@@ -1839,6 +2067,18 @@
           "dimensions": {
             "width": 900,
             "height": 300
+          },
+          "absoluteBoundingBox": {
+            "x": 4050,
+            "y": 550,
+            "width": 900,
+            "height": 300
+          },
+          "absoluteRenderBounds": {
+            "x": 4050,
+            "y": 550,
+            "width": 900,
+            "height": 300
           }
         },
         "shape": {
@@ -1933,6 +2173,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 50,
+            "y": 1050,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 50,
+            "y": 1050,
             "width": 400,
             "height": 400
           }
@@ -2030,6 +2282,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 550,
+            "y": 1050,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 550,
+            "y": 1050,
             "width": 400,
             "height": 400
           }
@@ -2146,6 +2410,18 @@
           "dimensions": {
             "width": 800,
             "height": 800
+          },
+          "absoluteBoundingBox": {
+            "x": 150,
+            "y": 2443,
+            "width": 800,
+            "height": 800
+          },
+          "absoluteRenderBounds": {
+            "x": 150,
+            "y": 2443,
+            "width": 800,
+            "height": 800
           }
         },
         "shape": {
@@ -2249,6 +2525,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 800,
+            "height": 800
+          },
+          "absoluteBoundingBox": {
+            "x": 150,
+            "y": 4125,
+            "width": 800,
+            "height": 800
+          },
+          "absoluteRenderBounds": {
+            "x": 150,
+            "y": 4125,
             "width": 800,
             "height": 800
           }
@@ -2356,6 +2644,18 @@
           "dimensions": {
             "width": 400,
             "height": 486
+          },
+          "absoluteBoundingBox": {
+            "x": 1050,
+            "y": 2491,
+            "width": 400,
+            "height": 486
+          },
+          "absoluteRenderBounds": {
+            "x": 1050,
+            "y": 2491,
+            "width": 400,
+            "height": 486
           }
         },
         "shape": {
@@ -2412,6 +2712,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 405,
+            "height": 513
+          },
+          "absoluteBoundingBox": {
+            "x": 1045,
+            "y": 3057,
+            "width": 405,
+            "height": 513
+          },
+          "absoluteRenderBounds": {
+            "x": 1045,
+            "y": 3057,
             "width": 405,
             "height": 513
           }
@@ -2541,6 +2853,18 @@
           "dimensions": {
             "width": 405,
             "height": 505
+          },
+          "absoluteBoundingBox": {
+            "x": 1045,
+            "y": 3620,
+            "width": 405,
+            "height": 505
+          },
+          "absoluteRenderBounds": {
+            "x": 1045,
+            "y": 3620,
+            "width": 405,
+            "height": 505
           }
         },
         "shape": {
@@ -2619,6 +2943,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 405,
+            "height": 491
+          },
+          "absoluteBoundingBox": {
+            "x": 1045,
+            "y": 4186,
+            "width": 405,
+            "height": 491
+          },
+          "absoluteRenderBounds": {
+            "x": 1045,
+            "y": 4186,
             "width": 405,
             "height": 491
           }
@@ -2730,6 +3066,18 @@
           "dimensions": {
             "width": 800,
             "height": 800
+          },
+          "absoluteBoundingBox": {
+            "x": 150,
+            "y": 3284,
+            "width": 800,
+            "height": 800
+          },
+          "absoluteRenderBounds": {
+            "x": 150,
+            "y": 3284,
+            "width": 800,
+            "height": 800
           }
         },
         "shape": {
@@ -2824,6 +3172,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 856
+          },
+          "absoluteBoundingBox": {
+            "x": 1050,
+            "y": 1050,
+            "width": 400,
+            "height": 856
+          },
+          "absoluteRenderBounds": {
+            "x": 1050,
+            "y": 1050,
             "width": 400,
             "height": 856
           }
@@ -2947,6 +3307,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteBoundingBox": {
+            "x": 1550,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteRenderBounds": {
+            "x": 1550,
+            "y": 2072,
             "width": 716,
             "height": 1286
           }
@@ -3113,6 +3485,18 @@
           "dimensions": {
             "width": 716,
             "height": 1286
+          },
+          "absoluteBoundingBox": {
+            "x": 2445,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteRenderBounds": {
+            "x": 2445,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
           }
         },
         "shape": {
@@ -3257,6 +3641,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteBoundingBox": {
+            "x": 3339,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteRenderBounds": {
+            "x": 3339,
+            "y": 2072,
             "width": 716,
             "height": 1286
           }
@@ -3423,6 +3819,18 @@
           "dimensions": {
             "width": 716,
             "height": 1286
+          },
+          "absoluteBoundingBox": {
+            "x": 4234,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
+          },
+          "absoluteRenderBounds": {
+            "x": 4234,
+            "y": 2072,
+            "width": 716,
+            "height": 1286
           }
         },
         "shape": {
@@ -3569,6 +3977,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1550,
+            "y": 1050,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1550,
+            "y": 1050,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -3665,6 +4085,18 @@
           "dimensions": {
             "width": 400,
             "height": 900
+          },
+          "absoluteBoundingBox": {
+            "x": 2050,
+            "y": 1050,
+            "width": 900,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2050,
+            "y": 1050,
+            "width": 900,
+            "height": 400
           }
         },
         "shape": {
@@ -3761,6 +4193,18 @@
           "dimensions": {
             "width": 900,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 3050,
+            "y": 1050,
+            "width": 900,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3050,
+            "y": 1050,
+            "width": 900,
+            "height": 400
           }
         },
         "shape": {
@@ -3855,6 +4299,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 900,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 4050,
+            "y": 1050,
+            "width": 900,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 4050,
+            "y": 1050,
             "width": 900,
             "height": 400
           }
@@ -3971,6 +4427,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 50,
+            "y": 1550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 50,
+            "y": 1550,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -4066,6 +4534,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 841
+          },
+          "absoluteBoundingBox": {
+            "x": 550,
+            "y": 1550,
+            "width": 400,
+            "height": 841
+          },
+          "absoluteRenderBounds": {
+            "x": 550,
+            "y": 1550,
             "width": 400,
             "height": 841
           }
@@ -4164,6 +4644,18 @@
           "dimensions": {
             "width": 400,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1050,
+            "y": 1991,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1050,
+            "y": 1991,
+            "width": 400,
+            "height": 400
           }
         },
         "shape": {
@@ -4258,6 +4750,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 400,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 1550,
+            "y": 1550,
+            "width": 400,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 1550,
+            "y": 1550,
             "width": 400,
             "height": 400
           }
@@ -4356,6 +4860,18 @@
           "dimensions": {
             "width": 400,
             "height": 800
+          },
+          "absoluteBoundingBox": {
+            "x": 2050,
+            "y": 1550,
+            "width": 800,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 2050,
+            "y": 1550,
+            "width": 800,
+            "height": 400
           }
         },
         "shape": {
@@ -4450,6 +4966,18 @@
         "effects": [],
         "meta": {
           "dimensions": {
+            "width": 900,
+            "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 3050,
+            "y": 1550,
+            "width": 900,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3050,
+            "y": 1550,
             "width": 900,
             "height": 400
           }
@@ -4548,6 +5076,18 @@
           "dimensions": {
             "width": 900,
             "height": 400
+          },
+          "absoluteBoundingBox": {
+            "x": 4050,
+            "y": 1550,
+            "width": 900,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 4050,
+            "y": 1550,
+            "width": 900,
+            "height": 400
           }
         },
         "shape": {
@@ -4644,6 +5184,18 @@
           "dimensions": {
             "width": 1400,
             "height": 1400
+          },
+          "absoluteBoundingBox": {
+            "x": 1500,
+            "y": 3337.6533203125,
+            "width": 1714.642822265625,
+            "height": 1714.642578125
+          },
+          "absoluteRenderBounds": {
+            "x": 1484.996337890625,
+            "y": 3323.16455078125,
+            "width": 1733.52880859375,
+            "height": 1676.83544921875
           }
         },
         "shape": {
@@ -4905,6 +5457,18 @@
           "dimensions": {
             "width": 400,
             "height": 200
+          },
+          "absoluteBoundingBox": {
+            "x": 3050,
+            "y": 3436,
+            "width": 200,
+            "height": 400
+          },
+          "absoluteRenderBounds": {
+            "x": 3050,
+            "y": 3436,
+            "width": 200,
+            "height": 400
           }
         },
         "shape": {
@@ -5001,6 +5565,18 @@
           "dimensions": {
             "width": 716,
             "height": 1400
+          },
+          "absoluteBoundingBox": {
+            "x": 3339,
+            "y": 3436,
+            "width": 716,
+            "height": 1400
+          },
+          "absoluteRenderBounds": {
+            "x": 3339,
+            "y": 3436,
+            "width": 716,
+            "height": 1400
           }
         },
         "shape": {
@@ -5075,6 +5651,18 @@
     ],
     "meta": {
       "dimensions": {
+        "width": 5000,
+        "height": 5000
+      },
+      "absoluteBoundingBox": {
+        "x": 0,
+        "y": 0,
+        "width": 5000,
+        "height": 5000
+      },
+      "absoluteRenderBounds": {
+        "x": 0,
+        "y": 0,
         "width": 5000,
         "height": 5000
       },

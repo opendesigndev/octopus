@@ -1,7 +1,7 @@
 {
   "id": "318-13",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dimensions": {
     "width": 300,
     "height": 100
@@ -34,6 +34,18 @@
         "dimensions": {
           "width": 300,
           "height": 100
+        },
+        "absoluteBoundingBox": {
+          "x": 70,
+          "y": 53,
+          "width": 300,
+          "height": 100
+        },
+        "absoluteRenderBounds": {
+          "x": 67,
+          "y": 50,
+          "width": 306,
+          "height": 106
         }
       },
       "shape": {
@@ -125,6 +137,18 @@
           "dimensions": {
             "width": 250,
             "height": 50
+          },
+          "absoluteBoundingBox": {
+            "x": 95,
+            "y": 78,
+            "width": 250,
+            "height": 50
+          },
+          "absoluteRenderBounds": {
+            "x": 147.9296875,
+            "y": 88.791015625,
+            "width": 143.876953125,
+            "height": 26.6484375
           }
         },
         "text": {
@@ -171,6 +195,18 @@
       "dimensions": {
         "width": 300,
         "height": 100
+      },
+      "absoluteBoundingBox": {
+        "x": 70,
+        "y": 53,
+        "width": 300,
+        "height": 100
+      },
+      "absoluteRenderBounds": {
+        "x": 67,
+        "y": 50,
+        "width": 306,
+        "height": 106
       },
       "isArtboard": true
     }

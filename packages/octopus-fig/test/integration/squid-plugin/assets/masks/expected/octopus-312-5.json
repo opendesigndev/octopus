@@ -1,7 +1,7 @@
 {
   "id": "312-5",
   "type": "OCTOPUS_COMPONENT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "dimensions": {
     "width": 300,
     "height": 200
@@ -34,6 +34,18 @@
         "dimensions": {
           "width": 300,
           "height": 200
+        },
+        "absoluteBoundingBox": {
+          "x": 4500,
+          "y": 0,
+          "width": 300,
+          "height": 200
+        },
+        "absoluteRenderBounds": {
+          "x": 4450,
+          "y": -15,
+          "width": 400,
+          "height": 360
         }
       },
       "shape": {
@@ -149,6 +161,18 @@
             "dimensions": {
               "width": 350,
               "height": 300
+            },
+            "absoluteBoundingBox": {
+              "x": 4475,
+              "y": 45,
+              "width": 350,
+              "height": 300
+            },
+            "absoluteRenderBounds": {
+              "x": 4450,
+              "y": 45,
+              "width": 400,
+              "height": 300
             }
           },
           "shape": {
@@ -256,6 +280,18 @@
               "dimensions": {
                 "width": 400,
                 "height": 200
+              },
+              "absoluteBoundingBox": {
+                "x": 4450,
+                "y": 95,
+                "width": 400,
+                "height": 200
+              },
+              "absoluteRenderBounds": {
+                "x": 4450,
+                "y": 95,
+                "width": 400,
+                "height": 200
               }
             },
             "shape": {
@@ -341,6 +377,18 @@
             "width": 300,
             "height": 200
           },
+          "absoluteBoundingBox": {
+            "x": 4500,
+            "y": 0,
+            "width": 300,
+            "height": 200
+          },
+          "absoluteRenderBounds": {
+            "x": 4450,
+            "y": -15,
+            "width": 400,
+            "height": 360
+          },
           "isArtboard": true
         }
       }
@@ -349,6 +397,18 @@
       "dimensions": {
         "width": 300,
         "height": 200
+      },
+      "absoluteBoundingBox": {
+        "x": 4500,
+        "y": 0,
+        "width": 300,
+        "height": 200
+      },
+      "absoluteRenderBounds": {
+        "x": 4450,
+        "y": -15,
+        "width": 400,
+        "height": 360
       },
       "isArtboard": true
     }
