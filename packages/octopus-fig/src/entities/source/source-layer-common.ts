@@ -1,6 +1,7 @@
 import { firstCallMemo } from '@opendesign/octopus-common/dist/decorators/first-call-memo.js'
 import { push } from '@opendesign/octopus-common/dist/utils/common.js'
 import { round } from '@opendesign/octopus-common/dist/utils/math.js'
+import mapValues from 'lodash/mapValues.js'
 import { v4 as uuid } from 'uuid'
 
 import { SourceArtboard } from './source-artboard.js'
@@ -155,12 +156,12 @@ export class SourceLayerCommon extends SourceEntity {
   get absoluteBoundingBox(): Octopus['Bounds'] | undefined {
     const { x, y, width, height } = this._rawValue.absoluteBoundingBox ?? {}
     if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
-    return { x, y, width, height }
+    return mapValues({ x, y, width, height }, (val) => round(val))
   }
 
   get absoluteRenderBounds(): Octopus['Bounds'] | undefined {
     const { x, y, width, height } = this._rawValue.absoluteRenderBounds ?? {}
     if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
-    return { x, y, width, height }
+    return mapValues({ x, y, width, height }, (val) => round(val))
   }
 }

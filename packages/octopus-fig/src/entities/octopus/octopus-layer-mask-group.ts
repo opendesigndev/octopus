@@ -217,9 +217,7 @@ export class OctopusLayerMaskGroup {
 
   get meta(): Octopus['LayerMeta'] | undefined {
     const dimensions = this.dimensions
-    const absoluteBoundingBox = this.sourceLayer.absoluteBoundingBox
-    const absoluteRenderBounds = this.sourceLayer.absoluteRenderBounds
-    return { dimensions, absoluteBoundingBox, absoluteRenderBounds, isArtboard: true }
+    return { dimensions, isArtboard: true }
   }
 
   get sourceLayer(): SourceLayer {

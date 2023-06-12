@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 445,
           "height": 342
-        },
-        "absoluteBoundingBox": {
-          "x": -317,
-          "y": -306,
-          "width": 445,
-          "height": 342
-        },
-        "absoluteRenderBounds": {
-          "x": -317,
-          "y": -306,
-          "width": 445,
-          "height": 342
         }
       },
       "shape": {
@@ -111,18 +99,6 @@
         "effects": [],
         "meta": {
           "dimensions": {
-            "width": 131,
-            "height": 95
-          },
-          "absoluteBoundingBox": {
-            "x": -235,
-            "y": -240,
-            "width": 131,
-            "height": 95
-          },
-          "absoluteRenderBounds": {
-            "x": -235,
-            "y": -240,
             "width": 131,
             "height": 95
           }
@@ -222,18 +198,6 @@
           "dimensions": {
             "width": 155,
             "height": 93
-          },
-          "absoluteBoundingBox": {
-            "x": -70,
-            "y": -238,
-            "width": 155,
-            "height": 93
-          },
-          "absoluteRenderBounds": {
-            "x": -70,
-            "y": -238,
-            "width": 155,
-            "height": 93
           }
         },
         "shape": {
@@ -292,18 +256,6 @@
           "dimensions": {
             "width": 246,
             "height": 35
-          },
-          "absoluteBoundingBox": {
-            "x": -227,
-            "y": -102,
-            "width": 246,
-            "height": 35
-          },
-          "absoluteRenderBounds": {
-            "x": -225.26988220214844,
-            "y": -95.75,
-            "width": 242.00479125976562,
-            "height": 27.68182373046875
           }
         },
         "text": {
@@ -348,18 +300,6 @@
     ],
     "meta": {
       "dimensions": {
-        "width": 445,
-        "height": 342
-      },
-      "absoluteBoundingBox": {
-        "x": -317,
-        "y": -306,
-        "width": 445,
-        "height": 342
-      },
-      "absoluteRenderBounds": {
-        "x": -317,
-        "y": -306,
         "width": 445,
         "height": 342
       },

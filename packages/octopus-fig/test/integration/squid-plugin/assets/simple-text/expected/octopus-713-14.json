@@ -26,18 +26,6 @@
       "dimensions": {
         "width": 251,
         "height": 204
-      },
-      "absoluteBoundingBox": {
-        "x": 1099,
-        "y": 47,
-        "width": 319.372314453125,
-        "height": 302.169189453125
-      },
-      "absoluteRenderBounds": {
-        "x": 1106.5263671875,
-        "y": 57.882469177246094,
-        "width": 303.91748046875,
-        "height": 281.7123718261719
       }
     },
     "text": {

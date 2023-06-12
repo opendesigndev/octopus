@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 300,
           "height": 100
-        },
-        "absoluteBoundingBox": {
-          "x": 50,
-          "y": -180,
-          "width": 300,
-          "height": 100
-        },
-        "absoluteRenderBounds": {
-          "x": 47,
-          "y": -183,
-          "width": 306,
-          "height": 106
         }
       },
       "shape": {
@@ -122,18 +110,6 @@
             "dimensions": {
               "width": 300,
               "height": 100
-            },
-            "absoluteBoundingBox": {
-              "x": 50,
-              "y": -180,
-              "width": 300,
-              "height": 100
-            },
-            "absoluteRenderBounds": {
-              "x": 47,
-              "y": -183,
-              "width": 306,
-              "height": 106
             }
           },
           "shape": {
@@ -225,18 +201,6 @@
               "dimensions": {
                 "width": 250,
                 "height": 50
-              },
-              "absoluteBoundingBox": {
-                "x": 75,
-                "y": -155,
-                "width": 250,
-                "height": 50
-              },
-              "absoluteRenderBounds": {
-                "x": 127.9296875,
-                "y": -144.208984375,
-                "width": 143.876953125,
-                "height": 26.6484375
               }
             },
             "text": {
@@ -284,18 +248,6 @@
             "width": 300,
             "height": 100
           },
-          "absoluteBoundingBox": {
-            "x": 50,
-            "y": -180,
-            "width": 300,
-            "height": 100
-          },
-          "absoluteRenderBounds": {
-            "x": 47,
-            "y": -183,
-            "width": 306,
-            "height": 106
-          },
           "isArtboard": true
         }
       }
@@ -304,18 +256,6 @@
       "dimensions": {
         "width": 300,
         "height": 100
-      },
-      "absoluteBoundingBox": {
-        "x": 50,
-        "y": -180,
-        "width": 300,
-        "height": 100
-      },
-      "absoluteRenderBounds": {
-        "x": 47,
-        "y": -183,
-        "width": 306,
-        "height": 106
       },
       "isArtboard": true
     }

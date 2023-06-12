@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 112,
           "height": 121
-        },
-        "absoluteBoundingBox": {
-          "x": 772,
-          "y": 825,
-          "width": 112,
-          "height": 121
-        },
-        "absoluteRenderBounds": {
-          "x": 772,
-          "y": 825,
-          "width": 112,
-          "height": 121
         }
       },
       "shape": {
@@ -113,18 +101,6 @@
           "dimensions": {
             "width": 99.12,
             "height": 107.67
-          },
-          "absoluteBoundingBox": {
-            "x": 779,
-            "y": 832,
-            "width": 99.120361328125,
-            "height": 107.66900634765625
-          },
-          "absoluteRenderBounds": {
-            "x": 779,
-            "y": 832,
-            "width": 99.120361328125,
-            "height": 107.66900634765625
           }
         },
         "shape": {
@@ -192,18 +168,6 @@
     ],
     "meta": {
       "dimensions": {
-        "width": 112,
-        "height": 121
-      },
-      "absoluteBoundingBox": {
-        "x": 772,
-        "y": 825,
-        "width": 112,
-        "height": 121
-      },
-      "absoluteRenderBounds": {
-        "x": 772,
-        "y": 825,
         "width": 112,
         "height": 121
       },

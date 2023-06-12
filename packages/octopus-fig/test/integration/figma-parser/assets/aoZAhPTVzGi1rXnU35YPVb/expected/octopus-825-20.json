@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 140,
           "height": 76
-        },
-        "absoluteBoundingBox": {
-          "x": 600,
-          "y": 841,
-          "width": 140,
-          "height": 76
-        },
-        "absoluteRenderBounds": {
-          "x": 600,
-          "y": 841,
-          "width": 140,
-          "height": 76
         }
       },
       "shape": {
@@ -121,18 +109,6 @@
             "dimensions": {
               "width": 101.08,
               "height": 31.38
-            },
-            "absoluteBoundingBox": {
-              "x": 617,
-              "y": 864,
-              "width": 101.075439453125,
-              "height": 31.3836669921875
-            },
-            "absoluteRenderBounds": {
-              "x": 617,
-              "y": 864,
-              "width": 101.075439453125,
-              "height": 31.3836669921875
             }
           },
           "shape": {
@@ -201,18 +177,6 @@
               "dimensions": {
                 "width": 75,
                 "height": 14
-              },
-              "absoluteBoundingBox": {
-                "x": 630.0377197265625,
-                "y": 872.6918334960938,
-                "width": 75,
-                "height": 14
-              },
-              "absoluteRenderBounds": {
-                "x": 630.52734375,
-                "y": 875.4337158203125,
-                "width": 73.75628662109375,
-                "height": 8.34417724609375
               }
             },
             "text": {
@@ -259,36 +223,12 @@
             "width": 140,
             "height": 76
           },
-          "absoluteBoundingBox": {
-            "x": 600,
-            "y": 841,
-            "width": 140,
-            "height": 76
-          },
-          "absoluteRenderBounds": {
-            "x": 600,
-            "y": 841,
-            "width": 140,
-            "height": 76
-          },
           "isArtboard": true
         }
       }
     ],
     "meta": {
       "dimensions": {
-        "width": 140,
-        "height": 76
-      },
-      "absoluteBoundingBox": {
-        "x": 600,
-        "y": 841,
-        "width": 140,
-        "height": 76
-      },
-      "absoluteRenderBounds": {
-        "x": 600,
-        "y": 841,
         "width": 140,
         "height": 76
       },

@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 250,
           "height": 500
-        },
-        "absoluteBoundingBox": {
-          "x": 350,
-          "y": 0,
-          "width": 250,
-          "height": 500
-        },
-        "absoluteRenderBounds": {
-          "x": 350,
-          "y": 0,
-          "width": 250,
-          "height": 500
         }
       },
       "shape": {
@@ -135,18 +123,6 @@
           "dimensions": {
             "width": 150,
             "height": 300
-          },
-          "absoluteBoundingBox": {
-            "x": 402,
-            "y": 46,
-            "width": 150,
-            "height": 300
-          },
-          "absoluteRenderBounds": {
-            "x": 402,
-            "y": 46,
-            "width": 174,
-            "height": 314
           }
         },
         "layers": [
@@ -168,18 +144,6 @@
             "effects": [],
             "meta": {
               "dimensions": {
-                "width": 150,
-                "height": 150
-              },
-              "absoluteBoundingBox": {
-                "x": 402,
-                "y": 46,
-                "width": 150,
-                "height": 150
-              },
-              "absoluteRenderBounds": {
-                "x": 402,
-                "y": 46,
                 "width": 150,
                 "height": 150
               }
@@ -279,18 +243,6 @@
               "dimensions": {
                 "width": 150,
                 "height": 150
-              },
-              "absoluteBoundingBox": {
-                "x": 402,
-                "y": 196,
-                "width": 150,
-                "height": 150
-              },
-              "absoluteRenderBounds": {
-                "x": 402,
-                "y": 196,
-                "width": 150,
-                "height": 150
               }
             },
             "shape": {
@@ -371,18 +323,6 @@
     ],
     "meta": {
       "dimensions": {
-        "width": 250,
-        "height": 500
-      },
-      "absoluteBoundingBox": {
-        "x": 350,
-        "y": 0,
-        "width": 250,
-        "height": 500
-      },
-      "absoluteRenderBounds": {
-        "x": 350,
-        "y": 0,
         "width": 250,
         "height": 500
       },

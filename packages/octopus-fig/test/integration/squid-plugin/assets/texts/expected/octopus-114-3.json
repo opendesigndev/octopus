@@ -34,18 +34,6 @@
         "dimensions": {
           "width": 1000,
           "height": 1000
-        },
-        "absoluteBoundingBox": {
-          "x": 0,
-          "y": 0,
-          "width": 1000,
-          "height": 1000
-        },
-        "absoluteRenderBounds": {
-          "x": 0,
-          "y": 0,
-          "width": 1000,
-          "height": 1000
         }
       },
       "shape": {
@@ -113,18 +101,6 @@
           "dimensions": {
             "width": 15,
             "height": 5
-          },
-          "absoluteBoundingBox": {
-            "x": 47,
-            "y": 75,
-            "width": 15,
-            "height": 5
-          },
-          "absoluteRenderBounds": {
-            "x": 47,
-            "y": 75,
-            "width": 15,
-            "height": 5
           }
         },
         "shape": {
@@ -183,18 +159,6 @@
           "dimensions": {
             "width": 849,
             "height": 172
-          },
-          "absoluteBoundingBox": {
-            "x": 49,
-            "y": 50,
-            "width": 849,
-            "height": 172
-          },
-          "absoluteRenderBounds": {
-            "x": 61.01171875,
-            "y": 80.626953125,
-            "width": 839.94140625,
-            "height": 109.2041015625
           }
         },
         "text": {
@@ -430,18 +394,6 @@
           "dimensions": {
             "width": 173,
             "height": 228
-          },
-          "absoluteBoundingBox": {
-            "x": 58.300045013427734,
-            "y": 238.8201446533203,
-            "width": 212.59402465820312,
-            "height": 256.3355712890625
-          },
-          "absoluteRenderBounds": {
-            "x": 60.36024475097656,
-            "y": 248.81581115722656,
-            "width": 205.61558532714844,
-            "height": 236.0831756591797
           }
         },
         "text": {
@@ -503,18 +455,6 @@
           "dimensions": {
             "width": 298.23,
             "height": 277.04
-          },
-          "absoluteBoundingBox": {
-            "x": 294.5062255859375,
-            "y": 200.62889099121094,
-            "width": 370.76544189453125,
-            "height": 357.4033203125
-          },
-          "absoluteRenderBounds": {
-            "x": 313.30877685546875,
-            "y": 209.70750427246094,
-            "width": 226.97027587890625,
-            "height": 251.1326141357422
           }
         },
         "text": {
@@ -576,18 +516,6 @@
           "dimensions": {
             "width": 298.23,
             "height": 277.04
-          },
-          "absoluteBoundingBox": {
-            "x": 398,
-            "y": 157,
-            "width": 370.76544189453125,
-            "height": 357.4033203125
-          },
-          "absoluteRenderBounds": {
-            "x": 536.2007446289062,
-            "y": 206.0607452392578,
-            "width": 227.61846923828125,
-            "height": 251.3496856689453
           }
         },
         "text": {
@@ -689,18 +617,6 @@
           "dimensions": {
             "width": 305,
             "height": 391
-          },
-          "absoluteBoundingBox": {
-            "x": 38,
-            "y": 543,
-            "width": 305,
-            "height": 391
-          },
-          "absoluteRenderBounds": {
-            "x": 40.6171875,
-            "y": 551.3671875,
-            "width": 304.66796875,
-            "height": 374.12109375
           }
         },
         "text": {
@@ -862,18 +778,6 @@
           "dimensions": {
             "width": 531,
             "height": 421
-          },
-          "absoluteBoundingBox": {
-            "x": 438,
-            "y": 554,
-            "width": 531,
-            "height": 421
-          },
-          "absoluteRenderBounds": {
-            "x": 438.111328125,
-            "y": 549.2578125,
-            "width": 531.052734375,
-            "height": 51.267578125
           }
         },
         "text": {
@@ -936,18 +840,6 @@
           "dimensions": {
             "width": 271,
             "height": 48
-          },
-          "absoluteBoundingBox": {
-            "x": 704,
-            "y": 14,
-            "width": 271,
-            "height": 48
-          },
-          "absoluteRenderBounds": {
-            "x": 704,
-            "y": 15.619999885559082,
-            "width": 267.9012451171875,
-            "height": 36
           }
         },
         "text": {
@@ -993,18 +885,6 @@
     ],
     "meta": {
       "dimensions": {
-        "width": 1000,
-        "height": 1000
-      },
-      "absoluteBoundingBox": {
-        "x": 0,
-        "y": 0,
-        "width": 1000,
-        "height": 1000
-      },
-      "absoluteRenderBounds": {
-        "x": 0,
-        "y": 0,
         "width": 1000,
         "height": 1000
       },
