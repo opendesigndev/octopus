@@ -118,17 +118,18 @@ export class OctopusStroke {
     const position = this.position
     const lineJoin = this.lineJoin
     const lineCap = this.lineCap
+    const thickness = this.thickness
 
     if (fill === null) return null
     if (position === null) return null
     if (lineJoin === null) return null
+    if (thickness === 0) return null
 
+    const path = this.path
     const style = this.style
     const dashing = this.dashing
     const visible = this.visible
-    const thickness = this.thickness
     const miterLimit = this.miterLimit
-    const path = this.path
     const fillRule = this.fillRule
 
     return { style, dashing, visible, fill, thickness, position, lineJoin, lineCap, miterLimit, fillRule, path }

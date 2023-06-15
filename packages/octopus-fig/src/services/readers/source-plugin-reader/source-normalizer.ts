@@ -91,7 +91,7 @@ export class SourceNormalizer {
 
     if (!strokeWeight) {
       const { strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight } = raw
-      raw.strokeWeight = max([strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight, 1])
+      raw.strokeWeight = max([strokeTopWeight, strokeBottomWeight, strokeLeftWeight, strokeRightWeight, 0])
     }
 
     return raw
