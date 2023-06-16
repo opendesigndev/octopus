@@ -8,11 +8,6 @@ import { getTransformFor } from '../../../utils/source.js'
 import type { StyledTextSegment, TextNode } from '../../../typings/plugin-api.js'
 import type { RawLayer, RawPaint, RawTextStyle, RawTransform } from '../../../typings/raw/index.js'
 
-const DEFAULT_TRANSFORM = [
-  [1, 0, 0],
-  [0, 1, 0],
-]
-
 const isArray = Array.isArray
 
 export class SourceNormalizer {
@@ -164,7 +159,7 @@ export class SourceNormalizer {
     return raw
   }
 
-  private _normalizeGroup(raw: any): RawLayer {
+  private _normalizeChildrenTransform(raw: any): RawLayer {
     if (isArray(raw.children) && isArray(raw.relativeTransform)) {
       raw.children.forEach((child: unknown) => this._normalizeChildTransform(child, raw.relativeTransform))
     }
@@ -172,7 +167,7 @@ export class SourceNormalizer {
   }
 
   private _normalizeTopLayerTransform(raw: any): RawLayer {
-    const transform = raw.type === 'BOOLEAN_OPERATION' ? DEFAULT_TRANSFORM : raw.absoluteTransform
+    const transform = raw.absoluteTransform
     const [[a, c, tx], [b, d, ty]] = transform
     const { x, y } = raw.absoluteRenderBounds
     raw.relativeTransform = [
@@ -195,9 +190,9 @@ export class SourceNormalizer {
     if (isArray(strokeGeometry)) strokeGeometry.forEach((geometry) => this._normalizeGeometry(geometry))
     if (isArray(fills)) fills.forEach((fill) => this._normalizeFill(fill))
 
-    if (type === 'BOOLEAN_OPERATION') raw.relativeTransform = DEFAULT_TRANSFORM
     if (type === 'POLYGON') raw.type = 'REGULAR_POLYGON'
-    if (type === 'GROUP') this._normalizeGroup(raw)
+    if (type === 'GROUP') this._normalizeChildrenTransform(raw)
+    if (type === 'BOOLEAN_OPERATION') this._normalizeChildrenTransform(raw)
     if (type === 'TEXT') this._normalizeText(raw)
     if (isTopLayer) this._normalizeTopLayerTransform(raw)
 
