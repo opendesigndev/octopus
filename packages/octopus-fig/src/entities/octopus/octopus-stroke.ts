@@ -48,9 +48,15 @@ export class OctopusStroke {
     return this._parentLayer.sourceLayer
   }
 
-  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+  get _isOpenPath(): boolean {
     const sourceShapeType = (this.sourceLayer as SourceLayerShape).shapeType
-    if (sourceShapeType === 'LINE' || sourceShapeType === 'VECTOR') return 'CENTER' // https://github.com/opendesigndev/octopus/issues/113
+    if (sourceShapeType === 'LINE') return true
+    if (sourceShapeType !== 'VECTOR') return false
+    return this._path.isOpenPath
+  }
+
+  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+    if (this._isOpenPath) return 'CENTER' // https://github.com/opendesigndev/octopus/issues/113
 
     const strokeAlign = this.sourceLayer.strokeAlign
     if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
