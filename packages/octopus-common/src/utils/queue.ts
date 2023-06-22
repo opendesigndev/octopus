@@ -7,7 +7,19 @@ export type QueueOptions<T, U> = {
   drainLimit?: number | null
   factory: (tasks: T[]) => Promise<SafeResult<U>[]>
 }
+export type SimpleThunkQueueOptions = {
+  name?: string
+  parallels?: number
+}
 export type TaskControl<T> = { task: T; resolve: (value?: unknown) => unknown; reject: (value?: unknown) => unknown }
+
+/**
+ * There's no `queueMicrotask` in some environments, 
+ * so it fallbacks to `setTimeout`.
+ */
+const enqueue = typeof queueMicrotask === 'function'
+  ? queueMicrotask
+  : (cb: () => void) => setTimeout(cb, 0)
 
 export class Queue<T, U> {
   private _name: string
@@ -25,6 +37,34 @@ export class Queue<T, U> {
   static safeError<T>(err: Error): SafeResult<T> {
     return { value: undefined, error: err }
   }
+
+  /**
+   * Simple factory for thunk-based queues:
+   * 
+   * const q = Queue.createSimpleThunkQueue<number>({ parallels: 5 })
+   * q.exec(async () => { return 42 }) // Promise<42>
+   * 
+   */
+  static createSimpleThunkQueue<T>(options: SimpleThunkQueueOptions): Queue<() => Promise<T>, T> {
+    const name = options.name ?? `queue_${this.lastQueueIndex++}`
+    const parallels = options.parallels ?? 3
+    return new Queue<() => Promise<T>, T>({
+        name,
+        parallels,
+        drainLimit: 1,
+        factory: async (thunks: (() => Promise<T>)[]) => {
+            return Promise.all(thunks.map(thunk => {
+                return thunk().then((value: T) => {
+                    return { value, error: null }
+                }, (error: Error) => {
+                    return { value: undefined, error }
+                })
+            }))
+        }
+    })
+  }
+
+  private static lastQueueIndex = 0
 
   constructor(options: QueueOptions<T, U>) {
     const { name, factory, parallels, drainLimit = 1 } = options
@@ -54,7 +94,7 @@ export class Queue<T, U> {
   private _finalizeTask(): void {
     this._working--
     this._available++
-    queueMicrotask(() => this._try())
+    enqueue(() => this._try())
   }
 
   private _try(): void {
@@ -69,7 +109,7 @@ export class Queue<T, U> {
     results.forEach((result, index) => {
       const { value, error } = result
       const { resolve, reject } = tasks[index]
-      queueMicrotask(() => {
+      enqueue(() => {
         error ? reject(error) : resolve(value)
       })
     })
@@ -93,7 +133,7 @@ export class Queue<T, U> {
       const results: SafeResult<U>[] = await this._factory(tasks.map((task) => task.task))
       this._resolveTasksWithResults(tasks, results)
     } catch (err) {
-      this._rejectTasks(tasks, err)
+      this._rejectTasks(tasks, err as Error)
     }
   }
 
@@ -101,7 +141,7 @@ export class Queue<T, U> {
     const { promise, resolve, reject } = detachPromiseControls<U>()
     this._tasks.push({ task, resolve, reject })
     this._awaiting++
-    queueMicrotask(() => this._try())
+    enqueue(() => this._try())
     return promise
   }
 
@@ -118,7 +158,7 @@ export class Queue<T, U> {
       const { promise, resolve, reject } = detachPromiseControls<U>()
       this._tasks.push({ task, resolve, reject })
       this._awaiting++
-      queueMicrotask(() => this._try())
+      enqueue(() => this._try())
       return promise
     })
     return promises
