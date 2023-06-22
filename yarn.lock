@@ -1108,6 +1108,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@opendesign/figma-plugin-common@3.0.0-rc.5":
+  version "3.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@opendesign/figma-plugin-common/-/figma-plugin-common-3.0.0-rc.5.tgz#f64c08d98bf95cbdef03f4f222b6c2a06e939c6e"
+  integrity sha512-wlb4MlG5SjtgSubNrT4Yb/1ZKABHAIJbe8XRsCk0EYsi7CnWmgx9yDujq1q1Na2CsU4O9yIJm5cC7COeHGSyhg==
+  dependencies:
+    buffer "^6.0.3"
+    react "^17.0.0"
+    react-dom "^17.0.0"
+
 "@opendesign/illustrator-parser-pdfcpu@1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@opendesign/illustrator-parser-pdfcpu/-/illustrator-parser-pdfcpu-1.1.2.tgz#db4c2ca804267a2412682064661fbc093465d00c"
