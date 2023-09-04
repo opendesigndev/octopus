@@ -1,12 +1,12 @@
 {
-  "version": "3.0.1",
+  "version": "3.1.1",
   "origin": {
     "name": "FIGMA",
     "version": "0"
   },
   "name": "Simple Text",
   "meta": {
-    "converterVersion": "3.0.0-rc.28"
+    "converterVersion": "3.0.0-rc.47"
   },
   "pages": [
     {
