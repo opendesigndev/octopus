@@ -133,6 +133,15 @@ export class OctopusPath {
     return this._getPathPath({ sourceLayer, isTopLayer })
   }
 
+  get isOpenPath(): boolean {
+    const path = this._getPath({ sourceLayer: this.sourceLayer, isTopLayer: true })
+    if (path.type !== 'PATH') return false
+    const geometry = path.geometry.toUpperCase()
+    const countOccurrences = (str: string, char: string) => str.split(char).length - 1
+    const countZ = countOccurrences(geometry, 'Z')
+    return countZ === 0
+  }
+
   get fillRule(): Octopus['FillRule'] {
     return this._firstGeometry(this.sourceLayer)?.fillRule ?? DEFAULTS.WINDING_RULE
   }

@@ -4,6 +4,8 @@ import type { PluginSource } from '../../../typings/plugin-source.js'
 import type { AbstractReader } from '../abstract-reader.js'
 import type { EventEmitter } from 'eventemitter3'
 
+export type { PluginSource }
+
 /**
  * Reader that receives Design Source from Squid Plugin and provide them through `EventEmitter` calls.
  */

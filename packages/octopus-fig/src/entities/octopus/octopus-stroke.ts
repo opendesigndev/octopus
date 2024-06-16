@@ -48,9 +48,15 @@ export class OctopusStroke {
     return this._parentLayer.sourceLayer
   }
 
-  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+  get _isOpenPath(): boolean {
     const sourceShapeType = (this.sourceLayer as SourceLayerShape).shapeType
-    if (sourceShapeType === 'LINE' || sourceShapeType === 'VECTOR') return 'CENTER' // https://github.com/opendesigndev/octopus/issues/113
+    if (sourceShapeType === 'LINE') return true
+    if (sourceShapeType !== 'VECTOR') return false
+    return this._path.isOpenPath
+  }
+
+  get position(): 'CENTER' | 'INSIDE' | 'OUTSIDE' | null {
+    if (this._isOpenPath) return 'CENTER' // https://github.com/opendesigndev/octopus/issues/113
 
     const strokeAlign = this.sourceLayer.strokeAlign
     if (!OctopusStroke.STROKE_ALIGNS.includes(strokeAlign)) {
@@ -118,17 +124,18 @@ export class OctopusStroke {
     const position = this.position
     const lineJoin = this.lineJoin
     const lineCap = this.lineCap
+    const thickness = this.thickness
 
     if (fill === null) return null
     if (position === null) return null
     if (lineJoin === null) return null
+    if (thickness === 0) return null
 
+    const path = this.path
     const style = this.style
     const dashing = this.dashing
     const visible = this.visible
-    const thickness = this.thickness
     const miterLimit = this.miterLimit
-    const path = this.path
     const fillRule = this.fillRule
 
     return { style, dashing, visible, fill, thickness, position, lineJoin, lineCap, miterLimit, fillRule, path }

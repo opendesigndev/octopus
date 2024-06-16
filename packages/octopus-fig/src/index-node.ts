@@ -6,7 +6,6 @@ import { createEnvironmentNode } from './services/general/environment/node/env-n
 import { imageSize } from './services/general/image-size/image-size-node.js'
 import { createLoggerNode } from './services/general/logger/node/logger-node.js'
 
-import type { SourceDesign } from './entities/source/source-design.js'
 import type { OctopusConverterOptions } from './octopus-fig-converter.js'
 import type { NodeFactories } from './services/general/platforms/index.js'
 
@@ -15,7 +14,8 @@ export { DebugExporter } from './services/exporters/node/debug-exporter.js'
 export { SourceApiReader } from './services/readers/source-api-reader.js'
 export { SourcePluginReader } from './services/readers/source-plugin-reader/index.js'
 
-export type { SourceDesign }
+export type { SourceDesign } from './entities/source/source-design.js'
+export type { PluginSource } from './services/readers/source-plugin-reader/index.js'
 
 export function createConverter(options?: Omit<OctopusConverterOptions, 'platformFactories'>): OctopusFigConverter {
   return new OctopusFigConverter({
