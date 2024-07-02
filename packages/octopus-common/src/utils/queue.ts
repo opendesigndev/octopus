@@ -14,12 +14,10 @@ export type SimpleThunkQueueOptions = {
 export type TaskControl<T> = { task: T; resolve: (value?: unknown) => unknown; reject: (value?: unknown) => unknown }
 
 /**
- * There's no `queueMicrotask` in some environments, 
+ * There's no `queueMicrotask` in some environments,
  * so it fallbacks to `setTimeout`.
  */
-const enqueue = typeof queueMicrotask === 'function'
-  ? queueMicrotask
-  : (cb: () => void) => setTimeout(cb, 0)
+const enqueue = typeof queueMicrotask === 'function' ? queueMicrotask : (cb: () => void) => setTimeout(cb, 0)
 
 export class Queue<T, U> {
   private _name: string
@@ -40,27 +38,32 @@ export class Queue<T, U> {
 
   /**
    * Simple factory for thunk-based queues:
-   * 
+   *
    * const q = Queue.createSimpleThunkQueue<number>({ parallels: 5 })
    * q.exec(async () => { return 42 }) // Promise<42>
-   * 
+   *
    */
   static createSimpleThunkQueue<T>(options: SimpleThunkQueueOptions): Queue<() => Promise<T>, T> {
     const name = options.name ?? `queue_${this.lastQueueIndex++}`
     const parallels = options.parallels ?? 3
     return new Queue<() => Promise<T>, T>({
-        name,
-        parallels,
-        drainLimit: 1,
-        factory: async (thunks: (() => Promise<T>)[]) => {
-            return Promise.all(thunks.map(thunk => {
-                return thunk().then((value: T) => {
-                    return { value, error: null }
-                }, (error: Error) => {
-                    return { value: undefined, error }
-                })
-            }))
-        }
+      name,
+      parallels,
+      drainLimit: 1,
+      factory: async (thunks: (() => Promise<T>)[]) => {
+        return Promise.all(
+          thunks.map((thunk) => {
+            return thunk().then(
+              (value: T) => {
+                return { value, error: null }
+              },
+              (error: Error) => {
+                return { value: undefined, error }
+              }
+            )
+          })
+        )
+      },
     })
   }
 
