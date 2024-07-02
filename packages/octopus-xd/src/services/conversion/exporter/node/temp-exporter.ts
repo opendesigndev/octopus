@@ -9,6 +9,7 @@ import type { SourceArtboard } from '../../../../entities/source/source-artboard
 import type { SourceDesign } from '../../../../entities/source/source-design.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
 import type { Exporter } from '../index.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type TempExporterOptions = {
@@ -110,8 +111,9 @@ export class TempExporter extends EventEmitter implements Exporter {
     return octopusPath
   }
 
-  async exportImage(name: string, data: Uint8Array): Promise<string> {
-    return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(name)), Buffer.from(data))
+  async exportImage(image: SourceImage): Promise<string> {
+    const data = await image.getImageData()
+    return this._save(path.join(TempExporter.IMAGES_DIR_NAME, image.id), Buffer.from(data))
   }
 
   async exportManifest(manifest: DesignConversionResult): Promise<string> {

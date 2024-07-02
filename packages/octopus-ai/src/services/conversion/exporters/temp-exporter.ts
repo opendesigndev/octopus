@@ -7,10 +7,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { createOctopusArtboardFileName } from '../../../utils/exporter.js'
 
-import type { Exporter, AuxiliaryData } from './index.js'
+import type { AuxiliaryData, AIExporter } from './index.js'
 import type { SourceArtboard } from '../../../entities/source/source-artboard.js'
 import type { SourceDesign } from '../../../entities/source/source-design.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../design-converter/index.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type TempExporterOptions = {
@@ -26,7 +27,8 @@ type TempExporterOptions = {
 /**
  * Exporter created to be used in manual runs.
  */
-export class TempExporter extends EventEmitter implements Exporter {
+
+export class TempExporter extends EventEmitter implements AIExporter {
   private _outputDir: Promise<string>
   private _tempDir: string
   private _completed: DetachedPromiseControls<void>
@@ -132,8 +134,9 @@ export class TempExporter extends EventEmitter implements Exporter {
    * @param {Buffer} data Data representation of given image
    * @returns {Promise<string>} which designates path to the exported Image
    */
-  async exportImage(name: string, data: Buffer): Promise<string> {
-    return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(name)), data)
+  async exportImage(image: SourceImage): Promise<string> {
+    const data = await image.getImageData()
+    return this._save(path.join(TempExporter.IMAGES_DIR_NAME, path.basename(image.id)), Buffer.from(data))
   }
 
   finalizeExport(): void {

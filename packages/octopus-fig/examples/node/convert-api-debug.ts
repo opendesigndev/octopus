@@ -75,7 +75,7 @@ export async function convertDesign({
   }
 
   const reader = new SourceApiReader(readerOptions)
-  await converter.convertDesign({ designEmitter: reader.parse(), exporter, skipReturn: true })
+  await converter.convertDesign({ designEmitter: reader.getSourceDesign(), exporter, skipReturn: true })
   await exporter.completed()
 }
 

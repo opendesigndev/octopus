@@ -12,14 +12,12 @@
     <script>
       window.addEventListener('DOMContentLoaded', async () => {
         const { createConverter, PSDFileReader, WebExporter } = OctopusPSD
-        const readerOptions = {
-          path: './smiley.psd',
-        }
-
         try {
+          const response = await fetch('./smiley.psd')
+          const file = new Uint8Array(await response.arrayBuffer())
           const converter = createConverter()
 
-          const reader = await PSDFileReader.withRenderer(readerOptions)
+          const reader = await PSDFileReader.withRenderer({ file })
           const sourceDesign = await reader.getSourceDesign()
 
           if (sourceDesign === null) {

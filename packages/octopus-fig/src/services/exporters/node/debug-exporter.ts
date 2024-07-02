@@ -16,6 +16,7 @@ import type { RawDesign, RawLayerContainer } from '../../../typings/raw/index.js
 import type { ComponentConversionResult } from '../../conversion/design-converter.js'
 import type { AbstractExporter } from '../abstract-exporter.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type DebugExporterOptions = {
@@ -181,9 +182,11 @@ export class DebugExporter extends EventEmitter implements AbstractExporter {
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, data: ArrayBuffer): Promise<string> {
-    const imagePath = this.getImagePath(name)
+  async exportImage(image: SourceImage): Promise<string> {
+    const id = image.id
+    const imagePath = this.getImagePath(id)
     if (!this._imageMap[imagePath]) this._imageMap[imagePath] = detachPromiseControls()
+    const data = await image.getImageData()
     const savedPath = await this._save(imagePath, Buffer.from(data))
     this._imageMap[imagePath]?.resolve(savedPath)
     this.emit('source:image', savedPath)

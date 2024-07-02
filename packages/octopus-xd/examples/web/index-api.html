@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div style="width: 100px; height: 100px; border: 1px solid red;" id="xxx"></div>
-  <script src="./octopus-xd-web.umd.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="width: 100px; height: 100px; border: 1px solid red" id="xxx"></div>
+    <script src="./octopus-xd-web.umd.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', async () => {
+        const { createConverter, XDFileReader, WebExporter } = OctopusXD
+        try {
+          const response = await fetch('./file.xd')
+          const file = new Uint8Array(await response.arrayBuffer())
+
+          const reader = new XDFileReader({ file })
+          const sourceDesign = await reader.getSourceDesign()
+          const converter = createConverter({ sourceDesign })
+
+          if (sourceDesign === null) {
+            console.error('Creating SourceDesign Failed')
+            return
+          }
+          const exporter = new WebExporter()
+
+          const result = await converter.convertDesign({ sourceDesign, exporter })
+
+          console.info('Result:', result)
+        } catch (err) {
+          console.error('Some error happened:', err)
+        }
+      })
+    </script>
+  </body>
 </html>

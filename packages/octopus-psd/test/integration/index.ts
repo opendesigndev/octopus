@@ -15,24 +15,23 @@ import type { Fail } from './services/tester.js'
 const REPORT_FOLDER = 'report'
 
 function createReport(failed: Fail[]): string {
-  const source = fs
-    .readFileSync(
-      path.join(
-        url.fileURLToPath(new URL('.', import.meta.url)),
-        '../../../../test/integration/assets/report-template.hbs'
-      )
-    )
-    .toString()
+  const templatePath = path.join(
+    url.fileURLToPath(new URL('.', import.meta.url)),
+    '../../../test/integration/assets/report-template.hbs'
+  )
+  const source = fs.readFileSync(templatePath).toString()
   const template = handlebars.compile(source)
   return template({ failed })
 }
 
 async function test() {
   const { selectedTest } = getCommandLineArgs()
+
   const assetsReader = new AssetReader({ selectedTest })
   const tester = new Tester(assetsReader)
 
   const failed = (await tester.test()) ?? []
+
   if (failed.length) {
     const html = createReport(failed)
     await makeDir(path.join(url.fileURLToPath(new URL('.', import.meta.url)), REPORT_FOLDER))

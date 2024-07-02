@@ -9,7 +9,7 @@ import type { OctopusComponent } from './octopus-component.js'
 import type { OctopusLayerBase } from './octopus-layer-base.js'
 import type { Octopus } from '../../typings/octopus.js'
 import type { SourceBounds } from '../../typings/source.js'
-import type { SourceImage } from '../source/source-design.js'
+import type { PsdSourceImage } from '../source/source-design.js'
 import type { SourceEffectFill } from '../source/source-effect-fill.js'
 
 type OctopusFillOptions = {
@@ -49,11 +49,11 @@ export class OctopusEffectFill {
   }
 
   private get _imagePath(): string | undefined {
-    return this._parentComponent.designConverter.octopusManifest.getExportedRelativeImageByName(this._imageName)
+    return this._parentComponent.designConverter.octopusManifest.getExportedRelativeImageById(this._imageName)
   }
 
-  private get _image(): SourceImage | undefined {
-    return this._parentComponent.sourceDesign.getImageByName(this._imageName)
+  private get _image(): PsdSourceImage | undefined {
+    return this._parentComponent.sourceDesign.getImageById(this._imageName)
   }
 
   private get _offset(): [number, number] {

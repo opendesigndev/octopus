@@ -14,6 +14,7 @@ import type { RawDesign, RawLayerContainer } from '../../../typings/raw/index.js
 import type { ComponentConversionResult } from '../../conversion/design-converter.js'
 import type { AbstractExporter } from '../abstract-exporter.js'
 import type { ResolvedStyle } from '@opendesign/figma-parser'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 import type { DetachedPromiseControls } from '@opendesign/octopus-common/dist/utils/async.js'
 
 type LocalExporterOptions = {
@@ -158,9 +159,10 @@ export class LocalExporter implements AbstractExporter {
    * @param {ArrayBuffer} data Image data represented as buffer of binary data
    * @returns {Promise<string>} returns path to the exported Image
    */
-  async exportImage(name: string, data: ArrayBuffer): Promise<string> {
-    const filePath = this.getImagePath(name)
+  async exportImage(image: SourceImage): Promise<string> {
+    const filePath = this.getImagePath(image.id)
     const fullPath = path.join(await this._outputDir, filePath)
+    const data = await image.getImageData()
     await this._save(fullPath, Buffer.from(data))
     return filePath
   }
