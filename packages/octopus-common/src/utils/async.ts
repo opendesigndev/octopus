@@ -36,7 +36,7 @@ export function sleep(ms: number): Promise<void> {
   })
 }
 
-export async function withRetry<T>(factory: () => Promise<T>, retries: number = 3): Promise<T> {
+export async function withRetry<T>(factory: () => Promise<T>, retries = 3): Promise<T> {
   return retries < 1
     ? Promise.reject(new Error('Please provide amount of retries higher than 0!'))
     : factory().then(
