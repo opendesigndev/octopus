@@ -10,7 +10,8 @@ import { setDefaults, setLogger } from './services/index.js'
 import { readPackageMeta } from './utils/read-pkg-meta.js'
 
 import type { SourceArtboard } from './entities/source/source-artboard.js'
-import type { GetImageData, SourceDesign } from './entities/source/source-design.js'
+import type { SourceDesign } from './entities/source/source-design.js'
+import type { GetImageData } from './entities/source/source-entry.js'
 import type { Exporter } from './services/conversion/exporter/index.js'
 import type { NodeFactories, WebFactories } from './services/general/platforms/index.js'
 import type { Logger } from './typings/index.js'
@@ -67,10 +68,10 @@ export class OctopusXDConverter {
   static PARTIAL_UPDATE_INTERVAL = 3000
 
   constructor(options: OctopusXDConverterOptions) {
+    this._sourceDesign = options.sourceDesign
     this._setGlobals(options)
     this._pkg = readPackageMeta()
     this._services = this._initServices()
-    this._sourceDesign = options.sourceDesign
     this._octopusManifest = new OctopusManifest({ octopusXdConverter: this })
   }
 
@@ -182,8 +183,7 @@ export class OctopusXDConverter {
     const images = await Promise.all(
       artboardImages.map(async (image) => {
         const imageId = pathBasename(image.path)
-        const rawData = await image.getImageData()
-        const imagePath = await rejectTo(exporter?.exportImage?.(image.path, rawData) ?? Promise.reject(null))
+        const imagePath = await rejectTo(exporter?.exportImage?.({ ...image, id: imageId }) ?? Promise.reject(null))
         this.octopusManifest.setExportedImage(imageId, { path: imagePath })
         return image
       })

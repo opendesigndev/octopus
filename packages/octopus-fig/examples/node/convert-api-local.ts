@@ -35,7 +35,7 @@ async function convertDesign(designId: string) {
 
   const exporter = new LocalExporter({ path: testDir })
 
-  await converter.convertDesign({ designEmitter: reader.parse(), exporter, skipReturn: true })
+  await converter.convertDesign({ designEmitter: reader.getSourceDesign(), exporter, skipReturn: true })
   await exporter.completed()
 
   console.info()

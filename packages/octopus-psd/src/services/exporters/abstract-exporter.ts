@@ -1,31 +1,35 @@
 import type { ComponentConversionResult, DesignConversionResult } from '../conversion/design-converter.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export abstract class AbstractExporter {
-  static IMAGES_DIR_NAME: string
-  static MANIFEST_NAME: string
-  static getOctopusFileName(_id: string): string {
-    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
-  }
-
   exportComponent(_component: ComponentConversionResult): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportComponent" method implemented!')
+    console.log('calling default export method `exportComponent()`')
+    return Promise.resolve()
   }
 
-  exportImage(_name: string, _data: Uint8Array): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportImage" method implemented!')
+  exportImage(image: SourceImage): Promise<unknown> {
+    const { id } = image
+    console.log('calling default export method `exportImage()`')
+    return Promise.resolve(id)
   }
 
   exportManifest(_manifest: DesignConversionResult): Promise<unknown> {
-    throw new Error('Subclass of "Exporter" has no "exportManifest" method implemented!')
+    console.log('calling default export method `exportManifest()`')
+    return Promise.resolve()
   }
 
   finalizeExport(): void {
-    throw new Error('Subclass of "Exporter" has no "finalizeExport" method implemented!')
+    console.log('calling default export method `finalizeExport()`')
+    Promise.resolve()
   }
 
   exportStatistics(_statistics?: object): Promise<string> {
-    throw new Error('Subclass of "Exporter" has no "exportStatistics" method implemented!')
+    console.log('calling default export method `exportStatistics()`')
+    return Promise.resolve('')
   }
 
-  abstract getBasePath(): Promise<string>
+  getBasePath(): Promise<string> {
+    console.log('calling default export method `getBasePath()`')
+    return Promise.resolve('')
+  }
 }
