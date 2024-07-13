@@ -153,13 +153,13 @@ export class SourceLayerCommon extends SourceEntity {
     return this.parent instanceof SourceArtboard
   }
 
-  get absoluteBoundingBox(): Octopus['Bounds'] | undefined {
+  get absoluteBoundingBox(): { x: number; y: number; width: number; height: number } | undefined {
     const { x, y, width, height } = this._rawValue.absoluteBoundingBox ?? {}
     if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
     return mapValues({ x, y, width, height }, (val) => round(val))
   }
 
-  get absoluteRenderBounds(): Octopus['Bounds'] | undefined {
+  get absoluteRenderBounds(): { x: number; y: number; width: number; height: number } | undefined {
     const { x, y, width, height } = this._rawValue.absoluteRenderBounds ?? {}
     if (x === undefined || y === undefined || width === undefined || height === undefined) return undefined
     return mapValues({ x, y, width, height }, (val) => round(val))

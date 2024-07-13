@@ -78,10 +78,11 @@ export function convertLinearGradientTransform(
   width: number,
   height: number
 ): number[] {
-  return createMatrix(gradientTransform)
+  const inverted = createMatrix(gradientTransform)
     .scale(1 / width, 1 / height)
     .invert()
-    .values.map((value) => round(value, 8))
+  const defaultMatrix = createMatrix([1, 0, 0, 1, 0, 0])
+  return (inverted ?? defaultMatrix).values.map((value) => round(value, 8))
 }
 
 export function convertRadialGradientTransform(
