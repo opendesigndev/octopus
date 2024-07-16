@@ -53,11 +53,11 @@ export class OctopusEffect {
     return { type: 'BOUNDED_BLUR', visible, basis, blur }
   }
 
-  private get _backgroundBlur(): Octopus['EffectBoundedBlur'] {
+  private get _backgroundBlur(): Octopus['EffectBackgroundBlur'] {
     const visible = this.visible
     const basis = 'BACKGROUND'
     const blur = this._effect.radius
-    return { type: 'BOUNDED_BLUR', visible, basis, blur }
+    return { type: 'BACKGROUND_BLUR', visible, basis, blur }
   }
 
   convert(): Octopus['Effect'] | null {
