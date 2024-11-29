@@ -231,7 +231,10 @@ export class DesignConverter {
     const imageSize = fill.size ? fill.size : await this._octopusConverter.imageSize(fill.buffer)
     if (imageSize) this._imageSizeMap[fillName] = imageSize
 
-    const fillPathPromise = this._exporter?.exportImage?.(fillName, fill.buffer)
+    const fillPathPromise = this._exporter?.exportImage?.({
+      id: fillName,
+      getImageData: () => Promise.resolve(new Uint8Array(fill.buffer)),
+    })
     this.octopusManifest?.setExportedImagePath(fillName, fillPathPromise)
     if (this._shouldReturn) this._conversionResult.images.push({ name: fillName, data: fill.buffer })
   }

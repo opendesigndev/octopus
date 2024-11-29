@@ -2,6 +2,7 @@
 
 import type { AdditionalTextData, RawArtboardEntry } from './raw/index.js'
 import type { Metadata } from '../services/readers/ai-file-reader-common.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 export interface Logger {
   fatal: Function
@@ -24,8 +25,6 @@ export type GradientStop = {
 }
 
 export type Color = { r: number; g: number; b: number; a: number }
-
-export type SourceImage = { id: string; getImageData: () => Promise<Uint8Array> }
 
 export type SourceTree = {
   metadata: Metadata

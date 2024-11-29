@@ -39,7 +39,7 @@ export class TestUpdater {
           throw new Error(`Wrong SourceData for testName: '${testName}' and sourceDataPath: '${sourceDataPath}'`)
         const reader = new SourcePluginReader(sourceData)
 
-        const result = await this._octopusConverter.convertDesign({ designEmitter: reader.parse() })
+        const result = await this._octopusConverter.convertDesign({ designEmitter: reader.getSourceDesign() })
         const { components, manifest } = result ?? {}
 
         return {

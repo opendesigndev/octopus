@@ -1,18 +1,21 @@
+import { Exporter } from '../index.js'
+
 import type { SourceArtboard } from '../../../../entities/source/source-artboard.js'
 import type { ComponentConversionResult, DesignConversionResult } from '../../../../octopus-xd-converter.js'
+import type { SourceImage } from '@opendesign/octopus-common/dist/typings/octopus-common/index.js'
 
 /**
  * Minimalistic exporter used for web build
  */
-export class WebExporter {
+export class WebExporter extends Exporter {
   exportArtboard(_: SourceArtboard, _artboard: ComponentConversionResult): Promise<unknown> {
     console.log('exportArtboard')
     return Promise.resolve()
   }
 
-  exportImage(name: string, _data: Uint8Array): Promise<unknown> {
-    console.log('exportImage', name)
-    return Promise.resolve(name)
+  exportImage(image: SourceImage): Promise<unknown> {
+    console.log('exportImage', image.id)
+    return Promise.resolve(image.id)
   }
 
   exportManifest(_manifest: DesignConversionResult): Promise<unknown> {

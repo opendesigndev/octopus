@@ -7,35 +7,8 @@ import { SourceResources } from './source-resources.js'
 import { Expander } from '../../services/conversion/expander/index.js'
 import { PasteboardNormalizer } from '../../services/conversion/pasteboard-normalizer/index.js'
 
-import type { RawSourceInteractions } from './source-interactions.js'
-import type { RawSourceManifest } from './source-manifest.js'
-import type { RawArtboard, RawArtboardLike, RawPasteboard } from '../../typings/source/index.js'
-import type { RawResources } from '../../typings/source/resources.js'
-
-type SourceDesignOptions = {
-  manifest: {
-    path: string
-    rawValue: RawSourceManifest
-  }
-  resources: {
-    path: string
-    rawValue: RawResources
-  }
-  interactions: {
-    path: string
-    rawValue: RawSourceInteractions
-  }
-  images: {
-    path: string
-    getImageData: GetImageData
-  }[]
-  artboards: {
-    path: string
-    rawValue: RawArtboardLike
-  }[]
-}
-
-export type GetImageData = () => Promise<Uint8Array>
+import type { SourceEntry, GetImageData } from './source-entry.js'
+import type { RawArtboard, RawPasteboard } from '../../typings/source/index.js'
 
 export class SourceDesign {
   private _manifest: SourceManifest
@@ -44,11 +17,9 @@ export class SourceDesign {
   private _artboards: SourceArtboard[]
   private _images: { path: string; getImageData: GetImageData }[]
 
-  constructor(options: SourceDesignOptions) {
+  constructor(options: SourceEntry) {
     this._manifest = new SourceManifest({
-      path: options.manifest.path,
       rawValue: options.manifest.rawValue,
-      design: this,
     })
     this._resources = new SourceResources({
       path: options.resources.path,

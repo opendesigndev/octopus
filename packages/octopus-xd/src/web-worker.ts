@@ -42,7 +42,7 @@ class OctopusXDWorker {
   private async _registerFile(msgId: number, buffer: ArrayBuffer) {
     const index = this._lastIndex++
     const reader = new XDFileReader({ file: new Uint8Array(buffer) })
-    const sourceDesign = await reader.sourceDesign
+    const sourceDesign = await reader.getSourceDesign()
     this._designs[index] = sourceDesign
     postMessage({ msgId, response: index })
   }
